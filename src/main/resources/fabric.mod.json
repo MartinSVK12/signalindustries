@@ -4,7 +4,8 @@
   "version": "1.0.0",
 
   "name": "Signal Industries",
-  "description": "",
+  "icon": "icon.png",
+  "description": "Technomagical mod with cool gadgets.",
   "authors": [
     "MartinSVK12"
   ],
