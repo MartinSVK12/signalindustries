@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.energyapi.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.energyapi.util.Config;
+import sunsetsatellite.fluidapi.FluidAPI;
+import turniplabs.halplibe.helper.BlockHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
-
+    public static int[] energyTex = new int[0];
+    public static Block energyFlowing;
+    public static Block energyStill;
 
 
     @Override
@@ -27,6 +31,10 @@ public class SignalIndustries implements ModInitializer {
 
     public SignalIndustries(){
         Config.init();
+        energyTex = FluidAPI.registerFluidTexture(MOD_ID,"signalumenergy.png");
+
+        energyFlowing = BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing(Config.getFromConfig("signalumEnergy",1200),Material.water),"oilFlowing","signalumenergy.png",Block.soundPowderFootstep,1.0f,1.0f,0).setPlaceOverwrites().setTexCoords(energyTex[0],energyTex[1],energyTex[2],energyTex[3],energyTex[4],energyTex[5],energyTex[6],energyTex[7],energyTex[8],energyTex[9],energyTex[10],energyTex[11]);
+        energyStill = BlockHelper.createBlock(MOD_ID,new BlockFluidStill(Config.getFromConfig("signalumEnergy",1200)+1,Material.water),"oilStill","signalumenergy.png",Block.soundPowderFootstep,1.0f,1.0f,0).setPlaceOverwrites().setTexCoords(energyTex[0],energyTex[1],energyTex[2],energyTex[3],energyTex[4],energyTex[5],energyTex[6],energyTex[7],energyTex[8],energyTex[9],energyTex[10],energyTex[11]);
     }
 
     public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile) {
