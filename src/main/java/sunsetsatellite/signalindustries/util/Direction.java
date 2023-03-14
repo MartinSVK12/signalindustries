@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import sunsetsatellite.energyapi.util.Vec3;
+import sunsetsatellite.signalindustries.util.Vec3;
 
 public enum Direction {
     X_POS (new Vec3(1,0,0)),

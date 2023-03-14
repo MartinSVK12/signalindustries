@@ -18,6 +18,8 @@ public class SignalIndustries implements ModInitializer {
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
 
+
+
     @Override
     public void onInitialize() {
         LOGGER.info("Signal Industries initialized.");

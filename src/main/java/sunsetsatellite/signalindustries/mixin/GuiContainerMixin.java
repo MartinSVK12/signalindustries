@@ -17,7 +17,6 @@ import sunsetsatellite.energyapi.util.ICustomDescription;
         remap = false
 )
 public class GuiContainerMixin extends GuiScreen
-    implements IGuiContainer
 {
 
     @Shadow private static RenderItem itemRenderer;
@@ -38,25 +37,6 @@ public class GuiContainerMixin extends GuiScreen
         }
         if(stack != null && stack.getItem() instanceof ICustomDescription){
             text.append(((ICustomDescription) stack.getItem()).getDescription(stack)).append("\n");
-        }
-    }
-
-    public void drawItemStack(ItemStack stack, int x, int y) {
-        if(stack != null) {
-            GL11.glPushMatrix();
-            GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-            RenderHelper.enableStandardItemLighting();
-            GL11.glPopMatrix();
-            GL11.glPushMatrix();
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-            itemRenderer.renderItemIntoGUI(this.fontRenderer, this.mc.renderEngine, stack, x, y, 1.0F);
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            RenderHelper.disableStandardItemLighting();
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glPopMatrix();
         }
     }
 
