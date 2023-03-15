@@ -9,8 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.energyapi.interfaces.mixins.IGuiContainer;
-import sunsetsatellite.energyapi.util.ICustomDescription;
+import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 
 @Mixin(
         value = GuiContainer.class,

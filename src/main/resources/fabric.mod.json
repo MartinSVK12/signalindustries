@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "fluidapi": [
+      "sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin"
     ]
   },
   "mixins": [

@@ -1,11 +1,16 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.src.*;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 
+@Debug(
+        export = true
+)
 @Mixin(
         value = EntityPlayerMP.class,
         remap = false
@@ -22,8 +27,8 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
 
     @Shadow private int currentWindowId;
 
-    @Override
-    public void displayGuiScreen(GuiScreen guiScreen, Container container, IInventory inventory) {
+
+    public void displayGuiScreen_si(GuiScreen guiScreen, Container container, IInventory inventory) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, Config.getFromConfig("GuiID",8), inventory.getInvName(), inventory.getSizeInventory()));
         this.craftingInventory = container;

@@ -5,5 +5,5 @@ import net.minecraft.src.GuiScreen;
 import net.minecraft.src.IInventory;
 
 public interface IEntityPlayerMP {
-    void displayGuiScreen(GuiScreen guiScreen, Container container, IInventory inventory);
+    void displayGuiScreen_si(GuiScreen guiScreen, Container container, IInventory inventory);
 }

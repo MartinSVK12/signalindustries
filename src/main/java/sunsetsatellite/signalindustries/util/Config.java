@@ -79,5 +79,5 @@ public class Config {
         return base;
     }
 
-    private static File configFile = new File((Minecraft.getMinecraftDir()) + "/config/SignalIndustries.cfg");
+    private static final File configFile = new File((Minecraft.getMinecraftDir()) + "/config/SignalIndustries.cfg");
 }
