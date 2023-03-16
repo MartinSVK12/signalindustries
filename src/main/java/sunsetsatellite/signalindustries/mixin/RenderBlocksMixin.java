@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import sunsetsatellite.fluidapi.render.RenderPipeBlock;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.util.RenderConduit;
 
 @Mixin(
         value={RenderBlocks.class},
@@ -23,9 +26,8 @@ public class RenderBlocksMixin {
             cancellable = true
     )
     void renderBlockByRenderType(Block block, int i, int j, int k, CallbackInfoReturnable<Boolean> cir) {
-        //TODO: Add conduits here
-        /*if(block.blockID == EnergyAPI.wire.blockID){
-            cir.setReturnValue(RenderWire.render((RenderBlocks) ((Object)this),this.blockAccess,i,j,k,block,0));
-        }*/
+        if(block.getRenderType() == 32){
+            cir.setReturnValue(RenderConduit.render((RenderBlocks) ((Object)this),this.blockAccess,i,j,k,block,0));
+        }
     }
 }

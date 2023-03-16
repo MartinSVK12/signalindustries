@@ -8,6 +8,7 @@ import sunsetsatellite.fluidapi.api.IItemFluidContainer;
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 
 public class ItemSignalumCrystal extends Item implements IItemFluidContainer, ICustomDescription {
@@ -18,6 +19,12 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+        itemstack.consumeItem(entityplayer);
+        world.playSoundAtEntity(entityplayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        if (!world.isMultiplayerAndNotHost) {
+            world.entityJoinedWorld(new EntityCrystal(world, entityplayer));
+        }
+
         return itemstack;
     }
 
