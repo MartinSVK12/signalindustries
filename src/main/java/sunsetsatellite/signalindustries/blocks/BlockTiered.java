@@ -4,8 +4,9 @@ import net.minecraft.src.*;
 import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.signalindustries.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
 
-public class BlockTiered extends Block implements ICustomDescription {
+public class BlockTiered extends Block implements ITiered {
 
     public Tiers tier;
 
@@ -16,8 +17,7 @@ public class BlockTiered extends Block implements ICustomDescription {
 
     @Override
     public String getDescription(ItemStack stack) {
-        StringBuilder text = new StringBuilder();
-        return text.append("Tier: ").append(tier.getColor()).append(tier.getRank()).toString();
+        return "Tier: " + tier.getColor() + tier.getRank();
     }
 
 }

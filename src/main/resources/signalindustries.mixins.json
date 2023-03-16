@@ -8,7 +8,8 @@
     "GuiContainerMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
-    "RenderGlobalMixin"
+    "RenderGlobalMixin",
+    "RenderPlayerMixin"
   ],
   "client": [
   ],

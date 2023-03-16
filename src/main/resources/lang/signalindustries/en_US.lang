@@ -24,3 +24,7 @@ tile.signalindustries.reinforced.conduit.name=Reinforced Conduit
 tile.signalindustries.reinforced.conduit.desc=Transfers [Signalum Energy] or any other fluid.
 tile.signalindustries.awakened.conduit.name=Awakened Conduit
 tile.signalindustries.awakened.conduit.desc=Transfers [Signalum Energy] or any other fluid.
+item.signalindustries.basic.prototypeHarness.name=Signalum Prototype Harness
+item.signalindustries.basic.prototypeHarness.desc=
+item.signalindustries.basic.prototypeHarnessGoggles.name=Prototype Goggles
+item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the [Signalum Prototype Harness].

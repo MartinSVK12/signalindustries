@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.signalindustries.blocks.BlockConduit;
@@ -10,6 +11,8 @@ import sunsetsatellite.signalindustries.blocks.BlockOreSignalum;
 import sunsetsatellite.signalindustries.blocks.BlockTiered;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
+import sunsetsatellite.signalindustries.items.ItemArmorTiered;
+import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.items.ItemSignalumCrystal;
@@ -50,7 +53,10 @@ public class SignalIndustries implements ModInitializer {
     public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(Config.getFromConfig("signalumCrystal",600)),"signalumCrystal","signalumcrystal.png").setMaxStackSize(1);
     public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("rawSignalumCrystal",602)),"rawSignalumCrystal","rawsignalumcrystal.png");
 
+    public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
 
+    public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarness",700),armorPrototypeHarness,1,Tiers.BASIC),"basic.prototypeHarness");
+    public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarnessGoggles",701),armorPrototypeHarness,0,Tiers.BASIC),"basic.prototypeHarnessGoggles");
 
     @Override
     public void onInitialize() {
@@ -61,6 +67,7 @@ public class SignalIndustries implements ModInitializer {
         CommandHelper.createCommand(new NBTEditCommand());
         EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
         EntityHelper.createEntity(EntityCrystal.class,new RenderSnowball(signalumCrystal.getIconFromDamage(0)),47,"signalumCrystal");
+
         Config.init();
     }
 

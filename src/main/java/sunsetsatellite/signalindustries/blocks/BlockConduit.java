@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
 
 import java.util.Random;
 
-public class BlockConduit extends BlockContainerTiered implements ICustomDescription {
+public class BlockConduit extends BlockContainerTiered {
     public BlockConduit(int i, Tiers tier, Material material) {
         super(i, tier, material);
     }
