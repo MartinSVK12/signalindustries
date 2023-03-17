@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.entities;
 import net.minecraft.src.*;
 import net.minecraft.src.helper.DamageType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EntityCrystal extends Entity {
@@ -128,12 +129,12 @@ public class EntityCrystal extends Entity {
 
         if (!this.worldObj.isMultiplayerAndNotHost) {
             Entity entity = null;
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0, 1.0, 1.0));
+            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(3.0, 3.0, 3.0));
             double d = 0.0;
 
             for(int i1 = 0; i1 < list.size(); ++i1) {
                 Entity entity1 = (Entity)list.get(i1);
-                if (entity1.canBeCollidedWith() && (entity1 != this.field_20051_g || this.field_20049_i >= 5)) {
+               if (entity1.canBeCollidedWith() && (entity1 != this.field_20051_g || this.field_20049_i >= 5)) {
                     float f4 = 0.3F;
                     AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f4, (double)f4, (double)f4);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb.func_1169_a(vec3d, vec3d1);
@@ -142,6 +143,7 @@ public class EntityCrystal extends Entity {
                         if (d1 < d || d == 0.0) {
                             entity = entity1;
                             d = d1;
+                            //entity.attackEntityFrom(this.field_20051_g,20,DamageType.COMBAT);
                         }
                     }
                 }
@@ -154,6 +156,24 @@ public class EntityCrystal extends Entity {
 
         if (movingobjectposition != null) {
             if (movingobjectposition.entityHit != null && !movingobjectposition.entityHit.attackEntityFrom(this.field_20051_g, 0, DamageType.COMBAT)) {
+                if(movingobjectposition.entityHit == this.field_20051_g){
+                    movingobjectposition.entityHit.attackEntityFrom(this.field_20051_g, 8, DamageType.COMBAT);
+                }
+            }
+
+
+
+            List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(3.0, 3.0, 3.0));
+            List<Entity> attacked = new ArrayList<>();
+            for (Entity entity : list) {
+                if(entity instanceof EntityLiving){
+                    if (entity == this.field_20051_g && entity instanceof EntityPlayer) {
+                        ((EntityPlayer) entity).heal(4);
+                    } else if (entity.canBeCollidedWith() && (entity != this.field_20051_g || this.field_20049_i >= 5) && !attacked.contains(entity)) {
+                        entity.attackEntityFrom(this.field_20051_g, 4, DamageType.COMBAT);
+                        attacked.add(entity);
+                    }
+                }
             }
 
             worldObj.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.rand.nextFloat() * 0.4F + 0.8F));

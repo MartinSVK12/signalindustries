@@ -6,6 +6,7 @@
   "mixins": [
     "EntityPlayerMPMixin",
     "GuiContainerMixin",
+    "GuiIngameMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
     "RenderGlobalMixin",
