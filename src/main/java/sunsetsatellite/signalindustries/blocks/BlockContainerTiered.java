@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
-public class BlockContainerTiered extends BlockContainerRotatable implements ITiered {
+public abstract class BlockContainerTiered extends BlockContainerRotatable implements ITiered {
 
     public Tiers tier;
 
@@ -20,10 +20,5 @@ public class BlockContainerTiered extends BlockContainerRotatable implements ITi
     @Override
     public String getDescription(ItemStack stack) {
         return "Tier: " + tier.getColor() + tier.getRank();
-    }
-
-    @Override
-    protected TileEntity getBlockEntity() {
-        return null;
     }
 }

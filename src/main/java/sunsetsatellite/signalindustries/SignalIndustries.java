@@ -6,14 +6,19 @@ import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sunsetsatellite.signalindustries.blocks.BlockConduit;
-import sunsetsatellite.signalindustries.blocks.BlockOreSignalum;
-import sunsetsatellite.signalindustries.blocks.BlockTiered;
+import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
+import sunsetsatellite.fluidapi.template.gui.GuiFluidTank;
+import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
+import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
+import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
+import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.tiles.TileEntityFluidConduit;
+import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.items.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.util.NBTEditCommand;
@@ -37,11 +42,17 @@ public class SignalIndustries implements ModInitializer {
     public static final Block awakenedMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("awakenedMachineCore",1210),Tiers.AWAKENED,Material.rock),"awakened.machine","machineawakened.png",Block.soundStoneFootstep,5.0f,50.0f,1);
 
     public static final Block prototypeConduit = BlockHelper.createBlock(MOD_ID,new BlockConduit(Config.getFromConfig("prototypeConduit",1203),Tiers.PROTOTYPE,Material.glass),"prototype.conduit","conduitprototype.png",Block.soundGlassFootstep,1.0f,1.0f,0);
-
     public static final Block basicConduit = BlockHelper.createBlock(MOD_ID,new BlockConduit(Config.getFromConfig("basicConduit",1204),Tiers.BASIC,Material.glass),"basic.conduit","conduitbasic.png",Block.soundGlassFootstep,1.0f,1.0f,0);
     public static final Block reinforcedConduit = BlockHelper.createBlock(MOD_ID,new BlockConduit(Config.getFromConfig("reinforcedConduit",1205),Tiers.REINFORCED,Material.glass),"reinforced.conduit","conduitreinforced.png",Block.soundGlassFootstep,1.0f,1.0f,0);
     public static final Block awakenedConduit = BlockHelper.createBlock(MOD_ID,new BlockConduit(Config.getFromConfig("awakenedConduit",1206),Tiers.AWAKENED,Material.glass),"awakened.conduit","conduitawakened.png",Block.soundGlassFootstep,1.0f,1.0f,0);
 
+    public static final Block prototypeFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("prototypeFluidConduit",1212),Tiers.PROTOTYPE,Material.glass),"prototype.conduit.fluid","fluidpipeprototype.png",Block.soundGlassFootstep,1.0f,1.0f,0);
+    public static final Block basicFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("basicFluidConduit",1213),Tiers.BASIC,Material.glass),"basic.conduit.fluid","fluidpipebasic.png",Block.soundGlassFootstep,1.0f,1.0f,0);
+    public static final Block reinforcedFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("reinforcedFluidConduit",1214),Tiers.REINFORCED,Material.glass),"reinforced.conduit.fluid","fluidpipereinforced.png",Block.soundGlassFootstep,1.0f,1.0f,0);
+
+    public static final Block prototypeEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("prototypeEnergyCell",1211),Tiers.PROTOTYPE,Material.glass),"prototype.energyCell","cellprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
+
+    public static final Block prototypeFluidTank = BlockHelper.createBlock(MOD_ID,new BlockSIFluidTank(Config.getFromConfig("prototypeFluidTank",1215),Tiers.PROTOTYPE,Material.glass),"prototype.fluidTank","fluidtankprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -66,7 +77,14 @@ public class SignalIndustries implements ModInitializer {
     public SignalIndustries(){
         CommandHelper.createCommand(new NBTEditCommand());
         EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
+        EntityHelper.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.createEntity(EntityCrystal.class,new RenderSnowball(signalumCrystal.getIconFromDamage(0)),47,"signalumCrystal");
+
+        EntityHelper.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
+        addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
+
+        EntityHelper.createSpecialTileEntity(TileEntitySIFluidTank.class,new RenderFluidInBlock(),"SI Fluid Tank");
+        addToNameGuiMap("SI Fluid Tank", GuiFluidTank.class, TileEntitySIFluidTank.class);
 
         Config.init();
     }
