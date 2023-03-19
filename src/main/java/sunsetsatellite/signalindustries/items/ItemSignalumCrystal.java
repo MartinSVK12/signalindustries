@@ -62,7 +62,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             if(remaining == 0){
                 return null;
             }
-            if(amount >= remaining){
+            if(amount > remaining){
                 slot.getFluidStack().amount -= remaining;
                 if(slot.getFluidStack().amount <= 0){
                     slot.putStack(null);

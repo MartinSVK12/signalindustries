@@ -44,4 +44,7 @@ tile.signalindustries.prototype.energyCell.name=Prototype Energy Cell
 tile.signalindustries.prototype.energyCell.desc=Buffer for storing [Signalum Energy].
 
 tile.signalindustries.prototype.fluidTank.name=Prototype Fluid Tank
-tile.signalindustries.prototype.fluidTank.desc=Tank for storing various fluids. Can NOT store [Signalum Energy].
+tile.signalindustries.prototype.fluidTank.desc=Tank for storing various fluids. Unsuitable for [Signalum Energy].
+
+tile.signalindustries.prototype.extractor.name=Prototype Signalum Extractor
+tile.signalindustries.prototype.extractor.desc=Extracts [Signalum Energy] from [Raw Signalum Crystals].

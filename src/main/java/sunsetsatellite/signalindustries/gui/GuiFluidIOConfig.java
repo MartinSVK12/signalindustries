@@ -1,22 +1,34 @@
 package sunsetsatellite.signalindustries.gui;
 
+import b100.utils.ReflectUtils;
+import net.minecraft.shared.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.command.ChatColor;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
 import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 
-public class GuiFluidIOConfig extends GuiContainer {
+import java.lang.reflect.Field;
+
+public class GuiFluidIOConfig extends GuiScreen {
 
     public GuiScreen parentScreen;
     public EntityPlayer entityplayer;
     public TileEntityFluidContainer tile;
+    public int xSize = 176;
+    public int ySize = 166;
+    public Container inventorySlots;
+    private static final RenderItem itemRenderer = new RenderItem();
     public GuiFluidIOConfig(EntityPlayer player, Container container, TileEntity tile, GuiScreen parent) {
-        super(container);
+        super(parent);
         this.tile = (TileEntityFluidContainer) tile;
         this.parentScreen = parent;
         this.entityplayer = player;
+        this.inventorySlots = container;
     }
 
     public void keyTyped(char c, int i) {
@@ -25,7 +37,6 @@ public class GuiFluidIOConfig extends GuiContainer {
         }
     }
 
-    @Override
     protected void drawGuiContainerBackgroundLayer(float f)
     {
         int i = mc.renderEngine.getTexture("assets/signalindustries/gui/ioconfig.png");
@@ -34,6 +45,32 @@ public class GuiFluidIOConfig extends GuiContainer {
         int j = (width - xSize) / 2;
         int k = (height - ySize) / 2;
         drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
+    }
+
+    @Override
+    public void drawScreen(int x, int y, float renderPartialTicks) {
+        this.drawDefaultBackground();
+        int centerX = (this.width - this.xSize) / 2;
+        int centerY = (this.height - this.ySize) / 2;
+        this.drawGuiContainerBackgroundLayer(renderPartialTicks);
+        GL11.glPushMatrix();
+        GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
+        RenderHelper.enableStandardItemLighting();
+        GL11.glPopMatrix();
+        GL11.glPushMatrix();
+        GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glEnable(32826);
+        GL11.glDisable(32826);
+        RenderHelper.disableStandardItemLighting();
+        GL11.glDisable(2896);
+        GL11.glDisable(2929);
+        this.drawGuiContainerForegroundLayer();
+        GL11.glPopMatrix();
+        super.drawScreen(x, y, renderPartialTicks);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glEnable(2929);
+
     }
 
     @Override
@@ -90,7 +127,6 @@ public class GuiFluidIOConfig extends GuiContainer {
 
     protected void drawGuiContainerForegroundLayer()
     {
-        super.drawGuiContainerForegroundLayer();
         fontRenderer.drawString("Configure: Fluids", 45, 6, 0xFF404040);
         fontRenderer.drawString("I/O", 78, 70, 0xFF404040);
         fontRenderer.drawString("Slot", 128, 70, 0xFF404040);

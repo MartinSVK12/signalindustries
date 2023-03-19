@@ -11,7 +11,7 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class BlockSIFluidTank extends BlockContainerTiered {
         {
             TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiFluidTank(entityplayer.inventory, tile),new ContainerFluidTank(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiSIFluidTank(entityplayer.inventory, tile),new ContainerFluidTank(entityplayer.inventory,tile),tile);
             }
             return true;
         }

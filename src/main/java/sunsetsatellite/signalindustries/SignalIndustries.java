@@ -12,13 +12,12 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
+import sunsetsatellite.signalindustries.gui.GuiExtractor;
+import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
-import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidConduit;
-import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
+import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.items.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.util.NBTEditCommand;
@@ -54,6 +53,9 @@ public class SignalIndustries implements ModInitializer {
 
     public static final Block prototypeFluidTank = BlockHelper.createBlock(MOD_ID,new BlockSIFluidTank(Config.getFromConfig("prototypeFluidTank",1215),Tiers.PROTOTYPE,Material.glass),"prototype.fluidTank","fluidtankprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
 
+    public static final Block prototypeExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("prototypeExtractor",1216),Tiers.PROTOTYPE,Material.rock),"prototype.extractor","prototypeblank.png","extractorprototypesideempty.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png")};
+
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
     public static final Block energyFlowing = BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing(Config.getFromConfig("signalumEnergy",1200),Material.water),"signalumEnergy","signalumenergy.png",Block.soundPowderFootstep,1.0f,1.0f,0).setNotInCreativeMenu().setPlaceOverwrites().setTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]);
@@ -84,7 +86,10 @@ public class SignalIndustries implements ModInitializer {
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
 
         EntityHelper.createSpecialTileEntity(TileEntitySIFluidTank.class,new RenderFluidInBlock(),"SI Fluid Tank");
-        addToNameGuiMap("SI Fluid Tank", GuiFluidTank.class, TileEntitySIFluidTank.class);
+        addToNameGuiMap("SI Fluid Tank", GuiSIFluidTank.class, TileEntitySIFluidTank.class);
+
+        EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
+        addToNameGuiMap("Extractor", GuiExtractor.class, TileEntityExtractor.class);
 
         Config.init();
     }
