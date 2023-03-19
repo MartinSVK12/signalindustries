@@ -17,7 +17,7 @@ public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeB
         machine = stack;
         this.addSlot(new SlotGuidebook(0, 9, 10, itemInputs.get(0), false));
         this.addSlot(new SlotGuidebook(1, 69, 19, new ItemStack(fluidOutputs.get(0).liquid,fluidOutputs.get(0).amount), false));
-        this.addSlot(new SlotGuidebook(2,36,0,stack,true));
+        this.addSlot(new SlotGuidebook(2,36,18,stack,true));
     }
 
     public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index){

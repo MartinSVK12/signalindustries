@@ -11,5 +11,6 @@ public class SignalIndustriesGuidebookPlugin implements GuidebookCustomRecipePlu
         logger.info("Loading recipe plugin: "+this.getClass().getSimpleName()+" from "+ SignalIndustries.MOD_ID);
         registry.addHandler(new RecipeHandlerExtractor(), RecipeExtractor.class);
         registry.addHandler(new RecipeHandlerCrusher(), RecipeCrusher.class);
+        registry.addHandler(new RecipeHandlerAlloySmelter(),RecipeAlloySmelter.class);
     }
 }

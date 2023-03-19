@@ -12,10 +12,7 @@ import sunsetsatellite.fluidapi.template.gui.GuiFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
-import sunsetsatellite.signalindustries.gui.GuiCrusher;
-import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
-import sunsetsatellite.signalindustries.gui.GuiExtractor;
-import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
+import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
@@ -61,6 +58,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block prototypeCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("prototypeCrusher",1217),Tiers.PROTOTYPE,Material.rock),"prototype.crusher","crusherprototypetopinactive.png","prototypeblank.png","crusherprototypeside.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png")};
 
+    public static final Block prototypeAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("prototypeAlloySmelter",1218),Tiers.PROTOTYPE,Material.rock),"prototype.alloySmelter","prototypeblank.png","prototypeblank.png","alloysmelterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] alloySmelterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeactive.png")};
+
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -75,6 +75,14 @@ public class SignalIndustries implements ModInitializer {
     public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("coalDust",603)),"coalDust","coaldust.png");
     public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("emptySignalumCrystalDust",604)),"signalumCrystalDust","emptysignalumdust.png");
     public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumCrystalDust",605)),"saturatedSignalumCrystalDust","saturatedsignalumdust.png");
+
+    public static final Item ironPlateHammer = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("ironPlateHammer",606)),"ironPlateHammer","platehammer.png");
+
+    public static final Item cobblestonePlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("cobblestonePlate",607)),"cobblestonePlate","cobblestoneplate.png");
+    public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("stonePlate",608)),"stonePlate","stoneplate.png");
+    public static final Item crystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyPlate",610)),"crystalAlloyPlate","crystalalloyplate.png");
+
+    public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyIngot",609)),"crystalAlloyIngot","crystalalloy.png");
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
 
@@ -103,6 +111,9 @@ public class SignalIndustries implements ModInitializer {
 
         EntityHelper.createTileEntity(TileEntityCrusher.class,"Crusher");
         addToNameGuiMap("Crusher", GuiCrusher.class, TileEntityCrusher.class);
+
+        EntityHelper.createTileEntity(TileEntityAlloySmelter.class,"Alloy Smelter");
+        addToNameGuiMap("Alloy Smelter", GuiAlloySmelter.class, TileEntityAlloySmelter.class);
 
         Config.init();
     }

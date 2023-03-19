@@ -23,6 +23,9 @@
     ],
     "fluidapi": [
       "sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin"
+    ],
+    "guidebookpp": [
+      "sunsetsatellite.signalindustries.api.impl.guidebookpp.SignalIndustriesGuidebookPlugin"
     ]
   },
   "mixins": [
