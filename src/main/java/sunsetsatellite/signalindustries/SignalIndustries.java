@@ -61,6 +61,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block prototypeAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("prototypeAlloySmelter",1218),Tiers.PROTOTYPE,Material.rock),"prototype.alloySmelter","prototypeblank.png","prototypeblank.png","alloysmelterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] alloySmelterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeactive.png")};
 
+    public static final Block prototypePlateFormer = BlockHelper.createBlock(MOD_ID,new BlockPlateFormer(Config.getFromConfig("prototypePlateFormer",1219),Tiers.PROTOTYPE,Material.rock),"prototype.plateFormer","prototypeblank.png","prototypeblank.png","plateformerprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] plateFormerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"plateformerprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"plateformerprototypeactive.png")};
+
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -81,6 +84,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Item cobblestonePlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("cobblestonePlate",607)),"cobblestonePlate","cobblestoneplate.png");
     public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("stonePlate",608)),"stonePlate","stoneplate.png");
     public static final Item crystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyPlate",610)),"crystalAlloyPlate","crystalalloyplate.png");
+    public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("steelPlate",611)),"steelPlate","steelplate.png");
 
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyIngot",609)),"crystalAlloyIngot","crystalalloy.png");
 
@@ -114,6 +118,9 @@ public class SignalIndustries implements ModInitializer {
 
         EntityHelper.createTileEntity(TileEntityAlloySmelter.class,"Alloy Smelter");
         addToNameGuiMap("Alloy Smelter", GuiAlloySmelter.class, TileEntityAlloySmelter.class);
+
+        EntityHelper.createTileEntity(TileEntityPlateFormer.class,"Plate Former");
+        addToNameGuiMap("Plate Former", GuiPlateFormer.class, TileEntityPlateFormer.class);
 
         Config.init();
     }
