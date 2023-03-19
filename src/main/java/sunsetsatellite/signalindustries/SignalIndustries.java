@@ -6,11 +6,13 @@ import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
 import sunsetsatellite.fluidapi.template.gui.GuiFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
+import sunsetsatellite.signalindustries.gui.GuiCrusher;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
@@ -56,6 +58,10 @@ public class SignalIndustries implements ModInitializer {
     public static final Block prototypeExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("prototypeExtractor",1216),Tiers.PROTOTYPE,Material.rock),"prototype.extractor","prototypeblank.png","extractorprototypesideempty.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png")};
 
+    public static final Block prototypeCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("prototypeCrusher",1217),Tiers.PROTOTYPE,Material.rock),"prototype.crusher","crusherprototypetopinactive.png","prototypeblank.png","crusherprototypeside.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png")};
+
+
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
     public static final Block energyFlowing = BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing(Config.getFromConfig("signalumEnergy",1200),Material.water),"signalumEnergy","signalumenergy.png",Block.soundPowderFootstep,1.0f,1.0f,0).setNotInCreativeMenu().setPlaceOverwrites().setTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]);
@@ -65,6 +71,10 @@ public class SignalIndustries implements ModInitializer {
     public static final Item signalumCrystalEmpty = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(Config.getFromConfig("signalumCrystalEmpty",601)),"signalumCrystalEmpty","signalumcrystalempty.png").setMaxStackSize(1);
     public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(Config.getFromConfig("signalumCrystal",600)),"signalumCrystal","signalumcrystal.png").setMaxStackSize(1);
     public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("rawSignalumCrystal",602)),"rawSignalumCrystal","rawsignalumcrystal.png");
+
+    public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("coalDust",603)),"coalDust","coaldust.png");
+    public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("emptySignalumCrystalDust",604)),"signalumCrystalDust","emptysignalumdust.png");
+    public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumCrystalDust",605)),"saturatedSignalumCrystalDust","saturatedsignalumdust.png");
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
 
@@ -91,6 +101,9 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
         addToNameGuiMap("Extractor", GuiExtractor.class, TileEntityExtractor.class);
 
+        EntityHelper.createTileEntity(TileEntityCrusher.class,"Crusher");
+        addToNameGuiMap("Crusher", GuiCrusher.class, TileEntityCrusher.class);
+
         Config.init();
     }
 
@@ -108,5 +121,13 @@ public class SignalIndustries implements ModInitializer {
         list.add(guiClass);
         list.add(tileEntityClass);
         nameToGuiMap.put(name,list);
+    }
+
+    public static int getEnergyBurnTime(FluidStack stack) {
+        if(stack == null) {
+            return 0;
+        } else {
+            return stack.isFluidEqual(new FluidStack((BlockFluid) SignalIndustries.energyFlowing,1)) ? 100 : 0;
+        }
     }
 }

@@ -3,20 +3,19 @@ package sunsetsatellite.signalindustries.api.impl.guidebookpp;
 import net.minecraft.src.ContainerGuidebookRecipeBase;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.StringTranslate;
-import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
+import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class RecipeHandlerExtractor
+public class RecipeHandlerCrusher
     implements IRecipeHandlerBase {
     public ContainerGuidebookRecipeBase getContainer(Object o) {
-        RecipeExtractor recipe = (RecipeExtractor) o;
-        return new ContainerGuidebookExtractorRecipe(new ItemStack(SignalIndustries.prototypeExtractor),recipe.itemInputs,recipe.fluidInputs,recipe.itemOutputs,recipe.fluidOutputs);
+        RecipeCrusher recipe = (RecipeCrusher) o;
+        return new ContainerGuidebookCrusherRecipe(new ItemStack(SignalIndustries.prototypeCrusher),recipe.itemInputs,recipe.fluidInputs,recipe.itemOutputs,recipe.fluidOutputs);
     }
 
 
@@ -25,26 +24,26 @@ public class RecipeHandlerExtractor
     }
 
     public ArrayList<?> getRecipes() {
-        HashMap<Integer, FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
+        HashMap<Integer, ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-            ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
+            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+            recipes.add(new RecipeCrusher(singletonList,null,singletonlist2, null));
         });
         return recipes;
     }
 
     public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
+        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
 
             if(usage){
                 if(new ItemStack(I,1,0).isItemEqual(filter)){
                     ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-                    ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipeCrusher(singletonList,null,singletonlist2, null));
                 }
             }
         });
@@ -56,12 +55,12 @@ public class RecipeHandlerExtractor
         if(name.equals("")){
             return getRecipes();
         }
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
+        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-            ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
+            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+            recipes.add(new RecipeCrusher(singletonList,null,singletonlist2, null));
         });
         recipes.removeIf((R)->!getNameOfRecipeOutput(R).contains(name.toLowerCase()));
         return recipes;
@@ -70,11 +69,11 @@ public class RecipeHandlerExtractor
     @Override
     public String getNameOfRecipeOutput(Object recipe){
         StringTranslate trans = StringTranslate.getInstance();
-        return trans.translateKey(((RecipeExtractor)recipe).fluidOutputs.get(0).getFluidName()+".name").toLowerCase();
+        return trans.translateKey(((RecipeCrusher)recipe).itemOutputs.get(0).getItemName()+".name").toLowerCase();
     }
 
     @Override
     public String getHandlerName() {
-        return "signalum extractor";
+        return "signalum crusher";
     }
 }

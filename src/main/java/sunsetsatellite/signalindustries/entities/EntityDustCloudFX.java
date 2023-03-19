@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries;
+package sunsetsatellite.signalindustries.entities;
 
 import net.minecraft.src.EntityFX;
 import net.minecraft.src.Tessellator;
@@ -17,7 +17,7 @@ public class EntityDustCloudFX extends EntityFX {
 	}
 
 	public void onUpdate() {
-		for(int i1 = 0; i1 < 6; ++i1) {
+		for(int i1 = 0; i1 < 30; ++i1) {
 			double d2 = this.posX + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;
 			double d4 = this.posY + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;
 			double d6 = this.posZ + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;

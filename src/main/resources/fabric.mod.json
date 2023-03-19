@@ -23,9 +23,6 @@
     ],
     "fluidapi": [
       "sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin"
-    ],
-    "guidebookpp": [
-      "sunsetsatellite.signalindustries.api.impl.guidebookpp.SignalIndustriesGuidebookPlugin"
     ]
   },
   "mixins": [
@@ -35,10 +32,10 @@
   "depends": {
     "fabricloader": ">=0.13.3",
     "minecraft": "1.7.6",
-    "fluidapi": ">=1.2"
+    "fluidapi": ">=1.2",
+    "guidebookpp": ">=1.4.1"
   },
   "suggests": {
-    "energyapi": ">=1.1.1",
-    "guidebookpp": ">=1.4"
+    "energyapi": ">=1.1.1"
   }
 }

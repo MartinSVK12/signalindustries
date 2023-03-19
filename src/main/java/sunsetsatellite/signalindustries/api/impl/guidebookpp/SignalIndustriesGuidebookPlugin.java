@@ -9,6 +9,7 @@ public class SignalIndustriesGuidebookPlugin implements GuidebookCustomRecipePlu
     @Override
     public void initializePlugin(CustomGuidebookRecipeRegistry registry, Logger logger) {
         logger.info("Loading recipe plugin: "+this.getClass().getSimpleName()+" from "+ SignalIndustries.MOD_ID);
-        registry.addHandler(new RecipeHandlerExtractor(), RecipeFluid.class);
+        registry.addHandler(new RecipeHandlerExtractor(), RecipeExtractor.class);
+        registry.addHandler(new RecipeHandlerCrusher(), RecipeCrusher.class);
     }
 }

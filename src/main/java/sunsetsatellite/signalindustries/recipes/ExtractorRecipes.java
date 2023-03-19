@@ -17,7 +17,7 @@ public class ExtractorRecipes {
     }
 
     private ExtractorRecipes() {
-        this.addRecipe(SignalIndustries.rawSignalumCrystal.itemID,new FluidStack((BlockFluid) SignalIndustries.energyFlowing,150));
+        this.addRecipe(SignalIndustries.rawSignalumCrystal.itemID,new FluidStack((BlockFluid) SignalIndustries.energyFlowing,160));
     }
 
     public void addRecipe(int id, FluidStack stack) {

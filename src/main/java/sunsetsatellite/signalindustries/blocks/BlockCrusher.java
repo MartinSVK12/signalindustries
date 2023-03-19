@@ -1,33 +1,32 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.containers.ContainerCrusher;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
+import sunsetsatellite.signalindustries.gui.GuiCrusher;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
-import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
+import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockExtractor extends BlockContainerTiered{
-    public BlockExtractor(int i, Tiers tier, Material material) {
+public class BlockCrusher extends BlockContainerTiered{
+    public BlockCrusher(int i, Tiers tier, Material material) {
         super(i, tier, material);
     }
 
     @Override
     protected TileEntity getBlockEntity() {
-        return new TileEntityExtractor();
+        return new TileEntityCrusher();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+        TileEntityCrusher tile = (TileEntityCrusher) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -72,9 +71,9 @@ public class BlockExtractor extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+            TileEntityCrusher tile = (TileEntityCrusher) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiCrusher(entityplayer.inventory, tile),new ContainerCrusher(entityplayer.inventory,tile),tile);
             }
             return true;
         }
@@ -82,7 +81,7 @@ public class BlockExtractor extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
-        TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityCrusher tile = (TileEntityCrusher) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
@@ -93,15 +92,12 @@ public class BlockExtractor extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
-        if(index > 1 && index < 6){
+        if(index == 1){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[2][0],SignalIndustries.extractorTex[2][1]);
-            } else if (tile.getStackInSlot(0) != null) {
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[1][0],SignalIndustries.extractorTex[1][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[1][0],SignalIndustries.crusherTex[1][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[0][0],SignalIndustries.extractorTex[0][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[0][0],SignalIndustries.crusherTex[0][1]);
         }
         return this.atlasIndices[index];
     }
-
 }
