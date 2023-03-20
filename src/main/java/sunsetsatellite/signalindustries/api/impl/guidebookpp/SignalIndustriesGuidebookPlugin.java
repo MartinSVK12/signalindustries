@@ -13,5 +13,6 @@ public class SignalIndustriesGuidebookPlugin implements GuidebookCustomRecipePlu
         registry.addHandler(new RecipeHandlerCrusher(), RecipeCrusher.class);
         registry.addHandler(new RecipeHandlerAlloySmelter(),RecipeAlloySmelter.class);
         registry.addHandler(new RecipeHandlerPlateFormer(),RecipePlateFormer.class);
+        registry.addHandler(new RecipeHandlerCrystalCutter(),RecipeCrystalCutter.class);
     }
 }

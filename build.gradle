@@ -70,13 +70,13 @@ dependencies {
 		exclude(group: 'objects', module: 'client')
 	}*/
 
-	modImplementation("com.github.MartinSVK12:fluidapi:f7fe057039"){
+	modImplementation("com.github.MartinSVK12:fluidapi:a90955bd33"){
 		exclude(group: 'objects', module: 'client')
 	}
 
-	modImplementation("com.github.MartinSVK12:guidebookpp:1.4.1"){
+	/*modImplementation("com.github.MartinSVK12:guidebookpp:1.4.1"){
 		exclude(group: 'objects', module: 'client')
-	}
+	}*/
 
 }
 

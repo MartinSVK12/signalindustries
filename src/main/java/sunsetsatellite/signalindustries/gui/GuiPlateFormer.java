@@ -56,7 +56,7 @@ public class GuiPlateFormer extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_machine.png");
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -75,7 +75,7 @@ public class GuiPlateFormer extends GuiFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawString(name, 64, 6, 0xFF404040);
+        fontRenderer.drawCenteredString(name,90,6,0xFFFFFFFF);
     }
     protected void actionPerformed(GuiButton guibutton) {
         if (!guibutton.enabled) {

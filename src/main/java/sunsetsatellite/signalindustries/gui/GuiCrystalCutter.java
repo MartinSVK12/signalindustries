@@ -6,19 +6,19 @@ import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerCrusher;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
+import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
+import sunsetsatellite.signalindustries.tiles.TileEntityCrystalCutter;
 
-public class GuiCrusher extends GuiFluid {
+public class GuiCrystalCutter extends GuiFluid {
 
-    public String name = "Crusher";
+    public String name = "Crystal Cutter";
     public EntityPlayer entityplayer;
-    public TileEntityCrusher tile;
+    public TileEntityCrystalCutter tile;
 
 
-    public GuiCrusher(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerCrusher(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
-        this.tile = (TileEntityCrusher) tile;
+    public GuiCrystalCutter(InventoryPlayer inventoryPlayer, TileEntity tile) {
+        super(new ContainerCrystalCutter(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
+        this.tile = (TileEntityCrystalCutter) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 
@@ -43,7 +43,7 @@ public class GuiCrusher extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                GuidebookPlusPlus.nameFocus = "*signalum crusher";
+                GuidebookPlusPlus.nameFocus = "*crystal cutter";
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -56,7 +56,7 @@ public class GuiCrusher extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -76,7 +76,6 @@ public class GuiCrusher extends GuiFluid {
     {
         super.drawGuiContainerForegroundLayer();
         fontRenderer.drawCenteredString(name,90,6,0xFFFFFFFF);
-        //fontRenderer.drawString(name, 64, 6, 0xFF404040);
     }
     protected void actionPerformed(GuiButton guibutton) {
         if (!guibutton.enabled) {
@@ -93,7 +92,7 @@ public class GuiCrusher extends GuiFluid {
 
     public void initGui()
     {
-        controlList.add(new GuiButton(0, Math.round(width / 2) - 80, Math.round(height / 2) - 80, 20, 20, "F"));
+        controlList.add(new GuiButton(0, Math.round(width / 2) + 60, Math.round(height / 2) - 80, 20, 20, "F"));
         super.initGui();
     }
 }
