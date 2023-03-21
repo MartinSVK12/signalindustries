@@ -39,22 +39,11 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     @Override
     public void writeToNBT(NBTTagCompound nBTTagCompound1) {
         super.writeToNBT(nBTTagCompound1);
-        NBTTagCompound connectionsTag = new NBTTagCompound();
-        for (Map.Entry<Direction, Connection> entry : connections.entrySet()) {
-            Direction dir = entry.getKey();
-            Connection con = entry.getValue();
-            connectionsTag.setInteger(String.valueOf(dir.ordinal()),con.ordinal());
-        }
-        nBTTagCompound1.setCompoundTag("fluidConnections",connectionsTag);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nBTTagCompound1) {
         super.readFromNBT(nBTTagCompound1);
-        NBTTagCompound connectionsTag = nBTTagCompound1.getCompoundTag("fluidConnections");
-        for (Object con : connectionsTag.func_28110_c()) {
-            connections.replace(Direction.values()[Integer.parseInt(((NBTTagInt)con).getKey())],Connection.values()[((NBTTagInt)con).intValue]);
-        }
     }
 
     @Override

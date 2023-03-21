@@ -196,13 +196,6 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
         nBTTagCompound1.setShort("ProcessTime", (short)this.progressTicks);
         nBTTagCompound1.setShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
         nBTTagCompound1.setInteger("MaxProcessTime",this.progressMaxTicks);
-        NBTTagCompound connectionsTag = new NBTTagCompound();
-        for (Map.Entry<Direction, Connection> entry : connections.entrySet()) {
-            Direction dir = entry.getKey();
-            Connection con = entry.getValue();
-            connectionsTag.setInteger(String.valueOf(dir.ordinal()),con.ordinal());
-        }
-        nBTTagCompound1.setCompoundTag("fluidConnections",connectionsTag);
     }
 
     @Override
@@ -212,10 +205,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
         progressTicks = nBTTagCompound1.getShort("ProcessTime");
         progressMaxTicks = nBTTagCompound1.getInteger("MaxProcessTime");
         fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
-        NBTTagCompound connectionsTag = nBTTagCompound1.getCompoundTag("fluidConnections");
-        for (Object con : connectionsTag.func_28110_c()) {
-            connections.replace(Direction.values()[Integer.parseInt(((NBTTagInt)con).getKey())],Connection.values()[((NBTTagInt)con).intValue]);
-        }
+
     }
 
 

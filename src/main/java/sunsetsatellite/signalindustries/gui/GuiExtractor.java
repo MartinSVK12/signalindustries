@@ -56,7 +56,7 @@ public class GuiExtractor extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/gui/furnace.png");
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -65,7 +65,7 @@ public class GuiExtractor extends GuiFluid {
         int i5;
         if(this.tile.isBurning()) {
             i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 56, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            this.drawTexturedModalRect(i3 + 57, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
         }
 
         i5 = this.tile.getProgressScaled(24);
@@ -75,7 +75,7 @@ public class GuiExtractor extends GuiFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawString(name, 42, 6, 0xFF404040);
+        fontRenderer.drawCenteredString(name, 90, 6, 0xFFFFFFFF);
     }
     protected void actionPerformed(GuiButton guibutton) {
         if (!guibutton.enabled) {

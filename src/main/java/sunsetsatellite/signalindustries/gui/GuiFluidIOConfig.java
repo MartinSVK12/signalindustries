@@ -31,6 +31,31 @@ public class GuiFluidIOConfig extends GuiScreen {
         this.inventorySlots = container;
     }
 
+    public void mouseClicked(int x, int y, int button) {
+        super.mouseClicked(x,y,button);
+        if (button == 1) {
+            for (int l = 0; l < this.controlList.size(); ++l) {
+                GuiButton guibutton = (GuiButton) this.controlList.get(l);
+                if (guibutton.mousePressed(this.mc, x, y)) {
+                    this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    action2Performed(guibutton);
+                }
+            }
+        }
+    }
+
+    public void action2Performed(GuiButton guibutton) {
+        if(guibutton.id > 5){
+            Direction dir = Direction.values()[guibutton.id-6];
+            Integer currentValue = tile.activeFluidSlots.get(dir);
+            if(currentValue > 0){
+                tile.activeFluidSlots.put(dir,currentValue-1);
+                guibutton.displayString = String.valueOf(tile.activeFluidSlots.get(dir));
+            }
+
+        }
+    }
+
     public void keyTyped(char c, int i) {
         if (i == 1) {
             SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile);
@@ -82,12 +107,12 @@ public class GuiFluidIOConfig extends GuiScreen {
         controlList.add(new GuiButton(1, Math.round(width / 2) - 24, Math.round(height / 2) - 48, 15, 15, tile.connections.get(Direction.X_NEG).getLetter())); //X-
         controlList.add(new GuiButton(5, Math.round(width / 2) + 4, Math.round(height / 2) - 33, 15, 15, tile.connections.get(Direction.Z_NEG).getLetter())); //Z-
 
-        controlList.add(new GuiButton(6, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 63, 15, 15, "0"));
-        controlList.add(new GuiButton(7, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 48, 15, 15, "0"));
-        controlList.add(new GuiButton(8, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 33, 15, 15, "0"));
-        controlList.add(new GuiButton(9, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 48, 15, 15, "0"));
-        controlList.add(new GuiButton(10, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, "0"));
-        controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, "0"));
+        controlList.add(new GuiButton(8, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 63, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_POS))));
+        controlList.add(new GuiButton(10, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_POS))));
+        controlList.add(new GuiButton(9, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_NEG))));
+        controlList.add(new GuiButton(6, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_POS))));
+        controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_NEG))));
+        controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_NEG))));
 
         if(((TileEntityFluidContainer)tile).fluidContents.length == 1){
             controlList.get(6).enabled = false;
@@ -121,6 +146,15 @@ public class GuiFluidIOConfig extends GuiScreen {
 
             guibutton.displayString = tile.connections.get(Direction.values()[guibutton.id]).getLetter();
 
+        }
+        if(guibutton.id > 5){
+            Direction dir = Direction.values()[guibutton.id-6];
+            Integer currentValue = tile.activeFluidSlots.get(dir);
+            if(currentValue < tile.fluidContents.length-1){
+                tile.activeFluidSlots.replace(dir,currentValue+1);
+            }
+
+            guibutton.displayString = String.valueOf(tile.activeFluidSlots.get(dir));
         }
         super.actionPerformed(guibutton);
     }
