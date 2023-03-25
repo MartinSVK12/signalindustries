@@ -48,7 +48,7 @@ public class RecipeHandlerCrystalCutter
         rawRecipes.forEach((I,O)->{
             if(usage){
                 for(Object obj : I){
-                    if((obj instanceof ItemStack && ((ItemStack) obj).isItemEqual(filter)) || (obj instanceof FluidStack && ((FluidStack) obj).isFluidEqual(new FluidStack((BlockFluid) Block.blocksList[filter.itemID], filter.stackSize)))) {
+                    if((obj instanceof ItemStack && ((ItemStack) obj).isItemEqual(filter)) || ( filter.itemID < 16384 && (obj instanceof FluidStack && ((FluidStack) obj).isFluidEqual(new FluidStack((BlockFluid) Block.blocksList[filter.itemID], filter.stackSize))))) {
                         ArrayList<ItemStack> list = new ArrayList<>();
                         ArrayList<FluidStack> fluidList = new ArrayList<>();
                         if (obj instanceof ItemStack) {

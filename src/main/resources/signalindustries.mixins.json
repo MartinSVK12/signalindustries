@@ -5,12 +5,15 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "EntityPlayerMPMixin",
+    "EntityRendererMixin",
     "GuiContainerMixin",
     "GuiIngameMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
     "RenderGlobalMixin",
-    "RenderPlayerMixin"
+    "RenderPlayerMixin",
+    "accessors.BiomeGenBaseAccessor",
+    "accessors.WorldTypeAccessor"
   ],
   "client": [
   ],

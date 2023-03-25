@@ -29,6 +29,12 @@ item.signalindustries.crystalAlloyPlate.desc=A plate made out of [Crystal Alloy]
 item.signalindustries.steelPlate.name=Steel Plate
 item.signalindustries.steelPlate.desc=A plate made out of steel.
 
+item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
+item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.
+
+item.signalindustries.dimensionalShard.name=Dimensional Shard
+item.signalindustries.dimensionalShard.desc=Shows reflections of many worlds.
+
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
 tile.signalindustries.signalumOre.desc=[Raw Signalum Crystal] encased in rock.
 
@@ -82,3 +88,21 @@ tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressi
 
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
+
+
+tile.signalindustries.recipeMaker.name=Recipe Maker
+tile.signalindustries.recipeMaker.desc=Development utility.
+
+tile.signalindustries.eternityPortal.name=Eternity Portal
+tile.signalindustries.eternityPortal.desc=
+
+tile.signalindustries.realityFabric.name=Fabric of Reality
+tile.signalindustries.realityFabric.desc=
+tile.signalindustries.rootedFabric.name=Rooted Fabric
+tile.signalindustries.rootedFabric.desc=
+tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
+tile.signalindustries.eternalTreeLog.desc=
+tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
+tile.signalindustries.dimensionalShardOre.desc=
+
+dimension.eternity.name=Eternity
