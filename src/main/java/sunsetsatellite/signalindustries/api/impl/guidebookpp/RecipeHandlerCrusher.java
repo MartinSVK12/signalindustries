@@ -45,6 +45,12 @@ public class RecipeHandlerCrusher
                     ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
                     recipes.add(new RecipeCrusher(singletonList,null,singletonlist2, null));
                 }
+            } else {
+                if(O.isItemEqual(filter)){
+                    ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipeCrusher(singletonList,null,singletonlist2, null));
+                }
             }
         });
         return recipes;

@@ -64,4 +64,15 @@ public class RenderGlobalMixin {
             ci.cancel();
         }
     }
+
+    @Inject(
+            method = "renderClouds",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    public void renderClouds(float f, CallbackInfo ci) {
+        if (this.mc.theWorld.dimension == SignalIndustries.dimEternity) {
+            ci.cancel();
+        }
+    }
 }

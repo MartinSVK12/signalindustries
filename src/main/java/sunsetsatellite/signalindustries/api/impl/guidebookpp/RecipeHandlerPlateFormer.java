@@ -38,9 +38,14 @@ public class RecipeHandlerPlateFormer
         HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(PlateFormerRecipes.getInstance().getRecipeList());
         ArrayList<RecipePlateFormer> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
-
             if(usage){
                 if(new ItemStack(I,1,0).isItemEqual(filter)){
+                    ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipePlateFormer(singletonList,null,singletonlist2, null));
+                }
+            } else {
+                if(O.isItemEqual(filter)){
                     ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
                     ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
                     recipes.add(new RecipePlateFormer(singletonList,null,singletonlist2, null));

@@ -51,6 +51,15 @@ public class RecipeHandlerAlloySmelter
                     ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
                     recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
                 }
+            } else {
+                if(O.isItemEqual(filter)){
+                    ArrayList<ItemStack> list = new ArrayList<>();
+                    for (Item item : I) {
+                        list.add(new ItemStack(item,1,0));
+                    }
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
+                }
             }
         });
         return recipes;

@@ -1,8 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp;
 
-import net.minecraft.src.ContainerGuidebookRecipeBase;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.StringTranslate;
+import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -42,6 +40,12 @@ public class RecipeHandlerExtractor
 
             if(usage){
                 if(new ItemStack(I,1,0).isItemEqual(filter)){
+                    ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
+                    ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
+                }
+            } else {
+                if(filter.itemID < 16384 && Block.blocksList[filter.itemID] instanceof BlockFluid && O.isFluidEqual(new FluidStack((BlockFluid) Block.blocksList[filter.itemID],1))){
                     ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
                     ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
                     recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
