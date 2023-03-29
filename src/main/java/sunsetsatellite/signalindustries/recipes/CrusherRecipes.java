@@ -5,11 +5,9 @@ import net.minecraft.src.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class CrusherRecipes {
+public class CrusherRecipes extends MachineRecipesBase<Integer,ItemStack> {
     private static final CrusherRecipes instance = new CrusherRecipes();
-    private final HashMap<Integer,ItemStack> recipeList = new HashMap<>();
 
     public static CrusherRecipes getInstance() {
         return instance;
@@ -22,16 +20,16 @@ public class CrusherRecipes {
         addRecipe(Item.coal.itemID,new ItemStack(SignalIndustries.coalDust,1));
     }
 
-    public void addRecipe(int id, ItemStack stack) {
+    public void addRecipe(Integer id, ItemStack stack) {
         this.recipeList.put(id, stack);
     }
 
-    public ItemStack getResult(int id) {
-        ItemStack stack = ((ItemStack)this.recipeList.get(id));
+    public ItemStack getResult(Integer id) {
+        ItemStack stack = this.recipeList.get(id);
         return stack == null ? null : stack.copy();
     }
 
-    public Map getRecipeList() {
+    public HashMap<Integer, ItemStack> getRecipeList() {
         return this.recipeList;
     }
 }

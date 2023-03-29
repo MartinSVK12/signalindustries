@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrystalCutterRecipes {
+public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>,ItemStack> {
     private static final CrystalCutterRecipes instance = new CrystalCutterRecipes();
-    private HashMap<ArrayList<Object>,ItemStack> recipeList = new HashMap<>();
 
     public static CrystalCutterRecipes getInstance() {
         return instance;

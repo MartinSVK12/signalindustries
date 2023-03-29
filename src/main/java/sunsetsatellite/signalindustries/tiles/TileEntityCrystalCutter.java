@@ -8,6 +8,7 @@ import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
+import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class TileEntityCrystalCutter extends TileEntityFluidItemContainer {
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 80;
+    public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
 
     public TileEntityCrystalCutter(){
         fluidContents = new FluidStack[2];
@@ -107,8 +109,8 @@ public class TileEntityCrystalCutter extends TileEntityFluidItemContainer {
             ArrayList<Object> list = new ArrayList<>();
             list.add(this.fluidContents[1]);
             list.add(this.itemContents[0]);
-            ItemStack stack = CrystalCutterRecipes.getInstance().getResult(list);
-            Map.Entry<ArrayList<Object>, ItemStack> recipe = CrystalCutterRecipes.getInstance().getValidRecipe(list);
+            ItemStack stack = recipes.getResult(list);
+            Map.Entry<ArrayList<Object>, ItemStack> recipe = recipes.getValidRecipe(list);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -136,7 +138,7 @@ public class TileEntityCrystalCutter extends TileEntityFluidItemContainer {
             ArrayList<Object> list = new ArrayList<>();
             list.add(this.fluidContents[1]);
             list.add(this.itemContents[0]);
-            ItemStack stack = CrystalCutterRecipes.getInstance().getResult(list);
+            ItemStack stack = recipes.getResult(list);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

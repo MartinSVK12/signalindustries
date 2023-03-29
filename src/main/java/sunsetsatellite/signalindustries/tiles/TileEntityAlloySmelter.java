@@ -8,6 +8,7 @@ import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
 import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
+import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 40;
+    public AlloySmelterRecipes recipes = AlloySmelterRecipes.getInstance();
 
     public TileEntityAlloySmelter(){
         itemContents = new ItemStack[3];
@@ -98,7 +100,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = AlloySmelterRecipes.getInstance().getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
+            ItemStack stack = recipes.getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -125,7 +127,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
         if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {
-            ItemStack stack = AlloySmelterRecipes.getInstance().getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
+            ItemStack stack = recipes.getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

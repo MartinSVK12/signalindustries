@@ -8,9 +8,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlloySmelterRecipes {
+public class AlloySmelterRecipes extends MachineRecipesBase<Item[],ItemStack> {
     private static final AlloySmelterRecipes instance = new AlloySmelterRecipes();
-    private final HashMap<Item[],ItemStack> recipeList = new HashMap<>();
 
     public static AlloySmelterRecipes getInstance() {
         return instance;

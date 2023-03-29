@@ -6,6 +6,7 @@ import org.lwjgl.Sys;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.dim.worldgen.WorldGenEternalTreeFancy;
 import sunsetsatellite.signalindustries.dim.worldgen.WorldGenEternityOre;
+import sunsetsatellite.signalindustries.dim.worldgen.WorldGenObelisk;
 
 public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
     public ChunkProviderEternity(World world, long l, int oceanHeight, int terrainMaxHeight, int terrainMiddle) {
@@ -41,6 +42,12 @@ public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
             int i11 = x + this.rand.nextInt(16) + 8;
             int l14 = z + this.rand.nextInt(16) + 8;
             worldgenerator.generate(this.worldObj, this.rand, i11, this.worldObj.getHeightValue(i11, l14), l14);
+        }
+
+        if(this.rand.nextInt(2) == 0) {
+            int i = x + this.rand.nextInt(16) + 8;
+            int j = z + this.rand.nextInt(16) + 8;
+            new WorldGenObelisk().generate(this.worldObj, this.rand, i, this.worldObj.getHeightValue(i, j), j);
         }
 
         for(int k4 = 0; k4 < this.heightModifier; ++k4) {

@@ -6,6 +6,7 @@ import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
 
@@ -56,7 +57,19 @@ public class GuiExtractor extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");
+
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");;
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");
+                break;
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_basic.png");
+                break;
+            case REINFORCED:
+            case AWAKENED:
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -75,7 +88,19 @@ public class GuiExtractor extends GuiFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawCenteredString(name, 90, 6, 0xFFFFFFFF);
+        int color = 0xFFFFFFFF;
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                break;
+            case BASIC:
+                color = 0xFFFF8080;
+                break;
+            case REINFORCED:
+                color = 0xFFFF0000;
+            case AWAKENED:
+                color = 0xFFFFA500;
+        }
+        fontRenderer.drawCenteredString(name, 90, 6, color);
     }
     protected void actionPerformed(GuiButton guibutton) {
         if (!guibutton.enabled) {

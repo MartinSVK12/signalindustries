@@ -23,7 +23,7 @@ public class RecipeHandlerExtractor
     }
 
     public ArrayList<?> getRecipes() {
-        HashMap<Integer, FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
+        HashMap<Integer, FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
         ArrayList<RecipeExtractor> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
@@ -34,7 +34,7 @@ public class RecipeHandlerExtractor
     }
 
     public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
+        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
         ArrayList<RecipeExtractor> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
 
@@ -60,7 +60,7 @@ public class RecipeHandlerExtractor
         if(name.equals("")){
             return getRecipes();
         }
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.getInstance().getRecipeList());
+        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
         ArrayList<RecipeExtractor> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));

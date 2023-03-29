@@ -1,16 +1,19 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.src.*;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
+import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 
 @Debug(
@@ -27,6 +30,8 @@ public class RenderPlayerMixin extends RenderLiving {
     @Shadow private ModelBiped modelArmorChestplate;
 
     @Shadow private ModelBiped modelArmor;
+
+    @Shadow private ModelBiped modelBipedMain;
 
     public RenderPlayerMixin(ModelBase modelbase, float f) {
         super(modelbase, f);
@@ -53,5 +58,28 @@ public class RenderPlayerMixin extends RenderLiving {
             this.setRenderPassModel(modelbiped);
             cir.setReturnValue(true);
         }
+    }
+
+    @Inject(
+            method = "renderSpecials",
+            at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V",ordinal = 7,shift = At.Shift.BEFORE)
+    )
+    protected void renderSpecials(EntityPlayer entityplayer, float f, CallbackInfo ci) {
+        ItemStack stack = entityplayer.inventory.getCurrentItem();
+        if(stack.getItem() instanceof ItemPulsar){
+            GL11.glRotatef(160f, 0.0F, -1.2F, 1.55F);
+            GL11.glTranslatef(-0.15F, 0.15f, 0.25F);
+            if(stack.tag.getByte("charge") >= 100){
+
+            }
+        }
+    }
+
+    @Inject(
+            method = "renderSpecials",
+            at = @At(value = "INVOKE",target = "Lnet/minecraft/src/ModelRenderer;postRender(F)V",ordinal = 1,shift = At.Shift.AFTER)
+    )
+    protected void renderSpecials2(EntityPlayer entityplayer, float f, CallbackInfo ci){
+
     }
 }

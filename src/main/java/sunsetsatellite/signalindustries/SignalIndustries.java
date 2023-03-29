@@ -16,13 +16,11 @@ import sunsetsatellite.signalindustries.dim.WorldProviderEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
-import sunsetsatellite.signalindustries.items.ItemArmorTiered;
-import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
+import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.mixin.accessors.BiomeGenBaseAccessor;
 import sunsetsatellite.signalindustries.mixin.accessors.WorldTypeAccessor;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.Config;
-import sunsetsatellite.signalindustries.items.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.util.NBTEditCommand;
 import sunsetsatellite.signalindustries.util.RenderFluidInConduit;
 import turniplabs.halplibe.helper.*;
@@ -60,6 +58,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Block reinforcedFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("reinforcedFluidConduit",availableBlockId++),Tiers.REINFORCED,Material.glass),"reinforced.conduit.fluid","fluidpipereinforced.png",Block.soundGlassFootstep,1.0f,1.0f,0);
 
     public static final Block prototypeEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("prototypeEnergyCell",availableBlockId++),Tiers.PROTOTYPE,Material.glass),"prototype.energyCell","cellprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
+    public static final Block basicEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("basicEnergyCell",availableBlockId++),Tiers.BASIC,Material.glass),"basic.energyCell","cellbasic.png",Block.soundGlassFootstep,2.0f,5.0f,0);
+
 
     public static final Block prototypeFluidTank = BlockHelper.createBlock(MOD_ID,new BlockSIFluidTank(Config.getFromConfig("prototypeFluidTank",availableBlockId++),Tiers.PROTOTYPE,Material.glass),"prototype.fluidTank","fluidtankprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
 
@@ -67,7 +67,9 @@ public class SignalIndustries implements ModInitializer {
 
 
     public static final Block prototypeExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("prototypeExtractor",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.extractor","prototypeblank.png","extractorprototypesideempty.png",Block.soundStoneFootstep,2,3,0);
-    public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png")};
+    public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideactive.png")};
+
+    public static final Block basicExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("basicExtractor",availableBlockId++),Tiers.BASIC,Material.rock),"basic.extractor","basicblank.png","extractorbasicsideempty.png",Block.soundStoneFootstep,2,3,0);
 
     public static final Block prototypeCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("prototypeCrusher",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.crusher","crusherprototypetopinactive.png","prototypeblank.png","crusherprototypeside.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png")};
@@ -113,6 +115,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Block dimensionalShardOre = BlockHelper.createBlock(MOD_ID,new BlockOreDimensionalShard(Config.getFromConfig("dimensionalShardOre",availableBlockId++)),"dimensionalShardOre","dimensionalshardore.png",Block.soundStoneFootstep,100f,50000f,1);
 
     public static final Item dimensionalShard = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("dimensionalShard",availableItemId++)),"dimensionalShard","dimensionalshard.png");
+    public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(Config.getFromConfig("warpOrb",availableItemId++)),"warpOrb","warporb.png");
+
 
     public static final Block eternalTreeLog = BlockHelper.createBlock(MOD_ID,new BlockEternalTreeLog(Config.getFromConfig("eternalTreeLog",availableBlockId++),Material.wood),"eternalTreeLog","eternaltreelogtop.png","eternaltreelog.png",Block.soundWoodFootstep, 75f,50000f,1);
 
@@ -121,7 +125,12 @@ public class SignalIndustries implements ModInitializer {
     public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarness",700),armorPrototypeHarness,1,Tiers.BASIC),"basic.prototypeHarness","harness.png");
     public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarnessGoggles",701),armorPrototypeHarness,0,Tiers.BASIC),"basic.prototypeHarnessGoggles","goggles.png");
 
-    public static BiomeGenBase biomeEternity = createBiome(16, BiomeGenEternity.class);
+    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(Config.getFromConfig("nullTrigger",availableItemId++)),"nullTrigger","trigger.png");
+
+    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png");
+    public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
+
+    public static BiomeGenBase biomeEternity; //= createBiome(16, BiomeGenEternity.class);
 
     public static Dimension dimEternity;
     public static WorldType eternityWorld;
@@ -133,8 +142,8 @@ public class SignalIndustries implements ModInitializer {
 
     public SignalIndustries(){
 
-        eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
-        dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);
+        /*eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
+        dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);*/
 
         CommandHelper.createCommand(new NBTEditCommand());
         EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
@@ -162,6 +171,8 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityCrystalCutter.class,"Crystal Cutter");
         addToNameGuiMap("Crystal Cutter", GuiCrystalCutter.class, TileEntityCrystalCutter.class);
 
+        addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
+
         EntityHelper.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
 
         //auto-generated recipe code
@@ -180,6 +191,8 @@ public class SignalIndustries implements ModInitializer {
         RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypePlateFormer, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
         RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeCrystalCutter, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
         RecipeHelper.Crafting.createRecipe(SignalIndustries.basicMachineCore, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.steelPlate,1,0),'1',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'2',new ItemStack(SignalIndustries.steelPlate,1,0),'3',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'4',new ItemStack(SignalIndustries.signalumCrystal,1,0),'5',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'6',new ItemStack(SignalIndustries.steelPlate,1,0),'7',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'8',new ItemStack(SignalIndustries.steelPlate,1,0)});
+        RecipeHelper.Crafting.createRecipe(SignalIndustries.basicConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeConduit,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
+        RecipeHelper.Crafting.createRecipe(SignalIndustries.basicFluidConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.steelPlate,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeFluidConduit,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.steelPlate,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
         //auto-generated recipe code
 
 
@@ -196,7 +209,7 @@ public class SignalIndustries implements ModInitializer {
         }
     }
 
-    public static void addToNameGuiMap(String name, Class<? extends Gui> guiClass, Class<? extends TileEntity> tileEntityClass){
+    public static void addToNameGuiMap(String name, Class<? extends Gui> guiClass, Class<? extends IInventory> tileEntityClass){
         ArrayList<Class<?>> list = new ArrayList<>();
         list.add(guiClass);
         list.add(tileEntityClass);
@@ -211,7 +224,7 @@ public class SignalIndustries implements ModInitializer {
         }
     }
 
-    public static WorldType createWorldType(int id, String name){
+    /*public static WorldType createWorldType(int id, String name){
         WorldType[] extendedList = (WorldType[]) Arrays.copyOf(WorldType.worldTypes, WorldType.worldTypes.length + 1);
         WorldTypeAccessor.setWorldTypes(extendedList);
 
@@ -224,6 +237,6 @@ public class SignalIndustries implements ModInitializer {
         BiomeGenBaseAccessor.setBiomeList(extendedList);
         return new BiomeGenEternity(id);
         //return new WorldType(id,name);
-    }
+    }*/
 
 }

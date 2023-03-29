@@ -8,6 +8,7 @@ import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
+import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 10;
+    public CrusherRecipes recipes = CrusherRecipes.getInstance();
 
     public TileEntityCrusher(){
         fluidCapacity[0] = 2000;
@@ -98,7 +100,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = CrusherRecipes.getInstance().getResult(this.itemContents[0].getItem().itemID);
+            ItemStack stack = recipes.getResult(this.itemContents[0].getItem().itemID);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -119,7 +121,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
         if(itemContents[0] == null) {
             return false;
         } else {
-            ItemStack stack = CrusherRecipes.getInstance().getResult(itemContents[0].itemID);
+            ItemStack stack = recipes.getResult(itemContents[0].itemID);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

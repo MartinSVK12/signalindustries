@@ -8,12 +8,11 @@
     "EntityRendererMixin",
     "GuiContainerMixin",
     "GuiIngameMixin",
+    "NBTTagCompoundMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
     "RenderGlobalMixin",
     "RenderPlayerMixin",
-    "accessors.BiomeGenBaseAccessor",
-    "accessors.WorldTypeAccessor"
   ],
   "client": [
   ],

@@ -93,13 +93,17 @@ public class BlockExtractor extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
+        int offset = (2*tier.ordinal())+1;
+        if(tier.ordinal() == 0){
+            offset = 0;
+        }
         if(index > 1 && index < 6){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[2][0],SignalIndustries.extractorTex[2][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[2+offset][0],SignalIndustries.extractorTex[2+offset][1]);
             } else if (tile.getStackInSlot(0) != null) {
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[1][0],SignalIndustries.extractorTex[1][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[1+offset][0],SignalIndustries.extractorTex[1+offset][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[0][0],SignalIndustries.extractorTex[0][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[offset][0],SignalIndustries.extractorTex[offset][1]);
         }
         return this.atlasIndices[index];
     }

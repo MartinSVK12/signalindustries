@@ -7,7 +7,10 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.recipes.BasicExtractorRecipes;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
+import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +24,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
     public int progressMaxTicks = 200;
     public int efficiency = 1;
     public int speedMultiplier = 1;
+    public MachineRecipesBase<Integer, FluidStack> recipes = ExtractorRecipes.instance;
 
     public TileEntityExtractor(){
         fluidCapacity[0] = 2000;
@@ -41,6 +45,21 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
                 itemContents[i] = null;
             }
         }
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null){
+            switch (block.tier){
+                case PROTOTYPE:
+                    recipes = ExtractorRecipes.instance;
+                    break;
+                case BASIC:
+                    recipes = BasicExtractorRecipes.instance;
+                    break;
+                case REINFORCED:
+                case AWAKENED:
+                    break;
+            }
+            speedMultiplier = block.tier.ordinal()+1;
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
@@ -48,7 +67,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
         if(itemContents[0] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 200;
+            progressMaxTicks = 200 / speedMultiplier;
         }
         if(!worldObj.isMultiplayerAndNotHost){
             if (progressTicks == 0 && canProcess()){
@@ -80,7 +99,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
 
     public int getBurnTimeRemainingScaled(int paramInt) {
         if(this.fuelMaxBurnTicks == 0) {
-            this.fuelMaxBurnTicks = 200;
+            this.fuelMaxBurnTicks = 200 / speedMultiplier;;
         }
         return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
     }
@@ -88,7 +107,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
     public boolean fuel(){
         int burn = getItemBurnTime(itemContents[1]);
         if(burn > 0 && canProcess()){
-            progressMaxTicks = 200;
+            progressMaxTicks = 200 / speedMultiplier;;
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             if(itemContents[1].getItem().hasContainerItem()) {
                 itemContents[1] = new ItemStack(itemContents[1].getItem().getContainerItem());
@@ -105,7 +124,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
 
     public void processItem(){
         if(canProcess()){
-            FluidStack stack = ExtractorRecipes.getInstance().getResult(this.itemContents[0].getItem().itemID);
+            FluidStack stack = recipes.getResult(this.itemContents[0].getItem().itemID);
             if(fluidContents[0] == null){
                 setFluidInSlot(0, stack);
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
@@ -126,7 +145,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
         if(itemContents[0] == null) {
             return false;
         } else {
-            FluidStack stack = ExtractorRecipes.getInstance().getResult(itemContents[0].itemID);
+            FluidStack stack = recipes.getResult(itemContents[0].itemID);
             return stack != null && (fluidContents[0] == null || (fluidContents[0].isFluidEqual(stack) && (fluidContents[0].amount < fluidCapacity[0])));
         }
     }
