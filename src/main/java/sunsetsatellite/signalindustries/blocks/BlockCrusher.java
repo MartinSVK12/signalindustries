@@ -4,11 +4,9 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
-import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.gui.GuiCrusher;
-import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
 
 import java.util.ArrayList;

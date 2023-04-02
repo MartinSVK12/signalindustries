@@ -1,15 +1,9 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import sunsetsatellite.fluidapi.template.blocks.BlockFluidPipe;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
-
-import java.util.Random;
 
 public class BlockConduit extends BlockContainerTiered {
     public BlockConduit(int i, Tiers tier, Material material) {

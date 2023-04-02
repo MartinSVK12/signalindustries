@@ -97,8 +97,10 @@ public class GuiExtractor extends GuiFluid {
                 break;
             case REINFORCED:
                 color = 0xFFFF0000;
+                break;
             case AWAKENED:
                 color = 0xFFFFA500;
+                break;
         }
         fontRenderer.drawCenteredString(name, 90, 6, color);
     }

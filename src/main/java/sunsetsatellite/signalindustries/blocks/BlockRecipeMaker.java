@@ -2,17 +2,8 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Direction;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.gui.GuiRecipeMaker;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
 import sunsetsatellite.signalindustries.tiles.TileEntityRecipeMaker;
-
-import java.util.ArrayList;
 
 public class BlockRecipeMaker extends BlockContainer {
     public BlockRecipeMaker(int i, Material material) {

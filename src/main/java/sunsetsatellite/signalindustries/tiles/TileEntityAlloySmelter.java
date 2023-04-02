@@ -6,13 +6,13 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
-import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
-import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.recipes.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
 
@@ -23,7 +23,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 40;
-    public AlloySmelterRecipes recipes = AlloySmelterRecipes.getInstance();
+    public MachineRecipesBase<Integer[],ItemStack> recipes = AlloySmelterRecipes.instance;
 
     public TileEntityAlloySmelter(){
         itemContents = new ItemStack[3];
@@ -39,6 +39,22 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
     public void updateEntity() {
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            switch (block.tier) {
+                case PROTOTYPE:
+                    recipes = AlloySmelterRecipes.instance;
+                    break;
+                case BASIC:
+                    recipes = BasicAlloySmelterRecipes.instance;
+                    break;
+                case REINFORCED:
+                case AWAKENED:
+                    break;
+            }
+            speedMultiplier = block.tier.ordinal() + 1;
+            cost = 40 * (block.tier.ordinal()+1);
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
@@ -100,7 +116,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
+            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -127,7 +143,7 @@ public class TileEntityAlloySmelter extends TileEntityFluidItemContainer {
         if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {
-            ItemStack stack = recipes.getResult(new Item[]{this.itemContents[2].getItem(), this.itemContents[0].getItem()});
+            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

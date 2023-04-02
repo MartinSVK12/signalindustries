@@ -4,16 +4,11 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
-import sunsetsatellite.fluidapi.template.containers.ContainerMachine;
-import sunsetsatellite.fluidapi.template.gui.GuiMachine;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityMachine;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
 

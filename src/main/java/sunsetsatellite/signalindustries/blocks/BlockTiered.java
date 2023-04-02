@@ -1,9 +1,7 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 public class BlockTiered extends Block implements ITiered {

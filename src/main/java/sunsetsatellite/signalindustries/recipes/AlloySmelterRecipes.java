@@ -8,24 +8,20 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlloySmelterRecipes extends MachineRecipesBase<Item[],ItemStack> {
-    private static final AlloySmelterRecipes instance = new AlloySmelterRecipes();
+public class AlloySmelterRecipes extends MachineRecipesBase<Integer[],ItemStack> {
+    public static final AlloySmelterRecipes instance = new AlloySmelterRecipes();
 
-    public static AlloySmelterRecipes getInstance() {
-        return instance;
+    protected AlloySmelterRecipes() {
+        addRecipe(new Integer[]{Item.ingotSteel.itemID, SignalIndustries.emptySignalumCrystalDust.itemID},new ItemStack(SignalIndustries.crystalAlloyIngot,1));
     }
 
-    private AlloySmelterRecipes() {
-        addRecipe(new Item[]{Item.ingotSteel, SignalIndustries.emptySignalumCrystalDust},new ItemStack(SignalIndustries.crystalAlloyIngot,1));
-    }
-
-    public void addRecipe(Item[] ids, ItemStack stack) {
+    public void addRecipe(Integer[] ids, ItemStack stack) {
         this.recipeList.put(ids, stack);
     }
 
-    public ItemStack getResult(Item[] ids) {
+    public ItemStack getResult(Integer[] ids) {
         ItemStack stack = null;
-        for(Map.Entry<Item[],ItemStack> recipe : recipeList.entrySet()){
+        for(Map.Entry<Integer[],ItemStack> recipe : recipeList.entrySet()){
             if(Arrays.equals(recipe.getKey(),ids)){
                 stack = recipe.getValue();
             }
@@ -33,7 +29,7 @@ public class AlloySmelterRecipes extends MachineRecipesBase<Item[],ItemStack> {
         return stack == null ? null : stack.copy();
     }
 
-    public HashMap<Item[], ItemStack> getRecipeList() {
+    public HashMap<Integer[], ItemStack> getRecipeList() {
         return this.recipeList;
     }
 }

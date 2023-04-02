@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.dim.RenderSky;
 import sunsetsatellite.signalindustries.entities.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.EntityShockwaveFX;
 
 @Mixin(
         value = RenderGlobal.class,
@@ -47,6 +48,9 @@ public class RenderGlobalMixin {
                 }
                 if(s.equals("dustcloud")){
                     this.mc.effectRenderer.addEffect(new EntityDustCloudFX(this.worldObj,x,y,z,motionX,motionY,motionZ));
+                }
+                if(s.equals("pulse_shockwave")){
+                    this.mc.effectRenderer.addEffect(new EntityShockwaveFX(this.worldObj,x,y,z,motionX,motionY,motionZ,this.mc.renderViewEntity));
                 }
             }
         }

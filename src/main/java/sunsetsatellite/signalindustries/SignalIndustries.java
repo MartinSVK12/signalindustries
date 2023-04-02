@@ -8,42 +8,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
-import sunsetsatellite.fluidapi.template.gui.GuiFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
 import sunsetsatellite.signalindustries.blocks.*;
-import sunsetsatellite.signalindustries.dim.BiomeGenEternity;
-import sunsetsatellite.signalindustries.dim.WorldProviderEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
-import sunsetsatellite.signalindustries.mixin.accessors.BiomeGenBaseAccessor;
-import sunsetsatellite.signalindustries.mixin.accessors.WorldTypeAccessor;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.util.NBTEditCommand;
 import sunsetsatellite.signalindustries.util.RenderFluidInConduit;
+import sunsetsatellite.signalindustries.util.Tiers;
 import turniplabs.halplibe.helper.*;
-import turniplabs.halplibe.mixin.accessors.DimensionAccessor;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
 public class SignalIndustries implements ModInitializer {
-    
+
     private static int availableBlockId = 1200;
     private static int availableItemId = 600;
-    
+
     public static final String MOD_ID = "signalindustries";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
     public static final Block signalumOre = BlockHelper.createBlock(MOD_ID,new BlockOreSignalum(Config.getFromConfig("signalumOre",availableBlockId++)),"signalumOre","signalumore.png",Block.soundStoneFootstep,1.0f,15.0f,1);
 
-    public static final Block prototypeMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("prototypeMachineCore",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.machine","machineprototype.png",Block.soundStoneFootstep,2.0f,3.0f,0);
+    public static final Block prototypeMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("prototypeMachineCore",availableBlockId++), Tiers.PROTOTYPE,Material.rock),"prototype.machine","machineprototype.png",Block.soundStoneFootstep,2.0f,3.0f,0);
     public static final Block basicMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("basicMachineCore",availableBlockId++),Tiers.BASIC,Material.rock),"basic.machine","machinebasic.png",Block.soundStoneFootstep,3.0f,8.0f,1.0f/2.0f);
     public static final Block reinforcedMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("reinforcedMachineCore",availableBlockId++),Tiers.REINFORCED,Material.rock),"reinforced.machine","machinereinforced.png",Block.soundStoneFootstep,4.0f,15.0f,1.0f/1.50f);
     public static final Block awakenedMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("awakenedMachineCore",availableBlockId++),Tiers.AWAKENED,Material.rock),"awakened.machine","machineawakened.png",Block.soundStoneFootstep,5.0f,50.0f,1);
@@ -67,21 +59,26 @@ public class SignalIndustries implements ModInitializer {
 
 
     public static final Block prototypeExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("prototypeExtractor",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.extractor","prototypeblank.png","extractorprototypesideempty.png",Block.soundStoneFootstep,2,3,0);
+    public static final Block basicExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("basicExtractor",availableBlockId++),Tiers.BASIC,Material.rock),"basic.extractor","basicblank.png","extractorbasicsideempty.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideactive.png")};
 
-    public static final Block basicExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("basicExtractor",availableBlockId++),Tiers.BASIC,Material.rock),"basic.extractor","basicblank.png","extractorbasicsideempty.png",Block.soundStoneFootstep,2,3,0);
 
     public static final Block prototypeCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("prototypeCrusher",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.crusher","crusherprototypetopinactive.png","prototypeblank.png","crusherprototypeside.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png")};
 
     public static final Block prototypeAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("prototypeAlloySmelter",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.alloySmelter","prototypeblank.png","prototypeblank.png","alloysmelterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
-    public static final int[][] alloySmelterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeactive.png")};
+    public static final Block basicAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("basicAlloySmelter",availableBlockId++),Tiers.BASIC,Material.iron),"basic.alloySmelter","basicblank.png","basicblank.png","alloysmelterbasicinactive.png","basicblank.png","basicblank.png","basicblank.png",Block.soundStoneFootstep,2,3,0);
+
+    public static final int[][] alloySmelterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterbasicinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterbasicactive.png")};
 
     public static final Block prototypePlateFormer = BlockHelper.createBlock(MOD_ID,new BlockPlateFormer(Config.getFromConfig("prototypePlateFormer",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.plateFormer","prototypeblank.png","prototypeblank.png","plateformerprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] plateFormerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"plateformerprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"plateformerprototypeactive.png")};
 
     public static final Block prototypeCrystalCutter = BlockHelper.createBlock(MOD_ID,new BlockCrystalCutter(Config.getFromConfig("prototypeCrystalCutter",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.crystalCutter","prototypeblank.png","prototypeblank.png","crystalcutterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] crystalCutterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crystalcutterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crystalcutterprototypeactive.png")};
+
+    public static final Block basicInfuser = BlockHelper.createBlock(MOD_ID,new BlockInfuser(Config.getFromConfig("basicInfuser",availableBlockId++),Tiers.BASIC,Material.iron),"basic.infuser","basicblank.png","infuserbasicsideinactive.png",Block.soundMetalFootstep,2,3,0);
+    public static final int[][] infuserTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideactive.png")};
 
 
     //this has to be after any other block
@@ -95,6 +92,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("rawSignalumCrystal",availableItemId++)),"rawSignalumCrystal","rawsignalumcrystal.png");
 
     public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("coalDust",availableItemId++)),"coalDust","coaldust.png");
+    public static final Item netherCoalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("netherCoalDust",availableItemId++)),"netherCoalDust","nethercoaldust.png");
     public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("emptySignalumCrystalDust",availableItemId++)),"signalumCrystalDust","emptysignalumdust.png");
     public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumCrystalDust",availableItemId++)),"saturatedSignalumCrystalDust","saturatedsignalumdust.png");
 
@@ -104,8 +102,14 @@ public class SignalIndustries implements ModInitializer {
     public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("stonePlate",availableItemId++)),"stonePlate","stoneplate.png");
     public static final Item crystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyPlate",availableItemId++)),"crystalAlloyPlate","crystalalloyplate.png");
     public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("steelPlate",availableItemId++)),"steelPlate","steelplate.png");
+    public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyPlate",availableItemId++)),"reinforcedCrystalAlloyPlate","reinforcedcrystalalloyplate.png");
+    public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumAlloyPlate",availableItemId++)),"saturatedSignalumAlloyPlate","saturatedsignalumalloyplate.png");
+
+
 
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyIngot",availableItemId++)),"crystalAlloyIngot","crystalalloy.png");
+    public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyIngot",availableItemId++)),"reinforcedCrystalAlloyIngot","reinforcedcrystalalloy.png");
+    public static final Item saturatedSignalumAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumAlloyIngot",availableItemId++)),"saturatedSignalumAlloyIngot","saturatedsignalumalloy.png");
 
     public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("diamondCuttingGear",availableItemId++)),"diamondCuttingGear","diamondcuttinggear.png");
 
@@ -115,19 +119,21 @@ public class SignalIndustries implements ModInitializer {
     public static final Block dimensionalShardOre = BlockHelper.createBlock(MOD_ID,new BlockOreDimensionalShard(Config.getFromConfig("dimensionalShardOre",availableBlockId++)),"dimensionalShardOre","dimensionalshardore.png",Block.soundStoneFootstep,100f,50000f,1);
 
     public static final Item dimensionalShard = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("dimensionalShard",availableItemId++)),"dimensionalShard","dimensionalshard.png");
-    public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(Config.getFromConfig("warpOrb",availableItemId++)),"warpOrb","warporb.png");
+    public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(Config.getFromConfig("warpOrb",availableItemId++)),"warpOrb","warporb.png").setMaxStackSize(1);
 
 
     public static final Block eternalTreeLog = BlockHelper.createBlock(MOD_ID,new BlockEternalTreeLog(Config.getFromConfig("eternalTreeLog",availableBlockId++),Material.wood),"eternalTreeLog","eternaltreelogtop.png","eternaltreelog.png",Block.soundWoodFootstep, 75f,50000f,1);
+
+    public static final Block glowingObsidian = BlockHelper.createBlock(MOD_ID,new Block(Config.getFromConfig("glowingObsidian",availableBlockId++),Material.rock),"glowingObsidian","glowingobsidian.png",Block.soundStoneFootstep, 50f,1200f,1.0f/2.0f);
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
 
     public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarness",700),armorPrototypeHarness,1,Tiers.BASIC),"basic.prototypeHarness","harness.png");
     public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(Config.getFromConfig("prototypeHarnessGoggles",701),armorPrototypeHarness,0,Tiers.BASIC),"basic.prototypeHarnessGoggles","goggles.png");
 
-    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(Config.getFromConfig("nullTrigger",availableItemId++)),"nullTrigger","trigger.png");
+    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(Config.getFromConfig("nullTrigger",availableItemId++)),"nullTrigger","trigger.png").setMaxStackSize(1);
 
-    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png");
+    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
     public static BiomeGenBase biomeEternity; //= createBiome(16, BiomeGenEternity.class);
@@ -170,6 +176,9 @@ public class SignalIndustries implements ModInitializer {
 
         EntityHelper.createTileEntity(TileEntityCrystalCutter.class,"Crystal Cutter");
         addToNameGuiMap("Crystal Cutter", GuiCrystalCutter.class, TileEntityCrystalCutter.class);
+
+        EntityHelper.createTileEntity(TileEntityInfuser.class,"Crystal Cutter");
+        addToNameGuiMap("Infuser", GuiInfuser.class, TileEntityInfuser.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
 

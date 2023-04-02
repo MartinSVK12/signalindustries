@@ -2,9 +2,7 @@ package sunsetsatellite.signalindustries.items;
 
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 public class ItemTiered extends Item implements ITiered {

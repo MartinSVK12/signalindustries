@@ -4,27 +4,27 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.containers.ContainerInfuser;
+import sunsetsatellite.signalindustries.gui.GuiInfuser;
+import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
 import sunsetsatellite.signalindustries.util.Tiers;
-import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
-import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
-import sunsetsatellite.signalindustries.tiles.TileEntityPlateFormer;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockPlateFormer extends BlockContainerTiered{
-    public BlockPlateFormer(int i, Tiers tier, Material material) {
+public class BlockInfuser extends BlockContainerTiered{
+    public BlockInfuser(int i, Tiers tier, Material material) {
         super(i, tier, material);
     }
 
     @Override
     protected TileEntity getBlockEntity() {
-        return new TileEntityPlateFormer();
+        return new TileEntityInfuser();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
+        TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -69,9 +69,9 @@ public class BlockPlateFormer extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
+            TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiPlateFormer(entityplayer.inventory, tile),new ContainerPlateFormer(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile);
             }
             return true;
         }
@@ -79,7 +79,7 @@ public class BlockPlateFormer extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
-        TileEntityPlateFormer tile = (TileEntityPlateFormer) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityInfuser tile = (TileEntityInfuser) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
@@ -90,11 +90,11 @@ public class BlockPlateFormer extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
-        if(index == 4){
+        if(index > 1 && index < 6){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.plateFormerTex[1][0],SignalIndustries.plateFormerTex[1][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.infuserTex[1][0],SignalIndustries.infuserTex[1][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.plateFormerTex[0][0],SignalIndustries.plateFormerTex[0][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.infuserTex[0][0],SignalIndustries.infuserTex[0][1]);
         }
         return this.atlasIndices[index];
     }

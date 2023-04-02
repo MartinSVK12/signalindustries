@@ -2,8 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidConduit;
 
 public class BlockFluidConduit extends BlockContainerTiered {

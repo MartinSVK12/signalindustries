@@ -1,9 +1,10 @@
 package sunsetsatellite.signalindustries.items;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
@@ -38,6 +39,8 @@ public class ItemPulsar extends ItemTiered {
         }
         if(itemstack.tag.getByte("charge") >= 100){
             itemstack.tag.setByte("charge", (byte) 0);
+            world.playSoundAtEntity(entityplayer, "signalindustries.pulsar", 0.5F, 1.0f);
+            world.spawnParticle("pulse_shockwave", entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0, 0.0, 0.0);
             return itemstack;
         }
         return itemstack;

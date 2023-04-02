@@ -6,27 +6,27 @@ import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IContainerRecipeBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 
 import java.util.ArrayList;
 
-public class ContainerGuidebookAlloySmelterRecipe extends ContainerGuidebookRecipeBase
+public class ContainerGuidebookInfuserRecipe extends ContainerGuidebookRecipeBase
     implements IContainerRecipeBase {
 
     ItemStack machine;
 
-    public ContainerGuidebookAlloySmelterRecipe(ItemStack stack, ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs, ArrayList<ItemStack> itemOutputs, ArrayList<FluidStack> fluidOutputs) {
+    public ContainerGuidebookInfuserRecipe(ItemStack stack, ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs, ArrayList<ItemStack> itemOutputs, ArrayList<FluidStack> fluidOutputs) {
         machine = stack;
-        this.addSlot(new SlotGuidebook(0, 9, 10, itemInputs.get(0), false));
-        this.addSlot(new SlotGuidebook(0, -19, 10, itemInputs.get(1), false));
-        this.addSlot(new SlotGuidebook(1, 69, 19,itemOutputs.get(0), false));
-        this.addSlot(new SlotGuidebook(2, 9, 45, new ItemStack(SignalIndustries.energyFlowing,40*(((BlockContainerTiered)Block.blocksList[stack.itemID]).tier.ordinal()+1)), false));
-        this.addSlot(new SlotGuidebook(3,36,18,stack,true));
+        this.addSlot(new SlotGuidebook(0, 29, 2, itemInputs.get(0), false));
+        this.addSlot(new SlotGuidebook(1, 29, 36,itemInputs.size() == 1 ? null : itemInputs.get(1), false));
+        this.addSlot(new SlotGuidebook(2, 9, 20,fluidInputs.size() > 0 ? new ItemStack(fluidInputs.get(0).liquid,fluidInputs.get(0).amount) : null, false));
+        this.addSlot(new SlotGuidebook(3, 59, 21,itemOutputs.get(0), false));
+        this.addSlot(new SlotGuidebook(4, -18, 34,new ItemStack(SignalIndustries.energyFlowing,240), false));
+        this.addSlot(new SlotGuidebook(5,30,19,stack,true));
     }
 
     public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index){
         RenderItem itemRenderer = new RenderItem();
-        int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_machine_double_recipe.png");
+        int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_recipe.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GuidebookPlusPlus.mc.renderEngine.bindTexture(i);
         int j = (guidebook.width - xSize) / 2;

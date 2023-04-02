@@ -8,10 +8,16 @@ item.signalindustries.rawSignalumCrystal.name=Raw Signalum Crystal
 item.signalindustries.rawSignalumCrystal.desc=Straight from the earth, the beginning of it all.
 
 item.signalindustries.crystalAlloyIngot.name=Crystal Alloy Ingot
-item.signalindustries.crystalAlloyIngot.desc=A alloy of steel and [Signalum Crystal Dust].
+item.signalindustries.crystalAlloyIngot.desc=An alloy of steel and [Signalum Crystal Dust].
+item.signalindustries.saturatedSignalumAlloyIngot.name=Saturated Signalum Alloy Ingot
+item.signalindustries.saturatedSignalumAlloyIngot.desc=The result of infusing [Crystal Alloy] with [S. Energy].
+item.signalindustries.reinforcedCrystalAlloyIngot.name=Reinforced Crystal Alloy Ingot
+item.signalindustries.reinforcedCrystalAlloyIngot.desc=A better, stronger alloy made out of [Glowing Obsidian] and [Crystal Alloy].
 
 item.signalindustries.coalDust.name=Coal Dust
 item.signalindustries.coalDust.desc=Ground up coal.
+item.signalindustries.netherCoalDust.name=Nether Coal Dust
+item.signalindustries.netherCoalDust.desc=Ground up nether coal.
 item.signalindustries.signalumCrystalDust.name=Signalum Crystal Dust
 item.signalindustries.signalumCrystalDust.desc=Ground up empty signalum crystals.
 item.signalindustries.saturatedSignalumCrystalDust.name=Saturated Signalum Crystal Dust
@@ -26,6 +32,10 @@ item.signalindustries.stonePlate.name=Stone Plate
 item.signalindustries.stonePlate.desc=A plate made out of stone.
 item.signalindustries.crystalAlloyPlate.name=Crystal Alloy Plate
 item.signalindustries.crystalAlloyPlate.desc=A plate made out of [Crystal Alloy].
+item.signalindustries.reinforcedCrystalAlloyPlate.name=Reinforced Crystal Alloy Plate
+item.signalindustries.reinforcedCrystalAlloyPlate.desc=A plate made out of [Reinforced Crystal Alloy].
+item.signalindustries.saturatedSignalumAlloyPlate.name=Saturated Signalum Alloy Plate
+item.signalindustries.saturatedSignalumAlloyPlate.desc=A plate made out of [Saturated Signalum Alloy].
 item.signalindustries.steelPlate.name=Steel Plate
 item.signalindustries.steelPlate.desc=A plate made out of steel.
 
@@ -98,6 +108,8 @@ tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
 
 tile.signalindustries.prototype.alloySmelter.name=Prototype Alloy Smelter
 tile.signalindustries.prototype.alloySmelter.desc=Combines materials with heat.
+tile.signalindustries.basic.alloySmelter.name=Basic Alloy Smelter
+tile.signalindustries.basic.alloySmelter.desc=Combines materials with more heat.
 
 tile.signalindustries.prototype.plateFormer.name=Prototype Plate Former
 tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more [Plates] than the [Plate Hammer] and out of more materials.
@@ -105,6 +117,8 @@ tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressi
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
 
+tile.signalindustries.basic.infuser.name=Basic Infuser
+tile.signalindustries.basic.infuser.desc=Infuses materials into other materials.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -120,5 +134,8 @@ tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
 tile.signalindustries.eternalTreeLog.desc=
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
 tile.signalindustries.dimensionalShardOre.desc=
+
+tile.signalindustries.glowingObsidian.name=Glowing Obsidian
+tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal, was used in ancient rituals involving the Nether..
 
 dimension.eternity.name=Eternity

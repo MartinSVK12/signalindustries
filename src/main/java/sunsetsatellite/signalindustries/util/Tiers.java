@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries;
+package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.src.command.ChatColor;
 

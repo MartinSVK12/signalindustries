@@ -4,11 +4,9 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.containers.ContainerCrusher;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
-import sunsetsatellite.signalindustries.gui.GuiCrusher;
 import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
 
 import java.util.ArrayList;
@@ -92,11 +90,15 @@ public class BlockAlloySmelter extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
+        int offset = tier.ordinal()+1;
+        if(tier.ordinal() == 0){
+            offset = 0;
+        }
         if(index == 4){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[1][0],SignalIndustries.alloySmelterTex[1][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[1+offset][0],SignalIndustries.alloySmelterTex[1+offset][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[0][0],SignalIndustries.alloySmelterTex[0][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[offset][0],SignalIndustries.alloySmelterTex[offset][1]);
         }
         return this.atlasIndices[index];
     }

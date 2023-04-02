@@ -3,9 +3,7 @@ package sunsetsatellite.signalindustries.blocks;
 import net.minecraft.src.BlockContainerRotatable;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
-import sunsetsatellite.signalindustries.Tiers;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 public abstract class BlockContainerTiered extends BlockContainerRotatable implements ITiered {

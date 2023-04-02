@@ -7,19 +7,19 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.containers.ContainerInfuser;
+import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
 
-public class GuiAlloySmelter extends GuiFluid {
+public class GuiInfuser extends GuiFluid {
 
-    public String name = "Alloy Smelter";
+    public String name = "Infuser";
     public EntityPlayer entityplayer;
-    public TileEntityAlloySmelter tile;
+    public TileEntityInfuser tile;
 
 
-    public GuiAlloySmelter(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerAlloySmelter(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
-        this.tile = (TileEntityAlloySmelter) tile;
+    public GuiInfuser(InventoryPlayer inventoryPlayer, TileEntity tile) {
+        super(new ContainerInfuser(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
+        this.tile = (TileEntityInfuser) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 
@@ -31,7 +31,7 @@ public class GuiAlloySmelter extends GuiFluid {
         StringTranslate trans = StringTranslate.getInstance();
         StringBuilder text = new StringBuilder();
         if(x > i+80 && x < i+94){
-            if(y > j+40 && y < j+46){
+            if(y > j+43 && y < j+49){
                 text.append("View Recipes");
                 this.drawTooltip(text.toString(),x,y,8,-8,true);
             }
@@ -43,19 +43,8 @@ public class GuiAlloySmelter extends GuiFluid {
         int i = (width - xSize) / 2;
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
-            if (y > j + 40 && y < j + 46) {
-                switch (((BlockContainerTiered)tile.getBlockType()).tier){
-                    case PROTOTYPE:
-                        GuidebookPlusPlus.nameFocus = "*alloy smelter";
-                        break;
-                    case BASIC:
-                        GuidebookPlusPlus.nameFocus = "*basic alloy smelter";
-                        break;
-                    case REINFORCED:
-                        break;
-                    case AWAKENED:
-                        break;
-                }
+            if (y > j + 43 && y < j + 49) {
+                GuidebookPlusPlus.nameFocus = "*infuser";
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -68,18 +57,7 @@ public class GuiAlloySmelter extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");;
-        switch (((BlockContainerTiered)tile.getBlockType()).tier){
-            case PROTOTYPE:
-                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
-                break;
-            case BASIC:
-                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
-                break;
-            case REINFORCED:
-            case AWAKENED:
-                break;
-        }
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_basic.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -88,11 +66,11 @@ public class GuiAlloySmelter extends GuiFluid {
         int i5;
         if(this.tile.isBurning()) {
             i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 56, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            this.drawTexturedModalRect(i3 + 9, i4 + 39 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
         }
 
         i5 = this.tile.getProgressScaled(24);
-        this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
+        this.drawTexturedModalRect(i3 + 79, i4 + 35, 176, 14, i5 + 1, 18);
     }
 
     protected void drawGuiContainerForegroundLayer()

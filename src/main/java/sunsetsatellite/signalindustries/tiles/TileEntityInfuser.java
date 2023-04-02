@@ -7,33 +7,40 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Connection;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
-import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
+import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
+import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityCrusher extends TileEntityFluidItemContainer {
+public class TileEntityInfuser extends TileEntityFluidItemContainer {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
-    public int progressMaxTicks = 200;
+    public int progressMaxTicks = 400;
     public int efficiency = 1;
     public int speedMultiplier = 1;
-    public int cost = 10;
-    public CrusherRecipes recipes = CrusherRecipes.getInstance();
+    public int cost = 80;
+    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.getInstance();
 
-    public TileEntityCrusher(){
+    public TileEntityInfuser(){
+        fluidContents = new FluidStack[2];
+        fluidCapacity = new int[2];
         fluidCapacity[0] = 2000;
+        fluidCapacity[1] = 4000;
+        for (FluidStack ignored : fluidContents) {
+            acceptedFluids.add(new ArrayList<>());
+        }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        itemContents = new ItemStack[3];
+        //acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
     }
     @Override
     public String getInvName() {
-        return "Crusher";
+        return "Infuser";
     }
 
     @Override
@@ -47,7 +54,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
         if(itemContents[0] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 200 / speedMultiplier;
+            progressMaxTicks = 400 / speedMultiplier;
         }
         if(!worldObj.isMultiplayerAndNotHost){
             if (progressTicks == 0 && canProcess()){
@@ -80,7 +87,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
 
     public int getBurnTimeRemainingScaled(int paramInt) {
         if(this.fuelMaxBurnTicks == 0) {
-            this.fuelMaxBurnTicks = 200;
+            this.fuelMaxBurnTicks = 400;
         }
         return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
     }
@@ -88,7 +95,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+            progressMaxTicks = 400 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {
@@ -101,20 +108,42 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(this.itemContents[0].getItem().itemID);
-            if(itemContents[1] == null){
-                setInventorySlotContents(1, stack);
-            } else if(itemContents[1].isItemEqual(stack)) {
-                itemContents[1].stackSize++;
+            ArrayList<Object> list = new ArrayList<>();
+            list.add(this.fluidContents[1]);
+            list.add(this.itemContents[0]);
+            list.add(this.itemContents[1]);
+            ItemStack stack = recipes.getResult(list);
+            Map.Entry<ArrayList<Object>, ItemStack> recipe = ((InfuserRecipes)recipes).getValidRecipe(list);
+            if(itemContents[2] == null){
+                setInventorySlotContents(2, stack);
+            } else if(itemContents[2].isItemEqual(stack)) {
+                itemContents[2].stackSize++;
             }
-            if(this.itemContents[0].getItem().hasContainerItem()) {
+            if(itemContents[0] != null && this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
+            } else if(itemContents[1] != null && this.itemContents[1].getItem().hasContainerItem()) {
+                this.itemContents[1] = new ItemStack(this.itemContents[1].getItem().getContainerItem());
             } else {
-                --this.itemContents[0].stackSize;
+                if(itemContents[0] != null && recipe.getKey().get(1) != null){
+                    this.itemContents[0].stackSize -= ((ItemStack)recipe.getKey().get(1)).stackSize;
+                }
+                if(itemContents[1] != null && recipe.getKey().get(2) != null){
+                    this.itemContents[1].stackSize -= ((ItemStack)recipe.getKey().get(2)).stackSize;
+                }
+                if(fluidContents[1] != null && recipe.getKey().get(0) != null){
+                    this.fluidContents[1].amount -= ((FluidStack)recipe.getKey().get(0)).amount;
+                }
             }
-            if(this.itemContents[0].stackSize <= 0) {
+            if(itemContents[0] != null && this.itemContents[0].stackSize <= 0) {
                 this.itemContents[0] = null;
             }
+            if(itemContents[1] != null && this.itemContents[1].stackSize <= 0) {
+                this.itemContents[1] = null;
+            }
+            if(fluidContents[1] != null && this.fluidContents[1].amount <= 0) {
+                this.fluidContents[1] = null;
+            }
+
         }
     }
 
@@ -122,8 +151,12 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
         if(itemContents[0] == null) {
             return false;
         } else {
-            ItemStack stack = recipes.getResult(itemContents[0].itemID);
-            return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
+            ArrayList<Object> list = new ArrayList<>();
+            list.add(this.fluidContents[1]);
+            list.add(this.itemContents[0]);
+            list.add(this.itemContents[1]);
+            ItemStack stack = recipes.getResult(list);
+            return stack != null && (itemContents[2] == null || (itemContents[2].isItemEqual(stack) && (itemContents[2].stackSize < getInventoryStackLimit() && itemContents[2].stackSize < itemContents[2].getMaxStackSize() || itemContents[2].stackSize < stack.getMaxStackSize())));
         }
     }
 

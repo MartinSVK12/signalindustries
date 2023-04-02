@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
 import sunsetsatellite.signalindustries.tiles.TileEntityCrystalCutter;

@@ -1,16 +1,13 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.Tiers;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
-import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,8 +15,11 @@ import java.util.Random;
 public class BlockExtractor extends BlockContainerTiered{
     public BlockExtractor(int i, Tiers tier, Material material) {
         super(i, tier, material);
+        textures = SignalIndustries.extractorTex;
     }
 
+    private static int[][] textures;
+    
     @Override
     protected TileEntity getBlockEntity() {
         return new TileEntityExtractor();
@@ -84,6 +84,7 @@ public class BlockExtractor extends BlockContainerTiered{
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
         TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
+        textures = SignalIndustries.extractorTex;
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
         this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
@@ -99,11 +100,11 @@ public class BlockExtractor extends BlockContainerTiered{
         }
         if(index > 1 && index < 6){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[2+offset][0],SignalIndustries.extractorTex[2+offset][1]);
+                return this.atlasIndices[index] = texCoordToIndex(textures[2+offset][0],textures[2+offset][1]);
             } else if (tile.getStackInSlot(0) != null) {
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[1+offset][0],SignalIndustries.extractorTex[1+offset][1]);
+                return this.atlasIndices[index] = texCoordToIndex(textures[1+offset][0],textures[1+offset][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.extractorTex[offset][0],SignalIndustries.extractorTex[offset][1]);
+            return this.atlasIndices[index] = texCoordToIndex(textures[offset][0],textures[offset][1]);
         }
         return this.atlasIndices[index];
     }
