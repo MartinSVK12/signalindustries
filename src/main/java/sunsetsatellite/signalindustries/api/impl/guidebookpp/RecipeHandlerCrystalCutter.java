@@ -63,17 +63,17 @@ public class RecipeHandlerCrystalCutter
                 }
             } else {
                 if(O.isItemEqual(filter)){
+                    ArrayList<ItemStack> list = new ArrayList<>();
+                    ArrayList<FluidStack> fluidList = new ArrayList<>();
                     for(Object obj : I){
-                        ArrayList<ItemStack> list = new ArrayList<>();
-                        ArrayList<FluidStack> fluidList = new ArrayList<>();
                         if (obj instanceof ItemStack) {
                             list.add((ItemStack) obj);
                         } else {
                             fluidList.add((FluidStack) obj);
                         }
-                        ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                        recipes.add(new RecipeCrystalCutter(list, fluidList, singletonlist2, null));
                     }
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
+                    recipes.add(new RecipeCrystalCutter(list, fluidList, singletonlist2, null));
                 }
             }
         });
