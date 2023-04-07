@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class NBTEditCommand extends Command {
     public NBTEditCommand() {
-        super("nbtedit", "nbt");
+        super("nbtedit", "nbt","si_nbt");
     }
 
     public static NBTTagCompound copy;

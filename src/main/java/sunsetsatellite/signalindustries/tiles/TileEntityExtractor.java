@@ -70,7 +70,7 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
             progressMaxTicks = 200 / speedMultiplier;
         }
         if(!worldObj.isMultiplayerAndNotHost){
-            if (progressTicks == 0 && canProcess()){
+            if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2){
                 update = fuel();
             }
             if(isBurning() && canProcess()){
@@ -81,9 +81,8 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
                     update = true;
                 }
             } else if(canProcess()){
-                fuel();
-                if(fuelBurnTicks > 0){
-                    fuelBurnTicks++;
+                if(fuelBurnTicks < 2){
+                    fuel();
                 }
             }
         }

@@ -63,17 +63,17 @@ public class RecipeHandlerInfuser
                 }
             } else {
                 if(O.isItemEqual(filter)){
+                    ArrayList<ItemStack> list = new ArrayList<>();
+                    ArrayList<FluidStack> fluidList = new ArrayList<>();
+                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
                     for(Object obj : I){
-                        ArrayList<ItemStack> list = new ArrayList<>();
-                        ArrayList<FluidStack> fluidList = new ArrayList<>();
                         if (obj instanceof ItemStack) {
                             list.add((ItemStack) obj);
-                        } else {
+                        } else if(obj instanceof FluidStack) {
                             fluidList.add((FluidStack) obj);
                         }
-                        ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                        recipes.add(new RecipeInfuser(list, fluidList, singletonlist2, null));
                     }
+                    recipes.add(new RecipeInfuser(list, fluidList, singletonlist2, null));
                 }
             }
         });

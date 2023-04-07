@@ -120,7 +120,10 @@ public class GuiAlloySmelter extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, (IInventory) tile);
+                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile);
+                break;
+            case 1:
+                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile);
                 break;
             default:
                 break;
@@ -130,6 +133,7 @@ public class GuiAlloySmelter extends GuiFluid {
     public void initGui()
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) + 60, Math.round(height / 2) - 80, 20, 20, "F"));
+        controlList.add(new GuiButton(1, Math.round(width / 2) + 60, Math.round(height / 2) - 60, 20, 20, "I"));
         super.initGui();
     }
 }
