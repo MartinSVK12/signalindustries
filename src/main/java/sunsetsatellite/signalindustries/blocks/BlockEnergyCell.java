@@ -6,7 +6,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Direction;
+import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;

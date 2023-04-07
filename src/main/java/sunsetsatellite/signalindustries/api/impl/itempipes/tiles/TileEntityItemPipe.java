@@ -2,15 +2,15 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.tiles;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.util.Connection;
+import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.IItemConnection;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.PipeItem;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
-import sunsetsatellite.signalindustries.util.Direction;
-import sunsetsatellite.signalindustries.util.Vec3f;
-import sunsetsatellite.signalindustries.util.Vec3i;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3f;
+import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.*;
 
@@ -69,9 +69,7 @@ public class TileEntityItemPipe extends TileEntity implements IItemConnection {
                     } else if (tile instanceof TileEntityFilter) {
                         ((TileEntityFilter) tile).filter(item.entity.item, item.outDir.getOpposite());
                     } else if (tile instanceof TileEntityFluidItemContainer){
-                        Direction d = item.outDir.getOpposite();
-                        //TODO|: Shove all these utils into one "mod" so this doesn't happen
-                        sunsetsatellite.fluidapi.util.Direction tileIn = sunsetsatellite.fluidapi.util.Direction.values()[d.ordinal()];
+                        Direction tileIn = item.outDir.getOpposite();
                         Integer activeSlot = ((TileEntityFluidItemContainer) tile).activeItemSlots.get(tileIn);
                         Connection connection = ((TileEntityFluidItemContainer) tile).itemConnections.get(tileIn);
                         if(connection == Connection.INPUT || connection == Connection.BOTH){

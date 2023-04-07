@@ -1,11 +1,12 @@
 package sunsetsatellite.signalindustries.tiles;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Connection;
-import sunsetsatellite.fluidapi.util.Direction;
+import sunsetsatellite.sunsetutils.util.Connection;
+import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.recipes.BasicExtractorRecipes;
@@ -230,6 +231,17 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
         fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
     }
 
-
-
+    @Override
+    public Block getBlockType() {
+        if(this.worldObj != null){
+            return super.getBlockType();
+        } else {
+            Block b = Block.blocksList[Minecraft.getMinecraft().theWorld.getBlockId(this.xCoord, this.yCoord, this.zCoord)];
+            if(b == null){
+                return SignalIndustries.prototypeExtractor;
+            } else {
+                return b;
+            }
+        }
+    }
 }

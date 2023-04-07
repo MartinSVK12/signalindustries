@@ -2,11 +2,11 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.tiles;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.util.Connection;
+import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.IItemConnection;
-import sunsetsatellite.signalindustries.util.Direction;
-import sunsetsatellite.signalindustries.util.TickTimer;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.util.List;
 
@@ -66,9 +66,7 @@ public class TileEntityInserter extends TileEntity implements IItemConnection {
             return;
         }
         if(inv instanceof TileEntityFluidItemContainer){
-            Direction d = outputDir;
-            //TODO|: Shove all these utils into one "mod" so this doesn't happen
-            sunsetsatellite.fluidapi.util.Direction tileIn = sunsetsatellite.fluidapi.util.Direction.values()[d.ordinal()];
+            Direction tileIn = outputDir;
             Integer activeSlot = ((TileEntityFluidItemContainer) inv).activeItemSlots.get(tileIn);
             Connection connection = ((TileEntityFluidItemContainer) inv).itemConnections.get(tileIn);
             if(connection == Connection.OUTPUT || connection == Connection.BOTH){

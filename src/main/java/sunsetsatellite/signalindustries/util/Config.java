@@ -27,7 +27,7 @@ public class Config {
                 if (field.getType() == Block.class) {
                     try {
                         configWriter.write(System.getProperty("line.separator") + field.getName()
-                                + "=" + ((Block) field.get(null)).blockID);
+                                + "=null");// + ((Block) field.get(null)).blockID);
                         //idMap.put(field.getName(),((Block) field.get(null)).blockID);
                     } catch (Exception exception) {
                         configWriter.write(System.getProperty("line.separator") + field.getName()
@@ -36,7 +36,7 @@ public class Config {
                 } else if (field.getType().getSuperclass() == Item.class || field.getType() == Item.class) {
                     try {
                         configWriter.write(System.getProperty("line.separator") + field.getName()
-                                + "=" + ((Item) field.get(null)).itemID);
+                                + "=null");// + ((Item) field.get(null)).itemID);
                         //idMap.put(field.getName(),((Item) field.get(null)).shiftedIndex);
                     } catch (Exception exception) {
                         configWriter.write(System.getProperty("line.separator") + field.getName()
@@ -53,6 +53,7 @@ public class Config {
 
     public static Integer getFromConfig(String s2, Integer base){
         try {
+            SignalIndustries.LOGGER.info("Getting id for: "+s2+" (base: "+base+")");
             BufferedReader configReader = new BufferedReader(new FileReader(configFile));
             String s;
             while ((s = configReader.readLine()) != null) {
@@ -63,8 +64,12 @@ public class Config {
                     String as[] = s.split("=");
                     String name = as[0];
                     int id = Integer.parseInt(as[1]);
+                    if (id > 16384){
+                        id -= 16384;
+                    }
                     //System.out.println(name +" ("+s2+") "+": "+id);
                     if (name.equals(s2)){
+                        SignalIndustries.LOGGER.info("Got id: "+id);
                         return id;
                     } else {
                         continue;
@@ -76,6 +81,7 @@ public class Config {
         } catch (Exception exception) {
            // exception.printStackTrace();
         }
+        SignalIndustries.LOGGER.info("No id defined, returning base: "+base);
         return base;
     }
 

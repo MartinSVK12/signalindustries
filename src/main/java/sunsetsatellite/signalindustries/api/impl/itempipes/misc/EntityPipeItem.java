@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.misc;
 import net.minecraft.src.*;
 import net.minecraft.src.helper.DamageType;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
-import sunsetsatellite.signalindustries.util.Direction;
-import sunsetsatellite.signalindustries.util.Vec3f;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3f;
 
 public class EntityPipeItem extends Entity {
     public ItemStack item;

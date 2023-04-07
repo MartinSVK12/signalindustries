@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.tiles;
 import net.minecraft.src.*;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.IItemConnection;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
-import sunsetsatellite.signalindustries.util.Direction;
-import sunsetsatellite.signalindustries.util.Vec3i;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.*;
 

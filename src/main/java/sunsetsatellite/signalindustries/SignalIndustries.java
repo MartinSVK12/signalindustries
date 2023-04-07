@@ -25,7 +25,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.Config;
-import sunsetsatellite.signalindustries.util.NBTEditCommand;
+import sunsetsatellite.sunsetutils.util.NBTEditCommand;
 import sunsetsatellite.signalindustries.util.RenderFluidInConduit;
 import sunsetsatellite.signalindustries.util.Tiers;
 import turniplabs.halplibe.helper.*;
@@ -72,13 +72,12 @@ public class SignalIndustries implements ModInitializer {
     public static final Block basicExtractor = BlockHelper.createBlock(MOD_ID,new BlockExtractor(Config.getFromConfig("basicExtractor",availableBlockId++),Tiers.BASIC,Material.rock),"basic.extractor","basicblank.png","extractorbasicsideempty.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] extractorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorprototypesideactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"extractorbasicsideactive.png")};
 
-
     public static final Block prototypeCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("prototypeCrusher",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.crusher","crusherprototypetopinactive.png","prototypeblank.png","crusherprototypeside.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
-    public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png")};
+    public static final Block basicCrusher = BlockHelper.createBlock(MOD_ID,new BlockCrusher(Config.getFromConfig("basicCrusher",availableBlockId++),Tiers.BASIC,Material.iron),"basic.crusher","crusherbasictopinactive.png","basicblank.png","crusherbasicside.png","basicblank.png","basicblank.png","basicblank.png",Block.soundMetalFootstep,2,3,0);
+    public static final int[][] crusherTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherprototypetopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherbasictopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crusherbasictopactive.png")};
 
     public static final Block prototypeAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("prototypeAlloySmelter",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.alloySmelter","prototypeblank.png","prototypeblank.png","alloysmelterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final Block basicAlloySmelter = BlockHelper.createBlock(MOD_ID,new BlockAlloySmelter(Config.getFromConfig("basicAlloySmelter",availableBlockId++),Tiers.BASIC,Material.iron),"basic.alloySmelter","basicblank.png","basicblank.png","alloysmelterbasicinactive.png","basicblank.png","basicblank.png","basicblank.png",Block.soundStoneFootstep,2,3,0);
-
     public static final int[][] alloySmelterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterprototypeactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterbasicinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"alloysmelterbasicactive.png")};
 
     public static final Block prototypePlateFormer = BlockHelper.createBlock(MOD_ID,new BlockPlateFormer(Config.getFromConfig("prototypePlateFormer",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.plateFormer","prototypeblank.png","prototypeblank.png","plateformerprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);

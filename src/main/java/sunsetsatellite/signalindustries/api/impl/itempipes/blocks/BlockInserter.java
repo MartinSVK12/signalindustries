@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
-import sunsetsatellite.signalindustries.util.Direction;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 public class BlockInserter extends BlockContainerRotatable {
     public BlockInserter(int i, Material material) {

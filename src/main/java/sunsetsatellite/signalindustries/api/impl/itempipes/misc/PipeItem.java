@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.misc;
 
 import net.minecraft.src.Vec3D;
-import sunsetsatellite.signalindustries.util.Direction;
-import sunsetsatellite.signalindustries.util.Vec3f;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3f;
 
 public class PipeItem {
 

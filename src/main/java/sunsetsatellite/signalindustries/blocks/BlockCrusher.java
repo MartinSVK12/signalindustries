@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Direction;
+import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
@@ -90,11 +90,15 @@ public class BlockCrusher extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
+        int offset = tier.ordinal()+1;
+        if(tier.ordinal() == 0){
+            offset = 0;
+        }
         if(index == 1){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[1][0],SignalIndustries.crusherTex[1][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[1+offset][0],SignalIndustries.crusherTex[1+offset][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[0][0],SignalIndustries.crusherTex[0][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crusherTex[offset][0],SignalIndustries.crusherTex[offset][1]);
         }
         return this.atlasIndices[index];
     }

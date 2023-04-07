@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Direction;
+import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.containers.ContainerFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.gui.GuiFilter;

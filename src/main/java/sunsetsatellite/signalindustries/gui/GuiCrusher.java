@@ -6,6 +6,7 @@ import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
 import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
 
@@ -43,7 +44,18 @@ public class GuiCrusher extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                GuidebookPlusPlus.nameFocus = "*signalum crusher";
+                switch (((BlockContainerTiered)tile.getBlockType()).tier){
+                    case PROTOTYPE:
+                        GuidebookPlusPlus.nameFocus = "*signalum crusher";
+                        break;
+                    case BASIC:
+                        GuidebookPlusPlus.nameFocus = "*basic signalum crusher";
+                        break;
+                    case REINFORCED:
+                        break;
+                    case AWAKENED:
+                        break;
+                }
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -57,6 +69,17 @@ public class GuiCrusher extends GuiFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
         int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
+                break;
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine.png");
+                break;
+            case REINFORCED:
+            case AWAKENED:
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -75,8 +98,21 @@ public class GuiCrusher extends GuiFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawCenteredString(name,90,6,0xFFFFFFFF);
-        //fontRenderer.drawString(name, 64, 6, 0xFF404040);
+        int color = 0xFFFFFFFF;
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                break;
+            case BASIC:
+                color = 0xFFFF8080;
+                break;
+            case REINFORCED:
+                color = 0xFFFF0000;
+                break;
+            case AWAKENED:
+                color = 0xFFFFA500;
+                break;
+        }
+        fontRenderer.drawCenteredString(name, 90, 6, color);
     }
     protected void actionPerformed(GuiButton guibutton) {
         if (!guibutton.enabled) {

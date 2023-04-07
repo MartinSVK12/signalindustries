@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.util.Direction;
+import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
@@ -69,9 +69,11 @@ public class BlockExtractor extends BlockContainerTiered{
     {
         if(world.isMultiplayerAndNotHost)
         {
+            SignalIndustries.LOGGER.info(tier.getRank());
             return true;
         } else
         {
+            SignalIndustries.LOGGER.info(tier.getRank());
             TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
                 SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile);

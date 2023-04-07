@@ -105,6 +105,9 @@ tile.signalindustries.basic.extractor.desc=Extracts [Signalum Energy] from [Raw 
 
 tile.signalindustries.prototype.crusher.name=Prototype Crusher
 tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
+tile.signalindustries.basic.crusher.name=Basic Crusher
+tile.signalindustries.basic.crusher.desc=Grinds materials into finer dusts.
+
 
 tile.signalindustries.prototype.alloySmelter.name=Prototype Alloy Smelter
 tile.signalindustries.prototype.alloySmelter.desc=Combines materials with heat.
