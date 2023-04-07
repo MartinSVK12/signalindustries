@@ -2,31 +2,76 @@ package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
-import sunsetsatellite.signalindustries.util.Vec3;
+import net.minecraft.src.Vec3D;
 
 public enum Direction {
-    X_POS (new Vec3(1,0,0)),
-    X_NEG (new Vec3(-1,0,0)),
-    Y_POS (new Vec3(0,1,0)),
-    Y_NEG (new Vec3(0,-1,0)),
-    Z_POS (new Vec3(0,0,1)),
-    Z_NEG (new Vec3(0,0,-1));
+    X_POS (new Vec3i(1,0,0),5,"EAST"),
+    X_NEG (new Vec3i(-1,0,0),4,"WEST"),
+    Y_POS (new Vec3i(0,1,0),1,"UP"),
+    Y_NEG (new Vec3i(0,-1,0),0,"DOWN"),
+    Z_POS (new Vec3i(0,0,1),3,"SOUTH"),
+    Z_NEG (new Vec3i(0,0,-1),2,"NORTH");
 
-    private final Vec3 vec;
+    private final Vec3i vec;
     private Direction opposite;
+    private final int side;
+    private String name;
 
-    Direction(Vec3 vec3) {
-        this.vec = vec3;
+    Direction(Vec3i vec3I,int side,String name) {
+        this.vec = vec3I;
+        this.side = side;
+        this.name = name;
     }
 
     public TileEntity getTileEntity(IBlockAccess world, TileEntity tile){
-        Vec3 pos = new Vec3(tile.xCoord + vec.x, tile.yCoord + vec.y, tile.zCoord + vec.z);
+        Vec3i pos = new Vec3i(tile.xCoord + vec.x, tile.yCoord + vec.y, tile.zCoord + vec.z);
         return world.getBlockTileEntity(pos.x,pos.y,pos.z);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Direction getOpposite(){
         return opposite;
+    }
+
+    public Vec3i getVec() {
+        return vec;
+    }
+
+    public static Direction getDirectionFromSide(int side){
+        for (Direction dir : values()) {
+            if(dir.side == side){
+                return dir;
+            }
+        }
+        return Direction.X_NEG;
+    }
+
+    public static Direction getFromName(String name){
+        for (Direction dir : values()) {
+            if(dir.name.equalsIgnoreCase(name)){
+                return dir;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets minecraft's side number, NOTE: this and .ordinal() aren't the same!
+     * @return Minecraft's side number.
+     */
+    public int getSide() {
+        return side;
+    }
+
+    public Vec3f getVecF(){
+        return new Vec3f(vec.x, vec.y, vec.z);
+    }
+
+    public Vec3D getMinecraftVec(){
+        return Vec3D.createVectorHelper(vec.x, vec.y, vec.z);
     }
 
     static {

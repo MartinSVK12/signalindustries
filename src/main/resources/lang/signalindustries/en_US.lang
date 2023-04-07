@@ -138,4 +138,13 @@ tile.signalindustries.dimensionalShardOre.desc=
 tile.signalindustries.glowingObsidian.name=Glowing Obsidian
 tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal, was used in ancient rituals involving the Nether..
 
+tile.signalindustries.itemPipe.name=Item Pipe
+tile.signalindustries.itemPipe.desc=Transports items, duh.
+tile.signalindustries.itemPipeOpaque.name=Opaque Item Pipe
+tile.signalindustries.itemPipeOpaque.desc=Transports items but you can't see them.
+tile.signalindustries.inserter.name=Inserter
+tile.signalindustries.inserter.desc=Sucks up items from the ground or from connected inventories and puts them into pipes.
+tile.signalindustries.filter.name=Filter
+tile.signalindustries.filter.desc=Sorts items that pass through it into colored outputs,
+
 dimension.eternity.name=Eternity

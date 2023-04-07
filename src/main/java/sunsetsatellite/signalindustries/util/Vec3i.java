@@ -1,11 +1,11 @@
 package sunsetsatellite.signalindustries.util;
 
-public class Vec3 {
+public class Vec3i {
     public int x;
     public int y;
     public int z;
 
-    public Vec3(int x, int y, int z){
+    public Vec3i(int x, int y, int z){
         this.x = x;
         this.y = y;
         this.z = z;
@@ -26,11 +26,11 @@ public class Vec3 {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Vec3 vec3 = (Vec3) o;
+        Vec3i vec3I = (Vec3i) o;
 
-        if (x != vec3.x) return false;
-        if (y != vec3.y) return false;
-        return z == vec3.z;
+        if (x != vec3I.x) return false;
+        if (y != vec3I.y) return false;
+        return z == vec3I.z;
     }
 
     @Override

@@ -66,11 +66,15 @@ dependencies {
 	modImplementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	modImplementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
 
-	/*modImplementation("com.github.MartinSVK12:energyapi:1.1.2"){
+	modImplementation("com.github.MartinSVK12:energyapi:c66e0bb497"){
 		exclude(group: 'objects', module: 'client')
-	}*/
+	}
 
-	modImplementation("com.github.MartinSVK12:fluidapi:dfee712472"){
+	modImplementation("com.github.MartinSVK12:fluidapi:03285b9120"){
+		exclude(group: 'objects', module: 'client')
+	}
+
+	modImplementation("com.github.MartinSVK12:retrostorage:28d755a047"){
 		exclude(group: 'objects', module: 'client')
 	}
 

@@ -8,6 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
+import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockFilter;
+import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockInserter;
+import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockItemPipe;
+import sunsetsatellite.signalindustries.api.impl.itempipes.gui.GuiFilter;
+import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
+import sunsetsatellite.signalindustries.api.impl.itempipes.misc.RenderItemPipe;
+import sunsetsatellite.signalindustries.api.impl.itempipes.misc.RenderPipeItem;
+import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;
+import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
+import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.*;
@@ -136,6 +146,12 @@ public class SignalIndustries implements ModInitializer {
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
+    public static final Block itemPipe = BlockHelper.createBlock(MOD_ID,new BlockItemPipe(Config.getFromConfig("itemPipe",availableBlockId++),Material.glass),"itemPipe","itempipe.png",Block.soundGlassFootstep,1.0f,1.0f,0);
+    public static final Block itemPipeOpaque = BlockHelper.createBlock(MOD_ID,new BlockItemPipe(Config.getFromConfig("itemPipeOpaque",availableBlockId++),Material.glass),"itemPipeOpaque","itempipeopaque.png",Block.soundGlassFootstep,1.0f,1.0f,0);
+    public static final Block inserter = BlockHelper.createBlock(MOD_ID,new BlockInserter(Config.getFromConfig("inserter",availableBlockId++),Material.rock),"inserter","prototypeblank.png","prototypeblank.png","inserterinput.png","prototypeblank.png","inserteroutput.png","prototypeblank.png",Block.soundStoneFootstep,1.0f,1.0f,0);
+    public static final Block filter = BlockHelper.createBlock(MOD_ID,new BlockFilter(Config.getFromConfig("filter",availableBlockId++),Material.rock),"filter","filterred.png","filtergreen.png","filterblue.png","filtercyan.png","filtermagenta.png","filteryellow.png",Block.soundStoneFootstep,1.0f,1.0f,0);
+
+
     public static BiomeGenBase biomeEternity; //= createBiome(16, BiomeGenEternity.class);
 
     public static Dimension dimEternity;
@@ -180,9 +196,16 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityInfuser.class,"Crystal Cutter");
         addToNameGuiMap("Infuser", GuiInfuser.class, TileEntityInfuser.class);
 
+        EntityHelper.createTileEntity(TileEntityFilter.class,"Filter");
+        addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
+
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
 
         EntityHelper.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
+        EntityHelper.createTileEntity(TileEntityItemPipe.class,"Item Pipe");
+        EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
+
+        EntityHelper.createEntity(EntityPipeItem.class,new RenderPipeItem(),48,"pipeItem");
 
         //auto-generated recipe code
         RecipeHelper.Crafting.createRecipe(SignalIndustries.ironPlateHammer, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.ingotIron,1,0),'4',new ItemStack(Item.stick,1,0),'5',new ItemStack(Item.ingotIron,1,0),'6',new ItemStack(Item.stick,1,0)});
