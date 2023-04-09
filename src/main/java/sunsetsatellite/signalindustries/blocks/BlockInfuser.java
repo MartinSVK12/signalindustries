@@ -71,7 +71,7 @@ public class BlockInfuser extends BlockContainerTiered{
         {
             TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

@@ -6,13 +6,15 @@
   "mixins": [
     "EntityPlayerMPMixin",
     "EntityRendererMixin",
+    "EntityTrackerEntryMixin",
+    "EntityTrackerMixin",
     "GuiContainerMixin",
     "GuiIngameMixin",
     "NBTTagCompoundMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
     "RenderGlobalMixin",
-    "RenderPlayerMixin",
+    "RenderPlayerMixin"
   ],
   "client": [
   ],

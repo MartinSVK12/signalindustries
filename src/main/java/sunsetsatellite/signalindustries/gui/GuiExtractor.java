@@ -9,6 +9,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
+import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
 
 public class GuiExtractor extends GuiFluid {
 
@@ -18,7 +19,7 @@ public class GuiExtractor extends GuiFluid {
 
 
     public GuiExtractor(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerExtractor(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
+        super(new ContainerExtractor(inventoryPlayer, (TileEntityTieredMachine) tile),inventoryPlayer);
         this.tile = (TileEntityExtractor) tile;
         this.entityplayer = inventoryPlayer.player;
     }
@@ -59,7 +60,7 @@ public class GuiExtractor extends GuiFluid {
     protected void drawGuiContainerBackgroundLayer(float f1) {
 
         int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");;
-        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+        switch (tile.tier){
             case PROTOTYPE:
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_prototype.png");
                 break;
@@ -89,7 +90,7 @@ public class GuiExtractor extends GuiFluid {
     {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+        switch (tile.tier){
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -110,10 +111,10 @@ public class GuiExtractor extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile);
+                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
                 break;
             case 1:
-                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile);
+                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
                 break;
             default:
                 break;

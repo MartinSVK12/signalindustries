@@ -36,7 +36,8 @@
     "fabricloader": ">=0.13.3",
     "minecraft": "1.7.6",
     "fluidapi": ">=1.2",
-    "guidebookpp": ">=1.4.1"
+    "guidebookpp": ">=1.4.1",
+    "sunsetutils": ">=1.0.0"
   },
   "suggests": {
     "energyapi": ">=1.1.1"

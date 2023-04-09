@@ -7,13 +7,13 @@ import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.fluidapi.mixin.accessors.PacketAccessor;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockItemPipe;
 import sunsetsatellite.signalindustries.api.impl.itempipes.gui.GuiFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
-import sunsetsatellite.signalindustries.api.impl.itempipes.misc.RenderItemPipe;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.RenderPipeItem;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
@@ -23,6 +23,8 @@ import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
+import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
+import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.sunsetutils.util.NBTEditCommand;
@@ -162,6 +164,10 @@ public class SignalIndustries implements ModInitializer {
     }
 
     public SignalIndustries(){
+        PacketAccessor.callAddIdClassMapping(Config.getFromConfig("PacketOpenMachineGUI_ID",113),true,false, PacketOpenMachineGUI.class);
+        PacketAccessor.callAddIdClassMapping(Config.getFromConfig("PacketPipeItemSpawn_ID",114),true,false, PacketPipeItemSpawn.class);
+        //PacketAccessor.callAddIdClassMapping(Config.getFromConfig("PacketPipeItemPos_ID",115),true,false, PacketPipeItemPos.class);
+
 
         /*eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
         dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);*/
@@ -170,6 +176,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
         EntityHelper.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.createEntity(EntityCrystal.class,new RenderSnowball(signalumCrystal.getIconFromDamage(0)),47,"signalumCrystal");
+        EntityHelper.createEntity(EntityPipeItem.class,new RenderPipeItem(),48,"pipeItem");
 
         EntityHelper.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
@@ -204,8 +211,6 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityItemPipe.class,"Item Pipe");
         EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
 
-        EntityHelper.createEntity(EntityPipeItem.class,new RenderPipeItem(),48,"pipeItem");
-
         //auto-generated recipe code
         RecipeHelper.Crafting.createRecipe(SignalIndustries.ironPlateHammer, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.ingotIron,1,0),'4',new ItemStack(Item.stick,1,0),'5',new ItemStack(Item.ingotIron,1,0),'6',new ItemStack(Item.stick,1,0)});
         RecipeHelper.Crafting.createRecipe(SignalIndustries.diamondCuttingGear, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.diamond,1,0),'3',new ItemStack(Item.diamond,1,0),'5',new ItemStack(Item.diamond,1,0),'7',new ItemStack(Item.diamond,1,0)});
@@ -232,9 +237,17 @@ public class SignalIndustries implements ModInitializer {
     }
 
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile) {
+    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,container,tile);
+            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,container,tile,x,y,z);
+        } else {
+            Minecraft.getMinecraft().displayGuiScreen(guiScreen);
+        }
+    }
+
+    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, ItemStack stack) {
+        if(entityplayer instanceof EntityPlayerMP) {
+            ((IEntityPlayerMP)entityplayer).displayItemGuiScreen_si(guiScreen,container,tile,stack);
         } else {
             Minecraft.getMinecraft().displayGuiScreen(guiScreen);
         }

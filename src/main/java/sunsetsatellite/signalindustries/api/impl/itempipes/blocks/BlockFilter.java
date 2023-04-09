@@ -35,7 +35,7 @@ public class BlockFilter extends BlockContainer {
         {
             TileEntityFilter tile = (TileEntityFilter) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiFilter(entityplayer.inventory, tile),new ContainerFilter(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiFilter(entityplayer.inventory, tile),new ContainerFilter(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

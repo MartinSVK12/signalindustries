@@ -1,8 +1,10 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.src.BlockContainerRotatable;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
+import net.minecraft.src.*;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
+import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 

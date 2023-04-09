@@ -4,26 +4,22 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ICrafting;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Slot;
-import sunsetsatellite.fluidapi.api.ContainerFluid;
 import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityMachine;
+import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
+import sunsetsatellite.signalindustries.tiles.TileEntityTiered;
+import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.util.Tiers;
 
-import java.util.Iterator;
-
-public class ContainerExtractor extends ContainerFluid {
-
-    private final TileEntityExtractor machine = ((TileEntityExtractor) tile);
+public class ContainerExtractor extends ContainerTiered {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
 
-    public ContainerExtractor(IInventory iInventory, TileEntityFluidItemContainer tileEntity){
+    public ContainerExtractor(IInventory iInventory, TileEntityTieredMachine tileEntity){
         super(iInventory, tileEntity);
-        tile = tileEntity;
 
         SlotFluid slot = new SlotFluid(tileEntity, 0, 116,35);
         addFluidSlot(slot);
@@ -89,6 +85,9 @@ public class ContainerExtractor extends ContainerFluid {
         if (id == 3) {
             machine.fuelMaxBurnTicks = value;
         }
+    }
+
+    public void updateClientTier(Tiers tier){
 
     }
 

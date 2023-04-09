@@ -58,7 +58,7 @@ public class GuiFluidIOConfig extends GuiScreen {
 
     public void keyTyped(char c, int i) {
         if (i == 1) {
-            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile);
+            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile,tile.xCoord,tile.yCoord,tile.zCoord);
         }
     }
 

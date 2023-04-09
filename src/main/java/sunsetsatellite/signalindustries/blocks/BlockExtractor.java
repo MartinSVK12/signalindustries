@@ -69,14 +69,12 @@ public class BlockExtractor extends BlockContainerTiered{
     {
         if(world.isMultiplayerAndNotHost)
         {
-            SignalIndustries.LOGGER.info(tier.getRank());
             return true;
         } else
         {
-            SignalIndustries.LOGGER.info(tier.getRank());
             TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

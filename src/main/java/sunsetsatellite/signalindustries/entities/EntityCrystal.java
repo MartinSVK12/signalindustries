@@ -13,7 +13,7 @@ public class EntityCrystal extends Entity {
     private int field_20053_e = 0;
     private boolean field_20052_f = false;
     public int field_20057_a = 0;
-    private EntityLiving field_20051_g;
+    public EntityLiving field_20051_g;
     private int field_20050_h;
     private int field_20049_i = 0;
 

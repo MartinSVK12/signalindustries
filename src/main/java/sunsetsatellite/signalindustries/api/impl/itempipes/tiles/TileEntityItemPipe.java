@@ -30,6 +30,7 @@ public class TileEntityItemPipe extends TileEntity implements IItemConnection {
     public void updateEntity() {
         super.updateEntity();
         moveItems();
+        //SignalIndustries.LOGGER.info(String.valueOf(items));
     }
 
     public void moveItems(){
@@ -61,59 +62,66 @@ public class TileEntityItemPipe extends TileEntity implements IItemConnection {
                 }
             } else if (!item.atEnd) {
                 Vec3f vec = item.outDir.getVecF().divide(2).add(0.5);
-                if(item.offset.distanceTo(vec) <= 0.02){
-                    item.atEnd = true;
-                    TileEntity tile = item.outDir.getTileEntity(worldObj,this);
-                    if(tile instanceof TileEntityItemPipe) {
-                        ((TileEntityItemPipe) tile).addItem(item.entity.item, item.outDir.getOpposite());
-                    } else if (tile instanceof TileEntityFilter) {
-                        ((TileEntityFilter) tile).filter(item.entity.item, item.outDir.getOpposite());
-                    } else if (tile instanceof TileEntityFluidItemContainer){
-                        Direction tileIn = item.outDir.getOpposite();
-                        Integer activeSlot = ((TileEntityFluidItemContainer) tile).activeItemSlots.get(tileIn);
-                        Connection connection = ((TileEntityFluidItemContainer) tile).itemConnections.get(tileIn);
-                        if(connection == Connection.INPUT || connection == Connection.BOTH){
-                            ItemStack stack = ((TileEntityFluidItemContainer) tile).getStackInSlot(activeSlot);
-                            if(stack == null){
-                                ((TileEntityFluidItemContainer) tile).setInventorySlotContents(activeSlot,item.entity.item);
-                                item.entity.setEntityDead();
-                                break;
-                            } else if (stack.isItemEqual(item.entity.item) && ((INBTCompound)stack.tag).equals(item.entity.item.tag) && 64-stack.stackSize >= item.entity.item.stackSize) {
-                                stack.stackSize += item.entity.item.stackSize;
-                                item.entity.setEntityDead();
-                                break;
+                if(!worldObj.isMultiplayerAndNotHost){
+                    if(item.offset.distanceTo(vec) <= 0.02){
+                        item.atEnd = true;
+                        TileEntity tile = item.outDir.getTileEntity(worldObj,this);
+                        if(tile instanceof TileEntityItemPipe) {
+                            ((TileEntityItemPipe) tile).addItem(item.entity.item, item.outDir.getOpposite());
+                        } else if (tile instanceof TileEntityFilter) {
+                            ((TileEntityFilter) tile).filter(item.entity.item, item.outDir.getOpposite());
+                        } else if (tile instanceof TileEntityFluidItemContainer){
+                            Direction tileIn = item.outDir.getOpposite();
+                            Integer activeSlot = ((TileEntityFluidItemContainer) tile).activeItemSlots.get(tileIn);
+                            Connection connection = ((TileEntityFluidItemContainer) tile).itemConnections.get(tileIn);
+                            if(connection == Connection.INPUT || connection == Connection.BOTH){
+                                ItemStack stack = ((TileEntityFluidItemContainer) tile).getStackInSlot(activeSlot);
+                                if(stack == null){
+                                    ((TileEntityFluidItemContainer) tile).setInventorySlotContents(activeSlot,item.entity.item);
+                                    item.entity.setEntityDead();
+                                    break;
+                                } else if (stack.isItemEqual(item.entity.item) && ((INBTCompound)stack.tag).equals(item.entity.item.tag) && 64-stack.stackSize >= item.entity.item.stackSize) {
+                                    stack.stackSize += item.entity.item.stackSize;
+                                    item.entity.setEntityDead();
+                                    break;
+                                } else {
+                                    item.entity.setEntityDead();
+                                    dropItem(item);
+                                }
                             } else {
                                 item.entity.setEntityDead();
                                 dropItem(item);
                             }
-                        } else {
-                            item.entity.setEntityDead();
-                            dropItem(item);
-                        }
 
-                    } else if (tile instanceof IInventory) {
-                        IInventory inv = (IInventory) tile;
-                        for (int i = 0; i < inv.getSizeInventory(); i++) {
-                            ItemStack stack = inv.getStackInSlot(i);
-                            if(stack == null){
-                                inv.setInventorySlotContents(i,item.entity.item);
-                                item.entity.setEntityDead();
-                                break;
-                            } else if (stack.isItemEqual(item.entity.item) && ((INBTCompound)stack.tag).equals(item.entity.item.tag) && 64-stack.stackSize >= item.entity.item.stackSize) {
-                                stack.stackSize += item.entity.item.stackSize;
-                                item.entity.setEntityDead();
-                                break;
+                        } else if (tile instanceof IInventory) {
+                            IInventory inv = (IInventory) tile;
+                            for (int i = 0; i < inv.getSizeInventory(); i++) {
+                                ItemStack stack = inv.getStackInSlot(i);
+                                if(stack == null){
+                                    inv.setInventorySlotContents(i,item.entity.item);
+                                    item.entity.setEntityDead();
+                                    break;
+                                } else if (stack.isItemEqual(item.entity.item) && ((INBTCompound)stack.tag).equals(item.entity.item.tag) && 64-stack.stackSize >= item.entity.item.stackSize) {
+                                    stack.stackSize += item.entity.item.stackSize;
+                                    item.entity.setEntityDead();
+                                    break;
+                                }
                             }
-                        }
-                        if(item.entity.isEntityAlive()){ 
-                            item.entity.setEntityDead();
+                            if(item.entity.isEntityAlive()){
+                                item.entity.setEntityDead();
+                                dropItem(item);
+                            }
+                        } else {
                             dropItem(item);
                         }
-                    } else {
-                        dropItem(item);
+                        item.entity.setEntityDead();
+                        continue;
                     }
-                    item.entity.setEntityDead();
-                    continue;
+                } else {
+                    if(item.offset.distanceTo(vec) <= 0.02){
+                        item.entity.setEntityDead();
+                        continue;
+                    }
                 }
                 switch (item.outDir){
                     case X_POS:
@@ -140,9 +148,15 @@ public class TileEntityItemPipe extends TileEntity implements IItemConnection {
             if(!items.isEmpty()){
                 //SignalIndustries.LOGGER.info(item.offset.toString());
             }
-            if(Math.abs(item.offset.x) > 1.2 || Math.abs(item.offset.y) > 1.2 || Math.abs(item.offset.z) > 1.2){
-                item.entity.setEntityDead();
-                dropItem(item);
+            if(!worldObj.isMultiplayerAndNotHost){
+                if(Math.abs(item.offset.x) > 1.2 || Math.abs(item.offset.y) > 1.2 || Math.abs(item.offset.z) > 1.2){
+                    item.entity.setEntityDead();
+                    dropItem(item);
+                }
+            } else {
+                if(Math.abs(item.offset.x) > 1.2 || Math.abs(item.offset.y) > 1.2 || Math.abs(item.offset.z) > 1.2){
+                    item.entity.setEntityDead();
+                }
             }
         }
         items.removeIf((V)-> !V.entity.isEntityAlive());

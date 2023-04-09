@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.tiles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -17,14 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityExtractor extends TileEntityFluidItemContainer {
+public class TileEntityExtractor extends TileEntityTieredMachine {
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-    public int efficiency = 1;
-    public int speedMultiplier = 1;
     public MachineRecipesBase<Integer, FluidStack> recipes = ExtractorRecipes.instance;
 
     public TileEntityExtractor(){
@@ -231,17 +224,4 @@ public class TileEntityExtractor extends TileEntityFluidItemContainer {
         fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
     }
 
-    @Override
-    public Block getBlockType() {
-        if(this.worldObj != null){
-            return super.getBlockType();
-        } else {
-            Block b = Block.blocksList[Minecraft.getMinecraft().theWorld.getBlockId(this.xCoord, this.yCoord, this.zCoord)];
-            if(b == null){
-                return SignalIndustries.prototypeExtractor;
-            } else {
-                return b;
-            }
-        }
-    }
 }

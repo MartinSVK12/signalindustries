@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.misc;
 
 import net.minecraft.src.*;
-import net.minecraft.src.helper.DamageType;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3f;
@@ -26,6 +26,17 @@ public class EntityPipeItem extends Entity {
         this.motionY = 0.0f;
         this.motionZ = 0.0f;
         this.pipe = (TileEntityItemPipe) pipe;
+    }
+
+    public PipeItem getPipeItem(){
+        if(pipe != null){
+            for (PipeItem pipeItem : pipe.items) {
+                if(pipeItem.entity == this){
+                    return pipeItem;
+                }
+            }
+        }
+        return null;
     }
 
     protected boolean canTriggerWalking() {
@@ -54,7 +65,16 @@ public class EntityPipeItem extends Entity {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
-        this.moveEntity(this.motionX, this.motionY, this.motionZ);
+        //this.moveEntity(this.motionX, this.motionY, this.motionZ);
+
+        /*for (EntityPlayer player : worldObj.players) {
+            if(player instanceof EntityPlayerMP && !worldObj.isMultiplayerAndNotHost){
+                ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(new PacketPipeItemPos(this));
+                /*if((this.prevPosX != this.posX ) || (this.prevPosY != this.posY) || (this.prevPosZ != this.posZ)){
+
+                }
+            }
+        }*/
 
     }
 
@@ -112,6 +132,14 @@ public class EntityPipeItem extends Entity {
             pipeItem.atEnd = end;
             this.pipe.items.add(pipeItem);
         }
+    }
+
+    public void linkEntityToPipe(TileEntityItemPipe pipe, Vec3f offset, Direction inDir, Direction outDir, boolean center, boolean end){
+        this.pipe = pipe;
+        PipeItem pipeItem = new PipeItem(this,inDir,outDir,offset);
+        pipeItem.goingToCenter = center;
+        pipeItem.atEnd = end;
+        this.pipe.items.add(pipeItem);
     }
 
     public boolean canRender() {

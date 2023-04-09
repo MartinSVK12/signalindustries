@@ -71,7 +71,7 @@ public class BlockCrystalCutter extends BlockContainerTiered{
         {
             TileEntityCrystalCutter tile = (TileEntityCrystalCutter) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCrystalCutter(entityplayer.inventory, tile),new ContainerCrystalCutter(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiCrystalCutter(entityplayer.inventory, tile),new ContainerCrystalCutter(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

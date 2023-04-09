@@ -71,7 +71,7 @@ public class BlockAlloySmelter extends BlockContainerTiered{
         {
             TileEntityAlloySmelter tile = (TileEntityAlloySmelter) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiAlloySmelter(entityplayer.inventory, tile),new ContainerAlloySmelter(entityplayer.inventory,tile),tile);
+                SignalIndustries.displayGui(entityplayer,new GuiAlloySmelter(entityplayer.inventory, tile),new ContainerAlloySmelter(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
