@@ -1,9 +1,11 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookExtractorRecipe;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeExtractor;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.containers;
 
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
@@ -6,25 +6,27 @@ import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IContainerRecipeBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 
 import java.util.ArrayList;
 
-public class ContainerGuidebookCrusherRecipe extends ContainerGuidebookRecipeBase
+public class ContainerGuidebookAlloySmelterRecipe extends ContainerGuidebookRecipeBase
     implements IContainerRecipeBase {
 
     ItemStack machine;
 
-    public ContainerGuidebookCrusherRecipe(ItemStack stack, ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs, ArrayList<ItemStack> itemOutputs, ArrayList<FluidStack> fluidOutputs) {
+    public ContainerGuidebookAlloySmelterRecipe(ItemStack stack, ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs, ArrayList<ItemStack> itemOutputs, ArrayList<FluidStack> fluidOutputs) {
         machine = stack;
         this.addSlot(new SlotGuidebook(0, 9, 10, itemInputs.get(0), false));
+        this.addSlot(new SlotGuidebook(0, -19, 10, itemInputs.get(1), false));
         this.addSlot(new SlotGuidebook(1, 69, 19,itemOutputs.get(0), false));
-        this.addSlot(new SlotGuidebook(2, 9, 45, new ItemStack(SignalIndustries.energyFlowing,20), false));
+        this.addSlot(new SlotGuidebook(2, 9, 45, new ItemStack(SignalIndustries.energyFlowing,40*(((BlockContainerTiered)Block.blocksList[stack.itemID]).tier.ordinal()+1)), false));
         this.addSlot(new SlotGuidebook(3,36,18,stack,true));
     }
 
     public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index){
         RenderItem itemRenderer = new RenderItem();
-        int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_machine_recipe.png");
+        int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_machine_double_recipe.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GuidebookPlusPlus.mc.renderEngine.bindTexture(i);
         int j = (guidebook.width - xSize) / 2;
@@ -32,7 +34,7 @@ public class ContainerGuidebookCrusherRecipe extends ContainerGuidebookRecipeBas
         int xPos = j + 29 + 158 * (index / 3);
         int yPos = k + 30 + 62 * (index % 3);
         int yOffset = 0;
-        guidebook.drawTexturedModalRect(xPos, yPos, 158, yOffset, 98, 54);
+        guidebook.drawTexturedModalRect(xPos - 20, yPos, 138, yOffset, 121, 54);
 
     };
 

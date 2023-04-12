@@ -19,6 +19,9 @@ import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilte
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
 import sunsetsatellite.signalindustries.blocks.*;
+import sunsetsatellite.signalindustries.dim.WeatherBloodMoon;
+import sunsetsatellite.signalindustries.dim.WeatherEclipse;
+import sunsetsatellite.signalindustries.dim.WeatherSolarApocalypse;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
@@ -91,6 +94,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block basicInfuser = BlockHelper.createBlock(MOD_ID,new BlockInfuser(Config.getFromConfig("basicInfuser",availableBlockId++),Tiers.BASIC,Material.iron),"basic.infuser","basicblank.png","infuserbasicsideinactive.png",Block.soundMetalFootstep,2,3,0);
     public static final int[][] infuserTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideactive.png")};
 
+    public static final Block basicWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("basicWrathBeacon",availableBlockId++),Tiers.BASIC,Material.iron),"basic.wrathBeacon","basicblank.png","wrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
+    public static final Block reinforcedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("reinforcedWrathBeacon",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.wrathBeacon","reinforcedblank.png","reinforcedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
+    public static final Block awakenedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("awakenedWrathBeacon",availableBlockId++),Tiers.AWAKENED,Material.iron),"awakened.wrathBeacon","reinforcedblank.png","awakenedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -115,8 +121,6 @@ public class SignalIndustries implements ModInitializer {
     public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("steelPlate",availableItemId++)),"steelPlate","steelplate.png");
     public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyPlate",availableItemId++)),"reinforcedCrystalAlloyPlate","reinforcedcrystalalloyplate.png");
     public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumAlloyPlate",availableItemId++)),"saturatedSignalumAlloyPlate","saturatedsignalumalloyplate.png");
-
-
 
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyIngot",availableItemId++)),"crystalAlloyIngot","crystalalloy.png");
     public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyIngot",availableItemId++)),"reinforcedCrystalAlloyIngot","reinforcedcrystalalloy.png");
@@ -153,6 +157,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block filter = BlockHelper.createBlock(MOD_ID,new BlockFilter(Config.getFromConfig("filter",availableBlockId++),Material.rock),"filter","filterred.png","filtergreen.png","filterblue.png","filtercyan.png","filtermagenta.png","filteryellow.png",Block.soundStoneFootstep,1.0f,1.0f,0);
 
 
+    public static Weather weatherBloodMoon = new WeatherBloodMoon(7).setLanguageKey("bloodMoon");
+    public static Weather weatherEclipse = new WeatherEclipse(8).setLanguageKey("solarEclipse");
+    public static Weather weatherSolarApocalypse = new WeatherSolarApocalypse(9).setLanguageKey("solarApocalypse");
     public static BiomeGenBase biomeEternity; //= createBiome(16, BiomeGenEternity.class);
 
     public static Dimension dimEternity;

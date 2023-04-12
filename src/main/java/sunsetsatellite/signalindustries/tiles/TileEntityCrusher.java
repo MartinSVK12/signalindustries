@@ -4,30 +4,22 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.recipes.*;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
-import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
-import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityCrusher extends TileEntityFluidItemContainer {
+public class TileEntityCrusher extends TileEntityTieredMachine {
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-    public int efficiency = 1;
-    public int speedMultiplier = 1;
-    public int cost = 10;
-    public CrusherRecipes recipes = CrusherRecipes.getInstance();
+    public CrusherRecipes recipes = CrusherRecipes.instance;
 
     public TileEntityCrusher(){
+        cost = 10;
         fluidCapacity[0] = 2000;
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
@@ -40,6 +32,22 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
     public void updateEntity() {
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            switch (block.tier) {
+                case PROTOTYPE:
+                    recipes = CrusherRecipes.instance;
+                    break;
+                case BASIC:
+                    recipes = BasicCrusherRecipes.instance;
+                    break;
+                case REINFORCED:
+                case AWAKENED:
+                    break;
+            }
+            speedMultiplier = block.tier.ordinal() + 1;
+            cost = 40 * (block.tier.ordinal()+1);
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
@@ -74,16 +82,7 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
 
     }
 
-    public int getProgressScaled(int paramInt) {
-        return this.progressTicks * paramInt / progressMaxTicks;
-    }
 
-    public int getBurnTimeRemainingScaled(int paramInt) {
-        if(this.fuelMaxBurnTicks == 0) {
-            this.fuelMaxBurnTicks = 200;
-        }
-        return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
-    }
 
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
@@ -126,85 +125,5 @@ public class TileEntityCrusher extends TileEntityFluidItemContainer {
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }
-
-    public boolean isBurning(){
-        return fuelBurnTicks > 0;
-    }
-
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile, transferSpeed);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
-    }
-
-    public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
-        pipe.isPressurized = true;
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
-                already.add(list);
-                ((TileEntityFluidPipe) tile).isPressurized = true;
-                pressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    public void unpressurizePipes(TileEntityFluidPipe pipe,ArrayList<HashMap<String,Integer>> already){
-        pipe.isPressurized = false;
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
-                already.add(list);
-                ((TileEntityFluidPipe) tile).isPressurized = false;
-                unpressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.setShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.setShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.setShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.setInteger("MaxProcessTime",this.progressMaxTicks);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
-        fuelBurnTicks = nBTTagCompound1.getShort("BurnTime");
-        progressTicks = nBTTagCompound1.getShort("ProcessTime");
-        progressMaxTicks = nBTTagCompound1.getInteger("MaxProcessTime");
-        fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
-
-    }
-
-
 
 }

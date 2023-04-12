@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes;
 
 import net.minecraft.src.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;

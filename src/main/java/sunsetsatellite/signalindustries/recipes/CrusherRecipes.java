@@ -7,13 +7,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import java.util.HashMap;
 
 public class CrusherRecipes extends MachineRecipesBase<Integer,ItemStack> {
-    private static final CrusherRecipes instance = new CrusherRecipes();
+    public static final CrusherRecipes instance = new CrusherRecipes();
 
-    public static CrusherRecipes getInstance() {
-        return instance;
-    }
-
-    private CrusherRecipes() {
+    protected CrusherRecipes() {
         addRecipe(SignalIndustries.signalumCrystalEmpty.itemID,new ItemStack(SignalIndustries.emptySignalumCrystalDust,2));
         addRecipe(SignalIndustries.rawSignalumCrystal.itemID,new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1));
         addRecipe(SignalIndustries.signalumCrystal.itemID,new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,2));

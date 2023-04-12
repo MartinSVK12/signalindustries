@@ -108,6 +108,17 @@ tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
 tile.signalindustries.basic.crusher.name=Basic Crusher
 tile.signalindustries.basic.crusher.desc=Grinds materials into finer dusts.
 
+tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
+tile.signalindustries.basic.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
+tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
+tile.signalindustries.reinforced.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
+tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
+tile.signalindustries.awakened.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
+
+event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
+event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!! There is no excape.
+event.signalindustries.awakenedWrathBeaconActivated=You have made a poor decision, and now you MUST PAY! AWAKENED WRATH BEACON ACTIVATED!
+event.signalindustries.bloodMoon=A blood moon is rising!
 
 tile.signalindustries.prototype.alloySmelter.name=Prototype Alloy Smelter
 tile.signalindustries.prototype.alloySmelter.desc=Combines materials with heat.
@@ -151,3 +162,7 @@ tile.signalindustries.filter.name=Filter
 tile.signalindustries.filter.desc=Sorts items that pass through it into colored outputs,
 
 dimension.eternity.name=Eternity
+weather.bloodMoon.name=Blood Moon
+weather.solarEclipse.name=Solar Eclipse
+weather.solarApocalypse.name=Solar Apocalypse
+bed.bloodMoon=You feel like something evil is watching you, you can't sleep!

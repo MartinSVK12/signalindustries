@@ -1,10 +1,12 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 import net.minecraft.src.ContainerGuidebookRecipeBase;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.StringTranslate;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookCrusherRecipe;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeCrusher;
 import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class RecipeHandlerCrusher
     }
 
     public ArrayList<?> getRecipes() {
-        HashMap<Integer, ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        HashMap<Integer, ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.instance.getRecipeList());
         ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
@@ -35,7 +37,7 @@ public class RecipeHandlerCrusher
     }
 
     public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.instance.getRecipeList());
         ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
 
@@ -61,7 +63,7 @@ public class RecipeHandlerCrusher
         if(name.equals("")){
             return getRecipes();
         }
-        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.getInstance().getRecipeList());
+        HashMap<Integer,ItemStack> rawRecipes = new HashMap<>(CrusherRecipes.instance.getRecipeList());
         ArrayList<RecipeCrusher> recipes = new ArrayList<>();
         rawRecipes.forEach((I,O)->{
             ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));

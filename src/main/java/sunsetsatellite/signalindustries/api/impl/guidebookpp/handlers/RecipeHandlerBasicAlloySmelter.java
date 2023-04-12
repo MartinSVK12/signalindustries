@@ -1,10 +1,12 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 import net.minecraft.src.ContainerGuidebookRecipeBase;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.StringTranslate;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookAlloySmelterRecipe;
+import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeBasicAlloySmelter;
 import sunsetsatellite.signalindustries.recipes.BasicAlloySmelterRecipes;
 import java.util.ArrayList;
 import java.util.Collections;

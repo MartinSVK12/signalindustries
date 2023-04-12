@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.guidebookpp;
+package sunsetsatellite.signalindustries.api.impl.guidebookpp.containers;
 
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;

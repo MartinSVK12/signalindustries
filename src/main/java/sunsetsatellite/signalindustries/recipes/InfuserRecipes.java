@@ -20,7 +20,7 @@ public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>,ItemSta
         ArrayList<Object> list = new ArrayList<>();
         list.add(null);
         list.add(new ItemStack(SignalIndustries.crystalAlloyIngot,1));
-        list.add(null);
+        list.add(new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,4));
         addRecipe(list,new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot.itemID,1,0));
         list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000));

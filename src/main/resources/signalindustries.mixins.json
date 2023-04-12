@@ -4,6 +4,8 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "EntityLivingMixin",
+    "EntityPlayerMixin",
     "EntityPlayerMPMixin",
     "EntityRendererMixin",
     "EntityTrackerEntryMixin",
@@ -14,7 +16,8 @@
     "NetClientHandlerMixin",
     "RenderBlocksMixin",
     "RenderGlobalMixin",
-    "RenderPlayerMixin"
+    "RenderPlayerMixin",
+    "WorldMixin"
   ],
   "client": [
   ],
