@@ -7,11 +7,10 @@ public class WeatherBloodMoon extends Weather {
         super(id);
         setSpawnRainParticles(false);
         setSubtractLightLevel(7);
-        setFogDistance(0.99f);
     }
 
     @Override
     public float[] modifyFogColor(float r, float g, float b, float intensity) {
-        return new float[]{0f, 0f, 0f};
+        return super.modifyFogColor(r,g,b,intensity);//new float[]{0f, 0f, 0f};
     }
 }

@@ -116,7 +116,7 @@ tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
 
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
-event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!! There is no excape.
+event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!.
 event.signalindustries.awakenedWrathBeaconActivated=You have made a poor decision, and now you MUST PAY! AWAKENED WRATH BEACON ACTIVATED!
 event.signalindustries.bloodMoon=A blood moon is rising!
 

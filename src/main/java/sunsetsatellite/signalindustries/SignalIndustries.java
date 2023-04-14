@@ -94,9 +94,10 @@ public class SignalIndustries implements ModInitializer {
     public static final Block basicInfuser = BlockHelper.createBlock(MOD_ID,new BlockInfuser(Config.getFromConfig("basicInfuser",availableBlockId++),Tiers.BASIC,Material.iron),"basic.infuser","basicblank.png","infuserbasicsideinactive.png",Block.soundMetalFootstep,2,3,0);
     public static final int[][] infuserTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideactive.png")};
 
-    public static final Block basicWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("basicWrathBeacon",availableBlockId++),Tiers.BASIC,Material.iron),"basic.wrathBeacon","basicblank.png","wrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
-    public static final Block reinforcedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("reinforcedWrathBeacon",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.wrathBeacon","reinforcedblank.png","reinforcedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
-    public static final Block awakenedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("awakenedWrathBeacon",availableBlockId++),Tiers.AWAKENED,Material.iron),"awakened.wrathBeacon","reinforcedblank.png","awakenedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
+    public static final Block basicWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockWrathBeacon(Config.getFromConfig("basicWrathBeacon",availableBlockId++),Tiers.BASIC,Material.iron),"basic.wrathBeacon","basicblank.png","wrathbeacon.png",Block.soundMetalFootstep,25f,500f,1);
+    //public static final Block reinforcedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockWrathBeacon(Config.getFromConfig("reinforcedWrathBeacon",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.wrathBeacon","reinforcedblank.png","reinforcedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
+    //public static final Block awakenedWrathBeacon = BlockHelper.createBlock(MOD_ID,new BlockWrathBeacon(Config.getFromConfig("awakenedWrathBeacon",availableBlockId++),Tiers.AWAKENED,Material.iron),"awakened.wrathBeacon","reinforcedblank.png","awakenedwrathbeaconactive.png",Block.soundMetalFootstep,25f,500f,1);
+    public static final int[][] wrathBeaconTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"wrathbeacon.png"),TextureHelper.registerBlockTexture(MOD_ID,"wrathbeaconactive.png")};
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -217,6 +218,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
         EntityHelper.createTileEntity(TileEntityItemPipe.class,"Item Pipe");
         EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
+        EntityHelper.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
 
         //auto-generated recipe code
         RecipeHelper.Crafting.createRecipe(SignalIndustries.ironPlateHammer, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.ingotIron,1,0),'4',new ItemStack(Item.stick,1,0),'5',new ItemStack(Item.ingotIron,1,0),'6',new ItemStack(Item.stick,1,0)});
