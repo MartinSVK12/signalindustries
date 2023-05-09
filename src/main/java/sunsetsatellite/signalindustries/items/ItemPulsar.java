@@ -4,12 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
 
-public class ItemPulsar extends ItemTiered {
+public class ItemPulsar extends ItemTiered implements IHasOverlay {
     public ItemPulsar(int i, Tiers tier) {
         super(i, tier);
     }
@@ -102,4 +103,17 @@ public class ItemPulsar extends ItemTiered {
         return getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.itemID ? ChatColor.purple+"Warp" : ChatColor.red+"Pulse";
     }
 
+    @Override
+    public void renderOverlay(FontRenderer fontrenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
+        InventoryPlayer inv = player.inventory;
+        ItemStack pulsar = inv.getCurrentItem();
+        int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;
+        fontrenderer.drawStringWithShadow("The Pulsar", 4, i += 16, 0xFFFF0000);
+        fontrenderer.drawStringWithShadow("Ability: ", 4, i += 16, 0xFFFFFFFF);
+        fontrenderer.drawStringWithShadow(((ItemPulsar) pulsar.getItem()).getAbility(pulsar), 4 + fontrenderer.getStringWidth("Ability: "), i, 0xFFFF0000);
+        fontrenderer.drawStringWithShadow("Charge: ", 4, i += 10, 0xFFFFFFFF);
+        fontrenderer.drawStringWithShadow(String.valueOf(pulsar.tag.getByte("charge")) + "%", 4 + fontrenderer.getStringWidth("Charge: "), i, pulsar.tag.getByte("charge") >= 100 ? 0xFFFF0000 : 0xFFFFFFFF);
+        fontrenderer.drawStringWithShadow("Energy: ", 4, i += 10, 0xFFFFFFFF);
+        fontrenderer.drawStringWithShadow(String.valueOf(((ItemPulsar) pulsar.getItem()).getFluidStack(0, pulsar).getInteger("amount")), 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+    }
 }

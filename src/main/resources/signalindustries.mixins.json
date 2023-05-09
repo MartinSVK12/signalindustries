@@ -13,6 +13,7 @@
     "EntityTrackerMixin",
     "GuiContainerMixin",
     "GuiIngameMixin",
+    "InventoryPlayerMixin",
     "NBTTagCompoundMixin",
     "NetClientHandlerMixin",
     "RenderBlocksMixin",

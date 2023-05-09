@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.command.ChatColor;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,7 +11,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
+import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
+import sunsetsatellite.signalindustries.items.ItemTrigger;
+
+import java.util.Objects;
 
 @Debug(
         export = true
@@ -34,16 +40,14 @@ public class GuiIngameMixin extends Gui {
         ItemStack headSlotItem = this.mc.thePlayer.inventory.armorItemInSlot(3);
         if(headSlotItem != null){
             if(headSlotItem.getItem().itemID == SignalIndustries.signalumPrototypeHarnessGoggles.itemID){
-                if(this.mc.thePlayer.inventory.getCurrentItem() != null && this.mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemPulsar){
-                    ItemStack pulsar = this.mc.thePlayer.inventory.getCurrentItem();
-                    int i = height-64;
-                    drawString(fontrenderer,"The Pulsar",4,i+=16,0xFFFF0000);
-                    drawString(fontrenderer,"Ability: ",4,i+=16,0xFFFFFFFF);
-                    drawString(fontrenderer,((ItemPulsar)pulsar.getItem()).getAbility(pulsar),4+fontrenderer.getStringWidth("Ability: "),i,0xFFFF0000);
-                    drawString(fontrenderer,"Charge: ",4,i+=10,0xFFFFFFFF);
-                    drawString(fontrenderer, String.valueOf(pulsar.tag.getByte("charge"))+"%",4+fontrenderer.getStringWidth("Charge: "),i,pulsar.tag.getByte("charge") >= 100 ? 0xFFFF0000 : 0xFFFFFFFF);
-                    drawString(fontrenderer,"Energy: ",4,i+=10,0xFFFFFFFF);
-                    drawString(fontrenderer, String.valueOf(((ItemPulsar)pulsar.getItem()).getFluidStack(0,pulsar).getInteger("amount")),4+fontrenderer.getStringWidth("Energy: "),i,0xFFFF8080);
+                InventoryPlayer inv = this.mc.thePlayer.inventory;
+                if(this.mc.thePlayer.inventory.getCurrentItem() != null) {
+                    if(this.mc.thePlayer.inventory.getCurrentItem().getItem() instanceof IHasOverlay){
+                        ((IHasOverlay)inv.getCurrentItem().getItem()).renderOverlay(fontrenderer,this.mc.thePlayer,height,width,mouseX,mouseY);
+                    }
+                }
+                if (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof IHasOverlay) {
+                    ((IHasOverlay)inv.armorItemInSlot(2).getItem()).renderOverlay(fontrenderer,this.mc.thePlayer,height,width,mouseX,mouseY);
                 }
             }
         }

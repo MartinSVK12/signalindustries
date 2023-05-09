@@ -42,8 +42,19 @@ item.signalindustries.steelPlate.desc=A plate made out of steel.
 item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
 item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.
 
-item.signalindustries.nullTrigger.name=Null Trigger
-item.signalindustries.nullTrigger.desc=Triggers are used to activate [S. P. Harness] abilities.
+item.signalindustries.triggerNull.name=Null Trigger
+item.signalindustries.triggerNull.desc=Triggers are used to activate [S. P. Harness] abilities.
+item.signalindustries.triggerRepair.name=Trigger: Repair
+item.signalindustries.triggerRepair.desc=Repairs a bit of the item next to this trigger for a bit of [Signalum Energy].
+item.signalindustries.triggerProjectile.name=Trigger: Projectile
+item.signalindustries.triggerProjectile.desc=Shoots an orb of [Signalum Energy] from the core of the [S. P. Harness] you're wearing.
+item.signalindustries.triggerBoost.name=Trigger: Boost
+item.signalindustries.triggerBoost.desc=Launches you in the direction you're looking at.
+
+item.signalindustries.romChipProjectile.name=ROM Chip: Projectile
+item.signalindustries.romChipProjectile.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChipBoost.name=ROM Chip: Boost
+item.signalindustries.romChipBoost.desc=Contains code for a [Trigger] ability.
 
 item.signalindustries.pulsar.name=The Pulsar
 item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is using high amounts of [S. Energy] to create powerful shockwaves.
@@ -114,6 +125,10 @@ tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
 tile.signalindustries.reinforced.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Call upon the cliffs of hell! Activation starts a monster wave challenge.
+
+tile.signalindustries.reinforced.dimensionalAnchor.name=Dimensional Anchor
+tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for [Warp Orbs] to anchor to.
+
 
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
 event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!.

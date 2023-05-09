@@ -44,6 +44,23 @@ repositories {
 		metadataSources { artifact() }
 	}
 	ivy {
+		url = "https://github.com/MartinSVK12"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]-BTA/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
+	ivy {
+		url = "https://github.com/MartinSVK12"
+		patternLayout {
+			artifact "[organisation]/releases/download/[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
+
+	ivy {
 		url = "https://piston-data.mojang.com"
 		patternLayout {
 			artifact "v1/[organisation]/[revision]/[module].jar"
@@ -70,14 +87,13 @@ dependencies {
 		exclude(group: 'objects', module: 'client')
 	}*/
 
-	modImplementation("com.github.MartinSVK12:fluidapi:bta-SNAPSHOT"){
-		exclude(group: 'objects', module: 'client')
-	}
+	modImplementation "fluidapi:fluidapi:1.4"
 
-	modImplementation("com.github.MartinSVK12:sunsetutils:main-SNAPSHOT"){
-		exclude(group: 'objects', module: 'client')
-	}
+	modImplementation "sunsetutils:sunsetutils:1.1"
 
+	modImplementation "guidebookpp:guidebookpp:1.4.1"
+
+	modImplementation("org.apache.commons:commons-lang3:3.12.0")
 	/*modImplementation("com.github.MartinSVK12:retrostorage:28d755a047"){
 		exclude(group: 'objects', module: 'client')
 	}*/
