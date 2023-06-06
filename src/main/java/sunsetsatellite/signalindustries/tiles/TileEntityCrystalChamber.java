@@ -138,7 +138,12 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
         if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {
-            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
+            ItemStack c1 = this.itemContents[0];
+            ItemStack c2 = this.itemContents[2];
+            if(c1.tag.getInteger("size") + c2.tag.getInteger("size") > 8){
+                return false;
+            }
+            ItemStack stack = recipes.getResult(new Integer[]{c2.itemID, c1.itemID});
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

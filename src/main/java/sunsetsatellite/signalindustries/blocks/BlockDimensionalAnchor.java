@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
@@ -29,6 +30,12 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     @Override
     public void onBlockAdded(World world, int i, int j, int k) {
         super.onBlockAdded(world, i, j, k);
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        String s = super.getDescription(stack);
+        return s+"\n"+ChatColor.yellow+"Multiblock"+ChatColor.white;
     }
 
     @Override

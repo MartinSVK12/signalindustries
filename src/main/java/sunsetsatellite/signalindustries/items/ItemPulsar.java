@@ -47,13 +47,16 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
                 ExplosionEnergy ex = new ExplosionEnergy(world,entityplayer,entityplayer.posX,entityplayer.posY,entityplayer.posZ,3f);
                 ex.doExplosionA();
                 ex.doExplosionB(true,0.7f,0.0f,0.7f);
-                ((INBTCompound)itemstack.tag.getCompoundTag("inventory")).removeTag(String.valueOf(0));
-                NBTTagCompound warpPosition = getItemFromSlot(0,itemstack).getCompoundTag("position");
+                NBTTagCompound warpPosition = getItemFromSlot(0,itemstack).getCompoundTag("Data").getCompoundTag("position");
                 if(warpPosition.hasKey("x") && warpPosition.hasKey("y") && warpPosition.hasKey("z")){
-                    //TODO: Teleportation to encoded point
+                    entityplayer.setLocationAndAngles(warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"),entityplayer.rotationYaw,entityplayer.rotationPitch);
+                    ex = new ExplosionEnergy(world,entityplayer,entityplayer.posX,entityplayer.posY,entityplayer.posZ,3f);
+                    ex.doExplosionA();
+                    ex.doExplosionB(true,0.7f,0.0f,0.7f);
                 } else {
                     SignalIndustries.usePortal(SignalIndustries.dimEternity.dimId);
                 }
+                ((INBTCompound)itemstack.tag.getCompoundTag("inventory")).removeTag(String.valueOf(0));
             } else {
                 world.spawnParticle("pulse_shockwave", entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0, 0.0, 0.0);
             }

@@ -13,6 +13,7 @@ public class CrystalChamberRecipes extends MachineRecipesBase<Integer[],ItemStac
 
     protected CrystalChamberRecipes() {
         addRecipe(new Integer[]{SignalIndustries.signalumCrystal.itemID, SignalIndustries.signalumCrystal.itemID},new ItemStack(SignalIndustries.signalumCrystal,1));
+        addRecipe(new Integer[]{SignalIndustries.signalumCrystalEmpty.itemID, SignalIndustries.signalumCrystalEmpty.itemID},new ItemStack(SignalIndustries.signalumCrystalEmpty,1));
     }
 
     public void addRecipe(Integer[] ids, ItemStack stack) {
