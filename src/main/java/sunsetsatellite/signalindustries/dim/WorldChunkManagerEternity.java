@@ -8,9 +8,9 @@ import net.minecraft.src.WorldChunkManager;
 import java.util.Arrays;
 
 public class WorldChunkManagerEternity extends WorldChunkManager {
-    private BiomeGenBase field_4201_e;
-    private double field_4200_f;
-    private double field_4199_g;
+    private final BiomeGenBase field_4201_e;
+    private final double field_4200_f;
+    private final double field_4199_g;
 
     public WorldChunkManagerEternity(World world, BiomeGenBase biomegenbase, double d, double d1) {
         this.field_4201_e = biomegenbase;

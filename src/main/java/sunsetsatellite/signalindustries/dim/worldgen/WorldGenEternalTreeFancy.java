@@ -75,7 +75,7 @@ public class WorldGenEternalTreeFancy extends WorldGenerator {
                         int[] ai2 = new int[]{k1, j + this.field_869_n, l1};
                         if (this.func_524_a(ai1, ai2) == -1) {
                             int[] ai3 = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]};
-                            double d3 = Math.sqrt(Math.pow((double)Math.abs(this.basePos[0] - ai1[0]), 2.0) + Math.pow((double)Math.abs(this.basePos[2] - ai1[2]), 2.0));
+                            double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - ai1[0]), 2.0) + Math.pow(Math.abs(this.basePos[2] - ai1[2]), 2.0));
                             double d4 = d3 * this.field_874_i;
                             if ((double)ai1[1] - d4 > (double)l) {
                                 ai3[1] = l;
@@ -155,7 +155,7 @@ public class WorldGenEternalTreeFancy extends WorldGenerator {
             } else if (Math.abs(f1) >= f) {
                 f2 = 0.0F;
             } else {
-                f2 = (float)Math.sqrt(Math.pow((double)Math.abs(f), 2.0) - Math.pow((double)Math.abs(f1), 2.0));
+                f2 = (float)Math.sqrt(Math.pow(Math.abs(f), 2.0) - Math.pow(Math.abs(f1), 2.0));
             }
 
             f2 *= 0.5F;

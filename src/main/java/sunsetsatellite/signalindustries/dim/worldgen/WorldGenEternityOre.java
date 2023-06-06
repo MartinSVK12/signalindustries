@@ -8,8 +8,8 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import java.util.Random;
 
 public class WorldGenEternityOre {
-    private int minableBlockId;
-    private int numberOfBlocks;
+    private final int minableBlockId;
+    private final int numberOfBlocks;
 
     public WorldGenEternityOre(int blockId, int numberOfBlocks) {
         this.minableBlockId = blockId;
@@ -18,12 +18,12 @@ public class WorldGenEternityOre {
 
     public boolean generate(World world, Random random, int xStart, int yStart, int zStart) {
         float f = random.nextFloat() * 3.141593F;
-        double xMax = (double)((float)(xStart + 8) + MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F);
-        double xMin = (double)((float)(xStart + 8) - MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F);
-        double zMax = (double)((float)(zStart + 8) + MathHelper.cos(f) * (float)this.numberOfBlocks / 8.0F);
-        double zMin = (double)((float)(zStart + 8) - MathHelper.cos(f) * (float)this.numberOfBlocks / 8.0F);
-        double yMax = (double)(yStart + random.nextInt(3) + 2);
-        double yMin = (double)(yStart - random.nextInt(3) + 2);
+        double xMax = (float)(xStart + 8) + MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F;
+        double xMin = (float)(xStart + 8) - MathHelper.sin(f) * (float)this.numberOfBlocks / 8.0F;
+        double zMax = (float)(zStart + 8) + MathHelper.cos(f) * (float)this.numberOfBlocks / 8.0F;
+        double zMin = (float)(zStart + 8) - MathHelper.cos(f) * (float)this.numberOfBlocks / 8.0F;
+        double yMax = yStart + random.nextInt(3) + 2;
+        double yMin = yStart - random.nextInt(3) + 2;
 
         for(int l = 0; l <= this.numberOfBlocks; ++l) {
             double d6 = xMax + (xMin - xMax) * (double)l / (double)this.numberOfBlocks;

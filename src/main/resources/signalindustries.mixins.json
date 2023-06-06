@@ -4,7 +4,9 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockRailMixin",
     "EntityLivingMixin",
+    "EntityMinecartMixin",
     "EntityMobMixin",
     "EntityPlayerMixin",
     "EntityPlayerMPMixin",
@@ -19,7 +21,10 @@
     "RenderBlocksMixin",
     "RenderGlobalMixin",
     "RenderPlayerMixin",
-    "WorldMixin"
+    "WorldGenLabyrinthMixin",
+    "WorldMixin",
+    "accessors.BiomeGenBaseAccessor",
+    "accessors.WorldTypeAccessor"
   ],
   "client": [
   ],

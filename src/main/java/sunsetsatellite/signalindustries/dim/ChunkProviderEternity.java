@@ -11,7 +11,6 @@ import sunsetsatellite.signalindustries.dim.worldgen.WorldGenObelisk;
 public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
     public ChunkProviderEternity(World world, long l, int oceanHeight, int terrainMaxHeight, int terrainMiddle) {
         super(world, l, oceanHeight, terrainMaxHeight, terrainMiddle);
-
     }
 
     /*public Chunk provideChunk(int x, int z) {
@@ -44,7 +43,7 @@ public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
             worldgenerator.generate(this.worldObj, this.rand, i11, this.worldObj.getHeightValue(i11, l14), l14);
         }
 
-        if(this.rand.nextInt(2) == 0) {
+        if(this.rand.nextInt(32) == 0) {
             int i = x + this.rand.nextInt(16) + 8;
             int j = z + this.rand.nextInt(16) + 8;
             new WorldGenObelisk().generate(this.worldObj, this.rand, i, this.worldObj.getHeightValue(i, j), j);
@@ -52,7 +51,7 @@ public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
 
         for(int k4 = 0; k4 < this.heightModifier; ++k4) {
             int i10 = x + this.rand.nextInt(16);
-            int i11 = this.rand.nextInt(this.terrainMaxHeight / 8);
+            int i11 = this.rand.nextInt(this.terrainMaxHeight / 8) + 24;
             int i12 = z + this.rand.nextInt(16);
             (new WorldGenEternityOre(SignalIndustries.dimensionalShardOre.blockID, 3)).generate(this.worldObj, this.rand, i10, i11, i12);
             //SignalIndustries.LOGGER.info(String.format("%d %d %d",i10,i11,i12));

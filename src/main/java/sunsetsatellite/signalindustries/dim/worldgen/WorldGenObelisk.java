@@ -52,8 +52,10 @@ public class WorldGenObelisk extends WorldGenerator {
 
                     if(world.getBlockId(i,j-1,k) == SignalIndustries.realityFabric.blockID){
                         for(k1 = 0; k1 < l; ++k1) {
-                            world.setBlockWithNotify(i, j + k1, k, Block.marble.blockID);
+                            world.setBlockWithNotify(i, j + k1, k, SignalIndustries.rootedFabric.blockID);
                         }
+                        world.setBlockWithNotify(i,j+l,k,SignalIndustries.dimensionalShardOre.blockID);
+                        //world.setBlockAndMetadataWithNotify()
                         return true;
                     } else {
                         return false;

@@ -16,7 +16,7 @@ public class RenderSky {
             float f2 = (float) vec3d.yCoord;
             float f3 = (float) vec3d.zCoord;
             float f10;
-            if ((Boolean) mc.gameSettings.anaglyph.value) {
+            if (mc.gameSettings.anaglyph.value) {
                 float f4 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
                 float f5 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
                 f10 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
@@ -92,13 +92,13 @@ public class RenderSky {
             GL11.glRotatef(0.0F, 0.0F, 0.0F, 1.0F);
             GL11.glRotatef(celestialAngle * 360.0F, 0.0F, 0.0F, 1.0F);
             f18 = 30.0F;
-            GL11.glBindTexture(3553, renderEngine.getTexture("/assets/signalindustries/misc/black_hole.png"));
+            /*GL11.glBindTexture(3553, renderEngine.getTexture("/assets/signalindustries/misc/black_hole.png"));
             tessellator.startDrawingQuads();
-            tessellator.addVertexWithUV((double) (-f18), 100.0, (double) (-f18), 0.0, 0.0);
-            tessellator.addVertexWithUV((double) f18, 100.0, (double) (-f18), 1.0, 0.0);
-            tessellator.addVertexWithUV((double) f18, 100.0, (double) f18, 1.0, 1.0);
-            tessellator.addVertexWithUV((double) (-f18), 100.0, (double) f18, 0.0, 1.0);
-            tessellator.draw();
+            tessellator.addVertexWithUV(-f18, 100.0, -f18, 0.0, 0.0);
+            tessellator.addVertexWithUV(f18, 100.0, -f18, 1.0, 0.0);
+            tessellator.addVertexWithUV(f18, 100.0, f18, 1.0, 1.0);
+            tessellator.addVertexWithUV(-f18, 100.0, f18, 0.0, 1.0);
+            tessellator.draw();*/
 
             GL11.glDisable(3553);
 
