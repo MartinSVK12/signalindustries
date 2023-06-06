@@ -4,7 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
+import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
@@ -41,7 +43,20 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
         if(itemstack.tag.getByte("charge") >= 100){
             itemstack.tag.setByte("charge", (byte) 0);
             world.playSoundAtEntity(entityplayer, "signalindustries.pulsar", 0.5F, 1.0f);
-            world.spawnParticle("pulse_shockwave", entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0, 0.0, 0.0);
+            if(getAbility(itemstack).contains("Warp")){
+                ExplosionEnergy ex = new ExplosionEnergy(world,entityplayer,entityplayer.posX,entityplayer.posY,entityplayer.posZ,3f);
+                ex.doExplosionA();
+                ex.doExplosionB(true,0.7f,0.0f,0.7f);
+                ((INBTCompound)itemstack.tag.getCompoundTag("inventory")).removeTag(String.valueOf(0));
+                NBTTagCompound warpPosition = getItemFromSlot(0,itemstack).getCompoundTag("position");
+                if(warpPosition.hasKey("x") && warpPosition.hasKey("y") && warpPosition.hasKey("z")){
+                    //TODO: Teleportation to encoded point
+                } else {
+                    SignalIndustries.usePortal(SignalIndustries.dimEternity.dimId);
+                }
+            } else {
+                world.spawnParticle("pulse_shockwave", entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0, 0.0, 0.0);
+            }
             return itemstack;
         }
         return itemstack;
@@ -57,6 +72,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
                 if(energy <= 0){
                     getFluidStack(0,itemstack).setInteger("amount",0);
                     itemstack.tag.setBoolean("charging",false);
+                    Minecraft.getMinecraft().ingameGUI.addChatMessage(ChatColor.white+"The Pulsar> "+ChatColor.red+" ERROR: "+ChatColor.white+"Ran out of energy while charging!");
                     return;
                 }
                 if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.itemID){
@@ -93,6 +109,10 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
 
     public int getItemIdFromSlot(int id, ItemStack stack){
         return stack.tag.getCompoundTag("inventory").getCompoundTag(String.valueOf(id)).getShort("id");
+    }
+
+    public NBTTagCompound getItemFromSlot(int id, ItemStack stack){
+        return stack.tag.getCompoundTag("inventory").getCompoundTag(String.valueOf(id));
     }
 
     public NBTTagCompound getFluidStack(int id, ItemStack stack){
