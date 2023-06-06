@@ -36,7 +36,7 @@ public abstract class EntityLivingMixin extends Entity {
                         fire = 0;
                     } else{
                         fire = 300;
-                        this.attackEntityFrom((Entity)null, 1, DamageType.FIRE);
+                        this.attackEntityFrom(null, 1, DamageType.FIRE);
                     }
                 }
             }

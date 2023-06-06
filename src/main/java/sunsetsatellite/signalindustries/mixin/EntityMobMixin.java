@@ -52,4 +52,12 @@ public class EntityMobMixin extends EntityLiving {
             }
         }
     }
+
+    @Override
+    public void onDeath(Entity entity) {
+        super.onDeath(entity);
+        if(rand.nextInt(64) == 0){
+            dropItem(SignalIndustries.monsterShard.itemID,1);
+        }
+    }
 }

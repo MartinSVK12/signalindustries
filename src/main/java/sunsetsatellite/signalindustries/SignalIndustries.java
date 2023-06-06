@@ -1,11 +1,13 @@
 package sunsetsatellite.signalindustries;
 
+import b100.utils.ReflectUtils;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.misc.Unsafe;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.mixin.accessors.PacketAccessor;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
@@ -19,24 +21,24 @@ import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilte
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
 import sunsetsatellite.signalindustries.blocks.*;
-import sunsetsatellite.signalindustries.dim.WeatherBloodMoon;
-import sunsetsatellite.signalindustries.dim.WeatherEclipse;
-import sunsetsatellite.signalindustries.dim.WeatherSolarApocalypse;
+import sunsetsatellite.signalindustries.dim.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
+import sunsetsatellite.signalindustries.mixin.accessors.WorldTypeAccessor;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
 import sunsetsatellite.signalindustries.tiles.*;
-import sunsetsatellite.signalindustries.util.Config;
+import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.sunsetutils.util.NBTEditCommand;
-import sunsetsatellite.signalindustries.util.RenderFluidInConduit;
-import sunsetsatellite.signalindustries.util.Tiers;
 import turniplabs.halplibe.helper.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -92,6 +94,10 @@ public class SignalIndustries implements ModInitializer {
     public static final Block prototypeCrystalCutter = BlockHelper.createBlock(MOD_ID,new BlockCrystalCutter(Config.getFromConfig("prototypeCrystalCutter",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.crystalCutter","prototypeblank.png","prototypeblank.png","crystalcutterprototypeinactive.png","prototypeblank.png","prototypeblank.png","prototypeblank.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] crystalCutterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"crystalcutterprototypeinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"crystalcutterprototypeactive.png")};
 
+    public static final Block basicCrystalChamber = BlockHelper.createBlock(MOD_ID,new BlockCrystalChamber(Config.getFromConfig("basicCrystalChamber",availableBlockId++),Tiers.BASIC,Material.rock),"basic.crystalChamber","basicblank.png","basicblank.png","basiccrystalchambersideinactive.png","basicblank.png","basicblank.png","basicblank.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] crystalChamberTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"basiccrystalchambersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"basiccrystalchambersideactive.png")};
+
+
     public static final Block basicInfuser = BlockHelper.createBlock(MOD_ID,new BlockInfuser(Config.getFromConfig("basicInfuser",availableBlockId++),Tiers.BASIC,Material.iron),"basic.infuser","basicblank.png","infuserbasicsideinactive.png",Block.soundMetalFootstep,2,3,0);
     public static final int[][] infuserTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"infuserbasicsideactive.png")};
 
@@ -102,6 +108,13 @@ public class SignalIndustries implements ModInitializer {
 
     public static final Block dimensionalAnchor = BlockHelper.createBlock(MOD_ID,new BlockDimensionalAnchor(Config.getFromConfig("dimensionalAnchor",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.dimensionalAnchor","dimensionanchortopinactive.png","reinforcedblank.png","dimensionalanchorinactive.png",Block.soundMetalFootstep,5f,20f,1);
     public static final int[][] anchorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchorinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionanchortopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"reinforcedblank.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchor.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionanchortop.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchorbottom.png")};
+
+    public static final Block dilithiumStabilizer = BlockHelper.createBlock(MOD_ID,new BlockDilithiumStabilizer(Config.getFromConfig("dilithiumStabilizer",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.dilithiumStabilizer","reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumstabilizersideinactive.png","dilithiumstabilizersideinactive.png","dilithiumstabilizersideinactive.png",Block.soundMetalFootstep,5f,20f,1);
+    public static final int[][] dilithStabilizerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideactive.png")};
+
+    public static final Block dilithiumBooster = BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster(Config.getFromConfig("dilithiumBooster",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.dilithiumBooster","reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png",Block.soundMetalFootstep,5f,20f,1);
+    public static final int[][] dilithBoosterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideactive.png")};
+
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -126,6 +139,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("steelPlate",availableItemId++)),"steelPlate","steelplate.png");
     public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyPlate",availableItemId++)),"reinforcedCrystalAlloyPlate","reinforcedcrystalalloyplate.png");
     public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("saturatedSignalumAlloyPlate",availableItemId++)),"saturatedSignalumAlloyPlate","saturatedsignalumalloyplate.png");
+    public static final Item dilithiumPlate = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("dilithiumPlate",availableItemId++)),"dilithiumPlate","dilithiumplate.png");
+
 
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("crystalAlloyIngot",availableItemId++)),"crystalAlloyIngot","crystalalloy.png");
     public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("reinforcedCrystalAlloyIngot",availableItemId++)),"reinforcedCrystalAlloyIngot","reinforcedcrystalalloy.png");
@@ -134,13 +149,16 @@ public class SignalIndustries implements ModInitializer {
     public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("diamondCuttingGear",availableItemId++)),"diamondCuttingGear","diamondcuttinggear.png");
 
     public static final Block portalEternity = BlockHelper.createBlock(MOD_ID,new BlockPortal(availableBlockId++,3,Block.bedrock.blockID,Block.fire.blockID),"eternityPortal","realityfabric.png",Block.soundGlassFootstep,1.0f,1.0f,1);
-    public static final Block realityFabric = BlockHelper.createBlock(MOD_ID,new Block(Config.getFromConfig("realityFabric",availableBlockId++),Material.ground),"realityFabric","realityfabric.png",Block.soundStoneFootstep,50f,50000f,0);
+    public static final Block realityFabric = BlockHelper.createBlock(MOD_ID,new BlockUndroppable(Config.getFromConfig("realityFabric",availableBlockId++),Material.ground),"realityFabric","realityfabric.png",Block.soundStoneFootstep,150f,50000f,0);
     public static final Block rootedFabric = BlockHelper.createBlock(MOD_ID,new Block(Config.getFromConfig("rootedFabric",availableBlockId++),Material.ground),"rootedFabric","rootedfabric.png",Block.soundStoneFootstep,50f,50000f,0);
     public static final Block dimensionalShardOre = BlockHelper.createBlock(MOD_ID,new BlockOreDimensionalShard(Config.getFromConfig("dimensionalShardOre",availableBlockId++)),"dimensionalShardOre","dimensionalshardore.png",Block.soundStoneFootstep,100f,50000f,1);
 
+    public static final Item monsterShard = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("monsterShard",availableItemId++)),"monsterShard","monstershard.png");
+    public static final Item evilCatalyst = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("evilCatalyst",availableItemId++)),"evilCatalyst","evilcatalyst.png").setMaxStackSize(4);
     public static final Item dimensionalShard = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("dimensionalShard",availableItemId++)),"dimensionalShard","dimensionalshard.png");
     public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(Config.getFromConfig("warpOrb",availableItemId++)),"warpOrb","warporb.png").setMaxStackSize(1);
-
+    public static final Item realityString = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("realityString",availableItemId++)),"realityString","stringofreality.png");
+    public static final Item dilithiumShard = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("dilithiumShard",availableItemId++)),"dilithiumShard","dilithiumshard.png");
 
     public static final Block eternalTreeLog = BlockHelper.createBlock(MOD_ID,new BlockEternalTreeLog(Config.getFromConfig("eternalTreeLog",availableBlockId++),Material.wood),"eternalTreeLog","eternaltreelogtop.png","eternaltreelog.png",Block.soundWoodFootstep, 75f,50000f,1);
 
@@ -156,6 +174,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("romChipProjectile",availableItemId++)),"romChipProjectile","chip1.png");
     public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("romChipBoost",availableItemId++)),"romChipBoost","chip2.png");
 
+    public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("energyCatalyst",availableItemId++)),"energyCatalyst","energycatalyst.png");
 
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
@@ -165,12 +184,15 @@ public class SignalIndustries implements ModInitializer {
     public static final Block inserter = BlockHelper.createBlock(MOD_ID,new BlockInserter(Config.getFromConfig("inserter",availableBlockId++),Material.rock),"inserter","prototypeblank.png","prototypeblank.png","inserterinput.png","prototypeblank.png","inserteroutput.png","prototypeblank.png",Block.soundStoneFootstep,1.0f,1.0f,0);
     public static final Block filter = BlockHelper.createBlock(MOD_ID,new BlockFilter(Config.getFromConfig("filter",availableBlockId++),Material.rock),"filter","filterred.png","filtergreen.png","filterblue.png","filtercyan.png","filtermagenta.png","filteryellow.png",Block.soundStoneFootstep,1.0f,1.0f,0);
 
+    public static final int[][] railTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumrailunpowered.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumrail.png")};
+    public static final Block dilithiumRail = BlockHelper.createBlock(MOD_ID,new BlockDilithiumRail(Config.getFromConfig("dilithiumRail",availableBlockId++),true),"dilithiumRail","dilithiumrailunpowered.png",Block.soundMetalFootstep,1,50f,0);
+
     public static final int[] energyOrbTex = TextureHelper.registerItemTexture(MOD_ID,"energyorb.png");
 
     public static Weather weatherBloodMoon = new WeatherBloodMoon(7).setLanguageKey("bloodMoon");
     public static Weather weatherEclipse = new WeatherEclipse(8).setLanguageKey("solarEclipse");
     public static Weather weatherSolarApocalypse = new WeatherSolarApocalypse(9).setLanguageKey("solarApocalypse");
-    public static BiomeGenBase biomeEternity; //= createBiome(16, BiomeGenEternity.class);
+    public static BiomeGenBase biomeEternity = createBiome(16, BiomeGenEternity.class);
 
     public static Dimension dimEternity;
     public static WorldType eternityWorld;
@@ -186,10 +208,11 @@ public class SignalIndustries implements ModInitializer {
         //PacketAccessor.callAddIdClassMapping(Config.getFromConfig("PacketPipeItemPos_ID",115),true,false, PacketPipeItemPos.class);
 
 
-        /*eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
-        dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);*/
+        eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
+        dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);
 
         CommandHelper.createCommand(new NBTEditCommand());
+        CommandHelper.createCommand(new StructureCommand("structure","struct"));
         EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
         EntityHelper.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.createEntity(EntityCrystal.class,new RenderSnowball(signalumCrystal.getIconFromDamage(0)),47,"signalumCrystal");
@@ -220,6 +243,15 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityInfuser.class,"Crystal Cutter");
         addToNameGuiMap("Infuser", GuiInfuser.class, TileEntityInfuser.class);
 
+        EntityHelper.createTileEntity(TileEntityBooster.class,"Dilithium Booster");
+        addToNameGuiMap("Dilithium Booster", GuiBooster.class, TileEntityBooster.class);
+
+        EntityHelper.createTileEntity(TileEntityCrystalChamber.class,"Crystal Chamber");
+        addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
+
+        EntityHelper.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
+        //TODO: Add nameGui mapping
+
         EntityHelper.createTileEntity(TileEntityFilter.class,"Filter");
         addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
 
@@ -231,27 +263,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
         EntityHelper.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
 
-        //auto-generated recipe code
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.ironPlateHammer, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.ingotIron,1,0),'4',new ItemStack(Item.stick,1,0),'5',new ItemStack(Item.ingotIron,1,0),'6',new ItemStack(Item.stick,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.diamondCuttingGear, 1, new Object[]{"012","345","678",'1',new ItemStack(Item.diamond,1,0),'3',new ItemStack(Item.diamond,1,0),'5',new ItemStack(Item.diamond,1,0),'7',new ItemStack(Item.diamond,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeMachineCore, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.stonePlate,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.stonePlate,1,0),'4',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'5',new ItemStack(SignalIndustries.stonePlate,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.stonePlate,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.cobblestonePlate, 1, new Object[]{"012","345","678",'4',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'7',new ItemStack(Block.cobbleStone,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.stonePlate, 1, new Object[]{"012","345","678",'4',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'7',new ItemStack(Block.stone,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.stonePlate,1,0),'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'2',new ItemStack(SignalIndustries.stonePlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(Block.glass,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.stonePlate,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'8',new ItemStack(SignalIndustries.stonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeFluidConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.stonePlate,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(Block.glass,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.stonePlate,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeFluidTank, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.stonePlate,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.stonePlate,1,0),'4',new ItemStack(Block.glass,1,0),'5',new ItemStack(SignalIndustries.stonePlate,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.stonePlate,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeExtractor, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(Block.furnaceStoneIdle,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeEnergyCell, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'1',new ItemStack(Block.glass,1,0),'2',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(Block.glass,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeCrusher, 1, new Object[]{"012","345","678",'0',new ItemStack(Item.flint,1,0),'1',new ItemStack(Item.flint,1,0),'2',new ItemStack(Item.flint,1,0),'3',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeAlloySmelter, 1, new Object[]{"012","345","678",'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'3',new ItemStack(Block.furnaceBlastIdle,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(Block.furnaceBlastIdle,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypePlateFormer, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.prototypeCrystalCutter, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.basicMachineCore, 1, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.steelPlate,1,0),'1',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'2',new ItemStack(SignalIndustries.steelPlate,1,0),'3',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'4',new ItemStack(SignalIndustries.signalumCrystal,1,0),'5',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'6',new ItemStack(SignalIndustries.steelPlate,1,0),'7',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'8',new ItemStack(SignalIndustries.steelPlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.basicConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeConduit,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
-        RecipeHelper.Crafting.createRecipe(SignalIndustries.basicFluidConduit, 4, new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.steelPlate,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeFluidConduit,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.steelPlate,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
-        //auto-generated recipe code
-
-
+        //crafting recipes in RecipeHandlerCraftingSI
 
         Config.init();
     }
@@ -288,19 +300,71 @@ public class SignalIndustries implements ModInitializer {
         }
     }
 
-    /*public static WorldType createWorldType(int id, String name){
-        WorldType[] extendedList = (WorldType[]) Arrays.copyOf(WorldType.worldTypes, WorldType.worldTypes.length + 1);
+    public static void spawnParticle(EntityFX particle){
+        if (Minecraft.getMinecraft() == null || Minecraft.getMinecraft().renderViewEntity == null || Minecraft.getMinecraft().effectRenderer == null)
+            return;
+        double d6 = Minecraft.getMinecraft().renderViewEntity.posX - particle.posX;
+        double d7 = Minecraft.getMinecraft().renderViewEntity.posY - particle.posY;
+        double d8 = Minecraft.getMinecraft().renderViewEntity.posZ - particle.posZ;
+        double d9 = 16.0D;
+        if (d6 * d6 + d7 * d7 + d8 * d8 > d9 * d9)
+            return;
+        Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+    }
+
+    public static WorldType createWorldType(int id, String name){
+        WorldType[] extendedList = Arrays.copyOf(WorldType.worldTypes, WorldType.worldTypes.length + 1);
         WorldTypeAccessor.setWorldTypes(extendedList);
 
         return new WorldType(id,name);
 
     }
 
-    public static BiomeGenBase createBiome(int id, Class<? extends BiomeGenBase> clazz){
-        BiomeGenBase[] extendedList = (BiomeGenBase[]) Arrays.copyOf(BiomeGenBase.biomeList, BiomeGenBase.biomeList.length + 1);
-        BiomeGenBaseAccessor.setBiomeList(extendedList);
-        return new BiomeGenEternity(id);
-        //return new WorldType(id,name);
-    }*/
+    public static BiomeGenBase createBiome(int id, Class<? extends BiomeGenPublic> clazz){
+        BiomeGenBase[] extendedList = Arrays.copyOf(BiomeGenBase.biomeList, BiomeGenBase.biomeList.length + 1);
+        Field biomeListField = ReflectUtils.getField(clazz,"biomeList");
+        try {
+            //lord forgive me for what im about to do
+            Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
+            unsafeField.setAccessible(true);
+            Unsafe unsafe = (Unsafe) unsafeField.get(null);
+            Object staticFieldBase = unsafe.staticFieldBase(biomeListField);
+            long staticFieldOffset = unsafe.staticFieldOffset(biomeListField);
+            unsafe.putObject(staticFieldBase, staticFieldOffset, extendedList);
+            return clazz.getConstructor(int.class).newInstance(id);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |
+                 NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void usePortal(int dim) {
+        Dimension lastDim = Dimension.dimensionList[Minecraft.getMinecraft().thePlayer.dimension];
+        Dimension newDim = Dimension.dimensionList[dim];
+        System.out.println("Switching to dimension \"" + newDim.getName() + "\"!!");
+        Minecraft.getMinecraft().thePlayer.dimension = dim;
+        Minecraft.getMinecraft().theWorld.setEntityDead(Minecraft.getMinecraft().thePlayer);
+        Minecraft.getMinecraft().thePlayer.isDead = false;
+        double d = Minecraft.getMinecraft().thePlayer.posX;
+        double d1 = Minecraft.getMinecraft().thePlayer.posZ;
+        double newY = Minecraft.getMinecraft().thePlayer.posY;
+        d *= Dimension.getCoordScale(lastDim, newDim);
+        d1 *= Dimension.getCoordScale(lastDim, newDim);
+        Minecraft.getMinecraft().thePlayer.setLocationAndAngles(d, newY, d1, Minecraft.getMinecraft().thePlayer.rotationYaw, Minecraft.getMinecraft().thePlayer.rotationPitch);
+        if (Minecraft.getMinecraft().thePlayer.isEntityAlive())
+            Minecraft.getMinecraft().theWorld.updateEntityWithOptionalForce(Minecraft.getMinecraft().thePlayer, false);
+        World world = null;
+        world = new World(Minecraft.getMinecraft().theWorld, newDim);
+        if (newDim == lastDim.homeDim) {
+            Minecraft.getMinecraft().changeWorld(world, "Leaving " + lastDim.getName(), Minecraft.getMinecraft().thePlayer);
+        } else {
+            Minecraft.getMinecraft().changeWorld(world, "Entering " + newDim.getName(), Minecraft.getMinecraft().thePlayer);
+        }
+        Minecraft.getMinecraft().thePlayer.worldObj = Minecraft.getMinecraft().theWorld;
+        if (Minecraft.getMinecraft().thePlayer.isEntityAlive()) {
+            Minecraft.getMinecraft().thePlayer.setLocationAndAngles(d, newY, d1, Minecraft.getMinecraft().thePlayer.rotationYaw, Minecraft.getMinecraft().thePlayer.rotationPitch);
+            Minecraft.getMinecraft().theWorld.updateEntityWithOptionalForce(Minecraft.getMinecraft().thePlayer, false);
+        }
+    }
 
 }

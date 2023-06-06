@@ -1,13 +1,17 @@
 package sunsetsatellite.signalindustries.blocks;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiInfuser;
+import sunsetsatellite.signalindustries.tiles.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
+import sunsetsatellite.signalindustries.util.BlockInstance;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,12 +23,17 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
 
     @Override
     protected TileEntity getBlockEntity() {
-        return new TileEntityInfuser();
+        return new TileEntityDimensionalAnchor();
+    }
+
+    @Override
+    public void onBlockAdded(World world, int i, int j, int k) {
+        super.onBlockAdded(world, i, j, k);
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
+        TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -47,11 +56,11 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
                         }
 
                         itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (double) ((float) i + f), (double) ((float) j + f1), (double) ((float) k + f2), new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (double) ((float) random.nextGaussian() * f3);
-                        entityitem.motionY = (double) ((float) random.nextGaussian() * f3 + 0.2F);
-                        entityitem.motionZ = (double) ((float) random.nextGaussian() * f3);
+                        entityitem.motionX = (float) random.nextGaussian() * f3;
+                        entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float) random.nextGaussian() * f3;
                         world.entityJoinedWorld(entityitem);
                     }
                 }
@@ -64,22 +73,29 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        world.setBlockMetadata(i,j,k,3);
         if(world.isMultiplayerAndNotHost)
         {
             return true;
         } else
         {
-            TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
+            TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
+            if(tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("Multiblock complete!");
+                //TODO: Open machine if multiblock valid
+            } else {
+                entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }
+            /*if(tile != null) {
+                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
+            }*/
             return true;
         }
     }
 
     @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
-        TileEntityInfuser tile = (TileEntityInfuser) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);

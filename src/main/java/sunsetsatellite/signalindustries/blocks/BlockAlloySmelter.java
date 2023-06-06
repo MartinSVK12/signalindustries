@@ -47,11 +47,11 @@ public class BlockAlloySmelter extends BlockContainerTiered{
                         }
 
                         itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (double) ((float) i + f), (double) ((float) j + f1), (double) ((float) k + f2), new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (double) ((float) random.nextGaussian() * f3);
-                        entityitem.motionY = (double) ((float) random.nextGaussian() * f3 + 0.2F);
-                        entityitem.motionZ = (double) ((float) random.nextGaussian() * f3);
+                        entityitem.motionX = (float) random.nextGaussian() * f3;
+                        entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float) random.nextGaussian() * f3;
                         world.entityJoinedWorld(entityitem);
                     }
                 }
@@ -84,7 +84,7 @@ public class BlockAlloySmelter extends BlockContainerTiered{
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
         this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
+        this.atlasIndices[4] = texCoordToIndex(northX, northY); //front face
         this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);

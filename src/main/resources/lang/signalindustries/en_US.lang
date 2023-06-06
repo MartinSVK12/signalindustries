@@ -38,6 +38,8 @@ item.signalindustries.saturatedSignalumAlloyPlate.name=Saturated Signalum Alloy 
 item.signalindustries.saturatedSignalumAlloyPlate.desc=A plate made out of [Saturated Signalum Alloy].
 item.signalindustries.steelPlate.name=Steel Plate
 item.signalindustries.steelPlate.desc=A plate made out of steel.
+item.signalindustries.dilithiumPlate.name=Dilithium Plate
+item.signalindustries.dilithiumPlate.desc=A plate made out of [Dilithium Shards].
 
 item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
 item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.
@@ -57,13 +59,24 @@ item.signalindustries.romChipBoost.name=ROM Chip: Boost
 item.signalindustries.romChipBoost.desc=Contains code for a [Trigger] ability.
 
 item.signalindustries.pulsar.name=The Pulsar
-item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is using high amounts of [S. Energy] to create powerful shockwaves.
+item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is using and releasing huge amounts of [S. Energy] to create powerful shockwaves.
 
 item.signalindustries.dimensionalShard.name=Dimensional Shard
-item.signalindustries.dimensionalShard.desc=Shows reflections of many worlds.
+item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
+item.signalindustries.dilithiumShard.name=Dilithium Shard
+item.signalindustries.dilithiumShard.desc=An extraterrestrial mineral used in transportation and teleportation equipment.
+item.signalindustries.realityString.name=String of Reality
+item.signalindustries.realityString.desc=An individual thread of the [Fabric of Reality].
+item.signalindustries.monsterShard.name=Monster Shard
+item.signalindustries.monsterShard.desc=Horrendous and corrupted.
+item.signalindustries.evilCatalyst.name=Evil Catalyst
+item.signalindustries.evilCatalyst.desc=A deep evil sealed within, there's probably a machine to could unleash it.
+
+item.signalindustries.energyCatalyst.name=Energy Catalyst
+item.signalindustries.energyCatalyst.desc=You've managed to fend off the monsters and release the evil, now all that remains here is your power.
 
 item.signalindustries.warpOrb.name=Warp Orb
-item.signalindustries.warpOrb.desc=A physical encoding of a point in space.
+item.signalindustries.warpOrb.desc=Contains a physical encoding of a point in space. What might happen if it were broken, if that's even possible, is unknown.
 
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
 tile.signalindustries.signalumOre.desc=[Raw Signalum Crystal] encased in rock.
@@ -129,11 +142,12 @@ tile.signalindustries.awakened.wrathBeacon.desc=Call upon the cliffs of hell! Ac
 tile.signalindustries.reinforced.dimensionalAnchor.name=Dimensional Anchor
 tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for [Warp Orbs] to anchor to.
 
-
-event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
-event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!.
-event.signalindustries.awakenedWrathBeaconActivated=You have made a poor decision, and now you MUST PAY! AWAKENED WRATH BEACON ACTIVATED!
-event.signalindustries.bloodMoon=A blood moon is rising!
+tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
+tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still.
+tile.signalindustries.reinforced.dilithiumBooster.name=Dilithium Booster
+tile.signalindustries.reinforced.dilithiumBooster.desc=[Dilithium] go brrrrrrrr. Speeds up an adjacent machine that it points to.
+tile.signalindustries.dilithiumRail.name=Dilithium Rail
+tile.signalindustries.dilithiumRail.desc=Hyperspeed!
 
 tile.signalindustries.prototype.alloySmelter.name=Prototype Alloy Smelter
 tile.signalindustries.prototype.alloySmelter.desc=Combines materials with heat.
@@ -145,6 +159,11 @@ tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressi
 
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
+tile.signalindustries.basic.crystalCutter.name=Basic Crystal Cutter
+tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut pure [S. Crystals] into two!
+
+tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
+tile.signalindustries.basic.crystalChamber.desc=Combines the powers of an [Alloy Smelter] and a [Plate Former] to fuse 2 [S. Crystals] together!
 
 tile.signalindustries.basic.infuser.name=Basic Infuser
 tile.signalindustries.basic.infuser.desc=Infuses materials into other materials.
@@ -153,19 +172,21 @@ tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
 
 tile.signalindustries.eternityPortal.name=Eternity Portal
-tile.signalindustries.eternityPortal.desc=
+tile.signalindustries.eternityPortal.desc=Development utility.
 
 tile.signalindustries.realityFabric.name=Fabric of Reality
-tile.signalindustries.realityFabric.desc=
+tile.signalindustries.realityFabric.desc=Holds reality together.
 tile.signalindustries.rootedFabric.name=Rooted Fabric
-tile.signalindustries.rootedFabric.desc=
+tile.signalindustries.rootedFabric.desc=Roots of a certain primordial creation have found their way around the [Fabric of Reality] but why?
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
-tile.signalindustries.eternalTreeLog.desc=
+tile.signalindustries.eternalTreeLog.desc=Kind of weird for a "tree" to exist in the middle of literally nowhere.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
-tile.signalindustries.dimensionalShardOre.desc=
+tile.signalindustries.dimensionalShardOre.desc=Sometimes between the fibers of existence, the crystallization of a world can be found.
 
 tile.signalindustries.glowingObsidian.name=Glowing Obsidian
-tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal, was used in ancient rituals involving the Nether..
+tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal.
+tile.signalindustries.brokenMobSpawner.name=Broken Mob Spawner
+tile.signalindustries.brokenMobSpawner.desc=Whatever black magic powered this, it is gone now.
 
 tile.signalindustries.itemPipe.name=Item Pipe
 tile.signalindustries.itemPipe.desc=Transports items, duh.
@@ -181,3 +202,10 @@ weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
 weather.solarApocalypse.name=Solar Apocalypse
 bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
+
+event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
+event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!.
+event.signalindustries.awakenedWrathBeaconActivated=A poor decision has been made.. An awakened Wrath Beacon has been activated!!!
+event.signalindustries.bloodMoon=A blood moon is rising!
+event.signalindustries.solarEclipse=A solar eclipse is happening!
+event.signalindustries.invalidMultiblock=Multiblock imcomplete or invalid!

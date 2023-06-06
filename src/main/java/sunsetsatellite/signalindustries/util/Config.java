@@ -61,7 +61,7 @@ public class Config {
                     continue; // Ignore comments
                 }
                 else if (s.contains("=")) {
-                    String as[] = s.split("=");
+                    String[] as = s.split("=");
                     String name = as[0];
                     int id = Integer.parseInt(as[1]);
                     if (id > 16384){

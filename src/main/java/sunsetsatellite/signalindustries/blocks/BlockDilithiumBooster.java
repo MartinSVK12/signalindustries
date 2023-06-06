@@ -2,32 +2,32 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.containers.ContainerBooster;
+import sunsetsatellite.signalindustries.containers.ContainerInfuser;
+import sunsetsatellite.signalindustries.gui.GuiBooster;
+import sunsetsatellite.signalindustries.gui.GuiInfuser;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.tiles.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.Tiers;
-import sunsetsatellite.signalindustries.containers.ContainerExtractor;
-import sunsetsatellite.signalindustries.gui.GuiExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockExtractor extends BlockContainerTiered{
-    public BlockExtractor(int i, Tiers tier, Material material) {
+public class BlockDilithiumBooster extends BlockContainerTiered {
+    public BlockDilithiumBooster(int i, Tiers tier, Material material) {
         super(i, tier, material);
-        textures = SignalIndustries.extractorTex;
     }
 
-    private static int[][] textures;
-    
     @Override
     protected TileEntity getBlockEntity() {
-        return new TileEntityExtractor();
+        return new TileEntityBooster();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+        TileEntityBooster tile = (TileEntityBooster) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -72,9 +72,9 @@ public class BlockExtractor extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+            TileEntityBooster tile = (TileEntityBooster) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiBooster(entityplayer.inventory, tile),new ContainerBooster(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
@@ -82,9 +82,8 @@ public class BlockExtractor extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
-        TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityBooster tile = (TileEntityBooster) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
-        textures = SignalIndustries.extractorTex;
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
         this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
@@ -94,19 +93,18 @@ public class BlockExtractor extends BlockContainerTiered{
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUp[6 * meta + side];
-        int offset = (2*tier.ordinal())+1;
-        if(tier.ordinal() == 0){
-            offset = 0;
-        }
-        if(index > 1 && index < 6){
+        if(index == 4){
             if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(textures[2+offset][0],textures[2+offset][1]);
-            } else if (tile.getStackInSlot(0) != null) {
-                return this.atlasIndices[index] = texCoordToIndex(textures[1+offset][0],textures[1+offset][1]);
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[1][0],SignalIndustries.dilithBoosterTex[1][1]);
             }
-            return this.atlasIndices[index] = texCoordToIndex(textures[offset][0],textures[offset][1]);
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[0][0],SignalIndustries.dilithBoosterTex[0][1]);
+        }
+        if(index == 2 || index == 3 || index == 5){
+            if(tile.isBurning()){
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[3][0],SignalIndustries.dilithBoosterTex[3][1]);
+            }
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[2][0],SignalIndustries.dilithBoosterTex[2][1]);
         }
         return this.atlasIndices[index];
     }
-
 }

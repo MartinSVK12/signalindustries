@@ -49,6 +49,6 @@ public class ContainerRecipeMaker extends Container
         return tile.canInteractWith(entityplayer);
     }
 
-    private TileEntityRecipeMaker tile;
+    private final TileEntityRecipeMaker tile;
 
 }

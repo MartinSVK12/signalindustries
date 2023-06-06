@@ -28,9 +28,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
         {
             TileEntityWrathBeacon tile = (TileEntityWrathBeacon) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.LOGGER.info(String.valueOf(tile.active));
                 tile.activate();
-
             }
             return true;
         }
