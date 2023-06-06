@@ -115,6 +115,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Block dilithiumBooster = BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster(Config.getFromConfig("dilithiumBooster",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.dilithiumBooster","reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png",Block.soundMetalFootstep,5f,20f,1);
     public static final int[][] dilithBoosterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideactive.png")};
 
+    public static final Block prototypePump = BlockHelper.createBlock(MOD_ID,new BlockPump(Config.getFromConfig("prototypePump",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.pump","prototypefluidconnection.png","prototypeblank.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png",Block.soundStoneFootstep,2,3,0);
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -248,6 +249,9 @@ public class SignalIndustries implements ModInitializer {
 
         EntityHelper.createTileEntity(TileEntityCrystalChamber.class,"Crystal Chamber");
         addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
+
+        EntityHelper.createTileEntity(TileEntityPump.class,"Pump");
+        addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
 
         EntityHelper.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
         //TODO: Add nameGui mapping

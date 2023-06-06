@@ -168,6 +168,9 @@ tile.signalindustries.basic.crystalChamber.desc=Combines the powers of an [Alloy
 tile.signalindustries.basic.infuser.name=Basic Infuser
 tile.signalindustries.basic.infuser.desc=Infuses materials into other materials.
 
+tile.signalindustries.prototype.pump.name=Prototype Pump
+tile.signalindustries.prototype.pump.desc=Extracts fluids from the world. This simple pump can only pump out water.
+
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
 

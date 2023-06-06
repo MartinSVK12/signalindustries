@@ -128,7 +128,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
             return false;
         } else {
             FluidStack stack = recipes.getResult(itemContents[0].itemID);
-            return stack != null && (fluidContents[0] == null || (fluidContents[0].isFluidEqual(stack) && (fluidContents[0].amount < fluidCapacity[0])));
+            return stack != null && (fluidContents[0] == null || (fluidContents[0].isFluidEqual(stack) && (fluidContents[0].amount + stack.amount <= fluidCapacity[0])));
         }
     }
 
