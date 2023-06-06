@@ -21,7 +21,7 @@ public class EntityDustCloudFX extends EntityFX {
 			double d2 = this.posX + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;
 			double d4 = this.posY + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;
 			double d6 = this.posZ + (this.rand.nextDouble() - this.rand.nextDouble()) * 4.0D;
-			this.worldObj.spawnParticle("reddust", d2, d4, d6, (double)((float)this.timeSinceStart / (float)this.maximumTime), 0.0D, 0.0D);
+			this.worldObj.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D);
 		}
 
 		++this.timeSinceStart;

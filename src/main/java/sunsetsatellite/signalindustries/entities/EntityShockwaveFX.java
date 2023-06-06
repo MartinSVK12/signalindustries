@@ -9,7 +9,7 @@ import java.util.List;
 public class EntityShockwaveFX extends EntityFX {
     private int timeSinceStart = 0;
     private int maximumTime = 0;
-    private EntityLiving creator;
+    private final EntityLiving creator;
 
     public EntityShockwaveFX(World world1, double d2, double d4, double d6, double d8, double d10, double d12, EntityLiving creator) {
         super(world1, d2, d4, d6, 0.0D, 0.0D, 0.0D);
@@ -25,7 +25,7 @@ public class EntityShockwaveFX extends EntityFX {
             double d2 = this.posX + (this.rand.nextDouble() - this.rand.nextDouble()) * timeSinceStart;
             double d4 = this.posY - 0.3;
             double d6 = this.posZ + (this.rand.nextDouble() - this.rand.nextDouble()) * timeSinceStart;
-            this.worldObj.spawnParticle("reddust", d2, d4, d6, (double)((float)this.timeSinceStart / (float)this.maximumTime), 0.0D, 0.0D);
+            this.worldObj.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D);
         }
 
         Vec3D vec3d = Vec3D.createVector(this.posX, this.posY, this.posZ);

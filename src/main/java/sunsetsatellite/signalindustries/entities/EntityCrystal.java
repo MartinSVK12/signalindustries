@@ -36,15 +36,15 @@ public class EntityCrystal extends Entity {
         this.field_20051_g = entityliving;
         this.setSize(0.25F, 0.25F);
         this.setLocationAndAngles(entityliving.posX, entityliving.posY + (double)entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * 0.16F);
+        this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * 0.16F;
         this.posY -= 0.10000000149011612;
-        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * 0.16F);
+        this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * 0.16F;
         this.setPosition(this.posX, this.posY, this.posZ);
         this.yOffset = 0.0F;
         float f = 0.4F;
-        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f);
-        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f);
-        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * 3.141593F) * f);
+        this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f;
+        this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f;
+        this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * 3.141593F) * f;
         this.setCrystalHeading(this.motionX, this.motionY, this.motionZ, 1.5F, 1.0F);
     }
 
@@ -58,21 +58,21 @@ public class EntityCrystal extends Entity {
 
     public void setCrystalHeading(double d, double d1, double d2, float f, float f1) {
         float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
-        d /= (double)f2;
-        d1 /= (double)f2;
-        d2 /= (double)f2;
+        d /= f2;
+        d1 /= f2;
+        d2 /= f2;
         d += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
         d1 += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
         d2 += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
-        d *= (double)f;
-        d1 *= (double)f;
-        d2 *= (double)f;
+        d *= f;
+        d1 *= f;
+        d2 *= f;
         this.motionX = d;
         this.motionY = d1;
         this.motionZ = d2;
         float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
         this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(d, d2) * 180.0 / 3.1415927410125732);
-        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, (double)f3) * 180.0 / 3.1415927410125732);
+        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, f3) * 180.0 / 3.1415927410125732);
         this.field_20050_h = 0;
     }
 
@@ -83,7 +83,7 @@ public class EntityCrystal extends Entity {
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
             float f = MathHelper.sqrt_double(d * d + d2 * d2);
             this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(d, d2) * 180.0 / 3.1415927410125732);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, (double)f) * 180.0 / 3.1415927410125732);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, f) * 180.0 / 3.1415927410125732);
         }
 
     }
@@ -109,9 +109,9 @@ public class EntityCrystal extends Entity {
             }
 
             this.field_20052_f = false;
-            this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-            this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-            this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+            this.motionX *= this.rand.nextFloat() * 0.2F;
+            this.motionY *= this.rand.nextFloat() * 0.2F;
+            this.motionZ *= this.rand.nextFloat() * 0.2F;
             this.field_20050_h = 0;
             this.field_20049_i = 0;
         } else {
@@ -136,7 +136,7 @@ public class EntityCrystal extends Entity {
                 Entity entity1 = (Entity)list.get(i1);
                if (entity1.canBeCollidedWith() && (entity1 != this.field_20051_g || this.field_20049_i >= 5)) {
                     float f4 = 0.3F;
-                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand((double)f4, (double)f4, (double)f4);
+                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand(f4, f4, f4);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb.func_1169_a(vec3d, vec3d1);
                     if (movingobjectposition1 != null) {
                         double d1 = vec3d.distanceTo(movingobjectposition1.hitVec);
@@ -211,7 +211,7 @@ public class EntityCrystal extends Entity {
         float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
         this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0 / 3.1415927410125732);
 
-        for(this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0 / 3.1415927410125732); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+        for(this.rotationPitch = (float)(Math.atan2(this.motionY, f) * 180.0 / 3.1415927410125732); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
         }
 
         while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
@@ -239,10 +239,10 @@ public class EntityCrystal extends Entity {
             f1 = 0.8F;
         }
 
-        this.motionX *= (double)f1;
-        this.motionY *= (double)f1;
-        this.motionZ *= (double)f1;
-        this.motionY -= (double)f2;
+        this.motionX *= f1;
+        this.motionY *= f1;
+        this.motionZ *= f1;
+        this.motionY -= f2;
         this.setPosition(this.posX, this.posY, this.posZ);
     }
 

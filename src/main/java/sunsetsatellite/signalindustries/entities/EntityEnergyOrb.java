@@ -131,6 +131,10 @@ public class EntityEnergyOrb extends Entity {
     }
 
     public void onUpdate() {
+        ++this.ticksInAir;
+        if(ticksInAir > 1200){
+            this.setEntityDead();
+        }
         super.onUpdate();
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
             float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -156,7 +160,7 @@ public class EntityEnergyOrb extends Entity {
             int k = this.worldObj.getBlockMetadata(this.xTile, this.yTile, this.zTile);
             if (j == this.inTile && k == this.field_28019_h) {
                 ++this.ticksInGround;
-                if (this.ticksInGround == 1200) {
+                if (this.ticksInGround > 1200) {
                     this.setEntityDead();
                 }
 
@@ -165,16 +169,12 @@ public class EntityEnergyOrb extends Entity {
                 this.motionX *= this.rand.nextFloat() * 0.2F;
                 this.motionY *= this.rand.nextFloat() * 0.2F;
                 this.motionZ *= this.rand.nextFloat() * 0.2F;
-                this.ticksInGround = 0;
-                this.ticksInAir = 0;
             }
         } else {
             /*if (this instanceof EntityArrowGolden) {
                 this.worldObj.spawnParticle("arrowtrail", this.posX, this.posY, this.posZ, this.motionX * 0.05000000074505806, this.motionY * 0.05000000074505806 - 0.10000000149011612, this.motionZ * 0.05000000074505806);
                 this.worldObj.spawnParticle("arrowtrail", this.posX + this.motionX * 0.5, this.posY + this.motionY * 0.5, this.posZ + this.motionZ * 0.5, this.motionX * 0.05000000074505806, this.motionY * 0.05000000074505806 - 0.10000000149011612, this.motionZ * 0.05000000074505806);
             }*/
-
-            ++this.ticksInAir;
             Vec3D vec3d = Vec3D.createVector(this.posX, this.posY, this.posZ);
             Vec3D vec3d1 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             MovingObjectPosition movingobjectposition = this.worldObj.func_28105_a(vec3d, vec3d1, false, true);
@@ -224,7 +224,6 @@ public class EntityEnergyOrb extends Entity {
                         this.motionZ *= -0.10000000149011612;
                         this.rotationYaw += 180.0F;
                         this.prevRotationYaw += 180.0F;
-                        this.ticksInAir = 0;
                     }
                 } else {
                     this.xTile = movingobjectposition.blockX;
