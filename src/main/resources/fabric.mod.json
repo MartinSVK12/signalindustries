@@ -18,14 +18,14 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "sunsetsatellite.signalindustries.SignalIndustries"
-    ],
     "fluidapi": [
       "sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin"
     ],
     "guidebookpp": [
       "sunsetsatellite.signalindustries.api.impl.guidebookpp.SignalIndustriesGuidebookPlugin"
+    ],
+    "main": [
+      "sunsetsatellite.signalindustries.SignalIndustries"
     ]
   },
   "mixins": [

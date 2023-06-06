@@ -87,11 +87,11 @@ dependencies {
 		exclude(group: 'objects', module: 'client')
 	}*/
 
-	modImplementation "fluidapi:fluidapi:1.4"
+	modImplementation "fluidapi:fluidapi:1.4.1"
 
 	modImplementation "sunsetutils:sunsetutils:1.1"
 
-	modImplementation "guidebookpp:guidebookpp:1.4.1"
+	modImplementation "guidebookpp:guidebookpp:1.5.1"
 
 	modImplementation("org.apache.commons:commons-lang3:3.12.0")
 	/*modImplementation("com.github.MartinSVK12:retrostorage:28d755a047"){
