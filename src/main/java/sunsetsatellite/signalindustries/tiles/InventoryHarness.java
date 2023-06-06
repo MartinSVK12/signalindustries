@@ -5,7 +5,7 @@ import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 
 public class InventoryHarness extends ItemInventoryFluid {
 
-    private ItemStack armor;
+    private final ItemStack armor;
 
     public InventoryHarness(ItemStack armor) {
         super(armor);

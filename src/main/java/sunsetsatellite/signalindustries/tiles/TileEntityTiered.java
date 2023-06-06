@@ -10,6 +10,7 @@ public class TileEntityTiered extends TileEntityFluidItemContainer {
 
     @Override
     public void updateEntity() {
+        super.updateEntity();
         if(worldObj != null){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }

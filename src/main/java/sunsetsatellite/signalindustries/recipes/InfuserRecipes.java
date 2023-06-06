@@ -10,11 +10,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import java.util.*;
 
 public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>,ItemStack> {
-    private static final InfuserRecipes instance = new InfuserRecipes();
-
-    public static InfuserRecipes getInstance() {
-        return instance;
-    }
+    public static final InfuserRecipes instance = new InfuserRecipes();
 
     private InfuserRecipes() {
         ArrayList<Object> list = new ArrayList<>();

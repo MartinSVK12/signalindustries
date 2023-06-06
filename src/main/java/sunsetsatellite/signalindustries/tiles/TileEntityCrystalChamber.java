@@ -1,40 +1,39 @@
 package sunsetsatellite.signalindustries.tiles;
 
-import net.minecraft.src.*;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockFluid;
+import net.minecraft.src.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.BasicAlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.CrystalChamberRecipes;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
-import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityCrystalCutter extends TileEntityTieredMachine implements IBoostable {
+public class TileEntityCrystalChamber extends TileEntityTieredMachine implements IBoostable {
 
-    public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
+    public CrystalChamberRecipes recipes = CrystalChamberRecipes.instance;
 
-    public TileEntityCrystalCutter(){
+    public TileEntityCrystalChamber(){
         cost = 80;
-        fluidContents = new FluidStack[2];
-        fluidCapacity = new int[2];
-        fluidCapacity[0] = 2000;
-        fluidCapacity[1] = 1000;
+        progressMaxTicks = 800;
+        fluidContents = new FluidStack[1];
+        fluidCapacity = new int[1];
+        fluidCapacity[0] = 4000;
+        itemContents = new ItemStack[3];
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
-        acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
     }
     @Override
     public String getInvName() {
-        return "Crystal Cutter";
+        return "Crystal Chamber";
     }
 
     @Override
@@ -42,6 +41,19 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         super.updateEntity();
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            switch (block.tier) {
+                case BASIC:
+                    recipes = CrystalChamberRecipes.instance;
+                    break;
+                case PROTOTYPE:
+                case REINFORCED:
+                case AWAKENED:
+                    break;
+            }
+            cost = 40 * (block.tier.ordinal()+1);
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
@@ -49,7 +61,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         if(itemContents[0] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 200 / speedMultiplier;
+            progressMaxTicks = 800 / speedMultiplier;
         }
         if(!worldObj.isMultiplayerAndNotHost){
             if (progressTicks == 0 && canProcess()){
@@ -79,7 +91,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+            progressMaxTicks = 800 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {
@@ -92,11 +104,13 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
 
     public void processItem(){
         if(canProcess()){
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            ItemStack stack = recipes.getResult(list);
-            Map.Entry<ArrayList<Object>, ItemStack> recipe = recipes.getValidRecipe(list);
+            int size1 = this.itemContents[0].tag.getInteger("size");
+            int sat1 = this.itemContents[0].tag.getInteger("saturation");
+            int size2 = this.itemContents[2].tag.getInteger("size");
+            int sat2 = this.itemContents[2].tag.getInteger("saturation");
+            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
+            stack.tag.setInteger("size",size1+size2);
+            stack.tag.setInteger("saturation",sat1+sat2);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -104,27 +118,27 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
             }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
+            } else if(this.itemContents[2].getItem().hasContainerItem()){
+                this.itemContents[2] = new ItemStack(this.itemContents[2].getItem().getContainerItem());
             } else {
-                this.itemContents[0].stackSize -= ((ItemStack)recipe.getKey().get(1)).stackSize;
-                this.fluidContents[1].amount -= ((FluidStack)recipe.getKey().get(0)).amount;
+                --this.itemContents[0].stackSize;
+                --this.itemContents[2].stackSize;
             }
             if(this.itemContents[0].stackSize <= 0) {
                 this.itemContents[0] = null;
             }
-            if(this.fluidContents[1].amount <= 0) {
-                this.fluidContents[1] = null;
+            if(this.itemContents[2].stackSize <= 0) {
+                this.itemContents[2] = null;
             }
         }
     }
 
     private boolean canProcess() {
-        if(itemContents[0] == null || fluidContents[1] == null) {
+        //TODO: Limit how big crystals can get
+        if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            ItemStack stack = recipes.getResult(list);
+            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

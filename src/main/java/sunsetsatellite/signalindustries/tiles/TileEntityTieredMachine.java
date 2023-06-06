@@ -4,6 +4,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -24,6 +25,26 @@ public class TileEntityTieredMachine extends TileEntityTiered {
     //TODO: Generify code for all machines
     public boolean isBurning(){
         return fuelBurnTicks > 0;
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null){
+            speedMultiplier = block.tier.ordinal()+1;
+            for(Direction dir : Direction.values()){
+                TileEntity tile = dir.getTileEntity(worldObj,this);
+                if(tile instanceof TileEntityBooster){
+                    if(((TileEntityBooster) tile).isBurning()){
+                        int meta = tile.getBlockMetadata();
+                        if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
+                            speedMultiplier = block.tier.ordinal()+2;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void extractFluids(){

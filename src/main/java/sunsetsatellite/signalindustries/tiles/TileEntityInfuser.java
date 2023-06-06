@@ -4,6 +4,7 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -15,18 +16,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityInfuser extends TileEntityFluidItemContainer {
+public class TileEntityInfuser extends TileEntityTieredMachine implements IBoostable {
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 400;
-    public int efficiency = 1;
-    public int speedMultiplier = 1;
-    public int cost = 80;
-    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.getInstance();
+    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
 
     public TileEntityInfuser(){
+        cost = 80;
+        progressMaxTicks = 400;
         fluidContents = new FluidStack[2];
         fluidCapacity = new int[2];
         fluidCapacity[0] = 2000;
@@ -45,51 +41,41 @@ public class TileEntityInfuser extends TileEntityFluidItemContainer {
 
     @Override
     public void updateEntity() {
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+        super.updateEntity();
+        worldObj.markBlocksDirty(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
         extractFluids();
         boolean update = false;
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
-        if(itemContents[0] == null){
+        if (itemContents[0] == null) {
             progressTicks = 0;
-        } else if(canProcess()) {
+        } else if (canProcess()) {
             progressMaxTicks = 400 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
-            if (progressTicks == 0 && canProcess()){
+        if (!worldObj.isMultiplayerAndNotHost) {
+            if (progressTicks == 0 && canProcess()) {
                 update = fuel();
             }
-            if(isBurning() && canProcess()){
+            if (isBurning() && canProcess()) {
                 progressTicks++;
-                if(progressTicks >= progressMaxTicks){
+                if (progressTicks >= progressMaxTicks) {
                     progressTicks = 0;
                     processItem();
                     update = true;
                 }
-            } else if(canProcess()){
+            } else if (canProcess()) {
                 fuel();
-                if(fuelBurnTicks > 0){
+                if (fuelBurnTicks > 0) {
                     fuelBurnTicks++;
                 }
             }
         }
 
-        if(update) {
+        if (update) {
             this.onInventoryChanged();
         }
 
-    }
-
-    public int getProgressScaled(int paramInt) {
-        return this.progressTicks * paramInt / progressMaxTicks;
-    }
-
-    public int getBurnTimeRemainingScaled(int paramInt) {
-        if(this.fuelMaxBurnTicks == 0) {
-            this.fuelMaxBurnTicks = 400;
-        }
-        return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
     }
 
     public boolean fuel(){
@@ -159,85 +145,6 @@ public class TileEntityInfuser extends TileEntityFluidItemContainer {
             return stack != null && (itemContents[2] == null || (itemContents[2].isItemEqual(stack) && (itemContents[2].stackSize < getInventoryStackLimit() && itemContents[2].stackSize < itemContents[2].getMaxStackSize() || itemContents[2].stackSize < stack.getMaxStackSize())));
         }
     }
-
-    public boolean isBurning(){
-        return fuelBurnTicks > 0;
-    }
-
-    public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
-            Direction dir = e.getKey();
-            Connection connection = e.getValue();
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile, transferSpeed);
-                ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
-    }
-
-    public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
-        pipe.isPressurized = true;
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
-                already.add(list);
-                ((TileEntityFluidPipe) tile).isPressurized = true;
-                pressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    public void unpressurizePipes(TileEntityFluidPipe pipe,ArrayList<HashMap<String,Integer>> already){
-        pipe.isPressurized = false;
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
-                already.add(list);
-                ((TileEntityFluidPipe) tile).isPressurized = false;
-                unpressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.setShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.setShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.setShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.setInteger("MaxProcessTime",this.progressMaxTicks);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
-        fuelBurnTicks = nBTTagCompound1.getShort("BurnTime");
-        progressTicks = nBTTagCompound1.getShort("ProcessTime");
-        progressMaxTicks = nBTTagCompound1.getInteger("MaxProcessTime");
-        fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
-
-    }
-
 
 
 }

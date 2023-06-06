@@ -2,7 +2,9 @@ package sunsetsatellite.signalindustries.tiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import sun.misc.Unsafe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.util.Wave;
 import sunsetsatellite.sunsetutils.util.TickTimer;
 
@@ -12,7 +14,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class TileEntityWrathBeacon extends TileEntity {
-
     public Random rand = new Random();
     public boolean active = false;
     public boolean intermission = false;
@@ -70,7 +71,7 @@ public class TileEntityWrathBeacon extends TileEntity {
         enemiesLeft.removeIf((E)-> !E.isEntityAlive());
         if(active && started && enemiesLeft.size() == 0 && wave < 5){
             for (EntityPlayer player : worldObj.players) {
-                player.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
             started = false;
             intermissionTimer.unpause();
@@ -78,7 +79,7 @@ public class TileEntityWrathBeacon extends TileEntity {
             wave++;
         } else if (active && started && enemiesLeft.size() == 0 && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
-                player.addChatMessage("Challenge complete!!");
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("Challenge complete!!");
             }
             active = false;
             started = false;
@@ -88,6 +89,11 @@ public class TileEntityWrathBeacon extends TileEntity {
             wave = 0;
             currentMaxAmount = 0;
             worldObj.setBlockWithNotify(xCoord,yCoord,zCoord,0);
+            ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, xCoord, yCoord, zCoord, 3);
+            explosion.doExplosionA();
+            explosion.doExplosionB(true);
+            EntityItem entityitem = new EntityItem(worldObj, (float) xCoord, (float) yCoord, (float) zCoord, new ItemStack(SignalIndustries.energyCatalyst, 1));
+            worldObj.entityJoinedWorld(entityitem);
         }
         if(active){
             for (float y = yCoord; y < 256; y+=0.1) {
@@ -102,7 +108,7 @@ public class TileEntityWrathBeacon extends TileEntity {
     public void activate(){
         if(!active){
             if(worldObj.isDaytime()){
-                Minecraft.getMinecraft().thePlayer.addChatMessage("Now is not the time..");
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
             for (int x = xCoord-7; x < xCoord+7; x++) {
@@ -111,26 +117,35 @@ public class TileEntityWrathBeacon extends TileEntity {
                         int id = worldObj.getBlockId(x,y,z);
                         int idUnder = worldObj.getBlockId(x,yCoord-1,z);
                         if (id != 0 && (x != xCoord || y != yCoord || z != zCoord)) {
-                            Minecraft.getMinecraft().thePlayer.addChatMessage("The wrath beacon desires more space..");
+                            Minecraft.getMinecraft().ingameGUI.addChatMessage("The wrath beacon desires more space..");
                             return;
                         }
                     }
                 }
             }
-            for (EntityPlayer player : worldObj.players) {
-                player.addChatMessage("event.signalindustries.wrathBeaconActivated");
+            if(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem().itemID == SignalIndustries.evilCatalyst.itemID){
+                /*if(Minecraft.getMinecraft().gameSettings.difficulty.value == 0){
+                    Minecraft.getMinecraft().theMinecraft.getMinecraft().ingameGUI.addChatMessage("This world is too peaceful..");
+                    return;
+                }*/
+                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft().thePlayer);
+                for (EntityPlayer player : worldObj.players) {
+                    player.addChatMessage("event.signalindustries.wrathBeaconActivated");
+                }
+                active = true;
+                startWave();
+            } else {
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("The wrath beacon needs a catalyst..");
             }
-            active = true;
-            startWave();
         }
     }
 
     public void startWave(){
         if(active){
             for (EntityPlayer player : worldObj.players) {
-                player.addChatMessage("WAVE "+wave);
+                Minecraft.getMinecraft().ingameGUI.addChatMessage("WAVE "+wave);
                 if(wave == 5){
-                    player.addChatMessage("FINAL WAVE!");
+                    Minecraft.getMinecraft().ingameGUI.addChatMessage("FINAL WAVE!");
                 }
             }
             intermission = false;
@@ -151,7 +166,7 @@ public class TileEntityWrathBeacon extends TileEntity {
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
-            mob.setLocationAndAngles((double)randomPos.x, (double)randomPos.y, (double)randomPos.z, worldObj.rand.nextFloat() * 360.0F, 0.0F);
+            mob.setLocationAndAngles(randomPos.x, randomPos.y, randomPos.z, worldObj.rand.nextFloat() * 360.0F, 0.0F);
             mob.entityInitOnSpawn();
             worldObj.entityJoinedWorld(mob);
             enemiesLeft.add(mob);

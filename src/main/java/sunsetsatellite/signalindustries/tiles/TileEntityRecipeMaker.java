@@ -131,7 +131,7 @@ public class TileEntityRecipeMaker extends TileEntity
     private ItemStack[] contents;
 
     public void makeRecipe() {
-        StringBuilder s = new StringBuilder("RecipeHelper.Crafting.createRecipe(");
+        StringBuilder s = new StringBuilder("createRecipe(new ItemStack(");
         ItemStack output = getStackInSlot(9);
         Object item;
 
@@ -144,7 +144,7 @@ public class TileEntityRecipeMaker extends TileEntity
             s.append(getBlockFieldName((Block) item));
             //blocks
         }
-        s.append(", ").append(output.stackSize).append(", new Object[]{\"012\",\"345\",\"678\"");
+        s.append(", ").append(output.stackSize).append("), new Object[]{\"012\",\"345\",\"678\"");
         for(int i = 0;i<9;i++){
             ItemStack stack = getStackInSlot(i);
             if(stack == null){
@@ -171,7 +171,7 @@ public class TileEntityRecipeMaker extends TileEntity
         contents = new ItemStack[10];
     }
 
-    private String getItemFieldName(Item item){
+    public static String getItemFieldName(Item item){
         try{
             ArrayList<Field> fields = new ArrayList<>(Arrays.asList(Item.class.getDeclaredFields()));
             //fields.addAll(Arrays.asList(mod_RetroStorage.class.getDeclaredFields()));
@@ -200,7 +200,7 @@ public class TileEntityRecipeMaker extends TileEntity
         return "";
     }
 
-    private String getBlockFieldName(Block item){
+    public static String getBlockFieldName(Block item){
         try{
             ArrayList<Field> fields = new ArrayList<>(Arrays.asList(Block.class.getDeclaredFields()));
             //fields.addAll(Arrays.asList(mod_RetroStorage.class.getDeclaredFields()));
