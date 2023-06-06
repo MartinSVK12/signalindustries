@@ -92,9 +92,9 @@ public class RenderPipeItem extends Render {
             }
 
             Tessellator tessellator = Tessellator.instance;
-            f6 = (float)(i % net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth + 0) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
+            f6 = (float)(i % net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
             f8 = (float)(i % net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth + tileWidth) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
-            f10 = (float)(i / net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth + 0) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
+            f10 = (float)(i / net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
             float f11 = (float)(i / net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth + tileWidth) / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileWidth);
             float f12 = 1.0F;
             float f13 = 0.5F;
@@ -116,10 +116,10 @@ public class RenderPipeItem extends Render {
                 GL11.glColor4f(f16 * f21, f18 * f21, f20 * f21, 1.0F);
             }
 
-            if ((Boolean)Minecraft.getMinecraft().gameSettings.items3D.value) {
+            if (Minecraft.getMinecraft().gameSettings.items3D.value) {
                 GL11.glPushMatrix();
                 GL11.glScaled(1.0, 1.0, 1.0);
-                GL11.glRotated((double)f3, 0.0, 1.0, 0.0);
+                GL11.glRotated(f3, 0.0, 1.0, 0.0);
                 GL11.glTranslated(-0.5, 0.0, -0.05 * (double)(renderCount - 1));
 
                 for(j = 0; j < renderCount; ++j) {
@@ -143,10 +143,10 @@ public class RenderPipeItem extends Render {
                     GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
                     tessellator.startDrawingQuads();
                     tessellator.setNormal(0.0F, 1.0F, 0.0F);
-                    tessellator.addVertexWithUV(-0.5, -0.25, 0.0, (double)f6, (double)f11);
-                    tessellator.addVertexWithUV(0.5, -0.25, 0.0, (double)f8, (double)f11);
-                    tessellator.addVertexWithUV(0.5, 0.75, 0.0, (double)f8, (double)f10);
-                    tessellator.addVertexWithUV(-0.5, 0.75, 0.0, (double)f6, (double)f10);
+                    tessellator.addVertexWithUV(-0.5, -0.25, 0.0, f6, f11);
+                    tessellator.addVertexWithUV(0.5, -0.25, 0.0, f8, f11);
+                    tessellator.addVertexWithUV(0.5, 0.75, 0.0, f8, f10);
+                    tessellator.addVertexWithUV(-0.5, 0.75, 0.0, f6, f10);
                     tessellator.draw();
                     GL11.glPopMatrix();
                 }
@@ -235,7 +235,7 @@ public class RenderPipeItem extends Render {
     public void renderItemOverlayIntoGUI(FontRenderer fontrenderer, RenderEngine renderengine, ItemStack itemstack, int i, int j, float alpha) {
         if (itemstack != null) {
             if (itemstack.stackSize != 1) {
-                String s = "" + itemstack.stackSize;
+                String s = String.valueOf(itemstack.stackSize);
                 GL11.glDisable(2896);
                 GL11.glDisable(2929);
                 fontrenderer.drawStringWithShadow(s, i + 19 - 2 - fontrenderer.getStringWidth(s), j + 6 + 3, 16777215);
@@ -267,7 +267,7 @@ public class RenderPipeItem extends Render {
     public void renderItemOverlayIntoGUI(FontRenderer fontrenderer, RenderEngine renderengine, ItemStack itemstack, int i, int j, boolean discovered) {
         if (itemstack != null) {
             if (itemstack.stackSize != 1 || !discovered) {
-                String s = "" + itemstack.stackSize;
+                String s = String.valueOf(itemstack.stackSize);
                 if (!discovered) {
                     s = "?";
                 }
@@ -303,10 +303,10 @@ public class RenderPipeItem extends Render {
     private void renderQuad(Tessellator tessellator, int i, int j, int k, int l, int i1) {
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_I(i1);
-        tessellator.addVertex((double)(i + 0), (double)(j + 0), 0.0);
-        tessellator.addVertex((double)(i + 0), (double)(j + l), 0.0);
-        tessellator.addVertex((double)(i + k), (double)(j + l), 0.0);
-        tessellator.addVertex((double)(i + k), (double)(j + 0), 0.0);
+        tessellator.addVertex(i, j, 0.0);
+        tessellator.addVertex(i, j + l, 0.0);
+        tessellator.addVertex(i + k, j + l, 0.0);
+        tessellator.addVertex(i + k, j, 0.0);
         tessellator.draw();
     }
 
@@ -316,10 +316,10 @@ public class RenderPipeItem extends Render {
         float f2 = 1.0F / (float)(net.minecraft.shared.Minecraft.TEXTURE_ATLAS_WIDTH_TILES * tileHeight);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 16), 0.0, (double)((float)(tileX + 0) * f1), (double)((float)(tileY + tileHeight) * f2));
-        tessellator.addVertexWithUV((double)(x + 16), (double)(y + 16), 0.0, (double)((float)(tileX + tileWidth) * f1), (double)((float)(tileY + tileHeight) * f2));
-        tessellator.addVertexWithUV((double)(x + 16), (double)(y + 0), 0.0, (double)((float)(tileX + tileWidth) * f1), (double)((float)(tileY + 0) * f2));
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), 0.0, (double)((float)(tileX + 0) * f1), (double)((float)(tileY + 0) * f2));
+        tessellator.addVertexWithUV(x, y + 16, 0.0, (float)(tileX) * f1, (float)(tileY + tileHeight) * f2);
+        tessellator.addVertexWithUV(x + 16, y + 16, 0.0, (float)(tileX + tileWidth) * f1, (float)(tileY + tileHeight) * f2);
+        tessellator.addVertexWithUV(x + 16, y, 0.0, (float)(tileX + tileWidth) * f1, (float)(tileY) * f2);
+        tessellator.addVertexWithUV(x, y, 0.0, (float)(tileX) * f1, (float)(tileY) * f2);
         tessellator.draw();
     }
 }

@@ -3,11 +3,16 @@ package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 import net.minecraft.src.ContainerGuidebookRecipeBase;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.StringTranslate;
+import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
+import sunsetsatellite.guidebookpp.RecipeGroup;
+import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookAlloySmelterRecipe;
-import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeAlloySmelter;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,83 +21,26 @@ import java.util.HashMap;
 public class RecipeHandlerAlloySmelter
     implements IRecipeHandlerBase {
     public ContainerGuidebookRecipeBase getContainer(Object o) {
-        RecipeAlloySmelter recipe = (RecipeAlloySmelter) o;
-        return new ContainerGuidebookAlloySmelterRecipe(new ItemStack(SignalIndustries.prototypeAlloySmelter),recipe.itemInputs,recipe.fluidInputs,recipe.itemOutputs,recipe.fluidOutputs);
-    }
-
-
-    public int getRecipeAmount() {
-        return getRecipes().size();
-    }
-
-    public ArrayList<?> getRecipes() {
-        HashMap<Integer[], ItemStack> rawRecipes = new HashMap<>(AlloySmelterRecipes.instance.getRecipeList());
-        ArrayList<RecipeAlloySmelter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> list = new ArrayList<>();
-            for (Integer item : I) {
-                list.add(new ItemStack(item,1,0));
-            }
-            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
-        });
-        return recipes;
-    }
-
-    public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<Integer[],ItemStack> rawRecipes = new HashMap<>(AlloySmelterRecipes.instance.getRecipeList());
-        ArrayList<RecipeAlloySmelter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            if(usage){
-                if(new ItemStack(I[0],1,0).isItemEqual(filter) || new ItemStack(I[1],1,0).isItemEqual(filter)){
-                    ArrayList<ItemStack> list = new ArrayList<>();
-                    for (Integer item : I) {
-                        list.add(new ItemStack(item,1,0));
-                    }
-                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
-                }
-            } else {
-                if(O.isItemEqual(filter)){
-                    ArrayList<ItemStack> list = new ArrayList<>();
-                    for (Integer item : I) {
-                        list.add(new ItemStack(item,1,0));
-                    }
-                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
-                }
-            }
-        });
-        return recipes;
+        RecipeFluid recipe = (RecipeFluid) o;
+        return new ContainerGuidebookAlloySmelterRecipe(new ItemStack(SignalIndustries.prototypeAlloySmelter),recipe);
     }
 
     @Override
-    public ArrayList<?> getRecipesFiltered(String name) {
-        if(name.equals("")){
-            return getRecipes();
-        }
-        HashMap<Integer[],ItemStack> rawRecipes = new HashMap<>(AlloySmelterRecipes.instance.getRecipeList());
-        ArrayList<RecipeAlloySmelter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> list = new ArrayList<>();
-            for (Integer item : I) {
-                list.add(new ItemStack(item,1,0));
+    public void addRecipes() {
+        GuidebookPlusPlus.LOGGER.info("Adding recipes for: " + this.getClass().getSimpleName());
+        ArrayList<RecipeFluid> recipes = new ArrayList<>();
+        AlloySmelterRecipes.instance.getRecipeList().forEach((I, O)->{
+            ArrayList<ItemStack> itemInputList = new ArrayList<>();
+            for (Integer integer : I) {
+                itemInputList.add(new ItemStack(integer,1,0));
             }
-            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeAlloySmelter(list,null,singletonlist2, null));
+            ArrayList<ItemStack> itemOutputList = new ArrayList<>(Collections.singleton(O));
+            recipes.add(new RecipeFluid(
+                    itemInputList,new ArrayList<>(),itemOutputList,new ArrayList<>(),1,0
+            ));
         });
-        recipes.removeIf((R)->!getNameOfRecipeOutput(R).contains(name.toLowerCase()));
-        return recipes;
+        RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, SignalIndustries.prototypeAlloySmelter,this,recipes);
+        RecipeRegistry.groups.add(group);
     }
 
-    @Override
-    public String getNameOfRecipeOutput(Object recipe){
-        StringTranslate trans = StringTranslate.getInstance();
-        return trans.translateKey(((RecipeAlloySmelter)recipe).itemOutputs.get(0).getItemName()+".name").toLowerCase();
-    }
-
-    @Override
-    public String getHandlerName() {
-        return "alloy smelter";
-    }
 }

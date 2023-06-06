@@ -83,7 +83,7 @@ public class EntityPipeItem extends Entity {
             setEntityDead();
             return;
         }
-        nbttagcompound.setShort("Health", (short)((byte)this.health));
+        nbttagcompound.setShort("Health", (byte)this.health);
         nbttagcompound.setShort("Age", (short)this.age);
         nbttagcompound.setCompoundTag("Item", this.item.writeToNBT(new NBTTagCompound()));
         NBTTagCompound tag = new NBTTagCompound();

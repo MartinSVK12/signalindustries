@@ -2,22 +2,18 @@ package sunsetsatellite.signalindustries.api.impl.guidebookpp.containers;
 
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IContainerRecipeBase;
 import sunsetsatellite.guidebookpp.recipes.RecipeBase;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 
-import java.util.ArrayList;
-
-public class ContainerGuidebookAlloySmelterRecipe extends ContainerGuidebookRecipeBase
+public class ContainerGuidebookCrystalChamberRecipe extends ContainerGuidebookRecipeBase
     implements IContainerRecipeBase {
 
     ItemStack machine;
 
-    public ContainerGuidebookAlloySmelterRecipe(ItemStack stack, RecipeFluid recipeFluid) {
+    public ContainerGuidebookCrystalChamberRecipe(ItemStack stack, RecipeFluid recipeFluid) {
         machine = stack;
         this.addSlot(new SlotGuidebook(0, 9, 10, recipeFluid.itemInputs.get(0), false));
         this.addSlot(new SlotGuidebook(0, -19, 10, recipeFluid.itemInputs.get(1), false));

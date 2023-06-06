@@ -28,7 +28,7 @@ public class GuiFilter extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
 
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/filter.png");;
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/filter.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;

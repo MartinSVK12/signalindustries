@@ -1,86 +1,44 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 import net.minecraft.src.*;
+import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.fluidapi.util.MachineRecipes;
+import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
+import sunsetsatellite.guidebookpp.RecipeGroup;
+import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookExtractorRecipe;
-import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeExtractor;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
 public class RecipeHandlerExtractor
     implements IRecipeHandlerBase {
     public ContainerGuidebookRecipeBase getContainer(Object o) {
-        RecipeExtractor recipe = (RecipeExtractor) o;
-        return new ContainerGuidebookExtractorRecipe(new ItemStack(SignalIndustries.prototypeExtractor),recipe.itemInputs,recipe.fluidInputs,recipe.itemOutputs,recipe.fluidOutputs);
-    }
-
-
-    public int getRecipeAmount() {
-        return getRecipes().size();
-    }
-
-    public ArrayList<?> getRecipes() {
-        HashMap<Integer, FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-            ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
-        });
-        return recipes;
-    }
-
-    public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-
-            if(usage){
-                if(new ItemStack(I,1,0).isItemEqual(filter)){
-                    ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-                    ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
-                }
-            } else {
-                if(filter.itemID < 16384 && Block.blocksList[filter.itemID] instanceof BlockFluid && O.isFluidEqual(new FluidStack((BlockFluid) Block.blocksList[filter.itemID],1))){
-                    ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-                    ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
-                }
-            }
-        });
-        return recipes;
+        RecipeFluid recipe = (RecipeFluid) o;
+        return new ContainerGuidebookExtractorRecipe(new ItemStack(SignalIndustries.prototypeExtractor),recipe);
     }
 
     @Override
-    public ArrayList<?> getRecipesFiltered(String name) {
-        if(name.equals("")){
-            return getRecipes();
-        }
-        HashMap<Integer,FluidStack> rawRecipes = new HashMap<>(ExtractorRecipes.instance.getRecipeList());
-        ArrayList<RecipeExtractor> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> singletonList = new ArrayList<>(Collections.singleton(new ItemStack(I, 1, 0)));
-            ArrayList<FluidStack> singletonList2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeExtractor(singletonList,null,null, singletonList2));
+    public void addRecipes() {
+        GuidebookPlusPlus.LOGGER.info("Adding recipes for: " + this.getClass().getSimpleName());
+        ArrayList<RecipeFluid> recipes = new ArrayList<>();
+        ExtractorRecipes.instance.getRecipeList().forEach((I, O)->{
+            recipes.add(new RecipeFluid(
+                    new ArrayList<>(Arrays.asList(new ItemStack(I,1,0))),
+                    new ArrayList<>(),
+                    new ArrayList<>(),
+                    new ArrayList<>(Arrays.asList(O)),1,0)
+            );
         });
-        recipes.removeIf((R)->!getNameOfRecipeOutput(R).contains(name.toLowerCase()));
-        return recipes;
+        RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, SignalIndustries.prototypeExtractor,this,recipes);
+        RecipeRegistry.groups.add(group);
     }
 
-    @Override
-    public String getNameOfRecipeOutput(Object recipe){
-        StringTranslate trans = StringTranslate.getInstance();
-        return trans.translateKey(((RecipeExtractor)recipe).fluidOutputs.get(0).getFluidName()+".name").toLowerCase();
-    }
-
-    @Override
-    public String getHandlerName() {
-        return "signalum extractor";
-    }
 }

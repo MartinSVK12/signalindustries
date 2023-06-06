@@ -2,11 +2,15 @@ package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
+import sunsetsatellite.guidebookpp.RecipeGroup;
+import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookCrystalCutterRecipe;
-import sunsetsatellite.signalindustries.api.impl.guidebookpp.recipes.RecipeCrystalCutter;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
+import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,106 +19,32 @@ import java.util.HashMap;
 public class RecipeHandlerCrystalCutter
     implements IRecipeHandlerBase {
     public ContainerGuidebookRecipeBase getContainer(Object o) {
-        RecipeCrystalCutter recipe = (RecipeCrystalCutter) o;
-        return new ContainerGuidebookCrystalCutterRecipe(new ItemStack(SignalIndustries.prototypeCrystalCutter),recipe.itemInputs,recipe.fluidInputs,recipe.itemOutputs,recipe.fluidOutputs);
+        RecipeFluid recipe = (RecipeFluid) o;
+        return new ContainerGuidebookCrystalCutterRecipe(new ItemStack(SignalIndustries.prototypeCrystalCutter),recipe);
     }
 
-
-    public int getRecipeAmount() {
-        return getRecipes().size();
-    }
-
-    public ArrayList<?> getRecipes() {
-        HashMap<ArrayList<Object>, ItemStack> rawRecipes = new HashMap<>(CrystalCutterRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeCrystalCutter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> list = new ArrayList<>();
-            ArrayList<FluidStack> fluidList = new ArrayList<>();
+    @Override
+    public void addRecipes() {
+        GuidebookPlusPlus.LOGGER.info("Adding recipes for: " + this.getClass().getSimpleName());
+        ArrayList<RecipeFluid> recipes = new ArrayList<>();
+        CrystalCutterRecipes.getInstance().getRecipeList().forEach((I, O)->{
+            ArrayList<ItemStack> itemInputList = new ArrayList<>();
+            ArrayList<FluidStack> fluidInputList = new ArrayList<>();
             for (Object obj : I) {
                 if(obj instanceof ItemStack){
-                    list.add((ItemStack) obj);
+                    itemInputList.add((ItemStack) obj);
                 } else if (obj instanceof FluidStack) {
-                    fluidList.add((FluidStack) obj);
+                    fluidInputList.add((FluidStack) obj);
                 }
 
             }
-            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeCrystalCutter(list,fluidList,singletonlist2, null));
+            ArrayList<ItemStack> itemOutputList = new ArrayList<>(Collections.singleton(O));
+            recipes.add(new RecipeFluid(
+                    itemInputList,fluidInputList,itemOutputList,new ArrayList<>(),1,0
+            ));
         });
-        return recipes;
+        RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, SignalIndustries.prototypeCrystalCutter,this,recipes);
+        RecipeRegistry.groups.add(group);
     }
 
-    public ArrayList<?> getRecipesFiltered(ItemStack filter, boolean usage) {
-        HashMap<ArrayList<Object>,ItemStack> rawRecipes = new HashMap<>(CrystalCutterRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeCrystalCutter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            if(usage){
-                for(Object obj : I){
-                    if((obj instanceof ItemStack && ((ItemStack) obj).isItemEqual(filter)) || ( filter.itemID < 16384 && Block.blocksList[filter.itemID] instanceof BlockFluid &&(obj instanceof FluidStack && ((FluidStack) obj).isFluidEqual(new FluidStack((BlockFluid) Block.blocksList[filter.itemID], filter.stackSize))))) {
-                        ArrayList<ItemStack> list = new ArrayList<>();
-                        ArrayList<FluidStack> fluidList = new ArrayList<>();
-                        if (obj instanceof ItemStack) {
-                            list.add((ItemStack) obj);
-                        } else {
-                            fluidList.add((FluidStack) obj);
-                        }
-                        ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                        recipes.add(new RecipeCrystalCutter(list, fluidList, singletonlist2, null));
-                        break;
-                    }
-                }
-            } else {
-                if(O.isItemEqual(filter)){
-                    ArrayList<ItemStack> list = new ArrayList<>();
-                    ArrayList<FluidStack> fluidList = new ArrayList<>();
-                    for(Object obj : I){
-                        if (obj instanceof ItemStack) {
-                            list.add((ItemStack) obj);
-                        } else {
-                            fluidList.add((FluidStack) obj);
-                        }
-                    }
-                    ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-                    recipes.add(new RecipeCrystalCutter(list, fluidList, singletonlist2, null));
-                }
-            }
-        });
-        return recipes;
-    }
-
-    @Override
-    public ArrayList<?> getRecipesFiltered(String name) {
-        if(name.equals("")){
-            return getRecipes();
-        }
-        HashMap<ArrayList<Object>,ItemStack> rawRecipes = new HashMap<>(CrystalCutterRecipes.getInstance().getRecipeList());
-        ArrayList<RecipeCrystalCutter> recipes = new ArrayList<>();
-        rawRecipes.forEach((I,O)->{
-            ArrayList<ItemStack> list = new ArrayList<>();
-            ArrayList<FluidStack> fluidList = new ArrayList<>();
-            for (Object obj : I) {
-                if(obj instanceof ItemStack){
-                    list.add((ItemStack) obj);
-                } else if (obj instanceof FluidStack) {
-                    fluidList.add((FluidStack) obj);
-                }
-
-            }
-            ArrayList<ItemStack> singletonlist2 = new ArrayList<>(Collections.singleton(O));
-            recipes.add(new RecipeCrystalCutter(list,fluidList,singletonlist2, null));
-        });
-        recipes.removeIf((R)->!getNameOfRecipeOutput(R).contains(name.toLowerCase()));
-        return recipes;
-    }
-
-    @Override
-    public String getNameOfRecipeOutput(Object recipe){
-        StringTranslate trans = StringTranslate.getInstance();
-        return trans.translateKey(((RecipeCrystalCutter)recipe).itemOutputs.get(0).getItemName()+".name").toLowerCase();
-    }
-
-    @Override
-    public String getHandlerName() {
-        return "crystal cutter";
-    }
 }

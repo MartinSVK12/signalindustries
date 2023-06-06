@@ -5,6 +5,8 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IContainerRecipeBase;
+import sunsetsatellite.guidebookpp.recipes.RecipeBase;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 
 import java.util.ArrayList;
 
@@ -13,14 +15,14 @@ public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeB
 
     ItemStack machine;
 
-    public ContainerGuidebookExtractorRecipe(ItemStack stack, ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs, ArrayList<ItemStack> itemOutputs, ArrayList<FluidStack> fluidOutputs) {
+    public ContainerGuidebookExtractorRecipe(ItemStack stack, RecipeFluid recipeFluid) {
         machine = stack;
-        this.addSlot(new SlotGuidebook(0, 9, 10, itemInputs.get(0), false));
-        this.addSlot(new SlotGuidebook(1, 69, 19, new ItemStack(fluidOutputs.get(0).liquid,fluidOutputs.get(0).amount), false));
+        this.addSlot(new SlotGuidebook(0, 9, 10, recipeFluid.itemInputs.get(0), false));
+        this.addSlot(new SlotGuidebook(1, 69, 19, new ItemStack(recipeFluid.fluidOutputs.get(0).liquid,recipeFluid.fluidOutputs.get(0).amount), false));
         this.addSlot(new SlotGuidebook(2,36,18,stack,true));
     }
 
-    public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index){
+    public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index, RecipeBase recipeBase){
         RenderItem itemRenderer = new RenderItem();
         int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_recipe.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -32,7 +34,7 @@ public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeB
         int yOffset = 0;
         guidebook.drawTexturedModalRect(xPos, yPos, 158, yOffset, 98, 54);
 
-    };
+    }
 
     @Override
     public void quickMoveItems(int i, EntityPlayer entityPlayer, boolean bl, boolean bl2) {
