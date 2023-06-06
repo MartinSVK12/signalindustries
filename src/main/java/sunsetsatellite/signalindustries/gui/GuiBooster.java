@@ -7,19 +7,20 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
+import sunsetsatellite.signalindustries.containers.ContainerBooster;
+import sunsetsatellite.signalindustries.tiles.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
 
-public class GuiInfuser extends GuiFluid {
+public class GuiBooster extends GuiFluid {
 
-    public String name = "Infuser";
+    public String name = "Dilithium Booster";
     public EntityPlayer entityplayer;
-    public TileEntityInfuser tile;
+    public TileEntityBooster tile;
 
 
-    public GuiInfuser(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerInfuser(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
-        this.tile = (TileEntityInfuser) tile;
+    public GuiBooster(InventoryPlayer inventoryPlayer, TileEntity tile) {
+        super(new ContainerBooster(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
+        this.tile = (TileEntityBooster) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 
@@ -59,7 +60,7 @@ public class GuiInfuser extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_basic.png");
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/dilithium_booster.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -68,11 +69,11 @@ public class GuiInfuser extends GuiFluid {
         int i5;
         if(this.tile.isBurning()) {
             i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 9, i4 + 39 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            this.drawTexturedModalRect(i3 + 44, i4 + 21 + 12 - i5, 176, 44 - i5, 14, i5 + 2);
         }
 
-        i5 = this.tile.getProgressScaled(24);
-        this.drawTexturedModalRect(i3 + 79, i4 + 35, 176, 14, i5 + 1, 18);
+        i5 = this.tile.getProgressScaled(32);
+        this.drawTexturedModalRect(i3 + 72, i4 + 62 - i5, 176, 32 - i5, 32, i5);
     }
 
     protected void drawGuiContainerForegroundLayer()

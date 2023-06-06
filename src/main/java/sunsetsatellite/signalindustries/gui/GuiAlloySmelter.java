@@ -44,18 +44,9 @@ public class GuiAlloySmelter extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                switch (((BlockContainerTiered)tile.getBlockType()).tier){
-                    case PROTOTYPE:
-                        GuidebookPlusPlus.nameFocus = "*alloy smelter";
-                        break;
-                    case BASIC:
-                        GuidebookPlusPlus.nameFocus = "*basic alloy smelter";
-                        break;
-                    case REINFORCED:
-                        break;
-                    case AWAKENED:
-                        break;
-                }
+                StringTranslate translator = StringTranslate.getInstance();
+                String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
+                GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -68,7 +59,7 @@ public class GuiAlloySmelter extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");;
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
         switch (((BlockContainerTiered)tile.getBlockType()).tier){
             case PROTOTYPE:
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
@@ -93,6 +84,7 @@ public class GuiAlloySmelter extends GuiFluid {
 
         i5 = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
+
     }
 
     protected void drawGuiContainerForegroundLayer()

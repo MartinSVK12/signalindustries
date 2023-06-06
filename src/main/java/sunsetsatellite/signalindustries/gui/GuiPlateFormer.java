@@ -43,7 +43,9 @@ public class GuiPlateFormer extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                GuidebookPlusPlus.nameFocus = "*plate former";
+                StringTranslate translator = StringTranslate.getInstance();
+                String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
+                GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {

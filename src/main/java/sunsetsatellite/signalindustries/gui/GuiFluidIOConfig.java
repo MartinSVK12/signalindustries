@@ -35,7 +35,7 @@ public class GuiFluidIOConfig extends GuiScreen {
         super.mouseClicked(x,y,button);
         if (button == 1) {
             for (int l = 0; l < this.controlList.size(); ++l) {
-                GuiButton guibutton = (GuiButton) this.controlList.get(l);
+                GuiButton guibutton = this.controlList.get(l);
                 if (guibutton.mousePressed(this.mc, x, y)) {
                     this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
                     action2Performed(guibutton);
@@ -114,7 +114,7 @@ public class GuiFluidIOConfig extends GuiScreen {
         controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_NEG))));
         controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_NEG))));
 
-        if(((TileEntityFluidContainer)tile).fluidContents.length == 1){
+        if(tile.fluidContents.length == 1){
             controlList.get(6).enabled = false;
             controlList.get(7).enabled = false;
             controlList.get(8).enabled = false;

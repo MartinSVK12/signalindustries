@@ -43,7 +43,9 @@ public class GuiCrystalCutter extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                GuidebookPlusPlus.nameFocus = "*crystal cutter";
+                StringTranslate translator = StringTranslate.getInstance();
+                String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
+                GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -70,6 +72,9 @@ public class GuiCrystalCutter extends GuiFluid {
 
         i5 = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
+        if(this.tile.speedMultiplier > tile.tier.ordinal()+1){
+            this.drawCenteredString(fontRenderer, "2x",i3 + xSize - 16,i4 + ySize/2 - 16,0xFFFF00FF);
+        }
     }
 
     protected void drawGuiContainerForegroundLayer()

@@ -40,12 +40,8 @@ public class GuiEnergyCell extends GuiFluid {
         if (!guibutton.enabled) {
             return;
         }
-        switch (guibutton.id){
-            case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, (IInventory) tile,tile.xCoord,tile.yCoord,tile.zCoord);
-                break;
-            default:
-                break;
+        if (guibutton.id == 0) {
+            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.xCoord, tile.yCoord, tile.zCoord);
         }
     }
 

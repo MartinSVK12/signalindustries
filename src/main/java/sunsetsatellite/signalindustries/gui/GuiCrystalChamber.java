@@ -7,19 +7,19 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
+import sunsetsatellite.signalindustries.containers.ContainerCrystalChamber;
+import sunsetsatellite.signalindustries.tiles.TileEntityCrystalChamber;
 
-public class GuiInfuser extends GuiFluid {
+public class GuiCrystalChamber extends GuiFluid {
 
-    public String name = "Infuser";
+    public String name = "Crystal Chamber";
     public EntityPlayer entityplayer;
-    public TileEntityInfuser tile;
+    public TileEntityCrystalChamber tile;
 
 
-    public GuiInfuser(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerInfuser(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
-        this.tile = (TileEntityInfuser) tile;
+    public GuiCrystalChamber(InventoryPlayer inventoryPlayer, TileEntity tile) {
+        super(new ContainerCrystalChamber(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
+        this.tile = (TileEntityCrystalChamber) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 
@@ -31,7 +31,7 @@ public class GuiInfuser extends GuiFluid {
         StringTranslate trans = StringTranslate.getInstance();
         StringBuilder text = new StringBuilder();
         if(x > i+80 && x < i+94){
-            if(y > j+43 && y < j+49){
+            if(y > j+40 && y < j+46){
                 text.append("View Recipes");
                 this.drawTooltip(text.toString(),x,y,8,-8,true);
             }
@@ -43,7 +43,7 @@ public class GuiInfuser extends GuiFluid {
         int i = (width - xSize) / 2;
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
-            if (y > j + 43 && y < j + 49) {
+            if (y > j + 40 && y < j + 46) {
                 StringTranslate translator = StringTranslate.getInstance();
                 String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
                 GuidebookPlusPlus.nameFocus = ">"+ name;
@@ -59,7 +59,18 @@ public class GuiInfuser extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/infuser_basic.png");
+        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+                break;
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
+                break;
+            case REINFORCED:
+            case AWAKENED:
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -68,11 +79,12 @@ public class GuiInfuser extends GuiFluid {
         int i5;
         if(this.tile.isBurning()) {
             i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 9, i4 + 39 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            this.drawTexturedModalRect(i3 + 56, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
         }
 
         i5 = this.tile.getProgressScaled(24);
-        this.drawTexturedModalRect(i3 + 79, i4 + 35, 176, 14, i5 + 1, 18);
+        this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
+
     }
 
     protected void drawGuiContainerForegroundLayer()

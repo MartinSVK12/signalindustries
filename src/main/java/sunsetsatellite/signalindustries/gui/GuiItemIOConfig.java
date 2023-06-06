@@ -28,7 +28,7 @@ public class GuiItemIOConfig extends GuiScreen {
         super.mouseClicked(x,y,button);
         if (button == 1) {
             for (int l = 0; l < this.controlList.size(); ++l) {
-                GuiButton guibutton = (GuiButton) this.controlList.get(l);
+                GuiButton guibutton = this.controlList.get(l);
                 if (guibutton.mousePressed(this.mc, x, y)) {
                     this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
                     action2Performed(guibutton);
@@ -51,7 +51,7 @@ public class GuiItemIOConfig extends GuiScreen {
 
     public void keyTyped(char c, int i) {
         if (i == 1) {
-            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile,tile.xCoord,tile.yCoord,tile.zCoord);
+            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
         }
     }
 

@@ -44,18 +44,9 @@ public class GuiCrusher extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 40 && y < j + 46) {
-                switch (((BlockContainerTiered)tile.getBlockType()).tier){
-                    case PROTOTYPE:
-                        GuidebookPlusPlus.nameFocus = "*signalum crusher";
-                        break;
-                    case BASIC:
-                        GuidebookPlusPlus.nameFocus = "*basic signalum crusher";
-                        break;
-                    case REINFORCED:
-                        break;
-                    case AWAKENED:
-                        break;
-                }
+                StringTranslate translator = StringTranslate.getInstance();
+                String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
+                GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
