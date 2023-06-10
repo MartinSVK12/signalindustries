@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.dim;
+package sunsetsatellite.signalindustries.weather;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.Material;

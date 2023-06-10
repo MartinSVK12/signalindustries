@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tiers;
@@ -75,6 +76,34 @@ public class BlockPump extends BlockContainerTiered{
             }
             return true;
         }
+    }
+
+    @Override
+    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
+        TileEntityPump tile = (TileEntityPump) iblockaccess.getBlockTileEntity(i,j,k);
+        int meta = iblockaccess.getBlockMetadata(i,j,k);
+        /*
+        this.atlasIndices[1] = texCoordToIndex(topX, topY);
+        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
+        this.atlasIndices[4] = texCoordToIndex(northX, northY);
+        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
+        this.atlasIndices[5] = texCoordToIndex(southX, southY);
+        this.atlasIndices[3] = texCoordToIndex(westX, westY);
+         */
+        int index = Sides.orientationLookUp[6 * meta + side];
+        if(index == 1){
+            if(tile.isBurning()){
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.pumpTex[3][0],SignalIndustries.pumpTex[3][1]);
+            }
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.pumpTex[2][0],SignalIndustries.pumpTex[2][1]);
+        }
+        if(index > 1 && index < 6){
+            if(tile.isBurning()){
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.pumpTex[1][0],SignalIndustries.pumpTex[1][1]);
+            }
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.pumpTex[0][0],SignalIndustries.pumpTex[0][1]);
+        }
+        return this.atlasIndices[index];
     }
 
 }

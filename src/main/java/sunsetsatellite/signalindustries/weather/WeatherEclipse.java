@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.dim;
+package sunsetsatellite.signalindustries.weather;
 
 import net.minecraft.src.Weather;
 import net.minecraft.src.WeatherClear;

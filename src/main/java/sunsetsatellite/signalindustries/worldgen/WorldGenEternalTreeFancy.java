@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.dim.worldgen;
+package sunsetsatellite.signalindustries.worldgen;
 
 import net.minecraft.src.*;
 import sunsetsatellite.signalindustries.SignalIndustries;

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.FluidAPI;
+import sunsetsatellite.fluidapi.FluidRegistry;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
@@ -20,20 +21,21 @@ public class TileEntitySIFluidTank extends TileEntityFluidItemContainer implemen
         transferSpeed = 50;
         connections.replace(Direction.Y_POS, Connection.INPUT);
         connections.replace(Direction.Y_NEG, Connection.OUTPUT);
-        for (Map.Entry<Item, BlockFluid> entry : FluidAPI.fluidRegistry.fluids.entrySet()) {
-            BlockFluid V = entry.getValue();
-            if(V != SignalIndustries.energyFlowing) {
-                acceptedFluids.get(0).add(V);
+        for (BlockFluid fluid : FluidRegistry.getAllFluids()) {
+            if(fluid != SignalIndustries.energyFlowing) {
+                acceptedFluids.get(0).add(fluid);
             }
         }
     }
 
     @Override
     public void updateEntity() {
-        fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 8000;
-        transferSpeed = 50 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
-        extractFluids();
-        super.updateEntity();
+        if(getBlockType() != null){
+            fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 8000;
+            transferSpeed = 50 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
+            extractFluids();
+            super.updateEntity();
+        }
     }
 
     @Override

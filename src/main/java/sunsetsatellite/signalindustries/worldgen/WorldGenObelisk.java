@@ -1,8 +1,6 @@
-package sunsetsatellite.signalindustries.dim.worldgen;
+package sunsetsatellite.signalindustries.worldgen;
 
 import net.minecraft.shared.Minecraft;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockGrass;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 import sunsetsatellite.signalindustries.SignalIndustries;

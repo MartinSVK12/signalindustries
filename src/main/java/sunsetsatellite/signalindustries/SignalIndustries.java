@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
+import net.minecraft.src.material.ToolMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.Unsafe;
@@ -32,6 +33,9 @@ import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.util.*;
+import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
+import sunsetsatellite.signalindustries.weather.WeatherEclipse;
+import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import sunsetsatellite.sunsetutils.util.NBTEditCommand;
 import turniplabs.halplibe.helper.*;
 
@@ -40,6 +44,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class SignalIndustries implements ModInitializer {
@@ -51,7 +56,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
-    public static final Block signalumOre = BlockHelper.createBlock(MOD_ID,new BlockOreSignalum(Config.getFromConfig("signalumOre",availableBlockId++)),"signalumOre","signalumore.png",Block.soundStoneFootstep,1.0f,15.0f,1);
+    public static final Block signalumOre = BlockHelper.createBlock(MOD_ID,new BlockOreSignalum(Config.getFromConfig("signalumOre",availableBlockId++)),"signalumOre","signalumore.png",Block.soundStoneFootstep,3.0f,25.0f,1);
+    public static final Block dilithiumOre = BlockHelper.createBlock(MOD_ID,new BlockOreDilithium(Config.getFromConfig("dilithiumOre",availableBlockId++)),"dilithiumOre","dilithiumore.png",Block.soundStoneFootstep,10.0f,25.0f,1);
 
     public static final Block prototypeMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("prototypeMachineCore",availableBlockId++), Tiers.PROTOTYPE,Material.rock),"prototype.machine","machineprototype.png",Block.soundStoneFootstep,2.0f,3.0f,0);
     public static final Block basicMachineCore = BlockHelper.createBlock(MOD_ID,new BlockTiered(Config.getFromConfig("basicMachineCore",availableBlockId++),Tiers.BASIC,Material.rock),"basic.machine","machinebasic.png",Block.soundStoneFootstep,3.0f,8.0f,1.0f/2.0f);
@@ -67,9 +73,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block basicFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("basicFluidConduit",availableBlockId++),Tiers.BASIC,Material.glass),"basic.conduit.fluid","fluidpipebasic.png",Block.soundGlassFootstep,1.0f,1.0f,0);
     public static final Block reinforcedFluidConduit = BlockHelper.createBlock(MOD_ID,new BlockFluidConduit(Config.getFromConfig("reinforcedFluidConduit",availableBlockId++),Tiers.REINFORCED,Material.glass),"reinforced.conduit.fluid","fluidpipereinforced.png",Block.soundGlassFootstep,1.0f,1.0f,0);
 
+    public static final Block infiniteEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("infiniteEnergyCell",availableBlockId++),Tiers.INFINITE,Material.glass),"infinite.energyCell","cellprototype.png",Block.soundGlassFootstep,-1.0f,1000000.0f,0);
     public static final Block prototypeEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("prototypeEnergyCell",availableBlockId++),Tiers.PROTOTYPE,Material.glass),"prototype.energyCell","cellprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
     public static final Block basicEnergyCell = BlockHelper.createBlock(MOD_ID,new BlockEnergyCell(Config.getFromConfig("basicEnergyCell",availableBlockId++),Tiers.BASIC,Material.glass),"basic.energyCell","cellbasic.png",Block.soundGlassFootstep,2.0f,5.0f,0);
-
 
     public static final Block prototypeFluidTank = BlockHelper.createBlock(MOD_ID,new BlockSIFluidTank(Config.getFromConfig("prototypeFluidTank",availableBlockId++),Tiers.PROTOTYPE,Material.glass),"prototype.fluidTank","fluidtankprototype.png",Block.soundGlassFootstep,2.0f,5.0f,0);
 
@@ -115,7 +121,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Block dilithiumBooster = BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster(Config.getFromConfig("dilithiumBooster",availableBlockId++),Tiers.REINFORCED,Material.iron),"reinforced.dilithiumBooster","reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png",Block.soundMetalFootstep,5f,20f,1);
     public static final int[][] dilithBoosterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideactive.png")};
 
-    public static final Block prototypePump = BlockHelper.createBlock(MOD_ID,new BlockPump(Config.getFromConfig("prototypePump",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.pump","prototypefluidconnection.png","prototypeblank.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png",Block.soundStoneFootstep,2,3,0);
+    public static final Block prototypePump = BlockHelper.createBlock(MOD_ID,new BlockPump(Config.getFromConfig("prototypePump",availableBlockId++),Tiers.PROTOTYPE,Material.rock),"prototype.pump","prototypepumptop.png","prototypeblank.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png",Block.soundStoneFootstep,2,3,0);
+    public static final int[][] pumpTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"prototypepumpsideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumpside.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumptopempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumptop.png")};
+
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -126,6 +134,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Item signalumCrystalEmpty = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(Config.getFromConfig("signalumCrystalEmpty",availableItemId++)),"signalumCrystalEmpty","signalumcrystalempty.png").setMaxStackSize(1);
     public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(Config.getFromConfig("signalumCrystal",availableItemId++)),"signalumCrystal","signalumcrystal.png").setMaxStackSize(1);
     public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("rawSignalumCrystal",availableItemId++)),"rawSignalumCrystal","rawsignalumcrystal.png");
+
+    public static final Item awakenedSignalumCrystal = ItemHelper.createItem(MOD_ID, new Item(Config.getFromConfig("awakenedSignalumCrystal",availableItemId++)),"awakenedSignalumCrystal","awakenedsignalumcrystal.png").setMaxStackSize(1);
+    public static final Item awakenedSignalumFragment = ItemHelper.createItem(MOD_ID, new Item(Config.getFromConfig("awakenedSignalumFragment",availableItemId++)),"awakenedSignalumFragment","awakenedsignalumfragment.png");
 
     public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("coalDust",availableItemId++)),"coalDust","coaldust.png");
     public static final Item netherCoalDust = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("netherCoalDust",availableItemId++)),"netherCoalDust","nethercoaldust.png");
@@ -176,6 +187,9 @@ public class SignalIndustries implements ModInitializer {
     public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("romChipBoost",availableItemId++)),"romChipBoost","chip2.png");
 
     public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item(Config.getFromConfig("energyCatalyst",availableItemId++)),"energyCatalyst","energycatalyst.png");
+
+    public static final Item signalumSaber = ItemHelper.createItem(MOD_ID, new ItemSignalumSaber(Config.getFromConfig("signalumSaber",availableItemId++),Tiers.REINFORCED, ToolMaterial.stone), "signalumSaber", "signalumsaberunpowered.png");
+    public static final int[][] saberTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"signalumsaberunpowered.png"),TextureHelper.registerItemTexture(MOD_ID,"signalumsaber.png")};
 
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(Config.getFromConfig("pulsar",availableItemId++),Tiers.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
@@ -270,6 +284,18 @@ public class SignalIndustries implements ModInitializer {
         //crafting recipes in RecipeHandlerCraftingSI
 
         Config.init();
+    }
+
+    public static void debug(String string, Object... args){
+        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
+        String trace = element.getFileName() + ":" + element.getLineNumber();
+        LOGGER.info("["+trace+"] "+String.format(string,args));
+    }
+
+    public static void error(String string, Object... args){
+        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
+        String trace = element.getFileName() + ":" + element.getLineNumber();
+        LOGGER.error("["+trace+"] "+String.format(string,args));
     }
 
 

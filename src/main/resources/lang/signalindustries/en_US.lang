@@ -6,6 +6,10 @@ item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
 item.signalindustries.signalumCrystalEmpty.desc=This crystal is useful even without any energy in it.
 item.signalindustries.rawSignalumCrystal.name=Raw Signalum Crystal
 item.signalindustries.rawSignalumCrystal.desc=Straight from the earth, the beginning of it all.
+item.signalindustries.awakenedSignalumCrystal.name=Awakened Signalum Crystal
+item.signalindustries.awakenedSignalumCrystal.desc=Reborn as the first star of evening. You are perfect, unmatched.
+item.signalindustries.awakenedSignalumFragment.name=Awakened Signalum Fragment
+item.signalindustries.awakenedSignalumFragment.desc=Let me reach for the stars now, they're so close to me. I will whisper to them all of my secrets.
 
 item.signalindustries.crystalAlloyIngot.name=Crystal Alloy Ingot
 item.signalindustries.crystalAlloyIngot.desc=An alloy of steel and [Signalum Crystal Dust].
@@ -61,6 +65,9 @@ item.signalindustries.romChipBoost.desc=Contains code for a [Trigger] ability.
 item.signalindustries.pulsar.name=The Pulsar
 item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is using and releasing huge amounts of [S. Energy] to create powerful shockwaves.
 
+item.signalindustries.signalumSaber.name=Signalum Saber
+item.signalindustries.signalumSaber.desc=Standing here, I realize..
+
 item.signalindustries.dimensionalShard.name=Dimensional Shard
 item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
 item.signalindustries.dilithiumShard.name=Dilithium Shard
@@ -79,7 +86,10 @@ item.signalindustries.warpOrb.name=Warp Orb
 item.signalindustries.warpOrb.desc=Contains a physical encoding of a point in space. What might happen if it were broken, if that's even possible, is unknown.
 
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
-tile.signalindustries.signalumOre.desc=[Raw Signalum Crystal] encased in rock.
+tile.signalindustries.signalumOre.desc=[Raw Signalum Crystals] encased in rock.
+
+tile.signalindustries.dilithiumOre.name=Dilithium Ore
+tile.signalindustries.dilithiumOre.desc=[Dilithium Shards] encased in rock.
 
 tile.signalindustries.prototype.machine.name=Prototype Machine Core
 tile.signalindustries.prototype.machine.desc=Key component for [Prototype] machines.
@@ -111,6 +121,8 @@ item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, b
 item.signalindustries.basic.prototypeHarnessGoggles.name=Prototype Goggles
 item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the [Signalum Prototype Harness] or other equipment. Provides information about the world and your equipment.
 
+tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
+tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.
 tile.signalindustries.prototype.energyCell.name=Prototype Energy Cell
 tile.signalindustries.prototype.energyCell.desc=Buffer for storing [Signalum Energy].
 tile.signalindustries.basic.energyCell.name=Basic Energy Cell

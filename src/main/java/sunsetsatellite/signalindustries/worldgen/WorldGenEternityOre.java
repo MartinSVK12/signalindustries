@@ -1,9 +1,7 @@
-package sunsetsatellite.signalindustries.dim.worldgen;
+package sunsetsatellite.signalindustries.worldgen;
 
-import net.minecraft.src.Block;
 import net.minecraft.src.MathHelper;
 import net.minecraft.src.World;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Random;
 

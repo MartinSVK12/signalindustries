@@ -2,11 +2,10 @@ package sunsetsatellite.signalindustries.dim;
 
 import net.minecraft.shared.Minecraft;
 import net.minecraft.src.*;
-import org.lwjgl.Sys;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.dim.worldgen.WorldGenEternalTreeFancy;
-import sunsetsatellite.signalindustries.dim.worldgen.WorldGenEternityOre;
-import sunsetsatellite.signalindustries.dim.worldgen.WorldGenObelisk;
+import sunsetsatellite.signalindustries.worldgen.WorldGenEternalTreeFancy;
+import sunsetsatellite.signalindustries.worldgen.WorldGenEternityOre;
+import sunsetsatellite.signalindustries.worldgen.WorldGenObelisk;
 
 public class ChunkProviderEternity extends ChunkProviderGenerateOverworld {
     public ChunkProviderEternity(World world, long l, int oceanHeight, int terrainMaxHeight, int terrainMiddle) {

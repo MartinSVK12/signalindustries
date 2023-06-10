@@ -6,10 +6,12 @@ import net.minecraft.src.NBTTagInt;
 import net.minecraft.src.TileEntity;
 import org.lwjgl.Sys;
 import sunsetsatellite.fluidapi.FluidAPI;
+import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
+import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -30,10 +32,23 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
 
     @Override
     public void updateEntity() {
-        fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 8000;
-        transferSpeed = 50 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
-        extractFluids();
-        super.updateEntity();
+        if(getBlockType() != null){
+            if(((BlockContainerTiered)getBlockType()).tier == Tiers.INFINITE){
+                fluidCapacity[0] = Integer.MAX_VALUE;
+                //TODO: Fix conduit next to energy cell going over its capacity when the transferSpeed is higher than its capacity
+                transferSpeed = Integer.MAX_VALUE;
+                if(fluidContents[0] != null){
+                    fluidContents[0].amount = Integer.MAX_VALUE;
+                } else {
+                   fluidContents[0] = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,Integer.MAX_VALUE);
+                }
+            } else {
+                fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 8000;
+                transferSpeed = 50 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
+            }
+            extractFluids();
+            super.updateEntity();
+        }
     }
 
     @Override
@@ -58,7 +73,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if (tile instanceof TileEntityFluidPipe) {
                 pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile, transferSpeed);
+                moveFluids(dir, (TileEntityFluidPipe) tile, Math.min(transferSpeed,((TileEntityFluidPipe) tile).transferSpeed));
                 ((TileEntityFluidPipe) tile).rememberTicks = 100;
             }
         }
