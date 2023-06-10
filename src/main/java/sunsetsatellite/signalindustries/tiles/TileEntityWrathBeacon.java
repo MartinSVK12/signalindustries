@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.tiles;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
-import sun.misc.Unsafe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.util.Wave;
@@ -10,7 +9,6 @@ import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class TileEntityWrathBeacon extends TileEntity {

@@ -35,7 +35,6 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
         if(getBlockType() != null){
             if(((BlockContainerTiered)getBlockType()).tier == Tiers.INFINITE){
                 fluidCapacity[0] = Integer.MAX_VALUE;
-                //TODO: Fix conduit next to energy cell going over its capacity when the transferSpeed is higher than its capacity
                 transferSpeed = Integer.MAX_VALUE;
                 if(fluidContents[0] != null){
                     fluidContents[0].amount = Integer.MAX_VALUE;

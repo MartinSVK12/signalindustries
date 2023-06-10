@@ -134,7 +134,6 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
     }
 
     private boolean canProcess() {
-        //TODO: Limit how big crystals can get
         if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {

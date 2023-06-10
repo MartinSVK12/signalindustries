@@ -8,7 +8,6 @@ import net.minecraft.src.material.ArmorMaterial;
 import net.minecraft.src.material.ToolMaterial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.Unsafe;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.mixin.accessors.PacketAccessor;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
@@ -28,6 +27,7 @@ import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
+import sunsetsatellite.signalindustries.mixin.accessors.BiomeGenBaseAccessor;
 import sunsetsatellite.signalindustries.mixin.accessors.WorldTypeAccessor;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
@@ -350,7 +350,7 @@ public class SignalIndustries implements ModInitializer {
 
     }
 
-    public static BiomeGenBase createBiome(int id, Class<? extends BiomeGenPublic> clazz){
+    /*public static BiomeGenBase createBiome(int id, Class<? extends BiomeGenPublic> clazz){
         BiomeGenBase[] extendedList = Arrays.copyOf(BiomeGenBase.biomeList, BiomeGenBase.biomeList.length + 1);
         Field biomeListField = ReflectUtils.getField(clazz,"biomeList");
         try {
@@ -364,6 +364,15 @@ public class SignalIndustries implements ModInitializer {
             return clazz.getConstructor(int.class).newInstance(id);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |
                  NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+    public static BiomeGenBase createBiome(int id, Class<? extends BiomeGenBase> clazz){
+        BiomeGenBase[] extendedList = Arrays.copyOf(BiomeGenBase.biomeList, BiomeGenBase.biomeList.length + 1);
+        BiomeGenBaseAccessor.setBiomeList(extendedList);
+        try {
+            return clazz.getDeclaredConstructor(int.class).newInstance(id);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
     }
