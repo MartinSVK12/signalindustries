@@ -12,7 +12,7 @@ import sunsetsatellite.signalindustries.recipes.BasicExtractorRecipes;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 import sunsetsatellite.signalindustries.recipes.PumpRecipes;
-import sunsetsatellite.signalindustries.util.BlockInstance;
+import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.ArrayList;

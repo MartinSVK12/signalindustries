@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
-import sunsetsatellite.signalindustries.util.Config;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 
 @Debug(

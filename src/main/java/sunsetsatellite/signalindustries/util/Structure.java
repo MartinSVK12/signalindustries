@@ -49,8 +49,6 @@ public class Structure {
     }
 
     public static void reloadInternalStructures() {
-        internalStructures.put("test",new Structure(SignalIndustries.MOD_ID,"test","test",true,true));
-        internalStructures.put("wool",new Structure(SignalIndustries.MOD_ID,"wool","wool",true,true));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.",internalStructures.size()));
     }
 
@@ -66,14 +64,16 @@ public class Structure {
         }
     }
 
+    //data.getCompoundTag("Data").func_28110_c()
+
     public boolean placeStructure(World world, int originX, int originY, int originZ){
-        for (Object o : data.func_28110_c()) {
+        for (Object o : data.getCompoundTag("Data").func_28110_c()) {
             NBTTagCompound block = (NBTTagCompound) o;
             if (!replaceBlocks && world.getBlockId(block.getInteger("x") + originX, block.getInteger("y") + originY, block.getInteger("z") + originZ) != 0) {
                 return false;
             }
         }
-        for (Object o : data.func_28110_c()) {
+        for (Object o : data.getCompoundTag("Data").func_28110_c()) {
             NBTTagCompound block = (NBTTagCompound) o;
             int id = getBlockId(block);
             if(id != 0 || placeAir){
@@ -87,6 +87,7 @@ public class Structure {
         if(size.x >= 0 && size.y >= 0 && size.z >= 0){
             int n = 0;
             NBTTagCompound data = new NBTTagCompound();
+            NBTTagCompound struct = new NBTTagCompound();
             for (int x = origin.x-size.x; x <= origin.x+size.x; x++) {
                 for (int y = origin.y-size.y; y <= origin.y+size.y; y++) {
                     for (int z = origin.z-size.z; z <= origin.z+size.z; z++) {
@@ -109,8 +110,9 @@ public class Structure {
                     }
                 }
             }
+            struct.setCompoundTag("Data",data);
             SignalIndustries.LOGGER.info(n+" blocks saved.");
-            Structure structure = new Structure(SignalIndustries.MOD_ID,filePath,data,placeAir,replaceBlocks);
+            Structure structure = new Structure(SignalIndustries.MOD_ID,filePath,struct,placeAir,replaceBlocks);
             structure.filePath = filePath;
             return structure;
         } else {
@@ -120,6 +122,7 @@ public class Structure {
     }
 
     public static Structure saveStructure(World world, Vec3i pos1, Vec3i pos2, String filePath, boolean placeAir, boolean replaceBlocks){
+        NBTTagCompound struct = new NBTTagCompound();
         NBTTagCompound data = new NBTTagCompound();
         Vec3i diff = new Vec3i(pos1.x-pos2.x,pos1.y-pos2.y,pos1.z-pos2.z);
         int n = 0;
@@ -165,15 +168,16 @@ public class Structure {
                 }
             }
         }
+        struct.setCompoundTag("Data",data);
         SignalIndustries.LOGGER.info(n+" blocks saved.");
-        Structure structure = new Structure(SignalIndustries.MOD_ID,filePath,data,placeAir,replaceBlocks);
+        Structure structure = new Structure(SignalIndustries.MOD_ID,filePath,struct,placeAir,replaceBlocks);
         structure.filePath = filePath;
         return structure;
     }
 
     public boolean placeStructure(World world, int originX, int originY, int originZ, String direction){
 
-        for (Object o : data.func_28110_c()) {
+        for (Object o : data.getCompoundTag("Data").func_28110_c()) {
             Vec3i pos;
             NBTTagCompound block = (NBTTagCompound) o;
             Direction dir = Direction.getFromName(direction);
@@ -195,7 +199,7 @@ public class Structure {
                 return false;
             }
         }
-        for (Object o : data.func_28110_c()) {
+        for (Object o : data.getCompoundTag("Data").func_28110_c()) {
             Vec3i pos;
             Direction dir = Direction.getFromName(direction);
             NBTTagCompound block = (NBTTagCompound) o;
@@ -229,14 +233,10 @@ public class Structure {
             String[] args = ((NBTTagString) nbt).stringValue.split(":");
 
             try {
-                if(args[0].contains("SignalIndustries")){
-                    return ((Block)SignalIndustries.class.getDeclaredField(args[1]).get(null)).blockID;
-                } else {
-                    Class<?> clazz = Class.forName(args[0]);
-                    Field field = clazz.getDeclaredField(args[1]);
-                    Block b = (Block) field.get(null);
-                    return b.blockID;
-                }
+                Class<?> clazz = Class.forName(args[0]);
+                Field field = clazz.getDeclaredField(args[1]);
+                Block b = (Block) field.get(null);
+                return b.blockID;
             } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException | ClassCastException e) {
                e.printStackTrace();
                return 0;
@@ -252,7 +252,7 @@ public class Structure {
             file = new File(Objects.requireNonNull(this.getClass().getResource("/assets/"+modId+"/structures/"+name+".nbt")).toURI());
             FileInputStream fileinputstream = new FileInputStream(file);
             this.data = CompressedStreamTools.func_1138_a(fileinputstream);
-            SignalIndustries.LOGGER.info(String.format("Structure '%s' contains %d blocks.",name,this.data.func_28110_c().size()));
+            SignalIndustries.LOGGER.info(String.format("Structure '%s' contains %d blocks.",name,this.data.getCompoundTag("Data").func_28110_c().size()));
         } catch (IOException | URISyntaxException e){
             e.printStackTrace();
         }

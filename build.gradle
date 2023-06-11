@@ -89,7 +89,7 @@ dependencies {
 
 	modImplementation "fluidapi:fluidapi:1.5"
 
-	modImplementation "sunsetutils:sunsetutils:1.1"
+	modImplementation "sunsetutils:sunsetutils:1.2"
 
 	modImplementation "guidebookpp:guidebookpp:1.5.1"
 
