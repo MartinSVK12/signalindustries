@@ -116,7 +116,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
             if(fluidContents[1] == null){
                 setFluidInSlot(1, stack);
             } else if(getFluidInSlot(1).getLiquid() == stack.getLiquid()) {
-                incrFluidAmount(1, stack.amount);
+                fluidContents[1].amount += stack.amount;
             }
             worldObj.setBlockWithNotify(currentBlock.pos.x,currentBlock.pos.y,currentBlock.pos.z,0);
             currentBlock = null;

@@ -110,7 +110,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
             if(fluidContents[0] == null){
                 setFluidInSlot(0, stack);
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
-                incrFluidAmount(0, stack.amount);
+                fluidContents[0].amount += stack.amount;
             }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());

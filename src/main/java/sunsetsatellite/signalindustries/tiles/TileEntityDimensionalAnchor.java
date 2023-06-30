@@ -4,8 +4,8 @@ import net.minecraft.src.BlockFluid;
 import net.minecraft.src.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.interfaces.IMultiblock;
-import sunsetsatellite.signalindustries.util.Multiblock;
+import sunsetsatellite.sunsetutils.util.multiblocks.IMultiblock;
+import sunsetsatellite.sunsetutils.util.multiblocks.Multiblock;
 
 import java.util.ArrayList;
 

@@ -87,9 +87,9 @@ dependencies {
 		exclude(group: 'objects', module: 'client')
 	}*/
 
-	modImplementation "fluidapi:fluidapi:1.5"
+	modImplementation "fluidapi:fluidapi:1.6.1"
 
-	modImplementation "sunsetutils:sunsetutils:1.2"
+	modImplementation "sunsetutils:sunsetutils:1.5.1"
 
 	modImplementation "guidebookpp:guidebookpp:1.5.1"
 

@@ -72,7 +72,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if (tile instanceof TileEntityFluidPipe) {
                 pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile, Math.min(transferSpeed,((TileEntityFluidPipe) tile).transferSpeed));
+                moveFluids(dir, (TileEntityFluidPipe) tile);
                 ((TileEntityFluidPipe) tile).rememberTicks = 100;
             }
         }

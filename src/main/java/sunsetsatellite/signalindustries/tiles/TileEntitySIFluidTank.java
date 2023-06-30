@@ -50,7 +50,7 @@ public class TileEntitySIFluidTank extends TileEntityFluidItemContainer implemen
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if (tile instanceof TileEntityFluidPipe) {
                 pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
-                moveFluids(dir, (TileEntityFluidPipe) tile, transferSpeed);
+                moveFluids(dir, (TileEntityFluidPipe) tile);
                 ((TileEntityFluidPipe) tile).rememberTicks = 100;
             }
         }

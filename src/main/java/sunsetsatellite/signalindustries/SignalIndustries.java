@@ -38,12 +38,15 @@ import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import sunsetsatellite.sunsetutils.util.Config;
 import sunsetsatellite.sunsetutils.util.NBTEditCommand;
+import sunsetsatellite.sunsetutils.util.multiblocks.Multiblock;
+import sunsetsatellite.sunsetutils.util.multiblocks.RenderMultiblock;
+import sunsetsatellite.sunsetutils.util.multiblocks.Structure;
+import sunsetsatellite.sunsetutils.util.multiblocks.StructureCommand;
 import turniplabs.halplibe.helper.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-
 
 public class SignalIndustries implements ModInitializer {
 
@@ -211,6 +214,8 @@ public class SignalIndustries implements ModInitializer {
     public static Dimension dimEternity;
     public static WorldType eternityWorld;
 
+    public static Multiblock dimAnchorMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"dimensionalAnchor","dimensionalAnchor",false);
+
     @Override
     public void onInitialize() {
         LOGGER.info("Signal Industries initialized.");
@@ -279,6 +284,10 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityItemPipe.class,"Item Pipe");
         EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
         EntityHelper.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
+
+        Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
+        SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
+        SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 
         //crafting recipes in RecipeHandlerCraftingSI
 
