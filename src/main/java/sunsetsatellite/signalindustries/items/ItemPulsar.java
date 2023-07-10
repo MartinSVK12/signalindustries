@@ -7,13 +7,13 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
 
 public class ItemPulsar extends ItemTiered implements IHasOverlay {
-    public ItemPulsar(int i, Tiers tier) {
+    public ItemPulsar(int i, Tier tier) {
         super(i, tier);
     }
 

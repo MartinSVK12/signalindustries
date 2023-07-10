@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockAlloySmelter extends BlockContainerTiered{
-    public BlockAlloySmelter(int i, Tiers tier, Material material) {
+    public BlockAlloySmelter(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

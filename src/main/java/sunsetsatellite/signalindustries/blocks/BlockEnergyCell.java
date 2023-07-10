@@ -8,14 +8,14 @@ import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
 
 import java.util.ArrayList;
 
 public class BlockEnergyCell extends BlockContainerTiered {
-    public BlockEnergyCell(int i, Tiers tier, Material material) {
+    public BlockEnergyCell(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

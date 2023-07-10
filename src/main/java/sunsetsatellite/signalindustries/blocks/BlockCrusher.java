@@ -2,9 +2,9 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
 import sunsetsatellite.signalindustries.gui.GuiCrusher;
 import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockCrusher extends BlockContainerTiered{
-    public BlockCrusher(int i, Tiers tier, Material material) {
+    public BlockCrusher(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

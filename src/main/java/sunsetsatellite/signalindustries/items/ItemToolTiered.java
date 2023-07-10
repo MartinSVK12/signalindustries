@@ -5,11 +5,11 @@ import net.minecraft.src.ItemTool;
 import net.minecraft.src.Material;
 import net.minecraft.src.material.ToolMaterial;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemToolTiered extends ItemTool implements ITiered {
-    public Tiers tier;
-    protected ItemToolTiered(int i, int j, Tiers tier, ToolMaterial toolMaterial, Material[] materialsEffectiveAgainst) {
+    public Tier tier;
+    protected ItemToolTiered(int i, int j, Tier tier, ToolMaterial toolMaterial, Material[] materialsEffectiveAgainst) {
         super(i, j, toolMaterial, materialsEffectiveAgainst);
         this.tier = tier;
     }
@@ -17,5 +17,10 @@ public class ItemToolTiered extends ItemTool implements ITiered {
     @Override
     public String getDescription(ItemStack stack) {
         return "Tier: " + tier.getColor() + tier.getRank();
+    }
+
+    @Override
+    public Tier getTier() {
+        return tier;
     }
 }

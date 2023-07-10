@@ -5,11 +5,8 @@ import net.minecraft.src.ICrafting;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntityTiered;
 import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerExtractor extends ContainerTiered {
 
@@ -87,7 +84,7 @@ public class ContainerExtractor extends ContainerTiered {
         }
     }
 
-    public void updateClientTier(Tiers tier){
+    public void updateClientTier(Tier tier){
 
     }
 

@@ -12,13 +12,13 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.interfaces.IVariableDamageWeapon;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFluidContainer, IVariableDamageWeapon, IHasOverlay {
 
-    public Tiers tier;
+    public Tier tier;
 
-    public ItemSignalumSaber(int i, Tiers tier, ToolMaterial enumtoolmaterial) {
+    public ItemSignalumSaber(int i, Tier tier, ToolMaterial enumtoolmaterial) {
         super(i, enumtoolmaterial);
         this.tier = tier;
     }
@@ -172,5 +172,10 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         fontrenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
         fontrenderer.drawStringWithShadow(String.valueOf(saber.tag.getInteger("energy")), 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
         fontrenderer.drawStringWithShadow(saber.tag.getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.tag.getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
+    }
+
+    @Override
+    public Tier getTier() {
+        return tier;
     }
 }

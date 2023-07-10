@@ -2,18 +2,18 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiInfuser;
 import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
-import sunsetsatellite.signalindustries.util.Tiers;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockInfuser extends BlockContainerTiered{
-    public BlockInfuser(int i, Tiers tier, Material material) {
+    public BlockInfuser(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

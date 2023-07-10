@@ -4,19 +4,16 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerBooster;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiBooster;
-import sunsetsatellite.signalindustries.gui.GuiInfuser;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.TileEntityBooster;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockDilithiumBooster extends BlockContainerTiered {
-    public BlockDilithiumBooster(int i, Tiers tier, Material material) {
+    public BlockDilithiumBooster(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

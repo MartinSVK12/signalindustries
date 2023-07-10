@@ -4,18 +4,16 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalChamber;
-import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.gui.GuiCrystalChamber;
-import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
 import sunsetsatellite.signalindustries.tiles.TileEntityCrystalChamber;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockCrystalChamber extends BlockContainerTiered{
-    public BlockCrystalChamber(int i, Tiers tier, Material material) {
+    public BlockCrystalChamber(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

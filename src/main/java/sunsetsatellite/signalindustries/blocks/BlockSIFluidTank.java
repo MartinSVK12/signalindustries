@@ -6,16 +6,16 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
 import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
 
 import java.util.ArrayList;
 
 public class BlockSIFluidTank extends BlockContainerTiered {
-    public BlockSIFluidTank(int i, Tiers tier, Material material) {
+    public BlockSIFluidTank(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

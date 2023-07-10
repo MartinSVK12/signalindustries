@@ -2,13 +2,13 @@ package sunsetsatellite.signalindustries.items;
 
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 public class ItemTiered extends Item implements ITiered {
-    public Tiers tier;
+    public Tier tier;
 
-    public ItemTiered(int i, Tiers tier) {
+    public ItemTiered(int i, Tier tier) {
         super(i);
         this.tier = tier;
     }
@@ -16,5 +16,10 @@ public class ItemTiered extends Item implements ITiered {
     @Override
     public String getDescription(ItemStack stack) {
         return "Tier: " + tier.getColor() + tier.getRank();
+    }
+
+    @Override
+    public Tier getTier() {
+        return tier;
     }
 }

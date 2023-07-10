@@ -2,16 +2,12 @@ package sunsetsatellite.signalindustries.tiles;
 
 import net.minecraft.src.BlockFluid;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagInt;
 import net.minecraft.src.TileEntity;
-import org.lwjgl.Sys;
-import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidTank;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -33,7 +29,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     @Override
     public void updateEntity() {
         if(getBlockType() != null){
-            if(((BlockContainerTiered)getBlockType()).tier == Tiers.INFINITE){
+            if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
                 if(fluidContents[0] != null){

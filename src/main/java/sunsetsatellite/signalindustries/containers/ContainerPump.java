@@ -6,7 +6,7 @@ import net.minecraft.src.IInventory;
 import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerPump extends ContainerTiered {
 
@@ -81,7 +81,7 @@ public class ContainerPump extends ContainerTiered {
         }
     }
 
-    public void updateClientTier(Tiers tier){
+    public void updateClientTier(Tier tier){
 
     }
 

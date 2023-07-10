@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
 import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
 import sunsetsatellite.signalindustries.tiles.TileEntityPlateFormer;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockPlateFormer extends BlockContainerTiered{
-    public BlockPlateFormer(int i, Tiers tier, Material material) {
+    public BlockPlateFormer(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

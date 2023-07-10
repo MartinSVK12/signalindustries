@@ -6,7 +6,7 @@ import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.tiles.TileEntityDimensionalAnchor;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3i;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockDimensionalAnchor extends BlockContainerTiered {
-    public BlockDimensionalAnchor(int i, Tiers tier, Material material) {
+    public BlockDimensionalAnchor(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

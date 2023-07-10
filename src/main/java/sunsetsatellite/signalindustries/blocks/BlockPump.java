@@ -2,10 +2,9 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerPump;
 import sunsetsatellite.signalindustries.gui.GuiPump;
 import sunsetsatellite.signalindustries.tiles.TileEntityPump;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockPump extends BlockContainerTiered{
-    public BlockPump(int i, Tiers tier, Material material) {
+    public BlockPump(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

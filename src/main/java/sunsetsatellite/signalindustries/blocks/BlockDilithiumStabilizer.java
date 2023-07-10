@@ -6,14 +6,14 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiInfuser;
 import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockDilithiumStabilizer extends BlockContainerTiered {
-    public BlockDilithiumStabilizer(int i, Tiers tier, Material material) {
+    public BlockDilithiumStabilizer(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

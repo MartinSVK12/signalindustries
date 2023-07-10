@@ -5,24 +5,18 @@ import net.minecraft.src.command.ChatColor;
 import net.minecraft.src.material.ArmorMaterial;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
-import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
-import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.tiles.InventoryHarness;
-import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
-import sunsetsatellite.signalindustries.util.Tiers;
-import sunsetsatellite.sunsetutils.util.TickTimer;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHasOverlay {
 
 
-    public ItemSignalumPrototypeHarness(int id, ArmorMaterial material, int armorPiece, Tiers tier) {
+    public ItemSignalumPrototypeHarness(int id, ArmorMaterial material, int armorPiece, Tier tier) {
         super(id, material, armorPiece, tier);
     }
 

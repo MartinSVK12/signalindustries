@@ -2,11 +2,11 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.tiles.TileEntityConduit;
 
 public class BlockConduit extends BlockContainerTiered {
-    public BlockConduit(int i, Tiers tier, Material material) {
+    public BlockConduit(int i, Tier tier, Material material) {
         super(i, tier, material);
     }
 

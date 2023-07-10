@@ -1,12 +1,10 @@
 package sunsetsatellite.signalindustries.containers;
 
-import net.minecraft.src.ICrafting;
 import net.minecraft.src.IInventory;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
-import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.tiles.TileEntityTiered;
 import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerTiered extends ContainerFluid {
     public ContainerTiered(IInventory iInventory, TileEntityTiered tileEntityTieredMachine) {
@@ -15,5 +13,5 @@ public class ContainerTiered extends ContainerFluid {
 
     protected TileEntityTiered tile = (TileEntityTiered) super.tile;
     protected TileEntityTieredMachine machine = (TileEntityTieredMachine) tile;
-    public Tiers tier = Tiers.PROTOTYPE;
+    public Tier tier = Tier.PROTOTYPE;
 }

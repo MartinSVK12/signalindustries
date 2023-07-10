@@ -1,14 +1,14 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
-import sunsetsatellite.signalindustries.util.Tiers;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 public class BlockTiered extends Block implements ITiered {
 
-    public Tiers tier;
+    public Tier tier;
 
-    public BlockTiered(int i, Tiers tier, Material material) {
+    public BlockTiered(int i, Tier tier, Material material) {
         super(i, material);
         this.tier = tier;
     }
@@ -18,4 +18,8 @@ public class BlockTiered extends Block implements ITiered {
         return "Tier: " + tier.getColor() + tier.getRank();
     }
 
+    @Override
+    public Tier getTier() {
+        return tier;
+    }
 }
