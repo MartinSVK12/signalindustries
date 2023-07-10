@@ -14,6 +14,11 @@ public abstract class BlockContainerTiered extends BlockContainerRotatable imple
     }
 
     @Override
+    public Tier getTier(){
+        return tier;
+    }
+
+    @Override
     public String getDescription(ItemStack stack) {
         return "Tier: " + tier.getColor() + tier.getRank();
     }
