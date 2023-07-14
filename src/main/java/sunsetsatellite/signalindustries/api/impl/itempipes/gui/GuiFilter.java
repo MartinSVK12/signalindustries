@@ -2,15 +2,8 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.gui;
 
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.containers.ContainerFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerExtractor;
-import sunsetsatellite.signalindustries.gui.GuiFluidIOConfig;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
 
 public class GuiFilter extends GuiContainer {
     public String name = "Filter";

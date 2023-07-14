@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp;
 
-import org.slf4j.Logger;;
+import org.slf4j.Logger;
 import sunsetsatellite.guidebookpp.GuidebookCustomRecipePlugin;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers.*;

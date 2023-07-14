@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.src.IInventory;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
-import sunsetsatellite.signalindustries.tiles.TileEntityTiered;
-import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.TileEntityTiered;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerTiered extends ContainerFluid {

@@ -5,7 +5,7 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiInfuser;
-import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
+import sunsetsatellite.signalindustries.inventories.TileEntityInfuser;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 

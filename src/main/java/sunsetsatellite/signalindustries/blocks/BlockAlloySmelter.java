@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
 
 import java.util.ArrayList;
 import java.util.Random;

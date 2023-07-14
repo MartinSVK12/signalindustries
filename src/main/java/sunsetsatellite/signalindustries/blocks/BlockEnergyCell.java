@@ -10,7 +10,7 @@ import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
 
 import java.util.ArrayList;
 

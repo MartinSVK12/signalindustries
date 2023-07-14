@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
 import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
-import sunsetsatellite.signalindustries.tiles.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.inventories.TileEntityPlateFormer;
 
 import java.util.ArrayList;
 import java.util.Random;

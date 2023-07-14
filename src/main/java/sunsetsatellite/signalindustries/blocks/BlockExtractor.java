@@ -7,7 +7,7 @@ import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
+import sunsetsatellite.signalindustries.inventories.TileEntityExtractor;
 
 import java.util.ArrayList;
 import java.util.Random;

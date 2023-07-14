@@ -17,7 +17,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
+import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;

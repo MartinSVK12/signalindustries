@@ -8,8 +8,7 @@ import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerBooster;
-import sunsetsatellite.signalindustries.tiles.TileEntityBooster;
-import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
+import sunsetsatellite.signalindustries.inventories.TileEntityBooster;
 
 public class GuiBooster extends GuiFluid {
 

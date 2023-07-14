@@ -7,7 +7,7 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
-import sunsetsatellite.signalindustries.tiles.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.inventories.TileEntityPlateFormer;
 
 public class GuiPlateFormer extends GuiFluid {
 

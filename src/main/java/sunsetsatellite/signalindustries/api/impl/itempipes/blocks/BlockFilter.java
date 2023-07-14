@@ -1,18 +1,11 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.blocks;
 
 import net.minecraft.src.*;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.containers.ContainerFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.gui.GuiFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;
-import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockFilter extends BlockContainer {

@@ -7,8 +7,7 @@ import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
+import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
 
 public class ContainerAlloySmelter extends ContainerFluid {
 

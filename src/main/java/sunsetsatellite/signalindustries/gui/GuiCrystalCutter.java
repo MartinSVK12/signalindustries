@@ -7,7 +7,7 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrystalCutter;
+import sunsetsatellite.signalindustries.inventories.TileEntityCrystalCutter;
 
 public class GuiCrystalCutter extends GuiFluid {
 

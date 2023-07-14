@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrystalCutter;
+import sunsetsatellite.signalindustries.inventories.TileEntityCrystalCutter;
 
 import java.util.ArrayList;
 import java.util.Random;

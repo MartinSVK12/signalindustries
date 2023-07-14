@@ -164,15 +164,16 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     }
 
     @Override
-    public void renderOverlay(FontRenderer fontrenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
+    public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, RenderItem itemRenderer) {
         InventoryPlayer inv = player.inventory;
         ItemStack saber = inv.getCurrentItem();
         int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;
-        fontrenderer.drawStringWithShadow("Signalum Saber", 4, i += 16, 0xFFFF0000);
-        fontrenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
-        fontrenderer.drawStringWithShadow(String.valueOf(saber.tag.getInteger("energy")), 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
-        fontrenderer.drawStringWithShadow(saber.tag.getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.tag.getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
+        fontRenderer.drawStringWithShadow("Signalum Saber", 4, i += 16, 0xFFFF0000);
+        fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
+        fontRenderer.drawStringWithShadow(String.valueOf(saber.tag.getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+        fontRenderer.drawStringWithShadow(saber.tag.getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.tag.getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
     }
+
 
     @Override
     public Tier getTier() {

@@ -1,14 +1,9 @@
 package sunsetsatellite.signalindustries.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.GuiFluid;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerRecipeMaker;
-import sunsetsatellite.signalindustries.tiles.TileEntityRecipeMaker;
+import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
 
 public class GuiRecipeMaker extends GuiContainer {
 

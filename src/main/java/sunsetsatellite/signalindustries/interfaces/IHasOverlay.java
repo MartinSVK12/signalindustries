@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.interfaces;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.FontRenderer;
+import net.minecraft.src.*;
 
 public interface IHasOverlay {
-    void renderOverlay(FontRenderer fontrenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY);
+    void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, RenderItem itemRenderer);
+
 }

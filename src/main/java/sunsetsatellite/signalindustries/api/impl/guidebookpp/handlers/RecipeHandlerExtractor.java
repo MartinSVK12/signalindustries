@@ -31,10 +31,10 @@ public class RecipeHandlerExtractor
         ArrayList<RecipeFluid> recipes = new ArrayList<>();
         ExtractorRecipes.instance.getRecipeList().forEach((I, O)->{
             recipes.add(new RecipeFluid(
-                    new ArrayList<>(Arrays.asList(new ItemStack(I,1,0))),
+                    new ArrayList<>(Collections.singletonList(new ItemStack(I, 1, 0))),
                     new ArrayList<>(),
                     new ArrayList<>(),
-                    new ArrayList<>(Arrays.asList(O)),1,0)
+                    new ArrayList<>(Collections.singletonList(O)),1,0)
             );
         });
         RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, SignalIndustries.prototypeExtractor,this,recipes);

@@ -8,7 +8,7 @@ import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalChamber;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrystalChamber;
+import sunsetsatellite.signalindustries.inventories.TileEntityCrystalChamber;
 
 public class GuiCrystalChamber extends GuiFluid {
 

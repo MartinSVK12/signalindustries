@@ -146,6 +146,11 @@ item.signalindustries.reinforced.signalumpowersuit.leggings.desc=Pants of the po
 item.signalindustries.reinforced.signalumpowersuit.boots.name=Signalum Power Suit Boots
 item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power suit. Help with jumping and negating fall damage. Functionality can be extended with [Attachments].
 
+item.signalindustries.testingAbilityItem.name=Ability Container: Testing Ability
+item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability.
+
+item.signalindustries.attachment.testingAttachment.name=Testing Attachment
+item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
 item.signalindustries.reinforced.attachment.secondaryEnergyPack.name=Extended Energy Pack
 item.signalindustries.reinforced.attachment.secondaryEnergyPack.desc=Provides an extra container for [Signalum Energy].
 item.signalindustries.reinforced.attachment.pulsar.name=The Pulsar (Attachment)
@@ -175,7 +180,7 @@ item.signalindustries.attackAbilityModule.name=Attack Ability Module
 item.signalindustries.attackAbilityModule.desc=Container for <Attack> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
 item.signalindustries.defenseAbilityModule.name=Defense Ability Module
 item.signalindustries.defenseAbilityModule.desc=Container for <Defense> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
-item.signalindustries.pursuitAbilityModule.name=Defense Ability Module
+item.signalindustries.pursuitAbilityModule.name=Pursuit Ability Module
 item.signalindustries.pursuitAbilityModule.desc=Container for <Pursuit> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
 item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module
 item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities of any type including <Awakened> abilities.
@@ -273,7 +278,6 @@ tile.signalindustries.reinforced.infuser.desc=Infuses materials into other mater
 tile.signalindustries.awakened.infuser.name=Awakened Saturating Infuser Controller
 tile.signalindustries.awakened.infuser.desc=Infuses materials into other materials.
 
-
 tile.signalindustries.prototype.pump.name=Prototype Pump
 tile.signalindustries.prototype.pump.desc=Extracts fluids from the world. This simple pump can only pump out water.
 tile.signalindustries.basic.pump.name=Basic Pump
@@ -320,9 +324,11 @@ tile.signalindustries.filter.name=Filter
 tile.signalindustries.filter.desc=Sorts items that pass through it into colored outputs,
 
 dimension.eternity.name=Eternity
+
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
 weather.solarApocalypse.name=Solar Apocalypse
+
 bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
 
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
@@ -331,3 +337,9 @@ event.signalindustries.awakenedWrathBeaconActivated=A poor decision has been mad
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
+
+ability.signalindustries.normal.testingAbility.name=Testing Ability
+ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
+
+key.signalindustries.openSuit=Open Suit
+key.signalindustries.activateAbility=Activate Suit Ability

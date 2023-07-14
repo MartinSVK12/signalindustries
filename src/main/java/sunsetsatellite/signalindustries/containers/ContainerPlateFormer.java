@@ -7,7 +7,7 @@ import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.tiles.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.inventories.TileEntityPlateFormer;
 
 public class ContainerPlateFormer extends ContainerFluid {
 

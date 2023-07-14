@@ -31,9 +31,9 @@ public class RecipeHandlerPlateFormer
         ArrayList<RecipeFluid> recipes = new ArrayList<>();
         PlateFormerRecipes.getInstance().getRecipeList().forEach((I, O)->{
             recipes.add(new RecipeFluid(
-                    new ArrayList<>(Arrays.asList(new ItemStack(I,1,0))),
+                    new ArrayList<>(Collections.singletonList(new ItemStack(I, 1, 0))),
                     new ArrayList<>(),
-                    new ArrayList<>(Arrays.asList(O)),
+                    new ArrayList<>(Collections.singletonList(O)),
                     new ArrayList<>(),1,0
             ));
         });

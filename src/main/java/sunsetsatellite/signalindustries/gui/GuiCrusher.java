@@ -8,7 +8,7 @@ import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
-import sunsetsatellite.signalindustries.tiles.TileEntityCrusher;
+import sunsetsatellite.signalindustries.inventories.TileEntityCrusher;
 
 public class GuiCrusher extends GuiFluid {
 

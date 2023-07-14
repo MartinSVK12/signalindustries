@@ -5,7 +5,7 @@ import net.minecraft.src.ICrafting;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerExtractor extends ContainerTiered {

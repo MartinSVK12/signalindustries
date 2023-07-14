@@ -1,16 +1,10 @@
 package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.src.*;
-import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.api.*;
-import sunsetsatellite.fluidapi.interfaces.mixins.IEntityPlayerMP;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
-import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
+import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
 import sunsetsatellite.signalindustries.util.NBTHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ContainerPulsar extends ContainerItemFluid {
 

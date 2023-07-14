@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerPump;
 import sunsetsatellite.signalindustries.gui.GuiPump;
-import sunsetsatellite.signalindustries.tiles.TileEntityPump;
+import sunsetsatellite.signalindustries.inventories.TileEntityPump;
 
 import java.util.ArrayList;
 import java.util.Random;

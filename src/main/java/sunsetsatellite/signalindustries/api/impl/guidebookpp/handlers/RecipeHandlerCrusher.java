@@ -14,6 +14,7 @@ import sunsetsatellite.signalindustries.recipes.PlateFormerRecipes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RecipeHandlerCrusher
     implements IRecipeHandlerBase {
@@ -28,9 +29,9 @@ public class RecipeHandlerCrusher
         ArrayList<RecipeFluid> recipes = new ArrayList<>();
         CrusherRecipes.instance.getRecipeList().forEach((I, O)->{
             recipes.add(new RecipeFluid(
-                    new ArrayList<>(Arrays.asList(new ItemStack(I,1,0))),
+                    new ArrayList<>(Collections.singletonList(new ItemStack(I, 1, 0))),
                     new ArrayList<>(),
-                    new ArrayList<>(Arrays.asList(O)),
+                    new ArrayList<>(Collections.singletonList(O)),
                     new ArrayList<>(),1,0
             ));
         });

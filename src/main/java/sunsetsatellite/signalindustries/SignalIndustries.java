@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.mixin.accessors.PacketAccessor;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
+import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
+import sunsetsatellite.signalindustries.abilities.powersuit.TestingAbility;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.blocks.BlockItemPipe;
@@ -26,11 +28,13 @@ import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.items.*;
+import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.mixin.accessors.BiomeGenBaseAccessor;
 import sunsetsatellite.signalindustries.mixin.accessors.WorldTypeAccessor;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
-import sunsetsatellite.signalindustries.tiles.*;
+import sunsetsatellite.signalindustries.inventories.*;
 import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
@@ -177,6 +181,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Block glowingObsidian = BlockHelper.createBlock(MOD_ID,new Block(config.getFromConfig("glowingObsidian",availableBlockId++),Material.rock),"glowingObsidian","glowingobsidian.png",Block.soundStoneFootstep, 50f,1200f,1.0f/2.0f);
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
+    public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial("signalumpowersuit",9999,50,50,50,50);
 
     public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(config.getFromConfig("prototypeHarness",700),armorPrototypeHarness,1, Tier.BASIC),"basic.prototypeHarness","harness.png");
     public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness(config.getFromConfig("prototypeHarnessGoggles",701),armorPrototypeHarness,0, Tier.BASIC),"basic.prototypeHarnessGoggles","goggles.png");
@@ -193,6 +198,23 @@ public class SignalIndustries implements ModInitializer {
 
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(config.getFromConfig("pulsar",availableItemId++), Tier.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.registerItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.registerItemTexture(MOD_ID,"pulsarwarpcharged.png")};
+
+    public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit(config.getFromConfig("signalumPowerSuitHelmet",availableItemId++),armorSignalumPowerSuit,0,Tier.REINFORCED),"reinforced.signalumpowersuit.helmet","signalumpowersuit_helmet.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit(config.getFromConfig("signalumPowerSuitChestplate",availableItemId++),armorSignalumPowerSuit,1,Tier.REINFORCED),"reinforced.signalumpowersuit.chestplate","signalumpowersuit_chestplate.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit(config.getFromConfig("signalumPowerSuitChestplate",availableItemId++),armorSignalumPowerSuit,2,Tier.REINFORCED),"reinforced.signalumpowersuit.leggings","signalumpowersuit_leggings.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit(config.getFromConfig("signalumPowerSuitChestplate",availableItemId++),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
+
+    public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getFromConfig("testingAttachment",availableItemId++), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
+
+    public static SuitBaseAbility testAbility = new TestingAbility();
+
+    public static final Item testingAbility = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getFromConfig("testingAbilityItem",availableItemId++),testAbility),"testingAbilityItem","testingability.png");
+
+    public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("normalAbilityModule",availableItemId++),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
+    public static final Item attackAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("attackAbilityModule",availableItemId++),Mode.ATTACK),"attackAbilityModule","attackmodule.png");
+    public static final Item defenseAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("defenseAbilityModule",availableItemId++),Mode.DEFENSE),"defenseAbilityModule","defensemodule.png");
+    public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("pursuitAbilityModule",availableItemId++),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");
+    public static final Item awakenedAbilityModuel = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("awakenedAbilityModuel",availableItemId++),Mode.AWAKENED),"awakenedAbilityModule","awakenedmodule.png");
 
     public static final Block itemPipe = BlockHelper.createBlock(MOD_ID,new BlockItemPipe(config.getFromConfig("itemPipe",availableBlockId++),Material.glass),"itemPipe","itempipe.png",Block.soundGlassFootstep,1.0f,1.0f,0);
     public static final Block itemPipeOpaque = BlockHelper.createBlock(MOD_ID,new BlockItemPipe(config.getFromConfig("itemPipeOpaque",availableBlockId++),Material.glass),"itemPipeOpaque","itempipeopaque.png",Block.soundGlassFootstep,1.0f,1.0f,0);
@@ -300,6 +322,11 @@ public class SignalIndustries implements ModInitializer {
             map.put(keys[i],values[i]);
         }
         return map;
+    }
+
+    @SafeVarargs
+    public static <T> List<T> listOf(T... values){
+        return new ArrayList<>(Arrays.asList(values));
     }
 
     public static void debug(String string, Object... args){

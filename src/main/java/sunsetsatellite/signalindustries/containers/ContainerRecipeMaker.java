@@ -4,7 +4,7 @@ import net.minecraft.src.Container;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.Slot;
-import sunsetsatellite.signalindustries.tiles.TileEntityRecipeMaker;
+import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
 
 public class ContainerRecipeMaker extends Container
 {

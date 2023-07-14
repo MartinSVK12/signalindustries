@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import sunsetsatellite.signalindustries.gui.GuiRecipeMaker;
-import sunsetsatellite.signalindustries.tiles.TileEntityRecipeMaker;
+import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
 
 public class BlockRecipeMaker extends BlockContainer {
     public BlockRecipeMaker(int i, Material material) {

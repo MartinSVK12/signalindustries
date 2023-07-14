@@ -6,8 +6,8 @@ import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPump;
-import sunsetsatellite.signalindustries.tiles.TileEntityPump;
-import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.TileEntityPump;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 
 public class GuiPump extends GuiFluid {
 
@@ -110,15 +110,11 @@ public class GuiPump extends GuiFluid {
         if (!guibutton.enabled) {
             return;
         }
-        switch (guibutton.id){
-            case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
-                break;
-            /*case 1:
+        if (guibutton.id == 0) {
+            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, tile, tile.xCoord, tile.yCoord, tile.zCoord);
+                /*case 1:
                 SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
                 break;*/
-            default:
-                break;
         }
     }
 

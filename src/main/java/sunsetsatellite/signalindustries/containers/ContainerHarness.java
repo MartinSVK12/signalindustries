@@ -7,10 +7,8 @@ import net.minecraft.src.Slot;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
-import sunsetsatellite.signalindustries.tiles.InventoryHarness;
-import sunsetsatellite.signalindustries.tiles.InventoryPulsar;
+import sunsetsatellite.signalindustries.inventories.InventoryHarness;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 
 public class ContainerHarness extends ContainerItemFluid {

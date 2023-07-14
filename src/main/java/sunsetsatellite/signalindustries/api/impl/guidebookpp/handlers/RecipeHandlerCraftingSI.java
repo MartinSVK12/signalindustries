@@ -19,7 +19,7 @@ public class RecipeHandlerCraftingSI implements IRecipeHandlerBase {
         return new ContainerGuidebookRecipeCrafting(recipe.recipe);
     }
 
-    private RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, Block.workbench,this,new ArrayList<>());
+    private final RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, Block.workbench,this,new ArrayList<>());
 
     @Override
     public void addRecipes() {

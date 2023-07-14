@@ -8,7 +8,7 @@ import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
 
 public class GuiAlloySmelter extends GuiFluid {
 

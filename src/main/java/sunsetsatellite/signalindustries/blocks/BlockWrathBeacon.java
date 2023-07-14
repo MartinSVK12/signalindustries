@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.src.*;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.tiles.TileEntityWrathBeacon;
+import sunsetsatellite.signalindustries.inventories.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockWrathBeacon extends BlockContainerTiered {

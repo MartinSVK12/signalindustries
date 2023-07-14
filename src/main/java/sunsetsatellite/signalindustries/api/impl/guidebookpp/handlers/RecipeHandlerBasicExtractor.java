@@ -14,6 +14,7 @@ import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class RecipeHandlerBasicExtractor
     implements IRecipeHandlerBase {
@@ -28,10 +29,10 @@ public class RecipeHandlerBasicExtractor
         ArrayList<RecipeFluid> recipes = new ArrayList<>();
         BasicExtractorRecipes.instance.getRecipeList().forEach((I, O)->{
             recipes.add(new RecipeFluid(
-                    new ArrayList<>(Arrays.asList(new ItemStack(I,1,0))),
+                    new ArrayList<>(Collections.singletonList(new ItemStack(I, 1, 0))),
                     new ArrayList<>(),
                     new ArrayList<>(),
-                    new ArrayList<>(Arrays.asList(O)),1,0)
+                    new ArrayList<>(Collections.singletonList(O)),1,0)
             );
         });
         RecipeGroup group = new RecipeGroup(SignalIndustries.MOD_ID, SignalIndustries.basicExtractor,this,recipes);

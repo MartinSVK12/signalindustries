@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RailLogic {
-    private World worldObj;
+    private final World worldObj;
 
-    private int trackX;
+    private final int trackX;
 
-    private int trackY;
+    private final int trackY;
 
-    private int trackZ;
+    private final int trackZ;
 
     private final boolean isPoweredRail;
 
-    private List connectedTracks;
+    private final List connectedTracks;
 
     final BlockRail rail;
 

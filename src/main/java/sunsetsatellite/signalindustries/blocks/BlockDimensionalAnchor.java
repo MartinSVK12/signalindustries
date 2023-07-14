@@ -5,7 +5,7 @@ import net.minecraft.src.*;
 import net.minecraft.src.command.ChatColor;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.tiles.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Direction;

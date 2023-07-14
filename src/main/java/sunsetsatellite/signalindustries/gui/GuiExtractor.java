@@ -3,13 +3,11 @@ package sunsetsatellite.signalindustries.gui;
 import net.minecraft.src.*;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.GuiFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.TileEntityExtractor;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 
 public class GuiExtractor extends GuiFluid {
 

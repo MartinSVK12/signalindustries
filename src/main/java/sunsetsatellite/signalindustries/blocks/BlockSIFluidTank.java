@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
-import sunsetsatellite.signalindustries.tiles.TileEntitySIFluidTank;
+import sunsetsatellite.signalindustries.inventories.TileEntitySIFluidTank;
 
 import java.util.ArrayList;
 

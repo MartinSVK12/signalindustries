@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
-import sunsetsatellite.signalindustries.tiles.InventoryHarness;
+import sunsetsatellite.signalindustries.inventories.InventoryHarness;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collection;
@@ -34,34 +34,35 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
     }
 
     @Override
-    public void renderOverlay(FontRenderer fontrenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
+    public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, RenderItem itemRenderer) {
         InventoryPlayer inv = player.inventory;
         ItemStack armor = inv.armorItemInSlot(2);
         if(armor != null && armor.getItem() instanceof ItemSignalumPrototypeHarness){
             int i = height - 64;
-            fontrenderer.drawStringWithShadow( "S. P. Harness", 4, i += 16, 0xFFFF0000);
+            fontRenderer.drawStringWithShadow( "S. P. Harness", 4, i += 16, 0xFFFF0000);
             if (inv.getCurrentItem() != null && inv.getCurrentItem().getItem() instanceof ItemTrigger){
                 ItemStack trigger = inv.getCurrentItem();
                 if(!Objects.equals(trigger.tag.getString("ability"), "")){
                     if(armor.tag.getInteger("cooldown"+trigger.tag.getString("ability")) <= 0){
-                        fontrenderer.drawStringWithShadow( "Ability: ", 4, i += 16, 0xFFFFFFFF);
-                        fontrenderer.drawStringWithShadow( trigger.tag.getString("ability")+ ChatColor.lime+" READY", 4 + fontrenderer.getStringWidth("Ability: "), i, 0xFFFF0000);
+                        fontRenderer.drawStringWithShadow( "Ability: ", 4, i += 16, 0xFFFFFFFF);
+                        fontRenderer.drawStringWithShadow( trigger.tag.getString("ability")+ ChatColor.lime+" READY", 4 + fontRenderer.getStringWidth("Ability: "), i, 0xFFFF0000);
                     } else {
-                        fontrenderer.drawStringWithShadow( "Ability: ", 4, i += 16, 0xFFFFFFFF);
-                        fontrenderer.drawStringWithShadow( trigger.tag.getString("ability")+ChatColor.red+" "+armor.tag.getInteger("cooldown"+trigger.tag.getString("ability"))+"s", 4 + fontrenderer.getStringWidth("Ability: "), i, 0xFF808080);
+                        fontRenderer.drawStringWithShadow( "Ability: ", 4, i += 16, 0xFFFFFFFF);
+                        fontRenderer.drawStringWithShadow( trigger.tag.getString("ability")+ChatColor.red+" "+armor.tag.getInteger("cooldown"+trigger.tag.getString("ability"))+"s", 4 + fontRenderer.getStringWidth("Ability: "), i, 0xFF808080);
                     }
-                    fontrenderer.drawStringWithShadow( "Energy: ", 4, i += 10, 0xFFFFFFFF);
-                    fontrenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount"))+ChatColor.red+"-"+ ItemTrigger.abilities.get(trigger.tag.getString("ability")).cost, 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+                    fontRenderer.drawStringWithShadow( "Energy: ", 4, i += 10, 0xFFFFFFFF);
+                    fontRenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount"))+ChatColor.red+"-"+ ItemTrigger.abilities.get(trigger.tag.getString("ability")).cost, 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
                 } else {
-                    fontrenderer.drawStringWithShadow( "Energy: ", 4, i += 16, 0xFFFFFFFF);
-                    fontrenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount")), 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+                    fontRenderer.drawStringWithShadow( "Energy: ", 4, i += 16, 0xFFFFFFFF);
+                    fontRenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
                 }
             } else {
-                fontrenderer.drawStringWithShadow( "Energy: ", 4, i += 16, 0xFFFFFFFF);
-                fontrenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount")), 4 + fontrenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+                fontRenderer.drawStringWithShadow( "Energy: ", 4, i += 16, 0xFFFFFFFF);
+                fontRenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
             }
         }
     }
+
 
     public int cooldownTicks = 0;
 

@@ -8,7 +8,7 @@ import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.tiles.TileEntityInfuser;
+import sunsetsatellite.signalindustries.inventories.TileEntityInfuser;
 
 public class GuiInfuser extends GuiFluid {
 
