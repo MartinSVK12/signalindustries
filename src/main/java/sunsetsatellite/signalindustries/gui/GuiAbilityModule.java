@@ -46,7 +46,11 @@ public class GuiAbilityModule extends GuiItemFluid {
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        drawCenteredString(fontRenderer,mode.getName()+" Ability Module",xSize/2,8,mode.getColor());
+        if(mode == Mode.AWAKENED){
+            drawCenteredString(fontRenderer,mode.getName()+" Ability Module",xSize/2,8,mode.getColor());
+        } else {
+            drawCenteredString(fontRenderer,"Ability Module",xSize/2,8,mode.getColor());
+        }
         GL11.glDisable(3042);
         GL11.glDisable(2896);
     }

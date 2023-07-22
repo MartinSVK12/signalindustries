@@ -12,7 +12,7 @@ import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockAlloySmelter extends BlockContainerTiered{
+public class    BlockAlloySmelter extends BlockContainerTiered{
     public BlockAlloySmelter(int i, Tier tier, Material material) {
         super(i, tier, material);
     }

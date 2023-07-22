@@ -23,10 +23,10 @@ public class SlotAbility extends Slot {
     @Override
     public boolean canPutStackInSlot(ItemStack itemstack) {
         if(itemstack != null && itemstack.getItem() instanceof IHasAbility){
-            if(mode == Mode.AWAKENED || ((IHasAbility) itemstack.getItem()).getAbility().mode == Mode.NORMAL){
-                return true;
+            if(mode != Mode.AWAKENED && ((IHasAbility) itemstack.getItem()).getAbility().mode == Mode.AWAKENED){
+                return false;
             }
-            return ((IHasAbility) itemstack.getItem()).getAbility().mode == mode;
+            return true;
         }
         return false;
     }

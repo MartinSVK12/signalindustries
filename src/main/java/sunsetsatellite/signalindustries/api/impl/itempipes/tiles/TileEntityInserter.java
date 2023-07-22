@@ -16,7 +16,7 @@ public class TileEntityInserter extends TileEntity implements IItemConnection {
     public Direction outputDir;
     public TickTimer workTImer;
     public int stackSize = 8;
-    public int delay = 60;
+    public int delay = 20;
 
     public TileEntityInserter() {
         try {

@@ -1,17 +1,17 @@
 tile.signalindustries.signalumEnergy.name=Signalum Energy
-tile.signalindustries.signalumEnergy.desc=Mysterious liquid with magically energetic properties.
+tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically energetic properties.
 tile.signalindustries.burntSignalum.name=Burnt Signalum
 tile.signalindustries.burntSignalum.desc=The remains of a S. Ignition reaction, most of it is useless now but maybe not all.
 item.signalindustries.signalumCrystal.name=Signalum Crystal
-item.signalindustries.signalumCrystal.desc=Crystal infused with [Signalum Energy], the natural container for this power.
+item.signalindustries.signalumCrystal.desc=A crystal that can store [Signalum Energy] within it's lattice. The main way to store and transport this substance.
 item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
 item.signalindustries.signalumCrystalEmpty.desc=Unpowered [Signalum Crystal]. Still useful for its physical properties.
 item.signalindustries.rawSignalumCrystal.name=Raw Signalum Crystal
-item.signalindustries.rawSignalumCrystal.desc=Straight from the earth, the beginning of it all.
+item.signalindustries.rawSignalumCrystal.desc=The beginning of it all, crude shards infused with a new kind of power.
 item.signalindustries.awakenedSignalumCrystal.name=Awakened Signalum Crystal
 item.signalindustries.awakenedSignalumCrystal.desc=The perfect form, the rebirth of the first star of evening. Shine!
 item.signalindustries.awakenedSignalumFragment.name=Awakened Signalum Fragment
-item.signalindustries.awakenedSignalumFragment.desc=Let me reach for the stars now, they're so close to me. I will whisper to them all of my secrets.
+item.signalindustries.awakenedSignalumFragment.desc=Let me reach for the lights now, they're so close to me. I will whisper to the stars all of my secrets.
 
 item.signalindustries.crystalAlloyIngot.name=Crystal Alloy Ingot
 item.signalindustries.crystalAlloyIngot.desc=An alloy of steel and [Signalum Crystal Dust].
@@ -22,7 +22,7 @@ item.signalindustries.reinforcedCrystalAlloyIngot.desc=A better, stronger alloy 
 item.signalindustries.voidAlloyIngot.name=Void Alloy Ingot
 item.signalindustries.voidAlloyIngot.desc=Woven [Fabric of Reality] combined with [R. C. Alloy].
 item.signalindustries.awakenedAlloyIngot.name=Awakened Alloy Ingot
-item.signalindustries.awakenedAlloyIngot.desc=
+item.signalindustries.awakenedAlloyIngot.desc=The perfect alloy, shines with radiant glow.
 
 item.signalindustries.coalDust.name=Coal Dust
 item.signalindustries.coalDust.desc=Ground up coal.
@@ -182,8 +182,11 @@ item.signalindustries.defenseAbilityModule.name=Defense Ability Module
 item.signalindustries.defenseAbilityModule.desc=Container for <Defense> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
 item.signalindustries.pursuitAbilityModule.name=Pursuit Ability Module
 item.signalindustries.pursuitAbilityModule.desc=Container for <Pursuit> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
+
+item.signalindustries.abilityModule.name=Ability Module
+item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] abilities.
 item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module
-item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities of any type including <Awakened> abilities.
+item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities of including <Awakened> abilities.
 
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
 tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.
@@ -217,7 +220,7 @@ tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
 tile.signalindustries.basic.crusher.name=Basic Crusher
 tile.signalindustries.basic.crusher.desc=Grinds tougher materials into finer dusts.
 tile.signalindustries.reinforced.crusher.name=Reinforced Pulverizer
-tile.signalindustries.reinforced.crusher.desc=<todo>
+tile.signalindustries.reinforced.crusher.desc=Crushes almost anything into nano-particle dusts.
 tile.signalindustries.awakened.crusher.name=Awakened Macerating Atomizer Controller
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
@@ -234,7 +237,12 @@ tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point 
 tile.signalindustries.reinforced.signalumReactorCore.name=Signalum Reactor Core
 tile.signalindustries.reinforced.signalumReactorCore.desc=Burns [Signalum Energy] in a barely stable reaction in search of something greater..
 tile.signalindustries.awakened.signalumReactorCore.name=Awakened Signalum Ignition Facility Controller
-tile.signalindustries.awakened.signalumReactorCore.desc=<todo>
+tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Signalum technology. Welcome to the far end of your adventure.
+
+tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
+tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.
+tile.signalindustries.awakened.centrifuge.name=Awakened Ultracentrifuge Controller
+tile.signalindustries.awakened.centrifuge.desc=Spins stuff REALLY FAST, beware of catastrophic failure. On the flip side, spins stuff REALLY WELL leading to increased efficiency.
 
 tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
 tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still.
@@ -249,27 +257,33 @@ tile.signalindustries.basic.alloySmelter.name=Basic Alloy Smelter
 tile.signalindustries.basic.alloySmelter.desc=Combines metals into alloys with more heat.
 tile.signalindustries.reinforced.alloySmelter.name=Reinforced Blast Alloy Smelter
 tile.signalindustries.reinforced.alloySmelter.desc=Combines even heat resistant metals with even more heat.
-tile.signalindustries.awakened.alloySmelter.name=Awakened Stellar Composite Forge Controller
+tile.signalindustries.awakened.alloySmelter.name=Awakened Composite Forge Chamber Controller
 tile.signalindustries.awakened.alloySmelter.desc=Fuses even the most resistant metals with heat surpassing that of cores of stars.
 
 tile.signalindustries.prototype.plateFormer.name=Prototype Plate Former
 tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more [Plates] than the [Plate Hammer] and out of more materials.
+tile.signalindustries.basic.plateFormer.name=Basic Metal Press
+tile.signalindustries.basic.plateFormer.desc=Bends and shapes metal ingots.
+tile.signalindustries.reinforced.plateFormer.name=Reinforced Forming Press
+tile.signalindustries.reinforced.plateFormer.desc=Bends and shapes materials with more pressure.
+tile.signalindustries.awakened.plateFormer.name=Awakened Singularity Compressor Controller
+tile.signalindustries.awakened.plateFormer.desc=Could compress something down to a black hole if it didn't mean the destruction of this world.
 
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
 tile.signalindustries.basic.crystalCutter.name=Basic Crystal Cutter
-tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut pure [S. Crystals] into two!
+tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut pure [S. Crystals] into two! Can also cut a few other things as well.
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
-tile.signalindustries.reinforced.crystalCutter.desc=<todo>
+tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
-tile.signalindustries.awakened.crystalCutter.desc=<todo>
+tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams! What more would you want.
 
 tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
-tile.signalindustries.basic.crystalChamber.desc=Combines the powers of an [Alloy Smelter] and a [Plate Former] to fuse 2 [S. Crystals] together!
+tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an [Alloy Smelter] and the pressure of a [Plate Former] to fuse 2 [S. Crystals] together!
 tile.signalindustries.reinforced.crystalChamber.name=Reinforced Crystal Chamber
-tile.signalindustries.reinforced.crystalChamber.desc=<todo>
+tile.signalindustries.reinforced.crystalChamber.desc=Can handle bigger crystals than the Basic version.
 tile.signalindustries.awakened.crystalChamber.name=Awakened Crystal Fusion Chamber Controller
-tile.signalindustries.awakened.crystalChamber.desc=<todo>
+tile.signalindustries.awakened.crystalChamber.desc=Just like stars fuse galactic amounts of hydrogen inside their cores, this machine can fuse crystals of extraordinary size.
 
 tile.signalindustries.basic.infuser.name=Basic Infuser
 tile.signalindustries.basic.infuser.desc=Infuses materials into other materials.
@@ -288,13 +302,18 @@ tile.signalindustries.awakened.pump.name=Awakened World Drainer Controller
 tile.signalindustries.awakened.pump.desc=Can drain entire oceans without problem.
 
 tile.signalindustries.prototype.blockBreaker.name=Prototype Block Breaker
-tile.signalindustries.prototype.blockBreaker.desc=Breaks the block next to where it is pointed when supplied with a tiny amount of [Signalum Energy] and activated by redstone.
+tile.signalindustries.prototype.blockBreaker.desc=Breaks the block next to where it is pointed when activated by redstone.
 tile.signalindustries.basic.blockBreaker.name=Basic Automatic Miner
 tile.signalindustries.basic.blockBreaker.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by [Signalum Energy].
 tile.signalindustries.reinforced.blockBreaker.name=Reinforced Quarry
 tile.signalindustries.reinforced.blockBreaker.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
 tile.signalindustries.awakened.blockBreaker.name=Awakened Galactic Excavation Facility Controller
 tile.signalindustries.awakened.blockBreaker.name=Can mine out whole worlds across the galaxy in search of rare ore remotely!
+
+tile.signalindustries.basic.dynamo.name=Signalum Dynamo
+tile.signalindustries.basoc.dynamo.desc=Generates EnergyAPI units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
+tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
+tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -332,8 +351,8 @@ weather.solarApocalypse.name=Solar Apocalypse
 bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
 
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
-event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!.
-event.signalindustries.awakenedWrathBeaconActivated=A poor decision has been made.. An awakened Wrath Beacon has been activated!!!
+event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!
+event.signalindustries.awakenedWrathBeaconActivated=An awakened Wrath Beacon has been activated!!!
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!

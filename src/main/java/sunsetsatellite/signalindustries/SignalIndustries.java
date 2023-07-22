@@ -128,6 +128,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Block prototypePump = BlockHelper.createBlock(MOD_ID,new BlockPump(config.getFromConfig("prototypePump",availableBlockId++), Tier.PROTOTYPE,Material.rock),"prototype.pump","prototypepumptop.png","prototypeblank.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png","prototypepumpside.png",Block.soundStoneFootstep,2,3,0);
     public static final int[][] pumpTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"prototypepumpsideempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumpside.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumptopempty.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypepumptop.png")};
 
+    public static final Block prototypeBlockBreaker = BlockHelper.createBlock(MOD_ID, new BlockBreaker(config.getFromConfig("prototypeBlockBreaker",availableBlockId++),Tier.PROTOTYPE,Material.rock), "prototype.blockBreaker", "prototypeblockbreakerside2.png", "prototypeblockbreakerside2.png", "prototypeblockbreaker.png", "prototypeblockbreakerside.png", "prototypeblank.png", "prototypeblockbreakerside.png", Block.soundStoneFootstep, 2f,3f,0f);
+    public static final int[][] breakerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreaker.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreakeractive.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreakerside.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreakersideactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreakerside2.png"),TextureHelper.registerBlockTexture(MOD_ID,"prototypeblockbreakerside2active.png"),TextureHelper.registerBlockTexture(MOD_ID,"inserteroutput.png")};
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalumenergy.png"); //registerFluidTexture(MOD_ID,"signalumenergy.png",0,4);
@@ -210,10 +212,11 @@ public class SignalIndustries implements ModInitializer {
 
     public static final Item testingAbility = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getFromConfig("testingAbilityItem",availableItemId++),testAbility),"testingAbilityItem","testingability.png");
 
-    public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("normalAbilityModule",availableItemId++),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
+    public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("abilityModule",availableItemId++),Mode.ATTACK),"abilityModule","abilitymodule.png");
+    /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("normalAbilityModule",availableItemId++),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
     public static final Item attackAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("attackAbilityModule",availableItemId++),Mode.ATTACK),"attackAbilityModule","attackmodule.png");
     public static final Item defenseAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("defenseAbilityModule",availableItemId++),Mode.DEFENSE),"defenseAbilityModule","defensemodule.png");
-    public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("pursuitAbilityModule",availableItemId++),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");
+    public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("pursuitAbilityModule",availableItemId++),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");*/
     public static final Item awakenedAbilityModuel = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("awakenedAbilityModuel",availableItemId++),Mode.AWAKENED),"awakenedAbilityModule","awakenedmodule.png");
 
     public static final Block itemPipe = BlockHelper.createBlock(MOD_ID,new BlockItemPipe(config.getFromConfig("itemPipe",availableBlockId++),Material.glass),"itemPipe","itempipe.png",Block.soundGlassFootstep,1.0f,1.0f,0);
@@ -304,6 +307,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityItemPipe.class,"Item Pipe");
         EntityHelper.createTileEntity(TileEntityInserter.class,"Inserter");
         EntityHelper.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
+        EntityHelper.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
 
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
