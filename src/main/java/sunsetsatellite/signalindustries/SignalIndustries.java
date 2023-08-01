@@ -249,6 +249,11 @@ public class SignalIndustries implements ModInitializer {
         PacketAccessor.callAddIdClassMapping(config.getFromConfig("PacketPipeItemSpawn_ID",114),true,false, PacketPipeItemSpawn.class);
         //PacketAccessor.callAddIdClassMapping(config.getFromConfig("PacketPipeItemPos_ID",115),true,false, PacketPipeItemPos.class);
 
+        ItemToolPickaxe.miningLevels.put(signalumOre,3);
+        ItemToolPickaxe.miningLevels.put(rootedFabric,4);
+        ItemToolPickaxe.miningLevels.put(dimensionalShardOre,4);
+        ItemToolPickaxe.miningLevels.put(dilithiumOre,4);
+
 
         eternityWorld = createWorldType(14,"eternity").setLanguageKey("worldType.eternity").setDefaultWeather(Weather.weatherClear).setWorldProvider(new WorldProviderEternity());
         dimEternity = DimensionHelper.createDimension(3,"eternity",Dimension.overworld,1.0f,portalEternity,eternityWorld,0,256);
