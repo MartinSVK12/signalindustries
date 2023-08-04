@@ -1,5 +1,5 @@
 plugins {
-	id 'babric-loom' version '0.12-SNAPSHOT'
+	id "org.quiltmc.loom" version "1.+"
 	id 'java'
 }
 
@@ -8,13 +8,13 @@ archivesBaseName = project.mod_name
 version = project.mod_version
 
 loom {
-	gluedMinecraftJar()
+	clientOnlyMinecraftJar()
+	//serverOnlyMinecraftJar()
 	noIntermediateMappings()
-	customMinecraftManifest.set("https://github.com/Turnip-Labs/bta-manifest-repo/releases/download/v${project.bta_version}/${project.bta_version}.json")
+	customMinecraftManifest.set("https://github.com/MartinSVK12/bta-manifest-repo/releases/download/v${project.bta_version}/${project.bta_version}.json")
 }
 
 repositories {
-
 	mavenCentral()
 	maven {
 		name = 'Babric'
@@ -23,9 +23,6 @@ repositories {
 	maven {
 		name = 'Fabric'
 		url = 'https://maven.fabricmc.net/'
-	}
-	maven {
-		url = "https://jitpack.io"
 	}
 	ivy {
 		url = "https://github.com/Better-than-Adventure"
@@ -44,9 +41,9 @@ repositories {
 		metadataSources { artifact() }
 	}
 	ivy {
-		url = "https://github.com/MartinSVK12"
+		url = "https://piston-data.mojang.com"
 		patternLayout {
-			artifact "[organisation]/releases/download/[revision]-BTA/[module]-[revision].jar"
+			artifact "v1/[organisation]/[revision]/[module].jar"
 			m2compatible = true
 		}
 		metadataSources { artifact() }
@@ -59,11 +56,10 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
-
 	ivy {
-		url = "https://piston-data.mojang.com"
+		url = "https://github.com/MartinSVK12"
 		patternLayout {
-			artifact "v1/[organisation]/[revision]/[module].jar"
+			artifact "[organisation]/releases/download/[revision]-BTA/[module]-[revision].jar"
 			m2compatible = true
 		}
 		metadataSources { artifact() }
@@ -72,36 +68,22 @@ repositories {
 
 dependencies {
 	minecraft "bta-download-repo:bta:${project.bta_version}"
-	mappings loom.layered() {}
+	mappings loom.layered {}
 
 	modRuntimeOnly "objects:client:43db9b498cb67058d2e12d394e6507722e71bb45" // https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
-	modImplementation "babric:fabric-loader:${project.loader_version}"
-
+	modImplementation("quilt-loader:quilt-loader:${project.loader_version}")
 	// Helper library
+	// If you do not need Halplibe you can comment this line out or delete this line
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
+
+	modImplementation "fluidapi:fluidapi:1.6.5"
+
+	modImplementation "sunsetutils:sunsetutils:1.7.0"
+
+	modImplementation "guidebookpp:guidebookpp:1.5.2"
 
 	modImplementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	modImplementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
-
-	/*modImplementation("com.github.MartinSVK12:energyapi:c66e0bb497"){
-		exclude(group: 'objects', module: 'client')
-	}*/
-
-	modImplementation "fluidapi:fluidapi:1.6.4"
-
-	modImplementation "sunsetutils:sunsetutils:1.6.1"
-
-	modImplementation "guidebookpp:guidebookpp:1.5.1"
-
-	modImplementation("org.apache.commons:commons-lang3:3.12.0")
-	/*modImplementation("com.github.MartinSVK12:retrostorage:28d755a047"){
-		exclude(group: 'objects', module: 'client')
-	}*/
-
-	/*modImplementation("com.github.MartinSVK12:guidebookpp:1.4.1"){
-		exclude(group: 'objects', module: 'client')
-	}*/
-
 }
 
 java {
@@ -117,13 +99,5 @@ tasks.withType(JavaCompile).configureEach {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${archivesBaseName}" }
-	}
-}
-
-processResources {
-	inputs.property "version", version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": version
 	}
 }
