@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.containers;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ICrafting;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Slot;
+
+
+
+
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;

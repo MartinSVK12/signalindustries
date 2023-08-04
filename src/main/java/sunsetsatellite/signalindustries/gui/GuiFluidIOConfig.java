@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries.gui;
 
 import b100.utils.ReflectUtils;
 import net.minecraft.shared.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
+
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;

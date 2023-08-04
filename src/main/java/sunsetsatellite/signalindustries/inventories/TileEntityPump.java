@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockFluid;
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;

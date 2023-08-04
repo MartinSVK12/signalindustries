@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.dim;
 
-import net.minecraft.src.BiomeGenBase;
-import net.minecraft.src.Weather;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class BiomeGenEternity extends BiomeGenPublic {

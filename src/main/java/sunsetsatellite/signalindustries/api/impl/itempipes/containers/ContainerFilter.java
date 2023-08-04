@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.containers;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;
 
 public class ContainerFilter extends Container {

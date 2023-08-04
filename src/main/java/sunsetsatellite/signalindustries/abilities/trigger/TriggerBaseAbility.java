@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.abilities.trigger;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
+
+
+
 
 public abstract class TriggerBaseAbility {
     public String name;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.mp.packets;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
 
 import java.io.DataInputStream;

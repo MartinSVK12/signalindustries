@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.misc.powersuit;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.IInventory;
-import net.minecraft.src.ItemArmor;
-import net.minecraft.src.Slot;
+
+
+
+
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;

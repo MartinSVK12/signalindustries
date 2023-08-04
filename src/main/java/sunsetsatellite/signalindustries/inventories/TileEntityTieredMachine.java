@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
+
+
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.sunsetutils.util.Connection;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 

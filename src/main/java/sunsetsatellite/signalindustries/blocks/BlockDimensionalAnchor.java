@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
+
+
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;

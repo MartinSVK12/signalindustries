@@ -7,7 +7,7 @@ package sunsetsatellite.signalindustries.api.impl.itempipes.misc;
 
 import java.util.Random;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderPipeItem extends Render {

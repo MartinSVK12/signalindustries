@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.blocks;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityInserter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;

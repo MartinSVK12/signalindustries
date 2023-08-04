@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.entities;
 
-import net.minecraft.src.*;
-import net.minecraft.src.helper.DamageType;
+
+
 
 import java.util.*;
 

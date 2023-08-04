@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.ItemStack;
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.util.NBTHelper;

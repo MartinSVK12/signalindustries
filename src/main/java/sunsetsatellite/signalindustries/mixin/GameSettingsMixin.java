@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.src.GameSettings;
-import net.minecraft.src.KeyBinding;
+
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.src.*;
+
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

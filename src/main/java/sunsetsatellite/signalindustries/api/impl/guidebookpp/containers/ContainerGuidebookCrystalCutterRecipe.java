@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.containers;
 
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;

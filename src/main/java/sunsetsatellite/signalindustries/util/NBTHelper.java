@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IFluidInventory;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;

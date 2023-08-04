@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.dim;
 
 import net.minecraft.shared.Minecraft;
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.worldgen.WorldGenEternalTreeFancy;
 import sunsetsatellite.signalindustries.worldgen.WorldGenEternityOre;

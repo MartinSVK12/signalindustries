@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.src.IInventory;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Slot;
+
+
+
 import sunsetsatellite.signalindustries.interfaces.IAttachable;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.interfaces.IHasAbility;

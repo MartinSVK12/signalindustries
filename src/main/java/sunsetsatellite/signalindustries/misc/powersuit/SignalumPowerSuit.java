@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.misc.powersuit;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import net.minecraft.src.helper.Color;
+
+
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;

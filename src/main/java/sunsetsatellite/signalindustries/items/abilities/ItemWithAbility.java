@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items.abilities;
 
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.command.ChatColor;
+
+
+
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 import sunsetsatellite.signalindustries.interfaces.IHasAbility;

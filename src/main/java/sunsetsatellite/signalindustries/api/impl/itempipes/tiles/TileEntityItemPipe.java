@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.tiles;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.signalindustries.SignalIndustries;

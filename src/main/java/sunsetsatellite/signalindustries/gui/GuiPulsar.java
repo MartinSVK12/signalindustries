@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.gui;
 
-import net.minecraft.src.*;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.GuiFluid;

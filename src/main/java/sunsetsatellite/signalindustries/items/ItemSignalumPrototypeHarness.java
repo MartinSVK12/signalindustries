@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import net.minecraft.src.material.ArmorMaterial;
+
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;

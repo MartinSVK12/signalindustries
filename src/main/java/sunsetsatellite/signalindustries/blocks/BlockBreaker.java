@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.inventories.TileEntityBlockBreaker;

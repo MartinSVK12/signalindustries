@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.RenderEngine;
-import net.minecraft.src.dynamictexture.DynamicTexture;
+
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

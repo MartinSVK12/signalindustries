@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.misc.powersuit;
 
-import net.minecraft.src.BlockFluid;
-import net.minecraft.src.ItemStack;
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;

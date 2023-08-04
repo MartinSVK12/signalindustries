@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;

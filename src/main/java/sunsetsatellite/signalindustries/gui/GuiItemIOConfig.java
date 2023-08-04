@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.gui;
 
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.sunsetutils.util.Connection;

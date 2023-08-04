@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ItemTool;
-import net.minecraft.src.Material;
-import net.minecraft.src.material.ToolMaterial;
+
+
+
+
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 

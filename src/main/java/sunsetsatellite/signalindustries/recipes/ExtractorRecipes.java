@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.recipes;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockFluid;
-import net.minecraft.src.ItemStack;
+
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.util.MachineRecipes;
 import sunsetsatellite.signalindustries.SignalIndustries;

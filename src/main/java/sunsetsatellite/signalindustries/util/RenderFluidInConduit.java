@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.api.IFluidInventory;

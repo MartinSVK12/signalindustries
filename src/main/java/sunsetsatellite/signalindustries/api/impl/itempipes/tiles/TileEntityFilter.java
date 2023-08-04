@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.tiles;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.IItemConnection;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.sunsetutils.util.Direction;

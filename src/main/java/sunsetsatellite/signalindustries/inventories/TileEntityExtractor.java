@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.SignalIndustries;

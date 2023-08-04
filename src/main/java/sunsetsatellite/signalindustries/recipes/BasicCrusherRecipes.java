@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.recipes;
 
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
+
+
 import sunsetsatellite.signalindustries.abilities.trigger.BoostAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ProjectileAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.TriggerBaseAbility;

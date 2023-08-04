@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.FluidRegistry;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;

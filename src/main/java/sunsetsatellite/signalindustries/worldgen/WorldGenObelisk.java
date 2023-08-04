@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.worldgen;
 
 import net.minecraft.shared.Minecraft;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldGenerator;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Random;

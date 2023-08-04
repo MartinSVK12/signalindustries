@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.BlockFluid;
-import net.minecraft.src.ItemStack;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.PlateFormerRecipes;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.mixin.accessors;
 
-import net.minecraft.src.WorldType;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 

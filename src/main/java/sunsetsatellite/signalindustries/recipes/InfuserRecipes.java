@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.recipes;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockFluid;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NBTTagCompound;
+
+
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 

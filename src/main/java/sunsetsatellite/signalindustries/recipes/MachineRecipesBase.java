@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.recipes;
 
-import net.minecraft.src.ItemStack;
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 
 import java.util.HashMap;

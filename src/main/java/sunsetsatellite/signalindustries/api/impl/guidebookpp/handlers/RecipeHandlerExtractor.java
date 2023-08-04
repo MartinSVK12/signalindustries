@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.FluidAPI;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.util.MachineRecipes;

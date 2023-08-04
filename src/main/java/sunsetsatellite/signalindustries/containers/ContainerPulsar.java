@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.containers;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.api.*;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;

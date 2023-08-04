@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.*;
-import net.minecraft.src.material.ArmorMaterial;
+
+
 import sunsetsatellite.signalindustries.interfaces.IAttachable;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;

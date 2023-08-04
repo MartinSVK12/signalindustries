@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+
+
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 

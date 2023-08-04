@@ -2,9 +2,9 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.material.ArmorMaterial;
-import net.minecraft.src.material.ToolMaterial;
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;

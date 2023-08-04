@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.worldgen;
 
-import net.minecraft.src.*;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Inject;
 import sunsetsatellite.signalindustries.SignalIndustries;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.src.command.ChatColor;
+
 
 public enum Tier {
     PROTOTYPE(ChatColor.lightGray,"0 (Prototype)"),

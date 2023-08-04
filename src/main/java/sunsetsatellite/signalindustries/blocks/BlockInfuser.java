@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;

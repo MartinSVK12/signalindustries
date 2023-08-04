@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import net.minecraft.src.command.commands.DifficultyCommand;
+
+
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

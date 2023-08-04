@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.ItemArmor;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.material.ArmorMaterial;
+
+
+
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 

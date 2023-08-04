@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.src.Entity;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+
+
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

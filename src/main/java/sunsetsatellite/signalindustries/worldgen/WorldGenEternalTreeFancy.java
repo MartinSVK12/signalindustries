@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.worldgen;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Random;

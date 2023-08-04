@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.BlockFluid;
-import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.TileEntity;
+
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;

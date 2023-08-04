@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
-import net.minecraft.src.material.ToolMaterial;
+
+
+
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IItemFluidContainer;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;

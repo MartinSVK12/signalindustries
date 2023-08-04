@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.containers;
 
-import net.minecraft.src.IInventory;
-import net.minecraft.src.Slot;
+
+
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.inventories.InventoryAbilityModule;

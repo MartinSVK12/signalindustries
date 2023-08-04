@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.misc;
 
-import net.minecraft.src.Vec3D;
+
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3f;
 

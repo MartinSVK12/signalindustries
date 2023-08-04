@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.abilities.powersuit;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.misc.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Mode;

@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.EntityRenderer;
-import net.minecraft.src.Vec3D;
-import net.minecraft.src.World;
+
+
+
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

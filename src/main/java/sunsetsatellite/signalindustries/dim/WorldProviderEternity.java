@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.dim;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class WorldProviderEternity extends WorldProvider {

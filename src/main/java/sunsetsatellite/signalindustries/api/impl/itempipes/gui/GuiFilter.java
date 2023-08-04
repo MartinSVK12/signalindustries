@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.gui;
 
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.signalindustries.api.impl.itempipes.containers.ContainerFilter;
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityFilter;

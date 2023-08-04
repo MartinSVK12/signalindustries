@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items.attachments;
 
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.command.ChatColor;
+
+
+
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;

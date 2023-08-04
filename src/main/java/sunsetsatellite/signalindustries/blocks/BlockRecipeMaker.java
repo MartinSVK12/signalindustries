@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.gui.GuiRecipeMaker;
 import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
 

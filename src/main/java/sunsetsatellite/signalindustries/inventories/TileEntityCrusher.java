@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.*;
 import sunsetsatellite.signalindustries.SignalIndustries;

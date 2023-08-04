@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.weather;
 
-import net.minecraft.src.Weather;
+
 
 public class WeatherBloodMoon extends Weather {
     public WeatherBloodMoon(int id) {

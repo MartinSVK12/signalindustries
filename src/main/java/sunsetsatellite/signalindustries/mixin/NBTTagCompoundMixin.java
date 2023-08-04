@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import b100.utils.ReflectUtils;
-import net.minecraft.src.NBTTagCompound;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;

@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.src.command.ChatColor;
-import net.minecraft.src.helper.Color;
+
+
 
 public enum Mode {
     NORMAL(ChatColor.gray,"Normal", 0xFF808080),

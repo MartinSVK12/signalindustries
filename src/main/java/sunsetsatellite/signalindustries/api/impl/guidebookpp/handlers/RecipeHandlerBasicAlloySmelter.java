@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
-import net.minecraft.src.ContainerGuidebookRecipeBase;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.StringTranslate;
+
+
+
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.guidebookpp.RecipeGroup;

@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.abilities.trigger;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
-import net.minecraft.src.dynamictexture.DynamicTexture;
+
+
+
+
 
 public class BoostAbility extends TriggerBaseAbility {
     public BoostAbility(String name, int cost, int cooldown) {

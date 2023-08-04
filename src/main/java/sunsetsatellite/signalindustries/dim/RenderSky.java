@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.dim;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SignalIndustries;

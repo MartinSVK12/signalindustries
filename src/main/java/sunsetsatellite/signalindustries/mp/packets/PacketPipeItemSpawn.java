@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.mp.packets;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
 import sunsetsatellite.signalindustries.api.impl.itempipes.misc.PipeItem;

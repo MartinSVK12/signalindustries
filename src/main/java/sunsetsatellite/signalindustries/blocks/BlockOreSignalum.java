@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.Material;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Random;

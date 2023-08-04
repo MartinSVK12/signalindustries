@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.containers;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.InventoryPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Slot;
+
+
+
+
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.SlotFluid;

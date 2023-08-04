@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.api.impl.itempipes.blocks;
 
-import net.minecraft.src.BlockContainerRotatable;
-import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+
+
+
+
 import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
 
 public class BlockItemPipe extends BlockContainerRotatable {

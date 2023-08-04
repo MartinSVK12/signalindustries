@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.gui;
 
-import net.minecraft.src.InventoryPlayer;
-import net.minecraft.src.Slot;
+
+
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.GuiItemFluid;

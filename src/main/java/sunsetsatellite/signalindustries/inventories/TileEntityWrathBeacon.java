@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.util.Wave;

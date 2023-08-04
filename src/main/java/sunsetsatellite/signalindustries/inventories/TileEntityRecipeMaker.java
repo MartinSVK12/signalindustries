@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.src.*;
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.lang.reflect.Field;

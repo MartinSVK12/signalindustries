@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.items;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
-import net.minecraft.src.command.ChatColor;
+
+
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;

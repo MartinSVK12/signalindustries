@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.entities;
 
-import net.minecraft.src.EntityFX;
-import net.minecraft.src.Tessellator;
-import net.minecraft.src.World;
+
+
+
 
 public class EntityColorParticleFX extends EntityFX {
     public float red;
