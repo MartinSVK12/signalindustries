@@ -1,6 +1,14 @@
 package sunsetsatellite.signalindustries.gui;
 
 
+import net.minecraft.client.entity.player.EntityPlayerSP;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.lang.I18n;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
@@ -28,12 +36,17 @@ public class GuiInfuser extends GuiFluid {
         int i = (width - xSize) / 2;
         int j = (height - ySize) / 2;
         super.drawScreen(x, y, renderPartialTicks);
-        StringTranslate trans = StringTranslate.getInstance();
+        I18n trans = I18n.getInstance();
         StringBuilder text = new StringBuilder();
         if(x > i+80 && x < i+94){
             if(y > j+43 && y < j+49){
                 text.append("View Recipes");
-                this.drawTooltip(text.toString(),x,y,8,-8,true);
+                GuiTooltip tooltip = new GuiTooltip(mc);
+                GL11.glDisable(GL11.GL_LIGHTING);
+                GL11.glDisable(GL11.GL_CULL_FACE);
+                tooltip.render(text.toString(),x,y,8,-8);
+                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glEnable(GL11.GL_CULL_FACE);
             }
         }
     }
@@ -44,8 +57,8 @@ public class GuiInfuser extends GuiFluid {
         int j = (height - ySize) / 2;
         if(x > i+80 && x < i+94) {
             if (y > j + 43 && y < j + 49) {
-                StringTranslate translator = StringTranslate.getInstance();
-                String name = translator.translateKey(tile.getBlockType().getBlockName(0)+".name");
+                I18n translator = I18n.getInstance();
+                String name = translator.translateKey(tile.getBlockType().getLanguageKey(0)+".name");
                 GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
@@ -94,7 +107,8 @@ public class GuiInfuser extends GuiFluid {
         }
         fontRenderer.drawCenteredString(name, 90, 6, color);
     }
-    protected void actionPerformed(GuiButton guibutton) {
+
+    protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {
             return;
         }

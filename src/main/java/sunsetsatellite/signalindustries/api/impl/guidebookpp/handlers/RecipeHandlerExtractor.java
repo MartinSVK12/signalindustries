@@ -1,22 +1,19 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 
-import sunsetsatellite.fluidapi.FluidAPI;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.util.MachineRecipes;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.ContainerGuidebookRecipeBase;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.guidebookpp.RecipeGroup;
 import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookExtractorRecipe;
-import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class RecipeHandlerExtractor
     implements IRecipeHandlerBase {

@@ -1,10 +1,15 @@
 package sunsetsatellite.signalindustries.gui;
 
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
+import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class GuiSIFluidTank extends GuiFluid {
@@ -37,7 +42,7 @@ public class GuiSIFluidTank extends GuiFluid {
     }
 
 
-    protected void actionPerformed(GuiButton guibutton) {
+    protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {
             return;
         }

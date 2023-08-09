@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.containers;
 
 
+import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
 import sunsetsatellite.signalindustries.inventories.TileEntityTiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;

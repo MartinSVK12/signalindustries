@@ -1,24 +1,33 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.helper.Sides;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
 import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class    BlockAlloySmelter extends BlockContainerTiered{
-    public BlockAlloySmelter(int i, Tier tier, Material material) {
-        super(i, tier, material);
+public class BlockAlloySmelter extends BlockContainerTiered{
+    public BlockAlloySmelter(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
     }
 
     @Override
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityAlloySmelter();
     }
 
@@ -49,9 +58,9 @@ public class    BlockAlloySmelter extends BlockContainerTiered{
                         itemstack.stackSize -= i1;
                         EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (float) random.nextGaussian() * f3;
-                        entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) random.nextGaussian() * f3;
+                        entityitem.xd = (float) random.nextGaussian() * f3;
+                        entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
+                        entityitem.zd = (float) random.nextGaussian() * f3;
                         world.entityJoinedWorld(entityitem);
                     }
                 }
@@ -64,7 +73,7 @@ public class    BlockAlloySmelter extends BlockContainerTiered{
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-        if(world.isMultiplayerAndNotHost)
+        if(world.isClientSide)
         {
             return true;
         } else
@@ -78,9 +87,9 @@ public class    BlockAlloySmelter extends BlockContainerTiered{
     }
 
     @Override
-    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
-        TileEntityAlloySmelter tile = (TileEntityAlloySmelter) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityAlloySmelter tile = (TileEntityAlloySmelter) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
         this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
@@ -89,7 +98,7 @@ public class    BlockAlloySmelter extends BlockContainerTiered{
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
-        int index = Sides.orientationLookUp[6 * meta + side];
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         int offset = tier.ordinal()+1;
         if(tier.ordinal() == 0){
             offset = 0;

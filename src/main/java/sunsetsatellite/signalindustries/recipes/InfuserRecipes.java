@@ -1,15 +1,18 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
-
-
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>,ItemStack> {
+public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>, ItemStack> {
     public static final InfuserRecipes instance = new InfuserRecipes();
 
     private InfuserRecipes() {
@@ -17,7 +20,7 @@ public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>,ItemSta
         list.add(null);
         list.add(new ItemStack(SignalIndustries.crystalAlloyIngot,1));
         list.add(new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,4));
-        addRecipe(list,new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot.itemID,1,0));
+        addRecipe(list,new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot.id,1,0));
         list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000));
         list.add(new ItemStack(Block.obsidian,2,0));

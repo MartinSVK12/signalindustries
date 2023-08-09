@@ -1,13 +1,11 @@
 package sunsetsatellite.signalindustries.gui;
 
 
-import org.lwjgl.input.Keyboard;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.fluidapi.api.GuiItemFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.fluidapi.interfaces.mixins.IPlayerController;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.util.NBTHelper;

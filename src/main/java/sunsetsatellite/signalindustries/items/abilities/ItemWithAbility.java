@@ -1,12 +1,13 @@
 package sunsetsatellite.signalindustries.items.abilities;
 
 
-
-
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
+import net.minecraft.core.net.command.TextFormatting;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 import sunsetsatellite.signalindustries.interfaces.IHasAbility;
-import sunsetsatellite.signalindustries.util.AttachmentPoint;
+import sunsetsatellite.sunsetutils.util.ICustomDescription;
 
 public class ItemWithAbility extends Item implements IHasAbility, ICustomDescription {
 
@@ -24,11 +25,12 @@ public class ItemWithAbility extends Item implements IHasAbility, ICustomDescrip
 
     @Override
     public String getDescription(ItemStack stack) {
-        StringBuilder s = new StringBuilder(ChatColor.yellow + "Ability Container" + ChatColor.white).append("\n");
-        s.append("Name: ").append(ChatColor.lightGray).append(ability.name).append(ChatColor.white).append("\n");
-        s.append("Mode: ").append(ability.mode.getChatColor()).append(ability.mode.getName()).append(ChatColor.white).append("\n");
-        s.append("Description: ").append(ChatColor.lightGray).append(ability.desc).append(ChatColor.white).append("\n");
-        s.append("Cost: ").append(ChatColor.red).append(ability.cost).append(ChatColor.white);
+        I18n t = I18n.getInstance();
+        StringBuilder s = new StringBuilder(TextFormatting.YELLOW + "Ability Container" + TextFormatting.WHITE).append("\n");
+        s.append("Name: ").append(TextFormatting.LIGHT_GRAY).append(t.translateKey(ability.name)).append(TextFormatting.WHITE).append("\n");
+        s.append("Mode: ").append(ability.mode.getChatColor()).append(ability.mode.getName()).append(TextFormatting.WHITE).append("\n");
+        s.append("Description: ").append(TextFormatting.LIGHT_GRAY).append(t.translateKey(ability.desc)).append(TextFormatting.WHITE).append("\n");
+        s.append("Cost: ").append(TextFormatting.RED).append(ability.cost).append(TextFormatting.WHITE);
         return s.toString();
     }
 }

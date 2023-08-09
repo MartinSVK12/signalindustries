@@ -1,23 +1,31 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.helper.Sides;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockWrathBeacon extends BlockContainerTiered {
-    public BlockWrathBeacon(int i, Tier tier, Material material) {
-        super(i, tier, material);
+
+    public BlockWrathBeacon(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
     }
 
     @Override
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityWrathBeacon();
     }
 
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if(world.isMultiplayerAndNotHost)
+        if(world.isClientSide)
         {
             return true;
         } else
@@ -44,7 +52,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
+    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
         TileEntityWrathBeacon tile = (TileEntityWrathBeacon) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
@@ -55,7 +63,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
-        int index = Sides.orientationLookUp[6 * meta + side];
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(index > 1 && index < 6){
             if(tile.active){
                 return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.wrathBeaconTex[1][0],SignalIndustries.wrathBeaconTex[1][1]);

@@ -1,14 +1,21 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.containers;
 
 
+import net.minecraft.client.gui.GuiGuidebook;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.InventoryAction;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.ContainerGuidebookRecipeBase;
+import net.minecraft.core.player.inventory.slot.Slot;
+import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IContainerRecipeBase;
 import sunsetsatellite.guidebookpp.recipes.RecipeBase;
-import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeBase
     implements IContainerRecipeBase {
@@ -23,7 +30,7 @@ public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeB
     }
 
     public void drawContainer(GuiGuidebook guidebook, int xSize, int ySize, int index, RecipeBase recipeBase){
-        RenderItem itemRenderer = new RenderItem();
+        ItemEntityRenderer itemRenderer = new ItemEntityRenderer();
         int i = GuidebookPlusPlus.mc.renderEngine.getTexture("/assets/signalindustries/gui/extractor_recipe.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GuidebookPlusPlus.mc.renderEngine.bindTexture(i);
@@ -37,7 +44,12 @@ public class ContainerGuidebookExtractorRecipe extends ContainerGuidebookRecipeB
     }
 
     @Override
-    public void quickMoveItems(int i, EntityPlayer entityPlayer, boolean bl, boolean bl2) {
+    public List<Integer> getMoveSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        return null;
+    }
 
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        return null;
     }
 }

@@ -1,13 +1,14 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
-
+import net.minecraft.core.block.Block;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
 
-public class PlateFormerRecipes extends MachineRecipesBase<Integer,ItemStack> {
+public class PlateFormerRecipes extends MachineRecipesBase<Integer, ItemStack> {
     private static final PlateFormerRecipes instance = new PlateFormerRecipes();
 
     public static PlateFormerRecipes getInstance() {
@@ -15,10 +16,10 @@ public class PlateFormerRecipes extends MachineRecipesBase<Integer,ItemStack> {
     }
 
     private PlateFormerRecipes() {
-        addRecipe(Block.stone.blockID,new ItemStack(SignalIndustries.stonePlate,2));
-        addRecipe(Block.cobbleStone.blockID,new ItemStack(SignalIndustries.cobblestonePlate,2));
-        addRecipe(Item.ingotSteel.itemID,new ItemStack(SignalIndustries.steelPlate,1));
-        addRecipe(SignalIndustries.crystalAlloyIngot.itemID,new ItemStack(SignalIndustries.crystalAlloyPlate,1));
+        addRecipe(Block.stone.id,new ItemStack(SignalIndustries.stonePlate,2));
+        addRecipe(Block.cobbleStone.id,new ItemStack(SignalIndustries.cobblestonePlate,2));
+        addRecipe(Item.ingotSteel.id,new ItemStack(SignalIndustries.steelPlate,1));
+        addRecipe(SignalIndustries.crystalAlloyIngot.id,new ItemStack(SignalIndustries.crystalAlloyPlate,1));
     }
 
     public void addRecipe(Integer id, ItemStack stack) {

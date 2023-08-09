@@ -1,8 +1,10 @@
 package sunsetsatellite.signalindustries.abilities.powersuit;
 
 
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.misc.powersuit.SignalumPowerSuit;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Mode;
 
 import java.util.ArrayList;
@@ -15,15 +17,22 @@ public abstract class SuitBaseAbility {
     public int cost;
     public int cooldown;
     public static ArrayList<SuitBaseAbility> abilities = new ArrayList<>();
+    public ActivationType activationType = null;
+
 
     public SuitBaseAbility(Mode mode, String modId, String translateKey, int cost, int cooldown) {
-        StringTranslate t = StringTranslate.getInstance();
         this.mode = mode;
-        this.name = t.translateKey("ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".name");
-        this.desc = t.translateKey("ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".desc");
+        this.name = "ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".name";
+        this.desc = "ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".desc";
         this.cost = cost;
         this.cooldown = cooldown;
         abilities.add(this);
+    }
+
+    public enum ActivationType {
+        POSITION,
+        SELF,
+        TARGET
     }
 
 

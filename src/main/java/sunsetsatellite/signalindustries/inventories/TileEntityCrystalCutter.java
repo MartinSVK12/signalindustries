@@ -1,9 +1,12 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
 
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         } else if(canProcess()) {
             progressMaxTicks = 200 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
                 update = fuel();
             }

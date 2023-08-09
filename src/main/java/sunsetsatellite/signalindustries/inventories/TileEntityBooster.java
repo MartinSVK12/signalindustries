@@ -1,9 +1,10 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
-
-
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
@@ -15,7 +16,10 @@ import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class TileEntityBooster extends TileEntityFluidItemContainer {
 
@@ -53,7 +57,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             /*if (progressTicks >= 0 && canProcess()){
                 update = fuel();
             }*/
@@ -201,16 +205,16 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nBTTagCompound1) {
+    public void writeToNBT(CompoundTag nBTTagCompound1) {
         super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.setShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.setShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.setShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.setInteger("MaxProcessTime",this.progressMaxTicks);
+        nBTTagCompound1.putShort("BurnTime", (short)this.fuelBurnTicks);
+        nBTTagCompound1.putShort("ProcessTime", (short)this.progressTicks);
+        nBTTagCompound1.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
+        nBTTagCompound1.putInt("MaxProcessTime",this.progressMaxTicks);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nBTTagCompound1) {
+    public void readFromNBT(CompoundTag nBTTagCompound1) {
         super.readFromNBT(nBTTagCompound1);
         fuelBurnTicks = nBTTagCompound1.getShort("BurnTime");
         progressTicks = nBTTagCompound1.getShort("ProcessTime");

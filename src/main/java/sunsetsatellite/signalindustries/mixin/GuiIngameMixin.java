@@ -1,8 +1,13 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.render.FontRenderer;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
+import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,8 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
-
-import java.util.Random;
 
 @Debug(
         export = true
@@ -28,23 +31,21 @@ public abstract class GuiIngameMixin extends Gui {
 
     @Shadow private Minecraft mc;
 
-    @Shadow private Random rand;
-
     @Shadow private int updateCounter;
 
     @Shadow protected abstract void renderInventorySlot(int itemIndex, int x, int y, float delta, float alpha);
 
-    @Shadow private static RenderItem itemRenderer;
+    @Shadow private static ItemEntityRenderer itemRenderer;
 
     @Inject(
             method = "renderGameOverlay",
-            at = @At(value = "INVOKE",target = "Lnet/minecraft/src/EntityRenderer;setupScaledResolution()V", shift = At.Shift.AFTER),
+            at = @At(value = "INVOKE",target = "Lnet/minecraft/client/render/WorldRenderer;setupScaledResolution()V", shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void renderAfterGameOverlay(float partialTicks, boolean flag, int mouseX, int mouseY, CallbackInfo ci, StringTranslate stringtranslate, int width, int height, int sp, FontRenderer fontrenderer) {
+    public void renderAfterGameOverlay(float partialTicks, boolean flag, int mouseX, int mouseY, CallbackInfo ci, I18n stringtranslate, int width, int height, int sp, FontRenderer fontrenderer) {
         ItemStack headSlotItem = this.mc.thePlayer.inventory.armorItemInSlot(3);
         if(headSlotItem != null){
-            if(headSlotItem.getItem().itemID == SignalIndustries.signalumPrototypeHarnessGoggles.itemID){
+            if(headSlotItem.getItem().id == SignalIndustries.signalumPrototypeHarnessGoggles.id){
                 InventoryPlayer inv = this.mc.thePlayer.inventory;
                 if(this.mc.thePlayer.inventory.getCurrentItem() != null) {
                     if(this.mc.thePlayer.inventory.getCurrentItem().getItem() instanceof IHasOverlay){
@@ -63,10 +64,10 @@ public abstract class GuiIngameMixin extends Gui {
     }
 
     private void drawHotbar(float partialTicks){
-        if (this.mc.isometricMode)
+        /*if (this.mc.isometricMode)
             return;
         GL11.glBindTexture(3553, this.mc.renderEngine.getTexture("/gui/icons.png"));
-        StringTranslate stringtranslate = StringTranslate.getInstance();
+        I18n stringtranslate = I18n.getInstance();
         int width = this.mc.resolution.scaledWidth;
         int height = this.mc.resolution.scaledHeight;
         int sp = (int)(this.mc.gameSettings.screenPadding.value.floatValue() * height / 8.0F);
@@ -80,7 +81,7 @@ public abstract class GuiIngameMixin extends Gui {
                 heartsFlash = false;
             int health = this.mc.thePlayer.health;
             int prevHealth = this.mc.thePlayer.prevHealth;
-            this.rand.setSeed(this.updateCounter * 312871L);
+            this.random.setSeed(this.updateCounter * 312871L);
             if (this.mc.playerController.shouldDrawHUD()) {
                 int armorValue = this.mc.thePlayer.getPlayerProtectionAmount();
                 for (int index = 0; index < 10; index++) {
@@ -100,7 +101,7 @@ public abstract class GuiIngameMixin extends Gui {
                             heartOffset = 1;
                         int x = width / 2 - 91 + index * 8;
                         if (health <= 4)
-                            y += this.rand.nextInt(2);
+                            y += this.random.nextInt(2);
                         drawTexturedModalRect(x, y, 16 + heartOffset * 9, 0, 9, 9);
                         if (heartsFlash) {
                             if (index * 2 + 1 < prevHealth)
@@ -152,7 +153,7 @@ public abstract class GuiIngameMixin extends Gui {
             GL11.glEnable(32826);
             GL11.glPushMatrix();
             GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-            RenderHelper.enableStandardItemLighting();
+            Lighting.turnOn();
             GL11.glPopMatrix();
             int lastHotbarStart = (this.mc.thePlayer.inventory.hotbarOffset + 27) % 36;
             int nextHotbarStart = (this.mc.thePlayer.inventory.hotbarOffset + 9) % 36;
@@ -200,7 +201,7 @@ public abstract class GuiIngameMixin extends Gui {
         if (headSlotItem.getItem() instanceof IHasOverlay) {
             InventoryPlayer inv = this.mc.thePlayer.inventory;
             ((IHasOverlay)inv.armorItemInSlot(3).getItem()).renderBeforeOverlay((GuiIngame) ((Object)this),this.mc.thePlayer,height,width,mouseX,mouseY,fontrenderer );
-        }
-    }*/
+        }*/
+    }
 
 }

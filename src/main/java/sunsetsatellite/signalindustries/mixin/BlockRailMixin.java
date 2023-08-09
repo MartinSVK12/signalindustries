@@ -1,6 +1,11 @@
 package sunsetsatellite.signalindustries.mixin;
 
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockRail;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.enums.EnumDropCause;
+import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,25 +28,25 @@ import sunsetsatellite.signalindustries.util.RailLogic;
 public abstract class BlockRailMixin extends Block {
     @Shadow @Final private boolean isPowered;
 
+    public BlockRailMixin(String key, int id, Material material) {
+        super(key, id, material);
+    }
+
     @Shadow protected abstract boolean func_27044_a(World world, int i, int j, int k, int l, boolean flag, int i1);
 
     @Shadow protected abstract void func_4031_h(World world, int i, int j, int k, boolean flag);
 
-    public BlockRailMixin(int i, Material material) {
-        super(i, material);
-    }
-
     @Inject(method = "isRailBlockAt", at = @At("HEAD"), cancellable = true)
     private static void isRailBlockAt(World world, int i, int j, int k, CallbackInfoReturnable<Boolean> cir) {
         int l = world.getBlockId(i, j, k);
-        if(l == SignalIndustries.dilithiumRail.blockID){
+        if(l == SignalIndustries.dilithiumRail.id){
             cir.setReturnValue(true);
         }
     }
 
     @Inject(method = "isRailBlock", at = @At("HEAD"), cancellable = true)
     private static void isRailBlock(int i, CallbackInfoReturnable<Boolean> cir) {
-        if(i == SignalIndustries.dilithiumRail.blockID){
+        if(i == SignalIndustries.dilithiumRail.id){
             cir.setReturnValue(true);
         }
     }
@@ -52,8 +57,8 @@ public abstract class BlockRailMixin extends Block {
             cancellable = true
     )
     public void onNeighborBlockChange(World world, int i, int j, int k, int l, CallbackInfo ci) {
-        if (this.blockID == SignalIndustries.dilithiumRail.blockID) {
-            if (world.isMultiplayerAndNotHost){
+        if (this.id == SignalIndustries.dilithiumRail.id) {
+            if (world.isClientSide){
                 ci.cancel();
             } else {
                 int i1 = world.getBlockMetadata(i, j, k);
@@ -70,7 +75,7 @@ public abstract class BlockRailMixin extends Block {
                 if (j1 == 5 && !world.canPlaceOnSurfaceOfBlock(i, j, k + 1))
                     flag = true;
                 if (flag) {
-                    dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k));
+                    dropBlockWithCause(world, EnumDropCause.WORLD, i, j, k, world.getBlockMetadata(i, j, k),null);
                     world.setBlockWithNotify(i, j, k, 0);
                 } else {
                     boolean flag1 = (world.isBlockIndirectlyGettingPowered(i, j, k) || world.isBlockIndirectlyGettingPowered(i, j + 1, k));
@@ -84,9 +89,9 @@ public abstract class BlockRailMixin extends Block {
                         flag2 = true;
                     }
                     if (flag2) {
-                        world.notifyBlocksOfNeighborChange(i, j - 1, k, this.blockID);
+                        world.notifyBlocksOfNeighborChange(i, j - 1, k, this.id);
                         if (j1 == 2 || j1 == 3 || j1 == 4 || j1 == 5)
-                            world.notifyBlocksOfNeighborChange(i, j + 1, k, this.blockID);
+                            world.notifyBlocksOfNeighborChange(i, j + 1, k, this.id);
                     }
                 }
             }
@@ -100,7 +105,7 @@ public abstract class BlockRailMixin extends Block {
     )
     private void func_27043_a(World world, int i, int j, int k, boolean flag, int l, int i1, CallbackInfoReturnable<Boolean> cir) {
         int j1 = world.getBlockId(i, j, k);
-        if (j1 == SignalIndustries.dilithiumRail.blockID) {
+        if (j1 == SignalIndustries.dilithiumRail.id) {
             int k1 = world.getBlockMetadata(i, j, k);
             int l1 = k1 & 0x7;
             if (i1 == 1 && (l1 == 0 || l1 == 4 || l1 == 5)){
@@ -123,10 +128,10 @@ public abstract class BlockRailMixin extends Block {
             cancellable = true
     )
     private void func_4031_h(World world, int i, int j, int k, boolean flag, CallbackInfo ci) {
-        if (world.isMultiplayerAndNotHost){
+        if (world.isClientSide){
             ci.cancel();
         } else {
-            if(this.blockID == SignalIndustries.dilithiumRail.blockID){
+            if(this.id == SignalIndustries.dilithiumRail.id){
                 (new RailLogic((BlockRail) ((Object)this), world, i, j, k)).func_792_a(world.isBlockIndirectlyGettingPowered(i, j, k), flag);
             }
         }

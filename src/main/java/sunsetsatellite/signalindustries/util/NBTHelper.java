@@ -1,6 +1,9 @@
 package sunsetsatellite.signalindustries.util;
 
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IFluidInventory;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
@@ -8,45 +11,45 @@ import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 public class NBTHelper {
 
     public static void saveInvToNBT(ItemStack source_item, IInventory inv){
-        NBTTagCompound itemData = source_item.tag.getCompoundTag("inventory");
+        CompoundTag itemData = source_item.tag.getCompound("inventory");
         for(int i = 0; i < inv.getSizeInventory();i++){
             ItemStack item = inv.getStackInSlot(i);
-            NBTTagCompound itemNBT = new NBTTagCompound();
+            CompoundTag itemNBT = new CompoundTag();
             if(item != null){
                 item.writeToNBT(itemNBT);
-                itemData.setCompoundTag(String.valueOf(i),itemNBT);
+                itemData.putCompound(String.valueOf(i),itemNBT);
             } else {
                 ((INBTCompound)itemData).removeTag(String.valueOf(i));
             }
         }
-        source_item.tag.setCompoundTag("inventory",itemData);
+        source_item.tag.putCompound("inventory",itemData);
         if(inv instanceof IFluidInventory){
             IFluidInventory fluidInv = (IFluidInventory) inv;
-            NBTTagCompound fluidData = source_item.tag.getCompoundTag("fluidInventory");
+            CompoundTag fluidData = source_item.tag.getCompound("fluidInventory");
             for(int i = 0; i < fluidInv.getFluidInventorySize();i++){
                 FluidStack fluid = ((IFluidInventory) inv).getFluidInSlot(i);
-                NBTTagCompound fluidNBT = new NBTTagCompound();
+                CompoundTag fluidNBT = new CompoundTag();
                 if(fluid != null){
                     fluid.writeToNBT(fluidNBT);
-                    fluidData.setCompoundTag(String.valueOf(i),fluidNBT);
+                    fluidData.putCompound(String.valueOf(i),fluidNBT);
                 } else {
                     ((INBTCompound)fluidData).removeTag(String.valueOf(i));
                 }
             }
-            source_item.tag.setCompoundTag("fluidInventory",fluidData);
+            source_item.tag.putCompound("fluidInventory",fluidData);
         }
     }
 
-    /*public static NBTTagCompound savePureNBT(NBTTagCompound nbt, IInventory inv){
+    /*public static CompoundTag savePureNBT(CompoundTag nbt, IInventory inv){
         for(int i = 0; i < inv.getSizeInventory();i++){
             ItemStack item = inv.getStackInSlot(i);
-            NBTTagCompound itemNBT = new NBTTagCompound();
+            CompoundTag itemNBT = new CompoundTag();
             if(item != null){
-                itemNBT.setByte("Count", (byte)item.stackSize);
-                itemNBT.setShort("id", (short)item.itemID);
-                itemNBT.setShort("Damage", (short)item.getMetadata());
-                itemNBT.setCompoundTag("Data", (NBTTagCompound)item.tag);
-                nbt.setCompoundTag(String.valueOf(i),itemNBT);
+                itemNBT.putByte("Count", (byte)item.stackSize);
+                itemNBT.putShort("id", (short)item.itemID);
+                itemNBT.putShort("Damage", (short)item.getMetadata());
+                itemNBT.putCompound("Data", (CompoundTag)item.tag);
+                nbt.putCompound(String.valueOf(i),itemNBT);
             } else {
                 ((INBTCompound)nbt).removeTag(String.valueOf(i));
             }
@@ -55,27 +58,27 @@ public class NBTHelper {
     }*/
 
     public static void loadInvFromNBT(ItemStack source_item, IInventory inv, int amount, int fluidAmount){
-        NBTTagCompound itemNBT = source_item.tag.getCompoundTag("inventory");
-        NBTTagCompound fluidNBT = source_item.tag.getCompoundTag("fluidInventory");
+        CompoundTag itemNBT = source_item.tag.getCompound("inventory");
+        CompoundTag fluidNBT = source_item.tag.getCompound("fluidInventory");
         for(int i = 0; i < amount;i++){
-            if(itemNBT.hasKey(String.valueOf(i))){
-                ItemStack item = new ItemStack(itemNBT.getCompoundTag(String.valueOf(i)));
+            if(itemNBT.containsKey(String.valueOf(i))){
+                ItemStack item = ItemStack.readItemStackFromNbt(itemNBT.getCompound(String.valueOf(i)));
                 inv.setInventorySlotContents(i,item);
             }
         }
         for (int i = 0; i < fluidAmount; i++) {
             if(inv instanceof IFluidInventory){
                 IFluidInventory fluidInv = (IFluidInventory) inv;
-                FluidStack fluid = new FluidStack(fluidNBT.getCompoundTag(String.valueOf(i)));
+                FluidStack fluid = new FluidStack(fluidNBT.getCompound(String.valueOf(i)));
                 fluidInv.setFluidInSlot(i,fluid);
             }
         }
     }
 
-    /*public static void loadPureNBT(NBTTagCompound nbt, IInventory inv, int amount){
+    /*public static void loadPureNBT(CompoundTag nbt, IInventory inv, int amount){
         for(int i = 0; i < amount;i++){
             if(nbt.hasKey(String.valueOf(i))){
-                ItemStack item = new ItemStack(nbt.getCompoundTag(String.valueOf(i)));
+                ItemStack item = new ItemStack(nbt.getCompound(String.valueOf(i)));
                 inv.setInventorySlotContents(i,item);
             }
         }
@@ -89,7 +92,7 @@ public class NBTHelper {
         } catch(IOException e){
             e.printStackTrace();
         }
-        return new NBTTagCompound();
+        return new CompoundTag();
     }
 
     public static void saveNBTFile(String name, NBTBase nbt) {

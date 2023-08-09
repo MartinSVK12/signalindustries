@@ -1,7 +1,14 @@
 package sunsetsatellite.signalindustries.entities;
 
 
-
+import net.minecraft.core.block.Block;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.util.helper.DamageType;
+import net.minecraft.core.util.helper.MathHelper;
+import net.minecraft.core.util.phys.AABB;
+import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.*;
@@ -11,7 +18,7 @@ public class ExplosionEnergy {
 
     protected Random ExplosionRNG;
 
-    protected World worldObj;
+    protected World world;
 
     public double explosionX;
 
@@ -31,7 +38,7 @@ public class ExplosionEnergy {
         this.isFlaming = false;
         this.ExplosionRNG = new Random();
         this.destroyedBlockPositions = new HashSet<>();
-        this.worldObj = world;
+        this.world = world;
         this.exploder = entity;
         this.explosionSize = f;
         this.explosionX = d;
@@ -49,7 +56,7 @@ public class ExplosionEnergy {
     }
 
     public void doExplosionB(boolean particles, float red, float green, float blue) {
-        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSoundAtEntity(exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
         List<ChunkPosition> arraylist = new ArrayList<>(this.destroyedBlockPositions);
         for (int i = arraylist.size() - 1; i >= 0; i--) {
             ChunkPosition chunkposition = arraylist.get(i);
@@ -57,9 +64,9 @@ public class ExplosionEnergy {
             int k = chunkposition.y;
             int l = chunkposition.z;
             if (particles) {
-                double d = (j + this.worldObj.rand.nextFloat());
-                double d1 = (k + this.worldObj.rand.nextFloat());
-                double d2 = (l + this.worldObj.rand.nextFloat());
+                double d = (j + this.world.rand.nextFloat());
+                double d1 = (k + this.world.rand.nextFloat());
+                double d2 = (l + this.world.rand.nextFloat());
                 double d3 = d - this.explosionX;
                 double d4 = d1 - this.explosionY;
                 double d5 = d2 - this.explosionZ;
@@ -68,18 +75,18 @@ public class ExplosionEnergy {
                 d4 /= d6;
                 d5 /= d6;
                 double d7 = 0.5D / (d6 / this.explosionSize + 0.1D);
-                d7 *= (this.worldObj.rand.nextFloat() * this.worldObj.rand.nextFloat() + 0.3F);
+                d7 *= (this.world.rand.nextFloat() * this.world.rand.nextFloat() + 0.3F);
                 d3 *= d7;
                 d4 *= d7;
                 d5 *= d7;
-                SignalIndustries.spawnParticle(new EntityColorParticleFX(this.worldObj,(d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5,1.0f,red,green,blue));
-                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,d, d1, d2,d3,d4,d5,1.0f, red,green,blue));
+                SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,(d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5,1.0f,red,green,blue));
+                SignalIndustries.spawnParticle(new EntityColorParticleFX(world,d, d1, d2,d3,d4,d5,1.0f, red,green,blue));
             }
         }
     }
 
     public void doExplosionB(boolean particles) {
-        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSoundAtEntity(exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
         List<ChunkPosition> arraylist = new ArrayList<>(this.destroyedBlockPositions);
         for (int i = arraylist.size() - 1; i >= 0; i--) {
             ChunkPosition chunkposition = arraylist.get(i);
@@ -87,9 +94,9 @@ public class ExplosionEnergy {
             int k = chunkposition.y;
             int l = chunkposition.z;
             if (particles) {
-                double d = (j + this.worldObj.rand.nextFloat());
-                double d1 = (k + this.worldObj.rand.nextFloat());
-                double d2 = (l + this.worldObj.rand.nextFloat());
+                double d = (j + this.world.rand.nextFloat());
+                double d1 = (k + this.world.rand.nextFloat());
+                double d2 = (l + this.world.rand.nextFloat());
                 double d3 = d - this.explosionX;
                 double d4 = d1 - this.explosionY;
                 double d5 = d2 - this.explosionZ;
@@ -98,12 +105,12 @@ public class ExplosionEnergy {
                 d4 /= d6;
                 d5 /= d6;
                 double d7 = 0.5D / (d6 / this.explosionSize + 0.1D);
-                d7 *= (this.worldObj.rand.nextFloat() * this.worldObj.rand.nextFloat() + 0.3F);
+                d7 *= (this.world.rand.nextFloat() * this.world.rand.nextFloat() + 0.3F);
                 d3 *= d7;
                 d4 *= d7;
                 d5 *= d7;
-                SignalIndustries.spawnParticle(new EntityColorParticleFX(this.worldObj,(d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5,1.0f,0.8f,0,0));
-                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,d, d1, d2,d3,d4,d5,1.0f, 1.0f,0.0f,0.0f));
+                SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,(d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5,1.0f,0.8f,0,0));
+                SignalIndustries.spawnParticle(new EntityColorParticleFX(world,d, d1, d2,d3,d4,d5,1.0f, 1.0f,0.0f,0.0f));
             }
         }
     }
@@ -121,7 +128,7 @@ public class ExplosionEnergy {
                         d /= d3;
                         d1 /= d3;
                         d2 /= d3;
-                        float f1 = this.explosionSize * (0.7F + this.worldObj.rand.nextFloat() * 0.6F);
+                        float f1 = this.explosionSize * (0.7F + this.world.rand.nextFloat() * 0.6F);
                         double d5 = this.explosionX;
                         double d7 = this.explosionY;
                         double d9 = this.explosionZ;
@@ -130,9 +137,9 @@ public class ExplosionEnergy {
                             int j4 = MathHelper.floor_double(d5);
                             int k4 = MathHelper.floor_double(d7);
                             int l4 = MathHelper.floor_double(d9);
-                            int i5 = this.worldObj.getBlockId(j4, k4, l4);
+                            int i5 = this.world.getBlockId(j4, k4, l4);
                             if (i5 > 0)
-                                f1 -= (Block.blocksList[i5].getExplosionResistance(this.exploder) + 0.3F) * f2;
+                                f1 -= (Block.blocksList[i5].getBlastResistance(this.exploder) + 0.3F) * f2;
                             if (f1 > 0.0F)
                                 this.destroyedBlockPositions.add(new ChunkPosition(j4, k4, l4));
                             d5 += d * f2;
@@ -154,24 +161,24 @@ public class ExplosionEnergy {
         int y2 = MathHelper.floor_double(this.explosionY + explosionSize2 + 1.0D);
         int z1 = MathHelper.floor_double(this.explosionZ - explosionSize2 - 1.0D);
         int z2 = MathHelper.floor_double(this.explosionZ + explosionSize2 + 1.0D);
-        List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, AxisAlignedBB.getBoundingBoxFromPool(x1, y1, z1, x2, y2, z2));
-        Vec3D vec3d = Vec3D.createVector(this.explosionX, this.explosionY, this.explosionZ);
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder, AABB.getBoundingBoxFromPool(x1, y1, z1, x2, y2, z2));
+        Vec3d vec3d = Vec3d.createVector(this.explosionX, this.explosionY, this.explosionZ);
         for (Entity entity : list) {
-            double d4 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / explosionSize2;
+            double d4 = entity.distanceTo(this.explosionX, this.explosionY, this.explosionZ) / explosionSize2;
             if (d4 <= 1.0D) {
-                double d6 = entity.posX - this.explosionX;
-                double d8 = entity.posY - this.explosionY;
-                double d10 = entity.posZ - this.explosionZ;
+                double d6 = entity.x - this.explosionX;
+                double d8 = entity.y - this.explosionY;
+                double d10 = entity.z - this.explosionZ;
                 double d11 = MathHelper.sqrt_double(d6 * d6 + d8 * d8 + d10 * d10);
                 d6 /= d11;
                 d8 /= d11;
                 d10 /= d11;
-                double d12 = this.worldObj.func_675_a(vec3d, entity.boundingBox);
+                double d12 = this.world.func_675_a(vec3d, entity.bb);
                 double d13 = (1.0D - d4) * d12;
-                entity.attackEntityFrom(this.exploder, (int) ((d13 * d13 + d13) / 2.0D * 8.0D * explosionSize2 + 1.0D), DamageType.BLAST);
-                entity.motionX += d6 * d13;
-                entity.motionY += d8 * d13;
-                entity.motionZ += d10 * d13;
+                entity.hurt(this.exploder, (int) ((d13 * d13 + d13) / 2.0D * 8.0D * explosionSize2 + 1.0D), DamageType.BLAST);
+                entity.xd += d6 * d13;
+                entity.yd += d8 * d13;
+                entity.zd += d10 * d13;
             }
         }
     }
@@ -183,8 +190,8 @@ public class ExplosionEnergy {
             int x1 = chunkposition.x;
             int y1 = chunkposition.y;
             int z1 = chunkposition.z;
-            if (this.worldObj.getBlockId(x1, y1, z1) == 0 && Block.opaqueCubeLookup[this.worldObj.getBlockId(x1, y1 - 1, z1)] && this.ExplosionRNG.nextInt(3) == 0)
-                this.worldObj.setBlockWithNotify(x1, y1, z1, Block.fire.blockID);
+            if (this.world.getBlockId(x1, y1, z1) == 0 && Block.opaqueCubeLookup[this.world.getBlockId(x1, y1 - 1, z1)] && this.ExplosionRNG.nextInt(3) == 0)
+                this.world.setBlockWithNotify(x1, y1, z1, Block.fire.id);
         }
     }
 }

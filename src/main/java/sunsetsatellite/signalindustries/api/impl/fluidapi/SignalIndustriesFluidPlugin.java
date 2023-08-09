@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.api.impl.fluidapi;
 
 
-
+import net.minecraft.core.block.BlockFluid;
 import org.slf4j.Logger;
 import sunsetsatellite.fluidapi.FluidAPIPlugin;
 import sunsetsatellite.fluidapi.FluidRegistry;

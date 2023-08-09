@@ -1,16 +1,16 @@
 package sunsetsatellite.signalindustries.gui;
 
 
-
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.GuiItemFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
-import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
-import sunsetsatellite.signalindustries.util.*;
+import sunsetsatellite.signalindustries.util.DrawUtil;
+import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.NBTHelper;
 
 public class GuiAbilityModule extends GuiItemFluid {
 
@@ -38,7 +38,7 @@ public class GuiAbilityModule extends GuiItemFluid {
         for (Slot inventorySlot : container.inventorySlots) {
             int x = inventorySlot.xDisplayPosition;
             int y = inventorySlot.yDisplayPosition;
-            //drawCenteredString(fontRenderer,String.valueOf(inventorySlot.id),i+x,j+y,color);
+            //drawStringCentered(fontRenderer,String.valueOf(inventorySlot.id),i+x,j+y,color);
             drawGradientRect(i+x,j+y,i+x+16,j+y+16,mode.getColor(0xA0), mode.getColor(0xA0));
         }
     }
@@ -47,9 +47,9 @@ public class GuiAbilityModule extends GuiItemFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         if(mode == Mode.AWAKENED){
-            drawCenteredString(fontRenderer,mode.getName()+" Ability Module",xSize/2,8,mode.getColor());
+            drawStringCentered(fontRenderer,mode.getName()+" Ability Module",xSize/2,8,mode.getColor());
         } else {
-            drawCenteredString(fontRenderer,"Ability Module",xSize/2,8,mode.getColor());
+            drawStringCentered(fontRenderer,"Ability Module",xSize/2,8,mode.getColor());
         }
         GL11.glDisable(3042);
         GL11.glDisable(2896);

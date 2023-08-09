@@ -1,26 +1,28 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
-
-
-
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.world.World;
 import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 
 public class BlockEnergyCell extends BlockContainerTiered {
-    public BlockEnergyCell(int i, Tier tier, Material material) {
-        super(i, tier, material);
+
+    public BlockEnergyCell(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
     }
 
     @Override
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityEnergyCell();
     }
 
@@ -41,7 +43,7 @@ public class BlockEnergyCell extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-        if(world.isMultiplayerAndNotHost)
+        if(world.isClientSide)
         {
             return true;
         } else

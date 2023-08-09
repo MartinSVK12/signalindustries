@@ -1,15 +1,15 @@
 package sunsetsatellite.signalindustries.util;
 
 
-
-
-
+import net.minecraft.core.block.BlockRail;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkPosition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RailLogic {
-    private final World worldObj;
+    private final World world;
 
     private final int trackX;
 
@@ -26,7 +26,7 @@ public class RailLogic {
     public RailLogic(BlockRail blockrail, World world, int i, int j, int k) {
         this.rail = blockrail;
         this.connectedTracks = new ArrayList();
-        this.worldObj = world;
+        this.world = world;
         this.trackX = i;
         this.trackY = j;
         this.trackZ = k;
@@ -85,20 +85,20 @@ public class RailLogic {
     }
 
     private boolean isMinecartTrack(int i, int j, int k) {
-        if (BlockRail.isRailBlockAt(this.worldObj, i, j, k))
+        if (BlockRail.isRailBlockAt(this.world, i, j, k))
             return true;
-        if (BlockRail.isRailBlockAt(this.worldObj, i, j + 1, k))
+        if (BlockRail.isRailBlockAt(this.world, i, j + 1, k))
             return true;
-        return BlockRail.isRailBlockAt(this.worldObj, i, j - 1, k);
+        return BlockRail.isRailBlockAt(this.world, i, j - 1, k);
     }
 
     private RailLogic getMinecartTrackLogic(ChunkPosition chunkposition) {
-        if (BlockRail.isRailBlockAt(this.worldObj, chunkposition.x, chunkposition.y, chunkposition.z))
-            return new RailLogic(this.rail, this.worldObj, chunkposition.x, chunkposition.y, chunkposition.z);
-        if (BlockRail.isRailBlockAt(this.worldObj, chunkposition.x, chunkposition.y + 1, chunkposition.z))
-            return new RailLogic(this.rail, this.worldObj, chunkposition.x, chunkposition.y + 1, chunkposition.z);
-        if (BlockRail.isRailBlockAt(this.worldObj, chunkposition.x, chunkposition.y - 1, chunkposition.z))
-            return new RailLogic(this.rail, this.worldObj, chunkposition.x, chunkposition.y - 1, chunkposition.z);
+        if (BlockRail.isRailBlockAt(this.world, chunkposition.x, chunkposition.y, chunkposition.z))
+            return new RailLogic(this.rail, this.world, chunkposition.x, chunkposition.y, chunkposition.z);
+        if (BlockRail.isRailBlockAt(this.world, chunkposition.x, chunkposition.y + 1, chunkposition.z))
+            return new RailLogic(this.rail, this.world, chunkposition.x, chunkposition.y + 1, chunkposition.z);
+        if (BlockRail.isRailBlockAt(this.world, chunkposition.x, chunkposition.y - 1, chunkposition.z))
+            return new RailLogic(this.rail, this.world, chunkposition.x, chunkposition.y - 1, chunkposition.z);
         return null;
     }
 
@@ -166,23 +166,23 @@ public class RailLogic {
                 byte0 = 9;
         }
         if (byte0 == 0) {
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX, this.trackY + 1, this.trackZ - 1))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX, this.trackY + 1, this.trackZ - 1))
                 byte0 = 4;
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX, this.trackY + 1, this.trackZ + 1))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX, this.trackY + 1, this.trackZ + 1))
                 byte0 = 5;
         }
         if (byte0 == 1) {
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX + 1, this.trackY + 1, this.trackZ))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX + 1, this.trackY + 1, this.trackZ))
                 byte0 = 2;
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX - 1, this.trackY + 1, this.trackZ))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX - 1, this.trackY + 1, this.trackZ))
                 byte0 = 3;
         }
         if (byte0 < 0)
             byte0 = 0;
         int i = byte0;
         if (this.isPoweredRail)
-            i = this.worldObj.getBlockMetadata(this.trackX, this.trackY, this.trackZ) & 0x8 | byte0;
-        this.worldObj.setBlockMetadataWithNotify(this.trackX, this.trackY, this.trackZ, i);
+            i = this.world.getBlockMetadata(this.trackX, this.trackY, this.trackZ) & 0x8 | byte0;
+        this.world.setBlockMetadataWithNotify(this.trackX, this.trackY, this.trackZ, i);
     }
 
     private boolean func_786_c(int i, int j, int k) {
@@ -240,15 +240,15 @@ public class RailLogic {
                 }
         }
         if (byte0 == 0) {
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX, this.trackY + 1, this.trackZ - 1))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX, this.trackY + 1, this.trackZ - 1))
                 byte0 = 4;
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX, this.trackY + 1, this.trackZ + 1))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX, this.trackY + 1, this.trackZ + 1))
                 byte0 = 5;
         }
         if (byte0 == 1) {
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX + 1, this.trackY + 1, this.trackZ))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX + 1, this.trackY + 1, this.trackZ))
                 byte0 = 2;
-            if (BlockRail.isRailBlockAt(this.worldObj, this.trackX - 1, this.trackY + 1, this.trackZ))
+            if (BlockRail.isRailBlockAt(this.world, this.trackX - 1, this.trackY + 1, this.trackZ))
                 byte0 = 3;
         }
         if (byte0 < 0)
@@ -256,9 +256,9 @@ public class RailLogic {
         setConnections(byte0);
         int i = byte0;
         if (this.isPoweredRail)
-            i = this.worldObj.getBlockMetadata(this.trackX, this.trackY, this.trackZ) & 0x8 | byte0;
-        if (flag1 || this.worldObj.getBlockMetadata(this.trackX, this.trackY, this.trackZ) != i) {
-            this.worldObj.setBlockMetadataWithNotify(this.trackX, this.trackY, this.trackZ, i);
+            i = this.world.getBlockMetadata(this.trackX, this.trackY, this.trackZ) & 0x8 | byte0;
+        if (flag1 || this.world.getBlockMetadata(this.trackX, this.trackY, this.trackZ) != i) {
+            this.world.setBlockMetadataWithNotify(this.trackX, this.trackY, this.trackZ, i);
             for (int j = 0; j < this.connectedTracks.size(); j++) {
                 RailLogic raillogic = getMinecartTrackLogic((ChunkPosition) this.connectedTracks.get(j));
                 if (raillogic != null) {

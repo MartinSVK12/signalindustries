@@ -1,23 +1,29 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidConduit;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockFluidConduit extends BlockContainerTiered {
-    public BlockFluidConduit(int i, Tier tier, Material material) {
-        super(i, tier, material);
+
+    public BlockFluidConduit(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
     }
 
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityFluidConduit();
     }
 
-    @Override
+    /*@Override
     public int getRenderType() {
         return 32;
-    }
+    }*/
 
     public boolean isOpaqueCube() {
         return false;
@@ -29,7 +35,7 @@ public class BlockFluidConduit extends BlockContainerTiered {
 
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if(entityplayer.isSneaking() && !world.isMultiplayerAndNotHost){
+        if(entityplayer.isSneaking() && !world.isClientSide){
             TileEntityFluidPipe tile = (TileEntityFluidPipe) world.getBlockTileEntity(i,j,k);
             if(tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).getLiquid() != null){
                 entityplayer.addChatMessage("Liquid: "+tile.getFluidInSlot(0).toString());

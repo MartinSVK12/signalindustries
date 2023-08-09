@@ -1,9 +1,15 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-import sunsetsatellite.fluidapi.api.*;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.player.inventory.slot.Slot;
+import sunsetsatellite.fluidapi.api.ContainerItemFluid;
+import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
+import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 
 public class ContainerPulsar extends ContainerItemFluid {
@@ -36,11 +42,6 @@ public class ContainerPulsar extends ContainerItemFluid {
         {
             addSlot(new Slot(inventoryPlayer, k, 8 + k * 18, 142));
         }
-    }
-
-    @Override
-    public void quickMoveItems(int i, EntityPlayer entityPlayer, boolean bl, boolean bl2) {
-
     }
 
     @Override

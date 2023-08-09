@@ -1,10 +1,9 @@
 package sunsetsatellite.signalindustries.util;
 
 
-
-
-import sunsetsatellite.signalindustries.interfaces.IAttachable;
-import sunsetsatellite.signalindustries.interfaces.IAttachment;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.signalindustries.interfaces.IHasAbility;
 
 public class SlotAbility extends Slot {

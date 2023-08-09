@@ -1,13 +1,12 @@
 package sunsetsatellite.signalindustries.gui;
 
 
-
-
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.GuiItemFluid;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
-import sunsetsatellite.signalindustries.containers.ContainerPulsar;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 

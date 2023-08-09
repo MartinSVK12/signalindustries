@@ -1,17 +1,19 @@
-package sunsetsatellite.signalindustries.misc.powersuit;
+package sunsetsatellite.signalindustries.powersuit;
 
 
-
-
-
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.GuiItemFluid;
 import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.signalindustries.util.SlotAttachment;
 import sunsetsatellite.signalindustries.util.DrawUtil;
+import sunsetsatellite.signalindustries.util.SlotAttachment;
 
 public class GuiPowerSuit extends GuiItemFluid {
 
@@ -38,7 +40,7 @@ public class GuiPowerSuit extends GuiItemFluid {
         for (Slot inventorySlot : container.inventorySlots) {
             int x = inventorySlot.xDisplayPosition;
             int y = inventorySlot.yDisplayPosition;
-            //drawCenteredString(fontRenderer,String.valueOf(inventorySlot.id),i+x,j+y,0xFFFFFFFF);
+            //drawStringCentered(fontRenderer,String.valueOf(inventorySlot.id),i+x,j+y,0xFFFFFFFF);
             if(inventorySlot instanceof SlotAttachment && ((SlotAttachment) inventorySlot).getAttachmentPoint() == AttachmentPoint.CORE_MODULE){
                 drawGradientRect(i+x-4,j+y-4,i+x+20,j+y+20,0xA0808080,0xA0808080);
             } else {
@@ -65,7 +67,10 @@ public class GuiPowerSuit extends GuiItemFluid {
             Slot slot = container.inventorySlots.get(k);
             if(getIsMouseOverSlot(slot,x,y) && slot instanceof SlotAttachment) {
                 if(slot.getStack() == null){
-                    drawTooltip("Slot accepts attachments of type:\n- "+((SlotAttachment) slot).getAttachmentPoint(),x,y,8,-8,true);
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glDisable(GL11.GL_CULL_FACE);
+                    GuiTooltip tooltip = new GuiTooltip(mc);
+                    tooltip.render("Slot accepts attachments of type:\n- "+((SlotAttachment) slot).getAttachmentPoint(),x,y,8,-8);
                 }
             }
         }
@@ -93,12 +98,12 @@ public class GuiPowerSuit extends GuiItemFluid {
     @Override
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
-        drawCenteredString(fontRenderer,name,xSize/2,-16,0xFFFFFFFF);
+        drawStringCentered(fontRenderer,name,xSize/2,-16,0xFFFFFFFF);
         GL11.glDisable(3042);
         GL11.glDisable(2896);
     }
 
-    protected void actionPerformed(GuiButton guibutton) {
+    protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {
             return;
         }
@@ -145,10 +150,10 @@ public class GuiPowerSuit extends GuiItemFluid {
         GuiButton legsButton = new GuiButton(2, (width / 2)+20, (height / 2)-25, 20, 20, "");
         GuiButton bootsButton = new GuiButton(3, (width / 2)+50, (height / 2)-25, 20, 20, "");
 
-        helmerButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitHelmet.itemID;
-        chestButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitChestplate.itemID;
-        legsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitLeggings.itemID;
-        bootsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitBoots.itemID;
+        helmerButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitHelmet.id;
+        chestButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitChestplate.id;
+        legsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitLeggings.id;
+        bootsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitBoots.id;
 
         controlList.add(helmerButton);
         controlList.add(chestButton);

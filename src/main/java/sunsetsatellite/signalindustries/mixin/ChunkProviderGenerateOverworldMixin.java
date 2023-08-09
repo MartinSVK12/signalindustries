@@ -1,6 +1,10 @@
 package sunsetsatellite.signalindustries.mixin;
 
+//TODO: Remake world gen
 
+/*import net.minecraft.core.block.Block;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.provider.IChunkProvider;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +28,7 @@ public abstract class ChunkProviderGenerateOverworldMixin implements IChunkProvi
 
     @Shadow protected int terrainMaxHeight;
 
-    @Shadow protected World worldObj;
+    @Shadow protected World world;
 
     @Inject(method = "populate",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/src/World;getRandomSeed()J", shift = At.Shift.AFTER, ordinal = 1),
@@ -33,16 +37,16 @@ public abstract class ChunkProviderGenerateOverworldMixin implements IChunkProvi
     public void populateMeteor(IChunkProvider ichunkprovider, int chunkX, int chunkZ, CallbackInfo ci, int x, int z, BiomeGenBase biomegenbase, long l1, long l2) {
         Random random = new Random();
         if(random.nextInt(512) == 0){
-            int y = this.worldObj.getHeightValue(x,z) - 4;
-            new WorldGenMeteor(Block.oreIronBasalt.blockID,0,25).generate(worldObj,random,x,y,z);
+            int y = this.world.getHeightValue(x,z) - 4;
+            new WorldGenMeteor(Block.oreIronBasalt.id,0,25).generate(world,random,x,y,z);
         }
         if(random.nextInt(1024) == 0){
-            int y = this.worldObj.getHeightValue(x,z) - 4;
-            new WorldGenMeteor(SignalIndustries.signalumOre.blockID,0,15).generate(worldObj,random,x,y,z);
+            int y = this.world.getHeightValue(x,z) - 4;
+            new WorldGenMeteor(SignalIndustries.signalumOre.id,0,15).generate(world,random,x,y,z);
         }
         if(random.nextInt(2048) == 0){
-            int y = this.worldObj.getHeightValue(x,z) - 4;
-            new WorldGenMeteor(SignalIndustries.dilithiumOre.blockID,0,3).generate(worldObj,random,x,y,z);
+            int y = this.world.getHeightValue(x,z) - 4;
+            new WorldGenMeteor(SignalIndustries.dilithiumOre.id,0,3).generate(world,random,x,y,z);
         }
     }
-}
+}*/

@@ -1,10 +1,13 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.*;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.recipes.BasicCrusherRecipes;
+import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
 
 public class TileEntityCrusher extends TileEntityTieredMachine implements IBoostable {
 
@@ -49,7 +52,7 @@ public class TileEntityCrusher extends TileEntityTieredMachine implements IBoost
         } else if(canProcess()) {
             progressMaxTicks = 200 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
                 update = fuel();
             }
@@ -92,7 +95,7 @@ public class TileEntityCrusher extends TileEntityTieredMachine implements IBoost
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(this.itemContents[0].getItem().itemID);
+            ItemStack stack = recipes.getResult(this.itemContents[0].getItem().id);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {

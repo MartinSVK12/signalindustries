@@ -1,281 +1,286 @@
 package sunsetsatellite.signalindustries.entities;
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.HitResult;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.DamageType;
+import net.minecraft.core.util.helper.MathHelper;
+import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.world.World;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class EntityCrystal extends Entity {
-    private int field_20056_b = -1;
-    private int field_20055_c = -1;
-    private int field_20054_d = -1;
-    private int field_20053_e = 0;
-    private boolean field_20052_f = false;
-    public int field_20057_a = 0;
-    public EntityLiving field_20051_g;
-    private int field_20050_h;
-    private int field_20049_i = 0;
+    private int xTileSnowball;
+    private int yTileSnowball;
+    private int zTileSnowball;
+    private int inTileSnowball;
+    private boolean inGroundSnowball;
+    public int shakeSnowball;
+    public EntityLiving thrower;
+    private int ticksInGroundSnowball;
+    private int ticksInAirSnowball;
+    public int damage = 4;
 
     public EntityCrystal(World world) {
         super(world);
+        this.xTileSnowball = -1;
+        this.yTileSnowball = -1;
+        this.zTileSnowball = -1;
+        this.inTileSnowball = 0;
+        this.inGroundSnowball = false;
+        this.shakeSnowball = 0;
+        this.ticksInAirSnowball = 0;
         this.setSize(0.25F, 0.25F);
     }
 
-    protected void entityInit() {
+    @Override
+    protected void init() {
     }
 
-    public boolean isInRangeToRenderDist(double d) {
-        double d1 = this.boundingBox.getAverageEdgeLength() * 4.0;
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        double d1 = this.bb.getAverageEdgeLength() * 4.0;
         d1 *= 64.0;
-        return d < d1 * d1;
+        return distance < d1 * d1;
     }
 
     public EntityCrystal(World world, EntityLiving entityliving) {
         super(world);
-        this.field_20051_g = entityliving;
+        this.xTileSnowball = -1;
+        this.yTileSnowball = -1;
+        this.zTileSnowball = -1;
+        this.inTileSnowball = 0;
+        this.inGroundSnowball = false;
+        this.shakeSnowball = 0;
+        this.ticksInAirSnowball = 0;
+        this.thrower = entityliving;
         this.setSize(0.25F, 0.25F);
-        this.setLocationAndAngles(entityliving.posX, entityliving.posY + (double)entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-        this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * 0.16F;
-        this.posY -= 0.10000000149011612;
-        this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * 0.16F;
-        this.setPosition(this.posX, this.posY, this.posZ);
-        this.yOffset = 0.0F;
+        this.moveTo(entityliving.x, entityliving.y + (double)entityliving.getHeadHeight(), entityliving.z, entityliving.yRot, entityliving.xRot);
+        this.x -= MathHelper.cos(this.yRot / 180.0F * 3.141593F) * 0.16F;
+        this.y -= 0.1F;
+        this.z -= MathHelper.sin(this.yRot / 180.0F * 3.141593F) * 0.16F;
+        this.setPos(this.x, this.y, this.z);
+        this.heightOffset = 0.0F;
         float f = 0.4F;
-        this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f;
-        this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * 3.141593F) * MathHelper.cos(this.rotationPitch / 180.0F * 3.141593F) * f;
-        this.motionY = -MathHelper.sin(this.rotationPitch / 180.0F * 3.141593F) * f;
-        this.setCrystalHeading(this.motionX, this.motionY, this.motionZ, 1.5F, 1.0F);
+        this.xd = -MathHelper.sin(this.yRot / 180.0F * 3.141593F) * MathHelper.cos(this.xRot / 180.0F * 3.141593F) * f;
+        this.zd = MathHelper.cos(this.yRot / 180.0F * 3.141593F) * MathHelper.cos(this.xRot / 180.0F * 3.141593F) * f;
+        this.yd = -MathHelper.sin(this.xRot / 180.0F * 3.141593F) * f;
+        this.setSnowballHeading(this.xd, this.yd, this.zd, 1.5F, 1.0F);
     }
 
     public EntityCrystal(World world, double d, double d1, double d2) {
         super(world);
-        this.field_20050_h = 0;
+        this.xTileSnowball = -1;
+        this.yTileSnowball = -1;
+        this.zTileSnowball = -1;
+        this.inTileSnowball = 0;
+        this.inGroundSnowball = false;
+        this.shakeSnowball = 0;
+        this.ticksInAirSnowball = 0;
+        this.ticksInGroundSnowball = 0;
         this.setSize(0.25F, 0.25F);
-        this.setPosition(d, d1, d2);
-        this.yOffset = 0.0F;
+        this.setPos(d, d1, d2);
+        this.heightOffset = 0.0F;
     }
 
-    public void setCrystalHeading(double d, double d1, double d2, float f, float f1) {
+    public void setSnowballHeading(double d, double d1, double d2, float f, float f1) {
         float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
         d /= f2;
         d1 /= f2;
         d2 /= f2;
-        d += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
-        d1 += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
-        d2 += this.rand.nextGaussian() * 0.007499999832361937 * (double)f1;
+        d += this.random.nextGaussian() * 0.0075F * (double)f1;
+        d1 += this.random.nextGaussian() * 0.0075F * (double)f1;
+        d2 += this.random.nextGaussian() * 0.0075F * (double)f1;
         d *= f;
         d1 *= f;
         d2 *= f;
-        this.motionX = d;
-        this.motionY = d1;
-        this.motionZ = d2;
+        this.xd = d;
+        this.yd = d1;
+        this.zd = d2;
         float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
-        this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(d, d2) * 180.0 / 3.1415927410125732);
-        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, f3) * 180.0 / 3.1415927410125732);
-        this.field_20050_h = 0;
+        this.yRotO = this.yRot = (float)(Math.atan2(d, d2) * 180.0 / (float) Math.PI);
+        this.xRotO = this.xRot = (float)(Math.atan2(d1, f3) * 180.0 / (float) Math.PI);
+        this.ticksInGroundSnowball = 0;
     }
 
-    public void setVelocity(double d, double d1, double d2) {
-        this.motionX = d;
-        this.motionY = d1;
-        this.motionZ = d2;
-        if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-            float f = MathHelper.sqrt_double(d * d + d2 * d2);
-            this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(d, d2) * 180.0 / 3.1415927410125732);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(d1, f) * 180.0 / 3.1415927410125732);
-        }
-
+    public void setSnowballHeadingPrecise(double d, double d1, double d2, float f, float f1) {
+        float f2 = MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
+        d /= f2;
+        d1 /= f2;
+        d2 /= f2;
+        d *= f;
+        d1 *= f;
+        d2 *= f;
+        this.xd = d;
+        this.yd = d1;
+        this.zd = d2;
+        float f3 = MathHelper.sqrt_double(d * d + d2 * d2);
+        this.yRotO = this.yRot = (float)(Math.atan2(d, d2) * 180.0 / (float) Math.PI);
+        this.xRotO = this.xRot = (float)(Math.atan2(d1, f3) * 180.0 / (float) Math.PI);
+        this.ticksInGroundSnowball = 0;
     }
 
-    public void onUpdate() {
-        this.lastTickPosX = this.posX;
-        this.lastTickPosY = this.posY;
-        this.lastTickPosZ = this.posZ;
-        super.onUpdate();
-        if (this.field_20057_a > 0) {
-            --this.field_20057_a;
+    @Override
+    public void lerpMotion(double xd, double yd, double zd) {
+        this.xd = xd;
+        this.yd = yd;
+        this.zd = zd;
+        if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
+            float f = MathHelper.sqrt_double(xd * xd + zd * zd);
+            this.yRotO = this.yRot = (float)(Math.atan2(xd, zd) * 180.0 / (float) Math.PI);
+            this.xRotO = this.xRot = (float)(Math.atan2(yd, f) * 180.0 / (float) Math.PI);
+        }
+    }
+
+    @Override
+    public void tick() {
+        this.xOld = this.x;
+        this.yOld = this.y;
+        this.zOld = this.z;
+        super.tick();
+        if (this.shakeSnowball > 0) {
+            --this.shakeSnowball;
         }
 
-        if (this.field_20052_f) {
-            int i = this.worldObj.getBlockId(this.field_20056_b, this.field_20055_c, this.field_20054_d);
-            if (i == this.field_20053_e) {
-                ++this.field_20050_h;
-                if (this.field_20050_h == 1200) {
-                    this.setEntityDead();
+        if (this.inGroundSnowball) {
+            int i = this.world.getBlockId(this.xTileSnowball, this.yTileSnowball, this.zTileSnowball);
+            if (i == this.inTileSnowball) {
+                ++this.ticksInGroundSnowball;
+                if (this.ticksInGroundSnowball == 1200) {
+                    this.remove();
                 }
 
                 return;
             }
 
-            this.field_20052_f = false;
-            this.motionX *= this.rand.nextFloat() * 0.2F;
-            this.motionY *= this.rand.nextFloat() * 0.2F;
-            this.motionZ *= this.rand.nextFloat() * 0.2F;
-            this.field_20050_h = 0;
-            this.field_20049_i = 0;
+            this.inGroundSnowball = false;
+            this.xd *= this.random.nextFloat() * 0.2F;
+            this.yd *= this.random.nextFloat() * 0.2F;
+            this.zd *= this.random.nextFloat() * 0.2F;
+            this.ticksInGroundSnowball = 0;
+            this.ticksInAirSnowball = 0;
         } else {
-            ++this.field_20049_i;
+            ++this.ticksInAirSnowball;
         }
 
-        Vec3D vec3d = Vec3D.createVector(this.posX, this.posY, this.posZ);
-        Vec3D vec3d1 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-        MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec3d, vec3d1);
-        vec3d = Vec3D.createVector(this.posX, this.posY, this.posZ);
-        vec3d1 = Vec3D.createVector(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+        Vec3d vec3d = Vec3d.createVector(this.x, this.y, this.z);
+        Vec3d vec3d1 = Vec3d.createVector(this.x + this.xd, this.y + this.yd, this.z + this.zd);
+        HitResult movingobjectposition = this.world.checkBlockCollisionBetweenPoints(vec3d, vec3d1);
+        vec3d = Vec3d.createVector(this.x, this.y, this.z);
+        vec3d1 = Vec3d.createVector(this.x + this.xd, this.y + this.yd, this.z + this.zd);
         if (movingobjectposition != null) {
-            vec3d1 = Vec3D.createVector(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord, movingobjectposition.hitVec.zCoord);
+            vec3d1 = Vec3d.createVector(movingobjectposition.location.xCoord, movingobjectposition.location.yCoord, movingobjectposition.location.zCoord);
         }
 
-        if (!this.worldObj.isMultiplayerAndNotHost) {
-            Entity entity = null;
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(3.0, 3.0, 3.0));
-            double d = 0.0;
+        if (!this.world.isClientSide) {
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.addCoord(this.xd, this.yd, this.zd).expand(3.0, 3.0, 3.0));
 
-            for(int i1 = 0; i1 < list.size(); ++i1) {
-                Entity entity1 = (Entity)list.get(i1);
-               if (entity1.canBeCollidedWith() && (entity1 != this.field_20051_g || this.field_20049_i >= 5)) {
-                    float f4 = 0.3F;
-                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand(f4, f4, f4);
-                    MovingObjectPosition movingobjectposition1 = axisalignedbb.func_1169_a(vec3d, vec3d1);
-                    if (movingobjectposition1 != null) {
-                        double d1 = vec3d.distanceTo(movingobjectposition1.hitVec);
-                        if (d1 < d || d == 0.0) {
-                            entity = entity1;
-                            d = d1;
-                            //entity.attackEntityFrom(this.field_20051_g,20,DamageType.COMBAT);
-                        }
-                    }
-                }
-            }
-
-            if (entity != null) {
-                movingobjectposition = new MovingObjectPosition(entity);
-            }
-        }
-
-        if (movingobjectposition != null) {
-            if (movingobjectposition.entityHit != null && !movingobjectposition.entityHit.attackEntityFrom(this.field_20051_g, 0, DamageType.COMBAT)) {
-                if(movingobjectposition.entityHit == this.field_20051_g){
-                    movingobjectposition.entityHit.attackEntityFrom(this.field_20051_g, 8, DamageType.COMBAT);
-                }
-            }
-
-
-
-            List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(3.0, 3.0, 3.0));
-            List<Entity> attacked = new ArrayList<>();
             for (Entity entity : list) {
                 if(entity instanceof EntityLiving){
-                    if (entity == this.field_20051_g && entity instanceof EntityPlayer) {
-                        ((EntityPlayer) entity).heal(4);
-                    } else if (entity.canBeCollidedWith() && (entity != this.field_20051_g || this.field_20049_i >= 5) && !attacked.contains(entity)) {
-                        entity.attackEntityFrom(this.field_20051_g, 4, DamageType.COMBAT);
-                        attacked.add(entity);
+                    if(thrower == entity){
+                        ((EntityLiving) entity).heal(this.damage);
+                    } else {
+                        entity.hurt(this.thrower,this.damage, DamageType.COMBAT);
                     }
                 }
             }
+        }
 
-            worldObj.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.rand.nextFloat() * 0.4F + 0.8F));
+        world.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.random.nextFloat() * 0.4F + 0.8F));
 
+        if (movingobjectposition != null) {
 
-            int byte0;
-            if (!this.worldObj.isMultiplayerAndNotHost && this.rand.nextInt(8) == 0) {
-                byte0 = 1;
-                if (this.rand.nextInt(32) == 0) {
-                    byte0 = 4;
-                }
-
-                for(int k = 0; k < byte0; ++k) {
-                    /*EntityChicken entitychicken = new EntityChicken(this.worldObj);
-                    entitychicken.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                    this.worldObj.entityJoinedWorld(entitychicken);*/
-                }
-            }
-
-
-
-            for(byte0 = 0; byte0 < 8; ++byte0) {
-                this.worldObj.spawnParticle("dustcloud", this.posX, this.posY, this.posZ, 0.0, 0.0, 0.0);
+            for(int j = 0; j < 8; ++j) {
+                this.world.spawnParticle("dustcloud", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 for (int i = 0; i < 4; i++) {
-                    this.worldObj.spawnParticle("crystalbreak", this.posX, this.posY, this.posZ, 0.0, 0.0, 0.0);
+                    this.world.spawnParticle("crystalbreak", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 }
             }
 
-            this.setEntityDead();
+            this.remove();
         }
 
-        this.posX += this.motionX;
-        this.posY += this.motionY;
-        this.posZ += this.motionZ;
-        float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-        this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0 / 3.1415927410125732);
+        this.x += this.xd;
+        this.y += this.yd;
+        this.z += this.zd;
+        float f = MathHelper.sqrt_double(this.xd * this.xd + this.zd * this.zd);
+        this.yRot = (float)(Math.atan2(this.xd, this.zd) * 180.0 / (float) Math.PI);
+        this.xRot = (float)(Math.atan2(this.yd, f) * 180.0 / (float) Math.PI);
 
-        for(this.rotationPitch = (float)(Math.atan2(this.motionY, f) * 180.0 / 3.1415927410125732); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+        while(this.xRot - this.xRotO < -180.0F) {
+            this.xRotO -= 360.0F;
         }
 
-        while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
-            this.prevRotationPitch += 360.0F;
+        while(this.xRot - this.xRotO >= 180.0F) {
+            this.xRotO += 360.0F;
         }
 
-        while(this.rotationYaw - this.prevRotationYaw < -180.0F) {
-            this.prevRotationYaw -= 360.0F;
+        while(this.yRot - this.yRotO < -180.0F) {
+            this.yRotO -= 360.0F;
         }
 
-        while(this.rotationYaw - this.prevRotationYaw >= 180.0F) {
-            this.prevRotationYaw += 360.0F;
+        while(this.yRot - this.yRotO >= 180.0F) {
+            this.yRotO += 360.0F;
         }
 
-        this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
-        this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+        this.xRot = this.xRotO + (this.xRot - this.xRotO) * 0.2F;
+        this.yRot = this.yRotO + (this.yRot - this.yRotO) * 0.2F;
         float f1 = 0.99F;
         float f2 = 0.03F;
         if (this.isInWater()) {
-            for(int l = 0; l < 4; ++l) {
+            for(int k = 0; k < 4; ++k) {
                 float f3 = 0.25F;
-                this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)f3, this.posY - this.motionY * (double)f3, this.posZ - this.motionZ * (double)f3, this.motionX, this.motionY, this.motionZ);
+                this.world.spawnParticle("bubble", this.x - this.xd * (double)f3, this.y - this.yd * (double)f3, this.z - this.zd * (double)f3, this.xd, this.yd, this.zd);
             }
 
             f1 = 0.8F;
         }
 
-        this.motionX *= f1;
-        this.motionY *= f1;
-        this.motionZ *= f1;
-        this.motionY -= f2;
-        this.setPosition(this.posX, this.posY, this.posZ);
+        this.xd *= f1;
+        this.yd *= f1;
+        this.zd *= f1;
+        this.yd -= f2;
+        this.setPos(this.x, this.y, this.z);
     }
 
-
-
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-        nbttagcompound.setShort("xTile", (short)this.field_20056_b);
-        nbttagcompound.setShort("yTile", (short)this.field_20055_c);
-        nbttagcompound.setShort("zTile", (short)this.field_20054_d);
-        nbttagcompound.setShort("inTile", (short)this.field_20053_e);
-        nbttagcompound.setByte("shake", (byte)this.field_20057_a);
-        nbttagcompound.setByte("inGround", (byte)(this.field_20052_f ? 1 : 0));
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        tag.putShort("xTile", (short)this.xTileSnowball);
+        tag.putShort("yTile", (short)this.yTileSnowball);
+        tag.putShort("zTile", (short)this.zTileSnowball);
+        tag.putShort("inTile", (short)this.inTileSnowball);
+        tag.putByte("shake", (byte)this.shakeSnowball);
+        tag.putByte("inGround", (byte)(this.inGroundSnowball ? 1 : 0));
     }
 
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-        this.field_20056_b = nbttagcompound.getShort("xTile");
-        this.field_20055_c = nbttagcompound.getShort("yTile");
-        this.field_20054_d = nbttagcompound.getShort("zTile");
-        this.field_20053_e = nbttagcompound.getShort("inTile") & 16383;
-        this.field_20057_a = nbttagcompound.getByte("shake") & 255;
-        this.field_20052_f = nbttagcompound.getByte("inGround") == 1;
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        this.xTileSnowball = tag.getShort("xTile");
+        this.yTileSnowball = tag.getShort("yTile");
+        this.zTileSnowball = tag.getShort("zTile");
+        this.inTileSnowball = tag.getShort("inTile") & 16383;
+        this.shakeSnowball = tag.getByte("shake") & 255;
+        this.inGroundSnowball = tag.getByte("inGround") == 1;
     }
 
-    public void onCollideWithPlayer(EntityPlayer entityplayer) {
-        if (this.field_20052_f && this.field_20051_g == entityplayer && this.field_20057_a <= 0 && entityplayer.inventory.addItemStackToInventory(new ItemStack(Item.ammoArrow, 1))) {
-            this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-            entityplayer.onItemPickup(this, 1);
-            this.setEntityDead();
+    @Override
+    public void playerTouch(EntityPlayer player) {
+        if (this.inGroundSnowball && this.thrower == player && this.shakeSnowball <= 0 && player.inventory.addItemStackToInventory(new ItemStack(Item.ammoArrow, 1))
+        )
+        {
+            this.world.playSoundAtEntity(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+            player.onItemPickup(this, 1);
+            this.remove();
         }
-
     }
 
-    public float getShadowSize() {
+    @Override
+    public float getShadowHeightOffs() {
         return 0.0F;
     }
 }

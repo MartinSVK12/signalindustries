@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -63,7 +64,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         } else if (canProcess()) {
             progressMaxTicks = 600 / speedMultiplier;
         }
-        if (!worldObj.isMultiplayerAndNotHost) {
+        if (!worldObj.isClientSide) {
             if (progressTicks == 0 && canProcess()) {
                 update = fuel();
             } else if(progressTicks > 0 && fuelBurnTicks <= 0 && canProcess()){
@@ -106,7 +107,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
 
     public void processItem(){
         if(canProcess()){
-            FluidStack stack = recipes.getResult(currentBlock.block.blockID);
+            FluidStack stack = recipes.getResult(currentBlock.block.id);
             if(fluidContents[1] == null){
                 setFluidInSlot(1, stack);
             } else if(getFluidInSlot(1).getLiquid() == stack.getLiquid()) {
@@ -121,7 +122,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         if(currentBlock == null){
             return false;
         }
-        FluidStack stack = recipes.getResult(currentBlock.block.blockID);
+        FluidStack stack = recipes.getResult(currentBlock.block.id);
         return stack != null && (fluidContents[1] == null || (fluidContents[1].isFluidEqual(stack) && (fluidContents[1].amount + stack.amount <= fluidCapacity[1])));
     }
 

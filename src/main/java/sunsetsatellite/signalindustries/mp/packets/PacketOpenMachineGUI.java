@@ -1,6 +1,10 @@
 package sunsetsatellite.signalindustries.mp.packets;
 
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.handler.NetHandler;
+import net.minecraft.core.net.packet.Packet;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
 
 import java.io.DataInputStream;
@@ -51,7 +55,7 @@ public class PacketOpenMachineGUI extends Packet {
         if (id >= 0) {
             byte amount = datainputstream.readByte();
             short metadata = datainputstream.readShort();
-            NBTTagCompound tag = readNBTTagCompound(datainputstream);
+            CompoundTag tag = readCompressedCompoundTag(datainputstream);
             this.stack = new ItemStack(id, amount, metadata, tag);
         } else {
             this.stack = null;
@@ -71,7 +75,7 @@ public class PacketOpenMachineGUI extends Packet {
             dataoutputstream.writeShort(this.stack.itemID);
             dataoutputstream.writeByte(this.stack.stackSize);
             dataoutputstream.writeShort(this.stack.getMetadata());
-            writeNBTTagCompound(this.stack.tag, dataoutputstream);
+            writeCompressedCompoundTag(this.stack.tag, dataoutputstream);
         }
     }
 

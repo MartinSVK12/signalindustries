@@ -1,57 +1,52 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import b100.utils.ReflectUtils;
-
+import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.Tag;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(
-        value = {NBTTagCompound.class},
+        value = {CompoundTag.class},
         remap = false
 )
 
-public class NBTTagCompoundMixin implements INBTCompound {
-    @Shadow
-    private Map tagMap = new HashMap();
+public abstract class NBTTagCompoundMixin  extends Tag<Map<String, Tag<?>>> implements INBTCompound {
 
     public NBTTagCompoundMixin(){}
 
     public void removeTag(String s){
-        this.tagMap.remove(s);
+        this.getValue().remove(s);
     }
 
     @Override
-    public boolean equals(NBTTagCompound tag) {
-        HashMap<?,?> otherTagMap = null;
-        Field field = ReflectUtils.getField(tag.getClass(),"tagMap");
-        otherTagMap = (HashMap<?, ?>) ReflectUtils.getValue(field,tag);//(HashMap<?, ?>) RetroStorage.getPrivateValue(tag.getClass(),tag,"tagMap");
+    public boolean equals(CompoundTag tag) {
+        HashMap<?,?> otherTagMap;
+        otherTagMap = (HashMap<?, ?>) tag.getValue();//(HashMap<?, ?>) RetroStorage.getPrivateValue(tag.getClass(),tag,"tagMap");
         if(otherTagMap == null){
             otherTagMap = new HashMap<>();
         }
-        if(tagMap.size() == 0 && otherTagMap.size() == 0){
+        if(getValue().isEmpty() && otherTagMap.isEmpty()){
             return true;
         }
-        if(tagMap.size() == 0){
+        if(getValue().isEmpty()){
             return false;
-        } else if (otherTagMap.size() == 0){
+        } else if (otherTagMap.isEmpty()){
             return false;
         }
         int s = 0;
-        for (Map.Entry<?, ?> entry : ((HashMap<?,?>)tagMap).entrySet()) {
+        for (Map.Entry<?, ?> entry : ((HashMap<?,?>)getValue()).entrySet()) {
             Object K = entry.getKey();
             Object V = entry.getValue();
-            if(tag.hasKey((String) K)){
+            if(tag.containsKey((String) K)){
                 if(V.equals(otherTagMap.get(K))){
                     s++;
                 }
             }
         }
-        return s == tagMap.size();
+        return s == getValue().size();
     }
 
 }

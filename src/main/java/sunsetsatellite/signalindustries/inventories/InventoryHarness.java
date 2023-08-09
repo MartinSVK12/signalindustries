@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 
 public class InventoryHarness extends ItemInventoryFluid {

@@ -1,6 +1,12 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.crafting.recipe.IRecipe;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.ContainerGuidebookRecipeBase;
+import net.minecraft.core.player.inventory.ContainerGuidebookRecipeCrafting;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.guidebookpp.RecipeGroup;

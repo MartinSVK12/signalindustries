@@ -1,17 +1,18 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
-
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IPipePressurizer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,12 +48,12 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nBTTagCompound1) {
+    public void writeToNBT(CompoundTag nBTTagCompound1) {
         super.writeToNBT(nBTTagCompound1);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nBTTagCompound1) {
+    public void readFromNBT(CompoundTag nBTTagCompound1) {
         super.readFromNBT(nBTTagCompound1);
     }
 

@@ -1,9 +1,17 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-
-
-
+import net.minecraft.client.option.enums.Difficulty;
+import net.minecraft.client.render.camera.ICamera;
+import net.minecraft.client.render.colorizer.ColorizerWater;
+import net.minecraft.core.Global;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.world.Explosion;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.weather.Weather;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,12 +31,6 @@ public abstract class WorldMixin {
 
     @Shadow public Weather currentWeather;
 
-    @Shadow public int skylightSubtracted;
-
-    @Shadow public abstract int calculateSkylightSubtracted(float f);
-
-    @Shadow public Random rand;
-
     @Shadow public Weather newWeather;
 
     @Shadow public long weatherDuration;
@@ -47,25 +49,19 @@ public abstract class WorldMixin {
 
     @Shadow public float weatherPower;
 
-    @Shadow protected float seasonProgress;
-
-    @Shadow protected int dayInSeason;
-
-    @Shadow protected Season nextSeason;
-
-    @Shadow public abstract boolean canBlockBePlacedAt(int i, int j, int k, int l, boolean flag, int i1);
-
     @Shadow public abstract Explosion newExplosion(Entity entity, double d, double d1, double d2, float f, boolean flag, boolean isCannonBall);
+
+    @Shadow public Random rand;
 
     @Inject(
             method = "getSkyColor",
             at = @At("HEAD"),
             cancellable = true)
-    public void getSkyColor(Entity entity, float f, CallbackInfoReturnable<Vec3D> cir) {
+    public void getSkyColor(ICamera camera, float renderPartialTicks, CallbackInfoReturnable<Vec3d> cir) {
         if(currentWeather == SignalIndustries.weatherEclipse){
-            cir.setReturnValue(Vec3D.createVector(0, 0, 0));
+            cir.setReturnValue(Vec3d.createVector(0, 0, 0));
         } else if (currentWeather == SignalIndustries.weatherSolarApocalypse) {
-            cir.setReturnValue(Vec3D.createVector(1.0, 0.5, 0));
+            cir.setReturnValue(Vec3d.createVector(1.0, 0.5, 0));
         }
     }
 
@@ -75,12 +71,12 @@ public abstract class WorldMixin {
     )
     public void doBloodMoon(CallbackInfo ci){
         long worldTime = getWorldTime();
-        int dayLength = net.minecraft.shared.Minecraft.DAY_LENGTH_TICKS;
+        int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         if(dayTime == 10500 && (currentWeather != SignalIndustries.weatherBloodMoon || currentWeather != SignalIndustries.weatherEclipse)){
-            if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft().gameSettings.difficulty.value == 0) && currentWeather != SignalIndustries.weatherBloodMoon){
+            if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && currentWeather != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
-                    player.addChatMessage(ChatColor.red+"A Blood Moon is rising!");
+                    player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
                 }
                 currentWeather = SignalIndustries.weatherBloodMoon;
                 newWeather = null;
@@ -90,34 +86,34 @@ public abstract class WorldMixin {
             }
         }
         if(dayTime == 0 && currentWeather == SignalIndustries.weatherBloodMoon){
-            currentWeather = Weather.weatherClear;
+            currentWeather = Weather.overworldClear;
         }
         if(currentWeather == SignalIndustries.weatherBloodMoon){
-            ColorizerWater.updateColorData(Minecraft.getMinecraft().renderEngine.getTextureImageData("/assets/signalindustries/misc/bloodmooncolorizer.png"));
+            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/bloodmooncolorizer.png"));
         } else {
-            ColorizerWater.updateColorData(Minecraft.getMinecraft().renderEngine.getTextureImageData("/misc/watercolor.png"));
+            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
         }
     }
 
-    @Inject(
+    /*@Inject(
             method = "doLightingUpdate",
             at = @At("HEAD")
     )
     public void doSolarEclipse(CallbackInfo ci){
         long worldTime = getWorldTime();
-        int dayLength = net.minecraft.shared.Minecraft.DAY_LENGTH_TICKS;
+        int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         if(dayTime == 4800 && dayInSeason == 6 && nextSeason == Season.surfaceSpring){
             for (EntityPlayer player : players) {
-                player.addChatMessage(ChatColor.orange+"A Solar Eclipse is happening!");
+                player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
             }
             currentWeather = SignalIndustries.weatherEclipse;
             newWeather = null;
-            weatherDuration = net.minecraft.shared.Minecraft.DAY_LENGTH_TICKS;
+            weatherDuration = Global.DAY_LENGTH_TICKS;
             weatherIntensity = 1.0f;
             weatherPower = 1.0f;
         }
-    }
+    }*/
 
     @Inject(
             method = "wakeUpAllPlayers",
@@ -126,7 +122,7 @@ public abstract class WorldMixin {
     protected void wakeUpAllPlayers(CallbackInfo ci) {
 
         if (this.currentWeather != null && currentWeather == SignalIndustries.weatherEclipse) {
-            this.currentWeather = Weather.weatherClear;
+            this.currentWeather = Weather.overworldClear;
         }
 
     }

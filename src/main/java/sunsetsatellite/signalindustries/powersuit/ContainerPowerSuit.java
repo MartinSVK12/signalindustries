@@ -1,14 +1,13 @@
-package sunsetsatellite.signalindustries.misc.powersuit;
+package sunsetsatellite.signalindustries.powersuit;
 
 
-
-
-
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemArmor;
+import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
-import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
 import sunsetsatellite.fluidapi.api.SlotFluid;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.SlotAttachment;
 
@@ -63,10 +62,6 @@ public class ContainerPowerSuit extends ContainerItemFluid {
         }
     }
 
-    @Override
-    public void quickMoveItems(int i, EntityPlayer entityPlayer, boolean bl, boolean bl2) {
-
-    }
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer) {

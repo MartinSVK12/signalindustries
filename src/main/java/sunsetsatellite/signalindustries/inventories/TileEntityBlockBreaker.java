@@ -1,14 +1,11 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
-
-
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.enums.EnumDropCause;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3i;
@@ -43,7 +40,7 @@ public class TileEntityBlockBreaker extends TileEntity {
                     blockBroken = true;
                     return;
                 }
-                block.dropBlockAsItem(worldObj, vec2.x, vec2.y, vec2.z, worldObj.getBlockMetadata(vec.x, vec.y, vec.z));
+                block.dropBlockWithCause(worldObj, EnumDropCause.WORLD, vec2.x, vec2.y, vec2.z, worldObj.getBlockMetadata(vec.x, vec.y, vec.z), this);
                 worldObj.setBlockWithNotify(vec.x, vec.y, vec.z, 0);
             }
             blockBroken = true;

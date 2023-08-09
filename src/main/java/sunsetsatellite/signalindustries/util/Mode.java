@@ -1,25 +1,27 @@
 package sunsetsatellite.signalindustries.util;
 
 
-
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Color;
 
 public enum Mode {
-    NORMAL(ChatColor.gray,"Normal", 0xFF808080),
-    ATTACK(ChatColor.red,"Attack", 0xFFFF2020),
-    DEFENSE(ChatColor.blue,"Defense", 0xFF4040FF),
-    PURSUIT(ChatColor.purple,"Pursuit", 0xFFFF40FF),
-    AWAKENED(ChatColor.orange,"Awakened", 0xFFFF8C00);
+    NONE(TextFormatting.GRAY,"None",0xFF808080),
+    NORMAL(TextFormatting.RED,"Normal", 0xFFFF2020),
+    /*ATTACK(TextFormatting.RED,"Attack", 0xFFFF2020),
+    DEFENSE(TextFormatting.BLUE,"Defense", 0xFF4040FF),
+    PURSUIT(TextFormatting.PURPLE,"Pursuit", 0xFFFF40FF),*/
+    AWAKENED(TextFormatting.ORANGE,"Awakened", 0xFFFF8C00);
 
-    private final ChatColor chatColor;
+    private final TextFormatting chatColor;
     private final String name;
     private final int color;
-    Mode(ChatColor chatColor, String name, int color){
+    Mode(TextFormatting chatColor, String name, int color){
         this.chatColor = chatColor;
         this.name = name;
         this.color = color;
     }
 
-    public ChatColor getChatColor(){
+    public TextFormatting getChatColor(){
         return chatColor;
     }
 

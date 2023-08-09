@@ -1,9 +1,8 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.client.Minecraft;
-
-
-
+/*import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,11 +35,11 @@ public class EntityRendererMixin {
             float f1 = 1.0F / (float)(5 - this.mc.gameSettings.renderDistance.value);
             f1 = 1.0F - (float)Math.pow(f1, 0.25);
             World world = this.mc.theWorld;
-            Vec3D vec3d = world.getSkyColor(this.mc.renderViewEntity, f);
+            Vec3d vec3d = world.getSkyColor(this.mc.renderViewEntity, f);
             float f2 = (float)vec3d.xCoord;
             float f3 = (float)vec3d.yCoord;
             float f4 = (float)vec3d.zCoord;
-            Vec3D vec3d1 = world.getFogColor(f);
+            Vec3d vec3d1 = world.getFogColor(f);
             this.fogColorRed = (float)vec3d1.xCoord;
             this.fogColorGreen = (float)vec3d1.yCoord;
             this.fogColorBlue = (float)vec3d1.zCoord;
@@ -54,4 +53,4 @@ public class EntityRendererMixin {
     }
 
 
-}
+}*/

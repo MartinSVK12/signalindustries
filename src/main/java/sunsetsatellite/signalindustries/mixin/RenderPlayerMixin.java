@@ -1,6 +1,14 @@
 package sunsetsatellite.signalindustries.mixin;
 
 
+import net.minecraft.client.render.entity.LivingRenderer;
+import net.minecraft.client.render.entity.PlayerRenderer;
+import net.minecraft.client.render.model.ModelBase;
+import net.minecraft.client.render.model.ModelBiped;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemArmor;
+import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
@@ -11,19 +19,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
-import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 
 @Debug(
         export = true
 )
 @Mixin(
-        value = RenderPlayer.class,
+        value = PlayerRenderer.class,
         remap = false
 )
-public class RenderPlayerMixin extends RenderLiving {
+public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
 
     @Shadow @Final private static String[] armorFilenamePrefix;
 
@@ -39,7 +45,7 @@ public class RenderPlayerMixin extends RenderLiving {
 
     @Inject(
             method = "setArmorModel",
-            at = @At(value = "INVOKE",target = "Lnet/minecraft/src/ItemStack;getItem()Lnet/minecraft/src/Item;", shift = At.Shift.AFTER),
+            at = @At(value = "INVOKE",target = "Lnet/minecraft/core/item/ItemStack;getItem()Lnet/minecraft/core/item/Item;", shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
     protected void setArmorModel(EntityPlayer entityplayer, int i, float f, CallbackInfoReturnable<Boolean> cir, ItemStack itemstack) {
@@ -49,7 +55,7 @@ public class RenderPlayerMixin extends RenderLiving {
             this.loadTexture("/assets/signalindustries/armor/" + armorFilenamePrefix[itemarmor.material.renderIndex] + "_" + (i != 2 ? 1 : 2) + ".png");
             ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
             modelbiped.bipedHead.showModel = i == 0;
-            modelbiped.bipedHeadwear.showModel = i == 0;
+            modelbiped.bipedHeadOverlay.showModel = i == 0;
             modelbiped.bipedBody.showModel = i == 1 || i == 2;
             modelbiped.bipedRightArm.showModel = i == 1;
             modelbiped.bipedLeftArm.showModel = i == 1;
@@ -73,13 +79,5 @@ public class RenderPlayerMixin extends RenderLiving {
 
             }
         }
-    }
-
-    @Inject(
-            method = "renderSpecials",
-            at = @At(value = "INVOKE",target = "Lnet/minecraft/src/ModelRenderer;postRender(F)V",ordinal = 1,shift = At.Shift.AFTER)
-    )
-    protected void renderSpecials2(EntityPlayer entityplayer, float f, CallbackInfo ci){
-
     }
 }

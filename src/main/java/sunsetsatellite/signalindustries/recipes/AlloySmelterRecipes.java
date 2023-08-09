@@ -1,18 +1,19 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlloySmelterRecipes extends MachineRecipesBase<Integer[],ItemStack> {
+public class AlloySmelterRecipes extends MachineRecipesBase<Integer[], ItemStack> {
     public static final AlloySmelterRecipes instance = new AlloySmelterRecipes();
 
     protected AlloySmelterRecipes() {
-        addRecipe(new Integer[]{Item.ingotSteel.itemID, SignalIndustries.emptySignalumCrystalDust.itemID},new ItemStack(SignalIndustries.crystalAlloyIngot,1));
+        addRecipe(new Integer[]{Item.ingotSteel.id, SignalIndustries.emptySignalumCrystalDust.id},new ItemStack(SignalIndustries.crystalAlloyIngot,1));
     }
 
     public void addRecipe(Integer[] ids, ItemStack stack) {

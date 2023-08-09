@@ -1,10 +1,14 @@
 package sunsetsatellite.signalindustries.containers;
 
 
-
-
-
+import net.minecraft.core.InventoryAction;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.player.inventory.Container;
+import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
+
+import java.util.List;
 
 public class ContainerRecipeMaker extends Container
 {
@@ -40,8 +44,13 @@ public class ContainerRecipeMaker extends Container
     }
 
     @Override
-    public void quickMoveItems(int i, EntityPlayer entityPlayer, boolean bl, boolean bl2) {
+    public List<Integer> getMoveSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        return null;
+    }
 
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, EntityPlayer entityPlayer) {
+        return null;
     }
 
     public boolean isUsableByPlayer(EntityPlayer entityplayer)

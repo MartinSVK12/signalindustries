@@ -1,10 +1,13 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.BasicExtractorRecipes;
 import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
@@ -55,7 +58,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
         } else if(canProcess()) {
             progressMaxTicks = 200 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2){
                 update = fuel();
             }
@@ -98,7 +101,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
 
     public void processItem(){
         if(canProcess()){
-            FluidStack stack = recipes.getResult(this.itemContents[0].getItem().itemID);
+            FluidStack stack = recipes.getResult(this.itemContents[0].getItem().id);
             if(fluidContents[0] == null){
                 setFluidInSlot(0, stack);
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
@@ -125,7 +128,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
     }
 
     private int getItemBurnTime(ItemStack stack) {
-        return stack == null ? 0 : LookupFuelFurnace.fuelFurnace().getFuelYield(stack.getItem().itemID);
+        return stack == null ? 0 : LookupFuelFurnace.instance.getFuelYield(stack.getItem().id);
     }
 
 }

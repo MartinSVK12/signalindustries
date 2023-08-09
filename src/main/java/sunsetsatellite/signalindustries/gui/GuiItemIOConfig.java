@@ -1,11 +1,19 @@
 package sunsetsatellite.signalindustries.gui;
 
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.render.Lighting;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.player.inventory.Container;
+import net.minecraft.core.sound.SoundType;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class GuiItemIOConfig extends GuiScreen {
 
@@ -15,7 +23,7 @@ public class GuiItemIOConfig extends GuiScreen {
     public int xSize = 176;
     public int ySize = 166;
     public Container inventorySlots;
-    private static final RenderItem itemRenderer = new RenderItem();
+    private static final ItemEntityRenderer itemRenderer = new ItemEntityRenderer();
     public GuiItemIOConfig(EntityPlayer player, Container container, TileEntity tile, GuiScreen parent) {
         super(parent);
         this.tile = (TileEntityFluidItemContainer) tile;
@@ -30,7 +38,7 @@ public class GuiItemIOConfig extends GuiScreen {
             for (int l = 0; l < this.controlList.size(); ++l) {
                 GuiButton guibutton = this.controlList.get(l);
                 if (guibutton.mousePressed(this.mc, x, y)) {
-                    this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
+                    this.mc.sndManager.playSound("random.click", SoundType.GUI_SOUNDS, 1.0F, 1.0F);
                     action2Performed(guibutton);
                 }
             }
@@ -73,14 +81,14 @@ public class GuiItemIOConfig extends GuiScreen {
         this.drawGuiContainerBackgroundLayer(renderPartialTicks);
         GL11.glPushMatrix();
         GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-        RenderHelper.enableStandardItemLighting();
+        Lighting.turnOn();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
         GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
         GL11.glDisable(32826);
-        RenderHelper.disableStandardItemLighting();
+        Lighting.turnOff();
         GL11.glDisable(2896);
         GL11.glDisable(2929);
         this.drawGuiContainerForegroundLayer();
@@ -120,7 +128,7 @@ public class GuiItemIOConfig extends GuiScreen {
     }
 
     @Override
-    protected void actionPerformed(GuiButton guibutton) {
+    protected void buttonPressed(GuiButton guibutton) {
         if(guibutton.id >= 0 && guibutton.id < 6){
             switch (tile.itemConnections.get(Direction.values()[guibutton.id])) {
                 case NONE:
@@ -149,7 +157,7 @@ public class GuiItemIOConfig extends GuiScreen {
 
             guibutton.displayString = String.valueOf(tile.activeItemSlots.get(dir));
         }
-        super.actionPerformed(guibutton);
+        super.buttonPressed(guibutton);
     }
 
     protected void drawGuiContainerForegroundLayer()

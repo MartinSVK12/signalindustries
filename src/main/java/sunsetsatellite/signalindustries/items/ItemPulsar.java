@@ -1,16 +1,26 @@
 package sunsetsatellite.signalindustries.items;
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
-
-
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.render.FontRenderer;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
+import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
-import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.signalindustries.containers.ContainerPulsar;
-import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemPulsar extends ItemTiered implements IHasOverlay {
     public ItemPulsar(int i, Tier tier) {
@@ -21,12 +31,12 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
     public String getDescription(ItemStack stack) {
         String text = super.getDescription(stack);
         String ability = getAbility(stack);
-        text += "\nCharge: "+ (stack.tag.getByte("charge") >= 100 ? ChatColor.red : ChatColor.lightGray) +stack.tag.getByte("charge")+"%"+ChatColor.white+" | Ability: "+ability;
+        text += "\nCharge: "+ (stack.tag.getByte("charge") >= 100 ? TextFormatting.RED : TextFormatting.LIGHT_GRAY) +stack.tag.getByte("charge")+"%"+TextFormatting.WHITE+" | Ability: "+ability;
         return text;
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, double heightPlaced) {
+    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         if(entityplayer.isSneaking() && !itemstack.tag.getBoolean("charging")){
             SignalIndustries.displayGui(entityplayer,new GuiPulsar(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerPulsar(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryPulsar(entityplayer.inventory.getCurrentItem()),itemstack);
             return true;
@@ -37,28 +47,28 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(!itemstack.tag.getBoolean("charging") && itemstack.tag.getByte("charge") < 100 && !entityplayer.isSneaking() && getFluidStack(0,itemstack).getInteger("amount") > 0) {
-            itemstack.tag.setBoolean("charging", true);
+            itemstack.tag.putBoolean("charging", true);
             return itemstack;
         }
         if(itemstack.tag.getByte("charge") >= 100){
-            itemstack.tag.setByte("charge", (byte) 0);
+            itemstack.tag.putByte("charge", (byte) 0);
             world.playSoundAtEntity(entityplayer, "signalindustries.pulsar", 0.5F, 1.0f);
             if(getAbility(itemstack).contains("Warp")){
-                ExplosionEnergy ex = new ExplosionEnergy(world,entityplayer,entityplayer.posX,entityplayer.posY,entityplayer.posZ,3f);
+                ExplosionEnergy ex = new ExplosionEnergy(world,entityplayer,entityplayer.x,entityplayer.y,entityplayer.z,3f);
                 ex.doExplosionA();
                 ex.doExplosionB(true,0.7f,0.0f,0.7f);
-                NBTTagCompound warpPosition = getItemFromSlot(0,itemstack).getCompoundTag("Data").getCompoundTag("position");
-                if(warpPosition.hasKey("x") && warpPosition.hasKey("y") && warpPosition.hasKey("z")){
-                    entityplayer.setLocationAndAngles(warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"),entityplayer.rotationYaw,entityplayer.rotationPitch);
-                    ex = new ExplosionEnergy(world,entityplayer,entityplayer.posX,entityplayer.posY,entityplayer.posZ,3f);
+                CompoundTag warpPosition = getItemFromSlot(0,itemstack).getCompound("Data").getCompound("position");
+                if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
+                    entityplayer.setPos(warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"));
+                    ex = new ExplosionEnergy(world,entityplayer,entityplayer.x,entityplayer.y,entityplayer.z,3f);
                     ex.doExplosionA();
                     ex.doExplosionB(true,0.7f,0.0f,0.7f);
                 } else {
-                    SignalIndustries.usePortal(SignalIndustries.dimEternity.dimId);
+                    SignalIndustries.usePortal(SignalIndustries.dimEternity.id);
                 }
-                ((INBTCompound)itemstack.tag.getCompoundTag("inventory")).removeTag(String.valueOf(0));
+                ((INBTCompound)itemstack.tag.getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
-                world.spawnParticle("pulse_shockwave", entityplayer.posX, entityplayer.posY, entityplayer.posZ, 0.0, 0.0, 0.0);
+                world.spawnParticle("pulse_shockwave", entityplayer.x, entityplayer.y, entityplayer.z, 0.0, 0.0, 0.0);
             }
             return itemstack;
         }
@@ -66,30 +76,30 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
     }
 
     @Override
-    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
+    public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
         boolean charging = itemstack.tag.getBoolean("charging");
         byte charge = itemstack.tag.getByte("charge");
         int energy = getFluidStack(0,itemstack).getInteger("amount");
         if(itemstack.tag.getBoolean("charging")){
             if(charge < 100){
                 if(energy <= 0){
-                    getFluidStack(0,itemstack).setInteger("amount",0);
-                    itemstack.tag.setBoolean("charging",false);
-                    Minecraft.getMinecraft().ingameGUI.addChatMessage(ChatColor.white+"The Pulsar> "+ChatColor.red+" ERROR: "+ChatColor.white+"Ran out of energy while charging!");
+                    getFluidStack(0,itemstack).putInt("amount",0);
+                    itemstack.tag.putBoolean("charging",false);
+                    Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
                     return;
                 }
-                if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.itemID){
-                    getFluidStack(0,itemstack).setInteger("amount",energy-80); //charging takes 100 ticks
+                if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.id){
+                    getFluidStack(0,itemstack).putInt("amount",energy-80); //charging takes 100 ticks
                 } else {
-                    getFluidStack(0,itemstack).setInteger("amount",energy-40); //charging takes 100 ticks
+                    getFluidStack(0,itemstack).putInt("amount",energy-40); //charging takes 100 ticks
                 }
-                itemstack.tag.setByte("charge", (byte) (charge+1));
+                itemstack.tag.putByte("charge", (byte) (charge+1));
             } else {
-                itemstack.tag.setBoolean("charging",false);
+                itemstack.tag.putBoolean("charging",false);
             }
 
         }
-        super.onUpdate(itemstack, world, entity, i, flag);
+        super.inventoryTick(itemstack, world, entity, i, flag);
     }
 
     @Override
@@ -101,7 +111,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
         if(itemstack.tag.getByte("charge") >= 100){
             tex = Item.iconCoordToIndex(SignalIndustries.pulsarTex[2][0],SignalIndustries.pulsarTex[2][1]);
         }
-        if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.itemID){
+        if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.id){
             tex = Item.iconCoordToIndex(SignalIndustries.pulsarTex[3][0],SignalIndustries.pulsarTex[3][1]);
             if(itemstack.tag.getByte("charge") >= 100){
                 tex = Item.iconCoordToIndex(SignalIndustries.pulsarTex[4][0],SignalIndustries.pulsarTex[4][1]);
@@ -111,23 +121,23 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
     }
 
     public int getItemIdFromSlot(int id, ItemStack stack){
-        return stack.tag.getCompoundTag("inventory").getCompoundTag(String.valueOf(id)).getShort("id");
+        return stack.tag.getCompound("inventory").getCompound(String.valueOf(id)).getShort("id");
     }
 
-    public NBTTagCompound getItemFromSlot(int id, ItemStack stack){
-        return stack.tag.getCompoundTag("inventory").getCompoundTag(String.valueOf(id));
+    public CompoundTag getItemFromSlot(int id, ItemStack stack){
+        return stack.tag.getCompound("inventory").getCompound(String.valueOf(id));
     }
 
-    public NBTTagCompound getFluidStack(int id, ItemStack stack){
-        return stack.tag.getCompoundTag("fluidInventory").getCompoundTag(String.valueOf(id));
+    public CompoundTag getFluidStack(int id, ItemStack stack){
+        return stack.tag.getCompound("fluidInventory").getCompound(String.valueOf(id));
     }
 
     public String getAbility(ItemStack stack){
-        return getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.itemID ? ChatColor.purple+"Warp" : ChatColor.red+"Pulse";
+        return getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
     }
 
     @Override
-        public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, RenderItem itemRenderer) {
+        public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
         InventoryPlayer inv = player.inventory;
         ItemStack pulsar = inv.getCurrentItem();
         int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;

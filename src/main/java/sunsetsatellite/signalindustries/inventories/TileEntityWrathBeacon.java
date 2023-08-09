@@ -1,7 +1,14 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.client.Minecraft;
-
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.monster.*;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.util.Wave;
@@ -12,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TileEntityWrathBeacon extends TileEntity {
-    public Random rand = new Random();
+    public Random random = new Random();
     public boolean active = false;
     public boolean intermission = false;
     public int wave = 0;
@@ -20,21 +27,15 @@ public class TileEntityWrathBeacon extends TileEntity {
     public boolean started = false;
     public ArrayList<EntityLiving> enemiesLeft = new ArrayList<>();
     public static ArrayList<Wave> waves = new ArrayList<>();
-    public TickTimer spawnTimer;
-    public TickTimer intermissionTimer;
+    public TickTimer spawnTimer = new TickTimer(this,"spawn",20,true);
+    public TickTimer intermissionTimer = new TickTimer(this,"startWave",300,false);
     {
-        try {
-            spawnTimer = new TickTimer(this,this.getClass().getMethod("spawn"),20,true);
             spawnTimer.pause();
-            intermissionTimer = new TickTimer(this, getClass().getMethod("startWave"),300,false);
             intermissionTimer.pause();
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public TileEntityWrathBeacon(){
-        ArrayList<Class<? extends EntityMob>> mobList = new ArrayList<>();
+        ArrayList<Class<? extends EntityMonster>> mobList = new ArrayList<>();
         mobList.add(EntityZombie.class);
         mobList.add(EntitySkeleton.class);
         waves.add(new Wave(mobList,3,6,20));
@@ -66,10 +67,10 @@ public class TileEntityWrathBeacon extends TileEntity {
             spawnTimer.tick();
             intermissionTimer.tick();
         }
-        enemiesLeft.removeIf((E)-> !E.isEntityAlive());
+        enemiesLeft.removeIf((E)-> !E.isAlive());
         if(active && started && enemiesLeft.size() == 0 && wave < 5){
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
             started = false;
             intermissionTimer.unpause();
@@ -77,7 +78,7 @@ public class TileEntityWrathBeacon extends TileEntity {
             wave++;
         } else if (active && started && enemiesLeft.size() == 0 && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("Challenge complete!!");
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
             }
             active = false;
             started = false;
@@ -106,7 +107,7 @@ public class TileEntityWrathBeacon extends TileEntity {
     public void activate(){
         if(!active){
             if(worldObj.isDaytime()){
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("Now is not the time..");
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
             for (int x = xCoord-7; x < xCoord+7; x++) {
@@ -115,25 +116,25 @@ public class TileEntityWrathBeacon extends TileEntity {
                         int id = worldObj.getBlockId(x,y,z);
                         int idUnder = worldObj.getBlockId(x,yCoord-1,z);
                         if (id != 0 && (x != xCoord || y != yCoord || z != zCoord)) {
-                            Minecraft.getMinecraft().ingameGUI.addChatMessage("The wrath beacon desires more space..");
+                            Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon desires more space..");
                             return;
                         }
                     }
                 }
             }
-            if(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem().itemID == SignalIndustries.evilCatalyst.itemID){
-                /*if(Minecraft.getMinecraft().gameSettings.difficulty.value == 0){
-                    Minecraft.getMinecraft().theMinecraft.getMinecraft().ingameGUI.addChatMessage("This world is too peaceful..");
+            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.evilCatalyst.id){
+                /*if(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == 0){
+                    Minecraft.getMinecraft(Minecraft.class).theMinecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("This worldObj is too peaceful..");
                     return;
                 }*/
-                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft().thePlayer);
+                Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
                     player.addChatMessage("event.signalindustries.wrathBeaconActivated");
                 }
                 active = true;
                 startWave();
             } else {
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("The wrath beacon needs a catalyst..");
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon needs a catalyst..");
             }
         }
     }
@@ -141,16 +142,16 @@ public class TileEntityWrathBeacon extends TileEntity {
     public void startWave(){
         if(active){
             for (EntityPlayer player : worldObj.players) {
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("WAVE "+wave);
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("WAVE "+wave);
                 if(wave == 5){
-                    Minecraft.getMinecraft().ingameGUI.addChatMessage("FINAL WAVE!");
+                    Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("FINAL WAVE!");
                 }
             }
             intermission = false;
             intermissionTimer.pause();
             spawnTimer.unpause();
             spawnTimer.max = waves.get(wave).spawnFrequency;
-            currentMaxAmount = waves.get(wave).lowerBound + rand.nextInt(waves.get(wave).upperBound-waves.get(wave).lowerBound);
+            currentMaxAmount = waves.get(wave).lowerBound + random.nextInt(waves.get(wave).upperBound-waves.get(wave).lowerBound);
         }
     }
 
@@ -158,14 +159,15 @@ public class TileEntityWrathBeacon extends TileEntity {
         if(enemiesLeft.size() < currentMaxAmount){
             started = true;
             ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, this.xCoord, this.zCoord);
-            EntityMob mob;
+            EntityMonster mob;
             try {
                 mob = waves.get(wave).chooseRandomMob().getConstructor(World.class).newInstance(worldObj);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
-            mob.setLocationAndAngles(randomPos.x, randomPos.y, randomPos.z, worldObj.rand.nextFloat() * 360.0F, 0.0F);
-            mob.entityInitOnSpawn();
+            mob.setPos(randomPos.x, randomPos.y, randomPos.z);
+            mob.setRot(worldObj.rand.nextFloat() * 360.0F, 0.0F);
+            mob.spawnInit();
             worldObj.entityJoinedWorld(mob);
             enemiesLeft.add(mob);
         } else {
@@ -174,10 +176,10 @@ public class TileEntityWrathBeacon extends TileEntity {
 
     }
 
-    public ChunkPosition getRandomSpawningPointInChunk(World world, int i, int j) {
-        int k = i + world.rand.nextInt(8);
+    public ChunkPosition getRandomSpawningPointInChunk(World worldObj, int i, int j) {
+        int k = i + worldObj.rand.nextInt(8);
         int l = this.yCoord;
-        int i1 = j + world.rand.nextInt(8);
+        int i1 = j + worldObj.rand.nextInt(8);
         return new ChunkPosition(k, l, i1);
     }
 

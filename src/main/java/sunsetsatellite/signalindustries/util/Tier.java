@@ -1,22 +1,23 @@
 package sunsetsatellite.signalindustries.util;
 
 
+import net.minecraft.core.net.command.TextFormatting;
 
 public enum Tier {
-    PROTOTYPE(ChatColor.lightGray,"0 (Prototype)"),
-    BASIC(ChatColor.white,"I (Basic)"),
-    REINFORCED(ChatColor.red,"II (Reinforced)"),
-    AWAKENED(ChatColor.orange,"III (Awakened)"),
-    INFINITE(ChatColor.magenta,"INF (Infinite)");
+    PROTOTYPE(TextFormatting.LIGHT_GRAY,"0 (Prototype)"),
+    BASIC(TextFormatting.WHITE,"I (Basic)"),
+    REINFORCED(TextFormatting.RED,"II (Reinforced)"),
+    AWAKENED(TextFormatting.ORANGE,"III (Awakened)"),
+    INFINITE(TextFormatting.MAGENTA,"INF (Infinite)");
 
-    private final ChatColor color;
+    private final TextFormatting color;
     private final String rank;
-    Tier(ChatColor color, String rank){
+    Tier(TextFormatting color, String rank){
         this.color = color;
         this.rank = rank;
     }
 
-    public ChatColor getColor(){
+    public TextFormatting getColor(){
         return this.color;
     }
 

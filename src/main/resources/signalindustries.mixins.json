@@ -5,17 +5,14 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockRailMixin",
-    "ChunkProviderGenerateOverworldMixin",
     "EntityLivingMixin",
     "EntityMinecartMixin",
     "EntityMobMixin",
     "EntityPlayerMixin",
     "EntityPlayerMPMixin",
-    "EntityRendererMixin",
     "EntityTrackerEntryMixin",
     "EntityTrackerMixin",
     "GameSettingsMixin",
-    "GuiContainerMixin",
     "GuiIngameMixin",
     "InventoryPlayerMixin",
     "ItemStackMixin",
@@ -27,9 +24,7 @@
     "RenderGlobalMixin",
     "RenderPlayerMixin",
     "WorldGenLabyrinthMixin",
-    "WorldMixin",
-    "accessors.BiomeGenBaseAccessor",
-    "accessors.WorldTypeAccessor"
+    "WorldMixin"
   ],
   "client": [
   ],

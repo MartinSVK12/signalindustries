@@ -1,9 +1,11 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 
@@ -47,7 +49,7 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
         } else if (canProcess()) {
             progressMaxTicks = 400 / speedMultiplier;
         }
-        if (!worldObj.isMultiplayerAndNotHost) {
+        if (!worldObj.isClientSide) {
             if (progressTicks == 0 && canProcess()) {
                 update = fuel();
             }

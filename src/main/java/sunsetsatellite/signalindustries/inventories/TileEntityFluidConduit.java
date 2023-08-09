@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.fluidapi.FluidRegistry;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;

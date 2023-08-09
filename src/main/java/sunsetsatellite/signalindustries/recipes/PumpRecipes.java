@@ -1,9 +1,9 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ public class PumpRecipes extends MachineRecipesBase<Integer,FluidStack> {
     public static final PumpRecipes instance = new PumpRecipes();
 
     protected PumpRecipes() {
-        this.addRecipe(Block.fluidWaterStill.blockID,new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
+        this.addRecipe(Block.fluidWaterStill.id,new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
     }
 
     public HashMap<Integer,FluidStack> getRecipeList() {

@@ -1,17 +1,21 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
-
-
-import java.util.Random;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.enums.EnumDropCause;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
 
 public class BlockUndroppable extends Block {
-    public BlockUndroppable(int i, Material material) {
-        super(i, material);
+
+    public BlockUndroppable(String key, int id, Material material) {
+        super(key, id, material);
     }
 
     @Override
-    public int idDropped(int i, Random random) {
-        return 0;
+    public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
+        return null;
     }
 }

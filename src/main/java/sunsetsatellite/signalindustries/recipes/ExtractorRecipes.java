@@ -1,10 +1,8 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
-
+import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.util.MachineRecipes;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
@@ -13,7 +11,7 @@ public class ExtractorRecipes extends MachineRecipesBase<Integer,FluidStack> {
     public static final ExtractorRecipes instance = new ExtractorRecipes();
 
     protected ExtractorRecipes() {
-        this.addRecipe(SignalIndustries.rawSignalumCrystal.itemID,new FluidStack((BlockFluid) SignalIndustries.energyFlowing,160));
+        this.addRecipe(SignalIndustries.rawSignalumCrystal.id,new FluidStack((BlockFluid) SignalIndustries.energyFlowing,160));
     }
 
     public HashMap<Integer,FluidStack> getRecipeList() {

@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.sunsetutils.util.multiblocks.IMultiblock;

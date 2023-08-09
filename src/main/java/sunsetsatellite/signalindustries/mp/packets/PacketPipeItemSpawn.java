@@ -1,9 +1,10 @@
 package sunsetsatellite.signalindustries.mp.packets;
 
 
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
-import sunsetsatellite.signalindustries.api.impl.itempipes.misc.PipeItem;
+/*import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.handler.NetHandler;
+import net.minecraft.core.util.helper.MathHelper;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3f;
@@ -73,7 +74,7 @@ public class PacketPipeItemSpawn extends Packet {
         if (id >= 0) {
             byte amount = dataInputStream.readByte();
             short metadata = dataInputStream.readShort();
-            NBTTagCompound tag = readNBTTagCompound(dataInputStream);
+            CompoundTag tag = readNBTTagCompound(dataInputStream);
             this.stack = new ItemStack(id, amount, metadata, tag);
         } else {
             this.stack = null;
@@ -116,4 +117,4 @@ public class PacketPipeItemSpawn extends Packet {
     public int getPacketSize() {
         return 41+24+2;
     }
-}
+}*/

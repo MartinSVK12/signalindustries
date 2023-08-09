@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.sunsetutils.util.Connection;
@@ -101,16 +102,16 @@ public class TileEntityTieredMachine extends TileEntityTiered {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nBTTagCompound1) {
+    public void writeToNBT(CompoundTag nBTTagCompound1) {
         super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.setShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.setShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.setShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.setInteger("MaxProcessTime",this.progressMaxTicks);
+        nBTTagCompound1.putShort("BurnTime", (short)this.fuelBurnTicks);
+        nBTTagCompound1.putShort("ProcessTime", (short)this.progressTicks);
+        nBTTagCompound1.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
+        nBTTagCompound1.putInt("MaxProcessTime",this.progressMaxTicks);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nBTTagCompound1) {
+    public void readFromNBT(CompoundTag nBTTagCompound1) {
         super.readFromNBT(nBTTagCompound1);
         fuelBurnTicks = nBTTagCompound1.getShort("BurnTime");
         progressTicks = nBTTagCompound1.getShort("ProcessTime");

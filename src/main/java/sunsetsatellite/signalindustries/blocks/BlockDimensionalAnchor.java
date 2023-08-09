@@ -1,8 +1,16 @@
 package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.client.Minecraft;
-
-
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.helper.Sides;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;
@@ -15,12 +23,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockDimensionalAnchor extends BlockContainerTiered {
-    public BlockDimensionalAnchor(int i, Tier tier, Material material) {
-        super(i, tier, material);
+
+    public BlockDimensionalAnchor(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
     }
 
     @Override
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityDimensionalAnchor();
     }
 
@@ -32,7 +41,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     @Override
     public String getDescription(ItemStack stack) {
         String s = super.getDescription(stack);
-        return s+"\n"+ChatColor.yellow+"Multiblock"+ChatColor.white;
+        return s+"\n"+TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
     }
 
     @Override
@@ -62,9 +71,9 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
                         itemstack.stackSize -= i1;
                         EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (float) random.nextGaussian() * f3;
-                        entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) random.nextGaussian() * f3;
+                        entityitem.xd = (float) random.nextGaussian() * f3;
+                        entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
+                        entityitem.zd = (float) random.nextGaussian() * f3;
                         world.entityJoinedWorld(entityitem);
                     }
                 }
@@ -78,14 +87,14 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
         world.setBlockMetadata(i,j,k,3);
-        if(world.isMultiplayerAndNotHost)
+        if(world.isClientSide)
         {
             return true;
         } else
         {
             TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
             if(tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
-                Minecraft.getMinecraft().ingameGUI.addChatMessage("Multiblock complete!");
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Multiblock complete!");
                 //TODO: Open machine if multiblock valid
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
@@ -98,7 +107,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
+    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
         TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
@@ -109,7 +118,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
-        int index = Sides.orientationLookUp[6 * meta + side];
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(index == 1){
             if(tile.isBurning()){
                 return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[4][0],SignalIndustries.anchorTex[4][1]);

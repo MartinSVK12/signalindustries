@@ -1,7 +1,14 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.net.handler.NetClientHandler;
+import net.minecraft.client.world.WorldClient;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.net.handler.NetHandler;
+import net.minecraft.core.net.packet.Packet23VehicleSpawn;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -9,15 +16,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.api.impl.itempipes.misc.EntityPipeItem;
-import sunsetsatellite.signalindustries.api.impl.itempipes.tiles.TileEntityItemPipe;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
-import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
-import sunsetsatellite.signalindustries.mp.packets.PacketPipeItemSpawn;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
+import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
@@ -61,7 +65,7 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
 
     @Inject(
             method = "handleVehicleSpawn",
-            at = @At(value = "FIELD",target = "Lnet/minecraft/src/Packet23VehicleSpawn;type:I",shift = At.Shift.BEFORE),
+            at = @At(value = "FIELD",target = "Lnet/minecraft/core/net/packet/Packet23VehicleSpawn;type:I",shift = At.Shift.BEFORE),
             locals = LocalCapture.CAPTURE_FAILHARD,
 
             cancellable = true)
@@ -76,18 +80,18 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
             obj.serverPosX = packet23vehiclespawn.xPosition;
             obj.serverPosY = packet23vehiclespawn.yPosition;
             obj.serverPosZ = packet23vehiclespawn.zPosition;
-            obj.rotationYaw = packet23vehiclespawn.yaw;
-            obj.rotationPitch = packet23vehiclespawn.pitch;
-            obj.entityId = packet23vehiclespawn.entityId;
+            obj.yRot = packet23vehiclespawn.yaw;
+            obj.xRot = packet23vehiclespawn.pitch;
+            obj.id = packet23vehiclespawn.entityId;
             this.worldClient.func_712_a(packet23vehiclespawn.entityId, obj);
             if (packet23vehiclespawn.field_28044_i > 0) {
-                obj.setVelocity((double)packet23vehiclespawn.field_28047_e / 8000.0, (double)packet23vehiclespawn.field_28046_f / 8000.0, (double)packet23vehiclespawn.field_28045_g / 8000.0);
+                obj.setPos((double)packet23vehiclespawn.field_28047_e / 8000.0, (double)packet23vehiclespawn.field_28046_f / 8000.0, (double)packet23vehiclespawn.field_28045_g / 8000.0);
             }
             ci.cancel();
         }
     }
 
-    @Override
+    /*@Override
     public void handlePipeItemSpawn(PacketPipeItemSpawn p) {
         TileEntityItemPipe tile = (TileEntityItemPipe) this.worldClient.getBlockTileEntity(p.tileX, p.tileY, p.tileZ);
         if(tile != null){
@@ -101,7 +105,7 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
                 obj.linkEntityToPipe(tile,p.offset,p.inDir,p.outDir,p.center, p.end);
             }
         }
-    }
+    }*/
 
     /*@Override
     public void handlePipeItemPosition(PacketPipeItemPos p){

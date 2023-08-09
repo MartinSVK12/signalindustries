@@ -1,9 +1,10 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-
-
-
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>,ItemStack> {
+public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, ItemStack> {
     private static final CrystalCutterRecipes instance = new CrystalCutterRecipes();
 
     public static CrystalCutterRecipes getInstance() {
@@ -22,10 +23,10 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>,I
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
         list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,8));
-        NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger("saturation",1000);
-        nbt.setInteger("size",1);
-        addRecipe(list,new ItemStack(SignalIndustries.signalumCrystal.itemID,1,0,nbt));
+        CompoundTag nbt = new CompoundTag();
+        nbt.putInt("saturation",1000);
+        nbt.putInt("size",1);
+        addRecipe(list,new ItemStack(SignalIndustries.signalumCrystal.id,1,0,nbt));
         //addRecipe(new ArrayList<Object>{new FluidStack((BlockFluid) Block.waterMoving,1000),new ItemStack(mod_SignalIndustries.rawSignalumCrystal,8)},new ItemStack(mod_SignalIndustries.signalumCrystal,1));
     }
 

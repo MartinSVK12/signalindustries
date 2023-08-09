@@ -1,14 +1,22 @@
-package sunsetsatellite.signalindustries.misc.powersuit;
+package sunsetsatellite.signalindustries.powersuit;
 
 import net.minecraft.client.Minecraft;
-
-
-
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.render.FontRenderer;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Color;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
+import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
@@ -17,7 +25,6 @@ import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.Mode;
 import sunsetsatellite.sunsetutils.util.TickTimer;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,19 +38,13 @@ public class SignalumPowerSuit {
     public InventoryAbilityModule module;
     public Status status = Status.OK;
     public boolean active = false;
-    private final Minecraft mc = Minecraft.getMinecraft();
+    private final Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
     public Mode mode;
     public EntityPlayer player;
     public int selectedAbilitySlot = 0;
-    public TickTimer saveTimer;
-    {
-        try {
-            saveTimer = new TickTimer(this, getClass().getDeclaredMethod("saveToStacks"),60,true);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public TickTimer saveTimer = new TickTimer(this, "saveToStacks",60,true);;
     public HashMap<SuitBaseAbility,Integer> cooldowns = new HashMap<>();
+    public HashMap<SuitBaseEffectAbility,Integer> effectTimes = new HashMap<>();
 
     public float temperature;
 
@@ -66,20 +67,20 @@ public class SignalumPowerSuit {
     }
 
     public enum Status {
-        OK(ChatColor.lime),
-        LOW_ENERGY(ChatColor.orange),
-        NO_ENERGY(ChatColor.red),
-        OVERHEAT(ChatColor.red),
-        CRITICAL_DAMAGE(ChatColor.red);
+        OK(TextFormatting.LIME),
+        LOW_ENERGY(TextFormatting.ORANGE),
+        NO_ENERGY(TextFormatting.RED),
+        OVERHEAT(TextFormatting.RED),
+        CRITICAL_DAMAGE(TextFormatting.RED);
 
-        private final ChatColor color;
-        Status(ChatColor color) {
+        private final TextFormatting color;
+        Status(TextFormatting color) {
             this.color = color;
         }
 
         @Override
         public String toString() {
-            return color+super.toString().replace("_"," ")+ChatColor.white;
+            return color+super.toString().replace("_"," ")+TextFormatting.WHITE;
         }
     }
 
@@ -103,7 +104,7 @@ public class SignalumPowerSuit {
             mode = getModuleMode();
         } else {
             module = null;
-            mode = Mode.NORMAL;
+            mode = Mode.NONE;
         }
 
         //count down cooldowns
@@ -111,6 +112,37 @@ public class SignalumPowerSuit {
             entry.setValue(entry.getValue()-1);
             if(entry.getValue() <= 0){
                 cooldowns.remove(entry.getKey());
+            }
+        }
+
+        for (Map.Entry<SuitBaseEffectAbility, Integer> entry : effectTimes.entrySet()) {
+            entry.setValue(entry.getValue()-1);
+            switch (entry.getKey().activationType) {
+                case POSITION:
+                    entry.getKey().tick(player,player.world,this);
+                    //TODO: figure out how to do this (should it be the current pos, or the pos at activation?)
+                case SELF:
+                    entry.getKey().tick(player,player.world,this);
+                    break;
+                case TARGET:
+                    entry.getKey().tick(player,player.world,this);
+                    //TODO: later
+                    break;
+            }
+            if(entry.getValue() <= 0){
+                switch (entry.getKey().activationType) {
+                    case POSITION:
+                        entry.getKey().deactivate(player,player.world,this);
+                        break;
+                    case SELF:
+                        entry.getKey().deactivate(player,player.world,this);
+                        break;
+                    case TARGET:
+                        entry.getKey().deactivate(player,player.world,this);
+                        break;
+                }
+                cooldowns.put(entry.getKey(), entry.getKey().cooldown);
+                effectTimes.remove(entry.getKey());
             }
         }
 
@@ -126,11 +158,23 @@ public class SignalumPowerSuit {
     public void activateSelectedAbility(){
         if(module.contents[selectedAbilitySlot] != null) {
             SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(!cooldowns.containsKey(selectedAbility)){
-                if(getEnergy() >= selectedAbility.cost){
-                    cooldowns.put(selectedAbility,selectedAbility.cooldown);
-                    decrementEnergy(selectedAbility.cost);
-                    selectedAbility.activate(player,player.worldObj,this);
+            if(selectedAbility instanceof SuitBaseEffectAbility){
+                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                    if(getEnergy() >= selectedAbility.cost){
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(player,player.world,this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
+                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                    }
+                }
+            }else {
+                if(!cooldowns.containsKey(selectedAbility)){
+                    if(getEnergy() >= selectedAbility.cost){
+                        cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(player,player.world,this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
+                    }
                 }
             }
         }
@@ -140,11 +184,23 @@ public class SignalumPowerSuit {
     public void activateSelectedAbility(Entity entity){
         if(module.contents[selectedAbilitySlot] != null) {
             SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(!cooldowns.containsKey(selectedAbility)){
-                if(getEnergy() >= selectedAbility.cost){
-                    cooldowns.put(selectedAbility,selectedAbility.cooldown);
-                    decrementEnergy(selectedAbility.cost);
-                    selectedAbility.activate(player,entity,player.worldObj,this);
+            if(selectedAbility instanceof SuitBaseEffectAbility){
+                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                    if(getEnergy() >= selectedAbility.cost){
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(player, entity, player.world,this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
+                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                    }
+                }
+            }else {
+                if (!cooldowns.containsKey(selectedAbility)) {
+                    if (getEnergy() >= selectedAbility.cost) {
+                        cooldowns.put(selectedAbility, selectedAbility.cooldown);
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(player, entity, player.world, this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
+                    }
                 }
             }
         }
@@ -153,11 +209,23 @@ public class SignalumPowerSuit {
     public void activateSelectedAbility(int x, int y, int z){
         if(module.contents[selectedAbilitySlot] != null) {
             SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(!cooldowns.containsKey(selectedAbility)){
-                if(getEnergy() >= selectedAbility.cost){
-                    cooldowns.put(selectedAbility,selectedAbility.cooldown);
-                    decrementEnergy(selectedAbility.cost);
-                    selectedAbility.activate(x,y,z,player,player.worldObj,this);
+            if(selectedAbility instanceof SuitBaseEffectAbility){
+                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                    if(getEnergy() >= selectedAbility.cost){
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(x,y,z,player,player.world,this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
+                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                    }
+                }
+            }else {
+                if(!cooldowns.containsKey(selectedAbility)){
+                    if(getEnergy() >= selectedAbility.cost){
+                        cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                        decrementEnergy(selectedAbility.cost);
+                        selectedAbility.activate(x,y,z,player,player.world,this);
+                        selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
+                    }
                 }
             }
         }
@@ -226,19 +294,19 @@ public class SignalumPowerSuit {
         }
     }
 
-    public void renderOverlay(GuiIngame guiIngame, FontRenderer fontRenderer, RenderItem itemRenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
+    public void renderOverlay(GuiIngame guiIngame, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer, EntityPlayer player, int height, int width, int mouseX, int mouseY) {
         DrawUtil drawUtil = new DrawUtil();
         if(!active){
-            KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyOpenSuit();
-            fontRenderer.drawCenteredString(String.format("%s | Press Shift+%s",ChatColor.gray+"OFFLINE"+ChatColor.white, Keyboard.getKeyName(openSuitKey.key)),width/2,height-64,0xFFFFFFFF);
+            KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
+            fontRenderer.drawCenteredString(String.format("%s | Press Shift+%s",TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, Keyboard.getKeyName(openSuitKey.key)),width/2,height-64,0xFFFFFFFF);
             return;
         }
         if(status == Status.NO_ENERGY){
-            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status,ChatColor.red+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+ChatColor.white,temperature),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,temperature),width/2,height-64,0xFFFFFFFF);
             return;
         }
 
-        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C",status.toString(),ChatColor.red+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+ChatColor.white,temperature),width/2,height-64,0xFFFFFFFF);
+        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C",status.toString(),TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,temperature),width/2,height-64,0xFFFFFFFF);
 
         int color = mode.getColor(0x40);//0x40808080;
         int color2 = mode.getColor();//0xFF808080;
@@ -258,11 +326,23 @@ public class SignalumPowerSuit {
         } else {
             if(module.contents[selectedAbilitySlot] != null){
                 SuitBaseAbility selectedAbility = ((ItemWithAbility)module.contents[selectedAbilitySlot].getItem()).getAbility();
-                if(!cooldowns.containsKey(selectedAbility)){
-                    fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+selectedAbility.name+ChatColor.white,ChatColor.red+"-"+selectedAbility.cost+ChatColor.white, ChatColor.lime+"READY"),width/2,25,color2);
+                I18n t = I18n.getInstance();
+                if(selectedAbility instanceof SuitBaseEffectAbility){
+                    if(effectTimes.containsKey(selectedAbility)){
+                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+String.valueOf(effectTimes.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                    } else if(cooldowns.containsKey(selectedAbility)){
+                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                    } else {
+                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                    }
                 } else {
-                    fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+selectedAbility.name+ChatColor.white,ChatColor.red+"-"+selectedAbility.cost+ChatColor.white, ChatColor.red+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                    if(cooldowns.containsKey(selectedAbility)){
+                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                    } else {
+                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                    }
                 }
+
             } else {
                 fontRenderer.drawCenteredString(String.format("%s","No ability selected."),width/2,25,color2);
             }

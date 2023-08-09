@@ -1,6 +1,13 @@
 package sunsetsatellite.signalindustries.mixin;
 
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.enums.EnumSleepStatus;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -11,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
-import sunsetsatellite.signalindustries.misc.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(
         value = EntityPlayer.class,
@@ -37,8 +44,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
             cancellable = true
     )
     public void sleepInBedAt(int x, int y, int z, CallbackInfoReturnable<EnumSleepStatus> cir) {
-        if (!worldObj.isMultiplayerAndNotHost) {
-            if(worldObj.currentWeather == SignalIndustries.weatherBloodMoon){
+        if (!world.isClientSide) {
+            if(world.currentWeather == SignalIndustries.weatherBloodMoon){
                 addChatMessage("bed.bloodMoon");
                 cir.setReturnValue(EnumSleepStatus.NOT_POSSIBLE_NOW);
             }
@@ -51,7 +58,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     }
 
     @Inject(
-            method = "onUpdate",
+            method = "onLivingUpdate",
             at = @At("HEAD")
     )
     public void powerSuitUpdate(CallbackInfo ci) {
@@ -73,10 +80,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     }
 
     @Inject(
-            method = "writeEntityToNBT",
+            method = "addAdditionalSaveData",
             at = @At("HEAD")
     )
-    public void saveSuitData(NBTTagCompound nbttagcompound, CallbackInfo ci) {
+    public void saveSuitData(CompoundTag nbttagcompound, CallbackInfo ci) {
         if(powerSuit != null){
             powerSuit.saveToStacks();
         }

@@ -1,6 +1,11 @@
 package sunsetsatellite.signalindustries.gui;
 
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiContainer;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.signalindustries.containers.ContainerRecipeMaker;
 import sunsetsatellite.signalindustries.inventories.TileEntityRecipeMaker;
@@ -35,7 +40,7 @@ public class GuiRecipeMaker extends GuiContainer {
     }
 
 
-    protected void actionPerformed(GuiButton guibutton) {
+    protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {
             return;
         }

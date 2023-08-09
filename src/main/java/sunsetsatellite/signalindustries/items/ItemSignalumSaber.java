@@ -1,8 +1,21 @@
 package sunsetsatellite.signalindustries.items;
 
 
-
-
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.render.FontRenderer;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.material.ToolMaterial;
+import net.minecraft.core.item.tool.ItemToolSword;
+import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.world.World;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.api.IItemFluidContainer;
 import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
@@ -18,14 +31,14 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     public Tier tier;
 
-    public ItemSignalumSaber(int i, Tier tier, ToolMaterial enumtoolmaterial) {
-        super(i, enumtoolmaterial);
+    public ItemSignalumSaber(String key, int i, Tier tier, ToolMaterial enumtoolmaterial) {
+        super(key, i, enumtoolmaterial);
         this.tier = tier;
     }
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank()+"\n"+"Energy: "+ ChatColor.red+stack.tag.getInteger("energy")+ChatColor.white;
+        return "Tier: " + tier.getColor() + tier.getRank()+"\n"+"Energy: "+ TextFormatting.RED+stack.tag.getInteger("energy")+TextFormatting.WHITE;
     }
 
     @Override
@@ -53,12 +66,12 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         int energy = itemstack.tag.getInteger("energy");
         if(itemstack.tag.getBoolean("active")){
             if(energy > 0){
-                itemstack.tag.setInteger("energy",energy-1);
-                victim.fire = 60;
+                itemstack.tag.putInt("energy",energy-1);
+                victim.remainingFireTicks = 60;
             }
         }
         if(energy <= 0){
-            itemstack.tag.setBoolean("active",false);
+            itemstack.tag.putBoolean("active",false);
         }
         return true;
     }
@@ -69,7 +82,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         int energy = itemstack.tag.getInteger("energy");
         if (block != null && block.getHardness() > 0.0F){
             if(energy > 1 && itemstack.tag.getBoolean("active")){
-                itemstack.tag.setInteger("energy",energy-2);
+                itemstack.tag.putInt("energy",energy-2);
             }
         }
         return true;
@@ -102,16 +115,16 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
                 if(slot.getFluidStack().amount <= 0){
                     slot.putStack(null);
                 }
-                NBTTagCompound data = new NBTTagCompound();
-                //data.setInteger("size",size);
-                data.setInteger("energy",getCapacity(stack));
+                CompoundTag data = new CompoundTag();
+                //data.putInt("size",size);
+                data.putInt("energy",getCapacity(stack));
                 stack.tag = data;
                 return stack;
             } else {
                 slot.putStack(null);
-                NBTTagCompound data = new NBTTagCompound();
-                //data.setInteger("size",size);
-                data.setInteger("energy",saturation + amount);
+                CompoundTag data = new CompoundTag();
+                //data.putInt("size",size);
+                data.putInt("energy",saturation + amount);
                 stack.tag = data;
                 return stack;
             }
@@ -158,13 +171,13 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.tag.getInteger("energy") > 0){
-            itemstack.tag.setBoolean("active",!itemstack.tag.getBoolean("active"));
+            itemstack.tag.putBoolean("active",!itemstack.tag.getBoolean("active"));
         }
         return super.onItemRightClick(itemstack, world, entityplayer);
     }
 
     @Override
-    public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, RenderItem itemRenderer) {
+    public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
         InventoryPlayer inv = player.inventory;
         ItemStack saber = inv.getCurrentItem();
         int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;

@@ -1,6 +1,14 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.ListTag;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.lang.reflect.Field;
@@ -85,38 +93,38 @@ public class TileEntityRecipeMaker extends TileEntity
         return 64;
     }
 
-    public void readFromNBT(NBTTagCompound nbttagcompound)
+    public void readFromNBT(CompoundTag nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+        ListTag nbttaglist = nbttagcompound.getList("Items");
         contents = new ItemStack[getSizeInventory()];
         for(int i = 0; i < nbttaglist.tagCount(); i++)
         {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+            CompoundTag nbttagcompound1 = (CompoundTag)nbttaglist.tagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 0xff;
             if(j >= 0 && j < contents.length)
             {
-                contents[j] = new ItemStack(nbttagcompound1);
+                contents[j] = ItemStack.readItemStackFromNbt(nbttagcompound1);
             }
         }
     }
 
-    public void writeToNBT(NBTTagCompound nbttagcompound)
+    public void writeToNBT(CompoundTag nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
-        NBTTagList nbttaglist = new NBTTagList();
+        ListTag nbttaglist = new ListTag();
         for(int i = 0; i < contents.length; i++)
         {
             if(contents[i] != null)
             {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                nbttagcompound1.setByte("Slot", (byte)i);
+                CompoundTag nbttagcompound1 = new CompoundTag();
+                nbttagcompound1.putByte("Slot", (byte)i);
                 contents[i].writeToNBT(nbttagcompound1);
-                nbttaglist.setTag(nbttagcompound1);
+                nbttaglist.addTag(nbttagcompound1);
             }
         }
 
-        nbttagcompound.setTag("Items", nbttaglist);
+        nbttagcompound.put("Items", nbttaglist);
     }
 
     public boolean canInteractWith(EntityPlayer entityplayer)
@@ -125,7 +133,7 @@ public class TileEntityRecipeMaker extends TileEntity
         {
             return false;
         }
-        return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+        return entityplayer.distanceToSqr((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
     }
 
     private ItemStack[] contents;

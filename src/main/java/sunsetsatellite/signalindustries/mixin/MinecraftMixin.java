@@ -1,17 +1,20 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-
+import net.minecraft.client.entity.player.EntityPlayerSP;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.option.GameSettings;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.core.HitResult;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.misc.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 import java.util.Objects;
 
@@ -28,7 +31,7 @@ public class MinecraftMixin {
 
     @Shadow public EntityPlayerSP thePlayer;
 
-    @Shadow public MovingObjectPosition objectMouseOver;
+    @Shadow public HitResult objectMouseOver;
 
     @Inject(
             method = "runTick",
@@ -37,8 +40,8 @@ public class MinecraftMixin {
     public void handleKeyboard(CallbackInfo ci){
         boolean shift = (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
         boolean control = (Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157));
-        KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyOpenSuit();
-        KeyBinding activeAbilityKey = ((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateAbility();
+        KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
+        KeyBinding activeAbilityKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateAbility();
         SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).signalIndustries$getPowerSuit();
         if(openSuitKey.isPressed()){
             if(currentScreen == null && powerSuit != null){
@@ -51,10 +54,10 @@ public class MinecraftMixin {
         }
         if(activeAbilityKey.isPressed()){
             if(currentScreen == null && powerSuit != null && powerSuit.active) {
-                if (objectMouseOver != null && objectMouseOver.entityHit == null) {
-                    powerSuit.activateSelectedAbility(objectMouseOver.blockX, objectMouseOver.blockY, objectMouseOver.blockZ);
+                if (objectMouseOver != null && objectMouseOver.entity == null) {
+                    powerSuit.activateSelectedAbility(objectMouseOver.x, objectMouseOver.y, objectMouseOver.z);
                 } else if (objectMouseOver != null) {
-                    powerSuit.activateSelectedAbility(objectMouseOver.entityHit);
+                    powerSuit.activateSelectedAbility(objectMouseOver.entity);
                 } else {
                     powerSuit.activateSelectedAbility();
                 }

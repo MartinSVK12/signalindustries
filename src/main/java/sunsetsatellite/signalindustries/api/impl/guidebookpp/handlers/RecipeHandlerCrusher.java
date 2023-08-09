@@ -1,19 +1,18 @@
 package sunsetsatellite.signalindustries.api.impl.guidebookpp.handlers;
 
 
-
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.ContainerGuidebookRecipeBase;
+import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
 import sunsetsatellite.guidebookpp.IRecipeHandlerBase;
 import sunsetsatellite.guidebookpp.RecipeGroup;
 import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.guidebookpp.containers.ContainerGuidebookCrusherRecipe;
-import sunsetsatellite.fluidapi.gbookpp.RecipeFluid;
 import sunsetsatellite.signalindustries.recipes.CrusherRecipes;
-import sunsetsatellite.signalindustries.recipes.PlateFormerRecipes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class RecipeHandlerCrusher

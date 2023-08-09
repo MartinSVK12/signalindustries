@@ -1,15 +1,19 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.recipes.*;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.BasicAlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 
 
 public class TileEntityAlloySmelter extends TileEntityTieredMachine implements IBoostable {
 
-    public MachineRecipesBase<Integer[],ItemStack> recipes = AlloySmelterRecipes.instance;
+    public MachineRecipesBase<Integer[], ItemStack> recipes = AlloySmelterRecipes.instance;
 
     public TileEntityAlloySmelter(){
         cost = 40;
@@ -51,7 +55,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachine implements I
         } else if(canProcess()) {
             progressMaxTicks = 200 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
                 update = fuel();
             }

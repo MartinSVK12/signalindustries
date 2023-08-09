@@ -1,9 +1,10 @@
 package sunsetsatellite.signalindustries.interfaces.mixins;
 
 
+import com.mojang.nbt.CompoundTag;
 
 public interface INBTCompound {
     void removeTag(String s);
 
-    boolean equals(NBTTagCompound tag);
+    boolean equals(CompoundTag tag);
 }

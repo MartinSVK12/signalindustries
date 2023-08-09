@@ -1,11 +1,12 @@
 package sunsetsatellite.signalindustries.items.attachments;
 
 
-
-
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
-import sunsetsatellite.signalindustries.interfaces.ICustomDescription;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
+import sunsetsatellite.sunsetutils.util.ICustomDescription;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
 
     @Override
     public String getDescription(ItemStack stack) {
-        StringBuilder s = new StringBuilder(ChatColor.yellow + "Attachment" + ChatColor.white);
+        StringBuilder s = new StringBuilder(TextFormatting.YELLOW + "Attachment" + TextFormatting.WHITE);
         for (AttachmentPoint attachmentPoint : attachmentPoints) {
             s.append("\n").append("- ").append(attachmentPoint);
         }

@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-
+import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
@@ -58,7 +59,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
         } else if(canProcess()) {
             progressMaxTicks = 800 / speedMultiplier;
         }
-        if(!worldObj.isMultiplayerAndNotHost){
+        if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
                 update = fuel();
             }
@@ -104,8 +105,8 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
             int size2 = this.itemContents[2].tag.getInteger("size");
             int sat2 = this.itemContents[2].tag.getInteger("saturation");
             ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
-            stack.tag.setInteger("size",size1+size2);
-            stack.tag.setInteger("saturation",sat1+sat2);
+            stack.tag.putInt("size",size1+size2);
+            stack.tag.putInt("saturation",sat1+sat2);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {

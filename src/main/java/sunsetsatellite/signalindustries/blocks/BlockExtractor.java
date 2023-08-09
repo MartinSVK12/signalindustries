@@ -1,27 +1,37 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.helper.Sides;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.inventories.TileEntityExtractor;
+import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockExtractor extends BlockContainerTiered{
-    public BlockExtractor(int i, Tier tier, Material material) {
-        super(i, tier, material);
+
+    private static int[][] textures;
+
+    public BlockExtractor(String key, int i, Tier tier, Material material) {
+        super(key, i, tier, material);
         textures = SignalIndustries.extractorTex;
     }
 
-    private static int[][] textures;
-    
     @Override
-    protected TileEntity getBlockEntity() {
+    protected TileEntity getNewBlockEntity() {
         return new TileEntityExtractor();
     }
 
@@ -52,9 +62,9 @@ public class BlockExtractor extends BlockContainerTiered{
                         itemstack.stackSize -= i1;
                         EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (float) random.nextGaussian() * f3;
-                        entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) random.nextGaussian() * f3;
+                        entityitem.xd = (float) random.nextGaussian() * f3;
+                        entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
+                        entityitem.zd = (float) random.nextGaussian() * f3;
                         world.entityJoinedWorld(entityitem);
                     }
                 }
@@ -67,7 +77,7 @@ public class BlockExtractor extends BlockContainerTiered{
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-        if(world.isMultiplayerAndNotHost)
+        if(world.isClientSide)
         {
             return true;
         } else
@@ -81,7 +91,7 @@ public class BlockExtractor extends BlockContainerTiered{
     }
 
     @Override
-    public int getBlockTexture(IBlockAccess iblockaccess, int i, int j, int k, int side) {
+    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
         TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         textures = SignalIndustries.extractorTex;
@@ -93,7 +103,7 @@ public class BlockExtractor extends BlockContainerTiered{
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
-        int index = Sides.orientationLookUp[6 * meta + side];
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         int offset = (2*tier.ordinal())+1;
         if(tier.ordinal() == 0){
             offset = 0;
