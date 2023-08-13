@@ -43,7 +43,10 @@ import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
-import sunsetsatellite.signalindustries.util.*;
+import sunsetsatellite.signalindustries.util.AttachmentPoint;
+import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.RenderFluidInConduit;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
@@ -55,7 +58,6 @@ import sunsetsatellite.sunsetutils.util.multiblocks.Structure;
 import sunsetsatellite.sunsetutils.util.multiblocks.StructureCommand;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.helper.*;
-import turniplabs.halplibe.mixin.accessors.DispatcherAccessor;
 
 import java.util.*;
 
@@ -255,8 +257,8 @@ public class SignalIndustries implements ModInitializer {
     }
 
     public SignalIndustries(){
-        RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
-        ((DispatcherAccessor)BlockModelDispatcher.getInstance()).callAddDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
+        //RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
+        BlockModelDispatcher.getInstance().addDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
         PacketAccessor.callAddIdClassMapping(config.getFromConfig("PacketOpenMachineGUI_ID",113),true,false, PacketOpenMachineGUI.class);
         //PacketAccessor.callAddIdClassMapping(config.getFromConfig("PacketPipeItemSpawn_ID",114),true,false, PacketPipeItemSpawn.class);
         //PacketAccessor.callAddIdClassMapping(config.getFromConfig("PacketPipeItemPos_ID",115),true,false, PacketPipeItemPos.class);

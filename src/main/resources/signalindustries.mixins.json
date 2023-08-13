@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockRailMixin",
+    "ChunkDecoratorOverworldMixin",
     "EntityLivingMixin",
     "EntityMinecartMixin",
     "EntityMobMixin",
