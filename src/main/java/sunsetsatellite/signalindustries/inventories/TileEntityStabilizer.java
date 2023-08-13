@@ -10,18 +10,17 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityColorParticleFX;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
-import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
+import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityBooster extends TileEntityFluidItemContainer {
+public class TileEntityStabilizer extends TileEntityFluidItemContainer {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -30,10 +29,11 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 160;
-    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
+    //public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
     public Random random = new Random();
+    public TileEntity connectedTo;
 
-    public TileEntityBooster(){
+    public TileEntityStabilizer(){
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = 4000;
@@ -46,7 +46,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     }
     @Override
     public String getInvName() {
-        return "Dilithium Booster";
+        return "Dilithium Stabilizer";
     }
 
     @Override
@@ -54,22 +54,41 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
         boolean update = false;
-        if(fuelBurnTicks > 0){
-            fuelBurnTicks--;
-        }
+
         if(!worldObj.isClientSide){
+
+            if(fuelBurnTicks > 0){
+                fuelBurnTicks--;
+            }
             /*if (progressTicks >= 0 && canProcess()){
                 update = fuel();
             }*/
             if(isBurning() && canProcess()){
                 if(progressTicks > 0){
-                    progressTicks--;
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
-                    int meta = worldObj.getBlockMetadata(xCoord,yCoord,zCoord);
-                    TileEntity tileEntity = Direction.getDirectionFromSide(meta).getTileEntity(worldObj,this);
-                    if(tileEntity instanceof IBoostable){
-                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,tileEntity.xCoord+random.nextFloat(),tileEntity.yCoord+random.nextFloat(),tileEntity.zCoord+random.nextFloat(),0,0,0,0.5f,1.0f,0.0f,0.5f));
+                    /*SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
+                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));*/
+                    if(connectedTo instanceof IStabilizable && ((IStabilizable) connectedTo).isActive()){
+
+                        progressTicks--;
+                        Vec3i pos = new Vec3i(xCoord,yCoord,zCoord);
+                        Vec3i connectedPos = new Vec3i(connectedTo.xCoord, connectedTo.yCoord, connectedTo.zCoord);
+                        if(pos.x > connectedPos.x){
+                            int temp = pos.x;
+                            pos.x = connectedPos.x;
+                            connectedPos.x = temp;
+                        }
+                        if(pos.z > connectedPos.z){
+                            int temp = pos.z;
+                            pos.z = connectedPos.z;
+                            connectedPos.z = temp;
+                        }
+                        for (float i = pos.x; i <= connectedPos.x; i+=0.1f) {
+                            for (float k = pos.z; k <= connectedPos.z; k+=0.1f) {
+                                for (float l = 0; l < 4; l++) {
+                                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,yCoord+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
+                                }
+                            }
+                        }
                     }
                 }
                 if(progressTicks <= 0){
@@ -78,9 +97,11 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
                     update = true;
                 }
             } else if(canProcess()){
-                fuel();
-                if(fuelBurnTicks > 0){
-                    fuelBurnTicks++;
+                if(connectedTo instanceof IStabilizable && ((IStabilizable) connectedTo).isActive()) {
+                    fuel();
+                    if(fuelBurnTicks > 0){
+                        fuelBurnTicks++;
+                    }
                 }
             }
         }
@@ -105,7 +126,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 * speedMultiplier;
+            progressMaxTicks = 200 * speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {
@@ -127,12 +148,9 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
         }
     }
 
-    private boolean canProcess() {
-        if(itemContents[0] == null) {
-            return false;
-        } else {
-            return itemContents[0].getItem() == SignalIndustries.dilithiumShard && itemContents[0].stackSize > 0;
-        }
+    public boolean canProcess() {
+        return ((itemContents[0] != null && itemContents[0].getItem() == SignalIndustries.dilithiumShard) || progressTicks > 0) && connectedTo instanceof IStabilizable;
+
         /*if(itemContents[0] == null) {
             return false;
         } else {

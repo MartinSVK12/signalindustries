@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.blocks;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
@@ -13,7 +12,10 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
+import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
 import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -49,6 +51,15 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
         TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
+
+                if(dir == Direction.Y_NEG || dir == Direction.Y_POS) continue;
+                Vec3i v = dir.getVec().multiply(2);
+                Vec3i tileVec = new Vec3i(i,j,k);
+                TileEntity stabilizer = dir.getTileEntity(world,tileVec.add(v));
+                if(stabilizer instanceof TileEntityStabilizer){
+                    ((TileEntityStabilizer) stabilizer).connectedTo = null;
+                }
+
                 TileEntity tile2 = dir.getTileEntity(world, tile);
                 if (tile2 instanceof TileEntityFluidPipe) {
                     tile.unpressurizePipes((TileEntityFluidPipe) tile2, new ArrayList<>());
@@ -94,8 +105,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
         {
             TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
             if(tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
-                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Multiblock complete!");
-                //TODO: Open machine if multiblock valid
+                SignalIndustries.displayGui(entityplayer,new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }

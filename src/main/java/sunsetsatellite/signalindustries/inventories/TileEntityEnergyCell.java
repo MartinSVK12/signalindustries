@@ -31,6 +31,11 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     public void updateEntity() {
         if(getBlockType() != null){
             if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){
+                for (Map.Entry<Direction, Connection> entry : connections.entrySet()) {
+                    if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
+                        entry.setValue(Connection.OUTPUT);
+                    }
+                }
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
                 if(fluidContents[0] != null){

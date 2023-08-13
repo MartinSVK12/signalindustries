@@ -99,7 +99,7 @@ item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.warpOrb.name=Warp Orb
-item.signalindustries.warpOrb.desc=The location encoded into this this orb is faintly visible inside, provided it points to somewhere of course. Wonder what would happen if you broke it?
+item.signalindustries.warpOrb.desc=The location encoded into this orb is faintly visible inside, provided it points to somewhere of course. Wonder what would happen if you broke it?
 
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
 tile.signalindustries.signalumOre.desc=[Raw Signalum Crystals] encased in rock.

@@ -12,9 +12,9 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.gui.GuiInfuser;
-import sunsetsatellite.signalindustries.inventories.TileEntityInfuser;
+import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
+import sunsetsatellite.signalindustries.gui.GuiStabilizer;
+import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -29,12 +29,12 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityInfuser();
+        return new TileEntityStabilizer();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
+        TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -79,9 +79,9 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
+            TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiStabilizer(entityplayer.inventory, tile),new ContainerStabilizer(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
@@ -89,20 +89,30 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
 
     @Override
     public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityInfuser tile = (TileEntityInfuser) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityStabilizer tile = (TileEntityStabilizer) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         /*
         this.atlasIndices[1] = texCoordToIndex(topX, topY);
         this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
+        this.atlasIndices[4] = texCoordToIndex(northX, northY); //back
+        this.atlasIndices[2] = texCoordToIndex(eastX, eastY); //front
         this.atlasIndices[5] = texCoordToIndex(southX, southY);
         this.atlasIndices[3] = texCoordToIndex(westX, westY);
          */
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index == 4){
+        if(index == 2){
+            if(tile.isBurning()){
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[1][0],SignalIndustries.dilithStabilizerTex[1][1]);
+            }
             return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[0][0],SignalIndustries.dilithStabilizerTex[0][1]);
+        } else if(index > 1 && index < 6) {
+            if(tile.isBurning()){
+                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[3][0],SignalIndustries.dilithStabilizerTex[3][1]);
+            }
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[2][0],SignalIndustries.dilithStabilizerTex[2][1]);
+        } else {
+            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[4][0],SignalIndustries.dilithStabilizerTex[4][1]);
         }
-        return this.atlasIndices[index];
+        //return this.atlasIndices[index];
     }
 }

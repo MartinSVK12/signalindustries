@@ -132,7 +132,7 @@ public class SignalIndustries implements ModInitializer {
     public static final int[][] anchorTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchorinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionanchortopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"reinforcedblank.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchor.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionanchortop.png"),TextureHelper.registerBlockTexture(MOD_ID,"dimensionalanchorbottom.png")};
 
     public static final Block dilithiumStabilizer = BlockHelper.createBlock(MOD_ID,new BlockDilithiumStabilizer(key("reinforced.dilithiumStabilizer"),config.getFromConfig("dilithiumStabilizer",availableBlockId++), Tier.REINFORCED,Material.metal),"reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumstabilizersideinactive.png","dilithiumstabilizersideinactive.png","dilithiumstabilizersideinactive.png",BlockSounds.METAL,5f,20f,1);
-    public static final int[][] dilithStabilizerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideactive.png")};
+    public static final int[][] dilithStabilizerTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumstabilizersideactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"reinforcedblank.png")};
 
     public static final Block dilithiumBooster = BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster(key("reinforced.dilithiumBooster"),config.getFromConfig("dilithiumBooster",availableBlockId++), Tier.REINFORCED,Material.metal),"reinforcedblank.png","reinforcedblank.png","dilithiumtopinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png","dilithiumboostersideinactive.png",BlockSounds.METAL,5f,20f,1);
     public static final int[][] dilithBoosterTex = new int[][]{TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumtopactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideinactive.png"),TextureHelper.registerBlockTexture(MOD_ID,"dilithiumboostersideactive.png")};
@@ -307,6 +307,9 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityBooster.class,"Dilithium Booster");
         addToNameGuiMap("Dilithium Booster", GuiBooster.class, TileEntityBooster.class);
 
+        EntityHelper.createTileEntity(TileEntityStabilizer.class,"Dilithium Stabilizer");
+        addToNameGuiMap("Dilithium Stabilizer", GuiStabilizer.class, TileEntityStabilizer.class);
+
         EntityHelper.createTileEntity(TileEntityCrystalChamber.class,"Crystal Chamber");
         addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
 
@@ -314,7 +317,7 @@ public class SignalIndustries implements ModInitializer {
         addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
 
         EntityHelper.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
-        //TODO: Add nameGui mapping
+        addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
 
         //EntityHelper.createTileEntity(TileEntityFilter.class,"Filter");
         //addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);

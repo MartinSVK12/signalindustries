@@ -133,12 +133,20 @@ public class GuiFluidIOConfig extends GuiScreen {
         if(guibutton.id >= 0 && guibutton.id < 6){
             switch (tile.connections.get(Direction.values()[guibutton.id])) {
                 case NONE:
+                    if(tile.getBlockType() == SignalIndustries.infiniteEnergyCell){
+                        tile.connections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
+                        break;
+                    }
                     tile.connections.replace(Direction.values()[guibutton.id], Connection.INPUT);
                     break;
                 case INPUT:
                     tile.connections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                     break;
                 case OUTPUT:
+                    if(tile.getBlockType() == SignalIndustries.infiniteEnergyCell){
+                        tile.connections.replace(Direction.values()[guibutton.id], Connection.NONE);
+                        break;
+                    }
                     tile.connections.replace(Direction.values()[guibutton.id], Connection.BOTH);
                     break;
                 case BOTH:

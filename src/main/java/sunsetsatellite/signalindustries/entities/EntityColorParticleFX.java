@@ -26,6 +26,22 @@ public class EntityColorParticleFX extends EntityFX {
         this.noPhysics = false;
     }
 
+    public EntityColorParticleFX(World world, double x, double y, double z, double xd, double yd, double zd, float f, float red, float green, float blue, int maxAge) {
+        super(world, x, y, z, 0.0D, 0.0D, 0.0D);
+        this.xd = xd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
+        this.yd = yd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
+        this.zd = zd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
+        float f4 = (float)Math.random() * 0.4F + 0.6F;
+        this.particleRed = red;
+        this.particleGreen = green;
+        this.particleBlue = blue;
+        this.particleScale *= 0.75F;
+        this.particleScale *= f;
+        this.particleMaxAge = maxAge;
+        this.particleMaxAge = (int)(this.particleMaxAge * f);
+        this.noPhysics = false;
+    }
+
     public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
         float f6 = (this.particleAge + f) / this.particleMaxAge * 32.0F;
         if (f6 < 0.0F)
@@ -35,7 +51,7 @@ public class EntityColorParticleFX extends EntityFX {
         super.renderParticle(tessellator, f, f1, f2, f3, f4, f5);
     }
 
-    public void onUpdate() {
+    public void tick() {
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
