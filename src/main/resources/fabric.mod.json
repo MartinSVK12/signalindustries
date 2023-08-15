@@ -24,6 +24,9 @@
     "guidebookpp": [
       "sunsetsatellite.signalindustries.api.impl.guidebookpp.SignalIndustriesGuidebookPlugin"
     ],
+    "btwaila": [
+      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
+    ],
     "main": [
       "sunsetsatellite.signalindustries.SignalIndustries"
     ]

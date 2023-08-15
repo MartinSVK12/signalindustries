@@ -3,9 +3,12 @@ package sunsetsatellite.signalindustries.mixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.RenderGlobal;
+import net.minecraft.client.render.Tessellator;
 import net.minecraft.core.entity.fx.EntitySlimeFX;
+import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +19,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.entities.EntityShockwaveFX;
 
+@Debug(
+        export = true
+)
 @Mixin(
         value = RenderGlobal.class,
         remap = false
@@ -73,7 +79,7 @@ public class RenderGlobalMixin {
 
     @Inject(
             method = "drawSky",
-            at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glBindTexture(II)V",ordinal = 1, shift = At.Shift.BEFORE),
+            at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderBloodMoon(float partialTicks, CallbackInfo ci) {
@@ -87,12 +93,19 @@ public class RenderGlobalMixin {
             at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glBindTexture(II)V",ordinal = 0, shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void renderSolar(float partialTicks, CallbackInfo ci) {
+    public void renderSolar(float renderPartialTicks, CallbackInfo ci, float celestialAngle, Vec3d vec3d, float f1, float f2, float f3, Tessellator tessellator, float[] af, float f6, float f9, float f11, float f13, float f15) {
         if(worldObj.currentWeather == SignalIndustries.weatherEclipse){
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);
             GL11.glBindTexture(3553, this.renderEngine.getTexture("/assets/signalindustries/misc/solar_eclipse.png"));
             GL11.glEnable(3553);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            tessellator.startDrawingQuads();
+            tessellator.addVertexWithUV(-f15, 100.0, -f15, 0.0, 0.0);
+            tessellator.addVertexWithUV(f15, 100.0, -f15, 1.0, 0.0);
+            tessellator.addVertexWithUV(f15, 100.0, f15, 1.0, 1.0);
+            tessellator.addVertexWithUV(-f15, 100.0, f15, 0.0, 1.0);
+            tessellator.draw();
         } else if (worldObj.currentWeather == SignalIndustries.weatherSolarApocalypse) {
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);

@@ -6,7 +6,9 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
+import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
@@ -29,13 +31,11 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.mixin.accessors.PacketAccessor;
 import sunsetsatellite.fluidapi.render.RenderFluidInBlock;
-import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
-import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
-import sunsetsatellite.signalindustries.abilities.powersuit.TestingAbility;
-import sunsetsatellite.signalindustries.abilities.powersuit.TestingEffectAbility;
+import sunsetsatellite.signalindustries.abilities.powersuit.*;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
+import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.inventories.*;
@@ -183,6 +183,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Block rootedFabric = BlockHelper.createBlock(MOD_ID,new Block(key("rootedFabric"),config.getFromConfig("rootedFabric",availableBlockId++),Material.dirt),"rootedfabric.png",BlockSounds.STONE,50f,50000f,0);
 
     public static final Item monsterShard = ItemHelper.createItem(MOD_ID,new Item(config.getFromConfig("monsterShard",availableItemId++)),"monsterShard","monstershard.png");
+    public static final Item infernalFragment = ItemHelper.createItem(MOD_ID,new Item(config.getFromConfig("infernalFragment",availableItemId++)),"infernalFragment","infernalfragment.png");
     public static final Item evilCatalyst = ItemHelper.createItem(MOD_ID,new Item(config.getFromConfig("evilCatalyst",availableItemId++)),"evilCatalyst","evilcatalyst.png").setMaxStackSize(4);
     public static final Item dimensionalShard = ItemHelper.createItem(MOD_ID,new Item(config.getFromConfig("dimensionalShard",availableItemId++)),"dimensionalShard","dimensionalshard.png");
     public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(config.getFromConfig("warpOrb",availableItemId++)),"warpOrb","warporb.png").setMaxStackSize(1);
@@ -221,8 +222,11 @@ public class SignalIndustries implements ModInitializer {
 
     public static SuitBaseAbility testAbility = new TestingAbility();
     public static SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
+    public static SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
 
     public static final Item testingAbility = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getFromConfig("testingAbilityItem",availableItemId++),testEffectAbility),"testingAbilityItem","testingability.png");
+    public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getFromConfig("clockworkAbilityContainer",availableItemId++),clockworkAbility),"clockworkAbilityContainer","clockworkability.png");
+
 
     public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getFromConfig("abilityModule",availableItemId++),Mode.NORMAL),"abilityModule","abilitymodule.png");
     /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getFromConfig("normalAbilityModule",availableItemId++),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
@@ -334,6 +338,8 @@ public class SignalIndustries implements ModInitializer {
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
+
+        EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getFromConfig("infernalId",50),"Infernal");
 
         //crafting recipes in RecipeHandlerCraftingSI
 

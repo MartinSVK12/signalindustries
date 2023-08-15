@@ -106,8 +106,8 @@ public class GuiDimAnchor extends GuiFluid {
                 break;
         }
         fontRenderer.drawCenteredString(name, 90, 6, color);
-        fontRenderer.drawCenteredString(String.valueOf(tile.progressTicks/20)+"s /",140,60, 0xFFFF00FF);
-        fontRenderer.drawCenteredString(String.valueOf(tile.progressMaxTicks/20)+"s",150,70, 0xFFFF00FF);
+        /*fontRenderer.drawCenteredString(tile.progressTicks / 20 +"s /",140,60, 0xFFFF00FF);
+        fontRenderer.drawCenteredString(tile.progressMaxTicks / 20 +"s",150,70, 0xFFFF00FF);*/
     }
     protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {

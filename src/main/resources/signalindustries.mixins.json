@@ -24,8 +24,11 @@
     "RenderEngineMixin",
     "RenderGlobalMixin",
     "RenderPlayerMixin",
+    "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
-    "WorldMixin"
+    "WorldMixin",
+    "accessors.GuiBlockOverlayAccessor",
+    "invokers.GuiInvoker"
   ],
   "client": [
   ],

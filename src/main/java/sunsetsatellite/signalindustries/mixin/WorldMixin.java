@@ -11,7 +11,10 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.Explosion;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.season.SeasonManager;
+import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.weather.Weather;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,6 +55,8 @@ public abstract class WorldMixin {
     @Shadow public abstract Explosion newExplosion(Entity entity, double d, double d1, double d2, float f, boolean flag, boolean isCannonBall);
 
     @Shadow public Random rand;
+
+    @Shadow @Final public SeasonManager seasonManager;
 
     @Inject(
             method = "getSkyColor",
@@ -95,7 +100,7 @@ public abstract class WorldMixin {
         }
     }
 
-    /*@Inject(
+    @Inject(
             method = "doLightingUpdate",
             at = @At("HEAD")
     )
@@ -103,17 +108,17 @@ public abstract class WorldMixin {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime == 4800 && dayInSeason == 6 && nextSeason == Season.surfaceSpring){
+        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && currentWeather != SignalIndustries.weatherEclipse ){
             for (EntityPlayer player : players) {
                 player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
             }
             currentWeather = SignalIndustries.weatherEclipse;
             newWeather = null;
             weatherDuration = Global.DAY_LENGTH_TICKS;
-            weatherIntensity = 1.0f;
-            weatherPower = 1.0f;
+            weatherIntensity = 0;
+            weatherPower = 1;
         }
-    }*/
+    }
 
     @Inject(
             method = "wakeUpAllPlayers",

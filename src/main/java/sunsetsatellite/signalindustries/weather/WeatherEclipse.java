@@ -11,4 +11,9 @@ public class WeatherEclipse extends WeatherClear {
         setMobsSpawnInDaylight();
     }
 
+    @Override
+    public float[] modifyFogColor(float r, float g, float b, float intensity) {
+        return new float[]{0.50f, 0.20f, 0.05f};
+    }
+
 }

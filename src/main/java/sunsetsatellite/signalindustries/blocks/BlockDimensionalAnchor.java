@@ -109,9 +109,6 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }
-            /*if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
-            }*/
             return true;
         }
     }

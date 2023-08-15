@@ -92,6 +92,8 @@ item.signalindustries.monsterShard.name=Monster Shard
 item.signalindustries.monsterShard.desc=Horrendous and corrupted.
 item.signalindustries.evilCatalyst.name=Evil Catalyst
 item.signalindustries.evilCatalyst.desc=A deep evil sealed within, there's probably a machine to could unleash it.
+item.signalindustries.infernalFragment.name=Infernal Fragment
+item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
 
 item.signalindustries.energyCatalyst.name=Energy Catalyst
 item.signalindustries.energyCatalyst.desc=You've managed to fend off the monsters and release the evil, now all that remains here is your power.
@@ -148,6 +150,9 @@ item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power
 
 item.signalindustries.testingAbilityItem.name=Ability Container: Testing Ability
 item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability.
+
+item.signalindustries.clockworkAbilityContainer.name=Ability Container: Clockwork
+item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
 
 item.signalindustries.attachment.testingAttachment.name=Testing Attachment
 item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
@@ -361,6 +366,9 @@ event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
 
 ability.signalindustries.normal.testingAbility.name=Testing Ability
 ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
+
+ability.signalindustries.awakened.clockwork.name=Clockwork
+ability.signalindustries.awakened.clockwork.desc=<insert cool description here>
 
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
