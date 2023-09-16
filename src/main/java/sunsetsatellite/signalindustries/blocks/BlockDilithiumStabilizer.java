@@ -88,31 +88,13 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityStabilizer tile = (TileEntityStabilizer) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY); //back
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY); //front
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityStabilizer tile = (TileEntityStabilizer) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index == 2){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[1][0],SignalIndustries.dilithStabilizerTex[1][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[0][0],SignalIndustries.dilithStabilizerTex[0][1]);
-        } else if(index > 1 && index < 6) {
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[3][0],SignalIndustries.dilithStabilizerTex[3][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[2][0],SignalIndustries.dilithStabilizerTex[2][1]);
-        } else {
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithStabilizerTex[4][0],SignalIndustries.dilithStabilizerTex[4][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get("dilithiumStabilizer.active").getTexture(Side.getSideById(index));
         }
-        //return this.atlasIndices[index];
+        return this.atlasIndices[index];
     }
 }

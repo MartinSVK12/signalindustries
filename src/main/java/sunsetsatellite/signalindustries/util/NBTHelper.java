@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 public class NBTHelper {
 
     public static void saveInvToNBT(ItemStack source_item, IInventory inv){
-        CompoundTag itemData = source_item.tag.getCompound("inventory");
+        CompoundTag itemData = source_item.getData().getCompound("inventory");
         for(int i = 0; i < inv.getSizeInventory();i++){
             ItemStack item = inv.getStackInSlot(i);
             CompoundTag itemNBT = new CompoundTag();
@@ -22,10 +22,10 @@ public class NBTHelper {
                 ((INBTCompound)itemData).removeTag(String.valueOf(i));
             }
         }
-        source_item.tag.putCompound("inventory",itemData);
+        source_item.getData().putCompound("inventory",itemData);
         if(inv instanceof IFluidInventory){
             IFluidInventory fluidInv = (IFluidInventory) inv;
-            CompoundTag fluidData = source_item.tag.getCompound("fluidInventory");
+            CompoundTag fluidData = source_item.getData().getCompound("fluidInventory");
             for(int i = 0; i < fluidInv.getFluidInventorySize();i++){
                 FluidStack fluid = ((IFluidInventory) inv).getFluidInSlot(i);
                 CompoundTag fluidNBT = new CompoundTag();
@@ -36,7 +36,7 @@ public class NBTHelper {
                     ((INBTCompound)fluidData).removeTag(String.valueOf(i));
                 }
             }
-            source_item.tag.putCompound("fluidInventory",fluidData);
+            source_item.getData().putCompound("fluidInventory",fluidData);
         }
     }
 
@@ -58,8 +58,8 @@ public class NBTHelper {
     }*/
 
     public static void loadInvFromNBT(ItemStack source_item, IInventory inv, int amount, int fluidAmount){
-        CompoundTag itemNBT = source_item.tag.getCompound("inventory");
-        CompoundTag fluidNBT = source_item.tag.getCompound("fluidInventory");
+        CompoundTag itemNBT = source_item.getData().getCompound("inventory");
+        CompoundTag fluidNBT = source_item.getData().getCompound("fluidInventory");
         for(int i = 0; i < amount;i++){
             if(itemNBT.containsKey(String.valueOf(i))){
                 ItemStack item = ItemStack.readItemStackFromNbt(itemNBT.getCompound(String.valueOf(i)));

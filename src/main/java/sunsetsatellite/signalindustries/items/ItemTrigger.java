@@ -34,20 +34,20 @@ public class ItemTrigger extends Item implements ICustomDescription {
     }
 
     public TriggerBaseAbility getAbility(ItemStack stack){
-        if(stack.tag.containsKey("ability") && abilities.containsKey(stack.tag.getString("ability"))){
-            return abilities.get(stack.tag.getString("ability"));
+        if(stack.getData().containsKey("ability") && abilities.containsKey(stack.getData().getString("ability"))){
+            return abilities.get(stack.getData().getString("ability"));
         }
         return null;
     }
     public String getAbilityName(ItemStack stack){
-        return stack.tag.getString("ability");
+        return stack.getData().getString("ability");
     }
 
 
     @Override
     public String getLanguageKey(ItemStack stack) {
         if(getAbility(stack) != null){
-            return "item.signalindustries.trigger"+stack.tag.getString("ability");
+            return "item.signalindustries.trigger"+stack.getData().getString("ability");
         } else {
             return "item.signalindustries.triggerNull";
         }
@@ -58,13 +58,13 @@ public class ItemTrigger extends Item implements ICustomDescription {
         if(getAbility(itemstack) != null) {
             if (entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) {
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
-                if (harness.tag.getInteger("cooldown" + getAbilityName(itemstack)) <= 0) {
+                if (harness.getData().getInteger("cooldown" + getAbilityName(itemstack)) <= 0) {
                     CompoundTag energy = ((ItemSignalumPrototypeHarness) harness.getItem()).getFluidStack(0, harness);
                     int amount = energy.getInteger("amount");
                     if (amount >= getAbility(itemstack).cost) {
                         getAbility(itemstack).activate(blockX, blockY, blockZ, entityplayer, world, itemstack);
                         energy.putInt("amount", amount - getAbility(itemstack).cost);
-                        harness.tag.putInt("cooldown" + getAbilityName(itemstack), getAbility(itemstack).cooldown);
+                        harness.getData().putInt("cooldown" + getAbilityName(itemstack), getAbility(itemstack).cooldown);
                     }
                 }
             }
@@ -77,13 +77,13 @@ public class ItemTrigger extends Item implements ICustomDescription {
         if(getAbility(itemstack) != null){
             if(entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness){
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
-                if(harness.tag.getInteger("cooldown"+getAbilityName(itemstack)) <= 0){
+                if(harness.getData().getInteger("cooldown"+getAbilityName(itemstack)) <= 0){
                     CompoundTag energy = ((ItemSignalumPrototypeHarness)harness.getItem()).getFluidStack(0,harness);
                     int amount = energy.getInteger("amount");
                     if(amount >= getAbility(itemstack).cost){
                         getAbility(itemstack).activate(entityplayer,world,itemstack);
                         energy.putInt("amount",amount-getAbility(itemstack).cost);
-                        harness.tag.putInt("cooldown"+getAbilityName(itemstack),getAbility(itemstack).cooldown);
+                        harness.getData().putInt("cooldown"+getAbilityName(itemstack),getAbility(itemstack).cooldown);
                     }
                 }
             }

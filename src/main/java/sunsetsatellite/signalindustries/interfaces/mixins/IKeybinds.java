@@ -7,4 +7,6 @@ public interface IKeybinds {
     KeyBinding signalIndustries$getKeyOpenSuit();
 
     KeyBinding signalIndustries$getKeyActivateAbility();
+
+    KeyBinding signalIndustries$getKeySwitchMode();
 }

@@ -25,8 +25,8 @@ public class ContainerGuidebookAlloySmelterRecipe extends ContainerGuidebookReci
 
     public ContainerGuidebookAlloySmelterRecipe(ItemStack stack, RecipeFluid recipeFluid) {
         machine = stack;
-        this.addSlot(new SlotGuidebook(0, 9, 10, recipeFluid.itemInputs.get(0), false));
-        this.addSlot(new SlotGuidebook(0, -19, 10, recipeFluid.itemInputs.get(1), false));
+        this.addSlot(new SlotGuidebook(0, 9, 10, recipeFluid.itemInputs.get(1), false));
+        this.addSlot(new SlotGuidebook(0, -19, 10, recipeFluid.itemInputs.get(0), false));
         this.addSlot(new SlotGuidebook(1, 69, 19, recipeFluid.itemOutputs.get(0), false));
         this.addSlot(new SlotGuidebook(2, 9, 45, new ItemStack(SignalIndustries.energyFlowing,recipeFluid.cost), false));
         this.addSlot(new SlotGuidebook(3,36,18,stack,true));

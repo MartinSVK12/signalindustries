@@ -4,8 +4,10 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AchievementMixin",
     "BlockRailMixin",
     "ChunkDecoratorOverworldMixin",
+    "EntityArrowMixin",
     "EntityLivingMixin",
     "EntityMinecartMixin",
     "EntityMobMixin",
@@ -27,7 +29,6 @@
     "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",
-    "accessors.GuiBlockOverlayAccessor",
     "invokers.GuiInvoker"
   ],
   "client": [

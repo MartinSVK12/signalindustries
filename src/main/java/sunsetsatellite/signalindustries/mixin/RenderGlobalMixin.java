@@ -1,10 +1,12 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.RenderGlobal;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.core.entity.fx.EntitySlimeFX;
+import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
@@ -121,6 +123,117 @@ public class RenderGlobalMixin {
     )
     public void renderClouds(float f, CallbackInfo ci) {
         if (this.mc.theWorld.dimension == SignalIndustries.dimEternity) {
+            ci.cancel();
+        }
+    }
+
+    @Inject(
+            method = "drawSky",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    public void eternitySky(float renderPartialTicks, CallbackInfo ci){
+        if(this.mc.theWorld.dimension == SignalIndustries.dimEternity){
+            float celestialAngle = this.worldObj.getCelestialAngle(renderPartialTicks);
+            GL11.glDisable(3553);
+            Vec3d vec3d = this.worldObj.getSkyColor(this.mc.activeCamera, renderPartialTicks);
+            float f1 = (float)vec3d.xCoord;
+            float f2 = (float)vec3d.yCoord;
+            float f3 = (float)vec3d.zCoord;
+            GL11.glColor3f(f1, f2, f3);
+            Tessellator tessellator = Tessellator.instance;
+            GL11.glDepthMask(false);
+            GL11.glEnable(2912);
+            GL11.glColor3f(f1, f2, f3);
+            GL11.glCallList(this.glSkyList);
+            GL11.glDisable(2912);
+            GL11.glDisable(3008);
+            GL11.glEnable(3042);
+            GL11.glBlendFunc(770, 771);
+            Lighting.enableLight();
+            float[] af = this.worldObj.worldType.getSunriseColor(celestialAngle, renderPartialTicks);
+            float f6;
+            float f9;
+            float f11;
+            float f20;
+            if (af != null) {
+                GL11.glDisable(3553);
+                GL11.glShadeModel(7425);
+                GL11.glPushMatrix();
+                GL11.glRotatef(-90.0F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(celestialAngle <= 0.5F ? 0.0F : 180.0F, 0.0F, 0.0F, 1.0F);
+                f6 = af[0];
+                f9 = af[1];
+                f11 = af[2];
+                tessellator.startDrawing(6);
+                tessellator.setColorRGBA_F(f6, f9, f11, af[3]);
+                tessellator.addVertex(0.0, 100.0, 0.0);
+                int i = 16;
+                tessellator.setColorRGBA_F(af[0], af[1], af[2], 0.0F);
+
+                for(int j = 0; j <= i; ++j) {
+                    f20 = (float)j * 3.141593F * 2.0F / (float)i;
+                    float f21 = MathHelper.sin(f20);
+                    float f22 = MathHelper.cos(f20);
+                    tessellator.addVertex(f21 * 120.0F, f22 * 120.0F, -f22 * 40.0F * af[3]);
+                }
+
+                tessellator.draw();
+                GL11.glPopMatrix();
+                GL11.glShadeModel(7424);
+            }
+
+            GL11.glEnable(3553);
+            GL11.glBlendFunc(770, 1);
+            GL11.glPushMatrix();
+            f6 = 1.0F; //- (this.worldObj.currentWeather != null && this.worldObj.currentWeather != Weather.overworldClear ? this.worldObj.weatherIntensity * this.worldObj.weatherPower * 1.5F : 0.0F);
+            f9 = 0.0F;
+            f11 = 0.0F;
+            float f13 = 0.0F;
+            GL11.glTranslatef(f9, f11, f13);
+            GL11.glRotatef(0.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(celestialAngle * 360.0F, 0.0F, 0.0F, 1.0F);
+            float f15 = 30.0F;
+            //GL11.glBindTexture(3553, this.renderEngine.getTexture("/terrain/sun.png"));
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, f6);
+            /*tessellator.startDrawingQuads();
+            tessellator.addVertexWithUV(-f15, 100.0, -f15, 0.0, 0.0);
+            tessellator.addVertexWithUV(f15, 100.0, -f15, 1.0, 0.0);
+            tessellator.addVertexWithUV(f15, 100.0, f15, 1.0, 1.0);
+            tessellator.addVertexWithUV(-f15, 100.0, f15, 0.0, 1.0);
+            tessellator.draw();*/
+            f15 = 20.0F;
+            //GL11.glBindTexture(3553, this.renderEngine.getTexture("/terrain/moon.png"));
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, f6);
+            /*tessellator.startDrawingQuads();
+            tessellator.addVertexWithUV(-f15, -100.0, f15, 1.0, 1.0);
+            tessellator.addVertexWithUV(f15, -100.0, f15, 0.0, 1.0);
+            tessellator.addVertexWithUV(f15, -100.0, -f15, 0.0, 0.0);
+            tessellator.addVertexWithUV(-f15, -100.0, -f15, 1.0, 0.0);
+            tessellator.draw();*/
+            GL11.glDisable(3553);
+            f20 = this.worldObj.getStarBrightness(renderPartialTicks) * f6;
+            if (f20 > 0.0F) {
+                GL11.glColor4f(f20, f20, f20, f20);
+                GL11.glCallList(this.starGLCallList);
+            }
+
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glDisable(3042);
+            GL11.glEnable(3008);
+            GL11.glEnable(2912);
+            GL11.glPopMatrix();
+            if (this.worldObj.worldType.hasGround()) {
+                GL11.glColor3f(f1 * 0.2F + 0.04F, f2 * 0.2F + 0.04F, f3 * 0.6F + 0.1F);
+            } else {
+                GL11.glColor3f(f1, f2, f3);
+            }
+
+            GL11.glDisable(3553);
+            GL11.glCallList(this.glSkyList2);
+            GL11.glEnable(3553);
+            GL11.glDepthMask(true);
             ci.cancel();
         }
     }

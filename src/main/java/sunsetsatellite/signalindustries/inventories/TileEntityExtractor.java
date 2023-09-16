@@ -37,6 +37,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
         }
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
+            tier = block.tier;
             switch (block.tier){
                 case PROTOTYPE:
                     recipes = ExtractorRecipes.instance;

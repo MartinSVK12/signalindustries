@@ -14,7 +14,7 @@ public class ItemWarpOrb extends Item implements ICustomDescription {
 
     @Override
     public String getDescription(ItemStack stack) {
-        CompoundTag warpPosition = stack.tag.getCompound("position");
+        CompoundTag warpPosition = stack.getData().getCompound("position");
         if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
             return String.format("Points to: %sX: %s Y: %s Z: %s%s",TextFormatting.MAGENTA,warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"), TextFormatting.WHITE);
         }

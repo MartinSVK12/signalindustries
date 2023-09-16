@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.util;
+package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.FontRenderer;
@@ -46,6 +46,8 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
                 }
             }
         }
+
+        fluidAmount = Math.min(fluidAmount,fluidMaxAmount);
 
         boolean flag = blockAccess.getBlockId(i + 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i + 1, j, k) instanceof IFluidInventory);
         boolean flag1 = blockAccess.getBlockId(i - 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i - 1, j, k) instanceof IFluidInventory);

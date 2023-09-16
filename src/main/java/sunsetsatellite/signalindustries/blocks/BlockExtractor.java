@@ -23,11 +23,8 @@ import java.util.Random;
 
 public class BlockExtractor extends BlockContainerTiered{
 
-    private static int[][] textures;
-
     public BlockExtractor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
-        textures = SignalIndustries.extractorTex;
     }
 
     @Override
@@ -94,27 +91,9 @@ public class BlockExtractor extends BlockContainerTiered{
     public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
         TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
-        textures = SignalIndustries.extractorTex;
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        int offset = (2*tier.ordinal())+1;
-        if(tier.ordinal() == 0){
-            offset = 0;
-        }
-        if(index > 1 && index < 6){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(textures[2+offset][0],textures[2+offset][1]);
-            } else if (tile.getStackInSlot(0) != null) {
-                return this.atlasIndices[index] = texCoordToIndex(textures[1+offset][0],textures[1+offset][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(textures[offset][0],textures[offset][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get(tile.tier.name()+".extractor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

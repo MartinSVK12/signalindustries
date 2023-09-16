@@ -40,7 +40,7 @@ public class BlockBreaker extends BlockContainerTiered{
         if(tier.ordinal() == 0){
             offset = 0;
         }
-        if(index == 4){
+        if(index == 2){
             if(tile.isActive()){
                 return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.breakerTex[1+offset][0],SignalIndustries.breakerTex[1+offset][1]);
             }

@@ -101,7 +101,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
                     return false;
                 }
             }
-            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].tag.containsKey("position");
+            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].getData().containsKey("position");
         }
     }
 
@@ -112,7 +112,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
             pos.putInt("x",xCoord);
             pos.putInt("y",yCoord+1);
             pos.putInt("z",zCoord);
-            stack.tag.put("position",pos);
+            stack.getData().put("position",pos);
         }
     }
 
@@ -150,7 +150,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
         if(itemContents[0] == null) {
             return false;
         } else {
-            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].tag.containsKey("Data");
+            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].getData().containsKey("Data");
         }
     }
 }

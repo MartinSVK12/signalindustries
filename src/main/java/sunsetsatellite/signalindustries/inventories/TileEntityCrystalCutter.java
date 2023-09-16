@@ -6,6 +6,7 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
 
@@ -38,6 +39,10 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         super.updateEntity();
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            tier = block.tier;
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;

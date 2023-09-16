@@ -5,6 +5,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
 import sunsetsatellite.signalindustries.recipes.PumpRecipes;
@@ -42,6 +43,10 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         super.updateEntity();
         worldObj.markBlocksDirty(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            tier = block.tier;
+        }
         if(currentBlock == null){
             Set<Integer> pumpableFluids = recipes.getRecipeList().keySet();
             for(int x = xCoord-range; x < xCoord+range; x++){

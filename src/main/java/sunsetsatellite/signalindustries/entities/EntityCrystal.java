@@ -5,8 +5,6 @@ import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.Vec3d;
@@ -177,23 +175,22 @@ public class EntityCrystal extends Entity {
             vec3d1 = Vec3d.createVector(movingobjectposition.location.xCoord, movingobjectposition.location.yCoord, movingobjectposition.location.zCoord);
         }
 
-        if (!this.world.isClientSide) {
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.addCoord(this.xd, this.yd, this.zd).expand(3.0, 3.0, 3.0));
 
-            for (Entity entity : list) {
-                if(entity instanceof EntityLiving){
-                    if(thrower == entity){
-                        ((EntityLiving) entity).heal(this.damage);
-                    } else {
-                        entity.hurt(this.thrower,this.damage, DamageType.COMBAT);
+        if (movingobjectposition != null) {
+
+            if (!this.world.isClientSide) {
+                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.addCoord(this.xd, this.yd, this.zd).expand(3.0, 3.0, 3.0));
+
+                for (Entity entity : list) {
+                    if(entity instanceof EntityLiving){
+                        if(thrower == entity){
+                            ((EntityLiving) entity).heal(this.damage);
+                        } else {
+                            entity.hurt(this.thrower,this.damage, DamageType.COMBAT);
+                        }
                     }
                 }
             }
-        }
-
-        world.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.random.nextFloat() * 0.4F + 0.8F));
-
-        if (movingobjectposition != null) {
 
             for(int j = 0; j < 8; ++j) {
                 this.world.spawnParticle("dustcloud", this.x, this.y, this.z, 0.0, 0.0, 0.0);
@@ -201,6 +198,8 @@ public class EntityCrystal extends Entity {
                     this.world.spawnParticle("crystalbreak", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 }
             }
+
+            world.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.random.nextFloat() * 0.4F + 0.8F));
 
             this.remove();
         }
@@ -270,8 +269,7 @@ public class EntityCrystal extends Entity {
 
     @Override
     public void playerTouch(EntityPlayer player) {
-        if (this.inGroundSnowball && this.thrower == player && this.shakeSnowball <= 0 && player.inventory.addItemStackToInventory(new ItemStack(Item.ammoArrow, 1))
-        )
+        if (this.inGroundSnowball && this.thrower == player && this.shakeSnowball <= 0)
         {
             this.world.playSoundAtEntity(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
             player.onItemPickup(this, 1);

@@ -1,7 +1,5 @@
 package sunsetsatellite.signalindustries.mixin;
 
-//TODO: Remake world gen
-
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
@@ -17,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.worldgen.WorldFeatureMeteor;
+import sunsetsatellite.signalindustries.worldgen.WorldFeatureObelisk;
 
 import java.util.Random;
 
@@ -46,6 +45,11 @@ public abstract class ChunkDecoratorOverworldMixin implements ChunkDecorator {
             SignalIndustries.LOGGER.info(String.format("Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(SignalIndustries.dilithiumOre.id,0,3).generate(world,rand,x,y,z);
+        }
+        if(rand.nextInt(4096) == 0){
+            SignalIndustries.LOGGER.info(String.format("Obelisk at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
+            y = this.world.getHeightValue(x,z);
+            new WorldFeatureObelisk().generate(world,rand,x,y,z);
         }
     }
 }

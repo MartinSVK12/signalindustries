@@ -20,6 +20,9 @@ public class GameSettingsMixin
     @Unique
     public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility",54);
 
+    @Unique
+    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode",50);
+
     @Override
     public KeyBinding signalIndustries$getKeyOpenSuit() {
         return keyOpenSuit;
@@ -28,5 +31,10 @@ public class GameSettingsMixin
     @Override
     public KeyBinding signalIndustries$getKeyActivateAbility() {
         return keyActivateAbility;
+    }
+
+    @Override
+    public KeyBinding signalIndustries$getKeySwitchMode() {
+        return keySwitchMode;
     }
 }

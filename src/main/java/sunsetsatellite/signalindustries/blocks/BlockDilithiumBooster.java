@@ -88,29 +88,12 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityBooster tile = (TileEntityBooster) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityBooster tile = (TileEntityBooster) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index == 4){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[1][0],SignalIndustries.dilithBoosterTex[1][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[0][0],SignalIndustries.dilithBoosterTex[0][1]);
-        }
-        if(index == 2 || index == 3 || index == 5){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[3][0],SignalIndustries.dilithBoosterTex[3][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.dilithBoosterTex[2][0],SignalIndustries.dilithBoosterTex[2][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get("dilithiumBooster.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

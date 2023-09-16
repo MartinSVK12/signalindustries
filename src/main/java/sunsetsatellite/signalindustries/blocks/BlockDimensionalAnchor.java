@@ -16,6 +16,7 @@ import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
 import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
 import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -104,7 +105,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
         } else
         {
             TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
-            if(tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
+            if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
                 SignalIndustries.displayGui(entityplayer,new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
@@ -114,36 +115,14 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index == 1){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[4][0],SignalIndustries.anchorTex[4][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[1][0],SignalIndustries.anchorTex[1][1]);
-        }
-        if(index == 0){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[5][0],SignalIndustries.anchorTex[5][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[2][0],SignalIndustries.anchorTex[2][1]);
-        }
-        if(index > 1 && index < 6){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[3][0],SignalIndustries.anchorTex[3][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.anchorTex[0][0],SignalIndustries.anchorTex[0][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get("dimensionalAnchor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
+
 }

@@ -7,12 +7,14 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.IFluidIO;
+import sunsetsatellite.sunsetutils.util.IItemIO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityTieredMachine extends TileEntityTiered {
+public class TileEntityTieredMachine extends TileEntityTiered implements IFluidIO, IItemIO {
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
@@ -128,5 +130,25 @@ public class TileEntityTieredMachine extends TileEntityTiered {
             this.fuelMaxBurnTicks = 200;
         }
         return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
+    }
+
+    @Override
+    public int getActiveFluidSlotForSide(Direction dir) {
+        return activeFluidSlots.get(dir);
+    }
+
+    @Override
+    public Connection getFluidIOForSide(Direction dir) {
+        return connections.get(dir);
+    }
+
+    @Override
+    public int getActiveItemSlotForSide(Direction dir) {
+        return activeItemSlots.get(dir);
+    }
+
+    @Override
+    public Connection getItemIOForSide(Direction dir) {
+        return itemConnections.get(dir);
     }
 }

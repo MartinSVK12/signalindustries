@@ -32,6 +32,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachine implements I
         extractFluids();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
+            tier = block.tier;
             switch (block.tier) {
                 case PROTOTYPE:
                     recipes = AlloySmelterRecipes.instance;

@@ -15,7 +15,7 @@ public class InventoryPulsar extends ItemInventoryFluid {
 
     /*public void setInventorySlotContents(int i, ItemStack itemstack) {
         if(itemstack != null && itemstack.itemID == SignalIndustries.warpOrb.itemID){
-            if(!itemstack.tag.hasKey("position")){
+            if(!itemstack.getData().hasKey("position")){
                  Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.orange+"WARNING:"+TextFormatting.WHITE+" This "+TextFormatting.magenta+"Warp Orb"+TextFormatting.WHITE+" isn't encoded! There is no telling where this might lead you to. You might die or not be able to get back if you're unprepared. Proceed with caution.");
             }
         }

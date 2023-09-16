@@ -9,6 +9,7 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.Explosion;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.season.SeasonManager;
@@ -58,6 +59,8 @@ public abstract class WorldMixin {
 
     @Shadow @Final public SeasonManager seasonManager;
 
+    @Shadow @Final public Dimension dimension;
+
     @Inject(
             method = "getSkyColor",
             at = @At("HEAD"),
@@ -67,6 +70,9 @@ public abstract class WorldMixin {
             cir.setReturnValue(Vec3d.createVector(0, 0, 0));
         } else if (currentWeather == SignalIndustries.weatherSolarApocalypse) {
             cir.setReturnValue(Vec3d.createVector(1.0, 0.5, 0));
+        }
+        if(dimension == SignalIndustries.dimEternity){
+            cir.setReturnValue(Vec3d.createVector(0.35,0.35,0.35));
         }
     }
 
@@ -94,7 +100,7 @@ public abstract class WorldMixin {
             currentWeather = Weather.overworldClear;
         }
         if(currentWeather == SignalIndustries.weatherBloodMoon){
-            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/bloodmooncolorizer.png"));
+            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
         } else {
             ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
         }

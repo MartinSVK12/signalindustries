@@ -75,7 +75,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         if(stack.getItem() instanceof ItemPulsar){
             GL11.glRotatef(160f, 0.0F, -1.2F, 1.55F);
             GL11.glTranslatef(-0.15F, 0.15f, 0.25F);
-            if(stack.tag.getByte("charge") >= 100){
+            if(stack.getData().getByte("charge") >= 100){
 
             }
         }

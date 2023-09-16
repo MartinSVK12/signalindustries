@@ -82,6 +82,11 @@ item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is u
 item.signalindustries.signalumSaber.name=Signalum Saber
 item.signalindustries.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
 
+item.signalindustries.basic.signalumDrill.name=Basic Signalum Drill
+item.signalindustries.basic.signalumDrill.desc=A heavy-duty drill powered by Signalum Energy. Will not break when it runs out of energy.
+item.signalindustries.reinforced.signalumDrill.name=Reinforced Signalum Drill
+item.signalindustries.reinforced.signalumDrill.desc=Capable of breaking through tough extraterrestrial materials. Can also break a 3x3 area at once.
+
 item.signalindustries.dimensionalShard.name=Dimensional Shard
 item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
 item.signalindustries.dilithiumShard.name=Dilithium Shard
@@ -92,6 +97,8 @@ item.signalindustries.monsterShard.name=Monster Shard
 item.signalindustries.monsterShard.desc=Horrendous and corrupted.
 item.signalindustries.evilCatalyst.name=Evil Catalyst
 item.signalindustries.evilCatalyst.desc=A deep evil sealed within, there's probably a machine to could unleash it.
+item.signalindustries.infernalEye.name=Infernal Eye
+item.signalindustries.infernalEye.desc=One does not simply walk into Mordor.
 item.signalindustries.infernalFragment.name=Infernal Fragment
 item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
 
@@ -117,6 +124,12 @@ tile.signalindustries.reinforced.machine.name=Reinforced Machine Core
 tile.signalindustries.reinforced.machine.desc=Key component for [Reinforced] machines.
 tile.signalindustries.awakened.machine.name=Awakened Machine Core
 tile.signalindustries.awakened.machine.desc=Key component for [Awakened] machines.
+
+tile.signalindustries.reinforced.casing.name=Reinforced Casing
+tile.signalindustries.reinforced.casing.desc=Used for Reinforced-tier multiblock machines.
+tile.signalindustries.reinforced.glass.name=Reinforced Glass
+tile.signalindustries.reinforced.glass.desc=Does not shatter when broken.
+
 
 tile.signalindustries.prototype.conduit.name=Prototype Energy Conduit
 tile.signalindustries.prototype.conduit.desc=Transfers [Signalum Energy].
@@ -283,7 +296,7 @@ tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
 tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
-tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams! What more would you want.
+tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams! What more could you want.
 
 tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
 tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an [Alloy Smelter] and the pressure of a [Plate Former] to fuse 2 [S. Crystals] together!
@@ -310,12 +323,15 @@ tile.signalindustries.awakened.pump.desc=Can drain entire oceans without problem
 
 tile.signalindustries.prototype.blockBreaker.name=Prototype Block Breaker
 tile.signalindustries.prototype.blockBreaker.desc=Breaks the block next to where it is pointed when activated by redstone.
-tile.signalindustries.basic.blockBreaker.name=Basic Automatic Miner
-tile.signalindustries.basic.blockBreaker.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by [Signalum Energy].
-tile.signalindustries.reinforced.blockBreaker.name=Reinforced Quarry
-tile.signalindustries.reinforced.blockBreaker.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
-tile.signalindustries.awakened.blockBreaker.name=Awakened Galactic Excavation Facility Controller
-tile.signalindustries.awakened.blockBreaker.name=Can mine out whole worlds across the galaxy in search of rare ore remotely!
+tile.signalindustries.basic.automaticMiner.name=Basic Automatic Miner
+tile.signalindustries.basic.automaticMiner.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by [Signalum Energy].
+tile.signalindustries.reinforced.automaticMiner.name=Reinforced Quarry
+tile.signalindustries.reinforced.automaticMiner.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
+tile.signalindustries.awakened.automaticMiner.name=Awakened Galactic Excavation Facility Controller
+tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds across the galaxy in search of rare ore remotely!
+
+tile.signalindustries.basic.externalIO.name=External I/O
+tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 
 tile.signalindustries.basic.dynamo.name=Signalum Dynamo
 tile.signalindustries.basoc.dynamo.desc=Generates EnergyAPI units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
@@ -331,7 +347,7 @@ tile.signalindustries.eternityPortal.desc=Development utility.
 tile.signalindustries.realityFabric.name=Fabric of Reality
 tile.signalindustries.realityFabric.desc=Holds reality together.
 tile.signalindustries.rootedFabric.name=Rooted Fabric
-tile.signalindustries.rootedFabric.desc=Roots of a certain primordial creation have found their way around the [Fabric of Reality] but why?
+tile.signalindustries.rootedFabric.desc=There's something in between the threads of reality.
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
 tile.signalindustries.eternalTreeLog.desc=Kind of weird for a "tree" to exist in the middle of literally nowhere. Cannot burn.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
@@ -339,6 +355,17 @@ tile.signalindustries.dimensionalShardOre.desc=Sometimes between the fibers of e
 
 tile.signalindustries.glowingObsidian.name=Glowing Obsidian
 tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal.
+
+tile.signalindustries.dilithiumBlock.name=Block of Dilithium
+tile.signalindustries.dilithiumBlock.desc=A solid block of Dilithium.
+tile.signalindustries.emptyCrystalBlock.name=Block of Empty Signalum Crystals
+tile.signalindustries.emptyCrystalBlock.desc=A solid block of empty Signalum Crystals.
+tile.signalindustries.rawCrystalBlock.name=Block of Raw Signalum Crystals
+tile.signalindustries.rawCrystalBlock.desc=A solid block of Raw Signalum Crystals.
+tile.signalindustries.awakenedSignalumCrystalBlock.name=Block of Awakened Signalum Crystals
+tile.signalindustries.awakenedSignalumCrystalBlock.desc=A solid block of Awakened Signalum Crystals. I guess nothing can stop you now. Congratulations.
+tile.signalindustries.dilithiumCrystalBlock.name=Dilithium Crystal Block
+tile.signalindustries.dilithiumCrystalBlock.desc=A fragile crystal of Dilithium.
 
 tile.signalindustries.itemPipe.name=Item Pipe
 tile.signalindustries.itemPipe.desc=Transports items, duh.
@@ -349,7 +376,9 @@ tile.signalindustries.inserter.desc=Sucks up items from the ground or from conne
 tile.signalindustries.filter.name=Filter
 tile.signalindustries.filter.desc=Sorts items that pass through it into colored outputs,
 
-dimension.eternity.name=Eternity
+dimension.signalindustries.eternity.name=Eternity
+signalindustries.eternity.name=Eternity
+
 
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
@@ -370,5 +399,14 @@ ability.signalindustries.normal.testingAbility.desc=Does not do anything. For te
 ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=<insert cool description here>
 
+achievements.page.signalindustries.desc=Achievements for Signal Industries!
+achievement.signalindustries.init=Initialization
+achievement.signalindustries.init.desc=Your journey begins here! Obtain some Raw Signalum Crystals.
+achievement.signalindustries.thePrototype=The Prototype
+achievement.signalindustries.thePrototype.desc=Create your first Prototype Machine Core.
+achievement.signalindustries.fromWithin=From Within
+achievement.signalindustries.thePrototype.desc=Extract Signalum Energy from Raw Signalum Crystals using an Extractor.
+
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
+key.signalindustries.switchMode=Switch Mode

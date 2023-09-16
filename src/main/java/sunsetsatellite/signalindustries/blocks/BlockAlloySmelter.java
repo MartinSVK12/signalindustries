@@ -15,6 +15,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
 import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -88,26 +89,11 @@ public class BlockAlloySmelter extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityAlloySmelter tile = (TileEntityAlloySmelter) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY); //front face
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        int offset = tier.ordinal()+1;
-        if(tier.ordinal() == 0){
-            offset = 0;
-        }
-        if(index == 4){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[1+offset][0],SignalIndustries.alloySmelterTex[1+offset][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.alloySmelterTex[offset][0],SignalIndustries.alloySmelterTex[offset][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get(tile.tier.name()+".alloySmelter.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

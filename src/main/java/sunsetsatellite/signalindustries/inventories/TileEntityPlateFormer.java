@@ -4,6 +4,7 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.PlateFormerRecipes;
 
@@ -26,6 +27,10 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
         boolean update = false;
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            tier = block.tier;
+        }
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
         }
@@ -79,7 +84,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
-                itemContents[1].stackSize++;
+                itemContents[1].stackSize += stack.stackSize;
             }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());

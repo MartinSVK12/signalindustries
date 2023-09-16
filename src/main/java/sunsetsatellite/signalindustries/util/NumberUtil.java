@@ -18,6 +18,6 @@ public class NumberUtil {
                 return String.valueOf(value);
             }
         }
-        return "???";
+        return String.valueOf(value);
     }
 }

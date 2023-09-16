@@ -39,6 +39,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
         extractFluids();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
+            tier = block.tier;
             switch (block.tier) {
                 case BASIC:
                     recipes = CrystalChamberRecipes.instance;
@@ -100,13 +101,13 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
 
     public void processItem(){
         if(canProcess()){
-            int size1 = this.itemContents[0].tag.getInteger("size");
-            int sat1 = this.itemContents[0].tag.getInteger("saturation");
-            int size2 = this.itemContents[2].tag.getInteger("size");
-            int sat2 = this.itemContents[2].tag.getInteger("saturation");
+            int size1 = this.itemContents[0].getData().getInteger("size");
+            int sat1 = this.itemContents[0].getData().getInteger("saturation");
+            int size2 = this.itemContents[2].getData().getInteger("size");
+            int sat2 = this.itemContents[2].getData().getInteger("saturation");
             ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
-            stack.tag.putInt("size",size1+size2);
-            stack.tag.putInt("saturation",sat1+sat2);
+            stack.getData().putInt("size",size1+size2);
+            stack.getData().putInt("saturation",sat1+sat2);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -135,7 +136,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
         } else {
             ItemStack c1 = this.itemContents[0];
             ItemStack c2 = this.itemContents[2];
-            if(c1.tag.getInteger("size") + c2.tag.getInteger("size") > 8){
+            if(c1.getData().getInteger("size") + c2.getData().getInteger("size") > 8){
                 return false;
             }
             ItemStack stack = recipes.getResult(new Integer[]{c2.itemID, c1.itemID});

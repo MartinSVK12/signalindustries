@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.EntityPlayerSP;
+import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
@@ -9,11 +10,14 @@ import net.minecraft.core.HitResult;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.items.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 import java.util.Objects;
@@ -33,35 +37,63 @@ public class MinecraftMixin {
 
     @Shadow public HitResult objectMouseOver;
 
+    @Shadow public GuiIngame ingameGUI;
+    @Unique
+    private static int debounce = 0;
+
     @Inject(
             method = "runTick",
             at = @At(value = "INVOKE",target = "Lorg/lwjgl/input/Keyboard;next()Z",shift = At.Shift.AFTER)
     )
     public void handleKeyboard(CallbackInfo ci){
+        if(debounce > 0) debounce--;
         boolean shift = (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
         boolean control = (Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157));
         KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
         KeyBinding activeAbilityKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateAbility();
+        KeyBinding switchModeKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode();
         SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).signalIndustries$getPowerSuit();
-        if(openSuitKey.isPressed()){
-            if(currentScreen == null && powerSuit != null){
-                if(shift){
-                    powerSuit.active = !powerSuit.active;
-                    return;
+        if(debounce <= 0){
+            if(switchModeKey.isPressed()){
+                debounce = 10;
+                if(thePlayer != null){
+                    if(thePlayer.getCurrentEquippedItem().getItem() == SignalIndustries.reinforcedSignalumDrill){
+                        ItemSignalumDrill.DrillMode mode = ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
+                        switch (mode){
+                            case NORMAL:
+                                ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.X3);
+                                break;
+                            case X3:
+                                ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
+                                break;
+                        }
+                        mode = ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
+                        ingameGUI.addChatMessage("Mode switched to: "+mode);
+                    }
                 }
-                powerSuit.openCoreUi();
             }
-        }
-        if(activeAbilityKey.isPressed()){
-            if(currentScreen == null && powerSuit != null && powerSuit.active) {
-                if (objectMouseOver != null && objectMouseOver.entity == null) {
-                    powerSuit.activateSelectedAbility(objectMouseOver.x, objectMouseOver.y, objectMouseOver.z);
-                } else if (objectMouseOver != null) {
-                    powerSuit.activateSelectedAbility(objectMouseOver.entity);
-                } else {
-                    powerSuit.activateSelectedAbility();
+            if(openSuitKey.isPressed()){
+                debounce = 10;
+                if(currentScreen == null && powerSuit != null){
+                    if(shift){
+                        powerSuit.active = !powerSuit.active;
+                        return;
+                    }
+                    powerSuit.openCoreUi();
                 }
+            }
+            if(activeAbilityKey.isPressed()){
+                debounce = 10;
+                if(currentScreen == null && powerSuit != null && powerSuit.active) {
+                    if (objectMouseOver != null && objectMouseOver.entity == null) {
+                        powerSuit.activateSelectedAbility(objectMouseOver.x, objectMouseOver.y, objectMouseOver.z);
+                    } else if (objectMouseOver != null) {
+                        powerSuit.activateSelectedAbility(objectMouseOver.entity);
+                    } else {
+                        powerSuit.activateSelectedAbility();
+                    }
 
+                }
             }
         }
         for(int i = 1; i < 10; ++i) {

@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.util;
+package sunsetsatellite.signalindustries.render;
 
 
 import net.minecraft.client.render.RenderBlocks;

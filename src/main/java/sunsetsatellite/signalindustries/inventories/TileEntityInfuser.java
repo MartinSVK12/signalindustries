@@ -5,6 +5,7 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
@@ -40,6 +41,10 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
         super.updateEntity();
         worldObj.markBlocksDirty(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
         extractFluids();
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null) {
+            tier = block.tier;
+        }
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;

@@ -81,14 +81,14 @@ public class GuiItemIOConfig extends GuiScreen {
         this.drawGuiContainerBackgroundLayer(renderPartialTicks);
         GL11.glPushMatrix();
         GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
-        Lighting.turnOn();
+        Lighting.enableInventoryLight();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
         GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
         GL11.glDisable(32826);
-        Lighting.turnOff();
+        Lighting.disable();
         GL11.glDisable(2896);
         GL11.glDisable(2929);
         this.drawGuiContainerForegroundLayer();

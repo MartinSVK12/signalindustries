@@ -38,7 +38,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank()+"\n"+"Energy: "+ TextFormatting.RED+stack.tag.getInteger("energy")+TextFormatting.WHITE;
+        return "Tier: " + tier.getColor() + tier.getRank()+"\n"+"Energy: "+ TextFormatting.RED+stack.getData().getInteger("energy")+TextFormatting.WHITE;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public int getRemainingCapacity(ItemStack stack) {
-        return 500-stack.tag.getInteger("energy");
+        return 500-stack.getData().getInteger("energy");
     }
 
     @Override
@@ -63,15 +63,15 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public boolean hitEntity(ItemStack itemstack, EntityLiving victim, EntityLiving attacker) {
-        int energy = itemstack.tag.getInteger("energy");
-        if(itemstack.tag.getBoolean("active")){
+        int energy = itemstack.getData().getInteger("energy");
+        if(itemstack.getData().getBoolean("active")){
             if(energy > 0){
-                itemstack.tag.putInt("energy",energy-1);
+                itemstack.getData().putInt("energy",energy-1);
                 victim.remainingFireTicks = 60;
             }
         }
         if(energy <= 0){
-            itemstack.tag.putBoolean("active",false);
+            itemstack.getData().putBoolean("active",false);
         }
         return true;
     }
@@ -79,10 +79,10 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     @Override
     public boolean onBlockDestroyed(ItemStack itemstack, int i, int j, int k, int l, EntityLiving entityliving) {
         Block block = Block.blocksList[i];
-        int energy = itemstack.tag.getInteger("energy");
+        int energy = itemstack.getData().getInteger("energy");
         if (block != null && block.getHardness() > 0.0F){
-            if(energy > 1 && itemstack.tag.getBoolean("active")){
-                itemstack.tag.putInt("energy",energy-2);
+            if(energy > 1 && itemstack.getData().getBoolean("active")){
+                itemstack.getData().putInt("energy",energy-2);
             }
         }
         return true;
@@ -90,7 +90,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public int getIconIndex(ItemStack itemstack) {
-        if(itemstack.tag.getBoolean("active")){
+        if(itemstack.getData().getBoolean("active")){
             return Item.iconCoordToIndex(SignalIndustries.saberTex[1][0],SignalIndustries.saberTex[1][1]);
         }
         return Item.iconCoordToIndex(SignalIndustries.saberTex[0][0],SignalIndustries.saberTex[0][1]);
@@ -103,9 +103,9 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         }
         if(slot.getFluidStack().getLiquid() == SignalIndustries.energyFlowing){
             int remaining = getRemainingCapacity(stack);
-            int saturation = stack.tag.getInteger("energy");
+            int saturation = stack.getData().getInteger("energy");
             int amount = slot.getFluidStack().amount;
-            //int size = stack.tag.getInteger("size");
+            //int size = stack.getData().getInteger("size");
             //ItemStack crystal = new ItemStack(SignalIndustries.signalumCrystal,1);
             if(remaining == 0){
                 return null;
@@ -118,14 +118,14 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
                 CompoundTag data = new CompoundTag();
                 //data.putInt("size",size);
                 data.putInt("energy",getCapacity(stack));
-                stack.tag = data;
+                stack.setData(data);
                 return stack;
             } else {
                 slot.putStack(null);
                 CompoundTag data = new CompoundTag();
                 //data.putInt("size",size);
                 data.putInt("energy",saturation + amount);
-                stack.tag = data;
+                stack.setData(data);
                 return stack;
             }
         }
@@ -161,7 +161,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public int getDamageVsEntity(Entity entity, ItemStack stack) {
-        if(stack.tag.getBoolean("active")){
+        if(stack.getData().getBoolean("active")){
             return 10;
         } else {
             return 4;
@@ -170,8 +170,8 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if(itemstack.tag.getInteger("energy") > 0){
-            itemstack.tag.putBoolean("active",!itemstack.tag.getBoolean("active"));
+        if(itemstack.getData().getInteger("energy") > 0){
+            itemstack.getData().putBoolean("active",!itemstack.getData().getBoolean("active"));
         }
         return super.onItemRightClick(itemstack, world, entityplayer);
     }
@@ -183,8 +183,8 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) ? height - 128 : height - 64;
         fontRenderer.drawStringWithShadow("Signalum Saber", 4, i += 16, 0xFFFF0000);
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
-        fontRenderer.drawStringWithShadow(String.valueOf(saber.tag.getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
-        fontRenderer.drawStringWithShadow(saber.tag.getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.tag.getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
+        fontRenderer.drawStringWithShadow(String.valueOf(saber.getData().getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+        fontRenderer.drawStringWithShadow(saber.getData().getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.getData().getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
     }
 
 

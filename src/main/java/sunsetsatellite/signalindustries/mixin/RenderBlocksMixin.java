@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.util.RenderConduit;
+import sunsetsatellite.signalindustries.render.RenderConduit;
 
 @Mixin(
         value={RenderBlocks.class},

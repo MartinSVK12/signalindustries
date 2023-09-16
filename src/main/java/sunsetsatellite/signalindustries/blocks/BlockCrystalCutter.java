@@ -15,6 +15,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
 import sunsetsatellite.signalindustries.inventories.TileEntityCrystalCutter;
+import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -88,23 +89,12 @@ public class BlockCrystalCutter extends BlockContainerTiered{
     }
 
     @Override
-    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityCrystalCutter tile = (TileEntityCrystalCutter) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index == 4){
-            if(tile.isBurning()){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crystalCutterTex[1][0],SignalIndustries.crystalCutterTex[1][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.crystalCutterTex[0][0],SignalIndustries.crystalCutterTex[0][1]);
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get(tile.tier.name()+".crystalCutter.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

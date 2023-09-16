@@ -29,6 +29,7 @@ public class TileEntityCrusher extends TileEntityTieredMachine implements IBoost
         extractFluids();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
+            tier = block.tier;
             switch (block.tier) {
                 case PROTOTYPE:
                     recipes = CrusherRecipes.instance;
