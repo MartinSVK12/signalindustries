@@ -1,41 +1,35 @@
 package sunsetsatellite.signalindustries.blocks;
 
-
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
-import sunsetsatellite.signalindustries.gui.GuiStabilizer;
-import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.containers.ContainerBus;
+import sunsetsatellite.signalindustries.gui.GuiBus;
+import sunsetsatellite.signalindustries.inventories.TileEntityBus;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockDilithiumStabilizer extends BlockContainerTiered {
-
-    public BlockDilithiumStabilizer(String key, int i, Tier tier, Material material) {
+public class BlockOutputBus extends BlockContainerTiered{
+    public BlockOutputBus(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityStabilizer();
+        return new TileEntityBus();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
+        TileEntityBus tile = (TileEntityBus) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -80,38 +74,11 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
+            TileEntityBus tile = (TileEntityBus) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiStabilizer(entityplayer.inventory, tile),new ContainerStabilizer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiBus(entityplayer.inventory, tile),new ContainerBus(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
-    }
-
-    @Override
-    public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
-        world.setBlockMetadataWithNotify(x, y, z, entity.getPlacementDirection(side).getOpposite().getId());
-    }
-
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityStabilizer tile = (TileEntityStabilizer) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index; //3, 2, 1, 0, 5, 4
-        int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, /**/ 0, 1, 2, 3, 4, 5};
-        if(meta == 0 || meta == 1){
-            index = orientationLookUpVertical[6 * meta + side.getId()];
-            if(tile.isBurning()){
-                return SignalIndustries.textures.get("dilithiumStabilizer.verticaL.active").getTexture(Side.getSideById(index));
-            } else {
-                return SignalIndustries.textures.get("dilithiumStabilizer.vertical").getTexture(Side.getSideById(index));
-            }
-        } else {
-            index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        }
-        if(tile.isBurning()){
-            return SignalIndustries.textures.get("dilithiumStabilizer.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
     }
 }

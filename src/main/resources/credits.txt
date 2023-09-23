@@ -1,0 +1,26 @@
+sunsetsatellite
+
+--Direct contributions--
+beatrice - crystal, sword texture
+theRandomHat - plate texture
+theMidford
+watermelonMojito - automatic miner texture
+felix170905 - connected textures code
+
+--Libraries/Mods integrated--
+azurelmao - halplibe
+toufouMaster - btwaila
+samuelDeboni - potato logistics
+
+--BTA--
+jonkadelic
+maggandgeez
+nebulabc
+bestsoft100
+
+--Thanks--
+BTA discord server
+BTA Modding discord server
+Modification Station
+calmilamsy & 6pak - babric and babric maven
+

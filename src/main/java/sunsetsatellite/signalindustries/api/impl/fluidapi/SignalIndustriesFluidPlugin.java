@@ -21,5 +21,9 @@ public class SignalIndustriesFluidPlugin implements FluidAPIPlugin {
         FluidRegistry.addToRegistry("basicSignalumDrill",entry);
         entry = new FluidRegistryEntry(SignalIndustries.MOD_ID,SignalIndustries.reinforcedSignalumDrill,SignalIndustries.reinforcedSignalumDrill, (BlockFluid) SignalIndustries.energyFlowing);
         FluidRegistry.addToRegistry("reinforcedSignalumDrill",entry);
+        entry = new FluidRegistryEntry(SignalIndustries.MOD_ID,SignalIndustries.fuelCell,SignalIndustries.fuelCell, (BlockFluid) SignalIndustries.energyFlowing);
+        FluidRegistry.addToRegistry("fuelCellFuel",entry);
+        entry = new FluidRegistryEntry(SignalIndustries.MOD_ID,SignalIndustries.fuelCell,SignalIndustries.fuelCell, (BlockFluid) SignalIndustries.burntSignalumFlowing);
+        FluidRegistry.addToRegistry("fuelCellDepleted",entry);
     }
 }

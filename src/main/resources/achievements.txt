@@ -64,7 +64,7 @@ Discover crystallized reality - the Dimensional Shard.
 BOOST
 Craft the Dilithium Booster to speed up your machines.
 
-The Greggening
+New Horizons
 Construct your first multiblock.
 
 Anchored
@@ -85,10 +85,7 @@ Take a look around Eternity and find out what it has to offer.
 False Eternity
 Escape Eternity without dying.
 
-Empowered
-Craft a piece of the Signalum Power Suit.
-
-Complete Set
+System, activate!
 Wear the entire Signalum Power Suit set for the first time.
 
 ...
@@ -102,7 +99,7 @@ Complete the Awakened Wrath Beacon challenge under the shine of the Blood Moon. 
 ...
 
 Awakened
-Discover the perfect form of Signalum as Awakened Signalum Crystals.
+Discover the perfect form of Signalum.
 
 Signal Industries
 Activate the Awakened Signalum Ignition Facility for the first time. Thanks for playing!

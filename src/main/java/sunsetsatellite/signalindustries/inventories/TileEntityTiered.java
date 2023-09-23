@@ -1,10 +1,9 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class TileEntityTiered extends TileEntityFluidItemContainer {
+public class TileEntityTiered extends TileEntityWithName {
     public Tier tier = Tier.PROTOTYPE;
 
     @Override

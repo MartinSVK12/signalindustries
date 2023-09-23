@@ -1,7 +1,7 @@
 tile.signalindustries.signalumEnergy.name=Signalum Energy
 tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically energetic properties.
 tile.signalindustries.burntSignalum.name=Burnt Signalum
-tile.signalindustries.burntSignalum.desc=The remains of a S. Ignition reaction, most of it is useless now but maybe not all.
+tile.signalindustries.burntSignalum.desc=Ashes to ashes, rust to rust, will you rise above or turn to dust?
 item.signalindustries.signalumCrystal.name=Signalum Crystal
 item.signalindustries.signalumCrystal.desc=A crystal that can store [Signalum Energy] within it's lattice. The main way to store and transport this substance.
 item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
@@ -98,7 +98,7 @@ item.signalindustries.monsterShard.desc=Horrendous and corrupted.
 item.signalindustries.evilCatalyst.name=Evil Catalyst
 item.signalindustries.evilCatalyst.desc=A deep evil sealed within, there's probably a machine to could unleash it.
 item.signalindustries.infernalEye.name=Infernal Eye
-item.signalindustries.infernalEye.desc=One does not simply walk into Mordor.
+item.signalindustries.infernalEye.desc=But they were, all of them, deceived for an even greater evil could be unleashed.
 item.signalindustries.infernalFragment.name=Infernal Fragment
 item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
 
@@ -106,6 +106,9 @@ item.signalindustries.energyCatalyst.name=Energy Catalyst
 item.signalindustries.energyCatalyst.desc=You've managed to fend off the monsters and release the evil, now all that remains here is your power.
 item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
+
+item.signalindustries.fuelCell.name=Fuel Cell
+item.signalindustries.fuelCell.desc=For use in the [Signalum Reactor]. Contents cannot be extracted until they have been processed.
 
 item.signalindustries.warpOrb.name=Warp Orb
 item.signalindustries.warpOrb.desc=The location encoded into this orb is faintly visible inside, provided it points to somewhere of course. Wonder what would happen if you broke it?
@@ -245,9 +248,9 @@ tile.signalindustries.awakened.crusher.name=Awakened Macerating Atomizer Control
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
-tile.signalindustries.basic.wrathBeacon.desc=Call upon the cliffs of hell for a monstrous challenge.
+tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an [Evil Catalyst].
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
-tile.signalindustries.reinforced.wrathBeacon.desc=Can you rise against the creatures from the underworld sealed within?
+tile.signalindustries.reinforced.wrathBeacon.desc=Can you rise against the creatures sealed within? Requires an [Infernal Eye] to be activated.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
@@ -258,6 +261,12 @@ tile.signalindustries.reinforced.signalumReactorCore.name=Signalum Reactor Core
 tile.signalindustries.reinforced.signalumReactorCore.desc=Burns [Signalum Energy] in a barely stable reaction in search of something greater..
 tile.signalindustries.awakened.signalumReactorCore.name=Awakened Signalum Ignition Facility Controller
 tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Signalum technology. Welcome to the far end of your adventure.
+
+tile.signalindustries.reinforced.ignitor.name=Reinforced Signalum Ignitor
+tile.signalindustries.reinforced.ignitor.desc=A core part of the [Signalum Reactor].
+
+tile.signalindustries.reinforced.energyConnector.name=Reinforced Energy Connector
+tile.signalindustries.reinforced.energyConnector.desc=A dedicated energy hatch for Reinforced-tier multiblocks.
 
 tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
 tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.

@@ -117,9 +117,9 @@ dependencies {
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
 
 	modImplementation "ModMenu:ModMenu:2.0.0"
-	modImplementation "fluidapi:fluidapi:1.6.9"
+	modImplementation "fluidapi:fluidapi:1.7.1"
 	modImplementation "sunsetutils:sunsetutils:1.8.2"
-	modImplementation "guidebookpp:guidebookpp:1.5.5"
+	modImplementation "guidebookpp:guidebookpp:1.5.6"
 	modImplementation "BTWaila:btwaila:0.2.2"
 	modImplementation "energyapi:energyapi:1.1.5"
 	modImplementation "potato-logistics:PotatoLogistics:0.1.4"

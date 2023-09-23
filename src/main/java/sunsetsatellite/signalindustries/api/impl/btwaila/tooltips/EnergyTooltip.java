@@ -33,6 +33,8 @@ public class EnergyTooltip implements IBTWailaCustomBlockTooltip {
         tooltipGroup.addTooltip(TileEntityCrystalChamber.class);
         tooltipGroup.addTooltip(TileEntityCrystalCutter.class);
         tooltipGroup.addTooltip(TileEntityEnergyCell.class);
+        tooltipGroup.addTooltip(TileEntityCentrifuge.class);
+        tooltipGroup.addTooltip(TileEntityIgnitor.class);
 
         TooltipRegistry.tooltipMap.add(tooltipGroup);
     }

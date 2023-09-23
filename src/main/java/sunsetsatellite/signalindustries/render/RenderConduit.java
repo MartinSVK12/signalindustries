@@ -5,6 +5,7 @@ import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.fluidapi.api.IFluidInventory;
+import sunsetsatellite.signalindustries.interfaces.IConduitsConnect;
 
 public class RenderConduit {
     public static boolean render(RenderBlocks renderblocks, WorldSource blockAccess, int i, int j, int k, Block block, int l) {
@@ -13,12 +14,12 @@ public class RenderConduit {
         float halfWidth = (1.0F - width) / 2.0F;
         block.setBlockBounds(halfWidth, halfWidth, halfWidth, halfWidth + width, halfWidth + width, halfWidth + width);
         renderblocks.renderStandardBlock(block, i, j, k);
-        boolean flag = blockAccess.getBlockId(i + 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i + 1, j, k) instanceof IFluidInventory);
-        boolean flag1 = blockAccess.getBlockId(i - 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i - 1, j, k) instanceof IFluidInventory);
-        boolean flag2 = blockAccess.getBlockId(i, j + 1, k) == block.id || (blockAccess.getBlockTileEntity(i, j + 1, k) instanceof IFluidInventory);
-        boolean flag3 = blockAccess.getBlockId(i, j - 1, k) == block.id || (blockAccess.getBlockTileEntity(i, j - 1, k) instanceof IFluidInventory);
-        boolean flag4 = blockAccess.getBlockId(i, j, k + 1) == block.id || (blockAccess.getBlockTileEntity(i, j, k + 1) instanceof IFluidInventory);
-        boolean flag5 = blockAccess.getBlockId(i, j, k - 1) == block.id || (blockAccess.getBlockTileEntity(i, j, k - 1) instanceof IFluidInventory);
+        boolean flag = blockAccess.getBlockId(i + 1, j, k) == block.id || (blockAccess.getBlock(i + 1, j, k) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i + 1, j, k) instanceof IFluidInventory);
+        boolean flag1 = blockAccess.getBlockId(i - 1, j, k) == block.id || (blockAccess.getBlock(i - 1, j, k) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i - 1, j, k) instanceof IFluidInventory);
+        boolean flag2 = blockAccess.getBlockId(i, j + 1, k) == block.id || (blockAccess.getBlock(i, j + 1, k) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i, j + 1, k) instanceof IFluidInventory);
+        boolean flag3 = blockAccess.getBlockId(i, j - 1, k) == block.id || (blockAccess.getBlock(i, j - 1, k) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i, j - 1, k) instanceof IFluidInventory);
+        boolean flag4 = blockAccess.getBlockId(i, j, k + 1) == block.id || (blockAccess.getBlock(i, j, k + 1) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i, j, k + 1) instanceof IFluidInventory);
+        boolean flag5 = blockAccess.getBlockId(i, j, k - 1) == block.id || (blockAccess.getBlock(i, j, k - 1) instanceof IConduitsConnect) || (blockAccess.getBlockTileEntity(i, j, k - 1) instanceof IFluidInventory);
         if(flag)
         {
             block.setBlockBounds(halfWidth + width, halfWidth, halfWidth, 1.0F, halfWidth + width, halfWidth + width);
