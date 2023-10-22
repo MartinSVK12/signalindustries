@@ -8,9 +8,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerBus;
-import sunsetsatellite.signalindustries.gui.GuiBus;
-import sunsetsatellite.signalindustries.inventories.TileEntityBus;
+import sunsetsatellite.signalindustries.containers.ContainerItemBus;
+import sunsetsatellite.signalindustries.gui.GuiItemBus;
+import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -24,12 +24,12 @@ public class BlockInputBus extends BlockContainerTiered{
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityBus();
+        return new TileEntityItemBus();
     }
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityBus tile = (TileEntityBus) world.getBlockTileEntity(i, j, k);
+        TileEntityItemBus tile = (TileEntityItemBus) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -74,9 +74,9 @@ public class BlockInputBus extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityBus tile = (TileEntityBus) world.getBlockTileEntity(i, j, k);
+            TileEntityItemBus tile = (TileEntityItemBus) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiBus(entityplayer.inventory, tile),new ContainerBus(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiItemBus(entityplayer.inventory, tile),new ContainerItemBus(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

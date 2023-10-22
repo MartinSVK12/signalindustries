@@ -13,6 +13,7 @@ import net.minecraft.core.sound.SoundType;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -102,6 +103,8 @@ public class GuiFluidIOConfig extends GuiScreen {
 
     @Override
     public void initGui() {
+
+
         controlList.add(new GuiButton(2, Math.round(width / 2) - 10, Math.round(height / 2) - 63, 15, 15, tile.connections.get(Direction.Y_POS).getLetter())); //Y+
         controlList.add(new GuiButton(4, Math.round(width / 2) - 10, Math.round(height / 2) - 48, 15, 15, tile.connections.get(Direction.Z_POS).getLetter())); //Z+
         controlList.add(new GuiButton(3, Math.round(width / 2) - 10, Math.round(height / 2) - 33, 15, 15, tile.connections.get(Direction.Y_NEG).getLetter())); //Y-
@@ -123,6 +126,10 @@ public class GuiFluidIOConfig extends GuiScreen {
             controlList.get(9).enabled = false;
             controlList.get(10).enabled = false;
             controlList.get(11).enabled = false;
+        }
+
+        if(tile instanceof TileEntityEnergyConnector && ((TileEntityEnergyConnector) tile).isConnected()){
+            controlList.get(0).enabled = false;
         }
 
         super.initGui();

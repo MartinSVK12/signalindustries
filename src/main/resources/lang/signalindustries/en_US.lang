@@ -98,7 +98,7 @@ item.signalindustries.monsterShard.desc=Horrendous and corrupted.
 item.signalindustries.evilCatalyst.name=Evil Catalyst
 item.signalindustries.evilCatalyst.desc=A deep evil sealed within, there's probably a machine to could unleash it.
 item.signalindustries.infernalEye.name=Infernal Eye
-item.signalindustries.infernalEye.desc=But they were, all of them, deceived for an even greater evil could be unleashed.
+item.signalindustries.infernalEye.desc=But they were, all of them, deceived for an even greater evil was made.
 item.signalindustries.infernalFragment.name=Infernal Fragment
 item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
 
@@ -177,7 +177,7 @@ item.signalindustries.reinforced.attachment.secondaryEnergyPack.desc=Provides an
 item.signalindustries.reinforced.attachment.pulsar.name=The Pulsar (Attachment)
 item.signalindustries.reinforced.attachment.pulsar.desc=A modified version of [The Pulsar] that can be connected to a [Signalum Power Suit] utilizing it's energy network.
 item.signalindustries.basic.attachment.backpack.name=Basic Backpack
-item.signalindustries.basic.attachment.backpack.desc=Portable item & fluid storage. Capable of storing a the same amount of items as a chest and 2 fluids (that aren't Signalum Energy).
+item.signalindustries.basic.attachment.backpack.desc=Portable item & fluid storage. Capable of storing the same amount of items as a chest and 2 fluids (that aren't Signalum Energy).
 item.signalindustries.reinforced.attachment.backpack.name=Reinforced Backpack
 item.signalindustries.reinforced.attachment.backpack.desc=Portable item & fluid storage. Using latest object shrinking technology it is capable of storing the same amount of items as a double chest and 4 fluids (that aren't Signalum Energy).
 item.signalindustries.basic.attachment.jetpack.name=Jetpack
@@ -263,10 +263,18 @@ tile.signalindustries.awakened.signalumReactorCore.name=Awakened Signalum Igniti
 tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Signalum technology. Welcome to the far end of your adventure.
 
 tile.signalindustries.reinforced.ignitor.name=Reinforced Signalum Ignitor
-tile.signalindustries.reinforced.ignitor.desc=A core part of the [Signalum Reactor].
+tile.signalindustries.reinforced.ignitor.desc=A core part of the [Signalum Reactor]. Drives the reaction by forcibly igniting [Signalum Energy].
 
 tile.signalindustries.reinforced.energyConnector.name=Reinforced Energy Connector
 tile.signalindustries.reinforced.energyConnector.desc=A dedicated energy hatch for Reinforced-tier multiblocks.
+tile.signalindustries.reinforced.fluidInputHatch.name=Reinforced Fluid Input Hatch
+tile.signalindustries.reinforced.fluidInputHatch.desc=A dedicated fluid input for Reinforced-tier multiblocks.
+tile.signalindustries.reinforced.fluidOutputHatch.name=Reinforced Fluid Output Hatch
+tile.signalindustries.reinforced.fluidOutputHatch.desc=A dedicated fluid output for Reinforced-tier multiblocks.
+tile.signalindustries.reinforced.itemInputBus.name=Reinforced Item Input Bus
+tile.signalindustries.reinforced.itemInputBus.desc=A dedicated item input for Reinforced-tier multiblocks.
+tile.signalindustries.reinforced.itemOutputBus.name=Reinforced Item Output Bus
+tile.signalindustries.reinforced.itemOutputBus.desc=A dedicated item output for Reinforced-tier multiblocks.
 
 tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
 tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.
@@ -293,10 +301,10 @@ tile.signalindustries.prototype.plateFormer.name=Prototype Plate Former
 tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more [Plates] than the [Plate Hammer] and out of more materials.
 tile.signalindustries.basic.plateFormer.name=Basic Metal Press
 tile.signalindustries.basic.plateFormer.desc=Bends and shapes metal ingots.
-tile.signalindustries.reinforced.plateFormer.name=Reinforced Forming Press
+tile.signalindustries.reinforced.plateFormer.name=Reinforced Compressor
 tile.signalindustries.reinforced.plateFormer.desc=Bends and shapes materials with more pressure.
 tile.signalindustries.awakened.plateFormer.name=Awakened Singularity Compressor Controller
-tile.signalindustries.awakened.plateFormer.desc=Could compress something down to a black hole if it didn't mean the destruction of this world.
+tile.signalindustries.awakened.plateFormer.desc=The raw power of this machine would be capable of compressing materials into black holes if it wasn't controlled.
 
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
@@ -305,7 +313,7 @@ tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
 tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
-tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams! What more could you want.
+tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams to slice through almost anything! What more could you want.
 
 tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
 tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an [Alloy Smelter] and the pressure of a [Plate Former] to fuse 2 [S. Crystals] together!
@@ -406,7 +414,7 @@ ability.signalindustries.normal.testingAbility.name=Testing Ability
 ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
 
 ability.signalindustries.awakened.clockwork.name=Clockwork
-ability.signalindustries.awakened.clockwork.desc=<insert cool description here>
+ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.
 
 achievements.page.signalindustries.desc=Achievements for Signal Industries!
 achievement.signalindustries.init=Initialization

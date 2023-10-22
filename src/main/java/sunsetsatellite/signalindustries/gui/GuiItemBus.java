@@ -9,21 +9,21 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerBus;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.containers.ContainerItemBus;
+import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
 
-public class GuiBus extends GuiFluid {
+public class GuiItemBus extends GuiFluid {
 
-    public String name = "I/O Bus";
+    public String name = "Item Bus";
     public EntityPlayer entityplayer;
-    public TileEntityEnergyConnector tile;
+    public TileEntityItemBus tile;
 
 
-    public GuiBus(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerBus(inventoryPlayer, (TileEntityTieredContainer) tile),inventoryPlayer);
+    public GuiItemBus(InventoryPlayer inventoryPlayer, TileEntity tile) {
+        super(new ContainerItemBus(inventoryPlayer, (TileEntityTieredContainer) tile),inventoryPlayer);
         this.ySize = 192;
-        this.tile = (TileEntityEnergyConnector) tile;
+        this.tile = (TileEntityItemBus) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 

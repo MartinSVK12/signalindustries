@@ -94,6 +94,21 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
     }
 
     @Override
+    public int getBlockTextureFromSideAndMetadata(Side side, int meta) {
+
+        if(SignalIndustries.textures == null) return this.atlasIndices[side.getId()];
+        int index;
+        int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, /**/ 0, 1, 2, 3, 4, 5};
+        if(meta == 0 || meta == 1){
+           index = orientationLookUpVertical[6 * meta + side.getId()];
+           return SignalIndustries.textures.get("dilithiumStabilizer.vertical").getTexture(Side.getSideById(index));
+        } else {
+           index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
+        }
+        return this.atlasIndices[index];
+    }
+
+    @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         TileEntityStabilizer tile = (TileEntityStabilizer) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
@@ -102,7 +117,7 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
         if(meta == 0 || meta == 1){
             index = orientationLookUpVertical[6 * meta + side.getId()];
             if(tile.isBurning()){
-                return SignalIndustries.textures.get("dilithiumStabilizer.verticaL.active").getTexture(Side.getSideById(index));
+                return SignalIndustries.textures.get("dilithiumStabilizer.vertical.active").getTexture(Side.getSideById(index));
             } else {
                 return SignalIndustries.textures.get("dilithiumStabilizer.vertical").getTexture(Side.getSideById(index));
             }

@@ -10,20 +10,20 @@ import sunsetsatellite.fluidapi.api.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerFluidHatch;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
 
 public class GuiFluidHatch extends GuiFluid {
 
-    public String name = "Fluid I/O Hatch";
+    public String name = "Fluid Hatch";
     public EntityPlayer entityplayer;
-    public TileEntityEnergyConnector tile;
+    public TileEntityFluidHatch tile;
 
 
     public GuiFluidHatch(InventoryPlayer inventoryPlayer, TileEntity tile) {
         super(new ContainerFluidHatch(inventoryPlayer, (TileEntityTieredContainer) tile),inventoryPlayer);
         this.ySize = 192;
-        this.tile = (TileEntityEnergyConnector) tile;
+        this.tile = (TileEntityFluidHatch) tile;
         this.entityplayer = inventoryPlayer.player;
     }
 

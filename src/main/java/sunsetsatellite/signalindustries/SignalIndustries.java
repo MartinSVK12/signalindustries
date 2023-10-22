@@ -51,10 +51,8 @@ import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.RenderAutoMiner;
 import sunsetsatellite.signalindustries.render.RenderFluidInBlock;
 import sunsetsatellite.signalindustries.render.RenderFluidInConduit;
-import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.signalindustries.util.BlockTexture;
-import sunsetsatellite.signalindustries.util.Mode;
-import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.signalindustries.render.RenderSignalumReactor;
+import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
@@ -245,11 +243,44 @@ public class SignalIndustries implements ModInitializer {
             .setTextures("reinforced_energy_connector.png")
             .build(new BlockEnergyConnector("reinforced.energyConnector",config.getFromConfig("reinforcedEnergyConnector",availableBlockId++),Tier.REINFORCED,Material.metal));
 
+    public static final Block reinforcedFluidInputHatch = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(5)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("reinforced_fluid_input_hatch.png")
+            .build(new BlockFluidInputHatch("reinforced.fluidInputHatch",config.getFromConfig("reinforcedFluidInputHatch",availableBlockId++),Tier.REINFORCED,Material.metal));
+
+    public static final Block reinforcedFluidOutputHatch = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(5)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("reinforced_fluid_output_hatch.png")
+            .build(new BlockFluidOutputHatch("reinforced.fluidOutputHatch",config.getFromConfig("reinforcedFluidOutputHatch",availableBlockId++),Tier.REINFORCED,Material.metal));
+
+    public static final Block reinforcedItemInputBus = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(5)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("reinforced_input_bus.png")
+            .build(new BlockInputBus("reinforced.itemInputBus",config.getFromConfig("reinforcedItemInputBus",availableBlockId++),Tier.REINFORCED,Material.metal));
+
+    public static final Block reinforcedItemOutputBus = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(5)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("reinforced_output_bus.png")
+            .build(new BlockOutputBus("reinforced.itemOutputBus",config.getFromConfig("reinforcedItemOutputBus",availableBlockId++),Tier.REINFORCED,Material.metal));
+
+
     //this has to be after any other block
-    public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalum_energy.png");
+    public static final int[] energyTex = TextureHelper.registerBlockTexture(MOD_ID,"signalum_energy_transparent.png");
     public static final int[] burntSignalumTex = TextureHelper.registerBlockTexture(MOD_ID,"burnt_signalum.png");//registerFluidTexture(MOD_ID,"signalum_energy.png",0,4);
-    public static final Block energyFlowing = BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing(key("signalumEnergy"),config.getFromConfig("signalumEnergy",availableBlockId++),Material.water),"signalum_energy.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
-    public static final Block energyStill = BlockHelper.createBlock(MOD_ID,new BlockFluidStill(key("signalumEnergy"),config.getFromConfig("signalumEnergy",availableBlockId++),Material.water),"signalum_energy.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
+    public static final Block energyFlowing = BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing(key("signalumEnergy"),config.getFromConfig("signalumEnergy",availableBlockId++),Material.water),"signalum_energy_transparent.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
+    public static final Block energyStill = BlockHelper.createBlock(MOD_ID,new BlockFluidStill(key("signalumEnergy"),config.getFromConfig("signalumEnergy",availableBlockId++),Material.water),"signalum_energy_transparent.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
 
     public static final Block burntSignalumFlowing = new BlockBuilder(MOD_ID)
             .setTextures("burnt_signalum.png")
@@ -380,6 +411,8 @@ public class SignalIndustries implements ModInitializer {
     public static final Dimension dimEternity = new Dimension(key("eternity"),Dimension.overworld,1,portalEternity.id).setDefaultWorldType(eternityWorld);
 
     public static final Multiblock dimAnchorMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"dimensionalAnchor","dimensionalAnchor",false);
+    public static final Multiblock testMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"test","test",false);
+    public static final Multiblock signalumReactor = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"signalumReactor","signalumReactor",false);
 
     public static Map<String, BlockTexture> textures = new HashMap<>();
 
@@ -532,11 +565,17 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityCentrifuge.class,"Separation Centrifuge");
         addToNameGuiMap("Separation Centrifuge", GuiCentrifuge.class, TileEntityCentrifuge.class);
 
-        EntityHelper.createTileEntity(TileEntitySignalumReactor.class,"Signalum Reactor");
+        EntityHelper.createSpecialTileEntity(TileEntitySignalumReactor.class,new RenderSignalumReactor(),"Signalum Reactor");
         addToNameGuiMap("Signalum Reactor", GuiSignalumReactor.class, TileEntitySignalumReactor.class);
 
         EntityHelper.createTileEntity(TileEntityEnergyConnector.class,"Energy Connector");
         addToNameGuiMap("Energy Connector", GuiEnergyConnector.class, TileEntityEnergyConnector.class);
+
+        EntityHelper.createTileEntity(TileEntityItemBus.class,"Item Bus");
+        addToNameGuiMap("Item Bus", GuiItemBus.class, TileEntityItemBus.class);
+
+        EntityHelper.createTileEntity(TileEntityFluidHatch.class,"Fluid Hatch");
+        addToNameGuiMap("Fluid Hatch", GuiItemBus.class, TileEntityFluidHatch.class);
 
         EntityHelper.createTileEntity(TileEntityIgnitor.class,"Signalum Ignitor");
 
@@ -548,12 +587,15 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
 
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
+        Multiblock.multiblocks.put("test",testMultiblock);
+        Multiblock.multiblocks.put("signalumReactor",signalumReactor);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 
         EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getFromConfig("infernalId",50),"Infernal");
         //crafting recipes in RecipeHandlerCraftingSI
 
+        BlockDataExporter.export();
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){

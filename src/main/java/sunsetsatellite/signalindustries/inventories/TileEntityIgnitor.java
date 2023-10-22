@@ -8,15 +8,17 @@ import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.util.*;
 
-public class TileEntityIgnitor extends TileEntityFluidItemContainer {
+public class TileEntityIgnitor extends TileEntityFluidItemContainer implements IMultiblockPart {
     public boolean isActivated = false;
-    private final TickTimer timer = new TickTimer(this,"work",5,true);
+    private final TickTimer timer = new TickTimer(this,"work",20,true);
+    public TileEntity connectedTo;
 
     public TileEntityIgnitor(){
         itemContents = new ItemStack[0];
@@ -38,12 +40,12 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer {
     public void updateEntity() {
         super.updateEntity();
         timer.tick();
+        Random random = new Random();
         spreadFluids(Direction.Y_POS);
         worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
         extractFluids();
         if(getFluidInSlot(0) != null && getFluidInSlot(0).amount <= 0) fluidContents[0] = null;
         if(isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5){
-            Random random = new Random();
             if(random.nextFloat() < 0.25){
                 float xd = random.nextFloat() / 10 - 0.05f;
                 float yd = random.nextFloat() / 10 - 0.05f;
@@ -69,18 +71,6 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer {
         if(getFluidInSlot(0) != null){
             this.give(dir);
         }
-        /*if(tile.getFluidInSlot(0) == null && getFluidInSlot(0) != null){
-            this.give(dir);
-        } else if (tile.getFluidInSlot(0) != null && getFluidInSlot(0) == null) {
-            this.take(tile.getFluidInSlot(0), dir);
-        } else {
-            if(tile.getFluidInSlot(0) == null || getFluidInSlot(0) == null) return;
-            if(tile.getFluidInSlot(0).amount < getFluidInSlot(0).amount){
-                this.give(dir);
-            } else {
-                this.take(tile.getFluidInSlot(0), dir);
-            }
-        }*/
         for (Direction direction : Direction.values()) {
             connections.put(dir, Connection.INPUT);
         }
@@ -88,6 +78,10 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer {
 
     public boolean isBurning(){
         return fluidContents[0] != null && fluidContents[0].liquid == SignalIndustries.energyFlowing && fluidContents[0].amount > 0 && isActivated;
+    }
+
+    public boolean isEmpty(){
+        return fluidContents[0] == null || fluidContents[0].liquid == SignalIndustries.energyFlowing && fluidContents[0].amount == 0;
     }
 
     public boolean isReady(){
@@ -147,5 +141,21 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer {
                 unpressurizePipes((TileEntityFluidPipe) tile,already);
             }
         }
+    }
+
+    @Override
+    public boolean isConnected() {
+        return connectedTo != null;
+    }
+
+    @Override
+    public TileEntity getConnectedTileEntity() {
+        return connectedTo;
+    }
+
+    @Override
+    public boolean connect(TileEntity tileEntity) {
+        connectedTo = tileEntity;
+        return true;
     }
 }

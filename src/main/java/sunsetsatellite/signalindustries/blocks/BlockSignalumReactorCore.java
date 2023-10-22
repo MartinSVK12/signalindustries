@@ -11,6 +11,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
 import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.sunsetutils.util.BlockInstance;
+import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.sunsetutils.util.Vec3i;
 
 public class BlockSignalumReactorCore extends BlockContainerTiered{
     public BlockSignalumReactorCore(String key, int i, Tier tier, Material material) {
@@ -32,8 +35,10 @@ public class BlockSignalumReactorCore extends BlockContainerTiered{
         } else
         {
             TileEntitySignalumReactor tile = (TileEntitySignalumReactor) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
+            if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile), Direction.Z_POS/*Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))*/)){
                 SignalIndustries.displayGui(entityplayer, new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
+            } else {
+                entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }

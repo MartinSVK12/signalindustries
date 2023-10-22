@@ -3,16 +3,13 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.fluidapi.api.ContainerFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
 
-public class ContainerBus extends ContainerFluid {
+public class ContainerItemBus extends ContainerFluid {
 
-    public ContainerBus(IInventory iInventory, TileEntityTieredContainer tile) {
+    public ContainerItemBus(IInventory iInventory, TileEntityTieredContainer tile) {
         super(iInventory, tile);
         this.tile = tile;
-        this.addFluidSlot(new SlotFluid(tile, 0, 80, 35));
-        this.addSlot(new Slot(tile, 0, 80, 60));
 
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 3; ++l) {

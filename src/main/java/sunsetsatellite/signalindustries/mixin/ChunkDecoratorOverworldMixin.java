@@ -32,17 +32,17 @@ public abstract class ChunkDecoratorOverworldMixin implements ChunkDecorator {
             locals = LocalCapture.CAPTURE_FAILHARD)
     public void decorate(Chunk chunk, CallbackInfo ci, int chunkX, int chunkZ, int minY, int maxY, int rangeY, float oreHeightModifier, int x, int z, int y, Biome biome, Random rand, long l1, long l2) {
         if(rand.nextInt(512) == 0){
-            SignalIndustries.LOGGER.info(String.format("Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
+            SignalIndustries.LOGGER.info(String.format("Iron Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(Block.oreIronBasalt.id,0,25).generate(world,rand,x,y,z);
         }
         if(rand.nextInt(1024) == 0){
-            SignalIndustries.LOGGER.info(String.format("Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
+            SignalIndustries.LOGGER.info(String.format("Signalum Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(SignalIndustries.signalumOre.id,0,15).generate(world,rand,x,y,z);
         }
         if(rand.nextInt(2048) == 0){
-            SignalIndustries.LOGGER.info(String.format("Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
+            SignalIndustries.LOGGER.info(String.format("Dilithium Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(SignalIndustries.dilithiumOre.id,0,3).generate(world,rand,x,y,z);
         }

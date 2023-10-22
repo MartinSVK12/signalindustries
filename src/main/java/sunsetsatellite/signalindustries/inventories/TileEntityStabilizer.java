@@ -10,6 +10,7 @@ import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityStabilizer extends TileEntityFluidItemContainer {
+public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -68,25 +69,30 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer {
                     /*SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
                     SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));*/
                     if(connectedTo instanceof IStabilizable && ((IStabilizable) connectedTo).isActive()){
-
                         progressTicks--;
-                        Vec3i pos = new Vec3i(xCoord,yCoord,zCoord);
-                        Vec3i connectedPos = new Vec3i(connectedTo.xCoord, connectedTo.yCoord, connectedTo.zCoord);
-                        if(pos.x > connectedPos.x){
-                            int temp = pos.x;
-                            pos.x = connectedPos.x;
-                            connectedPos.x = temp;
-                        }
-                        if(pos.z > connectedPos.z){
-                            int temp = pos.z;
-                            pos.z = connectedPos.z;
-                            connectedPos.z = temp;
-                        }
-                        for (float i = pos.x; i <= connectedPos.x; i+=0.1f) {
-                            for (float k = pos.z; k <= connectedPos.z; k+=0.1f) {
-                                for (float l = 0; l < 4; l++) {
-                                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,yCoord+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
+                        if(connectedTo instanceof TileEntityDimensionalAnchor){
+                            Vec3i pos = new Vec3i(xCoord,yCoord,zCoord);
+                            Vec3i connectedPos = new Vec3i(connectedTo.xCoord, connectedTo.yCoord, connectedTo.zCoord);
+                            if(pos.x > connectedPos.x){
+                                int temp = pos.x;
+                                pos.x = connectedPos.x;
+                                connectedPos.x = temp;
+                            }
+                            if(pos.z > connectedPos.z){
+                                int temp = pos.z;
+                                pos.z = connectedPos.z;
+                                connectedPos.z = temp;
+                            }
+                            for (float i = pos.x; i <= connectedPos.x; i+=0.1f) {
+                                for (float k = pos.z; k <= connectedPos.z; k+=0.1f) {
+                                    for (float l = 0; l < 4; l++) {
+                                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,yCoord+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
+                                    }
                                 }
+                            }
+                        } else if (connectedTo instanceof TileEntitySignalumReactor) {
+                            for (float i = 0; i < 12; i+=0.2f) {
+                                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+0.5,yCoord+i,zCoord+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
                             }
                         }
                     }
@@ -242,5 +248,19 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer {
     }
 
 
+    @Override
+    public boolean isConnected() {
+        return connectedTo != null;
+    }
 
+    @Override
+    public TileEntity getConnectedTileEntity() {
+        return connectedTo;
+    }
+
+    @Override
+    public boolean connect(TileEntity tileEntity) {
+        connectedTo = tileEntity;
+        return true;
+    }
 }

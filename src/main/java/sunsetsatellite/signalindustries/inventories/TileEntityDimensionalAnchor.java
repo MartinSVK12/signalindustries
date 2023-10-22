@@ -3,12 +3,12 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
+import sunsetsatellite.sunsetutils.util.BlockInstance;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.Vec3i;
 import sunsetsatellite.sunsetutils.util.multiblocks.IMultiblock;
@@ -40,7 +40,15 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
         speedMultiplier = 1;
         extractFluids();
         stabilizers.clear();
-        for (Direction value : Direction.values()) {
+        Direction dir = Direction.getDirectionFromSide(getBlockMetadata());
+        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(xCoord,yCoord,zCoord),dir);
+        for (BlockInstance tileEntity : tileEntities) {
+            if(tileEntity.tile instanceof TileEntityStabilizer){
+                ((TileEntityStabilizer) tileEntity.tile).connectedTo = this;
+                stabilizers.add((TileEntityStabilizer) tileEntity.tile);
+            }
+        }
+       /* for (Direction value : Direction.values()) {
             if(value == Direction.Y_NEG || value == Direction.Y_POS) continue;
             Vec3i v = value.getVec().multiply(2);
             Vec3i tileVec = new Vec3i(xCoord,yCoord,zCoord);
@@ -50,7 +58,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
                 stabilizers.add((TileEntityStabilizer) tile);
 
             }
-        }
+        }*/
 
         boolean update = false;
         if(fuelBurnTicks > 0){

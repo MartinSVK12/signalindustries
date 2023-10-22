@@ -106,6 +106,7 @@ repositories {
 }
 
 dependencies {
+
 	minecraft "bta-download-repo:bta:${project.bta_version}"
 	mappings loom.layered() {}
 
@@ -117,14 +118,12 @@ dependencies {
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
 
 	modImplementation "ModMenu:ModMenu:2.0.0"
-	modImplementation "fluidapi:fluidapi:1.7.1"
-	modImplementation "sunsetutils:sunsetutils:1.8.2"
+	//modImplementation "fluidapi:fluidapi:1.7.1"
+	implementation project(path: ":fluidapi", configuration: "namedElements")
+	implementation project(path: ":sunsetutils", configuration: "namedElements")
+	implementation project(path: ":energyapi", configuration: "namedElements")
 	modImplementation "guidebookpp:guidebookpp:1.5.6"
 	modImplementation "BTWaila:btwaila:0.2.2"
-	modImplementation "energyapi:energyapi:1.1.5"
-	modImplementation "potato-logistics:PotatoLogistics:0.1.4"
-
-	//modImplementation files("C:\\Users\\sunsetsatellite\\Projects\\BTA\\SignalIndustries\\PotatoLogistics-0.1.2.jar")
 	//modImplementation "retrostorage:retrostorage:1.2.0"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

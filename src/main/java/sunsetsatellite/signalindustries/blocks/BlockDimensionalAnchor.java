@@ -98,7 +98,6 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
-        world.setBlockMetadata(i,j,k,3);
         if(world.isClientSide)
         {
             return true;

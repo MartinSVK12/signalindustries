@@ -54,7 +54,7 @@ public class MinecraftMixin {
         KeyBinding switchModeKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode();
         SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).signalIndustries$getPowerSuit();
         if(debounce <= 0){
-            if(switchModeKey.isPressed()){
+            if(switchModeKey.isPressed() && currentScreen == null){
                 debounce = 10;
                 if(thePlayer != null){
                     if(thePlayer.getCurrentEquippedItem().getItem() == SignalIndustries.reinforcedSignalumDrill){

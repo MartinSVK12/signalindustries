@@ -17,8 +17,13 @@ public class TileEntityConduit extends TileEntityFluidPipe {
 
     @Override
     public void updateEntity() {
-        fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 1000;
-        transferSpeed = 20 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
+        if(fluidContents[0] != null && fluidContents[0].amount < 0){
+            fluidContents[0] = null;
+        }
+        if(getBlockType() != null){
+            fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 1000;
+            transferSpeed = 20 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
+        }
         super.updateEntity();
     }
 
