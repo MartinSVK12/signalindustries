@@ -73,6 +73,59 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("fuel");
+            int amount = tile.getFluidInSlot(slotIndex).amount;
+            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
+            if(remaining == 0){
+                return null;
+            }
+            if(amount > remaining){
+                tile.getFluidInSlot(slotIndex).amount -= remaining;
+                if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                    tile.setFluidInSlot(slotIndex,null);
+                }
+                CompoundTag data = new CompoundTag();
+                data.putInt("fuel",getCapacity(stack));
+                cell.setData(data);
+                return cell;
+            } else {
+                tile.setFluidInSlot(slotIndex,null);
+                CompoundTag data = new CompoundTag();
+                data.putInt("fuel",saturation + amount);
+                cell.setData(data);
+                return cell;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack, int maxAmount) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("fuel");
+            int amount = Math.min(tile.getFluidInSlot(slotIndex).amount,maxAmount);
+            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
+            if(remaining == 0) return null;
+            int result = Math.min(amount,remaining);
+            if(result == 0) return null;
+            tile.getFluidInSlot(slotIndex).amount -= result;
+            if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                tile.setFluidInSlot(slotIndex,null);
+            }
+            CompoundTag data = new CompoundTag();
+            data.putInt("fuel", saturation+result);
+            cell.setData(data);
+            return cell;
+        }
         return null;
     }
 

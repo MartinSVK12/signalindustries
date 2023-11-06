@@ -18,11 +18,11 @@ public class RenderSignalumReactor extends RenderMultiblock {
 
         float amount = Math.max(Math.abs(fluidAmount / fluidMaxAmount),fluidAmount != 0 ? 0.14f : 0f);
         float depletedAmount = Math.min(Math.abs(reactor.getDepletedFuel() / fluidAmount),0.9f);
-        if (fluidId != 0 && reactor.isActive()) {
+        if (fluidId != 0) {
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d, (float)e, (float)f);
-            GL11.glScalef(2.99F, 7f, 2.99F);
-            GL11.glTranslatef(0.70F, -0.42F, -0.35F);
+            GL11.glScalef(2.90F, 7f, 2.90F);
+            GL11.glTranslatef(0.70F, -0.42F, -0.34F);
             GL11.glColor4f(1-depletedAmount,1-depletedAmount,1-depletedAmount,amount);
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);

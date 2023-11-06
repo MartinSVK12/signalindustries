@@ -9,7 +9,7 @@ import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.sunsetutils.util.Connection;
@@ -155,7 +155,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     }
 
     public boolean canProcess() {
-        return ((itemContents[0] != null && itemContents[0].getItem() == SignalIndustries.dilithiumShard) || progressTicks > 0) && connectedTo instanceof IStabilizable;
+        return ((itemContents[0] != null && itemContents[0].getItem() == SignalIndustries.dilithiumShard) || progressTicks > 0) && ((fluidContents[0] != null && fluidContents[0].amount >= cost) || isBurning()) && connectedTo instanceof IStabilizable;
 
         /*if(itemContents[0] == null) {
             return false;

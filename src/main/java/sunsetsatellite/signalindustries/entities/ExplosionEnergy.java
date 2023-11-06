@@ -10,6 +10,7 @@ import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 
 import java.util.*;
 

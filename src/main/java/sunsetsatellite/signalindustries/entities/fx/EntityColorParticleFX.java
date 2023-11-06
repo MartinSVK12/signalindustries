@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.entities;
+package sunsetsatellite.signalindustries.entities.fx;
 
 
 import net.minecraft.client.render.Tessellator;

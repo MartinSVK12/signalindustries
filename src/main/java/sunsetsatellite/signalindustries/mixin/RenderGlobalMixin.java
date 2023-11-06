@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.EntityDustCloudFX;
-import sunsetsatellite.signalindustries.entities.EntityShockwaveFX;
+import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
+import sunsetsatellite.signalindustries.entities.fx.EntityShockwaveFX;
 
 @Debug(
         export = true

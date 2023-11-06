@@ -9,7 +9,7 @@ import sunsetsatellite.fluidapi.api.FluidStack;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
 import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;

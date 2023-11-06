@@ -93,6 +93,64 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
 
     @Override
     public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("saturation");
+            int amount = tile.getFluidInSlot(slotIndex).amount;
+            int size = stack.getData().getInteger("size");
+            ItemStack crystal = new ItemStack(SignalIndustries.signalumCrystal,1);
+            if(remaining == 0){
+                return null;
+            }
+            if(amount > remaining){
+                tile.getFluidInSlot(slotIndex).amount -= remaining;
+                if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                    tile.setFluidInSlot(slotIndex,null);
+                }
+                CompoundTag data = new CompoundTag();
+                data.putInt("size",size);
+                data.putInt("saturation",getCapacity(stack));
+                crystal.setData(data);
+                return crystal;
+            } else {
+                tile.setFluidInSlot(slotIndex,null);
+                CompoundTag data = new CompoundTag();
+                data.putInt("size",size);
+                data.putInt("saturation",saturation + amount);
+                crystal.setData(data);
+                return crystal;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack, int maxAmount) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("saturation");
+            int amount = Math.min(tile.getFluidInSlot(slotIndex).amount,maxAmount);
+            int size = stack.getData().getInteger("size");
+            ItemStack crystal = new ItemStack(SignalIndustries.signalumCrystal,1);
+            if(remaining == 0) return null;
+            int result = Math.min(amount,remaining);
+            if(result == 0) return null;
+            tile.getFluidInSlot(slotIndex).amount -= result;
+            if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                tile.setFluidInSlot(slotIndex,null);
+            }
+            CompoundTag data = new CompoundTag();
+            data.putInt("size",size);
+            data.putInt("saturation",saturation+result);
+            crystal.setData(data);
+            return crystal;
+        }
         return null;
     }
 

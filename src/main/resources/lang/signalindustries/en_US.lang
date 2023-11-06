@@ -258,7 +258,7 @@ tile.signalindustries.reinforced.dimensionalAnchor.name=Dimensional Anchor
 tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for [Warp Orbs] to anchor to.
 
 tile.signalindustries.reinforced.signalumReactorCore.name=Signalum Reactor Core
-tile.signalindustries.reinforced.signalumReactorCore.desc=Burns [Signalum Energy] in a barely stable reaction in search of something greater..
+tile.signalindustries.reinforced.signalumReactorCore.desc=Burns [Signalum Energy] in search of something greater..
 tile.signalindustries.awakened.signalumReactorCore.name=Awakened Signalum Ignition Facility Controller
 tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Signalum technology. Welcome to the far end of your adventure.
 
@@ -275,6 +275,9 @@ tile.signalindustries.reinforced.itemInputBus.name=Reinforced Item Input Bus
 tile.signalindustries.reinforced.itemInputBus.desc=A dedicated item input for Reinforced-tier multiblocks.
 tile.signalindustries.reinforced.itemOutputBus.name=Reinforced Item Output Bus
 tile.signalindustries.reinforced.itemOutputBus.desc=A dedicated item output for Reinforced-tier multiblocks.
+
+tile.signalindustries.basic.energyInjector.name=Basic Energy Injector
+tile.signalindustries.basic.energyInjector.desc=Provides an automatic way of filling appropriate items with [Signalum Energy].
 
 tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
 tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.

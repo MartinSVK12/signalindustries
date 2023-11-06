@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.render.RenderConduit;
+import sunsetsatellite.sunsetutils.util.models.ICustomModel;
 
 @Mixin(
         value={RenderBlocks.class},
@@ -33,6 +34,9 @@ public class RenderBlocksMixin {
         TileEntity tile = world.getBlockTileEntity(x,y,z);
         if(tile instanceof TileEntityFluidPipe){
             cir.setReturnValue(RenderConduit.render((RenderBlocks) ((Object)this),this.blockAccess,x,y,z,block,0));
+        }
+        if(block instanceof ICustomModel){
+            cir.setReturnValue(true);
         }
         /* else if (block.getRenderType() == 33) {
             cir.setReturnValue(RenderItemPipe.render((RenderBlocks) ((Object)this),this.blockAccess,x,y,z,block,0));

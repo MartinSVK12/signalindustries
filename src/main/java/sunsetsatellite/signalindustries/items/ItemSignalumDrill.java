@@ -205,6 +205,57 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("energy");
+            int amount = tile.getFluidInSlot(slotIndex).amount;
+            if(remaining == 0){
+                return null;
+            }
+            if(amount > remaining){
+                tile.getFluidInSlot(slotIndex).amount -= remaining;
+                if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                    tile.setFluidInSlot(slotIndex,null);
+                }
+                CompoundTag data = new CompoundTag();
+                data.putInt("energy",getCapacity(stack));
+                stack.setData(data);
+                return stack;
+            } else {
+                tile.setFluidInSlot(slotIndex,null);
+                CompoundTag data = new CompoundTag();
+                data.putInt("energy",saturation + amount);
+                stack.setData(data);
+                return stack;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack, int maxAmount) {
+        if(tile.getFluidInSlot(slotIndex) == null){
+            return null;
+        }
+        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("energy");
+            int amount = Math.min(tile.getFluidInSlot(slotIndex).amount,maxAmount);
+            if(remaining == 0) return null;
+            int result = Math.min(amount,remaining);
+            if(result == 0) return null;
+            tile.getFluidInSlot(slotIndex).amount -= result;
+            if(tile.getFluidInSlot(slotIndex).amount <= 0){
+                tile.setFluidInSlot(slotIndex,null);
+            }
+            CompoundTag data = new CompoundTag();
+            data.putInt("energy",saturation+result);
+            stack.setData(data);
+            return stack;
+        }
         return null;
     }
 

@@ -23,6 +23,8 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     public TileEntityItemBus input;
     public TileEntityItemBus output;
     public State state = State.INACTIVE;
+    public int stabilityField = 0;
+    public int maxStabilityField = 100;
 
     public TileEntitySignalumReactor(){
         multiblock = Multiblock.multiblocks.get("signalumReactor");
@@ -35,12 +37,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public boolean isReady() {
-        return state == State.STARTING;
+        return state == State.IGNITING;
     }
 
     public enum State {
         INACTIVE,
-        STARTING,
+        IGNITING,
         RUNNING,
     }
 
@@ -71,7 +73,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
                 ((IMultiblockPart) tileEntity.tile).connect(this);
             }
         }
-        if(state == State.STARTING && checkIfIgnitorsReady() && checkIfStabilizersReady()){
+        if(state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()){
             state = State.RUNNING;
         }
         //TODO: state machine maybe?
@@ -113,7 +115,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     public void depleteRandomFuelCell(){
         Random random = new Random();
-        if(random.nextFloat() <= 0.25){
+        if(random.nextFloat() <= 1.25){
             //TODO: actually pick a random cell
             for (ItemStack stack : input.itemContents) {
                 if (stack != null && stack.getItem() instanceof ItemFuelCell) {
@@ -171,8 +173,8 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     public void start() {
         if(getFuel() > 0 && state == State.INACTIVE){
-            state = State.STARTING;
-        } else if (state == State.STARTING || state == State.RUNNING) {
+            state = State.IGNITING;
+        } else if (state == State.IGNITING || state == State.RUNNING) {
             state = State.INACTIVE;
         }
     }
