@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.util.helper.Side;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import turniplabs.halplibe.helper.TextureHelper;
 
 import java.io.DataOutputStream;
@@ -19,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class BlockDataExporter {
-    public static void export() {
-        List<Field> fields = new ArrayList<>(Arrays.asList(SignalIndustries.class.getDeclaredFields()));
+    public static void export(Class<?> clazz) {
+        List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getDeclaredFields()));
         fields.removeIf((F)->F.getType() != Block.class);
         CompoundTag data = new CompoundTag();
         for (Field field : fields) {
@@ -32,7 +31,7 @@ public class BlockDataExporter {
             }
             CompoundTag tag = new CompoundTag();
             tag.putString("name",field.getName());
-            tag.putString("mod",SignalIndustries.class.getName());
+            tag.putString("mod", clazz.getName());
             CompoundTag uv = new CompoundTag();
             for (Side side : Side.values()) {
                 if(side == Side.NONE) continue;
@@ -59,7 +58,6 @@ public class BlockDataExporter {
         try {
             try (DataOutputStream output = new DataOutputStream(Files.newOutputStream(file.toPath()))) {
                 NbtIo.write(data, output);
-                SignalIndustries.LOGGER.info("exported block data");
             }
         } catch (Exception e){
             throw new RuntimeException(e);

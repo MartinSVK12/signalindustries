@@ -910,7 +910,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getInt("EntityIDs.infernalId"),"Infernal");
         //crafting recipes in RecipeHandlerCraftingSI
 
-        BlockDataExporter.export();
+        BlockDataExporter.export(SignalIndustries.class);
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){
