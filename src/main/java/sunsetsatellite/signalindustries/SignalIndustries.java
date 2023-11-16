@@ -402,6 +402,14 @@ public class SignalIndustries implements ModInitializer {
             .setNorthTexture("crystal_cutter_prototype_inactive.png")
             .build(new BlockCrystalCutter("prototype.crystalCutter",config.getInt("BlockIDs.prototypeCrystalCutter"), Tier.PROTOTYPE,Material.stone));
 
+    public static final Block basicCrystalCutter = new BlockBuilder(MOD_ID)
+            .setHardness(2)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTextures("basic_blank.png")
+            .setNorthTexture("crystal_cutter_basic_inactive.png")
+            .build(new BlockCrystalCutter("basic.crystalCutter",config.getInt("BlockIDs.basicCrystalCutter"), Tier.BASIC,Material.stone));
+
     public static final Block basicCrystalChamber = new BlockBuilder(MOD_ID)
             .setHardness(2)
             .setResistance(3)
@@ -465,7 +473,7 @@ public class SignalIndustries implements ModInitializer {
             .setSideTextures("prototype_pump_side_empty.png")
             .build(new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone));
 
-    public static final Block prototypeBlockBreaker = new BlockBuilder(MOD_ID)
+    /*public static final Block prototypeBlockBreaker = new BlockBuilder(MOD_ID)
             .setHardness(2)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
@@ -473,7 +481,7 @@ public class SignalIndustries implements ModInitializer {
             .setTopBottomTexture("prototype_block_breaker_side_2.png")
             .setSideTextures("prototype_block_breaker_side.png")
             .setNorthTexture("prototype_block_breaker.png")
-            .build(new BlockBreaker("prototype.blockBreaker",config.getInt("BlockIDs.prototypeBlockBreaker"),Tier.PROTOTYPE,Material.stone));
+            .build(new BlockBreaker("prototype.blockBreaker",config.getInt("BlockIDs.prototypeBlockBreaker"),Tier.PROTOTYPE,Material.stone));*/
     
     public static final int[][] breakerTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"inserteroutput.png")};
     public static final Block basicAutomaticMiner = new BlockBuilder(MOD_ID)
@@ -710,8 +718,8 @@ public class SignalIndustries implements ModInitializer {
 
     public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"reinforced.signalumpowersuit.helmet","signalumpowersuit_helmet.png");
     public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.chestplate",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,1,Tier.REINFORCED),"reinforced.signalumpowersuit.chestplate","signalumpowersuit_chestplate.png");
-    public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,2,Tier.REINFORCED),"reinforced.signalumpowersuit.leggings","signalumpowersuit_leggings.png");
-    public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitLeggings"),armorSignalumPowerSuit,2,Tier.REINFORCED),"reinforced.signalumpowersuit.leggings","signalumpowersuit_leggings.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
 
     public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
 
@@ -730,6 +738,26 @@ public class SignalIndustries implements ModInitializer {
     public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.pursuitAbilityModule"),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");*/
     public static final Item awakenedAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getInt("ItemIDs.awakenedAbilityModule"),Mode.AWAKENED),"awakenedAbilityModule","awakenedmodule.png");
 
+    //public static final Item crystalChip = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.crystalChip")),"crystalChip","crystal_chip.png");
+    public static final Item crystalChip = simpleItem("crystalChip","crystal_chip.png");
+    public static final Item pureCrystalChip = simpleItem("pureCrystalChip","pure_crystal_chip.png");
+    public static final Item basicEnergyCore = simpleItem("basicEnergyCore","basic_energy_core.png");
+    public static final Item reinforcedEnergyCore = simpleItem("reinforcedEnergyCore","reinforced_energy_core.png");
+    //public static final Item awakenedEnergyCore = simpleItem("awakenedEnergyCore","awakened_energy_core.png");
+    public static final Item basicDrillBit = simpleItem("basicDrillBit","basic_drill_bit.png");
+    public static final Item reinforcedDrillBit = simpleItem("reinforcedDrillBit","reinforced_drill_bit.png");
+    public static final Item basicDrillCasing = simpleItem("basicDrillCasing","basic_drill_casing.png");
+    public static final Item reinforcedDrillCasing = simpleItem("reinforcedDrillCasing","reinforced_drill_casing.png");
+    public static final Item pulsarShell = simpleItem("pulsarShell","pulsar_shell.png");
+    public static final Item pulsarInnerCore = simpleItem("pulsarInnerCore","pulsar_inner_core.png");
+    public static final Item pulsarOuterCore = simpleItem("pulsarOuterCore","pulsar_outer_core.png");
+    public static final Item itemManipulationCircuit = simpleItem("itemManipulationCircuit","item_manipulation_circuit.png");
+    public static final Item fluidManipulationCircuit = simpleItem("fluidManipulationCircuit","fluid_manipulation_circuit.png");
+    public static final Item dilithiumControlCore = simpleItem("dilithiumControlCore","dilithium_control_core.png");
+    public static final Item warpManipulatorCircuit = simpleItem("warpManipulatorCircuit","warp_manipulator_circuit.png");
+    public static final Item dilithiumChip = simpleItem("dilithiumChip","dilithium_chip.png");
+    public static final Item dimensionalChip = simpleItem("dimensionalChip","dimensional_chip.png");
+
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
 
     public static final Weather weatherBloodMoon = new WeatherBloodMoon(10).setLanguageKey("bloodMoon");
@@ -737,7 +765,6 @@ public class SignalIndustries implements ModInitializer {
     public static final Weather weatherSolarApocalypse = new WeatherSolarApocalypse(12).setLanguageKey("solarApocalypse");
 
     public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
-
 
     public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome().setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
@@ -770,6 +797,7 @@ public class SignalIndustries implements ModInitializer {
         textures.put(Tier.PROTOTYPE.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("plate_former_prototype_active.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("crystal_cutter_prototype_active.png"));
+        textures.put(Tier.BASIC.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("crystal_cutter_basic_active.png"));
 
         textures.put(Tier.BASIC.name()+".crystalChamber.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("basic_crystal_chamber_side_active.png"));
 
@@ -804,6 +832,7 @@ public class SignalIndustries implements ModInitializer {
     }
 
     public SignalIndustries(){
+
         AchievementHelper.addPage(ACHIEVEMENTS);
         //RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
         BlockModelDispatcher.getInstance().addDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
@@ -929,16 +958,8 @@ public class SignalIndustries implements ModInitializer {
         return new ArrayList<>(Arrays.asList(values));
     }
 
-    public static void debug(String string, Object... args){
-        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
-        String trace = element.getFileName() + ":" + element.getLineNumber();
-        LOGGER.info("["+trace+"] "+String.format(string,args));
-    }
-
-    public static void error(String string, Object... args){
-        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
-        String trace = element.getFileName() + ":" + element.getLineNumber();
-        LOGGER.error("["+trace+"] "+String.format(string,args));
+    public static Item simpleItem(String name, String texture){
+        return ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs."+name)),name,texture);
     }
 
 

@@ -3,6 +3,8 @@ package sunsetsatellite.signalindustries.blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
@@ -42,6 +44,12 @@ public class BlockSignalumReactorCore extends BlockContainerTiered{
             }
             return true;
         }
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        String s = super.getDescription(stack);
+        return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
     }
 
     @Override

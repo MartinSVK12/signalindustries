@@ -210,8 +210,10 @@ public class TileEntityExternalIO extends TileEntityTieredMachine {
             for (Direction dir : Direction.values()) {
                 TileEntity tile = dir.getTileEntity(worldObj,this);
                 if(tile instanceof IInventory || tile instanceof IFluidInventory){
-                    externalTile = tile;
-                    externalTileSide = dir;
+                    if(!(tile instanceof TileEntityExternalIO)){
+                        externalTile = tile;
+                        externalTileSide = dir;
+                    }
                 }
             }
         } else {

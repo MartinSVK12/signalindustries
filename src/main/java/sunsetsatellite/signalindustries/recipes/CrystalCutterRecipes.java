@@ -19,7 +19,7 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
         return instance;
     }
 
-    private CrystalCutterRecipes() {
+    protected CrystalCutterRecipes() {
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
         list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,8));
