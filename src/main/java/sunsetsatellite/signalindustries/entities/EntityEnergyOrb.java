@@ -213,9 +213,9 @@ public class EntityEnergyOrb extends Entity {
                 this.zTile = movingobjectposition.z;
                 this.inTile = this.world.getBlockId(this.xTile, this.yTile, this.zTile);
                 this.field_28019_h = this.world.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-                this.xd = (float)(movingobjectposition.location.x - this.x);
-                this.yd = (float)(movingobjectposition.location.y - this.y);
-                this.zd = (float)(movingobjectposition.location.z - this.z);
+                this.xd = (float)(movingobjectposition.location.xCoord - this.x);
+                this.yd = (float)(movingobjectposition.location.yCoord - this.y);
+                this.zd = (float)(movingobjectposition.location.zCoord - this.z);
                 float f1 = MathHelper.sqrt_double(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
                 this.x -= this.xd / (double)f1 * (double)0.05f;
                 this.y -= this.yd / (double)f1 * (double)0.05f;
