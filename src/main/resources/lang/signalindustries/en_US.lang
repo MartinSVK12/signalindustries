@@ -390,7 +390,7 @@ tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 
 tile.signalindustries.basic.dynamo.name=Signalum Dynamo
-tile.signalindustries.basoc.dynamo.desc=Generates EnergyAPI units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
+tile.signalindustries.basoc.dynamo.desc=Generates energy units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
@@ -407,15 +407,15 @@ tile.signalindustries.rootedFabric.desc=There's something in between the threads
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
 tile.signalindustries.eternalTreeLog.desc=Kind of weird for a "tree" to exist in the middle of literally nowhere. Cannot burn.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
-tile.signalindustries.dimensionalShardOre.desc=Sometimes between the fibers of existence, the crystallization of a world can be found.
+tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 
 tile.signalindustries.glowingObsidian.name=Glowing Obsidian
 tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal.
 
 tile.signalindustries.dilithiumBlock.name=Block of Dilithium
 tile.signalindustries.dilithiumBlock.desc=A solid block of Dilithium.
-tile.signalindustries.emptyCrystalBlock.name=Block of Empty Signalum Crystals
-tile.signalindustries.emptyCrystalBlock.desc=A solid block of empty Signalum Crystals.
+tile.signalindustries.emptyCrystalBlock.name=Block of Crystal Alloy
+tile.signalindustries.emptyCrystalBlock.desc=A solid block of Crystal Alloy.
 tile.signalindustries.rawCrystalBlock.name=Block of Raw Signalum Crystals
 tile.signalindustries.rawCrystalBlock.desc=A solid block of Raw Signalum Crystals.
 tile.signalindustries.awakenedSignalumCrystalBlock.name=Block of Awakened Signalum Crystals
@@ -435,7 +435,6 @@ tile.signalindustries.filter.desc=Sorts items that pass through it into colored 
 dimension.signalindustries.eternity.name=Eternity
 signalindustries.eternity.name=Eternity
 
-
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
 weather.solarApocalypse.name=Solar Apocalypse
@@ -445,12 +444,22 @@ bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
 event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!
 event.signalindustries.awakenedWrathBeaconActivated=An awakened Wrath Beacon has been activated!!!
+event.signalindustries.annihilatorChallenge=You have made a grave mistake...
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
 
 ability.signalindustries.normal.testingAbility.name=Testing Ability
 ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
+
+ability.signalindustries.normal.projectile.name=Projectile
+ability.signalindustries.normal.projectile.desc=Shoots out an orb of energy from your power suit.
+
+ability.signalindustries.normal.boost.name=Boost
+ability.signalindustries.normal.boost.desc=Launches you in the direction you're looking at.
+
+ability.signalindustries.normal.devouringField.name=Devouring Field
+ability.signalindustries.normal.devouringField.desc=Drains health from nearby enemies and also sets them on fire.
 
 ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.

@@ -16,7 +16,7 @@ Create a Prototype Energy Cell to store Signalum Energy.
 Shining
 Cut away impurities and create a pure Signalum Crystal!
 
-Only The Beginning
+It Begins
 Create a Basic Machine core.
 
 Combined
@@ -68,7 +68,7 @@ New Horizons
 Construct your first multiblock.
 
 Anchored
-Build the Dimensional Anchor multiblock.
+Build the Dimensional Anchor multiblock to help you encode warp orbs.
 
 Ticket to Everywhere and Nowhere
 Create a Warp Orb.
