@@ -1,11 +1,12 @@
-sunsetsatellite
+sunsetsatellite - supreme leader
 
 --Direct contributions--
 beatrice - crystal, sword texture
 theRandomHat - plate texture
-theMidford
+theMidford - ideas, emotional support
 watermelonMojito - automatic miner texture
 felix170905 - connected textures code
+mzov - basic tier texture remakes
 
 --Libraries/Mods integrated--
 azurelmao - halplibe

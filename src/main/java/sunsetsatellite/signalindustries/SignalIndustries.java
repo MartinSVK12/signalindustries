@@ -49,12 +49,14 @@ import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
-import sunsetsatellite.signalindustries.util.*;
+import sunsetsatellite.signalindustries.util.AttachmentPoint;
+import sunsetsatellite.signalindustries.util.BlockTexture;
+import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import sunsetsatellite.sunsetutils.util.NBTEditCommand;
-import sunsetsatellite.sunsetutils.util.models.NBTModel;
 import sunsetsatellite.sunsetutils.util.multiblocks.Multiblock;
 import sunsetsatellite.sunsetutils.util.multiblocks.RenderMultiblock;
 import sunsetsatellite.sunsetutils.util.multiblocks.Structure;
@@ -64,6 +66,8 @@ import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.toml.Toml;
+import useless.dragonfly.helper.ModelHelper;
+import useless.dragonfly.model.block.BlockModelDragonFly;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -573,8 +577,18 @@ public class SignalIndustries implements ModInitializer {
             .setHardness(5)
             .setResistance(20)
             .setLuminance(0)
+            .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"basic_energy_injector.json")))
             .setTextures("basic_energy_injector_bottom.png")
             .build(new BlockEnergyInjector("basic.energyInjector",config.getInt("BlockIDs.basicEnergyInjector"),Tier.BASIC,Material.metal));
+
+    public static final Block basicSignalumDynamo = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(5)
+            .setResistance(20)
+            .setLuminance(0)
+            .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"signalum_dynamo.json")))
+            .setTextures(1,0)
+            .build(new BlockSignalumDynamo("basic.dynamo",config.getInt("BlockIDs.basicSignalumDynamo"),Tier.BASIC,Material.metal));
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_energy_transparent.png");
@@ -774,8 +788,6 @@ public class SignalIndustries implements ModInitializer {
     public static final Multiblock testMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"test","test",false);
     public static final Multiblock signalumReactor = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"signalumReactor","signalumReactor",false);
 
-    public static final NBTModel energyInjectorModel = new NBTModel(MOD_ID,"basic_energy_injector",new String[]{"/assets/signalindustries/block/basic_energy_injector_bottom.png","/assets/signalindustries/block/basic_energy_injector_core.png"},false);
-
     public static Map<String, BlockTexture> textures = new HashMap<>();
 
     @Override
@@ -825,8 +837,6 @@ public class SignalIndustries implements ModInitializer {
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.active",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_active_inverted.png").setTopTexture("reinforced_ignitor_bottom_active.png").setBottomTexture("reinforced_ignitor_top_active.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready.png").setTopTexture("reinforced_ignitor_top_ready.png").setBottomTexture("reinforced_ignitor_bottom_ready.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready_inverted.png").setTopTexture("reinforced_ignitor_bottom_ready.png").setBottomTexture("reinforced_ignitor_top_ready.png"));
-
-        NBTModel.models.put("energyInjector",energyInjectorModel);
 
         Dimension.registerDimension(config.getInt("Other.eternityDimId"),dimEternity);
     }
@@ -923,6 +933,9 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createSpecialTileEntity(TileEntityEnergyInjector.class,new RenderEnergyInjector(),"Energy Injector");
         addToNameGuiMap("Energy Injector",GuiEnergyInjector.class,TileEntityEnergyInjector.class);
 
+        EntityHelper.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
+        addToNameGuiMap("Signalum Dynamo",GuiEnergyInjector.class,TileEntitySignalumDynamo.class);
+
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
 
@@ -939,7 +952,7 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getInt("EntityIDs.infernalId"),"Infernal");
         //crafting recipes in RecipeHandlerCraftingSI
 
-        BlockDataExporter.export(SignalIndustries.class);
+        //BlockDataExporter.export(SignalIndustries.class);
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){

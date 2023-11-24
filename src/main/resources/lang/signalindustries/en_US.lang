@@ -389,10 +389,13 @@ tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds acr
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 
-tile.signalindustries.basic.dynamo.name=Signalum Dynamo
-tile.signalindustries.basoc.dynamo.desc=Generates energy units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
+tile.signalindustries.basic.dynamo.name=Basic Signalum Dynamo
+tile.signalindustries.basic.dynamo.desc=Generates energy units using Signalum. Only available if EnergyAPI is installed.
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
+
+tile.signaindustries.reinforced.satellite.name=Satellite
+tile.signaindustries.reinforced.satellite.desc=Release it into the skies to watch the world from above remotely.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.

@@ -17,8 +17,8 @@ import sunsetsatellite.sunsetutils.util.Direction;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockEnergyInjector extends BlockContainerTiered {
-    public BlockEnergyInjector(String key, int i, Tier tier, Material material) {
+public class BlockSignalumDynamo extends BlockContainerTiered {
+    public BlockSignalumDynamo(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 

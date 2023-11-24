@@ -8,6 +8,7 @@ import net.minecraft.client.render.TextureFX;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.EntityItem;
@@ -17,11 +18,10 @@ import net.minecraft.core.item.tag.ItemTags;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
 import sunsetsatellite.sunsetutils.util.RenderBlockSimple;
-import sunsetsatellite.sunsetutils.util.models.RenderCustomTileEntityModel;
 
 import java.util.Random;
 
-public class RenderEnergyInjector extends RenderCustomTileEntityModel<TileEntityEnergyInjector> {
+public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInjector> {
 
     private final RenderBlockSimple sideRenderer = new RenderBlockSimple();
     private final Random random = new Random();
@@ -34,7 +34,6 @@ public class RenderEnergyInjector extends RenderCustomTileEntityModel<TileEntity
         if(counter >= 360){
             counter = 0;
         }
-        super.doRender(tileEntity, x, y, z, g);
         if(tileEntity.getStackInSlot(0) != null){
             EntityItem entityItem = new EntityItem(tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, tileEntity.getStackInSlot(0));
             doRenderItem(entityItem,x+0.5,y+0.5,z+0.5,0,0);

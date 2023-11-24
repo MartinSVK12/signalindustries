@@ -103,6 +103,14 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+	ivy {
+		url = "https://github.com/UselessBullets"
+		patternLayout {
+			artifact "[organisation]/releases/download/v[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 dependencies {
@@ -122,9 +130,11 @@ dependencies {
 	implementation project(path: ":fluidapi", configuration: "namedElements")
 	implementation project(path: ":sunsetutils", configuration: "namedElements")
 	implementation project(path: ":energyapi", configuration: "namedElements")
+	implementation project(path: ":dragonfly", configuration: "namedElements")
 	modImplementation "guidebookpp:guidebookpp:1.5.6"
 	modImplementation "BTWaila:btwaila:0.2.2"
 	modImplementation "potato-logistics:PotatoLogistics:0.2.2_1"
+	//modImplementation "DragonFly:dragonfly:0.1.1"
 	//modImplementation "retrostorage:retrostorage:1.2.0"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
