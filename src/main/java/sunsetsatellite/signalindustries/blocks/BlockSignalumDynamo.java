@@ -8,9 +8,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
-import sunsetsatellite.signalindustries.gui.GuiEnergyInjector;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
+import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
+import sunsetsatellite.signalindustries.gui.GuiSignalumDynamo;
+import sunsetsatellite.signalindustries.inventories.TileEntitySignalumDynamo;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.sunsetutils.util.Direction;
 
@@ -24,7 +24,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityEnergyInjector();
+        return new TileEntitySignalumDynamo();
     }
 
     @Override
@@ -40,9 +40,9 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
+            TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiEnergyInjector(entityplayer.inventory, tile),new ContainerEnergyInjector(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiSignalumDynamo(entityplayer.inventory, tile),new ContainerSignalumDynamo(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
@@ -50,7 +50,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
 
     @Override
     public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
+        TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);

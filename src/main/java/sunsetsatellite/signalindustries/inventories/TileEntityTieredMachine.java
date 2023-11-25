@@ -3,18 +3,13 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.sunsetutils.util.Connection;
 import sunsetsatellite.sunsetutils.util.Direction;
 import sunsetsatellite.sunsetutils.util.IFluidIO;
 import sunsetsatellite.sunsetutils.util.IItemIO;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-public class TileEntityTieredMachine extends TileEntityTieredContainer implements IFluidIO, IItemIO {
+public abstract class TileEntityTieredMachine extends TileEntityTieredContainer implements IFluidIO, IItemIO {
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;

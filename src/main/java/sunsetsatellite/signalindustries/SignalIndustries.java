@@ -934,7 +934,7 @@ public class SignalIndustries implements ModInitializer {
         addToNameGuiMap("Energy Injector",GuiEnergyInjector.class,TileEntityEnergyInjector.class);
 
         EntityHelper.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
-        addToNameGuiMap("Signalum Dynamo",GuiEnergyInjector.class,TileEntitySignalumDynamo.class);
+        addToNameGuiMap("Signalum Dynamo", GuiSignalumDynamo.class,TileEntitySignalumDynamo.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
@@ -952,7 +952,6 @@ public class SignalIndustries implements ModInitializer {
         EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getInt("EntityIDs.infernalId"),"Infernal");
         //crafting recipes in RecipeHandlerCraftingSI
 
-        //BlockDataExporter.export(SignalIndustries.class);
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){
