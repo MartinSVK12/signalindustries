@@ -14,7 +14,6 @@ import sunsetsatellite.guidebookpp.RecipeRegistry;
 import sunsetsatellite.guidebookpp.recipes.RecipeCrafting;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import turniplabs.halplibe.helper.RecipeHelper;
-import turniplabs.halplibe.mixin.accessors.CraftingManagerAccessor;
 
 import java.util.ArrayList;
 
@@ -44,7 +43,7 @@ public class RecipeHandlerCraftingSI implements IRecipeHandlerBase {
         createRecipe(new ItemStack(SignalIndustries.prototypeEnergyCell, 1),new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'1',new ItemStack(Block.glass,1,0),'2',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(Block.glass,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
         createRecipe(new ItemStack(SignalIndustries.prototypeCrusher, 1),new Object[]{"012","345","678",'0',new ItemStack(Item.flint,1,0),'1',new ItemStack(Item.flint,1,0),'2',new ItemStack(Item.flint,1,0),'3',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
         createRecipe(new ItemStack(SignalIndustries.prototypeAlloySmelter, 1),new Object[]{"012","345","678",'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'3',new ItemStack(Block.furnaceBlastIdle,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(Block.furnaceBlastIdle,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
-        createRecipe(new ItemStack(SignalIndustries.prototypePlateFormer, 1),new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)});
+        createRecipe(new ItemStack(SignalIndustries.prototypePlateFormer, 1),new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.ironPlateHammer,1,0),'6',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'7',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'8',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0)},true);
         createRecipe(new ItemStack(SignalIndustries.prototypeCrystalCutter, 1),new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'1',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'2',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'3',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'4',new ItemStack(SignalIndustries.prototypeMachineCore,1,0),'5',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'6',new ItemStack(SignalIndustries.cobblestonePlate,1,0),'7',new ItemStack(SignalIndustries.rawSignalumCrystal,1,0),'8',new ItemStack(SignalIndustries.cobblestonePlate,1,0)});
         createRecipe(new ItemStack(SignalIndustries.basicMachineCore, 1),new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.steelPlate,1,0),'1',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'2',new ItemStack(SignalIndustries.steelPlate,1,0),'3',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'4',new ItemStack(SignalIndustries.signalumCrystal,1,0),'5',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'6',new ItemStack(SignalIndustries.steelPlate,1,0),'7',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'8',new ItemStack(SignalIndustries.steelPlate,1,0)});
         createRecipe(new ItemStack(SignalIndustries.basicConduit, 4), new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(Block.glass,1,0),'4',new ItemStack(SignalIndustries.prototypeConduit,1,0),'5',new ItemStack(Block.glass,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
@@ -113,15 +112,21 @@ public class RecipeHandlerCraftingSI implements IRecipeHandlerBase {
     }
 
     private void createRecipe(ItemStack output, Object[] inputs){
-        ((CraftingManagerAccessor) RecipeHelper.craftingManager).callAddRecipe(output, inputs);
+        RecipeHelper.craftingManager.addRecipe(output,true,true,false,inputs);
         IRecipe recipe = RecipeHelper.craftingManager.getRecipeList().get(RecipeHelper.craftingManager.getRecipeList().size()-1);
         RecipeCrafting recipeCrafting = new RecipeCrafting(recipe);
         group.addRecipe(recipeCrafting);
+    }
 
+    private void createRecipe(ItemStack output, Object[] inputs, boolean consumeContainers){
+        RecipeHelper.craftingManager.addRecipe(output,true,true,consumeContainers,inputs);
+        IRecipe recipe = RecipeHelper.craftingManager.getRecipeList().get(RecipeHelper.craftingManager.getRecipeList().size()-1);
+        RecipeCrafting recipeCrafting = new RecipeCrafting(recipe);
+        group.addRecipe(recipeCrafting);
     }
 
     private void createShapelessRecipe(ItemStack output, Object[] inputs){
-        ((CraftingManagerAccessor) RecipeHelper.craftingManager).callAddShapelessRecipe(output, inputs);
+        RecipeHelper.craftingManager.addShapelessRecipe(output,inputs);
         IRecipe recipe = RecipeHelper.craftingManager.getRecipeList().get(RecipeHelper.craftingManager.getRecipeList().size()-1);
         RecipeCrafting recipeCrafting = new RecipeCrafting(recipe);
         group.addRecipe(recipeCrafting);

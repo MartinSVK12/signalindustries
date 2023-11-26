@@ -170,12 +170,18 @@ item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Su
 item.signalindustries.clockworkAbilityContainer.name=Ability Container: Clockwork
 item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
 
+item.signalindustries.boostAbilityContainer.name=Ability Container: Boost
+item.signalindustries.boostAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
+
+item.signalindustries.projectileAbilityContainer.name=Ability Container: Projectile
+item.signalindustries.projectileAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
+
 item.signalindustries.attachment.testingAttachment.name=Testing Attachment
 item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
-item.signalindustries.reinforced.attachment.secondaryEnergyPack.name=Extended Energy Pack
-item.signalindustries.reinforced.attachment.secondaryEnergyPack.desc=Provides an extra container for [Signalum Energy].
+item.signalindustries.reinforced.attachment.extendedEnergyPack.name=Extended Energy Pack
+item.signalindustries.reinforced.attachment.extendedEnergyPack.desc=Provides an extra container for [Signalum Energy].
 item.signalindustries.reinforced.attachment.pulsar.name=The Pulsar (Attachment)
-item.signalindustries.reinforced.attachment.pulsar.desc=A modified version of [The Pulsar] that can be connected to a [Signalum Power Suit] utilizing it's energy network.
+item.signalindustries.reinforced.attachment.pulsar.desc=A modified version of [The Pulsar] that can be connected to a [Signalum Power Suit] allowing it to utilize its energy network.
 item.signalindustries.basic.attachment.backpack.name=Basic Backpack
 item.signalindustries.basic.attachment.backpack.desc=Portable item & fluid storage. Capable of storing the same amount of items as a chest and 2 fluids (that aren't Signalum Energy).
 item.signalindustries.reinforced.attachment.backpack.name=Reinforced Backpack
@@ -245,7 +251,8 @@ item.signalindustries.dilithiumChip.name=Dilithium Chip
 item.signalindustries.dilithiumChip.desc=The main part of the [Dilithium Control Core].
 item.signalindustries.dimensionalChip.name=Dimensional Chip
 item.signalindustries.dimensionalChip.desc=The main part of the [Warp Manipulator Circuit].
-
+item.signalindustries.attachmentPoint.name=Attachment Point
+item.signalindustries.attachmentPoint.desc=Interface for [Attachments].
 
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
 tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.

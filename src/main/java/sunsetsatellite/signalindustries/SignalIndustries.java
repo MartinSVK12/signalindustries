@@ -46,6 +46,8 @@ import sunsetsatellite.signalindustries.inventories.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemTieredAttachment;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
@@ -621,7 +623,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.emptySignalumCrystalDust")),"signalumCrystalDust","emptysignalumdust.png");
     public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.saturatedSignalumCrystalDust")),"saturatedSignalumCrystalDust","saturatedsignalumdust.png");
 
-    public static final Item ironPlateHammer = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.ironPlateHammer")),"ironPlateHammer","platehammer.png");
+    public static final Item ironPlateHammer = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.ironPlateHammer")),"ironPlateHammer","platehammer.png").setMaxStackSize(1);
 
     public static final Item cobblestonePlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.cobblestonePlate")),"cobblestonePlate","cobblestoneplate.png");
     public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.stonePlate")),"stonePlate","stoneplate.png");
@@ -736,14 +738,19 @@ public class SignalIndustries implements ModInitializer {
     public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
 
     public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
+    public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment(config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"reinforced.attachment.pulsar","pulsar_attachment.png").setMaxStackSize(1);
+    public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment(config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced.attachment.extendedEnergyPack","extended_energy_pack.png").setMaxStackSize(1);
 
-    public static SuitBaseAbility testAbility = new TestingAbility();
-    public static SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
-    public static SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
+    public static final SuitBaseAbility testAbility = new TestingAbility();
+    public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
+    public static final SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
+    public static final SuitBaseAbility boostAbility = new BoostAbility();
+    public static final SuitBaseAbility projectileAbility = new ProjectileAbility();
 
     public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
-    public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","clockworkability.png");
-
+    public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
+    public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"boostAbilityContainer","ability2.png");
+    public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"projectileAbilityContainer","ability1.png");
 
     public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getInt("ItemIDs.abilityModule"),Mode.NORMAL),"abilityModule","abilitymodule.png");
     /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.normalAbilityModule"),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
@@ -771,6 +778,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Item warpManipulatorCircuit = simpleItem("warpManipulatorCircuit","warp_manipulator_circuit.png");
     public static final Item dilithiumChip = simpleItem("dilithiumChip","dilithium_chip.png");
     public static final Item dimensionalChip = simpleItem("dimensionalChip","dimensional_chip.png");
+    public static final Item attachmentPoint = simpleItem("attachmentPoint","attachment_point.png");
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
 
@@ -843,11 +851,27 @@ public class SignalIndustries implements ModInitializer {
 
     public SignalIndustries(){
 
-        AchievementHelper.addPage(ACHIEVEMENTS);
+        //AchievementHelper.addPage(ACHIEVEMENTS);
         //RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
         BlockModelDispatcher.getInstance().addDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
         PacketAccessor.callAddIdClassMapping(config.getInt("Other.machinePacketId"),true,false, PacketOpenMachineGUI.class);
 
+        List<Field> fields = new ArrayList<>(Arrays.asList(SignalIndustries.class.getDeclaredFields()));
+        fields.removeIf((F)->F.getType() != Block.class);
+
+        for (Field field : fields) {
+            try {
+                Block block = (Block) field.get(null);
+                ItemToolPickaxe.miningLevels.put(block,3);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        ItemToolPickaxe.miningLevels.put(prototypeMachineCore,3);
+        ItemToolPickaxe.miningLevels.put(basicMachineCore,3);
+        ItemToolPickaxe.miningLevels.put(reinforcedMachineCore,3);
+        ItemToolPickaxe.miningLevels.put(awakenedMachineCore,3);
         ItemToolPickaxe.miningLevels.put(signalumOre,3);
         ItemToolPickaxe.miningLevels.put(dilithiumBlock,4);
         ItemToolPickaxe.miningLevels.put(dilithiumCrystalBlock,4);
@@ -860,6 +884,10 @@ public class SignalIndustries implements ModInitializer {
         ItemToolPickaxe.miningLevels.put(realityFabric,5);
         ItemToolPickaxe.miningLevels.put(reinforcedGlass,3);
         ItemToolPickaxe.miningLevels.put(reinforcedCasing,3);
+
+
+
+        ironPlateHammer.setContainerItem(ironPlateHammer);
 
         CommandHelper.createCommand(new NBTEditCommand());
         CommandHelper.createCommand(new StructureCommand("structure","struct"));

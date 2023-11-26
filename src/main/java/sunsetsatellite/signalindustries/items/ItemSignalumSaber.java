@@ -25,6 +25,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.interfaces.IVariableDamageWeapon;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFluidContainer, IVariableDamageWeapon, IHasOverlay {
@@ -240,6 +241,11 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow(String.valueOf(saber.getData().getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
         fontRenderer.drawStringWithShadow(saber.getData().getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.getData().getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
+    }
+
+    @Override
+    public void renderOverlay(ItemStack stack, SignalumPowerSuit signalumPowerSuit, GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
+
     }
 
 

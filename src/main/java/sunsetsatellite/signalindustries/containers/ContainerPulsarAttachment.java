@@ -7,26 +7,25 @@ import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
+import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 
-public class ContainerPulsar extends ContainerItemFluid {
+public class ContainerPulsarAttachment extends ContainerItemFluid {
 
     ItemStack pulsar;
 
-    public ContainerPulsar(InventoryPlayer inventoryPlayer, ItemStack pulsar){
+    public ContainerPulsarAttachment(InventoryPlayer inventoryPlayer, ItemStack pulsar){
         super(inventoryPlayer,new InventoryPulsar(pulsar));
         this.pulsar = pulsar;
 
-        if(pulsar.getItem() instanceof ItemPulsar){
+        if(pulsar.getItem() instanceof ItemPulsarAttachment){
             NBTHelper.loadInvFromNBT(pulsar,inv,1,1);
         }
 
         addSlot(new Slot(inv,0,80,33));
 
-        addFluidSlot(new SlotFluid(inv,0,80,55));
+        //addFluidSlot(new SlotFluid(inv,0,80,55));
 
         for(int j = 0; j < 3; j++)
         {

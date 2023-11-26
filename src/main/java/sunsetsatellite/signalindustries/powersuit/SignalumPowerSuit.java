@@ -17,10 +17,12 @@ import sunsetsatellite.fluidapi.api.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
+import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.Mode;
 import sunsetsatellite.sunsetutils.util.TickTimer;
@@ -48,6 +50,20 @@ public class SignalumPowerSuit {
 
     public float temperature;
 
+    private boolean cooling;
+
+    private static class AttachmentLocation {
+        final int slot;
+        final InventoryPowerSuit inv;
+
+        public AttachmentLocation(int slot, InventoryPowerSuit inv) {
+            this.slot = slot;
+            this.inv = inv;
+        }
+    }
+
+    private final Map<String, AttachmentLocation> attachmentLocations = new HashMap<>();
+
     public SignalumPowerSuit(ItemStack[] armor, EntityPlayer player){
         this.armor = armor;
         this.player = player;
@@ -55,6 +71,18 @@ public class SignalumPowerSuit {
         chestplate = new InventoryPowerSuit(armor[2]);
         leggings = new InventoryPowerSuit(armor[1]);
         boots = new InventoryPowerSuit(armor[0]);
+        attachmentLocations.put("headTop", new AttachmentLocation(0, helmet));
+        attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate));
+        attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate));
+        attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate));
+        attachmentLocations.put("armBackL", new AttachmentLocation(3, chestplate));
+        attachmentLocations.put("armBackR", new AttachmentLocation(6, chestplate));
+        attachmentLocations.put("armSideL", new AttachmentLocation(4, chestplate));
+        attachmentLocations.put("armSideR", new AttachmentLocation(5, chestplate));
+        attachmentLocations.put("legSideL", new AttachmentLocation(0, leggings));
+        attachmentLocations.put("legSideR", new AttachmentLocation(1, leggings));
+        attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots));
+        attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots));
         temperature = 20.0f;
     }
 
@@ -64,6 +92,32 @@ public class SignalumPowerSuit {
         guiCore.powerSuit = this;
         guiCore.name = "Signalum Power Suit | Core";
         SignalIndustries.displayGui(player,guiCore,container,chestplate,armor[2]);
+    }
+
+    public void activateAttachment(KeyBinding attachmentKeybind) {
+        boolean shift = (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
+        if (attachmentKeybind.isPressed()) {
+            int slot = -1;
+            InventoryPowerSuit inv = null;
+            for (Map.Entry<String, AttachmentLocation> attachment : attachmentLocations.entrySet()) {
+                if (attachmentKeybind.name.contains(attachment.getKey())) {
+                    slot = attachment.getValue().slot;
+                    inv = attachment.getValue().inv;
+                    break;
+                }
+            }
+            if(slot != -1 && inv != null){
+                ItemStack stack = inv.getStackInSlot(slot);
+                if(stack != null){
+                    ItemAttachment attachment = (ItemAttachment) stack.getItem();
+                    if(shift){
+                        attachment.openSettings(stack,this,player,player.world);
+                    } else {
+                        attachment.activate(stack,this,player,player.world);
+                    }
+                }
+            }
+        }
     }
 
     public enum Status {
@@ -86,9 +140,6 @@ public class SignalumPowerSuit {
 
     public void tick(){
         //set status
-        if(temperature > 1000){
-            status = Status.OVERHEAT;
-        }
         if(getEnergyPercent() == 0){
             status = Status.NO_ENERGY;
         } else if (getEnergyPercent() < 15) {
@@ -96,7 +147,28 @@ public class SignalumPowerSuit {
         } else {
             status = Status.OK;
         }
+        if(temperature > 100){
+            status = Status.OVERHEAT;
+            for (ItemStack itemStack : armor) {
+                itemStack.damageItem(1,player);
+            }
+
+        }
         saveTimer.tick();
+
+        //leak excess energy
+        if(getEnergy() > getMaxEnergy()){
+            if (getEnergy() - 50 >= getMaxEnergy()) {
+                decrementEnergy(50);
+            }
+            decrementEnergy(1);
+            if(getEnergy()+1 == getMaxEnergy()){
+                decrementEnergy(-1);
+            }
+        }
+
+        //energy pack attachment bonus
+        chestplate.fluidCapacity[0] = hasAttachment((ItemAttachment) SignalIndustries.extendedEnergyPack) ? 64000 : 32000;
 
         //get module
         if(getModule() != null){
@@ -148,9 +220,60 @@ public class SignalumPowerSuit {
 
         //repair armor
         for (ItemStack itemStack : armor) {
-            if(itemStack.isItemDamaged() && getEnergy() > 0){
+            if(itemStack.isItemDamaged() && getEnergy() > 0 && status != Status.OVERHEAT){
                 decrementEnergy(1);
                 itemStack.damageItem(-1,player);
+            }
+        }
+
+        //actual cool down (temperature control)
+        if(temperature > 75 && !cooling){
+            cooling = true;
+        }
+        if(temperature <= 20 && cooling){
+            cooling = false;
+        }
+        if(player.isInLava()){
+            temperature += 0.25f;
+        }
+        if(cooling){
+            temperature -= 0.05f;
+            if(player.isInWaterOrRain()){
+                temperature -= 0.25f;
+            }
+            decrementEnergy(1);
+        }
+        if(temperature > 20){
+            temperature -= 0.01f;
+        }
+
+        //tick attachments
+        ItemStack[] contents = helmet.contents;
+        for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
+            ItemStack content = contents[i];
+            if (content != null) {
+                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+            }
+        }
+        contents = chestplate.contents;
+        for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
+            ItemStack content = contents[i];
+            if (content != null) {
+                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+            }
+        }
+        contents = leggings.contents;
+        for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
+            ItemStack content = contents[i];
+            if (content != null) {
+                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+            }
+        }
+        contents = boots.contents;
+        for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
+            ItemStack content = contents[i];
+            if (content != null) {
+                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
             }
         }
     }
@@ -286,6 +409,20 @@ public class SignalumPowerSuit {
         return chestplate.contents[0];
     }
 
+    public boolean hasAttachment(ItemAttachment attachment){
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        for (InventoryPowerSuit piece : pieces) {
+            for (ItemStack content : piece.contents) {
+                if(content != null){
+                    if(content.getItem() == attachment){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public Mode getModuleMode(){
         if(getModule() != null){
             return ((ItemAbilityModule)getModule().getItem()).mode;
@@ -302,11 +439,11 @@ public class SignalumPowerSuit {
             return;
         }
         if(status == Status.NO_ENERGY){
-            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,temperature),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
             return;
         }
 
-        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C",status.toString(),TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,temperature),width/2,height-64,0xFFFFFFFF);
+        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C",status.toString(),TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
 
         int color = mode.getColor(0x40);//0x40808080;
         int color2 = mode.getColor();//0xFF808080;
@@ -423,5 +560,20 @@ public class SignalumPowerSuit {
         GL11.glDisable(3042);
         GL11.glDisable(2896);
 
+
+        //render attachment info
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        for (InventoryPowerSuit piece : pieces) {
+            for (ItemStack content : piece.contents) {
+                if(content != null){
+                    if(content.getItem() instanceof IHasOverlay){
+                        ((IHasOverlay) content.getItem()).renderOverlay(content, this, guiIngame,player,height,width,mouseX,mouseY,fontRenderer,itemRenderer);
+                    }
+                }
+            }
+        }
+
     }
+
+
 }
