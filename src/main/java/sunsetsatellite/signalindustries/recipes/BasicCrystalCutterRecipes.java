@@ -20,10 +20,12 @@ public class BasicCrystalCutterRecipes extends CrystalCutterRecipes {
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,500));
         list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,4));
+        list.add(1);
         addRecipe(list,new ItemStack(SignalIndustries.crystalChip.id,1,0));
         list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,2000));
         list.add(new ItemStack(SignalIndustries.signalumCrystal,1));
+        list.add(0);
         addRecipe(list,new ItemStack(SignalIndustries.pureCrystalChip.id,2,0));
         //addRecipe(new ArrayList<Object>{new FluidStack((BlockFluid) Block.waterMoving,1000),new ItemStack(mod_SignalIndustries.rawSignalumCrystal,8)},new ItemStack(mod_SignalIndustries.signalumCrystal,1));
     }
