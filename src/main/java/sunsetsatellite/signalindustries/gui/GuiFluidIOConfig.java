@@ -11,11 +11,13 @@ import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.sound.SoundType;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+
+
 
 public class GuiFluidIOConfig extends GuiScreen {
 
@@ -39,7 +41,7 @@ public class GuiFluidIOConfig extends GuiScreen {
         if (button == 1) {
             for (int l = 0; l < this.controlList.size(); ++l) {
                 GuiButton guibutton = this.controlList.get(l);
-                if (guibutton.mousePressed(this.mc, x, y)) {
+                if (guibutton.mouseClicked(this.mc, x, y)) {
                     this.mc.sndManager.playSound("random.click", SoundType.GUI_SOUNDS, 1.0F, 1.0F);
                     action2Performed(guibutton);
                 }
@@ -61,13 +63,13 @@ public class GuiFluidIOConfig extends GuiScreen {
 
     public void keyTyped(char c, int i) {
         if (i == 1) {
-            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile,tile.xCoord,tile.yCoord,tile.zCoord);
+            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, (IInventory) tile,tile.x,tile.y,tile.z);
         }
     }
 
     protected void drawGuiContainerBackgroundLayer(float f)
     {
-        int i = mc.renderEngine.getTexture("assets/signalindustries/gui/ioconfig.png");
+        int i = mc.renderEngine.getTexture("/assets/signalindustries/gui/ioconfig.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(i);
         int j = (width - xSize) / 2;
@@ -102,7 +104,7 @@ public class GuiFluidIOConfig extends GuiScreen {
     }
 
     @Override
-    public void initGui() {
+    public void init() {
 
 
         controlList.add(new GuiButton(2, Math.round(width / 2) - 10, Math.round(height / 2) - 63, 15, 15, tile.connections.get(Direction.Y_POS).getLetter())); //Y+
@@ -132,7 +134,7 @@ public class GuiFluidIOConfig extends GuiScreen {
             controlList.get(0).enabled = false;
         }
 
-        super.initGui();
+        super.init();
     }
 
     @Override

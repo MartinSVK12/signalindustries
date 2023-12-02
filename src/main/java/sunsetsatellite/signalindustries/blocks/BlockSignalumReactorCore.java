@@ -3,17 +3,22 @@ package sunsetsatellite.signalindustries.blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
 import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.BlockInstance;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3i;
+
+
+
 
 public class BlockSignalumReactorCore extends BlockContainerTiered{
     public BlockSignalumReactorCore(String key, int i, Tier tier, Material material) {
@@ -42,6 +47,12 @@ public class BlockSignalumReactorCore extends BlockContainerTiered{
             }
             return true;
         }
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        String s = super.getDescription(stack);
+        return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
     }
 
     @Override

@@ -4,15 +4,15 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.multiblocks.IMultiblock;
+import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
-import sunsetsatellite.sunsetutils.util.BlockInstance;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3i;
-import sunsetsatellite.sunsetutils.util.multiblocks.IMultiblock;
-import sunsetsatellite.sunsetutils.util.multiblocks.Multiblock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +36,12 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         speedMultiplier = 1;
         extractFluids();
         stabilizers.clear();
-        Direction dir = Direction.getDirectionFromSide(getBlockMetadata());
-        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(xCoord,yCoord,zCoord),dir);
+        Direction dir = Direction.getDirectionFromSide(getMovedData());
+        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof TileEntityStabilizer){
                 ((TileEntityStabilizer) tileEntity.tile).connectedTo = this;
@@ -51,7 +51,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
        /* for (Direction value : Direction.values()) {
             if(value == Direction.Y_NEG || value == Direction.Y_POS) continue;
             Vec3i v = value.getVec().multiply(2);
-            Vec3i tileVec = new Vec3i(xCoord,yCoord,zCoord);
+            Vec3i tileVec = new Vec3i(x,y,z);
             TileEntity tile = value.getTileEntity(worldObj,tileVec.add(v));
             if(tile instanceof TileEntityStabilizer){
                 ((TileEntityStabilizer) tile).connectedTo = this;
@@ -74,8 +74,8 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
                 update = fuel();
             }
             if(isBurning() && canProcess()){
-                for (float y = yCoord; y < 256; y+=0.1f) {
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+0.5,y,zCoord+0.5,0,0,0,1.0f,0.5f,0.0f,1.0f,16));
+                for (float y1 = y; y < 256; y+=0.1f) {
+                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+0.5,y1,z+0.5,0,0,0,1.0f,0.5f,0.0f,1.0f,16));
                 }
                 progressTicks++;
                 if(progressTicks >= progressMaxTicks){
@@ -94,7 +94,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
         if(update) {
             this.onInventoryChanged();
         }
-        super.updateEntity();
+        super.tick();
     }
 
     public boolean canProcess() {
@@ -117,9 +117,9 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
         if (canProcess()) {
             ItemStack stack = itemContents[0];
             CompoundTag pos = new CompoundTag();
-            pos.putInt("x",xCoord);
-            pos.putInt("y",yCoord+1);
-            pos.putInt("z",zCoord);
+            pos.putInt("x",x);
+            pos.putInt("y",y+1);
+            pos.putInt("z",z);
             stack.getData().put("position",pos);
         }
     }

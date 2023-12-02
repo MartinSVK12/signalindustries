@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.powersuit;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.NBTHelper;

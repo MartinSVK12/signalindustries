@@ -8,21 +8,21 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.FluidAPI;
-import sunsetsatellite.fluidapi.api.IFluidInventory;
-import sunsetsatellite.fluidapi.render.RenderFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.CatalystFluids;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.render.RenderFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
     @Override
     public void doRender(TileEntity tileEntity1, double d2, double d4, double d6, float f8) {
 
-        int i = tileEntity1.xCoord;
-        int j = tileEntity1.yCoord;
-        int k = tileEntity1.zCoord;
-        World blockAccess = this.renderDispatcher.renderEngine.minecraft.theWorld;
+        int i = tileEntity1.x;
+        int j = tileEntity1.y;
+        int k = tileEntity1.z;
+        World blockAccess = this.renderDispatcher.renderEngine.mc.theWorld;
         Block block = SignalIndustries.prototypeConduit;
 
         GL11.glPushMatrix();
@@ -58,7 +58,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 
 
         float amount = (fluidAmount / fluidMaxAmount);
-        float mapped = (float) FluidAPI.map(amount,0.0d,1.0d,0.0d,0.3d);
+        float mapped = (float) CatalystFluids.map(amount,0.0d,1.0d,0.0d,0.3d);
         
         GL11.glTranslatef((float)d2, (float)d4, (float)d6);
         GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -157,7 +157,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
         renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
         Block f1 = Block.blocksList[i];
         GL11.glPushMatrix();
-        this.blockRenderer.renderBlock(f1, j, renderengine.minecraft.theWorld, tile.xCoord, tile.yCoord, tile.zCoord);
+        this.blockRenderer.renderBlock(f1, j, renderengine.mc.theWorld, tile.x, tile.y, tile.z);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);
     }

@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.inventories;
 
 
 import net.minecraft.core.block.BlockFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 
@@ -16,7 +16,7 @@ public class TileEntityConduit extends TileEntityFluidPipe {
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         if(fluidContents[0] != null && fluidContents[0].amount < 0){
             fluidContents[0] = null;
         }
@@ -24,7 +24,7 @@ public class TileEntityConduit extends TileEntityFluidPipe {
             fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 1000;
             transferSpeed = 20 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
         }
-        super.updateEntity();
+        super.tick();
     }
 
 }

@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 
 public class TileEntityItemBus extends TileEntityTieredContainer implements IMultiblockPart {
@@ -17,8 +17,8 @@ public class TileEntityItemBus extends TileEntityTieredContainer implements IMul
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         extractFluids();
     }
 

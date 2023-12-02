@@ -3,11 +3,11 @@ package sunsetsatellite.signalindustries.recipes;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 
 import java.util.HashMap;
 
-public class PumpRecipes extends MachineRecipesBase<Integer,FluidStack> {
+public class PumpRecipes extends MachineRecipesBase<Integer, FluidStack> {
     public static final PumpRecipes instance = new PumpRecipes();
 
     protected PumpRecipes() {

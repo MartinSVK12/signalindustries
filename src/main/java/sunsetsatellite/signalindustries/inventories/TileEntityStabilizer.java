@@ -5,16 +5,16 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3i;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,8 +51,13 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     }
 
     @Override
-    public void updateEntity() {
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void sortInventory() {
+
+    }
+
+    @Override
+    public void tick() {
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         boolean update = false;
 
@@ -66,13 +71,13 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
             }*/
             if(isBurning() && canProcess()){
                 if(progressTicks > 0){
-                    /*SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+random.nextFloat(),yCoord+random.nextFloat(),zCoord+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));*/
+                    /*SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
+                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));*/
                     if(connectedTo instanceof IStabilizable && ((IStabilizable) connectedTo).isActive()){
                         progressTicks--;
                         if(connectedTo instanceof TileEntityDimensionalAnchor){
-                            Vec3i pos = new Vec3i(xCoord,yCoord,zCoord);
-                            Vec3i connectedPos = new Vec3i(connectedTo.xCoord, connectedTo.yCoord, connectedTo.zCoord);
+                            Vec3i pos = new Vec3i(x,y,z);
+                            Vec3i connectedPos = new Vec3i(connectedTo.x, connectedTo.y, connectedTo.z);
                             if(pos.x > connectedPos.x){
                                 int temp = pos.x;
                                 pos.x = connectedPos.x;
@@ -86,13 +91,13 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
                             for (float i = pos.x; i <= connectedPos.x; i+=0.1f) {
                                 for (float k = pos.z; k <= connectedPos.z; k+=0.1f) {
                                     for (float l = 0; l < 4; l++) {
-                                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,yCoord+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
+                                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,i+0.5,y+0.5,k+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
                                     }
                                 }
                             }
                         } else if (connectedTo instanceof TileEntitySignalumReactor) {
                             for (float i = 0; i < 12; i+=0.2f) {
-                                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+0.5,yCoord+i,zCoord+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
+                                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+0.5,y+i,z+0.5,0,0,0,1.0f,1.0f,0.0f,1.0f,6));
                             }
                         }
                     }
@@ -192,14 +197,14 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = true;
                 pressurizePipes((TileEntityFluidPipe) tile,already);
@@ -213,14 +218,14 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = false;
                 unpressurizePipes((TileEntityFluidPipe) tile,already);

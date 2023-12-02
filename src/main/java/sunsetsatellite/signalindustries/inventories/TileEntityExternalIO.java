@@ -7,11 +7,11 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import org.jetbrains.annotations.NotNull;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.IFluidInventory;
-import sunsetsatellite.fluidapi.api.IFluidTransfer;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.api.IFluidTransfer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 
 import java.util.ArrayList;
 
@@ -203,19 +203,21 @@ public class TileEntityExternalIO extends TileEntityTieredMachine {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        worldObj.markBlocksDirty(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+    public void tick() {
+        super.tick();
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         if(externalTile == null){
             for (Direction dir : Direction.values()) {
                 TileEntity tile = dir.getTileEntity(worldObj,this);
                 if(tile instanceof IInventory || tile instanceof IFluidInventory){
-                    externalTile = tile;
-                    externalTileSide = dir;
+                    if(!(tile instanceof TileEntityExternalIO)){
+                        externalTile = tile;
+                        externalTileSide = dir;
+                    }
                 }
             }
         } else {
-            if(worldObj.getBlockTileEntity(externalTile.xCoord,externalTile.yCoord,externalTile.zCoord) != externalTile){
+            if(worldObj.getBlockTileEntity(externalTile.x,externalTile.y,externalTile.z) != externalTile){
                 externalTile = null;
                 externalTileSide = null;
             }

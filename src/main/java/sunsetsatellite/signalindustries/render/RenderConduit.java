@@ -4,7 +4,7 @@ package sunsetsatellite.signalindustries.render;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.fluidapi.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.signalindustries.interfaces.IConduitsConnect;
 
 public class RenderConduit {

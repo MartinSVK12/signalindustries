@@ -56,11 +56,12 @@ public class GuiRecipeMaker extends GuiContainer {
         }
     }
 
-    public void initGui()
+    @Override
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) - 80, Math.round(height / 2) - 80, 20, 20, "+"));
         controlList.add(new GuiButton(1, Math.round(width / 2) - 80, Math.round(height / 2) - 55, 20, 20, "X"));
-        super.initGui();
+        super.init();
     }
 }
 

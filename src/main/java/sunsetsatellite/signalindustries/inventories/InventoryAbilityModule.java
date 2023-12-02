@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries.inventories;
 
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 
 public class InventoryAbilityModule extends ItemInventoryFluid {

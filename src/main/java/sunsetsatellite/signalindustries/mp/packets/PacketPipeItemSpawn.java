@@ -6,8 +6,8 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.handler.NetHandler;
 import net.minecraft.core.util.helper.MathHelper;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3f;
+
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -40,9 +40,9 @@ public class PacketPipeItemSpawn extends Packet {
             PipeItem pipeItem = entity.getPipeItem();
             this.inDir = pipeItem.inDir;
             this.outDir = pipeItem.outDir;
-            this.tileX = entity.pipe.xCoord;
-            this.tileY = entity.pipe.yCoord;
-            this.tileZ = entity.pipe.zCoord;
+            this.tileX = entity.pipe.x;
+            this.tileY = entity.pipe.y;
+            this.tileZ = entity.pipe.z;
             this.offset = pipeItem.offset;
             this.center = pipeItem.goingToCenter;
             this.end = pipeItem.goingToCenter;

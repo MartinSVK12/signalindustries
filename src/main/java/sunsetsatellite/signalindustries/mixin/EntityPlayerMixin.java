@@ -45,7 +45,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     )
     public void sleepInBedAt(int x, int y, int z, CallbackInfoReturnable<EnumSleepStatus> cir) {
         if (!world.isClientSide) {
-            if(world.currentWeather == SignalIndustries.weatherBloodMoon){
+            if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
                 addChatMessage("bed.bloodMoon");
                 cir.setReturnValue(EnumSleepStatus.NOT_POSSIBLE_NOW);
             }

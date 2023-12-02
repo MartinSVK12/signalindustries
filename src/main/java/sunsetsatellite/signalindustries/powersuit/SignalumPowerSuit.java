@@ -11,9 +11,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Color;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.ContainerItemFluid;
+import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
@@ -23,7 +23,6 @@ import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.Mode;
-import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -150,7 +149,7 @@ public class SignalumPowerSuit {
         for (ItemStack itemStack : armor) {
             if(itemStack.isItemDamaged() && getEnergy() > 0){
                 decrementEnergy(1);
-                itemStack.damageItem(-1,player);
+                itemStack.repairItem(1);
             }
         }
     }
@@ -298,7 +297,7 @@ public class SignalumPowerSuit {
         DrawUtil drawUtil = new DrawUtil();
         if(!active){
             KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
-            fontRenderer.drawCenteredString(String.format("%s | Press Shift+%s",TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, Keyboard.getKeyName(openSuitKey.key)),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | Press Shift+%s",TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, openSuitKey.getKeyName()),width/2,height-64,0xFFFFFFFF);
             return;
         }
         if(status == Status.NO_ENERGY){

@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.recipes;
 
 
 import net.minecraft.core.block.BlockFluid;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class BasicExtractorRecipes extends ExtractorRecipes {

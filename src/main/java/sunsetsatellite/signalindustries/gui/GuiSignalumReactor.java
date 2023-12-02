@@ -60,16 +60,16 @@ public class GuiSignalumReactor extends GuiTileEntity<TileEntitySignalumReactor>
                 break;
         }
     }
-
+    
     @Override
-    public boolean doesGuiPauseGame() {
+    public boolean pausesGame() {
         return false;
     }
 
     @Override
-    public void initGui()
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round((float) width / 2) - 30, Math.round((float) height / 2) + 50, 60, 20, "ON/OFF"));
-        super.initGui();
+        super.init();
     }
 }

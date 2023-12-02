@@ -47,8 +47,8 @@ public abstract class GuiTileEntity<TILE extends TileEntity> extends GuiScreen {
     }
 
     @Override
-    public void updateScreen() {
-        super.updateScreen();
+    public void tick() {
+        super.tick();
         if (!this.mc.thePlayer.isAlive() || this.mc.thePlayer.removed) {
             this.mc.thePlayer.closeScreen();
         }

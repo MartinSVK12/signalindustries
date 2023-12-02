@@ -107,7 +107,7 @@ public class WorldFeatureDilithiumCrystal extends WorldFeature {
     }
 
     //TODO: doesn't do what it is supposed to do but creates interesting patterns, reuse for something else maybe?
-    public boolean isPointOnSphere(int x, int y, int z, double radius) {
+    public boolean unused(int x, int y, int z, double radius) {
         return (x*x + y*y + z*z)+1 == radius*radius || (x*x + y*y + z*z)-1 == radius*radius;
     }
 }

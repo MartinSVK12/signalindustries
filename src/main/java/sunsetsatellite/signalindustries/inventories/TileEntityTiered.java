@@ -7,8 +7,8 @@ public class TileEntityTiered extends TileEntityWithName {
     public Tier tier = Tier.PROTOTYPE;
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         if(worldObj != null && getBlockType() != null){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }

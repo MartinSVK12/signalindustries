@@ -9,7 +9,6 @@ public class EntityInfernal extends EntityMonster {
     public EntityInfernal(World world) {
         super(world);
         this.skinName = "infernal";
-        this.highestSkinVariant = 15;
         this.moveSpeed = 0.5F;
         this.attackStrength = 5;
         this.scoreValue = 300;
@@ -40,7 +39,7 @@ public class EntityInfernal extends EntityMonster {
         return "/assets/signalindustries/mob/infernal.png";
     }
 
-    protected String getLivingSound() {
+    public String getLivingSound() {
         return "fire.fire";
     }
 

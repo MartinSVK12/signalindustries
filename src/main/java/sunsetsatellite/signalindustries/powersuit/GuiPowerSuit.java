@@ -7,9 +7,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.ContainerItemFluid;
-import sunsetsatellite.fluidapi.api.GuiItemFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
+import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
+import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
+import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.DrawUtil;
@@ -143,7 +143,7 @@ public class GuiPowerSuit extends GuiItemFluid {
         }
     }
 
-    public void initGui()
+    public void init()
     {
         GuiButton helmerButton = new GuiButton(0, (width / 2)-70, (height / 2)-25, 20, 20, "");
         GuiButton chestButton = new GuiButton(1, (width / 2)-40, (height / 2)-25, 20, 20, "");
@@ -160,6 +160,6 @@ public class GuiPowerSuit extends GuiItemFluid {
         controlList.add(legsButton);
         controlList.add(bootsButton);
 
-        super.initGui();
+        super.init();
     }
 }

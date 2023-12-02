@@ -1,15 +1,15 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.multiblocks.IMultiblock;
+import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
-import sunsetsatellite.signalindustries.items.ItemFuelCell;
-import sunsetsatellite.sunsetutils.util.BlockInstance;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3i;
-import sunsetsatellite.sunsetutils.util.multiblocks.IMultiblock;
-import sunsetsatellite.sunsetutils.util.multiblocks.Multiblock;
+import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +47,11 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         stabilizers.clear();
         ignitors.clear();
-        Direction dir = Direction.getDirectionFromSide(getBlockMetadata());
-        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(xCoord,yCoord,zCoord),Direction.Z_POS);
+        Direction dir = Direction.getDirectionFromSide(getMovedData());
+        ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),Direction.Z_POS);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof IMultiblockPart){
                 if(tileEntity.tile instanceof TileEntityStabilizer){

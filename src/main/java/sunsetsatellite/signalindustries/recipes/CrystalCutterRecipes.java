@@ -5,7 +5,7 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
         return instance;
     }
 
-    private CrystalCutterRecipes() {
+    protected CrystalCutterRecipes() {
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
         list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,8));

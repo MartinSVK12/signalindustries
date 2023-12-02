@@ -38,7 +38,7 @@ public class BlockRecipeMaker extends BlockTileEntity {
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 }

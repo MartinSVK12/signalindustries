@@ -6,20 +6,18 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
 import sunsetsatellite.signalindustries.gui.GuiEnergyInjector;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.models.ICustomModel;
-import sunsetsatellite.sunsetutils.util.models.NBTModel;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockEnergyInjector extends BlockContainerTiered implements ICustomModel {
+public class BlockEnergyInjector extends BlockContainerTiered {
     public BlockEnergyInjector(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
@@ -30,7 +28,7 @@ public class BlockEnergyInjector extends BlockContainerTiered implements ICustom
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 
@@ -51,7 +49,7 @@ public class BlockEnergyInjector extends BlockContainerTiered implements ICustom
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
+    public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
@@ -86,11 +84,6 @@ public class BlockEnergyInjector extends BlockContainerTiered implements ICustom
             }
         }
 
-        super.onBlockRemoval(world, i, j, k);
-    }
-
-    @Override
-    public NBTModel getModel() {
-        return SignalIndustries.energyInjectorModel;
+        super.onBlockRemoved(world, i, j, k, data);
     }
 }

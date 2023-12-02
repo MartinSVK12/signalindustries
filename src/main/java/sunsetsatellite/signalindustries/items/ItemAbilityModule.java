@@ -5,7 +5,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.api.ContainerItemFluid;
+import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
 import sunsetsatellite.signalindustries.gui.GuiAbilityModule;

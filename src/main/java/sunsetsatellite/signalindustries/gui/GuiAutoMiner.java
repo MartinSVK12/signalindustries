@@ -7,8 +7,8 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.GuiFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
@@ -55,7 +55,7 @@ public class GuiAutoMiner extends GuiFluid {
             if (y > j + 43 && y < j + 49) {
                 I18n translator = I18n.getInstance();
                 String name = translator.translateKey(tile.getBlockType().getLanguageKey(0)+".name");
-                GuidebookPlusPlus.nameFocus = ">"+ name;
+                //GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -102,9 +102,9 @@ public class GuiAutoMiner extends GuiFluid {
                 break;
         }
         fontRenderer.drawCenteredString(name, 90, 4, color);
-        fontRenderer.drawStringWithShadow("X: "+(tile.current.x-tile.xCoord),38,20,0xFFFF0000);
-        fontRenderer.drawStringWithShadow("Y: "+(tile.current.y-tile.yCoord),38,32,0xFF4080FF);
-        fontRenderer.drawStringWithShadow("Z: "+(tile.current.z-tile.zCoord),38,44,0xFF00FF00);
+        fontRenderer.drawStringWithShadow("X: "+(tile.current.x-tile.x),38,20,0xFFFF0000);
+        fontRenderer.drawStringWithShadow("Y: "+(tile.current.y-tile.y),38,32,0xFF4080FF);
+        fontRenderer.drawStringWithShadow("Z: "+(tile.current.z-tile.z),38,44,0xFF00FF00);
         fontRenderer.drawStringWithShadow("S: "+(tile.progressMaxTicks/tile.speedMultiplier)+"t",80,44,0xFFFF8000);
         fontRenderer.drawStringWithShadow("C: "+(tile.cost),80,32,0xFF800000);
         //fontRenderer.drawString(String.format("X: %d Y: %d Z: %d",tile.current.x,tile.current.y,tile.current.z),38,20,0xFFFFFFFF);
@@ -116,10 +116,10 @@ public class GuiAutoMiner extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 1:
-                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 2:
                 if(tile.workTimer.isPaused()){
@@ -133,11 +133,11 @@ public class GuiAutoMiner extends GuiFluid {
         }
     }
 
-    public void initGui()
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) + 60, Math.round(height / 2) - 80, 20, 20, "F"));
         controlList.add(new GuiButton(1, Math.round(width / 2) + 60, Math.round(height / 2) - 24, 20, 20, "I"));
         controlList.add(new GuiButton(2, Math.round(width / 2) - 81, Math.round(height / 2) - 80, 20, 20, tile.workTimer.isPaused() ? "OFF" : "ON"));
-        super.initGui();
+        super.init();
     }
 }

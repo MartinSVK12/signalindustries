@@ -10,10 +10,10 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.GuiFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.guidebookpp.GuidebookPlusPlus;
+import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.inventories.TileEntityCrystalCutter;
 
@@ -58,7 +58,7 @@ public class GuiCrystalCutter extends GuiFluid {
             if (y > j + 40 && y < j + 46) {
                 I18n translator = I18n.getInstance();
                 String name = translator.translateKey(tile.getBlockType().getLanguageKey(0)+".name");
-                GuidebookPlusPlus.nameFocus = ">"+ name;
+                //GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
@@ -72,6 +72,17 @@ public class GuiCrystalCutter extends GuiFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
         int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+                break;
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
+                break;
+            case REINFORCED:
+            case AWAKENED:
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;
@@ -93,7 +104,21 @@ public class GuiCrystalCutter extends GuiFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawCenteredString(name,90,6,0xFFFFFFFF);
+        int color = 0xFFFFFFFF;
+        switch (((BlockContainerTiered)tile.getBlockType()).tier){
+            case PROTOTYPE:
+                break;
+            case BASIC:
+                color = 0xFFFF8080;
+                break;
+            case REINFORCED:
+                color = 0xFFFF0000;
+                break;
+            case AWAKENED:
+                color = 0xFFFFA500;
+                break;
+        }
+        fontRenderer.drawCenteredString(name, 90, 6, color);
     }
     protected void buttonPressed(GuiButton guibutton) {
         if (!guibutton.enabled) {
@@ -101,20 +126,20 @@ public class GuiCrystalCutter extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 1:
-                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             default:
                 break;
         }
     }
 
-    public void initGui()
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) + 60, Math.round(height / 2) - 80, 20, 20, "F"));
         controlList.add(new GuiButton(1, Math.round(width / 2) + 60, Math.round(height / 2) - 60, 20, 20, "I"));
-        super.initGui();
+        super.init();
     }
 }

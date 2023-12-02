@@ -5,7 +5,8 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
+
 
 public class ItemWarpOrb extends Item implements ICustomDescription {
     public ItemWarpOrb(int i) {

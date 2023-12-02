@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.fluidapi.api.ContainerFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
+import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
+import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
 
 public class ContainerFluidHatch extends ContainerFluid {

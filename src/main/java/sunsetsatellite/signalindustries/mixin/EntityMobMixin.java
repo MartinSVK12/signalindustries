@@ -29,7 +29,7 @@ public class EntityMobMixin extends EntityLiving {
             at = @At("HEAD")
     )
     public void onLivingUpdate(CallbackInfo ci) {
-        if(world.currentWeather == SignalIndustries.weatherBloodMoon) {
+        if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon) {
             if(random.nextInt(2)==1){
                 world.spawnParticle("reddust",x+random.nextFloat(),y+1,z+random.nextFloat(),0,0,0);
             } else {
@@ -45,7 +45,7 @@ public class EntityMobMixin extends EntityLiving {
             cancellable = true
     )
     public void attackEntity(Entity entity, float f, CallbackInfo ci){
-        if(world.currentWeather == SignalIndustries.weatherBloodMoon) {
+        if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon) {
             if (this.attackTime <= 0 && f < 2.0F && entity.bb.maxY > this.bb.minY && entity.bb.minY < this.bb.maxY) {
                 this.attackTime = 15;
                 entity.hurt(this, attackStrength * 2, DamageType.COMBAT);

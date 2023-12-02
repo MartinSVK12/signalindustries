@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.recipes;
 
 
-import sunsetsatellite.fluidapi.api.FluidStack;
+
 
 import java.util.HashMap;
 

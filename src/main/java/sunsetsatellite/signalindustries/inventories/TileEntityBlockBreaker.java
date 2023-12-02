@@ -5,10 +5,12 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.enums.EnumDropCause;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.Vec3i;
+
+
 
 public class TileEntityBlockBreaker extends TileEntity {
 
@@ -22,17 +24,17 @@ public class TileEntityBlockBreaker extends TileEntity {
     public boolean isActive(){
         return active;
     }
-
+    
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         if(worldObj != null && getBlockType() != null){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }
         if(active && !blockBroken){
-            Direction dir = Direction.getDirectionFromSide(getBlockMetadata());
-            Vec3i vec = new Vec3i(xCoord,yCoord,zCoord).add(dir.getVec());
-            Vec3i vec2 = new Vec3i(xCoord,yCoord,zCoord).add(dir.getOpposite().getVec());
+            Direction dir = Direction.getDirectionFromSide(getMovedData());
+            Vec3i vec = new Vec3i(x,y,z).add(dir.getVec());
+            Vec3i vec2 = new Vec3i(x,y,z).add(dir.getOpposite().getVec());
             int blockId = worldObj.getBlockId(vec.x, vec.y, vec.z);
             if(blockId > 0){
                 Block block = Block.blocksList[blockId];

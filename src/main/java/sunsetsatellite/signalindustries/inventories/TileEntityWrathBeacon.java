@@ -9,10 +9,10 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.util.Wave;
-import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -61,8 +61,8 @@ public class TileEntityWrathBeacon extends TileEntity {
     }
 
     @Override
-    public void updateEntity() {
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void tick() {
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         if(active){
             spawnTimer.tick();
             intermissionTimer.tick();
@@ -87,16 +87,16 @@ public class TileEntityWrathBeacon extends TileEntity {
             intermissionTimer.pause();
             wave = 0;
             currentMaxAmount = 0;
-            worldObj.setBlockWithNotify(xCoord,yCoord,zCoord,0);
-            ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, xCoord, yCoord, zCoord, 3);
+            worldObj.setBlockWithNotify(x,y,z,0);
+            ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) xCoord, (float) yCoord, (float) zCoord, new ItemStack(SignalIndustries.energyCatalyst, 1));
+            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.energyCatalyst, 1));
             worldObj.entityJoinedWorld(entityitem);
         }
         if(active){
-            for (float y = yCoord; y < 256; y+=0.1) {
-                worldObj.spawnParticle("reddust",xCoord+0.5,y,zCoord+0.5,0,0,0);
+            for (float y1 = y; y < 256; y+=0.1) {
+                worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0);
             }
         }
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
@@ -110,12 +110,12 @@ public class TileEntityWrathBeacon extends TileEntity {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
-            for (int x = xCoord-7; x < xCoord+7; x++) {
-                for (int y = yCoord; y < yCoord+8; y++) {
-                    for (int z = zCoord-7; z < zCoord+7; z++) {
+            for (int x1 = x-7; x < x+7; x++) {
+                for (int y1 = y; y < y+8; y++) {
+                    for (int z1 = z-7; z < z+7; z++) {
                         int id = worldObj.getBlockId(x,y,z);
-                        int idUnder = worldObj.getBlockId(x,yCoord-1,z);
-                        if (id != 0 && (x != xCoord || y != yCoord || z != zCoord)) {
+                        int idUnder = worldObj.getBlockId(x,y-1,z);
+                        if (id != 0 && (x1 != x || y1 != y || z1 != z)) {
                             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon desires more space..");
                             return;
                         }
@@ -158,7 +158,7 @@ public class TileEntityWrathBeacon extends TileEntity {
     public void spawn(){
         if(enemiesLeft.size() < currentMaxAmount){
             started = true;
-            ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, this.xCoord, this.zCoord);
+            ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, this.x, this.z);
             EntityMonster mob;
             try {
                 mob = waves.get(wave).chooseRandomMob().getConstructor(World.class).newInstance(worldObj);
@@ -178,7 +178,7 @@ public class TileEntityWrathBeacon extends TileEntity {
 
     public ChunkPosition getRandomSpawningPointInChunk(World worldObj, int i, int j) {
         int k = i + worldObj.rand.nextInt(8);
-        int l = this.yCoord;
+        int l = this.y;
         int i1 = j + worldObj.rand.nextInt(8);
         return new ChunkPosition(k, l, i1);
     }

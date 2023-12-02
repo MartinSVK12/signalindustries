@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.Side;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Direction;
 import turniplabs.halplibe.helper.TextureHelper;
 
 public class BlockTexture {

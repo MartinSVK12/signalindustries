@@ -17,6 +17,7 @@
     "EntityTrackerEntryMixin",
     "EntityTrackerMixin",
     "GameSettingsMixin",
+    "GuidebookSectionsMixin",
     "GuiIngameMixin",
     "InventoryPlayerMixin",
     "ItemStackMixin",

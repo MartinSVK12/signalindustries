@@ -5,9 +5,10 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.interfaces.IHasAbility;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
+
 
 public class ItemWithAbility extends Item implements IHasAbility, ICustomDescription {
 

@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.IItemFluidContainer;
+import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 
@@ -24,22 +24,22 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachine {
     }
 
     @Override
-    public void updateEntity() {
-        worldObj.markBlocksDirty(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+    public void tick() {
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         extractFluids();
         if(isBurning()){
             ItemStack stack = getStackInSlot(0);
             if(stack != null){
                 IItemFluidContainer item = (IItemFluidContainer) getStackInSlot(0).getItem();
                 if(item.canFill(stack)){
-                    ItemStack itemStack = item.fill(0,this,stack,injectSpeed);
+                    ItemStack itemStack = item.fill(getFluidInSlot(0),stack,this,injectSpeed);
                     if(itemStack != null){
                         setInventorySlotContents(0,itemStack);
                     }
                 }
             }
             for (float i = 0; i < 0.5; i+=0.01f) {
-                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,xCoord+0.5,yCoord+i,zCoord+0.5,0,0,0,1.0f,1.0f,0.0f,0.0f,2));
+                SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+0.5,y+i,z+0.5,0,0,0,1.0f,1.0f,0.0f,0.0f,2));
             }
         }
     }

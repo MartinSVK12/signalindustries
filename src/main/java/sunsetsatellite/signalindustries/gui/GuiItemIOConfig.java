@@ -10,10 +10,12 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.sound.SoundType;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+
+
 
 public class GuiItemIOConfig extends GuiScreen {
 
@@ -37,7 +39,7 @@ public class GuiItemIOConfig extends GuiScreen {
         if (button == 1) {
             for (int l = 0; l < this.controlList.size(); ++l) {
                 GuiButton guibutton = this.controlList.get(l);
-                if (guibutton.mousePressed(this.mc, x, y)) {
+                if (guibutton.mouseClicked(this.mc, x, y)) {
                     this.mc.sndManager.playSound("random.click", SoundType.GUI_SOUNDS, 1.0F, 1.0F);
                     action2Performed(guibutton);
                 }
@@ -59,13 +61,13 @@ public class GuiItemIOConfig extends GuiScreen {
 
     public void keyTyped(char c, int i) {
         if (i == 1) {
-            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+            SignalIndustries.displayGui(entityplayer, parentScreen, inventorySlots, tile,tile.x,tile.y,tile.z);
         }
     }
 
     protected void drawGuiContainerBackgroundLayer(float f)
     {
-        int i = mc.renderEngine.getTexture("assets/signalindustries/gui/ioconfig.png");
+        int i = mc.renderEngine.getTexture("/assets/signalindustries/gui/ioconfig.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(i);
         int j = (width - xSize) / 2;
@@ -100,7 +102,7 @@ public class GuiItemIOConfig extends GuiScreen {
     }
 
     @Override
-    public void initGui() {
+    public void init() {
         controlList.add(new GuiButton(2, Math.round(width / 2) - 10, Math.round(height / 2) - 63, 15, 15, tile.itemConnections.get(Direction.Y_POS).getLetter())); //Y+
         controlList.add(new GuiButton(4, Math.round(width / 2) - 10, Math.round(height / 2) - 48, 15, 15, tile.itemConnections.get(Direction.Z_POS).getLetter())); //Z+
         controlList.add(new GuiButton(3, Math.round(width / 2) - 10, Math.round(height / 2) - 33, 15, 15, tile.itemConnections.get(Direction.Y_NEG).getLetter())); //Y-
@@ -124,7 +126,7 @@ public class GuiItemIOConfig extends GuiScreen {
             controlList.get(11).enabled = false;
         }
 
-        super.initGui();
+        super.init();
     }
 
     @Override

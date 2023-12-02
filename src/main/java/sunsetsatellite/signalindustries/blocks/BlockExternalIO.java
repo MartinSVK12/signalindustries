@@ -9,13 +9,13 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerExternalIO;
 import sunsetsatellite.signalindustries.gui.GuiExternalIO;
 import sunsetsatellite.signalindustries.inventories.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
 import turniplabs.halplibe.helper.TextureHelper;
 
 public class BlockExternalIO extends BlockContainerTiered{

@@ -11,13 +11,13 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
 import sunsetsatellite.signalindustries.gui.GuiStabilizer;
 import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,7 +34,7 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
+    public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
@@ -69,7 +69,7 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
             }
         }
 
-        super.onBlockRemoval(world, i, j, k);
+        super.onBlockRemoved(world, i, j, k, data);
     }
 
     @Override

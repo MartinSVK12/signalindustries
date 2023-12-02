@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
+
 
 public class InventoryPulsar extends ItemInventoryFluid {
 

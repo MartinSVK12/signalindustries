@@ -4,17 +4,15 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.BasicExtractorRecipes;
-import sunsetsatellite.signalindustries.recipes.ExtractorRecipes;
-import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
 public class TileEntityExtractor extends TileEntityTieredMachine implements IBoostable {
 
-    public MachineRecipesBase<Integer, FluidStack> recipes = ExtractorRecipes.instance;
+    //public MachineRecipesBase<Integer, FluidStack> recipes = ExtractorRecipes.instance;
 
     public TileEntityExtractor(){
         fluidCapacity[0] = 2000;
@@ -26,9 +24,9 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void tick() {
+        super.tick();
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         for(int i = 0; i < itemContents.length; i++){
             if(itemContents[i] != null && itemContents[i].stackSize <= 0){
@@ -38,7 +36,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
             tier = block.tier;
-            switch (block.tier){
+            /*switch (block.tier){
                 case PROTOTYPE:
                     recipes = ExtractorRecipes.instance;
                     break;
@@ -48,7 +46,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
                 case REINFORCED:
                 case AWAKENED:
                     break;
-            }
+            }*/
         }
         boolean update = false;
         if(fuelBurnTicks > 0){
@@ -102,7 +100,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
 
     public void processItem(){
         if(canProcess()){
-            FluidStack stack = recipes.getResult(this.itemContents[0].getItem().id);
+            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0],tier);
             if(fluidContents[0] == null){
                 setFluidInSlot(0, stack);
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
@@ -123,7 +121,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
         if(itemContents[0] == null) {
             return false;
         } else {
-            FluidStack stack = recipes.getResult(itemContents[0].itemID);
+            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0],tier);
             return stack != null && (fluidContents[0] == null || (fluidContents[0].isFluidEqual(stack) && (fluidContents[0].amount + stack.amount <= fluidCapacity[0])));
         }
     }

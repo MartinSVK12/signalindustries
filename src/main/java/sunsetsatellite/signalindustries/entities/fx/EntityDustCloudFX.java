@@ -1,8 +1,8 @@
 package sunsetsatellite.signalindustries.entities.fx;
 
 
+import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.render.Tessellator;
-import net.minecraft.core.entity.fx.EntityFX;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 

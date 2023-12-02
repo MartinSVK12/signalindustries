@@ -15,13 +15,13 @@ public class GameSettingsMixin
     implements IKeybinds
 {
     @Unique
-    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit",24);
+    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bindKeyboard(24);
 
     @Unique
-    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility",54);
+    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility").bindKeyboard(54);
 
     @Unique
-    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode",50);
+    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bindKeyboard(50);
 
     @Override
     public KeyBinding signalIndustries$getKeyOpenSuit() {

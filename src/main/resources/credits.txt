@@ -3,9 +3,10 @@ sunsetsatellite
 --Direct contributions--
 beatrice - crystal, sword texture
 theRandomHat - plate texture
-theMidford
+theMidford - icons
 watermelonMojito - automatic miner texture
 felix170905 - connected textures code
+mzov - dynamo texture
 
 --Libraries/Mods integrated--
 azurelmao - halplibe

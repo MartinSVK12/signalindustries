@@ -18,17 +18,14 @@
 
   "environment": "*",
   "entrypoints": {
-    "fluidapi": [
-      "sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin"
-    ],
-    "guidebookpp": [
-      "sunsetsatellite.signalindustries.api.impl.guidebookpp.SignalIndustriesGuidebookPlugin"
-    ],
-    "btwaila": [
-      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
-    ],
     "main": [
       "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "afterGameStart": [
+      "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "recipesReady": [
+      "sunsetsatellite.signalindustries.recipes.container.SIRecipes"
     ]
   },
   "mixins": [
@@ -37,11 +34,11 @@
 
   "depends": {
     "fabricloader": ">=0.13.3",
-    "fluidapi": ">=1.6.6",
-    "guidebookpp": ">=1.5.3",
-    "sunsetutils": ">=1.7.1"
-  },
-  "suggests": {
-    "energyapi": ">=1.1.1"
+    "catalyst-core": ">=1.0.0",
+    "catalyst-fluids": ">=1.0.0",
+    "catalyst-models": ">=1.0.0",
+    "catalyst-multiblocks": ">=1.0.0",
+    "catalyst-energy": ">=1.0.0",
+    "halplibe": ">=2.5.0"
   }
 }

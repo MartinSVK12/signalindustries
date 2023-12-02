@@ -10,8 +10,9 @@ public class BlockTransparent extends Block {
         super(key, id, material);
     }
 
+
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 }

@@ -6,13 +6,13 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
 import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
 import sunsetsatellite.signalindustries.inventories.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,7 +28,7 @@ public class BlockAutoMiner extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
+    public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
@@ -63,7 +63,7 @@ public class BlockAutoMiner extends BlockContainerTiered {
             }
         }
 
-        super.onBlockRemoval(world, i, j, k);
+        super.onBlockRemoved(world, i, j, k, data);
     }
 
     @Override

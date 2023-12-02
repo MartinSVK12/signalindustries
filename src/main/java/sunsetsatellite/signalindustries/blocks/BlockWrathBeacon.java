@@ -39,7 +39,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
+    public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityWrathBeacon tile = (TileEntityWrathBeacon) world.getBlockTileEntity(i,j,k);
         if(tile != null && tile.active){
             for (EntityPlayer player : world.players) {
@@ -48,7 +48,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
             //world.newExplosion(null,i,j,k,5f,false,false);
         }
 
-        super.onBlockRemoval(world, i, j, k);
+        super.onBlockRemoved(world, i, j, k, data);
     }
 
     @Override

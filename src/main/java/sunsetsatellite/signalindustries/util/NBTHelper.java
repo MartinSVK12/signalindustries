@@ -4,8 +4,8 @@ package sunsetsatellite.signalindustries.util;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 
 public class NBTHelper {

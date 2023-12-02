@@ -7,8 +7,9 @@ import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.render.RenderFluid;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.render.RenderFluid;
+
 
 public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
     private final RenderFluid blockRenderer = new RenderFluid();
@@ -40,7 +41,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
             GL11.glScalef(0.98F, amount, 0.98F);
             GL11.glTranslatef(0.01F, 0.01F, 0.01F);
             GL11.glDisable(2896);
-            this.drawBlock(this.getFontRenderer(), this.renderDispatcher.renderEngine.minecraft.renderEngine, fluidId, 0, 0, 0, 0, tileEntity1);
+            this.drawBlock(this.getFontRenderer(), this.renderDispatcher.renderEngine.mc.renderEngine, fluidId, 0, 0, 0, 0, tileEntity1);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
         }
@@ -51,7 +52,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
         renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
         Block f1 = Block.blocksList[i];
         GL11.glPushMatrix();
-        this.blockRenderer.renderBlock(f1, j, renderengine.minecraft.theWorld, tile.xCoord, tile.yCoord, tile.zCoord);
+        this.blockRenderer.renderBlock(f1, j, renderengine.mc.theWorld, tile.x, tile.y, tile.z);
         GL11.glPopMatrix();
         GL11.glEnable(2884);
     }

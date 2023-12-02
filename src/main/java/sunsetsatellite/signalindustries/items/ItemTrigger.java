@@ -8,10 +8,10 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.abilities.trigger.BoostAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ProjectileAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.TriggerBaseAbility;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
 
 import java.util.HashMap;
 

@@ -5,13 +5,13 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class BlockEnergyCell extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
+    public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityEnergyCell tile = (TileEntityEnergyCell) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
@@ -37,7 +37,7 @@ public class BlockEnergyCell extends BlockContainerTiered {
                 }
             }
         }
-        super.onBlockRemoval(world, i, j, k);
+        super.onBlockRemoved(world, i, j, k, data);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class BlockEnergyCell extends BlockContainerTiered {
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 }

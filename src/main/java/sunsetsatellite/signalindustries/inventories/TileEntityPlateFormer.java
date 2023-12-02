@@ -23,8 +23,8 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
     }
 
     @Override
-    public void updateEntity() {
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void tick() {
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         boolean update = false;
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();

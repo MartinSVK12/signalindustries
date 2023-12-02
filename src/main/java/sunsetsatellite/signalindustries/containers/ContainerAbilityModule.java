@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.fluidapi.api.ContainerItemFluid;
-import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
+import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.SlotAbility;

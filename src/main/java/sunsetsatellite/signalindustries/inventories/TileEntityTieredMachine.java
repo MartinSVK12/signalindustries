@@ -3,16 +3,11 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IFluidIO;
+import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.IFluidIO;
-import sunsetsatellite.sunsetutils.util.IItemIO;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TileEntityTieredMachine extends TileEntityTieredContainer implements IFluidIO, IItemIO {
     public int fuelBurnTicks = 0;
@@ -29,8 +24,8 @@ public class TileEntityTieredMachine extends TileEntityTieredContainer implement
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
             speedMultiplier = block.tier.ordinal()+1;
@@ -38,7 +33,7 @@ public class TileEntityTieredMachine extends TileEntityTieredContainer implement
                 TileEntity tile = dir.getTileEntity(worldObj,this);
                 if(tile instanceof TileEntityBooster){
                     if(((TileEntityBooster) tile).isBurning()){
-                        int meta = tile.getBlockMetadata();
+                        int meta = tile.getMovedData();
                         if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
                             speedMultiplier = block.tier.ordinal()+2;
                         }
@@ -97,5 +92,10 @@ public class TileEntityTieredMachine extends TileEntityTieredContainer implement
     @Override
     public Connection getItemIOForSide(Direction dir) {
         return itemConnections.get(dir);
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 }

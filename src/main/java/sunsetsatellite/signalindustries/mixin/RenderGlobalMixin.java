@@ -36,8 +36,6 @@ public class RenderGlobalMixin {
 
     @Shadow private int starGLCallList;
 
-    @Shadow private int glSkyList2;
-
     @Shadow private int glSkyList;
 
     @Shadow private World worldObj;
@@ -85,7 +83,7 @@ public class RenderGlobalMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderBloodMoon(float partialTicks, CallbackInfo ci) {
-        if(worldObj.currentWeather == SignalIndustries.weatherBloodMoon){
+        if(worldObj.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             GL11.glColor4f(1.0f,0.0f,0.0f,1.0f);
         }
     }
@@ -96,7 +94,7 @@ public class RenderGlobalMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderSolar(float renderPartialTicks, CallbackInfo ci, float celestialAngle, Vec3d vec3d, float f1, float f2, float f3, Tessellator tessellator, float[] af, float f6, float f9, float f11, float f13, float f15) {
-        if(worldObj.currentWeather == SignalIndustries.weatherEclipse){
+        if(worldObj.getCurrentWeather() == SignalIndustries.weatherEclipse){
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);
             GL11.glBindTexture(3553, this.renderEngine.getTexture("/assets/signalindustries/misc/solar_eclipse.png"));
@@ -108,7 +106,7 @@ public class RenderGlobalMixin {
             tessellator.addVertexWithUV(f15, 100.0, f15, 1.0, 1.0);
             tessellator.addVertexWithUV(-f15, 100.0, f15, 0.0, 1.0);
             tessellator.draw();
-        } else if (worldObj.currentWeather == SignalIndustries.weatherSolarApocalypse) {
+        } else if (worldObj.getCurrentWeather() == SignalIndustries.weatherSolarApocalypse) {
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);
             GL11.glBindTexture(3553, this.renderEngine.getTexture("/assets/signalindustries/misc/solar_apocalypse.png"));
@@ -230,9 +228,6 @@ public class RenderGlobalMixin {
                 GL11.glColor3f(f1, f2, f3);
             }
 
-            GL11.glDisable(3553);
-            GL11.glCallList(this.glSkyList2);
-            GL11.glEnable(3553);
             GL11.glDepthMask(true);
             ci.cancel();
         }

@@ -3,11 +3,13 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+
+
 
 public class TileEntityEnergyConnector extends TileEntityTieredContainer implements IMultiblockPart {
 
@@ -23,8 +25,8 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         if(isConnected()){
             if(connectedTo instanceof TileEntitySignalumReactor){
                 if(((TileEntitySignalumReactor) connectedTo).state != TileEntitySignalumReactor.State.INACTIVE){

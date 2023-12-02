@@ -175,7 +175,7 @@ public class ExplosionNoDrops {
             int x1 = chunkposition.x;
             int y1 = chunkposition.y;
             int z1 = chunkposition.z;
-            if (this.world.getBlockId(x1, y1, z1) == 0 && Block.opaqueCubeLookup[this.world.getBlockId(x1, y1 - 1, z1)] && this.ExplosionRNG.nextInt(3) == 0)
+            if (this.world.getBlockId(x1, y1, z1) == 0 && Block.blocksList[this.world.getBlockId(x1, y1 - 1, z1)].isSolidRender() && this.ExplosionRNG.nextInt(3) == 0)
                 this.world.setBlockWithNotify(x1, y1, z1, Block.fire.id);
         }
     }

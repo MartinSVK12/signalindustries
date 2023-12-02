@@ -34,7 +34,7 @@ public abstract class EntityLivingMixin extends Entity {
         if (this.world.isDaytime()) {
             float f = this.getBrightness(1.0F);
             if (f > 0.5F && this.world.canBlockSeeTheSky(MathHelper.floor_double(this.x), MathHelper.floor_double(this.y), MathHelper.floor_double(this.z)) && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.getCurrentWeather() != Weather.overworldFog) {
-                if(world.currentWeather == SignalIndustries.weatherSolarApocalypse){
+                if(world.getCurrentWeather() == SignalIndustries.weatherSolarApocalypse){
                     if (this.fireImmune || this.world.isClientSide) {
                         remainingFireTicks = 0;
                     } else{
@@ -52,7 +52,7 @@ public abstract class EntityLivingMixin extends Entity {
             cancellable = true
     )
     protected void bloodMoonReward(CallbackInfo ci){
-        if(world.currentWeather == SignalIndustries.weatherBloodMoon){
+        if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             int i = this.getDropItemId();
             if (i > 0) {
                 int j = this.random.nextInt(4) + 1;
@@ -71,6 +71,6 @@ public abstract class EntityLivingMixin extends Entity {
             cancellable = true
     )
     public void bloodMoonSpawning(CallbackInfoReturnable<Integer> cir){
-        cir.setReturnValue(world.currentWeather == SignalIndustries.weatherBloodMoon ? 16 : 4);
+        cir.setReturnValue(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon ? 16 : 4);
     }
 }

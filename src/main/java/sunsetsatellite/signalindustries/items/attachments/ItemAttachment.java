@@ -4,9 +4,9 @@ package sunsetsatellite.signalindustries.items.attachments;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.sunsetutils.util.ICustomDescription;
 
 import java.util.List;
 

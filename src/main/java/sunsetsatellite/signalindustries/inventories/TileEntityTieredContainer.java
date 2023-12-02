@@ -1,12 +1,12 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.entity.TileEntity;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
     public Tier tier = Tier.PROTOTYPE;
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         if(worldObj != null && getBlockType() != null){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }
@@ -42,14 +42,14 @@ public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = true;
                 pressurizePipes((TileEntityFluidPipe) tile,already);
@@ -63,14 +63,14 @@ public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = false;
                 unpressurizePipes((TileEntityFluidPipe) tile,already);

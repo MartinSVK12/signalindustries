@@ -5,9 +5,9 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.fluidapi.api.ContainerItemFluid;
-import sunsetsatellite.fluidapi.api.ItemInventoryFluid;
-import sunsetsatellite.fluidapi.api.SlotFluid;
+import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
+import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
+import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.SlotAttachment;
 

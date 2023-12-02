@@ -23,7 +23,7 @@ public class EntityArrowMixin {
     @Inject(method = "<init>(Lnet/minecraft/core/world/World;Lnet/minecraft/core/entity/EntityLiving;ZI)V",at = @At("TAIL"))
     protected void init(CallbackInfo ci) {
         if(owner != null) {
-            if(owner.world.currentWeather == SignalIndustries.weatherBloodMoon && owner instanceof EntityMonster){
+            if(owner.world.getCurrentWeather() == SignalIndustries.weatherBloodMoon && owner instanceof EntityMonster){
                 arrowDamage *= 2;
             }
         }

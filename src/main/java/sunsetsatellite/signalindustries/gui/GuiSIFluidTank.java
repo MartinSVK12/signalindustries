@@ -7,9 +7,9 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.fluidapi.api.GuiFluid;
-import sunsetsatellite.fluidapi.template.containers.ContainerFluidTank;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
+import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class GuiSIFluidTank extends GuiFluid {
@@ -26,7 +26,7 @@ public class GuiSIFluidTank extends GuiFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f)
     {
-        int i = mc.renderEngine.getTexture("assets/fluidapi/gui/tank_gui.png");
+        int i = mc.renderEngine.getTexture("/assets/catalyst-fluids/gui/tank_gui.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(i);
         int j = (width - xSize) / 2;
@@ -47,14 +47,14 @@ public class GuiSIFluidTank extends GuiFluid {
             return;
         }
         if (guibutton.id == 0) {
-            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.xCoord, tile.yCoord, tile.zCoord);
+            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
         }
     }
 
-    public void initGui()
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) - 80, Math.round(height / 2) - 80, 20, 20, "F"));
-        super.initGui();
+        super.init();
     }
 }
 

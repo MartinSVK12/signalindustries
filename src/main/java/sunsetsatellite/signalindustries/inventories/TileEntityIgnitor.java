@@ -2,16 +2,16 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.entity.fx.EntityFlameFX;
+import net.minecraft.client.entity.fx.EntityFlameFX;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.TickTimer;
 
 import java.util.*;
 
@@ -37,12 +37,12 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         timer.tick();
         Random random = new Random();
         spreadFluids(Direction.Y_POS);
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         if(getFluidInSlot(0) != null && getFluidInSlot(0).amount <= 0) fluidContents[0] = null;
         if(isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5){
@@ -50,10 +50,10 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
                 float xd = random.nextFloat() / 10 - 0.05f;
                 float yd = random.nextFloat() / 10 - 0.05f;
                 float zd = random.nextFloat() / 10 - 0.05f;
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,xCoord+0.5,yCoord+0.5,zCoord,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,xCoord+0.5,yCoord+0.5,zCoord+1,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,xCoord,yCoord+0.5,zCoord+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,xCoord+1,yCoord+0.5,zCoord+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));
+                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+0.5,y+0.5,z,xd,yd,zd, EntityFlameFX.Type.ORANGE));
+                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+0.5,y+0.5,z+1,xd,yd,zd, EntityFlameFX.Type.ORANGE));
+                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x,y+0.5,z+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));
+                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+1,y+0.5,z+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));
             }
         }
     }
@@ -107,14 +107,14 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = true;
                 pressurizePipes((TileEntityFluidPipe) tile,already);
@@ -128,14 +128,14 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
             TileEntity tile = dir.getTileEntity(worldObj,pipe);
             if (tile instanceof TileEntityFluidPipe) {
                 for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.xCoord && V2.get("y") == tile.yCoord && V2.get("z") == tile.zCoord) {
+                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
                         return;
                     }
                 }
                 HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.xCoord);
-                list.put("y",tile.yCoord);
-                list.put("z",tile.zCoord);
+                list.put("x",tile.x);
+                list.put("y",tile.y);
+                list.put("z",tile.z);
                 already.add(list);
                 ((TileEntityFluidPipe) tile).isPressurized = false;
                 unpressurizePipes((TileEntityFluidPipe) tile,already);
@@ -157,5 +157,10 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
     public boolean connect(TileEntity tileEntity) {
         connectedTo = tileEntity;
         return true;
+    }
+
+    @Override
+    public void sortInventory() {
+
     }
 }

@@ -4,10 +4,11 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.recipes.BasicCrystalCutterRecipes;
 import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
 
 import java.util.ArrayList;
@@ -35,13 +36,28 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void tick() {
+        super.tick();
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
             tier = block.tier;
+            switch (block.tier) {
+                case PROTOTYPE:
+                    recipes = CrystalCutterRecipes.getInstance();
+                    fluidCapacity[0] = 2000;
+                    fluidCapacity[1] = 1000;
+                    break;
+                case BASIC:
+                    recipes = BasicCrystalCutterRecipes.getInstance();
+                    fluidCapacity[0] = 4000;
+                    fluidCapacity[1] = 4000;
+                    break;
+                case REINFORCED:
+                case AWAKENED:
+                    break;
+            }
         }
         boolean update = false;
         if(fuelBurnTicks > 0){

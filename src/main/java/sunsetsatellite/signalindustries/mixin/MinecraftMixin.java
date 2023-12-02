@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemSignalumDrill;
+import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 import java.util.Objects;

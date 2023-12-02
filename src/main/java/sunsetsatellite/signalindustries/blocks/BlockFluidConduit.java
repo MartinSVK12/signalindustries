@@ -6,7 +6,7 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -25,7 +25,7 @@ public class BlockFluidConduit extends BlockContainerTiered {
         return 32;
     }*/
 
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 

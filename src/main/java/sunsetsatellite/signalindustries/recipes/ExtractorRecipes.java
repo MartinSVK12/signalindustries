@@ -2,12 +2,12 @@ package sunsetsatellite.signalindustries.recipes;
 
 
 import net.minecraft.core.block.BlockFluid;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
 
-public class ExtractorRecipes extends MachineRecipesBase<Integer,FluidStack> {
+public class ExtractorRecipes extends MachineRecipesBase<Integer, FluidStack> {
     public static final ExtractorRecipes instance = new ExtractorRecipes();
 
     protected ExtractorRecipes() {

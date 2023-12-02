@@ -120,13 +120,13 @@ tile.signalindustries.dilithiumOre.name=Dilithium Ore
 tile.signalindustries.dilithiumOre.desc=[Dilithium Shards] encased in rock.
 
 tile.signalindustries.prototype.machine.name=Prototype Machine Core
-tile.signalindustries.prototype.machine.desc=Key component for [Prototype] machines.
+tile.signalindustries.prototype.machine.desc=Key component for Prototype-tier machines.
 tile.signalindustries.basic.machine.name=Basic Machine Core
-tile.signalindustries.basic.machine.desc=Key component for [Basic] machines.
+tile.signalindustries.basic.machine.desc=Key component for Basic-tier machines.
 tile.signalindustries.reinforced.machine.name=Reinforced Machine Core
-tile.signalindustries.reinforced.machine.desc=Key component for [Reinforced] machines.
+tile.signalindustries.reinforced.machine.desc=Key component for Reinforced-tier machines.
 tile.signalindustries.awakened.machine.name=Awakened Machine Core
-tile.signalindustries.awakened.machine.desc=Key component for [Awakened] machines.
+tile.signalindustries.awakened.machine.desc=Key component for Awakened-tier machines.
 
 tile.signalindustries.reinforced.casing.name=Reinforced Casing
 tile.signalindustries.reinforced.casing.desc=Used for Reinforced-tier multiblock machines.
@@ -210,6 +210,42 @@ item.signalindustries.abilityModule.name=Ability Module
 item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] abilities.
 item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module
 item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities including <Awakened> abilities.
+
+item.signalindustries.crystalChip.name=Crystal Chip
+item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy Core].
+item.signalindustries.pureCrystalChip.name=Pure Crystal Chip
+item.signalindustries.pureCrystalChip.desc=A better chip used in the [Reinforced Energy Core].
+item.signalindustries.basicEnergyCore.name=Basic Energy Core
+item.signalindustries.basicEnergyCore.desc=Powers Basic-tier machines.
+item.signalindustries.reinforcedEnergyCore.name=Reinforced Energy Core
+item.signalindustries.reinforcedEnergyCore.desc=Powers Reinforced-tier machines.
+item.signalindustries.basicDrillBit.name=Basic Drill Bit
+item.signalindustries.basicDrillBit.desc=A drill bit from a [Basic S. Drill]
+item.signalindustries.reinforcedDrillBit.name=Reinforced Drill Bit
+item.signalindustries.reinforcedDrillBit.desc=A drill bit from a [Reinforced S. Drill]
+item.signalindustries.basicDrillCasing.name=Basic Drill Casing
+item.signalindustries.basicDrillCasing.desc=Casing needed to make a [Basic S. Drill].
+item.signalindustries.reinforcedDrillCasing.name=Reinforced Drill Casing
+item.signalindustries.reinforcedDrillCasing.desc=Casing needed to make a [Reinforced S. Drill].
+item.signalindustries.pulsarShell.name=Pulsar Shell
+item.signalindustries.pulsarShell.desc=Shell of the [Pulsar].
+item.signalindustries.pulsarInnerCore.name=Pulsar Inner Core
+item.signalindustries.pulsarInnerCore.desc=Inner core of the [Pulsar].
+item.signalindustries.pulsarOuterCore.name=Pulsar Outer Core
+item.signalindustries.pulsarOuterCore.desc=Outer core of the [Pulsar].
+item.signalindustries.itemManipulationCircuit.name=Item Manipulation Circuit
+item.signalindustries.itemManipulationCircuit.desc=A part of some machines that manipulate with items.
+item.signalindustries.fluidManipulationCircuit.name=Fluid Manipulation Circuit
+item.signalindustries.fluidManipulationCircuit.desc=A part of some machines that manipulate with fluids.
+item.signalindustries.dilithiumControlCore.name=Dilithium Control Core
+item.signalindustries.dilithiumControlCore.desc=A part of some machines that manipulate time.
+item.signalindustries.warpManipulatorCircuit.name=Warp Manipulator Circuit
+item.signalindustries.warpManipulatorCircuit.desc=A part of some machines that manipulate space.
+item.signalindustries.dilithiumChip.name=Dilithium Chip
+item.signalindustries.dilithiumChip.desc=The main part of the [Dilithium Control Core].
+item.signalindustries.dimensionalChip.name=Dimensional Chip
+item.signalindustries.dimensionalChip.desc=The main part of the [Warp Manipulator Circuit].
+
 
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
 tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.
@@ -312,9 +348,9 @@ tile.signalindustries.awakened.plateFormer.desc=The raw power of this machine wo
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
 tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
 tile.signalindustries.basic.crystalCutter.name=Basic Crystal Cutter
-tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut pure [S. Crystals] into two! Can also cut a few other things as well.
+tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut a few more other things as well.
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
-tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger.
+tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger. Cuts most materials with unreal precision.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
 tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams to slice through almost anything! What more could you want.
 
@@ -354,7 +390,7 @@ tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 
 tile.signalindustries.basic.dynamo.name=Signalum Dynamo
-tile.signalindustries.basoc.dynamo.desc=Generates EnergyAPI units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
+tile.signalindustries.basoc.dynamo.desc=Generates energy units using Signalum. Only available when EnergyAPI is installed, and only useful for mods that utilize it.
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
@@ -371,15 +407,15 @@ tile.signalindustries.rootedFabric.desc=There's something in between the threads
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
 tile.signalindustries.eternalTreeLog.desc=Kind of weird for a "tree" to exist in the middle of literally nowhere. Cannot burn.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
-tile.signalindustries.dimensionalShardOre.desc=Sometimes between the fibers of existence, the crystallization of a world can be found.
+tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 
 tile.signalindustries.glowingObsidian.name=Glowing Obsidian
 tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal.
 
 tile.signalindustries.dilithiumBlock.name=Block of Dilithium
 tile.signalindustries.dilithiumBlock.desc=A solid block of Dilithium.
-tile.signalindustries.emptyCrystalBlock.name=Block of Empty Signalum Crystals
-tile.signalindustries.emptyCrystalBlock.desc=A solid block of empty Signalum Crystals.
+tile.signalindustries.emptyCrystalBlock.name=Block of Crystal Alloy
+tile.signalindustries.emptyCrystalBlock.desc=A solid block of Crystal Alloy.
 tile.signalindustries.rawCrystalBlock.name=Block of Raw Signalum Crystals
 tile.signalindustries.rawCrystalBlock.desc=A solid block of Raw Signalum Crystals.
 tile.signalindustries.awakenedSignalumCrystalBlock.name=Block of Awakened Signalum Crystals
@@ -399,7 +435,6 @@ tile.signalindustries.filter.desc=Sorts items that pass through it into colored 
 dimension.signalindustries.eternity.name=Eternity
 signalindustries.eternity.name=Eternity
 
-
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
 weather.solarApocalypse.name=Solar Apocalypse
@@ -409,12 +444,22 @@ bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
 event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!
 event.signalindustries.awakenedWrathBeaconActivated=An awakened Wrath Beacon has been activated!!!
+event.signalindustries.annihilatorChallenge=You have made a grave mistake...
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
 
 ability.signalindustries.normal.testingAbility.name=Testing Ability
 ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
+
+ability.signalindustries.normal.projectile.name=Projectile
+ability.signalindustries.normal.projectile.desc=Shoots out an orb of energy from your power suit.
+
+ability.signalindustries.normal.boost.name=Boost
+ability.signalindustries.normal.boost.desc=Launches you in the direction you're looking at.
+
+ability.signalindustries.normal.devouringField.name=Devouring Field
+ability.signalindustries.normal.devouringField.desc=Drains health from nearby enemies and also sets them on fire.
 
 ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.
@@ -430,3 +475,12 @@ achievement.signalindustries.thePrototype.desc=Extract Signalum Energy from Raw 
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
 key.signalindustries.switchMode=Switch Mode
+
+guidebook.section.signalindustries=Signal Industries
+guidebook.section.signalindustries.extractor=Extractor
+guidebook.section.signalindustries.crusher=Crusher
+guidebook.section.signalindustries.pump=Pump
+guidebook.section.signalindustries.multiblocks=Multiblocks
+
+multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
+multiblock.signalindustries.signalumReactor.name=Signalum Reactor

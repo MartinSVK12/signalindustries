@@ -6,12 +6,16 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityChest;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.TickTimer;
-import sunsetsatellite.sunsetutils.util.Vec3i;
+
+
+
+
 
 public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoostable {
 
@@ -26,7 +30,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
         fluidCapacity[0] = Short.MAX_VALUE*2;
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
         from = new Vec3i(0,4,0);
-        to = new Vec3i(-16,-yCoord-4,16);
+        to = new Vec3i(-16,-y-4,16);
         workTimer.pause();
         transferSpeed = 50;
         //.copy().add(new Vec3i(1,0,1));
@@ -43,15 +47,15 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
             current.y = worldObj.findTopSolidBlock(current.x, current.z);
             System.out.println(current.y);
             if(current.y < 1){
-                current.y = yCoord+4;
+                current.y = y+4;
                 //workTimer.pause();
             }
-            if(current.x < xCoord-16){
-                current.x = xCoord-1;
+            if(current.x < x-16){
+                current.x = x-1;
                 current.z++;
                 current.y = worldObj.findTopSolidBlock(current.x, current.z);
-                if(current.z > zCoord+16){
-                    current.z = zCoord+1;
+                if(current.z > z+16){
+                    current.z = z+1;
                     current.y = worldObj.findTopSolidBlock(current.x, current.z);
                 }
             }
@@ -70,10 +74,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
                 }
                 if(dir != null){
                     TileEntity tile = dir.getTileEntity(worldObj,this);
-                    ItemStack[] drops = block.getBreakResult(worldObj, EnumDropCause.PROPER_TOOL,xCoord,yCoord,zCoord,meta,tile);
+                    ItemStack[] drops = block.getBreakResult(worldObj, EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
                     if(tile instanceof TileEntityChest){
                         if(drops == null){
-                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,xCoord,yCoord+1,zCoord,meta,this);
+                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                             worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                             return;
                         }
@@ -87,7 +91,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
                                 }
                             }
                             if(availableSlot == -1){
-                                block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,xCoord,yCoord+1,zCoord,meta,this);
+                                block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                                 worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                             } else {
                                 ItemStack stack = ((TileEntityChest) tile).getStackInSlot(availableSlot);
@@ -100,11 +104,11 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
                             }
                         }
                     } else {
-                        block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,xCoord,yCoord+1,zCoord,meta,this);
+                        block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                     }
                 } else {
-                    block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,xCoord,yCoord+1,zCoord,meta,this);
+                    block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                     worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                 }
             }
@@ -112,14 +116,14 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         speedMultiplier = 1;
         cost = 0;
         for(Direction dir : Direction.values()){
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if(tile instanceof TileEntityBooster){
                 if(((TileEntityBooster) tile).isBurning()){
-                    int meta = tile.getBlockMetadata();
+                    int meta = tile.getMovedData();
                     if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
                         speedMultiplier = 2;
                     }
@@ -131,7 +135,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoo
             workTimer.tick();
         }
         if(current.equals(new Vec3i())){
-            current = new Vec3i(xCoord-1,yCoord+4,zCoord+1);
+            current = new Vec3i(x-1,y+4,z+1);
         }
         workTimer.max = progressMaxTicks / speedMultiplier;
     }

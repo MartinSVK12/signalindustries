@@ -2,9 +2,10 @@ package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
-import sunsetsatellite.sunsetutils.util.multiblocks.RenderMultiblock;
+
 
 public class RenderSignalumReactor extends RenderMultiblock {
 
@@ -27,7 +28,7 @@ public class RenderSignalumReactor extends RenderMultiblock {
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable( GL11.GL_BLEND );
-            this.drawBlock(this.getFontRenderer(), this.renderDispatcher.renderEngine.minecraft.renderEngine, fluidId, 0, 0, 0, 0, tileEntity);
+            this.drawBlock(this.getFontRenderer(), this.renderDispatcher.renderEngine.mc.renderEngine, fluidId, 0, 0, 0, 0, tileEntity);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
         }

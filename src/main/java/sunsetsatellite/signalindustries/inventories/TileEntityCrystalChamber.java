@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -33,9 +33,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        worldObj.markBlocksDirty(xCoord,yCoord,zCoord,xCoord,yCoord,zCoord);
+    public void tick() {
+        super.tick();
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {

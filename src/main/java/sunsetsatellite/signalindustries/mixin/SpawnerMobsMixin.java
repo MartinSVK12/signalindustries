@@ -5,7 +5,7 @@ import net.minecraft.core.enums.EnumCreatureType;
 import net.minecraft.core.world.SpawnerMobs;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
-import net.minecraft.core.world.chunk.ChunkCoordIntPair;
+import net.minecraft.core.world.chunk.ChunkCoordinate;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,8 +30,8 @@ public class SpawnerMobsMixin {
             at = @At(value = "INVOKE",target = "Ljava/util/List;isEmpty()Z",shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void performSpawning(World world, boolean spawnHostileMobs, boolean spawnPassiveMobs, CallbackInfoReturnable<Integer> cir, int playerIndex, ChunkCoordinates spawnChunk, EnumCreatureType[] creatureTypes, int i, EnumCreatureType creatureType, Iterator chunkIt, ChunkCoordIntPair chunk, Biome biome, List spawnableList) {
-        if(world.currentWeather == SignalIndustries.weatherEclipse){
+    private static void performSpawning(World world, boolean spawnHostileMobs, boolean spawnPassiveMobs, CallbackInfoReturnable<Integer> cir, int playerIndex, ChunkCoordinates spawnChunk, EnumCreatureType[] creatureTypes, int i, EnumCreatureType creatureType, Iterator chunkIt, ChunkCoordinate chunk, Biome biome, List spawnableList) {
+        if(world.getCurrentWeather() == SignalIndustries.weatherEclipse){
             for (Object o : spawnableList) {
                 SpawnListEntry entry = (SpawnListEntry) o;
                 if(entry.entityClass == EntityInfernal.class) return;
