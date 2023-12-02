@@ -7,6 +7,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumSleepStatus;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -76,6 +77,32 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
             powerSuit = new SignalumPowerSuit(armorInventory,((EntityPlayer) (Object) this));
         } else {
             powerSuit.tick();
+        }
+    }
+
+    @Inject(
+            method = "damageEntity",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    protected void damageEntity(int damage, DamageType damageType, CallbackInfo ci) {
+        float protection = 1.0f - this.inventory.getTotalProtectionAmount(damageType);
+        protection = Math.max(protection, 0.01f);
+        double d = (float)damage * protection;
+        int newDamage = (int)((double)this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
+        int preventedDamage = damage - newDamage;
+        if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT ) {
+            if(powerSuit.getEnergy() >= newDamage){
+                if (damageType != null && damageType.damageArmor()) {
+                    int armorDamage = (int)Math.ceil((double)preventedDamage / 4.0);
+                    this.inventory.damageArmor(armorDamage);
+                }
+                powerSuit.decrementEnergy(newDamage);
+                ci.cancel();
+            }
+            if(damageType == DamageType.FIRE){
+                powerSuit.temperature += 0.5f;
+            }
         }
     }
 

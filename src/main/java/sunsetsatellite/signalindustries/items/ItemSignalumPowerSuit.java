@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
@@ -22,5 +23,10 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
         if(ps != null && armorPiece == 0){
             ps.renderOverlay(guiIngame, fontRenderer, itemRenderer, player, height, width, mouseX, mouseY);
         }
+    }
+
+    @Override
+    public void renderOverlay(ItemStack stack, SignalumPowerSuit signalumPowerSuit, GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
+
     }
 }

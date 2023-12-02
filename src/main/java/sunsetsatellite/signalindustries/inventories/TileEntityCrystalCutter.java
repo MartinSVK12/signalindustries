@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
@@ -18,6 +19,8 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
 
     public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
 
+    public int recipeSelector = 0;
+
     public TileEntityCrystalCutter(){
         cost = 80;
         fluidContents = new FluidStack[2];
@@ -33,6 +36,18 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
     @Override
     public String getInvName() {
         return "Crystal Cutter";
+    }
+
+    @Override
+    public void readFromNBT(CompoundTag nBTTagCompound1) {
+        super.readFromNBT(nBTTagCompound1);
+        recipeSelector = nBTTagCompound1.getInteger("SelectedRecipe");
+    }
+
+    @Override
+    public void writeToNBT(CompoundTag nBTTagCompound1) {
+        super.writeToNBT(nBTTagCompound1);
+        nBTTagCompound1.putInt("SelectedRecipe",recipeSelector);
     }
 
     @Override
@@ -112,6 +127,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
             ArrayList<Object> list = new ArrayList<>();
             list.add(this.fluidContents[1]);
             list.add(this.itemContents[0]);
+            list.add(recipeSelector);
             ItemStack stack = recipes.getResult(list);
             Map.Entry<ArrayList<Object>, ItemStack> recipe = recipes.getValidRecipe(list);
             if(itemContents[1] == null){
@@ -141,6 +157,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
             ArrayList<Object> list = new ArrayList<>();
             list.add(this.fluidContents[1]);
             list.add(this.itemContents[0]);
+            list.add(recipeSelector);
             ItemStack stack = recipes.getResult(list);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }

@@ -23,6 +23,8 @@ public abstract class BlockFluidMixin extends Block {
         super(key, id, material);
     }
 
+
+
     @Inject(method = "getRenderBlockPass",at = @At("HEAD"), cancellable = true)
     public void getRenderBlockPass(CallbackInfoReturnable<Integer> cir) {
         if(thisAs == SignalIndustries.energyFlowing || thisAs == SignalIndustries.energyStill){

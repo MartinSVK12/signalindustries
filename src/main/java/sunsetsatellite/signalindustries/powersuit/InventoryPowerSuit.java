@@ -26,7 +26,6 @@ public class InventoryPowerSuit extends ItemInventoryFluid {
                     break;
                 case 1:
                     fluidContents = new FluidStack[1];
-                    //fluidContents[0] = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,8000);
                     fluidCapacity = new int[1];
                     fluidCapacity[0] = 32000;
                     contents = new ItemStack[8];

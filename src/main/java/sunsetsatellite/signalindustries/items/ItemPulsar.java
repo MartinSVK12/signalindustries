@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.InventoryPulsar;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemPulsar extends ItemTiered implements IHasOverlay {
@@ -148,6 +149,11 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
         fontRenderer.drawStringWithShadow(String.valueOf(pulsar.getData().getByte("charge")) + "%", 4 + fontRenderer.getStringWidth("Charge: "), i, pulsar.getData().getByte("charge") >= 100 ? 0xFFFF0000 : 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 10, 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow(String.valueOf(((ItemPulsar) pulsar.getItem()).getFluidStack(0, pulsar).getInteger("amount")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+    }
+
+    @Override
+    public void renderOverlay(ItemStack stack, SignalumPowerSuit signalumPowerSuit, GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
+
     }
 
 }

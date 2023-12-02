@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.inventories.InventoryHarness;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collection;
@@ -73,6 +74,11 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
                 fontRenderer.drawStringWithShadow( String.valueOf(((ItemSignalumPrototypeHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
             }
         }
+    }
+
+    @Override
+    public void renderOverlay(ItemStack stack, SignalumPowerSuit signalumPowerSuit, GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
+
     }
 
 

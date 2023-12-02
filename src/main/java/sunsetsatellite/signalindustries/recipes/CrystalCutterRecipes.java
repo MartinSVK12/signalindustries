@@ -23,6 +23,7 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
         list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,8));
+        list.add(0);
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("saturation",1000);
         nbt.putInt("size",1);
@@ -50,6 +51,11 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
                     }
                     else if(recipeStack instanceof FluidStack && outsideStack instanceof FluidStack){
                         boolean eq = ((FluidStack) recipeStack).liquid == ((FluidStack) outsideStack).liquid && ((FluidStack) recipeStack).amount <= ((FluidStack) outsideStack).amount;
+                        if(!eq){
+                            break;
+                        }
+                    } else if(recipeStack instanceof Integer) {
+                        boolean eq = recipeStack == outsideStack;
                         if(!eq){
                             break;
                         }
@@ -83,6 +89,11 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
                     }
                     else if(recipeStack instanceof FluidStack && outsideStack instanceof FluidStack){
                         boolean eq = ((FluidStack) recipeStack).liquid == ((FluidStack) outsideStack).liquid && ((FluidStack) recipeStack).amount <= ((FluidStack) outsideStack).amount;
+                        if(!eq){
+                            break;
+                        }
+                    } else if(recipeStack instanceof Integer) {
+                        boolean eq = recipeStack == outsideStack;
                         if(!eq){
                             break;
                         }

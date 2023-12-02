@@ -27,7 +27,6 @@ public class ContainerPulsar extends ContainerItemFluid {
         addSlot(new Slot(inv,0,80,33));
 
         addFluidSlot(new SlotFluid(inv,0,80,55));
-        //addSlot(new Slot(inv,1,80,55));
 
         for(int j = 0; j < 3; j++)
         {

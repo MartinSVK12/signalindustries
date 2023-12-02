@@ -20,6 +20,10 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Mixin(
@@ -38,8 +42,30 @@ public class MinecraftMixin {
     @Shadow public HitResult objectMouseOver;
 
     @Shadow public GuiIngame ingameGUI;
+
     @Unique
     private static int debounce = 0;
+
+    @Unique
+    private static final List<KeyBinding> attachmentKeybinds = new ArrayList<>();
+
+    @Inject(
+            method = "startGame",
+            at = @At("TAIL")
+    )
+    public void start(CallbackInfo ci){
+        Method[] methods = IKeybinds.class.getDeclaredMethods();
+        for (Method method : methods) {
+            try {
+                if(method.getName().contains("Attachment")){
+                    KeyBinding keyBinding = (KeyBinding) method.invoke(Minecraft.getMinecraft(Minecraft.class).gameSettings);
+                    attachmentKeybinds.add(keyBinding);
+                }
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     @Inject(
             method = "runTick",
@@ -54,9 +80,15 @@ public class MinecraftMixin {
         KeyBinding switchModeKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode();
         SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).signalIndustries$getPowerSuit();
         if(debounce <= 0){
+            for (KeyBinding attachmentKeybind : attachmentKeybinds) {
+                if (attachmentKeybind.isPressed() && powerSuit != null && powerSuit.active) {
+                    debounce = 10;
+                    powerSuit.activateAttachment(attachmentKeybind);
+                }
+            }
             if(switchModeKey.isPressed() && currentScreen == null){
                 debounce = 10;
-                if(thePlayer != null){
+                if(thePlayer != null && thePlayer.getCurrentEquippedItem() != null){
                     if(thePlayer.getCurrentEquippedItem().getItem() == SignalIndustries.reinforcedSignalumDrill){
                         ItemSignalumDrill.DrillMode mode = ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
                         switch (mode){

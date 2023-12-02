@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.option.enums.Difficulty;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.EntityLiving;
@@ -68,6 +69,10 @@ public class TileEntityWrathBeacon extends TileEntity {
             intermissionTimer.tick();
         }
         enemiesLeft.removeIf((E)-> !E.isAlive());
+        if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
+            Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
+            worldObj.setBlockWithNotify(xCoord,yCoord,zCoord,0);
+        }
         if(active && started && enemiesLeft.size() == 0 && wave < 5){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
@@ -106,6 +111,10 @@ public class TileEntityWrathBeacon extends TileEntity {
 
     public void activate(){
         if(!active){
+            if(worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
+                Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("This world is far too peaceful..");
+                return;
+            }
             if(worldObj.isDaytime()){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
@@ -123,10 +132,6 @@ public class TileEntityWrathBeacon extends TileEntity {
                 }
             }
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.evilCatalyst.id){
-                /*if(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == 0){
-                    Minecraft.getMinecraft(Minecraft.class).theMinecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("This worldObj is too peaceful..");
-                    return;
-                }*/
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
                     player.addChatMessage("event.signalindustries.wrathBeaconActivated");

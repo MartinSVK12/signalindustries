@@ -9,6 +9,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.server.entity.player.EntityPlayerMP;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
@@ -131,6 +132,13 @@ public class GuiCrystalCutter extends GuiFluid {
             case 1:
                 SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
+            case 2:
+                if(tile.recipeSelector > 0 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54))){
+                    tile.recipeSelector--;
+                } else {
+                    tile.recipeSelector++;
+                }
+                guibutton.displayString = String.valueOf(tile.recipeSelector);
             default:
                 break;
         }
@@ -140,6 +148,7 @@ public class GuiCrystalCutter extends GuiFluid {
     {
         controlList.add(new GuiButton(0, Math.round(width / 2) + 60, Math.round(height / 2) - 80, 20, 20, "F"));
         controlList.add(new GuiButton(1, Math.round(width / 2) + 60, Math.round(height / 2) - 60, 20, 20, "I"));
+        controlList.add(new GuiButton(2, Math.round(width / 2) + 60, Math.round(height / 2) - 30, 20, 20, String.valueOf(tile.recipeSelector)));
         super.init();
     }
 }
