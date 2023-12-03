@@ -15,6 +15,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.season.SeasonManager;
 import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.weather.Weather;
+import net.minecraft.core.world.weather.WeatherManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,12 +34,6 @@ import java.util.Random;
 )
 public abstract class WorldMixin {
 
-    @Shadow public Weather currentWeather;
-
-    @Shadow public Weather newWeather;
-
-    @Shadow public long weatherDuration;
-
     @Shadow public List<EntityPlayer> players;
 
     @Shadow public abstract boolean isDaytime();
@@ -49,10 +44,6 @@ public abstract class WorldMixin {
 
     @Shadow public abstract void playSoundAtEntity(Entity entity, String s, float f, float f1);
 
-    @Shadow public float weatherIntensity;
-
-    @Shadow public float weatherPower;
-
     @Shadow public abstract Explosion newExplosion(Entity entity, double d, double d1, double d2, float f, boolean flag, boolean isCannonBall);
 
     @Shadow public Random rand;
@@ -61,14 +52,20 @@ public abstract class WorldMixin {
 
     @Shadow @Final public Dimension dimension;
 
+    @Shadow public abstract Weather getCurrentWeather();
+
+    @Shadow @Final public WeatherManager weatherManager;
+
+    @Shadow public abstract long getRandomSeed();
+
     @Inject(
             method = "getSkyColor",
             at = @At("HEAD"),
             cancellable = true)
     public void getSkyColor(ICamera camera, float renderPartialTicks, CallbackInfoReturnable<Vec3d> cir) {
-        if(currentWeather == SignalIndustries.weatherEclipse){
+        if(getCurrentWeather() == SignalIndustries.weatherEclipse){
             cir.setReturnValue(Vec3d.createVector(0, 0, 0));
-        } else if (currentWeather == SignalIndustries.weatherSolarApocalypse) {
+        } else if (getCurrentWeather() == SignalIndustries.weatherSolarApocalypse) {
             cir.setReturnValue(Vec3d.createVector(1.0, 0.5, 0));
         }
         if(dimension == SignalIndustries.dimEternity){
@@ -84,22 +81,22 @@ public abstract class WorldMixin {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime == 10500 && (currentWeather != SignalIndustries.weatherBloodMoon || currentWeather != SignalIndustries.weatherEclipse)){
-            if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && currentWeather != SignalIndustries.weatherBloodMoon){
+        if(dayTime == 10500 && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse)){
+            if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
                 }
-                currentWeather = SignalIndustries.weatherBloodMoon;
-                newWeather = null;
+                weatherManager.overrideWeather(SignalIndustries.weatherBloodMoon,13000,1);
+                /*newWeather = null;
                 weatherDuration = 13000; //duration of night in ticks
                 weatherIntensity = 1.0f;
-                weatherPower = 1.0f;
+                weatherPower = 1.0f;*/
             }
         }
-        if(dayTime == 0 && currentWeather == SignalIndustries.weatherBloodMoon){
-            currentWeather = Weather.overworldClear;
+        if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+            weatherManager.overrideWeather(Weather.overworldClear);
         }
-        if(currentWeather == SignalIndustries.weatherBloodMoon){
+        if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
         } else {
             ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
@@ -114,15 +111,11 @@ public abstract class WorldMixin {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && currentWeather != SignalIndustries.weatherEclipse ){
+        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SignalIndustries.weatherEclipse ){
             for (EntityPlayer player : players) {
                 player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
             }
-            currentWeather = SignalIndustries.weatherEclipse;
-            newWeather = null;
-            weatherDuration = Global.DAY_LENGTH_TICKS;
-            weatherIntensity = 0;
-            weatherPower = 1;
+            weatherManager.overrideWeather(SignalIndustries.weatherEclipse,Global.DAY_LENGTH_TICKS,1);
         }
     }
 
@@ -132,8 +125,8 @@ public abstract class WorldMixin {
     )
     protected void wakeUpAllPlayers(CallbackInfo ci) {
 
-        if (this.currentWeather != null && currentWeather == SignalIndustries.weatherEclipse) {
-            this.currentWeather = Weather.overworldClear;
+        if (getCurrentWeather() != null && getCurrentWeather() == SignalIndustries.weatherEclipse) {
+            weatherManager.overrideWeather(Weather.overworldClear);
         }
 
     }
@@ -144,7 +137,7 @@ public abstract class WorldMixin {
             cancellable = true
     )
     public void solarEclipseCelestialAngle(float f, CallbackInfoReturnable<Float> cir){
-        if(currentWeather == SignalIndustries.weatherEclipse){
+        if(getCurrentWeather() == SignalIndustries.weatherEclipse){
             cir.setReturnValue(1f);
         }
     }

@@ -93,7 +93,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         int preventedDamage = damage - newDamage;
         if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT ) {
             if(powerSuit.getEnergy() >= newDamage){
-                if (damageType != null && damageType.damageArmor()) {
+                if (damageType != null && damageType.shouldDamageArmor()) {
                     int armorDamage = (int)Math.ceil((double)preventedDamage / 4.0);
                     this.inventory.damageArmor(armorDamage);
                 }

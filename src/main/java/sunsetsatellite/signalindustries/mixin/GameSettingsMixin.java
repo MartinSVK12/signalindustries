@@ -24,40 +24,40 @@ public class GameSettingsMixin
     public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bindKeyboard(50);
 
     @Unique
-    public KeyBinding keyActivateHeadTopAttachment = new KeyBinding("key.signalindustries.headTopActivate",0);
+    public KeyBinding keyActivateHeadTopAttachment = new KeyBinding("key.signalindustries.headTopActivate");
 
     @Unique
-    public KeyBinding keyActivateCoreBackAttachment = new KeyBinding("key.signalindustries.coreBackActivate",0);
+    public KeyBinding keyActivateCoreBackAttachment = new KeyBinding("key.signalindustries.coreBackActivate");
 
     @Unique
-    public KeyBinding keyActivateArmFrontLAttachment = new KeyBinding("key.signalindustries.armFrontLActivate",0);
+    public KeyBinding keyActivateArmFrontLAttachment = new KeyBinding("key.signalindustries.armFrontLActivate");
 
     @Unique
-    public KeyBinding keyActivateArmFrontRAttachment = new KeyBinding("key.signalindustries.armFrontRActivate",0);
+    public KeyBinding keyActivateArmFrontRAttachment = new KeyBinding("key.signalindustries.armFrontRActivate");
 
     @Unique
-    public KeyBinding keyActivateArmSideLAttachment = new KeyBinding("key.signalindustries.armSideLActivate",0);
+    public KeyBinding keyActivateArmSideLAttachment = new KeyBinding("key.signalindustries.armSideLActivate");
 
     @Unique
-    public KeyBinding keyActivateArmSideRAttachment = new KeyBinding("key.signalindustries.armSideRActivate",0);
+    public KeyBinding keyActivateArmSideRAttachment = new KeyBinding("key.signalindustries.armSideRActivate");
 
     @Unique
-    public KeyBinding keyActivateArmBackLAttachment = new KeyBinding("key.signalindustries.armBackLActivate",0);
+    public KeyBinding keyActivateArmBackLAttachment = new KeyBinding("key.signalindustries.armBackLActivate");
 
     @Unique
-    public KeyBinding keyActivateArmBackRAttachment = new KeyBinding("key.signalindustries.armBackRActivate",0);
+    public KeyBinding keyActivateArmBackRAttachment = new KeyBinding("key.signalindustries.armBackRActivate");
 
     @Unique
-    public KeyBinding keyActivateLegSideLAttachment = new KeyBinding("key.signalindustries.legSideLActivate",0);
+    public KeyBinding keyActivateLegSideLAttachment = new KeyBinding("key.signalindustries.legSideLActivate");
 
     @Unique
-    public KeyBinding keyActivateLegSideRAttachment = new KeyBinding("key.signalindustries.legSideRActivate",0);
+    public KeyBinding keyActivateLegSideRAttachment = new KeyBinding("key.signalindustries.legSideRActivate");
 
     @Unique
-    public KeyBinding keyActivateBootBackLAttachment = new KeyBinding("key.signalindustries.bootBackLActivate",0);
+    public KeyBinding keyActivateBootBackLAttachment = new KeyBinding("key.signalindustries.bootBackLActivate");
 
     @Unique
-    public KeyBinding keyActivateBootBackRAttachment = new KeyBinding("key.signalindustries.bootBackRActivate",0);
+    public KeyBinding keyActivateBootBackRAttachment = new KeyBinding("key.signalindustries.bootBackRActivate");
 
     @Override
     public KeyBinding signalIndustries$getKeyActivateHeadTopAttachment() {

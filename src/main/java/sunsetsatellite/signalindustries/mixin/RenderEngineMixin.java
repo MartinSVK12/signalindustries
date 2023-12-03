@@ -21,7 +21,7 @@ public abstract class RenderEngineMixin {
 
     @Shadow private List<DynamicTexture> dynamicTextures;
 
-    @Shadow @Final public Minecraft minecraft;
+    @Shadow @Final public Minecraft mc;
 
     @Shadow public abstract void updateDynamicTexture(DynamicTexture texture);
 

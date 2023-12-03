@@ -7,8 +7,8 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
-import sunsetsatellite.energyapi.EnergyAPI;
-import sunsetsatellite.fluidapi.api.GuiFluid;
+import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
@@ -47,8 +47,8 @@ public class GuiSignalumDynamo extends GuiFluid {
         int y = (this.height - this.ySize) / 2;
         int color;
         //1 (red, empty) -> 0.65 (green, full)
-        double color_mapped = EnergyAPI.map((float)tile.energy/(float)tile.capacity,0,1,1,0.65);
-        double x_mapped = EnergyAPI.map((float)tile.energy/(float)tile.capacity, 0,1,0,15);
+        double color_mapped = CatalystEnergy.map((float)tile.energy/(float)tile.capacity,0,1,1,0.65);
+        double x_mapped = CatalystEnergy.map((float)tile.energy/(float)tile.capacity, 0,1,0,15);
         Color c = new Color();
         c.fromHSB((float) color_mapped,1.0F,1.0F);
         color = c.getAlpha() << 24 | c.getRed() << 16 | c.getBlue() << 8 | c.getGreen();
@@ -73,7 +73,7 @@ public class GuiSignalumDynamo extends GuiFluid {
         StringBuilder text = new StringBuilder();
         if(x > i+80 && x < i+94){
             if(y > j+40 && y < j+46){
-                text.append(EnergyAPI.ENERGY_NAME).append(": ").append(tile.energy).append(" ").append(EnergyAPI.ENERGY_SUFFIX).append("/").append(tile.capacity).append(" ").append(EnergyAPI.ENERGY_SUFFIX);
+                text.append(CatalystEnergy.ENERGY_NAME).append(": ").append(tile.energy).append(" ").append(CatalystEnergy.ENERGY_SUFFIX).append("/").append(tile.capacity).append(" ").append(CatalystEnergy.ENERGY_SUFFIX);
                 GuiTooltip tooltip = new GuiTooltip(mc);
                 tooltip.render(text.toString(),x,y,8,-8);
                 //this.drawTooltip(text.toString(),x,y,8,-8,true);
@@ -107,10 +107,10 @@ public class GuiSignalumDynamo extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 1:
-                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.xCoord,tile.yCoord,tile.zCoord);
+                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             default:
                 break;
@@ -118,11 +118,11 @@ public class GuiSignalumDynamo extends GuiFluid {
     }
 
 
-    public void initGui()
+    public void init()
     {
         controlList.add(new GuiButton(0, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 80, 20, 20, "F"));
         controlList.add(new GuiButton(1, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 60, 20, 20, "I"));
-        super.initGui();
+        super.init();
     }
 
 }

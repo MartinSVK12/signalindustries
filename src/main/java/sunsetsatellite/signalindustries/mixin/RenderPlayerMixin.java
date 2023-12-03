@@ -31,10 +31,11 @@ import sunsetsatellite.signalindustries.items.ItemPulsar;
 )
 public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
 
-    @Shadow @Final private static String[] armorFilenamePrefix;
 
+    @Final
     @Shadow private ModelBiped modelArmorChestplate;
 
+    @Final
     @Shadow private ModelBiped modelArmor;
 
     @Shadow private ModelBiped modelBipedMain;
@@ -52,7 +53,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         Item item = itemstack.getItem();
         if(item instanceof ItemArmorTiered){
             ItemArmor itemarmor = (ItemArmor)item;
-            this.loadTexture("/assets/signalindustries/armor/" + armorFilenamePrefix[itemarmor.material.renderIndex] + "_" + (i != 2 ? 1 : 2) + ".png");
+            this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.name + "_" + (i != 2 ? 1 : 2) + ".png");
             ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
             modelbiped.bipedHead.showModel = i == 0;
             modelbiped.bipedHeadOverlay.showModel = i == 0;

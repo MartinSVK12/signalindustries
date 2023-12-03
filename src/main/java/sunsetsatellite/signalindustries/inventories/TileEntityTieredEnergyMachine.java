@@ -1,10 +1,10 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
-import sunsetsatellite.energyapi.api.IEnergy;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
-import sunsetsatellite.sunsetutils.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.energy.api.IEnergy;
 
 import java.util.HashMap;
 
@@ -25,7 +25,7 @@ public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMach
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         lastTransferMemory.tick();
     }
 

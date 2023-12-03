@@ -27,15 +27,18 @@ import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 )
 public abstract class GuiIngameMixin extends Gui {
 
-    @Shadow private FontRenderer fontrenderer;
+    @Shadow
+    protected FontRenderer fontrenderer;
 
-    @Shadow private Minecraft mc;
+    @Shadow
+    protected Minecraft mc;
 
-    @Shadow private int updateCounter;
+    @Shadow
+    public int updateCounter;
 
-    @Shadow protected abstract void renderInventorySlot(int itemIndex, int x, int y, float delta, float alpha);
 
-    @Shadow private static ItemEntityRenderer itemRenderer;
+    @Shadow
+    public static ItemEntityRenderer itemRenderer;
 
     @Inject(
             method = "renderGameOverlay",

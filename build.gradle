@@ -96,6 +96,14 @@ repositories {
 		metadataSources { artifact() }
 	}
 	ivy {
+		url = "https://github.com/UselessBullets"
+		patternLayout {
+			artifact "[organisation]/releases/download/v[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
+	ivy {
 		url = "https://github.com/MartinSVK12"
 		patternLayout {
 			artifact "[organisation]/releases/download/[revision]-BTA/[module]-[revision].jar"
@@ -125,6 +133,7 @@ dependencies {
 	implementation project(path: ":catalyst:energy",configuration: "namedElements")
 	implementation project(path: ":catalyst:fluids",configuration: "namedElements")
 	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
+	modImplementation("DragonFly:dragonfly:1.0.0-7.1")
 	//modImplementation "BTWaila:btwaila:0.2.2"
 	//modImplementation "potato-logistics:PotatoLogistics:0.2.2_1"
 	//modImplementation "retrostorage:retrostorage:1.2.0"

@@ -2,11 +2,11 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.fluidapi.api.FluidStack;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
 
@@ -25,8 +25,8 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void tick() {
+        super.tick();
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;

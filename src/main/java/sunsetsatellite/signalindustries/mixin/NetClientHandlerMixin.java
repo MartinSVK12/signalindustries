@@ -10,6 +10,7 @@ import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.net.handler.NetHandler;
 import net.minecraft.core.net.packet.Packet23VehicleSpawn;
 import org.spongepowered.asm.mixin.Debug;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,6 +36,7 @@ import java.util.Objects;
 )
 public abstract class NetClientHandlerMixin extends NetHandler implements INetClientHandler {
 
+    @Final
     @Shadow private Minecraft mc;
 
     @Shadow private WorldClient worldClient;

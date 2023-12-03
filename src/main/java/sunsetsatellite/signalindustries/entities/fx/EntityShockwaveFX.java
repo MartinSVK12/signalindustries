@@ -1,11 +1,11 @@
 package sunsetsatellite.signalindustries.entities.fx;
 
 
+import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.fx.EntityFX;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;

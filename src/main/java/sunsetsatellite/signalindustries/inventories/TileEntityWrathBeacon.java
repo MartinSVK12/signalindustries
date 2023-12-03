@@ -71,7 +71,7 @@ public class TileEntityWrathBeacon extends TileEntity {
         enemiesLeft.removeIf((E)-> !E.isAlive());
         if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
-            worldObj.setBlockWithNotify(xCoord,yCoord,zCoord,0);
+            worldObj.setBlockWithNotify(x,y,z,0);
         }
         if(active && started && enemiesLeft.size() == 0 && wave < 5){
             for (EntityPlayer player : worldObj.players) {

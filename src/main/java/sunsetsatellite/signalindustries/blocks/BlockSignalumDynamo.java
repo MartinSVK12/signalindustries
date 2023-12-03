@@ -6,13 +6,13 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.fluidapi.template.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
 import sunsetsatellite.signalindustries.gui.GuiSignalumDynamo;
 import sunsetsatellite.signalindustries.inventories.TileEntitySignalumDynamo;
 import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.sunsetutils.util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,7 +28,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isSolidRender() {
         return false;
     }
 
@@ -49,8 +49,8 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockRemoval(World world, int i, int j, int k) {
-        TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(i, j, k);
+    public void onBlockRemoved(World world, int x, int y, int z, int data) {
+        TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(x, y, z);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -73,7 +73,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
                         }
 
                         itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                        EntityItem entityitem = new EntityItem(world, (float) x + f, (float) y + f1, (float) z + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
                         entityitem.xd = (float) random.nextGaussian() * f3;
                         entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
@@ -83,7 +83,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
                 }
             }
         }
-
-        super.onBlockRemoval(world, i, j, k);
+        super.onBlockRemoved(world, x, y, z, data);
     }
+
 }

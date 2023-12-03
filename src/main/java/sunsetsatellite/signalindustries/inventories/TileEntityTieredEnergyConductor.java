@@ -3,12 +3,12 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.energyapi.api.IEnergy;
-import sunsetsatellite.energyapi.api.IEnergySink;
-import sunsetsatellite.energyapi.api.IEnergySource;
-import sunsetsatellite.energyapi.impl.ItemEnergyContainer;
-import sunsetsatellite.sunsetutils.util.Connection;
-import sunsetsatellite.sunsetutils.util.Direction;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.api.IEnergy;
+import sunsetsatellite.catalyst.energy.api.IEnergySink;
+import sunsetsatellite.catalyst.energy.api.IEnergySource;
+import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 
 public abstract class TileEntityTieredEnergyConductor extends TileEntityTieredEnergyMachine implements IEnergySource, IEnergySink {
 
@@ -125,7 +125,7 @@ public abstract class TileEntityTieredEnergyConductor extends TileEntityTieredEn
     }
 
     @Override
-    public void updateEntity() {
+    public void tick() {
         for (Direction dir : Direction.values()) {
             TileEntity facingTile = dir.getTileEntity(worldObj,this);
             if(facingTile instanceof IEnergySink && !facingTile.equals(lastReceived)){

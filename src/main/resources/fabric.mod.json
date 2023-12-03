@@ -36,7 +36,6 @@
     "fabricloader": ">=0.13.3",
     "catalyst-core": ">=1.0.0",
     "catalyst-fluids": ">=1.0.0",
-    "catalyst-models": ">=1.0.0",
     "catalyst-multiblocks": ">=1.0.0",
     "catalyst-energy": ">=1.0.0",
     "halplibe": ">=2.5.0"
