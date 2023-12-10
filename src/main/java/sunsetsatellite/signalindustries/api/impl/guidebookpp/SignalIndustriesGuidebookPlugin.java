@@ -19,6 +19,7 @@ public class SignalIndustriesGuidebookPlugin implements GuidebookCustomRecipePlu
         new RecipeHandlerInfuser().addRecipes();
         new RecipeHandlerCrystalCutter().addRecipes();
         new RecipeHandlerCrystalChamber().addRecipes();
+        new RecipeHandlerBasicCrystalCutter().addRecipes();
         new RecipeHandlerCraftingSI().addRecipes(); //preferably at the bottom
 
     }

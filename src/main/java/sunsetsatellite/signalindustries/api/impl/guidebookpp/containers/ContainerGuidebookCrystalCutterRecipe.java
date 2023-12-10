@@ -43,7 +43,7 @@ public class ContainerGuidebookCrystalCutterRecipe extends ContainerGuidebookRec
         int yPos = k + 30 + 62 * (index % 3);
         int yOffset = 0;
         guidebook.drawTexturedModalRect(xPos - 20, yPos, 138, yOffset, 121, 54);
-
+        guidebook.drawStringCentered(GuidebookPlusPlus.mc.fontRenderer,"R: "+((RecipeFluid)recipeBase).id,xPos+45,yPos+40,0xFFFFFFFF);
     }
 
     @Override
