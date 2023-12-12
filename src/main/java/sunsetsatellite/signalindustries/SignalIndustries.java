@@ -743,12 +743,12 @@ public class SignalIndustries implements ModInitializer {
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
-    public static final SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
+    //public static final SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
     public static final SuitBaseAbility boostAbility = new BoostAbility();
     public static final SuitBaseAbility projectileAbility = new ProjectileAbility();
 
     public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
-    public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
+    //public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
     public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"boostAbilityContainer","ability2.png");
     public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"projectileAbilityContainer","ability1.png");
 
