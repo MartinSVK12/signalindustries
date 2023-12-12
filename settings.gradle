@@ -19,11 +19,3 @@ pluginManagement {
         }
     }
 }
-include(":sunsetutils")
-include(":fluidapi")
-include(":energyapi")
-include(":dragonfly")
-project(':sunsetutils').projectDir = new File("C:\\Users\\sunsetsatellite\\Projects\\BTA\\1.7.7.0\\sunsetutils")
-project(':fluidapi').projectDir = new File("C:\\Users\\sunsetsatellite\\Projects\\BTA\\1.7.7.0\\fluidapi")
-project(':energyapi').projectDir = new File("C:\\Users\\sunsetsatellite\\Projects\\BTA\\1.7.7.0\\energyapi")
-project(':dragonfly').projectDir = new File("C:\\Users\\sunsetsatellite\\Projects\\BTA\\1.7.7.0\\DragonFly")
