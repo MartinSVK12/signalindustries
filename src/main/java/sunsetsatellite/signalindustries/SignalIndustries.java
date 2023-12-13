@@ -643,7 +643,7 @@ public class SignalIndustries implements ModInitializer {
             .setTextures("reality_fabric.png")
             .setBlockSound(BlockSounds.GLASS)
             .setLuminance(1)
-            .build(new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),3,Block.bedrock.id,Block.fire.id));
+            .build(new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),config.getInt("Other.eternityDimId"),Block.bedrock.id,Block.fire.id));
 
     //BlockHelper.createBlock(MOD_ID,new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),3,Block.bedrock.id,Block.fire.id),"reality_fabric.png",BlockSounds.GLASS,1.0f,1.0f,1);
     public static final Block realityFabric = new BlockBuilder(MOD_ID)
