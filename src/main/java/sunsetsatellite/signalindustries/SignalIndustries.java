@@ -332,13 +332,13 @@ public class SignalIndustries implements ModInitializer {
             .build(new BlockSIFluidTank("prototype.fluidTank",config.getInt("BlockIDs.prototypeFluidTank"),Tier.PROTOTYPE,Material.glass));
 
 
-    public static final Block recipeMaker = new BlockBuilder(MOD_ID)
+    /*public static final Block recipeMaker = new BlockBuilder(MOD_ID)
             .setTextures("prototype_connection.png")
             .setLuminance(0)
             .setHardness(1)
             .setResistance(5)
             .setBlockSound(BlockSounds.STONE)
-            .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));
+            .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));*/
 
 
     public static final Block prototypeExtractor = new BlockBuilder(MOD_ID)
