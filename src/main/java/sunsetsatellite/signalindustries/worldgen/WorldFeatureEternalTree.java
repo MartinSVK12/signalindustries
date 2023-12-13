@@ -371,7 +371,6 @@ public class WorldFeatureEternalTree extends WorldFeature {
             this.func_518_b();
             this.func_529_c();
             this.func_525_d();
-            SignalIndustries.LOGGER.info("tree! "+this.treeHeight+" "+this.treeMaxHeight);
             return true;
         }
     }
