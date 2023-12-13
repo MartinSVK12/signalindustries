@@ -48,7 +48,6 @@ import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemTieredAttachment;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -786,7 +785,7 @@ public class SignalIndustries implements ModInitializer {
     public static final Weather weatherEclipse = new WeatherEclipse(11).setLanguageKey("solarEclipse");
     public static final Weather weatherSolarApocalypse = new WeatherSolarApocalypse(12).setLanguageKey("solarApocalypse");
 
-    public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
+    public static final AchievementPage ACHIEVEMENTS = null; //new SignalIndustriesAchievementPage();
 
     public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome().setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
