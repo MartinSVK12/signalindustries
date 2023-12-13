@@ -84,7 +84,7 @@ public abstract class WorldMixin {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime == 10500 && (currentWeather != SignalIndustries.weatherBloodMoon || currentWeather != SignalIndustries.weatherEclipse)){
+        if(dayTime == 10500 && dimension == Dimension.overworld && (currentWeather != SignalIndustries.weatherBloodMoon || currentWeather != SignalIndustries.weatherEclipse)){
             if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && currentWeather != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
@@ -114,7 +114,7 @@ public abstract class WorldMixin {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && currentWeather != SignalIndustries.weatherEclipse ){
+        if(dayTime > 6680 && dayTime < 6700 && dimension == Dimension.overworld && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && currentWeather != SignalIndustries.weatherEclipse ){
             for (EntityPlayer player : players) {
                 player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
             }
