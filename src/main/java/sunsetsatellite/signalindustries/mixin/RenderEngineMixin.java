@@ -19,7 +19,7 @@ import java.util.List;
 )
 public abstract class RenderEngineMixin {
 
-    @Shadow private List<DynamicTexture> dynamicTextures;
+    /*@Shadow private List<DynamicTexture> dynamicTextures;
 
     @Shadow @Final public Minecraft mc;
 
@@ -36,6 +36,6 @@ public abstract class RenderEngineMixin {
         SignalIndustries.LOGGER.info(String.valueOf(Block.texCoordToIndex(SignalIndustries.pumpTex[1][0],SignalIndustries.pumpTex[1][1])));
         DynamicTexture dynTex = new DynamicTextureAnimated(minecraft,"/terrain.png", "/assets/signalindustries/block/prototypepumpanimated.png", Block.texCoordToIndex(SignalIndustries.pumpTex[1][0],SignalIndustries.pumpTex[1][1]), terrainResolution, 2);
         this.dynamicTextures.add(dynTex);
-        updateDynamicTexture(dynTex);*/
-    }
+        updateDynamicTexture(dynTex);
+    }*/
 }

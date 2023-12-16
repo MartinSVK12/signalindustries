@@ -5,6 +5,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.options.components.KeyBindingComponent;
+import net.minecraft.client.gui.options.components.OptionsCategory;
+import net.minecraft.client.gui.options.data.OptionsPage;
+import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.render.entity.MobRenderer;
@@ -46,6 +50,7 @@ import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
+import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
@@ -1104,6 +1109,24 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     @Override
     public void afterGameStart() {
-
+        OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");
+        category
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateAbility()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateHeadTopAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmBackLAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmBackRAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmFrontLAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmFrontRAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmSideLAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateArmSideRAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateCoreBackAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateLegSideLAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateLegSideRAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateBootBackLAttachment()))
+                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateBootBackRAttachment()));
+        OptionsPages.CONTROLS
+                .withComponent(category);
     }
 }

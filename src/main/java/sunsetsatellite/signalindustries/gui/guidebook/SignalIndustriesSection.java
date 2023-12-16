@@ -6,13 +6,13 @@ import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.gui.guidebook.pages.CrusherPage;
-import sunsetsatellite.signalindustries.gui.guidebook.pages.ExtractorPage;
-import sunsetsatellite.signalindustries.gui.guidebook.pages.PumpPage;
+import sunsetsatellite.signalindustries.gui.guidebook.pages.*;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MultiblockSection;
+import sunsetsatellite.signalindustries.recipes.container.CrystalCutterRecipes;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 import sunsetsatellite.signalindustries.util.SearchableGuidebookSubsection;
 
@@ -27,18 +27,36 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
 
     private final SearchableGuidebookSubsection extractor = new FluidMachineSection(this, SIRecipes.EXTRACTOR.getAllRecipes(), ExtractorPage.class);
     private final SearchableGuidebookSubsection crusher = new MachineSection(this,SIRecipes.CRUSHER.getAllRecipes(), CrusherPage.class);
+    private final SearchableGuidebookSubsection alloySmelter = new MachineSection(this,SIRecipes.ALLOY_SMELTER.getAllRecipes(), AlloySmelterPage.class);
+    private final SearchableGuidebookSubsection plateFormer = new MachineSection(this,SIRecipes.PLATE_FORMER.getAllRecipes(), PlateFormerPage.class);
     private final SearchableGuidebookSubsection pump = new FluidMachineSection(this,SIRecipes.PUMP.getAllRecipes(), PumpPage.class);
+    private final SearchableGuidebookSubsection crystalCutter = new MachineSection(this,SIRecipes.CRYSTAL_CUTTER.getAllRecipes(), CrystalCutterPage.class);
+    private final SearchableGuidebookSubsection crystalChamber = new MachineSection(this,SIRecipes.CRYSTAL_CHAMBER.getAllRecipes(), CrystalChamberPage.class);
+    private final SearchableGuidebookSubsection infuser = new MachineSection(this,SIRecipes.INFUSER.getAllRecipes(), InfuserPage.class);
+
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
     public SignalIndustriesSection() {
         super("guidebook.section.signalindustries", new ItemStack(SignalIndustries.signalumCrystal), 0xAA0000, 0xFF0000);
         reloadSection();
-        indices.add(new Index("guidebook.section.signalindustries.extractor",extractor.getPages().get(0)));
-        indices.add(new Index("guidebook.section.signalindustries.crusher",crusher.getPages().get(0)));
-        indices.add(new Index("guidebook.section.signalindustries.pump",pump.getPages().get(0)));
-        indices.add(new Index("guidebook.section.signalindustries.multiblocks",multiblocks.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.extractor"),extractor.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crusher"),crusher.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.alloySmelter"),alloySmelter.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.plateFormer"),plateFormer.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.pump"),pump.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalCutter"),crystalCutter.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalChamber"),crystalChamber.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.infuser"),infuser.getPages().get(0)));
+
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.multiblocks"),multiblocks.getPages().get(0)));
+
         subsections.add(extractor);
         subsections.add(crusher);
+        subsections.add(alloySmelter);
+        subsections.add(plateFormer);
         subsections.add(pump);
+        subsections.add(crystalCutter);
+        subsections.add(crystalChamber);
+        subsections.add(infuser);
         subsections.add(multiblocks);
     }
 

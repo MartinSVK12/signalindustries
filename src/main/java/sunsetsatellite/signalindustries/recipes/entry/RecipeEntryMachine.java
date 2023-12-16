@@ -85,6 +85,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
             if (symbol == null) continue;
             List<ItemStack> stacks = symbol.resolve();
             if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
+                if(stacks == null) return false;
                 for (ItemStack stack : stacks) {
                     if (query.strict && stack.getDisplayName().equalsIgnoreCase(query.query.getRight())) {
                         return true;

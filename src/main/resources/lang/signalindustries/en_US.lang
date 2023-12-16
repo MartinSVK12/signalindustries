@@ -476,12 +476,31 @@ achievement.signalindustries.thePrototype.desc=Extract Signalum Energy from Raw 
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
 key.signalindustries.switchMode=Switch Mode
+key.signalindustries.headTopActivate=Activate Head Top Attachment
+key.signalindustries.armBackLActivate=Activate Arm Back Left Attachment
+key.signalindustries.armBackRActivate=Activate Arm Back Right Attachment
+key.signalindustries.armFrontLActivate=Activate Arm Front Left Attachment
+key.signalindustries.armFrontRActivate=Activate Arm Front Right Attachment
+key.signalindustries.armSideLActivate=Activate Arm Side Left Attachment
+key.signalindustries.armSideRActivate=Activate Arm Side Right Attachment
+key.signalindustries.coreBackActivate=Activate Core Back Attachment
+key.signalindustries.legSideLActivate=Activate Leg Left Attachment
+key.signalindustries.legSideRActivate=Activate Leg Right Attachment
+key.signalindustries.bootBackLActivate=Activate Boot Left Attachment
+key.signalindustries.bootBackRActivate=Activate Boot Right Attachment
 
 guidebook.section.signalindustries=Signal Industries
 guidebook.section.signalindustries.extractor=Extractor
 guidebook.section.signalindustries.crusher=Crusher
+guidebook.section.signalindustries.alloySmelter=Alloy Smelter
 guidebook.section.signalindustries.pump=Pump
+guidebook.section.signalindustries.crystalCutter=Crystal Cutter
+guidebook.section.signalindustries.crystalChamber=Crystal Chamber
+guidebook.section.signalindustries.infuser=Infuser
+
 guidebook.section.signalindustries.multiblocks=Multiblocks
 
 multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
 multiblock.signalindustries.signalumReactor.name=Signalum Reactor
+
+gui.options.page.controls.category.signalindustries=Signal Industries

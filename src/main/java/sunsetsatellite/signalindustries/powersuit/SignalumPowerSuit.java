@@ -100,7 +100,7 @@ public class SignalumPowerSuit {
             int slot = -1;
             InventoryPowerSuit inv = null;
             for (Map.Entry<String, AttachmentLocation> attachment : attachmentLocations.entrySet()) {
-                if (attachmentKeybind.getKeyName().contains(attachment.getKey())) {
+                if (attachmentKeybind.getId().contains(attachment.getKey())) {
                     slot = attachment.getValue().slot;
                     inv = attachment.getValue().inv;
                     break;

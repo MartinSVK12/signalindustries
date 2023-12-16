@@ -22,7 +22,13 @@ public class SIRecipes implements RecipeEntrypoint {
     public static final RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
     public static final RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeExtractor), new ItemStack(SignalIndustries.basicExtractor))));
     public static final RecipeGroupSI<RecipeEntryMachine> CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher))));
+    public static final RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeAlloySmelter),new ItemStack(SignalIndustries.basicAlloySmelter))));
+    public static final RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer))));
     public static final RecipeGroupSI<RecipeEntryMachineFluid> PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump))));
+    public static final RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrystalCutter),new ItemStack(SignalIndustries.basicCrystalCutter))));
+    public static final RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber))));
+    public static final RecipeGroupSI<RecipeEntryMachine> INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicInfuser))));
+
 
     @Override
     public void onRecipesReady() {
@@ -32,11 +38,21 @@ public class SIRecipes implements RecipeEntrypoint {
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
         new ExtractorRecipes().addRecipes(EXTRACTOR);
         new CrusherRecipes().addRecipes(CRUSHER);
+        new AlloySmelterRecipes().addRecipes(ALLOY_SMELTER);
+        new PlateFormerRecipes().addRecipes(PLATE_FORMER);
         new PumpRecipes().addRecipes(PUMP);
+        new CrystalCutterRecipes().addRecipes(CRYSTAL_CUTTER);
+        new CrystalChamberRecipes().addRecipes(CRYSTAL_CHAMBER);
+        new InfuserRecipes().addRecipes(INFUSER);
         SIGNAL_INDUSTRIES.register("workbench",WORKBENCH);
         SIGNAL_INDUSTRIES.register("extractor",EXTRACTOR);
         SIGNAL_INDUSTRIES.register("crusher",CRUSHER);
+        SIGNAL_INDUSTRIES.register("alloy_smelter",ALLOY_SMELTER);
+        SIGNAL_INDUSTRIES.register("plate_former",PLATE_FORMER);
         SIGNAL_INDUSTRIES.register("pump",PUMP);
+        SIGNAL_INDUSTRIES.register("crystal_cutter",CRYSTAL_CUTTER);
+        SIGNAL_INDUSTRIES.register("crystal_chamber",CRYSTAL_CHAMBER);
+        SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
         SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }

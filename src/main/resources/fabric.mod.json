@@ -46,7 +46,7 @@
     "catalyst-fluids": ">=1.0.0",
     "catalyst-multiblocks": ">=1.0.0",
     "catalyst-energy": ">=1.0.0",
-    "halplibe": ">=3.0.0",
-    "dragonfly": ">=1.0.0"
+    "halplibe": ">=3.0.1",
+    "dragonfly": ">=1.0.0-7.1"
   }
 }
