@@ -1,8 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "signalindustries",
-  "version": "1.0.0",
-
+  "version": "0.1.2",
   "name": "Signal Industries",
   "icon": "icon.png",
   "description": "Technomagical mod with cool gadgets and machines.",
@@ -10,12 +9,22 @@
     "sunsetsatellite"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "sources": "https://github.com/MartinSVK12/signalindustries",
+    "issues": "https://github.com/MartinSVK12/signalindustries/issues"
   },
-
-  "license": "MIT",
-
+  "license": "GNU GPLv3",
+  "contributors": [
+    "beatrice",
+    "theRandomHat",
+    "theMidford",
+    "watermelonMojito",
+    "felix170905",
+    "mzov",
+    "azurelmao",
+    "toufouMaster",
+    "samuelDeboni",
+    "useless"
+  ],
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -31,13 +40,13 @@
   "mixins": [
     "signalindustries.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3",
     "catalyst-core": ">=1.0.0",
     "catalyst-fluids": ">=1.0.0",
     "catalyst-multiblocks": ">=1.0.0",
     "catalyst-energy": ">=1.0.0",
-    "halplibe": ">=2.5.0"
+    "halplibe": ">=3.0.0",
+    "dragonfly": ">=1.0.0"
   }
 }

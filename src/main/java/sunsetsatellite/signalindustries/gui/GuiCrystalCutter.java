@@ -45,8 +45,18 @@ public class GuiCrystalCutter extends GuiFluid {
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 tooltip.render(text.toString(),x,y,8,-8);
-                /*GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_CULL_FACE);*/
+            }
+        }
+        int xOffset = 148;
+        int yOffset = 52;
+        int size = 20;
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        if(x > i+xOffset && x < i+xOffset+size){
+            if(y > j+yOffset && y < j+yOffset+size){
+                GL11.glDisable(GL11.GL_LIGHTING);
+                GL11.glDisable(GL11.GL_CULL_FACE);
+                GuiTooltip tooltip = new GuiTooltip(mc);
+                tooltip.render("Click to increment ID of recipe that will be performed.\nShift+click to decrement.",x,y,8,-8);
             }
         }
     }

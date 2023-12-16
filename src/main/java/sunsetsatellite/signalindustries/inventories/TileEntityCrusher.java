@@ -86,7 +86,7 @@ public class TileEntityCrusher extends TileEntityTieredMachine implements IBoost
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
-                itemContents[1].stackSize++;
+                itemContents[1].stackSize += stack.stackSize;
             }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());

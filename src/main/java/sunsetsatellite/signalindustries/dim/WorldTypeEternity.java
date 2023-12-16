@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.dim;
 
+import net.minecraft.core.Global;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.provider.BiomeProvider;
@@ -71,7 +72,7 @@ public class WorldTypeEternity extends WorldType {
 
     @Override
     public int getDayNightCycleLengthTicks() {
-        return 0;
+        return Global.DAY_LENGTH_TICKS;
     }
 
     @Override

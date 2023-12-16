@@ -200,7 +200,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("machine_prototype.png")
             .setBlockSound(BlockSounds.STONE)
             .setLuminance(0)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .build(new BlockTiered("prototype.machine",config.getInt("BlockIDs.prototypeMachineCore"), Tier.PROTOTYPE,Material.stone));
 
@@ -224,7 +224,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setBlockSound(BlockSounds.METAL)
             .setTextures("machine_awakened.png")
             .setLuminance(1)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(50)
             .build(new BlockTiered("awakened.machine",config.getInt("BlockIDs.awakenedMachineCore"), Tier.AWAKENED,Material.metal));
 
@@ -313,7 +313,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block prototypeEnergyCell = new BlockBuilder(MOD_ID)
             .setTextures("cell_prototype.png")
             .setLuminance(1)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(5)
             .setBlockSound(BlockSounds.GLASS)
             .build(new BlockEnergyCell("prototype.energyCell",config.getInt("BlockIDs.prototypeEnergyCell"),Tier.PROTOTYPE,Material.glass));
@@ -321,7 +321,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block basicEnergyCell = new BlockBuilder(MOD_ID)
             .setTextures("cell_basic.png")
             .setLuminance(1)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(5)
             .setBlockSound(BlockSounds.GLASS)
             .build(new BlockEnergyCell("basic.energyCell",config.getInt("BlockIDs.basicEnergyCell"),Tier.BASIC,Material.glass));
@@ -330,23 +330,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block prototypeFluidTank = new BlockBuilder(MOD_ID)
             .setTextures("fluid_tank_prototype.png")
             .setLuminance(0)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(5)
             .setBlockSound(BlockSounds.GLASS)
             .build(new BlockSIFluidTank("prototype.fluidTank",config.getInt("BlockIDs.prototypeFluidTank"),Tier.PROTOTYPE,Material.glass));
 
 
-    public static final Block recipeMaker = new BlockBuilder(MOD_ID)
+    /*public static final Block recipeMaker = new BlockBuilder(MOD_ID)
             .setTextures("prototype_connection.png")
             .setLuminance(0)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(5)
             .setBlockSound(BlockSounds.STONE)
-            .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));
+            .build(new BlockRecipeMaker("recipeMaker",config.getInt("BlockIDs.recipeMaker"),Material.stone));*/
 
 
     public static final Block prototypeExtractor = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -354,7 +354,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockExtractor("prototype.extractor",config.getInt("BlockIDs.prototypeExtractor"),Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicExtractor = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -362,7 +362,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockExtractor("basic.extractor",config.getInt("BlockIDs.basicExtractor"),Tier.BASIC,Material.metal));
 
     public static final Block prototypeCrusher = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -371,7 +371,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockCrusher("prototype.crusher",config.getInt("BlockIDs.prototypeCrusher"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicCrusher = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -380,7 +380,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockCrusher("basic.crusher",config.getInt("BlockIDs.basicCrusher"), Tier.BASIC,Material.metal));
 
     public static final Block prototypeAlloySmelter = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -388,7 +388,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockAlloySmelter("prototype.alloySmelter",config.getInt("BlockIDs.prototypeAlloySmelter"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicAlloySmelter = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -396,7 +396,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockAlloySmelter("basic.alloySmelter",config.getInt("BlockIDs.basicAlloySmelter"), Tier.BASIC,Material.metal));
 
     public static final Block prototypePlateFormer = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -404,7 +404,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockPlateFormer("prototype.plateFormer",config.getInt("BlockIDs.prototypePlateFormer"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block prototypeCrystalCutter = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -412,7 +412,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockCrystalCutter("prototype.crystalCutter",config.getInt("BlockIDs.prototypeCrystalCutter"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicCrystalCutter = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("basic_blank.png")
@@ -420,7 +420,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockCrystalCutter("basic.crystalCutter",config.getInt("BlockIDs.basicCrystalCutter"), Tier.BASIC,Material.stone));
 
     public static final Block basicCrystalChamber = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -428,7 +428,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockCrystalChamber("basic.crystalChamber",config.getInt("BlockIDs.basicCrystalChamber"), Tier.BASIC,Material.stone));
 
     public static final Block basicInfuser = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -436,7 +436,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockInfuser("basic.infuser",config.getInt("BlockIDs.basicInfuser"), Tier.BASIC,Material.metal));
 
     public static final Block basicWrathBeacon = new BlockBuilder(MOD_ID)
-            .setHardness(10)
+            .setHardness(2)
             .setResistance(500)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
@@ -447,7 +447,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final int[][] wrathBeaconTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"wrath_beacon.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"wrath_beacon_active.png")};
 
     public static final Block dimensionalAnchor = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("reinforced_blank.png")
@@ -456,7 +456,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockDimensionalAnchor("reinforced.dimensionalAnchor",config.getInt("BlockIDs.dimensionalAnchor"), Tier.REINFORCED,Material.metal));
 
     public static final Block dilithiumStabilizer = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("reinforced_blank.png")
@@ -465,7 +465,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockDilithiumStabilizer("reinforced.dilithiumStabilizer",config.getInt("BlockIDs.dilithiumStabilizer"), Tier.REINFORCED,Material.metal));
 
     public static final Block dilithiumBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("reinforced_blank.png")
@@ -474,7 +474,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
 
     public static final Block prototypePump = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone),"prototype_pump_top_empty.png","prototype_blank.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png",BlockSounds.STONE,2,3,0);
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -483,7 +483,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone));
 
     /*public static final Block prototypeBlockBreaker = new BlockBuilder(MOD_ID)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
@@ -495,21 +495,21 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final int[][] breakerTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"inserteroutput.png")};
     public static final Block basicAutomaticMiner = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setTextures("basic_blank.png")
             .setNorthTexture("basic_automatic_miner.png")
             .build(new BlockAutoMiner("basic.automaticMiner",config.getInt("BlockIDs.basicAutomaticMiner"),Tier.BASIC,Material.metal));
     public static final Block externalIo = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(2)
+            .setHardness(1)
             .setResistance(3)
             .setTextures("external_io_blank.png")
             .build(new BlockExternalIO("basic.externalIO",config.getInt("BlockIDs.externalIo"),Tier.BASIC,Material.metal));
 
     public static final Block reinforcedCentrifuge = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(1)
             .setTextures("reinforced_blank.png")
@@ -519,7 +519,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedIgnitor = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(1)
             .setSideTextures("reinforced_ignitor_inactive.png")
@@ -529,7 +529,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block signalumReactorCore = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(1)
             .setTextures("reinforced_blank.png")
@@ -539,7 +539,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedEnergyConnector = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(1)
             .setTextures("reinforced_energy_connector.png")
@@ -547,7 +547,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedFluidInputHatch = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setTextures("reinforced_fluid_input_hatch.png")
@@ -555,7 +555,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedFluidOutputHatch = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setTextures("reinforced_fluid_output_hatch.png")
@@ -563,7 +563,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedItemInputBus = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setTextures("reinforced_input_bus.png")
@@ -571,7 +571,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block reinforcedItemOutputBus = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setTextures("reinforced_output_bus.png")
@@ -579,7 +579,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block basicEnergyInjector = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"basic_energy_injector.json")))
@@ -588,7 +588,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block basicSignalumDynamo = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
-            .setHardness(5)
+            .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
             .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"signalum_dynamo.json")))
@@ -647,7 +647,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("reality_fabric.png")
             .setBlockSound(BlockSounds.GLASS)
             .setLuminance(1)
-            .build(new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),3,Block.bedrock.id,Block.fire.id));
+            .build(new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),config.getInt("Other.eternityDimId"),Block.bedrock.id,Block.fire.id));
 
     //BlockHelper.createBlock(MOD_ID,new BlockPortal("eternityPortal",config.getInt("BlockIDs.portalEternity"),3,Block.bedrock.id,Block.fire.id),"reality_fabric.png",BlockSounds.GLASS,1.0f,1.0f,1);
     public static final Block realityFabric = new BlockBuilder(MOD_ID)
@@ -699,7 +699,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block glowingObsidian = new BlockBuilder(MOD_ID)
             .setTextures("glowing_obsidian.png")
             .setBlockSound(BlockSounds.STONE)
-            .setHardness(50)
+            .setHardness(2)
             .setResistance(1200)
             .setLuminance(1)
             .build(new Block("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
@@ -746,12 +746,12 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
-    public static final SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
+    //public static final SuitBaseEffectAbility clockworkAbility = new ClockworkAbility();
     public static final SuitBaseAbility boostAbility = new BoostAbility();
     public static final SuitBaseAbility projectileAbility = new ProjectileAbility();
 
     public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
-    public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
+    //public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
     public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"boostAbilityContainer","ability2.png");
     public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"projectileAbilityContainer","ability1.png");
 
@@ -789,7 +789,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Weather weatherEclipse = new WeatherEclipse(11).setLanguageKey("solarEclipse");
     public static final Weather weatherSolarApocalypse = new WeatherSolarApocalypse(12).setLanguageKey("solarApocalypse");
 
-    public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
+    public static final AchievementPage ACHIEVEMENTS = null; //new SignalIndustriesAchievementPage();
 
     public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome().setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));

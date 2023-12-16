@@ -328,9 +328,9 @@ tile.signalindustries.awakened.centrifuge.name=Awakened Ultracentrifuge Controll
 tile.signalindustries.awakened.centrifuge.desc=Spins stuff REALLY FAST, beware of catastrophic failure. On the flip side, spins stuff REALLY WELL leading to increased efficiency.
 
 tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
-tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still.
+tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still. Required to stabilize some machines.
 tile.signalindustries.reinforced.dilithiumBooster.name=Dilithium Booster
-tile.signalindustries.reinforced.dilithiumBooster.desc=[Dilithium] go brrrrrrrr. Speeds up an adjacent machine that it points to.
+tile.signalindustries.reinforced.dilithiumBooster.desc=Speeds up an adjacent machine that it points to. [Dilithium] go brrrrrrrr.
 tile.signalindustries.dilithiumRail.name=Dilithium Rail
 tile.signalindustries.dilithiumRail.desc=Hyperspeed!
 
@@ -402,7 +402,7 @@ tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
 tile.signaindustries.reinforced.satellite.name=Satellite
-tile.signaindustries.reinforced.satellite.desc=Release it into the skies to watch the world from above remotely.
+tile.signaindustries.reinforced.satellite.desc=Satellite, shine on me tonight~ Release it into the skies to watch the world from above.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -415,7 +415,7 @@ tile.signalindustries.realityFabric.desc=Holds reality together.
 tile.signalindustries.rootedFabric.name=Rooted Fabric
 tile.signalindustries.rootedFabric.desc=There's something in between the threads of reality.
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
-tile.signalindustries.eternalTreeLog.desc=Kind of weird for a "tree" to exist in the middle of literally nowhere. Cannot burn.
+tile.signalindustries.eternalTreeLog.desc=An ethereal "tree" born out of the nothingness of Eternity. Cannot burn.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
 tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 
@@ -433,15 +433,6 @@ tile.signalindustries.awakenedSignalumCrystalBlock.desc=A solid block of Awakene
 tile.signalindustries.dilithiumCrystalBlock.name=Dilithium Crystal Block
 tile.signalindustries.dilithiumCrystalBlock.desc=A fragile crystal of Dilithium.
 
-tile.signalindustries.itemPipe.name=Item Pipe
-tile.signalindustries.itemPipe.desc=Transports items, duh.
-tile.signalindustries.itemPipeOpaque.name=Opaque Item Pipe
-tile.signalindustries.itemPipeOpaque.desc=Transports items but you can't see them.
-tile.signalindustries.inserter.name=Inserter
-tile.signalindustries.inserter.desc=Sucks up items from the ground or from connected inventories and puts them into pipes.
-tile.signalindustries.filter.name=Filter
-tile.signalindustries.filter.desc=Sorts items that pass through it into colored outputs,
-
 dimension.signalindustries.eternity.name=Eternity
 signalindustries.eternity.name=Eternity
 
@@ -454,7 +445,7 @@ bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
 event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. Brace yourselves!
 event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!
 event.signalindustries.awakenedWrathBeaconActivated=An awakened Wrath Beacon has been activated!!!
-event.signalindustries.annihilatorChallenge=You have made a grave mistake...
+event.signalindustries.annihilatorChallenge=You have made a grave mistake... Annihilator challenge activated!!!!
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
