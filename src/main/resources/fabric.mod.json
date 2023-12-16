@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "id": "signalindustries",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "name": "Signal Industries",
-  "icon": "icon.png",
+  "icon": "icon128.png",
   "description": "Technomagical mod with cool gadgets and machines.",
   "authors": [
     "sunsetsatellite"
