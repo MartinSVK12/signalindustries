@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.entities;
 
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.data.gamerule.GameRule;
+import net.minecraft.core.data.gamerule.GameRules;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.util.helper.DamageType;
@@ -46,7 +48,7 @@ public class ExplosionNoDrops {
         this.explosionY = d1;
         this.explosionZ = d2;
         this.destroyBlocks = true;
-        if (!world.mobGriefing)
+        if (!world.getGameRule(GameRules.MOB_GRIEFING))
             this.destroyBlocks = (entity == null || entity instanceof EntityPlayer);
     }
 

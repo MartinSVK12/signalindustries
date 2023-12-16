@@ -19,15 +19,3 @@ pluginManagement {
         }
     }
 }
-
-include(":catalyst")
-include(":catalyst:energy")
-include(":catalyst:fluids")
-include(":catalyst:multiblocks")
-include(":catalyst:models")
-
-project(":catalyst").projectDir = file("C:\\Users\\sunsetsatellite\\Projects\\BTA\\7.1\\catalyst")
-project(":catalyst:energy").projectDir = file("${project(":catalyst").projectDir}\\energy")
-project(":catalyst:fluids").projectDir = file("${project(":catalyst").projectDir}\\fluids")
-project(":catalyst:multiblocks").projectDir = file("${project(":catalyst").projectDir}\\multiblocks")
-project(":catalyst:models").projectDir = file("${project(":catalyst").projectDir}\\models")
