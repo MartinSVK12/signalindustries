@@ -210,7 +210,7 @@ public class RenderGlobalMixin {
             tessellator.addVertexWithUV(f15, -100.0, -f15, 0.0, 0.0);
             tessellator.addVertexWithUV(-f15, -100.0, -f15, 1.0, 0.0);
             tessellator.draw();*/
-            GL11.glDisable(3553);
+            //GL11.glDisable(3553);
             f20 = this.worldObj.getStarBrightness(renderPartialTicks) * f6;
             if (f20 > 0.0F) {
                 GL11.glColor4f(f20, f20, f20, f20);
