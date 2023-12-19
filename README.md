@@ -1,12 +1,10 @@
 # Signal Industries
-A technomagical mod for Better Than Adventure 1.7.7.0.
+A technomagical mod for Better Than Adventure 7.1.
 
 Requires:
 
-- FluidAPI (https://github.com/MartinSVK12/fluidapi/releases)
-- EnergyAPI (https://github.com/MartinSVK12/energyapi/releases)
-- Guidebook++ (https://github.com/MartinSVK12/guidebookpp/releases)
-- SunsetUtils (https://github.com/MartinSVK12/sunsetutils/releases)
+- HalpLibe (https://github.com/Turnip-Labs/bta-halplibe)
+- Catalyst (all modules) (https://github.com/MartinSVK12/catalyst)
 - DragonFly (https://github.com/UselessBullets/DragonFly/releases)
 
 
