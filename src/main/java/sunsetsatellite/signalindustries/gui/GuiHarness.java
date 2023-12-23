@@ -38,7 +38,8 @@ public class GuiHarness extends GuiItemFluid {
         fontRenderer.drawCenteredString("Signalum Prototype Harness", 90, 6, 0xFFFF8080);
     }
 
-    public void onGuiClosed(){
+    @Override
+    public void onClosed(){
         if(armor.getItem() instanceof ItemSignalumPrototypeHarness){
             NBTHelper.saveInvToNBT(armor,((ContainerHarness)inventorySlots).inv);
         }

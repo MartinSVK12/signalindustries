@@ -38,7 +38,8 @@ public class GuiPulsar extends GuiItemFluid {
         fontRenderer.drawCenteredString("The Pulsar", 90, 6, 0xFFCC0000);
     }
 
-    public void onGuiClosed(){
+    @Override
+    public void onClosed() {
         if(pulsar.getItem() instanceof ItemPulsar){
             NBTHelper.saveInvToNBT(pulsar,((ContainerPulsar)inventorySlots).inv);
         }

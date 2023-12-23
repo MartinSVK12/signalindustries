@@ -52,7 +52,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
                 return true;
             }
         } else if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE_GROUP) {
-            RecipeGroup group;
+            RecipeGroup<?> group;
             try {
                 group = Registries.RECIPES.getGroupFromKey(query.scope.getRight());
             } catch (IllegalArgumentException e) {

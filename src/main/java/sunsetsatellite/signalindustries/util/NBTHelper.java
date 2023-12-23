@@ -40,23 +40,6 @@ public class NBTHelper {
         }
     }
 
-    /*public static CompoundTag savePureNBT(CompoundTag nbt, IInventory inv){
-        for(int i = 0; i < inv.getSizeInventory();i++){
-            ItemStack item = inv.getStackInSlot(i);
-            CompoundTag itemNBT = new CompoundTag();
-            if(item != null){
-                itemNBT.putByte("Count", (byte)item.stackSize);
-                itemNBT.putShort("id", (short)item.itemID);
-                itemNBT.putShort("Damage", (short)item.getMetadata());
-                itemNBT.putCompound("Data", (CompoundTag)item.tag);
-                nbt.putCompound(String.valueOf(i),itemNBT);
-            } else {
-                ((INBTCompound)nbt).removeTag(String.valueOf(i));
-            }
-        }
-        return nbt;
-    }*/
-
     public static void loadInvFromNBT(ItemStack source_item, IInventory inv, int amount, int fluidAmount){
         CompoundTag itemNBT = source_item.getData().getCompound("inventory");
         CompoundTag fluidNBT = source_item.getData().getCompound("fluidInventory");
@@ -74,33 +57,4 @@ public class NBTHelper {
             }
         }
     }
-
-    /*public static void loadPureNBT(CompoundTag nbt, IInventory inv, int amount){
-        for(int i = 0; i < amount;i++){
-            if(nbt.hasKey(String.valueOf(i))){
-                ItemStack item = new ItemStack(nbt.getCompound(String.valueOf(i)));
-                inv.setInventorySlotContents(i,item);
-            }
-        }
-    }*/
-
-    /*public static NBTBase loadNBTFile(String name) {
-        try {
-            RandomAccessFile file = new RandomAccessFile(name, "r");
-            NBTBase nbt = NBTBase.readTag(file);
-            return nbt;
-        } catch(IOException e){
-            e.printStackTrace();
-        }
-        return new CompoundTag();
-    }
-
-    public static void saveNBTFile(String name, NBTBase nbt) {
-        try {
-            RandomAccessFile file = new RandomAccessFile(name, "rw");
-            NBTBase.writeTag(nbt, file);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }*/
 }

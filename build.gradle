@@ -118,12 +118,13 @@ dependencies {
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
 
 	modImplementation "ModMenu:ModMenu:2.0.3"
-	modImplementation "catalyst:catalyst-core:1.0.0"
-	modImplementation "catalyst:catalyst-fluids:1.0.0"
-	modImplementation "catalyst:catalyst-energy:1.0.0"
-	modImplementation "catalyst:catalyst-multiblocks:1.0.0"
 
-	modImplementation "DragonFly:dragonfly:1.0.0-7.1"
+	implementation project(path: ":catalyst",configuration: "namedElements")
+	implementation project(path: ":catalyst:energy",configuration: "namedElements")
+	implementation project(path: ":catalyst:fluids",configuration: "namedElements")
+	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
+
+	modImplementation "DragonFly:dragonfly:1.0.4-7.1"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"

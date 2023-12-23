@@ -7,7 +7,7 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.api.impl.fluidapi.SignalIndustriesFluidPlugin;
+import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
 import sunsetsatellite.signalindustries.recipes.CraftingRecipesSI;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;

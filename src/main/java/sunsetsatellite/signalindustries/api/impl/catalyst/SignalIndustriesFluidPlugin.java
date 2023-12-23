@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.fluidapi;
+package sunsetsatellite.signalindustries.api.impl.catalyst;
 
 
 import net.minecraft.core.block.BlockFluid;

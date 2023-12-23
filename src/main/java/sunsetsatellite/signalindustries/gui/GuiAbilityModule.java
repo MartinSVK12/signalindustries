@@ -55,7 +55,8 @@ public class GuiAbilityModule extends GuiItemFluid {
         GL11.glDisable(2896);
     }
 
-    public void onGuiClosed(){
+    @Override
+    public void onClosed(){
         NBTHelper.saveInvToNBT(container.inv.item,((ContainerAbilityModule)inventorySlots).inv);
     }
 
