@@ -74,7 +74,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachine impleme
                 update = fuel();
             }
             if(isBurning() && canProcess()){
-                for (float y1 = y; y < 256; y+=0.1f) {
+                for (float y1 = y; y1 < 256; y1+=0.1f) {
                     SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+0.5,y1,z+0.5,0,0,0,1.0f,0.5f,0.0f,1.0f,16));
                 }
                 progressTicks++;

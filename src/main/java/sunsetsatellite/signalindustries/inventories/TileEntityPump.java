@@ -51,7 +51,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         if(currentBlock == null){
             Set<Integer> pumpableFluids = SIRecipes.PUMP.getAllRecipes().stream().map((R)->R.getOutput().getLiquid().id).collect(Collectors.toSet());
             for(int x1 = x-range; x < x+range; x++){
-                for(int y1 = y-range; y < y+range; y++){
+                for(int y1 = y-range; y1 < y+range; y1++){
                     for(int z1 = z-range; z < z+range; z++){
                         int id = worldObj.getBlockId(x1,y1,z1);
                         if(pumpableFluids.contains(id)){

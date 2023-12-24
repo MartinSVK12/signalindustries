@@ -120,7 +120,7 @@ public class TileEntityWrathBeacon extends TileEntity {
                 return;
             }
             for (int x1 = x-7; x < x+7; x++) {
-                for (int y1 = y; y < y+8; y++) {
+                for (int y1 = y; y1 < y+8; y1++) {
                     for (int z1 = z-7; z < z+7; z++) {
                         int id = worldObj.getBlockId(x,y,z);
                         int idUnder = worldObj.getBlockId(x,y-1,z);
