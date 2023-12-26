@@ -15,18 +15,23 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
+import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
+import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collection;
 import java.util.Objects;
 
-public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHasOverlay {
+public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHasOverlay, IInjectable {
 
 
     public ItemSignalumPrototypeHarness(String key, int id, ArmorMaterial material, int armorPiece, Tier tier) {
@@ -104,4 +109,21 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
         }
     }
 
+    @Override
+    public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
+        InventoryHarness inv = new InventoryHarness(stack);
+        NBTHelper.loadInvFromNBT(stack,inv,0,1);
+        inv.insertFluid(0,fluidStack.splitStack(Math.min(maxAmount,fluidStack.amount)));
+        NBTHelper.saveInvToNBT(stack,inv);
+    }
+
+    @Override
+    public boolean canFill(ItemStack stack) {
+        if(stack.getItem() == SignalIndustries.signalumPrototypeHarness){
+            InventoryHarness inv = new InventoryHarness(stack);
+            NBTHelper.loadInvFromNBT(stack,inv,0,1);
+            return inv.getFluidAmountForSlot(0) < inv.getFluidCapacityForSlot(0);
+        }
+        return false;
+    }
 }

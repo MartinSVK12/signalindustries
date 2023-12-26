@@ -13,17 +13,21 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
+import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class ItemPulsar extends ItemTiered implements IHasOverlay {
+public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     public ItemPulsar(int i, Tier tier) {
         super(i, tier);
     }
@@ -156,4 +160,18 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay {
 
     }
 
+    @Override
+    public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
+        InventoryPulsar inv = new InventoryPulsar(stack);
+        NBTHelper.loadInvFromNBT(stack,inv,1,1);
+        inv.insertFluid(0,fluidStack.splitStack(Math.min(maxAmount,fluidStack.amount)));
+        NBTHelper.saveInvToNBT(stack,inv);
+    }
+
+    @Override
+    public boolean canFill(ItemStack stack) {
+        InventoryPulsar inv = new InventoryPulsar(stack);
+        NBTHelper.loadInvFromNBT(stack,inv,1,1);
+        return inv.getFluidAmountForSlot(0) < inv.getFluidCapacityForSlot(0);
+    }
 }
