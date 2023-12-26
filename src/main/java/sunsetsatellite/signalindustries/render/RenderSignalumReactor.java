@@ -4,7 +4,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 
 
 public class RenderSignalumReactor extends RenderMultiblock {

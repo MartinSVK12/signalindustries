@@ -16,7 +16,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
 import sunsetsatellite.signalindustries.gui.GuiStabilizer;
-import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;

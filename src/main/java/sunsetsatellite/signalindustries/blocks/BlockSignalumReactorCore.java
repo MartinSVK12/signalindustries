@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 

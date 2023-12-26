@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.inventories.TileEntityInfuser;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityInfuser;
 
 public class GuiInfuser extends GuiFluid {
 

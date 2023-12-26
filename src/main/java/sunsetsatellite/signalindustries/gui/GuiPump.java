@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPump;
-import sunsetsatellite.signalindustries.inventories.TileEntityPump;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityPump;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 
 public class GuiPump extends GuiFluid {
 

@@ -12,7 +12,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumDynamo;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 
 public class GuiSignalumDynamo extends GuiFluid {
 

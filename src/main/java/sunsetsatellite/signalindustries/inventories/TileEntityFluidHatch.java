@@ -3,9 +3,10 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 
-public class TileEntityFluidHatch extends TileEntityTieredContainer{
+public class TileEntityFluidHatch extends TileEntityTieredContainer {
 
     public TileEntityFluidHatch(){
         itemContents = new ItemStack[0];

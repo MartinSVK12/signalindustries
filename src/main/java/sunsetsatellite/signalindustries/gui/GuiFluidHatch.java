@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class GuiFluidHatch extends GuiFluid {
 

@@ -4,7 +4,7 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 
 public class ContainerEnergyInjector extends ContainerTiered {
 

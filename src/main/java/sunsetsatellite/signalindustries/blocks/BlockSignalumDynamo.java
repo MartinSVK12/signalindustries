@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
 import sunsetsatellite.signalindustries.gui.GuiSignalumDynamo;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumDynamo;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;

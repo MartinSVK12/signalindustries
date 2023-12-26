@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
-import sunsetsatellite.signalindustries.inventories.TileEntityWithName;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
 @Debug(

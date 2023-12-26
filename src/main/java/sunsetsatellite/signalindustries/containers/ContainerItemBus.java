@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class ContainerItemBus extends ContainerFluid {
 

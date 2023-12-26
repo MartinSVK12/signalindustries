@@ -8,11 +8,11 @@ public class NumberUtil {
         if(Double.isInfinite(value)){
             return "inf";
         }
-        for (int i = 0; i < shortSuffixes.length; i++) {
-            if(value >= 1000){
+        for (String shortSuffix : shortSuffixes) {
+            if (value >= 1000) {
                 value /= 1000;
-                if(value < 1000){
-                    return String.format("%.2f%s",value,shortSuffixes[i]);
+                if (value < 1000) {
+                    return String.format("%.2f%s", value, shortSuffix);
                 }
             } else {
                 return String.valueOf(value);

@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 
 public class GuiSignalumReactor extends GuiTileEntity<TileEntitySignalumReactor> {
 

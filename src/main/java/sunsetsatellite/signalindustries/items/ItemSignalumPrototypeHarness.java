@@ -19,7 +19,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
-import sunsetsatellite.signalindustries.inventories.InventoryHarness;
+import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 

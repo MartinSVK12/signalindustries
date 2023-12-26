@@ -8,7 +8,8 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
-
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 
 
 public class TileEntityEnergyConnector extends TileEntityTieredContainer implements IMultiblockPart {

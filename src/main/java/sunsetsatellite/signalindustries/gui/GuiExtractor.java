@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
-import sunsetsatellite.signalindustries.inventories.TileEntityExtractor;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 
 public class GuiExtractor extends GuiFluid {
 

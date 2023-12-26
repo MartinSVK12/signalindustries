@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerTiered extends ContainerFluid {

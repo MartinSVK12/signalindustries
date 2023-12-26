@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
 import sunsetsatellite.signalindustries.gui.GuiEnergyInjector;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;

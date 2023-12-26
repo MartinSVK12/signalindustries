@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
-import sunsetsatellite.signalindustries.inventories.TileEntityCrusher;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrusher;
 
 public class GuiCrusher extends GuiFluid {
 

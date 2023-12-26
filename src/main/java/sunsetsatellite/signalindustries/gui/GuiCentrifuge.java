@@ -14,8 +14,8 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCentrifuge;
-import sunsetsatellite.signalindustries.inventories.TileEntityCentrifuge;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class GuiCentrifuge extends GuiFluid {
 

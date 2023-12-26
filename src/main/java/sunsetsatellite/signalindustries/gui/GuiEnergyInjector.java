@@ -14,8 +14,8 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 
 public class GuiEnergyInjector extends GuiFluid {
 

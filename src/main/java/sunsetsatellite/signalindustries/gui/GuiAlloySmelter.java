@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
 
 public class GuiAlloySmelter extends GuiFluid {
 

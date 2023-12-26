@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
 
 public class ContainerAlloySmelter extends ContainerFluid {
 

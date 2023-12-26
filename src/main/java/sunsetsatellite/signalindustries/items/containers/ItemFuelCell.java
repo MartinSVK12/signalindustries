@@ -1,5 +1,7 @@
 package sunsetsatellite.signalindustries.items.containers;
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
@@ -39,118 +41,52 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public ItemStack fill(FluidStack slot, ItemStack stack) {
+        if(slot== null){
+            return null;
+        }
+        if(slot.getLiquid() == SignalIndustries.energyFlowing){
+            int remaining = getRemainingCapacity(stack);
+            int saturation = stack.getData().getInteger("fuel");
+            int amount = slot.amount;
+            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
+            if(remaining == 0){
+                return null;
+            }
+            if(amount > remaining){
+                slot.amount -= remaining;
+                CompoundTag data = new CompoundTag();
+                data.putInt("fuel",getCapacity(stack));
+                cell.setData(data);
+                return cell;
+            } else {
+                CompoundTag data = new CompoundTag();
+                data.putInt("fuel",saturation + amount);
+                cell.setData(data);
+                return cell;
+            }
+        }
         return null;
     }
 
     @Override
     public ItemStack fill(FluidStack slot, ItemStack stack, TileEntityFluidContainer tile) {
-        return null;
+        return fill(slot, stack);
     }
 
     @Override
     public ItemStack fill(FluidStack slot, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
-        return null;
-    }
-
-    @Override
-    public ItemStack fill(FluidStack slot, ItemStack stack, ItemInventoryFluid inv) {
-        return null;
-    }
-
-
-    @Override
-    public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {
-
-    }
-
-    @Override
-    public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {
-
-    }
-
-    /*@Override
-    public ItemStack fill(SlotFluid slot, ItemStack stack) {
-        if(slot.getFluidStack() == null){
+        if(slot == null){
             return null;
         }
-        if(slot.getFluidStack().getLiquid() == SignalIndustries.energyFlowing){
+        if(slot.getLiquid() == SignalIndustries.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
-            int amount = slot.getFluidStack().amount;
-            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
-            if(remaining == 0){
-                return null;
-            }
-            if(amount > remaining){
-                slot.getFluidStack().amount -= remaining;
-                if(slot.getFluidStack().amount <= 0){
-                    slot.putStack(null);
-                }
-                CompoundTag data = new CompoundTag();
-                data.putInt("fuel",getCapacity(stack));
-                cell.setData(data);
-                return cell;
-            } else {
-                slot.putStack(null);
-                CompoundTag data = new CompoundTag();
-                data.putInt("fuel",saturation + amount);
-                cell.setData(data);
-                return cell;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack) {
-        if(tile.getFluidInSlot(slotIndex) == null){
-            return null;
-        }
-        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
-            int remaining = getRemainingCapacity(stack);
-            int saturation = stack.getData().getInteger("fuel");
-            int amount = tile.getFluidInSlot(slotIndex).amount;
-            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
-            if(remaining == 0){
-                return null;
-            }
-            if(amount > remaining){
-                tile.getFluidInSlot(slotIndex).amount -= remaining;
-                if(tile.getFluidInSlot(slotIndex).amount <= 0){
-                    tile.setFluidInSlot(slotIndex,null);
-                }
-                CompoundTag data = new CompoundTag();
-                data.putInt("fuel",getCapacity(stack));
-                cell.setData(data);
-                return cell;
-            } else {
-                tile.setFluidInSlot(slotIndex,null);
-                CompoundTag data = new CompoundTag();
-                data.putInt("fuel",saturation + amount);
-                cell.setData(data);
-                return cell;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public ItemStack fill(int slotIndex, TileEntityFluidContainer tile, ItemStack stack, int maxAmount) {
-        if(tile.getFluidInSlot(slotIndex) == null){
-            return null;
-        }
-        if(tile.getFluidInSlot(slotIndex).getLiquid() == SignalIndustries.energyFlowing){
-            int remaining = getRemainingCapacity(stack);
-            int saturation = stack.getData().getInteger("fuel");
-            int amount = Math.min(tile.getFluidInSlot(slotIndex).amount,maxAmount);
+            int amount = Math.min(slot.amount,maxAmount);
             ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
             if(remaining == 0) return null;
             int result = Math.min(amount,remaining);
             if(result == 0) return null;
-            tile.getFluidInSlot(slotIndex).amount -= result;
-            if(tile.getFluidInSlot(slotIndex).amount <= 0){
-                tile.setFluidInSlot(slotIndex,null);
-            }
+            slot.amount -= result;
             CompoundTag data = new CompoundTag();
             data.putInt("fuel", saturation+result);
             cell.setData(data);
@@ -158,6 +94,12 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         }
         return null;
     }
+
+    @Override
+    public ItemStack fill(FluidStack slot, ItemStack stack, ItemInventoryFluid inv) {
+        return fill(slot, stack);
+    }
+
 
     @Override
     public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {
@@ -219,7 +161,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
                 stack.getData().putInt("depleted",0);
             }
         }
-    }*/
+    }
 
     @Override
     public String getDescription(ItemStack itemStack) {

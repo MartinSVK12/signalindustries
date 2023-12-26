@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class GuiEnergyConnector extends GuiFluid {
 

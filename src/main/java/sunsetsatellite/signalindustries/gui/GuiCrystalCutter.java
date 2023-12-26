@@ -16,7 +16,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
-import sunsetsatellite.signalindustries.inventories.TileEntityCrystalCutter;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalCutter;
 
 public class GuiCrystalCutter extends GuiFluid {
 

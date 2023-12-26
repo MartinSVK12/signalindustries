@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerItemBus;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class GuiItemBus extends GuiFluid {
 

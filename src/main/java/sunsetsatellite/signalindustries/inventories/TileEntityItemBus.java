@@ -4,6 +4,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class TileEntityItemBus extends TileEntityTieredContainer implements IMultiblockPart {
 

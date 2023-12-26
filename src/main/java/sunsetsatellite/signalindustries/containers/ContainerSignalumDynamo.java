@@ -5,7 +5,7 @@ import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntitySignalumDynamo;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 
 public class ContainerSignalumDynamo extends ContainerFluid {
 

@@ -17,7 +17,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tag.ItemTags;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.RenderBlockSimple;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyInjector;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
 
 import java.util.Random;
 

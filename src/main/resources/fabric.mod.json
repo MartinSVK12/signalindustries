@@ -35,6 +35,9 @@
     ],
     "recipesReady": [
       "sunsetsatellite.signalindustries.recipes.container.SIRecipes"
+    ],
+    "btwaila": [
+      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
     ]
   },
   "mixins": [

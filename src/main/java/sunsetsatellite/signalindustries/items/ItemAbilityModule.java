@@ -9,7 +9,7 @@ import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
 import sunsetsatellite.signalindustries.gui.GuiAbilityModule;
-import sunsetsatellite.signalindustries.inventories.InventoryAbilityModule;
+import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Mode;

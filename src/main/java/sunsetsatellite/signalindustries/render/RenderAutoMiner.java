@@ -8,7 +8,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.render.RenderFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.inventories.TileEntityAutoMiner;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 
 import java.util.ArrayList;
 

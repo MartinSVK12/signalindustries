@@ -17,9 +17,9 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
 import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
-import sunsetsatellite.signalindustries.inventories.TileEntityDimensionalAnchor;
-import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;

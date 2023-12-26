@@ -3,8 +3,8 @@ package sunsetsatellite.signalindustries.containers;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.TileEntityCentrifuge;
-import sunsetsatellite.signalindustries.inventories.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 public class ContainerCentrifuge extends ContainerTiered{
 

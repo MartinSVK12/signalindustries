@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
-import sunsetsatellite.signalindustries.inventories.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
 
 public class GuiPlateFormer extends GuiFluid {
 

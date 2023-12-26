@@ -12,7 +12,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
-import sunsetsatellite.signalindustries.inventories.TileEntityAutoMiner;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 
 public class GuiAutoMiner extends GuiFluid {
 

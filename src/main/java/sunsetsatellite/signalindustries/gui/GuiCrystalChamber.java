@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalChamber;
-import sunsetsatellite.signalindustries.inventories.TileEntityCrystalChamber;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalChamber;
 
 public class GuiCrystalChamber extends GuiFluid {
 

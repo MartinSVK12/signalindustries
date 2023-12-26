@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerBooster;
-import sunsetsatellite.signalindustries.inventories.TileEntityBooster;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 
 public class GuiBooster extends GuiFluid {
 

@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
-import sunsetsatellite.signalindustries.inventories.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 
 public class GuiStabilizer extends GuiFluid {
 

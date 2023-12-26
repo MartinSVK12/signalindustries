@@ -9,7 +9,7 @@ import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.inventories.TileEntityBlockBreaker;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityBlockBreaker;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockBreaker extends BlockContainerTiered{
