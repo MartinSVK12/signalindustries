@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.Block;
@@ -7,7 +7,7 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
-
+@Deprecated
 public class PlateFormerRecipes extends MachineRecipesBase<Integer, ItemStack> {
     private static final PlateFormerRecipes instance = new PlateFormerRecipes();
 

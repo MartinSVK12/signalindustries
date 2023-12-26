@@ -7,15 +7,18 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
-import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
+import sunsetsatellite.signalindustries.recipes.legacy.InfuserRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class TileEntityInfuser extends TileEntityTieredMachine implements IBoostable {
 
-    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
+   // public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
 
     public TileEntityInfuser(){
         cost = 80;
@@ -95,12 +98,10 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
 
     public void processItem(){
         if(canProcess()){
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            list.add(this.itemContents[1]);
-            ItemStack stack = recipes.getResult(list);
-            Map.Entry<ArrayList<Object>, ItemStack> recipe = ((InfuserRecipes)recipes).getValidRecipe(list);
+            ItemStack stack = SIRecipes.INFUSER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0],itemContents[1]),
+                    tier);
+            RecipeEntryMachine recipe = SIRecipes.INFUSER.findRecipe(  RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0],itemContents[1]),tier);
             if(itemContents[2] == null){
                 setInventorySlotContents(2, stack);
             } else if(itemContents[2].isItemEqual(stack)) {
@@ -111,14 +112,14 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
             } else if(itemContents[1] != null && this.itemContents[1].getItem().hasContainerItem()) {
                 this.itemContents[1] = new ItemStack(this.itemContents[1].getItem().getContainerItem());
             } else {
-                if(itemContents[0] != null && recipe.getKey().get(1) != null){
-                    this.itemContents[0].stackSize -= ((ItemStack)recipe.getKey().get(1)).stackSize;
+                if(itemContents[0] != null && recipe.getInput()[1] != null){
+                    this.itemContents[0].stackSize -= recipe.getInput()[1].resolve().get(0).stackSize;
                 }
-                if(itemContents[1] != null && recipe.getKey().get(2) != null){
-                    this.itemContents[1].stackSize -= ((ItemStack)recipe.getKey().get(2)).stackSize;
+                if(itemContents[1] != null && recipe.getInput()[2] != null){
+                    this.itemContents[1].stackSize -= recipe.getInput()[2].resolve().get(0).stackSize;
                 }
-                if(fluidContents[1] != null && recipe.getKey().get(0) != null){
-                    this.fluidContents[1].amount -= ((FluidStack)recipe.getKey().get(0)).amount;
+                if(fluidContents[1] != null && recipe.getInput()[0] != null){
+                    this.fluidContents[1].amount -=  recipe.getInput()[0].resolveFluids().get(0).amount;
                 }
             }
             if(itemContents[0] != null && this.itemContents[0].stackSize <= 0) {
@@ -138,11 +139,9 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
         if(itemContents[0] == null) {
             return false;
         } else {
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            list.add(this.itemContents[1]);
-            ItemStack stack = recipes.getResult(list);
+            ItemStack stack = SIRecipes.INFUSER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0],itemContents[1]),
+                    tier);
             return stack != null && (itemContents[2] == null || (itemContents[2].isItemEqual(stack) && (itemContents[2].stackSize < getInventoryStackLimit() && itemContents[2].stackSize < itemContents[2].getMaxStackSize() || itemContents[2].stackSize < stack.getMaxStackSize())));
         }
     }

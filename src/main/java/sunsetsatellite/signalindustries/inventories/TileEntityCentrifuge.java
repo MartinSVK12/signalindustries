@@ -7,7 +7,10 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.CentrifugeRecipes;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
+import sunsetsatellite.signalindustries.recipes.legacy.CentrifugeRecipes;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +20,7 @@ import java.util.Random;
 
 public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBoostable {
 
-    public CentrifugeRecipes recipes = CentrifugeRecipes.instance;
+    //public CentrifugeRecipes recipes = CentrifugeRecipes.instance;
 
     public TileEntityCentrifuge(){
         cost = 240;
@@ -47,15 +50,7 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
             tier = block.tier;
-            switch (block.tier) {
-                case PROTOTYPE:
-                case BASIC:
-                case REINFORCED:
-                    recipes = CentrifugeRecipes.instance;
-                case AWAKENED:
-                    break;
-            }
-            speedMultiplier = 1;;
+            speedMultiplier = 1;
         }
         boolean update = false;
         if(fuelBurnTicks > 0){
@@ -105,8 +100,8 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(new FluidStack[]{getFluidInSlot(0),getFluidInSlot(1),getFluidInSlot(2),getFluidInSlot(3)});
-            Map.Entry<FluidStack[], ItemStack> recipe = recipes.getValidRecipe(new FluidStack[]{getFluidInSlot(0),getFluidInSlot(1),getFluidInSlot(2),getFluidInSlot(3)});
+            ItemStack stack = SIRecipes.CENTRIFUGE.findOutput(RecipeExtendedSymbol.arrayOf(fluidContents[0],fluidContents[1],fluidContents[2],fluidContents[3]),tier);
+            RecipeEntryMachine recipe = SIRecipes.CENTRIFUGE.findRecipe(RecipeExtendedSymbol.arrayOf(fluidContents[0],fluidContents[1],fluidContents[2],fluidContents[3]),tier);
             Random random = new Random();
             if(random.nextFloat() < 0.25){
                 if(itemContents[0] == null){
@@ -115,10 +110,10 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
                     itemContents[0].stackSize++;
                 }
             }
-            if(fluidContents[0] != null && recipe.getKey()[0] != null) fluidContents[0].amount -= recipe.getKey()[0].amount;
-            if(fluidContents[1] != null && recipe.getKey()[1] != null) fluidContents[1].amount -= recipe.getKey()[1].amount;
-            if(fluidContents[2] != null && recipe.getKey()[2] != null) fluidContents[2].amount -= recipe.getKey()[2].amount;
-            if(fluidContents[3] != null && recipe.getKey()[3] != null) fluidContents[3].amount -= recipe.getKey()[3].amount;
+            if(fluidContents[0] != null && recipe.getInput()[0] != null) fluidContents[0].amount -= recipe.getInput()[0].resolveFluids().get(0).amount;
+            if(fluidContents[1] != null && recipe.getInput()[1] != null) fluidContents[1].amount -= recipe.getInput()[1].resolveFluids().get(0).amount;
+            if(fluidContents[2] != null && recipe.getInput()[2] != null) fluidContents[2].amount -= recipe.getInput()[2].resolveFluids().get(0).amount;
+            if(fluidContents[3] != null && recipe.getInput()[3] != null) fluidContents[3].amount -= recipe.getInput()[3].resolveFluids().get(0).amount;
             if(fluidContents[0] != null && fluidContents[0].amount <= 0) fluidContents[0] = null;
             if(fluidContents[1] != null && fluidContents[1].amount <= 0) fluidContents[1] = null;
             if(fluidContents[2] != null && fluidContents[2].amount <= 0) fluidContents[2] = null;
@@ -127,7 +122,7 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
     }
 
     private boolean canProcess() {
-        ItemStack stack = recipes.getResult(new FluidStack[]{getFluidInSlot(0),getFluidInSlot(1),getFluidInSlot(2),getFluidInSlot(3)});
+        ItemStack stack = SIRecipes.CENTRIFUGE.findOutput(RecipeExtendedSymbol.arrayOf(fluidContents[0],fluidContents[1],fluidContents[2],fluidContents[3]),tier);
         return stack != null && (itemContents[0] == null || (itemContents[0].isItemEqual(stack) && (itemContents[0].stackSize < getInventoryStackLimit() && itemContents[0].stackSize < itemContents[0].getMaxStackSize() || itemContents[0].stackSize < stack.getMaxStackSize())));
     }
 }

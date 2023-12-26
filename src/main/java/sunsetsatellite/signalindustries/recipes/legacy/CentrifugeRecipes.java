@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Deprecated
 public class CentrifugeRecipes extends MachineRecipesBase<FluidStack[], ItemStack> {
     public static final CentrifugeRecipes instance = new CentrifugeRecipes();
 

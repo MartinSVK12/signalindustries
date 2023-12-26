@@ -36,6 +36,6 @@ public class RecipeProperties {
     }
 
     public boolean isCorrectTier(Tier tier){
-        return thisTierOnly ? this.tier == tier : this.tier.ordinal() >= tier.ordinal();
+        return thisTierOnly ? this.tier == tier : tier.ordinal() >= this.tier.ordinal();
     }
 }

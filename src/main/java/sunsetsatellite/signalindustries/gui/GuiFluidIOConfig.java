@@ -105,21 +105,25 @@ public class GuiFluidIOConfig extends GuiScreen {
 
     @Override
     public void init() {
+        int centerX = (width - xSize) / 2;
+        int centerY = (height - ySize) / 2;
 
+        controlList.add(new GuiButton(2, (width / 2) - 10, (height / 2) - 63, 15, 15, tile.connections.get(Direction.Y_POS).getLetter())); //Y+
+        controlList.add(new GuiButton(4, (width / 2) - 10, (height / 2) - 48, 15, 15, tile.connections.get(Direction.Z_POS).getLetter())); //Z+
+        controlList.add(new GuiButton(3, (width / 2) - 10, (height / 2) - 33, 15, 15, tile.connections.get(Direction.Y_NEG).getLetter())); //Y-
+        controlList.add(new GuiButton(0, (width / 2) + 4, (height / 2) - 48, 15, 15, tile.connections.get(Direction.X_POS).getLetter())); //X+
+        controlList.add(new GuiButton(1, (width / 2) - 24, (height / 2) - 48, 15, 15, tile.connections.get(Direction.X_NEG).getLetter())); //X-
+        controlList.add(new GuiButton(5, (width / 2) + 4, (height / 2) - 33, 15, 15, tile.connections.get(Direction.Z_NEG).getLetter())); //Z-
 
-        controlList.add(new GuiButton(2, Math.round(width / 2) - 10, Math.round(height / 2) - 63, 15, 15, tile.connections.get(Direction.Y_POS).getLetter())); //Y+
-        controlList.add(new GuiButton(4, Math.round(width / 2) - 10, Math.round(height / 2) - 48, 15, 15, tile.connections.get(Direction.Z_POS).getLetter())); //Z+
-        controlList.add(new GuiButton(3, Math.round(width / 2) - 10, Math.round(height / 2) - 33, 15, 15, tile.connections.get(Direction.Y_NEG).getLetter())); //Y-
-        controlList.add(new GuiButton(0, Math.round(width / 2) + 4, Math.round(height / 2) - 48, 15, 15, tile.connections.get(Direction.X_POS).getLetter())); //X+
-        controlList.add(new GuiButton(1, Math.round(width / 2) - 24, Math.round(height / 2) - 48, 15, 15, tile.connections.get(Direction.X_NEG).getLetter())); //X-
-        controlList.add(new GuiButton(5, Math.round(width / 2) + 4, Math.round(height / 2) - 33, 15, 15, tile.connections.get(Direction.Z_NEG).getLetter())); //Z-
+        controlList.add(new GuiButton(8, (width / 2) - 10 + 50, (height / 2) - 63, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_POS))));
+        controlList.add(new GuiButton(10, (width / 2) - 10 + 50, (height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_POS))));
+        controlList.add(new GuiButton(9, (width / 2) - 10 + 50, (height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_NEG))));
+        controlList.add(new GuiButton(6, (width / 2) + 4 + 50, (height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_POS))));
+        controlList.add(new GuiButton(7, (width / 2) - 24 + 50, (height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_NEG))));
+        controlList.add(new GuiButton(11, (width / 2) + 4 + 50, (height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_NEG))));
 
-        controlList.add(new GuiButton(8, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 63, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_POS))));
-        controlList.add(new GuiButton(10, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_POS))));
-        controlList.add(new GuiButton(9, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_NEG))));
-        controlList.add(new GuiButton(6, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_POS))));
-        controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.X_NEG))));
-        controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_NEG))));
+        controlList.add(new GuiButton(12,(width / 2) - 85, (height / 2)-12, 30, 15, "All I"));
+        controlList.add(new GuiButton(13, (width / 2) - 55, (height / 2)-12, 30, 15, "All O"));
 
         if(tile.fluidContents.length == 1){
             controlList.get(6).enabled = false;
@@ -166,7 +170,7 @@ public class GuiFluidIOConfig extends GuiScreen {
             guibutton.displayString = tile.connections.get(Direction.values()[guibutton.id]).getLetter();
 
         }
-        if(guibutton.id > 5){
+        if(guibutton.id > 5 && guibutton.id < 12){
             Direction dir = Direction.values()[guibutton.id-6];
             Integer currentValue = tile.activeFluidSlots.get(dir);
             if(currentValue < tile.fluidContents.length-1){
@@ -174,6 +178,26 @@ public class GuiFluidIOConfig extends GuiScreen {
             }
 
             guibutton.displayString = String.valueOf(tile.activeFluidSlots.get(dir));
+        }
+        if(guibutton.id == 12){
+            for (Direction direction : Direction.values()) {
+                tile.connections.replace(direction,Connection.INPUT);
+            }
+            for (GuiButton button : controlList) {
+                if(button.id >= 0 && button.id < 6){
+                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                }
+            }
+        }
+        if(guibutton.id == 13){
+            for (Direction direction : Direction.values()) {
+                tile.connections.replace(direction,Connection.OUTPUT);
+            }
+            for (GuiButton button : controlList) {
+                if(button.id >= 0 && button.id < 6){
+                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                }
+            }
         }
         super.buttonPressed(guibutton);
     }

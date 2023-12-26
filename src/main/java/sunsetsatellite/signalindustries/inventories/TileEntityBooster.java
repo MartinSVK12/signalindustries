@@ -13,8 +13,8 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.InfuserRecipes;
-import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
+import sunsetsatellite.signalindustries.recipes.legacy.InfuserRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
 
 import java.util.ArrayList;
 import java.util.HashMap;

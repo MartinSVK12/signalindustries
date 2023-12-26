@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 public class TileEntityPump extends TileEntityTieredMachine implements IBoostable {
 
-    //public MachineRecipesBase<Integer, FluidStack> recipes = PumpRecipes.instance;
     public BlockInstance currentBlock = null;
     public int range = 3;
     public TileEntityPump(){

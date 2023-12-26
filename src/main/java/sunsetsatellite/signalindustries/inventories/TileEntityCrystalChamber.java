@@ -7,13 +7,15 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.CrystalChamberRecipes;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.CrystalChamberRecipes;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 
 public class TileEntityCrystalChamber extends TileEntityTieredMachine implements IBoostable {
 
-    public CrystalChamberRecipes recipes = CrystalChamberRecipes.instance;
+    //public CrystalChamberRecipes recipes = CrystalChamberRecipes.instance;
 
     public TileEntityCrystalChamber(){
         cost = 80;
@@ -40,15 +42,6 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
             tier = block.tier;
-            switch (block.tier) {
-                case BASIC:
-                    recipes = CrystalChamberRecipes.instance;
-                    break;
-                case PROTOTYPE:
-                case REINFORCED:
-                case AWAKENED:
-                    break;
-            }
             cost = 40 * (block.tier.ordinal()+1);
         }
         boolean update = false;
@@ -88,7 +81,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 800 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+            progressMaxTicks = 800 / speedMultiplier;
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {
@@ -105,7 +98,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
             int sat1 = this.itemContents[0].getData().getInteger("saturation");
             int size2 = this.itemContents[2].getData().getInteger("size");
             int sat2 = this.itemContents[2].getData().getInteger("saturation");
-            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
+            ItemStack stack = SIRecipes.CRYSTAL_CHAMBER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(itemContents[2],itemContents[0]),
+                    tier);
             stack.getData().putInt("size",size1+size2);
             stack.getData().putInt("saturation",sat1+sat2);
             if(itemContents[1] == null){
@@ -139,7 +134,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachine implements
             if(c1.getData().getInteger("size") + c2.getData().getInteger("size") > 8){
                 return false;
             }
-            ItemStack stack = recipes.getResult(new Integer[]{c2.itemID, c1.itemID});
+            ItemStack stack = SIRecipes.CRYSTAL_CHAMBER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(c2,c1),
+                    tier);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

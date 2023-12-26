@@ -1,10 +1,11 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 
 
 import java.util.HashMap;
 
+@Deprecated
 public abstract class MachineRecipesBase<I,O> {
 
     protected final HashMap<I, O> recipeList = new HashMap<>();

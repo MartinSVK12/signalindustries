@@ -9,15 +9,15 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.BasicCrystalCutterRecipes;
-import sunsetsatellite.signalindustries.recipes.CrystalCutterRecipes;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class TileEntityCrystalCutter extends TileEntityTieredMachine implements IBoostable {
 
-    public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
+    //public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
 
     public int recipeSelector = 0;
 
@@ -60,12 +60,10 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
             tier = block.tier;
             switch (block.tier) {
                 case PROTOTYPE:
-                    recipes = CrystalCutterRecipes.getInstance();
                     fluidCapacity[0] = 2000;
                     fluidCapacity[1] = 1000;
                     break;
                 case BASIC:
-                    recipes = BasicCrystalCutterRecipes.getInstance();
                     fluidCapacity[0] = 4000;
                     fluidCapacity[1] = 4000;
                     break;
@@ -124,12 +122,14 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
 
     public void processItem(){
         if(canProcess()){
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            list.add(recipeSelector);
-            ItemStack stack = recipes.getResult(list);
-            Map.Entry<ArrayList<Object>, ItemStack> recipe = recipes.getValidRecipe(list);
+            ItemStack stack = SIRecipes.CRYSTAL_CUTTER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
+                    tier,
+                    recipeSelector);
+            RecipeEntryMachine recipe = SIRecipes.CRYSTAL_CUTTER.findRecipe(
+                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
+                    tier,
+                    recipeSelector);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -138,8 +138,8 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
             } else {
-                this.itemContents[0].stackSize -= ((ItemStack)recipe.getKey().get(1)).stackSize;
-                this.fluidContents[1].amount -= ((FluidStack)recipe.getKey().get(0)).amount;
+                this.itemContents[0].stackSize -= recipe.getInput()[1].resolve().get(0).stackSize;
+                this.fluidContents[1].amount -= recipe.getInput()[0].resolveFluids().get(0).amount;
             }
             if(this.itemContents[0].stackSize <= 0) {
                 this.itemContents[0] = null;
@@ -154,11 +154,10 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         if(itemContents[0] == null || fluidContents[1] == null) {
             return false;
         } else {
-            ArrayList<Object> list = new ArrayList<>();
-            list.add(this.fluidContents[1]);
-            list.add(this.itemContents[0]);
-            list.add(recipeSelector);
-            ItemStack stack = recipes.getResult(list);
+            ItemStack stack = SIRecipes.CRYSTAL_CUTTER.findOutput(
+                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
+                    tier,
+                    recipeSelector);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

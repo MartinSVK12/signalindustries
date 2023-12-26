@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.item.Item;
@@ -6,7 +6,7 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.HashMap;
-
+@Deprecated
 public class CrusherRecipes extends MachineRecipesBase<Integer, ItemStack> {
     public static final CrusherRecipes instance = new CrusherRecipes();
 

@@ -5,10 +5,8 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RecipeExtendedSymbol {
     private char symbol;
@@ -146,12 +144,38 @@ public class RecipeExtendedSymbol {
 
     public FluidStack getFluidStack() { return fluidStack; }
 
+    public boolean hasFluid() { return fluidStack != null; }
+
     public RecipeExtendedSymbol copy(){
         return new RecipeExtendedSymbol(symbol,stack,fluidStack,itemGroup);
     }
 
     public RecipeSymbol asNormalSymbol(){
         return new RecipeSymbol(symbol,stack,itemGroup);
+    }
+
+    public static RecipeExtendedSymbol[] arrayOf(Object... objs){
+        return Arrays.stream(objs).map((O) -> {
+            if (O instanceof ItemStack) {
+                return new RecipeExtendedSymbol((ItemStack) O);
+            } else if (O instanceof FluidStack) {
+                return new RecipeExtendedSymbol((FluidStack) O);
+            } else {
+                return null;
+            }
+        }).filter(Objects::nonNull).toArray(RecipeExtendedSymbol[]::new);
+    }
+
+    public static List<RecipeExtendedSymbol> listOf(Object... objs){
+        return Arrays.stream(objs).map((O) -> {
+            if (O instanceof ItemStack) {
+                return new RecipeExtendedSymbol((ItemStack) O);
+            } else if (O instanceof FluidStack) {
+                return new RecipeExtendedSymbol((FluidStack) O);
+            } else {
+                return null;
+            }
+        }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     @Override
@@ -162,12 +186,13 @@ public class RecipeExtendedSymbol {
         RecipeExtendedSymbol that = (RecipeExtendedSymbol) o;
 
         if (getSymbol() != that.getSymbol()) return false;
-        if (getStack() != null ? !getStack().isItemEqual(that.getStack()) : that.getStack() != null) return false;
+        if (getStack() != null && that.getStack() != null ? !getStack().isItemEqual(that.getStack()) : that.getStack() != null) {
+            return false;
+        }
         if (getItemGroup() != null ? !getItemGroup().equals(that.getItemGroup()) : that.getItemGroup() != null)
             return false;
         return getFluidStack() != null ? getFluidStack().isFluidEqual(that.getFluidStack()) : that.getFluidStack() == null;
     }
-
     @Override
     public String toString() {
         if(stack != null && itemGroup == null){

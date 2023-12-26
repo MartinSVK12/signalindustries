@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.Block;
@@ -6,7 +6,7 @@ import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 
 import java.util.HashMap;
-
+@Deprecated
 public class PumpRecipes extends MachineRecipesBase<Integer, FluidStack> {
     public static final PumpRecipes instance = new PumpRecipes();
 

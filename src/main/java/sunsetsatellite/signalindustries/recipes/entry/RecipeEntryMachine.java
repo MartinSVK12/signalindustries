@@ -6,6 +6,7 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -22,7 +23,25 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
     public RecipeEntryMachine() {}
 
     public boolean matches(RecipeExtendedSymbol[] symbols) {
-        return Arrays.stream(symbols).allMatch((S)-> Arrays.asList(getInput()).contains(S));
+        for (RecipeExtendedSymbol S : symbols) {
+            if (Arrays.asList(getInput()).contains(S)) {
+                RecipeExtendedSymbol inputSymbol = getInput()[Arrays.asList(getInput()).indexOf(S)];
+                if(inputSymbol.hasFluid()){
+                    FluidStack fluid = S.resolveFluids().get(0);
+                    FluidStack inputFluid = inputSymbol.resolveFluids().get(0);
+                    if(fluid.amount < inputFluid.amount){
+                        return false;
+                    }
+                } else {
+                    ItemStack stack = S.resolve().get(0);
+                    ItemStack inputStack = inputSymbol.resolve().get(0);
+                    if(stack.stackSize < inputStack.stackSize){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public boolean matchesQuery(SearchQuery query) {

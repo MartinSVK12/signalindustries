@@ -6,14 +6,16 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.AlloySmelterRecipes;
-import sunsetsatellite.signalindustries.recipes.BasicAlloySmelterRecipes;
-import sunsetsatellite.signalindustries.recipes.MachineRecipesBase;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.AlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.BasicAlloySmelterRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 
 public class TileEntityAlloySmelter extends TileEntityTieredMachine implements IBoostable {
 
-    public MachineRecipesBase<Integer[], ItemStack> recipes = AlloySmelterRecipes.instance;
+    //public MachineRecipesBase<Integer[], ItemStack> recipes = AlloySmelterRecipes.instance;
 
     public TileEntityAlloySmelter(){
         cost = 40;
@@ -33,17 +35,6 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachine implements I
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null) {
             tier = block.tier;
-            switch (block.tier) {
-                case PROTOTYPE:
-                    recipes = AlloySmelterRecipes.instance;
-                    break;
-                case BASIC:
-                    recipes = BasicAlloySmelterRecipes.instance;
-                    break;
-                case REINFORCED:
-                case AWAKENED:
-                    break;
-            }
             speedMultiplier = block.tier.ordinal() + 1;
             cost = 40 * (block.tier.ordinal()+1);
         }
@@ -97,7 +88,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachine implements I
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
+            ItemStack stack = SIRecipes.ALLOY_SMELTER.findOutput(RecipeExtendedSymbol.arrayOf(this.itemContents[2],this.itemContents[0]));
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -124,7 +115,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachine implements I
         if(itemContents[0] == null || itemContents[2] == null) {
             return false;
         } else {
-            ItemStack stack = recipes.getResult(new Integer[]{this.itemContents[2].itemID, this.itemContents[0].itemID});
+            ItemStack stack = SIRecipes.ALLOY_SMELTER.findOutput(RecipeExtendedSymbol.arrayOf(this.itemContents[2],this.itemContents[0]));
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

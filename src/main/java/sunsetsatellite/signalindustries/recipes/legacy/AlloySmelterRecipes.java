@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.item.Item;
@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class AlloySmelterRecipes extends MachineRecipesBase<Integer[], ItemStack> {
     public static final AlloySmelterRecipes instance = new AlloySmelterRecipes();
 

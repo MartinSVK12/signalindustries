@@ -1,10 +1,10 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
+@Deprecated
 public class BasicCrusherRecipes extends CrusherRecipes {
     public static final BasicCrusherRecipes instance = new BasicCrusherRecipes();
 

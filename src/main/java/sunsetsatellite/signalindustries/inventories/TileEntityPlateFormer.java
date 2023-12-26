@@ -6,11 +6,12 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.recipes.PlateFormerRecipes;
+import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.legacy.PlateFormerRecipes;
 
 public class TileEntityPlateFormer extends TileEntityTieredMachine implements IBoostable {
 
-    public PlateFormerRecipes recipes = PlateFormerRecipes.getInstance();
+    //public PlateFormerRecipes recipes = PlateFormerRecipes.getInstance();
 
     public TileEntityPlateFormer(){
         cost = 20;
@@ -19,7 +20,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
     }
     @Override
     public String getInvName() {
-        return "PlateFormer";
+        return "Plate Former";
     }
 
     @Override
@@ -80,7 +81,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
 
     public void processItem(){
         if(canProcess()){
-            ItemStack stack = recipes.getResult(this.itemContents[0].getItem().id);
+            ItemStack stack = SIRecipes.PLATE_FORMER.findOutput(itemContents[0],tier);//recipes.getResult(this.itemContents[0].getItem().id);
             if(itemContents[1] == null){
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
@@ -101,7 +102,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachine implements IB
         if(itemContents[0] == null) {
             return false;
         } else {
-            ItemStack stack = recipes.getResult(itemContents[0].itemID);
+            ItemStack stack = SIRecipes.PLATE_FORMER.findOutput(itemContents[0],tier);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
     }

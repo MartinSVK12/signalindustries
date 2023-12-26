@@ -1,10 +1,10 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
+@Deprecated
 public class BasicExtractorRecipes extends ExtractorRecipes {
     public static final BasicExtractorRecipes instance = new BasicExtractorRecipes();
 

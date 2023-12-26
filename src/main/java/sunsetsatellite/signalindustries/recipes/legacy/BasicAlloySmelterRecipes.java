@@ -1,9 +1,9 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
+@Deprecated
 public class BasicAlloySmelterRecipes extends AlloySmelterRecipes {
     public static final BasicAlloySmelterRecipes instance = new BasicAlloySmelterRecipes();
 

@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import com.mojang.nbt.CompoundTag;
@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+@Deprecated
 public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, ItemStack> {
     private static final CrystalCutterRecipes instance = new CrystalCutterRecipes();
 

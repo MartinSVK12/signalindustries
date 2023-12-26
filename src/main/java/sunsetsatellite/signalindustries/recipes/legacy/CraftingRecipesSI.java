@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.Block;
@@ -6,7 +6,7 @@ import net.minecraft.core.crafting.legacy.CraftingManager;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
+@Deprecated
 public class CraftingRecipesSI {
 
     public void addRecipes() {
@@ -86,14 +86,14 @@ public class CraftingRecipesSI {
         createRecipe(new ItemStack(SignalIndustries.signalumReactorCore, 1), new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.reinforcedCasing,1,0),'1',new ItemStack(SignalIndustries.rawCrystalBlock,1,0),'2',new ItemStack(SignalIndustries.reinforcedCasing,1,0),'3',new ItemStack(SignalIndustries.reinforcedEnergyCore,1,0),'4',new ItemStack(SignalIndustries.reinforcedMachineCore,1,0),'5',new ItemStack(SignalIndustries.reinforcedEnergyCore,1,0),'6',new ItemStack(SignalIndustries.reinforcedCasing,1,0),'7',new ItemStack(SignalIndustries.energyCatalyst,1,0),'8',new ItemStack(SignalIndustries.reinforcedCasing,1,0)});
         createRecipe(new ItemStack(SignalIndustries.basicCrystalCutter, 1), new Object[]{"012","345","678",'0',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'1',new ItemStack(SignalIndustries.diamondCuttingGear,1,0),'2',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'3',new ItemStack(SignalIndustries.signalumCrystal,1,0),'4',new ItemStack(SignalIndustries.prototypeCrystalCutter,1,0),'5',new ItemStack(SignalIndustries.signalumCrystal,1,0),'6',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0),'7',new ItemStack(SignalIndustries.basicMachineCore,1,0),'8',new ItemStack(SignalIndustries.crystalAlloyPlate,1,0)});
     }
-
+    @Deprecated
     private void createRecipe(ItemStack output, Object[] inputs){
         CraftingManager.getInstance().addRecipe(output,inputs);
         //((CraftingManagerAccessor) RecipeHelper.craftingManager).callAddRecipe(output, inputs);
         //IRecipe recipe = RecipeHelper.craftingManager.getRecipeList().get(RecipeHelper.craftingManager.getRecipeList().size()-1);
 
     }
-
+    @Deprecated
     private void createShapelessRecipe(ItemStack output, Object[] inputs){
         CraftingManager.getInstance().addShapelessRecipe(output,inputs);
         //((CraftingManagerAccessor) RecipeHelper.craftingManager).callAddShapelessRecipe(output, inputs);

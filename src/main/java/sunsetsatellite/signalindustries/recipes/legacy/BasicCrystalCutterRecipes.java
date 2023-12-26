@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.Block;
@@ -8,7 +8,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;
-
+@Deprecated
 public class BasicCrystalCutterRecipes extends CrystalCutterRecipes {
     private static final BasicCrystalCutterRecipes instance = new BasicCrystalCutterRecipes();
 

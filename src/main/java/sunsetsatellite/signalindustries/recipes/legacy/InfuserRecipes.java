@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.block.Block;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
+@Deprecated
 public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>, ItemStack> {
     public static final InfuserRecipes instance = new InfuserRecipes();
 

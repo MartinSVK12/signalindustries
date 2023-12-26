@@ -33,6 +33,8 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
     private final SearchableGuidebookSubsection crystalCutter = new MachineSection(this,SIRecipes.CRYSTAL_CUTTER.getAllRecipes(), CrystalCutterPage.class);
     private final SearchableGuidebookSubsection crystalChamber = new MachineSection(this,SIRecipes.CRYSTAL_CHAMBER.getAllRecipes(), CrystalChamberPage.class);
     private final SearchableGuidebookSubsection infuser = new MachineSection(this,SIRecipes.INFUSER.getAllRecipes(), InfuserPage.class);
+    private final SearchableGuidebookSubsection centrifuge = new MachineSection(this,SIRecipes.CENTRIFUGE.getAllRecipes(), CentrifugePage.class);
+
 
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
     public SignalIndustriesSection() {
@@ -46,6 +48,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalCutter"),crystalCutter.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crystalChamber"),crystalChamber.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.infuser"),infuser.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.centrifuge"),centrifuge.getPages().get(0)));
 
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.multiblocks"),multiblocks.getPages().get(0)));
 
@@ -57,6 +60,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         subsections.add(crystalCutter);
         subsections.add(crystalChamber);
         subsections.add(infuser);
+        subsections.add(centrifuge);
         subsections.add(multiblocks);
     }
 

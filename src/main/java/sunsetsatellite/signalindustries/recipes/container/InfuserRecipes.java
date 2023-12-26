@@ -1,9 +1,11 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
@@ -17,7 +19,7 @@ public class InfuserRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "glowing_obsidian",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(Block.fluidLavaFlowing,1000)),
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(Block.obsidian,2)),
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.netherCoalDust,1))
                         },

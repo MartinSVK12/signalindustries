@@ -117,6 +117,9 @@ public class GuiItemIOConfig extends GuiScreen {
         controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.X_NEG))));
         controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.Z_NEG))));
 
+        controlList.add(new GuiButton(12,(width / 2) - 85, (height / 2)-12, 30, 15, "All I"));
+        controlList.add(new GuiButton(13, (width / 2) - 55, (height / 2)-12, 30, 15, "All O"));
+
         if(tile.getSizeInventory() == 1){
             controlList.get(6).enabled = false;
             controlList.get(7).enabled = false;
@@ -150,7 +153,7 @@ public class GuiItemIOConfig extends GuiScreen {
             guibutton.displayString = tile.itemConnections.get(Direction.values()[guibutton.id]).getLetter();
 
         }
-        if(guibutton.id > 5){
+        if(guibutton.id > 5 && guibutton.id < 12){
             Direction dir = Direction.values()[guibutton.id-6];
             Integer currentValue = tile.activeItemSlots.get(dir);
             if(currentValue < tile.getSizeInventory()-1){
@@ -158,6 +161,26 @@ public class GuiItemIOConfig extends GuiScreen {
             }
 
             guibutton.displayString = String.valueOf(tile.activeItemSlots.get(dir));
+        }
+        if(guibutton.id == 12){
+            for (Direction direction : Direction.values()) {
+                tile.connections.replace(direction,Connection.INPUT);
+            }
+            for (GuiButton button : controlList) {
+                if(button.id >= 0 && button.id < 6){
+                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                }
+            }
+        }
+        if(guibutton.id == 13){
+            for (Direction direction : Direction.values()) {
+                tile.connections.replace(direction,Connection.OUTPUT);
+            }
+            for (GuiButton button : controlList) {
+                if(button.id >= 0 && button.id < 6){
+                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                }
+            }
         }
         super.buttonPressed(guibutton);
     }
