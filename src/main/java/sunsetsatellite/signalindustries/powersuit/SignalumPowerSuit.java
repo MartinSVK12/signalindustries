@@ -516,7 +516,7 @@ public class SignalumPowerSuit {
             Color c = new Color().setARGB(mode.getColor());
             GL11.glColor4f((float) c.getRed() /255, (float) c.getGreen() /255, (float) c.getBlue() /255, (float) c.getAlpha() /255);
             //GL11.glColor4b((byte) c.getRed(), (byte) c.getGreen(), (byte) c.getBlue(), (byte) c.getAlpha());
-            GL11.glBindTexture(3553, mc.renderEngine.getTexture("/gui/gui.png"));
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/gui.png"));
             int x = width / 2 - 91;
             int y = 0;
             drawUtil.drawTexturedModalRect(x, y, 0, 0, 182, 22);
