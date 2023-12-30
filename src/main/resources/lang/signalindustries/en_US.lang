@@ -217,6 +217,9 @@ item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] abi
 item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module
 item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities including <Awakened> abilities.
 
+item.signalindustries.meteorTracker.name=Meteor Tracker
+item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
+
 item.signalindustries.crystalChip.name=Crystal Chip
 item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy Core].
 item.signalindustries.pureCrystalChip.name=Pure Crystal Chip

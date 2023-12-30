@@ -29,6 +29,7 @@
     "RenderEngineMixin",
     "RenderGlobalMixin",
     "RenderPlayerMixin",
+    "SaveHandlerBaseMixin",
     "SearchPageMixin",
     "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",

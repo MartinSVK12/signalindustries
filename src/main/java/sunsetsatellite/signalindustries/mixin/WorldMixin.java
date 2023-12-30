@@ -11,7 +11,9 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.Explosion;
+import net.minecraft.core.world.LevelListener;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.save.LevelStorage;
 import net.minecraft.core.world.season.SeasonManager;
 import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.weather.Weather;
@@ -19,11 +21,13 @@ import net.minecraft.core.world.weather.WeatherManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.mixins.IWorldDataAccessor;
 
 import java.util.List;
 import java.util.Random;
@@ -32,7 +36,7 @@ import java.util.Random;
         value = World.class,
         remap = false
 )
-public abstract class WorldMixin {
+public abstract class WorldMixin implements IWorldDataAccessor {
 
     @Shadow public List<EntityPlayer> players;
 
@@ -57,6 +61,10 @@ public abstract class WorldMixin {
     @Shadow @Final public WeatherManager weatherManager;
 
     @Shadow public abstract long getRandomSeed();
+
+    @Shadow public abstract void removeListener(LevelListener iworldaccess);
+
+    @Shadow @Final protected LevelStorage saveHandler;
 
     @Inject(
             method = "getSkyColor",
@@ -141,4 +149,11 @@ public abstract class WorldMixin {
             cir.setReturnValue(1f);
         }
     }
+
+    @Override
+    @Unique
+    public LevelStorage getSaveHandler(){
+        return saveHandler;
+    }
+
 }

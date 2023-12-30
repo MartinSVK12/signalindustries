@@ -4,6 +4,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.chunk.Chunk;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.core.world.generate.chunk.ChunkDecorator;
 import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkDecoratorOverworld;
 import org.spongepowered.asm.mixin.Final;
@@ -35,16 +36,19 @@ public abstract class ChunkDecoratorOverworldMixin implements ChunkDecorator {
             SignalIndustries.LOGGER.info(String.format("Iron Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(Block.oreIronBasalt.id,0,25).generate(world,rand,x,y,z);
+            SignalIndustries.meteorLocations.add(new ChunkCoordinates(x,y,z));
         }
         if(rand.nextInt(1024) == 0){
             SignalIndustries.LOGGER.info(String.format("Signalum Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(SignalIndustries.signalumOre.id,0,15).generate(world,rand,x,y,z);
+            SignalIndustries.meteorLocations.add(new ChunkCoordinates(x,y,z));
         }
         if(rand.nextInt(2048) == 0){
             SignalIndustries.LOGGER.info(String.format("Dilithium Meteor fell at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
             y = this.world.getHeightValue(x,z) - 4;
             new WorldFeatureMeteor(SignalIndustries.dilithiumOre.id,0,3).generate(world,rand,x,y,z);
+            SignalIndustries.meteorLocations.add(new ChunkCoordinates(x,y,z));
         }
         if(rand.nextInt(4096) == 0){
             SignalIndustries.LOGGER.info(String.format("Obelisk at X:%d Z:%d (X:%d Y:%d Z:%d)",chunkX,chunkZ,x,y,z));
