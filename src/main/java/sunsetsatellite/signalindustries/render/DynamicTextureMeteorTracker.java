@@ -29,16 +29,13 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 		super(SignalIndustries.meteorTracker.getIconFromDamage(0), resolution, 1);
 		
 		this.mc = minecraft;
-		
-		BufferedImage compassImage = Textures.readImage(minecraft.texturePackList.selectedTexturePack.getResourceAsStream("/gui/items.png"));
+
 		compassImageData = new byte[resolution * resolution * 4];
-		
-		int tileX = textureIndex % Global.TEXTURE_ATLAS_WIDTH_TILES;
-		int tileY = textureIndex / Global.TEXTURE_ATLAS_WIDTH_TILES;
+		BufferedImage compass = mc.renderEngine.getImage("/assets/signalindustries/item/meteor_tracker.png");
 
 		for(int x=0; x < resolution; x++) {
 			for(int y=0; y < resolution; y++) {
-				putPixel(compassImageData, y * resolution + x, compassImage.getRGB(tileX * resolution + x, tileY * resolution + y));
+				putPixel(compassImageData, y * resolution + x, compass.getRGB(x, y));
 			}
 		}
 		
@@ -117,7 +114,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 		double xs = (resolution / 2.0) + 0.5;
 		double ys = (resolution / 2.0) - 0.5;
 
-		BufferedImage compass = mc.renderEngine.getImage("/assets/signalindustries/item/meteor_tracker.png");
+
 		
 		for(int i = (int)(-4 * scaleFactor); i <= (int)(4 * scaleFactor); ++i) {
 			x2 = (int)(xs + y * (double)i * 0.3D);

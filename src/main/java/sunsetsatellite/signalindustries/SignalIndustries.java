@@ -792,7 +792,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item dilithiumChip = simpleItem("dilithiumChip","dilithium_chip.png");
     public static final Item dimensionalChip = simpleItem("dimensionalChip","dimensional_chip.png");
     public static final Item attachmentPoint = simpleItem("attachmentPoint","attachment_point.png");
-    public static final Item meteorTracker = simpleItem("meteorTracker","meteor_tracker.png");
+    public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.meteorTracker")),"meteorTracker");
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
 
