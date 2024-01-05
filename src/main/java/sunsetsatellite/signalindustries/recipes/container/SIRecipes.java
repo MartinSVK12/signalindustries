@@ -58,7 +58,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
-        //DataLoader.loadRecipes("/assets/signalindustries/recipes/workbench.json");
+        DataLoader.loadRecipes("/assets/signalindustries/recipes/workbench.json");
         SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 }
