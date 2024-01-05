@@ -35,9 +35,5 @@ public class RenderBlocksMixin {
         if(tile instanceof TileEntityFluidPipe){
             cir.setReturnValue(RenderConduit.render((RenderBlocks) ((Object)this),this.blockAccess,x,y,z,block,0));
         }
-        /* else if (block.getRenderType() == 33) {
-            cir.setReturnValue(RenderItemPipe.render((RenderBlocks) ((Object)this),this.blockAccess,x,y,z,block,0));
-
-        }*/
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
-import sunsetsatellite.signalindustries.recipes.legacy.CraftingRecipesSI;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
@@ -35,7 +34,6 @@ public class SIRecipes implements RecipeEntrypoint {
     @Override
     public void onRecipesReady() {
         new SignalIndustriesFluidPlugin().initializePlugin(SignalIndustries.LOGGER);
-        new CraftingRecipesSI().addRecipes();
         Registries.RECIPE_TYPES.register("signalindustries:machine", RecipeEntryMachine.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
         new ExtractorRecipes().addRecipes(EXTRACTOR);

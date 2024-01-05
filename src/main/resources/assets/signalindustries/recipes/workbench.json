@@ -1490,5 +1490,1656 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/evil_catalyst",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "MMM",
+      "MCM",
+      "MMM"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "item.signalindustries.monsterShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.ammo.charge.explosive",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.evilCatalyst",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/infernal_eye",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "III",
+      "IEI",
+      "III"
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.infernalFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.evilCatalyst",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.infernalEye",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_energy_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      " G ",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "item.ingot.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.crystalChip",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.basicEnergyCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      " R ",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.pureCrystalChip",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforcedEnergyCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_control_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      "DLP",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.dilithiumChip",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "item.signalindustries.dilithiumPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.dilithiumControlCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/warp_manipulator_circuit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      " D ",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dimensionalShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.dimensionalChip",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.warpManipulatorCircuit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/warp_orb",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "DDD",
+      "DBD",
+      "DDD"
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dimensionalShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key":  "tile.signalindustries.emptyCrystalBlock",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.warpOrb",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/item_manipulation_circuit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SLS",
+      "OPL",
+      "SOS"
+    ],
+    "symbols": [
+      {
+        "symbol": "L",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 11
+        }
+      },
+      {
+        "symbol": "O",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 1
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key":  "item.signalindustries.stonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.itemManipulationCircuit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/fluid_manipulation_circuit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SOS",
+      "LBO",
+      "SLS"
+    ],
+    "symbols": [
+      {
+        "symbol": "L",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 11
+        }
+      },
+      {
+        "symbol": "O",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 1
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key":  "item.signalindustries.stonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.bucket",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.fluidManipulationCircuit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_drill_casing",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PP ",
+      " PP",
+      "P P"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.basicDrillCasing",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_drill_casing",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PPC",
+      " PP",
+      "P P"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.basicDrillCasing",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforcedDrillCasing",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_drill_bit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " SS",
+      "PPS",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.basicDrillBit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_drill_bit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " PS",
+      "PBP",
+      "SP "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.basicDrillBit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforcedDrillBit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_drill",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " SB",
+      "ICS",
+      "EI "
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.basicDrillBit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.basicDrillCasing",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.basicEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.basic.signalumDrill",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_drill",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSB",
+      "SCS",
+      "ESP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.reinforcedDrillBit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.reinforcedDrillCasing",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforced.signalumDrill",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/trigger",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " B ",
+      "CEC",
+      "CPC"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "tile.button.stone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.basicEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.triggerNull",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_casing",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RRR",
+      "R R",
+      "RRR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.casing",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_glass",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RGR",
+      "G G",
+      "RGR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.glass",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/signalum_saber",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "  S",
+      "RS ",
+      "ER "
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.signalumSaber",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_fluid_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RCR",
+      "GFG",
+      "RCR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.fluid",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit.fluid",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RCR",
+      "GFG",
+      "RCR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_goggles",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CEC",
+      "DDD",
+      "G G"
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumCrystalDust",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.basicEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.basic.prototypeHarnessGoggles",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/pulsar_shell",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " R ",
+      "RRR",
+      "R R"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.pulsarShell",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/pulsar_inner_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SSS",
+      "SBS",
+      "SSS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "tile.signalindustries.rawCrystalBlock",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.pulsarInnerCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/pulsar_outer_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SSS",
+      "RCR",
+      " R "
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.signalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.pulsarOuterCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/pulsar",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " I ",
+      "ESO",
+      " F "
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.pulsarInnerCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "item.signalindustries.pulsarOuterCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fuelCell",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.pulsarShell",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.pulsar",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/fuel_cell",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " P ",
+      "RGR",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.fuelCell",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_rail",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PDP",
+      "STS",
+      "PDP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "T",
+        "stack": {
+          "key": "item.stick",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.dilithiumRail",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/item_input_bus",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I",
+      "M"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.itemInputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/item_output_bus",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "M",
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.itemOutputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/fluid_output_hatch",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "M",
+      "F"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.fluidOutputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/fluid_input_hatch",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "F",
+      "M"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.fluidInputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_connector",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " E ",
+      "EME",
+      " E "
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.energyConnector",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_booster",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RBR",
+      "RMR",
+      "DCD"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "tile.signalindustries.dilithiumBlock",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.dilithiumControlCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.dilithiumBooster",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_stabilizer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RCR",
+      "DMD",
+      "RDR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.dilithiumControlCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.dilithiumStabilizer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dimensional_anchor",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RWR",
+      "DCD",
+      "RMR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dimensionalShard",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "item.signalindustries.warpOrb",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.warpManipulatorCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.dimensionalAnchor",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_signalum_ignitor",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RFR",
+      "SES",
+      "RMR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.tool.firestriker.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.ignitor",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/signalum_reactor_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RSR",
+      "EME",
+      "RCR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.casing",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "tile.signalindustries.rawCrystalBlock",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.energyCatalyst",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.signalumReactorCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_centrifuge",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RFS",
+      "FMF",
+      "EFR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.signalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fuelCell",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.centrifuge",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]
