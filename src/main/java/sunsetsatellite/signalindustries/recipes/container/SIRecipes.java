@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
@@ -57,6 +58,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
+        //DataLoader.loadRecipes("/assets/signalindustries/recipes/workbench.json");
         SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 }

@@ -53,15 +53,6 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			int g = this.compassImageData[i * 4 + 1] & 0xFF;
 			int b = this.compassImageData[i * 4 + 2] & 0xFF;
 			
-			if(this.anaglyphEnabled) {
-				int var6 = (r * 30 + g * 59 + b * 11) / 100;
-				int var7 = (r * 30 + g * 70) / 100;
-				int var8 = (r * 30 + b * 70) / 100;
-				r = var6;
-				g = var7;
-				b = var8;
-			}
-			
 			this.imageData[i * 4 + 0] = (byte)r;
 			this.imageData[i * 4 + 1] = (byte)g;
 			this.imageData[i * 4 + 2] = (byte)b;
@@ -122,9 +113,6 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 		int g;
 		int b;
 		int a;
-		int r2;
-		int g2;
-		int b2;
 		
 		double xs = (resolution / 2.0) + 0.5;
 		double ys = (resolution / 2.0) - 0.5;
@@ -139,14 +127,6 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			g = 100;
 			b = 100;
 			a = 255;
-			if(this.anaglyphEnabled) {
-				r2 = (r * 30 + g * 59 + b * 11) / 100;
-				g2 = (r * 30 + g * 70) / 100;
-				b2 = (r * 30 + b * 70) / 100;
-				r = r2;
-				g = g2;
-				b = b2;
-			}
 
 			this.imageData[j * 4 + 0] = (byte)r;
 			this.imageData[j * 4 + 1] = (byte)g;
@@ -162,14 +142,6 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			g = i >= 0 ? i*8 : 10; // determines the color of the pointer
 			b = i >= 0 ? 20 : 128; //
 			a = 255;
-			if(this.anaglyphEnabled) {
-				r2 = (r * 30 + g * 59 + b * 11) / 100;
-				g2 = (r * 30 + g * 70) / 100;
-				b2 = (r * 30 + b * 70) / 100;
-				r = r2;
-				g = g2;
-				b = b2;
-			}
 
 			this.imageData[j * 4 + 0] = (byte)r;
 			this.imageData[j * 4 + 1] = (byte)g;

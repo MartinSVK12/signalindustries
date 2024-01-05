@@ -29,7 +29,6 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
 
     @Inject(method = "getDimensionData", at = @At("HEAD"))
     public void getDimensionData(int dimensionId, CallbackInfoReturnable<DimensionData> cir) {
-        SignalIndustries.LOGGER.info("Loading custom world data..");
         CompoundTag data = saveFormat.getDimensionDataRaw(worldDirName, dimensionId);
         if(data != null){
             CompoundTag meteorLocations = data.getCompound("MeteorLocations");
@@ -41,14 +40,11 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
                     SignalIndustries.meteorLocations.add(coordinates);
                 }
             }
-            SignalIndustries.LOGGER.info(SignalIndustries.meteorLocations.size()+" saved meteor locations.");
         }
     }
 
     @Inject(method = "saveDimensionDataRaw", at = @At("HEAD"))
     public void saveDimensionDataRaw(int dimensionId, CompoundTag dimensionDataTag, CallbackInfo ci) {
-        SignalIndustries.LOGGER.info("Saving custom world data..");
-        SignalIndustries.LOGGER.info(SignalIndustries.meteorLocations.size()+" saved meteor locations.");
         CompoundTag meteorNbt = new CompoundTag();
         List<ChunkCoordinates> meteorLocations = SignalIndustries.meteorLocations;
         for (int i = 0; i < meteorLocations.size(); i++) {

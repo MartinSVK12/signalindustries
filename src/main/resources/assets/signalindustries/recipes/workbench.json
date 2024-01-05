@@ -1,0 +1,817 @@
+[
+  {
+    "name": "signalindustries:workbench/iron_plate_hammer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " I ",
+      " SI",
+      "S  "
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.ingot.iron",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.stick",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.ironPlateHammer",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/diamond_cutting_gear",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " D ",
+      "D D",
+      " D "
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.diamond",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.diamondCuttingGear",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/cobblestone_plate",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.signalindustries.ironPlateHammer",
+          "amount": 1,
+          "meta": 1
+        }
+      },
+      {
+        "group": "minecraft:cobblestones"
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cobblestonePlate",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/stone_plate",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.signalindustries.ironPlateHammer",
+          "amount": 1,
+          "meta": 1
+        }
+      },
+      {
+        "group": "minecraft:stones"
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.stonePlate",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_block_to_shards",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "tile.signalindustries.dilithiumBlock",
+          "amount": 1,
+          "meta": 1
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.dilithiumShard",
+      "amount": 9,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/signalum_block_to_crystals",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "tile.signalindustries.rawCrystalBlock",
+          "amount": 1,
+          "meta": 1
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.rawSignalumCrystal",
+      "amount": 9,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/crystal_alloy_block_to_ingots",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "tile.signalindustries.emptyCrystalBlock",
+          "amount": 1,
+          "meta": 1
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.crystalAlloyIngot",
+      "amount": 9,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_shards_to_block",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "DDD",
+      "DDD",
+      "DDD"
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumShard",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.dilithiumBlock",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/raw_signalum_crystals_to_block",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SSS",
+      "SSS",
+      "SSS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.rawCrystalBlock",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/crystal_alloy_ingots_to_block",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CCC",
+      "CCC",
+      "CCC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.emptyCrystalBlock",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_machine_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CPC",
+      "PSP",
+      "CPC"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.machine",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_machine_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PCP",
+      "CSC",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.signalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.machine",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_machine_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RSR",
+      "SBS",
+      "RSR"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key":  "tile.signalindustries.basic.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.machine",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_extractor",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "PMP",
+      "PFP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "tile.furnace.stone.idle",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.extractor",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_crusher",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "FFF",
+      "SMS",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "item.flint",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.crusher",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_alloy_smelterr",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " S ",
+      "BMB",
+      " S "
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key":  "tile.furnace.blast.idle",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.alloySmelter",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_plate_former",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PHP",
+      "HMH",
+      "SPS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "H",
+        "stack": {
+          "key":  "item.signalindustries.ironPlateHammer",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.plateFormer",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": true
+  },
+  {
+    "name": "signalindustries:workbench/prototype_pump",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PBP",
+      "SMS",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.prototype.conduit.fluid",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key":  "item.bucket",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.plateFormer",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_crystal_cutter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "GMG",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "item.signalindustries.diamondCuttingGear",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.crystalCutter",
+     "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "GGG",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "tile.glass",
+         "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.conduit",
+     "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_fluid_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "GGG",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+         "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.conduit.fluid",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_fluid_tank",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "SGS",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.fluidTank",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_energy_cell",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SGS",
+      "GMG",
+      "SGS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.rawSignalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.prototype.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.prototype.energyCell",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  }
+]

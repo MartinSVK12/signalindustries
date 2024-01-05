@@ -7,6 +7,7 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.weather.Weather;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,10 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
-@Mixin(
-        value = EntityLiving.class,
-        remap = false
-)
+@Debug(export = true)
+@Mixin(value = EntityLiving.class, remap = false)
 public abstract class EntityLivingMixin extends Entity {
     @Shadow protected abstract int getDropItemId();
 

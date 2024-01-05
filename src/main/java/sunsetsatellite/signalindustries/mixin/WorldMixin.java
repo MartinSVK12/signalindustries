@@ -95,10 +95,6 @@ public abstract class WorldMixin implements IWorldDataAccessor {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
                 }
                 weatherManager.overrideWeather(SignalIndustries.weatherBloodMoon,13000,1);
-                /*newWeather = null;
-                weatherDuration = 13000; //duration of night in ticks
-                weatherIntensity = 1.0f;
-                weatherPower = 1.0f;*/
             }
         }
         if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherBloodMoon){
