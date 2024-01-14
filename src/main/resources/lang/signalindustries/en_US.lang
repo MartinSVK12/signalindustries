@@ -212,6 +212,8 @@ item.signalindustries.defenseAbilityModule.desc=Container for <Defense> type [Si
 item.signalindustries.pursuitAbilityModule.name=Pursuit Ability Module
 item.signalindustries.pursuitAbilityModule.desc=Container for <Pursuit> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
 
+item.signalindustries.blankAbilityModule.name=Blank Ability Module
+item.signalindustries.blankAbilityModule.desc=Base component of an [Ability Module].
 item.signalindustries.abilityModule.name=Ability Module
 item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] abilities.
 item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module

@@ -17,7 +17,6 @@ import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
-import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -792,7 +791,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item dilithiumChip = simpleItem("dilithiumChip","dilithium_chip.png");
     public static final Item dimensionalChip = simpleItem("dimensionalChip","dimensional_chip.png");
     public static final Item attachmentPoint = simpleItem("attachmentPoint","attachment_point.png");
-    public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.meteorTracker")),"meteorTracker");
+    public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new ItemMeteorTracker(config.getInt("ItemIDs.meteorTracker")),"meteorTracker","meteor_tracker_uncalibrated.png");
+    public static final Item blankAbilityModule = simpleItem("blankAbilityModule","blank_module.png");
+
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
 
@@ -908,85 +909,87 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         CommandHelper.createCommand(new NBTEditCommand());
         CommandHelper.createCommand(new StructureCommand("structure","struct"));
-        EntityHelper.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
-        EntityHelper.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
-        EntityHelper.createEntity(EntityCrystal.class,new SnowballRenderer(signalumCrystal.getIconFromDamage(0)),47,"signalumCrystal");
-        EntityHelper.createEntity(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])),49,"energyOrb");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
+        EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
+        EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(signalumCrystal.getIconFromDamage(0)));
+        EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
+        EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
 
-        EntityHelper.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
 
-        EntityHelper.createSpecialTileEntity(TileEntitySIFluidTank.class,new RenderFluidInBlock(),"SI Fluid Tank");
+        EntityHelper.Core.createSpecialTileEntity(TileEntitySIFluidTank.class,new RenderFluidInBlock(),"SI Fluid Tank");
         addToNameGuiMap("SI Fluid Tank", GuiSIFluidTank.class, TileEntitySIFluidTank.class);
 
-        EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
+        EntityHelper.Core.createTileEntity(TileEntityExtractor.class,"Extractor");
         addToNameGuiMap("Extractor", GuiExtractor.class, TileEntityExtractor.class);
 
-        EntityHelper.createTileEntity(TileEntityCrusher.class,"Crusher");
+        EntityHelper.Core.createTileEntity(TileEntityCrusher.class,"Crusher");
         addToNameGuiMap("Crusher", GuiCrusher.class, TileEntityCrusher.class);
 
-        EntityHelper.createTileEntity(TileEntityAlloySmelter.class,"Alloy Smelter");
+        EntityHelper.Core.createTileEntity(TileEntityAlloySmelter.class,"Alloy Smelter");
         addToNameGuiMap("Alloy Smelter", GuiAlloySmelter.class, TileEntityAlloySmelter.class);
 
-        EntityHelper.createTileEntity(TileEntityPlateFormer.class,"Plate Former");
+        EntityHelper.Core.createTileEntity(TileEntityPlateFormer.class,"Plate Former");
         addToNameGuiMap("Plate Former", GuiPlateFormer.class, TileEntityPlateFormer.class);
 
-        EntityHelper.createTileEntity(TileEntityCrystalCutter.class,"Crystal Cutter");
+        EntityHelper.Core.createTileEntity(TileEntityCrystalCutter.class,"Crystal Cutter");
         addToNameGuiMap("Crystal Cutter", GuiCrystalCutter.class, TileEntityCrystalCutter.class);
 
-        EntityHelper.createTileEntity(TileEntityInfuser.class,"Infuser");
+        EntityHelper.Core.createTileEntity(TileEntityInfuser.class,"Infuser");
         addToNameGuiMap("Infuser", GuiInfuser.class, TileEntityInfuser.class);
 
-        EntityHelper.createTileEntity(TileEntityBooster.class,"Dilithium Booster");
+        EntityHelper.Core.createTileEntity(TileEntityBooster.class,"Dilithium Booster");
         addToNameGuiMap("Dilithium Booster", GuiBooster.class, TileEntityBooster.class);
 
-        EntityHelper.createTileEntity(TileEntityStabilizer.class,"Dilithium Stabilizer");
+        EntityHelper.Core.createTileEntity(TileEntityStabilizer.class,"Dilithium Stabilizer");
         addToNameGuiMap("Dilithium Stabilizer", GuiStabilizer.class, TileEntityStabilizer.class);
 
-        EntityHelper.createTileEntity(TileEntityCrystalChamber.class,"Crystal Chamber");
+        EntityHelper.Core.createTileEntity(TileEntityCrystalChamber.class,"Crystal Chamber");
         addToNameGuiMap("Crystal Chamber", GuiCrystalChamber.class, TileEntityCrystalChamber.class);
 
-        EntityHelper.createTileEntity(TileEntityPump.class,"Pump");
+        EntityHelper.Core.createTileEntity(TileEntityPump.class,"Pump");
         addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
 
-        EntityHelper.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
 
-        EntityHelper.createSpecialTileEntity(TileEntityAutoMiner.class, new RenderAutoMiner(),"Automatic Miner");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityAutoMiner.class, new RenderAutoMiner(),"Automatic Miner");
         addToNameGuiMap("Automatic Miner", GuiAutoMiner.class, TileEntityAutoMiner.class);
 
-        EntityHelper.createTileEntity(TileEntityExternalIO.class,"External I/O");
+        EntityHelper.Core.createTileEntity(TileEntityExternalIO.class,"External I/O");
         addToNameGuiMap("External I/O", GuiExternalIO.class, TileEntityExternalIO.class);
 
-        EntityHelper.createTileEntity(TileEntityCentrifuge.class,"Separation Centrifuge");
+        EntityHelper.Core.createTileEntity(TileEntityCentrifuge.class,"Separation Centrifuge");
         addToNameGuiMap("Separation Centrifuge", GuiCentrifuge.class, TileEntityCentrifuge.class);
 
-        EntityHelper.createSpecialTileEntity(TileEntitySignalumReactor.class,new RenderSignalumReactor(),"Signalum Reactor");
+        EntityHelper.Core.createSpecialTileEntity(TileEntitySignalumReactor.class,new RenderSignalumReactor(),"Signalum Reactor");
         addToNameGuiMap("Signalum Reactor", GuiSignalumReactor.class, TileEntitySignalumReactor.class);
 
-        EntityHelper.createTileEntity(TileEntityEnergyConnector.class,"Energy Connector");
+        EntityHelper.Core.createTileEntity(TileEntityEnergyConnector.class,"Energy Connector");
         addToNameGuiMap("Energy Connector", GuiEnergyConnector.class, TileEntityEnergyConnector.class);
 
-        EntityHelper.createTileEntity(TileEntityItemBus.class,"Item Bus");
+        EntityHelper.Core.createTileEntity(TileEntityItemBus.class,"Item Bus");
         addToNameGuiMap("Item Bus", GuiItemBus.class, TileEntityItemBus.class);
 
-        EntityHelper.createTileEntity(TileEntityFluidHatch.class,"Fluid Hatch");
+        EntityHelper.Core.createTileEntity(TileEntityFluidHatch.class,"Fluid Hatch");
         addToNameGuiMap("Fluid Hatch", GuiItemBus.class, TileEntityFluidHatch.class);
 
-        EntityHelper.createTileEntity(TileEntityIgnitor.class,"Signalum Ignitor");
+        EntityHelper.Core.createTileEntity(TileEntityIgnitor.class,"Signalum Ignitor");
 
-        EntityHelper.createSpecialTileEntity(TileEntityEnergyInjector.class,new RenderEnergyInjector(),"Energy Injector");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyInjector.class,new RenderEnergyInjector(),"Energy Injector");
         addToNameGuiMap("Energy Injector",GuiEnergyInjector.class,TileEntityEnergyInjector.class);
 
-        EntityHelper.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
+        EntityHelper.Core.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
         addToNameGuiMap("Signalum Dynamo", GuiSignalumDynamo.class,TileEntitySignalumDynamo.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
 
-        EntityHelper.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
-        EntityHelper.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
-        EntityHelper.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
+        EntityHelper.Core.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
+        EntityHelper.Core.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
+        EntityHelper.Core.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
 
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
         Multiblock.multiblocks.put("test",testMultiblock);
@@ -994,7 +997,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 
-        EntityHelper.createEntity(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(), 0.5F),config.getInt("EntityIDs.infernalId"),"Infernal");
+        EntityHelper.Core.createEntity(EntityInfernal.class,config.getInt("EntityIDs.infernalId"),"Infernal");
+        EntityHelper.Client.assignEntityRenderer(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(),0.5F));
         //crafting recipes in RecipeHandlerCraftingSI
 
     }

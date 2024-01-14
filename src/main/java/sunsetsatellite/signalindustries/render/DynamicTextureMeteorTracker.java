@@ -26,7 +26,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 	private double scaleFactor;
 	
 	public DynamicTextureMeteorTracker(Minecraft minecraft, int resolution) {
-		super(SignalIndustries.meteorTracker.getIconFromDamage(0), resolution, 1);
+		super(SignalIndustries.meteorTracker.getIconFromDamage(1), resolution, 1);
 		
 		this.mc = minecraft;
 
