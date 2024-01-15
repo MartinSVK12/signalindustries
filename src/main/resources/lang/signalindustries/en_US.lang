@@ -76,11 +76,11 @@ item.signalindustries.romChipProjectile.desc=Contains code for a [Trigger] abili
 item.signalindustries.romChipBoost.name=ROM Chip: Boost
 item.signalindustries.romChipBoost.desc=Contains code for a [Trigger] ability.
 
-item.signalindustries.pulsar.name=The Pulsar
-item.signalindustries.pulsar.desc=Multifunctional gadget. It's main ability is condensing and releasing huge amounts of [S. Energy]. For example in the form of powerful shockwaves.
+item.signalindustries.reinforced.pulsar.name=The Pulsar
+item.signalindustries.reinforced.pulsar.desc=Multifunctional gadget. It's main ability is condensing and releasing huge amounts of [S. Energy]. For example in the form of powerful shockwaves.
 
-item.signalindustries.signalumSaber.name=Signalum Saber
-item.signalindustries.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
+item.signalindustries.reinforced.signalumSaber.name=Signalum Saber
+item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
 
 item.signalindustries.basic.signalumDrill.name=Basic Signalum Drill
 item.signalindustries.basic.signalumDrill.desc=A heavy-duty drill powered by Signalum Energy. Will not break when it runs out of energy.
@@ -440,7 +440,7 @@ tile.signalindustries.dilithiumCrystalBlock.desc=A fragile crystal of Dilithium.
 
 dimension.signalindustries.eternity.name=Eternity
 signalindustries.eternity.name=Eternity
-signalindustries.eternity.desc=The void between worlds connected through the fabric of reality.\nHaving an active link to one of these worlds is the only way out.
+signalindustries.eternity.desc=The void between worlds\nconnected through the fabric of reality.\nHaving an active link to one of these worlds is the only way out.
 
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse

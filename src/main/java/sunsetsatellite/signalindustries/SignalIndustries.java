@@ -738,10 +738,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.energyCatalyst")),"energyCatalyst","energycatalyst.png");
 
-    public static final Item signalumSaber = ItemHelper.createItem(MOD_ID, new ItemSignalumSaber("signalumSaber",config.getInt("ItemIDs.signalumSaber"), Tier.REINFORCED, ToolMaterial.stone), "signalumSaber", "signalumsaberunpowered.png");
+    public static final Item signalumSaber = ItemHelper.createItem(MOD_ID, new ItemSignalumSaber("signalumSaber",config.getInt("ItemIDs.signalumSaber"), Tier.REINFORCED, ToolMaterial.stone), "reinforced.signalumSaber", "signalumsaberunpowered.png");
     public static final int[][] saberTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"signalumsaberunpowered.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"signalumsaber.png")};
 
-    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"pulsar","pulsaractive.png").setMaxStackSize(1);
+    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"reinforced.pulsar","pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
     public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"reinforced.signalumpowersuit.helmet","signalumpowersuit_helmet.png");

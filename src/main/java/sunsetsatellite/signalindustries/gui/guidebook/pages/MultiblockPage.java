@@ -29,7 +29,7 @@ public class MultiblockPage
     @Override
     protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
         if(multiblock != null){
-            drawStringCenteredNoShadow(fr, I18n.getInstance().translateKey(multiblock.translateKey), x + 158 / 2, y + 10, 0x000000);
+            drawStringCenteredNoShadow(fr, I18n.getInstance().translateNameKey(multiblock.translateKey), x + 158 / 2, y + 10, 0x000000);
         } else {
             drawStringCenteredNoShadow(fr,"No results :(" ,x+width/2,y+height/2,0xFF808080);
         }
