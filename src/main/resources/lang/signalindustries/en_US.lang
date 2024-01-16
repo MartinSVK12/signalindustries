@@ -167,6 +167,9 @@ item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power
 item.signalindustries.testingAbilityItem.name=Ability Container: Testing Ability
 item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability.
 
+item.signalindustries.abilityContainerCasing.name=Ability Container Casing
+item.signalindustries.abilityContainerCasing.desc=Casing for [Ability Containers].
+
 item.signalindustries.clockworkAbilityContainer.name=Ability Container: Clockwork
 item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
 
@@ -473,7 +476,7 @@ ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on you
 
 achievements.page.signalindustries.desc=Achievements for Signal Industries!
 achievement.signalindustries.init=Initialization
-achievement.signalindustries.init.desc=Your journey begins here! Obtain some Raw Signalum Crystals.
+achievement.signalindustries.init.desc=Your journey begins here! Obtain some Raw Signalum Crystals from a fallen meteorite.
 achievement.signalindustries.thePrototype=The Prototype
 achievement.signalindustries.thePrototype.desc=Create your first Prototype Machine Core.
 achievement.signalindustries.fromWithin=From Within

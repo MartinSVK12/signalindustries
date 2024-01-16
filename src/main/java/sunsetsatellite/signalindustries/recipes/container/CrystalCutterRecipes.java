@@ -48,7 +48,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1))
                         },
                         new ItemStack(SignalIndustries.pureCrystalChip,2,0),
-                        new RecipeProperties(100,80,2, Tier.BASIC,false)
+                        new RecipeProperties(100,80,2, Tier.REINFORCED,false)
                 )
         );
     }

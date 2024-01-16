@@ -74,6 +74,10 @@ public class CrystalCutterPage
                 return false;
             }).collect(Collectors.toList());
 
+            if(acceptedMachines.isEmpty()){
+                continue;
+            }
+
             outputSymbol = new RecipeSymbol(recipe.getOutput());
             recipeSlots.add(new SlotGuidebook(0, (width/2)-52, 36*(map.size()+1)-16, inputSymbol.get(0), false,recipe));
             recipeSlots.add(new SlotGuidebook(1, (width/2)-32, 36*(map.size()+1)-16, inputSymbol.get(1), false,recipe));
@@ -112,6 +116,9 @@ public class CrystalCutterPage
         for (int i = 1; i <= recipes.size(); i++) {
             RecipeEntryMachine recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
+            if(list == null || list.isEmpty()){
+                continue;
+            }
             drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t | ID: "+recipe.getData().id,x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 18,0xFF202020);
             drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 26,0xFFCC0000);
 
@@ -137,6 +144,9 @@ public class CrystalCutterPage
         for (int i = 1; i <= recipes.size(); i++) {
             RecipeEntryMachine recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
+            if(list == null || list.isEmpty()){
+                continue;
+            }
             drawTexturedModalRect(x + list.get(list.size()-1).xDisplayPosition - 32, y +  list.get(list.size()-1).yDisplayPosition, 90, 35, 22, 15);
         }
     }

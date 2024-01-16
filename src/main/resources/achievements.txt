@@ -61,7 +61,7 @@ Find a meteor containing Dilithium Shards.
 Interdimensional
 Discover crystallized reality - the Dimensional Shard.
 
-BOOST
+BOOST BOOST BOOST
 Craft the Dilithium Booster to speed up your machines.
 
 New Horizons
@@ -70,7 +70,7 @@ Construct your first multiblock.
 Anchored
 Build the Dimensional Anchor multiblock to help you encode warp orbs.
 
-Ticket to Everywhere and Nowhere
+One-way Ticket To Anywhere
 Create a Warp Orb.
 
 Tearing Spacetime
@@ -83,12 +83,15 @@ Under a Dead Sky
 Take a look around Eternity and find out what it has to offer.
 
 False Eternity
-Escape Eternity without dying.
+Escape Eternity without dying by planning ahead.
 
 System, activate!
 Wear the entire Signalum Power Suit set for the first time.
 
 ...
+
+Crimson Warrior
+Walk through fire completing the Reinforced Wrath Beacon challenge.
 
 Destroyer
 Complete the Awakened Wrath Beacon challenge and receive an ancient artifact.

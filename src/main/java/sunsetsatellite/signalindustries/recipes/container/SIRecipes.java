@@ -15,7 +15,9 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SIRecipes implements RecipeEntrypoint {
     public static final RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
@@ -36,6 +38,10 @@ public class SIRecipes implements RecipeEntrypoint {
         new SignalIndustriesFluidPlugin().initializePlugin(SignalIndustries.LOGGER);
         Registries.RECIPE_TYPES.register("signalindustries:machine", RecipeEntryMachine.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
+        List<ItemStack> abilityGroup = new ArrayList<>();
+        abilityGroup.add(SignalIndustries.boostAbilityContainer.getDefaultStack());
+        abilityGroup.add(SignalIndustries.projectileAbilityContainer.getDefaultStack());
+        Registries.ITEM_GROUPS.register("signalindustries:ability_containers",abilityGroup);
         new ExtractorRecipes().addRecipes(EXTRACTOR);
         new CrusherRecipes().addRecipes(CRUSHER);
         new AlloySmelterRecipes().addRecipes(ALLOY_SMELTER);

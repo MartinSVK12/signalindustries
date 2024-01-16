@@ -65,6 +65,7 @@ import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemTieredAttachment;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.BlockTexture;
@@ -749,7 +750,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitLeggings"),armorSignalumPowerSuit,2,Tier.REINFORCED),"reinforced.signalumpowersuit.leggings","signalumpowersuit_leggings.png");
     public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
 
-    public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
+    //public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
     public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment(config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"reinforced.attachment.pulsar","pulsar_attachment.png").setMaxStackSize(1);
     public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment(config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced.attachment.extendedEnergyPack","extended_energy_pack.png").setMaxStackSize(1);
 
@@ -759,7 +760,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final SuitBaseAbility boostAbility = new BoostAbility();
     public static final SuitBaseAbility projectileAbility = new ProjectileAbility();
 
-    public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
+    //public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
     //public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
     public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"boostAbilityContainer","ability2.png");
     public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"projectileAbilityContainer","ability1.png");
@@ -793,6 +794,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item attachmentPoint = simpleItem("attachmentPoint","attachment_point.png");
     public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new ItemMeteorTracker(config.getInt("ItemIDs.meteorTracker")),"meteorTracker","meteor_tracker_uncalibrated.png");
     public static final Item blankAbilityModule = simpleItem("blankAbilityModule","blank_module.png");
+    public static final Item abilityContainerCasing = simpleItem("abilityContainerCasing","abilitycontainercasing.png");
 
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
@@ -801,7 +803,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Weather weatherEclipse = new WeatherEclipse(11).setLanguageKey("solarEclipse");
     public static final Weather weatherSolarApocalypse = new WeatherSolarApocalypse(12).setLanguageKey("solarApocalypse");
 
-    public static final AchievementPage ACHIEVEMENTS = null; //new SignalIndustriesAchievementPage();
+    public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
 
     public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome().setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
@@ -864,8 +866,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     }
 
     public SignalIndustries(){
-
-        //AchievementHelper.addPage(ACHIEVEMENTS);
         //RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
         BlockModelDispatcher.getInstance().addDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
         BlockModelDispatcher.getInstance().addDispatch(energyStill,new BlockModelRenderBlocks(4));
@@ -1119,6 +1119,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     @Override
     public void afterGameStart() {
+        AchievementHelper.addPage(ACHIEVEMENTS);
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");
         category
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit()))
