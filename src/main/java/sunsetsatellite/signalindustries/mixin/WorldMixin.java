@@ -77,7 +77,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             cir.setReturnValue(Vec3d.createVector(1.0, 0.5, 0));
         }
         if(dimension == SignalIndustries.dimEternity){
-            cir.setReturnValue(Vec3d.createVector(0.35,0.35,0.35));
+            cir.setReturnValue(Vec3d.createVector(0.70,0.70,0.70));
         }
     }
 

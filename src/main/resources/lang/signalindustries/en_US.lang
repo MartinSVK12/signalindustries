@@ -62,19 +62,21 @@ item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine 
 item.signalindustries.signalumCuttingGear.name=Signalum Cutting Gear
 item.signalindustries.signalumCuttingGear.desc=Even sharper gear for cutting harder stuff.
 
-item.signalindustries.triggerNull.name=Null Trigger
-item.signalindustries.triggerNull.desc=Triggers are used to activate [S. P. Harness] abilities.
-item.signalindustries.triggerRepair.name=Trigger: Repair
-item.signalindustries.triggerRepair.desc=Repairs a bit of the item next to this trigger for a bit of [Signalum Energy].
-item.signalindustries.triggerProjectile.name=Trigger: Projectile
-item.signalindustries.triggerProjectile.desc=Shoots an orb of [Signalum Energy] from the core of the [S. P. Harness] you're wearing.
-item.signalindustries.triggerBoost.name=Trigger: Boost
-item.signalindustries.triggerBoost.desc=Launches you in the direction you're looking at.
+item.signalindustries.trigger.null.name=Null Trigger
+item.signalindustries.trigger.null.desc=Triggers are used to activate [S. P. Harness] abilities.
+item.signalindustries.trigger.repair.name=Trigger: Repair
+item.signalindustries.trigger.repair.desc=Repairs a bit of the item next to this trigger for a bit of [Signalum Energy].
+item.signalindustries.trigger.projectile.name=Trigger: Projectile
+item.signalindustries.trigger.projectile.desc=Shoots an orb of [Signalum Energy] from the core of the [S. P. Harness] you're wearing.
+item.signalindustries.trigger.boost.name=Trigger: Boost
+item.signalindustries.trigger.boost.desc=Launches you in the direction you're looking at.
 
-item.signalindustries.romChipProjectile.name=ROM Chip: Projectile
-item.signalindustries.romChipProjectile.desc=Contains code for a [Trigger] ability.
-item.signalindustries.romChipBoost.name=ROM Chip: Boost
-item.signalindustries.romChipBoost.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChip.projectile.name=ROM Chip: Projectile
+item.signalindustries.romChip.projectile.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChip.boost.name=ROM Chip: Boost
+item.signalindustries.romChip.boost.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChip.blank.name=Blank ROM Chip
+item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
 item.signalindustries.reinforced.pulsar.desc=Multifunctional gadget. It's main ability is condensing and releasing huge amounts of [S. Energy]. For example in the form of powerful shockwaves.
@@ -404,8 +406,13 @@ tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds acr
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 
+tile.signalindustries.basic.programmer.name=EEPROM Programmer
+tile.signalindustries.basic.programmer.desc=Device for programming and configuring [Triggers].
+tile.signalindustries.reinforced.programmer.name=Reinforced EEPROM Programmer
+tile.signalindustries.reinforced.programmer.desc=Device for programming and configuring [Ability Containers].
+
 tile.signalindustries.basic.dynamo.name=Basic Signalum Dynamo
-tile.signalindustries.basic.dynamo.desc=Generates energy units using Signalum. Only available if EnergyAPI is installed.
+tile.signalindustries.basic.dynamo.desc=Generates universal energy units using Signalum. Only available if Catalyst: Energy is installed.
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalum Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 

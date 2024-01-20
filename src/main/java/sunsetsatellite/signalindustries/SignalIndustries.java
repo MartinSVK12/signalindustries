@@ -66,6 +66,7 @@ import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemTieredAttachment;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.powersuit.GuiPowerSuit;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.BlockTexture;
@@ -605,6 +606,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures(1,0)
             .build(new BlockSignalumDynamo("basic.dynamo",config.getInt("BlockIDs.basicSignalumDynamo"),Tier.BASIC,Material.metal));
 
+    public static final Block basicProgrammer = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(0)
+            .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"eeprom_programmer.json")))
+            .setTextures(1,0)
+            .build(new BlockProgrammer("basic.programmer",config.getInt("BlockIDs.basicProgrammer"),Tier.BASIC,Material.metal));
+
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_energy_transparent.png");
     public static final int[] burntSignalumTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"burnt_signalum.png");//registerFluidTexture(MOD_ID,"signalum_energy.png",0,4);
@@ -732,10 +742,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final int[][] fuelCellTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellempty.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellfilled.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcelldepleted.png")};
 
 
-    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(config.getInt("ItemIDs.nullTrigger")),"triggerNull","trigger.png").setMaxStackSize(1);
+    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(config.getInt("ItemIDs.nullTrigger")),"trigger.null","trigger.png").setMaxStackSize(1);
 
-    public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.romChipProjectile")),"romChipProjectile","chip1.png");
-    public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.romChipBoost")),"romChipBoost","chip2.png");
+    public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new ItemRomChip(config.getInt("ItemIDs.romChipProjectile")),"romChip.projectile","chip1.png");
+    public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new ItemRomChip(config.getInt("ItemIDs.romChipBoost")),"romChip.boost","chip2.png");
 
     public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.energyCatalyst")),"energyCatalyst","energycatalyst.png");
 
@@ -795,6 +805,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new ItemMeteorTracker(config.getInt("ItemIDs.meteorTracker")),"meteorTracker","meteor_tracker_uncalibrated.png");
     public static final Item blankAbilityModule = simpleItem("blankAbilityModule","blank_module.png");
     public static final Item abilityContainerCasing = simpleItem("abilityContainerCasing","abilitycontainercasing.png");
+    public static final Item blankChip = simpleItem("blankChip","romChip.blank","blank_chip.png");
 
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
@@ -984,6 +995,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
         addToNameGuiMap("Signalum Dynamo", GuiSignalumDynamo.class,TileEntitySignalumDynamo.class);
 
+        EntityHelper.Core.createTileEntity(TileEntityProgrammer.class,"EEPROM Programmer");
+        addToNameGuiMap("EEPROM Programmer", GuiProgrammer.class,TileEntityProgrammer.class);
+
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
 
@@ -1021,6 +1035,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static Item simpleItem(String name, String texture){
         return ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs."+name)),name,texture);
+    }
+
+    public static Item simpleItem(String name, String lang, String texture){
+        return ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs."+name)),lang,texture);
     }
 
 

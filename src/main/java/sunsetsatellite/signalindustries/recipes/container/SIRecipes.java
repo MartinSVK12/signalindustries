@@ -42,6 +42,10 @@ public class SIRecipes implements RecipeEntrypoint {
         abilityGroup.add(SignalIndustries.boostAbilityContainer.getDefaultStack());
         abilityGroup.add(SignalIndustries.projectileAbilityContainer.getDefaultStack());
         Registries.ITEM_GROUPS.register("signalindustries:ability_containers",abilityGroup);
+        List<ItemStack> romChipGroup = new ArrayList<>();
+        romChipGroup.add(SignalIndustries.romChipBoost.getDefaultStack());
+        romChipGroup.add(SignalIndustries.romChipProjectile.getDefaultStack());
+        Registries.ITEM_GROUPS.register("signalindustries:rom_chips",romChipGroup);
         new ExtractorRecipes().addRecipes(EXTRACTOR);
         new CrusherRecipes().addRecipes(CRUSHER);
         new AlloySmelterRecipes().addRecipes(ALLOY_SMELTER);

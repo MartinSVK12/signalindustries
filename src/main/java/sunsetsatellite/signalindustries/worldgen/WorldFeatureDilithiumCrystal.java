@@ -14,7 +14,7 @@ public class WorldFeatureDilithiumCrystal extends WorldFeature {
 
         int radius = 0;
         int worldHeight = world.getHeightBlocks();
-        int height = ((worldHeight + j) / 2) - (random.nextInt(16)-8);
+        int height = ((worldHeight + j) / 4) - (random.nextInt(16)-8);
         /*if(world.getBlockId(i,height-1,k) != SignalIndustries.realityFabric.id){
             return false;
         }*/

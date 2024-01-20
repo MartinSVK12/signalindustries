@@ -20,8 +20,8 @@ public class ItemTrigger extends Item implements ICustomDescription {
     public static final HashMap<String, TriggerBaseAbility> abilities = new HashMap<>();
     public ItemTrigger(int i) {
         super(i);
-        abilities.put("Projectile",new ProjectileAbility("Projectlie",50,1));
-        abilities.put("Boost",new BoostAbility("Boost",150,5));
+        abilities.put("projectile",new ProjectileAbility("Projectlie",50,1));
+        abilities.put("boost",new BoostAbility("Boost",150,5));
     }
 
 
@@ -47,9 +47,9 @@ public class ItemTrigger extends Item implements ICustomDescription {
     @Override
     public String getLanguageKey(ItemStack stack) {
         if(getAbility(stack) != null){
-            return "item.signalindustries.trigger"+stack.getData().getString("ability");
+            return "item.signalindustries.trigger."+stack.getData().getString("ability");
         } else {
-            return "item.signalindustries.triggerNull";
+            return "item.signalindustries.trigger.null";
         }
     }
 

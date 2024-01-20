@@ -125,7 +125,7 @@ dependencies {
 	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
 	implementation project(path: ":catalyst:effects",configuration: "namedElements")
 
-	modImplementation "DragonFly:dragonfly:1.3.4-7.1"
+	modImplementation "DragonFly:dragonfly:1.4.1-7.1"
 	modImplementation "BTWaila:btwaila:1.0.7-7.1"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

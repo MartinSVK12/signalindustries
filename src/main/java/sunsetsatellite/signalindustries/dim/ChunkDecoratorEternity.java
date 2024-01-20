@@ -25,7 +25,7 @@ public class ChunkDecoratorEternity implements ChunkDecorator {
         int x = chunk.xPosition * 16;
         int z = chunk.zPosition * 16;
         int y = this.world.getHeightValue(x, z);
-        if(random.nextInt(32) == 0){
+        if(random.nextInt(16) == 0){
             WorldFeature tree = new WorldFeatureEternalTree(0, SignalIndustries.eternalTreeLog.id);
             tree.generate(world,random,x,y,z);
         }

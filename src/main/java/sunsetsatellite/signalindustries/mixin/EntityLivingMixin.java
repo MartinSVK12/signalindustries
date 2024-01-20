@@ -72,4 +72,12 @@ public abstract class EntityLivingMixin extends Entity {
     public void bloodMoonSpawning(CallbackInfoReturnable<Integer> cir){
         cir.setReturnValue(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon ? 16 : 4);
     }
+
+    @Inject(method = "getCanSpawnHere",at = @At("HEAD"),cancellable = true)
+    public void getCanSpawnHere(CallbackInfoReturnable<Boolean> cir)
+    {
+        if(world.dimension == SignalIndustries.dimEternity){
+            cir.setReturnValue(false);
+        }
+    }
 }

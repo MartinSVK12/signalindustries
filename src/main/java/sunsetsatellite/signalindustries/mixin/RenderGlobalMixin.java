@@ -222,11 +222,11 @@ public class RenderGlobalMixin {
             GL11.glEnable(3008);
             GL11.glEnable(2912);
             GL11.glPopMatrix();
-            if (this.worldObj.worldType.hasGround()) {
+            /*if (this.worldObj.worldType.hasGround()) {
                 GL11.glColor3f(f1 * 0.2F + 0.04F, f2 * 0.2F + 0.04F, f3 * 0.6F + 0.1F);
-            } else {
-                GL11.glColor3f(f1, f2, f3);
-            }
+            } else {*/
+            GL11.glColor3f(f1, f2, f3);
+            //}
 
             GL11.glDepthMask(true);
             GL11.glEnable(3553);
