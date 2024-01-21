@@ -28,6 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWorldDataAccessor;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.List;
 import java.util.Random;
@@ -93,6 +94,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
+                    player.triggerAchievement(SignalIndustriesAchievementPage.BLOOD_MOON);
                 }
                 weatherManager.overrideWeather(SignalIndustries.weatherBloodMoon,13000,1);
             }
@@ -118,6 +120,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SignalIndustries.weatherEclipse ){
             for (EntityPlayer player : players) {
                 player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
+                player.triggerAchievement(SignalIndustriesAchievementPage.ECLIPSE);
             }
             weatherManager.overrideWeather(SignalIndustries.weatherEclipse,Global.DAY_LENGTH_TICKS,1);
         }

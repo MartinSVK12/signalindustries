@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
@@ -9,6 +10,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
 public class TileEntityExtractor extends TileEntityTieredMachine implements IBoostable {
@@ -107,6 +109,7 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
                 fluidContents[0].amount += stack.amount;
             }
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.FROM_WITHIN);
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
             } else {

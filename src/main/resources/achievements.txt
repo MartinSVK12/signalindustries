@@ -49,7 +49,7 @@ Forge R.C. Alloy from Crystal Alloy and Glowing Obsidian.
 Reinforced
 Enter the Reinforced tier by making a Reinforced Machine Core.
 
-Standing here, I realize
+Studying the Blade
 Create a Signalum Saber.
 
 Pulse
@@ -79,8 +79,8 @@ Successfully teleport somewhere by breaking a Warp Orb.
 Reality Failure
 Suffer the consequences of breaking a blank Warp Orb.
 
-Under a Dead Sky
-Take a look around Eternity and find out what it has to offer.
+Dead Sky Limbo
+Looks like the void isn't really empty after all.
 
 False Eternity
 Escape Eternity without dying by planning ahead.

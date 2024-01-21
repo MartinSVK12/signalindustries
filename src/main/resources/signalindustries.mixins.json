@@ -31,6 +31,7 @@
     "RenderPlayerMixin",
     "RichPresenceHandlerThreadMixin",
     "SaveHandlerBaseMixin",
+    "SlotCraftingMixin",
     "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",

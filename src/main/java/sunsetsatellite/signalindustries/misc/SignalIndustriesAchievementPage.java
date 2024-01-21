@@ -13,17 +13,39 @@ import turniplabs.halplibe.util.achievements.GuiAchievements;
 
 import java.util.Random;
 
+import static sunsetsatellite.signalindustries.SignalIndustries.*;
+
 public class SignalIndustriesAchievementPage extends AchievementPage {
     public SignalIndustriesAchievementPage() {
         super("Signal Industries", "achievements.page.signalindustries");
         achievementList.add((Achievement) INIT.registerStat());
         achievementList.add((Achievement) THE_PROTOTYPE.registerStat());
         achievementList.add((Achievement) FROM_WITHIN.registerStat());
+        achievementList.add((Achievement) TRANSFER.registerStat());
+        achievementList.add((Achievement) BUFFER.registerStat());
+        achievementList.add((Achievement) CRUSHER.registerStat());
+        achievementList.add((Achievement) ALLOY_SMELTER.registerStat());
+        achievementList.add((Achievement) PLATE_FORMER.registerStat());
+        achievementList.add((Achievement) SHINING.registerStat());
+        achievementList.add((Achievement) BASIC.registerStat());
+        achievementList.add((Achievement) BLOOD_MOON.registerStat());
+        achievementList.add((Achievement) ECLIPSE.registerStat());
     }
 
-    public static final Achievement INIT = new Achievement(AchievementList.achievementList.size()+1,SignalIndustries.key("init"),0,0,SignalIndustries.rawSignalumCrystal,null);
-    public static final Achievement THE_PROTOTYPE = new Achievement(AchievementList.achievementList.size()+2,SignalIndustries.key("thePrototype"),2,0,SignalIndustries.prototypeMachineCore,INIT);
-    public static final Achievement FROM_WITHIN = new Achievement(AchievementList.achievementList.size()+3,SignalIndustries.key("fromWithin"),4,0,SignalIndustries.prototypeExtractor,THE_PROTOTYPE);
+    public static final Achievement INIT = new Achievement(AchievementList.achievementList.size()+1, key("init"),0,0, rawSignalumCrystal,null);
+    public static final Achievement THE_PROTOTYPE = new Achievement(AchievementList.achievementList.size()+2, key("thePrototype"),2,0, prototypeMachineCore,INIT);
+    public static final Achievement FROM_WITHIN = new Achievement(AchievementList.achievementList.size()+3, key("fromWithin"),3,-1, prototypeExtractor,THE_PROTOTYPE);
+    public static final Achievement TRANSFER = new Achievement(AchievementList.achievementList.size()+3, key("transfer"),4,1, prototypeConduit,THE_PROTOTYPE);
+    public static final Achievement BUFFER = new Achievement(AchievementList.achievementList.size()+3, key("buffer"),5,-1, prototypeEnergyCell,THE_PROTOTYPE);
+    public static final Achievement CRUSHER = new Achievement(AchievementList.achievementList.size()+3, key("crusher"),6,1, prototypeCrusher,THE_PROTOTYPE);
+    public static final Achievement ALLOY_SMELTER = new Achievement(AchievementList.achievementList.size()+3, key("alloySmelter"),7,-1, prototypeAlloySmelter,THE_PROTOTYPE);
+    public static final Achievement PLATE_FORMER = new Achievement(AchievementList.achievementList.size()+3, key("plateFormer"),8,1, prototypePlateFormer,THE_PROTOTYPE);
+    public static final Achievement SHINING = new Achievement(AchievementList.achievementList.size()+3, key("shining"),9,0, signalumCrystal,THE_PROTOTYPE);
+    public static final Achievement BASIC = new Achievement(AchievementList.achievementList.size()+3, key("basic"),2,2, basicMachineCore,SHINING);
+
+
+    public static final Achievement BLOOD_MOON = new Achievement(AchievementList.achievementList.size()+4, key("bloodMoon"),-2,2, monsterShard,null);
+    public static final Achievement ECLIPSE = new Achievement(AchievementList.achievementList.size()+4, key("eclipse"),-2,4, infernalFragment,null);
 
     @Override
     public void getBackground(GuiAchievements guiAchievements, Random random,  int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {
@@ -38,11 +60,11 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
                 int k8 = Block.sand.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                 if (j8 <= 37 && blockY1 + l7 != 35) {
                     if (j8 == 22) {
-                        k8 = SignalIndustries.dilithiumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
+                        k8 = dilithiumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     } else if (j8 == 10) {
                         k8 = Block.oreIronBasalt.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     } else if (j8 == 8) {
-                        k8 = SignalIndustries.signalumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
+                        k8 = signalumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     } else if (j8 > 4) {
                         k8 = Block.basalt.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     } else if (j8 > 0) {
@@ -50,9 +72,9 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
                     }
                 } else {
                     if (random.nextInt(2) == 0) {
-                        k8 = SignalIndustries.dimensionalShardOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
+                        k8 = dimensionalShardOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     } else {
-                        k8 = SignalIndustries.realityFabric.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
+                        k8 = realityFabric.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
                     }
                 }
 

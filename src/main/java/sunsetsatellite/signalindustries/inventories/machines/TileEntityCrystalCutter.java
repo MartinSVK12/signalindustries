@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
@@ -10,6 +11,8 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
@@ -135,6 +138,9 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
                 setInventorySlotContents(1, stack);
             } else if(itemContents[1].isItemEqual(stack)) {
                 itemContents[1].stackSize++;
+            }
+            if(stack.getItem() instanceof ItemSignalumCrystal){
+                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.SHINING);
             }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
