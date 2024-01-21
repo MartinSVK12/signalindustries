@@ -44,12 +44,13 @@
     "signalindustries.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13.3",
-    "catalyst-core": ">=1.1.1",
+    "fabricloader": ">=0.14.19-babric.3-bta",
+    "minecraft": ">=7.1-beta.1a",
+    "catalyst-core": ">=1.1.2",
     "catalyst-fluids": ">=1.0.1",
-    "catalyst-multiblocks": ">=1.0.0",
-    "catalyst-energy": ">=1.0.1",
-    "halplibe": ">=3.1.0",
-    "dragonfly": ">=1.2.0-7.1"
+    "catalyst-multiblocks": ">=1.0.1",
+    "catalyst-energy": ">=1.0.2",
+    "halplibe": ">=3.3.3",
+    "dragonfly": ">=1.4.1-7.1"
   }
 }
