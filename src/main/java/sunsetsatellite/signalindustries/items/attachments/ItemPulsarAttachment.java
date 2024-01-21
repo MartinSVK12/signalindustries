@@ -24,8 +24,9 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.List;
 
 public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOverlay {
-    public ItemPulsarAttachment(int i, List<AttachmentPoint> attachmentPoints, Tier tier) {
-        super(i, attachmentPoints, tier);
+
+    public ItemPulsarAttachment(String name, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
+        super(name, id, attachmentPoints, tier);
     }
 
     @Override

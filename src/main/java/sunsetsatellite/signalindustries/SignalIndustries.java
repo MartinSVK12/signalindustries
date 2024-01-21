@@ -44,6 +44,7 @@ import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
 import sunsetsatellite.signalindustries.abilities.powersuit.*;
 import sunsetsatellite.signalindustries.blocks.*;
+import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
@@ -611,7 +612,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setHardness(1)
             .setResistance(20)
             .setLuminance(0)
-            .setBlockModel(new BlockModelDragonFly(ModelHelper.getOrCreateBlockModel(MOD_ID,"eeprom_programmer.json")))
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"eeprom_programmer.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"eeprom_programmer.json"),
+                            new EEPROMProgrammerStateInterpreter(),
+                            true
+                    )
+            )
             .setTextures(1,0)
             .build(new BlockProgrammer("basic.programmer",config.getInt("BlockIDs.basicProgrammer"),Tier.BASIC,Material.metal));
 
@@ -634,34 +642,34 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("burnt_signalum.png")
             .build(new BlockFluidStill("burntSignalum",config.getInt("BlockIDs.burntSignalumStill"),Material.water).withTexCoords(burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
 
-    public static final Item signalumCrystalEmpty = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(config.getInt("ItemIDs.signalumCrystalEmpty")),"signalumCrystalEmpty","signalumcrystalempty.png").setMaxStackSize(1);
-    public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal(config.getInt("ItemIDs.signalumCrystal")),"signalumCrystal","signalumcrystal.png").setMaxStackSize(1);
-    public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.rawSignalumCrystal")),"rawSignalumCrystal","rawsignalumcrystal.png");
+    public static final Item signalumCrystalEmpty = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal("signalumCrystalEmpty",config.getInt("ItemIDs.signalumCrystalEmpty")),"signalumcrystalempty.png").setMaxStackSize(1);
+    public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal("signalumCrystal",config.getInt("ItemIDs.signalumCrystal")),"signalumcrystal.png").setMaxStackSize(1);
+    public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item("rawSignalumCrystal",config.getInt("ItemIDs.rawSignalumCrystal")),"rawsignalumcrystal.png");
 
-    public static final Item awakenedSignalumCrystal = ItemHelper.createItem(MOD_ID, new Item(config.getInt("ItemIDs.awakenedSignalumCrystal")),"awakenedSignalumCrystal","awakenedsignalumcrystal.png").setMaxStackSize(1);
-    public static final Item awakenedSignalumFragment = ItemHelper.createItem(MOD_ID, new Item(config.getInt("ItemIDs.awakenedSignalumFragment")),"awakenedSignalumFragment","awakenedsignalumfragment.png");
+    public static final Item awakenedSignalumCrystal = ItemHelper.createItem(MOD_ID, new Item("awakenedSignalumCrystal",config.getInt("ItemIDs.awakenedSignalumCrystal")),"awakenedsignalumcrystal.png").setMaxStackSize(1);
+    public static final Item awakenedSignalumFragment = ItemHelper.createItem(MOD_ID, new Item("awakenedSignalumFragment",config.getInt("ItemIDs.awakenedSignalumFragment")),"awakenedsignalumfragment.png");
 
-    public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.coalDust")),"coalDust","coaldust.png");
-    public static final Item netherCoalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.netherCoalDust")),"netherCoalDust","nethercoaldust.png");
-    public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.emptySignalumCrystalDust")),"signalumCrystalDust","emptysignalumdust.png");
-    public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.saturatedSignalumCrystalDust")),"saturatedSignalumCrystalDust","saturatedsignalumdust.png");
+    public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item("coalDust",config.getInt("ItemIDs.coalDust")),"coaldust.png");
+    public static final Item netherCoalDust = ItemHelper.createItem(MOD_ID,new Item("netherCoalDust",config.getInt("ItemIDs.netherCoalDust")),"nethercoaldust.png");
+    public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item("signalumCrystalDust",config.getInt("ItemIDs.emptySignalumCrystalDust")),"emptysignalumdust.png");
+    public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumCrystalDust",config.getInt("ItemIDs.saturatedSignalumCrystalDust")),"saturatedsignalumdust.png");
 
-    public static final Item ironPlateHammer = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.ironPlateHammer")),"ironPlateHammer","platehammer.png").setMaxStackSize(1);
+    public static final Item ironPlateHammer = ItemHelper.createItem(MOD_ID,new Item("ironPlateHammer",config.getInt("ItemIDs.ironPlateHammer")),"platehammer.png").setMaxStackSize(1);
 
-    public static final Item cobblestonePlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.cobblestonePlate")),"cobblestonePlate","cobblestoneplate.png");
-    public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.stonePlate")),"stonePlate","stoneplate.png");
-    public static final Item crystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.crystalAlloyPlate")),"crystalAlloyPlate","crystalalloyplate.png");
-    public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.steelPlate")),"steelPlate","steelplate.png");
-    public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.reinforcedCrystalAlloyPlate")),"reinforcedCrystalAlloyPlate","reinforcedcrystalalloyplate.png");
-    public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.saturatedSignalumAlloyPlate")),"saturatedSignalumAlloyPlate","saturatedsignalumalloyplate.png");
-    public static final Item dilithiumPlate = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.dilithiumPlate")),"dilithiumPlate","dilithiumplate.png");
+    public static final Item cobblestonePlate = ItemHelper.createItem(MOD_ID,new Item("cobblestonePlate",config.getInt("ItemIDs.cobblestonePlate")),"cobblestoneplate.png");
+    public static final Item stonePlate = ItemHelper.createItem(MOD_ID,new Item("stonePlate",config.getInt("ItemIDs.stonePlate")),"stoneplate.png");
+    public static final Item crystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("crystalAlloyPlate",config.getInt("ItemIDs.crystalAlloyPlate")),"crystalalloyplate.png");
+    public static final Item steelPlate = ItemHelper.createItem(MOD_ID,new Item("steelPlate",config.getInt("ItemIDs.steelPlate")),"steelplate.png");
+    public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("reinforcedCrystalAlloyPlate",config.getInt("ItemIDs.reinforcedCrystalAlloyPlate")),"reinforcedcrystalalloyplate.png");
+    public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyPlate",config.getInt("ItemIDs.saturatedSignalumAlloyPlate")),"saturatedsignalumalloyplate.png");
+    public static final Item dilithiumPlate = ItemHelper.createItem(MOD_ID,new Item("dilithiumPlate",config.getInt("ItemIDs.dilithiumPlate")),"dilithiumplate.png");
 
 
-    public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.crystalAlloyIngot")),"crystalAlloyIngot","crystalalloy.png");
-    public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.reinforcedCrystalAlloyIngot")),"reinforcedCrystalAlloyIngot","reinforcedcrystalalloy.png");
-    public static final Item saturatedSignalumAlloyIngot = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.saturatedSignalumAlloyIngot")),"saturatedSignalumAlloyIngot","saturatedsignalumalloy.png");
+    public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("crystalAlloyIngot",config.getInt("ItemIDs.crystalAlloyIngot")),"crystalalloy.png");
+    public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("reinforcedCrystalAlloyIngot",config.getInt("ItemIDs.reinforcedCrystalAlloyIngot")),"reinforcedcrystalalloy.png");
+    public static final Item saturatedSignalumAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyIngot",config.getInt("ItemIDs.saturatedSignalumAlloyIngot")),"saturatedsignalumalloy.png");
 
-    public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.diamondCuttingGear")),"diamondCuttingGear","diamondcuttinggear.png");
+    public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item("diamondCuttingGear",config.getInt("ItemIDs.diamondCuttingGear")),"diamondcuttinggear.png");
 
     public static final Block portalEternity = new BlockBuilder(MOD_ID)
             .setTextures("reality_fabric.png")
@@ -696,16 +704,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("dilithium_rail_unpowered.png")
             .build(new BlockDilithiumRail("dilithiumRail",config.getInt("BlockIDs.dilithiumRail"),true));
 
-    //BlockHelper.createBlock(MOD_ID,new Block(key("rootedFabric",config.getInt("BlockIDs.rootedFabric"),Material.dirt),"rooted_fabric.png",BlockSounds.STONE,50f,50000f,0);
 
-    public static final Item monsterShard = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.monsterShard")),"monsterShard","monstershard.png");
-    public static final Item infernalFragment = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.infernalFragment")),"infernalFragment","infernalfragment.png");
-    public static final Item evilCatalyst = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.evilCatalyst")),"evilCatalyst","evilcatalyst.png").setMaxStackSize(4);
-    public static final Item infernalEye = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.infernalEye")),"infernalEye","infernaleye.png").setMaxStackSize(4);
-    public static final Item dimensionalShard = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.dimensionalShard")),"dimensionalShard","dimensionalshard.png");
-    public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb(config.getInt("ItemIDs.warpOrb")),"warpOrb","warporb.png").setMaxStackSize(1);
-    public static final Item realityString = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.realityString")),"realityString","stringofreality.png");
-    public static final Item dilithiumShard = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.dilithiumShard")),"dilithiumShard","dilithiumshard.png");
+    public static final Item monsterShard = simpleItem("monsterShard","monstershard.png");
+    public static final Item infernalFragment = simpleItem("infernalFragment","infernalfragment.png");
+    public static final Item evilCatalyst = simpleItem("evilCatalyst","evilcatalyst.png").setMaxStackSize(4);
+    public static final Item infernalEye = simpleItem("infernalEye","infernaleye.png").setMaxStackSize(4);
+    public static final Item dimensionalShard = simpleItem("dimensionalShard","dimensionalshard.png");
+    public static final Item warpOrb = ItemHelper.createItem(MOD_ID,new ItemWarpOrb("warpOrb",config.getInt("ItemIDs.warpOrb")),"warporb.png").setMaxStackSize(1);
+    public static final Item realityString = simpleItem("realityString","stringofreality.png");
+    public static final Item dilithiumShard = simpleItem("dilithiumShard","dilithiumshard.png");
 
     public static final Block eternalTreeLog = new BlockBuilder(MOD_ID)
             .setHardness(75f)
@@ -725,44 +732,44 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new Block("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
         //BlockHelper.createBlock(MOD_ID,new Block(key("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone),"glowing_obsidian.png",BlockSounds.STONE, 50f,1200f,1.0f/2.0f);
 
-    public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial("signalumprototypeharness",1200,10,10,10,10);
-    public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial("signalumpowersuit",9999,50,50,50,50);
+    public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumprototypeharness",1200,10,10,10,10);
+    public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumpowersuit",9999,50,50,50,50);
 
-    public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness("basic.prototypeHarness",config.getInt("ItemIDs.signalumPrototypeHarness"),armorPrototypeHarness,1, Tier.BASIC),"basic.prototypeHarness","harness.png");
-    public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness("basic.prototypeHarnessGoggles",config.getInt("ItemIDs.signalumPrototypeHarnessGoggles"),armorPrototypeHarness,0, Tier.BASIC),"basic.prototypeHarnessGoggles","goggles.png");
+    public static final ItemArmorTiered signalumPrototypeHarness = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness("basic.prototypeHarness",config.getInt("ItemIDs.signalumPrototypeHarness"),armorPrototypeHarness,1, Tier.BASIC),"harness.png");
+    public static final ItemArmorTiered signalumPrototypeHarnessGoggles = (ItemArmorTiered) ItemHelper.createItem(MOD_ID,new ItemSignalumPrototypeHarness("basic.prototypeHarnessGoggles",config.getInt("ItemIDs.signalumPrototypeHarnessGoggles"),armorPrototypeHarness,0, Tier.BASIC),"goggles.png");
 
     public static final ToolMaterial toolMaterialBasic = new ToolMaterial().setDurability(9999).setMiningLevel(3).setEfficiency(25,50);
     public static final ToolMaterial toolMaterialReinforced = new ToolMaterial().setDurability(9999).setMiningLevel(4).setEfficiency(45,80);
     public static final ToolMaterial toolMaterialAwakened = new ToolMaterial().setDurability(9999).setMiningLevel(5).setEfficiency(60,100);
 
-    public static final Item basicSignalumDrill = ItemHelper.createItem(MOD_ID,new ItemSignalumDrill("basic.signalumDrill",config.getInt("ItemIDs.basicSignalumDrill"),Tier.BASIC,toolMaterialBasic),"basic.signalumDrill","signalum_drill.png");
-    public static final Item reinforcedSignalumDrill = ItemHelper.createItem(MOD_ID,new ItemSignalumDrill("reinforced.signalumDrill",config.getInt("ItemIDs.reinforcedSignalumDrill"),Tier.REINFORCED,toolMaterialReinforced),"reinforced.signalumDrill","signalum_drill_reinforced.png");
+    public static final Item basicSignalumDrill = ItemHelper.createItem(MOD_ID,new ItemSignalumDrill("basic.signalumDrill",config.getInt("ItemIDs.basicSignalumDrill"),Tier.BASIC,toolMaterialBasic),"signalum_drill.png");
+    public static final Item reinforcedSignalumDrill = ItemHelper.createItem(MOD_ID,new ItemSignalumDrill("reinforced.signalumDrill",config.getInt("ItemIDs.reinforcedSignalumDrill"),Tier.REINFORCED,toolMaterialReinforced),"signalum_drill_reinforced.png");
 
-    public static final Item fuelCell = ItemHelper.createItem(MOD_ID,new ItemFuelCell(config.getInt("ItemIDs.fuelCell")),"fuelCell","fuelcellempty.png").setMaxStackSize(1);
+    public static final Item fuelCell = ItemHelper.createItem(MOD_ID,new ItemFuelCell("fuelCell",config.getInt("ItemIDs.fuelCell")),"fuelcellempty.png").setMaxStackSize(1);
     public static final int[][] fuelCellTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellempty.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellfilled.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcelldepleted.png")};
 
 
-    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger(config.getInt("ItemIDs.nullTrigger")),"trigger.null","trigger.png").setMaxStackSize(1);
+    public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger("trigger.null",config.getInt("ItemIDs.nullTrigger")),"trigger.png").setMaxStackSize(1);
 
-    public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new ItemRomChip(config.getInt("ItemIDs.romChipProjectile")),"romChip.projectile","chip1.png");
-    public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new ItemRomChip(config.getInt("ItemIDs.romChipBoost")),"romChip.boost","chip2.png");
+    public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new ItemRomChip("romChip.projectile",config.getInt("ItemIDs.romChipProjectile")),"chip1.png");
+    public static final Item romChipBoost = ItemHelper.createItem(MOD_ID,new ItemRomChip("romChip.boost",config.getInt("ItemIDs.romChipBoost")),"chip2.png");
 
-    public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.energyCatalyst")),"energyCatalyst","energycatalyst.png");
+    public static final Item energyCatalyst = ItemHelper.createItem(MOD_ID,new Item("energyCatalyst",config.getInt("ItemIDs.energyCatalyst")),"energycatalyst.png");
 
-    public static final Item signalumSaber = ItemHelper.createItem(MOD_ID, new ItemSignalumSaber("signalumSaber",config.getInt("ItemIDs.signalumSaber"), Tier.REINFORCED, ToolMaterial.stone), "reinforced.signalumSaber", "signalumsaberunpowered.png");
+    public static final Item signalumSaber = ItemHelper.createItem(MOD_ID, new ItemSignalumSaber("reinforced.signalumSaber",config.getInt("ItemIDs.signalumSaber"), Tier.REINFORCED, ToolMaterial.stone), "signalumsaberunpowered.png");
     public static final int[][] saberTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"signalumsaberunpowered.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"signalumsaber.png")};
 
-    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar(config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"reinforced.pulsar","pulsaractive.png").setMaxStackSize(1);
+    public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar("reinforced.pulsar",config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
-    public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"reinforced.signalumpowersuit.helmet","signalumpowersuit_helmet.png");
-    public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.chestplate",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,1,Tier.REINFORCED),"reinforced.signalumpowersuit.chestplate","signalumpowersuit_chestplate.png");
-    public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitLeggings"),armorSignalumPowerSuit,2,Tier.REINFORCED),"reinforced.signalumpowersuit.leggings","signalumpowersuit_leggings.png");
-    public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"reinforced.signalumpowersuit.boots","signalumpowersuit_boots.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"signalumpowersuit_helmet.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.chestplate",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,1,Tier.REINFORCED),"signalumpowersuit_chestplate.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitLeggings"),armorSignalumPowerSuit,2,Tier.REINFORCED),"signalumpowersuit_leggings.png");
+    public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"signalumpowersuit_boots.png");
 
     //public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
-    public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment(config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"reinforced.attachment.pulsar","pulsar_attachment.png").setMaxStackSize(1);
-    public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment(config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced.attachment.extendedEnergyPack","extended_energy_pack.png").setMaxStackSize(1);
+    public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment("reinforced.attachment.pulsar",config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment.png").setMaxStackSize(1);
+    public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack",config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack.png").setMaxStackSize(1);
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
@@ -772,15 +779,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     //public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
     //public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
-    public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"boostAbilityContainer","ability2.png");
-    public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"projectileAbilityContainer","ability1.png");
+    public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("boostAbilityContainer",config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"ability2.png");
+    public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("projectileAbilityContainer",config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"ability1.png");
 
-    public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getInt("ItemIDs.abilityModule"),Mode.NORMAL),"abilityModule","abilitymodule.png");
+    public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("abilityModule",config.getInt("ItemIDs.abilityModule"),Mode.NORMAL),"abilitymodule.png");
     /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.normalAbilityModule"),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
     public static final Item attackAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.attackAbilityModule"),Mode.ATTACK),"attackAbilityModule","attackmodule.png");
     public static final Item defenseAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.defenseAbilityModule"),Mode.DEFENSE),"defenseAbilityModule","defensemodule.png");
     public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.pursuitAbilityModule"),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");*/
-    public static final Item awakenedAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule(config.getInt("ItemIDs.awakenedAbilityModule"),Mode.AWAKENED),"awakenedAbilityModule","awakenedmodule.png");
+    public static final Item awakenedAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("awakenedAbilityModule",config.getInt("ItemIDs.awakenedAbilityModule"),Mode.AWAKENED),"awakenedmodule.png");
 
     //public static final Item crystalChip = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.crystalChip")),"crystalChip","crystal_chip.png");
     public static final Item crystalChip = simpleItem("crystalChip","crystal_chip.png");
@@ -802,7 +809,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item dilithiumChip = simpleItem("dilithiumChip","dilithium_chip.png");
     public static final Item dimensionalChip = simpleItem("dimensionalChip","dimensional_chip.png");
     public static final Item attachmentPoint = simpleItem("attachmentPoint","attachment_point.png");
-    public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new ItemMeteorTracker(config.getInt("ItemIDs.meteorTracker")),"meteorTracker","meteor_tracker_uncalibrated.png");
+    public static final Item meteorTracker = ItemHelper.createItem(MOD_ID,new ItemMeteorTracker("meteorTracker",config.getInt("ItemIDs.meteorTracker")),"meteor_tracker_uncalibrated.png");
     public static final Item blankAbilityModule = simpleItem("blankAbilityModule","blank_module.png");
     public static final Item abilityContainerCasing = simpleItem("abilityContainerCasing","abilitycontainercasing.png");
     public static final Item blankChip = simpleItem("blankChip","romChip.blank","blank_chip.png");
@@ -1034,11 +1041,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     }
 
     public static Item simpleItem(String name, String texture){
-        return ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs."+name)),name,texture);
+        return ItemHelper.createItem(MOD_ID,new Item(name,config.getInt("ItemIDs."+name)),texture);
     }
 
     public static Item simpleItem(String name, String lang, String texture){
-        return ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs."+name)),lang,texture);
+        return ItemHelper.createItem(MOD_ID,new Item(lang,config.getInt("ItemIDs."+name)),texture);
     }
 
 

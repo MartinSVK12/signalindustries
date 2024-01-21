@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "loaded=false,activated=false,finished=false": {
+      "model": "signalindustries:eeprom_programmer"
+    },
+    "loaded=true,activated=false,finished=false": {
+      "model": "signalindustries:eeprom_programmer_chip"
+    },
+    "loaded=true,activated=true,finished=false": {
+      "model": "signalindustries:eeprom_programmer_chip_activated"
+    },
+    "loaded=true,activated=false,finished=true": {
+      "model": "signalindustries:eeprom_programmer_chip_finished"
+    }
+  }
+}

@@ -113,6 +113,8 @@ dependencies {
 	modRuntimeOnly "objects:client:43db9b498cb67058d2e12d394e6507722e71bb45" // https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
 	modImplementation "fabric-loader:fabric-loader:${project.loader_version}"
 
+	include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:0.2.0-beta.9")))
+
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
 	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"

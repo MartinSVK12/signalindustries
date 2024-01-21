@@ -14,8 +14,8 @@ public class ItemWithAbility extends Item implements IHasAbility, ICustomDescrip
 
     SuitBaseAbility ability;
 
-    public ItemWithAbility(int i, SuitBaseAbility ability) {
-        super(i);
+    public ItemWithAbility(String name, int id, SuitBaseAbility ability) {
+        super(name, id);
         this.ability = ability;
     }
 

@@ -9,8 +9,9 @@ import sunsetsatellite.catalyst.core.util.ICustomDescription;
 
 
 public class ItemWarpOrb extends Item implements ICustomDescription {
-    public ItemWarpOrb(int i) {
-        super(i);
+
+    public ItemWarpOrb(String name, int id) {
+        super(name, id);
     }
 
     @Override

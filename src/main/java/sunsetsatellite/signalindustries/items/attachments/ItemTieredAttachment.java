@@ -11,8 +11,8 @@ import java.util.List;
 public class ItemTieredAttachment extends ItemAttachment implements ITiered {
     public Tier tier;
 
-    public ItemTieredAttachment(int i, List<AttachmentPoint> attachmentPoints, Tier tier) {
-        super(i, attachmentPoints);
+    public ItemTieredAttachment(String name, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
+        super(name, id, attachmentPoints);
         this.tier = tier;
     }
 

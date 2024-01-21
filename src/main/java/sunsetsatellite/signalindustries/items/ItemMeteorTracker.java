@@ -11,8 +11,9 @@ import turniplabs.halplibe.helper.TextureHelper;
 
 public class ItemMeteorTracker extends Item implements ICustomDescription {
 
-    public ItemMeteorTracker(int id) {
-        super(id);
+
+    public ItemMeteorTracker(String name, int id) {
+        super(name, id);
     }
 
     @Override

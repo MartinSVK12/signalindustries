@@ -19,8 +19,8 @@ import sunsetsatellite.signalindustries.entities.EntityCrystal;
 
 public class ItemSignalumCrystal extends Item implements IItemFluidContainer, ICustomDescription {
 
-    public ItemSignalumCrystal(int id) {
-        super(id);
+    public ItemSignalumCrystal(String name, int id) {
+        super(name, id);
     }
 
     @Override

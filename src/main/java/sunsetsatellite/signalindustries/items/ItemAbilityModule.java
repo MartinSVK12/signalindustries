@@ -14,12 +14,14 @@ import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Mode;
 
+import java.util.List;
+
 public class ItemAbilityModule extends ItemAttachment {
 
     public Mode mode;
 
-    public ItemAbilityModule(int i, Mode mode) {
-        super(i, SignalIndustries.listOf(AttachmentPoint.CORE_MODULE));
+    public ItemAbilityModule(String name, int id, Mode mode) {
+        super(name, id, SignalIndustries.listOf(AttachmentPoint.CORE_MODULE));
         this.mode = mode;
     }
 

@@ -17,10 +17,15 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
 
     List<AttachmentPoint> attachmentPoints;
 
-    public ItemAttachment(int i, List<AttachmentPoint> attachmentPoints) {
-        super(i);
+    public ItemAttachment(String name, int id, List<AttachmentPoint> attachmentPoints) {
+        super(name, id);
         this.attachmentPoints = attachmentPoints;
     }
+
+    /*public ItemAttachment(int i, List<AttachmentPoint> attachmentPoints) {
+        super(i);
+        this.attachmentPoints = attachmentPoints;
+    }*/
 
     @Override
     public List<AttachmentPoint> getAttachmentPoints() {

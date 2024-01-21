@@ -18,12 +18,12 @@ import java.util.HashMap;
 public class ItemTrigger extends Item implements ICustomDescription {
 
     public static final HashMap<String, TriggerBaseAbility> abilities = new HashMap<>();
-    public ItemTrigger(int i) {
-        super(i);
+
+    public ItemTrigger(String name, int id) {
+        super(name, id);
         abilities.put("projectile",new ProjectileAbility("Projectlie",50,1));
         abilities.put("boost",new BoostAbility("Boost",150,5));
     }
-
 
     @Override
     public String getDescription(ItemStack stack) {

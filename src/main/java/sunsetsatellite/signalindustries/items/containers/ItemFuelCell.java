@@ -15,8 +15,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 
 
 public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDescription {
-    public ItemFuelCell(int id) {
-        super(id);
+
+    public ItemFuelCell(String name, int id) {
+        super(name, id);
     }
 
     @Override

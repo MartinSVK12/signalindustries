@@ -28,8 +28,9 @@ import sunsetsatellite.signalindustries.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
-    public ItemPulsar(int i, Tier tier) {
-        super(i, tier);
+
+    public ItemPulsar(String name, int id, Tier tier) {
+        super(name, id, tier);
     }
 
     @Override

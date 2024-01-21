@@ -9,8 +9,8 @@ import sunsetsatellite.signalindustries.util.Tier;
 public class ItemTiered extends Item implements ITiered {
     public Tier tier;
 
-    public ItemTiered(int i, Tier tier) {
-        super(i);
+    public ItemTiered(String name, int id, Tier tier) {
+        super(name, id);
         this.tier = tier;
     }
 
