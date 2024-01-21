@@ -3698,6 +3698,47 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/basic_fluid_tank",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CPC",
+      "PFP",
+      "CPC"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.prototype.fluidTank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.fluidTank",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/ability_container_casing",
     "type": "minecraft:crafting/shaped",
     "pattern": [
