@@ -8,8 +8,13 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import java.util.Random;
 
 public class WorldFeatureObelisk extends WorldFeature {
+
+    public WorldFeatureObelisk() {
+    }
+
     @Override
     public boolean generate(World world, Random random, int i, int j, int k) {
+        SignalIndustries.LOGGER.info(String.format("Obelisk at X:%d Y:%d Z:%d",i,j,k));
         int l = 8;
         if (j >= 1 && j + l + 1 <= world.getHeightBlocks()) {
             for (int x = -4; x <= 4; x++) {

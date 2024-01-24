@@ -4,27 +4,26 @@ package sunsetsatellite.signalindustries.worldgen;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionNoDrops;
 
 import java.util.Random;
 
-public class WorldFeatureMeteor extends WorldFeature {
+public class WorldFeatureGeode extends WorldFeature {
 
     public int oreId;
     public int oreMeta;
     public int oreChance;
     public int radius = 4;
 
-    public WorldFeatureMeteor(int oreId, int oreMeta, int oreChance){
+    public WorldFeatureGeode(int oreId, int oreMeta, int oreChance){
         this.oreId = oreId;
         this.oreMeta = oreMeta;
         this.oreChance = oreChance;
     }
 
-    public WorldFeatureMeteor(int oreId, int oreMeta, int oreChance, int radius){
+    public WorldFeatureGeode(int oreId, int oreMeta, int oreChance, int radius){
         this.oreId = oreId;
         this.oreMeta = oreMeta;
         this.oreChance = oreChance;
@@ -32,12 +31,20 @@ public class WorldFeatureMeteor extends WorldFeature {
     }
     @Override
     public boolean generate(World world, Random random, int i, int j, int k) {
-        SignalIndustries.LOGGER.info(String.format("%s Meteor fell at X:%d Y:%d Z:%d", I18n.getInstance().translateNameKey(Block.blocksList[oreId].getLanguageKey(oreMeta)),i,j,k));
-        ExplosionNoDrops ex = new ExplosionNoDrops(world,null,i,j,k,50f);
-        ex.doExplosionA();
-        ex.doExplosionB(false);
-
+        SignalIndustries.LOGGER.info(String.format("%s Geode at X:%d Y:%d Z:%d", I18n.getInstance().translateNameKey(Block.blocksList[oreId].getLanguageKey(oreMeta)),i,j,k));
         int oreBlocks = 0;
+
+        int radius1 = radius+1;
+
+        for(int x = -radius1+1; x <= radius1; ++x) {
+            for (int y = -radius1; y <= radius1; ++y) {
+                for (int z = -radius1; z <= radius1; ++z) {
+                    if (isPointInsideSphere(x, y, z, radius1)) {
+                        world.setBlockAndMetadataWithNotify(x+i, (y+j)-8, z+k, 0, 0);
+                    }
+                }
+            }
+        }
 
         for(int x = -radius; x <= radius; ++x) {
             for(int y = -radius; y <= radius; ++y) {
@@ -54,7 +61,6 @@ public class WorldFeatureMeteor extends WorldFeature {
             }
         }
 
-        SignalIndustries.meteorLocations.add(new ChunkCoordinates(i,j,k));
         //SignalIndustries.LOGGER.info("Meteor contains "+oreBlocks+" ore.");
         return true;
     }

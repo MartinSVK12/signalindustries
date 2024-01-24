@@ -7,7 +7,6 @@
     "AchievementMixin",
     "BlockFluidMixin",
     "BlockRailMixin",
-    "ChunkDecoratorOverworldMixin",
     "EntityArrowMixin",
     "EntityLivingMixin",
     "EntityMinecartMixin",
