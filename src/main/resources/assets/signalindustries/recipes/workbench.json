@@ -65,7 +65,7 @@
         "stack": {
           "key": "item.signalindustries.ironPlateHammer",
           "amount": 1,
-          "meta": 1
+          "meta": -1
         }
       },
       {
@@ -87,7 +87,7 @@
         "stack": {
           "key": "item.signalindustries.ironPlateHammer",
           "amount": 1,
-          "meta": 1
+          "meta": -1
         }
       },
       {
@@ -109,7 +109,7 @@
         "stack": {
           "key": "tile.signalindustries.dilithiumBlock",
           "amount": 1,
-          "meta": 1
+          "meta": 0
         }
       }
     ],
@@ -128,7 +128,7 @@
         "stack": {
           "key": "tile.signalindustries.rawCrystalBlock",
           "amount": 1,
-          "meta": 1
+          "meta": 0
         }
       }
     ],
@@ -147,7 +147,7 @@
         "stack": {
           "key": "tile.signalindustries.emptyCrystalBlock",
           "amount": 1,
-          "meta": 1
+          "meta": 0
         }
       }
     ],
