@@ -31,7 +31,7 @@ public class WorldFeatureGeode extends WorldFeature {
     }
     @Override
     public boolean generate(World world, Random random, int i, int j, int k) {
-        SignalIndustries.LOGGER.info(String.format("%s Geode at X:%d Y:%d Z:%d", I18n.getInstance().translateNameKey(Block.blocksList[oreId].getLanguageKey(oreMeta)),i,j,k));
+        //SignalIndustries.LOGGER.info(String.format("%s Geode at X:%d Y:%d Z:%d", I18n.getInstance().translateNameKey(Block.blocksList[oreId].getLanguageKey(oreMeta)),i,j,k));
         int oreBlocks = 0;
 
         int radius1 = radius+1;

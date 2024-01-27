@@ -54,6 +54,7 @@
     "catalyst-multiblocks": ">=1.0.1",
     "catalyst-energy": ">=1.0.2",
     "halplibe": ">=3.3.3",
-    "dragonfly": ">=1.4.1-7.1"
+    "dragonfly": ">=1.4.1-7.1",
+    "terrain-api": ">=1.4.2-7.1"
   }
 }
