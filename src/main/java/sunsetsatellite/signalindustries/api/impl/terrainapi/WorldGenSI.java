@@ -28,10 +28,10 @@ public class WorldGenSI extends BaseInitialization {
 
     @Override
     protected void initRandom() {
-        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(Block.oreIronBasalt.id,0,25),512);
-        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(SignalIndustries.signalumOre.id,0,15),1024);
-        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(SignalIndustries.dilithiumOre.id,0,3),2048);
-        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureObelisk(),4096);
+        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(Block.oreIronBasalt.id,0,25),256);
+        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(SignalIndustries.signalumOre.id,0,15),512);
+        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(SignalIndustries.dilithiumOre.id,0,3),1024);
+        OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureObelisk(),2048);
         OverworldInitialization.randomFeatures.addFeature(
                 (x) -> new WorldFeatureGeode(SignalIndustries.signalumOre.id,0,10,3),
                 null,
