@@ -8,6 +8,7 @@ Requires:
 - HalpLibe (https://github.com/Turnip-Labs/bta-halplibe)
 - Catalyst (all modules) (https://github.com/MartinSVK12/catalyst)
 - DragonFly (https://github.com/UselessBullets/DragonFly/releases)
+- TerrainAPI (https://github.com/UselessBullets/TerrainAPI)
 
 Recommends:
 
