@@ -1,6 +1,8 @@
 package sunsetsatellite.signalindustries.items.attachments;
 
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -41,6 +43,11 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
     }
 
     @Override
+    public void renderWhenAttached(EntityPlayer player, ItemStack stack) {
+
+    }
+
+    @Override
     public String getDescription(ItemStack stack) {
         StringBuilder s = new StringBuilder(TextFormatting.YELLOW + "Attachment" + TextFormatting.WHITE);
         for (AttachmentPoint attachmentPoint : attachmentPoints) {
@@ -50,4 +57,10 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
     }
 
     public void tick(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world, int slot){};
+
+    public void loadTexture(String texturePath)
+    {
+        RenderEngine renderEngine = Minecraft.getMinecraft(this).renderEngine;
+        renderEngine.bindTexture(renderEngine.getTexture(texturePath));
+    }
 }

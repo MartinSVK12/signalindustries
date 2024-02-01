@@ -19,8 +19,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
+import useless.dragonfly.helper.ModelHelper;
+import useless.dragonfly.model.entity.BenchEntityModel;
 
 @Debug(
         export = true
@@ -71,7 +77,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
             method = "renderSpecials",
             at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V",ordinal = 7,shift = At.Shift.BEFORE)
     )
-    protected void renderSpecials(EntityPlayer entityplayer, float f, CallbackInfo ci) {
+    protected void renderPulsar(EntityPlayer entityplayer, float f, CallbackInfo ci) {
         ItemStack stack = entityplayer.inventory.getCurrentItem();
         if(stack.getItem() instanceof ItemPulsar){
             GL11.glRotatef(160f, 0.0F, -1.2F, 1.55F);
@@ -79,6 +85,44 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
             /*if(stack.getData().getByte("charge") >= 100){
 
             }*/
+        }
+    }
+
+    @Inject(
+            method = "renderSpecials",
+            at = @At("HEAD")
+    )
+    protected void renderSpecials(EntityPlayer entityplayer, float f, CallbackInfo ci) {
+        SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)entityplayer).signalIndustries$getPowerSuit();
+        if(powerSuit != null){
+            for (ItemStack content : powerSuit.helmet.contents) {
+                if(content != null){
+                    GL11.glPushMatrix();
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    GL11.glPopMatrix();
+                }
+            }
+            for (ItemStack content : powerSuit.chestplate.contents) {
+                if(content != null){
+                    GL11.glPushMatrix();
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    GL11.glPopMatrix();
+                }
+            }
+            for (ItemStack content : powerSuit.leggings.contents) {
+                if(content != null){
+                    GL11.glPushMatrix();
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    GL11.glPopMatrix();
+                }
+            }
+            for (ItemStack content : powerSuit.boots.contents) {
+                if(content != null){
+                    GL11.glPushMatrix();
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    GL11.glPopMatrix();
+                }
+            }
         }
     }
 }

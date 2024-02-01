@@ -145,7 +145,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     )
     public void solarEclipseCelestialAngle(float f, CallbackInfoReturnable<Float> cir){
         if(getCurrentWeather() == SignalIndustries.weatherEclipse){
-            cir.setReturnValue(1f);
+            cir.setReturnValue(0.80f);
         }
     }
 

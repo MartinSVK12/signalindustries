@@ -24,10 +24,13 @@ import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
+import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.Mode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SignalumPowerSuit {
@@ -55,10 +58,12 @@ public class SignalumPowerSuit {
     private static class AttachmentLocation {
         final int slot;
         final InventoryPowerSuit inv;
+        final AttachmentPoint point;
 
-        public AttachmentLocation(int slot, InventoryPowerSuit inv) {
+        public AttachmentLocation(int slot, InventoryPowerSuit inv, AttachmentPoint point) {
             this.slot = slot;
             this.inv = inv;
+            this.point = point;
         }
     }
 
@@ -71,18 +76,18 @@ public class SignalumPowerSuit {
         chestplate = new InventoryPowerSuit(armor[2]);
         leggings = new InventoryPowerSuit(armor[1]);
         boots = new InventoryPowerSuit(armor[0]);
-        attachmentLocations.put("headTop", new AttachmentLocation(0, helmet));
-        attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate));
-        attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate));
-        attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate));
-        attachmentLocations.put("armBackL", new AttachmentLocation(3, chestplate));
-        attachmentLocations.put("armBackR", new AttachmentLocation(6, chestplate));
-        attachmentLocations.put("armSideL", new AttachmentLocation(4, chestplate));
-        attachmentLocations.put("armSideR", new AttachmentLocation(5, chestplate));
-        attachmentLocations.put("legSideL", new AttachmentLocation(0, leggings));
-        attachmentLocations.put("legSideR", new AttachmentLocation(1, leggings));
-        attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots));
-        attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots));
+        attachmentLocations.put("headTop", new AttachmentLocation(0, helmet, null));
+        attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate, null));
+        attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate, null));
+        attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate, null));
+        attachmentLocations.put("armBackL", new AttachmentLocation(3, chestplate, null));
+        attachmentLocations.put("armBackR", new AttachmentLocation(6, chestplate, null));
+        attachmentLocations.put("armSideL", new AttachmentLocation(4, chestplate, null));
+        attachmentLocations.put("armSideR", new AttachmentLocation(5, chestplate, null));
+        attachmentLocations.put("legSideL", new AttachmentLocation(0, leggings, null));
+        attachmentLocations.put("legSideR", new AttachmentLocation(1, leggings, null));
+        attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots, null));
+        attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots, null));
         temperature = 20.0f;
     }
 
@@ -237,14 +242,28 @@ public class SignalumPowerSuit {
             temperature += 0.25f;
         }
         if(cooling){
-            temperature -= 0.05f;
+            float value = 0.05f;
+
             if(player.isInWaterOrRain()){
-                temperature -= 0.25f;
+                value += 0.20f;
             }
+            if(hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
+                ItemStack wings = getAttachment((ItemAttachment) SignalIndustries.crystalWings);
+                if(wings != null && wings.getData().getBoolean("active")){
+                    value += 0.80f;
+                }
+            }
+            temperature -= value;
             decrementEnergy(1);
         }
         if(temperature > 20){
             temperature -= 0.01f;
+            if(hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
+                ItemStack wings = getAttachment((ItemAttachment) SignalIndustries.crystalWings);
+                if(wings != null && wings.getData().getBoolean("active")){
+                    temperature -= 0.49f;
+                }
+            }
         }
 
         //tick attachments
@@ -421,6 +440,20 @@ public class SignalumPowerSuit {
             }
         }
         return false;
+    }
+
+    public ItemStack getAttachment(ItemAttachment attachment){
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        for (InventoryPowerSuit piece : pieces) {
+            for (ItemStack content : piece.contents) {
+                if(content != null){
+                    if(content.getItem() == attachment){
+                        return content;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public Mode getModuleMode(){

@@ -10,6 +10,7 @@ import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
@@ -60,6 +61,7 @@ import sunsetsatellite.signalindustries.inventories.machines.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
 import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
@@ -84,6 +86,7 @@ import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.toml.Toml;
 import useless.dragonfly.helper.ModelHelper;
 import useless.dragonfly.model.block.BlockModelDragonFly;
+import useless.dragonfly.model.entity.BenchEntityModel;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -778,6 +781,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     //public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
     public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment("reinforced.attachment.pulsar",config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment.png").setMaxStackSize(1);
     public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack",config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack.png").setMaxStackSize(1);
+        public static final Item crystalWings = ItemHelper.createItem(MOD_ID,new ItemWingsAttachment("reinforced.attachment.wings",config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings.png").setMaxStackSize(1);
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
