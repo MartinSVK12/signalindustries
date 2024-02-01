@@ -70,9 +70,6 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 				double var23 = (double)chunk.x - this.mc.thePlayer.x;
 				double var25 = (double)chunk.z - this.mc.thePlayer.z;
 				angle = (double)(this.mc.thePlayer.yRot - 90.0F) * PI / 180.0D - Math.atan2(var25, var23);
-				if(this.mc.theWorld.dimension == Dimension.nether) {
-					angle = Math.random() * PI * 2;
-				}
 			} else {
 				return;
 			}

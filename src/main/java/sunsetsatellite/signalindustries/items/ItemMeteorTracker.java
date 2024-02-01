@@ -1,13 +1,18 @@
 package sunsetsatellite.signalindustries.items;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.dynamictexture.DynamicTexture;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import turniplabs.halplibe.helper.TextureHelper;
+
+import static java.lang.Math.PI;
 
 public class ItemMeteorTracker extends Item implements ICustomDescription {
 
@@ -29,6 +34,21 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.getMetadata() == 0){
             itemstack.setMetadata(1);
+        } else {
+            ChunkCoordinates chunk = null;
+            double distance = Double.MAX_VALUE;
+            Minecraft mc = Minecraft.getMinecraft(this);
+            for (ChunkCoordinates meteorLocation : SignalIndustries.meteorLocations) {
+                if(meteorLocation.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z) < distance){
+                    distance = meteorLocation.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
+                    chunk = meteorLocation;
+                }
+            }
+            if(chunk != null){
+                mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks",distance));
+            } else {
+                mc.ingameGUI.addChatMessage("No meteors detected nearby.");
+            }
         }
         return super.onItemRightClick(itemstack, world, entityplayer);
     }
