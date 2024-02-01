@@ -55,19 +55,17 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.*;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
+import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.inventories.machines.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
-import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
+import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
-import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
-import sunsetsatellite.signalindustries.items.attachments.ItemTieredAttachment;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.GuiPowerSuit;
 import sunsetsatellite.signalindustries.render.*;
@@ -781,7 +779,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     //public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
     public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment("reinforced.attachment.pulsar",config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment.png").setMaxStackSize(1);
     public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack",config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack.png").setMaxStackSize(1);
-        public static final Item crystalWings = ItemHelper.createItem(MOD_ID,new ItemWingsAttachment("reinforced.attachment.wings",config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings.png").setMaxStackSize(1);
+    public static final Item crystalWings = ItemHelper.createItem(MOD_ID,new ItemWingsAttachment("reinforced.attachment.wings",config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings.png").setMaxStackSize(1);
+    public static final Item basicBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("basic.attachment.backpack",config.getInt("ItemIDs.basicBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.BASIC),"basic_backpack.png").setMaxStackSize(1);
+    public static final Item reinforcedBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("reinforced.attachment.backpack",config.getInt("ItemIDs.reinforcedBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced_backpack.png").setMaxStackSize(1);;
+
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
@@ -1019,6 +1020,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
+        addToNameGuiMap("Backpack", GuiBackpack.class, InventoryBackpack.class);
 
         EntityHelper.Core.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
         EntityHelper.Core.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
