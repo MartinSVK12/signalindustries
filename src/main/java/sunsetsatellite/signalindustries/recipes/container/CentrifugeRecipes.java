@@ -24,7 +24,7 @@ public class CentrifugeRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)),
                         },
                         new ItemStack(SignalIndustries.awakenedSignalumFragment,1),
-                        new RecipeProperties(400,240,Tier.REINFORCED,false)
+                        new RecipeProperties(400,240,Tier.REINFORCED,false).setChance(0.25f)
                 )
         );
     }

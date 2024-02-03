@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -13,29 +13,29 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
-import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerExtractor;
+import sunsetsatellite.signalindustries.gui.GuiExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockPlateFormer extends BlockContainerTiered{
+public class BlockExtractor extends BlockContainerTiered {
 
-    public BlockPlateFormer(String key, int i, Tier tier, Material material) {
+    public BlockExtractor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityPlateFormer();
+        return new TileEntityExtractor();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
+        TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -80,22 +80,23 @@ public class BlockPlateFormer extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
+            TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiPlateFormer(entityplayer.inventory, tile),new ContainerPlateFormer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
     }
 
     @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
+    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
+        TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
+        int meta = iblockaccess.getBlockMetadata(i,j,k);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".plateFormer.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get(tile.tier.name()+".extractor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
+
 }

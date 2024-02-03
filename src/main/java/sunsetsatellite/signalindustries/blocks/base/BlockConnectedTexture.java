@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.base;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;

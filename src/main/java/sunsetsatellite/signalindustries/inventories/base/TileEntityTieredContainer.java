@@ -5,7 +5,7 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;

@@ -9,6 +9,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.inventories.TileEntitySIFluidTank;
 import sunsetsatellite.signalindustries.util.Tier;

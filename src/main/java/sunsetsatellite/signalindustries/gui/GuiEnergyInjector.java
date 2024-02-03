@@ -12,10 +12,10 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 public class GuiEnergyInjector extends GuiFluid {
 
@@ -25,7 +25,7 @@ public class GuiEnergyInjector extends GuiFluid {
 
 
     public GuiEnergyInjector(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerEnergyInjector(inventoryPlayer, (TileEntityTieredMachine) tile),inventoryPlayer);
+        super(new ContainerEnergyInjector(inventoryPlayer, (TileEntityTieredMachineBase) tile),inventoryPlayer);
         this.tile = (TileEntityEnergyInjector) tile;
         this.entityplayer = inventoryPlayer.player;
     }

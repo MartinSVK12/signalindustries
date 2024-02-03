@@ -23,21 +23,33 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
     public RecipeEntryMachineFluid() {}
 
     public boolean matches(RecipeExtendedSymbol[] symbols) {
-        for (RecipeExtendedSymbol S : symbols) {
-            if (Arrays.asList(getInput()).contains(S)) {
-                RecipeExtendedSymbol inputSymbol = getInput()[Arrays.asList(getInput()).indexOf(S)];
+        if(symbols.length == 0){
+            return false;
+        }
+        if(symbols.length != getInput().length){
+            return false;
+        }
+        for (RecipeExtendedSymbol symbol : symbols) {
+            if (Arrays.asList(getInput()).contains(symbol)) {
+                RecipeExtendedSymbol inputSymbol = getInput()[Arrays.asList(getInput()).indexOf(symbol)];
                 if(inputSymbol.hasFluid()){
-                    FluidStack fluid = S.resolveFluids().get(0);
+                    FluidStack fluid = symbol.resolveFluids().get(0);
                     FluidStack inputFluid = inputSymbol.resolveFluids().get(0);
-                    return fluid.amount >= inputFluid.amount;
+                    if (fluid.amount < inputFluid.amount) {
+                        return false;
+                    }
                 } else {
-                    ItemStack stack = S.resolve().get(0);
+                    ItemStack stack = symbol.resolve().get(0);
                     ItemStack inputStack = inputSymbol.resolve().get(0);
-                    return stack.stackSize >= inputStack.stackSize;
+                    if (stack.stackSize < inputStack.stackSize) {
+                        return false;
+                    }
                 }
+            } else {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public boolean matchesQuery(SearchQuery query) {

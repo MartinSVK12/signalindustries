@@ -10,7 +10,7 @@ import org.lwjgl.util.Color;
 import sunsetsatellite.catalyst.CatalystEnergy;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 

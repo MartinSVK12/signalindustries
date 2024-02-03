@@ -3,19 +3,21 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.ItemTrigger;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
-public class TileEntityProgrammer extends TileEntityTieredMachine {
+public class TileEntityProgrammer extends TileEntityTieredMachineBase {
+
+    public int cost;
 
     public TileEntityProgrammer(){
         cost = 120;
         fluidCapacity[0] = 2000;
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
+
     @Override
     public String getInvName() {
         return "EEPROM Programmer";

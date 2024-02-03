@@ -10,7 +10,6 @@ import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
-import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
@@ -45,6 +44,10 @@ import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
 import sunsetsatellite.signalindustries.abilities.powersuit.*;
 import sunsetsatellite.signalindustries.blocks.*;
+import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
+import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
+import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
@@ -67,7 +70,6 @@ import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.powersuit.GuiPowerSuit;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.BlockTexture;
@@ -84,7 +86,6 @@ import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.toml.Toml;
 import useless.dragonfly.helper.ModelHelper;
 import useless.dragonfly.model.block.BlockModelDragonFly;
-import useless.dragonfly.model.entity.BenchEntityModel;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -423,6 +424,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("prototype_blank.png")
             .setNorthTexture("plate_former_prototype_inactive.png")
             .build(new BlockPlateFormer("prototype.plateFormer",config.getInt("BlockIDs.prototypePlateFormer"), Tier.PROTOTYPE,Material.stone));
+
+    public static final Block basicPlateFormer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTextures("basic_blank.png")
+            .setNorthTexture("plate_former_basic_inactive.png")
+            .build(new BlockPlateFormer("basic.plateFormer",config.getInt("BlockIDs.basicPlateFormer"), Tier.BASIC,Material.metal));
 
     public static final Block prototypeCrystalCutter = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -862,6 +871,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put(Tier.BASIC.name()+".alloySmelter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("alloy_smelter_basic_active.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("plate_former_prototype_active.png"));
+        textures.put(Tier.BASIC.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("plate_former_basic_active.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("crystal_cutter_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("crystal_cutter_basic_active.png"));

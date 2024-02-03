@@ -1,22 +1,14 @@
 package sunsetsatellite.signalindustries.api.impl.btwaila.tooltip;
 
 import net.minecraft.core.block.Block;
-import net.minecraft.core.lang.I18n;
-import net.minecraft.core.net.command.TextFormatting;
-import net.minecraft.core.util.helper.Color;
-import net.minecraft.core.util.helper.Side;
-import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.*;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
-import toufoumaster.btwaila.tooltips.TileTooltip;
-import toufoumaster.btwaila.util.ColorOptions;
 import toufoumaster.btwaila.util.ProgressBarOptions;
 import toufoumaster.btwaila.util.TextureOptions;
 
-public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachine> {
+public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
     @Override
     public void initTooltip() {
         addClass(TileEntityExtractor.class);
@@ -34,7 +26,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachine> {
     }
 
     @Override
-    public void drawAdvancedTooltip(TileEntityTieredMachine tile, AdvancedInfoComponent c) {
+    public void drawAdvancedTooltip(TileEntityTieredMachineBase tile, AdvancedInfoComponent c) {
         ProgressBarOptions options = new ProgressBarOptions()
                 .setForegroundOptions(new TextureOptions(0x00FF00,Block.sand.atlasIndices[0]))
                 .setBackgroundOptions(new TextureOptions(0,SignalIndustries.realityFabric.atlasIndices[0]))

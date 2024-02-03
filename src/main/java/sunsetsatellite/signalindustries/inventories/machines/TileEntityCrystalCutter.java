@@ -2,31 +2,21 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
-import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
-import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 
-public class TileEntityCrystalCutter extends TileEntityTieredMachine implements IBoostable {
-
-    //public CrystalCutterRecipes recipes = CrystalCutterRecipes.getInstance();
+public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple implements IBoostable {
 
     public int recipeSelector = 0;
 
     public TileEntityCrystalCutter(){
-        cost = 80;
         fluidContents = new FluidStack[2];
         fluidCapacity = new int[2];
         fluidCapacity[0] = 2000;
@@ -36,6 +26,11 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
         }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
         acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
+        energySlot = 0;
+        recipeGroup = SIRecipes.CRYSTAL_CUTTER;
+        itemInputs = new int[]{0};
+        itemOutputs = new int[]{1};
+        fluidInputs = new int[]{1};
     }
     @Override
     public String getInvName() {
@@ -55,6 +50,12 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
     }
 
     @Override
+    public void tick() {
+        recipeId = recipeSelector;
+        super.tick();
+    }
+
+    /*@Override
     public void tick() {
         super.tick();
         worldObj.markBlocksDirty(x,y,z,x,y,z);
@@ -167,6 +168,6 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachine implements 
                     recipeSelector);
             return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
         }
-    }
+    }*/
 
 }

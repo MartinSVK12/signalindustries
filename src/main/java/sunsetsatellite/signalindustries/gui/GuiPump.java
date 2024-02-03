@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPump;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityPump;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 public class GuiPump extends GuiFluid {
 
@@ -24,7 +24,7 @@ public class GuiPump extends GuiFluid {
 
 
     public GuiPump(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerPump(inventoryPlayer, (TileEntityTieredMachine) tile),inventoryPlayer);
+        super(new ContainerPump(inventoryPlayer, (TileEntityTieredMachineBase) tile),inventoryPlayer);
         this.tile = (TileEntityPump) tile;
         this.entityplayer = inventoryPlayer.player;
     }

@@ -12,7 +12,7 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCentrifuge;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;

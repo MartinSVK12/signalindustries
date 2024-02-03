@@ -7,6 +7,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 

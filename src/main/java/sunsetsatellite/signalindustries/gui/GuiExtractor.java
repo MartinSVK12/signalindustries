@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 public class GuiExtractor extends GuiFluid {
 
@@ -24,7 +24,7 @@ public class GuiExtractor extends GuiFluid {
 
 
     public GuiExtractor(InventoryPlayer inventoryPlayer, TileEntity tile) {
-        super(new ContainerExtractor(inventoryPlayer, (TileEntityTieredMachine) tile),inventoryPlayer);
+        super(new ContainerExtractor(inventoryPlayer, (TileEntityTieredMachineBase) tile),inventoryPlayer);
         this.tile = (TileEntityExtractor) tile;
         this.entityplayer = inventoryPlayer.player;
     }

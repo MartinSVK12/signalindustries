@@ -7,15 +7,13 @@ import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
-public class TileEntityExtractor extends TileEntityTieredMachine implements IBoostable {
-
-    //public MachineRecipesBase<Integer, FluidStack> recipes = ExtractorRecipes.instance;
+public class TileEntityExtractor extends TileEntityTieredMachineBase implements IBoostable {
 
     public TileEntityExtractor(){
         fluidCapacity[0] = 2000;
@@ -39,17 +37,6 @@ public class TileEntityExtractor extends TileEntityTieredMachine implements IBoo
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
             tier = block.tier;
-            /*switch (block.tier){
-                case PROTOTYPE:
-                    recipes = ExtractorRecipes.instance;
-                    break;
-                case BASIC:
-                    recipes = BasicExtractorRecipes.instance;
-                    break;
-                case REINFORCED:
-                case AWAKENED:
-                    break;
-            }*/
         }
         boolean update = false;
         if(fuelBurnTicks > 0){

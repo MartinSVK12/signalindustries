@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.base;
 
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class TileEntityTiered extends TileEntityWithName {

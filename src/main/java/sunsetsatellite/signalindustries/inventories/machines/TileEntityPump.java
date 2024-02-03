@@ -8,18 +8,22 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
+import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TileEntityPump extends TileEntityTieredMachine implements IBoostable {
+public class TileEntityPump extends TileEntityTieredMachineBase implements IBoostable {
 
     public BlockInstance currentBlock = null;
+    public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
     public int range = 3;
     public TileEntityPump(){
         fluidContents = new FluidStack[2];
@@ -27,7 +31,6 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         fluidCapacity[0] = 2000;
         fluidCapacity[1] = 2000;
         progressMaxTicks = 600;
-        cost = 10;
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
@@ -55,6 +58,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
                     for(int z1 = z-range; z < z+range; z++){
                         int id = worldObj.getBlockId(x1,y1,z1);
                         if(pumpableFluids.contains(id)){
+                            currentRecipe = SIRecipes.PUMP.findRecipe(RecipeExtendedSymbol.arrayOf(new ItemStack(currentBlock.block)),tier);
                             currentBlock = new BlockInstance(Block.getBlock(id),new Vec3i(x1,y1,z1),null);
                         }
                     }
@@ -68,7 +72,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
         if (fluidContents[0] == null) {
             progressTicks = 0;
         } else if (canProcess()) {
-            progressMaxTicks = 600 / speedMultiplier;
+            progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;
         }
         if (!worldObj.isClientSide) {
             if (progressTicks == 0 && canProcess()) {
@@ -99,10 +103,10 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
 
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
-        if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 600 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+        if(burn > 0 && canProcess() && fluidContents[0].amount >= currentRecipe.getData().cost){
+            progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
-            fluidContents[0].amount -= cost;
+            fluidContents[0].amount -= currentRecipe.getData().cost;
             if(fluidContents[0].amount == 0) {
                 fluidContents[0] = null;
             }
@@ -125,7 +129,7 @@ public class TileEntityPump extends TileEntityTieredMachine implements IBoostabl
     }
 
     private boolean canProcess() {
-        if(currentBlock == null){
+        if(currentBlock == null || currentRecipe == null){
             return false;
         }
         FluidStack stack = SIRecipes.PUMP.findFluidOutput(new ItemStack(currentBlock.block),tier);

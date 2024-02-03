@@ -1224,7 +1224,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.automaticMiner",
+      "key":  "tile.signalindustries.basic.crystalChamber",
       "amount": 1,
       "meta": 0
     },

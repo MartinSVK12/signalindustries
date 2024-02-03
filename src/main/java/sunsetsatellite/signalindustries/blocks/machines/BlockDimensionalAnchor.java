@@ -1,43 +1,67 @@
-package sunsetsatellite.signalindustries.blocks;
-
+package sunsetsatellite.signalindustries.blocks.machines;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerCrystalChamber;
-import sunsetsatellite.signalindustries.gui.GuiCrystalChamber;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalChamber;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
+import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockCrystalChamber extends BlockContainerTiered{
+public class BlockDimensionalAnchor extends BlockContainerTiered {
 
-    public BlockCrystalChamber(String key, int i, Tier tier, Material material) {
+    public BlockDimensionalAnchor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityCrystalChamber();
+        return new TileEntityDimensionalAnchor();
+    }
+
+    @Override
+    public void onBlockAdded(World world, int i, int j, int k) {
+        super.onBlockAdded(world, i, j, k);
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        String s = super.getDescription(stack);
+        return s+"\n"+TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityCrystalChamber tile = (TileEntityCrystalChamber) world.getBlockTileEntity(i, j, k);
+        TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
+
+                if(dir == Direction.Y_NEG || dir == Direction.Y_POS) continue;
+                Vec3i v = dir.getVec().multiply(2);
+                Vec3i tileVec = new Vec3i(i,j,k);
+                TileEntity stabilizer = dir.getTileEntity(world,tileVec.add(v));
+                if(stabilizer instanceof TileEntityStabilizer){
+                    ((TileEntityStabilizer) stabilizer).connectedTo = null;
+                }
+
                 TileEntity tile2 = dir.getTileEntity(world, tile);
                 if (tile2 instanceof TileEntityFluidPipe) {
                     tile.unpressurizePipes((TileEntityFluidPipe) tile2, new ArrayList<>());
@@ -80,9 +104,11 @@ public class BlockCrystalChamber extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityCrystalChamber tile = (TileEntityCrystalChamber) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCrystalChamber(entityplayer.inventory, tile),new ContainerCrystalChamber(entityplayer.inventory,tile),tile,i,j,k);
+            TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
+            if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
+                SignalIndustries.displayGui(entityplayer,new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
+            } else {
+                entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }
@@ -90,12 +116,13 @@ public class BlockCrystalChamber extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".crystalChamber.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get("dimensionalAnchor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
+
 }

@@ -9,6 +9,7 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerFluidHatch;
 import sunsetsatellite.signalindustries.gui.GuiFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
@@ -17,7 +18,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockFluidInputHatch extends BlockContainerTiered{
+public class BlockFluidInputHatch extends BlockContainerTiered {
     public BlockFluidInputHatch(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }

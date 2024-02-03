@@ -5,24 +5,16 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 
-public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBoostable {
-
-    //public CentrifugeRecipes recipes = CentrifugeRecipes.instance;
-
+public class TileEntityCentrifuge extends TileEntityTieredMachineSimple implements IBoostable {
     public TileEntityCentrifuge(){
-        cost = 240;
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[5];
         fluidCapacity = new int[5];
@@ -36,13 +28,19 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
         acceptedFluids.get(3).add((BlockFluid) SignalIndustries.burntSignalumFlowing);
 
         acceptedFluids.get(4).add((BlockFluid) SignalIndustries.energyFlowing);
+
+        energySlot = 4;
+        itemOutputs = new int[]{0};
+        fluidInputs = new int[]{0,1,2,3};
+        recipeGroup = SIRecipes.CENTRIFUGE;
+
     }
     @Override
     public String getInvName() {
         return "Separation Centrifuge";
     }
 
-    @Override
+    /*@Override
     public void tick() {
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
@@ -123,5 +121,5 @@ public class TileEntityCentrifuge extends TileEntityTieredMachine implements IBo
     private boolean canProcess() {
         ItemStack stack = SIRecipes.CENTRIFUGE.findOutput(RecipeExtendedSymbol.arrayOf(fluidContents[0],fluidContents[1],fluidContents[2],fluidContents[3]),tier);
         return stack != null && (itemContents[0] == null || (itemContents[0].isItemEqual(stack) && (itemContents[0].stackSize < getInventoryStackLimit() && itemContents[0].stackSize < itemContents[0].getMaxStackSize() || itemContents[0].stackSize < stack.getMaxStackSize())));
-    }
+    }*/
 }

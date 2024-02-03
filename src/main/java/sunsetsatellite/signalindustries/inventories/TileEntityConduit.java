@@ -4,7 +4,7 @@ package sunsetsatellite.signalindustries.inventories;
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 
 public class TileEntityConduit extends TileEntityFluidPipe {
     public String getInvName() {

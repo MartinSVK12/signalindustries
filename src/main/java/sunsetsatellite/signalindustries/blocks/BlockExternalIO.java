@@ -12,13 +12,14 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExternalIO;
 import sunsetsatellite.signalindustries.gui.GuiExternalIO;
 import sunsetsatellite.signalindustries.inventories.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.TextureHelper;
 
-public class BlockExternalIO extends BlockContainerTiered{
+public class BlockExternalIO extends BlockContainerTiered {
     public BlockExternalIO(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }

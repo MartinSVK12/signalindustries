@@ -7,19 +7,18 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IFluidIO;
 import sunsetsatellite.catalyst.core.util.IItemIO;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 
-public class TileEntityTieredMachine extends TileEntityTieredContainer implements IFluidIO, IItemIO {
+
+public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO {
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
-    public int efficiency = 1;
     public int speedMultiplier = 1;
-    public int cost = 0;
 
-    //TODO: Generify code for all machines
     public boolean isBurning(){
         return fuelBurnTicks > 0;
     }
@@ -29,22 +28,23 @@ public class TileEntityTieredMachine extends TileEntityTieredContainer implement
         super.tick();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
-            speedMultiplier = block.tier.ordinal()+1;
-            for(Direction dir : Direction.values()){
-                TileEntity tile = dir.getTileEntity(worldObj,this);
-                if(tile instanceof TileEntityBooster){
-                    if(((TileEntityBooster) tile).isBurning()){
-                        int meta = tile.getMovedData();
-                        if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
-                            speedMultiplier = block.tier.ordinal()+2;
-                        }
+            applyModifiers();
+        }
+    }
+
+    public void applyModifiers(){
+        for(Direction dir : Direction.values()) {
+            TileEntity tile = dir.getTileEntity(worldObj, this);
+            if (tile instanceof TileEntityBooster && this instanceof IBoostable) {
+                if (((TileEntityBooster) tile).isBurning()) {
+                    int meta = tile.getMovedData();
+                    if (Direction.getDirectionFromSide(meta).getOpposite() == dir) {
+                        speedMultiplier = 2;
                     }
                 }
             }
         }
     }
-
-
 
     @Override
     public void writeToNBT(CompoundTag nBTTagCompound1) {
@@ -93,10 +93,5 @@ public class TileEntityTieredMachine extends TileEntityTieredContainer implement
     @Override
     public Connection getItemIOForSide(Direction dir) {
         return itemConnections.get(dir);
-    }
-
-    @Override
-    public void sortInventory() {
-
     }
 }

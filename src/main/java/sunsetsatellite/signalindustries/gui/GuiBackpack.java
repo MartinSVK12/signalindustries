@@ -6,10 +6,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerBackpack;
-import sunsetsatellite.signalindustries.containers.ContainerPulsar;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.util.NBTHelper;
 

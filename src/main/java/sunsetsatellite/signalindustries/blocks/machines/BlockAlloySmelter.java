@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -13,29 +13,29 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
-import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalCutter;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
+import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockCrystalCutter extends BlockContainerTiered{
-
-    public BlockCrystalCutter(String key, int i, Tier tier, Material material) {
+public class BlockAlloySmelter extends BlockContainerTiered {
+    public BlockAlloySmelter(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityCrystalCutter();
+        return new TileEntityAlloySmelter();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityCrystalCutter tile = (TileEntityCrystalCutter) world.getBlockTileEntity(i, j, k);
+        TileEntityAlloySmelter tile = (TileEntityAlloySmelter) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -80,9 +80,9 @@ public class BlockCrystalCutter extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityCrystalCutter tile = (TileEntityCrystalCutter) world.getBlockTileEntity(i, j, k);
+            TileEntityAlloySmelter tile = (TileEntityAlloySmelter) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCrystalCutter(entityplayer.inventory, tile),new ContainerCrystalCutter(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiAlloySmelter(entityplayer.inventory, tile),new ContainerAlloySmelter(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
@@ -90,11 +90,11 @@ public class BlockCrystalCutter extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".crystalCutter.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get(tile.tier.name()+".alloySmelter.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

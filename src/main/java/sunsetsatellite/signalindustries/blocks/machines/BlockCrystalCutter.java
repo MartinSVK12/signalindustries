@@ -1,10 +1,9 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
@@ -14,28 +13,30 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerStabilizer;
-import sunsetsatellite.signalindustries.gui.GuiStabilizer;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
+import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalCutter;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockDilithiumStabilizer extends BlockContainerTiered {
+public class BlockCrystalCutter extends BlockContainerTiered {
 
-    public BlockDilithiumStabilizer(String key, int i, Tier tier, Material material) {
+    public BlockCrystalCutter(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityStabilizer();
+        return new TileEntityCrystalCutter();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
+        TileEntityCrystalCutter tile = (TileEntityCrystalCutter) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -80,52 +81,21 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
+            TileEntityCrystalCutter tile = (TileEntityCrystalCutter) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiStabilizer(entityplayer.inventory, tile),new ContainerStabilizer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiCrystalCutter(entityplayer.inventory, tile),new ContainerCrystalCutter(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
     }
 
     @Override
-    public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
-        world.setBlockMetadataWithNotify(x, y, z, entity.getPlacementDirection(side).getOpposite().getId());
-    }
-
-    @Override
-    public int getBlockTextureFromSideAndMetadata(Side side, int meta) {
-
-        if(SignalIndustries.textures == null) return this.atlasIndices[side.getId()];
-        int index;
-        int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, /**/ 0, 1, 2, 3, 4, 5};
-        if(meta == 0 || meta == 1){
-           index = orientationLookUpVertical[6 * meta + side.getId()];
-           return SignalIndustries.textures.get("dilithiumStabilizer.vertical").getTexture(Side.getSideById(index));
-        } else {
-           index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        }
-        return this.atlasIndices[index];
-    }
-
-    @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityStabilizer tile = (TileEntityStabilizer) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index; //3, 2, 1, 0, 5, 4
-        int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, /**/ 0, 1, 2, 3, 4, 5};
-        if(meta == 0 || meta == 1){
-            index = orientationLookUpVertical[6 * meta + side.getId()];
-            if(tile.isBurning()){
-                return SignalIndustries.textures.get("dilithiumStabilizer.vertical.active").getTexture(Side.getSideById(index));
-            } else {
-                return SignalIndustries.textures.get("dilithiumStabilizer.vertical").getTexture(Side.getSideById(index));
-            }
-        } else {
-            index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        }
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get("dilithiumStabilizer.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get(tile.tier.name()+".crystalCutter.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

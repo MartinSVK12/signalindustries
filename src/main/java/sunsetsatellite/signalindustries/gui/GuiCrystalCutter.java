@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalCutter;
 

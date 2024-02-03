@@ -12,11 +12,11 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IFluidTransfer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 import java.util.ArrayList;
 
-public class TileEntityExternalIO extends TileEntityTieredMachine {
+public class TileEntityExternalIO extends TileEntityTieredMachineBase {
 
     public TileEntity externalTile;
     public Direction externalTileSide;

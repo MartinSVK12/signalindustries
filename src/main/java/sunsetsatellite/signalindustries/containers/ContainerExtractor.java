@@ -6,7 +6,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerExtractor extends ContainerTiered {
@@ -16,7 +16,7 @@ public class ContainerExtractor extends ContainerTiered {
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
 
-    public ContainerExtractor(IInventory iInventory, TileEntityTieredMachine tileEntity){
+    public ContainerExtractor(IInventory iInventory, TileEntityTieredMachineBase tileEntity){
         super(iInventory, tileEntity);
 
         SlotFluid slot = new SlotFluid(tileEntity, 0, 116,35);

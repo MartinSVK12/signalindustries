@@ -8,7 +8,7 @@ import sunsetsatellite.catalyst.energy.api.IEnergy;
 
 import java.util.HashMap;
 
-public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMachine implements IEnergy {
+public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMachineBase implements IEnergy {
 
     public int energy = 0;
     public int capacity = 0;

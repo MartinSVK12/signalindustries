@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;

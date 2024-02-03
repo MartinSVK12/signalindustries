@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -10,27 +10,48 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerFluidHatch;
-import sunsetsatellite.signalindustries.gui.GuiFluidHatch;
-import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
+import sunsetsatellite.signalindustries.gui.GuiSignalumDynamo;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockFluidOutputHatch extends BlockContainerTiered {
-    public BlockFluidOutputHatch(String key, int i, Tier tier, Material material) {
+public class BlockSignalumDynamo extends BlockContainerTiered {
+    public BlockSignalumDynamo(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityFluidHatch();
+        return new TileEntitySignalumDynamo();
     }
 
     @Override
-    public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityFluidHatch tile = (TileEntityFluidHatch) world.getBlockTileEntity(i, j, k);
+    public boolean isSolidRender() {
+        return false;
+    }
+
+    @Override
+    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+    {
+        if(world.isClientSide)
+        {
+            return true;
+        } else
+        {
+            TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(i, j, k);
+            if(tile != null) {
+                SignalIndustries.displayGui(entityplayer,new GuiSignalumDynamo(entityplayer.inventory, tile),new ContainerSignalumDynamo(entityplayer.inventory,tile),tile,i,j,k);
+            }
+            return true;
+        }
+    }
+
+    @Override
+    public void onBlockRemoved(World world, int x, int y, int z, int data) {
+        TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(x, y, z);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -53,7 +74,7 @@ public class BlockFluidOutputHatch extends BlockContainerTiered {
                         }
 
                         itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                        EntityItem entityitem = new EntityItem(world, (float) x + f, (float) y + f1, (float) z + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
                         float f3 = 0.05F;
                         entityitem.xd = (float) random.nextGaussian() * f3;
                         entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
@@ -63,23 +84,7 @@ public class BlockFluidOutputHatch extends BlockContainerTiered {
                 }
             }
         }
-
-        super.onBlockRemoved(world, i, j, k, data);
+        super.onBlockRemoved(world, x, y, z, data);
     }
 
-    @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-        if(world.isClientSide)
-        {
-            return true;
-        } else
-        {
-            TileEntityFluidHatch tile = (TileEntityFluidHatch) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiFluidHatch(entityplayer.inventory, tile),new ContainerFluidHatch(entityplayer.inventory,tile),tile,i,j,k);
-            }
-            return true;
-        }
-    }
 }

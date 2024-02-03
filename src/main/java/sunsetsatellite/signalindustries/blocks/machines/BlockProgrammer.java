@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -6,36 +6,33 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.gui.GuiInfuser;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityInfuser;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerProgrammer;
+import sunsetsatellite.signalindustries.gui.GuiProgrammer;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityProgrammer;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockInfuser extends BlockContainerTiered{
+public class BlockProgrammer extends BlockContainerTiered {
 
-    public BlockInfuser(String key, int i, Tier tier, Material material) {
+    public BlockProgrammer(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityInfuser();
+        return new TileEntityProgrammer();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
+        TileEntityProgrammer tile = (TileEntityProgrammer) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -73,6 +70,11 @@ public class BlockInfuser extends BlockContainerTiered{
     }
 
     @Override
+    public boolean isSolidRender() {
+        return false;
+    }
+
+    @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
         if(world.isClientSide)
@@ -80,22 +82,11 @@ public class BlockInfuser extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityInfuser tile = (TileEntityInfuser) world.getBlockTileEntity(i, j, k);
+            TileEntityProgrammer tile = (TileEntityProgrammer) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiInfuser(entityplayer.inventory, tile),new ContainerInfuser(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiProgrammer(entityplayer.inventory, tile),new ContainerProgrammer(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
-    }
-
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".infuser.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
     }
 }

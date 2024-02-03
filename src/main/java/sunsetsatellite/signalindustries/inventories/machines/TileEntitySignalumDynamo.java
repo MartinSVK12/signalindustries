@@ -11,6 +11,8 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredEnergyC
 
 public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
 
+    public int cost;
+
     public TileEntitySignalumDynamo(){
         cost = 40;
         itemContents = new ItemStack[2];

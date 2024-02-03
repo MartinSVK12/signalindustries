@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -14,16 +14,17 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCentrifuge;
 import sunsetsatellite.signalindustries.gui.GuiCentrifuge;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockCentrifuge extends BlockContainerTiered{
+public class BlockCentrifuge extends BlockContainerTiered {
     public BlockCentrifuge(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
@@ -90,7 +91,7 @@ public class BlockCentrifuge extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){

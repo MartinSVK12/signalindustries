@@ -7,9 +7,9 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
-public class TileEntityEnergyInjector extends TileEntityTieredMachine {
+public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
 
     public int injectSpeed = 5;
 

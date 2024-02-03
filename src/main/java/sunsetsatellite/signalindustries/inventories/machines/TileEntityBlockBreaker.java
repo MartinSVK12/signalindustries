@@ -7,7 +7,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.enums.EnumDropCause;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
 

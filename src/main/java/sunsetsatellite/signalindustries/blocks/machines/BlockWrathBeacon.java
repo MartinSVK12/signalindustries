@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -9,6 +9,7 @@ import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 

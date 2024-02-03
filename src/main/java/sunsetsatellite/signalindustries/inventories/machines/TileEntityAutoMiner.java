@@ -12,15 +12,16 @@ import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 
-public class TileEntityAutoMiner extends TileEntityTieredMachine implements IBoostable {
+public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements IBoostable {
 
     public Vec3i from = new Vec3i();
     public Vec3i to = new Vec3i();
     public Vec3i current = new Vec3i();
     public TickTimer workTimer = new TickTimer(this,"work",progressMaxTicks,true);
+    public int cost;
     public TileEntityAutoMiner(){
         progressMaxTicks = 20;
         cost = 250;

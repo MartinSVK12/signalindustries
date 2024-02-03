@@ -20,7 +20,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol(new ItemStack(Block.stone))
                         },
                         new ItemStack(SignalIndustries.stonePlate,2),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -30,7 +30,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol(new ItemStack(Block.cobbleStone))
                         },
                         new ItemStack(SignalIndustries.cobblestonePlate,2),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -40,7 +40,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol(new ItemStack(Item.ingotSteel))
                         },
                         new ItemStack(SignalIndustries.steelPlate,1),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -50,7 +50,27 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.crystalAlloyIngot))
                         },
                         new ItemStack(SignalIndustries.crystalAlloyPlate,1),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
+                )
+        );
+        group.register(
+                "saturated_alloy_plate",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot))
+                        },
+                        new ItemStack(SignalIndustries.saturatedSignalumAlloyPlate,1),
+                        new RecipeProperties(100,40, Tier.BASIC,false)
+                )
+        );
+        group.register(
+                "reinforced_crystal_alloy_plate",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.reinforcedCrystalAlloyIngot))
+                        },
+                        new ItemStack(SignalIndustries.reinforcedCrystalAlloyPlate,1),
+                        new RecipeProperties(100,40, Tier.BASIC,false)
                 )
         );
     }

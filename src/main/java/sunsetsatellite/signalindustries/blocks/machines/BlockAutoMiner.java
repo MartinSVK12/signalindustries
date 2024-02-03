@@ -1,45 +1,36 @@
-package sunsetsatellite.signalindustries.blocks;
-
+package sunsetsatellite.signalindustries.blocks.machines;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerInfuser;
-import sunsetsatellite.signalindustries.containers.ContainerProgrammer;
-import sunsetsatellite.signalindustries.gui.GuiInfuser;
-import sunsetsatellite.signalindustries.gui.GuiProgrammer;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityInfuser;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityProgrammer;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
+import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockProgrammer extends BlockContainerTiered{
-
-    public BlockProgrammer(String key, int i, Tier tier, Material material) {
+public class BlockAutoMiner extends BlockContainerTiered {
+    public BlockAutoMiner(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityProgrammer();
+        return new TileEntityAutoMiner();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityProgrammer tile = (TileEntityProgrammer) world.getBlockTileEntity(i, j, k);
+        TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -77,11 +68,6 @@ public class BlockProgrammer extends BlockContainerTiered{
     }
 
     @Override
-    public boolean isSolidRender() {
-        return false;
-    }
-
-    @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
         if(world.isClientSide)
@@ -89,11 +75,13 @@ public class BlockProgrammer extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityProgrammer tile = (TileEntityProgrammer) world.getBlockTileEntity(i, j, k);
+            TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
+
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiProgrammer(entityplayer.inventory, tile),new ContainerProgrammer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiAutoMiner(entityplayer.inventory, tile),new ContainerAutoMiner(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
     }
+
 }

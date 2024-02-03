@@ -23,5 +23,16 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                         new RecipeProperties(200,40,Tier.PROTOTYPE,false)
                 )
         );
+        group.register(
+                "reinforced_crystal_alloy_ingot",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.crystalAlloyIngot)),
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.glowingObsidian,2))
+                        },
+                        new ItemStack(SignalIndustries.reinforcedCrystalAlloyIngot,1),
+                        new RecipeProperties(100,80,Tier.BASIC,false)
+                )
+        );
     }
 }

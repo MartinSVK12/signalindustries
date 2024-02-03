@@ -1,42 +1,38 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.base;
 
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
-import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
+import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockAutoMiner extends BlockContainerTiered {
-    public BlockAutoMiner(String key, int i, Tier tier, Material material) {
+public class BlockMachineBase<T extends TileEntityTieredMachineSimple> extends BlockContainerTiered{
+
+    private final Class<T> tileEntityClass;
+
+    public BlockMachineBase(String key, int i, Tier tier, Material material, Class<T> tileEntityClass) {
         super(key, i, tier, material);
+        this.tileEntityClass = tileEntityClass;
     }
 
     @Override
-    protected TileEntity getNewBlockEntity() {
-        return new TileEntityAutoMiner();
+    protected T getNewBlockEntity() {
+        try {
+            return tileEntityClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
+        T tile = (T) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-            for (Direction dir : Direction.values()) {
-                TileEntity tile2 = dir.getTileEntity(world, tile);
-                if (tile2 instanceof TileEntityFluidPipe) {
-                    tile.unpressurizePipes((TileEntityFluidPipe) tile2, new ArrayList<>());
-                }
-            }
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.getStackInSlot(l);
@@ -74,13 +70,12 @@ public class BlockAutoMiner extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
+            T tile = (T) world.getBlockTileEntity(i, j, k);
 
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiAutoMiner(entityplayer.inventory, tile),new ContainerAutoMiner(entityplayer.inventory,tile),tile,i,j,k);
+                Catalyst.displayGui(entityplayer,tile,tile.getInvName());
             }
             return true;
         }
     }
-
 }

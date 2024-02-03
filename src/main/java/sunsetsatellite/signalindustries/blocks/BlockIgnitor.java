@@ -7,6 +7,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IConduitsConnect;
 import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 import sunsetsatellite.signalindustries.util.Tier;

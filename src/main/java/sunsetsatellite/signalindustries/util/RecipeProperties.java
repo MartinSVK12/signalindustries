@@ -4,7 +4,8 @@ public class RecipeProperties {
     public Tier tier;
     public int cost;
     public int ticks;
-    public int id;
+    public int id = 0;
+    public float chance = 1;
 
     public boolean thisTierOnly;
 
@@ -33,6 +34,11 @@ public class RecipeProperties {
         this.tier = tier;
         this.ticks = ticks;
         this.thisTierOnly = thisTierOnly;
+    }
+
+    public RecipeProperties setChance(float chance){
+        this.chance = chance;
+        return this;
     }
 
     public boolean isCorrectTier(Tier tier){

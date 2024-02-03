@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.entity.TileEntity;
@@ -13,28 +13,29 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
-import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.containers.ContainerBooster;
+import sunsetsatellite.signalindustries.gui.GuiBooster;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockAlloySmelter extends BlockContainerTiered{
-    public BlockAlloySmelter(String key, int i, Tier tier, Material material) {
+public class BlockDilithiumBooster extends BlockContainerTiered {
+
+    public BlockDilithiumBooster(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityAlloySmelter();
+        return new TileEntityBooster();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityAlloySmelter tile = (TileEntityAlloySmelter) world.getBlockTileEntity(i, j, k);
+        TileEntityBooster tile = (TileEntityBooster) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);
@@ -79,9 +80,9 @@ public class BlockAlloySmelter extends BlockContainerTiered{
             return true;
         } else
         {
-            TileEntityAlloySmelter tile = (TileEntityAlloySmelter) world.getBlockTileEntity(i, j, k);
+            TileEntityBooster tile = (TileEntityBooster) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiAlloySmelter(entityplayer.inventory, tile),new ContainerAlloySmelter(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,new GuiBooster(entityplayer.inventory, tile),new ContainerBooster(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
@@ -89,11 +90,11 @@ public class BlockAlloySmelter extends BlockContainerTiered{
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityBooster tile = (TileEntityBooster) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".alloySmelter.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get("dilithiumBooster.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

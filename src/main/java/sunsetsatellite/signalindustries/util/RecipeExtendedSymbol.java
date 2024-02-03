@@ -91,14 +91,14 @@ public class RecipeExtendedSymbol {
             list.add(stack);
             return list;
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public List<FluidStack> resolveFluids(){
         if(fluidStack != null && itemGroup == null){
             return Collections.singletonList(fluidStack);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public boolean matches(ItemStack stack){

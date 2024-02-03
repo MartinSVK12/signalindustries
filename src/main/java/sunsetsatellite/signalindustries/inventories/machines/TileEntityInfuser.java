@@ -5,22 +5,17 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 
-public class TileEntityInfuser extends TileEntityTieredMachine implements IBoostable {
+public class TileEntityInfuser extends TileEntityTieredMachineSimple implements IBoostable {
 
    // public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
 
     public TileEntityInfuser(){
-        cost = 80;
-        progressMaxTicks = 400;
         fluidContents = new FluidStack[2];
         fluidCapacity = new int[2];
         fluidCapacity[0] = 2000;
@@ -30,14 +25,18 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
         }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
         itemContents = new ItemStack[3];
-        //acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
+        energySlot = 0;
+        recipeGroup = SIRecipes.INFUSER;
+        itemInputs = new int[]{0,1};
+        itemOutputs = new int[]{2};
+        fluidInputs = new int[]{1};
     }
     @Override
     public String getInvName() {
         return "Infuser";
     }
 
-    @Override
+    /*@Override
     public void tick() {
         super.tick();
         worldObj.markBlocksDirty(x, y, z, x, y, z);
@@ -142,7 +141,7 @@ public class TileEntityInfuser extends TileEntityTieredMachine implements IBoost
                     tier);
             return stack != null && (itemContents[2] == null || (itemContents[2].isItemEqual(stack) && (itemContents[2].stackSize < getInventoryStackLimit() && itemContents[2].stackSize < itemContents[2].getMaxStackSize() || itemContents[2].stackSize < stack.getMaxStackSize())));
         }
-    }
+    }*/
 
 
 }

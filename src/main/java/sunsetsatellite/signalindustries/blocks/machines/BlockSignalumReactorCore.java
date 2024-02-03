@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -13,6 +13,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -20,7 +21,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 
 
-public class BlockSignalumReactorCore extends BlockContainerTiered{
+public class BlockSignalumReactorCore extends BlockContainerTiered {
     public BlockSignalumReactorCore(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }

@@ -13,15 +13,16 @@ import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityDimensionalAnchor extends TileEntityTieredMachine implements IMultiblock, IStabilizable {
+public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase implements IMultiblock, IStabilizable {
 
     public Multiblock multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
+    public int cost;
     public TileEntityDimensionalAnchor(){
         progressMaxTicks = 6000;
         cost = 240;
