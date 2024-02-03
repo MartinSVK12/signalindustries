@@ -28,6 +28,8 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
     @Override
     public void tick() {
         super.tick();
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
+        extractFluids();
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;

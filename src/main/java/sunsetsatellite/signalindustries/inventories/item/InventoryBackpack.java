@@ -6,6 +6,8 @@ import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +20,17 @@ public class InventoryBackpack extends ItemInventoryFluid {
     public InventoryBackpack(ItemStack backpack) {
         super(backpack);
         this.backpack = backpack;
-        contents = new ItemStack[27 * 2];
-        fluidContents = new FluidStack[4];
-        fluidCapacity = new int[4];
-        Arrays.fill(fluidCapacity,4000);
+        if(backpack.getItem() != null && ((ITiered)backpack.getItem()).getTier() == Tier.REINFORCED){
+            contents = new ItemStack[27 * 2];
+            fluidContents = new FluidStack[4];
+            fluidCapacity = new int[4];
+            Arrays.fill(fluidCapacity,4000);
+        } else if (backpack.getItem() != null && ((ITiered) backpack.getItem()).getTier() == Tier.BASIC) {
+            contents = new ItemStack[27];
+            fluidContents = new FluidStack[2];
+            fluidCapacity = new int[2];
+            Arrays.fill(fluidCapacity,2000);
+        }
         acceptedFluids.clear();
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
@@ -34,7 +43,7 @@ public class InventoryBackpack extends ItemInventoryFluid {
     }
 
     public String getInvName() {
-        return "The Pulsar";
+        return "Backpack";
     }
 
 

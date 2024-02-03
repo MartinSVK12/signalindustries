@@ -6,6 +6,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
+import sunsetsatellite.signalindustries.blocks.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerBackpack;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
@@ -20,13 +21,33 @@ public class GuiBackpack extends GuiItemFluid {
         super(new ContainerBackpack(inventoryPlayer,backpack),inventoryPlayer);
         this.backpack = backpack;
         this.player = inventoryPlayer.player;
-        ySize = 223;
-        xSize = 198;
+        if(backpack.getItem() instanceof ItemBackpackAttachment){
+            switch (((ItemBackpackAttachment) backpack.getItem()).tier){
+                case BASIC:
+                    ySize = 168;
+                    xSize = 198;
+                    break;
+                case REINFORCED:
+                    ySize = 223;
+                    xSize = 198;
+                    break;
+            }
+        }
     }
 
     protected void drawGuiContainerBackgroundLayer(float f)
     {
-        int i = mc.renderEngine.getTexture("assets/signalindustries/gui/reinforced_backpack.png");
+        int i = mc.renderEngine.getTexture("assets/signalindustries/gui/basic_backpack.png");
+        if(backpack.getItem() instanceof ItemBackpackAttachment){
+            switch (((ItemBackpackAttachment) backpack.getItem()).tier){
+                case BASIC:
+                    i = mc.renderEngine.getTexture("assets/signalindustries/gui/basic_backpack.png");
+                    break;
+                case REINFORCED:
+                    i = mc.renderEngine.getTexture("assets/signalindustries/gui/reinforced_backpack.png");
+                    break;
+            }
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(i);
         int j = (width - xSize) / 2;
@@ -38,7 +59,22 @@ public class GuiBackpack extends GuiItemFluid {
     protected void drawGuiContainerForegroundLayer()
     {
         super.drawGuiContainerForegroundLayer();
-        fontRenderer.drawCenteredString("Reinforced Backpack", 90, 6, 0xFFCC0000);
+        super.drawGuiContainerForegroundLayer();
+        int color = 0xFFFFFFFF;
+        String name = "";
+        if(backpack.getItem() instanceof ItemBackpackAttachment){
+            switch (((ItemBackpackAttachment) backpack.getItem()).tier){
+                case BASIC:
+                    color = 0xFFFF8080;
+                    name = "Basic Backpack";
+                    break;
+                case REINFORCED:
+                    color = 0xFFFF0000;
+                    name = "Reinforced Backpack";
+                    break;
+            }
+            fontRenderer.drawCenteredString(name, 90, 6, color);
+        }
     }
 
     @Override
