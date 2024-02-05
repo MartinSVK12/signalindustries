@@ -793,6 +793,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item basicBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("basic.attachment.backpack",config.getInt("ItemIDs.basicBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.BASIC),"basic_backpack.png");
     public static final Item reinforcedBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("reinforced.attachment.backpack",config.getInt("ItemIDs.reinforcedBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced_backpack.png");
     public static final Item nightVisionLens = ItemHelper.createItem(MOD_ID,new ItemNVGAttachment("reinforced.attachment.nightVisionLens",config.getInt("ItemIDs.nightVisionLens"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED),"night_vision_goggles.png");
+    public static final Item movementBoosters = ItemHelper.createItem(MOD_ID,new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters",config.getInt("ItemIDs.movementBoosters"), listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED),"movement_boosters.png");
+
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();

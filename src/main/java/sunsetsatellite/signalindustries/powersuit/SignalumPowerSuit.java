@@ -76,18 +76,18 @@ public class SignalumPowerSuit {
         chestplate = new InventoryPowerSuit(armor[2]);
         leggings = new InventoryPowerSuit(armor[1]);
         boots = new InventoryPowerSuit(armor[0]);
-        attachmentLocations.put("headTop", new AttachmentLocation(0, helmet, null));
-        attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate, null));
-        attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate, null));
-        attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate, null));
-        attachmentLocations.put("armBackL", new AttachmentLocation(3, chestplate, null));
-        attachmentLocations.put("armBackR", new AttachmentLocation(6, chestplate, null));
-        attachmentLocations.put("armSideL", new AttachmentLocation(4, chestplate, null));
-        attachmentLocations.put("armSideR", new AttachmentLocation(5, chestplate, null));
-        attachmentLocations.put("legSideL", new AttachmentLocation(0, leggings, null));
-        attachmentLocations.put("legSideR", new AttachmentLocation(1, leggings, null));
-        attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots, null));
-        attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots, null));
+        attachmentLocations.put("headTop", new AttachmentLocation(0, helmet, AttachmentPoint.HEAD_TOP));
+        attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate, AttachmentPoint.CORE_BACK));
+        attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate, AttachmentPoint.ARM_FRONT));
+        attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate, AttachmentPoint.ARM_FRONT));
+        attachmentLocations.put("armBackL", new AttachmentLocation(3, chestplate, AttachmentPoint.ARM_BACK));
+        attachmentLocations.put("armBackR", new AttachmentLocation(6, chestplate, AttachmentPoint.ARM_BACK));
+        attachmentLocations.put("armSideL", new AttachmentLocation(4, chestplate, AttachmentPoint.ARM_SIDE));
+        attachmentLocations.put("armSideR", new AttachmentLocation(5, chestplate, AttachmentPoint.ARM_SIDE));
+        attachmentLocations.put("legSideL", new AttachmentLocation(0, leggings, AttachmentPoint.LEG_SIDE));
+        attachmentLocations.put("legSideR", new AttachmentLocation(1, leggings, AttachmentPoint.LEG_SIDE));
+        attachmentLocations.put("bootBackL", new AttachmentLocation(0, boots, AttachmentPoint.BOOT_BACK));
+        attachmentLocations.put("bootBackR", new AttachmentLocation(1, boots, AttachmentPoint.BOOT_BACK));
         temperature = 20.0f;
     }
 
@@ -441,6 +441,18 @@ public class SignalumPowerSuit {
         }
         return false;
     }
+
+    //TODO: replace with enum
+    public boolean hasAttachment(ItemAttachment attachment, List<String> locations){
+        for (String location : locations) {
+            AttachmentLocation attachmentLocation = attachmentLocations.get(location);
+            if (attachmentLocation == null || attachmentLocation.inv.contents[attachmentLocation.slot] == null || (attachmentLocation.inv.contents[attachmentLocation.slot].getItem() != null && attachmentLocation.inv.contents[attachmentLocation.slot].getItem() != attachment)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public ItemStack getAttachment(ItemAttachment attachment){
         InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};

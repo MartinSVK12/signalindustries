@@ -22,20 +22,22 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
         super.activate(stack, signalumPowerSuit, player, world);
         Minecraft mc = Minecraft.getMinecraft(this);
-        if(Shaders.enableShaders){
-            if(mc.render instanceof ShadersRendererSI){
-                mc.setRenderer(new ShadersRenderer(mc));
-                mc.render.reload();
-                mc.fullbright = false;
-                mc.renderGlobal.loadRenderers();
+        if(signalumPowerSuit.getEnergy() >= 1 ) {
+            if (Shaders.enableShaders) {
+                if (mc.render instanceof ShadersRendererSI) {
+                    mc.setRenderer(new ShadersRenderer(mc));
+                    mc.render.reload();
+                    mc.fullbright = false;
+                    mc.renderGlobal.loadRenderers();
+                } else {
+                    mc.setRenderer(new ShadersRendererSI(mc, "nightvision/", signalumPowerSuit));
+                    mc.render.reload();
+                    mc.fullbright = true;
+                    mc.renderGlobal.loadRenderers();
+                }
             } else {
-                mc.setRenderer(new ShadersRendererSI(mc,"nightvision/",signalumPowerSuit));
-                mc.render.reload();
-                mc.fullbright = true;
-                mc.renderGlobal.loadRenderers();
+                mc.ingameGUI.addChatMessage("Can't activate: Shaders are disabled.");
             }
-        } else {
-            mc.ingameGUI.addChatMessage("Can't activate: Shaders are disabled.");
         }
     }
 

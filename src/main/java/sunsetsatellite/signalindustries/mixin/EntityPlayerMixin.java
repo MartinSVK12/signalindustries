@@ -17,8 +17,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(
@@ -33,6 +35,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Shadow public abstract void addChatMessage(String s);
 
     @Shadow public InventoryPlayer inventory;
+
+    @Shadow protected float baseSpeed;
 
     public EntityPlayerMixin(World world) {
         super(world);
@@ -77,6 +81,20 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
             powerSuit = new SignalumPowerSuit(armorInventory,((EntityPlayer) (Object) this));
         } else {
             powerSuit.tick();
+        }
+    }
+
+    @Inject(
+            method = "onLivingUpdate",
+            at = @At("TAIL")
+    )
+    public void updateSpeed(CallbackInfo ci) {
+        if(powerSuit != null && powerSuit.active){
+            if(powerSuit.hasAttachment((ItemAttachment) SignalIndustries.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))){
+                if(powerSuit.getAttachment((ItemAttachment) SignalIndustries.movementBoosters) != null && powerSuit.getAttachment((ItemAttachment) SignalIndustries.movementBoosters).getData().getBoolean("active")){
+                    speed += (float) (baseSpeed * 0.3);
+                }
+            }
         }
     }
 
