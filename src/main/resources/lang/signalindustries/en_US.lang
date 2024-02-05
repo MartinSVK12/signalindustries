@@ -83,6 +83,8 @@ item.signalindustries.reinforced.pulsar.desc=Multifunctional gadget. It's main a
 
 item.signalindustries.reinforced.signalumSaber.name=Signalum Saber
 item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
+item.signalindustries.awakened.sunriseDawn.name=Sunrise Dawn
+item.signalindustries.awakened.sunriseDawn.desc=Allows you to summon a destructive beam of light anywhere near the range of any [Satellite].
 
 item.signalindustries.basic.signalumDrill.name=Basic Signalum Drill
 item.signalindustries.basic.signalumDrill.desc=A heavy-duty drill powered by Signalum Energy. Will not break when it runs out of energy.
@@ -578,7 +580,7 @@ achievement.signalindustries.gate.desc=Construct a Warp Gate to link any two poi
 achievement.signalindustries.wings=Better than Icarus
 achievement.signalindustries.wings.desc=Attach a pair of Signalum Wings to your suit and reach for the stars.
 achievement.signalindustries.orbitalWeapon=3000 Orbital Weapons of Signal Industries
-achievement.signalindustries.orbitalWeapon.desc=<todo>
+achievement.signalindustries.orbitalWeapon.desc=Cast your divine fury upon your enemies and have them experience the unmatched power of the Sun.
 
 achievement.signalindustries.completed=Signal Industries
 achievement.signalindustries.completed=Activate the Awakened Signalum Ignition Facility for the first time reaching the end of your adventure. Thank you for playing!

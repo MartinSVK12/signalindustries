@@ -786,12 +786,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final ItemSignalumPowerSuit signalumPowerSuitBoots = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.boots",config.getInt("ItemIDs.signalumPowerSuitBoots"),armorSignalumPowerSuit,3,Tier.REINFORCED),"signalumpowersuit_boots.png");
 
     //public static final Item testingAttachment = ItemHelper.createItem(MOD_ID,new ItemAttachment(config.getInt("ItemIDs.testingAttachment"), listOf(AttachmentPoint.ANY)),"attachment.testingAttachment","energyorb.png");
-    public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment("reinforced.attachment.pulsar",config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment.png").setMaxStackSize(1);
-    public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack",config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack.png").setMaxStackSize(1);
-    public static final Item crystalWings = ItemHelper.createItem(MOD_ID,new ItemWingsAttachment("reinforced.attachment.wings",config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings.png").setMaxStackSize(1);
-    public static final Item basicBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("basic.attachment.backpack",config.getInt("ItemIDs.basicBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.BASIC),"basic_backpack.png").setMaxStackSize(1);
-    public static final Item reinforcedBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("reinforced.attachment.backpack",config.getInt("ItemIDs.reinforcedBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced_backpack.png").setMaxStackSize(1);;
-
+    //implicit max stack size of 1 (defined in ItemAttachment)
+    public static final Item pulsarAttachment = ItemHelper.createItem(MOD_ID,new ItemPulsarAttachment("reinforced.attachment.pulsar",config.getInt("ItemIDs.pulsarAttachment"), listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment.png");
+    public static final Item extendedEnergyPack = ItemHelper.createItem(MOD_ID,new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack",config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack.png");
+    public static final Item crystalWings = ItemHelper.createItem(MOD_ID,new ItemWingsAttachment("reinforced.attachment.wings",config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings.png");
+    public static final Item basicBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("basic.attachment.backpack",config.getInt("ItemIDs.basicBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.BASIC),"basic_backpack.png");
+    public static final Item reinforcedBackpack = ItemHelper.createItem(MOD_ID,new ItemBackpackAttachment("reinforced.attachment.backpack",config.getInt("ItemIDs.reinforcedBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"reinforced_backpack.png");
+    public static final Item nightVisionLens = ItemHelper.createItem(MOD_ID,new ItemNVGAttachment("reinforced.attachment.nightVisionLens",config.getInt("ItemIDs.nightVisionLens"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED),"night_vision_goggles.png");
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();

@@ -22,6 +22,7 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
     public ItemAttachment(String name, int id, List<AttachmentPoint> attachmentPoints) {
         super(name, id);
         this.attachmentPoints = attachmentPoints;
+        setMaxStackSize(1);
     }
 
     /*public ItemAttachment(int i, List<AttachmentPoint> attachmentPoints) {
