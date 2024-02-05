@@ -24,6 +24,7 @@ public class EntityInfernal extends EntityMonster {
     protected void attackEntity(Entity entity, float distance) {
         if (this.attackTime <= 0 && distance < 2.0F && entity.bb.maxY > this.bb.minY && entity.bb.minY < this.bb.maxY) {
             entity.remainingFireTicks = 100;
+            entity.maxFireTicks = 100;
         }
         this.attackStrength = 10;
         super.attackEntity(entity, distance);
@@ -31,12 +32,12 @@ public class EntityInfernal extends EntityMonster {
 
     @Override
     public String getDefaultEntityTexture() {
-        return "/assets/signalindustries/mob/infernal.png";
+        return "/assets/signalindustries/entity/infernal.png";
     }
 
     @Override
     public String getEntityTexture() {
-        return "/assets/signalindustries/mob/infernal.png";
+        return "/assets/signalindustries/entity/infernal.png";
     }
 
     public String getLivingSound() {
