@@ -31,7 +31,7 @@ public class InfuserRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "saturated_crystal_alloy",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                null,//new RecipeExtendedSymbol(new ItemStack(Block.fluidLavaFlowing,1000)),
+                                //new RecipeExtendedSymbol(new ItemStack(Block.fluidLavaFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.crystalAlloyIngot,1)),
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,4))
                         },

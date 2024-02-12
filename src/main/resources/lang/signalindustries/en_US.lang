@@ -305,7 +305,7 @@ tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find 
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
 tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an [Evil Catalyst].
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
-tile.signalindustries.reinforced.wrathBeacon.desc=Can you rise against the creatures sealed within? Requires an [Infernal Eye] to be activated.
+tile.signalindustries.reinforced.wrathBeacon.desc=Legends speak of a tree that feeds on the life force of others. Unfortunately, this was not a myth.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
@@ -434,7 +434,9 @@ tile.signalindustries.rootedFabric.desc=There's something in between the threads
 tile.signalindustries.unraveledFabric.name=Unraveled Fabric
 tile.signalindustries.unraveledFabric.desc=How?
 tile.signalindustries.eternalTreeLog.name=Eternal Tree Log
-tile.signalindustries.eternalTreeLog.desc=An ethereal "tree" born out of the nothingness of Eternity. Cannot burn.
+tile.signalindustries.eternalTreeLog.desc=An ethereal wood-like material only present in Eternity. Cannot burn.
+tile.signalindustries.fueledEternalTreeLog.name=Crimson Tree Log
+tile.signalindustries.fueledEternalTreeLog.desc=Malevolent forces have infested this tree, time is running out.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
 tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 

@@ -17,7 +17,7 @@ import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 
 import java.util.List;
 
-public class EntityEnergyOrb extends Entity {
+public class EntitySunbeam extends Entity {
     protected int xTile = -1;
     protected int yTile = -1;
     protected int zTile = -1;
@@ -34,23 +34,19 @@ public class EntityEnergyOrb extends Entity {
     protected int arrowDamage;
     protected int arrowType;
 
-    public EntityEnergyOrb(World world) {
-        this(world, 0);
-    }
-
-    public EntityEnergyOrb(World world, int arrowType) {
+    public EntitySunbeam(World world) {
         super(world);
         this.doesArrowBelongToPlayer = false;
-        this.arrowType = arrowType;
+        this.arrowType = 0;
         this.arrowShake = 0;
         this.ticksInAir = 0;
         this.setSize(0.5f, 0.5f);
     }
 
-    public EntityEnergyOrb(World world, double d, double d1, double d2, int arrowType) {
+    public EntitySunbeam(World world, double d, double d1, double d2) {
         super(world);
         this.doesArrowBelongToPlayer = false;
-        this.arrowType = arrowType;
+        this.arrowType = 0;
         this.arrowShake = 0;
         this.ticksInAir = 0;
         this.setSize(0.5f, 0.5f);
@@ -58,7 +54,7 @@ public class EntityEnergyOrb extends Entity {
         this.heightOffset = 0.0f;
     }
 
-    public EntityEnergyOrb(World world, EntityLiving entityliving, boolean doesArrowBelongToPlayer, int arrowType) {
+    public EntitySunbeam(World world, EntityLiving entityliving, boolean doesArrowBelongToPlayer) {
         super(world);
         this.doesArrowBelongToPlayer = doesArrowBelongToPlayer;
         this.arrowType = arrowType;
@@ -81,8 +77,8 @@ public class EntityEnergyOrb extends Entity {
     @Override
     protected void init() {
         this.arrowGravity = 0.00F;
-        this.arrowSpeed = 1.0F;
-        this.arrowDamage = 4;
+        this.arrowSpeed = 1.5F;
+        this.arrowDamage = 5;
         if (!(this.owner instanceof EntityPlayer)) {
             this.doesArrowBelongToPlayer = false;
         }
@@ -93,9 +89,9 @@ public class EntityEnergyOrb extends Entity {
         d /= f2;
         d1 /= f2;
         d2 /= f2;
-        d += this.random.nextGaussian() * (double)0.0075f * (double)f1;
-        d1 += this.random.nextGaussian() * (double)0.0075f * (double)f1;
-        d2 += this.random.nextGaussian() * (double)0.0075f * (double)f1;
+        //d += this.random.nextGaussian() * (double)0.0075f * (double)f1;
+        //d1 += this.random.nextGaussian() * (double)0.0075f * (double)f1;
+        //d2 += this.random.nextGaussian() * (double)0.0075f * (double)f1;
         this.xd = d *= f;
         this.yd = d1 *= f;
         this.zd = d2 *= f;
@@ -162,8 +158,8 @@ public class EntityEnergyOrb extends Entity {
             return;
         }
 
-        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x, this.y, this.z, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,0f,0f));
-        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,0,0));
+        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x, this.y, this.z, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
+        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
         ++this.ticksInAir;
         Vec3d oldPos = Vec3d.createVector(this.x, this.y, this.z);
         Vec3d newPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd, this.z + this.zd);

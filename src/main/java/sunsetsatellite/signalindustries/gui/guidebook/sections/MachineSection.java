@@ -36,7 +36,7 @@ public class MachineSection extends SearchableGuidebookSubsection {
     public void reloadSection() {
         pages.clear();
         int totalRecipes = recipes.size();
-        int totalPages = totalRecipes / recipesPerPage;
+        int totalPages = (int) Math.ceil((float)totalRecipes / recipesPerPage);
         if(totalPages == 0) totalPages = 1;
         for (int i = 0; i < totalPages; i++) {
             int j = i*recipesPerPage;

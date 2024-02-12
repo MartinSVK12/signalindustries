@@ -12,16 +12,18 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityWrathBeacon extends TileEntity {
+public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
     public Random random = new Random();
-    public boolean active = false;
     public boolean intermission = false;
     public int wave = 0;
     public int currentMaxAmount = 0;
@@ -68,12 +70,13 @@ public class TileEntityWrathBeacon extends TileEntity {
             spawnTimer.tick();
             intermissionTimer.tick();
         }
+
         enemiesLeft.removeIf((E)-> !E.isAlive());
         if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
             worldObj.setBlockWithNotify(x,y,z,0);
         }
-        if(active && started && enemiesLeft.size() == 0 && wave < 5){
+        if(active && started && enemiesLeft.isEmpty() && wave < 5){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
@@ -81,7 +84,7 @@ public class TileEntityWrathBeacon extends TileEntity {
             intermissionTimer.unpause();
             intermission = true;
             wave++;
-        } else if (active && started && enemiesLeft.size() == 0 && wave == 5) {
+        } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
             }
@@ -104,12 +107,15 @@ public class TileEntityWrathBeacon extends TileEntity {
                 worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0);
             }
         }
+        if(worldObj != null && getBlockType() != null){
+            tier = ((BlockContainerTiered)getBlockType()).tier;
+        }
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
         //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));
 
     }
 
-    public void activate(){
+    public void activate(EntityPlayer activator){
         if(!active){
             if(worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("This world is far too peaceful..");

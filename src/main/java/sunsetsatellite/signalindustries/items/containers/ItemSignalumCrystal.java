@@ -25,13 +25,13 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if(itemstack.getItem().id != SignalIndustries.signalumCrystalEmpty.id){
+        /*if(itemstack.getItem().id != SignalIndustries.signalumCrystalEmpty.id){
             itemstack.consumeItem(entityplayer);
             //world.playSoundAtEntity(entityplayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
             if (!world.isClientSide) {
                 world.entityJoinedWorld(new EntityCrystal(world, entityplayer));
             }
-        }
+        }*/
 
         return itemstack;
     }

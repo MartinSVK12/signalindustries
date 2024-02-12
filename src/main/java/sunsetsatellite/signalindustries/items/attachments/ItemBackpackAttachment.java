@@ -33,4 +33,10 @@ public class ItemBackpackAttachment extends ItemTieredAttachment{
         SignalIndustries.displayGui(entityplayer,new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
         return true;
     }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+        SignalIndustries.displayGui(entityplayer,new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
+        return super.onItemRightClick(itemstack, world, entityplayer);
+    }
 }

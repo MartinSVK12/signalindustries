@@ -1,15 +1,24 @@
 package sunsetsatellite.signalindustries.blocks.machines;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -21,7 +30,20 @@ public class BlockWrathBeacon extends BlockContainerTiered {
 
     @Override
     protected TileEntity getNewBlockEntity() {
+        if(tier == Tier.REINFORCED){
+            return new TileEntityReinforcedWrathBeacon();
+        }
         return new TileEntityWrathBeacon();
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        if(tier == Tier.REINFORCED){
+            String s = super.getDescription(stack);
+            return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
+        } else {
+            return super.getDescription(stack);
+        }
     }
 
     @Override
@@ -31,9 +53,19 @@ public class BlockWrathBeacon extends BlockContainerTiered {
             return true;
         } else
         {
-            TileEntityWrathBeacon tile = (TileEntityWrathBeacon) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                tile.activate();
+            if(tier == Tier.BASIC){
+                TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) world.getBlockTileEntity(i, j, k);
+                if(tile != null) {
+                    tile.activate(entityplayer);
+                }
+            } else {
+                TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getBlockTileEntity(i, j, k);
+                if(tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile), Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
+                    tile.activate(entityplayer);
+                    //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
+                } else {
+                    entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
+                }
             }
             return true;
         }
@@ -41,35 +73,33 @@ public class BlockWrathBeacon extends BlockContainerTiered {
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityWrathBeacon tile = (TileEntityWrathBeacon) world.getBlockTileEntity(i,j,k);
+        TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) world.getBlockTileEntity(i,j,k);
         if(tile != null && tile.active){
             for (EntityPlayer player : world.players) {
                 player.addChatMessage("Challenge failed!");
             }
             //world.newExplosion(null,i,j,k,5f,false,false);
+            if(tier == Tier.REINFORCED){
+                TileEntityReinforcedWrathBeacon w = (TileEntityReinforcedWrathBeacon) tile;
+                for (BlockInstance bi : w.multiblock.getBlocks(new Vec3i(i, j, k), Direction.Z_POS)) {
+                    if(world.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SignalIndustries.fueledEternalTreeLog.id){
+                        world.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
+                    }
+                }
+            }
         }
+
 
         super.onBlockRemoved(world, i, j, k, data);
     }
 
     @Override
-    public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityWrathBeacon tile = (TileEntityWrathBeacon) iblockaccess.getBlockTileEntity(i,j,k);
-        int meta = iblockaccess.getBlockMetadata(i,j,k);
-        /*
-        this.atlasIndices[1] = texCoordToIndex(topX, topY);
-        this.atlasIndices[0] = texCoordToIndex(bottomX, bottomY);
-        this.atlasIndices[4] = texCoordToIndex(northX, northY);
-        this.atlasIndices[2] = texCoordToIndex(eastX, eastY);
-        this.atlasIndices[5] = texCoordToIndex(southX, southY);
-        this.atlasIndices[3] = texCoordToIndex(westX, westY);
-         */
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(index > 1 && index < 6){
-            if(tile.active){
-                return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.wrathBeaconTex[1][0],SignalIndustries.wrathBeaconTex[1][1]);
-            }
-            return this.atlasIndices[index] = texCoordToIndex(SignalIndustries.wrathBeaconTex[0][0],SignalIndustries.wrathBeaconTex[0][1]);
+        if(tile.active){
+            return SignalIndustries.textures.get(tile.tier.name()+".wrathBeacon.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }

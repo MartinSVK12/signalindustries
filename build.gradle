@@ -9,6 +9,7 @@ version = project.mod_version
 
 loom {
 	gluedMinecraftJar()
+	//serverOnlyMinecraftJar()
 	noIntermediateMappings()
 	customMinecraftManifest.set("https://github.com/Turnip-Labs/bta-manifest-repo/releases/download/v${project.bta_version}/${project.bta_version}.json")
 }
@@ -147,7 +148,7 @@ dependencies {
 	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
 	modImplementation "BTWaila:btwaila:${project.btwaila_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
-	modImplementation "retrostorage:retrostorage:1.3.0"
+	//modImplementation "retrostorage:retrostorage:1.3.0"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"

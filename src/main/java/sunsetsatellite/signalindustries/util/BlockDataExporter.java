@@ -45,7 +45,12 @@ public class BlockDataExporter {
                         file = K;
                     }
                 }
-                uv.putString(side.name(),file.split(":")[1]);
+                if(file.isEmpty()){
+                    uv.putString(side.name(),"no_tex.png");
+                } else {
+                    uv.putString(side.name(),file.split(":")[1]);
+                }
+
             }
             tag.putCompound("uv",uv);
             tag.putString("main_uv",uv.getString("SOUTH"));

@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ModInitializer;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
@@ -52,6 +53,7 @@ import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInter
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
+import sunsetsatellite.signalindustries.entities.EntitySunbeam;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.gui.*;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
@@ -71,10 +73,7 @@ import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.render.*;
-import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.signalindustries.util.BlockTexture;
-import sunsetsatellite.signalindustries.util.Mode;
-import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
@@ -433,6 +432,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setNorthTexture("plate_former_basic_inactive.png")
             .build(new BlockPlateFormer("basic.plateFormer",config.getInt("BlockIDs.basicPlateFormer"), Tier.BASIC,Material.metal));
 
+    public static final Block reinforcedPlateFormer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTextures("reinforced_blank.png")
+            .setNorthTexture("plate_former_reinforced_inactive.png")
+            .build(new BlockPlateFormer("reinforced.plateFormer",config.getInt("BlockIDs.reinforcedPlateFormer"), Tier.REINFORCED,Material.metal));
+
     public static final Block prototypeCrystalCutter = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
@@ -472,9 +479,16 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("basic_blank.png")
             .setSideTextures("wrath_beacon.png")
             .build(new BlockWrathBeacon("basic.wrathBeacon",config.getInt("BlockIDs.basicWrathBeacon"), Tier.BASIC,Material.metal));
-    //public static final Block reinforcedWrathBeacon = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockWrathBeacon("",config.getInt("BlockIDs.reinforcedWrathBeacon"),Tiers.REINFORCED,Material.metal),"reinforced.wrathBeacon","reinforced_blank.png","reinforced_wrath_beacon_active.png",BlockSounds.METAL,25f,500f,1);
+
+    public static final Block reinforcedWrathBeacon = new BlockBuilder(MOD_ID)
+            .setHardness(2)
+            .setResistance(500)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setSideTextures("reinforced_wrath_beacon.png")
+            .build(new BlockWrathBeacon("reinforced.wrathBeacon",config.getInt("BlockIDs.reinforcedWrathBeacon"), Tier.REINFORCED,Material.metal));
+
     //public static final Block awakenedWrathBeacon = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockWrathBeacon("",config.getInt("BlockIDs.awakenedWrathBeacon"),Tiers.AWAKENED,Material.metal),"awakened.wrathBeacon","reinforced_blank.png","awakened_wrath_beacon_active.png",BlockSounds.METAL,25f,500f,1);
-    public static final int[][] wrathBeaconTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"wrath_beacon.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"wrath_beacon_active.png")};
 
     public static final Block dimensionalAnchor = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -735,11 +749,20 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block eternalTreeLog = new BlockBuilder(MOD_ID)
             .setHardness(75f)
             .setResistance(50000)
-            .setLuminance(15)
+            .setLuminance(12)
             .setTopBottomTexture("eternal_tree_log_top.png")
             .setSideTextures("eternal_tree_log.png")
             .setBlockSound(BlockSounds.WOOD)
             .build(new BlockEternalTreeLog("eternalTreeLog",config.getInt("BlockIDs.eternalTreeLog"),Material.wood));//new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockEternalTreeLog(key("eternalTreeLog",config.getInt("BlockIDs.eternalTreeLog"),Material.wood),"eternal_tree_log_top.png","eternal_tree_log.png",BlockSounds.WOOD, 75f,50000f,1);
+
+    public static final Block fueledEternalTreeLog = new BlockBuilder(MOD_ID)
+            .setUnbreakable()
+            .setResistance(18000000)
+            .setLuminance(15)
+            .setTopBottomTexture("fueled_eternal_tree_log_top.png")
+            .setSideTextures("fueled_eternal_tree_log.png")
+            .setBlockSound(BlockSounds.WOOD)
+            .build(new BlockEternalTreeLog("fueledEternalTreeLog",config.getInt("BlockIDs.fueledEternalTreeLog"),Material.wood));
 
     public static final Block glowingObsidian = new BlockBuilder(MOD_ID)
             .setTextures("glowing_obsidian.png")
@@ -766,7 +789,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item fuelCell = ItemHelper.createItem(MOD_ID,new ItemFuelCell("fuelCell",config.getInt("ItemIDs.fuelCell")),"fuelcellempty.png").setMaxStackSize(1);
     public static final int[][] fuelCellTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellempty.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcellfilled.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"fuelcelldepleted.png")};
 
-
     public static final Item nullTrigger = ItemHelper.createItem(MOD_ID,new ItemTrigger("trigger.null",config.getInt("ItemIDs.nullTrigger")),"trigger.png").setMaxStackSize(1);
 
     public static final Item romChipProjectile = ItemHelper.createItem(MOD_ID,new ItemRomChip("romChip.projectile",config.getInt("ItemIDs.romChipProjectile")),"chip1.png");
@@ -780,6 +802,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar("reinforced.pulsar",config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
+    public static final Item sunriseDawn = ItemHelper.createItem(MOD_ID,new ItemSunriseDawn("awakened.sunriseDawn",config.getInt("ItemIDs.sunriseDawn"), ToolMaterial.steel, Tier.AWAKENED),"sunrise_dawn.png").setMaxStackSize(1);
+    
     public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"signalumpowersuit_helmet.png");
     public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.chestplate",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,1,Tier.REINFORCED),"signalumpowersuit_chestplate.png");
     public static final ItemSignalumPowerSuit signalumPowerSuitLeggings = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.leggings",config.getInt("ItemIDs.signalumPowerSuitLeggings"),armorSignalumPowerSuit,2,Tier.REINFORCED),"signalumpowersuit_leggings.png");
@@ -853,7 +877,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Dimension dimEternity = new Dimension(key("eternity"),Dimension.overworld,1,portalEternity.id).setDefaultWorldType(eternityWorld);
 
     public static final Multiblock dimAnchorMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"dimensionalAnchor","dimensionalAnchor",false);
-    public static final Multiblock testMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"test","test",false);
+    public static final Multiblock wrathTree = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"wrathTree","reinforcedWrathBeacon",false);
     public static final Multiblock signalumReactor = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"signalumReactor","signalumReactor",false);
 
     public static Map<String, BlockTexture> textures = new HashMap<>();
@@ -875,6 +899,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         textures.put(Tier.PROTOTYPE.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("plate_former_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("plate_former_basic_active.png"));
+        textures.put(Tier.REINFORCED.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setNorthTexture("plate_former_reinforced_active.png"));
+
 
         textures.put(Tier.PROTOTYPE.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("crystal_cutter_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("crystal_cutter_basic_active.png"));
@@ -884,6 +910,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put(Tier.BASIC.name()+".infuser.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("infuser_basic_side_active.png"));
 
         textures.put(Tier.BASIC.name()+".wrathBeacon.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("wrath_beacon_active.png"));
+        textures.put(Tier.REINFORCED.name()+".wrathBeacon.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("reinforced_wrath_beacon_active.png"));
+
 
         textures.put(Tier.PROTOTYPE.name()+".pump.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setSides("prototype_pump_side.png").setTopTexture("prototype_pump_top.png"));
 
@@ -959,6 +987,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(signalumCrystal.getIconFromDamage(0)));
         EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
         EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
+        EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
+        EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
@@ -1037,10 +1067,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
         EntityHelper.Core.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class,new RenderReinforcedWrathBeacon(),"Reinforced Wrath Beacon");
         EntityHelper.Core.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
 
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
-        Multiblock.multiblocks.put("test",testMultiblock);
+        Multiblock.multiblocks.put("wrathTree",wrathTree);
         Multiblock.multiblocks.put("signalumReactor",signalumReactor);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
@@ -1171,6 +1202,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     @Override
     public void afterGameStart() {
+        BlockDataExporter.export(this.getClass());
         AchievementHelper.addPage(ACHIEVEMENTS);
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");
         category

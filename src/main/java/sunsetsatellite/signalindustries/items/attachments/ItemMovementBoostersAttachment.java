@@ -20,7 +20,7 @@ public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
     @Override
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
         super.activate(stack, signalumPowerSuit, player, world);
-        if(signalumPowerSuit.getEnergy() >= 1) {
+        if(signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.active && signalumPowerSuit.hasAttachment((ItemAttachment) SignalIndustries.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))) {
             boolean state = stack.getData().getBoolean("active");
             stack.getData().putBoolean("active", !state);
         }

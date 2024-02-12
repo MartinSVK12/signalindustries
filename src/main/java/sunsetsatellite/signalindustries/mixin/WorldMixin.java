@@ -16,6 +16,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.save.LevelStorage;
 import net.minecraft.core.world.season.SeasonManager;
 import net.minecraft.core.world.season.Seasons;
+import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.weather.Weather;
 import net.minecraft.core.world.weather.WeatherManager;
 import org.spongepowered.asm.mixin.Final;
@@ -67,6 +68,11 @@ public abstract class WorldMixin implements IWorldDataAccessor {
 
     @Shadow @Final protected LevelStorage saveHandler;
 
+    @Shadow @Final public WorldType worldType;
+
+    @Unique
+    private final World thisAs = (World)((Object)this);
+
     @Inject(
             method = "getSkyColor",
             at = @At("HEAD"),
@@ -87,10 +93,15 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             at = @At("HEAD")
     )
     public void doBloodMoon(CallbackInfo ci){
+        //SignalIndustries.LOGGER.info(String.valueOf(worldType.getSunriseTick(thisAs)));
+        int cycleTicks = worldType.getDayNightCycleLengthTicks();
+        int dayTicks = getDayLengthTicks();
+        int nightTicks = cycleTicks - dayTicks;
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime == 10500 && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse)){
+        int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks;
+        if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
             if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
@@ -107,6 +118,29 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         } else {
             ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
         }
+    }
+
+    @Unique
+    private int getDayLengthTicks() {
+        float dayLength;
+        float seasonProgress = seasonManager.getSeasonProgress();
+        if (seasonProgress < 0.5f)
+        {
+            float lastSeasonDayLength = seasonManager.getPreviousSeason().dayLength;
+            float thisSeasonDayLength = seasonManager.getCurrentSeason().dayLength;
+            float seasonModifier = seasonManager.getSeasonModifier() * 0.5f + 0.5f;
+            dayLength = (lastSeasonDayLength * (1.0f - seasonModifier)) + (thisSeasonDayLength * seasonModifier);
+        }
+        else
+        {
+            float thisSeasonDayLength = seasonManager.getCurrentSeason().dayLength;
+            float nextSeasonDayLength = seasonManager.getNextSeason().dayLength;
+            float seasonModifier = seasonManager.getSeasonModifier() * 0.5f + 0.5f;
+            dayLength = (thisSeasonDayLength * seasonModifier) + (nextSeasonDayLength * (1.0f - seasonModifier));
+        }
+
+        int cycleTicks = worldType.getDayNightCycleLengthTicks();
+        return (int)(dayLength * cycleTicks);
     }
 
     @Inject(

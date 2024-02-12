@@ -595,7 +595,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.prototype.plateFormer",
+      "key":  "tile.signalindustries.prototype.pump",
      "amount": 1,
       "meta": 0
     },

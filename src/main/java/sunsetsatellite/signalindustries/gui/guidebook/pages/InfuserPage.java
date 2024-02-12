@@ -79,9 +79,9 @@ public class InfuserPage
             int offsetY = 52;
 
             outputSymbol = new RecipeSymbol(recipe.getOutput());
-            recipeSlots.add(new SlotGuidebook(0, (width/2)-52, spacing*(map.size())+offsetY, inputSymbol.get(0), false,recipe));
-            recipeSlots.add(new SlotGuidebook(1, (width/2)-32, spacing*(map.size())+offsetY-20, inputSymbol.get(1), false,recipe));
-            recipeSlots.add(new SlotGuidebook(2, (width/2)-32, spacing*(map.size())+offsetY+20, inputSymbol.get(2), false,recipe));
+            recipeSlots.add(new SlotGuidebook(0, (width/2)-52, spacing*(map.size())+offsetY, !inputSymbol.isEmpty() ? inputSymbol.get(0) : null, false,recipe));
+            recipeSlots.add(new SlotGuidebook(1, (width/2)-32, spacing*(map.size())+offsetY-20, inputSymbol.size() >= 2 ? inputSymbol.get(1) : null, false,recipe));
+            recipeSlots.add(new SlotGuidebook(2, (width/2)-32, spacing*(map.size())+offsetY+20,  inputSymbol.size() >= 3 ? inputSymbol.get(2) : null, false,recipe));
             recipeSlots.add(new SlotGuidebook(4,(width/2)+48, spacing*(map.size())+offsetY,new RecipeSymbol(acceptedMachines),false,recipe));
             recipeSlots.add(new SlotGuidebook(3, (width/2)+24, spacing*(map.size())+offsetY, outputSymbol, false,recipe));
             map.put(recipe,recipeSlots);
