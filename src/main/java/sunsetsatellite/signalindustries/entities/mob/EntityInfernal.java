@@ -24,6 +24,7 @@ public class EntityInfernal extends EntityMonster {
     private int beamsLaunched = 0;
     private int beamCooldown = 0;
     private DamageType lastDamageType = null;
+    public boolean eclipseImmune = false;
 
     public void onLivingUpdate() {
         //this.remainingFireTicks = 300;
@@ -107,7 +108,7 @@ public class EntityInfernal extends EntityMonster {
         if(isInWaterOrRain()){
             hurt(null,1, DamageType.DROWN);
         }
-        if(world.getCurrentWeather() != SignalIndustries.weatherEclipse){
+        if(world.getCurrentWeather() != SignalIndustries.weatherEclipse && !eclipseImmune){
             hurt(null,4, DamageType.DROWN);
         }
     }
@@ -126,7 +127,7 @@ public class EntityInfernal extends EntityMonster {
         dead = true;
         if(!world.isClientSide)
         {
-            if(!lastDamageType.equals(DamageType.DROWN)){
+            if(!lastDamageType.equals(DamageType.DROWN) && !eclipseImmune){
                 dropFewItems();
             }
         }

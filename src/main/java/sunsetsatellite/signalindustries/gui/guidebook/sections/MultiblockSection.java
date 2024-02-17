@@ -24,8 +24,10 @@ public class MultiblockSection extends SearchableGuidebookSubsection {
     @Override
     public void reloadSection() {
         pages.clear();
+        //TODO: auto-add new multiblocks here
         pages.add(new MultiblockPage(parent, SignalIndustries.dimAnchorMultiblock));
         pages.add(new MultiblockPage(parent, SignalIndustries.signalumReactor));
+        pages.add(new MultiblockPage(parent, SignalIndustries.wrathTree));
     }
 
     @Override

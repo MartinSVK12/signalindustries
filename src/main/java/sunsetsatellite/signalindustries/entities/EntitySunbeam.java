@@ -158,8 +158,8 @@ public class EntitySunbeam extends Entity {
             return;
         }
 
-        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x, this.y, this.z, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
-        SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
+        //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x, this.y, this.z, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
+        //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
         ++this.ticksInAir;
         Vec3d oldPos = Vec3d.createVector(this.x, this.y, this.z);
         Vec3d newPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd, this.z + this.zd);

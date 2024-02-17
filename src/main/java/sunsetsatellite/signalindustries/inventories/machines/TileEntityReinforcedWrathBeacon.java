@@ -34,9 +34,10 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     public int currentMaxAmount = 0;
     public boolean started = false;
     public int ticksSinceStart = 0;
+    public int enemiesSpawned = 0;
     public boolean suddenDeath = false;
     public ArrayList<EntityLiving> enemiesLeft = new ArrayList<>();
-    public static ArrayList<Wave> waves = new ArrayList<>();
+    public ArrayList<Wave> waves = new ArrayList<>();
     public EntityPlayer player;
     public TickTimer spawnTimer = new TickTimer(this,"spawn",20,true);
     public TickTimer intermissionTimer = new TickTimer(this,"startWave",300,false);
@@ -50,38 +51,39 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     public TileEntityReinforcedWrathBeacon(){
+        //TODO: increase mobs in waves
         tier = Tier.REINFORCED;
         multiblock = Multiblock.multiblocks.get("wrathTree");
         ArrayList<Class<? extends EntityMonster>> mobList = new ArrayList<>();
         mobList.add(EntityCreeper.class);
-        waves.add(new Wave(mobList,4,4,20));
+        waves.add(new Wave(mobList,4,6,20));
         mobList = new ArrayList<>();
         mobList.add(EntityZombie.class);
         mobList.add(EntitySkeleton.class);
-        waves.add(new Wave(mobList,3,6,20));
-        waves.add(new Wave(mobList,5,10,20));
-        waves.add(new Wave(mobList,6,12,20));
+        waves.add(new Wave(mobList,10,16,20));
+        waves.add(new Wave(mobList,10,16,20));
+        waves.add(new Wave(mobList,10,16,20));
         mobList = new ArrayList<>();
         mobList.add(EntityZombie.class);
         mobList.add(EntitySkeleton.class);
         mobList.add(EntitySpider.class);
-        waves.add(new Wave(mobList,8,10,20));
+        waves.add(new Wave(mobList,10,16,20));
         mobList = new ArrayList<>();
         mobList.add(EntityCreeper.class);
         mobList.add(EntityInfernal.class);
-        waves.add(new Wave(mobList,6,6,20));
+        waves.add(new Wave(mobList,10,16,20));
         mobList = new ArrayList<>();
         mobList.add(EntityZombie.class);
         mobList.add(EntitySkeleton.class);
         mobList.add(EntitySpider.class);
-        waves.add(new Wave(mobList,8,10,20));
-        waves.add(new Wave(mobList,8,10,20));
+        waves.add(new Wave(mobList,16,24,20));
+        waves.add(new Wave(mobList,16,24,20));
         mobList = new ArrayList<>();
         mobList.add(EntityZombie.class);
         mobList.add(EntitySkeleton.class);
         mobList.add(EntitySpider.class);
         mobList.add(EntityCreeper.class);
-        waves.add(new Wave(mobList,10,16,20));
+        waves.add(new Wave(mobList,16,24,20));
         //final wave, boss not included
         mobList.add(EntityInfernal.class);
         waves.add(new Wave(mobList,20,32,20));
@@ -109,16 +111,19 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
             worldObj.setBlockWithNotify(x,y,z,0);
+            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
+            worldObj.entityJoinedWorld(entityitem2);
         }
-        if(active && started && enemiesLeft.isEmpty() && wave < 5){
+        if(active && started && enemiesLeft.isEmpty() && wave < waves.size()){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
             started = false;
             intermissionTimer.unpause();
             intermission = true;
+            enemiesSpawned = 0;
             wave++;
-        } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
+        } else if (active && started && enemiesLeft.isEmpty()) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
             }
@@ -134,12 +139,15 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             intermissionTimer.pause();
             wave = 0;
             currentMaxAmount = 0;
+            enemiesSpawned = 0;
             worldObj.setBlockWithNotify(x,y,z,0);
             ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
             EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.energyCatalyst, 1));
+            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
             worldObj.entityJoinedWorld(entityitem);
+            worldObj.entityJoinedWorld(entityitem2);
         }
         if(!suddenDeath && active && ticksSinceStart % 30 == 0){
             ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS);
@@ -184,6 +192,8 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x, y, z)))){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
                 worldObj.setBlockWithNotify(x,y,z,0);
+                EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
+                worldObj.entityJoinedWorld(entityitem2);
             }
         }
     }
@@ -245,7 +255,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         if(active){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("WAVE "+wave);
-                if(wave == 5){
+                if(wave == waves.size()){
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("FINAL WAVE!");
                 }
             }
@@ -264,7 +274,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public void spawn(){
         if(getBlockType() != null) {
-            if (enemiesLeft.size() < currentMaxAmount) {
+            if (enemiesSpawned < currentMaxAmount) {
                 started = true;
                 ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, this.x, this.z);
                 EntityMonster mob;
@@ -279,6 +289,10 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 mob.spawnInit();
                 worldObj.entityJoinedWorld(mob);
                 enemiesLeft.add(mob);
+                if(mob instanceof EntityInfernal){
+                    ((EntityInfernal) mob).eclipseImmune = true;
+                }
+                enemiesSpawned++;
             } else {
                 spawnTimer.pause();
             }

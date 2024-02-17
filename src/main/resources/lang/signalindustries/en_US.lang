@@ -623,5 +623,6 @@ guidebook.section.signalindustries.multiblocks=Multiblocks
 
 multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
 multiblock.signalindustries.signalumReactor.name=Signalum Reactor
+multiblock.signalindustries.wrathTree.name=Wrath Tree
 
 gui.options.page.controls.category.signalindustries=Signal Industries
