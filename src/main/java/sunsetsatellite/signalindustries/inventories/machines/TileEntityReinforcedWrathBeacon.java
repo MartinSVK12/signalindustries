@@ -114,7 +114,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
             worldObj.entityJoinedWorld(entityitem2);
         }
-        if(active && started && enemiesLeft.isEmpty() && wave < waves.size()){
+        if(active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave < waves.size()-1){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
             }
@@ -123,7 +123,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             intermission = true;
             enemiesSpawned = 0;
             wave++;
-        } else if (active && started && enemiesLeft.isEmpty()) {
+        } else if (active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave == waves.size()-1) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
             }
@@ -243,6 +243,9 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 mob.setRot(worldObj.rand.nextFloat() * 360.0F, 0.0F);
                 mob.spawnInit();
                 worldObj.entityJoinedWorld(mob);
+                if(mob instanceof EntityInfernal){
+                    ((EntityInfernal) mob).eclipseImmune = true;
+                }
             } else {
                 suddenDeathSpawnTImer.pause();
             }
@@ -255,7 +258,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         if(active){
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("WAVE "+wave);
-                if(wave == waves.size()){
+                if(wave == waves.size()-1){
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("FINAL WAVE!");
                 }
             }

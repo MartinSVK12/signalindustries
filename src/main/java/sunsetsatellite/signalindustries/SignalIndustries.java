@@ -802,7 +802,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item pulsar = ItemHelper.createItem(MOD_ID,new ItemPulsar("reinforced.pulsar",config.getInt("ItemIDs.pulsar"), Tier.REINFORCED),"pulsaractive.png").setMaxStackSize(1);
     public static final int[][] pulsarTex = new int[][]{TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarinactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsaractive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarcharged.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpactive.png"),TextureHelper.getOrCreateItemTexture(MOD_ID,"pulsarwarpcharged.png")};
 
-    public static final Item sunriseDawn = ItemHelper.createItem(MOD_ID,new ItemSunriseDawn("awakened.sunriseDawn",config.getInt("ItemIDs.sunriseDawn"), ToolMaterial.steel, Tier.AWAKENED),"sunrise_dawn.png").setMaxStackSize(1);
+    //TODO: WIP
+    //public static final Item sunriseDawn = ItemHelper.createItem(MOD_ID,new ItemSunriseDawn("awakened.sunriseDawn",config.getInt("ItemIDs.sunriseDawn"), ToolMaterial.steel, Tier.AWAKENED),"sunrise_dawn.png").setMaxStackSize(1);
     
     public static final ItemSignalumPowerSuit signalumPowerSuitHelmet = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.helmet",config.getInt("ItemIDs.signalumPowerSuitHelmet"),armorSignalumPowerSuit,0,Tier.REINFORCED),"signalumpowersuit_helmet.png");
     public static final ItemSignalumPowerSuit signalumPowerSuitChestplate = (ItemSignalumPowerSuit) ItemHelper.createItem(MOD_ID,new ItemSignalumPowerSuit("reinforced.signalumpowersuit.chestplate",config.getInt("ItemIDs.signalumPowerSuitChestplate"),armorSignalumPowerSuit,1,Tier.REINFORCED),"signalumpowersuit_chestplate.png");
@@ -979,8 +980,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         ironPlateHammer.setContainerItem(ironPlateHammer);
 
-        CommandHelper.createCommand(new NBTEditCommand());
-        CommandHelper.createCommand(new StructureCommand("structure","struct"));
+        CommandHelper.Core.createCommand(new NBTEditCommand());
+        CommandHelper.Core.createCommand(new StructureCommand("structure","struct"));
         EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
         EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");

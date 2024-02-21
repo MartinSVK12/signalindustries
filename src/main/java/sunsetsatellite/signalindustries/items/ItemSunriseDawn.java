@@ -33,13 +33,13 @@ public class ItemSunriseDawn extends ItemToolSword implements ITiered, IVariable
 
     @Override
     public int getDamageVsEntity(Entity entity, ItemStack stack) {
-        for (Entity entity1 : new ArrayList<>(Minecraft.getMinecraft(this).theWorld.loadedEntityList)) {
+        /*for (Entity entity1 : new ArrayList<>(Minecraft.getMinecraft(this).theWorld.loadedEntityList)) {
             if (entity1 instanceof EntityLiving) {
-                if (entity1.distanceTo(Minecraft.getMinecraft(this).thePlayer) < 10) {
+                if (entity1.distanceTo(Minecraft.getMinecraft(this).thePlayer) < 10 && entity1 != Minecraft.getMinecraft(this).thePlayer) {
                     entity1.hurt(entity1, 999, DamageType.GENERIC);
                 }
             }
-        }
-        return 999;
+        }*/
+        return 0;
     }
 }
