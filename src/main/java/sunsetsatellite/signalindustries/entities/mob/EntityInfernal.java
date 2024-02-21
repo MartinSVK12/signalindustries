@@ -16,7 +16,7 @@ public class EntityInfernal extends EntityMonster {
         this.skinName = "infernal";
         this.moveSpeed = 0.5F;
         this.attackStrength = 5;
-        this.scoreValue = 300;
+        this.scoreValue = 1000;
         this.health = 40;
         this.fireImmune = true;
     }

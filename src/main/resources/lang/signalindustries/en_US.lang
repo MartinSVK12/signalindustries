@@ -619,6 +619,9 @@ guidebook.section.signalindustries.crystalChamber=Crystal Chamber
 guidebook.section.signalindustries.infuser=Infuser
 guidebook.section.signalindustries.centrifuge=Centrifuge
 
+guidebook.section.mob.infernal.name=Infernal
+guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.
+
 guidebook.section.signalindustries.multiblocks=Multiblocks
 
 multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor

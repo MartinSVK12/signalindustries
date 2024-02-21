@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
+import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
@@ -9,6 +10,7 @@ import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
+import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
@@ -66,6 +68,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
+        MobInfoRegistry.register(EntityInfernal.class,"guidebook.section.mob.infernal.name", "guidebook.section.mob.infernal.desc",40,1000,new MobInfoRegistry.MobDrop[]{new MobInfoRegistry.MobDrop(new ItemStack(SignalIndustries.infernalFragment),1,0,2)});
         DataLoader.loadRecipes("/assets/signalindustries/recipes/workbench.json");
         SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
