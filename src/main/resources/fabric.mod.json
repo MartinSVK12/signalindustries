@@ -49,10 +49,10 @@
   "depends": {
     "fabricloader": ">=0.15.6-babric.4-bta",
     "minecraft": ">=7.1-beta.1a",
-    "catalyst-core": ">=1.1.2",
-    "catalyst-fluids": ">=1.0.1",
-    "catalyst-multiblocks": ">=1.0.1",
-    "catalyst-energy": ">=1.0.2",
+    "catalyst-core": ">=1.1.3",
+    "catalyst-fluids": ">=1.0.2",
+    "catalyst-multiblocks": ">=1.0.3",
+    "catalyst-energy": ">=1.0.3",
     "halplibe": ">=3.4.1",
     "dragonfly": ">=1.4.3-7.1",
     "terrain-api": ">=1.4.2-7.1"
