@@ -26,28 +26,55 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer {
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
 
+    //only for infinite tier energy cell, if true, the energy cell will act as an infinite source of energy, if false, it will act as a sink destroying any energy it gets.
+    //does not do anything for any other tier
+    public boolean isInfiniteSource = true;
+
     @Override
     public void tick() {
         if(getBlockType() != null){
             if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){
                 for (Map.Entry<Direction, Connection> entry : connections.entrySet()) {
-                    if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
-                        entry.setValue(Connection.OUTPUT);
+                    if(isInfiniteSource){
+                        if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
+                            entry.setValue(Connection.OUTPUT);
+                        }
+                    } else {
+                        if(entry.getValue() == Connection.OUTPUT || entry.getValue() == Connection.BOTH){
+                            entry.setValue(Connection.INPUT);
+                        }
                     }
                 }
-                fluidCapacity[0] = Integer.MAX_VALUE;
-                transferSpeed = Integer.MAX_VALUE;
-                if(fluidContents[0] != null){
-                    fluidContents[0].amount = Integer.MAX_VALUE;
+                if(isInfiniteSource){
+                    fluidCapacity[0] = Integer.MAX_VALUE;
+                    transferSpeed = Integer.MAX_VALUE;
+                    if(fluidContents[0] != null){
+                        fluidContents[0].amount = Integer.MAX_VALUE;
+                    } else {
+                        fluidContents[0] = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,Integer.MAX_VALUE);
+                    }
                 } else {
-                   fluidContents[0] = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,Integer.MAX_VALUE);
+                    fluidCapacity[0] = Integer.MAX_VALUE;
+                    transferSpeed = Integer.MAX_VALUE;
+                    if(fluidContents[0] != null){
+                        fluidContents[0] = null;
+                    }
                 }
+
             } else {
                 fluidCapacity[0] = (int) Math.pow(2,((BlockContainerTiered)getBlockType()).tier.ordinal()) * 8000;
                 transferSpeed = 50 * (((BlockContainerTiered)getBlockType()).tier.ordinal()+1);
             }
             extractFluids();
             super.tick();
+        }
+    }
+
+    public Tier getTier(){
+        if(getBlockType() != null){
+            return ((BlockContainerTiered)getBlockType()).tier;
+        } else {
+            return Tier.PROTOTYPE;
         }
     }
 
