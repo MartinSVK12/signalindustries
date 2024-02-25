@@ -35,6 +35,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
         if(itemstack.getMetadata() == 0){
             itemstack.setMetadata(1);
         } else {
+
             ChunkCoordinates chunk = null;
             double distance = Double.MAX_VALUE;
             Minecraft mc = Minecraft.getMinecraft(this);
@@ -45,7 +46,12 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
                 }
             }
             if(chunk != null){
-                mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks",distance));
+                if(entityplayer.isSneaking() && distance < 5){
+                    mc.ingameGUI.addChatMessage("This meteor will no longer be tracked.");
+                    SignalIndustries.meteorLocations.remove(chunk);
+                } else {
+                    mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks", distance));
+                }
             } else {
                 mc.ingameGUI.addChatMessage("No meteors detected nearby.");
             }
