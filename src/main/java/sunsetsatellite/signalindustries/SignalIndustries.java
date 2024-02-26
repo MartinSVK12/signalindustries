@@ -683,6 +683,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Item coalDust = ItemHelper.createItem(MOD_ID,new Item("coalDust",config.getInt("ItemIDs.coalDust")),"coaldust.png");
     public static final Item netherCoalDust = ItemHelper.createItem(MOD_ID,new Item("netherCoalDust",config.getInt("ItemIDs.netherCoalDust")),"nethercoaldust.png");
+    public static final Item tinyNetherCoalDust = ItemHelper.createItem(MOD_ID,new Item("tinyNetherCoalDust",config.getInt("ItemIDs.tinyNetherCoalDust")),"tiny_nether_coal_dust.png");
     public static final Item emptySignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item("signalumCrystalDust",config.getInt("ItemIDs.emptySignalumCrystalDust")),"emptysignalumdust.png");
     public static final Item saturatedSignalumCrystalDust = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumCrystalDust",config.getInt("ItemIDs.saturatedSignalumCrystalDust")),"saturatedsignalumdust.png");
 

@@ -466,7 +466,7 @@
       {
         "symbol": "S",
         "stack": {
-          "key": "item.signalindustries.rawSignalumCrystal",
+          "key": "item.signalindustries.steelPlate",
          "amount": 1,
           "meta": 0
         }
@@ -4182,6 +4182,50 @@
     ],
     "result": {
       "key": "item.signalindustries.abilityContainerCasing",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/split_nether_coal_dust",
+    "type": "minecraft:crafting/shapeless",
+    "inputs": [
+      {
+        "stack": {
+          "key": "item.signalindustries.netherCoalDust",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.tinyNetherCoalDust",
+      "amount": 9,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/combine_nether_coal_dust",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "DDD",
+      "DDD",
+      "DDD"
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.tinyNetherCoalDust",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.netherCoalDust",
       "amount": 1,
       "meta": 0
     },

@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
+import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -12,6 +13,26 @@ import sunsetsatellite.signalindustries.util.Tier;
 public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMachine>>{
     @Override
     public void addRecipes(RecipeGroup<RecipeEntryMachine> group) {
+        group.register(
+                "cobble_to_gravel",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol("minecraft:cobblestones")
+                        },
+                        new ItemStack(Block.gravel,1),
+                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                )
+        );
+        group.register(
+                "gravel_to_sand",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Block.gravel,1))
+                        },
+                        new ItemStack(Block.sand,1),
+                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                )
+        );
         group.register(
                 "prototype_raw_dust",
                 new RecipeEntryMachine(
