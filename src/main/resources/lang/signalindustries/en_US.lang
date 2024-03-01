@@ -1,15 +1,17 @@
 tile.signalindustries.signalumEnergy.name=Signalum Energy
-tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically energetic properties.
+tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically energetic properties. Used to power a new kind of technology.
 tile.signalindustries.burntSignalum.name=Burnt Signalum
-tile.signalindustries.burntSignalum.desc=Ashes to ashes, rust to rust, will you rise above or turn to dust?
+tile.signalindustries.burntSignalum.desc=[Signalum Energy] burnt out in an unstable reaction. But there's still beauty in the ashes, can you find it?
 item.signalindustries.signalumCrystal.name=Signalum Crystal
-item.signalindustries.signalumCrystal.desc=A crystal that can store [Signalum Energy] within it's lattice. The main way to store and transport this substance.
+item.signalindustries.signalumCrystal.desc=A pure crystal used to transport [Signalum Energy]. Shines with a bright red glow.
 item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
 item.signalindustries.signalumCrystalEmpty.desc=Unpowered [Signalum Crystal]. Still useful for its physical properties.
 item.signalindustries.rawSignalumCrystal.name=Raw Signalum Crystal
-item.signalindustries.rawSignalumCrystal.desc=The beginning of it all, crude shards infused with a new kind of power.
+item.signalindustries.rawSignalumCrystal.desc=The beginning of it all. Crude shards infused with a new kind of energy.
+item.signalindustries.volatileSignalumCrystal.name=Volatile Signalum Crystal
+item.signalindustries.volatileSignalumCrystal.desc=Designed to break on impact, releasing a burst of [Signalum Energy]. Handle with care.
 item.signalindustries.awakenedSignalumCrystal.name=Awakened Signalum Crystal
-item.signalindustries.awakenedSignalumCrystal.desc=The perfect form, the rebirth of the first star of evening. Shine!
+item.signalindustries.awakenedSignalumCrystal.desc=The pinnacle of Signalum technology. The power of the first star reborn. Shine!
 item.signalindustries.awakenedSignalumFragment.name=Awakened Signalum Fragment
 item.signalindustries.awakenedSignalumFragment.desc=Let me reach for the stars now, they're so close to me~
 
@@ -62,7 +64,7 @@ item.signalindustries.voidAlloyPlate.desc=A plate made out of [Void Alloy].
 item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
 item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.
 item.signalindustries.signalumCuttingGear.name=Signalum Cutting Gear
-item.signalindustries.signalumCuttingGear.desc=Even sharper gear for cutting harder stuff.
+item.signalindustries.signalumCuttingGear.desc=Even sharper gear for cutting tougher stuff.
 
 item.signalindustries.trigger.null.name=Null Trigger
 item.signalindustries.trigger.null.desc=Triggers are used to activate [S. P. Harness] abilities.
@@ -81,7 +83,7 @@ item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
-item.signalindustries.reinforced.pulsar.desc=Multifunctional gadget. It's main ability is condensing and releasing huge amounts of [S. Energy]. For example in the form of powerful shockwaves.
+item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing [Signalum Energy] either outwards into a powerful shockwave or inwards to break an slotted item inside.
 
 item.signalindustries.reinforced.signalumSaber.name=Signalum Saber
 item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
@@ -96,7 +98,7 @@ item.signalindustries.reinforced.signalumDrill.desc=Capable of breaking through 
 item.signalindustries.dimensionalShard.name=Dimensional Shard
 item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
 item.signalindustries.dilithiumShard.name=Dilithium Shard
-item.signalindustries.dilithiumShard.desc=An extraterrestrial mineral used in transportation and teleportation equipment.
+item.signalindustries.dilithiumShard.desc=An extraterrestrial mineral used in machines to locally manipulate time.
 item.signalindustries.realityString.name=String of Reality
 item.signalindustries.realityString.desc=An individual thread of the [Fabric of Reality].
 item.signalindustries.monsterShard.name=Monster Shard
@@ -114,10 +116,10 @@ item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.fuelCell.name=Fuel Cell
-item.signalindustries.fuelCell.desc=For use in the [Signalum Reactor]. Contents cannot be extracted until they have been processed.
+item.signalindustries.fuelCell.desc=A special container containing [Signalum Energy] For use in the [Signalum Reactor].
 
 item.signalindustries.warpOrb.name=Warp Orb
-item.signalindustries.warpOrb.desc=The location encoded into this orb is faintly visible inside, provided it points to somewhere of course. Wonder what would happen if you broke it?
+item.signalindustries.warpOrb.desc=Can be encoded with a location in space. Wonder what would happen if you broke it?
 
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
 tile.signalindustries.signalumOre.desc=[Raw Signalum Crystals] encased in rock.
@@ -212,15 +214,6 @@ item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces c
 item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Lens
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
 
-item.signalindustries.normalAbilityModule.name=Normal Ability Module
-item.signalindustries.normalAbilityModule.desc=Container for <Normal> type [Signalum Power Suit] abilities.
-item.signalindustries.attackAbilityModule.name=Attack Ability Module
-item.signalindustries.attackAbilityModule.desc=Container for <Attack> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
-item.signalindustries.defenseAbilityModule.name=Defense Ability Module
-item.signalindustries.defenseAbilityModule.desc=Container for <Defense> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
-item.signalindustries.pursuitAbilityModule.name=Pursuit Ability Module
-item.signalindustries.pursuitAbilityModule.desc=Container for <Pursuit> type [Signalum Power Suit] abilities. Can store <Normal> type abilities as well.
-
 item.signalindustries.blankAbilityModule.name=Blank Ability Module
 item.signalindustries.blankAbilityModule.desc=Base component of an [Ability Module].
 item.signalindustries.abilityModule.name=Ability Module
@@ -236,13 +229,13 @@ item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy 
 item.signalindustries.pureCrystalChip.name=Pure Crystal Chip
 item.signalindustries.pureCrystalChip.desc=A better chip used in the [Reinforced Energy Core].
 item.signalindustries.basicEnergyCore.name=Basic Energy Core
-item.signalindustries.basicEnergyCore.desc=Powers Basic-tier machines.
+item.signalindustries.basicEnergyCore.desc=Powers some Basic-tier machines.
 item.signalindustries.reinforcedEnergyCore.name=Reinforced Energy Core
-item.signalindustries.reinforcedEnergyCore.desc=Powers Reinforced-tier machines.
+item.signalindustries.reinforcedEnergyCore.desc=Powers some Reinforced-tier machines.
 item.signalindustries.basicDrillBit.name=Basic Drill Bit
-item.signalindustries.basicDrillBit.desc=A drill bit from a [Basic S. Drill]
+item.signalindustries.basicDrillBit.desc=A drill bit for a [Basic S. Drill]
 item.signalindustries.reinforcedDrillBit.name=Reinforced Drill Bit
-item.signalindustries.reinforcedDrillBit.desc=A drill bit from a [Reinforced S. Drill]
+item.signalindustries.reinforcedDrillBit.desc=A drill bit for a [Reinforced S. Drill]
 item.signalindustries.basicDrillCasing.name=Basic Drill Casing
 item.signalindustries.basicDrillCasing.desc=Casing needed to make a [Basic S. Drill].
 item.signalindustries.reinforcedDrillCasing.name=Reinforced Drill Casing
@@ -371,7 +364,7 @@ tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities f
 tile.signalindustries.basic.crystalCutter.name=Basic Crystal Cutter
 tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut a few more other things as well.
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
-tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger. Cuts most materials with unreal precision.
+tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger. Cuts most materials with precision and ease.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
 tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams to slice through almost anything! What more could you want.
 
