@@ -145,21 +145,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"reinforced_glass_no_top.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"reinforced_glass_left.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"reinforced_glass_right.png");
+
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_ore_overlay.png");
     }
     //public static final Config config = new Config(MOD_ID, mapOf(new String[]{"PacketOpenMachineGUI_ID","PacketPipeItemSpawn_ID","GuiID"},new String[]{"113","114","9"}), new Class[]{SignalIndustries.class});
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
     public static final Block signalumOre = new BlockBuilder(MOD_ID)
             .setTextures("signalum_ore.png")
-            .setLuminance(1)
+            .setLuminance(3)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(3)
             .setResistance(25)
-            .build(new BlockOreSignalum("signalumOre",config.getInt("BlockIDs.signalumOre")).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+            .build(new BlockOreSignalum("signalumOre",config.getInt("BlockIDs.signalumOre")).withTags(BlockTags.MINEABLE_BY_PICKAXE).withOverbright());
 
     public static final Block dilithiumOre = new BlockBuilder(MOD_ID)
             .setTextures("dilithium_ore.png")
-            .setLuminance(1)
+            .setLuminance(3)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(75)
             .setResistance(100)
@@ -167,7 +169,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Block dimensionalShardOre = new BlockBuilder(MOD_ID)
             .setTextures("dimensional_shard_ore.png")
-            .setLuminance(1)
+            .setLuminance(3)
             .setBlockSound(BlockSounds.STONE)
             .setHardness(200)
             .setResistance(50000)
@@ -770,7 +772,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setBlockSound(BlockSounds.STONE)
             .setHardness(2)
             .setResistance(1200)
-            .setLuminance(1)
+            .setLuminance(10)
             .build(new Block("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
         //BlockHelper.createBlock(MOD_ID,new Block(key("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone),"glowing_obsidian.png",BlockSounds.STONE, 50f,1200f,1.0f/2.0f);
 

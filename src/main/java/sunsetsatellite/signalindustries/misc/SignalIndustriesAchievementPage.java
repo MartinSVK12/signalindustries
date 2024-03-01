@@ -35,17 +35,17 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
     public static final Achievement INIT = new Achievement(AchievementList.achievementList.size()+1, key("init"),0,0, rawSignalumCrystal,null);
     public static final Achievement THE_PROTOTYPE = new Achievement(AchievementList.achievementList.size()+2, key("thePrototype"),2,0, prototypeMachineCore,INIT);
     public static final Achievement FROM_WITHIN = new Achievement(AchievementList.achievementList.size()+3, key("fromWithin"),3,-1, prototypeExtractor,THE_PROTOTYPE);
-    public static final Achievement TRANSFER = new Achievement(AchievementList.achievementList.size()+3, key("transfer"),4,1, prototypeConduit,THE_PROTOTYPE);
-    public static final Achievement BUFFER = new Achievement(AchievementList.achievementList.size()+3, key("buffer"),5,-1, prototypeEnergyCell,THE_PROTOTYPE);
-    public static final Achievement CRUSHER = new Achievement(AchievementList.achievementList.size()+3, key("crusher"),6,1, prototypeCrusher,THE_PROTOTYPE);
-    public static final Achievement ALLOY_SMELTER = new Achievement(AchievementList.achievementList.size()+3, key("alloySmelter"),7,-1, prototypeAlloySmelter,THE_PROTOTYPE);
-    public static final Achievement PLATE_FORMER = new Achievement(AchievementList.achievementList.size()+3, key("plateFormer"),8,1, prototypePlateFormer,THE_PROTOTYPE);
-    public static final Achievement SHINING = new Achievement(AchievementList.achievementList.size()+3, key("shining"),9,0, signalumCrystal,THE_PROTOTYPE);
-    public static final Achievement BASIC = new Achievement(AchievementList.achievementList.size()+3, key("basic"),2,2, basicMachineCore,SHINING);
+    public static final Achievement TRANSFER = new Achievement(AchievementList.achievementList.size()+4, key("transfer"),4,1, prototypeConduit,THE_PROTOTYPE);
+    public static final Achievement BUFFER = new Achievement(AchievementList.achievementList.size()+5, key("buffer"),5,-1, prototypeEnergyCell,THE_PROTOTYPE);
+    public static final Achievement CRUSHER = new Achievement(AchievementList.achievementList.size()+6, key("crusher"),6,1, prototypeCrusher,THE_PROTOTYPE);
+    public static final Achievement ALLOY_SMELTER = new Achievement(AchievementList.achievementList.size()+7, key("alloySmelter"),7,-1, prototypeAlloySmelter,THE_PROTOTYPE);
+    public static final Achievement PLATE_FORMER = new Achievement(AchievementList.achievementList.size()+8, key("plateFormer"),8,1, prototypePlateFormer,THE_PROTOTYPE);
+    public static final Achievement SHINING = new Achievement(AchievementList.achievementList.size()+9, key("shining"),9,0, signalumCrystal,THE_PROTOTYPE);
+    public static final Achievement BASIC = new Achievement(AchievementList.achievementList.size()+10, key("basic"),2,2, basicMachineCore,SHINING);
 
 
-    public static final Achievement BLOOD_MOON = new Achievement(AchievementList.achievementList.size()+4, key("bloodMoon"),-2,2, monsterShard,null);
-    public static final Achievement ECLIPSE = new Achievement(AchievementList.achievementList.size()+4, key("eclipse"),-2,4, infernalFragment,null);
+    public static final Achievement BLOOD_MOON = new Achievement(AchievementList.achievementList.size()+11, key("bloodMoon"),-2,2, monsterShard,null);
+    public static final Achievement ECLIPSE = new Achievement(AchievementList.achievementList.size()+12, key("eclipse"),-2,4, infernalFragment,null);
 
     @Override
     public void getBackground(GuiAchievements guiAchievements, Random random,  int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {
