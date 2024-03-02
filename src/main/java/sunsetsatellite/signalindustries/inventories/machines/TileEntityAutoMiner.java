@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
@@ -20,7 +21,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     public Vec3i from = new Vec3i();
     public Vec3i to = new Vec3i();
     public Vec3i current = new Vec3i();
-    public TickTimer workTimer = new TickTimer(this,"work",progressMaxTicks,true);
+    public TickTimer workTimer = new TickTimer(this,this::work,progressMaxTicks,true);
     public int cost;
     public TileEntityAutoMiner(){
         progressMaxTicks = 20;
@@ -116,6 +117,9 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
 
     @Override
     public void tick() {
+        if(worldObj != null && getBlockType() != null){
+            tier = ((BlockContainerTiered)getBlockType()).tier;
+        }
         speedMultiplier = 1;
         cost = 0;
         for(Direction dir : Direction.values()){

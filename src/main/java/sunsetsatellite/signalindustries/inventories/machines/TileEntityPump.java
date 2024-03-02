@@ -4,7 +4,9 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -12,11 +14,14 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,7 +29,10 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
 
     public BlockInstance currentBlock = null;
     public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
+    public TickTimer pumpTimer = new TickTimer(this,this::findFluid,20,true);
     public int range = 3;
+
+
     public TileEntityPump(){
         fluidContents = new FluidStack[2];
         fluidCapacity = new int[2];
@@ -34,7 +42,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
+        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids().stream().filter((F)->F.id != SignalIndustries.energyFlowing.id).collect(Collectors.toList()));
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
     @Override
@@ -42,29 +50,40 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         return "Pump";
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-        worldObj.markBlocksDirty(x, y, z, x, y, z);
-        extractFluids();
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null) {
-            tier = block.tier;
-        }
-        if(currentBlock == null){
-            Set<Integer> pumpableFluids = SIRecipes.PUMP.getAllRecipes().stream().map((R)->R.getOutput().getLiquid().id).collect(Collectors.toSet());
-            for(int x1 = x-range; x < x+range; x++){
-                for(int y1 = y-range; y1 < y+range; y1++){
-                    for(int z1 = z-range; z < z+range; z++){
-                        int id = worldObj.getBlockId(x1,y1,z1);
-                        if(pumpableFluids.contains(id)){
-                            currentRecipe = SIRecipes.PUMP.findRecipe(RecipeExtendedSymbol.arrayOf(new ItemStack(currentBlock.block)),tier);
-                            currentBlock = new BlockInstance(Block.getBlock(id),new Vec3i(x1,y1,z1),null);
+    public void findFluid(){
+        if(currentBlock == null || currentRecipe == null){
+            Set<Integer> pumpableFluids = new HashSet<>();
+            for (RecipeEntryMachineFluid recipe : SIRecipes.PUMP.getAllRecipes()) {
+                for (RecipeExtendedSymbol symbol : recipe.getInput()) {
+                    for (ItemStack stack : symbol.resolve()) {
+                        pumpableFluids.add(stack.itemID);
+                    }
+                }
+            }
+            for (int pumpX = x-range; pumpX < x+range; pumpX++) {
+                for (int pumpY = y-1; pumpY > y-range-1; pumpY--) {
+                    for (int pumpZ = z-range; pumpZ < z + range; pumpZ++) {
+                        Block block = worldObj.getBlock(pumpX,pumpY,pumpZ);
+                        if(block instanceof BlockFluid){
+                            if(pumpableFluids.contains(block.id)){
+                                currentBlock = new BlockInstance(block,new Vec3i(pumpX,pumpY,pumpZ),null);
+                                currentRecipe = SIRecipes.PUMP.findRecipe(RecipeExtendedSymbol.arrayOf(new FluidStack((BlockFluid) block)),tier);
+                                return;
+                            }
                         }
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
+        pumpTimer.tick();
+        extractFluids();
+
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
@@ -100,6 +119,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         }
 
     }
+
 
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);

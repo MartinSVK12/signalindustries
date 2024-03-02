@@ -35,6 +35,15 @@ public class RecipeGroupSI<T extends RecipeEntrySI<?,?, RecipeProperties>> exten
         return null;
     }
 
+    public FluidStack findFluidOutput(RecipeExtendedSymbol[] symbols, Tier tier){
+        for (T recipe : this.getAllRecipes()) {
+            if(recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)){
+                return ((FluidStack)recipe.getOutput()).copy();
+            }
+        }
+        return null;
+    }
+
     public ItemStack findOutput(ItemStack stack){
         for (T recipe : this.getAllRecipes()) {
             RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));

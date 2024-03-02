@@ -13,12 +13,19 @@ import sunsetsatellite.signalindustries.util.Tier;
 public class PumpRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMachineFluid>> {
     @Override
     public void addRecipes(RecipeGroup<RecipeEntryMachineFluid> group) {
-        group.register("prototype_water",new RecipeEntryMachineFluid(
+        group.register("water",new RecipeEntryMachineFluid(
                 new RecipeExtendedSymbol[]{
-                        new RecipeExtendedSymbol(new ItemStack(Block.fluidWaterFlowing))
+                        new RecipeExtendedSymbol("minecraft:water")
                 },
                 new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000),
-                new RecipeProperties(600,10, Tier.PROTOTYPE,true)
+                new RecipeProperties(600,10, Tier.PROTOTYPE,false)
+        ));
+        group.register("lava",new RecipeEntryMachineFluid(
+                new RecipeExtendedSymbol[]{
+                        new RecipeExtendedSymbol("minecraft:lava")
+                },
+                new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000),
+                new RecipeProperties(600,30, Tier.BASIC,false)
         ));
     }
 }

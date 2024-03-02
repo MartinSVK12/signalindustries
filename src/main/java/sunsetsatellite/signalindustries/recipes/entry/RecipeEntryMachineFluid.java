@@ -1,5 +1,7 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -7,12 +9,14 @@ import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[], FluidStack, RecipeProperties> {
 
@@ -29,24 +33,44 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         if(symbols.length != getInput().length){
             return false;
         }
+        List<FluidStack> recipeFluids = Arrays.stream(getInput()).flatMap((S) -> {
+            if(S.hasFluid()) {
+                return S.resolveFluids().stream();
+            } else if (!Objects.equals(S.getItemGroup(), "")){
+                return S.resolve().stream().filter((I)-> I.itemID < 16384 && Block.getBlock(I.itemID) instanceof BlockFluid).map((I)->new FluidStack((BlockFluid) Block.getBlock(I.itemID)));
+            }
+            return null;
+        }).collect(Collectors.toList());
+        List<ItemStack> recipeStacks = Arrays.stream(getInput()).flatMap((S) -> S.resolve().stream()).collect(Collectors.toList());
         for (RecipeExtendedSymbol symbol : symbols) {
-            if (Arrays.asList(getInput()).contains(symbol)) {
-                RecipeExtendedSymbol inputSymbol = getInput()[Arrays.asList(getInput()).indexOf(symbol)];
-                if(inputSymbol.hasFluid()){
-                    FluidStack fluid = symbol.resolveFluids().get(0);
-                    FluidStack inputFluid = inputSymbol.resolveFluids().get(0);
-                    if (fluid.amount < inputFluid.amount) {
-                        return false;
-                    }
-                } else {
-                    ItemStack stack = symbol.resolve().get(0);
-                    ItemStack inputStack = inputSymbol.resolve().get(0);
-                    if (stack.stackSize < inputStack.stackSize) {
+            if(symbol.hasFluid()){
+                List<FluidStack> fluids = symbol.resolveFluids();
+                if(fluids == null) return false;
+                if(fluids.isEmpty()) return false;
+                for (FluidStack fluid : fluids) {
+                    if(SignalIndustries.listContains(recipeFluids,fluid,FluidStack::areFluidsEqual)){
+                        FluidStack recipeFluid = recipeFluids.get(fluids.indexOf(fluid));
+                        if(fluid.amount < recipeFluid.amount){
+                            return false;
+                        }
+                    } else {
                         return false;
                     }
                 }
             } else {
-                return false;
+                List<ItemStack> stacks = symbol.resolve();
+                if(stacks == null) return false;
+                if(stacks.isEmpty()) return false;
+                for (ItemStack stack : stacks) {
+                    if(SignalIndustries.listContains(recipeStacks,stack,ItemStack::isItemEqual)){
+                        ItemStack recipeStack = recipeStacks.get(stacks.indexOf(stack));
+                        if(stack.stackSize < recipeStack.stackSize){
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
             }
         }
         return true;

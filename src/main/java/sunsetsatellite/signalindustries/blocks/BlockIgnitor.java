@@ -16,6 +16,29 @@ public class BlockIgnitor extends BlockContainerTiered implements IConduitsConne
 
     public BlockIgnitor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityIgnitor tile = (TileEntityIgnitor) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y-1,z);
+        if(tile == null) return atlasIndices[side];
+        if(tile.isBurning()){
+            if(meta == 0 && blockAccess.getBlock(x,y-1,z) == this){
+                return SignalIndustries.textures.get(tier.name()+".ignitor.inverted.active.overlay").getTexture(Side.getSideById(side));
+            } else {
+                return SignalIndustries.textures.get(tier.name()+".ignitor.active.overlay").getTexture(Side.getSideById(side));
+            }
+        } else if (tile.isReady()) {
+            if(meta == 0 && blockAccess.getBlock(x,y-1,z) == this){
+                return SignalIndustries.textures.get(tier.name()+".ignitor.inverted.ready.overlay").getTexture(Side.getSideById(side));
+            } else {
+                return SignalIndustries.textures.get(tier.name()+".ignitor.ready.overlay").getTexture(Side.getSideById(side));
+            }
+        } else {
+            return -1;
+        }
     }
 
     @Override

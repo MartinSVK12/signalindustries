@@ -24,6 +24,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 public class BlockSignalumReactorCore extends BlockContainerTiered {
     public BlockSignalumReactorCore(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -58,13 +59,25 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
 
     @Override
     public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        /*TileEntityTieredMachine tile = (TileEntityTieredMachine) blockAccess.getBlockTileEntity(x,y,z);
-        if(tile.isBurning()){
-            return SignalIndustries.textures.get(tile.tier.name()+".signalumReactorCore.active").getTexture(Side.getSideById(index));
-        }*/
+        TileEntitySignalumReactor tile = (TileEntitySignalumReactor) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
+        if(tile.isActive() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".signalumReactorCore.active").getTexture(Side.getSideById(index));
+        }
+
         return this.atlasIndices[index];
     }
 
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntitySignalumReactor tile = (TileEntitySignalumReactor) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isActive() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".signalumReactorCore.active.overlay").getTexture(Side.getSideById(index));
+        }
+
+        return -1;
+    }
 }

@@ -26,6 +26,7 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
 
     public BlockDilithiumBooster(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -97,5 +98,16 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
             return SignalIndustries.textures.get("dilithiumBooster.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityBooster tile = (TileEntityBooster) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get("dilithiumBooster.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
     }
 }

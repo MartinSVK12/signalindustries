@@ -31,5 +31,14 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new FluidStack((BlockFluid) SignalIndustries.energyFlowing,240),
                         new RecipeProperties(100, Tier.BASIC,true))
         );
+        group.register(
+                "reinforced",
+                new RecipeEntryMachineFluid(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal,4))
+                        },
+                        new FluidStack((BlockFluid) SignalIndustries.energyFlowing,480*4),
+                        new RecipeProperties(200, Tier.REINFORCED,true))
+        );
     }
 }

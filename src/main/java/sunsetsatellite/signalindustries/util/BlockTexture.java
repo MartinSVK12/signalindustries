@@ -6,13 +6,13 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import turniplabs.halplibe.helper.TextureHelper;
 
 public class BlockTexture {
-    private int[] topTexture;
-    private int[] bottomTexture;
-    private int[] northTexture;
-    private int[] eastTexture;
-    private int[] southTexture;
-    private int[] westTexture;
-    private String modId;
+    private int[] topTexture = new int[]{0,0};
+    private int[] bottomTexture = new int[]{0,0};;
+    private int[] northTexture = new int[]{0,0};;
+    private int[] eastTexture = new int[]{0,0};;
+    private int[] southTexture = new int[]{0,0};;
+    private int[] westTexture = new int[]{0,0};;
+    private final String modId;
 
     public BlockTexture(String modId){
         this.modId = modId;
@@ -99,20 +99,20 @@ public class BlockTexture {
     public int getTexture(Side side){
         switch (side){
             case TOP:
-                return Block.texCoordToIndex(topTexture[0],topTexture[1]);
+                return Block.texCoordToIndex(topTexture[0],topTexture[1]) == 0 ? -1 : Block.texCoordToIndex(topTexture[0],topTexture[1]);
             case BOTTOM:
-                return Block.texCoordToIndex(bottomTexture[0],bottomTexture[1]);
+                return Block.texCoordToIndex(bottomTexture[0],bottomTexture[1]) == 0 ? -1 : Block.texCoordToIndex(bottomTexture[0],bottomTexture[1]);
             case NORTH:
-                return Block.texCoordToIndex(northTexture[0],northTexture[1]);
+                return Block.texCoordToIndex(northTexture[0],northTexture[1]) == 0 ? -1 : Block.texCoordToIndex(northTexture[0],northTexture[1]);
             case EAST:
-                return Block.texCoordToIndex(eastTexture[0],eastTexture[1]);
+                return Block.texCoordToIndex(eastTexture[0],eastTexture[1]) == 0 ? -1 : Block.texCoordToIndex(eastTexture[0],eastTexture[1]);
             case SOUTH:
-                return Block.texCoordToIndex(southTexture[0],southTexture[1]);
+                return Block.texCoordToIndex(southTexture[0],southTexture[1]) == 0 ? -1 : Block.texCoordToIndex(southTexture[0],southTexture[1]);
             case WEST:
-                return Block.texCoordToIndex(westTexture[0],westTexture[1]);
+                return Block.texCoordToIndex(westTexture[0],westTexture[1]) == 0 ? -1 : Block.texCoordToIndex(westTexture[0],westTexture[1]);
             case NONE:
-                return 0;
+                return -1;
         }
-        return 0;
+        return -1;
     }
 }

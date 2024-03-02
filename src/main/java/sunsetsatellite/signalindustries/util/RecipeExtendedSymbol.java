@@ -155,7 +155,24 @@ public class RecipeExtendedSymbol {
     }
 
     public static RecipeExtendedSymbol[] arrayOf(Object... objs){
+        //java varargs bruh moment
+        if(objs.length == 1 && objs[0] instanceof List){
+            return arrayOf((List<Object>) objs[0]);
+        }
+
         return Arrays.stream(objs).map((O) -> {
+            if (O instanceof ItemStack) {
+                return new RecipeExtendedSymbol((ItemStack) O);
+            } else if (O instanceof FluidStack) {
+                return new RecipeExtendedSymbol((FluidStack) O);
+            } else {
+                return null;
+            }
+        }).filter(Objects::nonNull).toArray(RecipeExtendedSymbol[]::new);
+    }
+
+    public static RecipeExtendedSymbol[] arrayOf(List<Object> list){
+        return list.stream().map((O) -> {
             if (O instanceof ItemStack) {
                 return new RecipeExtendedSymbol((ItemStack) O);
             } else if (O instanceof FluidStack) {

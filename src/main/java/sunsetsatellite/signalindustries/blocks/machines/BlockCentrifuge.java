@@ -27,6 +27,7 @@ import java.util.Random;
 public class BlockCentrifuge extends BlockContainerTiered {
     public BlockCentrifuge(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -94,11 +95,20 @@ public class BlockCentrifuge extends BlockContainerTiered {
         TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
+        if(tile.isBurning() && tile.tier == tier){
             return SignalIndustries.textures.get(tile.tier.name()+".centrifuge.active").getTexture(Side.getSideById(index));
-        } else if (tile.getConnection(Direction.Y_POS) == Connection.BOTH) {
-            return SignalIndustries.textures.get(tile.tier.name()+".centrifuge.loaded").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".centrifuge.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
     }
 }

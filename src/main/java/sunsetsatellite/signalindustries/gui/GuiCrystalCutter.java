@@ -91,6 +91,8 @@ public class GuiCrystalCutter extends GuiFluid {
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
                 break;
             case REINFORCED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_reinforced_machine_double.png");
+                break;
             case AWAKENED:
                 break;
         }

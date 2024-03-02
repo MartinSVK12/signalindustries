@@ -6,17 +6,25 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
+import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
+import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
@@ -26,11 +34,25 @@ public class BlockExtractor extends BlockContainerTiered {
 
     public BlockExtractor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
+        if(tier == Tier.REINFORCED){
+            return new TileEntityReinforcedExtractor();
+        }
         return new TileEntityExtractor();
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        if(tier == Tier.REINFORCED){
+            String s = super.getDescription(stack);
+            return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
+        } else {
+            return super.getDescription(stack);
+        }
     }
 
     @Override
@@ -78,25 +100,46 @@ public class BlockExtractor extends BlockContainerTiered {
         if(world.isClientSide)
         {
             return true;
-        } else
-        {
-            TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiExtractor(entityplayer.inventory, tile),new ContainerExtractor(entityplayer.inventory,tile),tile,i,j,k);
+        } else {
+            if (tier == Tier.REINFORCED) {
+                TileEntityReinforcedExtractor tile = (TileEntityReinforcedExtractor) world.getBlockTileEntity(i, j, k);
+                if (tile != null) {
+                    if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
+                        SignalIndustries.displayGui(entityplayer,new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
+                    } else {
+                        entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
+                    }
+                }
+                return true;
+            } else {
+                TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+                if (tile != null) {
+                    SignalIndustries.displayGui(entityplayer, new GuiExtractor(entityplayer.inventory, tile), new ContainerExtractor(entityplayer.inventory, tile), tile, i, j, k);
+                }
+                return true;
             }
-            return true;
         }
     }
 
     @Override
     public int getBlockTexture(WorldSource iblockaccess, int i, int j, int k, Side side) {
-        TileEntityExtractor tile = (TileEntityExtractor) iblockaccess.getBlockTileEntity(i,j,k);
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) iblockaccess.getBlockTileEntity(i,j,k);
         int meta = iblockaccess.getBlockMetadata(i,j,k);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
+        if(tile.isBurning() && tile.tier == tier){
             return SignalIndustries.textures.get(tile.tier.name()+".extractor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
 
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".extractor.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
+    }
 }

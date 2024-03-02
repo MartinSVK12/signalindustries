@@ -6,11 +6,13 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
@@ -23,6 +25,18 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
     public Multiblock multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
     public int cost;
+    private boolean isValidMultiblock = false;
+    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,40,true);
+
+    private void verifyIntegrity() {
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null){
+            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)));
+        } else {
+            isValidMultiblock = false;
+        }
+    }
+
     public TileEntityDimensionalAnchor(){
         progressMaxTicks = 6000;
         cost = 240;
@@ -42,6 +56,10 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         speedMultiplier = 1;
         extractFluids();
         stabilizers.clear();
+        verifyTimer.tick();
+        if(!isValidMultiblock){
+            return;
+        }
         Direction dir = Direction.getDirectionFromSide(getMovedData());
         ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
@@ -153,6 +171,11 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
     @Override
     public boolean isActive() {
         return isBurning();
+    }
+
+    @Override
+    public boolean isBurning() {
+        return super.isBurning() && isValidMultiblock;
     }
 
     @Override

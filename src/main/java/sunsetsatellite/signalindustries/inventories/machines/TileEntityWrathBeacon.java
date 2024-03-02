@@ -30,8 +30,8 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
     public boolean started = false;
     public ArrayList<EntityLiving> enemiesLeft = new ArrayList<>();
     public static ArrayList<Wave> waves = new ArrayList<>();
-    public TickTimer spawnTimer = new TickTimer(this,"spawn",20,true);
-    public TickTimer intermissionTimer = new TickTimer(this,"startWave",300,false);
+    public TickTimer spawnTimer = new TickTimer(this,this::spawn,20,true);
+    public TickTimer intermissionTimer = new TickTimer(this,this::startWave,300,false);
     {
             spawnTimer.pause();
             intermissionTimer.pause();

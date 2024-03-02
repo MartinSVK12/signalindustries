@@ -3,10 +3,12 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
@@ -29,6 +31,17 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     public State state = State.INACTIVE;
     public int stabilityField = 0;
     public int maxStabilityField = 100;
+    private boolean isValidMultiblock = false;
+    private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,40,true);
+
+    private void verifyIntegrity() {
+        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+        if(block != null){
+            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)));
+        } else {
+            isValidMultiblock = false;
+        }
+    }
 
     public TileEntitySignalumReactor(){
         multiblock = Multiblock.multiblocks.get("signalumReactor");
@@ -52,8 +65,14 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void tick() {
+        super.tick();
         stabilizers.clear();
         ignitors.clear();
+        verifyTimer.tick();
+        if(!isValidMultiblock){
+            state = State.INACTIVE;
+            return;
+        }
         Direction dir = Direction.getDirectionFromSide(getMovedData());
         ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),Direction.Z_POS);
         for (BlockInstance tileEntity : tileEntities) {

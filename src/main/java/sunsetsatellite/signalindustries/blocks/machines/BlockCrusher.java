@@ -28,6 +28,7 @@ public class BlockCrusher extends BlockContainerTiered {
 
     public BlockCrusher(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -95,9 +96,20 @@ public class BlockCrusher extends BlockContainerTiered {
         TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
+        if(tile.isBurning() && tile.tier == tier){
             return SignalIndustries.textures.get(tile.tier.name()+".crusher.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".crusher.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
     }
 }

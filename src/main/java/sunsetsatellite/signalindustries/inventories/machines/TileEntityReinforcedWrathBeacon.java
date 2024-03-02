@@ -39,10 +39,10 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     public ArrayList<EntityLiving> enemiesLeft = new ArrayList<>();
     public ArrayList<Wave> waves = new ArrayList<>();
     public EntityPlayer player;
-    public TickTimer spawnTimer = new TickTimer(this,"spawn",20,true);
-    public TickTimer intermissionTimer = new TickTimer(this,"startWave",300,false);
-    public TickTimer checkTimer = new TickTimer(this,"check",20,true);
-    public TickTimer suddenDeathSpawnTImer = new TickTimer(this,"suddenDeathSpawn",20,true);
+    public TickTimer spawnTimer = new TickTimer(this,this::spawn,20,true);
+    public TickTimer intermissionTimer = new TickTimer(this,this::startWave,300,false);
+    public TickTimer checkTimer = new TickTimer(this,this::check,20,true);
+    public TickTimer suddenDeathSpawnTImer = new TickTimer(this,this::suddenDeathSpawn,20,true);
     {
             suddenDeathSpawnTImer.pause();
             spawnTimer.pause();

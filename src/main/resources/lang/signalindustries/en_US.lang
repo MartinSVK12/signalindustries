@@ -83,7 +83,7 @@ item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
-item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing [Signalum Energy] either outwards into a powerful shockwave or inwards to break an slotted item inside.
+item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing [Signalum Energy] either outwards into a powerful shockwave or inwards to break a slotted item inside.
 
 item.signalindustries.reinforced.signalumSaber.name=Signalum Saber
 item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
@@ -116,7 +116,7 @@ item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.fuelCell.name=Fuel Cell
-item.signalindustries.fuelCell.desc=A special container containing [Signalum Energy] For use in the [Signalum Reactor].
+item.signalindustries.fuelCell.desc=A special container containing [Signalum Energy] for use in the [Signalum Reactor].
 
 item.signalindustries.warpOrb.name=Warp Orb
 item.signalindustries.warpOrb.desc=Can be encoded with a location in space. Wonder what would happen if you broke it?
@@ -284,7 +284,7 @@ tile.signalindustries.prototype.extractor.desc=Extracts [Signalum Energy] from [
 tile.signalindustries.basic.extractor.name=Basic Signalum Extractor
 tile.signalindustries.basic.extractor.desc=Extracts [Signalum Energy] from [Raw Signalum Crystals].
 tile.signalindustries.reinforced.extractor.name=Reinforced Signalum Extraction Manifold
-tile.signalindustries.reinforced.extractor.desc=Extracts large amounts [Signalum Energy] from several [Raw Signalum Crystals] at once.
+tile.signalindustries.reinforced.extractor.desc=Extracts large amounts of [Signalum Energy] from several [Raw Signalum Crystals] at once.
 tile.signalindustries.awakened.extractor.name=Awakened Signalum Collection Array Controller
 tile.signalindustries.awakened.extractor.desc=Will extract all [Signalum Energy] from any amount of [Raw Signalum Crystal] all at once with extraordinary efficiency.
 
@@ -622,5 +622,6 @@ guidebook.section.signalindustries.multiblocks=Multiblocks
 multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
 multiblock.signalindustries.signalumReactor.name=Signalum Reactor
 multiblock.signalindustries.wrathTree.name=Wrath Tree
+multiblock.signalindustries.reinforcedExtractor.name=Extraction Manifold
 
 gui.options.page.controls.category.signalindustries=Signal Industries

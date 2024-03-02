@@ -30,6 +30,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
 
     public BlockDimensionalAnchor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -119,10 +120,20 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
         TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
+        if(tile.isBurning() && tile.tier == tier){
             return SignalIndustries.textures.get("dimensionalAnchor.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
 
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning() && tile.tier == tier){
+            return SignalIndustries.textures.get("dimensionalAnchor.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
+    }
 }

@@ -9,6 +9,8 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class EntityCrystal extends Entity {
     public EntityLiving thrower;
     private int ticksInGroundSnowball;
     private int ticksInAirSnowball;
-    public int damage = 4;
+    public int damage = 2;
 
     public EntityCrystal(World world) {
         super(world);
@@ -183,9 +185,7 @@ public class EntityCrystal extends Entity {
 
                 for (Entity entity : list) {
                     if(entity instanceof EntityLiving){
-                        if(thrower == entity){
-                            ((EntityLiving) entity).heal(this.damage);
-                        } else {
+                        if(!(thrower == entity)){
                             entity.hurt(this.thrower,this.damage, DamageType.COMBAT);
                         }
                     }
@@ -193,7 +193,12 @@ public class EntityCrystal extends Entity {
             }
 
             for(int j = 0; j < 8; ++j) {
-                this.world.spawnParticle("dustcloud", this.x, this.y, this.z, 0.0, 0.0, 0.0);
+                float red = this.random.nextFloat();
+                if(red < 0.25f){
+                    red = 0.25f;
+                }
+                SignalIndustries.spawnParticle(new EntityDustCloudFX(world, this.x, this.y, this.z, 0, 0, 0, red, 0.0f, 0.0f));
+                //this.world.spawnParticle("dustcloud", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 for (int i = 0; i < 4; i++) {
                     this.world.spawnParticle("crystalbreak", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 }

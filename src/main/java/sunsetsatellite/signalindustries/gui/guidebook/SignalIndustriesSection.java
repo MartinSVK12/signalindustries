@@ -69,7 +69,13 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         pages.add(new GuidebookPage(this) {
             @Override
             protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-
+                drawStringCenteredNoShadow(fr,"Work in progress..." ,x+width/2,y+height/2,0xFF808080);
+            }
+        });
+        pages.add(new GuidebookPage(this) {
+            @Override
+            protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
+                drawStringCenteredNoShadow(fr,"Work in progress..." ,x+width/2,y+height/2,0xFF808080);
             }
         });
         for (SearchableGuidebookSubsection subsection : subsections) {

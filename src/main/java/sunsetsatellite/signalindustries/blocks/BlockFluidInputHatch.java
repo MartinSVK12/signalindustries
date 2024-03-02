@@ -6,6 +6,7 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -14,6 +15,7 @@ import sunsetsatellite.signalindustries.containers.ContainerFluidHatch;
 import sunsetsatellite.signalindustries.gui.GuiFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.TextureHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,6 +23,12 @@ import java.util.Random;
 public class BlockFluidInputHatch extends BlockContainerTiered {
     public BlockFluidInputHatch(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"input_overlay.png");
     }
 
     @Override

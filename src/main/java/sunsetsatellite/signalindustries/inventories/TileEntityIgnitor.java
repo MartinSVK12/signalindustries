@@ -17,7 +17,7 @@ import java.util.*;
 
 public class TileEntityIgnitor extends TileEntityFluidItemContainer implements IMultiblockPart {
     public boolean isActivated = false;
-    private final TickTimer timer = new TickTimer(this,"work",20,true);
+    private final TickTimer timer = new TickTimer(this,this::work,20,true);
     public TileEntity connectedTo;
 
     public TileEntityIgnitor(){

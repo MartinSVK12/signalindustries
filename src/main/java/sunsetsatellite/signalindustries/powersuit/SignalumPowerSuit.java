@@ -47,7 +47,7 @@ public class SignalumPowerSuit {
     public Mode mode;
     public EntityPlayer player;
     public int selectedAbilitySlot = 0;
-    public TickTimer saveTimer = new TickTimer(this, "saveToStacks",60,true);;
+    public TickTimer saveTimer = new TickTimer(this, this::saveToStacks,60,true);;
     public HashMap<SuitBaseAbility,Integer> cooldowns = new HashMap<>();
     public HashMap<SuitBaseEffectAbility,Integer> effectTimes = new HashMap<>();
 

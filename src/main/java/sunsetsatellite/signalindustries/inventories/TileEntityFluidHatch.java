@@ -1,12 +1,16 @@
 package sunsetsatellite.signalindustries.inventories;
 
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 
 
-public class TileEntityFluidHatch extends TileEntityTieredContainer {
+public class TileEntityFluidHatch extends TileEntityTieredContainer implements IMultiblockPart {
+
+    public TileEntity connectedTo;
 
     public TileEntityFluidHatch(){
         itemContents = new ItemStack[0];
@@ -20,5 +24,21 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer {
     public void tick() {
         super.tick();
         extractFluids();
+    }
+
+    @Override
+    public boolean isConnected() {
+        return connectedTo != null;
+    }
+
+    @Override
+    public TileEntity getConnectedTileEntity() {
+        return connectedTo;
+    }
+
+    @Override
+    public boolean connect(TileEntity tileEntity) {
+        connectedTo = tileEntity;
+        return true;
     }
 }

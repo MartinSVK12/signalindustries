@@ -77,6 +77,8 @@ public class GuiPump extends GuiFluid {
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/prototype_pump.png");
                 break;
             case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_pump.png");
+                break;
             case REINFORCED:
             case AWAKENED:
                 break;

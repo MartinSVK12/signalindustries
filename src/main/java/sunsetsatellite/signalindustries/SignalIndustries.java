@@ -67,10 +67,7 @@ import sunsetsatellite.signalindustries.inventories.machines.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
-import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
-import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
-import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
-import sunsetsatellite.signalindustries.items.containers.ItemSignalumSaber;
+import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.*;
@@ -88,6 +85,7 @@ import useless.dragonfly.model.block.BlockModelDragonFly;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
@@ -147,6 +145,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"reinforced_glass_right.png");
 
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_ore_overlay.png");
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"glowing_obsidian_overlay.png");
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"input_overlay.png");
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"output_overlay.png");
+
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail_overlay.png");
     }
     //public static final Config config = new Config(MOD_ID, mapOf(new String[]{"PacketOpenMachineGUI_ID","PacketPipeItemSpawn_ID","GuiID"},new String[]{"113","114","9"}), new Class[]{SignalIndustries.class});
 
@@ -192,12 +195,12 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new Block("emptyCrystalBlock",config.getInt("BlockIDs.emptyCrystalBlock"),Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
     public static final Block rawCrystalBlock = new BlockBuilder(MOD_ID)
             .setTextures("saturated_crystal_block.png")
-            .setLuminance(1).setBlockSound(BlockSounds.GLASS)
+            .setLuminance(15).setBlockSound(BlockSounds.GLASS)
             .setHardness(24).setResistance(50000)
             .build(new Block("rawCrystalBlock",config.getInt("BlockIDs.rawCrystalBlock"),Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
     public static final Block awakenedSignalumCrystalBlock = new BlockBuilder(MOD_ID)
             .setTextures("awakened_crystal_block.png")
-            .setLuminance(1)
+            .setLuminance(15)
             .setBlockSound(BlockSounds.GLASS)
             .setHardness(50)
             .setResistance(1000000)
@@ -384,6 +387,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setSideTextures("extractor_basic_side_empty.png")
             .build(new BlockExtractor("basic.extractor",config.getInt("BlockIDs.basicExtractor"),Tier.BASIC,Material.metal));
 
+    public static final Block reinforcedExtractor = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setSideTextures("extractor_reinforced_side_empty.png")
+            .build(new BlockExtractor("reinforced.extractor",config.getInt("BlockIDs.reinforcedExtractor"),Tier.REINFORCED,Material.metal));
+
     public static final Block prototypeCrusher = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
@@ -429,7 +440,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block basicPlateFormer = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
-            .setBlockSound(BlockSounds.STONE)
+            .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
             .setNorthTexture("plate_former_basic_inactive.png")
             .build(new BlockPlateFormer("basic.plateFormer",config.getInt("BlockIDs.basicPlateFormer"), Tier.BASIC,Material.metal));
@@ -437,7 +448,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block reinforcedPlateFormer = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
-            .setBlockSound(BlockSounds.STONE)
+            .setBlockSound(BlockSounds.METAL)
             .setTextures("reinforced_blank.png")
             .setNorthTexture("plate_former_reinforced_inactive.png")
             .build(new BlockPlateFormer("reinforced.plateFormer",config.getInt("BlockIDs.reinforcedPlateFormer"), Tier.REINFORCED,Material.metal));
@@ -453,10 +464,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Block basicCrystalCutter = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
-            .setBlockSound(BlockSounds.STONE)
+            .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
             .setNorthTexture("crystal_cutter_basic_inactive.png")
-            .build(new BlockCrystalCutter("basic.crystalCutter",config.getInt("BlockIDs.basicCrystalCutter"), Tier.BASIC,Material.stone));
+            .build(new BlockCrystalCutter("basic.crystalCutter",config.getInt("BlockIDs.basicCrystalCutter"), Tier.BASIC,Material.metal));
+
+    public static final Block reinforcedCrystalCutter = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setNorthTexture("crystal_cutter_reinforced_inactive.png")
+            .build(new BlockCrystalCutter("reinforced.crystalCutter",config.getInt("BlockIDs.reinforcedCrystalCutter"), Tier.REINFORCED, Material.stone));
 
     public static final Block basicCrystalChamber = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -464,7 +483,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setBlockSound(BlockSounds.METAL)
             .setTextures("basic_blank.png")
             .setNorthTexture("basic_crystal_chamber_side_inactive.png")
-            .build(new BlockCrystalChamber("basic.crystalChamber",config.getInt("BlockIDs.basicCrystalChamber"), Tier.BASIC,Material.stone));
+            .build(new BlockCrystalChamber("basic.crystalChamber",config.getInt("BlockIDs.basicCrystalChamber"), Tier.BASIC,Material.metal));
 
     public static final Block basicInfuser = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -519,7 +538,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setNorthTexture("dilithium_top_inactive.png")
             .build(new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
 
-    public static final Block prototypePump = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone),"prototype_pump_top_empty.png","prototype_blank.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png","prototype_pump_side_empty.png",BlockSounds.STONE,2,3,0);
+    public static final Block prototypePump = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
@@ -527,6 +546,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTopTexture("prototype_pump_top_empty.png")
             .setSideTextures("prototype_pump_side_empty.png")
             .build(new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone));
+
+    public static final Block basicPump = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_blank.png")
+            .setTopTexture("basic_pump_top_empty.png")
+            .setSideTextures("basic_pump_side_empty.png")
+            .build(new BlockPump("basic.pump",config.getInt("BlockIDs.basicPump"), Tier.BASIC,Material.metal));
 
     /*public static final Block prototypeBlockBreaker = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -678,6 +706,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Item signalumCrystalEmpty = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal("signalumCrystalEmpty",config.getInt("ItemIDs.signalumCrystalEmpty")),"signalumcrystalempty.png").setMaxStackSize(1);
     public static final Item signalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystal("signalumCrystal",config.getInt("ItemIDs.signalumCrystal")),"signalumcrystal.png").setMaxStackSize(1);
+    public static final Item volatileSignalumCrystal = ItemHelper.createItem(MOD_ID,new ItemSignalumCrystalVolatile("volatileSignalumCrystal",config.getInt("ItemIDs.volatileSignalumCrystal")),"volatile_signalum_crystal.png").setMaxStackSize(4);
     public static final Item rawSignalumCrystal = ItemHelper.createItem(MOD_ID,new Item("rawSignalumCrystal",config.getInt("ItemIDs.rawSignalumCrystal")),"rawsignalumcrystal.png");
 
     public static final Item awakenedSignalumCrystal = ItemHelper.createItem(MOD_ID, new Item("awakenedSignalumCrystal",config.getInt("ItemIDs.awakenedSignalumCrystal")),"awakenedsignalumcrystal.png").setMaxStackSize(1);
@@ -773,7 +802,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setHardness(2)
             .setResistance(1200)
             .setLuminance(10)
-            .build(new Block("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
+            .build(new BlockGlowingObsidian("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
         //BlockHelper.createBlock(MOD_ID,new Block(key("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone),"glowing_obsidian.png",BlockSounds.STONE, 50f,1200f,1.0f/2.0f);
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumprototypeharness",1200,10,10,10,10);
@@ -883,6 +912,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Multiblock dimAnchorMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"dimensionalAnchor","dimensionalAnchor",false);
     public static final Multiblock wrathTree = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"wrathTree","reinforcedWrathBeacon",false);
     public static final Multiblock signalumReactor = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"signalumReactor","signalumReactor",false);
+    public static final Multiblock extractionManifold = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"reinforcedExtractor","reinforcedExtractor",false);
 
     public static Map<String, BlockTexture> textures = new HashMap<>();
 
@@ -894,49 +924,80 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     static {
         textures.put(Tier.PROTOTYPE.name()+".extractor.active",new BlockTexture(MOD_ID).setTopAndBottom("prototype_blank.png").setSides("extractor_prototype_side_active.png"));
         textures.put(Tier.BASIC.name()+".extractor.active",new BlockTexture(MOD_ID).setTopAndBottom("basic_blank.png").setSides("extractor_basic_side_active.png"));
+        textures.put(Tier.REINFORCED.name()+".extractor.active",new BlockTexture(MOD_ID).setTopAndBottom("reinforced_blank.png").setSides("extractor_reinforced_side_active.png"));
+        textures.put(Tier.PROTOTYPE.name()+".extractor.active.overlay",new BlockTexture(MOD_ID).setSides("extractor_overlay.png"));
+        textures.put(Tier.BASIC.name()+".extractor.active.overlay",new BlockTexture(MOD_ID).setSides("extractor_overlay.png"));
+        textures.put(Tier.REINFORCED.name()+".extractor.active.overlay",new BlockTexture(MOD_ID).setSides("extractor_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".crusher.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setTopTexture("crusher_prototype_top_active.png").setNorthTexture("crusher_prototype_side.png"));
         textures.put(Tier.BASIC.name()+".crusher.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setTopTexture("crusher_basic_top_active.png").setNorthTexture("crusher_basic_side.png"));
+        textures.put(Tier.PROTOTYPE.name()+".crusher.active.overlay",new BlockTexture(MOD_ID).setTopTexture("crusher_overlay.png"));
+        textures.put(Tier.BASIC.name()+".crusher.active.overlay",new BlockTexture(MOD_ID).setTopTexture("crusher_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".alloySmelter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("alloy_smelter_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".alloySmelter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("alloy_smelter_basic_active.png"));
+        textures.put(Tier.PROTOTYPE.name()+".alloySmelter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("alloy_smelter_overlay.png"));
+        textures.put(Tier.BASIC.name()+".alloySmelter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("alloy_smelter_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("plate_former_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("plate_former_basic_active.png"));
         textures.put(Tier.REINFORCED.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setNorthTexture("plate_former_reinforced_active.png"));
-
+        textures.put(Tier.PROTOTYPE.name()+".plateFormer.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("plate_former_overlay.png"));
+        textures.put(Tier.BASIC.name()+".plateFormer.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("plate_former_overlay.png"));
+        textures.put(Tier.REINFORCED.name()+".plateFormer.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("reinforced_plate_former_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("crystal_cutter_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("crystal_cutter_basic_active.png"));
+        textures.put(Tier.REINFORCED.name()+".crystalCutter.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setNorthTexture("crystal_cutter_reinforced_active.png"));
+
+        textures.put(Tier.PROTOTYPE.name()+".crystalCutter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("cutter_overlay.png"));
+        textures.put(Tier.BASIC.name()+".crystalCutter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("cutter_overlay.png"));
+        textures.put(Tier.REINFORCED.name()+".crystalCutter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("reinforced_cutter_overlay.png"));
 
         textures.put(Tier.BASIC.name()+".crystalChamber.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("basic_crystal_chamber_side_active.png"));
+        textures.put(Tier.BASIC.name()+".crystalChamber.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("chamber_overlay.png"));
+
+        textures.put(Tier.BASIC.name()+".automaticMiner.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("auto_miner_overlay.png"));
 
         textures.put(Tier.BASIC.name()+".infuser.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("infuser_basic_side_active.png"));
+        textures.put(Tier.BASIC.name()+".infuser.active.overlay",new BlockTexture(MOD_ID).setSides("infuser_overlay.png"));
 
         textures.put(Tier.BASIC.name()+".wrathBeacon.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("wrath_beacon_active.png"));
         textures.put(Tier.REINFORCED.name()+".wrathBeacon.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("reinforced_wrath_beacon_active.png"));
 
-
         textures.put(Tier.PROTOTYPE.name()+".pump.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setSides("prototype_pump_side.png").setTopTexture("prototype_pump_top.png"));
+        textures.put(Tier.BASIC.name()+".pump.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("basic_pump_side_empty.png").setTopTexture("basic_pump_top_empty.png"));
+
+        textures.put(Tier.REINFORCED.name()+".signalumReactorCore.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("signalum_reactor_side_active.png").setNorthTexture("signalum_reactor_front_active.png"));
+        textures.put(Tier.REINFORCED.name()+".signalumReactorCore.active.overlay",new BlockTexture(MOD_ID).setSides("reactor_side_overlay.png").setNorthTexture("reactor_overlay.png"));
 
         textures.put("dimensionalAnchor.active",new BlockTexture(MOD_ID).setSides("dimensional_anchor.png").setBottomTexture("dimensional_anchor_bottom.png").setTopTexture("dimensional_anchor_top.png"));
+        textures.put("dimensionalAnchor.active.overlay",new BlockTexture(MOD_ID).setSides("anchor_overlay.png").setBottomTexture("anchor_blank_overlay.png").setTopTexture("anchor_top_overlay.png"));
 
         textures.put("dilithiumStabilizer.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_stabilizer_side_active.png").setNorthTexture("dilithium_top_active.png"));
+        textures.put("dilithiumStabilizer.active.overlay",new BlockTexture(MOD_ID).setSides("stabilizer_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
         textures.put("dilithiumStabilizer.vertical",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_stabilizer_side_inactive.png").setTopTexture("dilithium_top_inactive.png"));
         textures.put("dilithiumStabilizer.vertical.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_stabilizer_side_active.png").setTopTexture("dilithium_top_active.png"));
+        textures.put("dilithiumStabilizer.vertical.active.overlay",new BlockTexture(MOD_ID).setSides("stabilizer_overlay.png").setTopTexture("dilithium_machine_overlay.png"));
 
         textures.put("dilithiumBooster.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_booster_side_active.png").setNorthTexture("dilithium_top_active.png"));
+        textures.put("dilithiumBooster.active.overlay",new BlockTexture(MOD_ID).setSides("booster_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
 
         textures.put(Tier.BASIC.name()+".externalIo",new BlockTexture(MOD_ID).setAll("external_io_blank.png").setTopTexture("external_io_input.png").setBottomTexture("external_io_output.png").setNorthTexture("external_io_both.png"));
 
         textures.put(Tier.REINFORCED.name()+".centrifuge.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("reinforced_centrifuge_closed.png").setNorthTexture("reinforced_centrifuge_front_active.png"));
+        textures.put(Tier.REINFORCED.name()+".centrifuge.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("centrifuge_overlay.png"));
         textures.put(Tier.REINFORCED.name()+".centrifuge.loaded",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("reinforced_centrifuge_loaded.png").setNorthTexture("reinforced_centrifuge_front_inactive.png"));
 
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_inactive_inverted.png").setTopTexture("reinforced_ignitor_bottom_inactive.png").setBottomTexture("reinforced_ignitor_top_inactive.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.active",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_active.png").setTopTexture("reinforced_ignitor_top_active.png").setBottomTexture("reinforced_ignitor_bottom_active.png"));
+        textures.put(Tier.REINFORCED.name()+".ignitor.active.overlay",new BlockTexture(MOD_ID).setSides("ignitor_1_overlay.png").setTopTexture("ignitor_7_overlay.png").setBottomTexture("ignitor_3_overlay.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.active",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_active_inverted.png").setTopTexture("reinforced_ignitor_bottom_active.png").setBottomTexture("reinforced_ignitor_top_active.png"));
+        textures.put(Tier.REINFORCED.name()+".ignitor.inverted.active.overlay",new BlockTexture(MOD_ID).setSides("ignitor_2_overlay.png").setTopTexture("ignitor_3_overlay.png").setBottomTexture("ignitor_7_overlay.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready.png").setTopTexture("reinforced_ignitor_top_ready.png").setBottomTexture("reinforced_ignitor_bottom_ready.png"));
+        textures.put(Tier.REINFORCED.name()+".ignitor.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_5_overlay.png").setTopTexture("ignitor_8_overlay.png").setBottomTexture("ignitor_4_overlay.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready_inverted.png").setTopTexture("reinforced_ignitor_bottom_ready.png").setBottomTexture("reinforced_ignitor_top_ready.png"));
+        textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_6_overlay.png").setTopTexture("ignitor_4_overlay.png").setBottomTexture("ignitor_8_overlay.png"));
 
         Dimension.registerDimension(config.getInt("Other.eternityDimId"),dimEternity);
     }
@@ -988,7 +1049,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
         EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
-        EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(signalumCrystal.getIconFromDamage(0)));
+        EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(volatileSignalumCrystal.getIconFromDamage(0)));
         EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
         EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
         EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
@@ -1002,6 +1063,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityExtractor.class,"Extractor");
         addToNameGuiMap("Extractor", GuiExtractor.class, TileEntityExtractor.class);
+
+        EntityHelper.Core.createSpecialTileEntity(TileEntityReinforcedExtractor.class, new RenderMultiblock(), "Extraction Manifold");
+        addToNameGuiMap("Extraction Manifold", GuiReinforcedExtractor.class, TileEntityReinforcedExtractor.class);
 
         EntityHelper.Core.createTileEntity(TileEntityCrusher.class,"Crusher");
         addToNameGuiMap("Crusher", GuiCrusher.class, TileEntityCrusher.class);
@@ -1077,6 +1141,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
         Multiblock.multiblocks.put("wrathTree",wrathTree);
         Multiblock.multiblocks.put("signalumReactor",signalumReactor);
+        Multiblock.multiblocks.put("extractionManifold",extractionManifold);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 
@@ -1164,6 +1229,30 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static String key(String key){
         return HalpLibe.addModId(MOD_ID,key);
+    }
+
+    public static <T> boolean listContains(List<T> list, T o, BiFunction<T,T,Boolean> equals){
+        for (T obj : list) {
+            if(equals.apply(o,obj)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<ItemStack> condenseList(List<ItemStack> list){
+        ArrayList<ItemStack> stacks = new ArrayList<>();
+        for (ItemStack stack : list) {
+            if(stack != null){
+                Optional<ItemStack> existing = stacks.stream().filter((S) -> S.itemID == stack.itemID).findAny();
+                if (existing.isPresent()) {
+                    existing.get().stackSize += stack.stackSize;
+                } else {
+                    stacks.add(stack.copy());
+                }
+            }
+        }
+        return stacks;
     }
 
     public static void usePortal(int dim) {

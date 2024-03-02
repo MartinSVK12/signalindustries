@@ -27,6 +27,7 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
 
     public BlockDilithiumStabilizer(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
     }
 
     @Override
@@ -129,5 +130,27 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
             return SignalIndustries.textures.get("dilithiumStabilizer.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityStabilizer tile = (TileEntityStabilizer) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index; //3, 2, 1, 0, 5, 4
+        int[] orientationLookUpVertical = new int[]{1, 0, 2, 3, 4, 5, /**/ 0, 1, 2, 3, 4, 5};
+        if(meta == 0 || meta == 1){
+            index = orientationLookUpVertical[6 * meta + side];
+            if(tile.isBurning()){
+                return SignalIndustries.textures.get("dilithiumStabilizer.vertical.active.overlay").getTexture(Side.getSideById(index));
+            } else {
+                return -1;
+            }
+        } else {
+            index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        }
+        if(tile.isBurning()){
+            return SignalIndustries.textures.get("dilithiumStabilizer.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
     }
 }

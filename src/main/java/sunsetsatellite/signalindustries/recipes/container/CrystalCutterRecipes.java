@@ -30,6 +30,17 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 )
         );
         group.register(
+                "volatile_signalum_crystal",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1))
+                        },
+                        new ItemStack(SignalIndustries.volatileSignalumCrystal,4,0),
+                        new RecipeProperties(200,80,3, Tier.BASIC,false)
+                )
+        );
+        group.register(
                 "crystal_chip",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{

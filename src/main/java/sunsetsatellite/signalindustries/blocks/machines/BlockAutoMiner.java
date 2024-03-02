@@ -5,13 +5,18 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
 import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -21,6 +26,18 @@ import java.util.Random;
 public class BlockAutoMiner extends BlockContainerTiered {
     public BlockAutoMiner(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
+        hasOverbright = true;
+    }
+
+    @Override
+    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
+        if(tile.isBurning() && tile.tier == tier){
+            return SignalIndustries.textures.get(tile.tier.name()+".automaticMiner.active.overlay").getTexture(Side.getSideById(index));
+        }
+        return -1;
     }
 
     @Override
