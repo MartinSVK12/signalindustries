@@ -4230,5 +4230,46 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/uv_lamp",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PDP",
+      "DLD",
+      "PDP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "tile.glass.tinted",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "stack": {
+          "id": 850,
+          "amount": 1,
+          "meta": 10
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.uvLamp",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

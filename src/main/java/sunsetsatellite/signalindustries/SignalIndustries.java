@@ -37,6 +37,7 @@ import net.minecraft.core.world.weather.Weather;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.NBTEditCommand;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
@@ -97,6 +98,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final TomlConfigHandler config;
     public static List<ChunkCoordinates> meteorLocations = new ArrayList<>();
+    public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     static {
         Toml configToml = new Toml("Signal Industries configuration file.");
@@ -148,8 +150,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"glowing_obsidian_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"input_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"output_overlay.png");
-
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail_overlay.png");
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"uv_lamp_overlay.png");
     }
     //public static final Config config = new Config(MOD_ID, mapOf(new String[]{"PacketOpenMachineGUI_ID","PacketPipeItemSpawn_ID","GuiID"},new String[]{"113","114","9"}), new Class[]{SignalIndustries.class});
 
@@ -805,6 +807,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .build(new BlockGlowingObsidian("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone));
         //BlockHelper.createBlock(MOD_ID,new Block(key("glowingObsidian",config.getInt("BlockIDs.glowingObsidian"),Material.stone),"glowing_obsidian.png",BlockSounds.STONE, 50f,1200f,1.0f/2.0f);
 
+    public static final Block uvLamp = new BlockBuilder(MOD_ID)
+            .setTextures("uv_lamp_inactive.png")
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .build(new BlockUVLamp("uvLamp",config.getInt("BlockIDs.uvLamp"),Material.metal));
+
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumprototypeharness",1200,10,10,10,10);
     public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumpowersuit",9999,50,50,50,50);
 
@@ -983,6 +992,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put("dilithiumBooster.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_booster_side_active.png").setNorthTexture("dilithium_top_active.png"));
         textures.put("dilithiumBooster.active.overlay",new BlockTexture(MOD_ID).setSides("booster_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
 
+        textures.put("uvLamp.active",new BlockTexture(MOD_ID).setAll("uv_lamp.png"));
+
         textures.put(Tier.BASIC.name()+".externalIo",new BlockTexture(MOD_ID).setAll("external_io_blank.png").setTopTexture("external_io_input.png").setBottomTexture("external_io_output.png").setNorthTexture("external_io_both.png"));
 
         textures.put(Tier.REINFORCED.name()+".centrifuge.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("reinforced_centrifuge_closed.png").setNorthTexture("reinforced_centrifuge_front_active.png"));
@@ -1128,6 +1139,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityProgrammer.class,"EEPROM Programmer");
         addToNameGuiMap("EEPROM Programmer", GuiProgrammer.class,TileEntityProgrammer.class);
+
+        EntityHelper.Core.createTileEntity(TileEntityUVLamp.class,"Ultraviolet Lamp");
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
