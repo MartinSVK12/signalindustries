@@ -78,12 +78,13 @@ import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.util.GameStartEntrypoint;
-import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.toml.Toml;
 import useless.dragonfly.helper.ModelHelper;
 import useless.dragonfly.model.block.BlockModelDragonFly;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -91,8 +92,8 @@ import java.util.stream.Collectors;
 
 public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
-    private static int availableBlockId = 1200;
-    private static int availableItemId = 17100;
+    private static final int blockIdStart = 1200;
+    private static final int itemIdStart = 17100;
 
     public static final String MOD_ID = "signalindustries";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -101,26 +102,73 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     static {
-        Toml configToml = new Toml("Signal Industries configuration file.");
-        configToml.addCategory("BlockIDs");
-        configToml.addCategory("ItemIDs");
-        configToml.addCategory("EntityIDs");
-        configToml.addCategory("Other");
-        configToml.addEntry("Other.eternityDimId",3);
-        configToml.addEntry("Other.GuiId",10);
-        configToml.addEntry("Other.machinePacketId",113);
-        configToml.addEntry("EntityIDs.infernalId",50);
-
         List<Field> blockFields = Arrays.stream(SignalIndustries.class.getDeclaredFields()).filter((F)->Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
-        for (Field blockField : blockFields) {
-            configToml.addEntry("BlockIDs."+blockField.getName(),availableBlockId++);
-        }
         List<Field> itemFields = Arrays.stream(SignalIndustries.class.getDeclaredFields()).filter((F)->Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
+
+        Toml defaultConfig = new Toml("Signal Industries configuration file.");
+        defaultConfig.addCategory("BlockIDs");
+        defaultConfig.addCategory("ItemIDs");
+        defaultConfig.addCategory("EntityIDs");
+        defaultConfig.addCategory("Other");
+        defaultConfig.addEntry("Other.eternityDimId",3);
+        defaultConfig.addEntry("Other.GuiId",10);
+        defaultConfig.addEntry("Other.machinePacketId",113);
+        defaultConfig.addEntry("EntityIDs.infernalId",50);
+
+        int blockId = blockIdStart;
+        int itemId = itemIdStart;
+        for (Field blockField : blockFields) {
+            defaultConfig.addEntry("BlockIDs."+blockField.getName(),blockId++);
+        }
         for (Field itemField : itemFields) {
-            configToml.addEntry("ItemIDs."+itemField.getName(),availableItemId++);
+            defaultConfig.addEntry("ItemIDs."+itemField.getName(),itemId++);
         }
 
-        config = new TomlConfigHandler(MOD_ID,configToml);
+
+        config = new TomlConfigHandler(MOD_ID,new Toml("Signal Industries configuration file."));
+
+        File configFile = config.getConfigFile();
+
+        if(config.getConfigFile().exists()){
+            config.loadConfig();
+            config.setDefaults(config.getRawParsed());
+            Toml rawConfig = config.getRawParsed();
+            int maxBlocks = ((Toml)rawConfig.get(".BlockIDs")).getOrderedKeys().size();
+            int maxItems = ((Toml)rawConfig.get(".ItemIDs")).getOrderedKeys().size();
+            int newNextBlockId = blockIdStart + maxBlocks;
+            int newNextItemId = itemIdStart + maxItems;
+            boolean changed = false;
+
+            for (Field F : blockFields) {
+                if (!rawConfig.contains("BlockIDs." + F.getName())) {
+                    rawConfig.addEntry("BlockIDs." + F.getName(), newNextBlockId++);
+                    changed = true;
+                }
+            }
+            for (Field F : itemFields) {
+                if (!rawConfig.contains("ItemIDs." + F.getName())) {
+                    rawConfig.addEntry("ItemIDs." + F.getName(), newNextItemId++);
+                    changed = true;
+                }
+            }
+            if(changed){
+                config.setDefaults(rawConfig);
+                config.writeConfig();
+                config.loadConfig();
+            }
+        } else {
+            config.setDefaults(defaultConfig);
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                configFile.getParentFile().mkdirs();
+                //noinspection ResultOfMethodCallIgnored
+                configFile.createNewFile();
+                config.writeConfig();
+                config.loadConfig();
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to generate config!",e);
+            }
+        }
 
         try {
             Class.forName("net.minecraft.core.block.Block");
