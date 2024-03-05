@@ -29,6 +29,7 @@ import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.Mode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -184,12 +185,17 @@ public class SignalumPowerSuit {
             mode = Mode.NONE;
         }
 
+        List<SuitBaseAbility> temp = new ArrayList<>();
         //count down cooldowns
         for (Map.Entry<SuitBaseAbility, Integer> entry : cooldowns.entrySet()) {
             entry.setValue(entry.getValue()-1);
             if(entry.getValue() <= 0){
-                cooldowns.remove(entry.getKey());
+                temp.add(entry.getKey());
             }
+        }
+
+        for (SuitBaseAbility suitBaseAbility : temp) {
+            cooldowns.remove(suitBaseAbility);
         }
 
         for (Map.Entry<SuitBaseEffectAbility, Integer> entry : effectTimes.entrySet()) {

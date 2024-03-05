@@ -778,12 +778,12 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyPlate",config.getInt("ItemIDs.saturatedSignalumAlloyPlate")),"saturatedsignalumalloyplate.png");
     public static final Item dilithiumPlate = ItemHelper.createItem(MOD_ID,new Item("dilithiumPlate",config.getInt("ItemIDs.dilithiumPlate")),"dilithiumplate.png");
 
-
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("crystalAlloyIngot",config.getInt("ItemIDs.crystalAlloyIngot")),"crystalalloy.png");
     public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("reinforcedCrystalAlloyIngot",config.getInt("ItemIDs.reinforcedCrystalAlloyIngot")),"reinforcedcrystalalloy.png");
     public static final Item saturatedSignalumAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyIngot",config.getInt("ItemIDs.saturatedSignalumAlloyIngot")),"saturatedsignalumalloy.png");
 
     public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item("diamondCuttingGear",config.getInt("ItemIDs.diamondCuttingGear")),"diamondcuttinggear.png");
+    public static final Item signalumCuttingGear = ItemHelper.createItem(MOD_ID,new Item("signalumCuttingGear",config.getInt("ItemIDs.signalumCuttingGear")),"signalumcuttinggear.png");
 
     public static final Block portalEternity = new BlockBuilder(MOD_ID)
             .setTextures("reality_fabric.png")
@@ -918,8 +918,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     //public static final Item testingAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.testingAbilityContainer"),testEffectAbility),"testingAbilityItem","testingability.png");
     //public static final Item clockworkAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility(config.getInt("ItemIDs.clockworkAbilityContainer"),clockworkAbility),"clockworkAbilityContainer","ability12.png");
-    public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("boostAbilityContainer",config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"ability2.png");
-    public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("projectileAbilityContainer",config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"ability1.png");
+    public static final Item boostAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("boostAbilityContainer",config.getInt("ItemIDs.boostAbilityContainer"),boostAbility),"ability2.png").setMaxStackSize(1);
+    public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("projectileAbilityContainer",config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"ability1.png").setMaxStackSize(1);
 
     public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("abilityModule",config.getInt("ItemIDs.abilityModule"),Mode.NORMAL),"abilitymodule.png");
     /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.normalAbilityModule"),Mode.NORMAL),"normalAbilityModule","normalmodule.png");

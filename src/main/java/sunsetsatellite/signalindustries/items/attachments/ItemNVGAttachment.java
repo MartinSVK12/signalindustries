@@ -6,6 +6,7 @@ import net.minecraft.client.render.shader.ShadersRenderer;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.render.ShadersRendererSI;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -54,6 +55,16 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
             } else {
                 signalumPowerSuit.decrementEnergy(1);
             }
+        }
+    }
+
+    public static void disable(){
+        Minecraft mc = Minecraft.getMinecraft(SignalIndustries.class);
+        if (mc.render instanceof ShadersRendererSI) {
+            mc.setRenderer(new ShadersRenderer(mc));
+            mc.render.reload();
+            mc.fullbright = false;
+            mc.renderGlobal.loadRenderers();
         }
     }
 }

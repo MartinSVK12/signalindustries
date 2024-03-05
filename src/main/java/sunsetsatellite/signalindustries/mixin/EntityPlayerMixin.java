@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.mixin;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.shader.ShadersRenderer;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumSleepStatus;
@@ -21,7 +23,9 @@ import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemNVGAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.render.ShadersRendererSI;
 
 @Mixin(
         value = EntityPlayer.class,
@@ -71,8 +75,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         for (ItemStack itemStack : armorInventory) {
             if(itemStack == null){
                 powerSuit = null;
+                ItemNVGAttachment.disable();
                 return;
             } else if(!(itemStack.getItem() instanceof ItemSignalumPowerSuit)){
+                ItemNVGAttachment.disable();
                 powerSuit = null;
                 return;
             }
