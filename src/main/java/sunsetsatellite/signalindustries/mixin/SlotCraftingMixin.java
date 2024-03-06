@@ -44,5 +44,26 @@ public class SlotCraftingMixin {
         if(item.id == SignalIndustries.basicMachineCore.id){
             thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BASIC);
         }
+        if(item.id == SignalIndustries.reinforcedMachineCore.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.REINFORCED);
+        }
+        if(item.id == SignalIndustries.dilithiumBooster.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BOOST);
+        }
+        if(item.id == SignalIndustries.warpOrb.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.WARP_ORB);
+        }
+        if(item.id == SignalIndustries.signalumSaber.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BLADE);
+        }
+        if(item.id == SignalIndustries.signalumPrototypeHarness.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.HARNESS);
+        }
+        if(item.id == SignalIndustries.basicAutomaticMiner.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.MINER);
+        }
+        if(item.id == SignalIndustries.basicPump.id){
+            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.PUMP);
+        }
     }
 }

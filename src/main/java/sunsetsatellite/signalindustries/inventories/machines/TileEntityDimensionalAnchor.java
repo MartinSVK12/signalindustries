@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
@@ -16,6 +17,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +143,8 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
             pos.putInt("y",y+1);
             pos.putInt("z",z);
             stack.getData().put("position",pos);
+            stack.getData().putInt("dim",worldObj.dimension.id);
+            Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.ANCHOR);
         }
     }
 

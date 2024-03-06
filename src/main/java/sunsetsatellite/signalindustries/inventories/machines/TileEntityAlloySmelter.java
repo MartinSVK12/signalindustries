@@ -1,11 +1,13 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
 
@@ -24,6 +26,14 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implem
     @Override
     public String getInvName() {
         return "Alloy Smelter";
+    }
+
+    @Override
+    public void processItem() {
+        super.processItem();
+        if(itemContents[itemOutputs[0]].itemID == SignalIndustries.reinforcedCrystalAlloyIngot.id){
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.KNIGHTS_ALLOY);
+        }
     }
 
 }

@@ -2,12 +2,15 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
 import java.util.ArrayList;
@@ -55,119 +58,12 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
         super.tick();
     }
 
-    /*@Override
-    public void tick() {
-        super.tick();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
-        extractFluids();
-        BlockContainerTiered block = (BlockContainerTiered) getBlockType();
-        if(block != null) {
-            tier = block.tier;
-            switch (block.tier) {
-                case PROTOTYPE:
-                    fluidCapacity[0] = 2000;
-                    fluidCapacity[1] = 1000;
-                    break;
-                case BASIC:
-                    fluidCapacity[0] = 4000;
-                    fluidCapacity[1] = 4000;
-                    break;
-                case REINFORCED:
-                case AWAKENED:
-                    break;
-            }
-        }
-        boolean update = false;
-        if(fuelBurnTicks > 0){
-            fuelBurnTicks--;
-        }
-        if(itemContents[0] == null){
-            progressTicks = 0;
-        } else if(canProcess()) {
-            progressMaxTicks = 200 / speedMultiplier;
-        }
-        if(!worldObj.isClientSide){
-            if (progressTicks == 0 && canProcess()){
-                update = fuel();
-            }
-            if(isBurning() && canProcess()){
-                progressTicks++;
-                if(progressTicks >= progressMaxTicks){
-                    progressTicks = 0;
-                    processItem();
-                    update = true;
-                }
-            } else if(canProcess()){
-                fuel();
-                if(fuelBurnTicks > 0){
-                    fuelBurnTicks++;
-                }
-            }
-        }
-
-        if(update) {
-            this.onInventoryChanged();
-        }
-
-    }
-
-    public boolean fuel(){
-        int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
-        if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
-            fuelMaxBurnTicks = fuelBurnTicks = burn;
-            fluidContents[0].amount -= cost;
-            if(fluidContents[0].amount == 0) {
-                fluidContents[0] = null;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public void processItem(){
-        if(canProcess()){
-            ItemStack stack = SIRecipes.CRYSTAL_CUTTER.findOutput(
-                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
-                    tier,
-                    recipeSelector);
-            RecipeEntryMachine recipe = SIRecipes.CRYSTAL_CUTTER.findRecipe(
-                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
-                    tier,
-                    recipeSelector);
-            if(itemContents[1] == null){
-                setInventorySlotContents(1, stack);
-            } else if(itemContents[1].isItemEqual(stack)) {
-                itemContents[1].stackSize++;
-            }
-            if(stack.getItem() instanceof ItemSignalumCrystal){
-                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.SHINING);
-            }
-            if(this.itemContents[0].getItem().hasContainerItem()) {
-                this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
-            } else {
-                this.itemContents[0].stackSize -= recipe.getInput()[1].resolve().get(0).stackSize;
-                this.fluidContents[1].amount -= recipe.getInput()[0].resolveFluids().get(0).amount;
-            }
-            if(this.itemContents[0].stackSize <= 0) {
-                this.itemContents[0] = null;
-            }
-            if(this.fluidContents[1].amount <= 0) {
-                this.fluidContents[1] = null;
-            }
+    @Override
+    public void processItem() {
+        super.processItem();
+        if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.SHINING);
         }
     }
-
-    private boolean canProcess() {
-        if(itemContents[0] == null || fluidContents[1] == null) {
-            return false;
-        } else {
-            ItemStack stack = SIRecipes.CRYSTAL_CUTTER.findOutput(
-                    RecipeExtendedSymbol.arrayOf(fluidContents[1],itemContents[0]),
-                    tier,
-                    recipeSelector);
-            return stack != null && (itemContents[1] == null || (itemContents[1].isItemEqual(stack) && (itemContents[1].stackSize < getInventoryStackLimit() && itemContents[1].stackSize < itemContents[1].getMaxStackSize() || itemContents[1].stackSize < stack.getMaxStackSize())));
-        }
-    }*/
 
 }

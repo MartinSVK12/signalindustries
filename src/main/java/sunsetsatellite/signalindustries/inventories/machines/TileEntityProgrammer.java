@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -7,6 +8,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.ItemTrigger;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 
@@ -84,6 +86,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
             ItemStack trigger = itemContents[1];
             String[] key = chip.getItemName().split("\\.");
             trigger.getData().putString("ability",key[key.length-1]);
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.PROGRAMMER);
         }
     }
 

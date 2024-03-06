@@ -17,6 +17,7 @@ import sunsetsatellite.signalindustries.gui.GuiPulsarAttachment;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -42,17 +43,27 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
                 ExplosionEnergy ex = new ExplosionEnergy(world,player,player.x,player.y,player.z,3f);
                 ex.doExplosionA();
                 ex.doExplosionB(true,0.7f,0.0f,0.7f);
-                CompoundTag warpPosition = getItemFromSlot(0,stack).getCompound("Data").getCompound("position");
+                CompoundTag data = getItemFromSlot(0,stack).getCompound("Data");
+                CompoundTag warpPosition = data.getCompound("position");
                 if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
+                    player.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_SUCCESS);
+                    if(player.dimension == SignalIndustries.dimEternity.id){
+                        player.triggerAchievement(SignalIndustriesAchievementPage.FALSE_ETERNITY);
+                    }
+                    if(data.getInteger("dim") != player.dimension){
+                        SignalIndustries.usePortal(data.getInteger("dim"));
+                    }
                     player.setPos(warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"));
                     ex = new ExplosionEnergy(world,player,player.x,player.y,player.z,3f);
                     ex.doExplosionA();
                     ex.doExplosionB(true,0.7f,0.0f,0.7f);
                 } else {
+                    player.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_FAIL);
                     SignalIndustries.usePortal(SignalIndustries.dimEternity.id);
                 }
                 ((INBTCompound)stack.getData().getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
+                player.triggerAchievement(SignalIndustriesAchievementPage.PULSE);
                 world.spawnParticle("pulse_shockwave", player.x, player.y, player.z, 0.0, 0.0, 0.0);
             }
         }

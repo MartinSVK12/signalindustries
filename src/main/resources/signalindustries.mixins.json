@@ -31,6 +31,7 @@
     "RichPresenceHandlerThreadMixin",
     "SaveHandlerBaseMixin",
     "SlotCraftingMixin",
+    "SlotMixin",
     "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",

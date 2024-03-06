@@ -16,6 +16,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 
 
@@ -44,6 +45,7 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
             TileEntitySignalumReactor tile = (TileEntitySignalumReactor) world.getBlockTileEntity(i, j, k);
             if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile), Direction.Z_POS/*Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))*/)){
                 SignalIndustries.displayGui(entityplayer, new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
+                entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }

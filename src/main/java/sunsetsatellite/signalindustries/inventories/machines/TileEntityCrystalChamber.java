@@ -1,12 +1,15 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 
 import java.util.ArrayList;
@@ -57,6 +60,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
             if(this.itemContents[itemOutputs[0]] != null){
                 this.itemContents[itemOutputs[0]].getData().putInt("size",size1+size2);
                 this.itemContents[itemOutputs[0]].getData().putInt("saturation", sat1 + sat2);
+            }
+            if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
+                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.COMBINED);
             }
         }
     }

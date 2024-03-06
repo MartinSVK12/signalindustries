@@ -15,6 +15,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
@@ -87,6 +88,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
         } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
+                player.triggerAchievement(SignalIndustriesAchievementPage.VICTORY);
             }
             active = false;
             started = false;
@@ -103,7 +105,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             worldObj.entityJoinedWorld(entityitem);
         }
         if(active){
-            for (float y1 = y; y < 256; y+=0.1) {
+            for (float y1 = y; y1 < 256; y1+=0.1f) {
                 worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0);
             }
         }
@@ -125,22 +127,23 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
-            for (int x1 = x-7; x < x+7; x++) {
+            /*for (int x1 = x-7; x < x+7; x++) {
                 for (int y1 = y; y1 < y+8; y1++) {
                     for (int z1 = z-7; z < z+7; z++) {
-                        int id = worldObj.getBlockId(x,y,z);
-                        int idUnder = worldObj.getBlockId(x,y-1,z);
+                        int id = worldObj.getBlockId(x1,y1,z1);
+                        int idUnder = worldObj.getBlockId(x1,y1-1,z1);
                         if (id != 0 && (x1 != x || y1 != y || z1 != z)) {
                             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon desires more space..");
                             return;
                         }
                     }
                 }
-            }
+            }*/
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.evilCatalyst.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
                     player.addChatMessage("event.signalindustries.wrathBeaconActivated");
+                    player.triggerAchievement(SignalIndustriesAchievementPage.CHALLENGE);
                 }
                 active = true;
                 startWave();

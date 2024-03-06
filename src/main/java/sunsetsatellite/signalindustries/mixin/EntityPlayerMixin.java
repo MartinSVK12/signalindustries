@@ -24,6 +24,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemNVGAttachment;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.render.ShadersRendererSI;
 
@@ -85,6 +86,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         }
         if(powerSuit == null){
             powerSuit = new SignalumPowerSuit(armorInventory,((EntityPlayer) (Object) this));
+            ((EntityPlayer) (Object) this).triggerAchievement(SignalIndustriesAchievementPage.POWER_SUIT);
         } else {
             powerSuit.tick();
         }

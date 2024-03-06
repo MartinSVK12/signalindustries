@@ -19,6 +19,7 @@ import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
@@ -51,7 +52,6 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     public TileEntityReinforcedWrathBeacon(){
-        //TODO: increase mobs in waves
         tier = Tier.REINFORCED;
         multiblock = Multiblock.multiblocks.get("wrathTree");
         ArrayList<Class<? extends EntityMonster>> mobList = new ArrayList<>();
@@ -126,6 +126,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         } else if (active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave == waves.size()-1) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
+                player.triggerAchievement(SignalIndustriesAchievementPage.VICTORY_REINFORCED);
             }
             for (BlockInstance bi : multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS)) {
                 if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SignalIndustries.fueledEternalTreeLog.id){

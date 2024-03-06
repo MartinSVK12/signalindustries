@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockWrathBeacon extends BlockContainerTiered {
@@ -62,6 +63,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
                 TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getBlockTileEntity(i, j, k);
                 if(tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile), Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
                     tile.activate(entityplayer);
+                    entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
                 } else {
                     entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");

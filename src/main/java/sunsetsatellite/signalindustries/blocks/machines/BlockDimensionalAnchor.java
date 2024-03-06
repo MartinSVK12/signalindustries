@@ -21,6 +21,7 @@ import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
@@ -108,6 +109,7 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
             TileEntityDimensionalAnchor tile = (TileEntityDimensionalAnchor) world.getBlockTileEntity(i, j, k);
             if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
                 SignalIndustries.displayGui(entityplayer,new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
+                entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
             } else {
                 entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
             }

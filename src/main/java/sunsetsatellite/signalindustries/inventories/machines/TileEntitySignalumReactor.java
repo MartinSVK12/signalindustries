@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -16,6 +17,7 @@ import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
+import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,6 +139,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     public void depleteRandomFuelCell(){
+        Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.REACTOR);
         Random random = new Random();
         if(random.nextFloat() <= 1.25){
             //TODO: actually pick a random cell
