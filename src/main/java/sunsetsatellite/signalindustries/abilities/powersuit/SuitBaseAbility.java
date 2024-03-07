@@ -5,13 +5,13 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 
 public abstract class SuitBaseAbility {
 
-    public Mode mode;
+    public Tier tier;
     public String name;
     public String desc;
     public int cost;
@@ -20,10 +20,10 @@ public abstract class SuitBaseAbility {
     public ActivationType activationType = null;
 
 
-    public SuitBaseAbility(Mode mode, String modId, String translateKey, int cost, int cooldown) {
-        this.mode = mode;
-        this.name = "ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".name";
-        this.desc = "ability."+modId+"."+mode.getName().toLowerCase()+"."+translateKey+".desc";
+    public SuitBaseAbility(Tier tier, String modId, String translateKey, int cost, int cooldown) {
+        this.tier = tier;
+        this.name = "ability."+modId+"."+ tier.name().toLowerCase()+"."+translateKey+".name";
+        this.desc = "ability."+modId+"."+ tier.name().toLowerCase()+"."+translateKey+".desc";
         this.cost = cost;
         this.cooldown = cooldown;
         abilities.add(this);

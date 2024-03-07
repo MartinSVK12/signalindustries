@@ -6,11 +6,11 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ClockworkAbility extends SuitBaseEffectAbility{
     public ClockworkAbility() {
-        super(Mode.AWAKENED, SignalIndustries.MOD_ID, "clockwork", 16000, 1800, 100);
+        super(Tier.AWAKENED, SignalIndustries.MOD_ID, "clockwork", 16000, 1800, 100);
     }
 
     //TODO: Add mixin to Entity.move() for time stop

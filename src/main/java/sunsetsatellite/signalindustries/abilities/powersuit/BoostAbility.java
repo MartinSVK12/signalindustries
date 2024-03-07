@@ -6,11 +6,11 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class BoostAbility extends SuitBaseAbility{
     public BoostAbility() {
-        super(Mode.NORMAL, SignalIndustries.MOD_ID, "boost", 150, 100);
+        super(Tier.BASIC, SignalIndustries.MOD_ID, "boost", 150, 100);
     }
 
     @Override

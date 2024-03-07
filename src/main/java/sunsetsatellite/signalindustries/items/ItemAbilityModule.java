@@ -9,20 +9,21 @@ import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
 import sunsetsatellite.signalindustries.gui.GuiAbilityModule;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.List;
 
-public class ItemAbilityModule extends ItemAttachment {
+public class ItemAbilityModule extends ItemAttachment implements ITiered {
 
-    public Mode mode;
+    public Tier tier;
 
-    public ItemAbilityModule(String name, int id, Mode mode) {
+    public ItemAbilityModule(String name, int id, Tier tier) {
         super(name, id, SignalIndustries.listOf(AttachmentPoint.CORE_MODULE));
-        this.mode = mode;
+        this.tier = tier;
     }
 
     @Override
@@ -32,5 +33,10 @@ public class ItemAbilityModule extends ItemAttachment {
         GuiAbilityModule gui = new GuiAbilityModule(container,entityplayer.inventory);
         SignalIndustries.displayGui(entityplayer,gui,container,inv,entityplayer.inventory.getCurrentItem());
         return true;
+    }
+
+    @Override
+    public Tier getTier() {
+        return tier;
     }
 }

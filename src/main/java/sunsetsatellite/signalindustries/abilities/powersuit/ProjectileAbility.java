@@ -6,11 +6,11 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class ProjectileAbility extends SuitBaseAbility {
     public ProjectileAbility() {
-        super(Mode.NORMAL, SignalIndustries.MOD_ID, "projectile", 50, 20);
+        super(Tier.BASIC, SignalIndustries.MOD_ID, "projectile", 50, 20);
     }
 
     @Override

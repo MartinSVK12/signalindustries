@@ -18,16 +18,18 @@ import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
+import sunsetsatellite.signalindustries.interfaces.IApplicationItem;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
-import sunsetsatellite.signalindustries.items.abilities.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.applications.ItemWithUtility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
-import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
+import sunsetsatellite.signalindustries.util.ApplicationType;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.DrawUtil;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,9 +47,9 @@ public class SignalumPowerSuit {
     public Status status = Status.OK;
     public boolean active = false;
     private final Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
-    public Mode mode;
+    public Tier mode;
     public EntityPlayer player;
-    public int selectedAbilitySlot = 0;
+    public int selectedApplicationSlot = 0;
     public TickTimer saveTimer = new TickTimer(this, this::saveToStacks,60,true);;
     public HashMap<SuitBaseAbility,Integer> cooldowns = new HashMap<>();
     public HashMap<SuitBaseEffectAbility,Integer> effectTimes = new HashMap<>();
@@ -182,7 +184,7 @@ public class SignalumPowerSuit {
             mode = getModuleMode();
         } else {
             module = null;
-            mode = Mode.NONE;
+            mode = Tier.BASIC;
         }
 
         List<SuitBaseAbility> temp = new ArrayList<>();
@@ -303,78 +305,96 @@ public class SignalumPowerSuit {
         }
     }
 
-    public void activateSelectedAbility(){
-        if(module.contents[selectedAbilitySlot] != null) {
-            SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(selectedAbility instanceof SuitBaseEffectAbility){
-                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                    if(getEnergy() >= selectedAbility.cost){
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(player,player.world,this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
-                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+    public void activateApplication(){
+        if(module.contents[selectedApplicationSlot] != null) {
+            IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
+            if(app.getType() == ApplicationType.ABILITY){
+                SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
+                if(selectedAbility instanceof SuitBaseEffectAbility){
+                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                        if(getEnergy() >= selectedAbility.cost){
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(player,player.world,this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                        }
+                    }
+                }else {
+                    if(!cooldowns.containsKey(selectedAbility)){
+                        if(getEnergy() >= selectedAbility.cost){
+                            cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(player,player.world,this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
+                        }
                     }
                 }
-            }else {
-                if(!cooldowns.containsKey(selectedAbility)){
-                    if(getEnergy() >= selectedAbility.cost){
-                        cooldowns.put(selectedAbility,selectedAbility.cooldown);
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(player,player.world,this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
-                    }
-                }
+            } else if(app.getType() == ApplicationType.UTILITY){
+                ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
+                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
             }
         }
 
     }
 
-    public void activateSelectedAbility(Entity entity){
-        if(module.contents[selectedAbilitySlot] != null) {
-            SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(selectedAbility instanceof SuitBaseEffectAbility){
-                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                    if(getEnergy() >= selectedAbility.cost){
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(player, entity, player.world,this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
-                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+    public void activateApplication(Entity entity){
+        if(module.contents[selectedApplicationSlot] != null) {
+            IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
+            if(app.getType() == ApplicationType.ABILITY){
+                SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
+                if(selectedAbility instanceof SuitBaseEffectAbility){
+                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                        if(getEnergy() >= selectedAbility.cost){
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(player, entity, player.world,this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                        }
+                    }
+                }else {
+                    if (!cooldowns.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
+                            cooldowns.put(selectedAbility, selectedAbility.cooldown);
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(player, entity, player.world, this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
+                        }
                     }
                 }
-            }else {
-                if (!cooldowns.containsKey(selectedAbility)) {
-                    if (getEnergy() >= selectedAbility.cost) {
-                        cooldowns.put(selectedAbility, selectedAbility.cooldown);
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(player, entity, player.world, this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
-                    }
-                }
+            } else if(app.getType() == ApplicationType.UTILITY){
+                ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
+                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
             }
         }
     }
 
-    public void activateSelectedAbility(int x, int y, int z){
-        if(module.contents[selectedAbilitySlot] != null) {
-            SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedAbilitySlot].getItem()).getAbility();
-            if(selectedAbility instanceof SuitBaseEffectAbility){
-                if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                    if(getEnergy() >= selectedAbility.cost){
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(x,y,z,player,player.world,this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
-                        effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+    public void activateApplication(int x, int y, int z){
+        if(module.contents[selectedApplicationSlot] != null) {
+            IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
+            if(app.getType() == ApplicationType.ABILITY){
+                SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
+                if(selectedAbility instanceof SuitBaseEffectAbility){
+                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
+                        if(getEnergy() >= selectedAbility.cost){
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(x,y,z,player,player.world,this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                        }
+                    }
+                }else {
+                    if(!cooldowns.containsKey(selectedAbility)){
+                        if(getEnergy() >= selectedAbility.cost){
+                            cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                            decrementEnergy(selectedAbility.cost);
+                            selectedAbility.activate(x,y,z,player,player.world,this);
+                            selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
+                        }
                     }
                 }
-            }else {
-                if(!cooldowns.containsKey(selectedAbility)){
-                    if(getEnergy() >= selectedAbility.cost){
-                        cooldowns.put(selectedAbility,selectedAbility.cooldown);
-                        decrementEnergy(selectedAbility.cost);
-                        selectedAbility.activate(x,y,z,player,player.world,this);
-                        selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
-                    }
-                }
+            } else if(app.getType() == ApplicationType.UTILITY){
+                ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
+                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
             }
         }
     }
@@ -474,9 +494,9 @@ public class SignalumPowerSuit {
         return null;
     }
 
-    public Mode getModuleMode(){
+    public Tier getModuleMode(){
         if(getModule() != null){
-            return ((ItemAbilityModule)getModule().getItem()).mode;
+            return ((ItemAbilityModule)getModule().getItem()).getTier();
         } else {
             return null;
         }
@@ -510,29 +530,34 @@ public class SignalumPowerSuit {
         drawUtil.drawGradientRect(width/2-100,16,width/2+100,36,color,color);
 
         if(getModule() == null){
-            fontRenderer.drawCenteredString(String.format("%s","No Module!"),width/2,25,color2);
+            fontRenderer.drawCenteredString(String.format("%s","No module."),width/2,25,color2);
         } else {
-            if(module.contents[selectedAbilitySlot] != null){
-                SuitBaseAbility selectedAbility = ((ItemWithAbility)module.contents[selectedAbilitySlot].getItem()).getAbility();
-                I18n t = I18n.getInstance();
-                if(selectedAbility instanceof SuitBaseEffectAbility){
-                    if(effectTimes.containsKey(selectedAbility)){
-                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+String.valueOf(effectTimes.get(selectedAbility)/20)+"s"),width/2,25,color2);
-                    } else if(cooldowns.containsKey(selectedAbility)){
-                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+            if(module.contents[selectedApplicationSlot] != null){
+                IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
+                if(app.getType() == ApplicationType.ABILITY){
+                    SuitBaseAbility selectedAbility = ((ItemWithAbility)module.contents[selectedApplicationSlot].getItem()).getApplication();
+                    I18n t = I18n.getInstance();
+                    if(selectedAbility instanceof SuitBaseEffectAbility){
+                        if(effectTimes.containsKey(selectedAbility)){
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+String.valueOf(effectTimes.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                        } else if(cooldowns.containsKey(selectedAbility)){
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                        } else {
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                        }
                     } else {
-                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                        if(cooldowns.containsKey(selectedAbility)){
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                        } else {
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                        }
                     }
-                } else {
-                    if(cooldowns.containsKey(selectedAbility)){
-                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
-                    } else {
-                        fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.mode.getChatColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
-                    }
+                } else if (app.getType() == ApplicationType.UTILITY) {
+                    ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
+                    fontRenderer.drawCenteredString(String.format("%s%s%s",item.getTier().getTextColor(),item.getTranslatedName(module.contents[selectedApplicationSlot]),TextFormatting.WHITE),width/2,25,color2);
                 }
-
             } else {
-                fontRenderer.drawCenteredString(String.format("%s","No ability selected."),width/2,25,color2);
+                fontRenderer.drawCenteredString(String.format("%s","No application selected."),width/2,25,color2);
             }
         }
 
@@ -563,7 +588,7 @@ public class SignalumPowerSuit {
             //drawUtil.drawTexturedModalRect(x - 1 + selectedAbilitySlot % 9 * 20, y - 1, 0, 22, 24, 22 + 2);
             //GL11.glBindTexture(3553, this.mc.renderEngine.getTexture("/gui/icons.png"));
         } else {
-            Mode mode = getModuleMode();
+            Tier mode = getModuleMode();
             Color c = new Color().setARGB(mode.getColor());
             GL11.glColor4f((float) c.getRed() /255, (float) c.getGreen() /255, (float) c.getBlue() /255, (float) c.getAlpha() /255);
             //GL11.glColor4b((byte) c.getRed(), (byte) c.getGreen(), (byte) c.getBlue(), (byte) c.getAlpha());
@@ -582,7 +607,7 @@ public class SignalumPowerSuit {
             //selected ability
             GL11.glBindTexture(3553, mc.renderEngine.getTexture("/gui/gui.png"));
             GL11.glColor4f(1F, 1F, 1F, 1.0F);
-            drawUtil.drawTexturedModalRect(x - 1 + selectedAbilitySlot % 9 * 20, y - 1, 0, 22, 24, 22 + 2);
+            drawUtil.drawTexturedModalRect(x - 1 + selectedApplicationSlot % 9 * 20, y - 1, 0, 22, 24, 22 + 2);
             GL11.glBindTexture(3553, this.mc.renderEngine.getTexture("/gui/icons.png"));
         }
 

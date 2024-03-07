@@ -7,11 +7,11 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class TestingAbility extends SuitBaseAbility{
     public TestingAbility() {
-        super(Mode.NORMAL, SignalIndustries.MOD_ID,"testingAbility",100,60);
+        super(Tier.REINFORCED, SignalIndustries.MOD_ID,"testingAbility",100,60);
     }
 
     @Override

@@ -7,7 +7,7 @@ import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.util.NBTHelper;
-import sunsetsatellite.signalindustries.util.SlotAbility;
+import sunsetsatellite.signalindustries.util.SlotApplication;
 
 public class ContainerAbilityModule extends ContainerItemFluid {
     public ContainerAbilityModule(IInventory inventoryPlayer, ItemInventoryFluid inv) {
@@ -17,7 +17,7 @@ public class ContainerAbilityModule extends ContainerItemFluid {
 
         for(int k = 0; k < 9; k++)
         {
-            addSlot(new SlotAbility(inv, k, 8 + k * 18, 32, ((ItemAbilityModule)(inv.item.getItem())).mode));
+            addSlot(new SlotApplication(inv, k, 8 + k * 18, 32, ((ItemAbilityModule)(inv.item.getItem())).getTier()));
         }
 
         for(int j = 0; j < 3; j++)

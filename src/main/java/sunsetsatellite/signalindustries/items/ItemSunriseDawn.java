@@ -1,17 +1,12 @@
 package sunsetsatellite.signalindustries.items;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
-import net.minecraft.core.util.helper.DamageType;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.interfaces.IVariableDamageWeapon;
 import sunsetsatellite.signalindustries.util.Tier;
-
-import java.util.ArrayList;
 
 public class ItemSunriseDawn extends ItemToolSword implements ITiered, IVariableDamageWeapon {
     public Tier tier;
@@ -23,7 +18,7 @@ public class ItemSunriseDawn extends ItemToolSword implements ITiered, IVariable
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank();
+        return "Tier: " + tier.getTextColor() + tier.getRank();
     }
 
     @Override

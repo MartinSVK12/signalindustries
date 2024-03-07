@@ -23,6 +23,6 @@ public abstract class BlockContainerTiered extends BlockTileEntityRotatable impl
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank();
+        return "Tier: " + tier.getTextColor() + tier.getRank();
     }
 }

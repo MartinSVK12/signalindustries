@@ -118,11 +118,11 @@ public class MinecraftMixin {
                 debounce = 10;
                 if(currentScreen == null && powerSuit != null && powerSuit.active) {
                     if (objectMouseOver != null && objectMouseOver.entity == null) {
-                        powerSuit.activateSelectedAbility(objectMouseOver.x, objectMouseOver.y, objectMouseOver.z);
+                        powerSuit.activateApplication(objectMouseOver.x, objectMouseOver.y, objectMouseOver.z);
                     } else if (objectMouseOver != null) {
-                        powerSuit.activateSelectedAbility(objectMouseOver.entity);
+                        powerSuit.activateApplication(objectMouseOver.entity);
                     } else {
-                        powerSuit.activateSelectedAbility();
+                        powerSuit.activateApplication();
                     }
 
                 }
@@ -130,9 +130,9 @@ public class MinecraftMixin {
         }
         for(int i = 1; i < 10; ++i) {
             if (Objects.equals(Keyboard.getKeyName(Keyboard.getEventKey()), "NUMPAD" + i) && powerSuit != null && powerSuit.active) {
-                powerSuit.selectedAbilitySlot = i-1;
+                powerSuit.selectedApplicationSlot = i-1;
             } else if (shift && powerSuit != null && powerSuit.active && Keyboard.getEventKey() == 1 + i) {
-                powerSuit.selectedAbilitySlot = i-1;
+                powerSuit.selectedApplicationSlot = i-1;
             }
         }
         /*SignalIndustries.LOGGER.info(String.format("Shift: %s | Control: %S",shift,control));

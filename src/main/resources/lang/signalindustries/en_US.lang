@@ -172,20 +172,20 @@ item.signalindustries.reinforced.signalumpowersuit.leggings.desc=Pants of the po
 item.signalindustries.reinforced.signalumpowersuit.boots.name=Signalum Power Suit Boots
 item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power suit. Help with jumping and negating fall damage. Functionality can be extended with [Attachments].
 
-item.signalindustries.testingAbilityItem.name=Ability Container: Testing Ability
-item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability.
+item.signalindustries.testingAbilityItem.name=Ability: Testing Ability
+item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability application.
 
 item.signalindustries.abilityContainerCasing.name=Ability Container Casing
 item.signalindustries.abilityContainerCasing.desc=Casing for [Ability Containers].
 
-item.signalindustries.clockworkAbilityContainer.name=Ability Container: Clockwork
-item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
+item.signalindustries.clockworkAbilityContainer.name=Ability: Clockwork
+item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
 
-item.signalindustries.boostAbilityContainer.name=Ability Container: Boost
-item.signalindustries.boostAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
+item.signalindustries.boostAbilityContainer.name=Ability: Boost
+item.signalindustries.boostAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
 
-item.signalindustries.projectileAbilityContainer.name=Ability Container: Projectile
-item.signalindustries.projectileAbilityContainer.desc=Container for a [Signalum Power Suit] ability.
+item.signalindustries.projectileAbilityContainer.name=Ability: Projectile
+item.signalindustries.projectileAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
 
 item.signalindustries.attachment.testingAttachment.name=Testing Attachment
 item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
@@ -214,12 +214,12 @@ item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces c
 item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Lens
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
 
-item.signalindustries.blankAbilityModule.name=Blank Ability Module
-item.signalindustries.blankAbilityModule.desc=Base component of an [Ability Module].
-item.signalindustries.abilityModule.name=Ability Module
-item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] abilities.
-item.signalindustries.awakenedAbilityModule.name=Awakened Ability Module
-item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] abilities including <Awakened> abilities.
+item.signalindustries.blankAbilityModule.name=Blank Application Module
+item.signalindustries.blankAbilityModule.desc=Base component of an [Application Module].
+item.signalindustries.abilityModule.name=Application Module
+item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] ability or utility applications.
+item.signalindustries.awakenedAbilityModule.name=Awakened Application Module
+item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] ability or utility applications.
 
 item.signalindustries.meteorTracker.name=Meteor Tracker
 item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
@@ -469,17 +469,17 @@ event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
 
-ability.signalindustries.normal.testingAbility.name=Testing Ability
-ability.signalindustries.normal.testingAbility.desc=Does not do anything. For testing only.
+ability.signalindustries.reinforced.testingAbility.name=Testing Ability
+ability.signalindustries.reinforced.testingAbility.desc=Does not do anything. For testing only.
 
-ability.signalindustries.normal.projectile.name=Projectile
-ability.signalindustries.normal.projectile.desc=Shoots out an orb of energy from your power suit.
+ability.signalindustries.basic.projectile.name=Projectile
+ability.signalindustries.basic.projectile.desc=Shoots out an orb of energy from your power suit.
 
-ability.signalindustries.normal.boost.name=Boost
-ability.signalindustries.normal.boost.desc=Launches you in the direction you're looking at.
+ability.signalindustries.basic.boost.name=Boost
+ability.signalindustries.basic.boost.desc=Launches you in the direction you're looking at.
 
-ability.signalindustries.normal.devouringField.name=Devouring Field
-ability.signalindustries.normal.devouringField.desc=Drains health from nearby enemies and also sets them on fire.
+ability.signalindustries.reinforced.devouringField.name=Devouring Field
+ability.signalindustries.reinforced.devouringField.desc=Drains health from nearby enemies and also sets them on fire.
 
 ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.

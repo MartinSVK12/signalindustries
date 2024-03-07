@@ -18,7 +18,7 @@ public class ItemTieredAttachment extends ItemAttachment implements ITiered {
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank()+"\n"+super.getDescription(stack);
+        return "Tier: " + tier.getTextColor() + tier.getRank()+"\n"+super.getDescription(stack);
     }
 
     @Override

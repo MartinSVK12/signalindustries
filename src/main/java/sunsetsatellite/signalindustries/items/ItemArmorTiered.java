@@ -17,7 +17,7 @@ public class ItemArmorTiered extends ItemArmor implements ITiered {
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getColor() + tier.getRank();
+        return "Tier: " + tier.getTextColor() + tier.getRank();
     }
 
     @Override

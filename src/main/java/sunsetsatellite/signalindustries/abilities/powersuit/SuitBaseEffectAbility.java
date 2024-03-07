@@ -4,14 +4,14 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import sunsetsatellite.signalindustries.util.Mode;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public abstract class SuitBaseEffectAbility extends SuitBaseAbility{
 
     public int effectTime = 0;
 
-    public SuitBaseEffectAbility(Mode mode, String modId, String translateKey, int cost, int cooldown, int effectTime) {
-        super(mode, modId, translateKey, cost, cooldown);
+    public SuitBaseEffectAbility(Tier tier, String modId, String translateKey, int cost, int cooldown, int effectTime) {
+        super(tier, modId, translateKey, cost, cooldown);
         this.effectTime = effectTime;
     }
 
