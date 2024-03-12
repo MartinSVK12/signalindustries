@@ -850,7 +850,7 @@
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.conduit.fluid",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
@@ -1022,13 +1022,13 @@
     ],
     "result": {
       "key":  "tile.signalindustries.basic.conduit",
-      "amount": 1,
+      "amount": 4,
       "meta": 0
     },
     "consumeContainers": false
   },
   {
-    "name": "signalindustries:workbench/basic_energy_conduit",
+    "name": "signalindustries:workbench/basic_fluid_conduit",
     "type": "minecraft:crafting/shaped",
     "pattern": [
       "PSP",
@@ -1071,7 +1071,7 @@
     ],
     "result": {
       "key":  "tile.signalindustries.basic.conduit.fluid",
-      "amount": 1,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
@@ -1544,7 +1544,7 @@
       {
         "symbol": "I",
         "stack": {
-          "key":  "item.signalindustries.saturatedSignalumAlloyIngot",
+          "key":  "item.signalindustries.signalumCrystal",
           "amount": 1,
           "meta": 0
         }
