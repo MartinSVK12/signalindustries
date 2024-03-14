@@ -10,15 +10,19 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
 import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.TextureHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,6 +108,32 @@ public class BlockPlateFormer extends BlockContainerTiered {
     @Override
     public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
         TileEntityTieredMachineSimple tile = (TileEntityTieredMachineSimple) blockAccess.getBlockTileEntity(x,y,z);
+        if(tile.preview != IOPreview.NONE){
+            Direction dir = Direction.getDirectionFromSide(side);
+            Connection con = Connection.NONE;
+            switch (tile.preview){
+                case ITEM: {
+                    con = tile.itemConnections.get(dir);
+                    break;
+                }
+                case FLUID: {
+                    con = tile.connections.get(dir);
+                    break;
+                }
+            }
+            switch (con){
+                case INPUT:
+                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"input_overlay.png");
+                case OUTPUT:
+                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"output_overlay.png");
+                case BOTH:
+                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"both_io_overlay.png");
+                case NONE:
+                    return -1;
+            }
+        } else {
+            return -1;
+        }
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side];
         if(tile.isBurning() && tile.tier == tier){

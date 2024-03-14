@@ -11,13 +11,19 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityEnergyCell extends TileEntityFluidItemContainer {
+public class TileEntityEnergyCell extends TileEntityFluidItemContainer implements IHasIOPreview {
+
+    public IOPreview preview = IOPreview.NONE;
+
     public TileEntityEnergyCell(){
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
@@ -148,4 +154,13 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer {
         }
     }
 
+    @Override
+    public IOPreview getPreview() {
+        return preview;
+    }
+
+    @Override
+    public void setPreview(IOPreview preview) {
+        this.preview = preview;
+    }
 }

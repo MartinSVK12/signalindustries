@@ -13,15 +13,17 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
+import sunsetsatellite.signalindustries.util.IOPreview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart {
+public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart, IHasIOPreview {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -33,6 +35,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     //public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
     public Random random = new Random();
     public TileEntity connectedTo;
+    public IOPreview preview = IOPreview.NONE;
 
     public TileEntityStabilizer(){
         fluidContents = new FluidStack[1];
@@ -267,5 +270,15 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     public boolean connect(TileEntity tileEntity) {
         connectedTo = tileEntity;
         return true;
+    }
+
+    @Override
+    public IOPreview getPreview() {
+        return preview;
+    }
+
+    @Override
+    public void setPreview(IOPreview preview) {
+        this.preview = preview;
     }
 }

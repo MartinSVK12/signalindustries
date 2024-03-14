@@ -13,15 +13,17 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.recipes.legacy.InfuserRecipes;
 import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
+import sunsetsatellite.signalindustries.util.IOPreview;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityBooster extends TileEntityFluidItemContainer {
+public class TileEntityBooster extends TileEntityFluidItemContainer implements IHasIOPreview {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -32,6 +34,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     public int cost = 160;
     public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
     public Random random = new Random();
+    public IOPreview preview = IOPreview.NONE;
 
     public TileEntityBooster(){
         fluidContents = new FluidStack[1];
@@ -224,5 +227,13 @@ public class TileEntityBooster extends TileEntityFluidItemContainer {
     }
 
 
+    @Override
+    public IOPreview getPreview() {
+        return preview;
+    }
 
+    @Override
+    public void setPreview(IOPreview preview) {
+        this.preview = preview;
+    }
 }

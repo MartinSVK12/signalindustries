@@ -9,15 +9,18 @@ import sunsetsatellite.catalyst.core.util.IFluidIO;
 import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
+import sunsetsatellite.signalindustries.util.IOPreview;
 
 
-public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO {
+public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview {
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
     public int speedMultiplier = 1;
+    public IOPreview preview = IOPreview.NONE;
 
     public boolean isBurning(){
         return fuelBurnTicks > 0;
@@ -93,5 +96,15 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     @Override
     public Connection getItemIOForSide(Direction dir) {
         return itemConnections.get(dir);
+    }
+
+    @Override
+    public IOPreview getPreview() {
+        return preview;
+    }
+
+    @Override
+    public void setPreview(IOPreview preview) {
+        this.preview = preview;
     }
 }

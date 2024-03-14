@@ -14,7 +14,9 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.IOPreview;
 
 
 public class GuiItemIOConfig extends GuiScreen {
@@ -120,6 +122,10 @@ public class GuiItemIOConfig extends GuiScreen {
         controlList.add(new GuiButton(12,(width / 2) - 85, (height / 2)-12, 30, 15, "All I"));
         controlList.add(new GuiButton(13, (width / 2) - 55, (height / 2)-12, 30, 15, "All O"));
 
+        if(tile instanceof IHasIOPreview){
+            controlList.add(new GuiButton(14, (width / 2) + 60, (height / 2) - 75, 20, 20, "P"));
+        }
+
         if(tile.getSizeInventory() == 1){
             controlList.get(6).enabled = false;
             controlList.get(7).enabled = false;
@@ -134,51 +140,60 @@ public class GuiItemIOConfig extends GuiScreen {
 
     @Override
     protected void buttonPressed(GuiButton guibutton) {
-        if(guibutton.id >= 0 && guibutton.id < 6){
-            switch (tile.itemConnections.get(Direction.values()[guibutton.id])) {
-                case NONE:
-                    tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.INPUT);
-                    break;
-                case INPUT:
-                    tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
-                    break;
-                case OUTPUT:
-                    tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.BOTH);
-                    break;
-                case BOTH:
-                    tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
-                    break;
-            }
+        if(tile != null){
+            if(guibutton.id >= 0 && guibutton.id < 6){
+                switch (tile.itemConnections.get(Direction.values()[guibutton.id])) {
+                    case NONE:
+                        tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.INPUT);
+                        break;
+                    case INPUT:
+                        tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
+                        break;
+                    case OUTPUT:
+                        tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.BOTH);
+                        break;
+                    case BOTH:
+                        tile.itemConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
+                        break;
+                }
 
-            guibutton.displayString = tile.itemConnections.get(Direction.values()[guibutton.id]).getLetter();
+                guibutton.displayString = tile.itemConnections.get(Direction.values()[guibutton.id]).getLetter();
 
-        }
-        if(guibutton.id > 5 && guibutton.id < 12){
-            Direction dir = Direction.values()[guibutton.id-6];
-            Integer currentValue = tile.activeItemSlots.get(dir);
-            if(currentValue < tile.getSizeInventory()-1){
-                tile.activeItemSlots.replace(dir,currentValue+1);
             }
+            if(guibutton.id > 5 && guibutton.id < 12){
+                Direction dir = Direction.values()[guibutton.id-6];
+                Integer currentValue = tile.activeItemSlots.get(dir);
+                if(currentValue < tile.getSizeInventory()-1){
+                    tile.activeItemSlots.replace(dir,currentValue+1);
+                }
 
-            guibutton.displayString = String.valueOf(tile.activeItemSlots.get(dir));
-        }
-        if(guibutton.id == 12){
-            for (Direction direction : Direction.values()) {
-                tile.connections.replace(direction,Connection.INPUT);
+                guibutton.displayString = String.valueOf(tile.activeItemSlots.get(dir));
             }
-            for (GuiButton button : controlList) {
-                if(button.id >= 0 && button.id < 6){
-                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+            if(guibutton.id == 12){
+                for (Direction direction : Direction.values()) {
+                    tile.connections.replace(direction,Connection.INPUT);
+                }
+                for (GuiButton button : controlList) {
+                    if(button.id >= 0 && button.id < 6){
+                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                    }
                 }
             }
-        }
-        if(guibutton.id == 13){
-            for (Direction direction : Direction.values()) {
-                tile.connections.replace(direction,Connection.OUTPUT);
+            if(guibutton.id == 13){
+                for (Direction direction : Direction.values()) {
+                    tile.connections.replace(direction,Connection.OUTPUT);
+                }
+                for (GuiButton button : controlList) {
+                    if(button.id >= 0 && button.id < 6){
+                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                    }
+                }
             }
-            for (GuiButton button : controlList) {
-                if(button.id >= 0 && button.id < 6){
-                    button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+
+            if (guibutton.id == 14) {
+                if (tile instanceof IHasIOPreview) {
+                    IHasIOPreview p = ((IHasIOPreview) tile);
+                    p.setPreview(((IHasIOPreview) tile).getPreview() != IOPreview.ITEM ? IOPreview.ITEM : IOPreview.NONE);
                 }
             }
         }

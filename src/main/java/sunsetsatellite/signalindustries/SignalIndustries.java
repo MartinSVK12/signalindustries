@@ -197,6 +197,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_ore_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"glowing_obsidian_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"input_overlay.png");
+        TextureHelper.getOrCreateBlockTexture(MOD_ID,"both_io_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"output_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"uv_lamp_overlay.png");
