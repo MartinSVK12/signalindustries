@@ -4,6 +4,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockGlowingObsidian;
@@ -28,6 +29,8 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids());
+        acceptedFluids.get(1).remove((BlockFluid) SignalIndustries.energyFlowing);
         itemContents = new ItemStack[3];
         energySlot = 0;
         recipeGroup = SIRecipes.INFUSER;

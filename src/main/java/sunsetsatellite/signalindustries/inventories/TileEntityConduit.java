@@ -3,8 +3,11 @@ package sunsetsatellite.signalindustries.inventories;
 
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+
+import java.util.ArrayList;
 
 public class TileEntityConduit extends TileEntityFluidPipe {
     public String getInvName() {
@@ -12,6 +15,7 @@ public class TileEntityConduit extends TileEntityFluidPipe {
     }
 
     public TileEntityConduit(){
+        acceptedFluids.get(0).clear();
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
 

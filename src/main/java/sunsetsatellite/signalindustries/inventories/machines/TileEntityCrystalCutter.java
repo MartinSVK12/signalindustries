@@ -55,6 +55,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     @Override
     public void tick() {
         recipeId = recipeSelector;
+        fluidCapacity[1] = 1000 * (2 * tier.ordinal());
         super.tick();
     }
 

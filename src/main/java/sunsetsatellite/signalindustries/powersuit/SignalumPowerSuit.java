@@ -306,7 +306,7 @@ public class SignalumPowerSuit {
     }
 
     public void activateApplication(){
-        if(module.contents[selectedApplicationSlot] != null) {
+        if(module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
             if(app.getType() == ApplicationType.ABILITY){
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
@@ -338,7 +338,7 @@ public class SignalumPowerSuit {
     }
 
     public void activateApplication(Entity entity){
-        if(module.contents[selectedApplicationSlot] != null) {
+        if(module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
             if(app.getType() == ApplicationType.ABILITY){
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
@@ -369,7 +369,7 @@ public class SignalumPowerSuit {
     }
 
     public void activateApplication(int x, int y, int z){
-        if(module.contents[selectedApplicationSlot] != null) {
+        if(module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
             if(app.getType() == ApplicationType.ABILITY){
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();

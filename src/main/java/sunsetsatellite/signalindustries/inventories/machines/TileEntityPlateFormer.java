@@ -18,6 +18,13 @@ public class TileEntityPlateFormer extends TileEntityTieredMachineSimple impleme
         itemInputs = new int[]{0};
         itemOutputs = new int[]{1};
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+        fluidCapacity[0] = 2000 * (2 * tier.ordinal());
+    }
+
     @Override
     public String getInvName() {
         return "Plate Former";
