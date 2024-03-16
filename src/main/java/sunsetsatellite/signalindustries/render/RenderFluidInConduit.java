@@ -5,15 +5,22 @@ import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.CatalystFluids;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.render.RenderFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.BlockConduit;
+import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
+
+import java.util.HashMap;
 
 public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
     @Override
@@ -24,6 +31,10 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
         int k = tileEntity1.z;
         World blockAccess = this.renderDispatcher.renderEngine.mc.theWorld;
         Block block = SignalIndustries.prototypeConduit;
+
+        if(tileEntity1.getBlockType() != null){
+            block = tileEntity1.getBlockType();
+        }
 
         GL11.glPushMatrix();
 
@@ -49,13 +60,27 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 
         fluidAmount = Math.min(fluidAmount,fluidMaxAmount);
 
-        boolean flag = blockAccess.getBlockId(i + 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i + 1, j, k) instanceof IFluidInventory);
-        boolean flag1 = blockAccess.getBlockId(i - 1, j, k) == block.id || (blockAccess.getBlockTileEntity(i - 1, j, k) instanceof IFluidInventory);
-        boolean flag2 = blockAccess.getBlockId(i, j + 1, k) == block.id || (blockAccess.getBlockTileEntity(i, j + 1, k) instanceof IFluidInventory);
-        boolean flag3 = blockAccess.getBlockId(i, j - 1, k) == block.id || (blockAccess.getBlockTileEntity(i, j - 1, k) instanceof IFluidInventory);
-        boolean flag4 = blockAccess.getBlockId(i, j, k + 1) == block.id || (blockAccess.getBlockTileEntity(i, j, k + 1) instanceof IFluidInventory);
-        boolean flag5 = blockAccess.getBlockId(i, j, k - 1) == block.id || (blockAccess.getBlockTileEntity(i, j, k - 1) instanceof IFluidInventory);
-
+        HashMap<Direction, Boolean> states = new HashMap<>();
+        for (Direction direction : Direction.values()) {
+            boolean show = false;
+            Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
+            Block neighbouringBlock = blockAccess.getBlock(offset.x, offset.y, offset.z);
+            if(neighbouringBlock != null) {
+                if(block.getClass().isAssignableFrom(neighbouringBlock.getClass())){
+                    show = true;
+                } else if(!(neighbouringBlock instanceof BlockConduit || neighbouringBlock instanceof BlockFluidConduit)) {
+                    if(neighbouringBlock instanceof BlockTileEntity){
+                        TileEntity neighbouringTile = blockAccess.getBlockTileEntity(offset.x, offset.y, offset.z);
+                        if(neighbouringTile instanceof IFluidInventory){
+                            show = true;
+                        }
+                    } else if (neighbouringBlock.hasTag(SignalIndustries.ENERGY_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
+                        show = true;
+                    }
+                }
+            }
+            states.put(direction, show);
+        }
 
         float amount = (fluidAmount / fluidMaxAmount);
         float mapped = (float) CatalystFluids.map(amount,0.0d,1.0d,0.0d,0.3d);
@@ -63,7 +88,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
         GL11.glTranslatef((float)d2, (float)d4, (float)d6);
         GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0.33F, 0.33f , 0.33f);
-        if(!(flag2 && flag3)){
+        if(!(states.get(Direction.Y_NEG) && states.get(Direction.Y_POS))){
             GL11.glScalef(0.3f, mapped,0.3f);
         } else {
             GL11.glScalef(mapped,0.3f,mapped);
@@ -78,7 +103,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 
         GL11.glPopMatrix();
 
-        if(flag){
+        if(states.get(Direction.getFromName("EAST"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -90,7 +115,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(flag1){
+        if(states.get(Direction.getFromName("WEST"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -102,7 +127,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(flag2 && ((TileEntityFluidPipe) tileEntity1).isPressurized || (blockAccess.getBlockTileEntity(i,j+1,k) instanceof TileEntityFluidPipe && ((TileEntityFluidPipe) blockAccess.getBlockTileEntity(i,j+1,k)).getFluidInSlot(0) != null)){
+        if(states.get(Direction.getFromName("UP")) && ((TileEntityFluidPipe) tileEntity1).isPressurized || (blockAccess.getBlockTileEntity(i,j+1,k) instanceof TileEntityFluidPipe && ((TileEntityFluidPipe) blockAccess.getBlockTileEntity(i,j+1,k)).getFluidInSlot(0) != null)){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -114,7 +139,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(flag3){
+        if(states.get(Direction.getFromName("DOWN"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -126,7 +151,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(flag4){
+        if(states.get(Direction.getFromName("SOUTH"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);
@@ -138,7 +163,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(flag5){
+        if(states.get(Direction.getFromName("NORTH"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);

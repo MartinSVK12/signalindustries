@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -21,11 +22,6 @@ public class BlockConduit extends BlockContainerTiered {
         return new TileEntityConduit();
     }
 
-    /*@Override
-    public int getRenderType() {
-        return 32;
-    }*/
-
     public boolean isSolidRender() {
         return false;
     }
@@ -39,12 +35,12 @@ public class BlockConduit extends BlockContainerTiered {
         if(entityplayer.isSneaking() && !world.isClientSide){
             TileEntityFluidPipe tile = (TileEntityFluidPipe) world.getBlockTileEntity(i,j,k);
             if(tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).getLiquid() != null){
-                entityplayer.addChatMessage("Liquid: "+tile.getFluidInSlot(0).toString());
+                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: "+tile.getFluidInSlot(0).toString());
             } else {
-                entityplayer.addChatMessage("Liquid: Empty");
+                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: Empty");
             }
-            entityplayer.addChatMessage("Capacity: "+tile.fluidCapacity[0]);
-            entityplayer.addChatMessage("Is pressurized? "+tile.isPressurized);
+            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Capacity: "+tile.fluidCapacity[0]);
+            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Is pressurized? "+tile.isPressurized);
             return false;
         }
         return false;

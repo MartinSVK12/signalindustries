@@ -18,6 +18,7 @@ import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -50,6 +51,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
+import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
@@ -205,6 +207,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     //public static final Config config = new Config(MOD_ID, mapOf(new String[]{"PacketOpenMachineGUI_ID","PacketPipeItemSpawn_ID","GuiID"},new String[]{"113","114","9"}), new Class[]{SignalIndustries.class});
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
+
+    public static final Tag<Block> ENERGY_CONDUITS_CONNECT = Tag.of("energy_conduits_connect");
+    public static final Tag<Block> FLUID_CONDUITS_CONNECT = Tag.of("fluid_conduits_connect");
+
     public static final Block signalumOre = new BlockBuilder(MOD_ID)
             .setTextures("signalum_ore.png")
             .setLuminance(3)
@@ -319,6 +325,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/energy/prototype/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"prototype_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockConduit("prototype.conduit",config.getInt("BlockIDs.prototypeConduit"),Tier.PROTOTYPE,Material.glass));
 
     public static final Block basicConduit = new BlockBuilder(MOD_ID)
@@ -327,6 +341,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                        ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/energy/basic/conduit_all.json"),
+                        ModelHelper.getOrCreateBlockState(MOD_ID,"basic_conduit.json"),
+                        new ConduitStateInterpreter(),
+                        true
+                    )
+            )
             .build(new BlockConduit("basic.conduit",config.getInt("BlockIDs.basicConduit"),Tier.BASIC,Material.glass));
 
     public static final Block reinforcedConduit = new BlockBuilder(MOD_ID)
@@ -335,6 +357,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/energy/reinforced/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"reinforced_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockConduit("reinforced.conduit",config.getInt("BlockIDs.reinforcedConduit"),Tier.REINFORCED,Material.glass));
 
     public static final Block awakenedConduit = new BlockBuilder(MOD_ID)
@@ -343,6 +373,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/energy/awakened/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"awakened_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockConduit("awakened.conduit",config.getInt("BlockIDs.awakenedConduit"),Tier.AWAKENED,Material.glass));
 
 
@@ -352,6 +390,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/fluid/prototype/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"prototype_fluid_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockFluidConduit("prototype.conduit.fluid",config.getInt("BlockIDs.prototypeFluidConduit"),Tier.PROTOTYPE,Material.glass));
 
     public static final Block basicFluidConduit = new BlockBuilder(MOD_ID)
@@ -360,6 +406,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/fluid/basic/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"basic_fluid_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockFluidConduit("basic.conduit.fluid",config.getInt("BlockIDs.basicFluidConduit"),Tier.BASIC,Material.glass));
 
     public static final Block reinforcedFluidConduit = new BlockBuilder(MOD_ID)
@@ -368,6 +422,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(1)
             .setHardness(1)
             .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/fluid/reinforced/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"reinforced_fluid_conduit.json"),
+                            new ConduitStateInterpreter(),
+                            true
+                    )
+            )
             .build(new BlockFluidConduit("reinforced.conduit.fluid",config.getInt("BlockIDs.reinforcedFluidConduit"),Tier.REINFORCED,Material.glass));
 
 

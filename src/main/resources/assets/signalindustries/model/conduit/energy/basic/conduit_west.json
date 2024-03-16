@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:conduit/template_conduit_west",
+  "textures": {
+    "conduit": "signalindustries:block/conduit_basic"
+  }
+}

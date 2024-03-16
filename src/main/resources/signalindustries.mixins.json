@@ -24,7 +24,6 @@
     "MinecraftMixin",
     "NBTTagCompoundMixin",
     "NetClientHandlerMixin",
-    "RenderBlocksMixin",
     "RenderEngineMixin",
     "RenderGlobalMixin",
     "RenderPlayerMixin",

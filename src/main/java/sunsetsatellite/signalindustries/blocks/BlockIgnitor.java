@@ -8,15 +8,15 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.interfaces.IConduitsConnect;
 import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockIgnitor extends BlockContainerTiered implements IConduitsConnect {
+public class BlockIgnitor extends BlockContainerTiered {
 
     public BlockIgnitor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
+        withTags(SignalIndustries.ENERGY_CONDUITS_CONNECT);
     }
 
     @Override
