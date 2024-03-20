@@ -95,7 +95,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             if(inputContents.isEmpty()){
                 progressTicks = 0;
             } else if(canProcess()) {
-                progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;
+                progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
             }
             if(!worldObj.isClientSide) {
                 if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2) {

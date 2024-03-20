@@ -45,16 +45,4 @@ public class BlockFluidConduit extends BlockContainerTiered {
         }
         return false;
     }
-
-    @Override
-    public void setBlockBoundsForItemRender() {
-        float width = 0.35f;
-        float halfWidth = (1.0F - width) / 2.0F;
-        setBlockBounds(halfWidth, halfWidth, halfWidth, halfWidth + width, halfWidth + width, halfWidth + width);
-    }
-
-    @Override
-    public String getDescription(ItemStack stack) {
-        return super.getDescription(stack);
-    }
 }

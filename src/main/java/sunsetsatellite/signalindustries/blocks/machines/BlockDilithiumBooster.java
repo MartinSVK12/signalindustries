@@ -98,7 +98,7 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
         int meta = blockAccess.getBlockMetadata(x,y,z);
         int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
         if(tile.isBurning()){
-            return SignalIndustries.textures.get("dilithiumBooster.active").getTexture(Side.getSideById(index));
+            return SignalIndustries.textures.get(tier.name()+"booster.active").getTexture(Side.getSideById(index));
         }
         return this.atlasIndices[index];
     }
@@ -133,7 +133,7 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
             int meta = blockAccess.getBlockMetadata(x, y, z);
             int index = Sides.orientationLookUpHorizontal[6 * meta + side];
             if (tile.isBurning()) {
-                return SignalIndustries.textures.get("dilithiumBooster.active.overlay").getTexture(Side.getSideById(index));
+                return SignalIndustries.textures.get(tier.name()+"booster.active.overlay").getTexture(Side.getSideById(index));
             }
             return -1;
         }

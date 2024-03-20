@@ -105,7 +105,7 @@ public class GuiAutoMiner extends GuiFluid {
         fontRenderer.drawStringWithShadow("X: "+(tile.current.x-tile.x),38,20,0xFFFF0000);
         fontRenderer.drawStringWithShadow("Y: "+(tile.current.y-tile.y),38,32,0xFF4080FF);
         fontRenderer.drawStringWithShadow("Z: "+(tile.current.z-tile.z),38,44,0xFF00FF00);
-        fontRenderer.drawStringWithShadow("S: "+(tile.progressMaxTicks/tile.speedMultiplier)+"t",80,44,0xFFFF8000);
+        fontRenderer.drawStringWithShadow("S: "+((int)(tile.progressMaxTicks/tile.speedMultiplier))+"t",80,44,0xFFFF8000);
         fontRenderer.drawStringWithShadow("C: "+(tile.cost),80,32,0xFF800000);
         //fontRenderer.drawString(String.format("X: %d Y: %d Z: %d",tile.current.x,tile.current.y,tile.current.z),38,20,0xFFFFFFFF);
     }

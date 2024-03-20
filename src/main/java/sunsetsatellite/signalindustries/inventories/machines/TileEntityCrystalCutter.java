@@ -65,6 +65,11 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
         if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.SHINING);
         }
+        if(itemContents[itemOutputs[0]].getItem() == SignalIndustries.signalumCrystalEmpty){
+            if(fluidContents[energySlot].amount <= fluidCapacity[energySlot]+1000){
+                fluidContents[energySlot].amount += 1000;
+            }
+        }
     }
 
 }

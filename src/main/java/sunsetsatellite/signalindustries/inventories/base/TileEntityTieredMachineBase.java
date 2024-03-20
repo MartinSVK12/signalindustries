@@ -12,6 +12,7 @@ import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.Tier;
 
 
 public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview {
@@ -19,7 +20,8 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
-    public int speedMultiplier = 1;
+    public float speedMultiplier = 1;
+    public float yield = 1;
     public IOPreview preview = IOPreview.NONE;
 
     public boolean isBurning(){
@@ -36,13 +38,24 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     }
 
     public void applyModifiers(){
+        speedMultiplier = 1;
+        yield = 1;
         for(Direction dir : Direction.values()) {
             TileEntity tile = dir.getTileEntity(worldObj, this);
             if (tile instanceof TileEntityBooster && this instanceof IBoostable) {
                 if (((TileEntityBooster) tile).isBurning()) {
                     int meta = tile.getMovedData();
                     if (Direction.getDirectionFromSide(meta).getOpposite() == dir) {
-                        speedMultiplier = 2;
+                        if(((TileEntityBooster) tile).tier == Tier.BASIC){
+                            speedMultiplier = 1.5f;
+                            yield = 1.05f;
+                        } else if(((TileEntityBooster) tile).tier == Tier.REINFORCED) {
+                            speedMultiplier = 2;
+                            yield = 1.25f;
+                        } else if (((TileEntityBooster) tile).tier == Tier.AWAKENED) {
+                            speedMultiplier = 3;
+                            yield = 2f;
+                        }
                     }
                 }
             }

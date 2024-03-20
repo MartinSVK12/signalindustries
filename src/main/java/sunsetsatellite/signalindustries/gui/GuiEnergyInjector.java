@@ -89,9 +89,9 @@ public class GuiEnergyInjector extends GuiFluid {
         if(tile.isBurning()){
             this.drawTexturedModalRect(i3 + 80, i4 + 36, 176, 0, 14, 12 + 2);
         }
-
-
-
+        if(this.tile.speedMultiplier > 1){
+            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - 16,i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        }
     }
 
     protected void drawGuiContainerForegroundLayer()

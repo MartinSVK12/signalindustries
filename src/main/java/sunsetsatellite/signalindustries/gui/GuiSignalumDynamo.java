@@ -62,6 +62,9 @@ public class GuiSignalumDynamo extends GuiFluid {
             i5 = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(j + 9, k + 39 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
         }
+        if(this.tile.speedMultiplier > 1){
+            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",j + xSize - 16,k + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        }
     }
 
     @Override

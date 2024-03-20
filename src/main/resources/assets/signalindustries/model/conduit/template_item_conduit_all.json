@@ -1,0 +1,99 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "#conduit"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"south": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "up",
+			"from": [4, 12, 4],
+			"to": [12, 16, 12],
+			"faces": {
+				"north": {"uv": [4, 0, 12, 4], "texture": "#conduit"},
+				"east": {"uv": [4, 0, 12, 4], "texture": "#conduit"},
+				"south": {"uv": [4, 0, 12, 4], "texture": "#conduit"},
+				"west": {"uv": [4, 0, 12, 4], "texture": "#conduit"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "down",
+			"from": [4, 0, 4],
+			"to": [12, 4, 12],
+			"faces": {
+				"north": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"east": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"south": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"west": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "north",
+			"from": [4, 4, 0],
+			"to": [12, 12, 4],
+			"faces": {
+				"north": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"east": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"south": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"west": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"up": {"uv": [4, 0, 12, 4], "texture": "#conduit"},
+				"down": {"uv": [4, 12, 12, 16], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "south",
+			"from": [4, 4, 12],
+			"to": [12, 12, 16],
+			"faces": {
+				"north": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"east": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"south": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"west": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"up": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"down": {"uv": [4, 0, 12, 4], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "east",
+			"from": [12, 4, 4],
+			"to": [16, 12, 12],
+			"faces": {
+				"north": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"south": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"up": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"down": {"uv": [12, 4, 16, 12], "texture": "#conduit"}
+			}
+		},
+		{
+			"name": "west",
+			"from": [0, 4, 4],
+			"to": [4, 12, 12],
+			"faces": {
+				"north": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"south": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"up": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"down": {"uv": [0, 4, 4, 12], "texture": "#conduit"}
+			}
+		}
+	]
+}

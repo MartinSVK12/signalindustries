@@ -16,18 +16,21 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerBooster;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
+import sunsetsatellite.signalindustries.util.Tier;
+
+import java.util.Objects;
 
 public class GuiBooster extends GuiFluid {
 
-    public String name = "Dilithium Booster";
+    public String name;
     public EntityPlayer entityplayer;
     public TileEntityBooster tile;
-
 
     public GuiBooster(InventoryPlayer inventoryPlayer, TileEntity tile) {
         super(new ContainerBooster(inventoryPlayer, (TileEntityFluidItemContainer) tile),inventoryPlayer);
         this.tile = (TileEntityBooster) tile;
         this.entityplayer = inventoryPlayer.player;
+        name = ((TileEntityBooster) tile).tier == Tier.REINFORCED || ((TileEntityBooster) tile).tier == Tier.AWAKENED ? "Dilithium Booster" : "Redstone Booster";
     }
 
     @Override
@@ -71,7 +74,21 @@ public class GuiBooster extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/dilithium_booster.png");
+        int i2;
+        switch (tile.tier) {
+            case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/redstone_booster.png");
+                break;
+            case REINFORCED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/dilithium_booster.png");
+                break;
+            case AWAKENED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/awakened_booster.png");
+                break;
+            default:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/dilithium_booster.png");
+                break;
+        }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(i2);
         int i3 = (this.width - this.xSize) / 2;

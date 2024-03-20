@@ -96,7 +96,9 @@ public class GuiAlloySmelter extends GuiFluid {
 
         i5 = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
-
+        if(this.tile.speedMultiplier > 1){
+            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - 16,i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        }
     }
 
     protected void drawGuiContainerForegroundLayer()

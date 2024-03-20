@@ -158,6 +158,15 @@ tile.signalindustries.basic.conduit.fluid.desc=Transfers fluids, not suitable fo
 tile.signalindustries.reinforced.conduit.fluid.name=Reinforced Fluid Conduit
 tile.signalindustries.reinforced.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
 
+tile.signalindustries.basic.conduit.item.name=Basic Item Conduit
+tile.signalindustries.basic.conduit.item.desc=Transfers items.
+
+tile.signalindustries.prototype.inserter.name=Prototype Inserter
+tile.signalindustries.prototype.inserter.desc=Picks up items from the ground and inserts them into item conduits.
+
+tile.signalindustries.basic.inserter.name=Basic Inserter
+tile.signalindustries.basic.inserter.desc=Picks up more items from the ground faster and inserts them into item conduits.
+
 item.signalindustries.basic.prototypeHarness.name=Signalum Prototype Harness
 item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, but allows you to start using [Signalum Energy] on the go.
 item.signalindustries.basic.prototypeHarnessGoggles.name=Prototype Goggles
@@ -336,8 +345,12 @@ tile.signalindustries.awakened.centrifuge.desc=Spins stuff REALLY FAST, beware o
 
 tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
 tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still. Required to stabilize some machines.
-tile.signalindustries.reinforced.dilithiumBooster.name=Dilithium Booster
-tile.signalindustries.reinforced.dilithiumBooster.desc=Speeds up an adjacent machine that it points to. [Dilithium] go brrrrrrrr.
+tile.signalindustries.basic.booster.name=Redstone Booster
+tile.signalindustries.basic.booster.desc=Crude device that tries to speed up other machines using [Redstone]. But maybe there's a material better suited for it?
+tile.signalindustries.reinforced.booster.name=Dilithium Booster
+tile.signalindustries.reinforced.booster.desc=Speeds up an adjacent machine that it points to using [Dilithium].
+tile.signalindustries.awakened.booster.name=Awakened Accelerator
+tile.signalindustries.awakened.booster.desc=Speeds up an adjacent machine that it points to significantly.
 tile.signalindustries.dilithiumRail.name=Dilithium Rail
 tile.signalindustries.dilithiumRail.desc=Hyperspeed!
 

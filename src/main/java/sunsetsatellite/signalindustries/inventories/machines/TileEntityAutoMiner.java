@@ -13,6 +13,7 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 
@@ -25,9 +26,9 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     public int cost;
     public TileEntityAutoMiner(){
         progressMaxTicks = 20;
-        cost = 250;
+        cost = 50;
         itemContents = new ItemStack[1];
-        fluidCapacity[0] = Short.MAX_VALUE*2;
+        fluidCapacity[0] = Short.MAX_VALUE/2;
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
         from = new Vec3i(0,4,0);
         to = new Vec3i(-16,-y-4,16);
@@ -67,7 +68,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                 Direction dir = null;
                 for (Direction direction : Direction.values()) {
                     if(itemConnections.get(direction) == Connection.OUTPUT || itemConnections.get(direction) == Connection.BOTH){
-                        if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest){
+                        if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest || direction.getTileEntity(worldObj,this) instanceof TileEntityItemConduit){
                             dir = direction;
                         }
                     }
@@ -103,6 +104,18 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                                 worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                             }
                         }
+                    } else if(tile instanceof TileEntityItemConduit) {
+                        if(drops != null){
+                            for (ItemStack drop : drops) {
+                                if(drop != null){
+                                    boolean success = ((TileEntityItemConduit) tile).addItem(drop,Direction.Y_POS.getOpposite());
+                                    if(!success){
+                                        block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                    }
+                                    worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                }
+                            }
+                        }
                     } else {
                         block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
@@ -120,27 +133,28 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         if(worldObj != null && getBlockType() != null){
             tier = ((BlockContainerTiered)getBlockType()).tier;
         }
-        speedMultiplier = 1;
-        cost = 0;
-        for(Direction dir : Direction.values()){
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if(tile instanceof TileEntityBooster){
-                if(((TileEntityBooster) tile).isBurning()){
-                    int meta = tile.getMovedData();
-                    if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
-                        speedMultiplier = 2;
+        if(worldObj != null){
+            applyModifiers();
+           /* for(Direction dir : Direction.values()){
+                TileEntity tile = dir.getTileEntity(worldObj,this);
+                if(tile instanceof TileEntityBooster){
+                    if(((TileEntityBooster) tile).isBurning()){
+                        int meta = tile.getMovedData();
+                        if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
+                            speedMultiplier = 2;
+                        }
                     }
                 }
+            }*/
+            extractFluids();
+            if(!workTimer.isPaused()){
+                workTimer.tick();
             }
+            if(current.equals(new Vec3i())){
+                current = new Vec3i(x-1,y+4,z+1);
+            }
+            workTimer.max = (int) (progressMaxTicks / speedMultiplier);
         }
-        extractFluids();
-        if(!workTimer.isPaused()){
-            workTimer.tick();
-        }
-        if(current.equals(new Vec3i())){
-            current = new Vec3i(x-1,y+4,z+1);
-        }
-        workTimer.max = progressMaxTicks / speedMultiplier;
     }
 
     @Override

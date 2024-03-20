@@ -96,8 +96,8 @@ public class GuiPump extends GuiFluid {
 
         i5 = this.tile.getProgressScaled(15);
         this.drawTexturedModalRect(i3 + 82, i4 + 35 + 15 - i5, 176, 29 - i5, 12, i5 + 2);
-        if(this.tile.speedMultiplier > tile.tier.ordinal()+1){
-            this.drawStringCentered(fontRenderer, "2x",i3 + xSize - 16,i4 + ySize/2 - 16,0xFFFF00FF);
+        if(this.tile.speedMultiplier > 1){
+            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - 16,i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 

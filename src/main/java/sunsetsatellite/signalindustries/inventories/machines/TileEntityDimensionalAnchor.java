@@ -89,7 +89,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         if(itemContents[0] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 6000 / speedMultiplier;
+            progressMaxTicks = (int) (6000 / speedMultiplier);
         }
         if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
@@ -151,7 +151,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 6000 / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+            progressMaxTicks = (int) (6000 / speedMultiplier);//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {

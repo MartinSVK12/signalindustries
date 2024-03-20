@@ -1,15 +1,11 @@
 package sunsetsatellite.signalindustries.inventories.base;
 
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IFluidIO;
 import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
@@ -53,7 +49,7 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
         if(areAllInputsNull()){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;
+            progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
         }
         if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
@@ -89,7 +85,7 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[energySlot]);
         if(burn > 0 && canProcess() && currentRecipe != null){
             if(fluidContents[energySlot].amount >= currentRecipe.getData().cost){
-                progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;
+                progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
                 fuelMaxBurnTicks = fuelBurnTicks = burn;
                 fluidContents[energySlot].amount -= currentRecipe.getData().cost;
                 if (fluidContents[energySlot].amount == 0) {
@@ -109,10 +105,17 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
                 if (stack != null) {
                     consumeInputs();
                     if(random.nextFloat() <= recipe.getData().chance){
+                        int multiplier = 1;
+                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
+                        if(fraction <= 0) fraction = 1;
+                        if(yield > 1 && random.nextFloat() <= fraction){
+                            multiplier = (int) Math.ceil(yield);
+                        }
                         if (itemContents[itemOutputs[0]] == null) {
+                            stack.stackSize *= multiplier;
                             setInventorySlotContents(itemOutputs[0], stack);
                         } else if (itemContents[itemOutputs[0]].isItemEqual(stack)) {
-                            itemContents[itemOutputs[0]].stackSize += stack.stackSize;
+                            itemContents[itemOutputs[0]].stackSize += (stack.stackSize * multiplier);
                         }
                     }
                 }
@@ -122,10 +125,17 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
                 if (fluidStack != null) {
                     consumeInputs();
                     if(random.nextFloat() <= recipe.getData().chance) {
+                        int multiplier = 1;
+                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
+                        if(fraction <= 0) fraction = 1;
+                        if(yield > 1 && random.nextFloat() <= fraction){
+                            multiplier = (int) Math.ceil(yield);
+                        }
                         if (fluidContents[fluidOutputs[0]] == null) {
+                            fluidStack.amount *= multiplier;
                             setFluidInSlot(fluidOutputs[0], fluidStack);
                         } else if (fluidContents[fluidOutputs[0]].isFluidEqual(fluidStack)) {
-                            fluidContents[fluidOutputs[0]].amount += fluidStack.amount;
+                            fluidContents[fluidOutputs[0]].amount += (fluidStack.amount * multiplier);
                         }
                     }
                 }
@@ -225,8 +235,16 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
             ItemStack outputStack = getStackInSlot(itemOutput);
             if (outputStack != null) {
                 if (outputStack.isItemEqual(stack)) {
-                    if ((outputStack.stackSize >= getInventoryStackLimit() || outputStack.stackSize >= outputStack.getMaxStackSize()) && outputStack.stackSize >= stack.getMaxStackSize()) {
-                        return false;
+                    if(yield > 1){
+                        int n = outputStack.stackSize+(stack.stackSize*((int) Math.ceil(yield)));
+                        if ((n > getInventoryStackLimit() || n > outputStack.getMaxStackSize()) && n > stack.getMaxStackSize()) {
+                            return false;
+                        }
+                    } else {
+                        int n = outputStack.stackSize+stack.stackSize;
+                        if ((n > getInventoryStackLimit() || n > outputStack.getMaxStackSize()) && n > stack.getMaxStackSize()) {
+                            return false;
+                        }
                     }
                 } else {
                     return false;
@@ -241,8 +259,14 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
             FluidStack outputStack = getFluidInSlot(fluidOutput);
             if (outputStack != null) {
                 if (outputStack.isFluidEqual(stack)) {
-                    if (stack.amount > getRemainingCapacity(fluidOutput)) {
-                        return false;
+                    if(yield > 1){
+                        if (stack.amount*Math.ceil(yield) > getRemainingCapacity(fluidOutput)) {
+                            return false;
+                        }
+                    } else {
+                        if (stack.amount > getRemainingCapacity(fluidOutput)) {
+                            return false;
+                        }
                     }
                     return false;
                 } else {

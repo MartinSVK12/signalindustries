@@ -10,6 +10,8 @@ import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
 
+import static sunsetsatellite.signalindustries.SignalIndustries.*;
+
 public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMachine>>{
     @Override
     public void addRecipes(RecipeGroup<RecipeEntryMachine> group) {
@@ -37,9 +39,9 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "prototype_raw_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal))
+                                new RecipeExtendedSymbol(new ItemStack(rawSignalumCrystal))
                         },
-                        new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,1),
+                        new ItemStack(saturatedSignalumCrystalDust,1),
                         new RecipeProperties(200,40, Tier.PROTOTYPE,false)
                 )
         );
@@ -49,7 +51,7 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.coal))
                         },
-                        new ItemStack(SignalIndustries.coalDust,1),
+                        new ItemStack(coalDust,1),
                         new RecipeProperties(200,40, Tier.PROTOTYPE,false)
                 )
         );
@@ -57,9 +59,9 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "prototype_empty_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystalEmpty))
+                                new RecipeExtendedSymbol(new ItemStack(signalumCrystalEmpty))
                         },
-                        new ItemStack(SignalIndustries.emptySignalumCrystalDust,2),
+                        new ItemStack(emptySignalumCrystalDust,2),
                         new RecipeProperties(200,40, Tier.PROTOTYPE,false)
                 )
         );
@@ -67,9 +69,9 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 "prototype_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal))
+                                new RecipeExtendedSymbol(new ItemStack(signalumCrystal))
                         },
-                        new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,2),
+                        new ItemStack(saturatedSignalumCrystalDust,2),
                         new RecipeProperties(200,40, Tier.PROTOTYPE,false)
                 )
         );
@@ -79,7 +81,17 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.nethercoal))
                         },
-                        new ItemStack(SignalIndustries.netherCoalDust,1),
+                        new ItemStack(netherCoalDust,1),
+                        new RecipeProperties(100,80, Tier.BASIC,false)
+                )
+        );
+        group.register(
+                "basic_tiny_nether_coal_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(netherCoalDust))
+                        },
+                        new ItemStack(tinyNetherCoalDust,9),
                         new RecipeProperties(100,80, Tier.BASIC,false)
                 )
         );

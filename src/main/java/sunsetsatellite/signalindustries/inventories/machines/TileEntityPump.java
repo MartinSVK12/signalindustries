@@ -91,7 +91,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         if (fluidContents[0] == null) {
             progressTicks = 0;
         } else if (canProcess()) {
-            progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;
+            progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
         }
         if (!worldObj.isClientSide) {
             if (progressTicks == 0 && canProcess()) {
@@ -124,7 +124,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= currentRecipe.getData().cost){
-            progressMaxTicks = currentRecipe.getData().ticks / speedMultiplier;//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
+            progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);//(itemContents[0].getItemData().getInteger("saturation") / speedMultiplier) == 0 ? 200 : (itemContents[0].getItemData().getInteger("saturation") / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= currentRecipe.getData().cost;
             if(fluidContents[0].amount == 0) {

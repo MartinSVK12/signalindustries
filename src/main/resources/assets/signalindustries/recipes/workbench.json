@@ -3226,7 +3226,7 @@
       }
     ],
     "result": {
-      "key": "tile.signalindustries.reinforced.dilithiumBooster",
+      "key": "tile.signalindustries.reinforced.booster",
       "amount": 1,
       "meta": 0
     },

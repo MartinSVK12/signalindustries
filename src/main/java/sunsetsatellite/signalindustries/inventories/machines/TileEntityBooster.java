@@ -2,21 +2,26 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.recipes.legacy.InfuserRecipes;
 import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,9 +37,9 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     public int efficiency = 1;
     public int speedMultiplier = 1;
     public int cost = 160;
-    public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
     public Random random = new Random();
     public IOPreview preview = IOPreview.NONE;
+    public Tier tier = Tier.REINFORCED;
 
     public TileEntityBooster(){
         fluidContents = new FluidStack[1];
@@ -56,6 +61,11 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     public void tick() {
         worldObj.markBlocksDirty(x,y,z,x,y,z);
         extractFluids();
+        if(getBlockType() != null){
+            BlockContainerTiered block = (BlockContainerTiered) getBlockType();
+            tier = block.tier;
+
+        }
         boolean update = false;
         if(fuelBurnTicks > 0){
             fuelBurnTicks--;
@@ -67,12 +77,34 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
             if(isBurning() && canProcess()){
                 if(progressTicks > 0){
                     progressTicks--;
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
-                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f,1.0f,0.0f,1.0f));
+                    Vec3f color = new Vec3f();
+                    if(tier == Tier.BASIC){
+                        color.x = 1.0f;
+                    } else if (tier == Tier.REINFORCED) {
+                        color.x = 1.0f;
+                        color.z = 1.0f;
+                    } else if (tier == Tier.AWAKENED) {
+                        color.x = 1.0f;
+                        color.y = 165f/255f;
+                    }
+                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f, (float) color.x, (float) color.y, (float) color.z));
+                    SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,x+random.nextFloat(),y+random.nextFloat(),z+random.nextFloat(),0,0,0,1.0f, (float) color.x, (float) color.y, (float) color.z));
                     int meta = worldObj.getBlockMetadata(x,y,z);
                     TileEntity tileEntity = Direction.getDirectionFromSide(meta).getTileEntity(worldObj,this);
                     if(tileEntity instanceof IBoostable){
-                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,tileEntity.x+random.nextFloat(),tileEntity.y+random.nextFloat(),tileEntity.z+random.nextFloat(),0,0,0,0.5f,1.0f,0.0f,0.5f));
+                        if(tier == Tier.BASIC){
+                            color.x = 1.0f;
+                            color.y = 0.5f;
+                            color.z = 0.5f;
+                        } else if (tier == Tier.REINFORCED) {
+                            color.x = 1.0f;
+                            color.z = 0.5f;
+                        } else if (tier == Tier.AWAKENED) {
+                            color.x = 1.0f;
+                            color.y = 165f/255f;
+                            color.z = 0.5f;
+                        }
+                        SignalIndustries.spawnParticle(new EntityColorParticleFX(worldObj,tileEntity.x+random.nextFloat(),tileEntity.y+random.nextFloat(),tileEntity.z+random.nextFloat(),0,0,0, 1.0f, (float) color.x, (float) color.y, (float) color.z));
                     }
                 }
                 if(progressTicks <= 0){
@@ -108,7 +140,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 * speedMultiplier;
+            setFuel();
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {
@@ -121,8 +153,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
 
     public void processItem(){
         if(canProcess() && progressTicks <= 0){
-            progressMaxTicks = 200 * speedMultiplier;
-            progressTicks = progressMaxTicks;
+           setFuel();
             itemContents[0].stackSize -= 1;
             if(itemContents[0].stackSize <= 0){
                 itemContents[0] = null;
@@ -130,11 +161,36 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
         }
     }
 
+    public void setFuel(){
+        if(canProcess() && progressTicks <= 0) {
+            if (tier == Tier.BASIC) {
+                if (itemContents[0].getItem() == Item.dustRedstone) {
+                    progressMaxTicks = 20 * speedMultiplier;
+                } else if (itemContents[0].itemID == Block.blockRedstone.id) {
+                    progressMaxTicks = 200 * speedMultiplier;
+                }
+            } else {
+                if (itemContents[0].getItem() == SignalIndustries.dilithiumShard) {
+                    progressMaxTicks = 300 * speedMultiplier;
+                } else if (itemContents[0].itemID == SignalIndustries.dilithiumBlock.id) {
+                    progressMaxTicks = 3000 * speedMultiplier;
+                }
+
+            }
+            progressTicks = progressMaxTicks;
+        }
+    }
+
     private boolean canProcess() {
         if(itemContents[0] == null) {
             return false;
         } else {
-            return itemContents[0].getItem() == SignalIndustries.dilithiumShard && itemContents[0].stackSize > 0;
+            if(tier == Tier.BASIC){
+                return (itemContents[0].getItem() == Item.dustRedstone || itemContents[0].itemID == Block.blockRedstone.id) && itemContents[0].stackSize > 0;
+            } else {
+                return (itemContents[0].getItem() == SignalIndustries.dilithiumShard || itemContents[0].itemID == SignalIndustries.dilithiumBlock.id) && itemContents[0].stackSize > 0;
+            }
+
         }
         /*if(itemContents[0] == null) {
             return false;

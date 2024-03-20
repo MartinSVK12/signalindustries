@@ -127,7 +127,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
-        if(states.get(Direction.getFromName("UP")) && ((TileEntityFluidPipe) tileEntity1).isPressurized || (blockAccess.getBlockTileEntity(i,j+1,k) instanceof TileEntityFluidPipe && ((TileEntityFluidPipe) blockAccess.getBlockTileEntity(i,j+1,k)).getFluidInSlot(0) != null)){
+        if(states.get(Direction.getFromName("UP"))){
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0f, 0.0F, 1.0F, 0.0F);

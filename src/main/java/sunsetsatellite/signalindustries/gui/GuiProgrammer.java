@@ -85,6 +85,9 @@ public class GuiProgrammer extends GuiFluid {
 
         i5 = Math.min(this.tile.getProgressScaled(54),54);
         this.drawTexturedModalRect(i3 + 61, i4 + 31, 176, 14, i5 + 1, 18);
+        if(this.tile.speedMultiplier > 1){
+            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - 16,i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        }
     }
 
     protected void drawGuiContainerForegroundLayer()

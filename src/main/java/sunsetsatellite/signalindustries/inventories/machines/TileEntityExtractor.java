@@ -45,7 +45,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
         if(itemContents[0] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 200 / speedMultiplier;
+            progressMaxTicks = (int) (200 / speedMultiplier);
         }
         if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2){
@@ -73,7 +73,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
     public boolean fuel(){
         int burn = getItemBurnTime(itemContents[1]);
         if(burn > 0 && canProcess()){
-            progressMaxTicks = 200 / speedMultiplier;
+            progressMaxTicks = (int) (200 / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             if(itemContents[1].getItem().hasContainerItem()) {
                 itemContents[1] = new ItemStack(itemContents[1].getItem().getContainerItem());

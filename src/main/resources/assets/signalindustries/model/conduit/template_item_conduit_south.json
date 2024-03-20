@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "#conduit"
+	},
+	"elements": [
+		{
+			"name": "south",
+			"from": [4, 4, 12],
+			"to": [12, 12, 16],
+			"faces": {
+				"north": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"east": {"uv": [0, 4, 4, 12], "texture": "#conduit"},
+				"south": {"uv": [4, 4, 12, 12], "texture": "#conduit"},
+				"west": {"uv": [12, 4, 16, 12], "texture": "#conduit"},
+				"up": {"uv": [4, 12, 12, 16], "texture": "#conduit"},
+				"down": {"uv": [4, 0, 12, 4], "texture": "#conduit"}
+			}
+		}
+	]
+}

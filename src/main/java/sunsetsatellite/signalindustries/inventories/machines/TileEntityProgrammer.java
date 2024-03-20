@@ -39,7 +39,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
         if(itemContents[0] == null || itemContents[1] == null){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = 1000 / speedMultiplier;
+            progressMaxTicks = (int) (1000 / speedMultiplier);
         }
         if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
@@ -69,7 +69,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     public boolean fuel(){
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
         if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
-            progressMaxTicks = 200 / speedMultiplier;
+            progressMaxTicks = (int) (200 / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
             if(fluidContents[0].amount == 0) {

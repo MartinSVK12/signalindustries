@@ -53,6 +53,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
+import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
@@ -210,6 +211,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Tag<Block> ENERGY_CONDUITS_CONNECT = Tag.of("energy_conduits_connect");
     public static final Tag<Block> FLUID_CONDUITS_CONNECT = Tag.of("fluid_conduits_connect");
+    public static final Tag<Block> ITEM_CONDUITS_CONNECT = Tag.of("item_conduits_connect");
 
     public static final Block signalumOre = new BlockBuilder(MOD_ID)
             .setTextures("signalum_ore.png")
@@ -432,6 +434,22 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             )
             .build(new BlockFluidConduit("reinforced.conduit.fluid",config.getInt("BlockIDs.reinforcedFluidConduit"),Tier.REINFORCED,Material.glass));
 
+    public static final Block basicItemConduit = new BlockBuilder(MOD_ID)
+            .setTextures("item_conduit_basic.png")
+            .setLuminance(0)
+            .setResistance(1)
+            .setHardness(1)
+            .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/item/basic/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"basic_item_conduit.json"),
+                            new ItemConduitStateInterpreter(),
+                            true
+                    )
+            )
+            .build(new BlockItemConduit("basic.conduit.item",config.getInt("BlockIDs.basicItemConduit"),Tier.BASIC,Material.glass));
+
 
     public static final Block infiniteEnergyCell = new BlockBuilder(MOD_ID)
             .setTextures("cell_prototype.png")
@@ -642,6 +660,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setNorthTexture("dilithium_top_inactive.png")
             .build(new BlockDilithiumStabilizer("reinforced.dilithiumStabilizer",config.getInt("BlockIDs.dilithiumStabilizer"), Tier.REINFORCED,Material.metal));
 
+    public static final Block redstoneBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_blank.png")
+            .setSideTextures("basic_booster_side_inactive.png")
+            .setNorthTexture("basic_booster_top_inactive.png")
+            .build(new BlockDilithiumBooster("basic.booster",config.getInt("BlockIDs.redstoneBooster"), Tier.BASIC,Material.metal));
+
     public static final Block dilithiumBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
             .setHardness(1)
             .setResistance(3)
@@ -649,7 +676,17 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("reinforced_blank.png")
             .setSideTextures("dilithium_booster_side_inactive.png")
             .setNorthTexture("dilithium_top_inactive.png")
-            .build(new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
+            .build(new BlockDilithiumBooster("reinforced.booster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
+
+    //TODO: W.I.P.
+    /*public static final Block awakenedBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("awakened_blank.png")
+            .setSideTextures("awakened_booster_side_inactive.png")
+            .setNorthTexture("awakened_booster_top_inactive.png")
+            .build(new BlockDilithiumBooster("awakened.booster",config.getInt("BlockIDs.awakenedBooster"), Tier.AWAKENED,Material.metal));*/
 
     public static final Block prototypePump = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -669,15 +706,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setSideTextures("basic_pump_side_empty.png")
             .build(new BlockPump("basic.pump",config.getInt("BlockIDs.basicPump"), Tier.BASIC,Material.metal));
 
-    /*public static final Block prototypeBlockBreaker = new BlockBuilder(MOD_ID)
+    public static final Block prototypeInserter = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("prototype_blank.png")
-            .setTopBottomTexture("prototype_block_breaker_side_2.png")
-            .setSideTextures("prototype_block_breaker_side.png")
-            .setNorthTexture("prototype_block_breaker.png")
-            .build(new BlockBreaker("prototype.blockBreaker",config.getInt("BlockIDs.prototypeBlockBreaker"),Tier.PROTOTYPE,Material.stone));*/
+            .setSouthTexture("inserter_output.png")
+            .setNorthTexture("inserter_input.png")
+            .build(new BlockInserter("prototype.inserter",config.getInt("BlockIDs.prototypeInserter"),Tier.PROTOTYPE,Material.stone));
+
+    public static final Block basicInserter = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_blank.png")
+            .setSouthTexture("basic_inserter_output.png")
+            .setNorthTexture("basic_inserter_input.png")
+            .build(new BlockInserter("basic.inserter",config.getInt("BlockIDs.basicInserter"),Tier.BASIC,Material.metal));
 
     public static final int[][] breakerTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"inserteroutput.png")};
     public static final Block basicAutomaticMiner = new BlockBuilder(MOD_ID)
@@ -687,6 +732,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setTextures("basic_blank.png")
             .setNorthTexture("basic_automatic_miner.png")
             .build(new BlockAutoMiner("basic.automaticMiner",config.getInt("BlockIDs.basicAutomaticMiner"),Tier.BASIC,Material.metal));
+
     public static final Block externalIo = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
             .setHardness(1)
@@ -1100,10 +1146,17 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put("dilithiumStabilizer.vertical.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_stabilizer_side_active.png").setTopTexture("dilithium_top_active.png"));
         textures.put("dilithiumStabilizer.vertical.active.overlay",new BlockTexture(MOD_ID).setSides("stabilizer_overlay.png").setTopTexture("dilithium_machine_overlay.png"));
 
-        textures.put("dilithiumBooster.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_booster_side_active.png").setNorthTexture("dilithium_top_active.png"));
-        textures.put("dilithiumBooster.active.overlay",new BlockTexture(MOD_ID).setSides("booster_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
+        textures.put(Tier.BASIC.name()+"booster.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setSides("basic_booster_side_active.png").setNorthTexture("basic_booster_top_active.png"));
+        textures.put(Tier.BASIC.name()+"booster.active.overlay",new BlockTexture(MOD_ID).setSides("basic_booster_overlay.png").setNorthTexture("basic_booster_overlay_top.png"));
+        textures.put(Tier.REINFORCED.name()+"booster.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setSides("dilithium_booster_side_active.png").setNorthTexture("dilithium_top_active.png"));
+        textures.put(Tier.REINFORCED.name()+"booster.active.overlay",new BlockTexture(MOD_ID).setSides("booster_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
+        textures.put(Tier.AWAKENED.name()+"booster.active",new BlockTexture(MOD_ID).setAll("awakened_blank.png").setSides("awakened_booster_side_active.png").setNorthTexture("awakened_booster_top_active.png"));
+        textures.put(Tier.AWAKENED.name()+"booster.active.overlay",new BlockTexture(MOD_ID).setSides("awakened_booster_overlay.png").setNorthTexture("dilithium_machine_overlay.png"));
 
         textures.put("uvLamp.active",new BlockTexture(MOD_ID).setAll("uv_lamp.png"));
+
+        textures.put(Tier.PROTOTYPE.name()+".inserter.vertical",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setBottomTexture("inserter_output.png").setTopTexture("inserter_input.png"));
+        textures.put(Tier.BASIC.name()+".inserter.vertical",new BlockTexture(MOD_ID).setAll("basic_blank.png").setBottomTexture("basic_inserter_output.png").setTopTexture("basic_inserter_input.png"));
 
         textures.put(Tier.BASIC.name()+".externalIo",new BlockTexture(MOD_ID).setAll("external_io_blank.png").setTopTexture("external_io_input.png").setBottomTexture("external_io_output.png").setNorthTexture("external_io_both.png"));
 
@@ -1162,20 +1215,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         ItemToolPickaxe.miningLevels.put(reinforcedGlass,3);
         ItemToolPickaxe.miningLevels.put(reinforcedCasing,3);
 
-
-
         ironPlateHammer.setContainerItem(ironPlateHammer);
 
         CommandHelper.Core.createCommand(new NBTEditCommand());
         CommandHelper.Core.createCommand(new StructureCommand("structure","struct"));
-        EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
-        EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
+
         EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
         EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(volatileSignalumCrystal.getIconFromDamage(0)));
         EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
         EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
         EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
         EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
+
+        EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
+        EntityHelper.Core.createSpecialTileEntity(TileEntityItemConduit.class, new RenderItemsInConduit(),"Item Conduit");
+
+        EntityHelper.Core.createTileEntity(TileEntityInserter.class, "Inserter");
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);

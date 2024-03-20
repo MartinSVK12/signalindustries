@@ -16,8 +16,7 @@ import java.util.HashMap;
 
 public class ConduitStateInterpreter extends MetaStateInterpreter {
     @Override
-    public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) {
-        HashMap<String, String> states = new HashMap<>();
+    public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) { HashMap<String, String> states = new HashMap<>();
         for (Direction direction : Direction.values()) {
             boolean show = false;
             Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
