@@ -1,0 +1,134 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_base"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"up": "true"},{"restrict_up": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_up"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"up": "true"},{"restrict_up": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_up"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"restrict_down": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_down"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"restrict_down": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_down"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"north": "true"},{"restrict_north": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_north"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"north": "true"},{"restrict_north": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_north"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"south": "true"},{"restrict_south": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_south"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"south": "true"},{"restrict_south": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_south"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"east": "true"},{"restrict_east": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_east"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"east": "true"},{"restrict_east": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_east"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"restrict_west": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/restrict/conduit_west"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"restrict_west": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/conduit_west"
+      }
+    }
+  ]
+}

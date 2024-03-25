@@ -81,6 +81,8 @@ item.signalindustries.romChip.boost.name=ROM Chip: Boost
 item.signalindustries.romChip.boost.desc=Contains code for a [Trigger] ability.
 item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
+item.signalindustries.romChip.position.name=Position Memory Chip
+item.signalindustries.romChip.position.desc=Stores an XYZ location in the current world, unlike the [Warp Orb] it can only be used to logically link 2 points together.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
 item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing [Signalum Energy] either outwards into a powerful shockwave or inwards to break a slotted item inside.
@@ -158,14 +160,20 @@ tile.signalindustries.basic.conduit.fluid.desc=Transfers fluids, not suitable fo
 tile.signalindustries.reinforced.conduit.fluid.name=Reinforced Fluid Conduit
 tile.signalindustries.reinforced.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
 
+tile.signalindustries.prototype.conduit.item.name=Prototype Item Conduit
+tile.signalindustries.prototype.conduit.item.desc=Transfers items.
 tile.signalindustries.basic.conduit.item.name=Basic Item Conduit
-tile.signalindustries.basic.conduit.item.desc=Transfers items.
+tile.signalindustries.basic.conduit.item.desc=Transfers items faster.
+tile.signalindustries.basic.conduit.item.restrict.name=Basic Restrict Item Conduit
+tile.signalindustries.basic.conduit.item.restrict.desc=Transfers items faster. Can have some of its directions blocked off preventing incoming items from going into that direction.
 
 tile.signalindustries.prototype.inserter.name=Prototype Inserter
 tile.signalindustries.prototype.inserter.desc=Picks up items from the ground and inserts them into item conduits.
-
 tile.signalindustries.basic.inserter.name=Basic Inserter
 tile.signalindustries.basic.inserter.desc=Picks up more items from the ground faster and inserts them into item conduits.
+
+tile.signalindustries.prototype.filter.name=Prototype Filter
+tile.signalindustries.prototype.filter.desc=Sorts items that pass through it into colored outputs,
 
 item.signalindustries.basic.prototypeHarness.name=Signalum Prototype Harness
 item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, but allows you to start using [Signalum Energy] on the go.
@@ -415,6 +423,8 @@ tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds acr
 
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
+tile.signalindustries.reinforced.externalIO.name=Reinforced External I/O
+tile.signalindustries.reinforced.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively, remotely!
 
 tile.signalindustries.basic.programmer.name=EEPROM Programmer
 tile.signalindustries.basic.programmer.desc=Device for programming and configuring [Triggers].
@@ -463,6 +473,15 @@ tile.signalindustries.awakenedSignalumCrystalBlock.name=Block of Awakened Signal
 tile.signalindustries.awakenedSignalumCrystalBlock.desc=A solid block of Awakened Signalum Crystals. I guess nothing can stop you now. Congratulations.
 tile.signalindustries.dilithiumCrystalBlock.name=Dilithium Crystal Block
 tile.signalindustries.dilithiumCrystalBlock.desc=A fragile crystal of Dilithium.
+
+tile.signalindustries.prototype.bricks.name=Cobblestone Bricks
+tile.signalindustries.prototype.bricks.desc=Stacked bricks of cobblestone.
+tile.signalindustries.basic.bricks.name=Crystal Alloy Bricks
+tile.signalindustries.basic.bricks.desc=Stacked bricks of Crystal Alloy ingots.
+tile.signalindustries.reinforced.bricks.name=Reinforced Crystal Alloy Bricks
+tile.signalindustries.reinforced.bricks.desc=Stacked bricks of Reinforced Crystal Alloy ingots.
+tile.signalindustries.awakened.bricks.name=Awakened Alloy Bricks
+tile.signalindustries.awakened.bricks.desc=Stacked bricks of Awakened Alloy ingots.
 
 dimension.signalindustries.eternity.name=Eternity
 signalindustries.eternity.name=Eternity

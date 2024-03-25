@@ -11,6 +11,8 @@ import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockConduit;
 import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
+import sunsetsatellite.signalindustries.inventories.TileEntityInserter;
+import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 
 import java.util.HashMap;
@@ -19,6 +21,7 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
     @Override
     public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) {
         HashMap<String, String> states = new HashMap<>();
+        TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(i,j,k);
         for (Direction direction : Direction.values()) {
             boolean show = false;
             Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
@@ -40,6 +43,9 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
                 }
             }
             states.put(direction.getName().toLowerCase(), String.valueOf(show));
+            if(tile != null){
+                states.put("restrict_"+direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
+            }
         }
         return states;
     }

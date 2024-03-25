@@ -66,7 +66,7 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
     public void work(){
         TileEntity inv = input.getTileEntity(worldObj,this);
         TileEntity pipe = output.getTileEntity(worldObj,this);
-        AABB aabb = getBlockType().getSelectedBoundingBoxFromPool(worldObj,x,y,z).expand(input.getVecF().x,input.getVecF().y,input.getVecF().z);
+        AABB aabb = getBlockType().getSelectedBoundingBoxFromPool(worldObj,x,y,z).copy().offset(input.getVecF().x,input.getVecF().y,input.getVecF().z);
         List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class,aabb).stream().map((E)->((EntityItem)E)).collect(Collectors.toList());
         if(pipe instanceof TileEntityItemConduit && inv instanceof IInventory){
             int slot = -1;
@@ -92,6 +92,9 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
             if(!success){
                 stack.stackSize += split.stackSize;
             }
+            if(stack.stackSize <= 0){
+                ((IInventory) inv).setInventorySlotContents(slot,null);
+            }
         } else if (pipe instanceof TileEntityItemConduit && !items.isEmpty()) {
             EntityItem item = items.get(0);
             ItemStack split;
@@ -107,11 +110,11 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
             } else {
                 if(item.item.itemID < 16384){
                     for (int i = 0; i < 4; i++) {
-                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, Block.getBlock(item.item.itemID),0,0));
+                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, Block.getBlock(item.item.itemID),0));
                     }
                 } else {
                     for (int i = 0; i < 4; i++) {
-                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, getBlockType(),0,0));
+                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, getBlockType(),0));
                     }
                 }
             }

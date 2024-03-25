@@ -62,7 +62,7 @@ public class ExplosionNoDrops {
 
     public void doExplosionB(boolean particles) {
         if(exploder != null){
-            this.world.playSoundAtEntity(exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+            this.world.playSoundAtEntity(exploder, exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
         }
         List<ChunkPosition> arraylist = new ArrayList<>();
         arraylist.addAll(this.destroyedBlockPositions);

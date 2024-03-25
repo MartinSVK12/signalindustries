@@ -17,10 +17,9 @@ public class EntityInfernal extends EntityMonster {
         this.moveSpeed = 0.5F;
         this.attackStrength = 5;
         this.scoreValue = 1000;
-        this.health = 40;
         this.fireImmune = true;
+        this.setHealthRaw(40);
     }
-
     private int beamsLaunched = 0;
     private int beamCooldown = 0;
     private DamageType lastDamageType = null;
@@ -66,7 +65,7 @@ public class EntityInfernal extends EntityMonster {
                     entityarrow.y += 0.3999999761581421D;
                     double d2 = (entity.y + (double) entity.getHeadHeight()) - 0.20000000298023224D - entityarrow.y;
                     float f1 = MathHelper.sqrt_double(d * d + d1 * d1) * 0.2F;
-                    world.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / (random.nextFloat() * 0.4F + 0.8F));
+                    world.playSoundAtEntity(this, this, "random.bow", 1.0F, 1.0F / (random.nextFloat() * 0.4F + 0.8F));
                     world.entityJoinedWorld(entityarrow);
                     entityarrow.setArrowHeading(d, d2, d1, 0.6F, 12F);
                     beamsLaunched++;
@@ -94,6 +93,11 @@ public class EntityInfernal extends EntityMonster {
         }
         lastDamageType = type;
         return super.hurt(attacker, i, type);
+    }
+
+    @Override
+    public int getMaxHealth() {
+        return 40;
     }
 
     @Override

@@ -14,7 +14,6 @@ import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
-import net.minecraft.client.sound.block.BlockSounds;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
@@ -27,6 +26,7 @@ import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.sound.BlockSounds;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
@@ -54,6 +54,7 @@ import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
+import sunsetsatellite.signalindustries.commands.RecipeReloadCommand;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
@@ -434,6 +435,22 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             )
             .build(new BlockFluidConduit("reinforced.conduit.fluid",config.getInt("BlockIDs.reinforcedFluidConduit"),Tier.REINFORCED,Material.glass));
 
+    public static final Block prototypeItemConduit = new BlockBuilder(MOD_ID)
+            .setTextures("item_conduit_prototype.png")
+            .setLuminance(0)
+            .setResistance(1)
+            .setHardness(1)
+            .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/item/prototype/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"prototype_item_conduit.json"),
+                            new ItemConduitStateInterpreter(),
+                            true
+                    )
+            )
+            .build(new BlockItemConduit("prototype.conduit.item",config.getInt("BlockIDs.prototypeItemConduit"),Tier.PROTOTYPE,Material.glass, PipeType.NORMAL));
+
     public static final Block basicItemConduit = new BlockBuilder(MOD_ID)
             .setTextures("item_conduit_basic.png")
             .setLuminance(0)
@@ -448,7 +465,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
                             true
                     )
             )
-            .build(new BlockItemConduit("basic.conduit.item",config.getInt("BlockIDs.basicItemConduit"),Tier.BASIC,Material.glass));
+            .build(new BlockItemConduit("basic.conduit.item",config.getInt("BlockIDs.basicItemConduit"),Tier.BASIC,Material.glass, PipeType.NORMAL));
+
+    public static final Block basicRestrictItemConduit = new BlockBuilder(MOD_ID)
+            .setTextures("item_conduit_basic.png")
+            .setLuminance(0)
+            .setResistance(1)
+            .setHardness(1)
+            .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/item/basic/restrict/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"basic_item_conduit_restrict.json"),
+                            new ItemConduitStateInterpreter(),
+                            true
+                    )
+            )
+            .build(new BlockItemConduit("basic.conduit.item.restrict",config.getInt("BlockIDs.basicRestrictItemConduit"),Tier.BASIC,Material.glass, PipeType.RESTRICT));
 
 
     public static final Block infiniteEnergyCell = new BlockBuilder(MOD_ID)
@@ -724,6 +757,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setNorthTexture("basic_inserter_input.png")
             .build(new BlockInserter("basic.inserter",config.getInt("BlockIDs.basicInserter"),Tier.BASIC,Material.metal));
 
+    public static final Block prototypeFilter = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTopTexture("filter_red.png")
+            .setNorthTexture("filter_green.png")
+            .setEastTexture("filter_blue.png")
+            .setWestTexture("filter_yellow.png")
+            .setSouthTexture("filter_magenta.png")
+            .setBottomTexture("filter_cyan.png")
+            .build(new BlockFilter("prototype.filter",config.getInt("BlockIDs.prototypeFilter"),Tier.PROTOTYPE,Material.stone));
+
     public static final int[][] breakerTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"prototype_block_breaker_side_2_active.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"inserteroutput.png")};
     public static final Block basicAutomaticMiner = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
@@ -739,6 +784,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setResistance(3)
             .setTextures("external_io_blank.png")
             .build(new BlockExternalIO("basic.externalIO",config.getInt("BlockIDs.externalIo"),Tier.BASIC,Material.metal));
+
+    public static final Block reinforcedExternalIo = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setTextures("reinforced_external_io_blank.png")
+            .build(new BlockExternalIO("reinforced.externalIO",config.getInt("BlockIDs.reinforcedExternalIo"),Tier.REINFORCED,Material.metal));
 
     public static final Block reinforcedCentrifuge = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
@@ -843,6 +895,30 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             )
             .setTextures(1,0)
             .build(new BlockProgrammer("basic.programmer",config.getInt("BlockIDs.basicProgrammer"),Tier.BASIC,Material.metal));
+
+    public static final Block cobblestoneBricks = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.STONE)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setTextures("cobblestone_bricks.png")
+            .build(new Block("prototype.bricks",config.getInt("BlockIDs.cobblestoneBricks"),Material.stone));
+
+    public static final Block crystalAlloyBricks = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setTextures("crystal_alloy_bricks.png")
+            .build(new Block("basic.bricks",config.getInt("BlockIDs.crystalAlloyBricks"),Material.metal));
+
+    public static final Block reinforcedCrystalAlloyBricks = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setTextures("reinforced_alloy_bricks.png")
+            .build(new Block("reinforced.bricks",config.getInt("BlockIDs.reinforcedCrystalAlloyBricks"),Material.metal));
 
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_energy_transparent.png");
@@ -1061,6 +1137,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item blankAbilityModule = simpleItem("blankAbilityModule","blank_module.png");
     public static final Item abilityContainerCasing = simpleItem("abilityContainerCasing","abilitycontainercasing.png");
     public static final Item blankChip = simpleItem("blankChip","romChip.blank","blank_chip.png");
+    public static final Item positionMemoryChip = ItemHelper.createItem(MOD_ID,new ItemPositionChip("romChip.position",config.getInt("ItemIDs.positionMemoryChip")),"position_chip.png");
 
 
     public static final int[] energyOrbTex = TextureHelper.getOrCreateItemTexture(MOD_ID,"energyorb.png");
@@ -1071,7 +1148,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
 
-    public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome().setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
+    public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome("signalindustries:eternity").setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
     public static final Dimension dimEternity = new Dimension(key("eternity"),Dimension.overworld,1,portalEternity.id).setDefaultWorldType(eternityWorld);
 
@@ -1159,6 +1236,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put(Tier.BASIC.name()+".inserter.vertical",new BlockTexture(MOD_ID).setAll("basic_blank.png").setBottomTexture("basic_inserter_output.png").setTopTexture("basic_inserter_input.png"));
 
         textures.put(Tier.BASIC.name()+".externalIo",new BlockTexture(MOD_ID).setAll("external_io_blank.png").setTopTexture("external_io_input.png").setBottomTexture("external_io_output.png").setNorthTexture("external_io_both.png"));
+        textures.put(Tier.REINFORCED.name()+".externalIo",new BlockTexture(MOD_ID).setAll("reinforced_external_io_blank.png").setTopTexture("reinforced_external_io_input.png").setBottomTexture("reinforced_external_io_output.png").setNorthTexture("reinforced_external_io_both.png"));
+
 
         textures.put(Tier.REINFORCED.name()+".centrifuge.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("reinforced_centrifuge_closed.png").setNorthTexture("reinforced_centrifuge_front_active.png"));
         textures.put(Tier.REINFORCED.name()+".centrifuge.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("centrifuge_overlay.png"));
@@ -1218,6 +1297,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         ironPlateHammer.setContainerItem(ironPlateHammer);
 
         CommandHelper.Core.createCommand(new NBTEditCommand());
+        CommandHelper.Core.createCommand(new RecipeReloadCommand("recipes"));
         CommandHelper.Core.createCommand(new StructureCommand("structure","struct"));
 
         EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
@@ -1307,6 +1387,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createTileEntity(TileEntityProgrammer.class,"EEPROM Programmer");
         addToNameGuiMap("EEPROM Programmer", GuiProgrammer.class,TileEntityProgrammer.class);
 
+        EntityHelper.Core.createTileEntity(TileEntityFilter.class,"Filter");
+        addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
+
         EntityHelper.Core.createTileEntity(TileEntityUVLamp.class,"Ultraviolet Lamp");
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
@@ -1354,7 +1437,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static Item simpleItem(String name, String lang, String texture){
         return ItemHelper.createItem(MOD_ID,new Item(lang,config.getInt("ItemIDs."+name)),texture);
     }
-
 
     public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {

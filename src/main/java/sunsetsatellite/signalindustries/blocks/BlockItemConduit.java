@@ -10,10 +10,14 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.gui.GuiFluidIOConfig;
+import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
 import sunsetsatellite.signalindustries.inventories.TileEntityConduit;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeMode;
+import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.List;
@@ -22,8 +26,11 @@ import java.util.stream.Collectors;
 
 public class BlockItemConduit extends BlockContainerTiered {
 
-    public BlockItemConduit(String key, int i, Tier tier, Material material) {
+    public PipeType type;
+
+    public BlockItemConduit(String key, int i, Tier tier, Material material, PipeType type) {
         super(key, i, tier, material);
+        this.type = type;
     }
 
     protected TileEntity getNewBlockEntity() {
@@ -36,10 +43,16 @@ public class BlockItemConduit extends BlockContainerTiered {
 
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if (entityplayer.isSneaking() && !world.isClientSide) {
+        if (entityplayer.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
             TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
             tile.mode = PipeMode.values()[tile.mode.ordinal()+1 <= PipeMode.values().length-1 ? tile.mode.ordinal()+1 : 0];
             Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Pipe mode changed to: "+tile.mode);
+            return true;
+        }
+        if (!world.isClientSide && type == PipeType.RESTRICT) {
+            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
+            SignalIndustries.displayGui(entityplayer, new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x,tile.y,tile.z);
+            return true;
         }
         return false;
     }

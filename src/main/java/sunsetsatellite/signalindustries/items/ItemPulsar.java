@@ -59,7 +59,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
         }
         if(itemstack.getData().getByte("charge") >= 100){
             itemstack.getData().putByte("charge", (byte) 0);
-            world.playSoundAtEntity(entityplayer, "signalindustries.pulsar", 0.5F, 1.0f);
+            world.playSoundAtEntity(entityplayer, entityplayer, "signalindustries.pulsar", 0.5F, 1.0f);
             if(getAbility(itemstack).contains("Warp")){
                 ExplosionEnergy ex = new ExplosionEnergy(world,entityplayer,entityplayer.x,entityplayer.y,entityplayer.z,3f);
                 ex.doExplosionA();

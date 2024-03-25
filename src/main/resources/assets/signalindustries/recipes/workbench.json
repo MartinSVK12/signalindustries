@@ -12,7 +12,7 @@
         "symbol": "I",
         "stack": {
           "key": "item.ingot.iron",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -20,14 +20,14 @@
         "symbol": "S",
         "stack": {
           "key": "item.stick",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "item.signalindustries.ironPlateHammer",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -45,14 +45,14 @@
         "symbol": "D",
         "stack": {
           "key": "item.diamond",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "item.signalindustries.diamondCuttingGear",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -196,14 +196,14 @@
         "symbol": "D",
         "stack": {
           "key": "item.signalindustries.dilithiumShard",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.dilithiumBlock",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -221,14 +221,14 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.rawCrystalBlock",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -246,14 +246,14 @@
         "symbol": "C",
         "stack": {
           "key": "item.signalindustries.crystalAlloyIngot",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.emptyCrystalBlock",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -271,7 +271,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -279,7 +279,7 @@
         "symbol": "C",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -287,14 +287,14 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.stonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.prototype.machine",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -312,7 +312,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.signalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -320,7 +320,7 @@
         "symbol": "C",
         "stack": {
           "key": "item.signalindustries.crystalAlloyPlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -328,14 +328,14 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.steelPlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.basic.machine",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -353,7 +353,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.saturatedSignalumAlloyIngot",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -361,7 +361,7 @@
         "symbol": "R",
         "stack": {
           "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -369,14 +369,14 @@
         "symbol": "B",
         "stack": {
           "key":  "tile.signalindustries.basic.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key": "tile.signalindustries.reinforced.machine",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -394,7 +394,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -402,7 +402,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -410,7 +410,7 @@
         "symbol": "F",
         "stack": {
           "key":  "tile.furnace.stone.idle",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -418,14 +418,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.extractor",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -443,7 +443,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -451,7 +451,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -459,7 +459,7 @@
         "symbol": "F",
         "stack": {
           "key":  "item.flint",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -467,14 +467,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.crusher",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -492,7 +492,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.steelPlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -500,7 +500,7 @@
         "symbol": "B",
         "stack": {
           "key":  "tile.furnace.blast.idle",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -508,14 +508,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.alloySmelter",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -533,7 +533,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -541,7 +541,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -549,7 +549,7 @@
         "symbol": "H",
         "stack": {
           "key":  "item.signalindustries.ironPlateHammer",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -557,14 +557,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.plateFormer",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": true
@@ -680,7 +680,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.stonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -688,7 +688,7 @@
         "symbol": "C",
         "stack": {
           "key": "tile.signalindustries.prototype.conduit.fluid",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -696,7 +696,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -704,7 +704,7 @@
         "symbol": "B",
         "stack": {
           "key":  "item.bucket",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -712,14 +712,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.pump",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -737,7 +737,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -745,7 +745,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -753,7 +753,7 @@
         "symbol": "G",
         "stack": {
           "key":  "item.signalindustries.diamondCuttingGear",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -761,14 +761,14 @@
         "symbol": "M",
         "stack": {
           "key":  "tile.signalindustries.prototype.machine",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.crystalCutter",
-     "amount": 1,
+      "amount": 1,
       "meta": 0
     },
     "consumeContainers": false
@@ -786,7 +786,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.rawSignalumCrystal",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -794,7 +794,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.stonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -802,14 +802,14 @@
         "symbol": "G",
         "stack": {
           "key":  "tile.glass",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.prototype.conduit",
-     "amount": 4,
+      "amount": 4,
       "meta": 0
     },
     "consumeContainers": false
@@ -827,7 +827,7 @@
         "symbol": "S",
         "stack": {
           "key": "item.signalindustries.stonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -835,7 +835,7 @@
         "symbol": "P",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
-         "amount": 1,
+          "amount": 1,
           "meta": 0
         }
       },
@@ -1578,8 +1578,8 @@
     "type": "minecraft:crafting/shaped",
     "pattern": [
       "PIP",
-      "IMI",
-      "PIP"
+      "FMI",
+      "PFP"
     ],
     "symbols": [
       {
@@ -1605,10 +1605,67 @@
           "amount": 1,
           "meta": 0
         }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
       }
     ],
     "result": {
       "key":  "tile.signalindustries.basic.externalIO",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_external_io",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PIP",
+      "FMI",
+      "PFP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key":  "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.externalIO",
       "amount": 1,
       "meta": 0
     },
@@ -2720,6 +2777,39 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/basic_item_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CGC",
+      "   ",
+      "CGC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.conduit.item",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/prototype_goggles",
     "type": "minecraft:crafting/shaped",
     "pattern": [
@@ -3227,6 +3317,63 @@
     ],
     "result": {
       "key": "tile.signalindustries.reinforced.booster",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/redstone_booster",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RBR",
+      "RMR",
+      "DCD"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.basicEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "tile.block.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.torch.redstone.active",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.booster",
       "amount": 1,
       "meta": 0
     },
@@ -4479,6 +4626,204 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.pump",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/position_memory_chip",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "D",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.romChip.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dimensionalChip",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.romChip.position",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/cobblestone_bricks",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CC",
+      "CC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "group": "minecraft:cobblestones"
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.bricks",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/crystal_alloy_bricks",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CC",
+      "CC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.bricks",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_crystal_alloy_bricks",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CC",
+      "CC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.bricks",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_inserter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CIC",
+      "SMS",
+      "C C"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.stonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.prototype.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.inserter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_inserter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " I ",
+      "CMC",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "tile.signalindustries.prototype.inserter",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.item",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.inserter",
       "amount": 1,
       "meta": 0
     },

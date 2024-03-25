@@ -191,7 +191,7 @@ public class EntitySunbeam extends Entity {
                     if (this.isOnFire()) {
                         movingobjectposition.entity.fireHurt();
                     }
-                    this.world.playSoundAtEntity(this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
+                    this.world.playSoundAtEntity(this, this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
                     this.remove();
                 } else {
                     this.remove();
@@ -256,7 +256,7 @@ public class EntitySunbeam extends Entity {
     }
 
     protected void inGroundAction() {
-        this.world.playSoundAtEntity(this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
+        this.world.playSoundAtEntity(this, this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
         this.inGround = true;
         this.arrowShake = 7;
     }

@@ -57,7 +57,7 @@ public class ExplosionEnergy {
     }
 
     public void doExplosionB(boolean particles, float red, float green, float blue) {
-        this.world.playSoundAtEntity(exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.world.playSoundAtEntity(exploder, exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
         List<ChunkPosition> arraylist = new ArrayList<>(this.destroyedBlockPositions);
         for (int i = arraylist.size() - 1; i >= 0; i--) {
             ChunkPosition chunkposition = arraylist.get(i);
@@ -88,7 +88,7 @@ public class ExplosionEnergy {
 
     public void doExplosionB(boolean particles) {
         if(exploder != null){
-            this.world.playSoundAtEntity(exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+            this.world.playSoundAtEntity(exploder, exploder, "rand.explode", 4.0F, (1.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
 
         }
         List<ChunkPosition> arraylist = new ArrayList<>(this.destroyedBlockPositions);

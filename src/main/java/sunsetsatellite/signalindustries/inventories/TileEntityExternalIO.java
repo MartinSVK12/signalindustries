@@ -1,25 +1,31 @@
 package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.util.helper.Side;
 import org.jetbrains.annotations.NotNull;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IFluidTransfer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.interfaces.IAcceptsPosition;
+import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 
-public class TileEntityExternalIO extends TileEntityTieredMachineBase {
+public class TileEntityExternalIO extends TileEntityTieredMachineBase implements IAcceptsPosition {
 
     public TileEntity externalTile;
     public Direction externalTileSide;
+    public CompoundTag externalTilePos;
+    public static int range = 5;
 
     public TileEntityExternalIO(){
     }
@@ -64,19 +70,21 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase {
     }
 
     @Override
-    public void readFromNBT(CompoundTag CompoundTag1) {
-        if(externalTile != null) {
+    public void readFromNBT(CompoundTag tag) {
+        /*if(externalTile != null) {
             externalTile.readFromNBT(CompoundTag1);
-        }
-        super.readFromNBT(CompoundTag1);
+        }*/
+        super.readFromNBT(tag);
+        externalTilePos = tag.getCompound("externalPosition");
     }
 
     @Override
-    public void writeToNBT(CompoundTag CompoundTag1) {
-        if(externalTile != null) {
+    public void writeToNBT(CompoundTag tag) {
+        /*if(externalTile != null) {
             externalTile.writeToNBT(CompoundTag1);
-        }
-        super.writeToNBT(CompoundTag1);
+        }*/
+        super.writeToNBT(tag);
+        tag.put("externalPosition",externalTilePos);
     }
 
     @Override
@@ -208,12 +216,41 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase {
         super.tick();
         worldObj.markBlocksDirty(x, y, z, x, y, z);
         if(externalTile == null){
-            for (Direction dir : Direction.values()) {
-                TileEntity tile = dir.getTileEntity(worldObj,this);
-                if(tile instanceof IInventory || tile instanceof IFluidInventory){
-                    if(!(tile instanceof TileEntityExternalIO)){
-                        externalTile = tile;
-                        externalTileSide = dir;
+            if(tier == Tier.BASIC){
+                for (Direction dir : Direction.values()) {
+                    TileEntity tile = dir.getTileEntity(worldObj, this);
+                    if (tile instanceof IInventory || tile instanceof IFluidInventory) {
+                        if (!(tile instanceof TileEntityExternalIO)) {
+                            externalTile = tile;
+                            externalTileSide = dir;
+                            CompoundTag pos = new CompoundTag();
+                            pos.putInt("x", externalTile.x);
+                            pos.putInt("y", externalTile.y);
+                            pos.putInt("z", externalTile.z);
+                            pos.putInt("side", dir.getSide());
+                            pos.putInt("dim", externalTile.worldObj.dimension.id);
+                            externalTilePos = pos;
+                        }
+                    }
+                }
+            } else if (tier == Tier.REINFORCED) {
+                if(externalTilePos != null){
+                    if(externalTilePos.containsKey("x") && externalTilePos.containsKey("y") && externalTilePos.containsKey("z") && externalTilePos.containsKey("dim") && externalTilePos.containsKey("side")){
+                        int eX = externalTilePos.getInteger("x");
+                        int eY = externalTilePos.getInteger("y");
+                        int eZ = externalTilePos.getInteger("z");
+                        int dim = externalTilePos.getInteger("dim");
+                        Vec3i pos = new Vec3i(eX,eY,eZ);
+                        Vec3f selfPos = new Vec3f(x,y,z);
+                        if(pos.distanceTo(selfPos) < range && dim == worldObj.dimension.id){
+                            TileEntity tile = worldObj.getBlockTileEntity(externalTilePos.getInteger("x"),externalTilePos.getInteger("y"),externalTilePos.getInteger("z"));
+                            if (tile instanceof IInventory || tile instanceof IFluidInventory) {
+                                if (!(tile instanceof TileEntityExternalIO)) {
+                                    externalTile = tile;
+                                    externalTileSide = Direction.getDirectionFromSide(externalTilePos.getInteger("side"));
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -221,8 +258,41 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase {
             if(worldObj.getBlockTileEntity(externalTile.x,externalTile.y,externalTile.z) != externalTile){
                 externalTile = null;
                 externalTileSide = null;
+                externalTilePos = null;
             }
         }
     }
 
+    @Override
+    public void receivePosition(int x, int y, int z, Side side, int dim) {
+        if(tier == Tier.REINFORCED){
+            Vec3i pos = new Vec3i(x,y,z);
+            Vec3f selfPos = new Vec3f(this.x,this.y,this.z);
+            CompoundTag tag = new CompoundTag();
+            tag.putInt("x", x);
+            tag.putInt("y", y);
+            tag.putInt("z", z);
+            tag.putInt("side", side.getId());
+            tag.putInt("dim", dim);
+            externalTilePos = tag;
+            TileEntity tile = worldObj.getBlockTileEntity(x,y,z);
+            if(pos.distanceTo(selfPos) < range){
+                if(dim == worldObj.dimension.id){
+                    if(tile instanceof IInventory || tile instanceof IFluidInventory) {
+                        if (!(tile instanceof TileEntityExternalIO)) {
+                            externalTile = tile;
+                            externalTileSide = Direction.getDirectionFromSide(side.getId());
+                            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Link established!");
+                        }
+                    } else {
+                        Minecraft.getMinecraft(this).ingameGUI.addChatMessage("invalid block at position!");
+                    }
+                } else {
+                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position outside this world!");
+                }
+            } else {
+                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position out of reach!");
+            }
+        }
+    }
 }

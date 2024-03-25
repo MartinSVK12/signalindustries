@@ -102,7 +102,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             }
             ticksSinceStart++;
 
-            if(player.health <= 0){
+            if(player.getHealth() <= 0){
                 worldObj.setBlockWithNotify(x,y,z,0);
             }
         }

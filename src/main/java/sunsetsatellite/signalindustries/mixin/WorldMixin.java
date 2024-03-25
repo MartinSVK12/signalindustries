@@ -42,15 +42,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
 
     @Shadow public List<EntityPlayer> players;
 
-    @Shadow public abstract boolean isDaytime();
-
-    @Shadow public abstract float getCelestialAngle(float f);
-
     @Shadow public abstract long getWorldTime();
-
-    @Shadow public abstract void playSoundAtEntity(Entity entity, String s, float f, float f1);
-
-    @Shadow public abstract Explosion newExplosion(Entity entity, double d, double d1, double d2, float f, boolean flag, boolean isCannonBall);
 
     @Shadow public Random rand;
 
@@ -61,10 +53,6 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     @Shadow public abstract Weather getCurrentWeather();
 
     @Shadow @Final public WeatherManager weatherManager;
-
-    @Shadow public abstract long getRandomSeed();
-
-    @Shadow public abstract void removeListener(LevelListener iworldaccess);
 
     @Shadow @Final protected LevelStorage saveHandler;
 

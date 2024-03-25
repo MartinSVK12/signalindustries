@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.gui;
 
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.render.Lighting;
@@ -8,14 +9,14 @@ import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.Container;
-import net.minecraft.core.sound.SoundType;
+
+import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 
@@ -42,7 +43,7 @@ public class GuiItemIOConfig extends GuiScreen {
             for (int l = 0; l < this.controlList.size(); ++l) {
                 GuiButton guibutton = this.controlList.get(l);
                 if (guibutton.mouseClicked(this.mc, x, y)) {
-                    this.mc.sndManager.playSound("random.click", SoundType.GUI_SOUNDS, 1.0F, 1.0F);
+                    this.mc.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
                     action2Performed(guibutton);
                 }
             }
@@ -78,7 +79,7 @@ public class GuiItemIOConfig extends GuiScreen {
     }
 
     @Override
-    public void drawScreen(int x, int y, float renderPartialTicks) {
+    public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
         this.drawDefaultBackground();
         int centerX = (this.width - this.xSize) / 2;
         int centerY = (this.height - this.ySize) / 2;
@@ -97,10 +98,9 @@ public class GuiItemIOConfig extends GuiScreen {
         GL11.glDisable(2929);
         this.drawGuiContainerForegroundLayer();
         GL11.glPopMatrix();
-        super.drawScreen(x, y, renderPartialTicks);
+        super.drawScreen(mouseX, mouseY, renderPartialTicks);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(2929);
-
     }
 
     @Override
@@ -171,21 +171,21 @@ public class GuiItemIOConfig extends GuiScreen {
             }
             if(guibutton.id == 12){
                 for (Direction direction : Direction.values()) {
-                    tile.connections.replace(direction,Connection.INPUT);
+                    tile.itemConnections.replace(direction,Connection.INPUT);
                 }
                 for (GuiButton button : controlList) {
                     if(button.id >= 0 && button.id < 6){
-                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                        button.displayString = tile.itemConnections.get(Direction.values()[button.id]).getLetter();
                     }
                 }
             }
             if(guibutton.id == 13){
                 for (Direction direction : Direction.values()) {
-                    tile.connections.replace(direction,Connection.OUTPUT);
+                    tile.itemConnections.replace(direction,Connection.OUTPUT);
                 }
                 for (GuiButton button : controlList) {
                     if(button.id >= 0 && button.id < 6){
-                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                        button.displayString = tile.itemConnections.get(Direction.values()[button.id]).getLetter();
                     }
                 }
             }

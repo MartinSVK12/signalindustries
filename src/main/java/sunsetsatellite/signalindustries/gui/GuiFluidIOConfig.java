@@ -9,7 +9,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
-import net.minecraft.core.sound.SoundType;
+import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -44,7 +44,7 @@ public class GuiFluidIOConfig extends GuiScreen {
             for (int l = 0; l < this.controlList.size(); ++l) {
                 GuiButton guibutton = this.controlList.get(l);
                 if (guibutton.mouseClicked(this.mc, x, y)) {
-                    this.mc.sndManager.playSound("random.click", SoundType.GUI_SOUNDS, 1.0F, 1.0F);
+                    this.mc.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
                     action2Performed(guibutton);
                 }
             }

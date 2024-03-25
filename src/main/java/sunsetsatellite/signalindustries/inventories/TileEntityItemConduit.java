@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
+import com.mojang.nbt.ByteTag;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.Tag;
 import net.minecraft.core.block.entity.TileEntity;
@@ -7,23 +8,40 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.signalindustries.blocks.BlockItemConduit;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
+import sunsetsatellite.signalindustries.items.ItemTiered;
 import sunsetsatellite.signalindustries.util.PipeMode;
+import sunsetsatellite.signalindustries.util.PipeType;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 //TODO: extract + split
-//TODO: Have pipes try to insert items multiple times (until all directions are invalid)
 //TODO: more modes
 
-public class TileEntityItemConduit extends TileEntity {
+public class TileEntityItemConduit extends TileEntityWithName {
 
-    public static final int TRANSFER_TICKS = 20*3;
-    public static final int EXTRACT_TICKS = 20*2;
+    public static int TRANSFER_TICKS = 20*3;
+    public static int EXTRACT_TICKS = 20*2;
     private final TickTimer extractTimer = new TickTimer(this, this::extractItem, EXTRACT_TICKS, true);
     private final List<PipeItem> contents = new ArrayList<>();
     public PipeMode mode = PipeMode.RANDOM;
     private final Random random = new Random();
+    public Tier tier = Tier.PROTOTYPE;
+    public PipeType type = PipeType.NORMAL;
+
+    public Map<Direction, Boolean> restrictDirections = new HashMap<>();
+
+    public TileEntityItemConduit(){
+        for (Direction dir : Direction.values()) {
+            restrictDirections.put(dir,false);
+        }
+    }
 
     public List<PipeItem> getContents() {
         return contents;
@@ -39,7 +57,7 @@ public class TileEntityItemConduit extends TileEntity {
         Direction exit = null;
         //select the exit direction based on mode
         if(mode == PipeMode.RANDOM){
-            exit = pickRandomExitDirection(exitList);
+            exit = pickRandomExitDirection(exitList,stack);
         } else if (mode == PipeMode.SPLIT) {
             //split stack into multiple pipe items going into every possible direction
             List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof IInventory || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
@@ -79,7 +97,7 @@ public class TileEntityItemConduit extends TileEntity {
         return true;
     }
 
-    private void dropItem(PipeItem item, Iterator<PipeItem> iter){
+    public void dropItem(PipeItem item, Iterator<PipeItem> iter){
         if(contents.contains(item)){
             Vec3f dirVec = item.exit.getVecF().divide(2);
             Vec3f offset = new Vec3f(x,y,z).add(dirVec).add(0.5);
@@ -89,7 +107,11 @@ public class TileEntityItemConduit extends TileEntity {
             entityitem.yd = dirVec.y * multiplier;
             entityitem.zd = dirVec.z * multiplier;
             worldObj.entityJoinedWorld(entityitem);
-            iter.remove();
+            if(iter != null){
+                iter.remove();
+            } else {
+                contents.remove(item);
+            }
         }
     }
 
@@ -132,7 +154,7 @@ public class TileEntityItemConduit extends TileEntity {
                     Direction exit = null;
                     //select the exit direction based on mode
                     if(mode == PipeMode.RANDOM){
-                        exit = pickRandomExitDirection(exitList);
+                        exit = pickRandomExitDirection(exitList,stack);
                     } else if (mode == PipeMode.SPLIT) {
                         //split stack into multiple pipe items going into every possible direction
                         List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof IInventory || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
@@ -191,7 +213,7 @@ public class TileEntityItemConduit extends TileEntity {
             }
             Direction exit = null;
             if(mode == PipeMode.RANDOM){
-                exit = pickRandomExitDirection(exitList);
+                exit = pickRandomExitDirection(exitList, item.stack);
             } else if (mode == PipeMode.SPLIT) {
                 //split stack into multiple pipe items going into every possible direction
                 List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof IInventory || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
@@ -232,11 +254,40 @@ public class TileEntityItemConduit extends TileEntity {
         }
     }
 
-    private Direction pickRandomExitDirection(List<Map.Entry<Direction, TileEntity>> exitList){
+    private Direction pickRandomExitDirection(List<Map.Entry<Direction, TileEntity>> exitList, ItemStack stack){
+        List<Direction> blockedDirs = new ArrayList<>();
         for (Map.Entry<Direction, TileEntity> exitEntry : exitList) {
             if(exitEntry.getValue() instanceof IItemIO || exitEntry.getValue() instanceof IInventory){
-                return exitEntry.getKey();
+                if(exitEntry.getValue() instanceof IItemIO){
+                    IItemIO io = (IItemIO) exitEntry.getValue();
+                    if(io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.INPUT || io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.BOTH){
+                        return exitEntry.getKey();
+                    } else {
+                        blockedDirs.add(exitEntry.getKey());
+                    }
+                } else {
+                    IInventory inv = (IInventory) exitEntry.getValue();
+                    for (int i = 0; i < inv.getSizeInventory(); i++) {
+                        if(inv.getStackInSlot(i) == null){
+                            return exitEntry.getKey();
+                        } else if (inv.getStackInSlot(i).isItemEqual(stack) && inv.getStackInSlot(i).stackSize+stack.stackSize <= inv.getInventoryStackLimit() && inv.getStackInSlot(i).stackSize+stack.stackSize <= inv.getStackInSlot(i).getMaxStackSize(inv)) {
+                            return exitEntry.getKey();
+                        }
+                    }
+                    blockedDirs.add(exitEntry.getKey());
+                }
             }
+        }
+        restrictDirections.forEach((D,B)->{
+            if(B && !blockedDirs.contains(D)){
+                blockedDirs.add(D);
+            }
+        });
+        exitList = exitList.stream().filter((E)->!(blockedDirs.contains(E.getKey()))).collect(Collectors.toList());
+        if(exitList.isEmpty()){
+            return null;
+        } else if (exitList.size() == 1) {
+            return exitList.get(0).getKey();
         }
         return exitList.get(random.nextInt(exitList.size())).getKey();
     }
@@ -244,6 +295,23 @@ public class TileEntityItemConduit extends TileEntity {
     @Override
     public void tick() {
         super.tick();
+        worldObj.markBlockDirty(x,y,z);
+        if(worldObj != null && getBlockType() != null){
+            tier = ((ITiered)getBlockType()).getTier();
+            type = ((BlockItemConduit)getBlockType()).type;
+        }
+        switch (tier){
+            case BASIC:
+                TRANSFER_TICKS = 20*3;
+                EXTRACT_TICKS = 20*2;
+                extractTimer.max = EXTRACT_TICKS;
+                break;
+            default:
+                TRANSFER_TICKS = 20*6;
+                EXTRACT_TICKS = 20*4;
+                extractTimer.max = EXTRACT_TICKS;
+                break;
+        }
         extractTimer.tick();
         contents.removeIf((P)->P.stack == null);
         final Iterator<PipeItem> iter = contents.iterator();
@@ -275,11 +343,17 @@ public class TileEntityItemConduit extends TileEntity {
     public void readFromNBT(CompoundTag nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         CompoundTag items = nbttagcompound.getCompound("Items");
+        CompoundTag restrict = nbttagcompound.getCompound("Restrictions");
         for (Tag<?> value : items.getValues()) {
             if(value instanceof CompoundTag){
                 CompoundTag itemNbt = (CompoundTag) value;
                 PipeItem item = new PipeItem(itemNbt);
                 contents.add(item);
+            }
+        }
+        for (Tag<?> value : restrict.getValues()) {
+            if(value instanceof ByteTag){
+                restrictDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
             }
         }
     }
@@ -288,12 +362,19 @@ public class TileEntityItemConduit extends TileEntity {
     public void writeToNBT(CompoundTag nbttagcompound) {
         super.writeToNBT(nbttagcompound);
         CompoundTag items = new CompoundTag();
+        CompoundTag restrict = new CompoundTag();
+        for (Map.Entry<Direction, Boolean> entry : restrictDirections.entrySet()) {
+            Direction D = entry.getKey();
+            Boolean B = entry.getValue();
+            restrict.putBoolean(D.getName(), B);
+        }
         for (int i = 0; i < contents.size(); i++) {
             CompoundTag itemNbt = new CompoundTag();
             PipeItem item = contents.get(i);
             item.writeToNBT(itemNbt);
             items.put(String.valueOf(i),itemNbt);
         }
+        nbttagcompound.put("Restrictions",restrict);
         nbttagcompound.put("Items",items);
     }
 
@@ -347,6 +428,11 @@ public class TileEntityItemConduit extends TileEntity {
         public void insertItem(){
             TileEntity tileEntity = exit.getTileEntity(worldObj, TileEntityItemConduit.this);
             Direction entry = exit.getOpposite();
+            //treat the filter as a special case
+            if(tileEntity instanceof TileEntityFilter){
+                ((TileEntityFilter)tileEntity).sort(entry.getOpposite(),this,TileEntityItemConduit.this);
+                return;
+            }
             if (tileEntity instanceof IItemIO && tileEntity instanceof IInventory) {
                 IItemIO io = ((IItemIO) tileEntity);
                 IInventory inv = ((IInventory) tileEntity);

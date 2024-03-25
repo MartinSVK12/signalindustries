@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.fx.EntitySlimeFX;
+import net.minecraft.client.entity.fx.EntitySlimeChunkFX;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.RenderGlobal;
@@ -52,7 +52,7 @@ public class RenderGlobalMixin {
             double d9 = 16.0;
             if (!(d6 * d6 + d7 * d7 + d8 * d8 > d9 * d9)) {
                 if (s.equals("crystalbreak")) {
-                    this.mc.effectRenderer.addEffect(new EntitySlimeFX(this.worldObj, x, y, z, SignalIndustries.signalumCrystal));
+                    this.mc.effectRenderer.addEffect(new EntitySlimeChunkFX(this.worldObj, x, y, z, SignalIndustries.signalumCrystal));
                 }
                 if(s.equals("dustcloud")){
                     this.mc.effectRenderer.addEffect(new EntityDustCloudFX(this.worldObj,x,y,z,xd,yd,zd));

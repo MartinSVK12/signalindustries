@@ -154,10 +154,6 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                 float f17 = (float)(k >> 8 & 0xFF) / 255.0f;
                 float f19 = (float)(k & 0xFF) / 255.0f;
                 float f21 = 1.0f;
-                //float f21 = entity.getBrightness(f1);
-                /*if (Minecraft.getMinecraft(this).fullbright || entity.item.getItem().hasTag(ItemTags.renderFullbright)) {
-                    f21 = 1.0f;
-                }*/
                 GL11.glColor4f(f15 * f21, f17 * f21, f19 * f21, 1.0f);
             }
             /*if (Minecraft.getMinecraft(this).gameSettings.items3D.value) {

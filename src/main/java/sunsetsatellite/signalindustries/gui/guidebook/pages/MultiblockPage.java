@@ -9,7 +9,7 @@ import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.util.RenderMultiblockInGuidebook;
+import sunsetsatellite.signalindustries.render.RenderMultiblockInGuidebook;
 
 public class MultiblockPage
     extends GuidebookPage {

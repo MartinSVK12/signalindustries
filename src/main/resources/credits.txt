@@ -7,6 +7,7 @@ theMidford - ideas, emotional support, icons
 watermelonMojito - automatic miner texture
 felix170905 - connected textures code
 mzov - basic tier texture remakes
+sillydot - brick textures, reinforced infuser texture
 
 --Libraries/Mods integrated--
 azurelmao - halplibe

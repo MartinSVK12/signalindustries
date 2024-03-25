@@ -38,7 +38,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
         }
         if(stack.getData().getByte("charge") >= 100){
             stack.getData().putByte("charge", (byte) 0);
-            world.playSoundAtEntity(player, "signalindustries.pulsar", 0.5F, 1.0f);
+            world.playSoundAtEntity(player,player, "signalindustries.pulsar", 0.5F, 1.0f);
             if(getAbility(stack).contains("Warp")){
                 ExplosionEnergy ex = new ExplosionEnergy(world,player,player.x,player.y,player.z,3f);
                 ex.doExplosionA();

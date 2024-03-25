@@ -23,7 +23,8 @@
     "azurelmao",
     "toufouMaster",
     "samuelDeboni",
-    "useless"
+    "useless",
+    "sillydot"
   ],
   "environment": "*",
   "entrypoints": {
@@ -35,9 +36,6 @@
     ],
     "recipesReady": [
       "sunsetsatellite.signalindustries.recipes.container.SIRecipes"
-    ],
-    "btwaila": [
-      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
     ],
     "terrain-api": [
       "sunsetsatellite.signalindustries.api.impl.terrainapi.TerrainAPISignalIndustriesPlugin"

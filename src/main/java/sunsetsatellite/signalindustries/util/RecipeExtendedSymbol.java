@@ -4,6 +4,7 @@ import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import turniplabs.halplibe.mixin.accessors.RecipeSymbolAccessor;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -151,7 +152,13 @@ public class RecipeExtendedSymbol {
     }
 
     public RecipeSymbol asNormalSymbol(){
-        return new RecipeSymbol(symbol,stack,itemGroup);
+        if(itemGroup == null){
+            RecipeSymbol r = new RecipeSymbol(stack);
+            ((RecipeSymbolAccessor)r).setSymbol(symbol);
+            return r;
+        } else {
+            return new RecipeSymbol(symbol,stack,itemGroup);
+        }
     }
 
     public static RecipeExtendedSymbol[] arrayOf(Object... objs){

@@ -204,7 +204,7 @@ public class EntityCrystal extends Entity {
                 }
             }
 
-            world.playSoundAtEntity(this, "signalindustries.crystalbreak", 0.5F, 1F / (this.random.nextFloat() * 0.4F + 0.8F));
+            world.playSoundAtEntity(this, this,"signalindustries.crystalbreak", 0.5F, 1F / (this.random.nextFloat() * 0.4F + 0.8F));
 
             this.remove();
         }
@@ -276,7 +276,7 @@ public class EntityCrystal extends Entity {
     public void playerTouch(EntityPlayer player) {
         if (this.inGroundSnowball && this.thrower == player && this.shakeSnowball <= 0)
         {
-            this.world.playSoundAtEntity(this, "random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+            this.world.playSoundAtEntity(this, this,"random.pop", 0.2F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.7F + 1.0F) * 2.0F);
             player.onItemPickup(this, 1);
             this.remove();
         }
