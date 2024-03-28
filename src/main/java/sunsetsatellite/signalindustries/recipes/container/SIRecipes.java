@@ -81,6 +81,13 @@ public class SIRecipes implements RecipeEntrypoint {
         new CrystalChamberRecipes().addRecipes(CRYSTAL_CHAMBER);
         new InfuserRecipes().addRecipes(INFUSER);
         new CentrifugeRecipes().addRecipes(CENTRIFUGE);
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
+        SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
+    }
+
+    @Override
+    public void initNamespaces() {
+        resetGroups();
         SIGNAL_INDUSTRIES.register("workbench",WORKBENCH);
         SIGNAL_INDUSTRIES.register("extractor",EXTRACTOR);
         SIGNAL_INDUSTRIES.register("crusher",CRUSHER);
@@ -92,7 +99,5 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
-        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
-        SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 }
