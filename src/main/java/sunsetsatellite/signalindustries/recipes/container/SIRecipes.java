@@ -88,6 +88,10 @@ public class SIRecipes implements RecipeEntrypoint {
     @Override
     public void initNamespaces() {
         resetGroups();
+        registerNamespaces();
+    }
+
+    public static void registerNamespaces(){
         SIGNAL_INDUSTRIES.register("workbench",WORKBENCH);
         SIGNAL_INDUSTRIES.register("extractor",EXTRACTOR);
         SIGNAL_INDUSTRIES.register("crusher",CRUSHER);
@@ -100,4 +104,5 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
+
 }

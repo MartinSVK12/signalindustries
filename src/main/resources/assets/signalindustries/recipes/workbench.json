@@ -2200,7 +2200,7 @@
         "stack": {
           "id": 16479,
           "amount": 1,
-          "meta": 11
+          "meta": 4
         }
       },
       {
@@ -2208,7 +2208,7 @@
         "stack": {
           "id": 16479,
           "amount": 1,
-          "meta": 1
+          "meta": 14
         }
       },
       {
@@ -2249,7 +2249,7 @@
         "stack": {
           "id": 16479,
           "amount": 1,
-          "meta": 11
+          "meta": 4
         }
       },
       {
@@ -2257,7 +2257,7 @@
         "stack": {
           "id": 16479,
           "amount": 1,
-          "meta": 1
+          "meta": 14
         }
       },
       {
@@ -2804,6 +2804,72 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.conduit.item",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_restrict_item_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CGC",
+      "BBB",
+      "CGC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "group": "minecraft:cobblestones"
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.conduit.item.restrict",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_item_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CGC",
+      "   ",
+      "CGC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "group": "minecraft:cobblestones"
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.conduit.item",
       "amount": 4,
       "meta": 0
     },
@@ -4824,6 +4890,71 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.inserter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_filter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CRC",
+      "YMG",
+      "CBC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 1
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 2
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 4
+        }
+      },
+      {
+        "symbol": "Y",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 11
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.prototype.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.inserter",
       "amount": 1,
       "meta": 0
     },

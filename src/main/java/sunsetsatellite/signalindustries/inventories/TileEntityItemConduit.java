@@ -21,7 +21,6 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//TODO: extract + split
 //TODO: more modes
 
 public class TileEntityItemConduit extends TileEntityWithName {
@@ -123,10 +122,8 @@ public class TileEntityItemConduit extends TileEntityWithName {
             return;
         }
         Direction entry = null;
-        //select the entry direction based on mode
-        if(mode == PipeMode.RANDOM){
-            entry = entryList.get(random.nextInt(entryList.size())).getKey();
-        }
+        //select the entry direction randomly
+        entry = entryList.get(random.nextInt(entryList.size())).getKey();
         if(entry == null){
             return;
         }

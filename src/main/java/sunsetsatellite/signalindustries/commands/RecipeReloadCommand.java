@@ -52,6 +52,7 @@ public class RecipeReloadCommand extends Command {
             DataLoader.loadRecipesFromFile("/recipes/trommel.json");
             DataLoader.loadRecipesFromFile("/recipes/workbench.json");
             SIRecipes.resetGroups();
+            SIRecipes.registerNamespaces();
             SIRecipes.load();
             DataLoader.loadDataPacks(Minecraft.getMinecraft(this));
             RECIPES_LOCAL_COPY = RECIPES;
