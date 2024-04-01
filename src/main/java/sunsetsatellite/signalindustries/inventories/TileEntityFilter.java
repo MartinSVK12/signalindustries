@@ -100,11 +100,11 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
 
     public enum FilterSide {
         RED(Direction.Y_POS),
-        GREEN(Direction.Z_NEG),
-        BLUE(Direction.X_NEG),
+        GREEN(Direction.Z_POS),
+        BLUE(Direction.X_POS),
         CYAN(Direction.Y_NEG),
-        MAGENTA(Direction.Z_POS),
-        YELLOW(Direction.X_POS);
+        MAGENTA(Direction.Z_NEG),
+        YELLOW(Direction.X_NEG);
 
         private final Direction direction;
 

@@ -21,6 +21,9 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
     @Override
     public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) {
         HashMap<String, String> states = new HashMap<>();
+        /*if(!(worldSource.getBlockTileEntity(i,j,k) instanceof TileEntityItemConduit)){
+            return states;
+        }*/
         TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(i,j,k);
         for (Direction direction : Direction.values()) {
             boolean show = false;

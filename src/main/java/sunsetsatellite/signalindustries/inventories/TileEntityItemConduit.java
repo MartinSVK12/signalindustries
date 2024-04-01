@@ -175,6 +175,9 @@ public class TileEntityItemConduit extends TileEntityWithName {
                                 }
                             }
                         }
+                        if(stack.stackSize <= 0){
+                            inv.setInventorySlotContents(slot,null);
+                        }
                         return;
                     }
                     if(exit == null){

@@ -4,8 +4,10 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityChest;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
@@ -74,6 +76,18 @@ public class BlockFilter extends BlockContainerTiered {
             }
             return true;
         }
+    }
+
+    @Override
+    public void setDefaultDirection(World world, int i, int j, int k) {
+        if (!world.isClientSide) {
+            world.setBlockMetadataWithNotify(i, j, k, 0);
+        }
+    }
+
+    @Override
+    public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
+        world.setBlockMetadataWithNotify(x, y, z, 0);
     }
 
     @Override

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
@@ -1257,6 +1258,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     }
 
     public SignalIndustries(){
+
         //RecipeFIleLoader.load("/assets/signalindustries/recipes/recipes.txt",mapOf(new String[]{"SignalIndustries"},new String[]{"sunsetsatellite.signalindustries.SignalIndustries"}));
         BlockModelDispatcher.getInstance().addDispatch(dilithiumRail,new BlockModelRenderBlocks(9));
         BlockModelDispatcher.getInstance().addDispatch(energyStill,new BlockModelRenderBlocks(4));
