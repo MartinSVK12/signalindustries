@@ -4803,13 +4803,21 @@
     "pattern": [
       "CIC",
       "SMS",
-      "C C"
+      "CPC"
     ],
     "symbols": [
       {
         "symbol": "C",
         "stack": {
           "key": "item.signalindustries.cobblestonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "tile.signalindustries.prototype.conduit.item",
           "amount": 1,
           "meta": 0
         }
@@ -4954,7 +4962,7 @@
       }
     ],
     "result": {
-      "key": "tile.signalindustries.prototype.inserter",
+      "key": "tile.signalindustries.prototype.filter",
       "amount": 1,
       "meta": 0
     },

@@ -73,5 +73,27 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                         new RecipeProperties(100,80,4, Tier.REINFORCED,false)
                 )
         );
+        group.register(
+                "dimensional_chip",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,2000)),
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.dimensionalShard,1))
+                        },
+                        new ItemStack(SignalIndustries.dimensionalChip,2,0),
+                        new RecipeProperties(200,160,5, Tier.REINFORCED,false)
+                )
+        );
+        group.register(
+                "dilithium_chip",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,2000)),
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.dilithiumShard,1))
+                        },
+                        new ItemStack(SignalIndustries.dilithiumChip,2,0),
+                        new RecipeProperties(100,160,6, Tier.REINFORCED,false)
+                )
+        );
     }
 }
