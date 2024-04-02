@@ -423,6 +423,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
             compoundTag.putInt("entry",entry.getSide());
             compoundTag.putInt("exit",exit.getSide());
             compoundTag.putInt("ticks", insertTimer.value);
+            compoundTag.putCompound("stack",stackNbt);
         }
 
         public void insertItem(){
