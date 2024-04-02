@@ -3,14 +3,15 @@ package sunsetsatellite.signalindustries.gui.guidebook.pages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
 import net.minecraft.client.gui.GuiTooltip;
-import net.minecraft.client.gui.guidebook.GuidebookPage;
-import net.minecraft.client.gui.guidebook.GuidebookSection;
+import net.minecraft.client.gui.guidebook.*;
+import net.minecraft.client.gui.guidebook.search.SearchPage;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.achievement.AchievementList;
 import net.minecraft.core.achievement.stat.StatList;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
@@ -148,6 +149,40 @@ public class CrystalCutterPage
                 continue;
             }
             drawTexturedModalRect(x + list.get(list.size()-1).xDisplayPosition - 32, y +  list.get(list.size()-1).yDisplayPosition, 90, 35, 22, 15);
+        }
+    }
+
+    @Override
+    public void keyTyped(char c, int key, int x, int y, int mouseX, int mouseY) {
+        super.keyTyped(c, key, x, y, mouseX, mouseY);
+        if(mc.gameSettings.keyShowRecipe.isKeyboardKey(key)){
+            SlotGuidebook hoveringSlot= null;
+            for (SlotGuidebook slot : slots) {
+                if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) hoveringSlot = slot;
+            }
+            if(hoveringSlot != null){
+                if(hoveringSlot.hasStack()){
+                    String query = "r:"+hoveringSlot.getStack().getDisplayName()+"!";
+                    PageManager.searchQuery = SearchQuery.resolve(query);
+                    SearchPage.searchField.setText(query);
+                    GuiGuidebook.getPageManager().updatePages();
+                    GuiGuidebook.getPageManager().setCurrentPage(GuiGuidebook.getPageManager().getSectionIndex(GuidebookSections.CRAFTING), true);
+                }
+            }
+        } else if (mc.gameSettings.keyShowUsage.isKeyboardKey(key)) {
+            SlotGuidebook hoveringSlot= null;
+            for (SlotGuidebook slot : slots) {
+                if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) hoveringSlot = slot;
+            }
+            if(hoveringSlot != null) {
+                if (hoveringSlot.hasStack()) {
+                    String query = "u:" + hoveringSlot.getStack().getDisplayName() + "!";
+                    PageManager.searchQuery = SearchQuery.resolve(query);
+                    SearchPage.searchField.setText(query);
+                    GuiGuidebook.getPageManager().updatePages();
+                    GuiGuidebook.getPageManager().setCurrentPage(GuiGuidebook.getPageManager().getSectionIndex(GuidebookSections.CRAFTING), true);
+                }
+            }
         }
     }
 

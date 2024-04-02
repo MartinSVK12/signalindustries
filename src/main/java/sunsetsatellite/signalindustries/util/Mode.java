@@ -5,7 +5,7 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Color;
 
 @Deprecated
-public enum ModeDeprecated {
+public enum Mode {
     NONE(TextFormatting.GRAY,"None",0xFF808080),
     NORMAL(TextFormatting.RED,"Normal", 0xFFFF2020),
     AWAKENED(TextFormatting.ORANGE,"Awakened", 0xFFFF8C00);
@@ -17,7 +17,7 @@ public enum ModeDeprecated {
     private final TextFormatting chatColor;
     private final String name;
     private final int color;
-    ModeDeprecated(TextFormatting chatColor, String name, int color){
+    Mode(TextFormatting chatColor, String name, int color){
         this.chatColor = chatColor;
         this.name = name;
         this.color = color;
