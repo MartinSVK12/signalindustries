@@ -7,50 +7,135 @@
     },
     {
       "apply": {
-        "model": "signalindustries:conduit/item/prototype/conduit_up"
+        "model": "signalindustries:conduit/item/prototype/split/conduit_base"
       },
       "when": {
-        "up": "true"
+        "mode": "SPLIT"
       }
     },
     {
+      "when": {
+        "AND": [
+          {"up": "true"},{"mode": "SPLIT"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/split/conduit_up"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"up": "true"},{"mode": "RANDOM"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/conduit_up"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"mode": "SPLIT"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/split/conduit_down"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"mode": "RANDOM"}
+        ]
+      },
       "apply": {
         "model": "signalindustries:conduit/item/prototype/conduit_down"
-      },
+      }
+    },
+
+    {
       "when": {
-        "down": "true"
+        "AND": [
+          {"north": "true"},{"mode": "SPLIT"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/split/conduit_north"
       }
     },
     {
+      "when": {
+        "AND": [
+          {"north": "true"},{"mode": "RANDOM"}
+        ]
+      },
       "apply": {
         "model": "signalindustries:conduit/item/prototype/conduit_north"
-      },
-      "when": {
-        "north": "true"
       }
     },
+
     {
+      "when": {
+        "AND": [
+          {"south": "true"},{"mode": "SPLIT"}
+        ]
+      },
       "apply": {
-        "model": "signalindustries:conduit/item/prototype/conduit_east"
-      },
-      "when": {
-        "east": "true"
+        "model": "signalindustries:conduit/item/prototype/split/conduit_south"
       }
     },
     {
+      "when": {
+        "AND": [
+          {"south": "true"},{"mode": "RANDOM"}
+        ]
+      },
       "apply": {
         "model": "signalindustries:conduit/item/prototype/conduit_south"
-      },
+      }
+    },
+
+    {
       "when": {
-        "south": "true"
+        "AND": [
+          {"east": "true"},{"mode": "SPLIT"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/split/conduit_east"
       }
     },
     {
+      "when": {
+        "AND": [
+          {"east": "true"},{"mode": "RANDOM"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/conduit_east"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"mode": "SPLIT"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/prototype/split/conduit_west"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"mode": "RANDOM"}
+        ]
+      },
       "apply": {
         "model": "signalindustries:conduit/item/prototype/conduit_west"
-      },
-      "when": {
-        "west": "true"
       }
     }
   ]

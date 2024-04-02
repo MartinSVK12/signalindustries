@@ -6,6 +6,14 @@
       }
     },
     {
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/split/conduit_base"
+      },
+      "when": {
+        "mode": "SPLIT"
+      }
+    },
+    {
       "when": {
         "AND": [
           {"up": "true"},{"restrict_up": "true"}

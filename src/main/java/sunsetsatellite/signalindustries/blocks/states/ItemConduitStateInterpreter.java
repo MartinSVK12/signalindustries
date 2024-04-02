@@ -48,6 +48,7 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
             states.put(direction.getName().toLowerCase(), String.valueOf(show));
             if(tile != null){
                 states.put("restrict_"+direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
+                states.put("mode",tile.mode.name());
             }
         }
         return states;
