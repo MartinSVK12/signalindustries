@@ -3,16 +3,27 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.render.Tessellator;
+import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
+import org.lwjgl.opengl.GL11;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import turniplabs.halplibe.helper.TextureHelper;
 
-public class EntityColorParticleFX extends EntityFX {
+import java.awt.*;
+
+public class EntityMeteorTailFX extends EntityFX {
     public float red;
     public float blue;
     public float green;
 
+    public int ticks = 0;
+    public int ticksMax = 0;
+
     public boolean fullbright = false;
 
-    public EntityColorParticleFX(World world, double x, double y, double z, double xd, double yd, double zd, float f, float red, float green, float blue) {
+    public int blockId = 0;
+
+    public EntityMeteorTailFX(World world, double x, double y, double z, double xd, double yd, double zd, float f) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
         this.xd = xd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
         this.yd = yd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
@@ -25,10 +36,11 @@ public class EntityColorParticleFX extends EntityFX {
         this.particleScale *= f;
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
         this.particleMaxAge = (int)(this.particleMaxAge * f);
+        this.ticksMax = 9;
         this.noPhysics = false;
     }
 
-    public EntityColorParticleFX(World world, double x, double y, double z, double xd, double yd, double zd, float f, float red, float green, float blue, int maxAge) {
+    public EntityMeteorTailFX(World world, double x, double y, double z, double xd, double yd, double zd, float f, int maxAge) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
         this.xd = xd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
         this.yd = yd + ((float)(Math.random() * 2.0D - 1.0D) * 0.05F);
@@ -41,6 +53,7 @@ public class EntityColorParticleFX extends EntityFX {
         this.particleScale *= f;
         this.particleMaxAge = maxAge;
         this.particleMaxAge = (int)(this.particleMaxAge * f);
+        this.ticksMax = maxAge;
         this.noPhysics = false;
     }
 
@@ -59,29 +72,52 @@ public class EntityColorParticleFX extends EntityFX {
         return super.getBrightness(partialTick);
     }
 
-    public EntityColorParticleFX setFullbright(boolean fullbright) {
+    public EntityMeteorTailFX setFullbright(boolean fullbright) {
         this.fullbright = fullbright;
         return this;
     }
 
+    public EntityMeteorTailFX setBlockId(int blockId) {
+        this.blockId = blockId;
+        return this;
+    }
+
     public void tick() {
+        ticks++;
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
         if (this.particleAge++ >= this.particleMaxAge)
             remove();
-        this.particleTextureIndex = 7 - this.particleAge * 8 / this.particleMaxAge;
+        this.particleTextureIndex = TextureHelper.getOrCreateParticleTextureIndex(SignalIndustries.MOD_ID,"meteor_tail.png");//7 - this.particleAge * 8 / this.particleMaxAge;
         move(this.xd, this.yd, this.zd);
         if (this.y == this.yo) {
             this.xd *= 1.1D;
             this.zd *= 1.1D;
         }
-        this.xd *= 0.9599999785423279D;
+        if(blockId == SignalIndustries.signalumOre.id){
+            this.particleRed = 0.9f;
+            this.particleGreen = 1 - (float) particleAge / particleMaxAge;
+            this.particleBlue = 1 - (((float) particleAge / particleMaxAge) * 2);
+        } else {
+            this.particleRed = 1 - (((float) particleAge / particleMaxAge) * 2);
+            this.particleGreen = 1 - (float) particleAge / particleMaxAge;
+            this.particleBlue = 0.7f;
+        }
+       /* this.xd *= 0.9599999785423279D;
         this.yd *= 0.9599999785423279D;
-        this.zd *= 0.9599999785423279D;
+        this.zd *= 0.9599999785423279D;*/
         if (this.onGround) {
             this.xd *= 0.699999988079071D;
             this.zd *= 0.699999988079071D;
         }
+    }
+
+    public Color mixColors(Color color1, Color color2, double percent){
+        double inverse_percent = 1.0 - percent;
+        int redPart = (int) (color1.getRed()*percent + color2.getRed()*inverse_percent);
+        int greenPart = (int) (color1.getGreen()*percent + color2.getGreen()*inverse_percent);
+        int bluePart = (int) (color1.getBlue()*percent + color2.getBlue()*inverse_percent);
+        return new Color(redPart, greenPart, bluePart);
     }
 }

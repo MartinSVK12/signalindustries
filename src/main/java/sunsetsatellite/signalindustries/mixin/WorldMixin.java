@@ -108,6 +108,33 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         }
     }
 
+    @Inject(
+            method = "doLightingUpdate",
+            at = @At("HEAD")
+    )
+    public void doMeteorShower(CallbackInfo ci){
+        //SignalIndustries.LOGGER.info(String.valueOf(worldType.getSunriseTick(thisAs)));
+        int cycleTicks = worldType.getDayNightCycleLengthTicks();
+        int dayTicks = getDayLengthTicks();
+        int nightTicks = cycleTicks - dayTicks;
+        long worldTime = getWorldTime();
+        int dayLength = Global.DAY_LENGTH_TICKS;
+        int dayTime = (int)(worldTime % (long)dayLength);
+        int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks+(nightTicks/4);
+        if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
+            if(rand.nextInt(24) == 0 && getCurrentWeather() != SignalIndustries.weatherMeteorShower){
+                for (EntityPlayer player : players) {
+                    player.addChatMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
+                    player.triggerAchievement(SignalIndustriesAchievementPage.STARFALL);
+                }
+                weatherManager.overrideWeather(SignalIndustries.weatherMeteorShower,60*20,1);
+            }
+        }
+        if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherMeteorShower){
+            weatherManager.overrideWeather(Weather.overworldClear);
+        }
+    }
+
     @Unique
     private int getDayLengthTicks() {
         float dayLength;

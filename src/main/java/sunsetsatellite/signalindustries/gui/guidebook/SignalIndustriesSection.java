@@ -8,11 +8,11 @@ import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.gui.guidebook.pages.*;
+import sunsetsatellite.signalindustries.gui.guidebook.pages.recipe.*;
+import sunsetsatellite.signalindustries.gui.guidebook.pages.wiki.IntroPage;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MultiblockSection;
-import sunsetsatellite.signalindustries.recipes.container.CrystalCutterRecipes;
 import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
 import sunsetsatellite.signalindustries.util.SearchableGuidebookSubsection;
 
@@ -66,21 +66,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
 
     public void reloadSection(){
         pages.clear();
-        pages.add(new GuidebookPage(this) {
-            @Override
-            protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-                drawStringCenteredNoShadow(fr,"Work in progress..." ,x+width/2,y+height/2,0xFF808080);
-            }
-        });
-        pages.add(new GuidebookPage(this) {
-            @Override
-            protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-                drawStringCenteredNoShadow(fr,"Work in progress..." ,x+width/2,y+height/2,0xFF808080);
-            }
-        });
-        for (SearchableGuidebookSubsection subsection : subsections) {
-            subsection.reloadSection();
-        }
+        pages.add(new IntroPage(this,"guidebook.section.signalindustries.intro"));
     }
 
     @Override

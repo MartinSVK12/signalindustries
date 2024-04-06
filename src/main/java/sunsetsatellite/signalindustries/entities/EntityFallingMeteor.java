@@ -5,8 +5,10 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
@@ -14,10 +16,11 @@ import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.entities.fx.EntityMeteorTailFX;
 
 import java.util.List;
 
-public class EntitySunbeam extends Entity {
+public class EntityFallingMeteor extends Entity {
     protected int xTile = -1;
     protected int yTile = -1;
     protected int zTile = -1;
@@ -33,30 +36,60 @@ public class EntitySunbeam extends Entity {
     protected float arrowGravity;
     protected int arrowDamage;
     protected int arrowType;
+    public int blockID;
+    protected World world;
 
-    public EntitySunbeam(World world) {
+    public EntityFallingMeteor(World world) {
         super(world);
         this.doesArrowBelongToPlayer = false;
         this.arrowType = 0;
         this.arrowShake = 0;
         this.ticksInAir = 0;
+        this.blockID = Block.basalt.id;
+        this.world = world;
         this.setSize(0.5f, 0.5f);
     }
 
-    public EntitySunbeam(World world, double d, double d1, double d2) {
+    public EntityFallingMeteor(World world, int blockId) {
+        super(world);
+        this.doesArrowBelongToPlayer = false;
+        this.arrowType = 0;
+        this.arrowShake = 0;
+        this.ticksInAir = 0;
+        this.blockID = blockId;
+        this.world = world;
+        this.setSize(0.5f, 0.5f);
+    }
+
+    public EntityFallingMeteor(World world, double d, double d1, double d2, int blockId) {
         super(world);
         this.doesArrowBelongToPlayer = false;
         this.arrowType = 0;
         this.arrowShake = 0;
         this.ticksInAir = 0;
         this.setSize(0.5f, 0.5f);
+        this.moveTo(d, d1, d2, 0, 0);
+        this.x -= MathHelper.cos(this.yRot / 180.0f * 3.141593f) * 0.16f;
+        this.y -= 0.1f;
+        this.z -= MathHelper.sin(this.yRot / 180.0f * 3.141593f) * 0.16f;
         this.setPos(d, d1, d2);
+        this.blockID = blockId;
+        this.world = world;
         this.heightOffset = 0.0f;
+        this.yd = -0.75f;
+        if(random.nextFloat() > 0.5f){
+            this.xd = random.nextFloat() - 0.5f;
+        } else {
+            this.zd = random.nextFloat() - 0.5f;
+        }
+        this.setArrowHeading(this.xd, this.yd, this.zd, 1f, 1.0f);
     }
 
-    public EntitySunbeam(World world, EntityLiving entityliving, boolean doesArrowBelongToPlayer) {
+    /*public EntityFallingMeteor(World world, EntityLiving entityliving, boolean doesArrowBelongToPlayer, int blockId) {
         super(world);
         this.doesArrowBelongToPlayer = doesArrowBelongToPlayer;
+        this.blockID = blockId;
+        this.world = world;
         this.arrowShake = 0;
         this.ticksInAir = 0;
         this.owner = entityliving;
@@ -71,16 +104,20 @@ public class EntitySunbeam extends Entity {
         this.zd = MathHelper.cos(this.yRot / 180.0f * 3.141593f) * MathHelper.cos(this.xRot / 180.0f * 3.141593f);
         this.yd = -MathHelper.sin(this.xRot / 180.0f * 3.141593f);
         this.setArrowHeading(this.xd, this.yd, this.zd, 1.5f, 1.0f);
-    }
+    }*/
 
     @Override
     protected void init() {
-        this.arrowGravity = 0.00F;
-        this.arrowSpeed = 1.5F;
-        this.arrowDamage = 5;
+        this.arrowGravity = 0.03F;
+        this.arrowSpeed = 1F;
+        this.arrowDamage = 10;
         if (!(this.owner instanceof EntityPlayer)) {
             this.doesArrowBelongToPlayer = false;
         }
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     public void setArrowHeading(double d, double d1, double d2, float f, float f1) {
@@ -157,7 +194,10 @@ public class EntitySunbeam extends Entity {
             return;
         }
 
-        //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x, this.y, this.z, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
+        for (int j = 0; j < 4; j++) {
+            SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),32);
+        }
+        SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),32);
         //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
         ++this.ticksInAir;
         Vec3d oldPos = Vec3d.createVector(this.x, this.y, this.z);
@@ -190,32 +230,24 @@ public class EntitySunbeam extends Entity {
                     if (this.isOnFire()) {
                         movingobjectposition.entity.fireHurt();
                     }
-                    this.world.playSoundAtEntity(this, this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
+                    if(blockID == SignalIndustries.signalumOre.id){
+                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                        world.entityJoinedWorld(entityitem);
+                    }
                     this.remove();
                 } else {
+                    if(blockID == SignalIndustries.signalumOre.id){
+                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                        world.entityJoinedWorld(entityitem);
+                    }
                     this.remove();
-                    /*this.xd *= -0.1f;
-                    this.yd *= -0.1f;
-                    this.zd *= -0.1f;
-                    this.yRot += 180.0f;
-                    this.yRotO += 180.0f;
-                    this.ticksInAir = 0;*/
                 }
             } else {
+                if(blockID == SignalIndustries.signalumOre.id){
+                    EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                    world.entityJoinedWorld(entityitem);
+                }
                 this.remove();
-                /*this.xTile = movingobjectposition.x;
-                this.yTile = movingobjectposition.y;
-                this.zTile = movingobjectposition.z;
-                this.inTile = this.world.getBlockId(this.xTile, this.yTile, this.zTile);
-                this.field_28019_h = this.world.getBlockMetadata(this.xTile, this.yTile, this.zTile);
-                this.xd = (float)(movingobjectposition.location.xCoord - this.x);
-                this.yd = (float)(movingobjectposition.location.yCoord - this.y);
-                this.zd = (float)(movingobjectposition.location.zCoord - this.z);
-                float f1 = MathHelper.sqrt_double(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
-                this.x -= this.xd / (double)f1 * (double)0.05f;
-                this.y -= this.yd / (double)f1 * (double)0.05f;
-                this.z -= this.zd / (double)f1 * (double)0.05f;
-                this.inGroundAction();*/
             }
         }
         this.x += this.xd;
@@ -255,7 +287,7 @@ public class EntitySunbeam extends Entity {
     }
 
     protected void inGroundAction() {
-        this.world.playSoundAtEntity(this, this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
+        //this.world.playSoundAtEntity(this, this, "random.drr", 1.0f, 1.2f / (this.random.nextFloat() * 0.2f + 0.9f));
         this.inGround = true;
         this.arrowShake = 7;
     }

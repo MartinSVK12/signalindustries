@@ -1,5 +1,8 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntitySlimeChunkFX;
 import net.minecraft.client.render.Lighting;
@@ -85,6 +88,18 @@ public class RenderGlobalMixin {
     public void renderBloodMoon(float partialTicks, CallbackInfo ci) {
         if(worldObj.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             GL11.glColor4f(1.0f,0.0f,0.0f,1.0f);
+        }
+    }
+
+    @Inject(
+            method = "drawSky",
+            at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER),
+            locals = LocalCapture.CAPTURE_FAILHARD
+    )
+    public void renderMeteorShower(float partialTicks, CallbackInfo ci, @Local(name = "f6")LocalFloatRef f6) {
+        if(worldObj.getCurrentWeather() == SignalIndustries.weatherMeteorShower){
+            f6.set(1.5f);
+            GL11.glColor4f( 1,1, 1,1.0f);
         }
     }
 

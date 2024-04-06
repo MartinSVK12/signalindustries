@@ -489,6 +489,7 @@ signalindustries.eternity.desc=The void between worlds\nconnected through the fa
 
 weather.bloodMoon.name=Blood Moon
 weather.solarEclipse.name=Solar Eclipse
+weather.meteorShower.name=Meteor Shower
 weather.solarApocalypse.name=Solar Apocalypse
 
 bed.bloodMoon=You feel like something evil is watching you, you can't sleep!
@@ -623,9 +624,11 @@ achievement.signalindustries.completed=Signal Industries
 achievement.signalindustries.completed=Activate the Awakened Signalum Ignition Facility for the first time reaching the end of your adventure. Thank you for playing!
 
 achievement.signalindustries.bloodMoon=The Night is Red
-achievement.signalindustries.bloodMoon.desc=Experience a Blood Moon.
+achievement.signalindustries.bloodMoon.desc=Experience a Blood Moon!
 achievement.signalindustries.eclipse=Totality
-achievement.signalindustries.eclipse.desc=Experience a Solar Eclipse.
+achievement.signalindustries.eclipse.desc=Experience a Solar Eclipse!
+achievement.signalindustries.starfall=Starfall
+achievement.signalindustries.starfall.desc=Experience a Meteor Shower!
 
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
@@ -656,6 +659,7 @@ guidebook.section.signalindustries.centrifuge=Centrifuge
 
 guidebook.section.mob.infernal.name=Infernal
 guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.
+guidebook.section.signalindustries.intro=Welcome to Signal Industries!
 
 guidebook.section.signalindustries.multiblocks=Multiblocks
 

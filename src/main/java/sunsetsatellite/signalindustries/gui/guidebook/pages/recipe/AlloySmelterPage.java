@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.gui.guidebook.pages;
+package sunsetsatellite.signalindustries.gui.guidebook.pages.recipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CrystalChamberPage
+public class AlloySmelterPage
     extends GuidebookPage {
     public static final int RECIPES_PER_PAGE = 5; //used through reflection
     public List<RecipeEntryMachine> recipes;
@@ -41,7 +41,7 @@ public class CrystalChamberPage
     private static final Minecraft mc = Minecraft.getMinecraft(GuidebookPage.class);
     private static EntityPlayer player;
     private static long ticks = 0;
-    public CrystalChamberPage(GuidebookSection section, ArrayList<RecipeEntryMachine> recipes) {
+    public AlloySmelterPage(GuidebookSection section, ArrayList<RecipeEntryMachine> recipes) {
         super(section);
         this.recipes = recipes;
         this.slots = new ArrayList<>();
@@ -87,7 +87,7 @@ public class CrystalChamberPage
 
     @Override
     protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        drawStringCenteredNoShadow(fr, "Crystal Chamber", x+width - 158 / 2, y+5, 0xFF808080);
+        drawStringCenteredNoShadow(fr, "Alloy Smelter", x+width - 158 / 2, y+5, 0xFF808080);
         if(recipes.isEmpty()){
             drawStringCenteredNoShadow(fr,"No recipes found :(" ,x+width/2,y+height/2,0xFF808080);
         }

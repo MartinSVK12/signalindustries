@@ -35,37 +35,6 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
             }
         });
 
-        /*achievementList.add((Achievement) INIT.registerStat());
-        achievementList.add((Achievement) THE_PROTOTYPE.registerStat());
-        achievementList.add((Achievement) FROM_WITHIN.registerStat());
-        achievementList.add((Achievement) TRANSFER.registerStat());
-        achievementList.add((Achievement) BUFFER.registerStat());
-        achievementList.add((Achievement) CRUSHER.registerStat());
-        achievementList.add((Achievement) ALLOY_SMELTER.registerStat());
-        achievementList.add((Achievement) PLATE_FORMER.registerStat());
-        achievementList.add((Achievement) SHINING.registerStat());
-        achievementList.add((Achievement) BASIC.registerStat());
-        achievementList.add((Achievement) BLOOD_MOON.registerStat());
-        achievementList.add((Achievement) ECLIPSE.registerStat());
-        achievementList.add((Achievement) ROM_CHIP.registerStat());
-        achievementList.add((Achievement) COMBINED.registerStat());
-        achievementList.add((Achievement) MINER.registerStat());
-        achievementList.add((Achievement) PUMP.registerStat());
-        achievementList.add((Achievement) HARNESS.registerStat());
-        achievementList.add((Achievement) PROGRAMMER.registerStat());
-        achievementList.add((Achievement) TRIGGER.registerStat());
-        achievementList.add((Achievement) RELIC.registerStat());
-        achievementList.add((Achievement) KNIGHTS_ALLOY.registerStat());
-        achievementList.add((Achievement) REINFORCED.registerStat());
-        achievementList.add((Achievement) BLADE.registerStat());
-        achievementList.add((Achievement) PULSE.registerStat());
-        achievementList.add((Achievement) POWER_SUIT.registerStat());
-        achievementList.add((Achievement) CHALLENGE.registerStat());
-        achievementList.add((Achievement) VICTORY.registerStat());
-        achievementList.add((Achievement) DILITHIUM.registerStat());
-        achievementList.add((Achievement) BOOST.registerStat());
-        achievementList.add((Achievement) WINGS.registerStat());*/
-
     }
 
     public static final Achievement INIT = new Achievement(nextAchievementID++, key("init"),0,0-offsetY, rawSignalumCrystal,null);
@@ -111,6 +80,7 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
 
     public static final Achievement BLOOD_MOON = new Achievement(nextAchievementID++, key("bloodMoon"),-2,2-offsetY, monsterShard,null);
     public static final Achievement ECLIPSE = new Achievement(nextAchievementID++, key("eclipse"),-2,4-offsetY, infernalFragment,null);
+    public static final Achievement STARFALL = new Achievement(nextAchievementID++, key("starfall"),-2,8-offsetY, Block.lampActive,null);
 
     @Override
     public void getBackground(GuiAchievements guiAchievements, Random random,  int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {

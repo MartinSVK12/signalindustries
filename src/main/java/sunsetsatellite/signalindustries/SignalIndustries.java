@@ -12,6 +12,7 @@ import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.entity.FallingSandRenderer;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
@@ -59,6 +60,7 @@ import sunsetsatellite.signalindustries.commands.RecipeReloadCommand;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
+import sunsetsatellite.signalindustries.entities.EntityFallingMeteor;
 import sunsetsatellite.signalindustries.entities.EntitySunbeam;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.gui.*;
@@ -79,6 +81,7 @@ import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
+import sunsetsatellite.signalindustries.weather.WeatherMeteorShower;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.helper.*;
@@ -206,6 +209,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"output_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail_overlay.png");
         TextureHelper.getOrCreateBlockTexture(MOD_ID,"uv_lamp_overlay.png");
+
+        TextureHelper.getOrCreateParticleTexture(MOD_ID,"meteor_tail.png");
     }
     //public static final Config config = new Config(MOD_ID, mapOf(new String[]{"PacketOpenMachineGUI_ID","PacketPipeItemSpawn_ID","GuiID"},new String[]{"113","114","9"}), new Class[]{SignalIndustries.class});
 
@@ -1146,6 +1151,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Weather weatherBloodMoon = new WeatherBloodMoon(10).setLanguageKey("bloodMoon");
     public static final Weather weatherEclipse = new WeatherEclipse(11).setLanguageKey("solarEclipse");
     public static final Weather weatherSolarApocalypse = new WeatherSolarApocalypse(12).setLanguageKey("solarApocalypse");
+    public static final Weather weatherMeteorShower = new WeatherMeteorShower(13).setLanguageKey("meteorShower");
+
 
     public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
 
@@ -1308,8 +1315,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
         EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
         EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
+        EntityHelper.Core.createEntity(EntityFallingMeteor.class,50,"fallingMeteor");
+        EntityHelper.Client.assignEntityRenderer(EntityFallingMeteor.class,new FallingMeteorRenderer());
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
+
         EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
         EntityHelper.Core.createSpecialTileEntity(TileEntityItemConduit.class, new RenderItemsInConduit(),"Item Conduit");
 
@@ -1487,6 +1497,17 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         double d8 = Minecraft.getMinecraft(Minecraft.class).thePlayer.z - particle.z;
         double d9 = 16.0D;
         if (d6 * d6 + d7 * d7 + d8 * d8 > d9 * d9)
+            return;
+        Minecraft.getMinecraft(Minecraft.class).effectRenderer.addEffect(particle);
+    }
+
+    public static void spawnParticle(EntityFX particle, double renderDistance){
+        if (Minecraft.getMinecraft(Minecraft.class) == null || Minecraft.getMinecraft(Minecraft.class).thePlayer == null || Minecraft.getMinecraft(Minecraft.class).effectRenderer == null)
+            return;
+        double d6 = Minecraft.getMinecraft(Minecraft.class).thePlayer.x - particle.x;
+        double d7 = Minecraft.getMinecraft(Minecraft.class).thePlayer.y - particle.y;
+        double d8 = Minecraft.getMinecraft(Minecraft.class).thePlayer.z - particle.z;
+        if (d6 * d6 + d7 * d7 + d8 * d8 > renderDistance * renderDistance)
             return;
         Minecraft.getMinecraft(Minecraft.class).effectRenderer.addEffect(particle);
     }

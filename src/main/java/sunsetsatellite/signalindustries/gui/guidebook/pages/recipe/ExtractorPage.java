@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.gui.guidebook.pages;
+package sunsetsatellite.signalindustries.gui.guidebook.pages.recipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
@@ -21,8 +21,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,18 +29,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CrystalCutterPage
+public class ExtractorPage
     extends GuidebookPage {
-    public static final int RECIPES_PER_PAGE = 5; //used through reflection
-    public List<RecipeEntryMachine> recipes;
+    public static final int RECIPES_PER_PAGE = 6;
+    public List<RecipeEntryMachineFluid> recipes;
     public List<SlotGuidebook> slots;
-    public Map<RecipeEntryMachine,List<SlotGuidebook>> map;
+    public Map<RecipeEntryMachineFluid,List<SlotGuidebook>> map;
     private final GuiTooltip guiTooltip;
     private final GuiRenderItem guiRenderItem;
     private static final Minecraft mc = Minecraft.getMinecraft(GuidebookPage.class);
     private static EntityPlayer player;
     private static long ticks = 0;
-    public CrystalCutterPage(GuidebookSection section, ArrayList<RecipeEntryMachine> recipes) {
+    public ExtractorPage(GuidebookSection section, ArrayList<RecipeEntryMachineFluid> recipes) {
         super(section);
         this.recipes = recipes;
         this.slots = new ArrayList<>();
@@ -51,17 +50,15 @@ public class CrystalCutterPage
         guiTooltip = new GuiTooltip(mc);
         guiRenderItem = new GuiRenderItem(mc);
 
-        for (RecipeEntryMachine recipe : recipes) {
+        for (RecipeEntryMachineFluid recipe : recipes) {
             List<SlotGuidebook> recipeSlots = new ArrayList<>();
-            List<RecipeSymbol> inputSymbol = new ArrayList<>();
+            RecipeSymbol inputSymbol;
             RecipeSymbol outputSymbol;
-            for (RecipeExtendedSymbol symbol : recipe.getInput()) {
-                if(symbol.getFluidStack() != null){
-                    FluidStack fluidStack = symbol.getFluidStack();
-                    inputSymbol.add(new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount)));
-                } else {
-                    inputSymbol.add(symbol.asNormalSymbol());
-                }
+            if(recipe.getInput()[0].getFluidStack() != null){
+                FluidStack fluidStack = recipe.getInput()[0].getFluidStack();
+                inputSymbol = new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount));
+            } else {
+                inputSymbol = recipe.getInput()[0].asNormalSymbol();
             }
             List<ItemStack> acceptedMachines = recipe.parent.getMachine().resolve().stream().filter((S)->{
                 Block block = Block.getBlock(S.itemID);
@@ -69,21 +66,16 @@ public class CrystalCutterPage
                     if(recipe.getData().thisTierOnly){
                         return ((ITiered) block).getTier() == recipe.getData().tier;
                     } else {
-                        return ((ITiered) block).getTier().ordinal() >= recipe.getData().tier.ordinal();
+                        return ((ITiered) block).getTier().ordinal() > recipe.getData().tier.ordinal();
                     }
                 }
                 return false;
             }).collect(Collectors.toList());
 
-            if(acceptedMachines.isEmpty()){
-                continue;
-            }
-
-            outputSymbol = new RecipeSymbol(recipe.getOutput());
-            recipeSlots.add(new SlotGuidebook(0, (width/2)-52, 36*(map.size()+1)-16, inputSymbol.get(0), false,recipe));
-            recipeSlots.add(new SlotGuidebook(1, (width/2)-32, 36*(map.size()+1)-16, inputSymbol.get(1), false,recipe));
-            recipeSlots.add(new SlotGuidebook(3,(width/2)+48, 36*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
-            recipeSlots.add(new SlotGuidebook(2, (width/2)+24, 36*(map.size()+1)-16, outputSymbol, false,recipe));
+            outputSymbol = new RecipeSymbol(new ItemStack(recipe.getOutput().liquid,recipe.getOutput().amount));
+            recipeSlots.add(new SlotGuidebook(0, (width/2)-32, 32*(map.size()+1)-16, inputSymbol, false,recipe));
+            recipeSlots.add(new SlotGuidebook(2,(width/2)+48, 32*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
+            recipeSlots.add(new SlotGuidebook(1, (width/2)+24, 32*(map.size()+1)-16, outputSymbol, false,recipe));
             map.put(recipe,recipeSlots);
             slots.addAll(recipeSlots);
         }
@@ -91,7 +83,7 @@ public class CrystalCutterPage
 
     @Override
     protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        drawStringCenteredNoShadow(fr, "Crystal Cutter", x+width - 158 / 2, y+5, 0xFF808080);
+        drawStringCenteredNoShadow(fr, "Extractor", x+width - 158 / 2, y+5, 0xFF808080);
         if(recipes.isEmpty()){
             drawStringCenteredNoShadow(fr,"No recipes found :(" ,x+width/2,y+height/2,0xFF808080);
         }
@@ -108,21 +100,16 @@ public class CrystalCutterPage
                     ticks = 0;
                 }
             }
-            if(slot.id != 3){
+            if(slot.id != 2){
                 drawSlot(re,x+slot.xDisplayPosition-1,y+slot.yDisplayPosition-1,0xFFFFFFFF);
             }
             if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
             guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
         }
         for (int i = 1; i <= recipes.size(); i++) {
-            RecipeEntryMachine recipe = recipes.get(i-1);
+            RecipeEntryMachineFluid recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
-            if(list == null || list.isEmpty()){
-                continue;
-            }
-            drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t | ID: "+recipe.getData().id,x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 18,0xFF202020);
-            drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 26,0xFFCC0000);
-
+            drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition + 4,0xFF808080);
             //drawTexturedModalRect( 90, 35, 22, 15);
         }
     }
@@ -143,11 +130,8 @@ public class CrystalCutterPage
         super.renderBackground(re, x, y);
         re.bindTexture(re.getTexture("/gui/crafting.png"));
         for (int i = 1; i <= recipes.size(); i++) {
-            RecipeEntryMachine recipe = recipes.get(i-1);
+            RecipeEntryMachineFluid recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
-            if(list == null || list.isEmpty()){
-                continue;
-            }
             drawTexturedModalRect(x + list.get(list.size()-1).xDisplayPosition - 32, y +  list.get(list.size()-1).yDisplayPosition, 90, 35, 22, 15);
         }
     }

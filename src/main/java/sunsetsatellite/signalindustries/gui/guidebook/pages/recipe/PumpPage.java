@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.gui.guidebook.pages;
+package sunsetsatellite.signalindustries.gui.guidebook.pages.recipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
@@ -21,8 +21,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,18 +29,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CentrifugePage
+public class PumpPage
     extends GuidebookPage {
-    public static final int RECIPES_PER_PAGE = 2; //used through reflection
-    public List<RecipeEntryMachine> recipes;
+    public static final int RECIPES_PER_PAGE = 6;
+    public List<RecipeEntryMachineFluid> recipes;
     public List<SlotGuidebook> slots;
-    public Map<RecipeEntryMachine,List<SlotGuidebook>> map;
+    public Map<RecipeEntryMachineFluid,List<SlotGuidebook>> map;
     private final GuiTooltip guiTooltip;
     private final GuiRenderItem guiRenderItem;
     private static final Minecraft mc = Minecraft.getMinecraft(GuidebookPage.class);
     private static EntityPlayer player;
     private static long ticks = 0;
-    public CentrifugePage(GuidebookSection section, ArrayList<RecipeEntryMachine> recipes) {
+    public PumpPage(GuidebookSection section, ArrayList<RecipeEntryMachineFluid> recipes) {
         super(section);
         this.recipes = recipes;
         this.slots = new ArrayList<>();
@@ -51,18 +50,15 @@ public class CentrifugePage
         guiTooltip = new GuiTooltip(mc);
         guiRenderItem = new GuiRenderItem(mc);
 
-        for (RecipeEntryMachine recipe : recipes) {
+        for (RecipeEntryMachineFluid recipe : recipes) {
             List<SlotGuidebook> recipeSlots = new ArrayList<>();
-            List<RecipeSymbol> inputSymbol = new ArrayList<>();
+            RecipeSymbol inputSymbol;
             RecipeSymbol outputSymbol;
-            for (RecipeExtendedSymbol symbol : recipe.getInput()) {
-                if(symbol == null) inputSymbol.add(null);
-                else if(symbol.getFluidStack() != null){
-                    FluidStack fluidStack = symbol.getFluidStack();
-                    inputSymbol.add(new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount)));
-                } else {
-                    inputSymbol.add(symbol.asNormalSymbol());
-                }
+            if(recipe.getInput()[0].getFluidStack() != null){
+                FluidStack fluidStack = recipe.getInput()[0].getFluidStack();
+                inputSymbol = new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount));
+            } else {
+                inputSymbol = recipe.getInput()[0].asNormalSymbol();
             }
             List<ItemStack> acceptedMachines = recipe.parent.getMachine().resolve().stream().filter((S)->{
                 Block block = Block.getBlock(S.itemID);
@@ -76,16 +72,10 @@ public class CentrifugePage
                 return false;
             }).collect(Collectors.toList());
 
-            int spacing = 70;
-            int offsetY = 52;
-
-            outputSymbol = new RecipeSymbol(recipe.getOutput());
-            recipeSlots.add(new SlotGuidebook(0, (width/2)-72, spacing*(map.size())+offsetY, inputSymbol.get(0), false,recipe));
-            recipeSlots.add(new SlotGuidebook(1, (width/2)-52, spacing*(map.size())+offsetY-20, inputSymbol.get(1), false,recipe));
-            recipeSlots.add(new SlotGuidebook(2, (width/2)-52, spacing*(map.size())+offsetY+20, inputSymbol.get(2), false,recipe));
-            recipeSlots.add(new SlotGuidebook(3, (width/2)-32, spacing*(map.size())+offsetY, inputSymbol.get(3), false,recipe));
-            recipeSlots.add(new SlotGuidebook(5,(width/2)+48, spacing*(map.size())+offsetY,new RecipeSymbol(acceptedMachines),false,recipe));
-            recipeSlots.add(new SlotGuidebook(4, (width/2)+24, spacing*(map.size())+offsetY, outputSymbol, false,recipe));
+            outputSymbol = new RecipeSymbol(new ItemStack(recipe.getOutput().liquid,recipe.getOutput().amount));
+            recipeSlots.add(new SlotGuidebook(0, (width/2)-32, 32*(map.size()+1)-16, inputSymbol, false,recipe));
+            recipeSlots.add(new SlotGuidebook(2,(width/2)+48, 32*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
+            recipeSlots.add(new SlotGuidebook(1, (width/2)+24, 32*(map.size()+1)-16, outputSymbol, false,recipe));
             map.put(recipe,recipeSlots);
             slots.addAll(recipeSlots);
         }
@@ -93,7 +83,7 @@ public class CentrifugePage
 
     @Override
     protected void renderForeground(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        drawStringCenteredNoShadow(fr, "Centrifuge", x+width - 158 / 2, y+5, 0xFF808080);
+        drawStringCenteredNoShadow(fr, "Pump", x+width - 158 / 2, y+5, 0xFF808080);
         if(recipes.isEmpty()){
             drawStringCenteredNoShadow(fr,"No recipes found :(" ,x+width/2,y+height/2,0xFF808080);
         }
@@ -110,19 +100,41 @@ public class CentrifugePage
                     ticks = 0;
                 }
             }
-            if(slot.id != 5){
+            if(slot.id != 2){
                 drawSlot(re,x+slot.xDisplayPosition-1,y+slot.yDisplayPosition-1,0xFFFFFFFF);
             }
             if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
             guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
         }
         for (int i = 1; i <= recipes.size(); i++) {
-            RecipeEntryMachine recipe = recipes.get(i-1);
+            RecipeEntryMachineFluid recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
-            drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t | "+(recipe.getData().chance*100)+"%",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 18,0xFF202020);
-            drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 26,0xFFCC0000);
+            drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition,0xFF808080);
+            drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition + 8,0xFFCC0000);
 
             //drawTexturedModalRect( 90, 35, 22, 15);
+        }
+    }
+
+    public boolean getIsMouseOverSlot(final Slot slot, int x, int y, int mouseX, int mouseY)
+    {
+        return mouseX >= x+slot.xDisplayPosition - 1 && mouseX < x+slot.xDisplayPosition + 16 + 1 && mouseY >= y+slot.yDisplayPosition - 1 && mouseY < y+slot.yDisplayPosition + 16 + 1;
+    }
+
+    @Override
+    public void render(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
+        super.render(re, fr, x, y, mouseX, mouseY, partialTicks);
+
+    }
+
+    @Override
+    protected void renderBackground(RenderEngine re, int x, int y) {
+        super.renderBackground(re, x, y);
+        re.bindTexture(re.getTexture("/gui/crafting.png"));
+        for (int i = 1; i <= recipes.size(); i++) {
+            RecipeEntryMachineFluid recipe = recipes.get(i-1);
+            List<SlotGuidebook> list = map.get(recipe);
+            drawTexturedModalRect(x + list.get(list.size()-1).xDisplayPosition - 32, y +  list.get(list.size()-1).yDisplayPosition, 90, 35, 22, 15);
         }
     }
 
@@ -157,28 +169,6 @@ public class CentrifugePage
                     GuiGuidebook.getPageManager().setCurrentPage(GuiGuidebook.getPageManager().getSectionIndex(GuidebookSections.CRAFTING), true);
                 }
             }
-        }
-    }
-
-    public boolean getIsMouseOverSlot(final Slot slot, int x, int y, int mouseX, int mouseY)
-    {
-        return mouseX >= x+slot.xDisplayPosition - 1 && mouseX < x+slot.xDisplayPosition + 16 + 1 && mouseY >= y+slot.yDisplayPosition - 1 && mouseY < y+slot.yDisplayPosition + 16 + 1;
-    }
-
-    @Override
-    public void render(RenderEngine re, FontRenderer fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        super.render(re, fr, x, y, mouseX, mouseY, partialTicks);
-
-    }
-
-    @Override
-    protected void renderBackground(RenderEngine re, int x, int y) {
-        super.renderBackground(re, x, y);
-        re.bindTexture(re.getTexture("/gui/crafting.png"));
-        for (int i = 1; i <= recipes.size(); i++) {
-            RecipeEntryMachine recipe = recipes.get(i-1);
-            List<SlotGuidebook> list = map.get(recipe);
-            drawTexturedModalRect(x + list.get(list.size()-1).xDisplayPosition - 32, y +  list.get(list.size()-1).yDisplayPosition, 90, 35, 22, 15);
         }
     }
 

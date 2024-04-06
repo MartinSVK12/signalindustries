@@ -34,6 +34,7 @@
     "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",
+    "WorldTypeOverworldMixin",
     "invokers.GuiInvoker"
   ],
   "client": [
