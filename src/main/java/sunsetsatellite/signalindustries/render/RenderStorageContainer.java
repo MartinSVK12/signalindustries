@@ -1,23 +1,19 @@
 package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiRenderItem;
-import net.minecraft.client.render.ItemRenderer;
-import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityAssembler;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.inventories.TileEntityStorageContainer;
+import sunsetsatellite.signalindustries.util.GuiRenderItemNoOverlay;
 
-public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAssembler> {
+public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorageContainer> {
 
-    private final GuiRenderItem itemRenderer = new GuiRenderItem(Minecraft.getMinecraft(this));
+    private final GuiRenderItemNoOverlay itemRenderer = new GuiRenderItemNoOverlay(Minecraft.getMinecraft(this));
     @Override
-    public void doRender(TileEntityAssembler tileEntity, double x, double y, double z, float g) {
+    public void doRender(TileEntityStorageContainer tileEntity, double x, double y, double z, float g) {
         GL11.glPushMatrix();
         float scale = 0.6666667F;
         float rot;
@@ -53,15 +49,32 @@ public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAs
         String name = "";
         String amount = "";
 
-        if(tileEntity.recipe != null) {
-            stack = tileEntity.recipe.getOutput();
-            name = stack.getDisplayName();
-            //amount = ((Integer) tileEntity.storedAmount).toString();
+        if(tileEntity.contents != null) {
+            stack = tileEntity.contents;
+            /*name = stack.getDisplayName();
+            if(tileEntity.locked){
+                name = "* "+name+" *";
+            }*/
+            amount = ((Integer) tileEntity.contents.stackSize).toString();
+        }
+        if (tileEntity.locked) {
+            name = "* Locked *";
+        }
+
+        if(tileEntity.infinite){
+            amount = "Infinite!";
+            color = 0xFFFF00FF;
         }
         int i14 = -6;
         GL11.glTranslatef(0,28,82);
-        //getFontRenderer().drawString(name, - getFontRenderer().getStringWidth(name) / 2, i14 * 10 - 5, color);
-        getFontRenderer().drawString(amount, - getFontRenderer().getStringWidth(amount) / 2, i14 * 10 + 64, color);
+       /* if(split.length > 1){
+            for (int i = 0; i < split.length; i++) {
+                String s = split[i];
+                getFontRenderer().drawString(s, -32, (i14 * 10 - 5) + (10 * i), color);
+            }
+        } else {*/
+        getFontRenderer().drawString(name, -getFontRenderer().getStringWidth(name) / 2, (i14 * 10 - 5), color);
+        getFontRenderer().drawString(amount, -getFontRenderer().getStringWidth(amount) / 2, i14 * 10 + 64, color);
         GL11.glTranslatef(0,-28,-82);
         GL11.glScalef(2.5f,2.5f,0.3f);
         GL11.glTranslatef(0,0,240);

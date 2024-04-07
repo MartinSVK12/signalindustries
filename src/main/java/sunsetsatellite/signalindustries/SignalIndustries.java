@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
@@ -10,9 +9,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
+import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
-import net.minecraft.client.render.entity.FallingSandRenderer;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
@@ -27,6 +26,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.sound.BlockSounds;
@@ -672,6 +672,37 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setNorthTexture("basic_assembler_front.png")
             .build(new BlockAssembler("basic.assembler",config.getInt("BlockIDs.basicAssembler"), Tier.BASIC, Material.metal));
 
+    public static final Block prototypeStorageContainer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTextures("prototype_blank.png")
+            .setNorthTexture("container_prototype_front.png")
+            .build(new BlockStorageContainer("prototype.storageContainer",config.getInt("BlockIDs.prototypeStorageContainer"), Tier.PROTOTYPE, Material.stone));
+
+    public static final Block infiniteStorageContainer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.STONE)
+            .setTextures("prototype_blank.png")
+            .setNorthTexture("container_prototype_front.png")
+            .build(new BlockStorageContainer("infinite.storageContainer",config.getInt("BlockIDs.infiniteStorageContainer"), Tier.INFINITE, Material.stone));
+
+    public static final Block basicStorageContainer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_blank.png")
+            .setNorthTexture("container_basic_front.png")
+            .build(new BlockStorageContainer("basic.storageContainer",config.getInt("BlockIDs.basicStorageContainer"), Tier.BASIC, Material.metal));
+
+    public static final Block reinforcedStorageContainer = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setNorthTexture("container_reinforced_front.png")
+            .build(new BlockStorageContainer("reinforced.storageContainer",config.getInt("BlockIDs.reinforcedStorageContainer"), Tier.REINFORCED, Material.metal));
 
     public static final Block basicWrathBeacon = new BlockBuilder(MOD_ID)
             .setHardness(2)
@@ -1387,6 +1418,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createSpecialTileEntity(TileEntityAssembler.class, new RenderAssemblerItemSprite3D(),"Assembler");
         addToNameGuiMap("Assembler", GuiAssembler.class, TileEntityAssembler.class);
 
+        EntityHelper.Core.createSpecialTileEntity(TileEntityStorageContainer.class, new RenderStorageContainer(),"Storage Container");
+
         EntityHelper.Core.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
 
@@ -1578,6 +1611,60 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             }
         }
         return s == sReq;
+    }
+
+    public static String[] splitStringIntoLines(FontRenderer fr, String string) {
+        String[] words = string.split(" ");
+        List<String> lines = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
+        for (String word : words) {
+            if (fr.getStringWidth(line + " " + word) > 142) {
+                lines.add(line.toString());
+                line = new StringBuilder();
+            }
+            if (word.contains("\n")) {
+                String safeWord = word.replace("\r", "");
+                String[] wordParts = safeWord.split("\n");
+                for (int i = 0; i < wordParts.length; i++) {
+                    if (i > 0) {
+                        lines.add(line.toString());
+                        line = new StringBuilder();
+                    }
+                    line.append(wordParts[i]).append(" ");
+                }
+            } else {
+                line.append(word).append(" ");
+            }
+        }
+        lines.add(line.toString());
+        return lines.toArray(new String[0]);
+    }
+
+    public static String[] splitStringIntoLines(FontRenderer fr, String string, int maxLength) {
+        String[] words = string.split(" ");
+        List<String> lines = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
+        for (String word : words) {
+            if (fr.getStringWidth(line + " " + word) > maxLength) {
+                lines.add(line.toString());
+                line = new StringBuilder();
+            }
+            if (word.contains("\n")) {
+                String safeWord = word.replace("\r", "");
+                String[] wordParts = safeWord.split("\n");
+                for (int i = 0; i < wordParts.length; i++) {
+                    if (i > 0) {
+                        lines.add(line.toString());
+                        line = new StringBuilder();
+                    }
+                    line.append(wordParts[i]).append(" ");
+                }
+            } else {
+                line.append(word).append(" ");
+            }
+        }
+        lines.add(line.toString());
+        return lines.toArray(new String[0]);
     }
 
     public static void usePortal(int dim) {

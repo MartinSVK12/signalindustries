@@ -10,6 +10,7 @@ import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.phys.AABB;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -68,32 +69,46 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
         TileEntity pipe = output.getTileEntity(worldObj,this);
         AABB aabb = getBlockType().getSelectedBoundingBoxFromPool(worldObj,x,y,z).copy().offset(input.getVecF().x,input.getVecF().y,input.getVecF().z);
         List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class,aabb).stream().map((E)->((EntityItem)E)).collect(Collectors.toList());
-        if(pipe instanceof TileEntityItemConduit && inv instanceof IInventory){
-            int slot = -1;
-            for (int i = 0; i < ((IInventory) inv).getSizeInventory(); i++) {
-                ItemStack stack = ((IInventory) inv).getStackInSlot(i);
-                if(stack == null){
-                    continue;
+        if(pipe instanceof TileEntityItemConduit && (inv instanceof IInventory || inv instanceof TileEntityStorageContainer)){
+            if(inv instanceof IInventory){
+                int slot = -1;
+                for (int i = 0; i < ((IInventory) inv).getSizeInventory(); i++) {
+                    ItemStack stack = ((IInventory) inv).getStackInSlot(i);
+                    if(stack == null){
+                        continue;
+                    }
+                    slot = i;
                 }
-                slot = i;
-            }
-            if(slot == -1){
-                return;
-            }
-            ItemStack stack = ((IInventory) inv).getStackInSlot(slot);
-            ItemStack split;
-            int maxSplit = (int) Math.min(64,(4 * speedMultiplier) * (tier.ordinal()+1));
-            if(stack.stackSize >= maxSplit){
-                split = stack.splitStack(maxSplit);
+                if(slot == -1){
+                    return;
+                }
+                ItemStack stack = ((IInventory) inv).getStackInSlot(slot);
+                ItemStack split;
+                int maxSplit = (int) Math.min(64,(4 * speedMultiplier) * (tier.ordinal()+1));
+                if(stack.stackSize >= maxSplit){
+                    split = stack.splitStack(maxSplit);
+                } else {
+                    split = stack.splitStack(stack.stackSize);
+                }
+                boolean success = ((TileEntityItemConduit) pipe).addItem(split,output.getOpposite());
+                if(!success){
+                    stack.stackSize += split.stackSize;
+                }
+                if(stack.stackSize <= 0){
+                    ((IInventory) inv).setInventorySlotContents(slot,null);
+                }
             } else {
-                split = stack.splitStack(stack.stackSize);
-            }
-            boolean success = ((TileEntityItemConduit) pipe).addItem(split,output.getOpposite());
-            if(!success){
-                stack.stackSize += split.stackSize;
-            }
-            if(stack.stackSize <= 0){
-                ((IInventory) inv).setInventorySlotContents(slot,null);
+                TileEntityStorageContainer container = (TileEntityStorageContainer) inv;
+                int maxSplit = (int) Math.min(64,(4 * speedMultiplier) * (tier.ordinal()+1));
+                ItemStack stack = container.extractStack(maxSplit);
+                if(stack != null){
+                    boolean success = ((TileEntityItemConduit) pipe).addItem(stack, output.getOpposite());
+                    if(!success){
+                        Vec3f vec = new Vec3f(x,y,z).add(Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getVecF()).add(0.5f);
+                        EntityItem entityitem = new EntityItem(worldObj, vec.x, vec.y, vec.z, stack);
+                        worldObj.entityJoinedWorld(entityitem);
+                    }
+                }
             }
         } else if (pipe instanceof TileEntityItemConduit && !items.isEmpty()) {
             EntityItem item = items.get(0);

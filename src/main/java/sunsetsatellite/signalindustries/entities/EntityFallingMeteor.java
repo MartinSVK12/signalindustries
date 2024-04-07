@@ -61,6 +61,11 @@ public class EntityFallingMeteor extends Entity {
         this.setSize(0.5f, 0.5f);
     }
 
+    @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        return true;
+    }
+
     public EntityFallingMeteor(World world, double d, double d1, double d2, int blockId) {
         super(world);
         this.doesArrowBelongToPlayer = false;
@@ -78,9 +83,9 @@ public class EntityFallingMeteor extends Entity {
         this.heightOffset = 0.0f;
         this.yd = -0.75f;
         if(random.nextFloat() > 0.5f){
-            this.xd = random.nextFloat() - 0.5f;
+            this.xd = (random.nextFloat()+1) - 1f;
         } else {
-            this.zd = random.nextFloat() - 0.5f;
+            this.zd = (random.nextFloat()+1) - 1f;
         }
         this.setArrowHeading(this.xd, this.yd, this.zd, 1f, 1.0f);
     }
@@ -195,9 +200,9 @@ public class EntityFallingMeteor extends Entity {
         }
 
         for (int j = 0; j < 4; j++) {
-            SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),32);
+            SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),256);
         }
-        SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),32);
+        SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),256);
         //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
         ++this.ticksInAir;
         Vec3d oldPos = Vec3d.createVector(this.x, this.y, this.z);

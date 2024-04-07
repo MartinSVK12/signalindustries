@@ -5024,5 +5024,116 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/prototype_storage_container",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PCP",
+      "CMC",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.prototype.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.cobblestonePlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.prototype.storageContainer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_storage_container",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PCP",
+      "CMC",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.storageContainer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_storage_container",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PCP",
+      "CMC",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.storageContainer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

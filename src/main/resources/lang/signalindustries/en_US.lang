@@ -317,6 +317,17 @@ tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find 
 tile.signalindustries.basic.assembler.name=Basic Assembler
 tile.signalindustries.basic.assembler.desc=Crafts items, automatically!
 
+tile.signalindustries.prototype.storageContainer.name=Prototype Storage Container
+tile.signalindustries.prototype.storageContainer.desc=A mass storage device that can hold a lot of a single type of item.
+tile.signalindustries.basic.storageContainer.name=Basic Storage Container
+tile.signalindustries.basic.storageContainer.desc=A bigger container, still limited to a single type.
+tile.signalindustries.reinforced.storageContainer.name=Reinforced Compressed Storage Container
+tile.signalindustries.reinforced.storageContainer.desc=Losslessly compresses items inside leading to huge storage capacity, still limited to a single type.
+tile.signalindustries.awakened.storageContainer.name=Awakened Non-Euclidean Storage Controller
+tile.signalindustries.awakened.storageContainer.desc=Creates a massive pocket dimension inside itself to store any amount of a single type of item.
+tile.signalindustries.infinite.storageContainer.name=Infinite Storage Container
+tile.signalindustries.infinite.storageContainer.desc=An infinite and unlimited supply of any item! Creative mode only.
+
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
 tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an [Evil Catalyst].
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
@@ -501,6 +512,8 @@ event.signalindustries.wrathBeaconActivated=A Wrath Beacon has been activated. B
 event.signalindustries.reinforcedWrathBeaconActivated=A reinforced Wrath Beacon has been activated!!
 event.signalindustries.awakenedWrathBeaconActivated=An awakened Wrath Beacon has been activated!!!
 event.signalindustries.annihilatorChallenge=You have made a grave mistake... Annihilator challenge activated!!!!
+event.signalindustries.containerLocked=Container locked!
+event.signalindustries.containerUnlocked=Container unlocked!
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
@@ -662,7 +675,7 @@ guidebook.section.signalindustries.centrifuge=Centrifuge
 
 guidebook.section.mob.infernal.name=Infernal
 guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.
-guidebook.section.signalindustries.intro=Welcome to Signal Industries!
+guidebook.section.signalindustries.intro=Welcome to Signal Industries! These pages are still work in progress...
 
 guidebook.section.signalindustries.multiblocks=Multiblocks
 

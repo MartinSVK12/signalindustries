@@ -15,5 +15,6 @@ public class BTWailaSIPlugin implements BTWailaCustomTooltipPlugin {
         tooltipRegistry.register(new BoosterTooltip());
         tooltipRegistry.register(new StabilizerTooltip());
         tooltipRegistry.register(new ItemConduitTooltip());
+        tooltipRegistry.register(new StorageContainerTooltip());
     }
 }
