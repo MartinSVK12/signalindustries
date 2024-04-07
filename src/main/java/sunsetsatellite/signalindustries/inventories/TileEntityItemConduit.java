@@ -438,7 +438,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
                 IItemIO io = ((IItemIO) tileEntity);
                 IInventory inv = ((IInventory) tileEntity);
                 if(io.getItemIOForSide(entry) == Connection.INPUT || io.getItemIOForSide(entry) == Connection.BOTH){
-                    int slot = io.getActiveItemSlotForSide(entry);
+                    int slot = io.getActiveItemSlotForSide(entry,stack);
                     ItemStack tileStack = inv.getStackInSlot(slot);
                     if(tileStack == null || (tileStack.isItemEqual(stack) && tileStack.stackSize+stack.stackSize <= tileStack.getMaxStackSize())){
                         if(tileStack == null){

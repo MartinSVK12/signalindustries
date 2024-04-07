@@ -17,7 +17,6 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCentrifuge;
 import sunsetsatellite.signalindustries.gui.GuiCentrifuge;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCentrifuge;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -116,7 +115,7 @@ public class BlockCentrifuge extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

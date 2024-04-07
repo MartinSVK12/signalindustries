@@ -314,6 +314,9 @@ tile.signalindustries.reinforced.crusher.desc=Crushes almost anything into nano-
 tile.signalindustries.awakened.crusher.name=Awakened Macerating Atomizer Controller
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
+tile.signalindustries.basic.assembler.name=Basic Assembler
+tile.signalindustries.basic.assembler.desc=Crafts items, automatically!
+
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
 tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an [Evil Catalyst].
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon

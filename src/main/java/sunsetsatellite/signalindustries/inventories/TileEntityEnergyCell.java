@@ -12,7 +12,6 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -27,8 +26,8 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     public TileEntityEnergyCell(){
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
-        connections.replace(Direction.Y_POS, Connection.INPUT);
-        connections.replace(Direction.Y_NEG, Connection.OUTPUT);
+        fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
+        fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
     }
 
@@ -40,7 +39,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     public void tick() {
         if(getBlockType() != null){
             if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){
-                for (Map.Entry<Direction, Connection> entry : connections.entrySet()) {
+                for (Map.Entry<Direction, Connection> entry : fluidConnections.entrySet()) {
                     if(isInfiniteSource){
                         if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
                             entry.setValue(Connection.OUTPUT);
@@ -100,7 +99,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     }
 
     public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
+        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
             Direction dir = e.getKey();
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);

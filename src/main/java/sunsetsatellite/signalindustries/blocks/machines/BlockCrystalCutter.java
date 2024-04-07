@@ -17,7 +17,6 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrystalCutter;
 import sunsetsatellite.signalindustries.gui.GuiCrystalCutter;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrystalCutter;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -51,7 +50,7 @@ public class BlockCrystalCutter extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

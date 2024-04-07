@@ -19,6 +19,7 @@ import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -663,6 +664,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             .setSideTextures("infuser_basic_side_inactive.png")
             .build(new BlockInfuser("basic.infuser",config.getInt("BlockIDs.basicInfuser"), Tier.BASIC,Material.metal));
 
+    public static final Block basicAssembler = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_assembler_side.png")
+            .setNorthTexture("basic_assembler_front.png")
+            .build(new BlockAssembler("basic.assembler",config.getInt("BlockIDs.basicAssembler"), Tier.BASIC, Material.metal));
+
+
     public static final Block basicWrathBeacon = new BlockBuilder(MOD_ID)
             .setHardness(2)
             .setResistance(500)
@@ -1246,6 +1256,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put(Tier.BASIC.name()+".externalIo",new BlockTexture(MOD_ID).setAll("external_io_blank.png").setTopTexture("external_io_input.png").setBottomTexture("external_io_output.png").setNorthTexture("external_io_both.png"));
         textures.put(Tier.REINFORCED.name()+".externalIo",new BlockTexture(MOD_ID).setAll("reinforced_external_io_blank.png").setTopTexture("reinforced_external_io_input.png").setBottomTexture("reinforced_external_io_output.png").setNorthTexture("reinforced_external_io_both.png"));
 
+        textures.put(Tier.BASIC.name()+".assembler.active",new BlockTexture(MOD_ID).setAll("basic_assembler_side_active.png").setNorthTexture("basic_assembler_front_active.png"));
+        textures.put(Tier.BASIC.name()+".assembler.active.overlay",new BlockTexture(MOD_ID).setAll("assembler_overlay_side.png").setNorthTexture("assembler_overlay_front.png"));
 
         textures.put(Tier.REINFORCED.name()+".centrifuge.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("reinforced_centrifuge_closed.png").setNorthTexture("reinforced_centrifuge_front_active.png"));
         textures.put(Tier.REINFORCED.name()+".centrifuge.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("centrifuge_overlay.png"));
@@ -1318,6 +1330,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createEntity(EntityFallingMeteor.class,50,"fallingMeteor");
         EntityHelper.Client.assignEntityRenderer(EntityFallingMeteor.class,new FallingMeteorRenderer());
 
+        addEntities();
+        //crafting recipes in RecipeHandlerCraftingSI
+
+    }
+
+    //idea got *too smart* recently and now considers anything after accessor stubs "unreachable" due to the throw statement in them that will never be triggered
+    @SuppressWarnings("UnreachableCode")
+    private void addEntities(){
         EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
@@ -1363,6 +1383,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityPump.class,"Pump");
         addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
+
+        EntityHelper.Core.createSpecialTileEntity(TileEntityAssembler.class, new RenderAssemblerItemSprite3D(),"Assembler");
+        addToNameGuiMap("Assembler", GuiAssembler.class, TileEntityAssembler.class);
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
@@ -1422,8 +1445,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createEntity(EntityInfernal.class,config.getInt("EntityIDs.infernalId"),"Infernal");
         EntityHelper.Client.assignEntityRenderer(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(),0.5F));
-        //crafting recipes in RecipeHandlerCraftingSI
-
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){
@@ -1538,6 +1559,25 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             }
         }
         return stacks;
+    }
+
+    public static boolean hasItems(List<RecipeSymbol> symbols, List<ItemStack> available){
+        symbols.removeIf(Objects::isNull);
+        List<ItemStack> copy = available.stream().map(ItemStack::copy).collect(Collectors.toList());
+        int s = 0;
+        int sReq = (int) symbols.stream().filter(Objects::nonNull).count();
+        label:
+        for (RecipeSymbol symbol : symbols) {
+            for (ItemStack stack : copy) {
+                if(symbol.matches(stack)){
+                    if(stack == null || stack.stackSize <= 0) continue;
+                    stack.stackSize--;
+                    s++;
+                    continue label;
+                }
+            }
+        }
+        return s == sReq;
     }
 
     public static void usePortal(int dim) {

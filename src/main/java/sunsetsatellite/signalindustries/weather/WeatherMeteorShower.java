@@ -24,13 +24,13 @@ public class WeatherMeteorShower extends Weather {
     @Override
     public void doEnvironmentUpdate(World world, Random rand, int x, int z) {
         int y = world.getHeightValue(x, z);
-        EntityPlayer player = world.getClosestPlayer(x,y,z,32);
+        EntityPlayer player = world.getClosestPlayer(x,y,z,64);
         if(rand.nextInt(50) == 0 && player != null){
             EntityFallingMeteor meteor;
             if(rand.nextInt(25) == 0){
-                meteor = new EntityFallingMeteor(world, x, y + 32, z, SignalIndustries.signalumOre.id);
+                meteor = new EntityFallingMeteor(world, x, 255, z, SignalIndustries.signalumOre.id);
             } else {
-                meteor = new EntityFallingMeteor(world, x, y + 32, z, Block.basalt.id);
+                meteor = new EntityFallingMeteor(world, x, 255, z, Block.basalt.id);
             }
             world.entityJoinedWorld(meteor);
         }

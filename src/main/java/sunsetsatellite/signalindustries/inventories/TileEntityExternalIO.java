@@ -212,6 +212,33 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     }
 
     @Override
+    public int getActiveItemSlotForSide(Direction dir, ItemStack stack) {
+        if(externalTile instanceof IInventory){
+            if(activeItemSlots.get(dir) == -1){
+                if(itemConnections.get(dir) == Connection.INPUT){
+                    for (int i = 0; i < ((IInventory) externalTile).getSizeInventory(); i++) {
+                        ItemStack content = ((IInventory) externalTile).getStackInSlot(i);
+                        if (content == null || content.isItemEqual(stack)) {
+                            return i;
+                        }
+                    }
+                } else if(itemConnections.get(dir) == Connection.OUTPUT) {
+                    for (int i = 0; i < ((IInventory) externalTile).getSizeInventory(); i++) {
+                        ItemStack content = ((IInventory) externalTile).getStackInSlot(i);
+                        if (content != null) {
+                            return i;
+                        }
+                    }
+                }
+                return 0;
+            } else {
+                return activeItemSlots.get(dir);
+            }
+        }
+        return 0;
+    }
+
+    @Override
     public void tick() {
         super.tick();
         worldObj.markBlocksDirty(x, y, z, x, y, z);

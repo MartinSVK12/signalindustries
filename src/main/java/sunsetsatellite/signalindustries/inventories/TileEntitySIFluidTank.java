@@ -24,8 +24,8 @@ public class TileEntitySIFluidTank extends TileEntityFluidItemContainer implemen
     public TileEntitySIFluidTank(){
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
-        connections.replace(Direction.Y_POS, Connection.INPUT);
-        connections.replace(Direction.Y_NEG, Connection.OUTPUT);
+        fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
+        fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
         for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
             if(fluid != SignalIndustries.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
@@ -49,7 +49,7 @@ public class TileEntitySIFluidTank extends TileEntityFluidItemContainer implemen
     }
 
     public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
+        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
             Direction dir = e.getKey();
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);

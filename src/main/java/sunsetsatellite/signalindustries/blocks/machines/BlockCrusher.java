@@ -17,7 +17,6 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerCrusher;
 import sunsetsatellite.signalindustries.gui.GuiCrusher;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -118,7 +117,7 @@ public class BlockCrusher extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

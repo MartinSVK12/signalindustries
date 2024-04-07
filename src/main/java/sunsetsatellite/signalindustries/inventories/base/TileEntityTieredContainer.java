@@ -24,7 +24,7 @@ public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
     }
 
     public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
+        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
             Direction dir = e.getKey();
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);

@@ -17,7 +17,6 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
 import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -44,7 +43,7 @@ public class BlockAutoMiner extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

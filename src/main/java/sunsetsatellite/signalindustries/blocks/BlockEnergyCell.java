@@ -9,13 +9,11 @@ import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiEnergyCell;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.TextureHelper;
@@ -41,7 +39,7 @@ public class BlockEnergyCell extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

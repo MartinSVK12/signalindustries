@@ -17,7 +17,6 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 
@@ -53,7 +52,7 @@ public class GuiFluidIOConfig extends GuiScreen {
 
     public void action2Performed(GuiButton guibutton) {
         if(guibutton.id > 5){
-            Direction dir = Direction.values()[guibutton.id-6];
+            Direction dir = Direction.values()[Math.min(6,Math.max(0,guibutton.id-6))];
             Integer currentValue = tile.activeFluidSlots.get(dir);
             if(currentValue > 0){
                 tile.activeFluidSlots.put(dir,currentValue-1);
@@ -110,12 +109,12 @@ public class GuiFluidIOConfig extends GuiScreen {
         int centerX = (width - xSize) / 2;
         int centerY = (height - ySize) / 2;
 
-        controlList.add(new GuiButton(2, (width / 2) - 10, (height / 2) - 63, 15, 15, tile.connections.get(Direction.Y_POS).getLetter())); //Y+
-        controlList.add(new GuiButton(4, (width / 2) - 10, (height / 2) - 48, 15, 15, tile.connections.get(Direction.Z_POS).getLetter())); //Z+
-        controlList.add(new GuiButton(3, (width / 2) - 10, (height / 2) - 33, 15, 15, tile.connections.get(Direction.Y_NEG).getLetter())); //Y-
-        controlList.add(new GuiButton(0, (width / 2) + 4, (height / 2) - 48, 15, 15, tile.connections.get(Direction.X_POS).getLetter())); //X+
-        controlList.add(new GuiButton(1, (width / 2) - 24, (height / 2) - 48, 15, 15, tile.connections.get(Direction.X_NEG).getLetter())); //X-
-        controlList.add(new GuiButton(5, (width / 2) + 4, (height / 2) - 33, 15, 15, tile.connections.get(Direction.Z_NEG).getLetter())); //Z-
+        controlList.add(new GuiButton(2, (width / 2) - 10, (height / 2) - 63, 15, 15, tile.fluidConnections.get(Direction.Y_POS).getLetter())); //Y+
+        controlList.add(new GuiButton(4, (width / 2) - 10, (height / 2) - 48, 15, 15, tile.fluidConnections.get(Direction.Z_POS).getLetter())); //Z+
+        controlList.add(new GuiButton(3, (width / 2) - 10, (height / 2) - 33, 15, 15, tile.fluidConnections.get(Direction.Y_NEG).getLetter())); //Y-
+        controlList.add(new GuiButton(0, (width / 2) + 4, (height / 2) - 48, 15, 15, tile.fluidConnections.get(Direction.X_POS).getLetter())); //X+
+        controlList.add(new GuiButton(1, (width / 2) - 24, (height / 2) - 48, 15, 15, tile.fluidConnections.get(Direction.X_NEG).getLetter())); //X-
+        controlList.add(new GuiButton(5, (width / 2) + 4, (height / 2) - 33, 15, 15, tile.fluidConnections.get(Direction.Z_NEG).getLetter())); //Z-
 
         controlList.add(new GuiButton(8, (width / 2) - 10 + 50, (height / 2) - 63, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Y_POS))));
         controlList.add(new GuiButton(10, (width / 2) - 10 + 50, (height / 2) - 48, 15, 15, String.valueOf(tile.activeFluidSlots.get(Direction.Z_POS))));
@@ -152,30 +151,30 @@ public class GuiFluidIOConfig extends GuiScreen {
     protected void buttonPressed(GuiButton guibutton) {
         if(tile != null) {
             if (guibutton.id >= 0 && guibutton.id < 6) {
-                switch (tile.connections.get(Direction.values()[guibutton.id])) {
+                switch (tile.fluidConnections.get(Direction.values()[guibutton.id])) {
                     case NONE:
                         if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell) {
-                            tile.connections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
+                            tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                             break;
                         }
-                        tile.connections.replace(Direction.values()[guibutton.id], Connection.INPUT);
+                        tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.INPUT);
                         break;
                     case INPUT:
-                        tile.connections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
+                        tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                         break;
                     case OUTPUT:
                         if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell) {
-                            tile.connections.replace(Direction.values()[guibutton.id], Connection.NONE);
+                            tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
                             break;
                         }
-                        tile.connections.replace(Direction.values()[guibutton.id], Connection.BOTH);
+                        tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.BOTH);
                         break;
                     case BOTH:
-                        tile.connections.replace(Direction.values()[guibutton.id], Connection.NONE);
+                        tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
                         break;
                 }
 
-                guibutton.displayString = tile.connections.get(Direction.values()[guibutton.id]).getLetter();
+                guibutton.displayString = tile.fluidConnections.get(Direction.values()[guibutton.id]).getLetter();
 
             }
             if (guibutton.id > 5 && guibutton.id < 12) {
@@ -189,21 +188,21 @@ public class GuiFluidIOConfig extends GuiScreen {
             }
             if (guibutton.id == 12) {
                 for (Direction direction : Direction.values()) {
-                    tile.connections.replace(direction, Connection.INPUT);
+                    tile.fluidConnections.replace(direction, Connection.INPUT);
                 }
                 for (GuiButton button : controlList) {
                     if (button.id >= 0 && button.id < 6) {
-                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                        button.displayString = tile.fluidConnections.get(Direction.values()[button.id]).getLetter();
                     }
                 }
             }
             if (guibutton.id == 13) {
                 for (Direction direction : Direction.values()) {
-                    tile.connections.replace(direction, Connection.OUTPUT);
+                    tile.fluidConnections.replace(direction, Connection.OUTPUT);
                 }
                 for (GuiButton button : controlList) {
                     if (button.id >= 0 && button.id < 6) {
-                        button.displayString = tile.connections.get(Direction.values()[button.id]).getLetter();
+                        button.displayString = tile.fluidConnections.get(Direction.values()[button.id]).getLetter();
                     }
                 }
             }

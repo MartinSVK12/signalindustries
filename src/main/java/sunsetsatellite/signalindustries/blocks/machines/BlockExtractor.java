@@ -25,7 +25,6 @@ import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -149,7 +148,7 @@ public class BlockExtractor extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

@@ -13,9 +13,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
 import sunsetsatellite.signalindustries.inventories.TileEntitySIFluidTank;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.TextureHelper;
@@ -46,7 +44,7 @@ public class BlockSIFluidTank extends BlockContainerTiered {
                     break;
                 }
                 case FLUID: {
-                    con = tile.connections.get(dir);
+                    con = tile.fluidConnections.get(dir);
                     break;
                 }
             }

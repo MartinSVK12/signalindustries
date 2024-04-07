@@ -22,7 +22,7 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
         fluidCapacity = new int[1];
         fluidCapacity[0] = 16000;
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
-        connections.put(Direction.Y_POS, Connection.OUTPUT);
+        fluidConnections.put(Direction.Y_POS, Connection.OUTPUT);
     }
 
     @Override

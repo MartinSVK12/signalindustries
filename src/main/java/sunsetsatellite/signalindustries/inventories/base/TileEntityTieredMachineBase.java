@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.inventories.base;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IFluidIO;
@@ -98,12 +99,55 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
 
     @Override
     public Connection getFluidIOForSide(Direction dir) {
-        return connections.get(dir);
+        return fluidConnections.get(dir);
     }
 
     @Override
     public int getActiveItemSlotForSide(Direction dir) {
-        return activeItemSlots.get(dir);
+        if(activeItemSlots.get(dir) == -1){
+            if(itemConnections.get(dir) == Connection.INPUT){
+                for (int i = 0; i < itemContents.length; i++) {
+                    ItemStack content = itemContents[i];
+                    if (content == null) {
+                        return i;
+                    }
+                }
+            } else if(itemConnections.get(dir) == Connection.OUTPUT) {
+                for (int i = 0; i < itemContents.length; i++) {
+                    ItemStack content = itemContents[i];
+                    if (content != null) {
+                        return i;
+                    }
+                }
+            }
+            return 0;
+        } else {
+            return activeItemSlots.get(dir);
+        }
+    }
+
+    @Override
+    public int getActiveItemSlotForSide(Direction dir, ItemStack stack) {
+        if(activeItemSlots.get(dir) == -1){
+            if(itemConnections.get(dir) == Connection.INPUT){
+                for (int i = 0; i < itemContents.length; i++) {
+                    ItemStack content = itemContents[i];
+                    if (content == null || content.isItemEqual(stack)) {
+                        return i;
+                    }
+                }
+            } else if(itemConnections.get(dir) == Connection.OUTPUT) {
+                for (int i = 0; i < itemContents.length; i++) {
+                    ItemStack content = itemContents[i];
+                    if (content != null) {
+                        return i;
+                    }
+                }
+            }
+            return 0;
+        } else {
+            return activeItemSlots.get(dir);
+        }
     }
 
     @Override

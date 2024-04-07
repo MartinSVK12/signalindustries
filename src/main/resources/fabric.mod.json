@@ -39,6 +39,9 @@
     ],
     "terrain-api": [
       "sunsetsatellite.signalindustries.api.impl.terrainapi.TerrainAPISignalIndustriesPlugin"
+    ],
+    "btwaila": [
+      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
     ]
   },
   "mixins": [

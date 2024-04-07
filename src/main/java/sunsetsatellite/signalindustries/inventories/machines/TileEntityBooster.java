@@ -18,8 +18,6 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.recipes.legacy.InfuserRecipes;
-import sunsetsatellite.signalindustries.recipes.legacy.MachineRecipesBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -209,7 +207,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     }
 
     public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
+        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
             Direction dir = e.getKey();
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);

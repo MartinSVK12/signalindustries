@@ -30,7 +30,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         }
         acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
         for (Direction dir : Direction.values()) {
-            connections.put(dir, Connection.INPUT);
+            fluidConnections.put(dir, Connection.INPUT);
             activeFluidSlots.put(dir,0);
         }
         transferSpeed = 10;
@@ -66,13 +66,13 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
 
     public void spreadFluids(Direction dir) {
         for (Direction direction : Direction.values()) {
-            connections.put(dir, Connection.BOTH);
+            fluidConnections.put(dir, Connection.BOTH);
         }
         if(getFluidInSlot(0) != null){
             this.give(dir);
         }
         for (Direction direction : Direction.values()) {
-            connections.put(dir, Connection.INPUT);
+            fluidConnections.put(dir, Connection.INPUT);
         }
     }
 
@@ -89,7 +89,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
     }
 
     public void extractFluids(){
-        for (Map.Entry<Direction, Connection> e : connections.entrySet()) {
+        for (Map.Entry<Direction, Connection> e : fluidConnections.entrySet()) {
             Direction dir = e.getKey();
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);

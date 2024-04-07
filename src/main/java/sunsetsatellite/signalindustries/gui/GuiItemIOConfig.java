@@ -54,9 +54,9 @@ public class GuiItemIOConfig extends GuiScreen {
         if(guibutton.id > 5){
             Direction dir = Direction.values()[guibutton.id-6];
             Integer currentValue = tile.activeItemSlots.get(dir);
-            if(currentValue > 0){
+            if(currentValue > -1){
                 tile.activeItemSlots.put(dir,currentValue-1);
-                guibutton.displayString = String.valueOf(tile.activeItemSlots.get(dir));
+                guibutton.displayString = tile.activeItemSlots.get(dir) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(dir));
             }
 
         }
@@ -112,12 +112,12 @@ public class GuiItemIOConfig extends GuiScreen {
         controlList.add(new GuiButton(1, Math.round(width / 2) - 24, Math.round(height / 2) - 48, 15, 15, tile.itemConnections.get(Direction.X_NEG).getLetter())); //X-
         controlList.add(new GuiButton(5, Math.round(width / 2) + 4, Math.round(height / 2) - 33, 15, 15, tile.itemConnections.get(Direction.Z_NEG).getLetter())); //Z-
 
-        controlList.add(new GuiButton(8, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 63, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.Y_POS))));
-        controlList.add(new GuiButton(10, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.Z_POS))));
-        controlList.add(new GuiButton(9, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.Y_NEG))));
-        controlList.add(new GuiButton(6, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.X_POS))));
-        controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.X_NEG))));
-        controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, String.valueOf(tile.activeItemSlots.get(Direction.Z_NEG))));
+        controlList.add(new GuiButton(8, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 63, 15, 15, tile.activeItemSlots.get(Direction.Y_POS) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.Y_POS))));
+        controlList.add(new GuiButton(10, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 48, 15, 15, tile.activeItemSlots.get(Direction.Z_POS) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.Z_POS))));
+        controlList.add(new GuiButton(9, Math.round(width / 2) - 10 + 50, Math.round(height / 2) - 33, 15, 15, tile.activeItemSlots.get(Direction.Y_NEG) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.Y_NEG))));
+        controlList.add(new GuiButton(6, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 48, 15, 15, tile.activeItemSlots.get(Direction.X_POS) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.X_POS))));
+        controlList.add(new GuiButton(7, Math.round(width / 2) - 24 + 50, Math.round(height / 2) - 48, 15, 15, tile.activeItemSlots.get(Direction.X_NEG) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.X_NEG))));
+        controlList.add(new GuiButton(11, Math.round(width / 2) + 4 + 50, Math.round(height / 2) - 33, 15, 15, tile.activeItemSlots.get(Direction.Z_NEG) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.Z_NEG))));
 
         controlList.add(new GuiButton(12,(width / 2) - 85, (height / 2)-12, 30, 15, "All I"));
         controlList.add(new GuiButton(13, (width / 2) - 55, (height / 2)-12, 30, 15, "All O"));
