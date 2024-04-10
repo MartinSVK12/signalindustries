@@ -132,7 +132,7 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
             if(itemConnections.get(dir) == Connection.INPUT){
                 for (int i = 0; i < itemContents.length; i++) {
                     ItemStack content = itemContents[i];
-                    if (content == null || content.isItemEqual(stack)) {
+                    if (content == null || (content.isItemEqual(stack) && content.stackSize+stack.stackSize <= content.getMaxStackSize())) {
                         return i;
                     }
                 }

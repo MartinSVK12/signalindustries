@@ -235,7 +235,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
             if (itemConnections.get(dir) == Connection.INPUT) {
                 for (int i = 1; i < itemContents.length; i++) {
                     ItemStack content = itemContents[i];
-                    if (content == null || content.isItemEqual(stack)) {
+                    if (content == null || (content.isItemEqual(stack) && content.stackSize+stack.stackSize <= content.getMaxStackSize())) {
                         return i;
                     }
                 }
