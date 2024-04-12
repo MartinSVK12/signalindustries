@@ -32,7 +32,6 @@ public class GuiRenderItemNoOverlay extends Gui {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
         if (slot != null) {
-            discovered = slot.discovered;
             int iconIndex = slot.getBackgroundIconIndex();
             if (iconIndex >= 0 && itemStack == null) {
                 GL11.glDisable(2896);

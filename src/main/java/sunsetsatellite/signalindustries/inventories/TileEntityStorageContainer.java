@@ -63,7 +63,7 @@ public class TileEntityStorageContainer extends TileEntityTiered {
             }
         } else {
             if(!(contents.isItemEqual(stack))) return false;
-            if(!((INBTCompound)contents.getData()).equals(stack.getData())) return false;
+            if(!(contents.getData()).equals(stack.getData())) return false;
             if(contents.stackSize >= capacity) return false;
             if(contents.stackSize+stack.stackSize > capacity){
                 int remainder = (contents.stackSize+stack.stackSize) - capacity;

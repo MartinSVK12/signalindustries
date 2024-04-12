@@ -21,32 +21,4 @@ public abstract class NBTTagCompoundMixin  extends Tag<Map<String, Tag<?>>> impl
         this.getValue().remove(s);
     }
 
-    @Override
-    public boolean equals(CompoundTag tag) {
-        HashMap<?,?> otherTagMap;
-        otherTagMap = (HashMap<?, ?>) tag.getValue();//(HashMap<?, ?>) RetroStorage.getPrivateValue(tag.getClass(),tag,"tagMap");
-        if(otherTagMap == null){
-            otherTagMap = new HashMap<>();
-        }
-        if(getValue().isEmpty() && otherTagMap.isEmpty()){
-            return true;
-        }
-        if(getValue().isEmpty()){
-            return false;
-        } else if (otherTagMap.isEmpty()){
-            return false;
-        }
-        int s = 0;
-        for (Map.Entry<?, ?> entry : ((HashMap<?,?>)getValue()).entrySet()) {
-            Object K = entry.getKey();
-            Object V = entry.getValue();
-            if(tag.containsKey((String) K)){
-                if(V.equals(otherTagMap.get(K))){
-                    s++;
-                }
-            }
-        }
-        return s == getValue().size();
-    }
-
 }

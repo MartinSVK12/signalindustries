@@ -95,9 +95,9 @@ public class CrystalChamberPage
         ticks++;
         for (SlotGuidebook slot : slots) {
             if(slot.item != null){
-                slot.discovered = mc.statsCounter.readStat(StatList.pickUpItemStats[slot.item.itemID]) > 0;
+                slot.setDiscovered(mc.statsCounter.readStat(StatList.pickUpItemStats[slot.item.itemID]) > 0);
             }
-            if(mc.thePlayer.gamemode == Gamemode.creative) slot.discovered = true;
+            if(mc.thePlayer.gamemode == Gamemode.creative) slot.setDiscovered(true);
             if(ticks > 100) {
                 slot.showRandomItem();
                 if(slots.get(slots.size()-1) == slot){

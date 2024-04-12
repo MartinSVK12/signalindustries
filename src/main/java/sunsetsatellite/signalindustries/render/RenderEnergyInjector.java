@@ -109,7 +109,7 @@ public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInj
             float f13 = 0.5f;
             float f14 = 0.25f;
             if (true) {
-                int k = Item.itemsList[itemstack.itemID].getColorFromDamage(itemstack.getMetadata());
+                int k = 0xFFFFFF;//Item.itemsList[itemstack.itemID].getColorFromDamage(itemstack.getMetadata());
                 float f15 = (float)(k >> 16 & 0xFF) / 255.0f;
                 float f17 = (float)(k >> 8 & 0xFF) / 255.0f;
                 float f19 = (float)(k & 0xFF) / 255.0f;

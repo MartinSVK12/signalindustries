@@ -36,15 +36,4 @@ public class ItemStackMixin {
         }
     }
 
-    @Inject(
-            method = "canStackWith",
-            at = @At(value = "INVOKE",target = "Lcom/mojang/nbt/CompoundTag;getTag(Ljava/lang/String;)Lcom/mojang/nbt/Tag;",ordinal = 0),
-            locals = LocalCapture.CAPTURE_FAILHARD,
-            cancellable = true
-    )
-    public void canStackWith(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir, CompoundTag nbt1, CompoundTag nbt2, Map data1, Map data2, Iterator var6, String key) {
-        if(!nbt1.containsKey(key) || !nbt2.containsKey(key)){
-            cir.setReturnValue(false);
-        }
-    }
 }

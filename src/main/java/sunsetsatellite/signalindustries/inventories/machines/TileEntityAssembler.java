@@ -51,7 +51,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
 
     @Override
     public String getInvName() {
-        return "Assembler";
+        return "SI Assembler";
     }
 
     @Override

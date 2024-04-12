@@ -276,7 +276,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
                 }
             } else if (exitEntry.getValue() instanceof TileEntityStorageContainer) {
                 TileEntityStorageContainer container = (TileEntityStorageContainer) exitEntry.getValue();
-                if (container.contents == null || (container.contents.isItemEqual(stack) && ((INBTCompound) container.contents.getData()).equals(stack.getData()) && container.contents.stackSize < container.capacity)) {
+                if (container.contents == null || (container.contents.isItemEqual(stack) && container.contents.getData().equals(stack.getData()) && container.contents.stackSize < container.capacity)) {
                     return exitEntry.getKey();
                 }
                 blockedDirs.add(exitEntry.getKey());

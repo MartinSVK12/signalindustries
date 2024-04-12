@@ -139,9 +139,9 @@ public class EntityCrystal extends Entity {
 
     @Override
     public void tick() {
-        this.xOld = this.x;
-        this.yOld = this.y;
-        this.zOld = this.z;
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
         super.tick();
         if (this.shakeSnowball > 0) {
             --this.shakeSnowball;

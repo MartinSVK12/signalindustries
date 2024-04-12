@@ -1415,8 +1415,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createTileEntity(TileEntityPump.class,"Pump");
         addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityAssembler.class, new RenderAssemblerItemSprite3D(),"Assembler");
-        addToNameGuiMap("Assembler", GuiAssembler.class, TileEntityAssembler.class);
+        EntityHelper.Core.createSpecialTileEntity(TileEntityAssembler.class, new RenderAssemblerItemSprite3D(),"SI Assembler");
+        addToNameGuiMap("SI Assembler", GuiAssembler.class, TileEntityAssembler.class);
 
         EntityHelper.Core.createSpecialTileEntity(TileEntityStorageContainer.class, new RenderStorageContainer(),"Storage Container");
 
