@@ -49,13 +49,13 @@
   ],
   "depends": {
     "fabricloader": ">=0.15.6-babric.4-bta",
-    "minecraft": ">=7.1-beta.1a",
-    "catalyst-core": ">=1.1.5",
-    "catalyst-fluids": ">=1.0.4",
-    "catalyst-multiblocks": ">=1.0.4",
-    "catalyst-energy": ">=1.0.5",
-    "halplibe": ">=3.4.13",
-    "dragonfly": ">=1.4.3-7.1",
-    "terrain-api": ">=1.4.2-7.1"
+    "minecraft": "7.1",
+    "catalyst-core": ">=1.1.8",
+    "catalyst-fluids": ">=1.0.6",
+    "catalyst-multiblocks": ">=1.0.6",
+    "catalyst-energy": ">=1.0.7",
+    "halplibe": ">=3.5.3",
+    "dragonfly": ">=1.4.8-7.1",
+    "terrain-api": ">=1.4.4-7.1"
   }
 }
