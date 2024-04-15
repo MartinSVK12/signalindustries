@@ -13,6 +13,7 @@ import sunsetsatellite.signalindustries.blocks.BlockConduit;
 import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
 import sunsetsatellite.signalindustries.inventories.TileEntityInserter;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.util.PipeType;
 import useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 
 import java.util.HashMap;
@@ -47,7 +48,12 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
             }
             states.put(direction.getName().toLowerCase(), String.valueOf(show));
             if(tile != null){
-                states.put("restrict_"+direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
+                if(tile.type == PipeType.RESTRICT){
+                    states.put("restrict_"+direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
+                } else if (tile.type == PipeType.SENSOR) {
+                    states.put("sensor_active",String.valueOf(tile.sensorActive));
+
+                }
                 states.put("mode",tile.mode.name());
             }
         }

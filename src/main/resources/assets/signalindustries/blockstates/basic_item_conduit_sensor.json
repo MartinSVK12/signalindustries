@@ -1,0 +1,150 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_base"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/split/conduit_base"
+      },
+      "when": {
+        "mode": "SPLIT"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_base"
+      },
+      "when": {
+        "sensor_active": "true"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"up": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_up"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"up": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_up"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_down"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"down": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_down"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"north": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_north"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"north": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_north"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"south": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_south"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"south": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_south"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"east": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_east"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"east": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_east"
+      }
+    },
+
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"sensor_active": "true"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/on/conduit_west"
+      }
+    },
+    {
+      "when": {
+        "AND": [
+          {"west": "true"},{"sensor_active": "false"}
+        ]
+      },
+      "apply": {
+        "model": "signalindustries:conduit/item/basic/sensor/off/conduit_west"
+      }
+    }
+  ]
+}

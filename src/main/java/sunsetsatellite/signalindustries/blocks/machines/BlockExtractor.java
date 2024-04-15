@@ -60,7 +60,7 @@ public class BlockExtractor extends BlockContainerTiered {
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
+        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
             for (Direction dir : Direction.values()) {
                 TileEntity tile2 = dir.getTileEntity(world, tile);

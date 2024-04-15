@@ -166,6 +166,8 @@ tile.signalindustries.basic.conduit.item.name=Basic Item Conduit
 tile.signalindustries.basic.conduit.item.desc=Transfers items faster.
 tile.signalindustries.basic.conduit.item.restrict.name=Basic Restrict Item Conduit
 tile.signalindustries.basic.conduit.item.restrict.desc=Transfers items faster. Can have some of its directions blocked off preventing incoming items from going into that direction.
+tile.signalindustries.basic.conduit.item.sensor.name=Basic Sensor Item Conduit
+tile.signalindustries.basic.conduit.item.sensor.desc=Transfers items faster. Emits a redstone signal depending on what items pass through it.
 
 tile.signalindustries.prototype.inserter.name=Prototype Inserter
 tile.signalindustries.prototype.inserter.desc=Picks up items from the ground and inserts them into item conduits.

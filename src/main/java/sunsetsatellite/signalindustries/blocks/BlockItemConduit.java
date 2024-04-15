@@ -9,11 +9,13 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiFluidIOConfig;
 import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
+import sunsetsatellite.signalindustries.gui.GuiSensorPipeConfig;
 import sunsetsatellite.signalindustries.inventories.TileEntityConduit;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeMode;
@@ -54,6 +56,11 @@ public class BlockItemConduit extends BlockContainerTiered {
             SignalIndustries.displayGui(entityplayer, new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x,tile.y,tile.z);
             return true;
         }
+        if(!world.isClientSide && type == PipeType.SENSOR) {
+            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
+            SignalIndustries.displayGui(entityplayer, new GuiSensorPipeConfig(entityplayer.inventory, tile), tile, tile.x,tile.y,tile.z);
+            return true;
+        }
         return false;
     }
 
@@ -87,6 +94,24 @@ public class BlockItemConduit extends BlockContainerTiered {
         super.onBlockRemoved(world, i, j, k, data);
     }
 
+    @Override
+    public boolean canProvidePower() {
+        return true;
+    }
+
+    @Override
+    public boolean isPoweringTo(WorldSource worldSource, int x, int y, int z, int side) {
+        TileEntityItemConduit tile = (TileEntityItemConduit)worldSource.getBlockTileEntity(x, y, z);
+        return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
+    }
+
+    @Override
+    public boolean isIndirectlyPoweringTo(World world, int x, int y, int z, int side) {
+        TileEntityItemConduit tile = (TileEntityItemConduit)world.getBlockTileEntity(x, y, z);
+        return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
+    }
+
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }

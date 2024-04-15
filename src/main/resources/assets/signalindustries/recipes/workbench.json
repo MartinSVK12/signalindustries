@@ -2847,6 +2847,47 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/basic_sensor_item_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CGC",
+      "RRR",
+      "CGC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.conduit.item.sensor",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/prototype_item_conduit",
     "type": "minecraft:crafting/shaped",
     "pattern": [

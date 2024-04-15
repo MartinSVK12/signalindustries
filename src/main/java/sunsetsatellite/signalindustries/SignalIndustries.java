@@ -490,6 +490,21 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             )
             .build(new BlockItemConduit("basic.conduit.item.restrict",config.getInt("BlockIDs.basicRestrictItemConduit"),Tier.BASIC,Material.glass, PipeType.RESTRICT));
 
+    public static final Block basicSensorItemConduit = new BlockBuilder(MOD_ID)
+            .setTextures("item_conduit_basic_sensor_off.png")
+            .setLuminance(0)
+            .setResistance(1)
+            .setHardness(1)
+            .setBlockSound(BlockSounds.GLASS)
+            .setBlockModel(
+                    new BlockModelDragonFly(
+                            ModelHelper.getOrCreateBlockModel(MOD_ID,"conduit/item/basic/sensor/off/conduit_all.json"),
+                            ModelHelper.getOrCreateBlockState(MOD_ID,"basic_item_conduit_sensor.json"),
+                            new ItemConduitStateInterpreter(),
+                            true
+                    )
+            )
+            .build(new BlockItemConduit("basic.conduit.item.sensor",config.getInt("BlockIDs.basicSensorItemConduit"),Tier.BASIC,Material.glass, PipeType.SENSOR));
 
     public static final Block infiniteEnergyCell = new BlockBuilder(MOD_ID)
             .setTextures("cell_prototype.png")

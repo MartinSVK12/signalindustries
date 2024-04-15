@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.ByteTag;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.Tag;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
@@ -33,6 +34,12 @@ public class TileEntityItemConduit extends TileEntityWithName {
     public PipeType type = PipeType.NORMAL;
 
     public Map<Direction, Boolean> restrictDirections = new HashMap<>();
+    public boolean sensorActive;
+    public int sensorMode = 0;
+    public int sensorAmount = 0;
+    public boolean sensorUseMeta = true;
+    public boolean sensorUseData = false;
+    public ItemStack sensorStack = null;
 
     public TileEntityItemConduit(){
         for (Direction dir : Direction.values()) {
@@ -300,6 +307,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
     public void tick() {
         super.tick();
         worldObj.markBlockDirty(x,y,z);
+        worldObj.notifyBlocksOfNeighborChange(x,y,z,sensorActive ? 15 : 0);
         if(worldObj != null && getBlockType() != null){
             tier = ((ITiered)getBlockType()).getTier();
             type = ((BlockItemConduit)getBlockType()).type;
@@ -321,13 +329,52 @@ public class TileEntityItemConduit extends TileEntityWithName {
         final Iterator<PipeItem> iter = contents.iterator();
         while(iter.hasNext()){
             PipeItem next = iter.next();
+
             if(next.insertTimer.isPaused()){
                 dropItem(next,iter);
             }
         }
+        sensorActive = false;
         for (PipeItem pipeItem : contents.toArray(new PipeItem[0])) {
             pipeItem.insertTimer.tick();
+            ItemStack stack = pipeItem.stack;
+            if(stack != null && type == PipeType.SENSOR){
+                if(stack.itemID == sensorStack.itemID){
+                    sensorActive = checkIfValidForSensor(stack);
+                }
+            }
         }
+    }
+
+    private boolean checkIfValidForSensor(ItemStack stack) {
+        boolean yes = false;
+        switch (sensorMode){
+            case 0:
+                yes = stack.stackSize == sensorAmount;
+                break;
+            case 1:
+                yes = stack.stackSize != sensorAmount;
+                break;
+            case 2:
+                yes = stack.stackSize > sensorAmount;
+                break;
+            case 3:
+                yes = stack.stackSize < sensorAmount;
+                break;
+            case 4:
+                yes = stack.stackSize >= sensorAmount;
+                break;
+            case 5:
+                yes = stack.stackSize <= sensorAmount;
+                break;
+        }
+        if(sensorUseMeta && stack.getMetadata() != sensorStack.getMetadata()){
+            yes = false;
+        }
+        if(sensorUseData && !stack.getData().equals(sensorStack.getData())){
+            yes = false;
+        }
+        return yes;
     }
 
     public HashMap<Direction, TileEntity> getSurroundings(){
@@ -346,6 +393,12 @@ public class TileEntityItemConduit extends TileEntityWithName {
     @Override
     public void readFromNBT(CompoundTag nbttagcompound) {
         super.readFromNBT(nbttagcompound);
+        sensorActive = nbttagcompound.getBoolean("IsActive");
+        sensorMode = nbttagcompound.getInteger("SensorMode");
+        sensorAmount = nbttagcompound.getInteger("CheckAmount");
+        sensorUseMeta = nbttagcompound.getBoolean("UseMeta");
+        sensorUseData = nbttagcompound.getBoolean("UseData");
+        sensorStack = ItemStack.readItemStackFromNbt(nbttagcompound.getCompound("SensorStack"));
         CompoundTag items = nbttagcompound.getCompound("Items");
         CompoundTag restrict = nbttagcompound.getCompound("Restrictions");
         for (Tag<?> value : items.getValues()) {
@@ -360,6 +413,8 @@ public class TileEntityItemConduit extends TileEntityWithName {
                 restrictDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
             }
         }
+
+
     }
 
     @Override
@@ -380,6 +435,15 @@ public class TileEntityItemConduit extends TileEntityWithName {
         }
         nbttagcompound.put("Restrictions",restrict);
         nbttagcompound.put("Items",items);
+
+        nbttagcompound.putBoolean("IsActive",sensorActive);
+        nbttagcompound.putInt("CheckAmount",sensorAmount);
+        nbttagcompound.putInt("SensorMode",sensorMode);
+        nbttagcompound.putBoolean("UseMeta",sensorUseMeta);
+        nbttagcompound.putBoolean("UseDeta",sensorUseData);
+        CompoundTag itemNbt = new CompoundTag();
+        sensorStack.writeToNBT(itemNbt);
+        nbttagcompound.putCompound("SensorStack",itemNbt);
     }
 
 

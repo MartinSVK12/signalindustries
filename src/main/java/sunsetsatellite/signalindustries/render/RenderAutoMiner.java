@@ -5,12 +5,14 @@ import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.render.RenderFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
@@ -32,77 +34,77 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         int cx = tileEntity.current.x;
         int cy = tileEntity.current.y;
         int cz = tileEntity.current.z;
+        World world = this.renderDispatcher.renderEngine.mc.theWorld;
 
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float)x-(tx-cx)+0.25f, (float)y+4.25f, (float)z+(cz-tz)+0.25f);
-        GL11.glScalef(0.5f,0.5f,0.5f);
-        GL11.glDisable(2896);
-        this.drawBlock(renderDispatcher.renderEngine, SignalIndustries.basicMachineCore.id,0, tileEntity);
-        GL11.glEnable(2896);
-        GL11.glPopMatrix();
-
-        if(cy-(ty+4) < 0){
+        if (!Objects.equals(world.getLevelData().getWorldName(), "modelviewer")) {
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)x-(tx-cx)+0.25f, (float)y-(ty-cy)+0.5f, (float)z+(cz-tz)+0.25f);
-            GL11.glScalef(0.50f,1f,0.50f);
+            GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y + 4.25f, (float) z + (cz - tz) + 0.25f);
+            GL11.glScalef(0.5f, 0.5f, 0.5f);
             GL11.glDisable(2896);
-            this.drawBlock(renderDispatcher.renderEngine,Block.basalt.id,0, tileEntity);
+            this.drawBlock(renderDispatcher.renderEngine, SignalIndustries.basicMachineCore.id, 0, tileEntity);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
+
+            if (cy - (ty + 4) < 0) {
+                GL11.glPushMatrix();
+                GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y - (ty - cy) + 0.5f, (float) z + (cz - tz) + 0.25f);
+                GL11.glScalef(0.50f, 1f, 0.50f);
+                GL11.glDisable(2896);
+                this.drawBlock(renderDispatcher.renderEngine, Block.basalt.id, 0, tileEntity);
+                GL11.glEnable(2896);
+                GL11.glPopMatrix();
+            }
+
+            if (cy - (ty + 4) <= 0) {
+                GL11.glPushMatrix();
+                GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy), (float) z + (cz - tz) + 0.375f);
+                GL11.glScalef(0.25f, 0.75f, 0.25f);
+                GL11.glDisable(2896);
+                this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
+                GL11.glEnable(2896);
+                GL11.glPopMatrix();
+            } else {
+                GL11.glPushMatrix();
+                GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy) + 1f, (float) z + (cz - tz) + 0.375f);
+                GL11.glScalef(0.25f, 0.75f, 0.25f);
+                GL11.glDisable(2896);
+                this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
+                GL11.glEnable(2896);
+                GL11.glPopMatrix();
+            }
+
+
+            //square above
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z);
+            //square
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x - 17, y, z);
+            //down
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z + 17);
+            //down 2
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 17, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 17, y, z + 17);
+            //square down
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 1, 1, 1, 2, x - 17, y - ty, z);
+
+            //current lines
+            renderLineBetweenTwoPoints(tx, ty, tz, cx, ty, tz, 1, 0, 0, 1, 8, x, y + 4, z + (cz - tz));
+            renderLineBetweenTwoPoints(tx, ty, cz, tx, ty, tz, 0, 0, 1, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, cy - 3, tz, 0, 1, 0, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
         }
-
-        if(cy-(ty+4) <= 0){
-            GL11.glPushMatrix();
-            GL11.glTranslatef((float)x-(tx-cx)+0.375f, (float)y-(ty-cy), (float)z+(cz-tz)+0.375f);
-            GL11.glScalef(0.25f,0.75f,0.25f);
-            GL11.glDisable(2896);
-            this.drawBlock(renderDispatcher.renderEngine,Block.blockDiamond.id,0, tileEntity);
-            GL11.glEnable(2896);
-            GL11.glPopMatrix();
-        } else {
-            GL11.glPushMatrix();
-            GL11.glTranslatef((float)x-(tx-cx)+0.375f, (float)y-(ty-cy)+1f, (float)z+(cz-tz)+0.375f);
-            GL11.glScalef(0.25f,0.75f,0.25f);
-            GL11.glDisable(2896);
-            this.drawBlock(renderDispatcher.renderEngine,Block.blockDiamond.id,0, tileEntity);
-            GL11.glEnable(2896);
-            GL11.glPopMatrix();
-        }
-
-
-
-
-
-        //square above
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,0.5f,0,1,8,x,y+4,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,0.5f,0,1,8,x,y+4,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,0.5f,0,1,8,x,y+4,z+17);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,0.5f,0,1,8,x-17,y+4,z);
-        //square
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,0.5f,0,1,8,x,y,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,0.5f,0,1,8,x,y,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,0.5f,0,1,8,x,y,z+17);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,0.5f,0,1,8,x-17,y,z);
-        //down
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty-4,tz,1,0.5f,0,1,8,x,y+4,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty-4,tz,1,0.5f,0,1,8,x-17,y+4,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty-4,tz,1,0.5f,0,1,8,x,y+4,z+17);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty-4,tz,1,0.5f,0,1,8,x-17,y+4,z+17);
-        //down 2
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,0,tz,1,1,1,1,2,x,y,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,0,tz,1,1,1,1,2,x-17,y,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,0,tz,1,1,1,1,2,x,y,z+17);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,0,tz,1,1,1,1,2,x-17,y,z+17);
-        //square down
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,1,1,1,2,x,y-ty,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,1,1,1,2,x,y-ty,z);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx-17,ty,tz,1,1,1,1,2,x,y-ty,z+17);
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,ty,tz+17,1,1,1,1,2,x-17,y-ty,z);
-
-        //current lines
-        renderLineBetweenTwoPoints(tx,ty,tz,cx,ty,tz,1,0,0,1,8,x,y+4,z+(cz-tz));
-        renderLineBetweenTwoPoints(tx,ty,cz,tx,ty,tz,0,0,1,1,8,x-(tx-cx),y+4,z+(cz-tz));
-        renderLineBetweenTwoPoints(tx,ty,tz,tx,cy-3,tz,0,1,0,1,8,x-(tx-cx),y+4,z+(cz-tz));
     }
 
     public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, double x, double y, double z) {
