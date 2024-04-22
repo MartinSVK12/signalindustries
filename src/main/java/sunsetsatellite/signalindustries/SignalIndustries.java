@@ -30,6 +30,7 @@ import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.lang.I18n;
+import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.sound.BlockSounds;
@@ -47,6 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.NBTEditCommand;
+import sunsetsatellite.catalyst.fluids.mp.packets.PacketSetFluidSlot;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
@@ -101,6 +103,7 @@ import useless.dragonfly.model.block.BlockModelDragonFly;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -1232,7 +1235,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     @Override
     public void onInitialize() {
-        NetworkHelper.register(PacketOpenMachineGUI.class, true, true);
         LOGGER.info("Signal Industries initialized.");
     }
 
@@ -1326,6 +1328,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         textures.put(Tier.REINFORCED.name()+".ignitor.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_5_overlay.png").setTopTexture("ignitor_8_overlay.png").setBottomTexture("ignitor_4_overlay.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready_inverted.png").setTopTexture("reinforced_ignitor_bottom_ready.png").setBottomTexture("reinforced_ignitor_top_ready.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_6_overlay.png").setTopTexture("ignitor_4_overlay.png").setBottomTexture("ignitor_8_overlay.png"));
+
+        NetworkHelper.register(PacketOpenMachineGUI.class, true, true);
+        // TODO For the love of god martin you need to register your packets 💀
+        NetworkHelper.register(PacketSetFluidSlot.class, true, true);
     }
 
     public SignalIndustries(){

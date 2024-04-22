@@ -42,7 +42,6 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
     @Override
     public void displayGuiScreen_si(Supplier<GuiScreen> screenSupplier, Container container, IInventory inventory, int x, int y, int z) {
         this.getNextWindowId();
-        //this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, Config.getFromConfig("GuiID",8), inventory.getInvName(), inventory.getSizeInventory()));
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getInvName(),inventory.getSizeInventory(),x,y,z));
         this.craftingInventory = container;
         this.craftingInventory.windowId = this.currentWindowId;
@@ -56,7 +55,6 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
     @Override
     public void displayItemGuiScreen_si(Supplier<GuiScreen> screenSupplier, Container container, IInventory inventory, ItemStack stack){
         this.getNextWindowId();
-        //this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, Config.getFromConfig("GuiID",8), inventory.getInvName(), inventory.getSizeInventory()));
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getInvName(),inventory.getSizeInventory(),stack));
         this.craftingInventory = container;
         this.craftingInventory.windowId = this.currentWindowId;
