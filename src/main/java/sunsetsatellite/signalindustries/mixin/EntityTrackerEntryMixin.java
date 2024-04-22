@@ -28,8 +28,8 @@ public class EntityTrackerEntryMixin {
     )
     private void getSpawnPacket(CallbackInfoReturnable<Packet> cir){
         if(this.trackedEntity instanceof EntityCrystal){
-            EntityLiving entityliving = ((EntityCrystal)this.trackedEntity).thrower;
-            cir.setReturnValue(new Packet23VehicleSpawn(this.trackedEntity, 47, entityliving == null ? this.trackedEntity.id : entityliving.id));
+            Entity entity = ((EntityCrystal)this.trackedEntity).thrower;
+            cir.setReturnValue(new Packet23VehicleSpawn(this.trackedEntity, 47, entity == null ? this.trackedEntity.id : entity.id));
         }
         /*if(this.trackedEntity instanceof EntityPipeItem){
             cir.setReturnValue(new PacketPipeItemSpawn((EntityPipeItem) this.trackedEntity));
