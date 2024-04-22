@@ -123,7 +123,7 @@ public class BlockAutoMiner extends BlockContainerTiered {
             TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
 
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiAutoMiner(entityplayer.inventory, tile),new ContainerAutoMiner(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiAutoMiner(entityplayer.inventory, tile),new ContainerAutoMiner(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

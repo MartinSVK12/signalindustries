@@ -84,7 +84,7 @@ public class BlockProgrammer extends BlockContainerTiered {
         {
             TileEntityProgrammer tile = (TileEntityProgrammer) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiProgrammer(entityplayer.inventory, tile),new ContainerProgrammer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiProgrammer(entityplayer.inventory, tile),new ContainerProgrammer(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

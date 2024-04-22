@@ -139,10 +139,10 @@ public class GuiCrystalCutter extends GuiFluid {
         }
         switch (guibutton.id){
             case 0:
-                SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
+                SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 1:
-                SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
+                SignalIndustries.displayGui(entityplayer, () -> new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;
             case 2:
                 if(tile.recipeSelector > 0 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54))){

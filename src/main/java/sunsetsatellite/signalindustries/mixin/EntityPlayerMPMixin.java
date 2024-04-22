@@ -17,6 +17,8 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
+import java.util.function.Supplier;
+
 @Debug(
         export = true
 )
@@ -37,7 +39,8 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
     @Shadow private int currentWindowId;
 
 
-    public void displayGuiScreen_si(GuiScreen guiScreen, Container container, IInventory inventory, int x, int y, int z) {
+    @Override
+    public void displayGuiScreen_si(Supplier<GuiScreen> screenSupplier, Container container, IInventory inventory, int x, int y, int z) {
         this.getNextWindowId();
         //this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, Config.getFromConfig("GuiID",8), inventory.getInvName(), inventory.getSizeInventory()));
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getInvName(),inventory.getSizeInventory(),x,y,z));
@@ -45,13 +48,13 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
         this.craftingInventory.windowId = this.currentWindowId;
         this.craftingInventory.onContainerInit(((EntityPlayerMP)((Object)this)));
     }
-
-    public void displayGuiScreen_si(GuiScreen guiScreen, TileEntityWithName inventory, int x, int y, int z){
+    @Override
+    public void displayGuiScreen_si(Supplier<GuiScreen> screenSupplier, TileEntityWithName inventory, int x, int y, int z){
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getName(),0,x,y,z));
     }
-
-    public void displayItemGuiScreen_si(GuiScreen guiScreen, Container container, IInventory inventory, ItemStack stack){
+    @Override
+    public void displayItemGuiScreen_si(Supplier<GuiScreen> screenSupplier, Container container, IInventory inventory, ItemStack stack){
         this.getNextWindowId();
         //this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, Config.getFromConfig("GuiID",8), inventory.getInvName(), inventory.getSizeInventory()));
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getInvName(),inventory.getSizeInventory(),stack));

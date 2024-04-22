@@ -49,7 +49,7 @@ public class GuiEnergyCell extends GuiFluid {
             return;
         }
         if (guibutton.id == 0) {
-            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
         }
         if(tile.getTier() == Tier.INFINITE && guibutton.id == 1){
             tile.isInfiniteSource = !tile.isInfiniteSource;

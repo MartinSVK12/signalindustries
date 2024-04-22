@@ -85,7 +85,7 @@ public class BlockInputBus extends BlockContainerTiered {
         {
             TileEntityItemBus tile = (TileEntityItemBus) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiItemBus(entityplayer.inventory, tile),new ContainerItemBus(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiItemBus(entityplayer.inventory, tile),new ContainerItemBus(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

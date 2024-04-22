@@ -43,7 +43,7 @@ public class BlockEnergyInjector extends BlockContainerTiered {
         {
             TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiEnergyInjector(entityplayer.inventory, tile),new ContainerEnergyInjector(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiEnergyInjector(entityplayer.inventory, tile),new ContainerEnergyInjector(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

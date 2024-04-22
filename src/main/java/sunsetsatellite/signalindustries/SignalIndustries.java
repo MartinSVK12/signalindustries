@@ -82,6 +82,7 @@ import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
@@ -102,6 +103,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class SignalIndustries implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
@@ -1230,6 +1232,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     @Override
     public void onInitialize() {
+        NetworkHelper.register(PacketOpenMachineGUI.class, true, true);
         LOGGER.info("Signal Industries initialized.");
     }
 
@@ -1541,27 +1544,27 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         return ItemHelper.createItem(MOD_ID,new Item(lang,config.getInt("ItemIDs."+name)),texture);
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, int x, int y, int z) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, Container container, IInventory tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,container,tile,x,y,z);
+            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,container,tile,x,y,z);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, TileEntityWithName tile, int x, int y, int z) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, TileEntityWithName tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,tile,x,y,z);
+            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,tile,x,y,z);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, ItemStack stack) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, Container container, IInventory tile, ItemStack stack) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayItemGuiScreen_si(guiScreen,container,tile,stack);
+            ((IEntityPlayerMP)entityplayer).displayItemGuiScreen_si(screenSupplier,container,tile,stack);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 

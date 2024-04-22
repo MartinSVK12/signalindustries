@@ -41,7 +41,7 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         if(entityplayer.isSneaking()){
-            SignalIndustries.displayGui(entityplayer,new GuiHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryHarness(entityplayer.inventory.getCurrentItem()),itemstack);
+            SignalIndustries.displayGui(entityplayer,() -> new GuiHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerHarness(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryHarness(entityplayer.inventory.getCurrentItem()),itemstack);
             return true;
         }
         return false;

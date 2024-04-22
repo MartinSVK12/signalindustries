@@ -25,18 +25,18 @@ public class ItemBackpackAttachment extends ItemTieredAttachment{
 
     @Override
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer entityplayer, World world) {
-        SignalIndustries.displayGui(entityplayer,new GuiBackpack(entityplayer.inventory,stack),new ContainerBackpack(entityplayer.inventory,stack),new InventoryBackpack(stack),stack);
+        SignalIndustries.displayGui(entityplayer,() -> new GuiBackpack(entityplayer.inventory,stack),new ContainerBackpack(entityplayer.inventory,stack),new InventoryBackpack(stack),stack);
     }
 
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
-        SignalIndustries.displayGui(entityplayer,new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
+        SignalIndustries.displayGui(entityplayer,() -> new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
         return true;
     }
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        SignalIndustries.displayGui(entityplayer,new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
+        SignalIndustries.displayGui(entityplayer,() -> new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
         return super.onItemRightClick(itemstack, world, entityplayer);
     }
 }

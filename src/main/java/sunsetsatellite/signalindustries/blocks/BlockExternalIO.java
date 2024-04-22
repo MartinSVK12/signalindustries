@@ -39,7 +39,7 @@ public class BlockExternalIO extends BlockContainerTiered {
         {
             TileEntityExternalIO tile = (TileEntityExternalIO) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiExternalIO(entityplayer.inventory, tile),new ContainerExternalIO(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiExternalIO(entityplayer.inventory, tile),new ContainerExternalIO(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

@@ -53,12 +53,12 @@ public class BlockItemConduit extends BlockContainerTiered {
         }
         if (!world.isClientSide && type == PipeType.RESTRICT) {
             TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
-            SignalIndustries.displayGui(entityplayer, new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x,tile.y,tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x,tile.y,tile.z);
             return true;
         }
         if(!world.isClientSide && type == PipeType.SENSOR) {
             TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
-            SignalIndustries.displayGui(entityplayer, new GuiSensorPipeConfig(entityplayer.inventory, tile), tile, tile.x,tile.y,tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiSensorPipeConfig(entityplayer.inventory, tile), tile, tile.x,tile.y,tile.z);
             return true;
         }
         return false;

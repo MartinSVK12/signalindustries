@@ -114,7 +114,7 @@ public class BlockAssembler extends BlockContainerTiered {
         {
             TileEntityAssembler tile = (TileEntityAssembler) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiAssembler(entityplayer.inventory, tile),new ContainerAssembler(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiAssembler(entityplayer.inventory, tile),new ContainerAssembler(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

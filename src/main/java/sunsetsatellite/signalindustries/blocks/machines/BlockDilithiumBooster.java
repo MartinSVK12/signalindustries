@@ -86,7 +86,7 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
         {
             TileEntityBooster tile = (TileEntityBooster) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiBooster(entityplayer.inventory, tile),new ContainerBooster(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiBooster(entityplayer.inventory, tile),new ContainerBooster(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
