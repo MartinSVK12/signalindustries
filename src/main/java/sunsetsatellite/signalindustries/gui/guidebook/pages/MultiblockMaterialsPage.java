@@ -3,33 +3,30 @@ package sunsetsatellite.signalindustries.gui.guidebook.pages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
 import net.minecraft.client.gui.GuiTooltip;
-import net.minecraft.client.gui.guidebook.*;
+import net.minecraft.client.gui.guidebook.GuiGuidebook;
+import net.minecraft.client.gui.guidebook.GuidebookPage;
+import net.minecraft.client.gui.guidebook.GuidebookSection;
+import net.minecraft.client.gui.guidebook.GuidebookSections;
+import net.minecraft.client.gui.guidebook.PageManager;
 import net.minecraft.client.gui.guidebook.search.SearchPage;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.achievement.stat.StatList;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
-import org.apache.logging.log4j.core.util.Integers;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import turniplabs.halplibe.HalpLibe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MultiblockMaterialsPage extends GuidebookPage {
     public final Multiblock multiblock;

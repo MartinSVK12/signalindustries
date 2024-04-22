@@ -101,10 +101,12 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             weatherManager.overrideWeather(Weather.overworldClear);
         }
-        if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
-            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
-        } else {
-            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
+        if (!Global.isServer){
+            if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
+            } else {
+                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
+            }
         }
     }
 
