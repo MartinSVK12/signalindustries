@@ -1370,10 +1370,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         CommandHelper.Core.createCommand(new RecipeReloadCommand("recipes"));
         CommandHelper.Core.createCommand(new StructureCommand("structure","struct"));
 
-        EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
-        EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
-        EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
-        EntityHelper.Core.createEntity(EntityFallingMeteor.class,50,"fallingMeteor");
+        EntityHelper.Core.createEntity(EntityCrystal.class,347,"signalumCrystal");
+        EntityHelper.Core.createEntity(EntityEnergyOrb.class,349,"energyOrb");
+        EntityHelper.Core.createEntity(EntitySunbeam.class,349,"sunBeam");
+        EntityHelper.Core.createEntity(EntityFallingMeteor.class,350,"fallingMeteor");
 
 
         if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
