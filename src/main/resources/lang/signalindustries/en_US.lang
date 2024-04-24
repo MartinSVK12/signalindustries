@@ -233,6 +233,9 @@ item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces c
 item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Lens
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
 
+item.signalindustries.basic.portableWorkbench.name=Portable Workbench
+item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
+
 item.signalindustries.blankAbilityModule.name=Blank Application Module
 item.signalindustries.blankAbilityModule.desc=Base component of an [Application Module].
 item.signalindustries.abilityModule.name=Application Module

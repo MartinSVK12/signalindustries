@@ -47,9 +47,9 @@ public class GuiAbilityModule extends GuiItemFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         if(tier == Tier.AWAKENED){
-            drawStringCentered(fontRenderer, "Awakened Ability Module",xSize/2,8, tier.getColor());
+            drawStringCentered(fontRenderer, "Awakened Application Module",xSize/2,8, tier.getColor());
         } else {
-            drawStringCentered(fontRenderer,"Ability Module",xSize/2,8, tier.getColor());
+            drawStringCentered(fontRenderer,"Application Module",xSize/2,8, tier.getColor());
         }
         GL11.glDisable(3042);
         GL11.glDisable(2896);

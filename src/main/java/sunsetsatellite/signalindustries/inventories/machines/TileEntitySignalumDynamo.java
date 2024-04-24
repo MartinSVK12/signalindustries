@@ -4,6 +4,7 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.energy.api.IEnergyItem;
 import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -48,15 +49,13 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
             }
         }
 
-        if(getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof ItemEnergyContainer){
+        if(getStackInSlot(1) != null && getStackInSlot(1).getItem() instanceof IEnergyItem){
             ItemStack stack = getStackInSlot(1);
-            ItemEnergyContainer item = (ItemEnergyContainer) getStackInSlot(1).getItem();
             provide(stack,getMaxProvide(),false);
             onInventoryChanged();
         }
-        if(getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof ItemEnergyContainer) {
+        if(getStackInSlot(0) != null && getStackInSlot(0).getItem() instanceof IEnergyItem) {
             ItemStack stack = getStackInSlot(0);
-            ItemEnergyContainer item = (ItemEnergyContainer) getStackInSlot(0).getItem();
             receive(stack,getMaxReceive(),false);
             onInventoryChanged();
         }

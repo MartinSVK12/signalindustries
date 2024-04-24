@@ -1156,6 +1156,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item nightVisionLens = ItemHelper.createItem(MOD_ID,new ItemNVGAttachment("reinforced.attachment.nightVisionLens",config.getInt("ItemIDs.nightVisionLens"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED),"night_vision_goggles.png");
     public static final Item movementBoosters = ItemHelper.createItem(MOD_ID,new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters",config.getInt("ItemIDs.movementBoosters"), listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED),"movement_boosters.png");
 
+    public static final ItemPortableWorkbench portableWorkbench = (ItemPortableWorkbench) ItemHelper.createItem(MOD_ID,new ItemPortableWorkbench("basic.portableWorkbench",config.getInt("ItemIDs.portableWorkbench"),Tier.BASIC),"portable_workbench.png");
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
@@ -1169,10 +1170,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Item projectileAbilityContainer = ItemHelper.createItem(MOD_ID,new ItemWithAbility("projectileAbilityContainer",config.getInt("ItemIDs.projectileAbilityContainer"),projectileAbility),"ability1.png").setMaxStackSize(1);
 
     public static final Item abilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("abilityModule",config.getInt("ItemIDs.abilityModule"),Tier.REINFORCED),"abilitymodule.png");
-    /*public static final Item normalAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.normalAbilityModule"),Mode.NORMAL),"normalAbilityModule","normalmodule.png");
-    public static final Item attackAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.attackAbilityModule"),Mode.ATTACK),"attackAbilityModule","attackmodule.png");
-    public static final Item defenseAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.defenseAbilityModule"),Mode.DEFENSE),"defenseAbilityModule","defensemodule.png");
-    public static final Item pursuitAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("",config.getInt("ItemIDs.pursuitAbilityModule"),Mode.PURSUIT),"pursuitAbilityModule","pursuitmodule.png");*/
     public static final Item awakenedAbilityModule = ItemHelper.createItem(MOD_ID,new ItemAbilityModule("awakenedAbilityModule",config.getInt("ItemIDs.awakenedAbilityModule"),Tier.AWAKENED),"awakenedmodule.png");
 
     //public static final Item crystalChip = ItemHelper.createItem(MOD_ID,new Item(config.getInt("ItemIDs.crystalChip")),"crystalChip","crystal_chip.png");
