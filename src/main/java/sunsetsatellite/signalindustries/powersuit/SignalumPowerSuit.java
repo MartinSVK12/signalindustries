@@ -99,7 +99,7 @@ public class SignalumPowerSuit {
         GuiPowerSuit guiCore = new GuiPowerSuit(container,player.inventory);
         guiCore.powerSuit = this;
         guiCore.name = "Signalum Power Suit | Core";
-        SignalIndustries.displayGui(player,guiCore,container,chestplate,armor[2]);
+        SignalIndustries.displayGui(player,() -> guiCore,container,chestplate,armor[2]);
     }
 
     public void activateAttachment(KeyBinding attachmentKeybind) {

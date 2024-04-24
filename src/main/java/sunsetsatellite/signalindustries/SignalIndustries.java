@@ -1,7 +1,9 @@
 package sunsetsatellite.signalindustries;
 
+import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
@@ -15,6 +17,7 @@ import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
@@ -27,6 +30,7 @@ import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.lang.I18n;
+import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.sound.BlockSounds;
@@ -39,10 +43,12 @@ import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.WorldTypes;
 import net.minecraft.core.world.weather.Weather;
 import net.minecraft.server.entity.player.EntityPlayerMP;
+import org.lwjgl.opengl.GL11;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.NBTEditCommand;
+import sunsetsatellite.catalyst.fluids.mp.packets.PacketSetFluidSlot;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
@@ -78,6 +84,7 @@ import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.util.*;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
@@ -86,6 +93,7 @@ import sunsetsatellite.signalindustries.weather.WeatherMeteorShower;
 import sunsetsatellite.signalindustries.weather.WeatherSolarApocalypse;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.helper.*;
+import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.toml.Toml;
@@ -95,11 +103,13 @@ import useless.dragonfly.model.block.BlockModelDragonFly;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
+public class SignalIndustries implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
 
     private static final int blockIdStart = 1200;
     private static final int itemIdStart = 17100;
@@ -1214,7 +1224,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome("signalindustries:eternity").setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
-    public static final Dimension dimEternity = new Dimension(key("eternity"),Dimension.overworld,1,portalEternity.id).setDefaultWorldType(eternityWorld);
+    public static Dimension dimEternity;
 
     public static final Multiblock dimAnchorMultiblock = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"dimensionalAnchor","dimensionalAnchor",false);
     public static final Multiblock wrathTree = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"wrathTree","reinforcedWrathBeacon",false);
@@ -1319,7 +1329,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready",new BlockTexture(MOD_ID).setSides("reinforced_ignitor_ready_inverted.png").setTopTexture("reinforced_ignitor_bottom_ready.png").setBottomTexture("reinforced_ignitor_top_ready.png"));
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_6_overlay.png").setTopTexture("ignitor_4_overlay.png").setBottomTexture("ignitor_8_overlay.png"));
 
-        Dimension.registerDimension(config.getInt("Other.eternityDimId"),dimEternity);
+        NetworkHelper.register(PacketOpenMachineGUI.class, true, true);
+        // TODO For the love of god martin you need to register your packets 💀
+        NetworkHelper.register(PacketSetFluidSlot.class, true, true);
     }
 
     public SignalIndustries(){
@@ -1367,14 +1379,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         CommandHelper.Core.createCommand(new RecipeReloadCommand("recipes"));
         CommandHelper.Core.createCommand(new StructureCommand("structure","struct"));
 
-        EntityHelper.Core.createEntity(EntityCrystal.class,47,"signalumCrystal");
-        EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(volatileSignalumCrystal.getIconFromDamage(0)));
-        EntityHelper.Core.createEntity(EntityEnergyOrb.class,49,"energyOrb");
-        EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
-        EntityHelper.Core.createEntity(EntitySunbeam.class,49,"sunBeam");
-        EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
-        EntityHelper.Core.createEntity(EntityFallingMeteor.class,50,"fallingMeteor");
-        EntityHelper.Client.assignEntityRenderer(EntityFallingMeteor.class,new FallingMeteorRenderer());
+        EntityHelper.Core.createEntity(EntityCrystal.class,347,"signalumCrystal");
+        EntityHelper.Core.createEntity(EntityEnergyOrb.class,349,"energyOrb");
+        EntityHelper.Core.createEntity(EntitySunbeam.class,349,"sunBeam");
+        EntityHelper.Core.createEntity(EntityFallingMeteor.class,350,"fallingMeteor");
+
+
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT){
+            EntityHelper.Client.assignEntityRenderer(EntityCrystal.class,new SnowballRenderer(volatileSignalumCrystal.getIconFromDamage(0)));
+            EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
+            EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
+            EntityHelper.Client.assignEntityRenderer(EntityFallingMeteor.class,new FallingMeteorRenderer());
+        }
 
         addEntities();
         //crafting recipes in RecipeHandlerCraftingSI
@@ -1384,23 +1400,31 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     //idea got *too smart* recently and now considers anything after accessor stubs "unreachable" due to the throw statement in them that will never be triggered
     @SuppressWarnings("UnreachableCode")
     private void addEntities(){
-        EntityHelper.Core.createSpecialTileEntity(TileEntityConduit.class, new RenderFluidInConduit(),"Conduit");
+        boolean isClientSide = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
+        EntityHelper.Core.createTileEntity(TileEntityConduit.class,"Conduit");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityConduit.class, new RenderFluidInConduit());
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityFluidConduit.class, new RenderFluidInConduit(),"Fluid Conduit");
-        EntityHelper.Core.createSpecialTileEntity(TileEntityItemConduit.class, new RenderItemsInConduit(),"Item Conduit");
+        EntityHelper.Core.createTileEntity(TileEntityFluidConduit.class,"Fluid Conduit");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityFluidConduit.class, new RenderFluidInConduit());
+
+        EntityHelper.Core.createTileEntity(TileEntityItemConduit.class,"Item Conduit");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityItemConduit.class, new RenderItemsInConduit());
 
         EntityHelper.Core.createTileEntity(TileEntityInserter.class, "Inserter");
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyCell.class,new RenderFluidInBlock(),"Energy Cell");
+        EntityHelper.Core.createTileEntity(TileEntityEnergyCell.class,"Energy Cell");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityEnergyCell.class,new RenderFluidInBlock());
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntitySIFluidTank.class,new RenderFluidInBlock(),"SI Fluid Tank");
+        EntityHelper.Core.createTileEntity(TileEntitySIFluidTank.class,"SI Fluid Tank");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntitySIFluidTank.class,new RenderFluidInBlock());
         addToNameGuiMap("SI Fluid Tank", GuiSIFluidTank.class, TileEntitySIFluidTank.class);
 
         EntityHelper.Core.createTileEntity(TileEntityExtractor.class,"Extractor");
         addToNameGuiMap("Extractor", GuiExtractor.class, TileEntityExtractor.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityReinforcedExtractor.class, new RenderMultiblock(), "Extraction Manifold");
+        EntityHelper.Core.createTileEntity(TileEntityReinforcedExtractor.class, "Extraction Manifold");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityReinforcedExtractor.class, new RenderMultiblock());
         addToNameGuiMap("Extraction Manifold", GuiReinforcedExtractor.class, TileEntityReinforcedExtractor.class);
 
         EntityHelper.Core.createTileEntity(TileEntityCrusher.class,"Crusher");
@@ -1430,15 +1454,19 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createTileEntity(TileEntityPump.class,"Pump");
         addToNameGuiMap("Pump", GuiPump.class, TileEntityCrystalChamber.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityAssembler.class, new RenderAssemblerItemSprite3D(),"SI Assembler");
+        EntityHelper.Core.createTileEntity(TileEntityAssembler.class,"SI Assembler");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityAssembler.class, new RenderAssemblerItemSprite3D());
         addToNameGuiMap("SI Assembler", GuiAssembler.class, TileEntityAssembler.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityStorageContainer.class, new RenderStorageContainer(),"Storage Container");
+        EntityHelper.Core.createTileEntity(TileEntityStorageContainer.class,"Storage Container");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityStorageContainer.class, new RenderStorageContainer());
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityDimensionalAnchor.class,new RenderMultiblock(),"Dimensional Anchor");
+        EntityHelper.Core.createTileEntity(TileEntityDimensionalAnchor.class,"Dimensional Anchor");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityDimensionalAnchor.class,new RenderMultiblock());
         addToNameGuiMap("Dimensional Anchor", GuiDimAnchor.class, TileEntityDimensionalAnchor.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityAutoMiner.class, new RenderAutoMiner(),"Automatic Miner");
+        EntityHelper.Core.createTileEntity(TileEntityAutoMiner.class,"Automatic Miner");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityAutoMiner.class, new RenderAutoMiner());
         addToNameGuiMap("Automatic Miner", GuiAutoMiner.class, TileEntityAutoMiner.class);
 
         EntityHelper.Core.createTileEntity(TileEntityExternalIO.class,"External I/O");
@@ -1447,7 +1475,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.Core.createTileEntity(TileEntityCentrifuge.class,"Separation Centrifuge");
         addToNameGuiMap("Separation Centrifuge", GuiCentrifuge.class, TileEntityCentrifuge.class);
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntitySignalumReactor.class,new RenderSignalumReactor(),"Signalum Reactor");
+        EntityHelper.Core.createTileEntity(TileEntitySignalumReactor.class,"Signalum Reactor");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntitySignalumReactor.class,new RenderSignalumReactor());
         addToNameGuiMap("Signalum Reactor", GuiSignalumReactor.class, TileEntitySignalumReactor.class);
 
         EntityHelper.Core.createTileEntity(TileEntityEnergyConnector.class,"Energy Connector");
@@ -1461,7 +1490,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityIgnitor.class,"Signalum Ignitor");
 
-        EntityHelper.Core.createSpecialTileEntity(TileEntityEnergyInjector.class,new RenderEnergyInjector(),"Energy Injector");
+        EntityHelper.Core.createTileEntity(TileEntityEnergyInjector.class,"Energy Injector");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityEnergyInjector.class,new RenderEnergyInjector());
         addToNameGuiMap("Energy Injector",GuiEnergyInjector.class,TileEntityEnergyInjector.class);
 
         EntityHelper.Core.createTileEntity(TileEntitySignalumDynamo.class,"Signalum Dynamo");
@@ -1481,7 +1511,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
         EntityHelper.Core.createTileEntity(TileEntityRecipeMaker.class,"Recipe Maker");
         EntityHelper.Core.createTileEntity(TileEntityWrathBeacon.class,"Wrath Beacon");
-        EntityHelper.Core.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class,new RenderReinforcedWrathBeacon(),"Reinforced Wrath Beacon");
+        EntityHelper.Core.createTileEntity(TileEntityReinforcedWrathBeacon.class,"Reinforced Wrath Beacon");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityReinforcedWrathBeacon.class,new RenderReinforcedWrathBeacon());
         EntityHelper.Core.createTileEntity(TileEntityBlockBreaker.class,"Block Breaker");
 
         Multiblock.multiblocks.put("dimensionalAnchor",dimAnchorMultiblock);
@@ -1492,7 +1523,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 
         EntityHelper.Core.createEntity(EntityInfernal.class,config.getInt("EntityIDs.infernalId"),"Infernal");
-        EntityHelper.Client.assignEntityRenderer(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(),0.5F));
+        if (isClientSide) EntityHelper.Client.assignEntityRenderer(EntityInfernal.class,new MobRenderer<EntityInfernal>(new ModelZombie(),0.5F));
     }
 
     public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){
@@ -1519,27 +1550,27 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         return ItemHelper.createItem(MOD_ID,new Item(lang,config.getInt("ItemIDs."+name)),texture);
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, int x, int y, int z) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, Container container, IInventory tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,container,tile,x,y,z);
+            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,container,tile,x,y,z);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, TileEntityWithName tile, int x, int y, int z) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, TileEntityWithName tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(guiScreen,tile,x,y,z);
+            ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,tile,x,y,z);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 
-    public static void displayGui(EntityPlayer entityplayer, GuiScreen guiScreen, Container container, IInventory tile, ItemStack stack) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, Container container, IInventory tile, ItemStack stack) {
         if(entityplayer instanceof EntityPlayerMP) {
-            ((IEntityPlayerMP)entityplayer).displayItemGuiScreen_si(guiScreen,container,tile,stack);
+            ((IEntityPlayerMP)entityplayer).displayItemGuiScreen_si(screenSupplier,container,tile,stack);
         } else {
-            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(guiScreen);
+            Minecraft.getMinecraft(Minecraft.class).displayGuiScreen(screenSupplier.get());
         }
     }
 
@@ -1722,6 +1753,16 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     @Override
     public void afterGameStart() {
+
+    }
+
+    @Override
+    public void beforeClientStart() {
+
+    }
+
+    @Override
+    public void afterClientStart() {
         BlockDataExporter.export(this.getClass());
         AchievementHelper.addPage(ACHIEVEMENTS);
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");

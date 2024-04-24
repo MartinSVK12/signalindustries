@@ -125,7 +125,7 @@ public class GuiPump extends GuiFluid {
             return;
         }
         if (guibutton.id == 0) {
-            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, tile, tile.x, tile.y, tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, tile, tile.x, tile.y, tile.z);
                 /*case 1:
                 SignalIndustries.displayGui(entityplayer, new GuiItemIOConfig(entityplayer,inventorySlots, tile, this), inventorySlots, tile,tile.x,tile.y,tile.z);
                 break;*/

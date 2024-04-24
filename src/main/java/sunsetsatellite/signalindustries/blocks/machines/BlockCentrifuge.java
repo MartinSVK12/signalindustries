@@ -86,7 +86,7 @@ public class BlockCentrifuge extends BlockContainerTiered {
         {
             TileEntityCentrifuge tile = (TileEntityCentrifuge) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCentrifuge(entityplayer.inventory, tile),new ContainerCentrifuge(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiCentrifuge(entityplayer.inventory, tile),new ContainerCentrifuge(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

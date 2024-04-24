@@ -19,8 +19,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
+import sunsetsatellite.signalindustries.gui.GuiBackpack;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
+import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
@@ -150,14 +152,18 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
                 throw new RuntimeException(e);
             }
         } else {
-            if(p.stack != null && Objects.equals(p.windowTitle, "The Pulsar")){
-                InventoryPulsar inv = new InventoryPulsar(p.stack);
-                this.mc.displayGuiScreen(new GuiPulsar(this.mc.thePlayer.inventory,p.stack));
+            if(p.stack != null){
+                if (p.windowTitle.equals("The Pulsar")){
+                    InventoryPulsar inv = new InventoryPulsar(p.stack);
+                    this.mc.displayGuiScreen(new GuiPulsar(this.mc.thePlayer.inventory,p.stack));
                 /*try {
                     this.mc.displayGuiScreen((GuiScreen) SignalIndustries.nameToGuiMap.get(p.windowTitle).get(0).getDeclaredConstructors()[0].newInstance(this.mc.thePlayer.inventory,inv));
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                     throw new RuntimeException(e);
                 }*/
+                } else if (p.windowTitle.equals("Backpack")) {
+                    this.mc.displayGuiScreen(new GuiBackpack(mc.thePlayer.inventory, p.stack));
+                }
             } else {
                 try {
                     tile = (TileEntity) SignalIndustries.nameToGuiMap.get(p.windowTitle).get(1).getDeclaredConstructor().newInstance();
@@ -171,7 +177,6 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
                     throw new RuntimeException(e);
                 }
             }
-
         }
         this.mc.thePlayer.craftingInventory.windowId = p.windowId;
     }

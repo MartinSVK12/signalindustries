@@ -119,7 +119,7 @@ public class BlockPump extends BlockContainerTiered {
         {
             TileEntityPump tile = (TileEntityPump) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiPump(entityplayer.inventory, tile),new ContainerPump(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiPump(entityplayer.inventory, tile),new ContainerPump(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

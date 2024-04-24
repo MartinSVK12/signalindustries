@@ -31,7 +31,7 @@ public class ItemAbilityModule extends ItemAttachment implements ITiered {
         InventoryAbilityModule inv = new InventoryAbilityModule(entityplayer.inventory.getCurrentItem());
         ContainerItemFluid container = new ContainerAbilityModule(entityplayer.inventory,inv);
         GuiAbilityModule gui = new GuiAbilityModule(container,entityplayer.inventory);
-        SignalIndustries.displayGui(entityplayer,gui,container,inv,entityplayer.inventory.getCurrentItem());
+        SignalIndustries.displayGui(entityplayer,() -> gui,container,inv,entityplayer.inventory.getCurrentItem());
         return true;
     }
 

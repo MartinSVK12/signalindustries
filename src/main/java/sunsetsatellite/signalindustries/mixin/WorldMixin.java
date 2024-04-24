@@ -58,6 +58,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
 
     @Shadow @Final public WorldType worldType;
 
+    @Shadow public int difficultySetting;
     @Unique
     private final World thisAs = (World)((Object)this);
 
@@ -90,7 +91,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks;
         if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
-            if(rand.nextInt(16) == 15 && !(Minecraft.getMinecraft(Minecraft.class).gameSettings.difficulty.value == Difficulty.PEACEFUL) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
+            if(rand.nextInt(16) == 15 && !(difficultySetting == 0) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
                     player.triggerAchievement(SignalIndustriesAchievementPage.BLOOD_MOON);
@@ -101,10 +102,12 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherBloodMoon){
             weatherManager.overrideWeather(Weather.overworldClear);
         }
-        if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
-            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
-        } else {
-            ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
+        if (!Global.isServer){
+            if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
+            } else {
+                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
+            }
         }
     }
 

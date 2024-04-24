@@ -88,7 +88,7 @@ public class BlockCrusher extends BlockContainerTiered {
         {
             TileEntityCrusher tile = (TileEntityCrusher) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCrusher(entityplayer.inventory, tile),new ContainerCrusher(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiCrusher(entityplayer.inventory, tile),new ContainerCrusher(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

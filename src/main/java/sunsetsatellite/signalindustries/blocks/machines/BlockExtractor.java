@@ -108,7 +108,7 @@ public class BlockExtractor extends BlockContainerTiered {
                 TileEntityReinforcedExtractor tile = (TileEntityReinforcedExtractor) world.getBlockTileEntity(i, j, k);
                 if (tile != null) {
                     if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
-                        SignalIndustries.displayGui(entityplayer,new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
+                        SignalIndustries.displayGui(entityplayer,() -> new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
                         entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
                     } else {
                         entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
@@ -118,7 +118,7 @@ public class BlockExtractor extends BlockContainerTiered {
             } else {
                 TileEntityExtractor tile = (TileEntityExtractor) world.getBlockTileEntity(i, j, k);
                 if (tile != null) {
-                    SignalIndustries.displayGui(entityplayer, new GuiExtractor(entityplayer.inventory, tile), new ContainerExtractor(entityplayer.inventory, tile), tile, i, j, k);
+                    SignalIndustries.displayGui(entityplayer, () -> new GuiExtractor(entityplayer.inventory, tile), new ContainerExtractor(entityplayer.inventory, tile), tile, i, j, k);
                 }
                 return true;
             }
