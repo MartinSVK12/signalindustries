@@ -87,7 +87,7 @@ public class BlockDilithiumStabilizer extends BlockContainerTiered {
         {
             TileEntityStabilizer tile = (TileEntityStabilizer) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiStabilizer(entityplayer.inventory, tile),new ContainerStabilizer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiStabilizer(entityplayer.inventory, tile),new ContainerStabilizer(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

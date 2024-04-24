@@ -47,7 +47,7 @@ public class GuiSIFluidTank extends GuiFluid {
             return;
         }
         if (guibutton.id == 0) {
-            SignalIndustries.displayGui(entityplayer, new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
         }
     }
 

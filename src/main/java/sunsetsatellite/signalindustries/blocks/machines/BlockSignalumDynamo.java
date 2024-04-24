@@ -43,7 +43,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
         {
             TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiSignalumDynamo(entityplayer.inventory, tile),new ContainerSignalumDynamo(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiSignalumDynamo(entityplayer.inventory, tile),new ContainerSignalumDynamo(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

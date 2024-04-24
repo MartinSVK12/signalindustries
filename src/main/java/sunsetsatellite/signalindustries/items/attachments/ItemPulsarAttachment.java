@@ -72,7 +72,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
     @Override
     public void openSettings(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
         if(!stack.getData().getBoolean("charging")){
-            SignalIndustries.displayGui(player,new GuiPulsarAttachment(player.inventory,stack),new ContainerPulsarAttachment(player.inventory,stack),new InventoryPulsar(stack),stack);
+            SignalIndustries.displayGui(player,() -> new GuiPulsarAttachment(player.inventory,stack),new ContainerPulsarAttachment(player.inventory,stack),new InventoryPulsar(stack),stack);
         }
     }
 

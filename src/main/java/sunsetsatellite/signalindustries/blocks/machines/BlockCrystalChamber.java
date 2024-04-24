@@ -87,7 +87,7 @@ public class BlockCrystalChamber extends BlockContainerTiered {
         {
             TileEntityCrystalChamber tile = (TileEntityCrystalChamber) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiCrystalChamber(entityplayer.inventory, tile),new ContainerCrystalChamber(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiCrystalChamber(entityplayer.inventory, tile),new ContainerCrystalChamber(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

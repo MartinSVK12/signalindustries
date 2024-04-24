@@ -77,7 +77,7 @@ public class BlockEnergyConnector extends BlockContainerTiered {
         {
             TileEntityEnergyConnector tile = (TileEntityEnergyConnector) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiEnergyConnector(entityplayer.inventory, tile),new ContainerEnergyConnector(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiEnergyConnector(entityplayer.inventory, tile),new ContainerEnergyConnector(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

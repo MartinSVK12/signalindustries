@@ -115,28 +115,28 @@ public class GuiPowerSuit extends GuiItemFluid {
                 gui = new GuiPowerSuit(container,mc.thePlayer.inventory);
                 gui.powerSuit = powerSuit;
                 gui.name = "Signalum Power Suit | Helmet";
-                SignalIndustries.displayGui(mc.thePlayer,gui,container,powerSuit.helmet,powerSuit.armor[3]);
+                SignalIndustries.displayGui(mc.thePlayer,() -> gui,container,powerSuit.helmet,powerSuit.armor[3]);
                 break;
             case 1:
                 container = new ContainerPowerSuit(mc.thePlayer.inventory,powerSuit.chestplate);
                 gui = new GuiPowerSuit(container,mc.thePlayer.inventory);
                 gui.powerSuit = powerSuit;
                 gui.name = "Signalum Power Suit | Core";
-                SignalIndustries.displayGui(mc.thePlayer,gui,container,powerSuit.chestplate,powerSuit.armor[2]);
+                SignalIndustries.displayGui(mc.thePlayer,() -> gui,container,powerSuit.chestplate,powerSuit.armor[2]);
                 break;
             case 2:
                 container = new ContainerPowerSuit(mc.thePlayer.inventory,powerSuit.leggings);
                 gui = new GuiPowerSuit(container,mc.thePlayer.inventory);
                 gui.powerSuit = powerSuit;
                 gui.name = "Signalum Power Suit | Leggings";
-                SignalIndustries.displayGui(mc.thePlayer,gui,container,powerSuit.leggings,powerSuit.armor[1]);
+                SignalIndustries.displayGui(mc.thePlayer,() -> gui,container,powerSuit.leggings,powerSuit.armor[1]);
                 break;
             case 3:
                 container = new ContainerPowerSuit(mc.thePlayer.inventory,powerSuit.boots);
                 gui = new GuiPowerSuit(container,mc.thePlayer.inventory);
                 gui.powerSuit = powerSuit;
                 gui.name = "Signalum Power Suit | Boots";
-                SignalIndustries.displayGui(mc.thePlayer,gui,container,powerSuit.boots,powerSuit.armor[0]);
+                SignalIndustries.displayGui(mc.thePlayer,() -> gui,container,powerSuit.boots,powerSuit.armor[0]);
                 break;
             default:
                 break;

@@ -85,7 +85,7 @@ public class BlockFluidInputHatch extends BlockContainerTiered {
         {
             TileEntityFluidHatch tile = (TileEntityFluidHatch) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiFluidHatch(entityplayer.inventory, tile),new ContainerFluidHatch(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiFluidHatch(entityplayer.inventory, tile),new ContainerFluidHatch(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }

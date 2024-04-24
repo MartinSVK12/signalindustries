@@ -87,7 +87,7 @@ public class BlockPlateFormer extends BlockContainerTiered {
         {
             TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
             if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,new GuiPlateFormer(entityplayer.inventory, tile),new ContainerPlateFormer(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer,() -> new GuiPlateFormer(entityplayer.inventory, tile),new ContainerPlateFormer(entityplayer.inventory,tile),tile,i,j,k);
             }
             return true;
         }
