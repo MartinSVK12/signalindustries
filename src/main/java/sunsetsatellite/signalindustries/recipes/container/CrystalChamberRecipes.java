@@ -31,5 +31,16 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                         new RecipeProperties(800,80, Tier.BASIC,false)
                 )
         );
+        group.register(
+                "awakened_combine",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.awakenedSignalumFragment,4,0)),
+                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.awakenedSignalumFragment,4,0))
+                        },
+                        new ItemStack(SignalIndustries.awakenedSignalumCrystal,1,0),
+                        new RecipeProperties(3000,320, Tier.REINFORCED,false)
+                )
+        );
     }
 }

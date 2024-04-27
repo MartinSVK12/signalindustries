@@ -32,7 +32,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
     public static RecipeGroupSI<RecipeEntryMachineFluid> PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));
     public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrystalCutter),new ItemStack(SignalIndustries.basicCrystalCutter),new ItemStack(SignalIndustries.reinforcedCrystalCutter))));
-    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber))));
+    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber),new ItemStack(SignalIndustries.reinforcedCrystalChamber))));
     public static RecipeGroupSI<RecipeEntryMachine> INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicInfuser))));
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.reinforcedCentrifuge))));
 
@@ -54,7 +54,7 @@ public class SIRecipes implements RecipeEntrypoint {
         PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
         PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));
         CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrystalCutter),new ItemStack(SignalIndustries.basicCrystalCutter),new ItemStack(SignalIndustries.reinforcedCrystalCutter))));
-        CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber))));
+        CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber),new ItemStack(SignalIndustries.reinforcedCrystalChamber))));
         INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicInfuser))));
         CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.reinforcedCentrifuge))));
     }

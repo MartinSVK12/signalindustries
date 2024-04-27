@@ -682,6 +682,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setNorthTexture("basic_crystal_chamber_side_inactive.png")
             .build(new BlockCrystalChamber("basic.crystalChamber",config.getInt("BlockIDs.basicCrystalChamber"), Tier.BASIC,Material.metal));
 
+    public static final Block reinforcedCrystalChamber = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setNorthTexture("reinforced_crystal_chamber_side_inactive.png")
+            .build(new BlockCrystalChamber("reinforced.crystalChamber",config.getInt("BlockIDs.reinforcedCrystalChamber"), Tier.REINFORCED,Material.metal));
+
     public static final Block basicInfuser = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
@@ -1271,6 +1279,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
         textures.put(Tier.BASIC.name()+".crystalChamber.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("basic_crystal_chamber_side_active.png"));
         textures.put(Tier.BASIC.name()+".crystalChamber.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("chamber_overlay.png"));
+
+        textures.put(Tier.REINFORCED.name()+".crystalChamber.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setNorthTexture("reinforced_crystal_chamber_side_active.png"));
+        textures.put(Tier.REINFORCED.name()+".crystalChamber.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("reinforced_chamber_overlay.png"));
 
         textures.put(Tier.BASIC.name()+".automaticMiner.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("auto_miner_overlay.png"));
 
