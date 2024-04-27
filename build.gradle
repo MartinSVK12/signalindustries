@@ -144,8 +144,7 @@ dependencies {
 
 	//implementation project(path: ":retrostorage",configuration: "namedElements")
 
-	modImplementation files("libs/dragonfly.jar")
-	//modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
+	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
 	modImplementation "BTWaila:btwaila:${project.btwaila_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 

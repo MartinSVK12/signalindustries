@@ -25,7 +25,7 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
 
     @Override
     public void renderOverlay(GuiIngame guiIngame, EntityPlayer player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, ItemEntityRenderer itemRenderer) {
-        SignalumPowerSuit ps = ((IPlayerPowerSuit)player).signalIndustries$getPowerSuit();
+        SignalumPowerSuit ps = ((IPlayerPowerSuit)player).getPowerSuit();
         if(ps != null && armorPiece == 0){
             ps.renderOverlay(guiIngame, fontRenderer, itemRenderer, player, height, width, mouseX, mouseY);
         }

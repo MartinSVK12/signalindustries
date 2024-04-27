@@ -78,7 +78,7 @@ public class MinecraftMixin {
         KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
         KeyBinding activeAbilityKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateAbility();
         KeyBinding switchModeKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeySwitchMode();
-        SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).signalIndustries$getPowerSuit();
+        SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)thePlayer).getPowerSuit();
         if(debounce <= 0){
             for (KeyBinding attachmentKeybind : attachmentKeybinds) {
                 if (attachmentKeybind.isPressed() && powerSuit != null && powerSuit.active) {

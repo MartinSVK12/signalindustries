@@ -19,14 +19,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
-import useless.dragonfly.helper.ModelHelper;
-import useless.dragonfly.model.entity.BenchEntityModel;
 
 @Debug(
         export = true
@@ -93,7 +90,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
             at = @At("HEAD")
     )
     protected void renderSpecials(EntityPlayer entityplayer, float f, CallbackInfo ci) {
-        SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)entityplayer).signalIndustries$getPowerSuit();
+        SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)entityplayer).getPowerSuit();
         if(powerSuit != null){
             for (ItemStack content : powerSuit.helmet.contents) {
                 if(content != null){

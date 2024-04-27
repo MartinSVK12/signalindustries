@@ -59,7 +59,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     }
 
     @Override
-    public SignalumPowerSuit signalIndustries$getPowerSuit() {
+    public SignalumPowerSuit getPowerSuit() {
         return powerSuit;
     }
 

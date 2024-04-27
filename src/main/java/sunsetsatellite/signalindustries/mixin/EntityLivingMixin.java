@@ -5,7 +5,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
@@ -100,7 +99,7 @@ public abstract class EntityLivingMixin extends Entity {
     private boolean flyWithWings(boolean original){
         if(thisAs instanceof EntityPlayer){
             EntityPlayer player = ((EntityPlayer) thisAs);
-            SignalumPowerSuit ps = ((IPlayerPowerSuit)player).signalIndustries$getPowerSuit();
+            SignalumPowerSuit ps = ((IPlayerPowerSuit)player).getPowerSuit();
             if(ps != null && ps.active && ps.hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
                 return original || ps.getAttachment((ItemAttachment) SignalIndustries.crystalWings).getData().getBoolean("active");
             } else {
@@ -115,7 +114,7 @@ public abstract class EntityLivingMixin extends Entity {
     protected void causeFallDamage(float f, CallbackInfo ci) {
         if(thisAs instanceof EntityPlayer) {
             EntityPlayer player = ((EntityPlayer) thisAs);
-            SignalumPowerSuit ps = ((IPlayerPowerSuit) player).signalIndustries$getPowerSuit();
+            SignalumPowerSuit ps = ((IPlayerPowerSuit) player).getPowerSuit();
             if (ps != null && ps.active && ps.hasAttachment((ItemAttachment) SignalIndustries.crystalWings)) {
                 if(ps.getAttachment((ItemAttachment) SignalIndustries.crystalWings).getData().getBoolean("active")){
                     ci.cancel();
