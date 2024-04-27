@@ -17,6 +17,7 @@
     "EntityPlayerMPMixin",
     "EntityTrackerEntryMixin",
     "EntityTrackerMixin",
+    "GuiInventoryMixin",
     "InventoryPlayerMixin",
     "ItemStackMixin",
     "NBTTagCompoundMixin",

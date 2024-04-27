@@ -1176,6 +1176,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Item movementBoosters = ItemHelper.createItem(MOD_ID,new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters",config.getInt("ItemIDs.movementBoosters"), listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED),"movement_boosters.png");
 
     public static final ItemPortableWorkbench portableWorkbench = (ItemPortableWorkbench) ItemHelper.createItem(MOD_ID,new ItemPortableWorkbench("basic.portableWorkbench",config.getInt("ItemIDs.portableWorkbench"),Tier.BASIC),"portable_workbench.png");
+    public static final ItemSmartWatch smartWatch = (ItemSmartWatch) ItemHelper.createItem(MOD_ID,new ItemSmartWatch("basic.smartWatch",config.getInt("ItemIDs.smartWatch"),Tier.BASIC),"smartwatch.png");
+
 
     public static final SuitBaseAbility testAbility = new TestingAbility();
     public static final SuitBaseEffectAbility testEffectAbility = new TestingEffectAbility();
