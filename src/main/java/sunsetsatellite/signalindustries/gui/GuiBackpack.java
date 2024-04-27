@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
 import sunsetsatellite.signalindustries.containers.ContainerBackpack;
 import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 
 public class GuiBackpack extends GuiItemFluid {
 

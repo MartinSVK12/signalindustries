@@ -51,14 +51,14 @@
     "signalindustries.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.15.6-babric.4-bta",
-    "minecraft": "7.1",
-    "catalyst-core": ">=1.1.8",
-    "catalyst-fluids": ">=1.0.6",
-    "catalyst-multiblocks": ">=1.0.6",
-    "catalyst-energy": ">=1.0.7",
-    "halplibe": ">=3.5.3",
-    "dragonfly": ">=1.4.8-7.1",
+    "fabricloader": ">=0.15.6-babric.5-bta",
+    "minecraft": "~7.1",
+    "catalyst-core": ">=1.1.9",
+    "catalyst-fluids": ">=1.0.7",
+    "catalyst-multiblocks": ">=1.0.7",
+    "catalyst-energy": ">=1.0.9",
+    "halplibe": ">=3.5.4",
+    "dragonfly": ">=1.4.4-7.1",
     "terrain-api": ">=1.4.4-7.1"
   }
 }

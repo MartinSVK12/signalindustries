@@ -6,7 +6,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.SlotApplication;
 
 public class ContainerAbilityModule extends ContainerItemFluid {

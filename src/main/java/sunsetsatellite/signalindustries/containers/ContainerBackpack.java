@@ -2,20 +2,15 @@ package sunsetsatellite.signalindustries.containers;
 
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
-import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
-import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.SlotBackpack;
-import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerBackpack extends ContainerItemFluid {
     ItemStack backpack;

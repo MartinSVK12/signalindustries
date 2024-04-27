@@ -10,7 +10,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.items.ItemPulsar;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 
 public class ContainerPulsar extends ContainerItemFluid {
 

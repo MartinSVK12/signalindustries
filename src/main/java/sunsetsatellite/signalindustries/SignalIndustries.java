@@ -42,6 +42,7 @@ import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.WorldTypes;
 import net.minecraft.core.world.weather.Weather;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 import org.slf4j.Logger;
@@ -132,7 +133,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         defaultConfig.addEntry("Other.eternityDimId",3);
         defaultConfig.addEntry("Other.GuiId",10);
         defaultConfig.addEntry("Other.machinePacketId",113);
-        defaultConfig.addEntry("EntityIDs.infernalId",50);
+        defaultConfig.addEntry("EntityIDs.infernalId",100);
 
         int blockId = blockIdStart;
         int itemId = itemIdStart;
@@ -1327,8 +1328,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         textures.put(Tier.REINFORCED.name()+".ignitor.inverted.ready.overlay",new BlockTexture(MOD_ID).setSides("ignitor_6_overlay.png").setTopTexture("ignitor_4_overlay.png").setBottomTexture("ignitor_8_overlay.png"));
 
         NetworkHelper.register(PacketOpenMachineGUI.class, true, true);
-        // TODO For the love of god martin you need to register your packets 💀
-        NetworkHelper.register(PacketSetFluidSlot.class, true, true);
     }
 
     public SignalIndustries(){

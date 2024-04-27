@@ -9,7 +9,7 @@ import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
 import sunsetsatellite.signalindustries.items.ItemAbilityModule;
 import sunsetsatellite.signalindustries.util.DrawUtil;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class GuiAbilityModule extends GuiItemFluid {

@@ -4,6 +4,8 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
@@ -151,6 +153,11 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
                 unpressurizePipes((TileEntityFluidPipe) tile,already);
             }
         }
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        return new Packet140TileEntityData(this);
     }
 
     @Override

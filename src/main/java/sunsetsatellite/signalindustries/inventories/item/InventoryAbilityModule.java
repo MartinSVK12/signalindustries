@@ -4,7 +4,7 @@ package sunsetsatellite.signalindustries.inventories.item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 
 public class InventoryAbilityModule extends ItemInventoryFluid {
     public InventoryAbilityModule(ItemStack item) {

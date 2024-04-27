@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.inventories;
 
 
 import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -31,4 +33,8 @@ public class TileEntityConduit extends TileEntityFluidPipe {
         super.tick();
     }
 
+    @Override
+    public Packet getDescriptionPacket() {
+        return new Packet140TileEntityData(this);
+    }
 }

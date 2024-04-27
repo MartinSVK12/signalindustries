@@ -7,6 +7,8 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet140TileEntityData;
 import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.signalindustries.blocks.BlockItemConduit;
@@ -398,9 +400,12 @@ public class TileEntityItemConduit extends TileEntityWithName {
         sensorAmount = nbttagcompound.getInteger("CheckAmount");
         sensorUseMeta = nbttagcompound.getBoolean("UseMeta");
         sensorUseData = nbttagcompound.getBoolean("UseData");
-        sensorStack = ItemStack.readItemStackFromNbt(nbttagcompound.getCompound("SensorStack"));
+        if(nbttagcompound.containsKey("SensorStack")){
+            sensorStack = ItemStack.readItemStackFromNbt(nbttagcompound.getCompound("SensorStack"));
+        }
         CompoundTag items = nbttagcompound.getCompound("Items");
         CompoundTag restrict = nbttagcompound.getCompound("Restrictions");
+        contents.clear();
         for (Tag<?> value : items.getValues()) {
             if(value instanceof CompoundTag){
                 CompoundTag itemNbt = (CompoundTag) value;
@@ -415,6 +420,11 @@ public class TileEntityItemConduit extends TileEntityWithName {
         }
 
 
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        return new Packet140TileEntityData(this);
     }
 
     @Override
@@ -441,9 +451,11 @@ public class TileEntityItemConduit extends TileEntityWithName {
         nbttagcompound.putInt("SensorMode",sensorMode);
         nbttagcompound.putBoolean("UseMeta",sensorUseMeta);
         nbttagcompound.putBoolean("UseDeta",sensorUseData);
-        CompoundTag itemNbt = new CompoundTag();
-        sensorStack.writeToNBT(itemNbt);
-        nbttagcompound.putCompound("SensorStack",itemNbt);
+        if(sensorStack != null){
+            CompoundTag itemNbt = new CompoundTag();
+            sensorStack.writeToNBT(itemNbt);
+            nbttagcompound.putCompound("SensorStack",itemNbt);
+        }
     }
 
 

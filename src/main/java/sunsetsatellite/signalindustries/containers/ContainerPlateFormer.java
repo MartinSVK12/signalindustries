@@ -45,51 +45,7 @@ public class ContainerPlateFormer extends ContainerFluid {
         }
     }
 
-    public void updateInventory() {
-        super.updateInventory();
-
-        for (ICrafting crafter : this.crafters) {
-            if (this.progressTicks != machine.progressTicks) {
-                crafter.updateCraftingInventoryInfo(this, 0, machine.progressTicks);
-            }
-
-            if (this.fuelBurnTicks != machine.fuelBurnTicks) {
-                crafter.updateCraftingInventoryInfo(this, 1, machine.fuelBurnTicks);
-            }
-
-            if (this.progressMaxTicks != machine.progressMaxTicks) {
-                crafter.updateCraftingInventoryInfo(this, 2, machine.progressMaxTicks);
-            }
-
-            if (this.fuelMaxBurnTicks != machine.fuelMaxBurnTicks) {
-                crafter.updateCraftingInventoryInfo(this, 3, machine.fuelMaxBurnTicks);
-            }
-        }
-
-        this.progressTicks = machine.progressTicks;
-        this.fuelBurnTicks = machine.fuelBurnTicks;
-        this.progressMaxTicks = machine.progressMaxTicks;
-        this.fuelMaxBurnTicks = machine.fuelMaxBurnTicks;
-    }
-
-    public void updateClientProgressBar(int id, int value) {
-        if (id == 0) {
-            machine.progressTicks = value;
-        }
-
-        if (id == 1) {
-            machine.fuelBurnTicks = value;
-        }
-
-        if (id == 2) {
-            machine.progressMaxTicks = value;
-        }
-
-        if (id == 3) {
-            machine.fuelMaxBurnTicks = value;
-        }
-
-    }
+    
 
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityPlayer1) {

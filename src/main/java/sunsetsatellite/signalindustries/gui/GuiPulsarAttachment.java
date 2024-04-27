@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
 import sunsetsatellite.signalindustries.containers.ContainerPulsarAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
-import sunsetsatellite.signalindustries.util.NBTHelper;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 
 public class GuiPulsarAttachment extends GuiItemFluid {
 
