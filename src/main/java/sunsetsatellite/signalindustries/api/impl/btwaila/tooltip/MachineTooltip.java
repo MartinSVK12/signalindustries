@@ -24,6 +24,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityPump.class);
         addClass(TileEntityAutoMiner.class);
         addClass(TileEntityAssembler.class);
+        addClass(TileEntityInductionSmelter.class);
     }
 
     @Override

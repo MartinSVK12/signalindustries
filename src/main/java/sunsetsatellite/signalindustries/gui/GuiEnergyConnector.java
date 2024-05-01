@@ -12,6 +12,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 public class GuiEnergyConnector extends GuiFluid {
 
@@ -33,6 +34,8 @@ public class GuiEnergyConnector extends GuiFluid {
         switch (((BlockContainerTiered)tile.getBlockType()).tier){
             case PROTOTYPE:
             case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_energy_connector.png");
+                break;
             case REINFORCED:
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/reinforced_energy_connector.png");
                 break;
@@ -45,10 +48,13 @@ public class GuiEnergyConnector extends GuiFluid {
         int i4 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i3, i4, 0, 0, this.xSize, this.ySize);
         int i5;
-        /*if(this.tile.isBurning()) {
-            i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 33, i4 + 14 + 12 - i5, 176, 45 - i5, 14, i5 + 2);
-        }*/
+        if(this.tile.connectedTo instanceof TileEntityTieredMachineBase) {
+            TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) this.tile.connectedTo;
+            if(tile.isBurning()){
+                i5 = tile.getBurnTimeRemainingScaled(12);
+                this.drawTexturedModalRect(i3 + 80, i4 + 17 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            }
+        }
     }
 
     protected void drawGuiContainerForegroundLayer()

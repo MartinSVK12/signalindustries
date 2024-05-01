@@ -23,6 +23,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //TODO: more modes
+//TODO: double chests don't work
+//TODO: do a second try for items that failed to insert
 
 public class TileEntityItemConduit extends TileEntityWithName {
 

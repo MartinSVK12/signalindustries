@@ -2599,7 +2599,32 @@
     ],
     "result": {
       "key":  "tile.signalindustries.reinforced.casing",
-      "amount": 1,
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_casing",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CCC",
+      "C C",
+      "CCC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.basic.casing",
+      "amount": 4,
       "meta": 0
     },
     "consumeContainers": false

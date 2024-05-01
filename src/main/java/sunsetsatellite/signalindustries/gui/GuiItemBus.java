@@ -33,6 +33,8 @@ public class GuiItemBus extends GuiFluid {
         switch (((BlockContainerTiered)tile.getBlockType()).tier){
             case PROTOTYPE:
             case BASIC:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_item_hatch.png");
+                break;
             case REINFORCED:
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/reinforced_item_hatch.png");
                 break;

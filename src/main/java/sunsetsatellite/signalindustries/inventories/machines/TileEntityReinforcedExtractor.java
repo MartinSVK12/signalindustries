@@ -1,7 +1,5 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
-import net.minecraft.client.entity.fx.EntityFlameFX;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +17,7 @@ import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;

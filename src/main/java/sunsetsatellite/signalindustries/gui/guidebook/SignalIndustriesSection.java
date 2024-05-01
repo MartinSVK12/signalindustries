@@ -3,8 +3,6 @@ package sunsetsatellite.signalindustries.gui.guidebook;
 import net.minecraft.client.gui.guidebook.GuidebookPage;
 import net.minecraft.client.gui.guidebook.SearchableGuidebookSection;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
-import net.minecraft.client.render.FontRenderer;
-import net.minecraft.client.render.RenderEngine;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -13,7 +11,7 @@ import sunsetsatellite.signalindustries.gui.guidebook.pages.wiki.IntroPage;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MultiblockSection;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 import sunsetsatellite.signalindustries.util.SearchableGuidebookSubsection;
 
 import java.util.ArrayList;

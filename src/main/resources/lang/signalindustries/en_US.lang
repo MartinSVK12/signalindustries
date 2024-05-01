@@ -138,6 +138,8 @@ tile.signalindustries.reinforced.machine.desc=Key component for Reinforced-tier 
 tile.signalindustries.awakened.machine.name=Awakened Machine Core
 tile.signalindustries.awakened.machine.desc=Key component for Awakened-tier machines.
 
+tile.signalindustries.basic.casing.name=Basic Casing
+tile.signalindustries.basic.casing.desc=Used for Basic-tier and above multiblock machines.
 tile.signalindustries.reinforced.casing.name=Reinforced Casing
 tile.signalindustries.reinforced.casing.desc=Used for Reinforced-tier multiblock machines.
 tile.signalindustries.reinforced.glass.name=Reinforced Glass
@@ -317,8 +319,8 @@ tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
 tile.signalindustries.basic.crusher.name=Basic Crusher
 tile.signalindustries.basic.crusher.desc=Grinds tougher materials into finer dusts.
 tile.signalindustries.reinforced.crusher.name=Reinforced Pulverizer
-tile.signalindustries.reinforced.crusher.desc=Crushes almost anything into nano-particle dusts.
-tile.signalindustries.awakened.crusher.name=Awakened Macerating Atomizer Controller
+tile.signalindustries.reinforced.crusher.desc=Crushes materials you wouldn't even think could be crushed.
+tile.signalindustries.awakened.crusher.name=Awakened Atomic Pulverizer Controller
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
 tile.signalindustries.basic.assembler.name=Basic Assembler
@@ -364,6 +366,17 @@ tile.signalindustries.reinforced.itemInputBus.desc=A dedicated item input for Re
 tile.signalindustries.reinforced.itemOutputBus.name=Reinforced Item Output Bus
 tile.signalindustries.reinforced.itemOutputBus.desc=A dedicated item output for Reinforced-tier multiblocks.
 
+tile.signalindustries.basic.energyConnector.name=Basic Energy Connector
+tile.signalindustries.basic.energyConnector.desc=A dedicated energy hatch for Basic-tier multiblocks.
+tile.signalindustries.basic.fluidInputHatch.name=Basic Fluid Input Hatch
+tile.signalindustries.basic.fluidInputHatch.desc=A dedicated fluid input for Basic-tier multiblocks.
+tile.signalindustries.basic.fluidOutputHatch.name=Basic Fluid Output Hatch
+tile.signalindustries.basic.fluidOutputHatch.desc=A dedicated fluid output for Basic-tier multiblocks.
+tile.signalindustries.basic.itemInputBus.name=Basic Item Input Bus
+tile.signalindustries.basic.itemInputBus.desc=A dedicated item input for Basic-tier multiblocks.
+tile.signalindustries.basic.itemOutputBus.name=Basic Item Output Bus
+tile.signalindustries.basic.itemOutputBus.desc=A dedicated item output for Basic-tier multiblocks.
+
 tile.signalindustries.basic.energyInjector.name=Basic Energy Injector
 tile.signalindustries.basic.energyInjector.desc=Provides an automatic way of filling appropriate items with [Signalum Energy].
 
@@ -392,6 +405,13 @@ tile.signalindustries.reinforced.alloySmelter.desc=Combines even heat resistant 
 tile.signalindustries.awakened.alloySmelter.name=Awakened Composite Forge Chamber Controller
 tile.signalindustries.awakened.alloySmelter.desc=Fuses even the most resistant metals with heat surpassing that of cores of stars.
 
+tile.signalindustries.basic.inductionSmelter.name=Basic Induction Smelter
+tile.signalindustries.basic.inductionSmelter.desc=Smelts up to 8 items that a normal furnace can smelt in parallel.
+tile.signalindustries.reinforced.inductionSmelter.name=Reinforced Induction Smelter
+tile.signalindustries.reinforced.inductionSmelter.desc=Smelts up to 16 items that a normal furnace can smelt in parallel at higher speed and efficiency.
+tile.signalindustries.awakened.inductionSmelter.name=Awakened Quark-Gluon Plasma Melter Controller
+tile.signalindustries.awakened.inductionSmelter.desc=Smelts entire stacks at once using the heat of the early universe.
+
 tile.signalindustries.prototype.plateFormer.name=Prototype Plate Former
 tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more [Plates] than the [Plate Hammer] and out of more materials.
 tile.signalindustries.basic.plateFormer.name=Basic Metal Press
@@ -413,7 +433,7 @@ tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams to s
 tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
 tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an [Alloy Smelter] and the pressure of a [Plate Former] to fuse 2 [S. Crystals] together!
 tile.signalindustries.reinforced.crystalChamber.name=Reinforced Crystal Chamber
-tile.signalindustries.reinforced.crystalChamber.desc=Can handle bigger crystals than the Basic version.
+tile.signalindustries.reinforced.crystalChamber.desc=Awakening awaits, this machine can fuse crystals of extraordinary size or power.
 tile.signalindustries.awakened.crystalChamber.name=Awakened Crystal Fusion Chamber Controller
 tile.signalindustries.awakened.crystalChamber.desc=Just like stars fuse galactic amounts of hydrogen inside their cores, this machine can fuse crystals of extraordinary size.
 
@@ -504,7 +524,15 @@ tile.signalindustries.reinforced.bricks.desc=Stacked bricks of Reinforced Crysta
 tile.signalindustries.awakened.bricks.name=Awakened Alloy Bricks
 tile.signalindustries.awakened.bricks.desc=Stacked bricks of Awakened Alloy ingots.
 
+tile.signalindustries.signalumAlloyCoil.name=Saturated Signalum Alloy Coil
+tile.signalindustries.signalumAlloyCoil.desc=A coil of Saturated Signalum Alloy.
+tile.signalindustries.dilithiumCoil.name=Dilithium Coil
+tile.signalindustries.dilithiumCoil.desc=A coil of Dilithium.
+tile.signalindustries.awakenedAlloyCoil.name=Awakened Alloy Coil
+tile.signalindustries.awakenedAlloyCoil.desc=A coil of Awakened Alloy.
+
 dimension.signalindustries.eternity.name=Eternity
+biome.eternity=Eternity
 signalindustries.eternity.name=Eternity
 signalindustries.eternity.desc=The void between worlds\nconnected through the fabric of reality.\nHaving an active link to one of these worlds is the only way out.
 

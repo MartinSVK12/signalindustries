@@ -324,7 +324,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setResistance(50)
             .build(new BlockTiered("awakened.machine",config.getInt("BlockIDs.awakenedMachineCore"), Tier.AWAKENED,Material.metal));
 
-
+    public static final Block basicCasing = new BlockBuilder(MOD_ID)
+            .setTextures("basic_casing.png")
+            .setLuminance(0)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(10)
+            .setResistance(2000)
+            .build(new Block("basic.casing",config.getInt("BlockIDs.basicCasing"),Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
     public static final Block reinforcedCasing = new BlockBuilder(MOD_ID)
             .setTextures("reinforced_casing.png")
             .setLuminance(0)
@@ -610,6 +616,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setNorthTexture("crusher_basic_side.png")
             .build(new BlockCrusher("basic.crusher",config.getInt("BlockIDs.basicCrusher"), Tier.BASIC,Material.metal));
 
+    public static final Block reinforcedCrusher = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("reinforced_blank.png")
+            .setTopTexture("crusher_reinforced_top_inactive.png")
+            .setNorthTexture("crusher_reinforced_side.png")
+            .build(new BlockCrusher("reinforced.crusher",config.getInt("BlockIDs.reinforcedCrusher"), Tier.REINFORCED, Material.metal));
+
     public static final Block prototypeAlloySmelter = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
@@ -625,6 +640,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("basic_blank.png")
             .setNorthTexture("alloy_smelter_basic_inactive.png")
             .build(new BlockAlloySmelter("basic.alloySmelter",config.getInt("BlockIDs.basicAlloySmelter"), Tier.BASIC,Material.metal));
+
+    public static final Block basicInductionSmelter = new BlockBuilder(MOD_ID)
+            .setHardness(1)
+            .setResistance(3)
+            .setBlockSound(BlockSounds.METAL)
+            .setTextures("basic_blank.png")
+            .setNorthTexture("basic_induction_smelter_front_inactive.png")
+            .setTopTexture("basic_induction_smelter_top_inactive.png")
+            .build(new BlockInductionSmelter("basic.inductionSmelter",config.getInt("BlockIDs.basicInductionSmelter"), Tier.BASIC,Material.metal));
 
     public static final Block prototypePlateFormer = new BlockBuilder(MOD_ID)
             .setHardness(1)
@@ -911,6 +935,46 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("reinforced_energy_connector.png")
             .build(new BlockEnergyConnector("reinforced.energyConnector",config.getInt("BlockIDs.reinforcedEnergyConnector"),Tier.REINFORCED,Material.metal));
 
+    public static final Block basicEnergyConnector = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(1)
+            .setTextures("basic_energy_connector.png")
+            .build(new BlockEnergyConnector("basic.energyConnector",config.getInt("BlockIDs.basicEnergyConnector"),Tier.BASIC,Material.metal));
+
+    public static final Block basicFluidInputHatch = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("basic_fluid_input_hatch.png")
+            .build(new BlockFluidInputHatch("basic.fluidInputHatch",config.getInt("BlockIDs.basicFluidInputHatch"),Tier.BASIC,Material.metal));
+
+    public static final Block basicFluidOutputHatch = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("basic_fluid_output_hatch.png")
+            .build(new BlockFluidOutputHatch("basic.fluidOutputHatch",config.getInt("BlockIDs.basicFluidOutputHatch"),Tier.BASIC,Material.metal));
+
+    public static final Block basicItemInputBus = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("basic_input_bus.png")
+            .build(new BlockInputBus("basic.itemInputBus",config.getInt("BlockIDs.basicItemInputBus"),Tier.BASIC,Material.metal));
+
+    public static final Block basicItemOutputBus = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(20)
+            .setLuminance(0)
+            .setTextures("basic_output_bus.png")
+            .build(new BlockOutputBus("basic.itemOutputBus",config.getInt("BlockIDs.basicItemOutputBus"),Tier.BASIC,Material.metal));
+    
     public static final Block reinforcedFluidInputHatch = new BlockBuilder(MOD_ID)
             .setBlockSound(BlockSounds.METAL)
             .setHardness(1)
@@ -1001,6 +1065,39 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("reinforced_alloy_bricks.png")
             .build(new Block("reinforced.bricks",config.getInt("BlockIDs.reinforcedCrystalAlloyBricks"),Material.metal));
 
+    public static final Block signalumAlloyCoil = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setNorthTexture("signalum_alloy_coil.png")
+            .setSouthTexture("signalum_alloy_coil.png")
+            .setEastTexture("signalum_alloy_coil_2.png")
+            .setWestTexture("signalum_alloy_coil_2.png")
+            .setTopBottomTexture("signalum_alloy_coil_top.png")
+            .build(new Block("signalumAlloyCoil",config.getInt("BlockIDs.signalumAlloyCoil"),Material.metal));
+
+    public static final Block dilithiumCoil = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setSideTextures("dilithium_coil.png")
+            .setTopBottomTexture("dilithium_coil_top.png")
+            .build(new Block("dilithiumCoil",config.getInt("BlockIDs.dilithiumCoil"),Material.metal));
+
+    public static final Block awakenedAlloyCoil = new BlockBuilder(MOD_ID)
+            .setBlockSound(BlockSounds.METAL)
+            .setHardness(1)
+            .setResistance(3)
+            .setLuminance(0)
+            .setNorthTexture("awakened_alloy_coil.png")
+            .setSouthTexture("awakened_alloy_coil.png")
+            .setEastTexture("awakened_alloy_coil_2.png")
+            .setWestTexture("awakened_alloy_coil_2.png")
+            .setTopBottomTexture("awakened_alloy_coil_top.png")
+            .build(new Block("awakenedAlloyCoil",config.getInt("BlockIDs.awakenedAlloyCoil"),Material.metal));
+
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_energy_transparent.png");
     public static final int[] burntSignalumTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"burnt_signalum.png");//registerFluidTexture(MOD_ID,"signalum_energy.png",0,4);
@@ -1043,10 +1140,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Item reinforcedCrystalAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("reinforcedCrystalAlloyPlate",config.getInt("ItemIDs.reinforcedCrystalAlloyPlate")),"reinforcedcrystalalloyplate.png");
     public static final Item saturatedSignalumAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyPlate",config.getInt("ItemIDs.saturatedSignalumAlloyPlate")),"saturatedsignalumalloyplate.png");
     public static final Item dilithiumPlate = ItemHelper.createItem(MOD_ID,new Item("dilithiumPlate",config.getInt("ItemIDs.dilithiumPlate")),"dilithiumplate.png");
+    public static final Item voidAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("voidAlloyPlate",config.getInt("ItemIDs.voidAlloyPlate")),"void_alloy_plate.png");
+    public static final Item awakenedAlloyPlate = ItemHelper.createItem(MOD_ID,new Item("awakenedAlloyPlate",config.getInt("ItemIDs.awakenedAlloyPlate")),"awakened_alloy_plate.png");
 
     public static final Item crystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("crystalAlloyIngot",config.getInt("ItemIDs.crystalAlloyIngot")),"crystalalloy.png");
     public static final Item reinforcedCrystalAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("reinforcedCrystalAlloyIngot",config.getInt("ItemIDs.reinforcedCrystalAlloyIngot")),"reinforcedcrystalalloy.png");
     public static final Item saturatedSignalumAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("saturatedSignalumAlloyIngot",config.getInt("ItemIDs.saturatedSignalumAlloyIngot")),"saturatedsignalumalloy.png");
+    public static final Item voidAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("voidAlloyIngot",config.getInt("ItemIDs.voidAlloyIngot")),"void_alloy.png");
+    public static final Item awakenedAlloyIngot = ItemHelper.createItem(MOD_ID,new Item("awakenedAlloyIngot",config.getInt("ItemIDs.awakenedAlloyIngot")),"awakened_alloy.png");
 
     public static final Item diamondCuttingGear = ItemHelper.createItem(MOD_ID,new Item("diamondCuttingGear",config.getInt("ItemIDs.diamondCuttingGear")),"diamondcuttinggear.png");
     public static final Item signalumCuttingGear = ItemHelper.createItem(MOD_ID,new Item("signalumCuttingGear",config.getInt("ItemIDs.signalumCuttingGear")),"signalumcuttinggear.png");
@@ -1072,7 +1173,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setHardness(50)
             .setResistance(50000)
             .setLuminance(0)
-            .build(new Block("rootedFabric",config.getInt("BlockIDs.rootedFabric"),Material.stone));
+            .build(new Block("rootedFabric",config.getInt("BlockIDs.rootedFabric"),Material.stone).withTags(BlockTags.MINEABLE_BY_PICKAXE));
 
     public static final int[][] railTex = new int[][]{TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail_unpowered.png"),TextureHelper.getOrCreateBlockTexture(MOD_ID,"dilithium_rail.png")};
 
@@ -1230,7 +1331,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     public static final AchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
 
-    public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome("signalindustries:eternity").setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
+    public static final Biome biomeEternity = Biomes.register("signalindustries:eternity",new Biome("eternity").setFillerBlock(realityFabric.id).setTopBlock(realityFabric.id).setColor(0x808080));
     public static final WorldType eternityWorld = WorldTypes.register("signalindustries:eternity",new WorldTypeEternity(key("eternity")));
     public static Dimension dimEternity;
 
@@ -1238,6 +1339,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Multiblock wrathTree = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"wrathTree","reinforcedWrathBeacon",false);
     public static final Multiblock signalumReactor = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"signalumReactor","signalumReactor",false);
     public static final Multiblock extractionManifold = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"reinforcedExtractor","reinforcedExtractor",false);
+    public static final Multiblock inductionSmelterBasic = new Multiblock(MOD_ID,new Class[]{SignalIndustries.class},"basicInductionSmelter","basicInductionSmelter",false);
 
     public static Map<String, BlockTexture> textures = new HashMap<>();
 
@@ -1256,13 +1358,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
         textures.put(Tier.PROTOTYPE.name()+".crusher.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setTopTexture("crusher_prototype_top_active.png").setNorthTexture("crusher_prototype_side.png"));
         textures.put(Tier.BASIC.name()+".crusher.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setTopTexture("crusher_basic_top_active.png").setNorthTexture("crusher_basic_side.png"));
+        textures.put(Tier.REINFORCED.name()+".crusher.active",new BlockTexture(MOD_ID).setAll("reinforced_blank.png").setTopTexture("crusher_reinforced_top_active.png").setNorthTexture("crusher_reinforced_side.png"));
         textures.put(Tier.PROTOTYPE.name()+".crusher.active.overlay",new BlockTexture(MOD_ID).setTopTexture("crusher_overlay.png"));
         textures.put(Tier.BASIC.name()+".crusher.active.overlay",new BlockTexture(MOD_ID).setTopTexture("crusher_overlay.png"));
+        textures.put(Tier.REINFORCED.name()+".crusher.active.overlay",new BlockTexture(MOD_ID).setTopTexture("crusher_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".alloySmelter.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("alloy_smelter_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".alloySmelter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("alloy_smelter_basic_active.png"));
         textures.put(Tier.PROTOTYPE.name()+".alloySmelter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("alloy_smelter_overlay.png"));
         textures.put(Tier.BASIC.name()+".alloySmelter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("alloy_smelter_overlay.png"));
+
+        textures.put(Tier.BASIC.name()+".inductionSmelter.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("basic_induction_smelter_front_active.png").setTopTexture("basic_induction_smelter_top_active.png"));
+        textures.put(Tier.BASIC.name()+".inductionSmelter.active.overlay",new BlockTexture(MOD_ID).setNorthTexture("induction_smelter_front_overlay.png").setTopTexture("induction_smelter_top_overlay.png"));
 
         textures.put(Tier.PROTOTYPE.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("prototype_blank.png").setNorthTexture("plate_former_prototype_active.png"));
         textures.put(Tier.BASIC.name()+".plateFormer.active",new BlockTexture(MOD_ID).setAll("basic_blank.png").setNorthTexture("plate_former_basic_active.png"));
@@ -1381,6 +1488,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         ItemToolPickaxe.miningLevels.put(realityFabric,5);
         ItemToolPickaxe.miningLevels.put(reinforcedGlass,3);
         ItemToolPickaxe.miningLevels.put(reinforcedCasing,3);
+        ItemToolPickaxe.miningLevels.put(basicCasing,3);
 
         ironPlateHammer.setContainerItem(ironPlateHammer);
 
@@ -1435,6 +1543,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.Core.createTileEntity(TileEntityReinforcedExtractor.class, "Extraction Manifold");
         if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityReinforcedExtractor.class, new RenderMultiblock());
         addToNameGuiMap("Extraction Manifold", GuiReinforcedExtractor.class, TileEntityReinforcedExtractor.class);
+
+        EntityHelper.Core.createTileEntity(TileEntityInductionSmelter.class, "Induction Smelter");
+        if (isClientSide) EntityHelper.Client.assignTileEntityRenderer(TileEntityInductionSmelter.class, new RenderMultiblock());
 
         EntityHelper.Core.createTileEntity(TileEntityCrusher.class,"Crusher");
         addToNameGuiMap("Crusher", GuiCrusher.class, TileEntityCrusher.class);
@@ -1528,6 +1639,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         Multiblock.multiblocks.put("wrathTree",wrathTree);
         Multiblock.multiblocks.put("signalumReactor",signalumReactor);
         Multiblock.multiblocks.put("extractionManifold",extractionManifold);
+        Multiblock.multiblocks.put("basicInductionSmelter",inductionSmelterBasic);
         SignalIndustries.LOGGER.info(String.format("Loaded %d multiblocks..",Multiblock.multiblocks.size()));
         SignalIndustries.LOGGER.info(String.format("Loaded %d internal structures.", Structure.internalStructures.size()));
 

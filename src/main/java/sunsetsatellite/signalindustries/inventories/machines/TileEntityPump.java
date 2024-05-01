@@ -10,17 +10,15 @@ import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;

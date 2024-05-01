@@ -5,19 +5,16 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.legacy.CraftingManager;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.Registry;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeRegistry;
 import net.minecraft.core.data.registry.recipe.entry.*;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 

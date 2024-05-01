@@ -80,6 +80,8 @@ public class GuiCrusher extends GuiFluid {
                 i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine.png");
                 break;
             case REINFORCED:
+                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_reinforced_machine.png");
+                break;
             case AWAKENED:
                 break;
         }

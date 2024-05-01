@@ -7,7 +7,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
 import java.util.Arrays;

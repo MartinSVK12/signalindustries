@@ -95,5 +95,15 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                         new RecipeProperties(100,80, Tier.BASIC,false)
                 )
         );
+        group.register(
+                "string_of_reality",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(rootedFabric))
+                        },
+                        new ItemStack(realityString,2),
+                        new RecipeProperties(300,160, Tier.REINFORCED,false).setChance(0.5f)
+                )
+        );
     }
 }

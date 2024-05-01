@@ -4,7 +4,7 @@ import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 public class TileEntityCrusher extends TileEntityTieredMachineSimple implements IBoostable {
 

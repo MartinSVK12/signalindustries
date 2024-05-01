@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 
 public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implements IBoostable {

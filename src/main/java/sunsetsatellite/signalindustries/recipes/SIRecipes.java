@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes.container;
+package sunsetsatellite.signalindustries.recipes;
 
 import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
 import net.minecraft.core.block.Block;
@@ -11,23 +11,20 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
-import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
+import sunsetsatellite.signalindustries.recipes.container.*;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class SIRecipes implements RecipeEntrypoint {
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
     public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
     public static RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeExtractor), new ItemStack(SignalIndustries.basicExtractor), new ItemStack(SignalIndustries.reinforcedExtractor))));
-    public static RecipeGroupSI<RecipeEntryMachine> CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher))));
+    public static RecipeGroupSI<RecipeEntryMachine> CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher),new ItemStack(SignalIndustries.reinforcedCrusher))));
     public static RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeAlloySmelter),new ItemStack(SignalIndustries.basicAlloySmelter))));
     public static RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
     public static RecipeGroupSI<RecipeEntryMachineFluid> PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));
@@ -49,7 +46,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
         EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeExtractor), new ItemStack(SignalIndustries.basicExtractor), new ItemStack(SignalIndustries.reinforcedExtractor))));
-        CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher))));
+        CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher),new ItemStack(SignalIndustries.reinforcedCrusher))));
         ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeAlloySmelter),new ItemStack(SignalIndustries.basicAlloySmelter))));
         PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
         PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));

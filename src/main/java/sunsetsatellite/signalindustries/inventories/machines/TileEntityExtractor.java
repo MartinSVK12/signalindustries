@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 public class TileEntityExtractor extends TileEntityTieredMachineBase implements IBoostable {
 

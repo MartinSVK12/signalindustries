@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.recipes.container.SIRecipes;
+import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
 

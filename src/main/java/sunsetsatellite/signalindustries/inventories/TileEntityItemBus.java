@@ -5,10 +5,14 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.util.Tier;
+
+import java.util.Arrays;
 
 public class TileEntityItemBus extends TileEntityTieredContainer implements IMultiblockPart {
 
     public TileEntity connectedTo;
+    private boolean init = false;
 
     public TileEntityItemBus(){
         itemContents = new ItemStack[9];
@@ -21,6 +25,12 @@ public class TileEntityItemBus extends TileEntityTieredContainer implements IMul
     public void tick() {
         super.tick();
         extractFluids();
+        if(!init){
+            if (tier == Tier.BASIC) {
+                itemContents = Arrays.copyOf(itemContents,4);
+                init = true;
+            }
+        }
     }
 
     @Override

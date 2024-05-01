@@ -19,6 +19,9 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 
 public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements IBoostable {
 
+    //TODO: don't mine out blocks above the orange outline
+    //TODO: conduit output is broken
+
     public Vec3i from = new Vec3i();
     public Vec3i to = new Vec3i();
     public Vec3i current = new Vec3i();
@@ -46,7 +49,6 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
 
             current.x--;
             current.y = worldObj.findTopSolidBlock(current.x, current.z);
-            System.out.println(current.y);
             if(current.y < 1){
                 current.y = y+4;
                 //workTimer.pause();
@@ -64,65 +66,67 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             //SignalIndustries.LOGGER.info(String.valueOf(current.y));
             if(worldObj.getBlockId(current.x,current.y-1,current.z) != Block.bedrock.id){
                 Block block = Block.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
-                int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
-                Direction dir = null;
-                for (Direction direction : Direction.values()) {
-                    if(itemConnections.get(direction) == Connection.OUTPUT || itemConnections.get(direction) == Connection.BOTH){
-                        if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest || direction.getTileEntity(worldObj,this) instanceof TileEntityItemConduit){
-                            dir = direction;
+                if(block != null){
+                    int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
+                    Direction dir = null;
+                    for (Direction direction : Direction.values()) {
+                        if(itemConnections.get(direction) == Connection.OUTPUT || itemConnections.get(direction) == Connection.BOTH){
+                            if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest || direction.getTileEntity(worldObj,this) instanceof TileEntityItemConduit){
+                                dir = direction;
+                            }
                         }
                     }
-                }
-                if(dir != null){
-                    TileEntity tile = dir.getTileEntity(worldObj,this);
-                    ItemStack[] drops = block.getBreakResult(worldObj, EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
-                    if(tile instanceof TileEntityChest){
-                        if(drops == null){
-                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
-                            worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
-                            return;
-                        }
-                        for (ItemStack drop : drops) {
-                            int availableSlot = -1;
-                            for (int i = 0; i < ((TileEntityChest) tile).getSizeInventory(); i++) {
-                                ItemStack stack = ((TileEntityChest) tile).getStackInSlot(i);
-                                if(stack == null || (stack.isItemEqual(drop)) && stack.stackSize < stack.getMaxStackSize()) {
-                                    availableSlot = i;
-                                    break;
-                                }
-                            }
-                            if(availableSlot == -1){
+                    if(dir != null){
+                        TileEntity tile = dir.getTileEntity(worldObj,this);
+                        ItemStack[] drops = block.getBreakResult(worldObj, EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
+                        if(tile instanceof TileEntityChest){
+                            if(drops == null){
                                 block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                                 worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
-                            } else {
-                                ItemStack stack = ((TileEntityChest) tile).getStackInSlot(availableSlot);
-                                if(stack == null){
-                                    ((TileEntityChest) tile).setInventorySlotContents(availableSlot,drop);
-                                } else if (stack.isItemEqual(drop)){
-                                    stack.stackSize+=drop.stackSize;
-                                }
-                                worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                return;
                             }
-                        }
-                    } else if(tile instanceof TileEntityItemConduit) {
-                        if(drops != null){
                             for (ItemStack drop : drops) {
-                                if(drop != null){
-                                    boolean success = ((TileEntityItemConduit) tile).addItem(drop,Direction.Y_POS.getOpposite());
-                                    if(!success){
-                                        block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                int availableSlot = -1;
+                                for (int i = 0; i < ((TileEntityChest) tile).getSizeInventory(); i++) {
+                                    ItemStack stack = ((TileEntityChest) tile).getStackInSlot(i);
+                                    if(stack == null || (stack.isItemEqual(drop)) && stack.stackSize < stack.getMaxStackSize()) {
+                                        availableSlot = i;
+                                        break;
+                                    }
+                                }
+                                if(availableSlot == -1){
+                                    block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                    worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                } else {
+                                    ItemStack stack = ((TileEntityChest) tile).getStackInSlot(availableSlot);
+                                    if(stack == null){
+                                        ((TileEntityChest) tile).setInventorySlotContents(availableSlot,drop);
+                                    } else if (stack.isItemEqual(drop)){
+                                        stack.stackSize+=drop.stackSize;
                                     }
                                     worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                                 }
                             }
+                        } else if(tile instanceof TileEntityItemConduit) {
+                            if(drops != null){
+                                for (ItemStack drop : drops) {
+                                    if(drop != null){
+                                        boolean success = ((TileEntityItemConduit) tile).addItem(drop,dir.getOpposite());
+                                        if(!success){
+                                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                        }
+                                        worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                    }
+                                }
+                            }
+                        } else {
+                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                            worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                         }
                     } else {
                         block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                     }
-                } else {
-                    block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
-                    worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                 }
             }
         }
