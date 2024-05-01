@@ -22,7 +22,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachineSimple impleme
     @Override
     public void tick() {
         super.tick();
-        fluidCapacity[0] = 2000 * (2 * tier.ordinal());
+        fluidCapacity[0] = (int) (2000 * (Math.pow(2,tier.ordinal())));
     }
 
     @Override
