@@ -5201,5 +5201,394 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/signalum_alloy_coil",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SSS",
+      "SCS",
+      "SSS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.signalumAlloyCoil",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_coil",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "DDD",
+      "DRD",
+      "DDD"
+    ],
+    "symbols": [
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.dilithiumCoil",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/awakened_coil",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "AAA",
+      "AVA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "V",
+        "stack": {
+          "key": "item.signalindustries.voidAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakenedAlloyCoil",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_item_input_bus",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I",
+      "M"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.itemInputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_item_output_bus",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "M",
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.itemOutputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_fluid_output_hatch",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "M",
+      "F"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.fluidOutputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_fluid_input_hatch",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "F",
+      "M"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.fluidInputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_energy_connector",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " E ",
+      "EME",
+      " E "
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.basicEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.energyConnector",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_induction_smelter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      "PFP",
+      " M "
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.furnace.stone.idle",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.signalumAlloyCoil",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.inductionSmelter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/portable_workbench",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "P ",
+      " W"
+    ],
+    "symbols": [
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "tile.workbench",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.attachmentPoint",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.basic.portableWorkbench",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/smartwatch",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PC",
+      "OR"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.tool.clock",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "item.tool.compass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.tool.calendar",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.attachmentPoint",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.basic.smartWatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

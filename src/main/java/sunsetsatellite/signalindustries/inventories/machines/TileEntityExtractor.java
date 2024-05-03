@@ -91,7 +91,10 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
     public void processItem(){
         if(canProcess()){
             FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0],tier);
-            if(fluidContents[0] == null){
+            if(stack == null){
+                return;
+            }
+            if(fluidContents[0] == null || getFluidInSlot(0).getLiquid() == null){
                 setFluidInSlot(0, stack);
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
                 fluidContents[0].amount += stack.amount;

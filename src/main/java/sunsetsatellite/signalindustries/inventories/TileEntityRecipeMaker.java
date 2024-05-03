@@ -3,22 +3,31 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.ListTag;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.data.DataLoader;
+import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.IInventory;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class TileEntityRecipeMaker extends TileEntity
     implements IInventory
 {
+    public String currentRecipeName = "";
+    public boolean shaped = true;
+    public boolean useContainers = false;
+
     public TileEntityRecipeMaker() {
         contents = new ItemStack[10];
     }
@@ -144,40 +153,102 @@ public class TileEntityRecipeMaker extends TileEntity
     private ItemStack[] contents;
 
     public void makeRecipe() {
-        StringBuilder s = new StringBuilder("createRecipe(new ItemStack(");
-        ItemStack output = getStackInSlot(9);
-        Object item;
+        if(shaped){
+            int j = 0;
+            List<String> strings = new ArrayList<>();
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < 9; i++) {
+                ItemStack stack = getStackInSlot(i);
+                if(stack != null){
+                    s.append(i);
+                }
+                j++;
+                if(j % 3 == 0 && s.length() > 0){
+                    strings.add(s.toString());
+                    s = new StringBuilder();
+                }
+            }
+            List<Object> list = new ArrayList<>(strings);
+            for (int i = 0; i < 9; i++) {
+                ItemStack stack = getStackInSlot(i);
+                if (stack != null) {
+                    list.add((String.valueOf(i).charAt(0)));
+                    list.add(stack.copy());
+                }
+            }
+            if(!strings.isEmpty() && !Objects.equals(currentRecipeName, "")){
+                RecipeEntryCraftingShaped recipe = parseRecipe(getStackInSlot(9),useContainers,list.toArray());
+                try {
+                    Registries.RECIPES.addCustomRecipe(currentRecipeName,recipe);
+                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Recipe created!");
+                    SignalIndustries.LOGGER.info(DataLoader.serializeRecipe(recipe));
+                } catch (IllegalArgumentException e) {
+                    Minecraft.getMinecraft(this).ingameGUI.addChatMessage(TextFormatting.RED+e.getMessage());
+                }
+            }
+        }
+    }
 
-        if(output.itemID > 16384){
-            item = output.getItem();
-            s.append(getItemFieldName((Item) item));
-            //items
+    public static RecipeEntryCraftingShaped parseRecipe(ItemStack itemstack, boolean consumeContainerItem, Object... aobj) {
+        StringBuilder s = new StringBuilder();
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int i1;
+        if (aobj[i] instanceof String[]) {
+            String[] as = (String[])aobj[i++];
+            i1 = as.length;
+
+            for(int var10 = 0; var10 < i1; ++var10) {
+                String s2 = as[var10];
+                ++k;
+                j = s2.length();
+                s.append(s2);
+            }
         } else {
-            item = Block.blocksList[output.itemID];
-            s.append(getBlockFieldName((Block) item));
-            //blocks
-        }
-        s.append(", ").append(output.stackSize).append("), new Object[]{\"012\",\"345\",\"678\"");
-        for(int i = 0;i<9;i++){
-            ItemStack stack = getStackInSlot(i);
-            if(stack == null){
-                continue;
+            while(aobj[i] instanceof String) {
+                String s1 = (String)aobj[i++];
+                ++k;
+                j = s1.length();
+                s = new StringBuilder(s + s1);
             }
-            Object inputItem;
-            if(stack.itemID > 16384){
-                inputItem = stack.getItem();
-                s.append(",'").append(i).append("',").append("new ItemStack(").append(getItemFieldName((Item) inputItem)).append(",1,").append(stack.getMetadata()).append(")");
-                //items
+        }
+
+        HashMap<Character,RecipeSymbol> map;
+        for(map = new HashMap<>(); i < aobj.length; i += 2) {
+            Character character = (Character)aobj[i];
+            RecipeSymbol recipeSymbol = null;
+            if (aobj[i + 1] instanceof Item) {
+                recipeSymbol = new RecipeSymbol(character, new ItemStack((Item)aobj[i + 1]));
+            } else if (aobj[i + 1] instanceof Block) {
+                recipeSymbol = new RecipeSymbol(character, new ItemStack((Block)aobj[i + 1]));
+            } else if (aobj[i + 1] instanceof ItemStack) {
+                recipeSymbol = new RecipeSymbol(character, (ItemStack)aobj[i + 1]);
+            }
+
+            if (aobj[i + 1] instanceof String) {
+                recipeSymbol = new RecipeSymbol(character, null, (String)aobj[i + 1]);
+            }
+
+            if (aobj[i + 1] instanceof RecipeSymbol) {
+                recipeSymbol = (RecipeSymbol)aobj[i + 1];
+            }
+
+            map.put(character, recipeSymbol);
+        }
+
+        RecipeSymbol[] symbols = new RecipeSymbol[j * k];
+
+        for(i1 = 0; i1 < j * k; ++i1) {
+            char c = s.charAt(i1);
+            if (map.containsKey(c)) {
+                symbols[i1] = map.get(c).copy();
             } else {
-                inputItem = Block.blocksList[stack.itemID];
-                s.append(",'").append(i).append("',").append("new ItemStack(").append(getBlockFieldName((Block) inputItem)).append(",1,").append(stack.getMetadata()).append(")");
-                //blocks
+                symbols[i1] = null;
             }
-
         }
 
-        s.append("});");
-        SignalIndustries.LOGGER.info(s.toString());
+        return new RecipeEntryCraftingShaped(j, k, symbols, itemstack, consumeContainerItem);
     }
 
     public void deleteContents() {
