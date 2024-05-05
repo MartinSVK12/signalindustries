@@ -140,9 +140,9 @@ public class GuiFluidIOConfig extends GuiScreen {
             controlList.get(11).enabled = false;
         }
 
-        if(tile instanceof TileEntityEnergyConnector && ((TileEntityEnergyConnector) tile).isConnected()){
+        /*if(tile instanceof TileEntityEnergyConnector && ((TileEntityEnergyConnector) tile).isConnected()){
             controlList.get(0).enabled = false;
-        }
+        }*/
 
         super.init();
     }
@@ -153,7 +153,7 @@ public class GuiFluidIOConfig extends GuiScreen {
             if (guibutton.id >= 0 && guibutton.id < 6) {
                 switch (tile.fluidConnections.get(Direction.values()[guibutton.id])) {
                     case NONE:
-                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell) {
+                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell || tile.getBlockType() == SignalIndustries.infiniteFluidTank) {
                             tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                             break;
                         }
@@ -163,7 +163,7 @@ public class GuiFluidIOConfig extends GuiScreen {
                         tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                         break;
                     case OUTPUT:
-                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell) {
+                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell || tile.getBlockType() == SignalIndustries.infiniteFluidTank) {
                             tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
                             break;
                         }

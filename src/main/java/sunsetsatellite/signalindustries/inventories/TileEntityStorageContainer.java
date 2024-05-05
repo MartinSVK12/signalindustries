@@ -2,9 +2,12 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.util.Tier;
+
+import java.util.Map;
 
 public class TileEntityStorageContainer extends TileEntityTiered {
     public ItemStack contents = null;
@@ -22,10 +25,17 @@ public class TileEntityStorageContainer extends TileEntityTiered {
         super.writeToNBT(nbttagcompound);
         nbttagcompound.putBoolean("Infinite", infinite);
         nbttagcompound.putBoolean("Unlimited", unlimited);
-        nbttagcompound.putBoolean("locked", locked);
+        nbttagcompound.putBoolean("Locked", locked);
         if(contents != null){
             CompoundTag contentsTag = new CompoundTag();
-            contents.writeToNBT(contentsTag);
+            contentsTag.putShort("id", (short)contents.itemID);
+            contentsTag.putInt("Count", (byte)contents.stackSize);
+            contentsTag.putShort("Damage", (short)contents.getMetadata());
+            contentsTag.putByte("Expanded", (byte)1);
+            contentsTag.putInt("Version", 19134);
+            if (contents.getData() != null && !contents.getData().getValue().isEmpty()) {
+                contentsTag.putCompound("Data", contents.getData());
+            }
             nbttagcompound.put("Contents", contentsTag);
         }
     }
@@ -35,9 +45,11 @@ public class TileEntityStorageContainer extends TileEntityTiered {
         super.readFromNBT(nbttagcompound);
         infinite = nbttagcompound.getBoolean("Infinite");
         unlimited = nbttagcompound.getBoolean("Unlimited");
-        locked = nbttagcompound.getBoolean("locked");
+        locked = nbttagcompound.getBoolean("Locked");
         if(nbttagcompound.containsKey("Contents")){
-            contents = ItemStack.readItemStackFromNbt(nbttagcompound.getCompound("Contents"));
+            contents = new ItemStack(1,1,0);
+            contents.readFromNBT(nbttagcompound.getCompound("Contents"));
+            contents.stackSize = nbttagcompound.getCompound("Contents").getInteger("Count");
         }
     }
 
@@ -121,6 +133,7 @@ public class TileEntityStorageContainer extends TileEntityTiered {
     @Override
     public void tick() {
         super.tick();
+        worldObj.markBlocksDirty(x,y,z,x,y,z);
         if(tier == Tier.INFINITE){
             infinite = true;
             unlimited = true;

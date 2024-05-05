@@ -33,6 +33,8 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
                 if(((TileEntitySignalumReactor) connectedTo).state != TileEntitySignalumReactor.State.INACTIVE){
                     extractFluids();
                 }
+            } else {
+                extractFluids();
             }
         }
     }
