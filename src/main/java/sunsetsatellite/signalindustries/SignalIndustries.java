@@ -556,6 +556,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.GLASS)
             .build(new BlockSIFluidTank("prototype.fluidTank",config.getInt("BlockIDs.prototypeFluidTank"),Tier.PROTOTYPE,Material.glass));
 
+    public static final Block infiniteFluidTank = new BlockBuilder(MOD_ID)
+            .setTextures("fluid_tank_prototype.png")
+            .setLuminance(0)
+            .setHardness(1)
+            .setResistance(5)
+            .setBlockSound(BlockSounds.GLASS)
+            .build(new BlockSIFluidTank("infinite.fluidTank",config.getInt("BlockIDs.infiniteFluidTank"),Tier.INFINITE,Material.glass));
+
     public static final Block basicFluidTank = new BlockBuilder(MOD_ID)
             .setTextures("fluid_tank_basic.png")
             .setLuminance(0)

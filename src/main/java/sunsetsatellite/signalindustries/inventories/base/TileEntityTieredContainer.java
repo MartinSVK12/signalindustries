@@ -77,4 +77,8 @@ public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
             }
         }
     }
+
+    public Tier getTier() {
+        return tier;
+    }
 }

@@ -298,6 +298,8 @@ tile.signalindustries.reinforced.energyCell.desc=Buffer for storing [Signalum En
 tile.signalindustries.awakened.energyCell.name=Awakened Energy Storage Array Controller
 tile.signalindustries.awakened.energyCell.desc=Huge expandable buffer for storing [Signalum Energy].
 
+tile.signalindustries.infinite.fluidTank.name=Infinite Fluid Tank
+tile.signalindustries.infinite.fluidTank.desc=An unlimited source of any fluid! Creative mode only.
 tile.signalindustries.prototype.fluidTank.name=Prototype Fluid Tank
 tile.signalindustries.prototype.fluidTank.desc=Tank for storing various fluids. Unsuitable for [Signalum Energy].
 tile.signalindustries.basic.fluidTank.name=Basic Fluid Tank
