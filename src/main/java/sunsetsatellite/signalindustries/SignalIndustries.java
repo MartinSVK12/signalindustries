@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
 import net.minecraft.client.gui.Gui;
@@ -56,6 +57,7 @@ import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
 import sunsetsatellite.signalindustries.abilities.powersuit.*;
+import sunsetsatellite.signalindustries.api.impl.retrostorage.ReSPlugin;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
@@ -1515,6 +1517,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             EntityHelper.Client.assignEntityRenderer(EntityEnergyOrb.class,new SnowballRenderer(Block.texCoordToIndex(energyOrbTex[0],energyOrbTex[1])));
             EntityHelper.Client.assignEntityRenderer(EntitySunbeam.class,new SunbeamRenderer());
             EntityHelper.Client.assignEntityRenderer(EntityFallingMeteor.class,new FallingMeteorRenderer());
+        }
+
+        if (FabricLoaderImpl.INSTANCE.isModLoaded("retrostorage")) {
+            new ReSPlugin().initializePlugin(LOGGER);
         }
 
         addEntities();

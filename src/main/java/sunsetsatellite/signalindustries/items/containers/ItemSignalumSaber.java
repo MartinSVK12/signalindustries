@@ -16,6 +16,7 @@ import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
@@ -97,6 +98,11 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     }
 
     @Override
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile) {
+        return fill(fluidStack,stack);
+    }
+
+    @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         if(fluidStack == null){
             return null;
@@ -125,6 +131,9 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {}
+
+    @Override
+    public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {}
 
     @Override
     public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {}

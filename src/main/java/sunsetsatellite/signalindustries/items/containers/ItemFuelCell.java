@@ -6,6 +6,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
@@ -70,24 +71,29 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     }
 
     @Override
-    public ItemStack fill(FluidStack slot, ItemStack stack, TileEntityFluidContainer tile) {
-        return fill(slot, stack);
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile) {
+        return fill(fluidStack, stack);
     }
 
     @Override
-    public ItemStack fill(FluidStack slot, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
-        if(slot == null){
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile) {
+        return fill(fluidStack, stack);
+    }
+
+    @Override
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
+        if(fluidStack == null){
             return null;
         }
-        if(slot.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
-            int amount = Math.min(slot.amount,maxAmount);
+            int amount = Math.min(fluidStack.amount,maxAmount);
             ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
             if(remaining == 0) return null;
             int result = Math.min(amount,remaining);
             if(result == 0) return null;
-            slot.amount -= result;
+            fluidStack.amount -= result;
             CompoundTag data = new CompoundTag();
             data.putInt("fuel", saturation+result);
             cell.setData(data);
@@ -97,13 +103,44 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     }
 
     @Override
-    public ItemStack fill(FluidStack slot, ItemStack stack, ItemInventoryFluid inv) {
-        return fill(slot, stack);
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, ItemInventoryFluid inv) {
+        return fill(fluidStack, stack);
     }
 
 
     @Override
     public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {
+        int saturation = stack.getData().getInteger("depleted");
+        int capacity = tile.getFluidCapacityForSlot(slot.slotNumber);
+        if(saturation == 0){
+            return;
+        }
+        if(slot.getFluidStack() != null){
+            int amount = slot.getFluidStack().amount;
+            if(amount + saturation > capacity){
+                int remainder = (amount+saturation)-capacity;
+                slot.getFluidStack().amount = capacity;
+                stack.getData().putInt("depleted",remainder);
+            } else {
+                slot.getFluidStack().amount += saturation;
+                stack.getData().putInt("depleted",0);
+            }
+        } else {
+            if(saturation > capacity){
+                int remainder = saturation-capacity;
+                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,capacity);
+                slot.putStack(fluid);
+                stack.getData().putInt("depleted",remainder);
+            } else {
+                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,saturation);
+                slot.putStack(fluid);
+                stack.getData().putInt("depleted",0);
+            }
+        }
+    }
+
+    @Override
+    public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {
         int saturation = stack.getData().getInteger("depleted");
         int capacity = tile.getFluidCapacityForSlot(slot.slotNumber);
         if(saturation == 0){

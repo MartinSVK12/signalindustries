@@ -8,6 +8,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
@@ -98,6 +99,11 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     }
 
     @Override
+    public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile) {
+        return fill(fluidStack,stack);
+    }
+
+    @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         if(fluidStack == null){
             return null;
@@ -164,6 +170,46 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             }
         }
     }
+
+    @Override
+    public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {
+        int saturation = stack.getData().getInteger("saturation");
+        int capacity = tile.getFluidCapacityForSlot(slot.slotNumber);
+        int size = stack.getData().getInteger("size");
+        if(saturation == 0){
+            stack.itemID = SignalIndustries.signalumCrystalEmpty.id;
+            return;
+        }
+        if(slot.getFluidStack() != null){
+            int amount = slot.getFluidStack().amount;
+            if(amount + saturation > capacity){
+                int remainder = (amount+saturation)-capacity;
+                slot.getFluidStack().amount = capacity;
+                stack.getData().putInt("saturation",remainder);
+                stack.getData().putInt("size",size);
+            } else {
+                slot.getFluidStack().amount += saturation;
+                stack.getData().putInt("saturation",0);
+                stack.getData().putInt("size",size);
+                stack.itemID = SignalIndustries.signalumCrystalEmpty.id;
+            }
+        } else {
+            if(saturation > capacity){
+                int remainder = saturation-capacity;
+                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,capacity);
+                slot.putStack(fluid);
+                stack.getData().putInt("saturation",remainder);
+                stack.getData().putInt("size",size);
+            } else {
+                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,saturation);
+                slot.putStack(fluid);
+                stack.getData().putInt("saturation",0);
+                stack.getData().putInt("size",size);
+                stack.itemID = SignalIndustries.signalumCrystalEmpty.id;
+            }
+        }
+    }
+
     @Override
     public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {
         int saturation = stack.getData().getInteger("saturation");
