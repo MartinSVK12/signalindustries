@@ -42,6 +42,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     }
 
     @Override
+    public FluidStack getCurrentFluid(ItemStack stack) {
+        return new FluidStack(SignalIndustries.energyFlowing,getCapacity(stack));
+    }
+
+    @Override
     public ItemStack fill(FluidStack slot, ItemStack stack) {
         if(slot== null){
             return null;

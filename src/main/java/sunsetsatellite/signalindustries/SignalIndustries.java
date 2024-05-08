@@ -1111,19 +1111,19 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     //this has to be after any other block
     public static final int[] energyTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"signalum_energy_transparent.png");
     public static final int[] burntSignalumTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"burnt_signalum.png");//registerFluidTexture(MOD_ID,"signalum_energy.png",0,4);
-    public static final Block energyFlowing = new BlockBuilder(MOD_ID)
+    public static final BlockFluid energyFlowing = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalum_energy_transparent.png")
             .build(new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyFlowing"),Material.water).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
     //BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyFlowing"),Material.water),"signalum_energy_transparent.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
-    public static final Block energyStill = new BlockBuilder(MOD_ID)
+    public static final BlockFluid energyStill = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalum_energy_transparent.png")
             .build(new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyStill"),Material.water).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
     //BlockHelper.createBlock(MOD_ID,new BlockFluidStill("signalumEnergy",config.getInt("BlockIDs.energyStill"),Material.water),"signalum_energy_transparent.png",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
 
-    public static final Block burntSignalumFlowing = new BlockBuilder(MOD_ID)
+    public static final BlockFluid burntSignalumFlowing = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("burnt_signalum.png")
             .build(new BlockFluidFlowing("burntSignalum",config.getInt("BlockIDs.burntSignalumFlowing"),Material.water).withTexCoords(burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
-    public static final Block burntSignalumStill = new BlockBuilder(MOD_ID)
+    public static final BlockFluid burntSignalumStill = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("burnt_signalum.png")
             .build(new BlockFluidStill("burntSignalum",config.getInt("BlockIDs.burntSignalumStill"),Material.water).withTexCoords(burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1],burntSignalumTex[0],burntSignalumTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
 

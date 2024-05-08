@@ -58,6 +58,11 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     }
 
     @Override
+    public FluidStack getCurrentFluid(ItemStack stack) {
+        return new FluidStack(SignalIndustries.energyFlowing,getCapacity(stack));
+    }
+
+    @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
         if(fluidStack == null){
             return null;
