@@ -1354,6 +1354,63 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/reinforced_crystal_chamber",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "FMA",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "A",
+        "stack": {
+          "key":  "tile.signalindustries.basic.alloySmelter",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "tile.signalindustries.basic.plateFormer",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key":  "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.crystalChamber",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/basic_energy_injector",
     "type": "minecraft:crafting/shaped",
     "pattern": [
