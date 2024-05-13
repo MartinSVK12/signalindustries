@@ -35,6 +35,7 @@ import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.sound.BlockSounds;
+import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
@@ -1675,6 +1676,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     @SafeVarargs
     public static <T> List<T> listOf(T... values){
         return new ArrayList<>(Arrays.asList(values));
+    }
+
+    public static <T,U> List<Pair<T,U>> zip(List<T> first, List<U> second){
+        List<Pair<T,U>> list = new ArrayList<>();
+        List<?> shortest = first.size() < second.size() ? first : second;
+        for (int i = 0; i < shortest.size(); i++) {
+            list.add(Pair.of(first.get(i),second.get(i)));
+        }
+        return list;
     }
 
     public static Item simpleItem(String name, String texture){

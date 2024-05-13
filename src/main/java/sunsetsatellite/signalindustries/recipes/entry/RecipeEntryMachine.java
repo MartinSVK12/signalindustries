@@ -6,7 +6,9 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -29,19 +31,23 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         if(symbols.length != getInput().length){
             return false;
         }
-        for (RecipeExtendedSymbol symbol : symbols) {
-            if (Arrays.asList(getInput()).contains(symbol)) {
-                RecipeExtendedSymbol inputSymbol = getInput()[Arrays.asList(getInput()).indexOf(symbol)];
+        for (RecipeExtendedSymbol subSymbol : symbols) {
+            if (Arrays.stream(getInput()).anyMatch((S)->S.matches(subSymbol))) {
+                RecipeExtendedSymbol inputSymbol = Arrays.stream(getInput()).filter((S) -> S.matches(subSymbol)).findFirst().orElse(null);
+                if(inputSymbol == null) return false;
                 if(inputSymbol.hasFluid()){
-                    FluidStack fluid = symbol.resolveFluids().get(0);
-                    FluidStack inputFluid = inputSymbol.resolveFluids().get(0);
-                    if (fluid.amount < inputFluid.amount) {
+                    List<FluidStack> fluid = subSymbol.resolveFluids();
+                    List<FluidStack> inputFluid = inputSymbol.resolveFluids();
+                    List<Pair<FluidStack, FluidStack>> pairs = SignalIndustries.zip(fluid, inputFluid);
+                    if (pairs.stream().anyMatch(pair -> pair.getLeft().amount < pair.getRight().amount)) {
                         return false;
                     }
+
                 } else {
-                    ItemStack stack = symbol.resolve().get(0);
-                    ItemStack inputStack = inputSymbol.resolve().get(0);
-                    if (stack.stackSize < inputStack.stackSize) {
+                    List<ItemStack> stack = subSymbol.resolve();
+                    List<ItemStack> inputStack = inputSymbol.resolve();
+                    List<Pair<ItemStack, ItemStack>> pairs = SignalIndustries.zip(stack, inputStack);
+                    if (pairs.stream().anyMatch(pair -> pair.getLeft().stackSize < pair.getRight().stackSize)) {
                         return false;
                     }
                 }

@@ -17,7 +17,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "stone_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(Block.stone))
+                                new RecipeExtendedSymbol("minecraft:stones")
                         },
                         new ItemStack(SignalIndustries.stonePlate,2),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)
@@ -27,7 +27,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "cobblestone_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(Block.cobbleStone))
+                                new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
                         new ItemStack(SignalIndustries.cobblestonePlate,2),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)

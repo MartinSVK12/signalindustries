@@ -118,6 +118,14 @@ public class RecipeExtendedSymbol {
         return foundId && foundMeta;
     }
 
+    public boolean matches(RecipeExtendedSymbol symbol){
+        if(symbol == null) return false;
+        if(equals(symbol)) return true;
+        List<RecipeExtendedSymbol> symbols = resolve().stream().map(RecipeExtendedSymbol::new).collect(Collectors.toList());
+        List<ItemStack> checkedStacks = symbol.resolve();
+        return symbols.stream().anyMatch((S)->checkedStacks.stream().anyMatch(S::matches));
+    }
+
     public boolean matchesFluid(FluidStack fluidStack){
         if(fluidStack == null) return false;
         List<FluidStack> fluidStacks = resolveFluids();
@@ -217,6 +225,9 @@ public class RecipeExtendedSymbol {
             return false;
         return getFluidStack() != null ? getFluidStack().isFluidEqual(that.getFluidStack()) : that.getFluidStack() == null;
     }
+
+
+
     @Override
     public String toString() {
         if(stack != null && itemGroup == null){
