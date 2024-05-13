@@ -18,6 +18,8 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("saturation",1000);
         nbt.putInt("size",1);
+        CompoundTag nbt2 = new CompoundTag();
+        nbt2.putInt("size",1);
         group.register(
                 "signalum_crystal",
                 new RecipeEntryMachine(
@@ -36,7 +38,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal,8))
                         },
-                        new ItemStack(SignalIndustries.signalumCrystalEmpty,1,0),
+                        new ItemStack(SignalIndustries.signalumCrystalEmpty,1,0,nbt2),
                         new RecipeProperties(200,80,1, Tier.PROTOTYPE,false)
                 )
         );

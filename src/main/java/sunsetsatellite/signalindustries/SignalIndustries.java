@@ -827,14 +827,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .build(new BlockDilithiumBooster("reinforced.booster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
 
     //TODO: W.I.P.
-    /*public static final Block awakenedBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
+    public static final Block awakenedBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank.png","reinforced_blank.png","dilithium_top_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png","dilithium_booster_side_inactive.png",BlockSounds.METAL,5f,20f,1);
             .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("awakened_blank.png")
             .setSideTextures("awakened_booster_side_inactive.png")
             .setNorthTexture("awakened_booster_top_inactive.png")
-            .build(new BlockDilithiumBooster("awakened.booster",config.getInt("BlockIDs.awakenedBooster"), Tier.AWAKENED,Material.metal));*/
+            .build(new BlockDilithiumBooster("awakened.booster",config.getInt("BlockIDs.awakenedBooster"), Tier.AWAKENED,Material.metal));
 
     public static final Block prototypePump = new BlockBuilder(MOD_ID)
             .setHardness(1)

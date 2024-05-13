@@ -29,10 +29,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     public int cost;
     public TileEntityAutoMiner(){
         progressMaxTicks = 20;
-        cost = 50;
+        cost = 1;
         itemContents = new ItemStack[1];
         fluidCapacity[0] = Short.MAX_VALUE/2;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add(SignalIndustries.energyFlowing);
         from = new Vec3i(0,4,0);
         to = new Vec3i(-16,-y-4,16);
         workTimer.pause();
@@ -48,7 +48,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             }
 
             current.x--;
-            current.y = worldObj.findTopSolidBlock(current.x, current.z);
+            current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
             if(current.y < 1){
                 current.y = y+4;
                 //workTimer.pause();
@@ -56,10 +56,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             if(current.x < x-16){
                 current.x = x-1;
                 current.z++;
-                current.y = worldObj.findTopSolidBlock(current.x, current.z);
+                current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
                 if(current.z > z+16){
                     current.z = z+1;
-                    current.y = worldObj.findTopSolidBlock(current.x, current.z);
+                    current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
                 }
             }
 
