@@ -82,35 +82,37 @@ public class GuiCrystalCutter extends GuiFluid {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
-        int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
-        switch (((BlockContainerTiered)tile.getBlockType()).tier){
-            case PROTOTYPE:
-                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
-                break;
-            case BASIC:
-                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
-                break;
-            case REINFORCED:
-                i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_reinforced_machine_double.png");
-                break;
-            case AWAKENED:
-                break;
-        }
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(i2);
-        int i3 = (this.width - this.xSize) / 2;
-        int i4 = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(i3, i4, 0, 0, this.xSize, this.ySize);
-        int i5;
-        if(this.tile.isBurning()) {
-            i5 = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(i3 + 56, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
-        }
+        if(tile != null && tile.getBlockType() != null){
+            int i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+            switch (((BlockContainerTiered)tile.getBlockType()).tier){
+                case PROTOTYPE:
+                    i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+                    break;
+                case BASIC:
+                    i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
+                    break;
+                case REINFORCED:
+                    i2 = this.mc.renderEngine.getTexture("/assets/signalindustries/gui/generic_reinforced_machine_double.png");
+                    break;
+                case AWAKENED:
+                    break;
+            }
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            this.mc.renderEngine.bindTexture(i2);
+            int i3 = (this.width - this.xSize) / 2;
+            int i4 = (this.height - this.ySize) / 2;
+            this.drawTexturedModalRect(i3, i4, 0, 0, this.xSize, this.ySize);
+            int i5;
+            if(this.tile.isBurning()) {
+                i5 = this.tile.getBurnTimeRemainingScaled(12);
+                this.drawTexturedModalRect(i3 + 56, i4 + 36 + 12 - i5, 176, 12 - i5, 14, i5 + 2);
+            }
 
-        i5 = this.tile.getProgressScaled(24);
-        this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - (xSize - 20),i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+            i5 = this.tile.getProgressScaled(24);
+            this.drawTexturedModalRect(i3 + 79, i4 + 34, 176, 14, i5 + 1, 16);
+            if(this.tile.speedMultiplier > 1){
+                this.drawStringCentered(fontRenderer, this.tile.speedMultiplier+"x",i3 + xSize - (xSize - 20),i4 + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+            }
         }
     }
 
