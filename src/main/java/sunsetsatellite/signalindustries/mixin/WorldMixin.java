@@ -184,7 +184,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     )
     protected void wakeUpAllPlayers(CallbackInfo ci) {
 
-        if (getCurrentWeather() != null && getCurrentWeather() == SignalIndustries.weatherEclipse) {
+        if (getCurrentWeather() != null && (getCurrentWeather() == SignalIndustries.weatherEclipse || getCurrentWeather() == SignalIndustries.weatherBloodMoon)) {
             weatherManager.overrideWeather(Weather.overworldClear);
         }
 
