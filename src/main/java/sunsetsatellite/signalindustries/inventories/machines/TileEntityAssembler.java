@@ -46,7 +46,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add(SignalIndustries.energyFlowing);
     }
 
     @Override

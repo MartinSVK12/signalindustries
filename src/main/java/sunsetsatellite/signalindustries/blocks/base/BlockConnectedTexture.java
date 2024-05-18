@@ -8,7 +8,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.util.BitSet;
 
@@ -19,7 +19,7 @@ public class BlockConnectedTexture extends BlockTransparent {
         super(key, id, Material.glass);
     }
 
-    @Override
+    /*@Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
         switch (dropCause) {
             case SILK_TOUCH:
@@ -76,7 +76,7 @@ public class BlockConnectedTexture extends BlockTransparent {
 
 
     @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+    public int _getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         int meta = checkNeighbors(blockAccess, x, y, z);
         BitSet bits = intToBitSet(meta,6), subbits = new BitSet(4);
         for (int i=0;i<4;i++) {subbits.set(i,bits.get(relCoords[side.getId()][i]));}
@@ -95,5 +95,5 @@ public class BlockConnectedTexture extends BlockTransparent {
         BitSet b=new BitSet(l);int i=0;
         while (v != 0) {if (v % 2 != 0)b.set(i);++i;v=v>>>1;}
         return b;
-    }
+    }*/
 }

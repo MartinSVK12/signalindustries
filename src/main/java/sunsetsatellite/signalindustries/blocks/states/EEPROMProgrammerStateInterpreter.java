@@ -2,10 +2,10 @@ package sunsetsatellite.signalindustries.blocks.states;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.WorldSource;
+import org.useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityProgrammer;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.ItemTrigger;
-import useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 
 import java.util.HashMap;
 

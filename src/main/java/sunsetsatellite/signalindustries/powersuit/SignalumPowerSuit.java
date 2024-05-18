@@ -5,6 +5,9 @@ import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.ItemModelDispatcher;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
@@ -599,7 +602,8 @@ public class SignalumPowerSuit {
             int i = x;
             int j = y;
             for (int i1 = 0; i1 < module.contents.length; i1++) {
-                itemRenderer.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, module.contents[i1], i+3, j+3, 1.0F);
+                ItemModel model = ItemModelDispatcher.getInstance().getDispatch(module.contents[i1]);
+                model.renderItemIntoGui(Tessellator.instance, fontRenderer, this.mc.renderEngine, module.contents[i1], i+3, j+3, 1.0F);
                 GL11.glDisable(3042);
                 GL11.glDisable(2896);
                 i+=20;
@@ -618,7 +622,8 @@ public class SignalumPowerSuit {
             if (stack != null) {
                 int x = 2 ;
                 int y = height - 64 + i * 16;
-                itemRenderer.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, stack, x, y, 1.0F);
+                ItemModel model = ItemModelDispatcher.getInstance().getDispatch(stack);
+                model.renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, stack, x, y, 1.0F);
                 GL11.glDisable(3042);
                 GL11.glDisable(2896);
                 InventoryPowerSuit pieceInv = getPieceInventory(i);
@@ -626,7 +631,8 @@ public class SignalumPowerSuit {
                     int k = 16;
                     for (ItemStack content : pieceInv.contents) {
                         if(content != null){
-                            itemRenderer.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, content, x+k, y, 1.0F);
+                            model = ItemModelDispatcher.getInstance().getDispatch(content);
+                            model.renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, content, x+k, y, 1.0F);
                             k+=16;
                         }
                     }

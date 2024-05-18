@@ -36,9 +36,9 @@ public class EntityMobMixin extends EntityLiving {
     public void onLivingUpdate(CallbackInfo ci) {
         if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon) {
             if(random.nextInt(2)==1){
-                world.spawnParticle("reddust",x+random.nextFloat(),y+1,z+random.nextFloat(),0,0,0);
+                world.spawnParticle("reddust",x+random.nextFloat(),y+1,z+random.nextFloat(),0,0,0,0);
             } else {
-                world.spawnParticle("reddust",x-random.nextFloat(),y+1,z-random.nextFloat(),0,0,0);
+                world.spawnParticle("reddust",x-random.nextFloat(),y+1,z-random.nextFloat(),0,0,0,0);
             }
 
         }

@@ -2,12 +2,13 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 
 import net.minecraft.client.entity.fx.EntityFX;
-import net.minecraft.client.render.Tessellator;
+
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.awt.*;
 
@@ -89,7 +90,7 @@ public class EntityMeteorTailFX extends EntityFX {
         this.zo = this.z;
         if (this.particleAge++ >= this.particleMaxAge)
             remove();
-        this.particleTextureIndex = TextureHelper.getOrCreateParticleTextureIndex(SignalIndustries.MOD_ID,"meteor_tail.png");//7 - this.particleAge * 8 / this.particleMaxAge;
+        //this.particleTextureIndex = TextureHelper.getOrCreateParticleTextureIndex(SignalIndustries.MOD_ID,"meteor_tail.png");//7 - this.particleAge * 8 / this.particleMaxAge;
         move(this.xd, this.yd, this.zd);
         if (this.y == this.yo) {
             this.xd *= 1.1D;

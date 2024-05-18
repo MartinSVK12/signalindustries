@@ -200,7 +200,7 @@ public class EntityCrystal extends Entity {
                 SignalIndustries.spawnParticle(new EntityDustCloudFX(world, this.x, this.y, this.z, 0, 0, 0, red, 0.0f, 0.0f));
                 //this.world.spawnParticle("dustcloud", this.x, this.y, this.z, 0.0, 0.0, 0.0);
                 for (int i = 0; i < 4; i++) {
-                    this.world.spawnParticle("crystalbreak", this.x, this.y, this.z, 0.0, 0.0, 0.0);
+                    this.world.spawnParticle("crystalbreak", this.x, this.y, this.z, 0.0, 0.0, 0.0,0);
                 }
             }
 
@@ -239,7 +239,7 @@ public class EntityCrystal extends Entity {
         if (this.isInWater()) {
             for(int k = 0; k < 4; ++k) {
                 float f3 = 0.25F;
-                this.world.spawnParticle("bubble", this.x - this.xd * (double)f3, this.y - this.yd * (double)f3, this.z - this.zd * (double)f3, this.xd, this.yd, this.zd);
+                this.world.spawnParticle("bubble", this.x - this.xd * (double)f3, this.y - this.yd * (double)f3, this.z - this.zd * (double)f3, this.xd, this.yd, this.zd,0);
             }
 
             f1 = 0.8F;

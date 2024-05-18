@@ -85,7 +85,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 ((INBTCompound)itemstack.getData().getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
                 entityplayer.triggerAchievement(SignalIndustriesAchievementPage.PULSE);
-                world.spawnParticle("pulse_shockwave", entityplayer.x, entityplayer.y, entityplayer.z, 0.0, 0.0, 0.0);
+                world.spawnParticle("pulse_shockwave", entityplayer.x, entityplayer.y, entityplayer.z, 0.0, 0.0, 0.0,0);
             }
             return itemstack;
         }
@@ -119,7 +119,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
         super.inventoryTick(itemstack, world, entity, i, flag);
     }
 
-    @Override
+    /*@Override
     public int getIconIndex(ItemStack itemstack) {
         if(getFluidStack(0,itemstack).getInteger("amount") <= 0 && itemstack.getData().getByte("charge") <= 0){
             return Item.iconCoordToIndex(SignalIndustries.pulsarTex[0][0],SignalIndustries.pulsarTex[0][1]);
@@ -135,7 +135,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
             }
         }
         return tex;
-    }
+    }*/
 
     public int getItemIdFromSlot(int id, ItemStack stack){
         return stack.getData().getCompound("inventory").getCompound(String.valueOf(id)).getShort("id");

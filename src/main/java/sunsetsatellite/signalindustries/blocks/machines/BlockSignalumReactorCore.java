@@ -47,7 +47,7 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
                 SignalIndustries.displayGui(entityplayer, () -> new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
                 entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
             } else {
-                entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
+                entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }
@@ -59,27 +59,4 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
         return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
     }
 
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntitySignalumReactor tile = (TileEntitySignalumReactor) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isActive() && tile.tier == tier){
-            return SignalIndustries.textures.get(tile.tier.name()+".signalumReactorCore.active").getTexture(Side.getSideById(index));
-        }
-
-        return this.atlasIndices[index];
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntitySignalumReactor tile = (TileEntitySignalumReactor) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side];
-        if(tile.isActive() && tile.tier == tier){
-            return SignalIndustries.textures.get(tile.tier.name()+".signalumReactorCore.active.overlay").getTexture(Side.getSideById(index));
-        }
-
-        return -1;
-    }
 }

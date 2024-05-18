@@ -2,7 +2,8 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 
 import net.minecraft.client.entity.fx.EntityFX;
-import net.minecraft.client.render.Tessellator;
+
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.world.World;
 
 public class EntityColorParticleFX extends EntityFX {
@@ -70,7 +71,7 @@ public class EntityColorParticleFX extends EntityFX {
         this.zo = this.z;
         if (this.particleAge++ >= this.particleMaxAge)
             remove();
-        this.particleTextureIndex = 7 - this.particleAge * 8 / this.particleMaxAge;
+        //this.particleTextureIndex = 7 - this.particleAge * 8 / this.particleMaxAge;
         move(this.xd, this.yd, this.zd);
         if (this.y == this.yo) {
             this.xd *= 1.1D;

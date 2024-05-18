@@ -1,23 +1,16 @@
-package sunsetsatellite.signalindustries.util;//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.render.Lighting;
-import net.minecraft.client.render.TextureFX;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.core.Global;
-import net.minecraft.core.WeightedRandomBag;
-import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.slot.Slot;
-import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
 
 public class GuiRenderItemNoOverlay extends Gui {
+    //FIXME
     static ItemEntityRenderer itemRenderer = new ItemEntityRenderer();
     Minecraft mc;
 
@@ -26,7 +19,7 @@ public class GuiRenderItemNoOverlay extends Gui {
     }
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot) {
-        boolean hasDrawnSlotBackground = false;
+        /*boolean hasDrawnSlotBackground = false;
         boolean discovered = true;
         Lighting.enableInventoryLight();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -44,7 +37,7 @@ public class GuiRenderItemNoOverlay extends Gui {
 
         if (!hasDrawnSlotBackground) {
             GL11.glEnable(2929);
-            itemRenderer.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? 1.0F : 0.0F, 1.0F);
+            itemRenderer.renderItemIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? 1.0F : 0.0F, 1.0F);*/
             /*if (slot instanceof SlotGuidebook) {
                 if (((SlotGuidebook)slot).recipe instanceof RecipeEntryTrommel && ((SlotGuidebook)slot).item != null && ((SlotGuidebook)slot).isOutput) {
                     WeightedRandomBag<WeightedRandomLootObject> loot = (WeightedRandomBag)((RecipeEntryTrommel)((SlotGuidebook)slot).recipe).getOutput();
@@ -69,7 +62,7 @@ public class GuiRenderItemNoOverlay extends Gui {
                 itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? null : "?", 1.0F);
             }*/
 
-            GL11.glDisable(2929);
+            /*GL11.glDisable(2929);
         }
 
         if (isSelected) {
@@ -83,7 +76,7 @@ public class GuiRenderItemNoOverlay extends Gui {
         GL11.glDisable(32826);
         Lighting.disable();
         GL11.glDisable(2896);
-        GL11.glDisable(2929);
+        GL11.glDisable(2929);*/
     }
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected) {

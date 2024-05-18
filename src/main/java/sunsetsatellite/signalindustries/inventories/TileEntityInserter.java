@@ -125,11 +125,11 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
             } else {
                 if(item.item.itemID < 16384){
                     for (int i = 0; i < 4; i++) {
-                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, Block.getBlock(item.item.itemID),0));
+                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, Block.getBlock(item.item.itemID),0, item.item.getMetadata()));
                     }
                 } else {
                     for (int i = 0; i < 4; i++) {
-                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, getBlockType(),0));
+                        SignalIndustries.spawnParticle(new EntityDiggingFX(worldObj, item.x, item.y, item.z, 0,0,0, getBlockType(),0, item.item.getMetadata()));
                     }
                 }
             }

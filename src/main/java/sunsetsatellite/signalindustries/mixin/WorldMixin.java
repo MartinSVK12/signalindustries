@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.mixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.enums.Difficulty;
 import net.minecraft.client.render.camera.ICamera;
-import net.minecraft.client.render.colorizer.ColorizerWater;
 import net.minecraft.core.Global;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -78,7 +77,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     }
 
     @Inject(
-            method = "doLightingUpdate",
+            method = "allChanged",
             at = @At("HEAD")
     )
     public void doBloodMoon(CallbackInfo ci){
@@ -93,7 +92,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
             if(rand.nextInt(16) == 15 && !(difficultySetting == 0) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
                 for (EntityPlayer player : players) {
-                    player.addChatMessage(TextFormatting.RED+"A Blood Moon is rising!");
+                    player.sendMessage(TextFormatting.RED+"A Blood Moon is rising!");
                     player.triggerAchievement(SignalIndustriesAchievementPage.BLOOD_MOON);
                 }
                 weatherManager.overrideWeather(SignalIndustries.weatherBloodMoon,13000,1);
@@ -103,16 +102,17 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             weatherManager.overrideWeather(Weather.overworldClear);
         }
         if (!Global.isServer){
-            if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+            //FIXME:
+            /*if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
                 ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
             } else {
                 ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
-            }
+            }*/
         }
     }
 
     @Inject(
-            method = "doLightingUpdate",
+            method = "allChanged",
             at = @At("HEAD")
     )
     public void doMeteorShower(CallbackInfo ci){
@@ -127,7 +127,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
             if(rand.nextInt(24) == 0 && getCurrentWeather() != SignalIndustries.weatherMeteorShower){
                 for (EntityPlayer player : players) {
-                    player.addChatMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
+                    player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
                     player.triggerAchievement(SignalIndustriesAchievementPage.STARFALL);
                 }
                 weatherManager.overrideWeather(SignalIndustries.weatherMeteorShower,60*20,1);
@@ -162,7 +162,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     }
 
     @Inject(
-            method = "doLightingUpdate",
+            method = "allChanged",
             at = @At("HEAD")
     )
     public void doSolarEclipse(CallbackInfo ci){
@@ -171,7 +171,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayTime = (int)(worldTime % (long)dayLength);
         if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SignalIndustries.weatherEclipse ){
             for (EntityPlayer player : players) {
-                player.addChatMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
+                player.sendMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
                 player.triggerAchievement(SignalIndustriesAchievementPage.ECLIPSE);
             }
             weatherManager.overrideWeather(SignalIndustries.weatherEclipse,Global.DAY_LENGTH_TICKS,1);

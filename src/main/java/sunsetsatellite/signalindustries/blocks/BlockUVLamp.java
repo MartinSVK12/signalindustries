@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityUVLamp;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -67,19 +67,5 @@ public class BlockUVLamp extends BlockTileEntity {
 				world.scheduleBlockUpdate(i, j, k, id, tickRate());
 			}
 		}
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        return blockAccess.getBlockMetadata(x,y,z) == 1 ? TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"uv_lamp_overlay.png") : -1;
-    }
-
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        if(blockAccess.getBlockMetadata(x,y,z) == 1){
-            return SignalIndustries.textures.get("uvLamp.active").getTexture(side);
-        } else {
-            return atlasIndices[0];
-        }
     }
 }

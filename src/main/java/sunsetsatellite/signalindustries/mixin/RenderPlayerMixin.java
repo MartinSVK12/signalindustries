@@ -56,7 +56,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         Item item = itemstack.getItem();
         if(item instanceof ItemArmorTiered){
             ItemArmor itemarmor = (ItemArmor)item;
-            this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.name + "_" + (i != 2 ? 1 : 2) + ".png");
+            this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.identifier.value + "_" + (i != 2 ? 1 : 2) + ".png");
             ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
             modelbiped.bipedHead.showModel = i == 0;
             modelbiped.bipedHeadOverlay.showModel = i == 0;
@@ -70,7 +70,7 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         }
     }
 
-    @Inject(
+    /*@Inject(
             method = "renderSpecials",
             at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V",ordinal = 7,shift = At.Shift.BEFORE)
     )
@@ -79,11 +79,8 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         if(stack.getItem() instanceof ItemPulsar){
             GL11.glRotatef(160f, 0.0F, -1.2F, 1.55F);
             GL11.glTranslatef(-0.15F, 0.15f, 0.25F);
-            /*if(stack.getData().getByte("charge") >= 100){
-
-            }*/
         }
-    }
+    }*/
 
     @Inject(
             method = "renderSpecials",

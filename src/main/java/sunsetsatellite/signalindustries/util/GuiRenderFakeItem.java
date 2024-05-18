@@ -2,23 +2,16 @@ package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.core.Global;
-import net.minecraft.core.WeightedRandomBag;
-import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
+
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.client.render.Lighting;
-import net.minecraft.client.render.entity.ItemEntityRenderer;
+
 import net.minecraft.core.player.inventory.slot.Slot;
-import net.minecraft.client.render.TextureFX;
-import net.minecraft.core.player.inventory.slot.SlotGuidebook;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
+
 
 public class GuiRenderFakeItem extends Gui
 {
-    static ItemEntityRenderer itemRenderer = new ItemEntityRenderer();
 
+    //FIXME
     Minecraft mc;
 
     public GuiRenderFakeItem(Minecraft mc)
@@ -28,7 +21,7 @@ public class GuiRenderFakeItem extends Gui
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot)
     {
-        boolean hasDrawnSlotBackground = false;
+        /*boolean hasDrawnSlotBackground = false;
         float alpha = 0.5f;
 
         // Do setup
@@ -98,7 +91,7 @@ public class GuiRenderFakeItem extends Gui
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         Lighting.disable();
         GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);*/
     }
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected)

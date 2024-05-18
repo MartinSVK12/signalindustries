@@ -170,13 +170,13 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         return true;
     }
 
-    @Override
+    /*@Override
     public int getIconIndex(ItemStack itemstack) {
         if(itemstack.getData().getBoolean("active")){
             return Item.iconCoordToIndex(SignalIndustries.saberTex[1][0],SignalIndustries.saberTex[1][1]);
         }
         return Item.iconCoordToIndex(SignalIndustries.saberTex[0][0],SignalIndustries.saberTex[0][1]);
-    }
+    }*/
 
     @Override
     public int getDamageVsEntity(Entity entity, ItemStack stack) {

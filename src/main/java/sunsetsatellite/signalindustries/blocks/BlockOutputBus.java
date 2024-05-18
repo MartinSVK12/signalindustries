@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.containers.ContainerItemBus;
 import sunsetsatellite.signalindustries.gui.GuiItemBus;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.util.Tier;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,11 +24,6 @@ public class BlockOutputBus extends BlockContainerTiered {
     public BlockOutputBus(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"output_overlay.png");
     }
 
     @Override

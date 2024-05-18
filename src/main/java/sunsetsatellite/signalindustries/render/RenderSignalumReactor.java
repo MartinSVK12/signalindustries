@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.render;
 
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
@@ -10,9 +11,9 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumR
 public class RenderSignalumReactor extends RenderMultiblock {
 
     @Override
-    public void doRender(TileEntity tileEntity, double d, double e, double f, float g) {
+    public void doRender(Tessellator tessellator, TileEntity tileEntity, double d, double e, double f, float g) {
         TileEntitySignalumReactor reactor = (TileEntitySignalumReactor) tileEntity;
-        super.doRender(tileEntity, d, e, f, g);
+        super.doRender(tessellator, tileEntity, d, e, f, g);
         float fluidAmount = reactor.getFuel() + reactor.getDepletedFuel();
         float fluidMaxAmount = 4000*9;
         int fluidId = SignalIndustries.energyFlowing.id;
@@ -28,7 +29,7 @@ public class RenderSignalumReactor extends RenderMultiblock {
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable( GL11.GL_BLEND );
-            this.drawBlock(this.getFontRenderer(), this.renderDispatcher.renderEngine.mc.renderEngine, fluidId, 0, 0, 0, 0, tileEntity);
+            this.drawBlock(tessellator, this.renderDispatcher.renderEngine.mc.renderEngine, fluidId, 0, 0, 0, 0, tileEntity);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
         }

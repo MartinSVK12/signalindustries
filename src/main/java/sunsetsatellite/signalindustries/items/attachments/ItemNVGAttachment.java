@@ -27,14 +27,14 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
         Minecraft mc = Minecraft.getMinecraft(this);
         if(signalumPowerSuit.getEnergy() >= 1 ) {
             if (Shaders.enableShaders) {
-                if (mc.render instanceof ShadersRendererSI) {
+                if (mc.renderer instanceof ShadersRendererSI) {
                     mc.setRenderer(new ShadersRenderer(mc));
-                    mc.render.reload();
+                    mc.renderer.reload();
                     mc.fullbright = false;
                     mc.renderGlobal.loadRenderers();
                 } else {
                     mc.setRenderer(new ShadersRendererSI(mc, "nightvision/", signalumPowerSuit));
-                    mc.render.reload();
+                    mc.renderer.reload();
                     mc.fullbright = true;
                     mc.renderGlobal.loadRenderers();
                 }
@@ -49,10 +49,10 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
         super.tick(stack, signalumPowerSuit, player, world, slot);
         if (Global.isServer) return;
         Minecraft mc = Minecraft.getMinecraft(this);
-        if(mc.render instanceof ShadersRendererSI){
+        if(mc.renderer instanceof ShadersRendererSI){
             if(signalumPowerSuit.getEnergy() < 1 ){
                 mc.setRenderer(new ShadersRenderer(mc));
-                mc.render.reload();
+                mc.renderer.reload();
                 mc.fullbright = false;
                 mc.renderGlobal.loadRenderers();
             } else {
@@ -64,9 +64,9 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
     public static void disable(){
         if (Global.isServer) return;
         Minecraft mc = Minecraft.getMinecraft(SignalIndustries.class);
-        if (mc.render instanceof ShadersRendererSI) {
+        if (mc.renderer instanceof ShadersRendererSI) {
             mc.setRenderer(new ShadersRenderer(mc));
-            mc.render.reload();
+            mc.renderer.reload();
             mc.fullbright = false;
             mc.renderGlobal.loadRenderers();
         }

@@ -10,7 +10,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 public class BlockDilithiumRail extends BlockRail {
 
@@ -184,27 +184,5 @@ public class BlockDilithiumRail extends BlockRail {
         }
 
         return false;
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-       if((blockAccess.getBlockMetadata(x, y, z) & 8) != 0){
-          return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"dilithium_rail_overlay.png");
-       }
-       return -1;
-    }
-
-    @Override
-    public int getBlockTextureFromSideAndMetadata(Side side, int j) {
-        if(SignalIndustries.dilithiumRail != null) {
-            if (this.id == SignalIndustries.dilithiumRail.id) {
-                if ((j & 0x8) == 0) {
-                    return texCoordToIndex(SignalIndustries.railTex[0][0], SignalIndustries.railTex[0][1]);
-                } else {
-                    return texCoordToIndex(SignalIndustries.railTex[1][0], SignalIndustries.railTex[1][1]);
-                }
-            }
-        }
-        return texCoordToIndex(SignalIndustries.railTex[0][0], SignalIndustries.railTex[0][1]);
     }
 }

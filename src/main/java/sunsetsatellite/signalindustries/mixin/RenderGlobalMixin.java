@@ -8,7 +8,8 @@ import net.minecraft.client.entity.fx.EntitySlimeChunkFX;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.RenderGlobal;
-import net.minecraft.client.render.Tessellator;
+
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
@@ -44,24 +45,24 @@ public class RenderGlobalMixin {
     @Shadow private World worldObj;
 
     @Inject(
-            method = "addParticle(Ljava/lang/String;DDDDDD)V",
+            method = "addParticle(Ljava/lang/String;DDDDDDID)V",
             at = @At("HEAD")
     )
-    public void spawnParticle(String s, double x, double y, double z, double xd, double yd, double zd, CallbackInfo ci) {
+    public void spawnParticle(String particleId, double x, double y, double z, double motionX, double motionY, double motionZ, int data, double maxDistance, CallbackInfo ci) {
         if (this.mc != null && this.mc.thePlayer != null && this.mc.effectRenderer != null) {
             double d6 = this.mc.thePlayer.x - x;
             double d7 = this.mc.thePlayer.y - y;
             double d8 = this.mc.thePlayer.z - z;
             double d9 = 16.0;
             if (!(d6 * d6 + d7 * d7 + d8 * d8 > d9 * d9)) {
-                if (s.equals("crystalbreak")) {
+                if (particleId.equals("crystalbreak")) {
                     this.mc.effectRenderer.addEffect(new EntitySlimeChunkFX(this.worldObj, x, y, z, SignalIndustries.signalumCrystal));
                 }
-                if(s.equals("dustcloud")){
-                    this.mc.effectRenderer.addEffect(new EntityDustCloudFX(this.worldObj,x,y,z,xd,yd,zd));
+                if(particleId.equals("dustcloud")){
+                    this.mc.effectRenderer.addEffect(new EntityDustCloudFX(this.worldObj,x,y,z,motionX,motionY,motionZ));
                 }
-                if(s.equals("pulse_shockwave")){
-                    this.mc.effectRenderer.addEffect(new EntityShockwaveFX(this.worldObj,x,y,z,xd,yd,zd,this.mc.thePlayer));
+                if(particleId.equals("pulse_shockwave")){
+                    this.mc.effectRenderer.addEffect(new EntityShockwaveFX(this.worldObj,x,y,z,motionX,motionY,motionZ,this.mc.thePlayer));
                 }
             }
         }
@@ -96,7 +97,7 @@ public class RenderGlobalMixin {
             at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void renderMeteorShower(float partialTicks, CallbackInfo ci, @Local(name = "f6")LocalFloatRef f6) {
+    public void renderMeteorShower(float partialTicks, CallbackInfo ci, @Local(name = "sunAlpha")LocalFloatRef f6) {
         if(worldObj.getCurrentWeather() == SignalIndustries.weatherMeteorShower){
             f6.set(1.5f);
             GL11.glColor4f( 1,1, 1,1.0f);

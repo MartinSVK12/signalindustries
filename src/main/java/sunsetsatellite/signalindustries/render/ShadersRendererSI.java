@@ -30,7 +30,7 @@ public class ShadersRendererSI extends ShadersRenderer {
         if(powerSuit != null){
             if(!powerSuit.hasAttachment((ItemAttachment) SignalIndustries.nightVisionLens) || !powerSuit.active){
                 mc.setRenderer(new ShadersRenderer(mc));
-                mc.render.reload();
+                mc.renderer.reload();
                 mc.fullbright = false;
                 mc.renderGlobal.loadRenderers();
                 return;

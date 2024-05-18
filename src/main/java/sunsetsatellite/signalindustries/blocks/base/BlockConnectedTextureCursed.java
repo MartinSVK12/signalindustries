@@ -7,7 +7,6 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import turniplabs.halplibe.helper.TextureHelper;
 
 public class BlockConnectedTextureCursed extends BlockTransparent {
 
@@ -19,8 +18,8 @@ public class BlockConnectedTextureCursed extends BlockTransparent {
 
     //what you're about to witness is probably the worst code I have ever written, I'm very sorry
     //please oh lord, forgive me
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+    /*@Override
+    public int _getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         int index = Sides.orientationLookUpHorizontal[side.getId()];
         boolean up = blockAccess.getBlock(x,y+1,z) == this;
         boolean down = blockAccess.getBlock(x,y-1,z) == this;
@@ -1231,9 +1230,9 @@ public class BlockConnectedTextureCursed extends BlockTransparent {
     }
 
     @Override
-    public int getBlockTextureFromSideAndMetadata(Side side, int meta) {
+    public int _getBlockTextureFromSideAndMetadata(Side side, int meta) {
         int index = Sides.orientationLookUpHorizontal[side.getId()];
         int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,this.baseTexture+".png");
         return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
-    }
+    }*/
 }

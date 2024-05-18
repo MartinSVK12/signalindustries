@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.util.helper.Side;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.io.DataOutputStream;
 import java.io.File;
@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BlockDataExporter {
+    //FIXME
     public static void export(Class<?> clazz) {
         List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getDeclaredFields()));
         fields.removeIf((F)->F.getType() != Block.class);
@@ -37,14 +38,14 @@ public class BlockDataExporter {
                 if(side == Side.NONE) continue;
                 int index = block.atlasIndices[side.getId()];
                 String file = "";
-                for (Map.Entry<String, int[]> entry : TextureHelper.registeredBlockTextures.entrySet()) {
+                /*for (Map.Entry<String, int[]> entry : TextureHelper.registeredBlockTextures.entrySet()) {
                     String K = entry.getKey();
                     int[] V = entry.getValue();
                     int texIndex = Block.texCoordToIndex(V[0],V[1]);
                     if(texIndex == index){
                         file = K;
                     }
-                }
+                }*/
                 if(file.isEmpty()){
                     uv.putString(side.name(),"no_tex.png");
                 } else {

@@ -230,7 +230,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         return text.toString();
     }
 
-    @Override
+    /*@Override
     public int getIconIndex(ItemStack itemstack) {
         int fuel = itemstack.getData().getInteger("fuel");
         int depleted = itemstack.getData().getInteger("depleted");
@@ -241,5 +241,5 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             return Item.iconCoordToIndex(SignalIndustries.fuelCellTex[1][0],SignalIndustries.fuelCellTex[1][1]);
         }
-    }
+    }*/
 }

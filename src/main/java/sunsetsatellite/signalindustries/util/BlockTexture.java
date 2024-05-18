@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.util;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.core.util.Direction;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 public class BlockTexture {
     private int[] topTexture = new int[]{0,0};
@@ -18,7 +18,7 @@ public class BlockTexture {
         this.modId = modId;
     }
 
-    public BlockTexture setAll(String texture){
+    /*public BlockTexture setAll(String texture){
         this.topTexture = TextureHelper.getOrCreateBlockTexture(modId,texture);
         this.bottomTexture = TextureHelper.getOrCreateBlockTexture(modId,texture);
         this.northTexture = TextureHelper.getOrCreateBlockTexture(modId,texture);
@@ -114,5 +114,5 @@ public class BlockTexture {
                 return -1;
         }
         return -1;
-    }
+    }*/
 }

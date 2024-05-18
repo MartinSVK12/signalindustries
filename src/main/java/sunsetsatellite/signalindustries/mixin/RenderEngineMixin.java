@@ -32,8 +32,8 @@ public abstract class RenderEngineMixin {
             at = @At(value = "TAIL"),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void initSIDynamicTextures(List<Throwable> errors, CallbackInfo ci, int terrainResolution, int itemsResolution) {
+    public void initSIDynamicTextures(List<Throwable> errors, CallbackInfo ci) {
         SignalIndustries.LOGGER.info("Loading dynamic textures..");
-        dynamicTextures.add(new DynamicTextureMeteorTracker(mc,itemsResolution));
+        //dynamicTextures.add(new DynamicTextureMeteorTracker(mc));
     }
 }

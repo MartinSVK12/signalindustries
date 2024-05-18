@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -13,7 +14,7 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
 
     private final GuiRenderItemNoOverlay itemRenderer = new GuiRenderItemNoOverlay(Minecraft.getMinecraft(this));
     @Override
-    public void doRender(TileEntityStorageContainer tileEntity, double x, double y, double z, float g) {
+    public void doRender(Tessellator tessellator, TileEntityStorageContainer tileEntity, double x, double y, double z, float g) {
         GL11.glPushMatrix();
         float scale = 0.6666667F;
         float rot;

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
 import net.minecraft.client.render.ItemRenderer;
 import net.minecraft.client.render.Lighting;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
@@ -17,7 +18,7 @@ public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAs
 
     private final GuiRenderItem itemRenderer = new GuiRenderItem(Minecraft.getMinecraft(this));
     @Override
-    public void doRender(TileEntityAssembler tileEntity, double x, double y, double z, float g) {
+    public void doRender(Tessellator tessellator, TileEntityAssembler tileEntity, double x, double y, double z, float g) {
         GL11.glPushMatrix();
         float scale = 0.6666667F;
         float rot;

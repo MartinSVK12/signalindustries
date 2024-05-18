@@ -103,20 +103,13 @@ public class BlockStorageContainer extends BlockContainerTiered {
                 } else {
                     tile.locked = !tile.locked;
                     if(tile.locked){
-                        player.addChatMessage("event.signalindustries.containerLocked");
+                        player.sendMessage("event.signalindustries.containerLocked");
                     } else {
-                        player.addChatMessage("event.signalindustries.containerUnlocked");
+                        player.sendMessage("event.signalindustries.containerUnlocked");
                     }
                 }
             }
         }
         return false;
-    }
-
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        return this.atlasIndices[index];
     }
 }

@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 
 public class RenderReinforcedWrathBeacon extends RenderMultiblock {
     @Override
-    public void doRender(TileEntity tileEntity, double d, double e, double f, float g) {
-        super.doRender(tileEntity, d, e, f, g);
+    public void doRender(Tessellator tessellator, TileEntity tileEntity, double d, double e, double f, float g) {
+        super.doRender(tessellator, tileEntity, d, e, f, g);
         TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) tileEntity;
         if(tile.active && !tile.enemiesLeft.isEmpty() && tile.suddenDeath){
             for(int i = 0; i < tile.enemiesLeft.size(); i++){

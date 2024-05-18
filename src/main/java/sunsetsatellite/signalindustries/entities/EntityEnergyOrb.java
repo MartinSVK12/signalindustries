@@ -248,7 +248,7 @@ public class EntityEnergyOrb extends Entity {
         if (this.isInWater()) {
             for (int i1 = 0; i1 < 4; ++i1) {
                 float f6 = 0.25f;
-                this.world.spawnParticle("bubble", this.x - this.xd * (double)f6, this.y - this.yd * (double)f6, this.z - this.zd * (double)f6, this.xd, this.yd, this.zd);
+                this.world.spawnParticle("bubble", this.x - this.xd * (double)f6, this.y - this.yd * (double)f6, this.z - this.zd * (double)f6, this.xd, this.yd, this.zd,0);
             }
             f3 = 0.8f;
         }

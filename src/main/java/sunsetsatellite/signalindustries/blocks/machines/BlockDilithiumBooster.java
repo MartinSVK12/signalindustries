@@ -20,7 +20,6 @@ import sunsetsatellite.signalindustries.gui.GuiBooster;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
-import turniplabs.halplibe.helper.TextureHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -92,51 +91,4 @@ public class BlockDilithiumBooster extends BlockContainerTiered {
         }
     }
 
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityBooster tile = (TileEntityBooster) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning()){
-            return SignalIndustries.textures.get(tier.name()+"booster.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntityBooster tile = (TileEntityBooster) blockAccess.getBlockTileEntity(x,y,z);
-        if(tile.preview != IOPreview.NONE){
-            Direction dir = Direction.getDirectionFromSide(side);
-            Connection con = Connection.NONE;
-            switch (tile.preview){
-                case ITEM: {
-                    con = tile.itemConnections.get(dir);
-                    break;
-                }
-                case FLUID: {
-                    con = tile.fluidConnections.get(dir);
-                    break;
-                }
-            }
-            switch (con){
-                case INPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"input_overlay.png");
-                case OUTPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"output_overlay.png");
-                case BOTH:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"both_io_overlay.png");
-                case NONE:
-                    return -1;
-            }
-        } else {
-            int meta = blockAccess.getBlockMetadata(x, y, z);
-            int index = Sides.orientationLookUpHorizontal[6 * meta + side];
-            if (tile.isBurning()) {
-                return SignalIndustries.textures.get(tier.name()+"booster.active.overlay").getTexture(Side.getSideById(index));
-            }
-            return -1;
-        }
-        return -1;
-    }
 }

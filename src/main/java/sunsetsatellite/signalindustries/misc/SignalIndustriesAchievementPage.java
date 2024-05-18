@@ -1,7 +1,9 @@
 package sunsetsatellite.signalindustries.misc;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.TextureFX;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.core.Global;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.achievement.AchievementList;
@@ -82,39 +84,61 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
     public static final Achievement ECLIPSE = new Achievement(nextAchievementID++, key("eclipse"),-2,4-offsetY, infernalFragment,null);
     public static final Achievement STARFALL = new Achievement(nextAchievementID++, key("starfall"),-2,8-offsetY, Block.lampActive,null);
 
-    @Override
-    public void getBackground(GuiAchievements guiAchievements, Random random,  int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {
-        for(int l7 = 0; l7 * 16 - blockY2 < 155; ++l7) {
-            float f5 = 0.6F - (float)(blockY1 + l7) / 25.0F * 0.3F;
-            GL11.glColor4f(f5, f5, f5, 1.0F);
 
-            for(int i8 = 0; i8 * 16 - blockX2 < 224; ++i8) {
-                random.setSeed((long)(1234 + blockX1 + i8));
+    @Override
+    public void getBackground(GuiAchievements guiAchievements, Random random, int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {
+        for(int row = 0; row * 16 - blockY2 < 155; ++row) {
+            float brightness = 0.6F - (float)(blockY1 + row) / 25.0F * 0.3F;
+            GL11.glColor4f(brightness, brightness, brightness, 1.0F);
+
+            for(int column = 0; column * 16 - blockX2 < 224; ++column) {
+                random.setSeed(1234 + blockX1 + column);
                 random.nextInt();
-                int j8 = random.nextInt(1 + blockY1 + l7) + (blockY1 + l7) / 2;
-                int k8 = Block.sand.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                if (j8 <= 37 && blockY1 + l7 != 35) {
-                    if (j8 == 22) {
-                        k8 = dilithiumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    } else if (j8 == 10) {
-                        k8 = Block.oreIronBasalt.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    } else if (j8 == 8) {
-                        k8 = signalumOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    } else if (j8 > 4) {
-                        k8 = Block.basalt.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    } else if (j8 > 0) {
-                        k8 = Block.stone.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    }
-                } else {
-                    if (random.nextInt(2) == 0) {
-                        k8 = dimensionalShardOre.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    } else {
-                        k8 = realityFabric.getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
-                    }
+                int randomY = random.nextInt(1 + blockY1 + row) + (blockY1 + row) / 2;
+                IconCoordinate texture = this.getTextureFromBlock(Block.stone);
+                Block[] oreArray = stoneOres;
+                if (randomY >= 28 || blockY1 + row > 24) {
+                    oreArray = basaltOres;
                 }
 
-                guiAchievements.drawTexturedModalRect(iOffset + i8 * 16 - blockX2, jOffset + l7 * 16 - blockY2, k8 % Global.TEXTURE_ATLAS_WIDTH_TILES * TextureFX.tileWidthTerrain, k8 / Global.TEXTURE_ATLAS_WIDTH_TILES * TextureFX.tileWidthTerrain, 16, 16, TextureFX.tileWidthTerrain, 1.0F / (float)(Global.TEXTURE_ATLAS_WIDTH_TILES * TextureFX.tileWidthTerrain));
+                if (randomY <= 37 && blockY1 + row != 35) {
+                    if (randomY == 22) {
+                        if (random.nextInt(2) == 0) {
+                            texture = this.getTextureFromBlock(oreArray[3]);
+                        } else {
+                            texture = this.getTextureFromBlock(oreArray[4]);
+                        }
+                    } else if (randomY == 10) {
+                        texture = this.getTextureFromBlock(oreArray[1]);
+                    } else if (randomY == 8) {
+                        texture = this.getTextureFromBlock(oreArray[0]);
+                    } else if (randomY > 4) {
+                        texture = this.getTextureFromBlock(Block.stone);
+                        if (randomY >= 28 || blockY1 + row > 24) {
+                            texture = this.getTextureFromBlock(Block.basalt);
+                        }
+                    } else if (randomY > 0) {
+                        texture = this.getTextureFromBlock(Block.stone);
+                    }
+                } else {
+                    texture = this.getTextureFromBlock(realityFabric);
+                }
+
+
             }
         }
+
+    }
+
+    private static final Block[] stoneOres;
+    private static final Block[] basaltOres;
+
+    static {
+        stoneOres = new Block[]{Block.oreIronStone};
+        basaltOres = new Block[]{Block.oreIronBasalt, signalumOre, dilithiumOre};
+    }
+
+    protected IconCoordinate getTextureFromBlock(Block block) {
+        return ((BlockModel<?>) BlockModelDispatcher.getInstance().getDispatch(block)).getBlockTextureFromSideAndMetadata(Side.BOTTOM, 0);
     }
 }

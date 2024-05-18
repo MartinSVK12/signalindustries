@@ -3,11 +3,10 @@ package sunsetsatellite.signalindustries.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.RenderBlocks;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.TextureFX;
+
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
-import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
@@ -32,7 +31,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
     private final RenderBlocks renderBlocks = new RenderBlocks();
 
     @Override
-    public void doRender(TileEntityItemConduit tileEntity, double x, double y, double z, float g) {
+    public void doRender(Tessellator tessellator, TileEntityItemConduit tileEntity, double x, double y, double z, float g) {
         for (TileEntityItemConduit.PipeItem content : tileEntity.getContents()) {
             Direction begin = content.getEntry();
             Direction end = content.getExit();
@@ -84,7 +83,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
     }
 
     public void doRenderItem(ItemStack itemstack, double d, double d1, double d2, float f, float f1) {
-        this.random.setSeed(187L);
+       /* this.random.setSeed(187L);
         if (itemstack == null) {
             return;
         }
@@ -155,7 +154,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                 float f19 = (float)(k & 0xFF) / 255.0f;
                 float f21 = 1.0f;
                 GL11.glColor4f(f15 * f21, f17 * f21, f19 * f21, 1.0f);
-            }
+            }*/
             /*if (Minecraft.getMinecraft(this).gameSettings.items3D.value) {
                 GL11.glPushMatrix();
                 GL11.glScaled(1.0, 1.0, 1.0);
@@ -169,7 +168,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                 }
                 GL11.glPopMatrix();
             } else {*/
-                for (int l = 0; l < renderCount; ++l) {
+                /*for (int l = 0; l < renderCount; ++l) {
                     GL11.glPushMatrix();
                     if (l > 0) {
                         float f16 = (this.random.nextFloat() * 2.0f - 1.0f) * 0.3f;
@@ -190,6 +189,6 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
             //}
         }
         GL11.glDisable(32826);
-        GL11.glPopMatrix();
+        GL11.glPopMatrix();*/
     }
 }

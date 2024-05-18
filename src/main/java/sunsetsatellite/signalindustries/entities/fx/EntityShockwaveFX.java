@@ -2,7 +2,8 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 
 import net.minecraft.client.entity.fx.EntityFX;
-import net.minecraft.client.render.Tessellator;
+
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
@@ -32,7 +33,7 @@ public class EntityShockwaveFX extends EntityFX {
             double d2 = this.x + (this.random.nextDouble() - this.random.nextDouble()) * timeSinceStart;
             double d4 = this.y - 0.3;
             double d6 = this.z + (this.random.nextDouble() - this.random.nextDouble()) * timeSinceStart;
-            this.world.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D);
+            this.world.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D,0);
         }
 
         Vec3d vec3d = Vec3d.createVector(this.x, this.y, this.z);

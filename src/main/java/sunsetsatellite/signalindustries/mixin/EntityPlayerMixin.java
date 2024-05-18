@@ -33,7 +33,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Unique
     public SignalumPowerSuit powerSuit = null;
 
-    @Shadow public abstract void addChatMessage(String s);
+    @Shadow public abstract void sendTranslatedChatMessage(String message);
 
     @Shadow public InventoryPlayer inventory;
 
@@ -52,7 +52,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     public void sleepInBedAt(int x, int y, int z, CallbackInfoReturnable<EnumSleepStatus> cir) {
         if (!world.isClientSide) {
             if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
-                addChatMessage("bed.bloodMoon");
+                sendTranslatedChatMessage("bed.bloodMoon");
                 cir.setReturnValue(EnumSleepStatus.NOT_POSSIBLE_NOW);
             }
         }

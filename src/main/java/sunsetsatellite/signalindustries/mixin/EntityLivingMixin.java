@@ -2,9 +2,11 @@ package sunsetsatellite.signalindustries.mixin;
 
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
@@ -23,11 +25,12 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
+import java.util.Iterator;
+import java.util.List;
+
 @Debug(export = true)
 @Mixin(value = EntityLiving.class, remap = false)
 public abstract class EntityLivingMixin extends Entity {
-    @Shadow protected abstract int getDropItemId();
-
     @Unique
     private final EntityLiving thisAs = (EntityLiving) ((Object)this);
 
@@ -55,21 +58,33 @@ public abstract class EntityLivingMixin extends Entity {
         }
     }
 
+    @Shadow protected abstract List<WeightedRandomLootObject> getMobDrops();
+
     @Inject(
             method = "dropFewItems",
-            at = @At("HEAD"),
-            cancellable = true
+            at = @At("HEAD")
     )
     protected void bloodMoonReward(CallbackInfo ci){
         if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
-            int i = this.getDropItemId();
-            if (i > 0) {
-                int j = this.random.nextInt(4) + 1;
+            List<WeightedRandomLootObject> drops = this.getMobDrops();
+            if (drops != null) {
+                Iterator<WeightedRandomLootObject> var2 = drops.iterator();
 
-                for(int k = 0; k < j; ++k) {
-                    this.spawnAtLocation(i, 1);
+                while(true) {
+                    ItemStack stack;
+                    do {
+                        if (!var2.hasNext()) {
+                            return;
+                        }
+
+                        WeightedRandomLootObject lootObject = var2.next();
+                        stack = lootObject.getItemStack();
+                    } while(stack == null);
+
+                    for(int i = 0; i < stack.stackSize; ++i) {
+                        this.spawnAtLocation(new ItemStack(stack.itemID, 1, stack.getMetadata(), stack.getData()), 0.0F);
+                    }
                 }
-                ci.cancel();
             }
         }
     }

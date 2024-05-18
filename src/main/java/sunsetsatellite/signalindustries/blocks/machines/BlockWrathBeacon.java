@@ -66,7 +66,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
                     entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
                 } else {
-                    entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
+                    entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
                 }
             }
             return true;
@@ -78,7 +78,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
         TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) world.getBlockTileEntity(i,j,k);
         if(tile != null && tile.active){
             for (EntityPlayer player : world.players) {
-                player.addChatMessage("Challenge failed!");
+                player.sendMessage("Challenge failed!");
             }
             //world.newExplosion(null,i,j,k,5f,false,false);
             if(tier == Tier.REINFORCED){
@@ -93,16 +93,5 @@ public class BlockWrathBeacon extends BlockContainerTiered {
 
 
         super.onBlockRemoved(world, i, j, k, data);
-    }
-
-    @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.active){
-            return SignalIndustries.textures.get(tile.tier.name()+".wrathBeacon.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
     }
 }

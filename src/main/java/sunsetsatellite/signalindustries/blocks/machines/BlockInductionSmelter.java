@@ -29,7 +29,7 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntityInduction
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -58,7 +58,7 @@ public class BlockInductionSmelter extends BlockContainerTiered {
                 //SignalIndustries.displayGui(entityplayer,() -> new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
                 entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
             } else {
-                entityplayer.addChatMessage("event.signalindustries.invalidMultiblock");
+                entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }
@@ -66,56 +66,8 @@ public class BlockInductionSmelter extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning() && tile.tier == tier){
-            return SignalIndustries.textures.get(tile.tier.name()+".inductionSmelter.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
-    }
-
-    @Override
     public String getDescription(ItemStack stack) {
         String s = super.getDescription(stack);
         return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
-        if(tile.preview != IOPreview.NONE){
-            Direction dir = Direction.getDirectionFromSide(side);
-            Connection con = Connection.NONE;
-            switch (tile.preview){
-                case ITEM: {
-                    con = tile.itemConnections.get(dir);
-                    break;
-                }
-                case FLUID: {
-                    con = tile.fluidConnections.get(dir);
-                    break;
-                }
-            }
-            switch (con){
-                case INPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"input_overlay.png");
-                case OUTPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"output_overlay.png");
-                case BOTH:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"both_io_overlay.png");
-                case NONE:
-                    return -1;
-            }
-        } else {
-            int meta = blockAccess.getBlockMetadata(x, y, z);
-            int index = Sides.orientationLookUpHorizontal[6 * meta + side];
-            if (tile.isBurning() && tile.tier == tier) {
-                return SignalIndustries.textures.get(tile.tier.name() + ".inductionSmelter.active.overlay").getTexture(Side.getSideById(index));
-            }
-            return -1;
-        }
-        return -1;
     }
 }

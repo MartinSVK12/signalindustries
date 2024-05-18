@@ -91,7 +91,7 @@ public class WorldTypeEternity extends WorldType {
     }
 
     @Override
-    public Vec3d getFogColor(float f, float g) {
+    public Vec3d getFogColor(World world, double d, double e, double f, float g, float h) {
         return Vec3d.createVector(0.70, 0.70, 0.70);
     }
 

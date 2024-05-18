@@ -64,7 +64,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
                 ((INBTCompound)stack.getData().getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
                 player.triggerAchievement(SignalIndustriesAchievementPage.PULSE);
-                world.spawnParticle("pulse_shockwave", player.x, player.y, player.z, 0.0, 0.0, 0.0);
+                world.spawnParticle("pulse_shockwave", player.x, player.y, player.z, 0.0, 0.0, 0.0,0);
             }
         }
     }

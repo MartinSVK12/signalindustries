@@ -106,7 +106,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
         }
         if(active){
             for (float y1 = y; y1 < 256; y1+=0.1f) {
-                worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0);
+                worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0,0);
             }
         }
         if(worldObj != null && getBlockType() != null){
@@ -142,7 +142,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.evilCatalyst.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
-                    player.addChatMessage("event.signalindustries.wrathBeaconActivated");
+                    player.sendMessage("event.signalindustries.wrathBeaconActivated");
                     player.triggerAchievement(SignalIndustriesAchievementPage.CHALLENGE);
                 }
                 active = true;

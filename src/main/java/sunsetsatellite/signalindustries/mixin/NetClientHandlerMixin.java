@@ -87,7 +87,7 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
             obj.yRot = packet23vehiclespawn.yaw;
             obj.xRot = packet23vehiclespawn.pitch;
             obj.id = packet23vehiclespawn.entityId;
-            this.worldClient.func_712_a(packet23vehiclespawn.entityId, obj);
+            this.worldClient.addEntityToWorld(packet23vehiclespawn.entityId, obj);
             if (packet23vehiclespawn.ownerId > 0) {
                 obj.setPos((double)packet23vehiclespawn.xVelocity / 8000.0, (double)packet23vehiclespawn.yVelocity / 8000.0, (double)packet23vehiclespawn.zVelocity / 8000.0);
             }

@@ -2,12 +2,12 @@ package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.fluids.render.RenderFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 
@@ -16,18 +16,15 @@ import java.util.Objects;
 
 public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
-    private final RenderFluid blockRenderer = new RenderFluid();
-
     public void drawBlock(RenderEngine renderengine, int i, int j, TileEntity tile) {
-        renderengine.bindTexture(renderengine.getTexture("/terrain.png"));
         Block f1 = Block.blocksList[i];
         GL11.glPushMatrix();
-        this.blockRenderer.renderBlock(f1, j, renderengine.mc.theWorld, tile.x, tile.y, tile.z);
+        //this.blockRenderer.renderBlock(f1, j, renderengine.mc.theWorld, tile.x, tile.y, tile.z);
         GL11.glPopMatrix();
         GL11.glEnable(2884);
     }
     @Override
-    public void doRender(TileEntityAutoMiner tileEntity, double x, double y, double z, float f) {
+    public void doRender(Tessellator tessellator, TileEntityAutoMiner tileEntity, double x, double y, double z, float f) {
         int tx = tileEntity.x;
         int ty = tileEntity.y;
         int tz = tileEntity.z;

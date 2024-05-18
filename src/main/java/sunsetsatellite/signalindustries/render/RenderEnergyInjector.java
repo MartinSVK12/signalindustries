@@ -3,11 +3,10 @@ package sunsetsatellite.signalindustries.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.RenderBlocks;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.TextureFX;
+
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
-import net.minecraft.client.render.block.model.BlockModelRenderBlocks;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
@@ -16,20 +15,18 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tag.ItemTags;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.RenderBlockSimple;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
 
 import java.util.Random;
 
 public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInjector> {
 
-    private final RenderBlockSimple sideRenderer = new RenderBlockSimple();
     private final Random random = new Random();
     private final RenderBlocks renderBlocks = new RenderBlocks();
     private int counter = 0;
 
     @Override
-    public void doRender(TileEntityEnergyInjector tileEntity, double x, double y, double z, float g) {
+    public void doRender(Tessellator tessellator, TileEntityEnergyInjector tileEntity, double x, double y, double z, float g) {
         counter++;
         if(counter >= 360){
             counter = 0;
@@ -43,7 +40,7 @@ public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInj
     }
 
     public void doRenderItem(EntityItem entity, double d, double d1, double d2, float f, float f1) {
-        this.random.setSeed(187L);
+        /*this.random.setSeed(187L);
         ItemStack itemstack = entity.item;
         if (itemstack == null) {
             return;
@@ -153,6 +150,6 @@ public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInj
             }
         }
         GL11.glDisable(32826);
-        GL11.glPopMatrix();
+        GL11.glPopMatrix();*/
     }
 }

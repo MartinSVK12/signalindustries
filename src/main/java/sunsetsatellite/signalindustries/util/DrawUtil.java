@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.util;
 
 
 import net.minecraft.client.render.FontRenderer;
-import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.tessellator.Tessellator;
 import org.lwjgl.opengl.GL11;
 
 public class DrawUtil {

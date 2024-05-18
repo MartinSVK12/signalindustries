@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.dynamictexture.DynamicTexture;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.Global;
 import net.minecraft.core.util.helper.Color;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
@@ -24,14 +25,16 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 	private double delta;
 	
 	private double scaleFactor;
+
+	private final int resolution = 16;
 	
-	public DynamicTextureMeteorTracker(Minecraft minecraft, int resolution) {
-		super(SignalIndustries.meteorTracker.getIconFromDamage(1), resolution, 1);
+	public DynamicTextureMeteorTracker(Minecraft minecraft) {
+		super(TextureRegistry.getTexture("signalindustries:item/meteor_tracker"));
 		
 		this.mc = minecraft;
 
 		compassImageData = new byte[resolution * resolution * 4];
-		BufferedImage compass = mc.renderEngine.getImage("/assets/signalindustries/item/meteor_tracker.png");
+		BufferedImage compass = mc.renderEngine.getImage("/assets/signalindustries/textures/item/meteor_tracker.png");
 
 		for(int x=0; x < resolution; x++) {
 			for(int y=0; y < resolution; y++) {
@@ -143,10 +146,4 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			this.imageData[j * 4 + 3] = (byte)a;
 		}
 	}
-
-	@Override
-	public String getTextureName() {
-		return "/gui/items.png";
-	}
-
 }

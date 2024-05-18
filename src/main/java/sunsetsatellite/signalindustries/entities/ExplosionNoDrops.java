@@ -48,7 +48,7 @@ public class ExplosionNoDrops {
         this.explosionY = d1;
         this.explosionZ = d2;
         this.destroyBlocks = true;
-        if (!world.getGameRule(GameRules.MOB_GRIEFING))
+        if (!world.getGameRuleValue(GameRules.MOB_GRIEFING))
             this.destroyBlocks = (entity == null || entity instanceof EntityPlayer);
     }
 
@@ -88,8 +88,8 @@ public class ExplosionNoDrops {
                 d3 *= d7;
                 d4 *= d7;
                 d5 *= d7;
-                this.world.spawnParticle("explode", (d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5);
-                this.world.spawnParticle("smoke", d, d1, d2, d3, d4, d5);
+                this.world.spawnParticle("explode", (d + this.explosionX) / 2.0D, (d1 + this.explosionY) / 2.0D, (d2 + this.explosionZ) / 2.0D, d3, d4, d5,0);
+                this.world.spawnParticle("smoke", d, d1, d2, d3, d4, d5,0);
             }
             if (id > 0) {
                 //Block.blocksList[id].dropBlockAsItemWithChance(this.world, j, k, l, this.world.getBlockMetadata(j, k, l), 1.0F);

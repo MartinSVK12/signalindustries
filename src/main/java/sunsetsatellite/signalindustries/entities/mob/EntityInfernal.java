@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.entities.mob;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
@@ -13,7 +14,7 @@ import sunsetsatellite.signalindustries.entities.EntitySunbeam;
 public class EntityInfernal extends EntityMonster {
     public EntityInfernal(World world) {
         super(world);
-        this.skinName = "infernal";
+        this.textureIdentifier = new NamespaceID("signalindustries", "infernal");
         this.moveSpeed = 0.5F;
         this.attackStrength = 5;
         this.scoreValue = 1000;

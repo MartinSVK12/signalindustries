@@ -16,7 +16,7 @@ import java.util.Random;
 public class BlockDilithiumCrystal extends BlockTransparent {
 
     public BlockDilithiumCrystal(String key, int id, Material material, boolean renderInside) {
-        super(key, id, material, renderInside);
+        super(key, id, material);
     }
 
     @Override

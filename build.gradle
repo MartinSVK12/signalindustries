@@ -142,10 +142,10 @@ dependencies {
 	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
 	implementation project(path: ":catalyst:effects",configuration: "namedElements")
 
-	implementation project(path: ":retrostorage",configuration: "namedElements")
+	//implementation project(path: ":retrostorage",configuration: "namedElements")
 
 	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
-	modImplementation "BTWaila:btwaila:${project.btwaila_version}"
+	//modImplementation "BTWaila:btwaila:${project.btwaila_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

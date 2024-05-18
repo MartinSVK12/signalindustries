@@ -4,12 +4,12 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
+import org.useless.dragonfly.helper.ModelHelper;
+import org.useless.dragonfly.model.entity.BenchEntityModel;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
-import useless.dragonfly.helper.ModelHelper;
-import useless.dragonfly.model.entity.BenchEntityModel;
 
 import java.util.List;
 

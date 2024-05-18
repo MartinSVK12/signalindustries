@@ -1,7 +1,8 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.render.Tessellator;
+
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.util.helper.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -85,9 +86,7 @@ public class SunbeamRenderer extends EntityRenderer<EntitySunbeam>
     }
 
     @Override
-    public void doRender(EntitySunbeam entity, double x, double y, double z,
-                         float yaw, float partialTick)
-    {
-        renderSunbeam(entity, x, y, z, yaw, partialTick);
+    public void doRender(Tessellator tessellator, EntitySunbeam entity, double d, double e, double f, float g, float h) {
+        renderSunbeam(entity, d, e, f, g, h);
     }
 }

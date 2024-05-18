@@ -10,7 +10,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import static java.lang.Math.PI;
 
@@ -21,14 +21,14 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
         super(name, id);
     }
 
-    @Override
+    /*@Override
     public int getIconFromDamage(int id) {
         if(id == 1){
             int[] a = TextureHelper.getOrCreateItemTexture(SignalIndustries.MOD_ID,"meteor_tracker.png");
             return Item.iconCoordToIndex(a[0],a[1]);
         }
         return iconIndex;
-    }
+    }*/
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {

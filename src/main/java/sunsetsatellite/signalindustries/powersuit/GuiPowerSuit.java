@@ -3,6 +3,8 @@ package sunsetsatellite.signalindustries.powersuit;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTooltip;
+import net.minecraft.client.render.item.model.ItemModelDispatcher;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -59,10 +61,14 @@ public class GuiPowerSuit extends GuiItemFluid {
         super.drawScreen(x,y,f);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        itemRender.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, new ItemStack(SignalIndustries.signalumPowerSuitHelmet), i+(xSize / 2)-68, j+(ySize/2)-23, 1.0F);
-        itemRender.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, new ItemStack(SignalIndustries.signalumPowerSuitChestplate), i+(xSize / 2)-38, j+(ySize/2)-23, 1.0F);
-        itemRender.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, new ItemStack(SignalIndustries.signalumPowerSuitLeggings), i+(xSize / 2)+22, j+(ySize/2)-23, 1.0F);
-        itemRender.renderItemIntoGUI(fontRenderer, this.mc.renderEngine, new ItemStack(SignalIndustries.signalumPowerSuitBoots), i+(xSize / 2)+52, j+(ySize/2)-23, 1.0F);
+        ItemStack helmet = new ItemStack(SignalIndustries.signalumPowerSuitHelmet);
+        ItemStack chest = new ItemStack(SignalIndustries.signalumPowerSuitChestplate);
+        ItemStack leg = new ItemStack(SignalIndustries.signalumPowerSuitLeggings);
+        ItemStack boots = new ItemStack(SignalIndustries.signalumPowerSuitBoots);
+        ItemModelDispatcher.getInstance().getDispatch(helmet).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, helmet,i+(xSize / 2)-68, j+(ySize/2)-23, 1.0F);
+        ItemModelDispatcher.getInstance().getDispatch(chest).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, chest,i+(xSize / 2)-38, j+(ySize/2)-23, 1.0F);
+        ItemModelDispatcher.getInstance().getDispatch(leg).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, leg,i+(xSize / 2)+22, j+(ySize/2)-23, 1.0F);
+        ItemModelDispatcher.getInstance().getDispatch(boots).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, boots,i+(xSize / 2)+52, j+(ySize/2)-23, 1.0F);
         for (int k = 0; k < container.inventorySlots.size(); k++) {
             Slot slot = container.inventorySlots.get(k);
             if(getIsMouseOverSlot(slot,x,y) && slot instanceof SlotAttachment) {

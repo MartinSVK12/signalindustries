@@ -4,13 +4,13 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.WorldSource;
+import org.useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockConduit;
 import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
-import useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 
 import java.util.HashMap;
 

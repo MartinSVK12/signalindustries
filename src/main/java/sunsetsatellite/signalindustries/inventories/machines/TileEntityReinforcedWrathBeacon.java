@@ -216,7 +216,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.infernalEye.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
-                    player.addChatMessage("event.signalindustries.reinforcedWrathBeaconActivated");
+                    player.sendMessage("event.signalindustries.reinforcedWrathBeaconActivated");
                 }
                 active = true;
                 player = activator;

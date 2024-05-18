@@ -20,7 +20,7 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAssembler;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
-import turniplabs.halplibe.helper.TextureHelper;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -94,17 +94,6 @@ public class BlockAssembler extends BlockContainerTiered {
     }
 
     @Override
-    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
-        int meta = blockAccess.getBlockMetadata(x,y,z);
-        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
-        if(tile.isBurning() && tile.tier == tier){
-            return SignalIndustries.textures.get(tile.tier.name()+".assembler.active").getTexture(Side.getSideById(index));
-        }
-        return this.atlasIndices[index];
-    }
-
-    @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
         if(world.isClientSide)
@@ -118,43 +107,6 @@ public class BlockAssembler extends BlockContainerTiered {
             }
             return true;
         }
-    }
-
-    @Override
-    public int getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) blockAccess.getBlockTileEntity(x,y,z);
-        if(tile.preview != IOPreview.NONE){
-            Direction dir = Direction.getDirectionFromSide(side);
-            Connection con = Connection.NONE;
-            switch (tile.preview){
-                case ITEM: {
-                    con = tile.itemConnections.get(dir);
-                    break;
-                }
-                case FLUID: {
-                    con = tile.fluidConnections.get(dir);
-                    break;
-                }
-            }
-            switch (con){
-                case INPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"input_overlay.png");
-                case OUTPUT:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"output_overlay.png");
-                case BOTH:
-                    return TextureHelper.getOrCreateBlockTextureIndex(SignalIndustries.MOD_ID,"both_io_overlay.png");
-                case NONE:
-                    return -1;
-            }
-        } else {
-            int meta = blockAccess.getBlockMetadata(x,y,z);
-            int index = Sides.orientationLookUpHorizontal[6 * meta + side];
-            if(tile.isBurning() && tile.tier == tier){
-                return SignalIndustries.textures.get(tile.tier.name()+".assembler.active.overlay").getTexture(Side.getSideById(index));
-            }
-            return -1;
-        }
-        return -1;
     }
 
     @Override
