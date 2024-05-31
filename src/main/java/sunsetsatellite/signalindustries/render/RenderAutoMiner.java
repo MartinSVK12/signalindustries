@@ -1,7 +1,11 @@
 package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.LightmapHelper;
+import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
@@ -16,13 +20,22 @@ import java.util.Objects;
 
 public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
-    public void drawBlock(RenderEngine renderengine, int i, int j, TileEntity tile) {
-        Block f1 = Block.blocksList[i];
+    private RenderBlocks blockRenderer;
+
+    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta) {
+        TextureRegistry.blockAtlas.bindTexture();
         GL11.glPushMatrix();
-        //this.blockRenderer.renderBlock(f1, j, renderengine.mc.theWorld, tile.x, tile.y, tile.z);
+        RenderBlocks renderBlocks = BlockModel.renderBlocks;
+        BlockModel.setRenderBlocks(blockRenderer);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        model.renderBlockOnInventory(tessellator,meta,1,0.75f);
+        BlockModel.setRenderBlocks(renderBlocks);
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
-        GL11.glEnable(2884);
+        GL11.glEnable(GL11.GL_CULL_FACE);
     }
+
     @Override
     public void doRender(Tessellator tessellator, TileEntityAutoMiner tileEntity, double x, double y, double z, float f) {
         int tx = tileEntity.x;
@@ -38,7 +51,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y + 4.25f, (float) z + (cz - tz) + 0.25f);
             GL11.glScalef(0.5f, 0.5f, 0.5f);
             GL11.glDisable(2896);
-            this.drawBlock(renderDispatcher.renderEngine, SignalIndustries.basicMachineCore.id, 0, tileEntity);
+            //this.drawBlock(renderDispatcher.renderEngine, SignalIndustries.basicMachineCore.id, 0, tileEntity);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
 
@@ -47,7 +60,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                 GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y - (ty - cy) + 0.5f, (float) z + (cz - tz) + 0.25f);
                 GL11.glScalef(0.50f, 1f, 0.50f);
                 GL11.glDisable(2896);
-                this.drawBlock(renderDispatcher.renderEngine, Block.basalt.id, 0, tileEntity);
+                //this.drawBlock(renderDispatcher.renderEngine, Block.basalt.id, 0, tileEntity);
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
@@ -57,7 +70,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                 GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy), (float) z + (cz - tz) + 0.375f);
                 GL11.glScalef(0.25f, 0.75f, 0.25f);
                 GL11.glDisable(2896);
-                this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
+                //this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             } else {
@@ -65,7 +78,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                 GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy) + 1f, (float) z + (cz - tz) + 0.375f);
                 GL11.glScalef(0.25f, 0.75f, 0.25f);
                 GL11.glDisable(2896);
-                this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
+                //this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
@@ -119,6 +132,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         GL11.glTranslated(x, y, z);
         GL11.glDepthMask(false);
         GL11.glBegin(GL11.GL_LINE_STRIP);
+        LightmapHelper.setLightmapCoord(15,15);
         //First
         if(!backwired) {
             if(firstblocksided){

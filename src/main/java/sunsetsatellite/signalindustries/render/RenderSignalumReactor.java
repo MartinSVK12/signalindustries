@@ -1,8 +1,13 @@
 package sunsetsatellite.signalindustries.render;
 
+import net.minecraft.client.render.LightmapHelper;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.multiblocks.IColorOverride;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
@@ -21,15 +26,17 @@ public class RenderSignalumReactor extends RenderMultiblock {
         float amount = Math.max(Math.abs(fluidAmount / fluidMaxAmount),fluidAmount != 0 ? 0.14f : 0f);
         float depletedAmount = Math.min(Math.abs(reactor.getDepletedFuel() / fluidAmount),0.9f);
         if (fluidId != 0) {
+            BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[fluidId]);
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d, (float)e, (float)f);
             GL11.glScalef(2.90F, 7f, 2.90F);
-            GL11.glTranslatef(0.70F, -0.42F, -0.34F);
-            GL11.glColor4f(1-depletedAmount,1-depletedAmount,1-depletedAmount,amount);
+            GL11.glTranslatef(1.2f, 0.08f, 0.16f);
+            ((IColorOverride)model).overrideColor(1-depletedAmount,1-depletedAmount,1-depletedAmount,amount);
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable( GL11.GL_BLEND );
-            this.drawBlock(tessellator, this.renderDispatcher.renderEngine.mc.renderEngine, fluidId, 0, 0, 0, 0, tileEntity);
+            this.drawBlock(tessellator, model, 0);
+            ((IColorOverride)model).overrideColor(1,1,1,1);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
         }

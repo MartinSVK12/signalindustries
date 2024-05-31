@@ -6,6 +6,7 @@
   "mixins": [
     "AchievementMixin",
     "BlockFluidMixin",
+    "BlockModelStandardMixin",
     "BlockRailMixin",
     "ContainerWorkbenchMixin",
     "DimensionMixin",

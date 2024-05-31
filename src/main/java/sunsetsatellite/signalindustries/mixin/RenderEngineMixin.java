@@ -34,6 +34,7 @@ public abstract class RenderEngineMixin {
     )
     public void initSIDynamicTextures(List<Throwable> errors, CallbackInfo ci) {
         SignalIndustries.LOGGER.info("Loading dynamic textures..");
+        //FIXME:
         //dynamicTextures.add(new DynamicTextureMeteorTracker(mc));
     }
 }

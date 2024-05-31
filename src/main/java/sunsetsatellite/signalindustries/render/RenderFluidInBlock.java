@@ -2,13 +2,22 @@ package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderBlocks;
+import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.multiblocks.IColorOverride;
+import sunsetsatellite.signalindustries.SignalIndustries;
+
+import java.util.ArrayList;
 
 
 public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
@@ -18,7 +27,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
     }
 
     public void doRender(Tessellator tessellator, TileEntity tileEntity1, double d2, double d4, double d6, float f8) {
-        blockRenderer = new RenderBlocks(tileEntity1.worldObj);
+
         float fluidAmount = 0.0F;
         float fluidMaxAmount = 1.0F;
         int fluidId = 0;
@@ -36,23 +45,36 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
 
         float amount = Math.abs(fluidAmount / fluidMaxAmount - 0.02F);
         if (fluidId != 0) {
+            Block block = Block.blocksList[fluidId];
+            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(block,new Vec3i(),0,null))));
+            BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);
             GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
             GL11.glScalef(0.98F, amount, 0.98F);
-            GL11.glTranslatef(0.01F, 0.01F, 0.01F);
+            GL11.glTranslatef(0.51F, 0.50F, 0.51F);
             GL11.glDisable(2896);
-            this.drawBlock(tessellator, fluidId, tileEntity1);
+            if(block == Block.fluidWaterFlowing || block == Block.fluidWaterStill){
+                ((IColorOverride)model).overrideColor(0,0.5f,1,0.75f);
+            }
+            this.drawBlock(tessellator, model, 0);
             GL11.glEnable(2896);
+            ((IColorOverride)model).overrideColor(1,1,1,1f);
             GL11.glPopMatrix();
         }
 
     }
 
-    public void drawBlock(Tessellator tessellator, int i, TileEntity tile) {
-        Block block = Block.blocksList[i];
+    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta) {
+        TextureRegistry.blockAtlas.bindTexture();
         GL11.glPushMatrix();
-        this.blockRenderer.renderStandardBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(block),block,tile.x,tile.y,tile.z);
+        RenderBlocks renderBlocks = BlockModel.renderBlocks;
+        BlockModel.setRenderBlocks(blockRenderer);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        model.renderBlockOnInventory(tessellator,meta,1,0.75f);
+        BlockModel.setRenderBlocks(renderBlocks);
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);
     }
