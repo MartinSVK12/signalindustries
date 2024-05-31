@@ -15,6 +15,7 @@ import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelFluid;
+import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.item.model.ItemModelStandard;
@@ -64,6 +65,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
+import sunsetsatellite.signalindustries.blocks.models.BlockModelMachine;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
@@ -595,6 +597,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.STONE)
             .setTextures("signalindustries:block/prototype_blank")
             .setSideTextures("signalindustries:block/extractor_prototype_side_empty")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultSideTextures("extractor_prototype_side_empty")
+                    .withActiveSideTextures("extractor_prototype_side_active")
+                    .withOverbrightSideTextures("extractor_overlay")
+            )
             .build(new BlockExtractor("prototype.extractor",config.getInt("BlockIDs.prototypeExtractor"),Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicExtractor = new BlockBuilder(MOD_ID)
@@ -603,6 +610,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSideTextures("signalindustries:block/extractor_basic_side_empty")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultSideTextures("extractor_basic_side_empty")
+                    .withActiveSideTextures("extractor_basic_side_active")
+                    .withOverbrightSideTextures("extractor_overlay")
+            )
             .build(new BlockExtractor("basic.extractor",config.getInt("BlockIDs.basicExtractor"),Tier.BASIC,Material.metal));
 
     public static final Block reinforcedExtractor = new BlockBuilder(MOD_ID)
@@ -611,6 +623,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/reinforced_blank")
             .setSideTextures("signalindustries:block/extractor_reinforced_side_empty")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultSideTextures("extractor_reinforced_side_empty")
+                    .withActiveSideTextures("extractor_reinforced_side_active")
+                    .withOverbrightSideTextures("extractor_overlay")
+            )
             .build(new BlockExtractor("reinforced.extractor",config.getInt("BlockIDs.reinforcedExtractor"),Tier.REINFORCED,Material.metal));
 
     public static final Block prototypeCrusher = new BlockBuilder(MOD_ID)
@@ -620,6 +637,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/prototype_blank")
             .setTopTexture("signalindustries:block/crusher_prototype_top_inactive")
             .setSouthTexture("signalindustries:block/crusher_prototype_side")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultTopTexture("crusher_prototype_top_inactive")
+                    .withDefaultNorthTexture("crusher_prototype_side")
+                    .withActiveTopTexture("crusher_prototype_top_active")
+                    .withActiveNorthTexture("crusher_prototype_side")
+                    .withOverbrightTopTexture("crusher_overlay")
+            )
             .build(new BlockCrusher("prototype.crusher",config.getInt("BlockIDs.prototypeCrusher"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicCrusher = new BlockBuilder(MOD_ID)
@@ -629,6 +653,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/basic_blank")
             .setTopTexture("signalindustries:block/crusher_basic_top_inactive")
             .setSouthTexture("signalindustries:block/crusher_basic_side")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultTopTexture("crusher_basic_top_inactive")
+                    .withDefaultNorthTexture("crusher_basic_side")
+                    .withActiveTopTexture("crusher_basic_top_active")
+                    .withActiveNorthTexture("crusher_basic_side")
+                    .withOverbrightTopTexture("crusher_overlay")
+            )
             .build(new BlockCrusher("basic.crusher",config.getInt("BlockIDs.basicCrusher"), Tier.BASIC,Material.metal));
 
     public static final Block reinforcedCrusher = new BlockBuilder(MOD_ID)
@@ -638,6 +669,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/reinforced_blank")
             .setTopTexture("signalindustries:block/crusher_reinforced_top_inactive")
             .setSouthTexture("signalindustries:block/crusher_reinforced_side")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultTopTexture("crusher_reinforced_top_inactive")
+                    .withDefaultNorthTexture("crusher_reinforced_side")
+                    .withActiveTopTexture("crusher_reinforced_top_active")
+                    .withActiveNorthTexture("crusher_reinforced_side")
+                    .withOverbrightTopTexture("crusher_overlay")
+            )
             .build(new BlockCrusher("reinforced.crusher",config.getInt("BlockIDs.reinforcedCrusher"), Tier.REINFORCED, Material.metal));
 
     public static final Block prototypeAlloySmelter = new BlockBuilder(MOD_ID)
@@ -646,6 +684,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.STONE)
             .setTextures("signalindustries:block/prototype_blank")
             .setSouthTexture("signalindustries:block/alloy_smelter_prototype_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultNorthTexture("alloy_smelter_prototype_inactive")
+                    .withActiveNorthTexture("alloy_smelter_prototype_active")
+                    .withOverbrightNorthTexture("alloy_smelter_overlay")
+            )
             .build(new BlockAlloySmelter("prototype.alloySmelter",config.getInt("BlockIDs.prototypeAlloySmelter"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicAlloySmelter = new BlockBuilder(MOD_ID)
@@ -654,6 +697,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/alloy_smelter_basic_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultNorthTexture("alloy_smelter_basic_inactive")
+                    .withActiveNorthTexture("alloy_smelter_basic_active")
+                    .withOverbrightNorthTexture("alloy_smelter_overlay")
+            )
             .build(new BlockAlloySmelter("basic.alloySmelter",config.getInt("BlockIDs.basicAlloySmelter"), Tier.BASIC,Material.metal));
 
     public static final Block basicInductionSmelter = new BlockBuilder(MOD_ID)
@@ -663,6 +711,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/basic_induction_smelter_front_inactive")
             .setTopTexture("signalindustries:block/basic_induction_smelter_top_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultTopTexture("basic_induction_smelter_top_inactive")
+                    .withDefaultNorthTexture("basic_induction_smelter_front_inactive")
+                    .withActiveTopTexture("basic_induction_smelter_top_active")
+                    .withActiveNorthTexture("basic_induction_smelter_front_active")
+                    .withOverbrightTopTexture("induction_smelter_top_overlay")
+                    .withOverbrightNorthTexture("induction_smelter_front_overlay")
+            )
             .build(new BlockInductionSmelter("basic.inductionSmelter",config.getInt("BlockIDs.basicInductionSmelter"), Tier.BASIC,Material.metal));
 
     public static final Block prototypePlateFormer = new BlockBuilder(MOD_ID)
@@ -671,6 +727,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.STONE)
             .setTextures("signalindustries:block/prototype_blank")
             .setSouthTexture("signalindustries:block/plate_former_prototype_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultNorthTexture("plate_former_prototype_inactive")
+                    .withActiveNorthTexture("plate_former_prototype_active")
+                    .withOverbrightNorthTexture("plate_former_overlay")
+            )
             .build(new BlockPlateFormer("prototype.plateFormer",config.getInt("BlockIDs.prototypePlateFormer"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicPlateFormer = new BlockBuilder(MOD_ID)
@@ -679,6 +740,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/plate_former_basic_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultNorthTexture("plate_former_basic_inactive")
+                    .withActiveNorthTexture("plate_former_basic_active")
+                    .withOverbrightNorthTexture("plate_former_overlay")
+            )
             .build(new BlockPlateFormer("basic.plateFormer",config.getInt("BlockIDs.basicPlateFormer"), Tier.BASIC,Material.metal));
 
     public static final Block reinforcedPlateFormer = new BlockBuilder(MOD_ID)
@@ -687,6 +753,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/reinforced_blank")
             .setSouthTexture("signalindustries:block/plate_former_reinforced_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultNorthTexture("plate_former_reinforced_inactive")
+                    .withActiveNorthTexture("plate_former_reinforced_active")
+                    .withOverbrightNorthTexture("plate_former_overlay")
+            )
             .build(new BlockPlateFormer("reinforced.plateFormer",config.getInt("BlockIDs.reinforcedPlateFormer"), Tier.REINFORCED,Material.metal));
 
     public static final Block prototypeCrystalCutter = new BlockBuilder(MOD_ID)
@@ -695,6 +766,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.STONE)
             .setTextures("signalindustries:block/prototype_blank")
             .setSouthTexture("signalindustries:block/crystal_cutter_prototype_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultNorthTexture("crystal_cutter_prototype_inactive")
+                    .withActiveNorthTexture("crystal_cutter_prototype_active")
+                    .withOverbrightNorthTexture("cutter_overlay")
+            )
             .build(new BlockCrystalCutter("prototype.crystalCutter",config.getInt("BlockIDs.prototypeCrystalCutter"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicCrystalCutter = new BlockBuilder(MOD_ID)
@@ -703,6 +779,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/crystal_cutter_basic_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultNorthTexture("crystal_cutter_basic_inactive")
+                    .withActiveNorthTexture("crystal_cutter_basic_active")
+                    .withOverbrightNorthTexture("cutter_overlay")
+            )
             .build(new BlockCrystalCutter("basic.crystalCutter",config.getInt("BlockIDs.basicCrystalCutter"), Tier.BASIC,Material.metal));
 
     public static final Block reinforcedCrystalCutter = new BlockBuilder(MOD_ID)
@@ -711,6 +792,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/reinforced_blank")
             .setSouthTexture("signalindustries:block/crystal_cutter_reinforced_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultNorthTexture("crystal_cutter_reinforced_inactive")
+                    .withActiveNorthTexture("crystal_cutter_reinforced_active")
+                    .withOverbrightNorthTexture("reinforced_cutter_overlay")
+            )
             .build(new BlockCrystalCutter("reinforced.crystalCutter",config.getInt("BlockIDs.reinforcedCrystalCutter"), Tier.REINFORCED, Material.stone));
 
     public static final Block basicCrystalChamber = new BlockBuilder(MOD_ID)
@@ -719,6 +805,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/basic_crystal_chamber_side_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultNorthTexture("basic_crystal_chamber_side_inactive")
+                    .withActiveNorthTexture("basic_crystal_chamber_side_active")
+                    .withOverbrightNorthTexture("chamber_overlay")
+            )
             .build(new BlockCrystalChamber("basic.crystalChamber",config.getInt("BlockIDs.basicCrystalChamber"), Tier.BASIC,Material.metal));
 
     public static final Block reinforcedCrystalChamber = new BlockBuilder(MOD_ID)
@@ -727,6 +818,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/reinforced_blank")
             .setSouthTexture("signalindustries:block/reinforced_crystal_chamber_side_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultNorthTexture("reinforced_crystal_chamber_side_inactive")
+                    .withActiveNorthTexture("reinforced_crystal_chamber_side_active")
+                    .withOverbrightNorthTexture("reinforced_chamber_overlay")
+            )
             .build(new BlockCrystalChamber("reinforced.crystalChamber",config.getInt("BlockIDs.reinforcedCrystalChamber"), Tier.REINFORCED,Material.metal));
 
     public static final Block basicInfuser = new BlockBuilder(MOD_ID)
@@ -735,6 +831,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
             .setSideTextures("signalindustries:block/infuser_basic_side_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultSideTextures("infuser_basic_side_inactive")
+                    .withActiveSideTextures("infuser_basic_side_active")
+                    .withOverbrightSideTextures("infuser_overlay")
+            )
             .build(new BlockInfuser("basic.infuser",config.getInt("BlockIDs.basicInfuser"), Tier.BASIC,Material.metal));
 
     public static final Block basicAssembler = new BlockBuilder(MOD_ID)
@@ -743,14 +844,23 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_assembler_side")
             .setSouthTexture("signalindustries:block/basic_assembler_front")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultTexture("basic_assembler_side")
+                    .withDefaultNorthTexture("basic_assembler_front")
+                    .withActiveTexture("basic_assembler_side_active")
+                    .withActiveNorthTexture("basic_assembler_front_active")
+                    .withOverbrightTexture("assembler_overlay_side")
+                    .withOverbrightNorthTexture("assembler_overlay_front")
+            )
             .build(new BlockAssembler("basic.assembler",config.getInt("BlockIDs.basicAssembler"), Tier.BASIC, Material.metal));
 
     public static final Block prototypeStorageContainer = new BlockBuilder(MOD_ID)
             .setHardness(1)
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .setTextures("signalindustries:block/prototype_blank")
-            .setSouthTexture("signalindustries:block/container_prototype_front")
+            .setNorthTexture("signalindustries:block/container_prototype_front")
             .build(new BlockStorageContainer("prototype.storageContainer",config.getInt("BlockIDs.prototypeStorageContainer"), Tier.PROTOTYPE, Material.stone));
 
     public static final Block infiniteStorageContainer = new BlockBuilder(MOD_ID)
@@ -758,7 +868,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setResistance(3)
             .setBlockSound(BlockSounds.STONE)
             .setTextures("signalindustries:block/prototype_blank")
-            .setSouthTexture("signalindustries:block/container_prototype_front")
+            .setNorthTexture("signalindustries:block/container_prototype_front")
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .build(new BlockStorageContainer("infinite.storageContainer",config.getInt("BlockIDs.infiniteStorageContainer"), Tier.INFINITE, Material.stone));
 
     public static final Block basicStorageContainer = new BlockBuilder(MOD_ID)
@@ -766,7 +877,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/basic_blank")
-            .setSouthTexture("signalindustries:block/container_basic_front")
+            .setNorthTexture("signalindustries:block/container_basic_front")
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .build(new BlockStorageContainer("basic.storageContainer",config.getInt("BlockIDs.basicStorageContainer"), Tier.BASIC, Material.metal));
 
     public static final Block reinforcedStorageContainer = new BlockBuilder(MOD_ID)
@@ -774,7 +886,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setResistance(3)
             .setBlockSound(BlockSounds.METAL)
             .setTextures("signalindustries:block/reinforced_blank")
-            .setSouthTexture("signalindustries:block/container_reinforced_front")
+            .setNorthTexture("signalindustries:block/container_reinforced_front")
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .build(new BlockStorageContainer("reinforced.storageContainer",config.getInt("BlockIDs.reinforcedStorageContainer"), Tier.REINFORCED, Material.metal));
 
     public static final Block basicWrathBeacon = new BlockBuilder(MOD_ID)
@@ -802,6 +915,16 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/reinforced_blank")
             .setTopTexture("signalindustries:block/dimensional_anchor_top_inactive")
             .setSideTextures("signalindustries:block/dimensional_anchor_inactive")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultSideTextures("dimensional_anchor_inactive")
+                    .withDefaultTopTexture("dimensional_anchor_top_inactive")
+                    .withActiveSideTextures("dimensional_anchor")
+                    .withActiveTopTexture("dimensional_anchor_top")
+                    .withActiveBottomTexture("dimensional_anchor_bottom")
+                    .withOverbrightTexture("anchor_blank_overlay")
+                    .withOverbrightSideTextures("anchor_overlay")
+                    .withOverbrightTopTexture("anchor_top_overlay")
+            )
             .build(new BlockDimensionalAnchor("reinforced.dimensionalAnchor",config.getInt("BlockIDs.dimensionalAnchor"), Tier.REINFORCED,Material.metal));
 
     public static final Block dilithiumStabilizer = new BlockBuilder(MOD_ID)
@@ -848,6 +971,12 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/prototype_blank")
             .setTopTexture("signalindustries:block/prototype_pump_top_empty")
             .setSideTextures("signalindustries:block/prototype_pump_side_empty")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.PROTOTYPE)
+                    .withDefaultSideTextures("prototype_pump_side_empty")
+                    .withDefaultTopTexture("prototype_pump_top_empty")
+                    .withActiveSideTextures("prototype_pump_side")
+                    .withActiveTopTexture("prototype_pump_top")
+            )
             .build(new BlockPump("prototype.pump",config.getInt("BlockIDs.prototypePump"), Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicPump = new BlockBuilder(MOD_ID)
@@ -866,6 +995,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/prototype_blank")
             .setNorthTexture("signalindustries:block/inserter_output")
             .setSouthTexture("signalindustries:block/inserter_input")
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .build(new BlockInserter("prototype.inserter",config.getInt("BlockIDs.prototypeInserter"),Tier.PROTOTYPE,Material.stone));
 
     public static final Block basicInserter = new BlockBuilder(MOD_ID)
@@ -875,6 +1005,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/basic_blank")
             .setNorthTexture("signalindustries:block/basic_inserter_output")
             .setSouthTexture("signalindustries:block/basic_inserter_input")
+            .setBlockModel(BlockModelHorizontalRotation::new)
             .build(new BlockInserter("basic.inserter",config.getInt("BlockIDs.basicInserter"),Tier.BASIC,Material.metal));
 
     public static final Block prototypeFilter = new BlockBuilder(MOD_ID)
@@ -895,6 +1026,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setResistance(3)
             .setTextures("signalindustries:block/basic_blank")
             .setSouthTexture("signalindustries:block/basic_automatic_miner")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.BASIC)
+                    .withDefaultNorthTexture("basic_automatic_miner")
+                    .withActiveNorthTexture("basic_automatic_miner")
+                    .withOverbrightNorthTexture("auto_miner_overlay")
+            )
             .build(new BlockAutoMiner("basic.automaticMiner",config.getInt("BlockIDs.basicAutomaticMiner"),Tier.BASIC,Material.metal));
 
     public static final Block externalIo = new BlockBuilder(MOD_ID)
@@ -919,6 +1055,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/reinforced_blank")
             .setSouthTexture("signalindustries:block/reinforced_centrifuge_front_inactive")
             .setTopTexture("signalindustries:block/reinforced_centrifuge_empty")
+            .setBlockModel((block)-> new BlockModelMachine(block,Tier.REINFORCED)
+                    .withDefaultNorthTexture("reinforced_centrifuge_front_inactive")
+                    .withDefaultTopTexture("reinforced_centrifuge_empty")
+                    .withActiveNorthTexture("reinforced_centrifuge_front_active")
+                    .withActiveTopTexture("reinforced_centrifuge_closed")
+                    .withOverbrightNorthTexture("centrifuge_overlay")
+            )
             .build(new BlockCentrifuge("reinforced.centrifuge",config.getInt("BlockIDs.reinforcedCentrifuge"),Tier.REINFORCED,Material.metal));
 
     public static final Block reinforcedIgnitor = new BlockBuilder(MOD_ID)
@@ -1715,6 +1858,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             map.put(keys[i],values[i]);
         }
         return map;
+    }
+
+    public static <T,V> T[] arrayFill(T[] array,V value){
+        Arrays.fill(array,value);
+        return array;
     }
 
     @SafeVarargs
