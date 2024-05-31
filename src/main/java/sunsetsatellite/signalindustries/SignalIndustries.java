@@ -14,6 +14,7 @@ import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.block.model.BlockModelFluid;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.item.model.ItemModelStandard;
@@ -1119,18 +1120,22 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     //public static final int[] burntSignalumTex = TextureHelper.getOrCreateBlockTexture(MOD_ID,"burnt_signalum");//registerFluidTexture(MOD_ID,"signalum_energy",0,4);
     public static final BlockFluid energyFlowing = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalindustries:block/signalum_energy_transparent")
+            .setBlockModel(BlockModelFluid::new)
             .build(new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyFlowing"),Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
     //BlockHelper.createBlock(MOD_ID,new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyFlowing"),Material.water),"signalum_energy_transparent",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
     public static final BlockFluid energyStill = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalindustries:block/signalum_energy_transparent")
+            .setBlockModel(BlockModelFluid::new)
             .build(new BlockFluidFlowing("signalumEnergy",config.getInt("BlockIDs.energyStill"),Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
     //BlockHelper.createBlock(MOD_ID,new BlockFluidStill("signalumEnergy",config.getInt("BlockIDs.energyStill"),Material.water),"signalum_energy_transparent",BlockSounds.DEFAULT,1.0f,1.0f,0).withTexCoords(energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1],energyTex[0],energyTex[1]).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES);
 
     public static final BlockFluid burntSignalumFlowing = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalindustries:block/burnt_signalum")
+            .setBlockModel(BlockModelFluid::new)
             .build(new BlockFluidFlowing("burntSignalum",config.getInt("BlockIDs.burntSignalumFlowing"),Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
     public static final BlockFluid burntSignalumStill = (BlockFluid) new BlockBuilder(MOD_ID)
             .setTextures("signalindustries:block/burnt_signalum")
+            .setBlockModel(BlockModelFluid::new)
             .build(new BlockFluidStill("burntSignalum",config.getInt("BlockIDs.burntSignalumStill"),Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU,BlockTags.PLACE_OVERWRITES));
 
     public static final Item signalumCrystalEmpty = new ItemBuilder(MOD_ID)
@@ -1797,7 +1802,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     }
 
     public static String key(String key){
-        return HalpLibe.addModId(MOD_ID,key);
+        return MOD_ID+":"+key;
     }
 
     public static <T> boolean listContains(List<T> list, T o, BiFunction<T,T,Boolean> equals){
