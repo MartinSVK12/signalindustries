@@ -25,7 +25,6 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.IColorOverride;
 
 public class GuiRenderItemNoOverlay extends Gui {
-    //FIXME
     Minecraft mc;
 
     public GuiRenderItemNoOverlay(Minecraft mc) {
