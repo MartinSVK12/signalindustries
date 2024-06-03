@@ -16,12 +16,14 @@ import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelFluid;
 import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
+import net.minecraft.client.render.block.model.BlockModelRail;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.client.render.stitcher.AtlasStitcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.client.sound.SoundManager;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
@@ -65,6 +67,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
+import sunsetsatellite.signalindustries.blocks.models.BlockModelDilithiumRail;
 import sunsetsatellite.signalindustries.blocks.models.BlockModelMachine;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
@@ -89,6 +92,9 @@ import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
+import sunsetsatellite.signalindustries.items.models.ItemModelFuelCell;
+import sunsetsatellite.signalindustries.items.models.ItemModelPulsar;
+import sunsetsatellite.signalindustries.items.models.ItemModelSaber;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
@@ -123,10 +129,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final TomlConfigHandler config;
     public static List<ChunkCoordinates> meteorLocations = new ArrayList<>();
     public static Set<BlockInstance> uvLamps = new HashSet<>();
-
-    public static AtlasStitcher blockAtlas;
-    public static AtlasStitcher itemAtlas;
-    public static AtlasStitcher particleAtlas;
 
     static {
 
@@ -1355,6 +1357,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setHardness(1)
             .setResistance(50)
             .setTextures("signalindustries:block/dilithium_rail_unpowered")
+            .setBlockModel(BlockModelDilithiumRail::new)
             .build(new BlockDilithiumRail("dilithiumRail",config.getInt("BlockIDs.dilithiumRail"),true));
 
 
@@ -1431,6 +1434,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Item fuelCell = new ItemBuilder(MOD_ID)
             .setIcon("signalindustries:item/fuelcellempty")
             .setStackSize(1)
+            .setItemModel((item)->new ItemModelFuelCell(item,MOD_ID))
             .build(new ItemFuelCell("fuelCell",config.getInt("ItemIDs.fuelCell")));
 
     public static final Item nullTrigger = new ItemBuilder(MOD_ID)
@@ -1452,11 +1456,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     public static final Item signalumSaber = new ItemBuilder(MOD_ID)
             .setIcon("signalindustries:item/signalumsaberunpowered")
+            .setItemModel((item)->new ItemModelSaber(item,MOD_ID))
             .build(new ItemSignalumSaber("reinforced.signalumSaber",config.getInt("ItemIDs.signalumSaber"), Tier.REINFORCED, ToolMaterial.stone));
 
     public static final Item pulsar = new ItemBuilder(MOD_ID)
             .setIcon("signalindustries:item/pulsaractive")
             .setStackSize(1)
+            .setItemModel((item)-> new ItemModelPulsar(item,MOD_ID))
             .build(new ItemPulsar("reinforced.pulsar",config.getInt("ItemIDs.pulsar"), Tier.REINFORCED));
 
     //TODO: WIP
@@ -2095,14 +2101,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     @Override
     public void beforeClientStart() {
-        particleAtlas = TextureRegistry.register("particle", new AtlasStitcher("particle", false, null));
-        itemAtlas = TextureRegistry.register("item", new AtlasStitcher("item", true, "/assets/minecraft/textures/item/texture_missing.png"));
-        blockAtlas = TextureRegistry.register("block", new AtlasStitcher("block", true, "/assets/minecraft/textures/block/texture_missing.png"));
-
         try {
-            TextureRegistry.initializeAllFiles(MOD_ID, blockAtlas);
-            TextureRegistry.initializeAllFiles(MOD_ID, itemAtlas);
-            TextureRegistry.initializeAllFiles(MOD_ID, particleAtlas);
+            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.blockAtlas);
+            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.itemAtlas);
+            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.particleAtlas);
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException(e);
         }

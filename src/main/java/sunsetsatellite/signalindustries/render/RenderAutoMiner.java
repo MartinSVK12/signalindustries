@@ -12,6 +12,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.multiblocks.IColorOverride;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
 
@@ -29,8 +30,10 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        ((IColorOverride)model).enableFullbright();
         model.renderBlockOnInventory(tessellator,meta,1,0.75f);
         BlockModel.setRenderBlocks(renderBlocks);
+        ((IColorOverride)model).disableFullbright();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);

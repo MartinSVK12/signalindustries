@@ -20,6 +20,7 @@
     "EntityTrackerMixin",
     "GuiInventoryMixin",
     "InventoryPlayerMixin",
+    "ItemModelStandardMixin",
     "ItemStackMixin",
     "NBTTagCompoundMixin",
     "SaveHandlerBaseMixin",
