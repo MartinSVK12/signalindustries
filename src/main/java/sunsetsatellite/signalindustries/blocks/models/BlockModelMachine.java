@@ -73,7 +73,7 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
 
         Side id = Side.getSideById(index);
 
-        return overbrightTextures.get(id);
+        return null; //overbrightTextures.get(id);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
 
         Side id = Side.getSideById(index);
 
-        return activeTextures.get(id);
+        return defaultTextures.get(id);
     }
 
     public BlockModelMachine withDefaultTexture(String texture) {

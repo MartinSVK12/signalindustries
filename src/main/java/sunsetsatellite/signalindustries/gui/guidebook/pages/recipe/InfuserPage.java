@@ -7,6 +7,11 @@ import net.minecraft.client.gui.guidebook.*;
 import net.minecraft.client.gui.guidebook.search.SearchPage;
 import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.render.block.color.BlockColorDispatcher;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.core.achievement.AchievementList;
 import net.minecraft.core.achievement.stat.StatList;
 import net.minecraft.core.block.Block;
@@ -17,8 +22,10 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
+import net.minecraft.core.util.helper.Color;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
@@ -113,7 +120,20 @@ public class InfuserPage
                 drawSlot(re,x+slot.xDisplayPosition-1,y+slot.yDisplayPosition-1,0xFFFFFFFF);
             }
             if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
-            guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
+            if(slot.item != null && slot.item.itemID < 16384 && (Block.getBlock(slot.item.itemID) == Block.fluidWaterFlowing || Block.getBlock(slot.item.itemID) == Block.fluidWaterStill) && mc.gameSettings.biomeWater.value){
+                BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.getBlock(slot.item.itemID));
+                ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(slot.getStack().getItem());
+                int waterColor = BlockColorDispatcher.getInstance().getDispatch(Block.fluidWaterFlowing).getWorldColor(mc.theWorld, (int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
+                Color c = new Color().setARGB(waterColor);
+                c.setRGBA(c.getRed(),c.getGreen(),c.getBlue(),0x40);
+                ((IColorOverride)blockModel).overrideColor(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
+                ((IColorOverride)itemModel).overrideColor(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
+                guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
+                ((IColorOverride)blockModel).overrideColor(1,1,1,1);
+                ((IColorOverride)itemModel).overrideColor(1,1,1,1);
+            } else {
+                guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
+            }
         }
         for (int i = 1; i <= recipes.size(); i++) {
             RecipeEntryMachine recipe = recipes.get(i-1);

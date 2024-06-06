@@ -1,13 +1,12 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.render.LightmapHelper;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.multiblocks.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;

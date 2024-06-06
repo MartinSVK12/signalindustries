@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.multiblocks.HologramWorld;
-import sunsetsatellite.catalyst.multiblocks.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;

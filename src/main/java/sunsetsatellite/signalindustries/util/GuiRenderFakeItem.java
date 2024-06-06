@@ -23,7 +23,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.catalyst.multiblocks.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 
 
 public class GuiRenderFakeItem extends Gui

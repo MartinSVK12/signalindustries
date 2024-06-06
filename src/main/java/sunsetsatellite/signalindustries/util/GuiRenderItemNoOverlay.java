@@ -6,14 +6,12 @@ import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
-import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.ItemModelBlock;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.Global;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
@@ -22,7 +20,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.multiblocks.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 
 public class GuiRenderItemNoOverlay extends Gui {
     Minecraft mc;

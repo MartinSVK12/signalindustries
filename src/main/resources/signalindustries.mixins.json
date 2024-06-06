@@ -6,7 +6,6 @@
   "mixins": [
     "AchievementMixin",
     "BlockFluidMixin",
-    "BlockModelStandardMixin",
     "BlockRailMixin",
     "ContainerWorkbenchMixin",
     "DimensionMixin",
@@ -20,7 +19,6 @@
     "EntityTrackerMixin",
     "GuiInventoryMixin",
     "InventoryPlayerMixin",
-    "ItemModelStandardMixin",
     "ItemStackMixin",
     "NBTTagCompoundMixin",
     "SaveHandlerBaseMixin",
