@@ -69,6 +69,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.BlockModelDilithiumRail;
 import sunsetsatellite.signalindustries.blocks.models.BlockModelMachine;
+import sunsetsatellite.signalindustries.blocks.models.BlockModelVerticalMachine;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
@@ -936,6 +937,20 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/reinforced_blank")
             .setSideTextures("signalindustries:block/dilithium_stabilizer_side_inactive")
             .setSouthTexture("signalindustries:block/dilithium_top_inactive")
+            .setBlockModel((block)->new BlockModelVerticalMachine(block, Tier.REINFORCED)
+                    .withDefaultSideTextures("dilithium_stabilizer_side_inactive")
+                    .withDefaultNorthTexture("dilithium_top_inactive")
+                    .withActiveSideTextures("dilithium_stabilizer_side_active")
+                    .withActiveNorthTexture("dilithium_top_active")
+                    .withOverbrightSideTextures("stabilizer_overlay")
+                    .withOverbrightNorthTexture("dilithium_machine_overlay")
+                    .withVerticalDefaultSideTextures("dilithium_stabilizer_side_inactive")
+                    .withVerticalDefaultTopTexture("dilithium_top_inactive")
+                    .withVerticalActiveSideTextures("dilithium_stabilizer_side_active")
+                    .withVerticalActiveTopTexture("dilithium_top_active")
+                    .withVerticalOverbrightSideTextures("stabilizer_overlay")
+                    .withVerticalOverbrightTopTexture("dilithium_machine_overlay")
+            )
             .build(new BlockDilithiumStabilizer("reinforced.dilithiumStabilizer",config.getInt("BlockIDs.dilithiumStabilizer"), Tier.REINFORCED,Material.metal));
 
     public static final Block redstoneBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank","reinforced_blank","dilithium_top_inactive","dilithium_booster_side_inactive","dilithium_booster_side_inactive","dilithium_booster_side_inactive",BlockSounds.METAL,5f,20f,1);

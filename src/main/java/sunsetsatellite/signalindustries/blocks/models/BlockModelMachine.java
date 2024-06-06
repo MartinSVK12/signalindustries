@@ -68,10 +68,10 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
 
     @Override
     public IconCoordinate getBlockOverbrightTextureFromSideAndMeta(Side side, int data) {
-        int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side.getId()];
+       /* int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side.getId()];
         if (index >= Sides.orientationLookUpHorizontal.length) return null;
 
-        Side id = Side.getSideById(index);
+        Side id = Side.getSideById(index);*/
 
         return null; //overbrightTextures.get(id);
     }
