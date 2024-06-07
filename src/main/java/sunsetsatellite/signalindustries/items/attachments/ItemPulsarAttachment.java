@@ -10,6 +10,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import org.lwjgl.input.Keyboard;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPulsarAttachment;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
@@ -17,7 +20,6 @@ import sunsetsatellite.signalindustries.gui.GuiPulsarAttachment;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -46,9 +48,9 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
                 CompoundTag data = getItemFromSlot(0,stack).getCompound("Data");
                 CompoundTag warpPosition = data.getCompound("position");
                 if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
-                    player.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_SUCCESS);
-                    if(player.dimension == SignalIndustries.dimEternity.id){
-                        player.triggerAchievement(SignalIndustriesAchievementPage.FALSE_ETERNITY);
+                    player.triggerAchievement(SIAchievements.TELEPORT_SUCCESS);
+                    if(player.dimension == SIDimensions.dimEternity.id){
+                        player.triggerAchievement(SIAchievements.FALSE_ETERNITY);
                     }
                     if(data.getInteger("dim") != player.dimension){
                         SignalIndustries.usePortal(data.getInteger("dim"));
@@ -58,12 +60,12 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
                     ex.doExplosionA();
                     ex.doExplosionB(true,0.7f,0.0f,0.7f);
                 } else {
-                    player.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_FAIL);
-                    SignalIndustries.usePortal(SignalIndustries.dimEternity.id);
+                    player.triggerAchievement(SIAchievements.TELEPORT_FAIL);
+                    SignalIndustries.usePortal(SIDimensions.dimEternity.id);
                 }
                 ((INBTCompound)stack.getData().getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
-                player.triggerAchievement(SignalIndustriesAchievementPage.PULSE);
+                player.triggerAchievement(SIAchievements.PULSE);
                 world.spawnParticle("pulse_shockwave", player.x, player.y, player.z, 0.0, 0.0, 0.0,0);
             }
         }
@@ -88,7 +90,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
                     return;
                 }
-                if(getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.id){
+                if(getItemIdFromSlot(0,stack) == SIItems.warpOrb.id){
                     signalumPowerSuit.decrementEnergy(80); //charging takes 100 ticks
                 } else {
                     signalumPowerSuit.decrementEnergy(40); //charging takes 100 ticks
@@ -115,7 +117,7 @@ public class ItemPulsarAttachment extends ItemTieredAttachment implements IHasOv
     }
 
     public String getAbility(ItemStack stack){
-        return getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
+        return getItemIdFromSlot(0,stack) == SIItems.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
     }
 
     @Override

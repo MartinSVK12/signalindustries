@@ -4,6 +4,7 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
@@ -17,7 +18,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
 
     @Override

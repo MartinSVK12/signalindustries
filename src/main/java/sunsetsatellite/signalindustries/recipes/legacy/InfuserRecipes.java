@@ -5,7 +5,8 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,14 +19,14 @@ public class InfuserRecipes extends MachineRecipesBase<ArrayList<Object>, ItemSt
     private InfuserRecipes() {
         ArrayList<Object> list = new ArrayList<>();
         list.add(null);
-        list.add(new ItemStack(SignalIndustries.crystalAlloyIngot,1));
-        list.add(new ItemStack(SignalIndustries.saturatedSignalumCrystalDust,4));
-        addRecipe(list,new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot.id,1,0));
+        list.add(new ItemStack(SIItems.crystalAlloyIngot,1));
+        list.add(new ItemStack(SIItems.saturatedSignalumCrystalDust,4));
+        addRecipe(list,new ItemStack(SIItems.saturatedSignalumAlloyIngot.id,1,0));
         list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidLavaFlowing,1000));
         list.add(new ItemStack(Block.obsidian,2,0));
-        list.add(new ItemStack(SignalIndustries.netherCoalDust,1,0));
-        addRecipe(list,new ItemStack(SignalIndustries.glowingObsidian,1,0));
+        list.add(new ItemStack(SIItems.netherCoalDust,1,0));
+        addRecipe(list,new ItemStack(SIBlocks.glowingObsidian,1,0));
 
     }
 

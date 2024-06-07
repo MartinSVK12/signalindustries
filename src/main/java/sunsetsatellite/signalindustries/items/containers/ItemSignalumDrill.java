@@ -18,7 +18,7 @@ import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -174,7 +174,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SignalIndustries.energyFlowing,getCapacity(stack));
+        return new FluidStack(SIBlocks.energyFlowing,getCapacity(stack));
     }
 
     @Override
@@ -182,7 +182,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
         if(fluidStack == null){
             return null;
         }
-        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = fluidStack.amount;
@@ -220,7 +220,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
         if(fluidStack == null){
             return null;
         }
-        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = Math.min(fluidStack.amount,maxAmount);

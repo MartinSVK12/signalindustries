@@ -3,7 +3,8 @@ package sunsetsatellite.signalindustries.recipes.legacy;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class CentrifugeRecipes extends MachineRecipesBase<FluidStack[], ItemStac
     public static final CentrifugeRecipes instance = new CentrifugeRecipes();
 
     protected CentrifugeRecipes(){
-        addRecipe(new FluidStack[]{new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250),new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250),new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250),new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)},new ItemStack(SignalIndustries.awakenedSignalumFragment,1));
+        addRecipe(new FluidStack[]{new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250),new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250),new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250),new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250)},new ItemStack(SIItems.awakenedSignalumFragment,1));
     }
 
     @Override

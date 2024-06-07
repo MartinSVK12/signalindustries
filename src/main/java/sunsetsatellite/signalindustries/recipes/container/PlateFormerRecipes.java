@@ -1,10 +1,9 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
-import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -19,7 +18,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol("minecraft:stones")
                         },
-                        new ItemStack(SignalIndustries.stonePlate,2),
+                        new ItemStack(SIItems.stonePlate,2),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
@@ -29,7 +28,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
-                        new ItemStack(SignalIndustries.cobblestonePlate,2),
+                        new ItemStack(SIItems.cobblestonePlate,2),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
@@ -39,7 +38,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.ingotSteel))
                         },
-                        new ItemStack(SignalIndustries.steelPlate,1),
+                        new ItemStack(SIItems.steelPlate,1),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
@@ -47,9 +46,9 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "crystal_alloy_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.crystalAlloyIngot))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot))
                         },
-                        new ItemStack(SignalIndustries.crystalAlloyPlate,1),
+                        new ItemStack(SIItems.crystalAlloyPlate,1),
                         new RecipeProperties(200,20, Tier.PROTOTYPE,false)
                 )
         );
@@ -57,9 +56,9 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "saturated_alloy_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.saturatedSignalumAlloyIngot))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumAlloyIngot))
                         },
-                        new ItemStack(SignalIndustries.saturatedSignalumAlloyPlate,1),
+                        new ItemStack(SIItems.saturatedSignalumAlloyPlate,1),
                         new RecipeProperties(200,40, Tier.BASIC,false)
                 )
         );
@@ -67,9 +66,9 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "reinforced_crystal_alloy_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.reinforcedCrystalAlloyIngot))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.reinforcedCrystalAlloyIngot))
                         },
-                        new ItemStack(SignalIndustries.reinforcedCrystalAlloyPlate,1),
+                        new ItemStack(SIItems.reinforcedCrystalAlloyPlate,1),
                         new RecipeProperties(200,40, Tier.BASIC,false)
                 )
         );
@@ -77,9 +76,9 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 "dilithium_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.dilithiumShard,2))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.dilithiumShard,2))
                         },
-                        new ItemStack(SignalIndustries.dilithiumPlate,1),
+                        new ItemStack(SIItems.dilithiumPlate,1),
                         new RecipeProperties(200,80, Tier.REINFORCED,false)
                 )
         );

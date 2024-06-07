@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import net.minecraft.core.block.BlockFluid;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
@@ -12,7 +12,7 @@ public class TileEntityPlateFormer extends TileEntityTieredMachineSimple impleme
 
     public TileEntityPlateFormer(){
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.PLATE_FORMER;
         itemInputs = new int[]{0};

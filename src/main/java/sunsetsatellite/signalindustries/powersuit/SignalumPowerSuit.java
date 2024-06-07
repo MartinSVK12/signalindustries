@@ -18,6 +18,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
@@ -179,7 +180,7 @@ public class SignalumPowerSuit {
         }
 
         //energy pack attachment bonus
-        chestplate.fluidCapacity[0] = hasAttachment((ItemAttachment) SignalIndustries.extendedEnergyPack) ? 64000 : 32000;
+        chestplate.fluidCapacity[0] = hasAttachment((ItemAttachment) SIItems.extendedEnergyPack) ? 64000 : 32000;
 
         //get module
         if(getModule() != null){
@@ -258,8 +259,8 @@ public class SignalumPowerSuit {
             if(player.isInWaterOrRain()){
                 value += 0.20f;
             }
-            if(hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
-                ItemStack wings = getAttachment((ItemAttachment) SignalIndustries.crystalWings);
+            if(hasAttachment((ItemAttachment) SIItems.crystalWings)){
+                ItemStack wings = getAttachment((ItemAttachment) SIItems.crystalWings);
                 if(wings != null && wings.getData().getBoolean("active")){
                     value += 0.80f;
                 }
@@ -269,8 +270,8 @@ public class SignalumPowerSuit {
         }
         if(temperature > 20){
             temperature -= 0.01f;
-            if(hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
-                ItemStack wings = getAttachment((ItemAttachment) SignalIndustries.crystalWings);
+            if(hasAttachment((ItemAttachment) SIItems.crystalWings)){
+                ItemStack wings = getAttachment((ItemAttachment) SIItems.crystalWings);
                 if(wings != null && wings.getData().getBoolean("active")){
                     temperature -= 0.49f;
                 }

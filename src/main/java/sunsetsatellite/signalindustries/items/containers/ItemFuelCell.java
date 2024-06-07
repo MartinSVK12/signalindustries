@@ -12,7 +12,8 @@ import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 
 
 public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDescription {
@@ -43,7 +44,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SignalIndustries.energyFlowing,getCapacity(stack));
+        return new FluidStack(SIBlocks.energyFlowing,getCapacity(stack));
     }
 
     @Override
@@ -51,11 +52,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         if(slot== null){
             return null;
         }
-        if(slot.getLiquid() == SignalIndustries.energyFlowing){
+        if(slot.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
             int amount = slot.amount;
-            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
+            ItemStack cell = new ItemStack(SIItems.fuelCell,1);
             if(remaining == 0){
                 return null;
             }
@@ -90,11 +91,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         if(fluidStack == null){
             return null;
         }
-        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
             int amount = Math.min(fluidStack.amount,maxAmount);
-            ItemStack cell = new ItemStack(SignalIndustries.fuelCell,1);
+            ItemStack cell = new ItemStack(SIItems.fuelCell,1);
             if(remaining == 0) return null;
             int result = Math.min(amount,remaining);
             if(result == 0) return null;
@@ -133,11 +134,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }
@@ -164,11 +165,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }
@@ -195,11 +196,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }

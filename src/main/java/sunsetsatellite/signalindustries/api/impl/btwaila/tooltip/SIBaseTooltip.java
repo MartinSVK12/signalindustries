@@ -8,11 +8,10 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.util.NumberUtil;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.tooltips.TileTooltip;
-import toufoumaster.btwaila.util.ColorOptions;
 import toufoumaster.btwaila.util.ProgressBarOptions;
 import toufoumaster.btwaila.util.TextureOptions;
 
@@ -39,7 +38,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
                 } else {
-                    if(inv.getAllowedFluidsForSlot(id).contains(SignalIndustries.energyFlowing)){
+                    if(inv.getAllowedFluidsForSlot(id).contains(SIBlocks.energyFlowing)){
                         ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("sE: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
                         c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                     } else {
@@ -52,9 +51,9 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
             List<ItemStack> stacks = new ArrayList<>();
             for (int id = 0; id < inv.getFluidInventorySize(); id++) {
                 FluidStack stack = inv.getFluidInSlot(id);
-                if(stack != null && stack.liquid != null && stack.liquid != SignalIndustries.energyFlowing){
+                if(stack != null && stack.liquid != null && stack.liquid != SIBlocks.energyFlowing){
                     stacks.add(new ItemStack(stack.liquid,stack.amount));
-                } else if (stack != null && stack.liquid == SignalIndustries.energyFlowing){
+                } else if (stack != null && stack.liquid == SIBlocks.energyFlowing){
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.liquid);
                     ProgressBarOptions options = new ProgressBarOptions(
                             0,
@@ -68,7 +67,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
-                } else if (inv.getAllowedFluidsForSlot(id).contains(SignalIndustries.energyFlowing)) {
+                } else if (inv.getAllowedFluidsForSlot(id).contains(SIBlocks.energyFlowing)) {
                     ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("sE: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
                     c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }

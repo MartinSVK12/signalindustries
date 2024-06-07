@@ -4,7 +4,7 @@ import net.minecraft.client.gui.guidebook.GuidebookPage;
 import net.minecraft.client.gui.guidebook.GuidebookSection;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.util.collection.Pair;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIMultiblocks;
 import sunsetsatellite.signalindustries.gui.guidebook.pages.MultiblockMaterialsPage;
 import sunsetsatellite.signalindustries.gui.guidebook.pages.MultiblockPage;
 import sunsetsatellite.signalindustries.util.SearchableGuidebookSubsection;
@@ -26,14 +26,14 @@ public class MultiblockSection extends SearchableGuidebookSubsection {
     public void reloadSection() {
         pages.clear();
         //TODO: auto-add new multiblocks here
-        pages.add(new MultiblockPage(parent, SignalIndustries.dimAnchorMultiblock));
-        pages.add(new MultiblockMaterialsPage(parent, SignalIndustries.dimAnchorMultiblock));
-        pages.add(new MultiblockPage(parent, SignalIndustries.signalumReactor));
-        pages.add(new MultiblockMaterialsPage(parent, SignalIndustries.signalumReactor));
-        pages.add(new MultiblockPage(parent, SignalIndustries.wrathTree));
-        pages.add(new MultiblockMaterialsPage(parent, SignalIndustries.wrathTree));
-        pages.add(new MultiblockPage(parent, SignalIndustries.extractionManifold));
-        pages.add(new MultiblockMaterialsPage(parent, SignalIndustries.extractionManifold));
+        pages.add(new MultiblockPage(parent, SIMultiblocks.dimAnchorMultiblock));
+        pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.dimAnchorMultiblock));
+        pages.add(new MultiblockPage(parent, SIMultiblocks.signalumReactor));
+        pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.signalumReactor));
+        pages.add(new MultiblockPage(parent, SIMultiblocks.wrathTree));
+        pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.wrathTree));
+        pages.add(new MultiblockPage(parent, SIMultiblocks.extractionManifold));
+        pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.extractionManifold));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
-import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
@@ -13,22 +12,15 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
-import sunsetsatellite.signalindustries.inventories.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.recipes.SIRecipes;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
-import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TileEntityInductionSmelter extends TileEntityTieredMachineBase implements IMultiblock {
 
@@ -80,11 +72,11 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
             ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z), Direction.Z_POS);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {
-                    if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SignalIndustries.basicItemInputBus){
+                    if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.basicItemInputBus){
                         input = (TileEntityItemBus) tileEntity.tile;
-                    } else if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SignalIndustries.basicItemOutputBus){
+                    } else if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.basicItemOutputBus){
                         output = (TileEntityItemBus) tileEntity.tile;
-                    } else if(tileEntity.tile instanceof TileEntityEnergyConnector && tileEntity.block == SignalIndustries.basicEnergyConnector){
+                    } else if(tileEntity.tile instanceof TileEntityEnergyConnector && tileEntity.block == SIBlocks.basicEnergyConnector){
                         energy = (TileEntityEnergyConnector) tileEntity.tile;
                     }
                     ((IMultiblockPart) tileEntity.tile).connect(this);

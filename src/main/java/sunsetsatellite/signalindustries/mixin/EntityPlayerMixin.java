@@ -16,12 +16,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemNVGAttachment;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(
@@ -51,7 +53,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     )
     public void sleepInBedAt(int x, int y, int z, CallbackInfoReturnable<EnumSleepStatus> cir) {
         if (!world.isClientSide) {
-            if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+            if(world.getCurrentWeather() == SIWeather.weatherBloodMoon){
                 sendTranslatedChatMessage("bed.bloodMoon");
                 cir.setReturnValue(EnumSleepStatus.NOT_POSSIBLE_NOW);
             }
@@ -82,7 +84,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
         }
         if(powerSuit == null){
             powerSuit = new SignalumPowerSuit(armorInventory,((EntityPlayer) (Object) this));
-            ((EntityPlayer) (Object) this).triggerAchievement(SignalIndustriesAchievementPage.POWER_SUIT);
+            ((EntityPlayer) (Object) this).triggerAchievement(SIAchievements.POWER_SUIT);
         } else {
             powerSuit.tick();
         }
@@ -94,8 +96,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     )
     public void updateSpeed(CallbackInfo ci) {
         if(powerSuit != null && powerSuit.active){
-            if(powerSuit.hasAttachment((ItemAttachment) SignalIndustries.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))){
-                if(powerSuit.getAttachment((ItemAttachment) SignalIndustries.movementBoosters) != null && powerSuit.getAttachment((ItemAttachment) SignalIndustries.movementBoosters).getData().getBoolean("active")){
+            if(powerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))){
+                if(powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters) != null && powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters).getData().getBoolean("active")){
                     speed += (float) (baseSpeed * 0.3);
                 }
             }

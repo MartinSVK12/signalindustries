@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Random;
 
@@ -26,10 +26,10 @@ public class WorldGenLabyrinthMixin {
             int j = random.nextInt(2);
             switch (j){
                 case 0:
-                    cir.setReturnValue(new ItemStack(SignalIndustries.romChipProjectile,1));
+                    cir.setReturnValue(new ItemStack(SIItems.romChipProjectile,1));
                     break;
                 case 1:
-                    cir.setReturnValue(new ItemStack(SignalIndustries.romChipBoost,1));
+                    cir.setReturnValue(new ItemStack(SIItems.romChipBoost,1));
                     break;
             }
         } else {

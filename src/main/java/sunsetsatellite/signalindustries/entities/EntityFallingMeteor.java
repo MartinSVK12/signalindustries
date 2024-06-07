@@ -14,8 +14,9 @@ import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.entities.fx.EntityMeteorTailFX;
 
 import java.util.List;
@@ -235,21 +236,21 @@ public class EntityFallingMeteor extends Entity {
                     if (this.isOnFire()) {
                         movingobjectposition.entity.fireHurt();
                     }
-                    if(blockID == SignalIndustries.signalumOre.id){
-                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                    if(blockID == SIBlocks.signalumOre.id){
+                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
                         world.entityJoinedWorld(entityitem);
                     }
                     this.remove();
                 } else {
-                    if(blockID == SignalIndustries.signalumOre.id){
-                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                    if(blockID == SIBlocks.signalumOre.id){
+                        EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
                         world.entityJoinedWorld(entityitem);
                     }
                     this.remove();
                 }
             } else {
-                if(blockID == SignalIndustries.signalumOre.id){
-                    EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SignalIndustries.rawSignalumCrystal, random.nextInt(3)+1));
+                if(blockID == SIBlocks.signalumOre.id){
+                    EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
                     world.entityJoinedWorld(entityitem);
                 }
                 this.remove();

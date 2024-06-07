@@ -5,7 +5,7 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -36,7 +36,7 @@ public class InventoryBackpack extends ItemInventoryFluid {
             acceptedFluids.add(new ArrayList<>());
         }
         for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
-            if(fluid != SignalIndustries.energyFlowing) {
+            if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }
         }

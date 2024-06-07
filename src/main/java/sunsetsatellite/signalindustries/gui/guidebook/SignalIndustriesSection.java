@@ -5,7 +5,7 @@ import net.minecraft.client.gui.guidebook.SearchableGuidebookSection;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.gui.guidebook.pages.recipe.*;
 import sunsetsatellite.signalindustries.gui.guidebook.pages.wiki.IntroPage;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
@@ -36,7 +36,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
 
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
     public SignalIndustriesSection() {
-        super("guidebook.section.signalindustries", new ItemStack(SignalIndustries.signalumCrystal), 0xAA0000, 0xFF0000);
+        super("guidebook.section.signalindustries", new ItemStack(SIItems.signalumCrystal), 0xAA0000, 0xFF0000);
         reloadSection();
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.extractor"),extractor.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crusher"),crusher.getPages().get(0)));

@@ -20,7 +20,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
@@ -46,7 +48,7 @@ public abstract class EntityLivingMixin extends Entity {
         if (this.world.isDaytime()) {
             float f = this.getBrightness(1.0F);
             if (f > 0.5F && this.world.canBlockSeeTheSky(MathHelper.floor_double(this.x), MathHelper.floor_double(this.y), MathHelper.floor_double(this.z)) && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.getCurrentWeather() != Weather.overworldFog) {
-                if(world.getCurrentWeather() == SignalIndustries.weatherSolarApocalypse){
+                if(world.getCurrentWeather() == SIWeather.weatherSolarApocalypse){
                     if (this.fireImmune || this.world.isClientSide) {
                         remainingFireTicks = 0;
                     } else{
@@ -65,7 +67,7 @@ public abstract class EntityLivingMixin extends Entity {
             at = @At("HEAD")
     )
     protected void bloodMoonReward(CallbackInfo ci){
-        if(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+        if(world.getCurrentWeather() == SIWeather.weatherBloodMoon){
             List<WeightedRandomLootObject> drops = this.getMobDrops();
             if (drops != null) {
                 Iterator<WeightedRandomLootObject> var2 = drops.iterator();
@@ -95,13 +97,13 @@ public abstract class EntityLivingMixin extends Entity {
             cancellable = true
     )
     public void bloodMoonSpawning(CallbackInfoReturnable<Integer> cir){
-        cir.setReturnValue(world.getCurrentWeather() == SignalIndustries.weatherBloodMoon ? 16 : 4);
+        cir.setReturnValue(world.getCurrentWeather() == SIWeather.weatherBloodMoon ? 16 : 4);
     }
 
     @Inject(method = "getCanSpawnHere",at = @At("HEAD"),cancellable = true)
     public void getCanSpawnHere(CallbackInfoReturnable<Boolean> cir)
     {
-        if(world.dimension == SignalIndustries.dimEternity){
+        if(world.dimension == SIDimensions.dimEternity){
             cir.setReturnValue(false);
         }
     }
@@ -115,8 +117,8 @@ public abstract class EntityLivingMixin extends Entity {
         if(thisAs instanceof EntityPlayer){
             EntityPlayer player = ((EntityPlayer) thisAs);
             SignalumPowerSuit ps = ((IPlayerPowerSuit)player).getPowerSuit();
-            if(ps != null && ps.active && ps.hasAttachment((ItemAttachment) SignalIndustries.crystalWings)){
-                return original || ps.getAttachment((ItemAttachment) SignalIndustries.crystalWings).getData().getBoolean("active");
+            if(ps != null && ps.active && ps.hasAttachment((ItemAttachment) SIItems.crystalWings)){
+                return original || ps.getAttachment((ItemAttachment) SIItems.crystalWings).getData().getBoolean("active");
             } else {
                 return original;
             }
@@ -130,8 +132,8 @@ public abstract class EntityLivingMixin extends Entity {
         if(thisAs instanceof EntityPlayer) {
             EntityPlayer player = ((EntityPlayer) thisAs);
             SignalumPowerSuit ps = ((IPlayerPowerSuit) player).getPowerSuit();
-            if (ps != null && ps.active && ps.hasAttachment((ItemAttachment) SignalIndustries.crystalWings)) {
-                if(ps.getAttachment((ItemAttachment) SignalIndustries.crystalWings).getData().getBoolean("active")){
+            if (ps != null && ps.active && ps.hasAttachment((ItemAttachment) SIItems.crystalWings)) {
+                if(ps.getAttachment((ItemAttachment) SIItems.crystalWings).getData().getBoolean("active")){
                     ci.cancel();
                 }
             }

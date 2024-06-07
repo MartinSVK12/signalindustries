@@ -6,18 +6,18 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 public class TileEntityExtractor extends TileEntityTieredMachineBase implements IBoostable {
 
     public TileEntityExtractor(){
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
     @Override
     public String getInvName() {
@@ -99,7 +99,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
                 fluidContents[0].amount += stack.amount;
             }
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.FROM_WITHIN);
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
             } else {

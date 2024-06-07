@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.DrawUtil;
@@ -61,10 +62,10 @@ public class GuiPowerSuit extends GuiItemFluid {
         super.drawScreen(x,y,f);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        ItemStack helmet = new ItemStack(SignalIndustries.signalumPowerSuitHelmet);
-        ItemStack chest = new ItemStack(SignalIndustries.signalumPowerSuitChestplate);
-        ItemStack leg = new ItemStack(SignalIndustries.signalumPowerSuitLeggings);
-        ItemStack boots = new ItemStack(SignalIndustries.signalumPowerSuitBoots);
+        ItemStack helmet = new ItemStack(SIItems.signalumPowerSuitHelmet);
+        ItemStack chest = new ItemStack(SIItems.signalumPowerSuitChestplate);
+        ItemStack leg = new ItemStack(SIItems.signalumPowerSuitLeggings);
+        ItemStack boots = new ItemStack(SIItems.signalumPowerSuitBoots);
         ItemModelDispatcher.getInstance().getDispatch(helmet).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, helmet,i+(xSize / 2)-68, j+(ySize/2)-23, 1.0F);
         ItemModelDispatcher.getInstance().getDispatch(chest).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, chest,i+(xSize / 2)-38, j+(ySize/2)-23, 1.0F);
         ItemModelDispatcher.getInstance().getDispatch(leg).renderItemIntoGui(Tessellator.instance,fontRenderer, this.mc.renderEngine, leg,i+(xSize / 2)+22, j+(ySize/2)-23, 1.0F);
@@ -156,10 +157,10 @@ public class GuiPowerSuit extends GuiItemFluid {
         GuiButton legsButton = new GuiButton(2, (width / 2)+20, (height / 2)-25, 20, 20, "");
         GuiButton bootsButton = new GuiButton(3, (width / 2)+50, (height / 2)-25, 20, 20, "");
 
-        helmerButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitHelmet.id;
-        chestButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitChestplate.id;
-        legsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitLeggings.id;
-        bootsButton.enabled = container.inv.item.itemID != SignalIndustries.signalumPowerSuitBoots.id;
+        helmerButton.enabled = container.inv.item.itemID != SIItems.signalumPowerSuitHelmet.id;
+        chestButton.enabled = container.inv.item.itemID != SIItems.signalumPowerSuitChestplate.id;
+        legsButton.enabled = container.inv.item.itemID != SIItems.signalumPowerSuitLeggings.id;
+        bootsButton.enabled = container.inv.item.itemID != SIItems.signalumPowerSuitBoots.id;
 
         controlList.add(helmerButton);
         controlList.add(chestButton);

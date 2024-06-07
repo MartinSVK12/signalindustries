@@ -13,6 +13,8 @@ import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
@@ -47,7 +49,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
         //acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
     }
@@ -169,9 +171,9 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
                     progressMaxTicks = 200 * speedMultiplier;
                 }
             } else {
-                if (itemContents[0].getItem() == SignalIndustries.dilithiumShard) {
+                if (itemContents[0].getItem() == SIItems.dilithiumShard) {
                     progressMaxTicks = 300 * speedMultiplier;
-                } else if (itemContents[0].itemID == SignalIndustries.dilithiumBlock.id) {
+                } else if (itemContents[0].itemID == SIBlocks.dilithiumBlock.id) {
                     progressMaxTicks = 3000 * speedMultiplier;
                 }
 
@@ -187,7 +189,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
             if(tier == Tier.BASIC){
                 return (itemContents[0].getItem() == Item.dustRedstone || itemContents[0].itemID == Block.blockRedstone.id) && itemContents[0].stackSize > 0;
             } else {
-                return (itemContents[0].getItem() == SignalIndustries.dilithiumShard || itemContents[0].itemID == SignalIndustries.dilithiumBlock.id) && itemContents[0].stackSize > 0;
+                return (itemContents[0].getItem() == SIItems.dilithiumShard || itemContents[0].itemID == SIBlocks.dilithiumBlock.id) && itemContents[0].stackSize > 0;
             }
 
         }

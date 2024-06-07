@@ -6,7 +6,7 @@ import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 
 public class TileEntityFluidConduit extends TileEntityFluidPipe {
@@ -17,7 +17,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe {
     public TileEntityFluidConduit(){
         acceptedFluids.get(0).clear();
         for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
-            if(fluid != SignalIndustries.energyFlowing) {
+            if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }
         }

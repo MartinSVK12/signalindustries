@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntitySlimeChunkFX;
 import net.minecraft.client.render.Lighting;
@@ -21,7 +20,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.entities.fx.EntityShockwaveFX;
 
@@ -56,7 +57,7 @@ public class RenderGlobalMixin {
             double d9 = 16.0;
             if (!(d6 * d6 + d7 * d7 + d8 * d8 > d9 * d9)) {
                 if (particleId.equals("crystalbreak")) {
-                    this.mc.effectRenderer.addEffect(new EntitySlimeChunkFX(this.worldObj, x, y, z, SignalIndustries.signalumCrystal));
+                    this.mc.effectRenderer.addEffect(new EntitySlimeChunkFX(this.worldObj, x, y, z, SIItems.signalumCrystal));
                 }
                 if(particleId.equals("dustcloud")){
                     this.mc.effectRenderer.addEffect(new EntityDustCloudFX(this.worldObj,x,y,z,motionX,motionY,motionZ));
@@ -87,7 +88,7 @@ public class RenderGlobalMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderBloodMoon(float partialTicks, CallbackInfo ci) {
-        if(worldObj.getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+        if(worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon){
             GL11.glColor4f(1.0f,0.0f,0.0f,1.0f);
         }
     }
@@ -98,7 +99,7 @@ public class RenderGlobalMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderMeteorShower(float partialTicks, CallbackInfo ci, @Local(name = "sunAlpha")LocalFloatRef f6) {
-        if(worldObj.getCurrentWeather() == SignalIndustries.weatherMeteorShower){
+        if(worldObj.getCurrentWeather() == SIWeather.weatherMeteorShower){
             f6.set(1.5f);
             GL11.glColor4f( 1,1, 1,1.0f);
         }
@@ -110,7 +111,7 @@ public class RenderGlobalMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void renderSolar(float renderPartialTicks, CallbackInfo ci, float celestialAngle, Vec3d vec3d, float f1, float f2, float f3, Tessellator tessellator, float[] af, float f6, float f9, float f11, float f13, float f15) {
-        if(worldObj.getCurrentWeather() == SignalIndustries.weatherEclipse){
+        if(worldObj.getCurrentWeather() == SIWeather.weatherEclipse){
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);
             GL11.glBindTexture(3553, this.renderEngine.getTexture("/assets/signalindustries/misc/solar_eclipse.png"));
@@ -122,7 +123,7 @@ public class RenderGlobalMixin {
             tessellator.addVertexWithUV(f15, 100.0, f15, 1.0, 1.0);
             tessellator.addVertexWithUV(-f15, 100.0, f15, 0.0, 1.0);
             tessellator.draw();
-        } else if (worldObj.getCurrentWeather() == SignalIndustries.weatherSolarApocalypse) {
+        } else if (worldObj.getCurrentWeather() == SIWeather.weatherSolarApocalypse) {
             GL11.glDisable(3553);
             GL11.glColor4f(1,1,1,1);
             GL11.glBindTexture(3553, this.renderEngine.getTexture("/assets/signalindustries/misc/solar_apocalypse.png"));
@@ -136,7 +137,7 @@ public class RenderGlobalMixin {
             cancellable = true
     )
     public void renderClouds(float f, CallbackInfo ci) {
-        if (this.mc.theWorld.dimension == SignalIndustries.dimEternity) {
+        if (this.mc.theWorld.dimension == SIDimensions.dimEternity) {
             ci.cancel();
         }
     }
@@ -147,7 +148,7 @@ public class RenderGlobalMixin {
             cancellable = true
     )
     public void eternitySky(float renderPartialTicks, CallbackInfo ci){
-        if(this.mc.theWorld.dimension == SignalIndustries.dimEternity){
+        if(this.mc.theWorld.dimension == SIDimensions.dimEternity){
             float celestialAngle = this.worldObj.getCelestialAngle(renderPartialTicks);
             GL11.glDisable(3553);
             Vec3d vec3d = this.worldObj.getSkyColor(this.mc.activeCamera, renderPartialTicks);

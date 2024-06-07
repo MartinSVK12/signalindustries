@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.items;
 
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -10,10 +9,10 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.abilities.trigger.BoostAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ProjectileAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.TriggerBaseAbility;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.HashMap;
 
@@ -65,7 +64,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
                     int amount = energy.getInteger("amount");
                     if (amount >= getAbility(itemstack).cost) {
                         getAbility(itemstack).activate(blockX, blockY, blockZ, entityplayer, world, itemstack);
-                        entityplayer.triggerAchievement(SignalIndustriesAchievementPage.TRIGGER);
+                        entityplayer.triggerAchievement(SIAchievements.TRIGGER);
                         energy.putInt("amount", amount - getAbility(itemstack).cost);
                         harness.getData().putInt("cooldown" + getAbilityName(itemstack), getAbility(itemstack).cooldown);
                     }
@@ -85,7 +84,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
                     int amount = energy.getInteger("amount");
                     if(amount >= getAbility(itemstack).cost){
                         getAbility(itemstack).activate(entityplayer,world,itemstack);
-                        entityplayer.triggerAchievement(SignalIndustriesAchievementPage.TRIGGER);
+                        entityplayer.triggerAchievement(SIAchievements.TRIGGER);
                         energy.putInt("amount",amount-getAbility(itemstack).cost);
                         harness.getData().putInt("cooldown"+getAbilityName(itemstack),getAbility(itemstack).cooldown);
                     }

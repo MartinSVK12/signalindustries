@@ -1,11 +1,9 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -24,10 +22,10 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                 "size_up",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1,0,nbt)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1,0,nbt))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1,0,nbt)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1,0,nbt))
                         },
-                        new ItemStack(SignalIndustries.signalumCrystal,1,0,nbt2),
+                        new ItemStack(SIItems.signalumCrystal,1,0,nbt2),
                         new RecipeProperties(800,80, Tier.BASIC,false)
                 )
         );
@@ -35,10 +33,10 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                 "awakened_combine",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.awakenedSignalumFragment,4,0)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.awakenedSignalumFragment,4,0))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.awakenedSignalumFragment,4,0)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.awakenedSignalumFragment,4,0))
                         },
-                        new ItemStack(SignalIndustries.awakenedSignalumCrystal,1,0),
+                        new ItemStack(SIItems.awakenedSignalumCrystal,1,0),
                         new RecipeProperties(3000,320, Tier.REINFORCED,false)
                 )
         );

@@ -11,6 +11,8 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
@@ -45,7 +47,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
         //acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
     }
@@ -164,7 +166,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     }
 
     public boolean canProcess() {
-        return ((itemContents[0] != null && itemContents[0].getItem() == SignalIndustries.dilithiumShard) || progressTicks > 0) && ((fluidContents[0] != null && fluidContents[0].amount >= cost) || isBurning()) && connectedTo instanceof IStabilizable;
+        return ((itemContents[0] != null && itemContents[0].getItem() == SIItems.dilithiumShard) || progressTicks > 0) && ((fluidContents[0] != null && fluidContents[0].amount >= cost) || isBurning()) && connectedTo instanceof IStabilizable;
 
         /*if(itemContents[0] == null) {
             return false;

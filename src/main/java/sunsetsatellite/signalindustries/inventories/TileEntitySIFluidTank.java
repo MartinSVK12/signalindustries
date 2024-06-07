@@ -4,17 +4,13 @@ package sunsetsatellite.signalindustries.inventories;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -37,7 +33,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
         for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
-            if(fluid != SignalIndustries.energyFlowing) {
+            if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }
         }

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.util.RailLogic;
 
 @Debug(
@@ -39,14 +39,14 @@ public abstract class BlockRailMixin extends Block {
     @Inject(method = "isRailBlockAt", at = @At("HEAD"), cancellable = true)
     private static void isRailBlockAt(World world, int i, int j, int k, CallbackInfoReturnable<Boolean> cir) {
         int l = world.getBlockId(i, j, k);
-        if(l == SignalIndustries.dilithiumRail.id){
+        if(l == SIBlocks.dilithiumRail.id){
             cir.setReturnValue(true);
         }
     }
 
     @Inject(method = "isRailBlock", at = @At("HEAD"), cancellable = true)
     private static void isRailBlock(int i, CallbackInfoReturnable<Boolean> cir) {
-        if(i == SignalIndustries.dilithiumRail.id){
+        if(i == SIBlocks.dilithiumRail.id){
             cir.setReturnValue(true);
         }
     }
@@ -57,7 +57,7 @@ public abstract class BlockRailMixin extends Block {
             cancellable = true
     )
     public void onNeighborBlockChange(World world, int i, int j, int k, int l, CallbackInfo ci) {
-        if (this.id == SignalIndustries.dilithiumRail.id) {
+        if (this.id == SIBlocks.dilithiumRail.id) {
             if (world.isClientSide){
                 ci.cancel();
             } else {
@@ -105,7 +105,7 @@ public abstract class BlockRailMixin extends Block {
     )
     private void func_27043_a(World world, int i, int j, int k, boolean flag, int l, int i1, CallbackInfoReturnable<Boolean> cir) {
         int j1 = world.getBlockId(i, j, k);
-        if (j1 == SignalIndustries.dilithiumRail.id) {
+        if (j1 == SIBlocks.dilithiumRail.id) {
             int k1 = world.getBlockMetadata(i, j, k);
             int l1 = k1 & 0x7;
             if (i1 == 1 && (l1 == 0 || l1 == 4 || l1 == 5)){
@@ -131,7 +131,7 @@ public abstract class BlockRailMixin extends Block {
         if (world.isClientSide){
             ci.cancel();
         } else {
-            if(this.id == SignalIndustries.dilithiumRail.id){
+            if(this.id == SIBlocks.dilithiumRail.id){
                 (new RailLogic((BlockRail) ((Object)this), world, i, j, k)).func_792_a(world.isBlockIndirectlyGettingPowered(i, j, k), flag);
             }
         }

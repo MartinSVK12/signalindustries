@@ -3,7 +3,8 @@ package sunsetsatellite.signalindustries.recipes.container;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -17,7 +18,7 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.ingotIron)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.tinyNetherCoalDust))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.tinyNetherCoalDust))
                         },
                         new ItemStack(Item.ingotSteel,1),
                         new RecipeProperties(200,40,Tier.PROTOTYPE,false)
@@ -28,9 +29,9 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.ingotSteel)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.emptySignalumCrystalDust))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.emptySignalumCrystalDust))
                         },
-                        new ItemStack(SignalIndustries.crystalAlloyIngot,1),
+                        new ItemStack(SIItems.crystalAlloyIngot,1),
                         new RecipeProperties(200,40,Tier.PROTOTYPE,true)
                 )
         );
@@ -39,9 +40,9 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Item.ingotSteel)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.emptySignalumCrystalDust))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.emptySignalumCrystalDust))
                         },
-                        new ItemStack(SignalIndustries.crystalAlloyIngot,2),
+                        new ItemStack(SIItems.crystalAlloyIngot,2),
                         new RecipeProperties(200,40,Tier.BASIC,true)
                 )
         );
@@ -49,10 +50,10 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                 "reinforced_crystal_alloy_ingot",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.crystalAlloyIngot)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.glowingObsidian,2))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot)),
+                                new RecipeExtendedSymbol(new ItemStack(SIBlocks.glowingObsidian,2))
                         },
-                        new ItemStack(SignalIndustries.reinforcedCrystalAlloyIngot,1),
+                        new ItemStack(SIItems.reinforcedCrystalAlloyIngot,1),
                         new RecipeProperties(100,80,Tier.BASIC,false)
                 )
         );

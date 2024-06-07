@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 
@@ -47,7 +48,7 @@ public abstract class EntityMinecartMixin extends Entity implements IInventory {
         this.i = i;
         this.j = j;
         this.k = k;
-        if(l == SignalIndustries.dilithiumRail.id && (i1 & 0x8) != 0) {
+        if(l == SIBlocks.dilithiumRail.id && (i1 & 0x8) != 0) {
             for (int m = 0; m < 24; m++) {
                 SignalIndustries.spawnParticle(new EntityColorParticleFX(world, x, y, z, 0, 0, 0, 1.0f, 1.0f, 0.0f, 1.0f));
             }
@@ -60,7 +61,7 @@ public abstract class EntityMinecartMixin extends Entity implements IInventory {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     public void dilithiumRailBoost(CallbackInfo ci){
-        if(l == SignalIndustries.dilithiumRail.id){
+        if(l == SIBlocks.dilithiumRail.id){
             double d31 = Math.sqrt(this.xd * this.xd + this.zd * this.zd);
             if (d31 > 0.01D) {
                 double d32 = 0.12D;
@@ -84,7 +85,7 @@ public abstract class EntityMinecartMixin extends Entity implements IInventory {
 
     @ModifyVariable(method = "onUpdate2", at = @At("STORE"), ordinal = 1)
     private boolean injected(boolean flag) {
-        if(l == SignalIndustries.dilithiumRail.id || l == Block.railPowered.id){
+        if(l == SIBlocks.dilithiumRail.id || l == Block.railPowered.id){
             return ((i1 & 0x8) != 0);
         }
         return flag;

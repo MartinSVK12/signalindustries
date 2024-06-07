@@ -3,10 +3,9 @@ package sunsetsatellite.signalindustries.recipes.container;
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -25,9 +24,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal,8))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,8))
                         },
-                        new ItemStack(SignalIndustries.signalumCrystal,1,0,nbt),
+                        new ItemStack(SIItems.signalumCrystal,1,0,nbt),
                         new RecipeProperties(200,80,0, Tier.PROTOTYPE,false)
                 )
         );
@@ -36,9 +35,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal,8))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,8))
                         },
-                        new ItemStack(SignalIndustries.signalumCrystalEmpty,1,0,nbt2),
+                        new ItemStack(SIItems.signalumCrystalEmpty,1,0,nbt2),
                         new RecipeProperties(200,80,1, Tier.PROTOTYPE,false)
                 )
         );
@@ -47,9 +46,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1))
                         },
-                        new ItemStack(SignalIndustries.volatileSignalumCrystal,4,0),
+                        new ItemStack(SIItems.volatileSignalumCrystal,4,0),
                         new RecipeProperties(200,80,2, Tier.BASIC,false)
                 )
         );
@@ -58,9 +57,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,500)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.rawSignalumCrystal,4))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
                         },
-                        new ItemStack(SignalIndustries.crystalChip,1,0),
+                        new ItemStack(SIItems.crystalChip,1,0),
                         new RecipeProperties(100,80,3, Tier.BASIC,false)
                 )
         );
@@ -69,9 +68,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,2000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.signalumCrystal,1))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1))
                         },
-                        new ItemStack(SignalIndustries.pureCrystalChip,2,0),
+                        new ItemStack(SIItems.pureCrystalChip,2,0),
                         new RecipeProperties(100,80,4, Tier.REINFORCED,false)
                 )
         );
@@ -80,9 +79,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,2000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.dimensionalShard,1))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.dimensionalShard,1))
                         },
-                        new ItemStack(SignalIndustries.dimensionalChip,2,0),
+                        new ItemStack(SIItems.dimensionalChip,2,0),
                         new RecipeProperties(200,160,5, Tier.REINFORCED,false)
                 )
         );
@@ -91,9 +90,9 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,2000)),
-                                new RecipeExtendedSymbol(new ItemStack(SignalIndustries.dilithiumShard,1))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.dilithiumShard,1))
                         },
-                        new ItemStack(SignalIndustries.dilithiumChip,2,0),
+                        new ItemStack(SIItems.dilithiumChip,2,0),
                         new RecipeProperties(100,160,6, Tier.REINFORCED,false)
                 )
         );

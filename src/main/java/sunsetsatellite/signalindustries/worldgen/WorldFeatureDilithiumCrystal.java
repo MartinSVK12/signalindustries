@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.worldgen;
 
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 import java.util.Random;
 
@@ -22,7 +22,7 @@ public class WorldFeatureDilithiumCrystal extends WorldFeature {
         generateCircle(world,random,i,height+((maxRadius + maxRadiusRepeat)/2)+1,k);
 
         boolean flip = false;
-        int id = SignalIndustries.dilithiumCrystalBlock.id;
+        int id = SIBlocks.dilithiumCrystalBlock.id;
         int y = 0;
         for (int l = 0; l <= maxRadius*2; l++) {
             int x = 0;
@@ -78,9 +78,9 @@ public class WorldFeatureDilithiumCrystal extends WorldFeature {
             for(int z = -blockRadius; z <= blockRadius; ++z) {
                 if (isPointInsideCircle(x, z, blockRadius)) {
                     if(random.nextFloat() < 0.33f){
-                        world.setBlockAndMetadataWithNotify(x+i, j, z+k, SignalIndustries.rootedFabric.id, 0);
+                        world.setBlockAndMetadataWithNotify(x+i, j, z+k, SIBlocks.rootedFabric.id, 0);
                     } else {
-                        world.setBlockAndMetadataWithNotify(x+i, j, z+k, SignalIndustries.realityFabric.id, 0);
+                        world.setBlockAndMetadataWithNotify(x+i, j, z+k, SIBlocks.realityFabric.id, 0);
                     }
 
                 }

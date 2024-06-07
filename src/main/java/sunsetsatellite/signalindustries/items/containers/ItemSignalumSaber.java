@@ -9,7 +9,6 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
@@ -22,7 +21,7 @@ import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.interfaces.IVariableDamageWeapon;
@@ -66,7 +65,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SignalIndustries.energyFlowing,getCapacity(stack));
+        return new FluidStack(SIBlocks.energyFlowing,getCapacity(stack));
     }
 
     @Override
@@ -74,7 +73,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         if(fluidStack == null){
             return null;
         }
-        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = fluidStack.amount;
@@ -112,7 +111,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         if(fluidStack == null){
             return null;
         }
-        if(fluidStack.getLiquid() == SignalIndustries.energyFlowing){
+        if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = Math.min(fluidStack.amount,maxAmount);

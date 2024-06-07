@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumDrill;
@@ -89,17 +89,17 @@ public class MinecraftMixin {
             if(switchModeKey.isPressed() && currentScreen == null){
                 debounce = 10;
                 if(thePlayer != null && thePlayer.getCurrentEquippedItem() != null){
-                    if(thePlayer.getCurrentEquippedItem().getItem() == SignalIndustries.reinforcedSignalumDrill){
-                        ItemSignalumDrill.DrillMode mode = ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
+                    if(thePlayer.getCurrentEquippedItem().getItem() == SIItems.reinforcedSignalumDrill){
+                        ItemSignalumDrill.DrillMode mode = ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
                         switch (mode){
                             case NORMAL:
-                                ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.X3);
+                                ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.X3);
                                 break;
                             case X3:
-                                ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
+                                ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
                                 break;
                         }
-                        mode = ((ItemSignalumDrill)SignalIndustries.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
+                        mode = ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).getMode(thePlayer.getCurrentEquippedItem());
                         ingameGUI.addChatMessage("Mode switched to: "+mode);
                     }
                 }

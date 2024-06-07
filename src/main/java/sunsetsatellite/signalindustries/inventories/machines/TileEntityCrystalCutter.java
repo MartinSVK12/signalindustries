@@ -6,11 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.CRYSTAL_CUTTER;
@@ -63,9 +64,9 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     public void processItem() {
         super.processItem();
         if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.SHINING);
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.SHINING);
         }
-        if(itemContents[itemOutputs[0]].getItem() == SignalIndustries.signalumCrystalEmpty){
+        if(itemContents[itemOutputs[0]].getItem() == SIItems.signalumCrystalEmpty){
             if(fluidContents[energySlot].amount+1000 <= fluidCapacity[energySlot]){
                 fluidContents[energySlot].amount += 1000;
             }

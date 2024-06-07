@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSmartWatch;
@@ -54,7 +54,7 @@ public abstract class GuiIngameMixin extends Gui {
     public void renderAfterGameOverlay(float partialTicks, boolean flag, int mouseX, int mouseY, CallbackInfo ci, I18n stringtranslate, int width, int height, int sp, FontRenderer fontrenderer) {
         ItemStack headSlotItem = this.mc.thePlayer.inventory.armorItemInSlot(3);
         if(headSlotItem != null){
-            if(headSlotItem.getItem().id == SignalIndustries.signalumPrototypeHarnessGoggles.id){
+            if(headSlotItem.getItem().id == SIItems.signalumPrototypeHarnessGoggles.id){
                 InventoryPlayer inv = this.mc.thePlayer.inventory;
                 if(this.mc.thePlayer.inventory.getCurrentItem() != null) {
                     if(this.mc.thePlayer.inventory.getCurrentItem().getItem() instanceof IHasOverlay){

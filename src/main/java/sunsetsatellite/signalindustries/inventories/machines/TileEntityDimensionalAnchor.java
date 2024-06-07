@@ -12,12 +12,14 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
         multiblock = Multiblock.multiblocks.get("dimensionalAnchor");
     }
@@ -131,7 +133,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
                     return false;
                 }
             }
-            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].getData().containsKey("position");
+            return itemContents[0].getItem() == SIItems.warpOrb && !itemContents[0].getData().containsKey("position");
         }
     }
 
@@ -144,7 +146,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
             pos.putInt("z",z);
             stack.getData().put("position",pos);
             stack.getData().putInt("dim",worldObj.dimension.id);
-            Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.ANCHOR);
+            Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SIAchievements.ANCHOR);
         }
     }
 
@@ -187,7 +189,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         if(itemContents[0] == null) {
             return false;
         } else {
-            return itemContents[0].getItem() == SignalIndustries.warpOrb && !itemContents[0].getData().containsKey("Data");
+            return itemContents[0].getItem() == SIItems.warpOrb && !itemContents[0].getData().containsKey("Data");
         }
     }
 }

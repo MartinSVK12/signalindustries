@@ -8,7 +8,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 
 
@@ -20,7 +20,7 @@ public class RenderSignalumReactor extends RenderMultiblock {
         super.doRender(tessellator, tileEntity, d, e, f, g);
         float fluidAmount = reactor.getFuel() + reactor.getDepletedFuel();
         float fluidMaxAmount = 4000*9;
-        int fluidId = SignalIndustries.energyFlowing.id;
+        int fluidId = SIBlocks.energyFlowing.id;
 
         float amount = Math.max(Math.abs(fluidAmount / fluidMaxAmount),fluidAmount != 0 ? 0.14f : 0f);
         float depletedAmount = Math.min(Math.abs(reactor.getDepletedFuel() / fluidAmount),0.9f);

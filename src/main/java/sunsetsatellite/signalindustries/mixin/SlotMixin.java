@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIItems;
 
 @Mixin(value = Slot.class,remap = false)
 public class SlotMixin {
@@ -17,8 +17,8 @@ public class SlotMixin {
     public void onPickupFromSlot(ItemStack itemStack, CallbackInfo ci) {
         Item item = itemStack.getItem();
         //TODO: check for item group instead
-        if(item.id == SignalIndustries.romChipProjectile.id || item.id == SignalIndustries.romChipBoost.id){
-            Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.ROM_CHIP);
+        if(item.id == SIItems.romChipProjectile.id || item.id == SIItems.romChipBoost.id){
+            Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SIAchievements.ROM_CHIP);
         }
     }
 }

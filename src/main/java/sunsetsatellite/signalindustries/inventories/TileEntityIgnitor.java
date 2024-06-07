@@ -10,6 +10,7 @@ import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 
@@ -28,7 +29,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         for (Direction dir : Direction.values()) {
             fluidConnections.put(dir, Connection.INPUT);
             activeFluidSlots.put(dir,0);
@@ -77,15 +78,15 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
     }
 
     public boolean isBurning(){
-        return fluidContents[0] != null && fluidContents[0].liquid == SignalIndustries.energyFlowing && fluidContents[0].amount > 0 && isActivated;
+        return fluidContents[0] != null && fluidContents[0].liquid == SIBlocks.energyFlowing && fluidContents[0].amount > 0 && isActivated;
     }
 
     public boolean isEmpty(){
-        return fluidContents[0] == null || fluidContents[0].liquid == SignalIndustries.energyFlowing && fluidContents[0].amount == 0;
+        return fluidContents[0] == null || fluidContents[0].liquid == SIBlocks.energyFlowing && fluidContents[0].amount == 0;
     }
 
     public boolean isReady(){
-        return fluidContents[0] != null && fluidContents[0].liquid == SignalIndustries.energyFlowing && fluidContents[0].amount >= fluidCapacity[0];
+        return fluidContents[0] != null && fluidContents[0].liquid == SIBlocks.energyFlowing && fluidContents[0].amount >= fluidCapacity[0];
     }
 
     public void extractFluids(){

@@ -8,6 +8,8 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
@@ -22,50 +24,50 @@ import java.util.List;
 
 public class SIRecipes implements RecipeEntrypoint {
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
-    public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
-    public static RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeExtractor), new ItemStack(SignalIndustries.basicExtractor), new ItemStack(SignalIndustries.reinforcedExtractor))));
-    public static RecipeGroupSI<RecipeEntryMachine> CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher),new ItemStack(SignalIndustries.reinforcedCrusher))));
-    public static RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeAlloySmelter),new ItemStack(SignalIndustries.basicAlloySmelter))));
-    public static RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
-    public static RecipeGroupSI<RecipeEntryMachineFluid> PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));
-    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrystalCutter),new ItemStack(SignalIndustries.basicCrystalCutter),new ItemStack(SignalIndustries.reinforcedCrystalCutter))));
-    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber),new ItemStack(SignalIndustries.reinforcedCrystalChamber))));
-    public static RecipeGroupSI<RecipeEntryMachine> INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicInfuser))));
-    public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.reinforcedCentrifuge))));
-
+    public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH;
+    public static RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR;
+    public static RecipeGroupSI<RecipeEntryMachine> CRUSHER;
+    public static RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER;
+    public static RecipeGroupSI<RecipeEntryMachine> PLATE_FORMER;
+    public static RecipeGroupSI<RecipeEntryMachineFluid> PUMP;
+    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CUTTER;
+    public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER;
+    public static RecipeGroupSI<RecipeEntryMachine> INFUSER;
+    public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
 
     @Override
     public void onRecipesReady() {
         new SignalIndustriesFluidPlugin().initializePlugin(SignalIndustries.LOGGER);
+        resetGroups();
         load();
-        MobInfoRegistry.register(EntityInfernal.class,"guidebook.section.mob.infernal.name", "guidebook.section.mob.infernal.desc",40,1000,new MobInfoRegistry.MobDrop[]{new MobInfoRegistry.MobDrop(new ItemStack(SignalIndustries.infernalFragment),1,0,2)});
+        MobInfoRegistry.register(EntityInfernal.class,"guidebook.section.mob.infernal.name", "guidebook.section.mob.infernal.desc",40,1000,new MobInfoRegistry.MobDrop[]{new MobInfoRegistry.MobDrop(new ItemStack(SIItems.infernalFragment),1,0,2)});
 
     }
 
-    public static void resetGroups(){
+    public void resetGroups(){
         SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
-        EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeExtractor), new ItemStack(SignalIndustries.basicExtractor), new ItemStack(SignalIndustries.reinforcedExtractor))));
-        CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrusher),new ItemStack(SignalIndustries.basicCrusher),new ItemStack(SignalIndustries.reinforcedCrusher))));
-        ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeAlloySmelter),new ItemStack(SignalIndustries.basicAlloySmelter))));
-        PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePlateFormer),new ItemStack(SignalIndustries.basicPlateFormer),new ItemStack(SignalIndustries.reinforcedPlateFormer))));
-        PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypePump),new ItemStack(SignalIndustries.basicPump))));
-        CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.prototypeCrystalCutter),new ItemStack(SignalIndustries.basicCrystalCutter),new ItemStack(SignalIndustries.reinforcedCrystalCutter))));
-        CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicCrystalChamber),new ItemStack(SignalIndustries.reinforcedCrystalChamber))));
-        INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.basicInfuser))));
-        CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SignalIndustries.reinforcedCentrifuge))));
+        EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeExtractor), new ItemStack(SIBlocks.basicExtractor), new ItemStack(SIBlocks.reinforcedExtractor))));
+        CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrusher),new ItemStack(SIBlocks.basicCrusher),new ItemStack(SIBlocks.reinforcedCrusher))));
+        ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeAlloySmelter),new ItemStack(SIBlocks.basicAlloySmelter))));
+        PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePlateFormer),new ItemStack(SIBlocks.basicPlateFormer),new ItemStack(SIBlocks.reinforcedPlateFormer))));
+        PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePump),new ItemStack(SIBlocks.basicPump))));
+        CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrystalCutter),new ItemStack(SIBlocks.basicCrystalCutter),new ItemStack(SIBlocks.reinforcedCrystalCutter))));
+        CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCrystalChamber),new ItemStack(SIBlocks.reinforcedCrystalChamber))));
+        INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicInfuser))));
+        CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.reinforcedCentrifuge))));
     }
 
-    public static void load(){
+    public void load(){
         Registries.RECIPE_TYPES.register("signalindustries:machine", RecipeEntryMachine.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
         List<ItemStack> abilityGroup = new ArrayList<>();
-        abilityGroup.add(SignalIndustries.boostAbilityContainer.getDefaultStack());
-        abilityGroup.add(SignalIndustries.projectileAbilityContainer.getDefaultStack());
+        abilityGroup.add(SIItems.boostAbilityContainer.getDefaultStack());
+        abilityGroup.add(SIItems.projectileAbilityContainer.getDefaultStack());
         Registries.ITEM_GROUPS.register("signalindustries:ability_containers",abilityGroup);
         List<ItemStack> romChipGroup = new ArrayList<>();
-        romChipGroup.add(SignalIndustries.romChipBoost.getDefaultStack());
-        romChipGroup.add(SignalIndustries.romChipProjectile.getDefaultStack());
+        romChipGroup.add(SIItems.romChipBoost.getDefaultStack());
+        romChipGroup.add(SIItems.romChipProjectile.getDefaultStack());
         Registries.ITEM_GROUPS.register("signalindustries:rom_chips",romChipGroup);
         Registries.ITEM_GROUPS.register("minecraft:water", SignalIndustries.listOf(new ItemStack(Block.fluidWaterFlowing),new ItemStack(Block.fluidWaterStill)));
         Registries.ITEM_GROUPS.register("minecraft:lava", SignalIndustries.listOf(new ItemStack(Block.fluidLavaFlowing),new ItemStack(Block.fluidLavaStill)));
@@ -88,7 +90,7 @@ public class SIRecipes implements RecipeEntrypoint {
         registerNamespaces();
     }
 
-    public static void registerNamespaces(){
+    public void registerNamespaces(){
         SIGNAL_INDUSTRIES.register("workbench",WORKBENCH);
         SIGNAL_INDUSTRIES.register("extractor",EXTRACTOR);
         SIGNAL_INDUSTRIES.register("crusher",CRUSHER);

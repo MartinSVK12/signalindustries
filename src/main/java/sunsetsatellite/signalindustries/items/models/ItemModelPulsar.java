@@ -7,10 +7,9 @@ import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.net.command.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 
 public class ItemModelPulsar extends ItemModelStandard {
 
@@ -33,7 +32,7 @@ public class ItemModelPulsar extends ItemModelStandard {
         if(itemstack.getData().getByte("charge") >= 100){
             tex = pulsarCharged;
         }
-        if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.id){
+        if(getItemIdFromSlot(0,itemstack) == SIItems.warpOrb.id){
             tex = pulsarWarpActive;
             if(itemstack.getData().getByte("charge") >= 100){
                 tex = pulsarWarpCharged;

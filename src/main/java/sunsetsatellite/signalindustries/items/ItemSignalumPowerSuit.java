@@ -9,7 +9,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
@@ -46,7 +46,7 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
 
     @Override
     public boolean canFill(ItemStack stack) {
-        if(stack.getItem() == SignalIndustries.signalumPowerSuitChestplate){
+        if(stack.getItem() == SIItems.signalumPowerSuitChestplate){
             InventoryPowerSuit inv = new InventoryPowerSuit(stack);
             NBTHelper.loadInvFromNBT(stack,inv,8,1);
             return inv.getFluidAmountForSlot(0) < inv.getFluidCapacityForSlot(0);

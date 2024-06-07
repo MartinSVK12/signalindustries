@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 @Mixin(
         value = BlockFluid.class,
@@ -27,7 +27,7 @@ public abstract class BlockFluidMixin extends Block {
 
     @Inject(method = "getRenderBlockPass",at = @At("HEAD"), cancellable = true)
     public void getRenderBlockPass(CallbackInfoReturnable<Integer> cir) {
-        if(thisAs == SignalIndustries.energyFlowing || thisAs == SignalIndustries.energyStill){
+        if(thisAs == SIBlocks.energyFlowing || thisAs == SIBlocks.energyStill){
             cir.setReturnValue(1);
         }
     }

@@ -3,12 +3,13 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.ItemTrigger;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 
@@ -17,7 +18,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     public TileEntityProgrammer(){
         cost = 120;
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
             ItemStack trigger = itemContents[1];
             String[] key = chip.getItemName().split("\\.");
             trigger.getData().putString("ability",key[key.length-1]);
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.PROGRAMMER);
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
         }
     }
 

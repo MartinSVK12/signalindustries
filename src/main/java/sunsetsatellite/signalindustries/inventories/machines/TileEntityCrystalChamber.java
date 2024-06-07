@@ -5,11 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.items.containers.ItemSignalumCrystal;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.CRYSTAL_CHAMBER;
         itemInputs = new int[]{0,2};
@@ -62,7 +62,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
                 this.itemContents[itemOutputs[0]].getData().putInt("saturation", sat1 + sat2);
             }
             if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
-                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.COMBINED);
+                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.COMBINED);
             }
         }
     }

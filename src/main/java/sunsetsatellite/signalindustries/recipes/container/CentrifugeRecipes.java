@@ -1,11 +1,11 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -18,12 +18,12 @@ public class CentrifugeRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
                 "awakened_fragments",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)),
-                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)),
-                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)),
-                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SignalIndustries.burntSignalumFlowing,250)),
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250)),
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250)),
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250)),
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,250)),
                         },
-                        new ItemStack(SignalIndustries.awakenedSignalumFragment,1),
+                        new ItemStack(SIItems.awakenedSignalumFragment,1),
                         new RecipeProperties(400,240,Tier.REINFORCED,false).setChance(0.25f)
                 )
         );

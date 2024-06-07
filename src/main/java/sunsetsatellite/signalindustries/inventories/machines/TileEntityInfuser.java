@@ -6,10 +6,10 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids());
-        acceptedFluids.get(1).remove((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(1).remove((BlockFluid) SIBlocks.energyFlowing);
         itemContents = new ItemStack[3];
         energySlot = 0;
         recipeGroup = SIRecipes.INFUSER;
@@ -44,8 +44,8 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
     @Override
     public void processItem() {
         super.processItem();
-        if(itemContents[itemOutputs[0]].itemID == SignalIndustries.glowingObsidian.id){
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.RELIC);
+        if(itemContents[itemOutputs[0]].itemID == SIBlocks.glowingObsidian.id){
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.RELIC);
         }
     }
 

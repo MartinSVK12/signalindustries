@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityChest;
 import net.minecraft.core.enums.EnumDropCause;
@@ -10,7 +9,7 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
@@ -32,7 +31,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         cost = 1;
         itemContents = new ItemStack[1];
         fluidCapacity[0] = Short.MAX_VALUE/2;
-        acceptedFluids.get(0).add(SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         from = new Vec3i(0,4,0);
         to = new Vec3i(-16,-y-4,16);
         workTimer.pause();

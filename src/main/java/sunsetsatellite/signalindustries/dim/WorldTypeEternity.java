@@ -11,7 +11,8 @@ import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.weather.Weather;
 import net.minecraft.core.world.wind.WindManagerGeneric;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBiomes;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 public class WorldTypeEternity extends WorldType {
     public WorldTypeEternity(String languageKey) {
@@ -52,12 +53,12 @@ public class WorldTypeEternity extends WorldType {
 
     @Override
     public int getFillerBlock() {
-        return SignalIndustries.realityFabric.id;
+        return SIBlocks.realityFabric.id;
     }
 
     @Override
     public BiomeProvider createBiomeProvider(World world) {
-        return new BiomeProviderSingleBiome(SignalIndustries.biomeEternity, 1.0, 1.0, 1.0);
+        return new BiomeProviderSingleBiome(SIBiomes.biomeEternity, 1.0, 1.0, 1.0);
     }
 
     @Override

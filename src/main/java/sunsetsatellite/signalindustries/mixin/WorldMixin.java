@@ -1,16 +1,11 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.option.enums.Difficulty;
 import net.minecraft.client.render.camera.ICamera;
 import net.minecraft.core.Global;
-import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.Dimension;
-import net.minecraft.core.world.Explosion;
-import net.minecraft.core.world.LevelListener;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.save.LevelStorage;
 import net.minecraft.core.world.season.SeasonManager;
@@ -26,9 +21,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWorldDataAccessor;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.List;
 import java.util.Random;
@@ -66,12 +62,12 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             at = @At("HEAD"),
             cancellable = true)
     public void getSkyColor(ICamera camera, float renderPartialTicks, CallbackInfoReturnable<Vec3d> cir) {
-        if(getCurrentWeather() == SignalIndustries.weatherEclipse){
+        if(getCurrentWeather() == SIWeather.weatherEclipse){
             cir.setReturnValue(Vec3d.createVector(0, 0, 0));
-        } else if (getCurrentWeather() == SignalIndustries.weatherSolarApocalypse) {
+        } else if (getCurrentWeather() == SIWeather.weatherSolarApocalypse) {
             cir.setReturnValue(Vec3d.createVector(1.0, 0.5, 0));
         }
-        if(dimension == SignalIndustries.dimEternity){
+        if(dimension == SIDimensions.dimEternity){
             cir.setReturnValue(Vec3d.createVector(0.70,0.70,0.70));
         }
     }
@@ -89,16 +85,16 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks;
-        if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
-            if(rand.nextInt(16) == 15 && !(difficultySetting == 0) && getCurrentWeather() != SignalIndustries.weatherBloodMoon){
+        if((dayTime == triggerTime && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
+            if(rand.nextInt(16) == 15 && !(difficultySetting == 0) && getCurrentWeather() != SIWeather.weatherBloodMoon){
                 for (EntityPlayer player : players) {
                     player.sendMessage(TextFormatting.RED+"A Blood Moon is rising!");
-                    player.triggerAchievement(SignalIndustriesAchievementPage.BLOOD_MOON);
+                    player.triggerAchievement(SIAchievements.BLOOD_MOON);
                 }
-                weatherManager.overrideWeather(SignalIndustries.weatherBloodMoon,13000,1);
+                weatherManager.overrideWeather(SIWeather.weatherBloodMoon,13000,1);
             }
         }
-        if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherBloodMoon){
+        if(dayTime == 0 && getCurrentWeather() == SIWeather.weatherBloodMoon){
             weatherManager.overrideWeather(Weather.overworldClear);
         }
         if (!Global.isServer){
@@ -124,16 +120,16 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks+(nightTicks/4);
-        if((dayTime == triggerTime && (getCurrentWeather() != SignalIndustries.weatherBloodMoon || getCurrentWeather() != SignalIndustries.weatherEclipse))){
-            if(rand.nextInt(24) == 0 && getCurrentWeather() != SignalIndustries.weatherMeteorShower){
+        if((dayTime == triggerTime && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
+            if(rand.nextInt(24) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
                 for (EntityPlayer player : players) {
                     player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
-                    player.triggerAchievement(SignalIndustriesAchievementPage.STARFALL);
+                    player.triggerAchievement(SIAchievements.STARFALL);
                 }
-                weatherManager.overrideWeather(SignalIndustries.weatherMeteorShower,60*20,1);
+                weatherManager.overrideWeather(SIWeather.weatherMeteorShower,60*20,1);
             }
         }
-        if(dayTime == 0 && getCurrentWeather() == SignalIndustries.weatherMeteorShower){
+        if(dayTime == 0 && getCurrentWeather() == SIWeather.weatherMeteorShower){
             weatherManager.overrideWeather(Weather.overworldClear);
         }
     }
@@ -169,12 +165,12 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         long worldTime = getWorldTime();
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
-        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SignalIndustries.weatherEclipse ){
+        if(dayTime > 6680 && dayTime < 6700 && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SIWeather.weatherEclipse){
             for (EntityPlayer player : players) {
                 player.sendMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
-                player.triggerAchievement(SignalIndustriesAchievementPage.ECLIPSE);
+                player.triggerAchievement(SIAchievements.ECLIPSE);
             }
-            weatherManager.overrideWeather(SignalIndustries.weatherEclipse,Global.DAY_LENGTH_TICKS,1);
+            weatherManager.overrideWeather(SIWeather.weatherEclipse,Global.DAY_LENGTH_TICKS,1);
         }
     }
 
@@ -184,7 +180,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     )
     protected void wakeUpAllPlayers(CallbackInfo ci) {
 
-        if (getCurrentWeather() != null && (getCurrentWeather() == SignalIndustries.weatherEclipse || getCurrentWeather() == SignalIndustries.weatherBloodMoon)) {
+        if (getCurrentWeather() != null && (getCurrentWeather() == SIWeather.weatherEclipse || getCurrentWeather() == SIWeather.weatherBloodMoon)) {
             weatherManager.overrideWeather(Weather.overworldClear);
         }
 
@@ -196,7 +192,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
             cancellable = true
     )
     public void solarEclipseCelestialAngle(float f, CallbackInfoReturnable<Float> cir){
-        if(getCurrentWeather() == SignalIndustries.weatherEclipse){
+        if(getCurrentWeather() == SIWeather.weatherEclipse){
             cir.setReturnValue(1f);
         }
     }

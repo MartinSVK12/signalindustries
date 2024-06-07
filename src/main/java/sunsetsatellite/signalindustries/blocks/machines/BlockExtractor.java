@@ -7,15 +7,12 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.containers.ContainerExtractor;
@@ -25,8 +22,6 @@ import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
@@ -108,7 +103,7 @@ public class BlockExtractor extends BlockContainerTiered {
                 if (tile != null) {
                     if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
                         SignalIndustries.displayGui(entityplayer,() -> new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
-                        entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
+                        entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     } else {
                         entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
                     }

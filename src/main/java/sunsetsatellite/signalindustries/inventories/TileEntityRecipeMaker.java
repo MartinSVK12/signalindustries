@@ -15,6 +15,8 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.IInventory;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.lang.reflect.Field;
@@ -268,7 +270,7 @@ public class TileEntityRecipeMaker extends TileEntity
                     }
                 }
             }
-            fields = new ArrayList<>(Arrays.asList(SignalIndustries.class.getDeclaredFields()));
+            fields = new ArrayList<>(Arrays.asList(SIItems.class.getDeclaredFields()));
             for (Field field : fields) {
                 if(field.getType().isAssignableFrom(Item.class) && Modifier.isStatic(field.getModifiers())){
                     field.setAccessible(true);
@@ -297,7 +299,7 @@ public class TileEntityRecipeMaker extends TileEntity
                     }
                 }
             }
-            fields = new ArrayList<>(Arrays.asList(SignalIndustries.class.getDeclaredFields()));
+            fields = new ArrayList<>(Arrays.asList(SIBlocks.class.getDeclaredFields()));
             for (Field field : fields) {
                 if(field.getType().isAssignableFrom(Block.class) && Modifier.isStatic(field.getModifiers())){
                     field.setAccessible(true);

@@ -7,7 +7,6 @@ import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -15,6 +14,9 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerPulsar;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
@@ -23,7 +25,6 @@ import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -67,9 +68,9 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 CompoundTag data = getItemFromSlot(0,itemstack).getCompound("Data");
                 CompoundTag warpPosition = data.getCompound("position");
                 if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
-                    entityplayer.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_SUCCESS);
-                    if(entityplayer.dimension == SignalIndustries.dimEternity.id){
-                        entityplayer.triggerAchievement(SignalIndustriesAchievementPage.FALSE_ETERNITY);
+                    entityplayer.triggerAchievement(SIAchievements.TELEPORT_SUCCESS);
+                    if(entityplayer.dimension == SIDimensions.dimEternity.id){
+                        entityplayer.triggerAchievement(SIAchievements.FALSE_ETERNITY);
                     }
                     if(data.getInteger("dim") != entityplayer.dimension){
                         SignalIndustries.usePortal(data.getInteger("dim"));
@@ -79,12 +80,12 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                     ex.doExplosionA();
                     ex.doExplosionB(true,0.7f,0.0f,0.7f);
                 } else {
-                    entityplayer.triggerAchievement(SignalIndustriesAchievementPage.TELEPORT_FAIL);
-                    SignalIndustries.usePortal(SignalIndustries.dimEternity.id);
+                    entityplayer.triggerAchievement(SIAchievements.TELEPORT_FAIL);
+                    SignalIndustries.usePortal(SIDimensions.dimEternity.id);
                 }
                 ((INBTCompound)itemstack.getData().getCompound("inventory")).removeTag(String.valueOf(0));
             } else {
-                entityplayer.triggerAchievement(SignalIndustriesAchievementPage.PULSE);
+                entityplayer.triggerAchievement(SIAchievements.PULSE);
                 world.spawnParticle("pulse_shockwave", entityplayer.x, entityplayer.y, entityplayer.z, 0.0, 0.0, 0.0,0);
             }
             return itemstack;
@@ -105,7 +106,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage(TextFormatting.WHITE+"The Pulsar> "+TextFormatting.RED+" ERROR: "+TextFormatting.WHITE+"Ran out of energy while charging!");
                     return;
                 }
-                if(getItemIdFromSlot(0,itemstack) == SignalIndustries.warpOrb.id){
+                if(getItemIdFromSlot(0,itemstack) == SIItems.warpOrb.id){
                     getFluidStack(0,itemstack).putInt("amount",energy-80); //charging takes 100 ticks
                 } else {
                     getFluidStack(0,itemstack).putInt("amount",energy-40); //charging takes 100 ticks
@@ -150,7 +151,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     }
 
     public String getAbility(ItemStack stack){
-        return getItemIdFromSlot(0,stack) == SignalIndustries.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
+        return getItemIdFromSlot(0,stack) == SIItems.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
     }
 
     @Override

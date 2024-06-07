@@ -9,6 +9,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
@@ -40,8 +41,8 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids().stream().filter((F)->F.id != SignalIndustries.energyFlowing.id).collect(Collectors.toList()));
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids().stream().filter((F)->F.id != SIBlocks.energyFlowing.id).collect(Collectors.toList()));
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
     @Override
     public String getInvName() {

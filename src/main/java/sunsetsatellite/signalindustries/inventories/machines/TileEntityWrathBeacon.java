@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.enums.Difficulty;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.*;
@@ -11,12 +10,11 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.catalyst.core.util.TickTimer;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
-import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
 import java.lang.reflect.InvocationTargetException;
@@ -88,7 +86,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
         } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
-                player.triggerAchievement(SignalIndustriesAchievementPage.VICTORY);
+                player.triggerAchievement(SIAchievements.VICTORY);
             }
             active = false;
             started = false;
@@ -101,7 +99,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.energyCatalyst, 1));
+            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.energyCatalyst, 1));
             worldObj.entityJoinedWorld(entityitem);
         }
         if(active){
@@ -139,11 +137,11 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                     }
                 }
             }*/
-            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.evilCatalyst.id){
+            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SIItems.evilCatalyst.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
                     player.sendMessage("event.signalindustries.wrathBeaconActivated");
-                    player.triggerAchievement(SignalIndustriesAchievementPage.CHALLENGE);
+                    player.triggerAchievement(SIAchievements.CHALLENGE);
                 }
                 active = true;
                 startWave();

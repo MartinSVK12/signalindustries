@@ -1,40 +1,26 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
-import net.minecraft.core.InventoryAction;
-import net.minecraft.core.block.BlockFluid;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShaped;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingShapeless;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventoryCrafting;
-import net.minecraft.core.player.inventory.slot.Slot;
-import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.IFluidIO;
-import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.containers.ContainerAssembler;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.inventories.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TileEntityAssembler extends TileEntityTieredMachineBase implements IBoostable {
 
@@ -46,7 +32,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add(SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
 
     @Override

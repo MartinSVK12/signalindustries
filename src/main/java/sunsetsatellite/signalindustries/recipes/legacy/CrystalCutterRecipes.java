@@ -6,7 +6,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +22,12 @@ public class CrystalCutterRecipes extends MachineRecipesBase<ArrayList<Object>, 
     protected CrystalCutterRecipes() {
         ArrayList<Object> list = new ArrayList<>();
         list.add(new FluidStack((BlockFluid) Block.fluidWaterFlowing,1000));
-        list.add(new ItemStack(SignalIndustries.rawSignalumCrystal,8));
+        list.add(new ItemStack(SIItems.rawSignalumCrystal,8));
         list.add(0);
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("saturation",1000);
         nbt.putInt("size",1);
-        addRecipe(list,new ItemStack(SignalIndustries.signalumCrystal.id,1,0,nbt));
+        addRecipe(list,new ItemStack(SIItems.signalumCrystal.id,1,0,nbt));
         //addRecipe(new ArrayList<Object>{new FluidStack((BlockFluid) Block.waterMoving,1000),new ItemStack(mod_SignalIndustries.rawSignalumCrystal,8)},new ItemStack(mod_SignalIndustries.signalumCrystal,1));
     }
 

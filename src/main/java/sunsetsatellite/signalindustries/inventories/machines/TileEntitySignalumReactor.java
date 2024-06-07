@@ -8,7 +8,8 @@ import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
@@ -17,7 +18,6 @@ import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemBus;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.items.containers.ItemFuelCell;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +86,9 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
                     ignitors.add((TileEntityIgnitor) tileEntity.tile);
                 }
                 else if(tileEntity.tile instanceof TileEntityItemBus){
-                    if(tileEntity.block == SignalIndustries.reinforcedItemInputBus){
+                    if(tileEntity.block == SIBlocks.reinforcedItemInputBus){
                         input = (TileEntityItemBus) tileEntity.tile;
-                    } else if (tileEntity.block == SignalIndustries.reinforcedItemOutputBus) {
+                    } else if (tileEntity.block == SIBlocks.reinforcedItemOutputBus) {
                         output = (TileEntityItemBus) tileEntity.tile;
                     }
                 }
@@ -139,7 +139,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     public void depleteRandomFuelCell(){
-        Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.REACTOR);
+        Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SIAchievements.REACTOR);
         Random random = new Random();
         if(random.nextFloat() <= 1.25){
             //TODO: actually pick a random cell

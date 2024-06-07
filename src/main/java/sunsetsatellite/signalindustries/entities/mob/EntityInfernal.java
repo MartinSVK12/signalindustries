@@ -2,13 +2,13 @@ package sunsetsatellite.signalindustries.entities.mob;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
-import net.minecraft.core.entity.projectile.EntityArrow;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.entities.EntitySunbeam;
 
 public class EntityInfernal extends EntityMonster {
@@ -113,7 +113,7 @@ public class EntityInfernal extends EntityMonster {
         if(isInWaterOrRain()){
             hurt(null,1, DamageType.DROWN);
         }
-        if(world.getCurrentWeather() != SignalIndustries.weatherEclipse && !eclipseImmune){
+        if(world.getCurrentWeather() != SIWeather.weatherEclipse && !eclipseImmune){
             hurt(null,4, DamageType.DROWN);
         }
     }
@@ -163,6 +163,6 @@ public class EntityInfernal extends EntityMonster {
     }
 
     protected int getDropItemId() {
-        return SignalIndustries.infernalFragment.id;
+        return SIItems.infernalFragment.id;
     }
 }

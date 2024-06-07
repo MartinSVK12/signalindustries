@@ -1,26 +1,21 @@
 package sunsetsatellite.signalindustries.blocks.machines;
 
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockWrathBeacon extends BlockContainerTiered {
@@ -63,7 +58,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
                 TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getBlockTileEntity(i, j, k);
                 if(tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile), Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
                     tile.activate(entityplayer);
-                    entityplayer.triggerAchievement(SignalIndustriesAchievementPage.HORIZONS);
+                    entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
                 } else {
                     entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
@@ -84,7 +79,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
             if(tier == Tier.REINFORCED){
                 TileEntityReinforcedWrathBeacon w = (TileEntityReinforcedWrathBeacon) tile;
                 for (BlockInstance bi : w.multiblock.getBlocks(new Vec3i(i, j, k), Direction.Z_POS)) {
-                    if(world.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SignalIndustries.fueledEternalTreeLog.id){
+                    if(world.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.fueledEternalTreeLog.id){
                         world.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                     }
                 }

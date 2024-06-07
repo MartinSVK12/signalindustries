@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 
 import java.util.Iterator;
@@ -31,7 +31,7 @@ public class SpawnerMobsMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void performSpawning(World world, boolean spawnHostileMobs, boolean spawnPassiveMobs, CallbackInfoReturnable<Integer> cir, int playerIndex, ChunkCoordinates spawnChunk, EnumCreatureType[] creatureTypes, int i, EnumCreatureType creatureType, Iterator chunkIt, ChunkCoordinate chunk, Biome biome, List spawnableList) {
-        if(world.getCurrentWeather() == SignalIndustries.weatherEclipse){
+        if(world.getCurrentWeather() == SIWeather.weatherEclipse){
             for (Object o : spawnableList) {
                 SpawnListEntry entry = (SpawnListEntry) o;
                 if(entry.entityClass == EntityInfernal.class) return;

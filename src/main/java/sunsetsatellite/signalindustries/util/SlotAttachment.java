@@ -5,11 +5,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.interfaces.IAttachable;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 
 public class SlotAttachment extends Slot implements IAttachable {
 
@@ -44,7 +44,7 @@ public class SlotAttachment extends Slot implements IAttachable {
     public void putStack(ItemStack itemstack) {
         super.putStack(itemstack);
         if(itemstack.getItem() instanceof ItemWingsAttachment){
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SignalIndustriesAchievementPage.WINGS);
+            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.WINGS);
         }
     }
 

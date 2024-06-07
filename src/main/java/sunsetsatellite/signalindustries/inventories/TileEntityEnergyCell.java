@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -30,7 +30,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
 
     //only for infinite tier energy cell, if true, the energy cell will act as an infinite source of energy, if false, it will act as a sink destroying any energy it gets.
@@ -58,7 +58,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
                     if(fluidContents[0] != null){
                         fluidContents[0].amount = Integer.MAX_VALUE;
                     } else {
-                        fluidContents[0] = new FluidStack((BlockFluid) SignalIndustries.energyFlowing,Integer.MAX_VALUE);
+                        fluidContents[0] = new FluidStack((BlockFluid) SIBlocks.energyFlowing,Integer.MAX_VALUE);
                     }
                 } else {
                     fluidCapacity[0] = Integer.MAX_VALUE;

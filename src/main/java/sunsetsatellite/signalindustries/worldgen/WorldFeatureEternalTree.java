@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries.worldgen;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 import java.util.Random;
 
@@ -363,7 +363,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
             for (int x = -3; x < 2; x++) {
                 for (int z = -3; z < 2; z++) {
                     if(random.nextInt(2) == 0){
-                        world.setBlockAndMetadataWithNotify(this.basePos[0]+x,this.basePos[1]-1,this.basePos[2]+z,  SignalIndustries.rootedFabric.id, 1);
+                        world.setBlockAndMetadataWithNotify(this.basePos[0]+x,this.basePos[1]-1,this.basePos[2]+z,  SIBlocks.rootedFabric.id, 1);
                     }
                 }
             }

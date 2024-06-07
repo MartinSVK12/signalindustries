@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.option.enums.Difficulty;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.*;
@@ -13,13 +12,11 @@ import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
-import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
@@ -111,7 +108,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         if(active && worldObj.difficultySetting == Difficulty.PEACEFUL.id()){
             Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
             worldObj.setBlockWithNotify(x,y,z,0);
-            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
+            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
             worldObj.entityJoinedWorld(entityitem2);
         }
         if(active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave < waves.size()-1){
@@ -126,10 +123,10 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         } else if (active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave == waves.size()-1) {
             for (EntityPlayer player : worldObj.players) {
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Challenge complete!!");
-                player.triggerAchievement(SignalIndustriesAchievementPage.VICTORY_REINFORCED);
+                player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
             }
             for (BlockInstance bi : multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS)) {
-                if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SignalIndustries.fueledEternalTreeLog.id){
+                if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.fueledEternalTreeLog.id){
                     worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                 }
             }
@@ -145,8 +142,8 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             ExplosionEnergy explosion = new ExplosionEnergy(worldObj, null, x, y, z, 3);
             explosion.doExplosionA();
             explosion.doExplosionB(true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.energyCatalyst, 1));
-            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
+            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.energyCatalyst, 1));
+            EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
             worldObj.entityJoinedWorld(entityitem);
             worldObj.entityJoinedWorld(entityitem2);
         }
@@ -154,12 +151,12 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(x, y, z), Direction.Z_POS);
             int i = random.nextInt(blocks.size());
             BlockInstance block = blocks.get(i);
-            while (worldObj.getBlockId(block.pos.x, block.pos.y, block.pos.z) == SignalIndustries.fueledEternalTreeLog.id && !readyForSuddenDeath())
+            while (worldObj.getBlockId(block.pos.x, block.pos.y, block.pos.z) == SIBlocks.fueledEternalTreeLog.id && !readyForSuddenDeath())
             {
                 i = random.nextInt(blocks.size());
                 block = blocks.get(i);
             }
-            worldObj.setBlockWithNotify(block.pos.x, block.pos.y, block.pos.z, SignalIndustries.fueledEternalTreeLog.id);
+            worldObj.setBlockWithNotify(block.pos.x, block.pos.y, block.pos.z, SIBlocks.fueledEternalTreeLog.id);
         }
 //        if(active){
 //            for (float y1 = y; y < 256; y+=0.1f) {
@@ -176,9 +173,9 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public void check(){
         if(getBlockType() != null && active){
-            if(worldObj.getCurrentWeather() == SignalIndustries.weatherBloodMoon && !suddenDeath){
+            if(worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon && !suddenDeath){
                 for (BlockInstance bi : multiblock.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
-                    if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SignalIndustries.eternalTreeLog.id){
+                    if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.eternalTreeLog.id){
                         worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id);
                     }
                 }
@@ -193,7 +190,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x, y, z)))){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
                 worldObj.setBlockWithNotify(x,y,z,0);
-                EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SignalIndustries.reinforcedWrathBeacon, 1));
+                EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
                 worldObj.entityJoinedWorld(entityitem2);
             }
         }
@@ -213,7 +210,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessageTranslate("event.signalindustries.invalidMultiblock");
                 return;
             }
-            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SignalIndustries.infernalEye.id){
+            if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SIItems.infernalEye.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
                     player.sendMessage("event.signalindustries.reinforcedWrathBeaconActivated");
@@ -312,7 +309,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public boolean readyForSuddenDeath(){
         for (BlockInstance substitution : multiblock.getSubstitutions(new Vec3i(x, y, z), Direction.Z_POS)) {
-            if(worldObj.getBlockId(substitution.pos.x,substitution.pos.y,substitution.pos.z) != SignalIndustries.fueledEternalTreeLog.id){
+            if(worldObj.getBlockId(substitution.pos.x,substitution.pos.y,substitution.pos.z) != SIBlocks.fueledEternalTreeLog.id){
                 return false;
             }
         }

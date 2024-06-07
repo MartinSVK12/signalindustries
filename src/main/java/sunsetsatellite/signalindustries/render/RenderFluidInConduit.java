@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
@@ -17,6 +16,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockConduit;
 import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
@@ -31,7 +31,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
         int j = tileEntity1.y;
         int k = tileEntity1.z;
         World blockAccess = this.renderDispatcher.renderEngine.mc.theWorld;
-        Block block = SignalIndustries.prototypeConduit;
+        Block block = SIBlocks.prototypeConduit;
 
         if(tileEntity1.getBlockType() != null){
             block = tileEntity1.getBlockType();

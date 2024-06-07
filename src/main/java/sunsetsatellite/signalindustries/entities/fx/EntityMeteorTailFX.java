@@ -4,10 +4,8 @@ package sunsetsatellite.signalindustries.entities.fx;
 import net.minecraft.client.entity.fx.EntityFX;
 
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
-import org.lwjgl.opengl.GL11;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 
 import java.awt.*;
@@ -96,7 +94,7 @@ public class EntityMeteorTailFX extends EntityFX {
             this.xd *= 1.1D;
             this.zd *= 1.1D;
         }
-        if(blockId == SignalIndustries.signalumOre.id){
+        if(blockId == SIBlocks.signalumOre.id){
             this.particleRed = 0.9f;
             this.particleGreen = 1 - (float) particleAge / particleMaxAge;
             this.particleBlue = 1 - (((float) particleAge / particleMaxAge) * 2);

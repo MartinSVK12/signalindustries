@@ -8,8 +8,9 @@ import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class BlockDilithiumCrystal extends BlockTransparent {
             case PROPER_TOOL:
                 Random random = new Random();
                 if(random.nextFloat() < 0.5f){
-                    return new ItemStack[]{new ItemStack(SignalIndustries.dilithiumShard,1)};
+                    return new ItemStack[]{new ItemStack(SIItems.dilithiumShard,1)};
                 } else {
                     return null;
                 }
@@ -45,8 +46,8 @@ public class BlockDilithiumCrystal extends BlockTransparent {
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta, EntityPlayer player, Item item) {
         super.onBlockDestroyedByPlayer(world, x, y, z, meta, player, item);
-        if(player.dimension == SignalIndustries.dimEternity.id) {
-            player.triggerAchievement(SignalIndustriesAchievementPage.ETERNITY);
+        if(player.dimension == SIDimensions.dimEternity.id) {
+            player.triggerAchievement(SIAchievements.ETERNITY);
         }
     }
 }

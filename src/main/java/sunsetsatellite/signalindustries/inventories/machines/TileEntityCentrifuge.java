@@ -4,7 +4,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
@@ -22,12 +22,12 @@ public class TileEntityCentrifuge extends TileEntityTieredMachineSimple implemen
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.burntSignalumFlowing);
-        acceptedFluids.get(1).add((BlockFluid) SignalIndustries.burntSignalumFlowing);
-        acceptedFluids.get(2).add((BlockFluid) SignalIndustries.burntSignalumFlowing);
-        acceptedFluids.get(3).add((BlockFluid) SignalIndustries.burntSignalumFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.burntSignalumFlowing);
+        acceptedFluids.get(1).add((BlockFluid) SIBlocks.burntSignalumFlowing);
+        acceptedFluids.get(2).add((BlockFluid) SIBlocks.burntSignalumFlowing);
+        acceptedFluids.get(3).add((BlockFluid) SIBlocks.burntSignalumFlowing);
 
-        acceptedFluids.get(4).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(4).add((BlockFluid) SIBlocks.energyFlowing);
 
         energySlot = 4;
         itemOutputs = new int[]{0};

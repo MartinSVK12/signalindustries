@@ -9,8 +9,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 
 @Mixin(
         value = SlotCrafting.class,
@@ -23,47 +24,47 @@ public class SlotCraftingMixin {
     @Inject(method = "onPickupFromSlot",at = @At("HEAD"))
     public void onPickupFromSlot(ItemStack itemStack, CallbackInfo ci) {
         Item item = itemStack.getItem();
-        if(item.id == SignalIndustries.prototypeMachineCore.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.THE_PROTOTYPE);
+        if(item.id == SIBlocks.prototypeMachineCore.id){
+            thePlayer.triggerAchievement(SIAchievements.THE_PROTOTYPE);
         }
-        if(item.id == SignalIndustries.prototypeConduit.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.TRANSFER);
+        if(item.id == SIBlocks.prototypeConduit.id){
+            thePlayer.triggerAchievement(SIAchievements.TRANSFER);
         }
-        if(item.id == SignalIndustries.prototypeEnergyCell.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BUFFER);
+        if(item.id == SIBlocks.prototypeEnergyCell.id){
+            thePlayer.triggerAchievement(SIAchievements.BUFFER);
         }
-        if(item.id == SignalIndustries.prototypeCrusher.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.CRUSHER);
+        if(item.id == SIBlocks.prototypeCrusher.id){
+            thePlayer.triggerAchievement(SIAchievements.CRUSHER);
         }
-        if(item.id == SignalIndustries.prototypeAlloySmelter.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.ALLOY_SMELTER);
+        if(item.id == SIBlocks.prototypeAlloySmelter.id){
+            thePlayer.triggerAchievement(SIAchievements.ALLOY_SMELTER);
         }
-        if(item.id == SignalIndustries.prototypePlateFormer.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.PLATE_FORMER);
+        if(item.id == SIBlocks.prototypePlateFormer.id){
+            thePlayer.triggerAchievement(SIAchievements.PLATE_FORMER);
         }
-        if(item.id == SignalIndustries.basicMachineCore.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BASIC);
+        if(item.id == SIBlocks.basicMachineCore.id){
+            thePlayer.triggerAchievement(SIAchievements.BASIC);
         }
-        if(item.id == SignalIndustries.reinforcedMachineCore.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.REINFORCED);
+        if(item.id == SIBlocks.reinforcedMachineCore.id){
+            thePlayer.triggerAchievement(SIAchievements.REINFORCED);
         }
-        if(item.id == SignalIndustries.dilithiumBooster.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BOOST);
+        if(item.id == SIBlocks.dilithiumBooster.id){
+            thePlayer.triggerAchievement(SIAchievements.BOOST);
         }
-        if(item.id == SignalIndustries.warpOrb.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.WARP_ORB);
+        if(item.id == SIItems.warpOrb.id){
+            thePlayer.triggerAchievement(SIAchievements.WARP_ORB);
         }
-        if(item.id == SignalIndustries.signalumSaber.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.BLADE);
+        if(item.id == SIItems.signalumSaber.id){
+            thePlayer.triggerAchievement(SIAchievements.BLADE);
         }
-        if(item.id == SignalIndustries.signalumPrototypeHarness.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.HARNESS);
+        if(item.id == SIItems.signalumPrototypeHarness.id){
+            thePlayer.triggerAchievement(SIAchievements.HARNESS);
         }
-        if(item.id == SignalIndustries.basicAutomaticMiner.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.MINER);
+        if(item.id == SIBlocks.basicAutomaticMiner.id){
+            thePlayer.triggerAchievement(SIAchievements.MINER);
         }
-        if(item.id == SignalIndustries.basicPump.id){
-            thePlayer.triggerAchievement(SignalIndustriesAchievementPage.PUMP);
+        if(item.id == SIBlocks.basicPump.id){
+            thePlayer.triggerAchievement(SIAchievements.PUMP);
         }
     }
 }

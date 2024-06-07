@@ -10,6 +10,7 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
@@ -68,9 +69,9 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z), Direction.Z_POS);
             for (BlockInstance tileEntity : tileEntities) {
                 if (tileEntity.tile instanceof IMultiblockPart) {
-                    if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SignalIndustries.reinforcedItemInputBus){
+                    if(tileEntity.tile instanceof TileEntityItemBus && tileEntity.block == SIBlocks.reinforcedItemInputBus){
                         input = (TileEntityItemBus) tileEntity.tile;
-                    } else if(tileEntity.tile instanceof TileEntityFluidHatch && tileEntity.block == SignalIndustries.reinforcedFluidOutputHatch){
+                    } else if(tileEntity.tile instanceof TileEntityFluidHatch && tileEntity.block == SIBlocks.reinforcedFluidOutputHatch){
                         output = (TileEntityFluidHatch) tileEntity.tile;
                     }
                     ((IMultiblockPart) tileEntity.tile).connect(this);

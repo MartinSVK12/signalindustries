@@ -5,8 +5,8 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.energy.api.IEnergyItem;
-import sunsetsatellite.catalyst.energy.impl.ItemEnergyContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredEnergyConductor;
 
@@ -19,7 +19,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
         setCapacity(10000);
         setEnergy(0);
         setTransfer(250);
@@ -79,7 +79,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
         if(fluidContents[0] == null) {
             return false;
         } else {
-            return fluidContents[0].getLiquid() == SignalIndustries.energyFlowing && fluidContents[0].amount >= cost && getEnergy() < getCapacity();
+            return fluidContents[0].getLiquid() == SIBlocks.energyFlowing && fluidContents[0].amount >= cost && getEnergy() < getCapacity();
         }
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerHarness;
 import sunsetsatellite.signalindustries.gui.GuiHarness;
@@ -118,7 +119,7 @@ public class ItemSignalumPrototypeHarness extends ItemArmorTiered implements IHa
 
     @Override
     public boolean canFill(ItemStack stack) {
-        if(stack.getItem() == SignalIndustries.signalumPrototypeHarness){
+        if(stack.getItem() == SIItems.signalumPrototypeHarness){
             InventoryHarness inv = new InventoryHarness(stack);
             NBTHelper.loadInvFromNBT(stack,inv,0,1);
             return inv.getFluidAmountForSlot(0) < inv.getFluidCapacityForSlot(0);

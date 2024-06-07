@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.shader.ShaderProvider;
 import net.minecraft.client.render.shader.ShaderProviderInternal;
 import net.minecraft.client.render.shader.ShadersRenderer;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
@@ -28,7 +28,7 @@ public class ShadersRendererSI extends ShadersRenderer {
     @Override
     public void beginRenderGame(float partialTicks) {
         if(powerSuit != null){
-            if(!powerSuit.hasAttachment((ItemAttachment) SignalIndustries.nightVisionLens) || !powerSuit.active){
+            if(!powerSuit.hasAttachment((ItemAttachment) SIItems.nightVisionLens) || !powerSuit.active){
                 mc.setRenderer(new ShadersRenderer(mc));
                 mc.renderer.reload();
                 mc.fullbright = false;

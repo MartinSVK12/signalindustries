@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.recipes.legacy;
 
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,8 +12,8 @@ public class CrystalChamberRecipes extends MachineRecipesBase<Integer[], ItemSta
     public static final CrystalChamberRecipes instance = new CrystalChamberRecipes();
 
     protected CrystalChamberRecipes() {
-        addRecipe(new Integer[]{SignalIndustries.signalumCrystal.id, SignalIndustries.signalumCrystal.id},new ItemStack(SignalIndustries.signalumCrystal,1));
-        addRecipe(new Integer[]{SignalIndustries.signalumCrystalEmpty.id, SignalIndustries.signalumCrystalEmpty.id},new ItemStack(SignalIndustries.signalumCrystalEmpty,1));
+        addRecipe(new Integer[]{SIItems.signalumCrystal.id, SIItems.signalumCrystal.id},new ItemStack(SIItems.signalumCrystal,1));
+        addRecipe(new Integer[]{SIItems.signalumCrystalEmpty.id, SIItems.signalumCrystalEmpty.id},new ItemStack(SIItems.signalumCrystalEmpty,1));
     }
 
     public void addRecipe(Integer[] ids, ItemStack stack) {

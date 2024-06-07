@@ -4,12 +4,10 @@ package sunsetsatellite.signalindustries.blocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockRail;
 import net.minecraft.core.block.entity.TileEntity;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.util.RailLogic;
 import net.minecraft.core.enums.EnumDropCause;
-import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 
 public class BlockDilithiumRail extends BlockRail {
@@ -55,7 +53,7 @@ public class BlockDilithiumRail extends BlockRail {
             if (flag) {
                 this.dropBlockWithCause(world, EnumDropCause.WORLD, x, y, z, world.getBlockMetadata(x, y, z), (TileEntity)null);
                 world.setBlockWithNotify(x, y, z, 0);
-            } else if (this.id == SignalIndustries.dilithiumRail.id) {
+            } else if (this.id == SIBlocks.dilithiumRail.id) {
                 boolean flag1 = world.isBlockIndirectlyGettingPowered(x, y, z) || world.isBlockIndirectlyGettingPowered(x, y + 1, z);
                 flag1 = flag1 || this.func_27044_a(world, x, y, z, i1, true, 0) || this.func_27044_a(world, x, y, z, i1, false, 0);
                 boolean flag2 = false;
@@ -163,7 +161,7 @@ public class BlockDilithiumRail extends BlockRail {
 
     private boolean func_27043_a(World world, int i, int j, int k, boolean flag, int l, int i1) {
         int j1 = world.getBlockId(i, j, k);
-        if (j1 == SignalIndustries.dilithiumRail.id) {
+        if (j1 == SIBlocks.dilithiumRail.id) {
             int k1 = world.getBlockMetadata(i, j, k);
             int l1 = k1 & 7;
             if (i1 == 1 && (l1 == 0 || l1 == 4 || l1 == 5)) {

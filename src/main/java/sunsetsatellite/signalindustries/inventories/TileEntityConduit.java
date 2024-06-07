@@ -5,11 +5,8 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-
-import java.util.ArrayList;
 
 public class TileEntityConduit extends TileEntityFluidPipe {
     public String getInvName() {
@@ -18,7 +15,7 @@ public class TileEntityConduit extends TileEntityFluidPipe {
 
     public TileEntityConduit(){
         acceptedFluids.get(0).clear();
-        acceptedFluids.get(0).add((BlockFluid) SignalIndustries.energyFlowing);
+        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
     }
 
     @Override

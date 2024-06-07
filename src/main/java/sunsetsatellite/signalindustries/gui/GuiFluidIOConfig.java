@@ -14,9 +14,9 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 
@@ -153,7 +153,7 @@ public class GuiFluidIOConfig extends GuiScreen {
             if (guibutton.id >= 0 && guibutton.id < 6) {
                 switch (tile.fluidConnections.get(Direction.values()[guibutton.id])) {
                     case NONE:
-                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell || tile.getBlockType() == SignalIndustries.infiniteFluidTank) {
+                        if (tile.getBlockType() == SIBlocks.infiniteEnergyCell || tile.getBlockType() == SIBlocks.infiniteFluidTank) {
                             tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                             break;
                         }
@@ -163,7 +163,7 @@ public class GuiFluidIOConfig extends GuiScreen {
                         tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.OUTPUT);
                         break;
                     case OUTPUT:
-                        if (tile.getBlockType() == SignalIndustries.infiniteEnergyCell || tile.getBlockType() == SignalIndustries.infiniteFluidTank) {
+                        if (tile.getBlockType() == SIBlocks.infiniteEnergyCell || tile.getBlockType() == SIBlocks.infiniteFluidTank) {
                             tile.fluidConnections.replace(Direction.values()[guibutton.id], Connection.NONE);
                             break;
                         }
