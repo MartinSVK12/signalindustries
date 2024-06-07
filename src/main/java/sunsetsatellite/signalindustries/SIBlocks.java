@@ -10,11 +10,10 @@ import org.useless.dragonfly.model.block.DFBlockModelBuilder;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockTransparent;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
-import sunsetsatellite.signalindustries.blocks.models.BlockModelDilithiumRail;
-import sunsetsatellite.signalindustries.blocks.models.BlockModelMachine;
-import sunsetsatellite.signalindustries.blocks.models.BlockModelVerticalMachine;
+import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
 import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
@@ -233,12 +232,13 @@ public class SIBlocks extends DataInitializer {
                 .setResistance(2000)
                 .build(new Block("reinforced.casing", config.getInt("BlockIDs.reinforcedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         reinforcedGlass = new BlockBuilder(MOD_ID)
-                .setTextures("signalindustries:block/reinforced_glass")
+                .setTextures("signalindustries:block/reinforced_glass_0")
                 .setLuminance(0)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(4)
                 .setResistance(2000)
-                .build(new BlockConnectedTextureCursed("reinforced.glass", config.getInt("BlockIDs.reinforcedGlass"), Material.metal, "reinforced_glass").withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .setBlockModel((block)->new BlockModelConnectedTexture(block,"signalindustries:block/reinforced_glass"))
+                .build(new BlockTransparent("reinforced.glass", config.getInt("BlockIDs.reinforcedGlass"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         prototypeConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/conduit_prototype")
                 .setLuminance(0)
@@ -853,7 +853,12 @@ public class SIBlocks extends DataInitializer {
                 .setTextures("signalindustries:block/prototype_blank")
                 .setNorthTexture("signalindustries:block/inserter_output")
                 .setSouthTexture("signalindustries:block/inserter_input")
-                .setBlockModel(BlockModelHorizontalRotation::new)
+                .setBlockModel((block) -> new BlockModelVerticalMachine(block,Tier.PROTOTYPE)
+                        .withDefaultNorthTexture("inserter_input")
+                        .withDefaultSouthTexture("inserter_output")
+                        .withVerticalDefaultTopTexture("inserter_input")
+                        .withVerticalDefaultBottomTexture("inserter_output")
+                )
                 .build(new BlockInserter("prototype.inserter", config.getInt("BlockIDs.prototypeInserter"), Tier.PROTOTYPE, Material.stone));
         basicInserter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
@@ -862,7 +867,12 @@ public class SIBlocks extends DataInitializer {
                 .setTextures("signalindustries:block/basic_blank")
                 .setNorthTexture("signalindustries:block/basic_inserter_output")
                 .setSouthTexture("signalindustries:block/basic_inserter_input")
-                .setBlockModel(BlockModelHorizontalRotation::new)
+                .setBlockModel((block) -> new BlockModelVerticalMachine(block,Tier.BASIC)
+                        .withDefaultNorthTexture("basic_inserter_input")
+                        .withDefaultSouthTexture("basic_inserter_output")
+                        .withVerticalDefaultTopTexture("basic_inserter_input")
+                        .withVerticalDefaultBottomTexture("basic_inserter_output")
+                )
                 .build(new BlockInserter("basic.inserter", config.getInt("BlockIDs.basicInserter"), Tier.BASIC, Material.metal));
         prototypeFilter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
@@ -923,6 +933,7 @@ public class SIBlocks extends DataInitializer {
                 .setSideTextures("signalindustries:block/reinforced_ignitor_inactive")
                 .setTopTexture("signalindustries:block/reinforced_ignitor_top_inactive")
                 .setBottomTexture("signalindustries:block/reinforced_ignitor_bottom_inactive")
+                .setBlockModel(BlockModelIgnitor::new)
                 .build(new BlockIgnitor("reinforced.ignitor", config.getInt("BlockIDs.reinforcedIgnitor"), Tier.REINFORCED, Material.metal));
         signalumReactorCore = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)

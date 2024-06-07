@@ -1,15 +1,22 @@
 package sunsetsatellite.signalindustries.render;
 
+import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.multiblocks.HologramWorld;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
+
+import java.util.ArrayList;
 
 
 public class RenderSignalumReactor extends RenderMultiblock {
@@ -31,10 +38,13 @@ public class RenderSignalumReactor extends RenderMultiblock {
             GL11.glScalef(2.90F, 7f, 2.90F);
             GL11.glTranslatef(1.2f, 0.08f, 0.16f);
             ((IColorOverride)model).overrideColor(1-depletedAmount,1-depletedAmount,1-depletedAmount,amount);
+            ((IColorOverride) model).enableFullbright();
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable( GL11.GL_BLEND );
+            //blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(Block.blocksList[fluidId],new Vec3i(),null))));
             this.drawBlock(tessellator, model, 0);
+            ((IColorOverride) model).disableFullbright();
             ((IColorOverride)model).overrideColor(1,1,1,1);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
