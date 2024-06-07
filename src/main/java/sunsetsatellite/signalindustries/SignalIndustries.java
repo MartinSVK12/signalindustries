@@ -960,6 +960,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/basic_blank")
             .setSideTextures("signalindustries:block/basic_booster_side_inactive")
             .setSouthTexture("signalindustries:block/basic_booster_top_inactive")
+            .setBlockModel((block)->new BlockModelMachine(block, Tier.BASIC)
+                    .withDefaultSideTextures("basic_booster_side_inactive")
+                    .withDefaultNorthTexture("basic_booster_top_inactive")
+                    .withActiveSideTextures("basic_booster_side_active")
+                    .withActiveNorthTexture("basic_booster_top_active")
+                    .withOverbrightSideTextures("basic_booster_overlay")
+                    .withOverbrightNorthTexture("basic_booster_overlay_top")
+            )
             .build(new BlockDilithiumBooster("basic.booster",config.getInt("BlockIDs.redstoneBooster"), Tier.BASIC,Material.metal));
 
     public static final Block dilithiumBooster = new BlockBuilder(MOD_ID) //BlockHelper.createBlock(MOD_ID,new BlockDilithiumBooster("reinforced.dilithiumBooster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal),"reinforced_blank","reinforced_blank","dilithium_top_inactive","dilithium_booster_side_inactive","dilithium_booster_side_inactive","dilithium_booster_side_inactive",BlockSounds.METAL,5f,20f,1);
@@ -969,6 +977,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/reinforced_blank")
             .setSideTextures("signalindustries:block/dilithium_booster_side_inactive")
             .setSouthTexture("signalindustries:block/dilithium_top_inactive")
+            .setBlockModel((block)->new BlockModelMachine(block, Tier.REINFORCED)
+                    .withDefaultSideTextures("dilithium_booster_side_inactive")
+                    .withDefaultNorthTexture("dilithium_top_inactive")
+                    .withActiveSideTextures("dilithium_booster_side_active")
+                    .withActiveNorthTexture("dilithium_top_active")
+                    .withOverbrightSideTextures("booster_overlay")
+                    .withOverbrightNorthTexture("dilithium_machine_overlay")
+            )
             .build(new BlockDilithiumBooster("reinforced.booster",config.getInt("BlockIDs.dilithiumBooster"), Tier.REINFORCED,Material.metal));
 
     //TODO: W.I.P.
@@ -979,6 +995,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
             .setTextures("signalindustries:block/awakened_blank")
             .setSideTextures("signalindustries:block/awakened_booster_side_inactive")
             .setSouthTexture("signalindustries:block/awakened_booster_top_inactive")
+            .setBlockModel((block)->new BlockModelMachine(block, Tier.AWAKENED)
+                    .withDefaultSideTextures("awakened_booster_side_inactive")
+                    .withDefaultNorthTexture("awakened_booster_top_inactive")
+                    .withActiveSideTextures("awakened_booster_side_active")
+                    .withActiveNorthTexture("awakened_booster_top_active")
+                    .withOverbrightSideTextures("awakened_booster_overlay")
+                    .withOverbrightNorthTexture("dilithium_machine_overlay")
+            )
             .build(new BlockDilithiumBooster("awakened.booster",config.getInt("BlockIDs.awakenedBooster"), Tier.AWAKENED,Material.metal));
 
     public static final Block prototypePump = new BlockBuilder(MOD_ID)

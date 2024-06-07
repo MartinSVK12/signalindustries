@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IFluidIO;
 import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
@@ -18,7 +19,7 @@ import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
 
-public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview {
+public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview, IActiveForm {
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
     public int progressTicks = 0;
@@ -27,6 +28,7 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     public float yield = 1;
     public IOPreview preview = IOPreview.NONE;
 
+    @Override
     public boolean isBurning(){
         return fuelBurnTicks > 0;
     }

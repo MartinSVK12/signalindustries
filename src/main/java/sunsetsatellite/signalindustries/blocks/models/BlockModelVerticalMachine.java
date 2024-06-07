@@ -9,6 +9,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -52,9 +53,8 @@ public class BlockModelVerticalMachine extends BlockModelMachine{
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof TileEntityStabilizer){
-            //FIXME: hard-coding this is bad
-            if(((TileEntityStabilizer) tileEntity).isBurning()){
+        if(tileEntity instanceof IActiveForm){
+            if(((IActiveForm) tileEntity).isBurning()){
                 int data = blockAccess.getBlockMetadata(x, y, z);
                 boolean isVertical = data == 0 || data == 1;
                 int index;
@@ -92,8 +92,8 @@ public class BlockModelVerticalMachine extends BlockModelMachine{
             usingTextures = defaultVerticalTextures;
         }
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof TileEntityStabilizer){
-            if(((TileEntityStabilizer) tileEntity).isBurning()){
+        if(tileEntity instanceof IActiveForm){
+            if(((IActiveForm) tileEntity).isBurning()){
                 usingTextures = activeTextures;
                 if(isVertical){
                     usingTextures = activeVerticalTextures;

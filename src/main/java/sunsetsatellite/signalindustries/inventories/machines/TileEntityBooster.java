@@ -16,6 +16,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityBooster extends TileEntityFluidItemContainer implements IHasIOPreview {
+public class TileEntityBooster extends TileEntityFluidItemContainer implements IHasIOPreview, IActiveForm {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -202,6 +203,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
         }*/
     }
 
+    @Override
     public boolean isBurning(){
         return fuelBurnTicks > 0;
     }

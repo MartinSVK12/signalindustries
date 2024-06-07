@@ -10,6 +10,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -52,8 +53,8 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof TileEntityTieredMachineBase){
-            if(((TileEntityTieredMachineBase) tileEntity).isBurning()){
+        if(tileEntity instanceof IActiveForm){
+            if(((IActiveForm) tileEntity).isBurning()){
                 int data = blockAccess.getBlockMetadata(x, y, z);
                 int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side];
                 if (index >= Sides.orientationLookUpHorizontal.length) return null;
@@ -80,8 +81,8 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
     public IconCoordinate getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         HashMap<Side, IconCoordinate> usingTextures = defaultTextures;
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof TileEntityTieredMachineBase){
-            if(((TileEntityTieredMachineBase) tileEntity).isBurning()){
+        if(tileEntity instanceof IActiveForm){
+            if(((IActiveForm) tileEntity).isBurning()){
                 usingTextures = activeTextures;
             }
         }

@@ -13,6 +13,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart, IHasIOPreview {
+public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart, IHasIOPreview, IActiveForm {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -177,6 +178,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
         }*/
     }
 
+    @Override
     public boolean isBurning(){
         return fuelBurnTicks > 0;
     }
