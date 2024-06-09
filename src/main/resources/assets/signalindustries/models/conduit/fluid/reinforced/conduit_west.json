@@ -1,6 +1,6 @@
 {
   "parent": "signalindustries:conduit/template_conduit_west",
   "textures": {
-    "conduit": "signalindustries:block/fluid_pipe_reinforced"
+    "conduit": "signalindustries:block/fluid_conduit_reinforced"
   }
 }

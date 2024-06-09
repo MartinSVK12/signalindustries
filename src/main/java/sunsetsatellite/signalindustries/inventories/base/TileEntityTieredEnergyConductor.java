@@ -114,10 +114,10 @@ public abstract class TileEntityTieredEnergyConductor extends TileEntityTieredEn
     }
 
     @Override
-    public void readFromNBT(CompoundTag CompoundTag) {
-        maxReceive = CompoundTag.getInteger("maxReceive");
-        maxProvide = CompoundTag.getInteger("maxProvide");
-        super.readFromNBT(CompoundTag);
+    public void readFromNBT(CompoundTag tag) {
+        maxReceive = tag.getInteger("maxReceive");
+        maxProvide = tag.getInteger("maxProvide");
+        super.readFromNBT(tag);
     }
 
     public void setTransfer(int amount){

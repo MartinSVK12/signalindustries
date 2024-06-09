@@ -61,7 +61,7 @@ public class BlockWrathBeacon extends BlockContainerTiered {
                     entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
                 } else {
-                    entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
+                    entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
                 }
             }
             return true;

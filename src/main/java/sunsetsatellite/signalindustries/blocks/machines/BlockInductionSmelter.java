@@ -39,7 +39,7 @@ public class BlockInductionSmelter extends BlockContainerTiered {
                 //SignalIndustries.displayGui(entityplayer,() -> new GuiDimAnchor(entityplayer.inventory, tile),new ContainerDimAnchor(entityplayer.inventory,tile),tile,i,j,k);
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
             } else {
-                entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
+                entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }

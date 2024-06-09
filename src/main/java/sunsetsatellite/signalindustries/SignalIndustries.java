@@ -47,10 +47,10 @@ import sunsetsatellite.signalindustries.entities.EntityFallingMeteor;
 import sunsetsatellite.signalindustries.entities.EntitySunbeam;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.gui.*;
+import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.*;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryHarness;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
@@ -184,7 +184,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     public static HashMap<String, ArrayList<Class<?>>> nameToGuiMap = new HashMap<>();
 
-    public static final Tag<Block> ENERGY_CONDUITS_CONNECT = Tag.of("energy_conduits_connect");
+    public static final Tag<Block> SIGNALUM_CONDUITS_CONNECT = Tag.of("signalum_conduits_connect");
     public static final Tag<Block> FLUID_CONDUITS_CONNECT = Tag.of("fluid_conduits_connect");
     public static final Tag<Block> ITEM_CONDUITS_CONNECT = Tag.of("item_conduits_connect");
 
@@ -384,7 +384,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntitySignalumReactor.class, "Signalum Reactor", RenderSignalumReactor::new);
         EntityHelper.createSpecialTileEntity(TileEntityEnergyInjector.class, "Energy Injector", RenderEnergyInjector::new);
         EntityHelper.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class, "Reinforced Wrath Beacon", RenderReinforcedWrathBeacon::new);
-
+        EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -407,6 +407,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createTileEntity(TileEntityProgrammer.class,"EEPROM Programmer");
         EntityHelper.createTileEntity(TileEntityFilter.class,"Filter");
         EntityHelper.createTileEntity(TileEntityUVLamp.class,"Ultraviolet Lamp");
+        EntityHelper.createTileEntity(TileEntityCatalystConduit.class,"Catalyst Energy Conduit");
+
 
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
         addToNameGuiMap("SI Fluid Tank", GuiSIFluidTank.class, TileEntitySIFluidTank.class);
@@ -484,7 +486,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         }
     }
 
-    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, TileEntityWithName tile, int x, int y, int z) {
+    public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, INamedTileEntity tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
             ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,tile,x,y,z);
         } else {

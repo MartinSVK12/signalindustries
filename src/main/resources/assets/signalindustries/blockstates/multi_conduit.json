@@ -1,0 +1,3586 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/frame"
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "none"
+          },
+          {
+            "conduit_2_type": "none"
+          },
+          {
+            "conduit_3_type": "none"
+          },
+          {
+            "conduit_4_type": "none"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/casing"
+      },
+      "when": {
+        "split": "true"
+      }
+    },
+    
+    
+    
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/prototype_energy_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/prototype_energy_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/prototype_energy_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/basic_energy_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/basic_energy_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/basic_energy_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/reinforced_energy_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/reinforced_energy_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/reinforced_energy_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/awakened_energy_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/awakened_energy_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/awakened_energy_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/prototype_fluid_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/prototype_fluid_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/prototype_fluid_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/basic_fluid_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/basic_fluid_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/basic_fluid_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/reinforced_fluid_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/reinforced_fluid_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/reinforced_fluid_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/prototype_item_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/prototype_item_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/prototype_item_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/basic_item_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/basic_item_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/basic_item_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/prototype_energy_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/prototype_energy_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/prototype_energy_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/basic_energy_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/basic_energy_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/basic_energy_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/reinforced_energy_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/reinforced_energy_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/reinforced_energy_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/awakened_energy_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/awakened_energy_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/awakened_energy_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/prototype_fluid_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/prototype_fluid_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/prototype_fluid_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/basic_fluid_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/basic_fluid_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/basic_fluid_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/reinforced_fluid_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/reinforced_fluid_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/reinforced_fluid_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/prototype_item_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/prototype_item_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/prototype_item_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/basic_item_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/basic_item_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/basic_item_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/prototype_energy_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/prototype_energy_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/prototype_energy_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/basic_energy_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/basic_energy_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/basic_energy_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/reinforced_energy_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/reinforced_energy_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/reinforced_energy_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "signalum"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/2/awakened_energy_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "signalum"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/3/awakened_energy_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "signalum"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/energy/4/awakened_energy_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "signalum"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/prototype_fluid_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/prototype_fluid_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/prototype_fluid_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/basic_fluid_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/basic_fluid_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/basic_fluid_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "fluid"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/2/reinforced_fluid_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "fluid"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/3/reinforced_fluid_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "fluid"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/fluid/4/reinforced_fluid_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "fluid"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/prototype_item_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/prototype_item_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/prototype_item_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "prototype"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "item"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/2/basic_item_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "item"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/3/basic_item_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "item"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/item/4/basic_item_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "item"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/1/network_cable_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/2/network_cable_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/3/network_cable_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/4/network_cable_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/1/network_cable_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/2/network_cable_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/3/network_cable_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/4/network_cable_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/1/network_cable_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/2/network_cable_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/3/network_cable_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/network/4/network_cable_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "network"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+    
+    
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/basic_catalyst_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/basic_catalyst_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/basic_catalyst_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/reinforced_catalyst_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/reinforced_catalyst_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/reinforced_catalyst_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/awakened_catalyst_conduit_2",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/awakened_catalyst_conduit_3",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/awakened_catalyst_conduit_4",
+        "x": -90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "y"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/basic_catalyst_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/basic_catalyst_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/basic_catalyst_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/reinforced_catalyst_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/reinforced_catalyst_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/reinforced_catalyst_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/awakened_catalyst_conduit_2",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/awakened_catalyst_conduit_3",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/awakened_catalyst_conduit_4",
+        "y": 0
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "z"
+          }
+        ]
+      }
+    },
+
+
+
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/basic_catalyst_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/basic_catalyst_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/basic_catalyst_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "basic"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/reinforced_catalyst_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/reinforced_catalyst_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/reinforced_catalyst_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "reinforced"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+
+
+
+
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_1_type": "catalyst_energy"
+          },
+          {
+            "conduit_1_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/2/awakened_catalyst_conduit_2",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_2_type": "catalyst_energy"
+          },
+          {
+            "conduit_2_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/3/awakened_catalyst_conduit_3",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_3_type": "catalyst_energy"
+          },
+          {
+            "conduit_3_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:multi_conduit/catalyst/4/awakened_catalyst_conduit_4",
+        "y": 90
+      },
+      "when": {
+        "AND": [
+          {
+            "conduit_4_type": "catalyst_energy"
+          },
+          {
+            "conduit_4_tier": "awakened"
+          },
+          {
+            "split": "false"
+          },
+          {
+            "axis": "x"
+          }
+        ]
+      }
+    }
+  ]
+}

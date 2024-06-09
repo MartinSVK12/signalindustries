@@ -209,9 +209,9 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     }
 
     @Override
-    public void readFromNBT(CompoundTag nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
-        template.readFromNBT(nBTTagCompound1.getCompound("Template"));
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        template.readFromNBT(tag.getCompound("Template"));
         template.onInventoryChanged();
     }
 

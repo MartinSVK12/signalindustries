@@ -13,6 +13,7 @@ import net.minecraft.server.net.handler.NetServerHandler;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.mixins.IEntityPlayerMP;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
@@ -48,7 +49,7 @@ public abstract class EntityPlayerMPMixin extends EntityPlayer implements IEntit
         this.craftingInventory.onContainerInit(((EntityPlayerMP)((Object)this)));
     }
     @Override
-    public void displayGuiScreen_si(Supplier<GuiScreen> screenSupplier, TileEntityWithName inventory, int x, int y, int z){
+    public void displayGuiScreen_si(Supplier<GuiScreen> screenSupplier, INamedTileEntity inventory, int x, int y, int z){
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new PacketOpenMachineGUI(this.currentWindowId,inventory.getName(),0,x,y,z));
     }

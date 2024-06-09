@@ -140,7 +140,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SIItems.evilCatalyst.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
-                    player.sendMessage("event.signalindustries.wrathBeaconActivated");
+                    player.sendTranslatedChatMessage("event.signalindustries.wrathBeaconActivated");
                     player.triggerAchievement(SIAchievements.CHALLENGE);
                 }
                 active = true;

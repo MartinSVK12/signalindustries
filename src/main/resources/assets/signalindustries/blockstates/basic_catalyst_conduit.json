@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_base"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_up"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_down"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_north"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_east"
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_south"
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/basic/conduit_west"
+      },
+      "when": {
+        "west": "true"
+      }
+    }
+  ]
+}

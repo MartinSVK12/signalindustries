@@ -8,15 +8,12 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
 import org.useless.dragonfly.model.block.DFBlockModelBuilder;
 import sunsetsatellite.signalindustries.blocks.*;
-import sunsetsatellite.signalindustries.blocks.base.BlockConnectedTextureCursed;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockTransparent;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.*;
-import sunsetsatellite.signalindustries.blocks.states.ConduitStateInterpreter;
-import sunsetsatellite.signalindustries.blocks.states.EEPROMProgrammerStateInterpreter;
-import sunsetsatellite.signalindustries.blocks.states.ItemConduitStateInterpreter;
+import sunsetsatellite.signalindustries.blocks.states.*;
 import sunsetsatellite.signalindustries.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -51,6 +48,10 @@ public class SIBlocks extends DataInitializer {
     public static Block basicItemConduit;
     public static Block basicRestrictItemConduit;
     public static Block basicSensorItemConduit;
+    public static Block multiConduit;
+    public static Block basicCatalystConduit;
+    public static Block reinforcedCatalystConduit;
+    public static Block awakenedCatalystConduit;
     public static Block infiniteEnergyCell;
     public static Block prototypeEnergyCell;
     public static Block basicEnergyCell;
@@ -295,12 +296,57 @@ public class SIBlocks extends DataInitializer {
                                 new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/energy/awakened/conduit_all.json")
                                         .setBlockState("awakened_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
                                         .build(block)
                 )
                 .build(new BlockConduit("awakened.conduit", config.getInt("BlockIDs.awakenedConduit"), Tier.AWAKENED, Material.glass));
+        basicCatalystConduit = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/catalyst_energy_conduit_basic")
+                .setLuminance(0)
+                .setResistance(1)
+                .setHardness(1)
+                .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(
+                        block ->
+                                new DFBlockModelBuilder(MOD_ID)
+                                        .setBlockModel("conduit/catalyst/basic/conduit_all.json")
+                                        .setBlockState("basic_catalyst_conduit.json")
+                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                        .build(block)
+                )
+                .build(new BlockCatalystConduit("basic.conduit.catalyst", config.getInt("BlockIDs.basicCatalystConduit"), Tier.BASIC, Material.glass));
+        reinforcedCatalystConduit = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/catalyst_energy_conduit_reinforced")
+                .setLuminance(0)
+                .setResistance(1)
+                .setHardness(1)
+                .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(
+                        block ->
+                                new DFBlockModelBuilder(MOD_ID)
+                                        .setBlockModel("conduit/catalyst/reinforced/conduit_all.json")
+                                        .setBlockState("reinforced_catalyst_conduit.json")
+                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                        .build(block)
+                )
+                .build(new BlockCatalystConduit("reinforced.conduit.catalyst", config.getInt("BlockIDs.reinforcedCatalystConduit"), Tier.REINFORCED, Material.glass));
+        awakenedCatalystConduit = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/catalyst_energy_conduit_awakened")
+                .setLuminance(0)
+                .setResistance(1)
+                .setHardness(1)
+                .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(
+                        block ->
+                                new DFBlockModelBuilder(MOD_ID)
+                                        .setBlockModel("conduit/catalyst/awakened/conduit_all.json")
+                                        .setBlockState("awakened_catalyst_conduit.json")
+                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                        .build(block)
+                )
+                .build(new BlockCatalystConduit("awakened.conduit.catalyst", config.getInt("BlockIDs.awakenedCatalystConduit"), Tier.AWAKENED, Material.glass));
         prototypeFluidConduit = new BlockBuilder(MOD_ID)
-                .setTextures("signalindustries:block/fluid_pipe_prototype")
+                .setTextures("signalindustries:block/fluid_conduit_prototype")
                 .setLuminance(0)
                 .setResistance(1)
                 .setHardness(1)
@@ -315,7 +361,7 @@ public class SIBlocks extends DataInitializer {
                 )
                 .build(new BlockFluidConduit("prototype.conduit.fluid", config.getInt("BlockIDs.prototypeFluidConduit"), Tier.PROTOTYPE, Material.glass));
         basicFluidConduit = new BlockBuilder(MOD_ID)
-                .setTextures("signalindustries:block/fluid_pipe_basic")
+                .setTextures("signalindustries:block/fluid_conduit_basic")
                 .setLuminance(0)
                 .setResistance(1)
                 .setHardness(1)
@@ -330,7 +376,7 @@ public class SIBlocks extends DataInitializer {
                 )
                 .build(new BlockFluidConduit("basic.conduit.fluid", config.getInt("BlockIDs.basicFluidConduit"), Tier.BASIC, Material.glass));
         reinforcedFluidConduit = new BlockBuilder(MOD_ID)
-                .setTextures("signalindustries:block/fluid_pipe_reinforced")
+                .setTextures("signalindustries:block/fluid_conduit_reinforced")
                 .setLuminance(0)
                 .setResistance(1)
                 .setHardness(1)
@@ -404,6 +450,17 @@ public class SIBlocks extends DataInitializer {
                                         .build(block)
                 )
                 .build(new BlockItemConduit("basic.conduit.item.sensor", config.getInt("BlockIDs.basicSensorItemConduit"), Tier.BASIC, Material.glass, PipeType.SENSOR));
+        multiConduit = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setBlockModel((block)->new DFBlockModelBuilder(MOD_ID)
+                        .setBlockModel("multi_conduit/frame.json")
+                        .setBlockState("multi_conduit.json")
+                        .setMetaStateInterpreter(new MultiConduitStateInterpreter())
+                        .build(block)
+                )
+                .build(new BlockMultiConduit("reinforced.conduit.multi", config.getInt("BlockIDs.multiConduit"), Tier.REINFORCED, Material.metal ).withTags(SIGNALUM_CONDUITS_CONNECT,ITEM_CONDUITS_CONNECT,FLUID_CONDUITS_CONNECT));
         infiniteEnergyCell = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/cell_prototype")
                 .setLuminance(1)

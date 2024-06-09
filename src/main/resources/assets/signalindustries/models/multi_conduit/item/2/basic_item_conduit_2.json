@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:multi_conduit/conduits_item_2",
+  "textures": {
+    "i2": "signalindustries:block/item_conduit_basic"
+  }
+}

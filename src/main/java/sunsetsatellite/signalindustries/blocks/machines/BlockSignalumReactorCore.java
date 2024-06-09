@@ -44,7 +44,7 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
                 SignalIndustries.displayGui(entityplayer, () -> new GuiSignalumReactor(entityplayer.inventory, tile), tile, i, j, k);
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
             } else {
-                entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
+                entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
             }
             return true;
         }

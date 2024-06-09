@@ -105,7 +105,7 @@ public class BlockExtractor extends BlockContainerTiered {
                         SignalIndustries.displayGui(entityplayer,() -> new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
                         entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     } else {
-                        entityplayer.sendMessage("event.signalindustries.invalidMultiblock");
+                        entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
                     }
                 }
                 return true;

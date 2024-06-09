@@ -19,9 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
-    public void drawFluids(IFluidInventory inv, AdvancedInfoComponent c){
+    public void drawFluids(IFluidInventory inv, AdvancedInfoComponent c, boolean collapse){
         if(inv.getFluidInventorySize() <= 2){
             for (int id = 0; id < inv.getFluidInventorySize(); id++) {
+                if(inv.getFluidCapacityForSlot(id) <= 0) continue;
                 FluidStack stack = inv.getFluidInSlot(id);
                 if(stack != null && stack.liquid != null){
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.liquid);
@@ -38,22 +39,18 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
                 } else {
-                    if(inv.getAllowedFluidsForSlot(id).contains(SIBlocks.energyFlowing)){
-                        ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("sE: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
-                        c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
-                    } else {
-                        ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
-                        c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
-                    }
+                    ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
+                    c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }
         } else {
             List<ItemStack> stacks = new ArrayList<>();
             for (int id = 0; id < inv.getFluidInventorySize(); id++) {
+                if(inv.getFluidCapacityForSlot(id) <= 0) continue;
                 FluidStack stack = inv.getFluidInSlot(id);
-                if(stack != null && stack.liquid != null && stack.liquid != SIBlocks.energyFlowing){
+                if(stack != null && stack.liquid != null && stack.liquid != SIBlocks.energyFlowing && collapse){
                     stacks.add(new ItemStack(stack.liquid,stack.amount));
-                } else if (stack != null && stack.liquid == SIBlocks.energyFlowing){
+                } else if (stack != null && (stack.liquid == SIBlocks.energyFlowing || !collapse)){
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.liquid);
                     ProgressBarOptions options = new ProgressBarOptions(
                             0,
@@ -67,8 +64,8 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
-                } else if (inv.getAllowedFluidsForSlot(id).contains(SIBlocks.energyFlowing)) {
-                    ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("sE: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
+                } else {
+                    ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
                     c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }

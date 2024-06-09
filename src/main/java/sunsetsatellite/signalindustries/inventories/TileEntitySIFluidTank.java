@@ -143,8 +143,8 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     }
 
     @Override
-    public void readFromNBT(CompoundTag nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
     }
 
     @Override

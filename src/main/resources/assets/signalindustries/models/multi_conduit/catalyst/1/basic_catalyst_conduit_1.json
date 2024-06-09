@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:multi_conduit/conduits_1",
+  "textures": {
+    "c1": "signalindustries:block/catalyst_energy_conduit_basic"
+  }
+}

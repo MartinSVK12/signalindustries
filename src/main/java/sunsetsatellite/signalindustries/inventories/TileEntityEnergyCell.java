@@ -91,8 +91,8 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
     }
 
     @Override
-    public void readFromNBT(CompoundTag nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
     }
 
     @Override

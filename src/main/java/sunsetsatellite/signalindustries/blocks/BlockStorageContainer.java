@@ -103,9 +103,9 @@ public class BlockStorageContainer extends BlockContainerTiered {
                 } else {
                     tile.locked = !tile.locked;
                     if(tile.locked){
-                        player.sendMessage("event.signalindustries.containerLocked");
+                        player.sendTranslatedChatMessage("event.signalindustries.containerLocked");
                     } else {
-                        player.sendMessage("event.signalindustries.containerUnlocked");
+                        player.sendTranslatedChatMessage("event.signalindustries.containerUnlocked");
                     }
                 }
             }

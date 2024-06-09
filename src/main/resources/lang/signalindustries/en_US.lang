@@ -146,14 +146,21 @@ tile.signalindustries.reinforced.glass.name=Reinforced Glass
 tile.signalindustries.reinforced.glass.desc=Does not shatter when broken.
 
 
-tile.signalindustries.prototype.conduit.name=Prototype Energy Conduit
+tile.signalindustries.prototype.conduit.name=Prototype Signalum Conduit
 tile.signalindustries.prototype.conduit.desc=Transfers [Signalum Energy].
-tile.signalindustries.basic.conduit.name=Basic Energy Conduit
+tile.signalindustries.basic.conduit.name=Basic Signalum Conduit
 tile.signalindustries.basic.conduit.desc=Transfers [Signalum Energy].
-tile.signalindustries.reinforced.conduit.name=Reinforced Energy Conduit
+tile.signalindustries.reinforced.conduit.name=Reinforced Signalum Conduit
 tile.signalindustries.reinforced.conduit.desc=Transfers [Signalum Energy].
-tile.signalindustries.awakened.conduit.name=Awakened Energy Conduit
+tile.signalindustries.awakened.conduit.name=Awakened Signalum Conduit
 tile.signalindustries.awakened.conduit.desc=Transfers [Signalum Energy].
+
+tile.signalindustries.basic.conduit.catalyst.name=Basic Universal Energy Conduit
+tile.signalindustries.basic.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
+tile.signalindustries.reinforced.conduit.catalyst.name=Reinforced Universal Energy Conduit
+tile.signalindustries.reinforced.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
+tile.signalindustries.awakened.conduit.catalyst.name=Awakened Universal Energy Conduit
+tile.signalindustries.awakened.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
 
 tile.signalindustries.prototype.conduit.fluid.name=Prototype Fluid Conduit
 tile.signalindustries.prototype.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
@@ -170,6 +177,9 @@ tile.signalindustries.basic.conduit.item.restrict.name=Basic Restrict Item Condu
 tile.signalindustries.basic.conduit.item.restrict.desc=Transfers items faster. Can have some of its directions blocked off preventing incoming items from going into that direction.
 tile.signalindustries.basic.conduit.item.sensor.name=Basic Sensor Item Conduit
 tile.signalindustries.basic.conduit.item.sensor.desc=Transfers items faster. Emits a redstone signal depending on what items pass through it.
+
+tile.signalindustries.reinforced.conduit.multi.name=Multi Conduit Frame
+tile.signalindustries.reinforced.conduit.multi.desc=Allows you to place up to 4 of any conduit into the space of one block!
 
 tile.signalindustries.prototype.inserter.name=Prototype Inserter
 tile.signalindustries.prototype.inserter.desc=Picks up items from the ground and inserts them into item conduits.
@@ -393,7 +403,7 @@ tile.signalindustries.basic.booster.name=Redstone Booster
 tile.signalindustries.basic.booster.desc=Crude device that tries to speed up other machines using [Redstone]. But maybe there's a material better suited for it?
 tile.signalindustries.reinforced.booster.name=Dilithium Booster
 tile.signalindustries.reinforced.booster.desc=Speeds up an adjacent machine that it points to using [Dilithium].
-tile.signalindustries.awakened.booster.name=Awakened Accelerator
+tile.signalindustries.awakened.booster.name=Awakened Dilithium Overbooster
 tile.signalindustries.awakened.booster.desc=Speeds up an adjacent machine that it points to significantly.
 tile.signalindustries.dilithiumRail.name=Dilithium Rail
 tile.signalindustries.dilithiumRail.desc=Hyperspeed!

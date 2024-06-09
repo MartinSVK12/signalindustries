@@ -29,8 +29,10 @@ public class ConduitStateInterpreter extends MetaStateInterpreter {
                         TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
                         if(neighbouringTile instanceof IFluidInventory){
                             show = true;
+                        } else if (neighbouringBlock.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
+                            show = true;
                         }
-                    } else if (neighbouringBlock.hasTag(SignalIndustries.ENERGY_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
+                    } else if (neighbouringBlock.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
                         show = true;
                     }
                 }

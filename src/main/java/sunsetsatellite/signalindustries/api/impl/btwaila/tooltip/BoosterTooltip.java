@@ -36,7 +36,7 @@ public class BoosterTooltip extends SIBaseTooltip<TileEntityBooster> {
             options.setForegroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("signalindustries:block/dilithium_crystal_block")));
         }
         c.drawProgressBarTextureWithText(tile.progressTicks,tile.progressMaxTicks,options,0);
-        drawFluids(tile,c);
+        drawFluids(tile,c,false);
         c.drawInventory(tile, 0);
     }
 

@@ -9,7 +9,7 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 
-public class TileEntityFluidConduit extends TileEntityFluidPipe {
+public class TileEntityFluidConduit extends TileEntityFluidPipe{
     public String getInvName() {
         return "Fluid Conduit";
     }

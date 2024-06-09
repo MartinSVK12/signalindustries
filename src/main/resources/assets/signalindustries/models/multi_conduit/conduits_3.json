@@ -1,0 +1,19 @@
+{
+	"credit": "Made with Blockbench",
+	"elements": [
+		{
+			"name": "conduit",
+			"from": [8, 2, 0],
+			"to": [14, 8, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [5, 5, 11, 11], "texture": "#c3"},
+				"east": {"uv": [0, 5, 5, 11], "texture": "#c3"},
+				"south": {"uv": [5, 5, 11, 11], "texture": "#c3"},
+				"west": {"uv": [11, 5, 16, 11], "texture": "#c3"},
+				"up": {"uv": [5, 0, 11, 5], "texture": "#c3"},
+				"down": {"uv": [5, 11, 11, 16], "texture": "#c3"}
+			}
+		}
+	]
+}

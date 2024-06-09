@@ -275,12 +275,12 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     }
 
     @Override
-    public void readFromNBT(CompoundTag nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
-        fuelBurnTicks = nBTTagCompound1.getShort("BurnTime");
-        progressTicks = nBTTagCompound1.getShort("ProcessTime");
-        progressMaxTicks = nBTTagCompound1.getInteger("MaxProcessTime");
-        fuelMaxBurnTicks = nBTTagCompound1.getShort("MaxBurnTime");
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        fuelBurnTicks = tag.getShort("BurnTime");
+        progressTicks = tag.getShort("ProcessTime");
+        progressMaxTicks = tag.getInteger("MaxProcessTime");
+        fuelMaxBurnTicks = tag.getShort("MaxBurnTime");
 
     }
 

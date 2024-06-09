@@ -7,17 +7,15 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.gui.GuiFluidIOConfig;
 import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
 import sunsetsatellite.signalindustries.gui.GuiSensorPipeConfig;
-import sunsetsatellite.signalindustries.inventories.TileEntityConduit;
+import sunsetsatellite.catalyst.core.util.IConduit;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
+import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -26,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class BlockItemConduit extends BlockContainerTiered {
+public class BlockItemConduit extends BlockContainerTiered implements IConduit {
 
     public PipeType type;
 
@@ -114,5 +112,10 @@ public class BlockItemConduit extends BlockContainerTiered {
     @Override
     public boolean renderAsNormalBlock() {
         return false;
+    }
+
+    @Override
+    public ConduitCapability getConduitCapability() {
+        return ConduitCapability.ITEM;
     }
 }

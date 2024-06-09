@@ -42,9 +42,9 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     }
 
     @Override
-    public void readFromNBT(CompoundTag nBTTagCompound1) {
-        super.readFromNBT(nBTTagCompound1);
-        recipeSelector = nBTTagCompound1.getInteger("SelectedRecipe");
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        recipeSelector = tag.getInteger("SelectedRecipe");
     }
 
     @Override

@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:conduit/template_conduit_all",
+  "textures": {
+    "conduit": "signalindustries:block/catalyst_energy_conduit_awakened"
+  }
+}

@@ -35,7 +35,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
                 .setBackgroundOptions(new TextureOptions(0,TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                 .setText("Progress: ");
         c.drawProgressBarTextureWithText(tile.progressTicks,tile.progressMaxTicks,options,0);
-        drawFluids(tile,c);
+        drawFluids(tile,c,true);
         c.drawInventory(tile, 0);
     }
 

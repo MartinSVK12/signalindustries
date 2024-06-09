@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:multi_conduit/conduits_4",
+  "textures": {
+    "c4": "signalindustries:block/fluid_conduit_prototype"
+  }
+}

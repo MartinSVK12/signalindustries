@@ -1,0 +1,6 @@
+{
+  "parent": "signalindustries:multi_conduit/conduits_3",
+  "textures": {
+    "c3": "retrostorage:block/block_cable"
+  }
+}

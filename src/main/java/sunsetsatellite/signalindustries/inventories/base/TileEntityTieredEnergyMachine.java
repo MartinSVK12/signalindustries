@@ -55,10 +55,10 @@ public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMach
     }
 
     @Override
-    public void readFromNBT(CompoundTag CompoundTag) {
-        energy = CompoundTag.getInteger("energy");
-        capacity = CompoundTag.getInteger("capacity");
-        super.readFromNBT(CompoundTag);
+    public void readFromNBT(CompoundTag tag) {
+        energy = tag.getInteger("energy");
+        capacity = tag.getInteger("capacity");
+        super.readFromNBT(tag);
     }
 
     @Override

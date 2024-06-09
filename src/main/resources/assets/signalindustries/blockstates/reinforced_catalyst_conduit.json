@@ -1,0 +1,57 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_base"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_up"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_down"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_north"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_east"
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_south"
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "signalindustries:conduit/catalyst/reinforced/conduit_west"
+      },
+      "when": {
+        "west": "true"
+      }
+    }
+  ]
+}

@@ -5,7 +5,6 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
@@ -16,7 +15,7 @@ public class BlockIgnitor extends BlockContainerTiered {
     public BlockIgnitor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
-        withTags(SignalIndustries.ENERGY_CONDUITS_CONNECT);
+        withTags(SignalIndustries.SIGNALUM_CONDUITS_CONNECT);
     }
 
     @Override
