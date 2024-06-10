@@ -60,11 +60,6 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
                 if(stabilizer instanceof TileEntityStabilizer){
                     ((TileEntityStabilizer) stabilizer).connectedTo = null;
                 }
-
-                TileEntity tile2 = dir.getTileEntity(world, tile);
-                if (tile2 instanceof TileEntityFluidPipe) {
-                    tile.unpressurizePipes((TileEntityFluidPipe) tile2, new ArrayList<>());
-                }
             }
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {

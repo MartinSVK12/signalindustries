@@ -1089,6 +1089,8 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(block ->
                         new DFBlockModelBuilder(MOD_ID)
                                 .setBlockModel("signalum_dynamo.json")
+                                .setBlockState("dynamo.json")
+                                .setMetaStateInterpreter(new RotatableStateInterpreter())
                                 .build(block))
                 .build(new BlockSignalumDynamo("basic.dynamo", config.getInt("BlockIDs.basicSignalumDynamo"), Tier.BASIC, Material.metal));
         basicProgrammer = new BlockBuilder(MOD_ID)

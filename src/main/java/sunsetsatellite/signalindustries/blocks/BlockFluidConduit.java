@@ -41,7 +41,6 @@ public class BlockFluidConduit extends BlockContainerTiered implements IConduit 
                 Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: Empty");
             }
             Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Capacity: "+tile.fluidCapacity[0]);
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Is pressurized? "+tile.isPressurized);
             return false;
         }
         return false;

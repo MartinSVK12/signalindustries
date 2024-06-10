@@ -53,12 +53,7 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
         TileEntitySignalumDynamo tile = (TileEntitySignalumDynamo) world.getBlockTileEntity(x, y, z);
         if (tile != null) {
-            for (Direction dir : Direction.values()) {
-                TileEntity tile2 = dir.getTileEntity(world, tile);
-                if (tile2 instanceof TileEntityFluidPipe) {
-                    tile.unpressurizePipes((TileEntityFluidPipe) tile2, new ArrayList<>());
-                }
-            }
+           
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.getStackInSlot(l);
