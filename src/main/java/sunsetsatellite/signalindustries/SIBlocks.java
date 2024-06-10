@@ -959,12 +959,14 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(3)
                 .setTextures("signalindustries:block/external_io_blank")
+                .setBlockModel(BlockModelExtendedIO::new)
                 .build(new BlockExternalIO("basic.externalIO", config.getInt("BlockIDs.externalIo"), Tier.BASIC, Material.metal));
         reinforcedExternalIo = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1)
                 .setResistance(3)
                 .setTextures("signalindustries:block/reinforced_external_io_blank")
+                .setBlockModel(BlockModelExtendedIO::new)
                 .build(new BlockExternalIO("reinforced.externalIO", config.getInt("BlockIDs.reinforcedExternalIo"), Tier.REINFORCED, Material.metal));
         reinforcedCentrifuge = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)

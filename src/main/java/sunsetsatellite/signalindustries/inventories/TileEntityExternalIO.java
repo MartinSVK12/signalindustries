@@ -83,8 +83,8 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         /*if(externalTile != null) {
             externalTile.writeToNBT(CompoundTag1);
         }*/
-        super.writeToNBT(tag);
         tag.put("externalPosition",externalTilePos);
+        super.writeToNBT(tag);
     }
 
     @Override

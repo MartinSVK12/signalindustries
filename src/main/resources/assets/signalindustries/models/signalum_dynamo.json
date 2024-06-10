@@ -5,7 +5,8 @@
 		"1": "signalindustries:block/steel_block",
 		"2": "signalindustries:block/saturated_crystal_block",
 		"3": "signalindustries:block/empty_crystal_block",
-		"4": "signalindustries:block/dynamo_tex_1"
+		"4": "signalindustries:block/dynamo_tex_1",
+		"particle": "#0"
 	},
 	"elements": [
 		{

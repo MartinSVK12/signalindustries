@@ -44,4 +44,43 @@ public class BlockExternalIO extends BlockContainerTiered {
             return true;
         }
     }
+
+    /*
+        @Override
+    public int getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
+        TileEntityExternalIO tile = (TileEntityExternalIO) blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y,z);
+        int index = Sides.orientationLookUpHorizontal[6 * meta + side.getId()];
+        Connection connection = tile.itemConnections.get(Direction.getDirectionFromSide(side.getId()));
+        if(tier == Tier.REINFORCED){
+            if(connection == Connection.INPUT){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"reinforced_external_io_input.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else if(connection == Connection.OUTPUT){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"reinforced_external_io_output.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else if(connection == Connection.BOTH){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"reinforced_external_io_both.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else {
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"reinforced_external_io_blank.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            }
+        } else {
+            if(connection == Connection.INPUT){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"external_io_input.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else if(connection == Connection.OUTPUT){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"external_io_output.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else if(connection == Connection.BOTH){
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"external_io_both.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            } else {
+                int[] t = TextureHelper.getOrCreateBlockTexture(SignalIndustries.MOD_ID,"external_io_blank.png");
+                return this.atlasIndices[index] = Block.texCoordToIndex(t[0],t[1]);
+            }
+        }
+    }
+     */
 }
