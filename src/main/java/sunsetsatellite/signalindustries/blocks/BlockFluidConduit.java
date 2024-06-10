@@ -8,12 +8,12 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.catalyst.core.util.IConduit;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidConduit;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockFluidConduit extends BlockContainerTiered implements IConduit {
+public class BlockFluidConduit extends BlockContainerTiered implements IConduitBlock {
 
     public BlockFluidConduit(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);

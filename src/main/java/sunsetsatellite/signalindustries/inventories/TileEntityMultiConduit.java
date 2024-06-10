@@ -26,7 +26,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IEnergy, IEnergySource, IEnergySink {
-    public IConduit[] conduits = new IConduit[4];
+    public IConduitBlock[] conduits = new IConduitBlock[4];
     public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) SignalIndustries.mapOf(Direction.values(),SignalIndustries.arrayFill(new Integer[Direction.values().length],-1));
 
     //fluids
@@ -60,7 +60,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
             acceptedFluids.clear();
         }
         for (int i = 0; i < conduits.length; i++) {
-            IConduit conduit = conduits[i];
+            IConduitBlock conduit = conduits[i];
             if (conduit != null) {
                rememberTicks++;
                if(rememberTicks >= maxRememberTicks){
@@ -143,9 +143,9 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         }
     }
 
-    public boolean addConduit(IConduit newConduit){
+    public boolean addConduit(IConduitBlock newConduit){
         for (int i = 0; i < conduits.length; i++) {
-            IConduit conduit = conduits[i];
+            IConduitBlock conduit = conduits[i];
             if(newConduit.getConduitCapability() == ConduitCapability.NETWORK && conduit != null && conduit.getConduitCapability() == ConduitCapability.NETWORK){
                 return false;
             }
@@ -194,7 +194,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 
     public int getAmountOfConduits(){
         int n = 0;
-        for (IConduit conduit : conduits) {
+        for (IConduitBlock conduit : conduits) {
             if (conduit != null) {
                 n++;
             }
@@ -216,7 +216,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public void writeToNBT(CompoundTag tag) {
         ListTag conduitList = new ListTag();
         CompoundTag conduitConnectionsTag = new CompoundTag();
-        for (IConduit conduit : conduits) {
+        for (IConduitBlock conduit : conduits) {
             if(conduit == null) continue;
             Block block = (Block) conduit;
             conduitList.addTag(new IntTag(block.id));
@@ -241,7 +241,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     @Override
     public void readFromNBT(CompoundTag tag) {
         ListTag conduitList = tag.getList("conduits");
-        conduitList.forEach((C)->addConduit((IConduit) Block.getBlock((int) C.getValue())));
+        conduitList.forEach((C)->addConduit((IConduitBlock) Block.getBlock((int) C.getValue())));
 
         maxReceive = tag.getInteger("maxReceive");
         maxProvide = tag.getInteger("maxProvide");
@@ -264,7 +264,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 
     @Override
     public boolean supports(ConduitCapability capability) {
-        for (IConduit conduit : conduits) {
+        for (IConduitBlock conduit : conduits) {
             if(conduit == null) continue;
             if(conduit.getConduitCapability() == capability){
                 return true;

@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiMultiConduitConfig;
-import sunsetsatellite.catalyst.core.util.IConduit;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -45,7 +45,7 @@ public class BlockMultiConduit extends BlockContainerTiered {
         TileEntity tile = world.getBlockTileEntity(x,y,z);
         if(tile instanceof TileEntityMultiConduit) {
             TileEntityMultiConduit multiConduit = (TileEntityMultiConduit) tile;
-            for (IConduit conduit : multiConduit.conduits) {
+            for (IConduitBlock conduit : multiConduit.conduits) {
                 if(conduit == null) continue;
                 Random random = new Random();
                 float xr = random.nextFloat() * 0.8F + 0.1F;
@@ -68,8 +68,8 @@ public class BlockMultiConduit extends BlockContainerTiered {
         if(player.getCurrentEquippedItem() != null){
             if(player.getCurrentEquippedItem().itemID < 16384){
                 Block block = Block.getBlock(player.getCurrentEquippedItem().itemID);
-                if(block instanceof IConduit){
-                    IConduit conduit = (IConduit) block;
+                if(block instanceof IConduitBlock){
+                    IConduitBlock conduit = (IConduitBlock) block;
                     TileEntity tile = world.getBlockTileEntity(x,y,z);
                     if(tile instanceof TileEntityMultiConduit){
                         TileEntityMultiConduit multiConduit = (TileEntityMultiConduit) tile;
@@ -87,7 +87,7 @@ public class BlockMultiConduit extends BlockContainerTiered {
                 Vec3i pos = new Vec3i(x,y,z);
                 for (Direction dir : Direction.values()) {
                     Block connectedBlock = dir.getBlock(world, pos);
-                    if(connectedBlock instanceof IConduit){
+                    if(connectedBlock instanceof IConduitBlock){
                         normalConduitsConnected = true;
                         break;
                     }

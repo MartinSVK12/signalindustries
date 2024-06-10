@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.HologramWorld;
 import sunsetsatellite.signalindustries.blocks.BlockMultiConduit;
-import sunsetsatellite.catalyst.core.util.IConduit;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityMultiConduit;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
 
@@ -35,7 +35,7 @@ public class RenderFluidInMultiConduit extends TileEntityRenderer<TileEntityMult
                     break;
                 }
             }
-            if(connectedBlock instanceof IConduit){
+            if(connectedBlock instanceof IConduitBlock){
                 split = true;
                 break;
             }
@@ -69,9 +69,9 @@ public class RenderFluidInMultiConduit extends TileEntityRenderer<TileEntityMult
 
         };
 
-        IConduit[] conduits = tile.conduits;
+        IConduitBlock[] conduits = tile.conduits;
         for (int i = 0; i < conduits.length; i++) {
-            IConduit conduit = conduits[i];
+            IConduitBlock conduit = conduits[i];
             if(conduit != null){
                 if(conduit.getConduitCapability() == ConduitCapability.SIGNALUM || conduit.getConduitCapability() == ConduitCapability.FLUID){
                     if(tile.fluidContents[i] != null){

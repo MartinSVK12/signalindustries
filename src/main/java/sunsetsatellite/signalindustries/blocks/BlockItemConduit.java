@@ -13,7 +13,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
 import sunsetsatellite.signalindustries.gui.GuiSensorPipeConfig;
-import sunsetsatellite.catalyst.core.util.IConduit;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.PipeMode;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class BlockItemConduit extends BlockContainerTiered implements IConduit {
+public class BlockItemConduit extends BlockContainerTiered implements IConduitBlock {
 
     public PipeType type;
 

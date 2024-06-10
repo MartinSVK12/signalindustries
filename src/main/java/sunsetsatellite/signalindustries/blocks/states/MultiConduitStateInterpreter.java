@@ -8,7 +8,7 @@ import org.useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.blocks.BlockMultiConduit;
-import sunsetsatellite.catalyst.core.util.IConduit;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityMultiConduit;
 
@@ -42,7 +42,7 @@ public class MultiConduitStateInterpreter extends MetaStateInterpreter {
                         break;
                     }
                 }
-                if(connectedBlock instanceof IConduit){
+                if(connectedBlock instanceof IConduitBlock){
                     split = true;
                     break;
                 }

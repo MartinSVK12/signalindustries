@@ -5647,5 +5647,120 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/multi_conduit_frame",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " P ",
+      "P P",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit.multi",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_universal_energy_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PGP",
+      "RRR",
+      "PGP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "tile.block.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.conduit.catalyst",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_universal_energy_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RGR",
+      "SCS",
+      "RGR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.catalyst",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit.catalyst",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

@@ -1,21 +1,18 @@
 package sunsetsatellite.signalindustries.blocks;
 
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
-import sunsetsatellite.catalyst.core.util.IConduit;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityCatalystConduit;
-import sunsetsatellite.signalindustries.inventories.TileEntityConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockCatalystConduit extends BlockContainerTiered implements IConduit {
+public class BlockCatalystConduit extends BlockContainerTiered implements IConduitBlock {
 
     public BlockCatalystConduit(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
