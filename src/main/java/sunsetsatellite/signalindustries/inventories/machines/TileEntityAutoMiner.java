@@ -3,8 +3,11 @@ package sunsetsatellite.signalindustries.inventories.machines;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityChest;
+import net.minecraft.core.block.material.Material;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.Chunk;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
@@ -18,7 +21,6 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 
 public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements IBoostable {
 
-    //TODO: don't mine out blocks above the orange outline
     //TODO: conduit output is broken
 
     public Vec3i from = new Vec3i();
@@ -47,7 +49,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             }
 
             current.x--;
-            current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
+            current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
             if(current.y < 1){
                 current.y = y+4;
                 //workTimer.pause();
@@ -55,10 +57,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             if(current.x < x-16){
                 current.x = x-1;
                 current.z++;
-                current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
+                current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
                 if(current.z > z+16){
                     current.z = z+1;
-                    current.y = worldObj.findTopSolidNonLiquidBlock(current.x, current.z);
+                    current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
                 }
             }
 
@@ -158,6 +160,22 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             }
             workTimer.max = (int) (progressMaxTicks / speedMultiplier);
         }
+    }
+
+    public int findTopSolidNonLiquidBlockLimited(World world,  int x, int z, int yLimit) {
+        Chunk chunk = world.getChunkFromBlockCoords(x, z);
+        int k = Math.min(yLimit,world.getHeightBlocks() - 1);
+        x &= 15;
+
+        for(z &= 15; k > 0; --k) {
+            int l = chunk.getBlockID(x, k, z);
+            Material material = l != 0 ? Block.blocksList[l].blockMaterial : Material.air;
+            if (material.blocksMotion()) {
+                return k + 1;
+            }
+        }
+
+        return -1;
     }
 
     @Override

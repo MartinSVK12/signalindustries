@@ -112,7 +112,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             //current lines
             renderLineBetweenTwoPoints(tx, ty, tz, cx, ty, tz, 1, 0, 0, 1, 8, x, y + 4, z + (cz - tz));
             renderLineBetweenTwoPoints(tx, ty, cz, tx, ty, tz, 0, 0, 1, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, cy - 3, tz, 0, 1, 0, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, cy - 5, tz, 0, 1, 0, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
         }
     }
 

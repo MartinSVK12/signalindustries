@@ -72,7 +72,7 @@ public class BlockSIFluidTank extends BlockContainerTiered {
                                     }
                                 }
                             } else if (equippedItem instanceof IItemFluidContainer) {
-
+                                //TODO:
                             }
                         }
                     } else if(!(CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem).isEmpty())){
@@ -87,7 +87,7 @@ public class BlockSIFluidTank extends BlockContainerTiered {
                                     }
                                 }
                             } else if (equippedItem instanceof IItemFluidContainer) {
-
+                                //TODO:
                             }
                         }
                     }
