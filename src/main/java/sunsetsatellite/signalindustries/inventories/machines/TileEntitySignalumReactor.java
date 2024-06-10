@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyConnector;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntitySignalumReactor extends TileEntityTiered implements IMultiblock, IStabilizable {
+public class TileEntitySignalumReactor extends TileEntityTiered implements IMultiblock, IStabilizable, IActiveForm {
     public Multiblock multiblock;
     public List<TileEntityStabilizer> stabilizers = new ArrayList<>();
     public List<TileEntityIgnitor> ignitors = new ArrayList<>();
@@ -57,6 +58,11 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     @Override
     public boolean isReady() {
         return state == State.IGNITING;
+    }
+
+    @Override
+    public boolean isBurning() {
+        return isActive();
     }
 
     public enum State {
