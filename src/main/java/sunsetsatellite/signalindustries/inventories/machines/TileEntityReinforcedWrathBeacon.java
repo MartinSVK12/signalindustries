@@ -16,6 +16,7 @@ import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
+import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
@@ -213,7 +214,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             if(Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem() != null && Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().getItem().id == SIItems.infernalEye.id){
                 Minecraft.getMinecraft(Minecraft.class).thePlayer.inventory.getCurrentItem().consumeItem(Minecraft.getMinecraft(Minecraft.class).thePlayer);
                 for (EntityPlayer player : worldObj.players) {
-                    player.sendMessage("event.signalindustries.reinforcedWrathBeaconActivated");
+                    player.sendTranslatedChatMessage("event.signalindustries.reinforcedWrathBeaconActivated");
                 }
                 active = true;
                 player = activator;

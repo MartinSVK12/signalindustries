@@ -4,6 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiRenderItem;
 import net.minecraft.client.render.ItemRenderer;
 import net.minecraft.client.render.Lighting;
+import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
@@ -12,6 +16,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAssembler;
 
 public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAssembler> {
@@ -85,7 +90,20 @@ public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAs
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+            ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(stack.getItem());
+            ((IColorOverride) itemModel).enableFullbright();
+            ((IColorOverride) getFontRenderer()).enableFullbright();
+            if(stack.itemID < 16384){
+                BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.getBlock(stack.itemID));
+                ((IColorOverride) blockModel).enableFullbright();
+            }
             itemRenderer.render(stack, x, y);
+            ((IColorOverride) itemModel).disableFullbright();
+            if(stack.itemID < 16384){
+                BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.getBlock(stack.itemID));
+                ((IColorOverride) blockModel).disableFullbright();
+            }
+            ((IColorOverride) getFontRenderer()).disableFullbright();
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glPopMatrix();

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import net.minecraft.client.render.block.model.BlockModelFluid;
 import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
+import net.minecraft.client.render.block.model.BlockModelStandard;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
@@ -296,7 +297,7 @@ public class SIBlocks extends DataInitializer {
                                 new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/energy/awakened/conduit_all.json")
                                         .setBlockState("awakened_conduit.json")
-                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
                                         .build(block)
                 )
                 .build(new BlockConduit("awakened.conduit", config.getInt("BlockIDs.awakenedConduit"), Tier.AWAKENED, Material.glass));
@@ -785,6 +786,10 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.METAL)
                 .setTextures("signalindustries:block/basic_blank")
                 .setSideTextures("signalindustries:block/wrath_beacon")
+                .setBlockModel((block)->new BlockModelMachine(block,Tier.BASIC)
+                        .withDefaultSideTextures("wrath_beacon")
+                        .withActiveSideTextures("wrath_beacon_active")
+                )
                 .build(new BlockWrathBeacon("basic.wrathBeacon", config.getInt("BlockIDs.basicWrathBeacon"), Tier.BASIC, Material.metal));
         reinforcedWrathBeacon = new BlockBuilder(MOD_ID)
                 .setHardness(2)
@@ -792,6 +797,10 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.METAL)
                 .setTextures("signalindustries:block/reinforced_blank")
                 .setSideTextures("signalindustries:block/reinforced_wrath_beacon")
+                .setBlockModel((block)->new BlockModelMachine(block,Tier.REINFORCED)
+                        .withDefaultSideTextures("reinforced_wrath_beacon")
+                        .withActiveSideTextures("reinforced_wrath_beacon_active")
+                )
                 .build(new BlockWrathBeacon("reinforced.wrathBeacon", config.getInt("BlockIDs.reinforcedWrathBeacon"), Tier.REINFORCED, Material.metal));
         dimensionalAnchor = new BlockBuilder(MOD_ID)
                 .setHardness(1)
@@ -1224,6 +1233,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(2)
                 .setResistance(1200)
                 .setLuminance(10)
+                .setBlockModel(block -> new BlockModelStandard<>(block).withOverbrightTexture("signalindustries:block/glowing_obsidian_overlay"))
                 .build(new BlockGlowingObsidian("glowingObsidian", config.getInt("BlockIDs.glowingObsidian"),Material.stone));
 
         uvLamp = new BlockBuilder(MOD_ID)
@@ -1231,6 +1241,7 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1)
                 .setResistance(3)
+                .setBlockModel(BlockModelUVLamp::new)
                 .build(new BlockUVLamp("uvLamp", config.getInt("BlockIDs.uvLamp"),Material.metal));
 
             /*public static final Block recipeMaker = new BlockBuilder(MOD_ID)

@@ -88,47 +88,8 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
             Connection connection = e.getValue();
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if (tile instanceof TileEntityFluidPipe) {
-                pressurizePipes((TileEntityFluidPipe) tile, new ArrayList<>());
                 moveFluids(dir, (TileEntityFluidPipe) tile);
                 ((TileEntityFluidPipe) tile).rememberTicks = 100;
-            }
-        }
-    }
-
-    public void pressurizePipes(TileEntityFluidPipe pipe, ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                pressurizePipes((TileEntityFluidPipe) tile,already);
-            }
-        }
-    }
-
-    public void unpressurizePipes(TileEntityFluidPipe pipe,ArrayList<HashMap<String,Integer>> already){
-        for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,pipe);
-            if (tile instanceof TileEntityFluidPipe) {
-                for (HashMap<String, Integer> V2 : already) {
-                    if (V2.get("x") == tile.x && V2.get("y") == tile.y && V2.get("z") == tile.z) {
-                        return;
-                    }
-                }
-                HashMap<String,Integer> list = new HashMap<>();
-                list.put("x",tile.x);
-                list.put("y",tile.y);
-                list.put("z",tile.z);
-                already.add(list);
-                unpressurizePipes((TileEntityFluidPipe) tile,already);
             }
         }
     }

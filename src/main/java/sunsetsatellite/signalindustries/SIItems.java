@@ -20,6 +20,7 @@ import static sunsetsatellite.signalindustries.SignalIndustries.*;
 public class SIItems extends DataInitializer {
     public static Item signalumCrystalEmpty;
     public static Item signalumCrystal;
+    public static Item infiniteSignalumCrystal;
     public static Item volatileSignalumCrystal;
     public static Item rawSignalumCrystal;
     public static Item awakenedSignalumCrystal;
@@ -167,12 +168,17 @@ public class SIItems extends DataInitializer {
                 .setIcon("signalindustries:item/signalumcrystalempty")
                 .setStackSize(1)
                 .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
-                .build(new ItemSignalumCrystal("signalumCrystalEmpty", config.getInt("ItemIDs.signalumCrystalEmpty")));
+                .build(new ItemSignalumCrystal("signalumCrystalEmpty", config.getInt("ItemIDs.signalumCrystalEmpty"),false));
         signalumCrystal = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/signalumcrystal")
                 .setStackSize(1)
                 .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
-                .build(new ItemSignalumCrystal("signalumCrystal", config.getInt("ItemIDs.signalumCrystal")));
+                .build(new ItemSignalumCrystal("signalumCrystal", config.getInt("ItemIDs.signalumCrystal"),false));
+        infiniteSignalumCrystal = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/awakenedsignalumcrystal")
+                .setStackSize(1)
+                .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
+                .build(new ItemSignalumCrystal("infiniteSignalumCrystal", config.getInt("ItemIDs.infiniteSignalumCrystal"),true));
         volatileSignalumCrystal = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/volatile_signalum_crystal")
                 .setStackSize(4)

@@ -27,7 +27,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                 if(stack != null && stack.liquid != null){
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.liquid);
                     ProgressBarOptions options = new ProgressBarOptions(
-                            0,
+                            152,
                             I18n.getInstance().translateKey(stack.getFluidName()+".name")
                                     .replace("Flowing ","")
                                     .replace("Still ","")
@@ -39,7 +39,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
                 } else {
-                    ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
+                    ProgressBarOptions options = new ProgressBarOptions().setBoxWidth(152).setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
                     c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }
@@ -53,7 +53,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                 } else if (stack != null && (stack.liquid == SIBlocks.energyFlowing || !collapse)){
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.liquid);
                     ProgressBarOptions options = new ProgressBarOptions(
-                            0,
+                            152,
                             I18n.getInstance().translateKey(stack.getFluidName()+".name")
                                     .replace("Flowing ","")
                                     .replace("Still ","")
@@ -64,8 +64,8 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
-                } else {
-                    ProgressBarOptions options = new ProgressBarOptions().setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
+                } else if(!collapse) {
+                    ProgressBarOptions options = new ProgressBarOptions().setBoxWidth(152).setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
                     c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }

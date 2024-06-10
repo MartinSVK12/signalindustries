@@ -20,8 +20,11 @@ import sunsetsatellite.signalindustries.SIItems;
 
 public class ItemSignalumCrystal extends Item implements IItemFluidContainer, ICustomDescription {
 
-    public ItemSignalumCrystal(String name, int id) {
+    public final boolean infinite;
+
+    public ItemSignalumCrystal(String name, int id, boolean infinite) {
         super(name, id);
+        this.infinite = infinite;
     }
 
     @Override
@@ -39,11 +42,13 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
 
     @Override
     public int getCapacity(ItemStack stack) {
+        if(infinite) return Integer.MAX_VALUE;
         return stack.getData().getInteger("size")*1000;
     }
 
     @Override
     public int getRemainingCapacity(ItemStack stack) {
+        if(infinite) return Integer.MAX_VALUE;
         return (stack.getData().getInteger("size")*1000)-stack.getData().getInteger("saturation");
     }
 
@@ -54,6 +59,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
 
     @Override
     public boolean canDrain(ItemStack stack) {
+        if(infinite) return true;
         return getCapacity(stack) > getRemainingCapacity(stack) && stack.getItem().id == SIItems.signalumCrystal.id;
     }
 
@@ -70,9 +76,11 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("saturation");
+            if(infinite) saturation = Integer.MAX_VALUE;
             int amount = fluidStack.amount;
             int size = stack.getData().getInteger("size");
             ItemStack crystal = new ItemStack(SIItems.signalumCrystal,1);
+            if(infinite) crystal = new ItemStack(SIItems.infiniteSignalumCrystal);
             if(remaining == 0){
                 return null;
             }
@@ -90,7 +98,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 fluidStack.amount = 0;
                 CompoundTag data = new CompoundTag();
                 data.putInt("size",size);
-                data.putInt("saturation",saturation + amount);
+                if(!infinite) data.putInt("saturation",saturation + amount);
                 crystal.setData(data);
                 return crystal;
             }
@@ -116,16 +124,18 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         if(fluidStack.getLiquid() == SIBlocks.energyFlowing){
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("saturation");
+            if(infinite) saturation = Integer.MAX_VALUE;
             int amount = Math.min(fluidStack.amount,maxAmount);
             int size = stack.getData().getInteger("size");
             ItemStack crystal = new ItemStack(SIItems.signalumCrystal,1);
+            if(infinite) crystal = new ItemStack(SIItems.infiniteSignalumCrystal);
             if(remaining == 0) return null;
             int result = Math.min(amount,remaining);
             if(result == 0) return null;
             fluidStack.amount -= result;
             CompoundTag data = new CompoundTag();
             data.putInt("size",size);
-            data.putInt("saturation",saturation+result);
+            if(!infinite) data.putInt("saturation",saturation+result);
             crystal.setData(data);
             return crystal;
         }
@@ -140,6 +150,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     @Override
     public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {
         int saturation = stack.getData().getInteger("saturation");
+        if(infinite) saturation = Integer.MAX_VALUE;
         int capacity = tile.getFluidCapacityForSlot(slot.slotNumber);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
@@ -162,12 +173,12 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",remainder);
                 stack.getData().putInt("size",size);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
@@ -179,6 +190,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     @Override
     public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {
         int saturation = stack.getData().getInteger("saturation");
+        if(infinite) saturation = Integer.MAX_VALUE;
         int capacity = tile.getFluidCapacityForSlot(slot.slotNumber);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
@@ -201,12 +213,12 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",remainder);
                 stack.getData().putInt("size",size);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
@@ -218,6 +230,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     @Override
     public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {
         int saturation = stack.getData().getInteger("saturation");
+        if(infinite) saturation = Integer.MAX_VALUE;
         int capacity = inv.getFluidCapacityForSlot(slot.slotNumber);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
@@ -240,12 +253,12 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",remainder);
                 stack.getData().putInt("size",size);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.energyFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.energyFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
@@ -257,9 +270,13 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     @Override
     public String getDescription(ItemStack stack) {
         StringBuilder text = new StringBuilder();
-        text.append("Size: ").append(stack.getData().getInteger("size"));
-        if(stack.getItem().id == SIItems.signalumCrystal.id){
-            text.append(" | ").append("Saturation: ").append(stack.getData().getInteger("saturation"));
+        if(infinite){
+            text.append("Size: 1 | Saturation: Infinite");
+        } else {
+            text.append("Size: ").append(stack.getData().getInteger("size"));
+            if(stack.getItem().id == SIItems.signalumCrystal.id){
+                text.append(" | ").append("Saturation: ").append(stack.getData().getInteger("saturation"));
+            }
         }
         return text.toString();
     }
