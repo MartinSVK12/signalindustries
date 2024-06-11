@@ -149,7 +149,7 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
                     for (int j = 0; j < contents.length; j++) {
                         ItemStack itemContent = contents[j];
                         if (itemContent != null && itemContent.isItemEqual(inputStack)) {
-                            parallelAmount = Math.min(itemContent.stackSize,8);
+                            parallelAmount = Math.min(itemContent.stackSize,16);
                             itemContent.stackSize -= parallelAmount;
                             k++;
                             if (itemContent.stackSize <= 0) {

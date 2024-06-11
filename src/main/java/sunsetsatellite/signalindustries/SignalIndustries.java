@@ -204,12 +204,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final SuitBaseAbility boostAbility = new BoostAbility();
     public static final SuitBaseAbility projectileAbility = new ProjectileAbility();
 
-    public static final SignalIndustriesAchievementPage ACHIEVEMENTS = new SignalIndustriesAchievementPage();
+    public static SignalIndustriesAchievementPage ACHIEVEMENTS;
 
     @Override
     public void onInitialize() {
         new SIBlocks().init();
         new SIItems().init();
+        ACHIEVEMENTS = new SignalIndustriesAchievementPage();
         new SIAchievements().init();
         new SIWeather().init();
         new SIBiomes().init();
@@ -384,6 +385,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntitySignalumReactor.class, "Signalum Reactor", RenderSignalumReactor::new);
         EntityHelper.createSpecialTileEntity(TileEntityEnergyInjector.class, "Energy Injector", RenderEnergyInjector::new);
         EntityHelper.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class, "Reinforced Wrath Beacon", RenderReinforcedWrathBeacon::new);
+        EntityHelper.createSpecialTileEntity(TileEntityInductionSmelter.class,"Induction Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
@@ -542,6 +544,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     public static String key(String key){
         return MOD_ID+":"+key;
+    }
+
+    public static String langKey(String key){
+        return MOD_ID+"."+key;
     }
 
     public static <T> boolean listContains(List<T> list, T o, BiFunction<T,T,Boolean> equals){

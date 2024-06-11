@@ -72,33 +72,58 @@ public class BlockModelIgnitor extends BlockModelStandard<BlockIgnitor> {
         invertedActiveTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_inverted"));
 
         //wrong
-        /*readyOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_top_ready_overbright"));
-        readyOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_bottom_ready_overbright"));
-        readyOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright"));
-        readyOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright"));
-        readyOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright"));
-        readyOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright"));
+        readyOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/ignitor_8_overlay"));
+        readyOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/ignitor_4_overlay"));
+        readyOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/ignitor_5_overlay"));
+        readyOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/ignitor_5_overlay"));
+        readyOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/ignitor_5_overlay"));
+        readyOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/ignitor_5_overlay"));
 
-        activeOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_top_active_overbright"));
-        activeOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_bottom_active_overbright"));
-        activeOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright"));
-        activeOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright"));
-        activeOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright"));
-        activeOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright"));
+        activeOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/ignitor_7_overlay"));
+        activeOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/ignitor_3_overlay"));
+        activeOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/ignitor_1_overlay"));
+        activeOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/ignitor_1_overlay"));
+        activeOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/ignitor_1_overlay"));
+        activeOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/ignitor_1_overlay"));
 
-        invertedReadyOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_bottom_ready_overbright"));
-        invertedReadyOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_top_ready_overbright"));
-        invertedReadyOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright_inverted"));
-        invertedReadyOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright_inverted"));
-        invertedReadyOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright_inverted"));
-        invertedReadyOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_ready_overbright_inverted"));
+        invertedReadyOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/ignitor_4_overlay"));
+        invertedReadyOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/ignitor_8_overlay"));
+        invertedReadyOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/ignitor_6_overlay"));
+        invertedReadyOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/ignitor_6_overlay"));
+        invertedReadyOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/ignitor_6_overlay"));
+        invertedReadyOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/ignitor_6_overlay"));
 
-        invertedActiveOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_bottom_active_overbright"));
-        invertedActiveOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_top_active_overbright"));
-        invertedActiveOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright_inverted"));
-        invertedActiveOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright_inverted"));
-        invertedActiveOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright_inverted"));
-        invertedActiveOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_active_overbright_inverted"));*/
+        invertedActiveOverbrightTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/ignitor_3_overlay"));
+        invertedActiveOverbrightTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/ignitor_7_overlay"));
+        invertedActiveOverbrightTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/ignitor_2_overlay"));
+        invertedActiveOverbrightTextures.put(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/ignitor_2_overlay"));
+        invertedActiveOverbrightTextures.put(Side.EAST, TextureRegistry.getTexture("signalindustries:block/ignitor_2_overlay"));
+        invertedActiveOverbrightTextures.put(Side.WEST, TextureRegistry.getTexture("signalindustries:block/ignitor_2_overlay"));
+    }
+
+    @Override
+    public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int sideId) {
+        Side side = Side.getSideById(sideId);
+        TileEntity tile = blockAccess.getBlockTileEntity(x,y,z);
+        int meta = blockAccess.getBlockMetadata(x,y-1,z);
+        if(tile == null) return null;
+        if(tile instanceof TileEntityIgnitor){
+            TileEntityIgnitor ignitor = (TileEntityIgnitor) tile;
+            if(ignitor.isBurning()){
+                if(meta == 0 && blockAccess.getBlock(x,y-1,z) instanceof BlockIgnitor){
+                    return invertedActiveOverbrightTextures.get(side);
+                } else {
+                    return activeOverbrightTextures.get(side);
+                }
+            } else if (ignitor.isReady()) {
+                if(meta == 0 && blockAccess.getBlock(x,y-1,z) instanceof BlockIgnitor){
+                    return invertedReadyOverbrightTextures.get(side);
+                } else {
+                    return readyOverbrightTextures.get(side);
+                }
+            }
+        }
+        return null;
     }
 
     @Override

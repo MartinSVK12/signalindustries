@@ -420,7 +420,7 @@ tile.signalindustries.awakened.alloySmelter.name=Awakened Composite Forge Chambe
 tile.signalindustries.awakened.alloySmelter.desc=Fuses even the most resistant metals with heat surpassing that of cores of stars.
 
 tile.signalindustries.basic.inductionSmelter.name=Basic Induction Smelter
-tile.signalindustries.basic.inductionSmelter.desc=Smelts up to 8 items that a normal furnace can smelt in parallel.
+tile.signalindustries.basic.inductionSmelter.desc=Smelts up to 16 items that a normal furnace can smelt in parallel.
 tile.signalindustries.reinforced.inductionSmelter.name=Reinforced Induction Smelter
 tile.signalindustries.reinforced.inductionSmelter.desc=Smelts up to 16 items that a normal furnace can smelt in parallel at higher speed and efficiency.
 tile.signalindustries.awakened.inductionSmelter.name=Awakened Quark-Gluon Plasma Melter Controller
@@ -640,7 +640,7 @@ achievement.signalindustries.dimensional.desc=Discover crystallized reality in a
 achievement.signalindustries.boost=BOOST! BOOST! BOOST!
 achievement.signalindustries.boost.desc=Craft a Dilithium Booster to speed up your machines.
 achievement.signalindustries.horizons=New Horizons
-achievement.signalindustries.horizons.desc=Build your first multiblock.
+achievement.signalindustries.horizons.desc=Build your first reinforced-tier multiblock.
 achievement.signalindustries.warpOrb=One-way Ticket to Anywhere
 achievement.signalindustries.warpOrb.desc=Create a Warp Orb.
 achievement.signalindustries.anchor=Anchored
@@ -686,7 +686,7 @@ achievement.signalindustries.orbitalWeapon=The Sun Is A Deadly Laser
 achievement.signalindustries.orbitalWeapon.desc=Cast your divine fury upon your enemies and have them experience the unmatched power of the Sun.
 
 achievement.signalindustries.completed=Signal Industries
-achievement.signalindustries.completed=Activate the Awakened Signalum Ignition Facility for the first time reaching the end of your adventure. Thank you for playing!
+achievement.signalindustries.completed.desc=Activate the Awakened Signalum Ignition Facility for the first time reaching the end of your adventure. Thank you for playing!
 
 achievement.signalindustries.bloodMoon=The Night is Red
 achievement.signalindustries.bloodMoon.desc=Experience a Blood Moon!

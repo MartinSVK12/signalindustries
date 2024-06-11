@@ -168,7 +168,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 slot.getFluidStack().amount += saturation;
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                stack.itemID = SIItems.signalumCrystalEmpty.id;
+                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         } else {
             if(saturation > capacity){
@@ -182,7 +182,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 slot.putStack(fluid);
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                stack.itemID = SIItems.signalumCrystalEmpty.id;
+                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         }
     }
