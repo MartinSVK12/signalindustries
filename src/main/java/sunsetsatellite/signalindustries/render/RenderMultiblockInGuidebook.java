@@ -8,11 +8,8 @@ import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.Vec3i;
+import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.multiblocks.HologramWorld;
-import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ public class RenderMultiblockInGuidebook {
         blockRenderer = new RenderBlocks(new HologramWorld(blocks));
         for (BlockInstance block : blocks) {
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block.block);
-            ((IColorOverride)model).enableFullbright();
+            ((IFullbright)model).enableFullbright();
             Vec3i pos = block.pos;
             int id = block.block.id;
             int meta = block.meta == -1 ? 0 : block.meta;
@@ -39,7 +36,7 @@ public class RenderMultiblockInGuidebook {
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glTranslatef((float)d+(pos.x-i), (float)e+(pos.y-j), (float)f+(pos.z-k));
             drawBlock(Tessellator.instance, model, meta);
-            ((IColorOverride)model).disableFullbright();
+            ((IFullbright)model).disableFullbright();
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }

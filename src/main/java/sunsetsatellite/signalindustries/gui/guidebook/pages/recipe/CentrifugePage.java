@@ -128,10 +128,10 @@ public class CentrifugePage
                 Color c = new Color().setARGB(waterColor);
                 c.setRGBA(c.getRed(),c.getGreen(),c.getBlue(),0x40);
                 ((IColorOverride)blockModel).overrideColor(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
-                ((IColorOverride)itemModel).overrideColor(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
+                
                 guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
                 ((IColorOverride)blockModel).overrideColor(1,1,1,1);
-                ((IColorOverride)itemModel).overrideColor(1,1,1,1);
+                
             } else {
                 guiRenderItem.render(slot.getStack(),x+slot.xDisplayPosition,y+slot.yDisplayPosition,mouseOverSlot == slot,slot);
             }

@@ -32,11 +32,11 @@ public class WorldGenSI extends BaseInitialization {
         OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureMeteor(SIBlocks.dilithiumOre.id,0,3),1024);
         OverworldInitialization.randomFeatures.addFeatureSurface(new WorldFeatureObelisk(),2048);
         OverworldInitialization.randomFeatures.addFeature(
-                (x) -> new WorldFeatureGeode(SIBlocks.signalumOre.id,0,10,3),
+                (x) -> new WorldFeatureGeode(SIBlocks.signalumOre.id,0,20,4),
                 null,
-                OverworldFunctions::getStandardBiomesDensity,
+                OverworldFunctions::getStandardOreBiomesDensity,
                 new Object[]{1, null},
-                32,
+                10,
                 0.10f,
                 0.25f
         );

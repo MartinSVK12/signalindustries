@@ -7,6 +7,7 @@ import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IFullbright;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityStorageContainer;
 import sunsetsatellite.signalindustries.util.GuiRenderItemNoOverlay;
@@ -75,10 +76,10 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
                 getFontRenderer().drawString(s, -32, (i14 * 10 - 5) + (10 * i), color);
             }
         } else {*/
-        ((IColorOverride) getFontRenderer()).enableFullbright();
+        ((IFullbright) getFontRenderer()).enableFullbright();
         getFontRenderer().drawString(name, -getFontRenderer().getStringWidth(name) / 2, (i14 * 10 - 5), color);
         getFontRenderer().drawString(amount, -getFontRenderer().getStringWidth(amount) / 2, i14 * 10 + 64, color);
-        ((IColorOverride) getFontRenderer()).disableFullbright();
+        ((IFullbright) getFontRenderer()).disableFullbright();
         GL11.glTranslatef(0,-28,-82);
         GL11.glScalef(2.5f,2.5f,0.3f);
         GL11.glTranslatef(0,0,240);

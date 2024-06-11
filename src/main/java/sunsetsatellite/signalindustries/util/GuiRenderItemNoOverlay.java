@@ -21,6 +21,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IFullbright;
 
 public class GuiRenderItemNoOverlay extends Gui {
     Minecraft mc;
@@ -53,9 +54,9 @@ public class GuiRenderItemNoOverlay extends Gui {
                 ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(itemStack.getItem());
                 if(itemModel instanceof ItemModelBlock){
                     BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[itemStack.itemID]);
-                    ((IColorOverride)blockModel).enableFullbright();
+                    ((IFullbright)blockModel).enableFullbright();
                 }
-                ((IColorOverride)itemModel).enableFullbright();
+                ((IFullbright)itemModel).enableFullbright();
                 itemModel.renderItemIntoGui(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? 1.0F : 0.0F, 1.0F);
                 if (slot instanceof SlotGuidebook) {
                     if (((SlotGuidebook)slot).recipe instanceof RecipeEntryTrommel && ((SlotGuidebook)slot).item != null && ((SlotGuidebook)slot).isOutput) {
@@ -79,10 +80,10 @@ public class GuiRenderItemNoOverlay extends Gui {
                 } else {
                     //itemModel.renderItemOverlayIntoGUI(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? null : "?", 1.0F);
                 }
-                ((IColorOverride)itemModel).disableFullbright();
+                ((IFullbright)itemModel).disableFullbright();
                 if(itemModel instanceof ItemModelBlock){
                     BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[itemStack.itemID]);
-                    ((IColorOverride)blockModel).disableFullbright();
+                    ((IFullbright)blockModel).disableFullbright();
                 }
             }
 

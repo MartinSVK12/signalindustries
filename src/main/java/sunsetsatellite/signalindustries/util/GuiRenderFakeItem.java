@@ -24,6 +24,7 @@ import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IFullbright;
 
 
 public class GuiRenderFakeItem extends Gui
@@ -64,10 +65,10 @@ public class GuiRenderFakeItem extends Gui
                 ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(itemStack.getItem());
                 if(itemModel instanceof ItemModelBlock){
                     BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[itemStack.itemID]);
-                    ((IColorOverride)blockModel).enableFullbright();
+                    ((IFullbright)blockModel).enableFullbright();
                     ((IColorOverride)blockModel).overrideColor(1,1,1,0.5f);
                 }
-                ((IColorOverride)itemModel).enableFullbright();
+                ((IFullbright)itemModel).enableFullbright();
                 ((IColorOverride)itemModel).overrideColor(1,1,1,0.5f);
                 itemModel.renderItemIntoGui(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? 1.0F : 0.0F, 1.0F);
                 if (slot instanceof SlotGuidebook) {
@@ -92,11 +93,11 @@ public class GuiRenderFakeItem extends Gui
                 } else {
                     //itemModel.renderItemOverlayIntoGUI(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? null : "?", 1.0F);
                 }
-                ((IColorOverride)itemModel).disableFullbright();
+                ((IFullbright)itemModel).disableFullbright();
                 ((IColorOverride)itemModel).overrideColor(1,1,1,1f);
                 if(itemModel instanceof ItemModelBlock){
                     BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[itemStack.itemID]);
-                    ((IColorOverride)blockModel).disableFullbright();
+                    ((IFullbright)blockModel).disableFullbright();
                     ((IColorOverride)blockModel).overrideColor(1,1,1,1f);
                 }
             }

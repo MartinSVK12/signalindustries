@@ -17,6 +17,7 @@ import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IFullbright;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAssembler;
 
 public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAssembler> {
@@ -91,19 +92,19 @@ public class RenderAssemblerItemSprite3D extends TileEntityRenderer<TileEntityAs
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glTranslatef(0.0F, 0.0F, 32.0F);
             ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(stack.getItem());
-            ((IColorOverride) itemModel).enableFullbright();
-            ((IColorOverride) getFontRenderer()).enableFullbright();
+            ((IFullbright) itemModel).enableFullbright();
+            ((IFullbright) getFontRenderer()).enableFullbright();
             if(stack.itemID < 16384){
                 BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.getBlock(stack.itemID));
-                ((IColorOverride) blockModel).enableFullbright();
+                ((IFullbright) blockModel).enableFullbright();
             }
             itemRenderer.render(stack, x, y);
-            ((IColorOverride) itemModel).disableFullbright();
+            ((IFullbright) itemModel).disableFullbright();
             if(stack.itemID < 16384){
                 BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.getBlock(stack.itemID));
-                ((IColorOverride) blockModel).disableFullbright();
+                ((IFullbright) blockModel).disableFullbright();
             }
-            ((IColorOverride) getFontRenderer()).disableFullbright();
+            ((IFullbright) getFontRenderer()).disableFullbright();
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glPopMatrix();
