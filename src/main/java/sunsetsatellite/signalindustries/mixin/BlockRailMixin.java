@@ -17,9 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.util.RailLogic;
 
-@Debug(
-        export = true
-)
+
 
 @Mixin(
         value = BlockRail.class,

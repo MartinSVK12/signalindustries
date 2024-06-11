@@ -29,9 +29,7 @@ import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value= NetClientHandler.class,
         remap = false

@@ -25,9 +25,7 @@ import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value = PlayerRenderer.class,
         remap = false

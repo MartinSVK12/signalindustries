@@ -26,9 +26,7 @@ import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.entities.fx.EntityDustCloudFX;
 import sunsetsatellite.signalindustries.entities.fx.EntityShockwaveFX;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value = RenderGlobal.class,
         remap = false

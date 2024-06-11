@@ -20,9 +20,7 @@ import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
 import java.util.function.Supplier;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value = EntityPlayerMP.class,
         remap = false

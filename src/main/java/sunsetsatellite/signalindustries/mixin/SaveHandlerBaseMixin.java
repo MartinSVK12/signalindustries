@@ -19,7 +19,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.List;
 
-@Debug(export = true)
+
 @Mixin(value = SaveHandlerBase.class,remap = false)
 public abstract class SaveHandlerBaseMixin implements LevelStorage {
 

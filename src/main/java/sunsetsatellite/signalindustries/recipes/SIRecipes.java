@@ -16,11 +16,14 @@ import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.recipes.container.*;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
+import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static sunsetsatellite.signalindustries.SignalIndustries.*;
 
 public class SIRecipes implements RecipeEntrypoint {
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
@@ -37,7 +40,7 @@ public class SIRecipes implements RecipeEntrypoint {
 
     @Override
     public void onRecipesReady() {
-        new SignalIndustriesFluidPlugin().initializePlugin(SignalIndustries.LOGGER);
+        new SignalIndustriesFluidPlugin().initializePlugin(LOGGER);
         resetGroups();
         load();
         MobInfoRegistry.register(EntityInfernal.class,"guidebook.section.mob.infernal.name", "guidebook.section.mob.infernal.desc",40,1000,new MobInfoRegistry.MobDrop[]{new MobInfoRegistry.MobDrop(new ItemStack(SIItems.infernalFragment),1,0,2)});
@@ -64,13 +67,19 @@ public class SIRecipes implements RecipeEntrypoint {
         List<ItemStack> abilityGroup = new ArrayList<>();
         abilityGroup.add(SIItems.boostAbilityContainer.getDefaultStack());
         abilityGroup.add(SIItems.projectileAbilityContainer.getDefaultStack());
-        Registries.ITEM_GROUPS.register("signalindustries:ability_containers",abilityGroup);
+        RecipeBuilder.addItemsToGroup(MOD_ID,"ability_containers",abilityGroup.toArray());
         List<ItemStack> romChipGroup = new ArrayList<>();
         romChipGroup.add(SIItems.romChipBoost.getDefaultStack());
         romChipGroup.add(SIItems.romChipProjectile.getDefaultStack());
-        Registries.ITEM_GROUPS.register("signalindustries:rom_chips",romChipGroup);
-        Registries.ITEM_GROUPS.register("minecraft:water", SignalIndustries.listOf(new ItemStack(Block.fluidWaterFlowing),new ItemStack(Block.fluidWaterStill)));
-        Registries.ITEM_GROUPS.register("minecraft:lava", SignalIndustries.listOf(new ItemStack(Block.fluidLavaFlowing),new ItemStack(Block.fluidLavaStill)));
+        RecipeBuilder.addItemsToGroup(MOD_ID,"rom_chips",romChipGroup.toArray());
+        RecipeBuilder.addItemsToGroup("common_plates","cobblestone",SIItems.cobblestonePlate);
+        RecipeBuilder.addItemsToGroup("common_plates","stone",SIItems.stonePlate);
+        RecipeBuilder.addItemsToGroup("common_plates","steel",SIItems.steelPlate);
+        RecipeBuilder.addItemsToGroup("common_dusts","coal",SIItems.coalDust);
+        RecipeBuilder.addItemsToGroup("common_dusts","nether_coal",SIItems.netherCoalDust);
+        RecipeBuilder.addItemsToGroup("common_tiny_dusts","nether_coal",SIItems.tinyNetherCoalDust);
+        Registries.ITEM_GROUPS.register("minecraft:water", listOf(new ItemStack(Block.fluidWaterFlowing),new ItemStack(Block.fluidWaterStill)));
+        Registries.ITEM_GROUPS.register("minecraft:lava", listOf(new ItemStack(Block.fluidLavaFlowing),new ItemStack(Block.fluidLavaStill)));
         new ExtractorRecipes().addRecipes(EXTRACTOR);
         new CrusherRecipes().addRecipes(CRUSHER);
         new AlloySmelterRecipes().addRecipes(ALLOY_SMELTER);
@@ -81,7 +90,7 @@ public class SIRecipes implements RecipeEntrypoint {
         new InfuserRecipes().addRecipes(INFUSER);
         new CentrifugeRecipes().addRecipes(CENTRIFUGE);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
-        SignalIndustries.LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
+        LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 
     @Override

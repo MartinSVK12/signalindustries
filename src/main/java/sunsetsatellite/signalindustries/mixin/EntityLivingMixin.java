@@ -30,7 +30,7 @@ import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import java.util.Iterator;
 import java.util.List;
 
-@Debug(export = true)
+
 @Mixin(value = EntityLiving.class, remap = false)
 public abstract class EntityLivingMixin extends Entity {
     @Unique

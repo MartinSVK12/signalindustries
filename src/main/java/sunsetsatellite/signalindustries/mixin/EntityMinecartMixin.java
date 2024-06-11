@@ -18,9 +18,7 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value = EntityMinecart.class,
         remap = false

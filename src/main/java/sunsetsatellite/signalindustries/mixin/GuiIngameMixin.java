@@ -24,9 +24,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSmartWatch;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
-@Debug(
-        export = true
-)
+
 @Mixin(
         value = GuiIngame.class,
         remap = false
