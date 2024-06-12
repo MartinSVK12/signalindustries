@@ -517,6 +517,8 @@ tile.signalindustries.glowingObsidian.name=Glowing Obsidian
 tile.signalindustries.glowingObsidian.desc=Obsidian infused with hellish coal.
 tile.signalindustries.uvLamp.name=Ultraviolet Lamp
 tile.signalindustries.uvLamp.desc=A special lamp that emits ultraviolet light. Stops mobs from spawning in a moderate radius without affecting the light level.
+tile.signalindustries.voidContainer.name=Void Container
+tile.signalindustries.voidContainer.desc=Completely destroys any item or fluid.
 
 tile.signalindustries.dilithiumBlock.name=Block of Dilithium
 tile.signalindustries.dilithiumBlock.desc=A solid block of Dilithium.

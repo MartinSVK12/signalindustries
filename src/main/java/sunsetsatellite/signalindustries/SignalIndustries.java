@@ -312,6 +312,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createTileEntity(TileEntityFilter.class,"Filter");
         EntityHelper.createTileEntity(TileEntityUVLamp.class,"Ultraviolet Lamp");
         EntityHelper.createTileEntity(TileEntityCatalystConduit.class,"Catalyst Energy Conduit");
+        EntityHelper.createTileEntity(TileEntityVoidContainer.class,"Void Container");
 
 
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);

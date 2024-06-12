@@ -5762,5 +5762,46 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/void_container",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "SOS",
+      "OFO",
+      "SOS"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "tile.obsidian",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.tool.firestriker",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.voidContainer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

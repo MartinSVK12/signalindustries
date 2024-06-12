@@ -128,6 +128,7 @@ public class SIBlocks extends DataInitializer {
     public static Block fueledEternalTreeLog;
     public static Block glowingObsidian;
     public static Block uvLamp;
+    public static Block voidContainer;
 
     public static BlockFluid energyStill;
     public static BlockFluid burntSignalumFlowing;
@@ -1244,6 +1245,12 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(BlockModelUVLamp::new)
                 .build(new BlockUVLamp("uvLamp", config.getInt("BlockIDs.uvLamp"),Material.metal));
 
+        voidContainer = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/container_void")
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(1)
+                .setResistance(3)
+                .build(new BlockVoidContainer("voidContainer", config.getInt("BlockIDs.voidContainer"), Material.metal));
             /*public static final Block recipeMaker = new BlockBuilder(MOD_ID)
             .setTextures("signalindustries:block/prototype_connection")
             .setLuminance(0)
