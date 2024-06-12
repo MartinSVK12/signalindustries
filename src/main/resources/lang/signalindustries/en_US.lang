@@ -732,5 +732,6 @@ multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
 multiblock.signalindustries.signalumReactor.name=Signalum Reactor
 multiblock.signalindustries.wrathTree.name=Wrath Tree
 multiblock.signalindustries.reinforcedExtractor.name=Extraction Manifold
+multiblock.signalindustries.basicInductionSmelter.name=Basic Induction Smelter
 
 gui.options.page.controls.category.signalindustries=Signal Industries
