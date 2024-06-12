@@ -1,0 +1,929 @@
+[
+  {
+    "name": "signalindustries:workbench/reinforced_machine_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RSR",
+      "SBS",
+      "RSR"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key":  "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.machine",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+
+
+  {
+    "name": "signalindustries:workbench/reinforced_plate_former",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "SFS",
+      "PMP"
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key":  "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":   "tile.signalindustries.basic.plateFormer",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.plateFormer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+
+  {
+    "name": "signalindustries:workbench/reinforced_crystal_chamber",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSP",
+      "FMA",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "A",
+        "stack": {
+          "key":  "tile.signalindustries.basic.alloySmelter",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "tile.signalindustries.basic.plateFormer",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key":  "item.signalindustries.awakenedSignalumFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.crystalChamber",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+  {
+    "name": "signalindustries:workbench/reinforced_wrath_beacon",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PEP",
+      "FWF",
+      "PMP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "item.signalindustries.infernalFragment",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "W",
+        "stack": {
+          "key":  "tile.signalindustries.basic.wrathBeacon",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key":  "item.signalindustries.infernalEye",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.wrathBeacon",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+  {
+    "name": "signalindustries:workbench/reinforced_external_io",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PIP",
+      "FMI",
+      "PFP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "I",
+        "stack": {
+          "key":  "item.signalindustries.itemManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key":  "item.signalindustries.fluidManipulationCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.externalIO",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+  {
+    "name": "signalindustries:workbench/reinforced_crystal_cutter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RGR",
+      "PCP",
+      "RMR"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key":  "item.signalindustries.signalumCuttingGear",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "tile.signalindustries.basic.crystalCutter",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.crystalCutter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_core",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      " R ",
+      " P "
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.dust.redstone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key":  "item.signalindustries.pureCrystalChip",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforcedEnergyCore",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_drill_bit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " PS",
+      "PBP",
+      "SP "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.basicDrillBit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforcedDrillBit",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+  {
+    "name": "signalindustries:workbench/reinforced_drill",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PSB",
+      "SCS",
+      "ESP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.reinforcedDrillBit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.reinforcedDrillCasing",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "item.signalindustries.reinforced.signalumDrill",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_casing",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RRR",
+      "R R",
+      "RRR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.casing",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+  {
+    "name": "signalindustries:workbench/reinforced_glass",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RGR",
+      "G G",
+      "RGR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key":  "tile.signalindustries.reinforced.glass",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_fluid_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RCR",
+      "GFG",
+      "RCR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.fluid",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit.fluid",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RCR",
+      "GFG",
+      "RCR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_energy_connector",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " E ",
+      "EME",
+      " E "
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.energyConnector",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_signalum_ignitor",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RFR",
+      "SES",
+      "RMR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.tool.firestriker.steel",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.ignitor",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_centrifuge",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RFS",
+      "FMF",
+      "EFR"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.signalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "item.signalindustries.fuelCell",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.centrifuge",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_backpack",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PBP",
+      "CAC",
+      "PSP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.attachmentPoint",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.bucket",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.reinforced.attachment.backpack",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_crystal_alloy_bricks",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "CC",
+      "CC"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.bricks",
+      "amount": 8,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+
+
+  {
+    "name": "signalindustries:workbench/reinforced_storage_container",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PCP",
+      "CMC",
+      "PCP"
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.storageContainer",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_universal_energy_conduit",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "RGR",
+      "SCS",
+      "RGR"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.catalyst",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.conduit.catalyst",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  }
+]

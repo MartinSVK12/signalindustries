@@ -1,0 +1,35 @@
+[
+  {
+    "name": "signalindustries:workbench/awakened_coil",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "AAA",
+      "AVA",
+      "AAA"
+    ],
+    "symbols": [
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "V",
+        "stack": {
+          "key": "item.signalindustries.voidAlloyIngot",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakenedAlloyCoil",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  }
+]

@@ -90,6 +90,10 @@ public class SIRecipes implements RecipeEntrypoint {
         new InfuserRecipes().addRecipes(INFUSER);
         new CentrifugeRecipes().addRecipes(CENTRIFUGE);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_reinforced.json");
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_awakened.json");
         LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 
