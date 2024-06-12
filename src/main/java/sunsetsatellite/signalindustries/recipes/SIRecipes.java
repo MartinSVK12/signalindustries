@@ -42,6 +42,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public void onRecipesReady() {
         new SignalIndustriesFluidPlugin().initializePlugin(LOGGER);
         resetGroups();
+        registerNamespaces();
         load();
         MobInfoRegistry.register(EntityInfernal.class,"guidebook.section.mob.infernal.name", "guidebook.section.mob.infernal.desc",40,1000,new MobInfoRegistry.MobDrop[]{new MobInfoRegistry.MobDrop(new ItemStack(SIItems.infernalFragment),1,0,2)});
 

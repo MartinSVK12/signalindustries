@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.material.ToolMaterial;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
@@ -106,6 +107,10 @@ public class SIItems extends DataInitializer {
     public static Item abilityContainerCasing;
     public static Item blankChip;
     public static Item positionMemoryChip;
+    public static Item condensedMilkCan;
+    public static Item bucketCaramel;
+    public static Item caramelPlate;
+    public static Item krowka;
 
     public void init() {
         if (initialized) return;
@@ -163,6 +168,14 @@ public class SIItems extends DataInitializer {
         blankAbilityModule = simpleItem("blankAbilityModule", "signalindustries:item/blank_module");
         abilityContainerCasing = simpleItem("abilityContainerCasing", "signalindustries:item/abilitycontainercasing");
         blankChip = simpleItem("blankChip", "romChip.blank", "signalindustries:item/blank_chip");
+        condensedMilkCan = simpleItem("condensedMilkCan","condensedMilkCan","signalindustries:item/condensed_milk_can").setMaxStackSize(1);
+        bucketCaramel = simpleItem("bucketCaramel","bucketCaramel","signalindustries:item/bucket_caramel").setMaxStackSize(1).setContainerItem(Item.bucket);
+        caramelPlate = simpleItem("caramelPlate","caramelPlate","signalindustries:item/caramel_plate");
+        krowka = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/krowka")
+                .setStackSize(8)
+                .setItemModel((item)->new ItemModelStandard(item, MOD_ID))
+                .build(new ItemFood("krowka",config.getInt("ItemIDs.krowka"),1,1,false,8));
 
         signalumCrystalEmpty = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/signalumcrystalempty")

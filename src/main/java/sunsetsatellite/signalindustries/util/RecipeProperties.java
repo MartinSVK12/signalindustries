@@ -8,6 +8,7 @@ public class RecipeProperties {
     public float chance = 1;
 
     public boolean thisTierOnly;
+    public boolean consumeContainers = false;
 
     public RecipeProperties(){}
 
@@ -38,6 +39,11 @@ public class RecipeProperties {
 
     public RecipeProperties setChance(float chance){
         this.chance = chance;
+        return this;
+    }
+
+    public RecipeProperties setConsumeContainers(){
+        this.consumeContainers = true;
         return this;
     }
 

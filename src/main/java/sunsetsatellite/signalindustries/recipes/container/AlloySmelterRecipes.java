@@ -57,5 +57,27 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                         new RecipeProperties(100,80,Tier.BASIC,false)
                 )
         );
+        group.register(
+                "condensed_milk_can",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Item.bucketMilk)),
+                                new RecipeExtendedSymbol(new ItemStack(Item.dustSugar,8))
+                        },
+                        new ItemStack(SIItems.condensedMilkCan,1),
+                        new RecipeProperties(200,40,Tier.PROTOTYPE,false).setConsumeContainers()
+                )
+        );
+        group.register(
+                "caramel_bucket",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.condensedMilkCan)),
+                                new RecipeExtendedSymbol(new ItemStack(Item.dustSugar,4))
+                        },
+                        new ItemStack(SIItems.bucketCaramel,1),
+                        new RecipeProperties(200,40,Tier.PROTOTYPE,false).setConsumeContainers()
+                )
+        );
     }
 }

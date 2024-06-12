@@ -31,6 +31,16 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 )
         );
         group.register(
+                "krowka",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.caramelPlate,1))
+                        },
+                        new ItemStack(SIItems.krowka,8,0,nbt),
+                        new RecipeProperties(200,80,7, Tier.PROTOTYPE,false)
+                )
+        );
+        group.register(
                 "empty_signalum_crystal",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{

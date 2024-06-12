@@ -299,6 +299,15 @@ item.signalindustries.dimensionalChip.desc=The main part of the [Warp Manipulato
 item.signalindustries.attachmentPoint.name=Attachment Point
 item.signalindustries.attachmentPoint.desc=Interface for [Attachments].
 
+item.signalindustries.condensedMilkCan.name=Condensed Milk Can
+item.signalindustries.condensedMilkCan.desc=Thick and sweet.
+item.signalindustries.bucketCaramel.name=Bucket of Caramel
+item.signalindustries.bucketCaramel.desc=A bucket full of caramelized sugar.
+item.signalindustries.caramelPlate.name=Caramel Plate
+item.signalindustries.caramelPlate.desc=A plate made out of... caramel?
+item.signalindustries.krowka.name=Krówka
+item.signalindustries.krowka.desc=Sweet caramel candy.
+
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
 tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.
 tile.signalindustries.prototype.energyCell.name=Prototype Energy Cell

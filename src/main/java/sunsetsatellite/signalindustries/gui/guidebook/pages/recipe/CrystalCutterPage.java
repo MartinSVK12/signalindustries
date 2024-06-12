@@ -63,11 +63,14 @@ public class CrystalCutterPage
             List<RecipeSymbol> inputSymbol = new ArrayList<>();
             RecipeSymbol outputSymbol;
             for (RecipeExtendedSymbol symbol : recipe.getInput()) {
-                if(symbol.getFluidStack() != null){
-                    FluidStack fluidStack = symbol.getFluidStack();
-                    inputSymbol.add(new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount)));
-                } else {
-                    inputSymbol.add(symbol.asNormalSymbol());
+                if(symbol == null) inputSymbol.add(null);
+                if(symbol != null){
+                    if(symbol.getFluidStack() != null){
+                        FluidStack fluidStack = symbol.getFluidStack();
+                        inputSymbol.add(new RecipeSymbol(new ItemStack(fluidStack.liquid,fluidStack.amount)));
+                    } else {
+                        inputSymbol.add(symbol.asNormalSymbol());
+                    }
                 }
             }
             List<ItemStack> acceptedMachines = recipe.parent.getMachine().resolve().stream().filter((S)->{
@@ -88,7 +91,7 @@ public class CrystalCutterPage
 
             outputSymbol = new RecipeSymbol(recipe.getOutput());
             recipeSlots.add(new SlotGuidebook(0, (width/2)-52, 36*(map.size()+1)-16, inputSymbol.get(0), false,recipe));
-            recipeSlots.add(new SlotGuidebook(1, (width/2)-32, 36*(map.size()+1)-16, inputSymbol.get(1), false,recipe));
+            recipeSlots.add(new SlotGuidebook(1, (width/2)-32, 36*(map.size()+1)-16, inputSymbol.size() > 1 ? inputSymbol.get(1) : null, false,recipe));
             recipeSlots.add(new SlotGuidebook(3,(width/2)+48, 36*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
             recipeSlots.add(new SlotGuidebook(2, (width/2)+24, 36*(map.size()+1)-16, outputSymbol, false,recipe));
             map.put(recipe,recipeSlots);

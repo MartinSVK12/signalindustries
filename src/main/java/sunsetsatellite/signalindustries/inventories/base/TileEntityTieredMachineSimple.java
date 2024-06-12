@@ -148,7 +148,7 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
             for (int itemInput : itemInputs) {
                 ItemStack inputStack = getStackInSlot(itemInput);
-                if(inputStack != null && inputStack.getItem().hasContainerItem()){
+                if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
                     setInventorySlotContents(itemInput, new ItemStack(inputStack.getItem().getContainerItem()));
                 } else if (inputStack != null) {
                     Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
@@ -156,10 +156,15 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
                             .filter(Objects::nonNull)
                             .filter(stack -> stack.isItemEqual(inputStack))
                             .findFirst();
-                    recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
-                    if (inputStack.stackSize <= 0) {
-                        setInventorySlotContents(itemInput, null);
+                    if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                        setInventorySlotContents(itemInput, inputStack.getItem().getContainerItem().getDefaultStack());
+                    } else {
+                        recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
+                        if (inputStack.stackSize <= 0) {
+                            setInventorySlotContents(itemInput, null);
+                        }
                     }
+
                 }
             }
             for (int fluidInput : fluidInputs) {
@@ -180,7 +185,7 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
             for (int itemInput : itemInputs) {
                 ItemStack inputStack = getStackInSlot(itemInput);
-                if(inputStack != null && inputStack.getItem().hasContainerItem()){
+                if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
                     setInventorySlotContents(itemInput, new ItemStack(inputStack.getItem().getContainerItem()));
                 } else if (inputStack != null) {
                     Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
@@ -188,9 +193,13 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
                             .filter(Objects::nonNull)
                             .filter(stack -> stack.isItemEqual(inputStack))
                             .findFirst();
-                    recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
-                    if (inputStack.stackSize <= 0) {
-                        setInventorySlotContents(itemInput, null);
+                    if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                        setInventorySlotContents(itemInput, inputStack.getItem().getContainerItem().getDefaultStack());
+                    } else {
+                        recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
+                        if (inputStack.stackSize <= 0) {
+                            setInventorySlotContents(itemInput, null);
+                        }
                     }
                 }
             }

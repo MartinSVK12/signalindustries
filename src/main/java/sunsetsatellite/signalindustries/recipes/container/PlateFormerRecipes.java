@@ -53,6 +53,16 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                 )
         );
         group.register(
+                "caramel_plate",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.bucketCaramel))
+                        },
+                        new ItemStack(SIItems.caramelPlate,1),
+                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
+                )
+        );
+        group.register(
                 "saturated_alloy_plate",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
