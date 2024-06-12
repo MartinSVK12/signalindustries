@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -63,7 +64,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     @Override
     public void processItem() {
         super.processItem();
-        if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
+        if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal && !Global.isServer){
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.SHINING);
         }
         if(itemContents[itemOutputs[0]].getItem() == SIItems.signalumCrystalEmpty){

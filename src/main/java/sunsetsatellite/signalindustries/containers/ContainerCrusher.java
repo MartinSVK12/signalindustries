@@ -14,11 +14,6 @@ public class ContainerCrusher extends ContainerFluid {
 
     private final TileEntityCrusher machine = ((TileEntityCrusher) tile);
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-
 
     public ContainerCrusher(IInventory iInventory, TileEntityFluidItemContainer tileEntity){
         super(iInventory, tileEntity);

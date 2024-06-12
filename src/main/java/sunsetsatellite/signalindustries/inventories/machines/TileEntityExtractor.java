@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.item.ItemStack;
@@ -99,7 +100,9 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
             } else if(getFluidInSlot(0).getLiquid() == stack.getLiquid()) {
                 fluidContents[0].amount += stack.amount;
             }
-            Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
+            if(!Global.isServer){
+                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
+            }
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
             } else {

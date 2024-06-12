@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -61,7 +62,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
                 this.itemContents[itemOutputs[0]].getData().putInt("size",size1+size2);
                 this.itemContents[itemOutputs[0]].getData().putInt("saturation", sat1 + sat2);
             }
-            if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal){
+            if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal && !Global.isServer){
                 Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.COMBINED);
             }
         }

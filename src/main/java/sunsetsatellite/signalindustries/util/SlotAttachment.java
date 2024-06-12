@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.util;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -43,7 +44,7 @@ public class SlotAttachment extends Slot implements IAttachable {
     @Override
     public void putStack(ItemStack itemstack) {
         super.putStack(itemstack);
-        if(itemstack.getItem() instanceof ItemWingsAttachment){
+        if(itemstack.getItem() instanceof ItemWingsAttachment && !Global.isServer){
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.WINGS);
         }
     }

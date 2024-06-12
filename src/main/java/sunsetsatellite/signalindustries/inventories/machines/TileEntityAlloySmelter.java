@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SIAchievements;
@@ -32,7 +33,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implem
     @Override
     public void processItem() {
         super.processItem();
-        if(itemContents[itemOutputs[0]].itemID == SIItems.reinforcedCrystalAlloyIngot.id){
+        if(itemContents[itemOutputs[0]].itemID == SIItems.reinforcedCrystalAlloyIngot.id && !Global.isServer){
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.KNIGHTS_ALLOY);
         }
     }

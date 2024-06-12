@@ -14,11 +14,6 @@ public class ContainerAlloySmelter extends ContainerFluid {
 
     private final TileEntityAlloySmelter machine = ((TileEntityAlloySmelter) tile);
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-
     public ContainerAlloySmelter(IInventory iInventory, TileEntityFluidItemContainer tileEntity){
         super(iInventory, tileEntity);
         tile = tileEntity;

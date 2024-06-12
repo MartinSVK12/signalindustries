@@ -11,11 +11,6 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerExtractor extends ContainerTiered {
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-
     public ContainerExtractor(IInventory iInventory, TileEntityTieredMachineBase tileEntity){
         super(iInventory, tileEntity);
 

@@ -14,11 +14,6 @@ public class ContainerPlateFormer extends ContainerFluid {
 
     private final TileEntityPlateFormer machine = ((TileEntityPlateFormer) tile);
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 200;
-
 
     public ContainerPlateFormer(IInventory iInventory, TileEntityFluidItemContainer tileEntity){
         super(iInventory, tileEntity);

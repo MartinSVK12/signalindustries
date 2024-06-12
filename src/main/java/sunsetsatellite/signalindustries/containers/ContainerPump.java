@@ -11,11 +11,6 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 public class ContainerPump extends ContainerTiered {
 
-    public int fuelBurnTicks = 0;
-    public int fuelMaxBurnTicks = 0;
-    public int progressTicks = 0;
-    public int progressMaxTicks = 600;
-
     public ContainerPump(IInventory iInventory, TileEntityTieredMachineBase tileEntity){
         super(iInventory, tileEntity);
 
