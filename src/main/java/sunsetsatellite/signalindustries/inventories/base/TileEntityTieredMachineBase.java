@@ -2,21 +2,32 @@ package sunsetsatellite.signalindustries.inventories.base;
 
 
 import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.Tag;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.EntityItem;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.IFluidIO;
-import sunsetsatellite.catalyst.core.util.IItemIO;
+import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.covers.CoverBase;
+import sunsetsatellite.signalindustries.covers.DilithiumLensCover;
+import sunsetsatellite.signalindustries.covers.SwitchCover;
+import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview, IActiveForm {
@@ -27,6 +38,22 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     public float speedMultiplier = 1;
     public float yield = 1;
     public IOPreview preview = IOPreview.NONE;
+    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+    public boolean disabled = false;
+
+
+    @Override
+    public void disableIOPreview() {
+        preview = IOPreview.NONE;
+    }
+
+    @Override
+    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+        IOPreviewTimer.value = ticks;
+        IOPreviewTimer.max = ticks;
+        IOPreviewTimer.unpause();
+        this.preview = preview;
+    }
 
     @Override
     public boolean isBurning(){
@@ -34,8 +61,14 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     }
 
     @Override
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    @Override
     public void tick() {
         super.tick();
+        IOPreviewTimer.tick();
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
             applyModifiers();
@@ -50,16 +83,26 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
             if (tile instanceof TileEntityBooster && this instanceof IBoostable) {
                 if (((TileEntityBooster) tile).isBurning()) {
                     int meta = tile.getMovedData();
-                    if (Direction.getDirectionFromSide(meta).getOpposite() == dir) {
+                    Direction side = Direction.getDirectionFromSide(meta);
+                    if (side.getOpposite() == dir) {
                         if(((TileEntityBooster) tile).tier == Tier.BASIC){
                             speedMultiplier = 1.5f;
                             yield = 1.05f;
+                            if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                                yield = 1.15f;
+                            }
                         } else if(((TileEntityBooster) tile).tier == Tier.REINFORCED) {
                             speedMultiplier = 2;
                             yield = 1.25f;
+                            if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                                yield = 1.35f;
+                            }
                         } else if (((TileEntityBooster) tile).tier == Tier.AWAKENED) {
                             speedMultiplier = 3;
                             yield = 2f;
+                            if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                                yield = 2.1f;
+                            }
                         }
                     }
                 }
@@ -68,12 +111,13 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     }
 
     @Override
-    public void writeToNBT(CompoundTag nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.putShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.putShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.putInt("MaxProcessTime",this.progressMaxTicks);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
+        tag.putShort("BurnTime", (short)this.fuelBurnTicks);
+        tag.putShort("ProcessTime", (short)this.progressTicks);
+        tag.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
+        tag.putInt("MaxProcessTime",this.progressMaxTicks);
+        tag.putBoolean("Disabled",disabled);
     }
 
     @Override
@@ -83,6 +127,7 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
         progressTicks = tag.getShort("ProcessTime");
         progressMaxTicks = tag.getInteger("MaxProcessTime");
         fuelMaxBurnTicks = tag.getShort("MaxBurnTime");
+        disabled = tag.getBoolean("Disabled");
     }
 
     public int getProgressScaled(int paramInt) {
@@ -104,6 +149,11 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     @Override
     public Connection getFluidIOForSide(Direction dir) {
         return fluidConnections.get(dir);
+    }
+
+    @Override
+    public void setFluidIOForSide(Direction dir, Connection con) {
+        fluidConnections.put(dir,con);
     }
 
     @Override
@@ -165,6 +215,11 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     }
 
     @Override
+    public void setItemIOForSide(Direction dir, Connection con) {
+        itemConnections.put(dir,con);
+    }
+
+    @Override
     public IOPreview getPreview() {
         return preview;
     }
@@ -173,4 +228,11 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
     public void setPreview(IOPreview preview) {
         this.preview = preview;
     }
+
+    public void onPoweredBlockChange(boolean powered){
+        if(hasCoverAnywhere(SwitchCover.class)){
+            disabled = powered;
+        }
+    }
+
 }

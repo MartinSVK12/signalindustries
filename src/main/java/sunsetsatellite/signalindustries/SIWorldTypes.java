@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.WorldTypes;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 

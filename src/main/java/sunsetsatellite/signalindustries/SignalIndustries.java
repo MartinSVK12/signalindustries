@@ -14,8 +14,10 @@ import net.minecraft.client.render.FontRenderer;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
+import net.minecraft.client.render.stitcher.AtlasStitcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.block.*;
+import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -62,16 +64,20 @@ import sunsetsatellite.signalindustries.util.*;
 import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
+import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.toml.Toml;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.*;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SignalIndustries implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
 
@@ -109,7 +115,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         }
 
 
-        config = new TomlConfigHandler(MOD_ID, new Toml("Signal Industries configuration file."));
+        config = new TomlConfigHandler(MOD_ID, new Toml("Signal Industries configuration file."),false);
 
         File configFile = config.getConfigFile();
 
@@ -257,7 +263,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         }
 
         addEntities();
-        LOGGER.info("Signal Industries initialized.");
+        LOGGER.info("Signal Industries initialized. Shine!");
     }
 
     static {
@@ -595,17 +601,83 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     @Override
     public void beforeClientStart() {
+
+    }
+
+
+    //thanks kill05 ;)
+    public void loadTextures(AtlasStitcher stitcher){
+        // This is awful, but required until 7.2-pre2 comes out
+        String id = TextureRegistry.stitcherMap.entrySet().stream().filter((e)->e.getValue() == stitcher).map(Map.Entry::getKey).collect(Collectors.toSet()).stream().findFirst().orElse(null);
+        if(id == null){
+            throw new RuntimeException("Failed to load textures: invalid atlas provided!");
+        }
+        LOGGER.info("Loading "+id+" textures...");
+        long start = System.currentTimeMillis();
+
+        String path = String.format("%s/%s/%s", "/assets", MOD_ID, stitcher.directoryPath);
+        URI uri;
         try {
-            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.blockAtlas);
-            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.itemAtlas);
-            TextureRegistry.initializeAllFiles(MOD_ID, TextureRegistry.particleAtlas);
-        } catch (URISyntaxException | IOException e) {
+            uri = DataLoader.class.getResource(path).toURI();
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+        FileSystem fileSystem = null;
+        Path myPath;
+        if (uri.getScheme().equals("jar")) {
+            try {
+                fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            myPath = fileSystem.getPath(path);
+        } else {
+            myPath = Paths.get(uri);
+        }
+
+        Stream<Path> walk;
+        try {
+            walk = Files.walk(myPath, Integer.MAX_VALUE);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Iterator<Path> it = walk.iterator();
+
+        while (it.hasNext()) {
+            Path file = it.next();
+            String name = file.getFileName().toString();
+            if (name.endsWith(".png")) {
+                String path1 = file.toString().replace(file.getFileSystem().getSeparator(), "/");
+                String cutPath = path1.split(path)[1];
+                cutPath = cutPath.substring(0, cutPath.length() - 4);
+                TextureRegistry.getTexture(MOD_ID + ":"+ id + cutPath);
+            }
+        }
+
+        walk.close();
+        if (fileSystem != null) {
+            try {
+                fileSystem.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        try {
+            TextureRegistry.initializeAllFiles(MOD_ID, stitcher);
+        } catch (URISyntaxException | IOException e) {
+            throw new RuntimeException("Failed to load textures.", e);
+        }
+        LOGGER.info(String.format("Loaded "+id+" textures (took %sms).", System.currentTimeMillis() - start));
     }
 
     @Override
     public void afterClientStart() {
+        loadTextures(TextureRegistry.blockAtlas);
+        loadTextures(TextureRegistry.itemAtlas);
+        loadTextures(TextureRegistry.particleAtlas);
+        Minecraft.getMinecraft(Minecraft.class).renderEngine.refreshTextures(new ArrayList<>());
+
         BlockDataExporter.export(this.getClass());
         AchievementHelper.addPage(ACHIEVEMENTS);
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");

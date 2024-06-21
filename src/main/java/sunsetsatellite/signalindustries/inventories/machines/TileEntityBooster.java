@@ -9,6 +9,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
@@ -21,6 +22,7 @@ import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -29,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityBooster extends TileEntityFluidItemContainer implements IHasIOPreview, IActiveForm {
+public class TileEntityBooster extends TileEntityTieredContainer implements IHasIOPreview, IActiveForm {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -40,7 +42,20 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     public int cost = 160;
     public Random random = new Random();
     public IOPreview preview = IOPreview.NONE;
-    public Tier tier = Tier.REINFORCED;
+    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+
+    @Override
+    public void disableIOPreview() {
+        preview = IOPreview.NONE;
+    }
+
+    @Override
+    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+        IOPreviewTimer.value = ticks;
+        IOPreviewTimer.max = ticks;
+        IOPreviewTimer.unpause();
+        this.preview = preview;
+    }
 
     public TileEntityBooster(){
         fluidContents = new FluidStack[1];
@@ -61,6 +76,7 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     @Override
     public void tick() {
         worldObj.markBlocksDirty(x,y,z,x,y,z);
+        IOPreviewTimer.tick();
         extractFluids();
         if(getBlockType() != null){
             BlockContainerTiered block = (BlockContainerTiered) getBlockType();
@@ -208,6 +224,12 @@ public class TileEntityBooster extends TileEntityFluidItemContainer implements I
     @Override
     public boolean isBurning(){
         return fuelBurnTicks > 0;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        //TODO:
+        return false;
     }
 
     public void extractFluids(){

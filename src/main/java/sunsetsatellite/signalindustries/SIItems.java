@@ -4,15 +4,18 @@ import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.material.ToolMaterial;
+import sunsetsatellite.signalindustries.covers.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
+import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.items.models.ItemModelConfigurationTablet;
 import sunsetsatellite.signalindustries.items.models.ItemModelFuelCell;
 import sunsetsatellite.signalindustries.items.models.ItemModelPulsar;
 import sunsetsatellite.signalindustries.items.models.ItemModelSaber;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
 
@@ -31,6 +34,7 @@ public class SIItems extends DataInitializer {
     public static Item tinyNetherCoalDust;
     public static Item emptySignalumCrystalDust;
     public static Item saturatedSignalumCrystalDust;
+    public static Item awakenedSignalumCrystalDust;
     public static Item ironPlateHammer;
     public static Item cobblestonePlate;
     public static Item stonePlate;
@@ -103,6 +107,7 @@ public class SIItems extends DataInitializer {
     public static Item dimensionalChip;
     public static Item attachmentPoint;
     public static Item meteorTracker;
+    public static Item configurationTablet;
     public static Item blankAbilityModule;
     public static Item abilityContainerCasing;
     public static Item blankChip;
@@ -111,6 +116,14 @@ public class SIItems extends DataInitializer {
     public static Item bucketCaramel;
     public static Item caramelPlate;
     public static Item krowka;
+
+    public static ItemCover blankCover;
+    public static ItemCover redstoneCover;
+    public static ItemCover voidCover;
+    public static ItemCover conveyorCover;
+    public static ItemCover pumpCover;
+    public static ItemCover switchCover;
+    public static ItemCover dilithiumLensCover;
 
     public void init() {
         if (initialized) return;
@@ -123,6 +136,7 @@ public class SIItems extends DataInitializer {
         tinyNetherCoalDust = simpleItem("tinyNetherCoalDust", "signalindustries:item/tiny_nether_coal_dust");
         emptySignalumCrystalDust = simpleItem("emptySignalumCrystalDust", "signalumCrystalDust", "signalindustries:item/emptysignalumdust");
         saturatedSignalumCrystalDust = simpleItem("saturatedSignalumCrystalDust", "signalindustries:item/saturatedsignalumdust");
+        awakenedSignalumCrystalDust = simpleItem("awakenedSignalumCrystalDust", "signalindustries:item/awakened_signalum_dust");
         ironPlateHammer = simpleItem("ironPlateHammer", "signalindustries:item/platehammer").setMaxStackSize(1);
         cobblestonePlate = simpleItem("cobblestonePlate", "signalindustries:item/cobblestoneplate");
         stonePlate = simpleItem("stonePlate", "signalindustries:item/stoneplate");
@@ -299,9 +313,41 @@ public class SIItems extends DataInitializer {
         meteorTracker = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/meteor_tracker_uncalibrated")
                 .build(new ItemMeteorTracker("meteorTracker", config.getInt("ItemIDs.meteorTracker")));
+        configurationTablet = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/configuration_tablet_rotation")
+                .setItemModel((item)->new ItemModelConfigurationTablet(item,MOD_ID))
+                .build(new ItemConfigurationTablet("configurationTablet.rotation", config.getInt("ItemIDs.configurationTablet")).setMaxStackSize(1));
         positionMemoryChip = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/position_chip")
                 .build(new ItemPositionChip("romChip.position", config.getInt("ItemIDs.positionMemoryChip")));
+
+        blankCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/blank_cover")
+                .build(new ItemCover("cover.blank",config.getInt("ItemIDs.blankCover"), BlankCover::new));
+
+        redstoneCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/redstone_cover")
+                .build(new ItemCover("cover.redstone",config.getInt("ItemIDs.redstoneCover"), RedstoneCover::new));
+
+        voidCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/void_cover")
+                .build(new ItemCover("cover.void",config.getInt("ItemIDs.voidCover"), VoidCover::new));
+
+        conveyorCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/conveyor_cover")
+                .build(new ItemCover("cover.item", config.getInt("ItemIDs.conveyorCover"), ConveyorCover::new));
+
+        pumpCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/pump_cover")
+                .build(new ItemCover("cover.fluid", config.getInt("ItemIDs.pumpCover"), PumpCover::new));
+
+        switchCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/switch_cover")
+                .build(new ItemCover("cover.switch", config.getInt("ItemIDs.switchCover"), SwitchCover::new));
+
+        dilithiumLensCover = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/dilithium_lens")
+                .build(new ItemCover("cover.dilithiumLens", config.getInt("ItemIDs.dilithiumLensCover"), DilithiumLensCover::new));
 
         ironPlateHammer.setContainerItem(ironPlateHammer);
 

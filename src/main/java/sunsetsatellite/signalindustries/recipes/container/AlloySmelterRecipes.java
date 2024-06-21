@@ -79,5 +79,16 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                         new RecipeProperties(200,40,Tier.PROTOTYPE,false).setConsumeContainers()
                 )
         );
+        group.register(
+                "void_alloy_ingot",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.reinforcedCrystalAlloyIngot,2)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.realityString,8))
+                        },
+                        new ItemStack(SIItems.voidAlloyIngot,1),
+                        new RecipeProperties(300,80,Tier.REINFORCED,false)
+                )
+        );
     }
 }

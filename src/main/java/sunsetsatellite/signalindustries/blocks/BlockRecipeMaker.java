@@ -23,6 +23,9 @@ public class BlockRecipeMaker extends BlockTileEntity {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

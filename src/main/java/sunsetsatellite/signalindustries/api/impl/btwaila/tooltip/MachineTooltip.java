@@ -9,6 +9,8 @@ import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.util.ProgressBarOptions;
 import toufoumaster.btwaila.util.TextureOptions;
 
+import java.util.Objects;
+
 public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
     @Override
     public void initTooltip() {
@@ -30,6 +32,10 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
 
     @Override
     public void drawAdvancedTooltip(TileEntityTieredMachineBase tile, AdvancedInfoComponent c) {
+        long coversCount = tile.getCovers().values().stream().filter(Objects::nonNull).count();
+        if(coversCount > 0){
+            c.drawStringWithShadow(coversCount+" "+(coversCount > 1 ? "covers" : "cover")+" installed.",0);
+        }
         ProgressBarOptions options = new ProgressBarOptions()
                 .setForegroundOptions(new TextureOptions(0x00FF00, TextureRegistry.getTexture("minecraft:block/sand")))
                 .setBackgroundOptions(new TextureOptions(0,TextureRegistry.getTexture("signalindustries:block/reality_fabric")))

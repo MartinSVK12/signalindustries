@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.gui.GuiSignalumReactor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -19,7 +19,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 
 
-public class BlockSignalumReactorCore extends BlockContainerTiered {
+public class BlockSignalumReactorCore extends BlockMachineBase {
     public BlockSignalumReactorCore(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
@@ -34,6 +34,9 @@ public class BlockSignalumReactorCore extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

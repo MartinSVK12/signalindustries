@@ -36,6 +36,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
     public PipeType type = PipeType.NORMAL;
 
     public Map<Direction, Boolean> restrictDirections = new HashMap<>();
+    public Map<Direction, Boolean> noConnectDirections = new HashMap<>();
     public boolean sensorActive;
     public int sensorMode = 0;
     public int sensorAmount = 0;
@@ -46,6 +47,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
     public TileEntityItemConduit(){
         for (Direction dir : Direction.values()) {
             restrictDirections.put(dir,false);
+            noConnectDirections.put(dir,false);
         }
     }
 
@@ -296,6 +298,11 @@ public class TileEntityItemConduit extends TileEntityWithName {
                 blockedDirs.add(D);
             }
         });
+        noConnectDirections.forEach((D,B)->{
+            if(B && !blockedDirs.contains(D)){
+                blockedDirs.add(D);
+            }
+        });
         exitList = exitList.stream().filter((E)->!(blockedDirs.contains(E.getKey()))).collect(Collectors.toList());
         if(exitList.isEmpty()){
             return null;
@@ -340,7 +347,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
         for (PipeItem pipeItem : contents.toArray(new PipeItem[0])) {
             pipeItem.insertTimer.tick();
             ItemStack stack = pipeItem.stack;
-            if(stack != null && type == PipeType.SENSOR){
+            if(stack != null && sensorStack != null && type == PipeType.SENSOR){
                 if(stack.itemID == sensorStack.itemID){
                     sensorActive = checkIfValidForSensor(stack);
                 }
@@ -385,7 +392,9 @@ public class TileEntityItemConduit extends TileEntityWithName {
             TileEntity tile = dir.getTileEntity(worldObj,this);
             if(tile != null){
                 if(tile instanceof IInventory || tile instanceof TileEntityItemConduit || tile instanceof TileEntityStorageContainer){
-                    surroundings.put(dir,tile);
+                    if(!noConnectDirections.get(dir)){
+                        surroundings.put(dir,tile);
+                    }
                 }
             }
         }
@@ -405,6 +414,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
         }
         CompoundTag items = nbttagcompound.getCompound("Items");
         CompoundTag restrict = nbttagcompound.getCompound("Restrictions");
+        CompoundTag noConnect = nbttagcompound.getCompound("NoConnect");
         contents.clear();
         for (Tag<?> value : items.getValues()) {
             if(value instanceof CompoundTag){
@@ -416,6 +426,11 @@ public class TileEntityItemConduit extends TileEntityWithName {
         for (Tag<?> value : restrict.getValues()) {
             if(value instanceof ByteTag){
                 restrictDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
+            }
+        }
+        for (Tag<?> value : noConnect.getValues()) {
+            if(value instanceof ByteTag){
+                noConnectDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
             }
         }
 
@@ -432,10 +447,16 @@ public class TileEntityItemConduit extends TileEntityWithName {
         super.writeToNBT(nbttagcompound);
         CompoundTag items = new CompoundTag();
         CompoundTag restrict = new CompoundTag();
+        CompoundTag noConnect = new CompoundTag();
         for (Map.Entry<Direction, Boolean> entry : restrictDirections.entrySet()) {
             Direction D = entry.getKey();
             Boolean B = entry.getValue();
             restrict.putBoolean(D.getName(), B);
+        }
+        for (Map.Entry<Direction, Boolean> entry : noConnectDirections.entrySet()) {
+            Direction D = entry.getKey();
+            Boolean B = entry.getValue();
+            noConnect.putBoolean(D.getName(), B);
         }
         for (int i = 0; i < contents.size(); i++) {
             CompoundTag itemNbt = new CompoundTag();
@@ -443,6 +464,7 @@ public class TileEntityItemConduit extends TileEntityWithName {
             item.writeToNBT(itemNbt);
             items.put(String.valueOf(i),itemNbt);
         }
+        nbttagcompound.put("NoConnect",noConnect);
         nbttagcompound.put("Restrictions",restrict);
         nbttagcompound.put("Items",items);
 
@@ -500,8 +522,8 @@ public class TileEntityItemConduit extends TileEntityWithName {
         public void writeToNBT(CompoundTag compoundTag) {
             CompoundTag stackNbt = new CompoundTag();
             stack.writeToNBT(stackNbt);
-            compoundTag.putInt("entry",entry.getSide());
-            compoundTag.putInt("exit",exit.getSide());
+            compoundTag.putInt("entry",entry.getSideNumber());
+            compoundTag.putInt("exit",exit.getSideNumber());
             compoundTag.putInt("ticks", insertTimer.value);
             compoundTag.putCompound("stack",stackNbt);
         }

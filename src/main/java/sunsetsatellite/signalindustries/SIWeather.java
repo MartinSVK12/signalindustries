@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries;
 
 import net.minecraft.core.world.weather.Weather;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.weather.WeatherBloodMoon;
 import sunsetsatellite.signalindustries.weather.WeatherEclipse;
 import sunsetsatellite.signalindustries.weather.WeatherMeteorShower;

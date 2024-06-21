@@ -10,10 +10,9 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockConduitBase;
 import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
 import sunsetsatellite.signalindustries.gui.GuiSensorPipeConfig;
-import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.PipeMode;
@@ -24,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class BlockItemConduit extends BlockContainerTiered implements IConduitBlock {
+public class BlockItemConduit extends BlockConduitBase {
 
     public PipeType type;
 
@@ -43,6 +42,9 @@ public class BlockItemConduit extends BlockContainerTiered implements IConduitBl
 
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if (entityplayer.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
             TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
             tile.mode = PipeMode.values()[tile.mode.ordinal()+1 <= PipeMode.values().length-1 ? tile.mode.ordinal()+1 : 0];

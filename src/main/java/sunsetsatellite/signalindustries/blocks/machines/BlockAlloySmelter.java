@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerAlloySmelter;
 import sunsetsatellite.signalindustries.gui.GuiAlloySmelter;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
@@ -26,7 +26,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockAlloySmelter extends BlockContainerTiered {
+public class BlockAlloySmelter extends BlockMachineBase {
     public BlockAlloySmelter(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
@@ -74,6 +74,9 @@ public class BlockAlloySmelter extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

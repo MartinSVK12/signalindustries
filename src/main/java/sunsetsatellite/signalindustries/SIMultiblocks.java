@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 

@@ -6,6 +6,9 @@ import net.minecraft.client.render.RenderBlocks;
 
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.ItemModelBlock;
+import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.Global;
@@ -19,6 +22,8 @@ import net.minecraft.core.util.helper.MathHelper;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
+import sunsetsatellite.catalyst.core.util.IFullbright;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
@@ -28,7 +33,6 @@ import java.util.Random;
 public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemConduit> {
 
     private final Random random = new Random();
-    private final RenderBlocks renderBlocks = new RenderBlocks();
 
     @Override
     public void doRender(Tessellator tessellator, TileEntityItemConduit tileEntity, double x, double y, double z, float g) {
@@ -78,7 +82,22 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                     break;
             }
             Vec3f p = pos.copy().add(offset);
-            doRenderItem(content.getStack(),p.x, p.y, p.z, 0,0);
+            ItemModel model = ItemModelDispatcher.getInstance().getDispatch(content.getStack());
+            ((IFullbright) model).enableFullbright();
+            if(model instanceof ItemModelBlock){
+                BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[content.getStack().itemID]);
+                ((IFullbright)blockModel).enableFullbright();
+            }
+            GL11.glPushMatrix();
+            GL11.glTranslated(p.x,p.y,p.z);
+            model.renderAsItemEntity(tessellator,null,random,content.getStack(),content.getStack().stackSize,0,1,g);
+            ((IFullbright) model).disableFullbright();
+            if(model instanceof ItemModelBlock){
+                BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[content.getStack().itemID]);
+                ((IFullbright)blockModel).disableFullbright();
+            }
+            GL11.glPopMatrix();
+            //doRenderItem(content.getStack(),p.x, p.y, p.z, 0,0);
         }
     }
 

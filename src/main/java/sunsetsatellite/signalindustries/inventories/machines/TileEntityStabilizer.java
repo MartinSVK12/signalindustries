@@ -7,6 +7,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
@@ -14,11 +15,13 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.covers.DilithiumLensCover;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.util.IOPreview;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TileEntityStabilizer extends TileEntityFluidItemContainer implements IMultiblockPart, IHasIOPreview, IActiveForm {
+public class TileEntityStabilizer extends TileEntityTieredContainer implements IMultiblockPart, IHasIOPreview, IActiveForm {
 
     public int fuelBurnTicks = 0;
     public int fuelMaxBurnTicks = 0;
@@ -39,6 +42,20 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     public Random random = new Random();
     public TileEntity connectedTo;
     public IOPreview preview = IOPreview.NONE;
+    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+
+    @Override
+    public void disableIOPreview() {
+        preview = IOPreview.NONE;
+    }
+
+    @Override
+    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+        IOPreviewTimer.value = ticks;
+        IOPreviewTimer.max = ticks;
+        IOPreviewTimer.unpause();
+        this.preview = preview;
+    }
 
     public TileEntityStabilizer(){
         fluidContents = new FluidStack[1];
@@ -64,6 +81,7 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     @Override
     public void tick() {
         worldObj.markBlocksDirty(x,y,z,x,y,z);
+        IOPreviewTimer.tick();
         extractFluids();
         boolean update = false;
 
@@ -157,6 +175,10 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     public void processItem(){
         if(canProcess() && progressTicks <= 0){
             progressMaxTicks = 200 * speedMultiplier;
+            Direction side = Direction.getDirectionFromSide(getMovedData());
+            if(hasCover(side, DilithiumLensCover.class)){
+                progressMaxTicks = (int) Math.ceil(progressMaxTicks * 1.25f);
+            }
             progressTicks = progressMaxTicks;
             itemContents[0].stackSize -= 1;
             if(itemContents[0].stackSize <= 0){
@@ -183,6 +205,12 @@ public class TileEntityStabilizer extends TileEntityFluidItemContainer implement
     @Override
     public boolean isBurning(){
         return fuelBurnTicks > 0;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        //TODO:
+        return false;
     }
 
     public void extractFluids(){

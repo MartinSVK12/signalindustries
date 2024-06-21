@@ -27,6 +27,7 @@ include(":catalyst:multiblocks")
 include(":catalyst:effects")
 include(":catalyst:all")
 include(":retrostorage")
+include(":kektech")
 
 project(":catalyst").projectDir = file("${rootProject.projectDir}/../catalyst")
 project(":catalyst:energy").projectDir = file("${project(":catalyst").projectDir}/energy")
@@ -35,3 +36,4 @@ project(":catalyst:multiblocks").projectDir = file("${project(":catalyst").proje
 project(":catalyst:effects").projectDir = file("${project(":catalyst").projectDir}/effects")
 project(":catalyst:all").projectDir = file("${project(":catalyst").projectDir}/all")
 project(":retrostorage").projectDir = file("${rootProject.projectDir}/../retrostorage")
+project(":kektech").projectDir = file("${rootProject.projectDir}/../../7.2/kektech")

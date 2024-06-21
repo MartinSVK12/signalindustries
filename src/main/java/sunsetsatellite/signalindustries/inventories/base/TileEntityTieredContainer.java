@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityTieredContainer extends TileEntityFluidItemContainer {
+public class TileEntityTieredContainer extends TileEntityCoverable {
     public Tier tier = Tier.PROTOTYPE;
 
     @Override

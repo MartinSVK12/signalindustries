@@ -4,4 +4,6 @@ public interface IActiveForm {
 
     boolean isBurning();
 
+    boolean isDisabled();
+
 }

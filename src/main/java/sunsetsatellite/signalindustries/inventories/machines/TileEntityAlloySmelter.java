@@ -8,7 +8,9 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
@@ -28,6 +30,14 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implem
     @Override
     public String getInvName() {
         return "Alloy Smelter";
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(getBlockType() != null){
+            fluidCapacity[0] = 2000 * (((BlockContainerTiered) getBlockType()).getTier().ordinal()+1);
+        }
     }
 
     @Override

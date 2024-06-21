@@ -1,6 +1,8 @@
 package sunsetsatellite.signalindustries.inventories.base;
 
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IFluidIO;
 import sunsetsatellite.catalyst.core.util.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -35,11 +37,9 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
             setCurrentRecipe();
-            work();
+            if(!disabled) work();
         }
     }
-
-
 
     public void work(){
         boolean update = false;
@@ -301,4 +301,13 @@ public class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase i
         currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]),tier,recipeId);
     }
 
+    @Override
+    public void setFluidIOForSide(Direction dir, Connection con) {
+        fluidConnections.put(dir,con);
+    }
+
+    @Override
+    public void setItemIOForSide(Direction dir, Connection con) {
+        itemConnections.put(dir,con);
+    }
 }

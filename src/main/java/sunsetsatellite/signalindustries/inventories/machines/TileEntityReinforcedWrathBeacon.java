@@ -321,4 +321,9 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     public Multiblock getMultiblock() {
         return multiblock;
     }
+
+    @Override
+    public boolean isDisabled() {
+        return false;
+    }
 }

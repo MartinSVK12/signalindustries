@@ -8,7 +8,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.signalindustries.blocks.BlockExternalIO;
+import sunsetsatellite.signalindustries.blocks.machines.BlockExternalIO;
 import sunsetsatellite.signalindustries.inventories.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.util.Tier;
 

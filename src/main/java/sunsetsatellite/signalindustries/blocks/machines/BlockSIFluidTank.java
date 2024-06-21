@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
 import net.minecraft.core.block.BlockFluid;
@@ -10,26 +10,17 @@ import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemBucketEmpty;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.CatalystFluids;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
-import sunsetsatellite.catalyst.fluids.registry.FluidRegistry;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.gui.GuiSIFluidTank;
 import sunsetsatellite.signalindustries.inventories.TileEntitySIFluidTank;
-import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
-
-import java.util.ArrayList;
-
-public class BlockSIFluidTank extends BlockContainerTiered {
+public class BlockSIFluidTank extends BlockMachineBase {
 
     public BlockSIFluidTank(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
@@ -49,6 +40,9 @@ public class BlockSIFluidTank extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

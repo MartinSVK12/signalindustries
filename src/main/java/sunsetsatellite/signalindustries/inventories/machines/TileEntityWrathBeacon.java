@@ -195,4 +195,8 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
         return new ChunkPosition(k, l, i1);
     }
 
+    @Override
+    public boolean isDisabled() {
+        return false;
+    }
 }

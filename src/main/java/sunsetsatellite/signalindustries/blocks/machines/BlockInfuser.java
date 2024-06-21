@@ -14,7 +14,7 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerInfuser;
 import sunsetsatellite.signalindustries.gui.GuiInfuser;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
@@ -26,7 +26,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockInfuser extends BlockContainerTiered {
+public class BlockInfuser extends BlockMachineBase {
 
     public BlockInfuser(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
@@ -75,6 +75,9 @@ public class BlockInfuser extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

@@ -9,7 +9,7 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerSignalumDynamo;
 import sunsetsatellite.signalindustries.gui.GuiSignalumDynamo;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumDynamo;
@@ -18,7 +18,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockSignalumDynamo extends BlockContainerTiered {
+public class BlockSignalumDynamo extends BlockMachineBase {
     public BlockSignalumDynamo(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
@@ -36,6 +36,9 @@ public class BlockSignalumDynamo extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

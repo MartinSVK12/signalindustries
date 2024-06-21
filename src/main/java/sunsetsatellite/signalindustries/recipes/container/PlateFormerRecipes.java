@@ -92,5 +92,15 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                         new RecipeProperties(200,80, Tier.REINFORCED,false)
                 )
         );
+        group.register(
+                "void_alloy_plate",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.voidAlloyIngot))
+                        },
+                        new ItemStack(SIItems.voidAlloyPlate,1),
+                        new RecipeProperties(200,80, Tier.REINFORCED,false)
+                )
+        );
     }
 }

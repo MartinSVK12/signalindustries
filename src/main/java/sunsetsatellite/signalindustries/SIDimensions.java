@@ -2,12 +2,11 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.core.Global;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.EntityTracker;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 

@@ -65,6 +65,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         return isActive();
     }
 
+    @Override
+    public boolean isDisabled() {
+        //TODO:
+        return false;
+    }
+
     public enum State {
         INACTIVE,
         IGNITING,

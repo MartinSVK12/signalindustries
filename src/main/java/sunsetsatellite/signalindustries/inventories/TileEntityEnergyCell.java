@@ -8,12 +8,14 @@ import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
+import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -21,16 +23,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityEnergyCell extends TileEntityFluidItemContainer implements IHasIOPreview {
+public class TileEntityEnergyCell extends TileEntityTieredContainer implements IHasIOPreview {
 
     public IOPreview preview = IOPreview.NONE;
+    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+
+    @Override
+    public void disableIOPreview() {
+        preview = IOPreview.NONE;
+    }
+
+    @Override
+    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+        IOPreviewTimer.value = ticks;
+        IOPreviewTimer.max = ticks;
+        IOPreviewTimer.unpause();
+        this.preview = preview;
+    }
 
     public TileEntityEnergyCell(){
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
 
     //only for infinite tier energy cell, if true, the energy cell will act as an infinite source of energy, if false, it will act as a sink destroying any energy it gets.
@@ -39,6 +55,7 @@ public class TileEntityEnergyCell extends TileEntityFluidItemContainer implement
 
     @Override
     public void tick() {
+        IOPreviewTimer.tick();
         if(getBlockType() != null){
             if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){
                 for (Map.Entry<Direction, Connection> entry : fluidConnections.entrySet()) {

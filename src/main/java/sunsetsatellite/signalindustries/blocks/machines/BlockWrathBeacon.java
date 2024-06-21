@@ -12,13 +12,13 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedWrathBeacon;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityWrathBeacon;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockWrathBeacon extends BlockContainerTiered {
+public class BlockWrathBeacon extends BlockMachineBase {
 
     public BlockWrathBeacon(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);

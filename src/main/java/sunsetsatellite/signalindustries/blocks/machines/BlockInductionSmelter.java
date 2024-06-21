@@ -11,11 +11,11 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIAchievements;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityInductionSmelter;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockInductionSmelter extends BlockContainerTiered {
+public class BlockInductionSmelter extends BlockMachineBase {
     public BlockInductionSmelter(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
         hasOverbright = true;
@@ -29,6 +29,9 @@ public class BlockInductionSmelter extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

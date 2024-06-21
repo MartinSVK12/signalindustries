@@ -1,25 +1,19 @@
-package sunsetsatellite.signalindustries.blocks;
+package sunsetsatellite.signalindustries.blocks.machines;
 
 
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerExternalIO;
 import sunsetsatellite.signalindustries.gui.GuiExternalIO;
 import sunsetsatellite.signalindustries.inventories.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.util.Tier;
 
 
-public class BlockExternalIO extends BlockContainerTiered {
+public class BlockExternalIO extends BlockMachineBase {
     public BlockExternalIO(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
     }
@@ -32,6 +26,9 @@ public class BlockExternalIO extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

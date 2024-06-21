@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 

@@ -3,7 +3,7 @@ package sunsetsatellite.signalindustries;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.block.Block;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

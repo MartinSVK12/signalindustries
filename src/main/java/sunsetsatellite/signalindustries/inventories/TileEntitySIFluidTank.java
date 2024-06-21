@@ -7,6 +7,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
@@ -27,6 +28,21 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     public Tier tier;
 
     public IOPreview preview = IOPreview.NONE;
+    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+
+    @Override
+    public void disableIOPreview() {
+        preview = IOPreview.NONE;
+    }
+
+    @Override
+    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+        IOPreviewTimer.value = ticks;
+        IOPreviewTimer.max = ticks;
+        IOPreviewTimer.unpause();
+        this.preview = preview;
+    }
+
     public TileEntitySIFluidTank(){
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
@@ -41,6 +57,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
 
     @Override
     public void tick() {
+        IOPreviewTimer.tick();
         if(getBlockType() != null){
             this.tier = ((BlockContainerTiered)getBlockType()).tier;
             if(((BlockContainerTiered)getBlockType()).tier == Tier.INFINITE){

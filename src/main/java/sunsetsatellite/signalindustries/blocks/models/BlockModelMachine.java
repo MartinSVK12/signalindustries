@@ -4,19 +4,27 @@ import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
 import net.minecraft.client.render.block.model.BlockModelStandard;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
+import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.Vec3f;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.HashMap;
 
-public class BlockModelMachine extends BlockModelStandard<Block> {
+public class BlockModelMachine extends BlockModelCoverable {
 
     protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(),SignalIndustries.arrayFill(new IconCoordinate[Side.values().length],BLOCK_TEXTURE_UNASSIGNED));
     protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(),SignalIndustries.arrayFill(new IconCoordinate[Side.values().length],BLOCK_TEXTURE_UNASSIGNED));
@@ -53,8 +61,13 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
+        if(tileEntity instanceof IHasIOPreview){
+            if(((IHasIOPreview) tileEntity).getPreview() != IOPreview.NONE){
+                return super.getBlockOverbrightTexture(blockAccess, x, y, z, side);
+            }
+        }
         if(tileEntity instanceof IActiveForm){
-            if(((IActiveForm) tileEntity).isBurning()){
+            if(((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()){
                 int data = blockAccess.getBlockMetadata(x, y, z);
                 int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side];
                 if (index >= Sides.orientationLookUpHorizontal.length) return null;
@@ -82,7 +95,7 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
         HashMap<Side, IconCoordinate> usingTextures = defaultTextures;
         TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
         if(tileEntity instanceof IActiveForm){
-            if(((IActiveForm) tileEntity).isBurning()){
+            if(((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()){
                 usingTextures = activeTextures;
             }
         }
@@ -270,4 +283,6 @@ public class BlockModelMachine extends BlockModelStandard<Block> {
         overbrightTextures.replace(Side.EAST,TextureRegistry.getTexture("signalindustries:block/"+texture));
         return this;
     }
+
+
 }

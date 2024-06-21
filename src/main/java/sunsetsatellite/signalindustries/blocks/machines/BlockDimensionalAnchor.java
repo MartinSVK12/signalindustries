@@ -13,7 +13,7 @@ import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
+import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerDimAnchor;
 import sunsetsatellite.signalindustries.gui.GuiDimAnchor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityDimensionalAnchor;
@@ -24,7 +24,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockDimensionalAnchor extends BlockContainerTiered {
+public class BlockDimensionalAnchor extends BlockMachineBase {
 
     public BlockDimensionalAnchor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
@@ -93,6 +93,9 @@ public class BlockDimensionalAnchor extends BlockContainerTiered {
     @Override
     public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
     {
+        if(super.blockActivated(world, i, j, k, entityplayer)){
+            return true;
+        }
         if(world.isClientSide)
         {
             return true;

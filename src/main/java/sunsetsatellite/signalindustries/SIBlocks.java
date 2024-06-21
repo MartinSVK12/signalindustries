@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.states.*;
-import sunsetsatellite.signalindustries.util.DataInitializer;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.BlockBuilder;
@@ -67,6 +67,7 @@ public class SIBlocks extends DataInitializer {
     public static Block reinforcedCrusher;
     public static Block prototypeAlloySmelter;
     public static Block basicAlloySmelter;
+    public static Block reinforcedAlloySmelter;
     public static Block basicInductionSmelter;
     public static Block prototypePlateFormer;
     public static Block basicPlateFormer;
@@ -469,6 +470,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(-1)
                 .setResistance(1000000)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockEnergyCell("infinite.energyCell", config.getInt("BlockIDs.infiniteEnergyCell"), Tier.INFINITE, Material.glass));
         prototypeEnergyCell = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/cell_prototype")
@@ -476,6 +478,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockEnergyCell("prototype.energyCell", config.getInt("BlockIDs.prototypeEnergyCell"), Tier.PROTOTYPE, Material.glass));
         basicEnergyCell = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/cell_basic")
@@ -483,6 +486,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockEnergyCell("basic.energyCell", config.getInt("BlockIDs.basicEnergyCell"), Tier.BASIC, Material.glass));
         prototypeFluidTank = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_tank_prototype")
@@ -490,6 +494,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockSIFluidTank("prototype.fluidTank", config.getInt("BlockIDs.prototypeFluidTank"), Tier.PROTOTYPE, Material.glass));
         infiniteFluidTank = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_tank_prototype")
@@ -497,6 +502,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockSIFluidTank("infinite.fluidTank", config.getInt("BlockIDs.infiniteFluidTank"), Tier.INFINITE, Material.glass));
         basicFluidTank = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_tank_basic")
@@ -504,6 +510,7 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockSIFluidTank("basic.fluidTank", config.getInt("BlockIDs.basicFluidTank"), Tier.BASIC, Material.glass));
         prototypeExtractor = new BlockBuilder(MOD_ID)
                 .setHardness(1)
@@ -610,6 +617,18 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightNorthTexture("alloy_smelter_overlay")
                 )
                 .build(new BlockAlloySmelter("basic.alloySmelter", config.getInt("BlockIDs.basicAlloySmelter"), Tier.BASIC, Material.metal));
+        reinforcedAlloySmelter = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/reinforced_blank")
+                .setSouthTexture("signalindustries:block/alloy_smelter_reinforced_inactive")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.REINFORCED)
+                        .withDefaultNorthTexture("alloy_smelter_reinforced_inactive")
+                        .withActiveNorthTexture("alloy_smelter_reinforced_active")
+                        .withOverbrightNorthTexture("alloy_smelter_reinforced_overlay")
+                )
+                .build(new BlockAlloySmelter("reinforced.alloySmelter", config.getInt("BlockIDs.reinforcedAlloySmelter"), Tier.REINFORCED, Material.metal));
         basicInductionSmelter = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)

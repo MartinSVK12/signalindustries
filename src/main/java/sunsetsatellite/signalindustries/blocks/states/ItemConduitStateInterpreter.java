@@ -24,10 +24,21 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
         TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(i,j,k);
         for (Direction direction : Direction.values()) {
             boolean show = false;
+            if(tile != null && tile.noConnectDirections.get(direction)){
+                states.put(direction.getName().toLowerCase(), String.valueOf(show));
+                continue;
+            }
             Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
             Block neighbouringBlock = worldSource.getBlock(offset.x, offset.y, offset.z);
             if(neighbouringBlock != null) {
                 if(block.getClass().isAssignableFrom(neighbouringBlock.getClass())){
+                    TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
+                    if(neighbouringTile instanceof TileEntityItemConduit){
+                        if(((TileEntityItemConduit) neighbouringTile).noConnectDirections.get(direction.getOpposite())){
+                            states.put(direction.getName().toLowerCase(), String.valueOf(show));
+                            continue;
+                        }
+                    }
                     show = true;
                 } else {
                     if(neighbouringBlock instanceof BlockTileEntity){

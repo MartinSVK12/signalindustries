@@ -14,7 +14,6 @@ import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IFluidTransfer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IAcceptsPosition;
-import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -254,7 +253,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
                             pos.putInt("x", externalTile.x);
                             pos.putInt("y", externalTile.y);
                             pos.putInt("z", externalTile.z);
-                            pos.putInt("side", dir.getSide());
+                            pos.putInt("side", dir.getSideNumber());
                             pos.putInt("dim", externalTile.worldObj.dimension.id);
                             externalTilePos = pos;
                         }

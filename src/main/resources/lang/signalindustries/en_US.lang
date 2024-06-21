@@ -261,6 +261,31 @@ item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power S
 
 item.signalindustries.meteorTracker.name=Meteor Tracker
 item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
+item.signalindustries.configurationTablet.rotation.name=Configuration Tablet (Rotation)
+item.signalindustries.configurationTablet.rotation.desc=Used to change an already placed blocks rotation. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.item.name=Configuration Tablet (Item I/O)
+item.signalindustries.configurationTablet.item.desc=Used to change the Item I/O connections for a machine. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.fluid.name=Configuration Tablet (Fluid I/O)
+item.signalindustries.configurationTablet.fluid.desc=Used to change the Fluid I/O connections for a machine. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.disconnect.name=Configuration Tablet (Disconnector)
+item.signalindustries.configurationTablet.disconnect.desc=Used to disconnect conduits and remove covers. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.config.name=Configuration Tablet (Configurator)
+item.signalindustries.configurationTablet.config.desc=Used to configure covers. Shift+RMB to change mode.
+
+item.signalindustries.cover.blank.name=Blank Cover
+item.signalindustries.cover.blank.desc=Covers can be attached to any side of a machine for extended functionality, although this cover doesn't have any.
+item.signalindustries.cover.item.name=Conveyor Cover
+item.signalindustries.cover.item.desc=Allows direct block-to-block transfer of items.
+item.signalindustries.cover.fluid.name=Pump Cover
+item.signalindustries.cover.fluid.desc=Allows direct block-to-block transfer of fluids.
+item.signalindustries.cover.redstone.name=Redstone Cover
+item.signalindustries.cover.redstone.desc=Responds to a set condition with redstone signal.
+item.signalindustries.cover.switch.name=Switch Cover
+item.signalindustries.cover.switch.desc=Can turn off a machine according to a redstone signal, pairs great with a [Redstone Cover].
+item.signalindustries.cover.void.name=Void Cover
+item.signalindustries.cover.void.desc=Completely destroys any configured item or fluid.
+item.signalindustries.cover.dilithiumLens.name=Dilithium Lens Cover
+item.signalindustries.cover.dilithiumLens.desc=Increases yield if attached to a [Booster], reduces fuel usage for [Stabilizers], Must be attached at the machines output side.
 
 item.signalindustries.crystalChip.name=Crystal Chip
 item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy Core].
@@ -577,6 +602,9 @@ event.signalindustries.containerUnlocked=Container unlocked!
 event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
+event.signalindustries.modeChanged=Changed mode to:
+
+signalindustries.warning=Warning!
 
 ability.signalindustries.reinforced.testingAbility.name=Testing Ability
 ability.signalindustries.reinforced.testingAbility.desc=Does not do anything. For testing only.
