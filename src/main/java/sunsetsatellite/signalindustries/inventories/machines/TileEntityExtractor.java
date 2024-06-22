@@ -18,7 +18,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
 
     public TileEntityExtractor(){
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
     @Override
     public String getInvName() {

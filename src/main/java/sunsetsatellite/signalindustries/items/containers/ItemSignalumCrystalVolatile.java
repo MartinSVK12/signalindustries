@@ -25,7 +25,7 @@ public class ItemSignalumCrystalVolatile extends Item {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         itemstack.consumeItem(entityplayer);
         if (!world.isClientSide) {
             world.entityJoinedWorld(new EntityCrystal(world, entityplayer));

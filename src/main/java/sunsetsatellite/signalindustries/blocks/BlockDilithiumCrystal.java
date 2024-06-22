@@ -34,8 +34,8 @@ public class BlockDilithiumCrystal extends BlockTransparent {
             }
             case PROPER_TOOL:
                 Random random = new Random();
-                if(random.nextFloat() < 0.5f){
-                    return new ItemStack[]{new ItemStack(SIItems.dilithiumShard,1)};
+                if (random.nextFloat() < 0.5f) {
+                    return new ItemStack[]{new ItemStack(SIItems.dilithiumShard, 1)};
                 } else {
                     return null;
                 }
@@ -46,7 +46,7 @@ public class BlockDilithiumCrystal extends BlockTransparent {
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, int meta, EntityPlayer player, Item item) {
         super.onBlockDestroyedByPlayer(world, x, y, z, meta, player, item);
-        if(player.dimension == SIDimensions.dimEternity.id) {
+        if (player.dimension == SIDimensions.dimEternity.id) {
             player.triggerAchievement(SIAchievements.ETERNITY);
         }
     }

@@ -9,6 +9,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemBucketEmpty;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
@@ -24,7 +25,6 @@ public class BlockSIFluidTank extends BlockMachineBase {
 
     public BlockSIFluidTank(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
-        withOverbright();
     }
 
     @Override
@@ -38,28 +38,25 @@ public class BlockSIFluidTank extends BlockMachineBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
-        if(world.isClientSide)
-        {
+        if (world.isClientSide) {
             return true;
-        } else
-        {
+        } else {
             TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
+            if (tile != null) {
                 ItemStack equippedStack = entityplayer.getCurrentEquippedItem();
-                if(equippedStack != null){
+                if (equippedStack != null) {
                     Item equippedItem = equippedStack.getItem();
-                    if(!(CatalystFluids.FLUIDS.findFluidsWithFilledContainer(equippedItem).isEmpty())){
+                    if (!(CatalystFluids.FLUIDS.findFluidsWithFilledContainer(equippedItem).isEmpty())) {
                         for (BlockFluid fluid : CatalystFluids.FLUIDS.findFluidsWithFilledContainer(equippedItem)) {
-                            if(equippedItem instanceof ItemBucket){
-                                FluidStack stack = new FluidStack(fluid,1000);
-                                if(tile.canInsertFluid(0,stack) && tile.getRemainingCapacity(0) >= 1000){
-                                    if(tile.getAllowedFluidsForSlot(0).contains(fluid)){
-                                        tile.insertFluid(0,stack);
+                            if (equippedItem instanceof ItemBucket) {
+                                FluidStack stack = new FluidStack(fluid, 1000);
+                                if (tile.canInsertFluid(0, stack) && tile.getRemainingCapacity(0) >= 1000) {
+                                    if (tile.getAllowedFluidsForSlot(0).contains(fluid)) {
+                                        tile.insertFluid(0, stack);
                                         Item emptyContainer = CatalystFluids.FLUIDS.findEmptyContainersWithContainer(fluid, equippedItem).get(0);
                                         entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(emptyContainer);
                                         return true;
@@ -69,11 +66,11 @@ public class BlockSIFluidTank extends BlockMachineBase {
                                 //TODO:
                             }
                         }
-                    } else if(!(CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem).isEmpty())){
+                    } else if (!(CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem).isEmpty())) {
                         for (BlockFluid fluid : CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem)) {
                             if (equippedItem instanceof ItemBucketEmpty) {
-                                if(tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).isFluidEqual(fluid)){
-                                    if(tile.getFluidInSlot(0).amount >= 1000){
+                                if (tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).isFluidEqual(fluid)) {
+                                    if (tile.getFluidInSlot(0).amount >= 1000) {
                                         tile.getFluidInSlot(0).amount -= 1000;
                                         Item filledContainer = CatalystFluids.FLUIDS.findFilledContainersWithContainer(fluid, equippedItem).get(0);
                                         entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(filledContainer);
@@ -86,7 +83,7 @@ public class BlockSIFluidTank extends BlockMachineBase {
                         }
                     }
                 }
-                SignalIndustries.displayGui(entityplayer,() -> new GuiSIFluidTank(entityplayer.inventory, tile),new ContainerFluidTank(entityplayer.inventory,tile),tile,i,j,k);
+                SignalIndustries.displayGui(entityplayer, () -> new GuiSIFluidTank(entityplayer.inventory, tile), new ContainerFluidTank(entityplayer.inventory, tile), tile, i, j, k);
             }
             return true;
         }

@@ -6,29 +6,20 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerAutoMiner;
 import sunsetsatellite.signalindustries.gui.GuiAutoMiner;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityAutoMiner;
-import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockAutoMiner extends BlockMachineBase {
     public BlockAutoMiner(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
-        hasOverbright = true;
+
     }
 
     @Override
@@ -40,7 +31,7 @@ public class BlockAutoMiner extends BlockMachineBase {
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-           
+
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.getStackInSlot(l);
@@ -71,20 +62,17 @@ public class BlockAutoMiner extends BlockMachineBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
-        if(world.isClientSide)
-        {
+        if (world.isClientSide) {
             return true;
-        } else
-        {
+        } else {
             TileEntityAutoMiner tile = (TileEntityAutoMiner) world.getBlockTileEntity(i, j, k);
 
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,() -> new GuiAutoMiner(entityplayer.inventory, tile),new ContainerAutoMiner(entityplayer.inventory,tile),tile,i,j,k);
+            if (tile != null) {
+                SignalIndustries.displayGui(entityplayer, () -> new GuiAutoMiner(entityplayer.inventory, tile), new ContainerAutoMiner(entityplayer.inventory, tile), tile, i, j, k);
             }
             return true;
         }

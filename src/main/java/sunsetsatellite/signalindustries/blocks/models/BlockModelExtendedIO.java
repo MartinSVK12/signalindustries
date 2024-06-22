@@ -30,9 +30,9 @@ public class BlockModelExtendedIO extends BlockModelStandard<BlockExternalIO> {
 
     @Override
     public IconCoordinate getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        TileEntityExternalIO tile = (TileEntityExternalIO) blockAccess.getBlockTileEntity(x,y,z);
+        TileEntityExternalIO tile = (TileEntityExternalIO) blockAccess.getBlockTileEntity(x, y, z);
         Connection connection = tile.itemConnections.get(Direction.getDirectionFromSide(side.getId()));
-        if(block.tier == Tier.BASIC){
+        if (block.tier == Tier.BASIC) {
             if (connection == Connection.INPUT) {
                 return input;
             } else if (connection == Connection.OUTPUT) {

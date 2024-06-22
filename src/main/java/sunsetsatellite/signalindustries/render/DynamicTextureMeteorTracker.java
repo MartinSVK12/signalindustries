@@ -1,35 +1,29 @@
 package sunsetsatellite.signalindustries.render;
 
-import static java.lang.Math.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.dynamictexture.DynamicTexture;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
+import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.awt.image.BufferedImage;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.dynamictexture.DynamicTexture;
-import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.core.Global;
-import net.minecraft.core.util.helper.Color;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
-import net.minecraft.core.world.Dimension;
-import net.minecraft.core.item.Item;
-import net.minecraft.client.util.helper.Textures;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import static java.lang.Math.PI;
 
 public class DynamicTextureMeteorTracker extends DynamicTexture {
 	
-	private Minecraft mc;
+	private final Minecraft mc;
 	
-	private byte[] compassImageData;
+	private final byte[] compassImageData;
 	
 	private double angleFinal;
 	private double delta;
 	
-	private double scaleFactor;
+	private final double scaleFactor;
 
 	private final int resolution = 16;
 	
 	public DynamicTextureMeteorTracker(Minecraft minecraft) {
-		super(TextureRegistry.getTexture("signalindustries:item/meteor_tracker"));
+		super();
 		
 		this.mc = minecraft;
 
@@ -46,14 +40,19 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 	}
 
 	@Override
+	public void postInit() {
+
+	}
+
+	@Override
 	public void update() {
 		for(int i = 0; i < resolution * resolution; i++) {
 			int a = this.compassImageData[i * 4 + 3] & 0xFF;
-			int r = this.compassImageData[i * 4 + 0] & 0xFF;
+			int r = this.compassImageData[i * 4] & 0xFF;
 			int g = this.compassImageData[i * 4 + 1] & 0xFF;
 			int b = this.compassImageData[i * 4 + 2] & 0xFF;
 			
-			this.imageData[i * 4 + 0] = (byte)r;
+			this.imageData[i * 4] = (byte)r;
 			this.imageData[i * 4 + 1] = (byte)g;
 			this.imageData[i * 4 + 2] = (byte)b;
 			this.imageData[i * 4 + 3] = (byte)a;
@@ -81,8 +80,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 
 		double angleSmooth;
 		for(angleSmooth = angle - this.angleFinal; angleSmooth < -PI; angleSmooth += 2 * PI) {
-			;
-		}
+        }
 
 		while(angleSmooth >= PI) {
 			angleSmooth -= 2 * PI;
@@ -125,7 +123,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			b = 100;
 			a = 255;
 
-			this.imageData[j * 4 + 0] = (byte)r;
+			this.imageData[j * 4] = (byte)r;
 			this.imageData[j * 4 + 1] = (byte)g;
 			this.imageData[j * 4 + 2] = (byte)b;
 			this.imageData[j * 4 + 3] = (byte)a;
@@ -140,7 +138,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 			b = i >= 0 ? 20 : 128; //
 			a = 255;
 
-			this.imageData[j * 4 + 0] = (byte)r;
+			this.imageData[j * 4] = (byte)r;
 			this.imageData[j * 4 + 1] = (byte)g;
 			this.imageData[j * 4 + 2] = (byte)b;
 			this.imageData[j * 4 + 3] = (byte)a;

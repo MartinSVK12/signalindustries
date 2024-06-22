@@ -2,14 +2,12 @@ package sunsetsatellite.signalindustries.inventories;
 
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
@@ -75,7 +73,7 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
                     if(fluidContents[0] != null){
                         fluidContents[0].amount = Integer.MAX_VALUE;
                     } else {
-                        fluidContents[0] = new FluidStack((BlockFluid) SIBlocks.energyFlowing,Integer.MAX_VALUE);
+                        fluidContents[0] = new FluidStack(SIBlocks.energyFlowing,Integer.MAX_VALUE);
                     }
                 } else {
                     fluidCapacity[0] = Integer.MAX_VALUE;

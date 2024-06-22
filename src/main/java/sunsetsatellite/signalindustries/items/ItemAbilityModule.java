@@ -15,8 +15,6 @@ import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.List;
-
 public class ItemAbilityModule extends ItemAttachment implements ITiered {
 
     public Tier tier;
@@ -27,7 +25,7 @@ public class ItemAbilityModule extends ItemAttachment implements ITiered {
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+    public boolean onUseItemOnBlock(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         InventoryAbilityModule inv = new InventoryAbilityModule(entityplayer.inventory.getCurrentItem());
         ContainerItemFluid container = new ContainerAbilityModule(entityplayer.inventory,inv);
         GuiAbilityModule gui = new GuiAbilityModule(container,entityplayer.inventory);

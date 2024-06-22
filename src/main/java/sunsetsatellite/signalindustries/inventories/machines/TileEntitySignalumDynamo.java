@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -19,7 +18,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyConductor {
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         setCapacity(10000);
         setEnergy(0);
         setTransfer(250);

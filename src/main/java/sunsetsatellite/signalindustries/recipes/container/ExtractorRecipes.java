@@ -20,7 +20,7 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new FluidStack((BlockFluid) SIBlocks.energyFlowing,160),
+                        new FluidStack(SIBlocks.energyFlowing,160),
                         new RecipeProperties(200, Tier.PROTOTYPE,true))
         );
         group.register(
@@ -29,7 +29,7 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new FluidStack((BlockFluid) SIBlocks.energyFlowing,240),
+                        new FluidStack(SIBlocks.energyFlowing,240),
                         new RecipeProperties(100, Tier.BASIC,true))
         );
         group.register(
@@ -38,7 +38,7 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
                         },
-                        new FluidStack((BlockFluid) SIBlocks.energyFlowing,480*4),
+                        new FluidStack(SIBlocks.energyFlowing,480*4),
                         new RecipeProperties(200, Tier.REINFORCED,true))
         );
     }

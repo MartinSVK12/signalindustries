@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -27,9 +26,9 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids());
-        acceptedFluids.get(1).remove((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(1).remove(SIBlocks.energyFlowing);
         itemContents = new ItemStack[3];
         energySlot = 0;
         recipeGroup = SIRecipes.INFUSER;

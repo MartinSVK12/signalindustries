@@ -15,7 +15,7 @@ import java.util.List;
 public class MultiblockSection extends SearchableGuidebookSubsection {
 
     private final List<GuidebookPage> pages = new ArrayList<>();
-    private Pair<String,List<GuidebookPage>> filteredPages = null;
+    private final Pair<String,List<GuidebookPage>> filteredPages = null;
 
     public MultiblockSection(GuidebookSection parent) {
         super(parent);

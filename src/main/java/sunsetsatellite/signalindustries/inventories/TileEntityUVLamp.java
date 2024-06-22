@@ -15,7 +15,7 @@ public class TileEntityUVLamp extends TileEntity {
             if(worldObj.getBlock(x,y,z) == SIBlocks.uvLamp){
                 SignalIndustries.uvLamps.add(new BlockInstance(SIBlocks.uvLamp,new Vec3i(x,y,z),null));
             }
-        };
+        }
     }
 
     @Override

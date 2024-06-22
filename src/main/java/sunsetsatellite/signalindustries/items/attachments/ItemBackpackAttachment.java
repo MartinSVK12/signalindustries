@@ -29,14 +29,14 @@ public class ItemBackpackAttachment extends ItemTieredAttachment{
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+    public boolean onUseItemOnBlock(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         SignalIndustries.displayGui(entityplayer,() -> new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
         return true;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         SignalIndustries.displayGui(entityplayer,() -> new GuiBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerBackpack(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryBackpack(entityplayer.inventory.getCurrentItem()),itemstack);
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 }

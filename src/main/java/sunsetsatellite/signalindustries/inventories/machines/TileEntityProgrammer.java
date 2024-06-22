@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
@@ -18,7 +17,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     public TileEntityProgrammer(){
         cost = 120;
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
         if(canProcess()){
             ItemStack chip = itemContents[0];
             ItemStack trigger = itemContents[1];
-            String[] key = chip.getItemName().split("\\.");
+            String[] key = chip.getItemKey().split("\\.");
             trigger.getData().putString("ability",key[key.length-1]);
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
         }

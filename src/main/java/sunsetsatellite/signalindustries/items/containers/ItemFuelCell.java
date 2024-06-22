@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.items.containers;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
@@ -134,11 +133,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }
@@ -165,11 +164,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }
@@ -196,11 +195,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
         } else {
             if(saturation > capacity){
                 int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,capacity);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,capacity);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",remainder);
             } else {
-                FluidStack fluid = new FluidStack((BlockFluid) SIBlocks.burntSignalumFlowing,saturation);
+                FluidStack fluid = new FluidStack(SIBlocks.burntSignalumFlowing,saturation);
                 slot.putStack(fluid);
                 stack.getData().putInt("depleted",0);
             }
@@ -211,23 +210,22 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     public String getDescription(ItemStack itemStack) {
         int fuel = itemStack.getData().getInteger("fuel");
         int depleted = itemStack.getData().getInteger("depleted");
-        StringBuilder text = new StringBuilder();
-        text.append("Fuel: ")
-                .append(TextFormatting.RED)
-                .append(fuel)
-                .append(TextFormatting.WHITE)
-                .append(" | ")
-                .append(TextFormatting.BROWN)
-                .append(depleted)
-                .append(TextFormatting.WHITE)
-                .append(" Depletion: ")
-                .append(TextFormatting.LIGHT_GRAY)
-                .append(String.format("%.2f",((float)depleted/getCapacity(itemStack))*100))
-                .append("%")
-                .append("\n")
-                .append("Capacity: ")
-                .append(TextFormatting.RED)
-                .append(getCapacity(itemStack));
-        return text.toString();
+        String text = "Fuel: " +
+                TextFormatting.RED +
+                fuel +
+                TextFormatting.WHITE +
+                " | " +
+                TextFormatting.BROWN +
+                depleted +
+                TextFormatting.WHITE +
+                " Depletion: " +
+                TextFormatting.LIGHT_GRAY +
+                String.format("%.2f", ((float) depleted / getCapacity(itemStack)) * 100) +
+                "%" +
+                "\n" +
+                "Capacity: " +
+                TextFormatting.RED +
+                getCapacity(itemStack);
+        return text;
     }
 }

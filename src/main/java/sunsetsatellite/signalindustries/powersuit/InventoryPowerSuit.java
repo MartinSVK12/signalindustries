@@ -5,9 +5,9 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
-import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ public class InventoryPowerSuit extends ItemInventoryFluid {
             this.acceptedFluids = new ArrayList<>(this.fluidContents.length);
             for (int i = 0; i < fluidContents.length; i++) {
                 ArrayList<BlockFluid> list = new ArrayList<>();
-                list.add((BlockFluid) SIBlocks.energyFlowing);
+                list.add(SIBlocks.energyFlowing);
                 acceptedFluids.add(list);
             }
             readFromNBT();

@@ -1,13 +1,8 @@
 package sunsetsatellite.signalindustries.misc;
 
-import net.minecraft.client.render.block.model.BlockModel;
-import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.util.helper.Side;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.signalindustries.SIBlocks;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.achievements.GuiAchievements;
 
@@ -24,7 +19,7 @@ public class SignalIndustriesAchievementPage extends AchievementPage {
 
     @Override
     public void getBackground(GuiAchievements guiAchievements, Random random, int iOffset, int jOffset, int blockX1, int blockY1, int blockX2, int blockY2) {
-        final IconCoordinate[] stoneOres = new IconCoordinate[]{TextureRegistry.getTexture("minecraft:block/stone"),TextureRegistry.getTexture("minecraft:block/ore_iron_stone"),TextureRegistry.getTexture("minecraft:block/ore_gold_stone")};;
+        final IconCoordinate[] stoneOres = new IconCoordinate[]{TextureRegistry.getTexture("minecraft:block/stone"),TextureRegistry.getTexture("minecraft:block/ore_iron_stone"),TextureRegistry.getTexture("minecraft:block/ore_gold_stone")};
         final IconCoordinate[] basaltOres = new IconCoordinate[]{TextureRegistry.getTexture("minecraft:block/ore_iron_basalt"), TextureRegistry.getTexture("signalindustries:block/signalum_ore"), TextureRegistry.getTexture("signalindustries:block/dilithium_ore")};
         for(int row = 0; row * 16 - blockY2 < 155; ++row) {
             float brightness = 0.6F - (float)(blockY1 + row) / 25.0F * 0.3F;

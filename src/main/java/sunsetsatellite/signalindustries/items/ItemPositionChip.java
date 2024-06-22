@@ -19,16 +19,16 @@ public class ItemPositionChip extends Item implements ICustomDescription {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(entityplayer.isSneaking()){
             ((INBTCompound)itemstack.getData()).removeTag("position");
             Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Position cleared!");
         }
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+    public boolean onUseItemOnBlock(ItemStack itemStack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         TileEntity tile = world.getBlockTileEntity(blockX,blockY,blockZ);
         if(tile instanceof IAcceptsPosition){
             if(itemStack.getData().containsKey("position")){

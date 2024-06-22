@@ -1,17 +1,12 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.core.block.Block;
-import net.minecraft.core.util.helper.Side;
-import sunsetsatellite.catalyst.core.util.Direction;
-
-
 public class BlockTexture {
-    private int[] topTexture = new int[]{0,0};
-    private int[] bottomTexture = new int[]{0,0};;
-    private int[] northTexture = new int[]{0,0};;
-    private int[] eastTexture = new int[]{0,0};;
-    private int[] southTexture = new int[]{0,0};;
-    private int[] westTexture = new int[]{0,0};;
+    private final int[] topTexture = new int[]{0,0};
+    private final int[] bottomTexture = new int[]{0,0};
+    private final int[] northTexture = new int[]{0,0};
+    private final int[] eastTexture = new int[]{0,0};
+    private final int[] southTexture = new int[]{0,0};
+    private final int[] westTexture = new int[]{0,0};
     private final String modId;
 
     public BlockTexture(String modId){

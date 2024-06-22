@@ -49,7 +49,7 @@ public class RenderMultiblockInGuidebook {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        model.renderBlockOnInventory(tessellator,meta,1,0.75f);
+        model.renderBlockOnInventory(tessellator,meta,1,0.75f,null);
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();

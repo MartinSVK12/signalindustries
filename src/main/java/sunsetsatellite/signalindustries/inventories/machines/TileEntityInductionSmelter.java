@@ -32,9 +32,9 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
     public RecipeEntryFurnace currentRecipe;
     private boolean isValidMultiblock = false;
     private final TickTimer verifyTimer = new TickTimer(this,this::verifyIntegrity,20,true);
-    private int ticks = 100;
+    private final int ticks = 100;
     public Random random = new Random();
-    private int cost = 40;
+    private final int cost = 40;
 
     public TileEntityInductionSmelter(){
         multiblock = Multiblock.multiblocks.get("basicInductionSmelter");

@@ -25,14 +25,14 @@ public class BlockModelIOPreview extends BlockModelStandard<Block> {
 
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof IHasIOPreview) {
+        TileEntity tileEntity = blockAccess.getBlockTileEntity(x, y, z);
+        if (tileEntity instanceof IHasIOPreview) {
             if (((IHasIOPreview) tileEntity).getPreview() != IOPreview.NONE) {
-                switch (((IHasIOPreview) tileEntity).getPreview()){
+                switch (((IHasIOPreview) tileEntity).getPreview()) {
                     case ITEM:
-                        if(tileEntity instanceof IItemIO){
+                        if (tileEntity instanceof IItemIO) {
                             Connection io = ((IItemIO) tileEntity).getItemIOForSide(Direction.getDirectionFromSide(side));
-                            switch (io){
+                            switch (io) {
                                 case INPUT:
                                     return input;
                                 case OUTPUT:
@@ -45,9 +45,9 @@ public class BlockModelIOPreview extends BlockModelStandard<Block> {
                         }
                         break;
                     case FLUID:
-                        if(tileEntity instanceof IFluidIO){
+                        if (tileEntity instanceof IFluidIO) {
                             Connection io = ((IFluidIO) tileEntity).getFluidIOForSide(Direction.getDirectionFromSide(side));
-                            switch (io){
+                            switch (io) {
                                 case INPUT:
                                     return input;
                                 case OUTPUT:

@@ -1,8 +1,7 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.core.block.BlockFluid;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.client.entity.fx.EntityFlameFX;
+import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -29,7 +28,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         for (Direction dir : Direction.values()) {
             fluidConnections.put(dir, Connection.INPUT);
             activeFluidSlots.put(dir,0);

@@ -5,6 +5,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.catalyst.core.util.IConduitBlock;
@@ -30,10 +31,11 @@ public class BlockCatalystConduit extends BlockContainerTiered implements ICondu
         return false;
     }
 
+
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if(entityplayer.isSneaking() && !world.isClientSide){
-            TileEntityCatalystConduit tile = (TileEntityCatalystConduit) world.getBlockTileEntity(i,j,k);
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (entityplayer.isSneaking() && !world.isClientSide) {
+            TileEntityCatalystConduit tile = (TileEntityCatalystConduit) world.getBlockTileEntity(i, j, k);
             entityplayer.sendMessage(TextFormatting.WHITE + "Max Transfer: " + TextFormatting.LIGHT_GRAY + "IN: " + tile.maxReceive + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + "OUT: " + tile.maxProvide + " | "
                     + TextFormatting.WHITE + "Energy: " + TextFormatting.LIGHT_GRAY + tile.energy + TextFormatting.WHITE + " / " + TextFormatting.LIGHT_GRAY + tile.capacity);
             return false;

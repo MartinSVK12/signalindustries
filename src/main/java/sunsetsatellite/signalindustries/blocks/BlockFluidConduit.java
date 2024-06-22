@@ -5,11 +5,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.blocks.base.BlockConduitBase;
 import sunsetsatellite.signalindustries.inventories.TileEntityFluidConduit;
-import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class BlockFluidConduit extends BlockConduitBase {
@@ -31,18 +32,18 @@ public class BlockFluidConduit extends BlockConduitBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
-        if(entityplayer.isSneaking() && !world.isClientSide){
-            TileEntityFluidPipe tile = (TileEntityFluidPipe) world.getBlockTileEntity(i,j,k);
-            if(tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).getLiquid() != null){
-                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: "+tile.getFluidInSlot(0).toString());
+        if (entityplayer.isSneaking() && !world.isClientSide) {
+            TileEntityFluidPipe tile = (TileEntityFluidPipe) world.getBlockTileEntity(i, j, k);
+            if (tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).getLiquid() != null) {
+                Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: " + tile.getFluidInSlot(0).toString());
             } else {
                 Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Liquid: Empty");
             }
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Capacity: "+tile.fluidCapacity[0]);
+            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Capacity: " + tile.fluidCapacity[0]);
             return false;
         }
         return false;

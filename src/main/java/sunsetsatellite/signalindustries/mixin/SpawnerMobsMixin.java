@@ -30,7 +30,7 @@ public class SpawnerMobsMixin {
             at = @At(value = "INVOKE",target = "Ljava/util/List;isEmpty()Z",shift = At.Shift.AFTER),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void performSpawning(World world, boolean spawnHostileMobs, boolean spawnPassiveMobs, CallbackInfoReturnable<Integer> cir, int playerIndex, ChunkCoordinates spawnChunk, EnumCreatureType[] creatureTypes, int i, EnumCreatureType creatureType, Iterator chunkIt, ChunkCoordinate chunk, Biome biome, List spawnableList) {
+    private static void performSpawning(World world, boolean spawnHostileMobs, boolean spawnPassiveMobs, CallbackInfoReturnable<Integer> cir, int totalSpawned, ChunkCoordinates spawnChunk, ChunkCoordinate[] spawnChunks, EnumCreatureType[] var6, int var7, int var8, EnumCreatureType creatureType, Iterator var10, ChunkCoordinate chunk, boolean checkSpawnDist, int blockX, int blockZ, Biome biome, List spawnableList) {
         if(world.getCurrentWeather() == SIWeather.weatherEclipse){
             for (Object o : spawnableList) {
                 SpawnListEntry entry = (SpawnListEntry) o;

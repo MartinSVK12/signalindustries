@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.legacy;
 
 
-import net.minecraft.core.block.BlockFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
@@ -12,7 +11,7 @@ public class ExtractorRecipes extends MachineRecipesBase<Integer, FluidStack> {
     public static final ExtractorRecipes instance = new ExtractorRecipes();
 
     protected ExtractorRecipes() {
-        this.addRecipe(SIItems.rawSignalumCrystal.id,new FluidStack((BlockFluid) SIBlocks.energyFlowing,160));
+        this.addRecipe(SIItems.rawSignalumCrystal.id,new FluidStack(SIBlocks.energyFlowing,160));
     }
 
     public HashMap<Integer,FluidStack> getRecipeList() {

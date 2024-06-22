@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.inventories;
 
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
@@ -21,7 +20,7 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = 16000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         fluidConnections.put(Direction.Y_POS, Connection.OUTPUT);
     }
 

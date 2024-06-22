@@ -17,7 +17,7 @@ public abstract class BlockContainerTiered extends BlockTileEntityRotatable impl
     }
 
     @Override
-    public Tier getTier(){
+    public Tier getTier() {
         return tier;
     }
 

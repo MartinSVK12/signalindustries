@@ -7,14 +7,15 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockConduitBase;
 import sunsetsatellite.signalindustries.gui.GuiRestrictPipeConfig;
 import sunsetsatellite.signalindustries.gui.GuiSensorPipeConfig;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
-import sunsetsatellite.catalyst.core.util.ConduitCapability;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -41,24 +42,24 @@ public class BlockItemConduit extends BlockConduitBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer) {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
         if (entityplayer.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
-            tile.mode = PipeMode.values()[tile.mode.ordinal()+1 <= PipeMode.values().length-1 ? tile.mode.ordinal()+1 : 0];
-            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Pipe mode changed to: "+tile.mode);
+            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i, j, k);
+            tile.mode = PipeMode.values()[tile.mode.ordinal() + 1 <= PipeMode.values().length - 1 ? tile.mode.ordinal() + 1 : 0];
+            Minecraft.getMinecraft(this).ingameGUI.addChatMessage("Pipe mode changed to: " + tile.mode);
             return true;
         }
         if (!world.isClientSide && type == PipeType.RESTRICT) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
-            SignalIndustries.displayGui(entityplayer, () -> new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x,tile.y,tile.z);
+            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i, j, k);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiRestrictPipeConfig(entityplayer, tile, null), tile, tile.x, tile.y, tile.z);
             return true;
         }
-        if(!world.isClientSide && type == PipeType.SENSOR) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
-            SignalIndustries.displayGui(entityplayer, () -> new GuiSensorPipeConfig(entityplayer.inventory, tile), tile, tile.x,tile.y,tile.z);
+        if (!world.isClientSide && type == PipeType.SENSOR) {
+            TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i, j, k);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiSensorPipeConfig(entityplayer.inventory, tile), tile, tile.x, tile.y, tile.z);
             return true;
         }
         return false;
@@ -66,7 +67,7 @@ public class BlockItemConduit extends BlockConduitBase {
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i,j,k);
+        TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(i, j, k);
         List<ItemStack> stacks = tile.getContents().stream().map(TileEntityItemConduit.PipeItem::getStack).collect(Collectors.toList());
         for (ItemStack itemstack : stacks) {
             if (itemstack != null) {
@@ -101,13 +102,13 @@ public class BlockItemConduit extends BlockConduitBase {
 
     @Override
     public boolean isPoweringTo(WorldSource worldSource, int x, int y, int z, int side) {
-        TileEntityItemConduit tile = (TileEntityItemConduit)worldSource.getBlockTileEntity(x, y, z);
+        TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(x, y, z);
         return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
     }
 
     @Override
     public boolean isIndirectlyPoweringTo(World world, int x, int y, int z, int side) {
-        TileEntityItemConduit tile = (TileEntityItemConduit)world.getBlockTileEntity(x, y, z);
+        TileEntityItemConduit tile = (TileEntityItemConduit) world.getBlockTileEntity(x, y, z);
         return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
     }
 

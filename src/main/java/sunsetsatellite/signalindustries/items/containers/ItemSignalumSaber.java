@@ -179,11 +179,11 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.getData().getInteger("energy") > 0){
             itemstack.getData().putBoolean("active",!itemstack.getData().getBoolean("active"));
         }
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
     }*/
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(itemstack.getMetadata() == 0){
             itemstack.setMetadata(1);
         } else {
@@ -56,7 +56,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
                 mc.ingameGUI.addChatMessage("No meteors detected nearby.");
             }
         }
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 
     @Override

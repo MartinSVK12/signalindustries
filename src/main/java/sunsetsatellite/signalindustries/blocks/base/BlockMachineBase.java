@@ -10,8 +10,6 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.*;
-import sunsetsatellite.retrostorage.tiles.TileEntityRedstoneEmitter;
-import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
@@ -21,9 +19,7 @@ import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public abstract class BlockMachineBase extends BlockContainerTiered implements ISideInteractable {
 
@@ -32,7 +28,7 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
     }
 
     @Override
-    public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
+    public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit) {
         if (!isPlayerHoldingSIdeInteractableItem(player)) {
             return false;
         }
@@ -55,8 +51,8 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
 
     @Override
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof TileEntityCoverable){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileEntityCoverable) {
             Direction[] covers = ((TileEntityCoverable) tile).getCovers().keySet().toArray(new Direction[0]);
             for (Direction dir : covers) {
                 ((TileEntityCoverable) tile).removeCover(dir);
@@ -66,25 +62,25 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
     }
 
     private void handleCoverInstallation(EntityPlayer player, Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
         ItemCover cover = (ItemCover) player.getCurrentEquippedItem().getItem();
-        if(tile instanceof TileEntityCoverable){
+        if (tile instanceof TileEntityCoverable) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            if(dir == null) return;
+            if (dir == null) return;
             if (((TileEntityCoverable) tile).installCover(dir, cover.coverSupplier.get(), player)) {
                 player.getCurrentEquippedItem().stackSize--;
-                if(player.getCurrentEquippedItem().stackSize <= 0){
-                    player.inventory.setCurrentItem(null,false);
+                if (player.getCurrentEquippedItem().stackSize <= 0) {
+                    player.inventory.setCurrentItem(null, false);
                 }
             }
         }
     }
 
     private void handleCoverRemoval(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, EntityPlayer player) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof TileEntityCoverable){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileEntityCoverable) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            if(dir == null) return;
+            if (dir == null) return;
             ((TileEntityCoverable) tile).removeCover(dir, player);
         }
     }
@@ -129,47 +125,47 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
     }
 
     private void handleCoverConfig(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, EntityPlayer player) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof TileEntityCoverable){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileEntityCoverable) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            if(dir == null) return;
-            if(((TileEntityCoverable) tile).getCovers().get(dir) != null){
+            if (dir == null) return;
+            if (((TileEntityCoverable) tile).getCovers().get(dir) != null) {
                 ((TileEntityCoverable) tile).getCovers().get(dir).openConfiguration(player);
             }
         }
     }
 
     private void handleFluidIoChange(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, EntityPlayer player) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof IFluidIO){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof IFluidIO) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            if(dir == null) return;
-            ((IFluidIO) tile).setFluidIOForSide(dir,Connection.values()[(((IFluidIO) tile).getFluidIOForSide(dir).ordinal()+1) % Connection.values().length]);
-            if(tile instanceof IHasIOPreview){
-                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.FLUID,100);
+            if (dir == null) return;
+            ((IFluidIO) tile).setFluidIOForSide(dir, Connection.values()[(((IFluidIO) tile).getFluidIOForSide(dir).ordinal() + 1) % Connection.values().length]);
+            if (tile instanceof IHasIOPreview) {
+                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.FLUID, 100);
             }
-            player.sendMessage("Side "+dir.getSide()+" set to "+((IFluidIO) tile).getFluidIOForSide(dir)+"!");
+            player.sendMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
         }
     }
 
     private void handleItemIoChange(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, EntityPlayer player) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof IItemIO){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof IItemIO) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            if(dir == null) return;
+            if (dir == null) return;
 
-            ((IItemIO) tile).setItemIOForSide(dir,Connection.values()[(((IItemIO) tile).getItemIOForSide(dir).ordinal()+1) % Connection.values().length]);
-            if(tile instanceof IHasIOPreview){
-                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.ITEM,100);
+            ((IItemIO) tile).setItemIOForSide(dir, Connection.values()[(((IItemIO) tile).getItemIOForSide(dir).ordinal() + 1) % Connection.values().length]);
+            if (tile instanceof IHasIOPreview) {
+                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.ITEM, 100);
             }
-            player.sendMessage("Side "+dir.getSide()+" set to "+((IItemIO) tile).getItemIOForSide(dir)+"!");
+            player.sendMessage("Side " + dir.getSide() + " set to " + ((IItemIO) tile).getItemIOForSide(dir) + "!");
         }
     }
 
     private void handleRotationAction(Pair<Direction, BlockSection> pair, World world,
                                       int x, int y, int z, Side playerFacing, EntityPlayer player) {
         int side = Objects.requireNonNull(pair.getRight().toDirection(pair.getLeft(), playerFacing)).getSideNumber();
-        if((side == 0 || side == 1) && !(this instanceof BlockVerticalMachineBase)){
+        if ((side == 0 || side == 1) && !(this instanceof BlockVerticalMachineBase)) {
             return;
         }
         world.setBlockMetadata(x, y, z, side);
@@ -199,16 +195,15 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
 
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int blockId) {
-        if(blockId > 0 && Block.blocksList[blockId].canProvidePower())
-        {
+        if (blockId > 0 && Block.blocksList[blockId].canProvidePower()) {
             boolean powered = world.isBlockIndirectlyGettingPowered(x, y, z);
             onPoweredBlockChange(world, x, y, z, powered);
         }
     }
 
     public void onPoweredBlockChange(World world, int x, int y, int z, boolean powered) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof TileEntityTieredMachineBase){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileEntityTieredMachineBase) {
             ((TileEntityTieredMachineBase) tile).onPoweredBlockChange(powered);
         }
     }

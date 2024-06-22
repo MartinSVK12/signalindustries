@@ -29,7 +29,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.CRYSTAL_CUTTER;

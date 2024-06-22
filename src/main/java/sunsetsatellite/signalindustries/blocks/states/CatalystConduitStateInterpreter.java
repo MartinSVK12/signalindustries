@@ -9,27 +9,25 @@ import sunsetsatellite.catalyst.CatalystEnergy;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.energy.api.IEnergy;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.BlockCatalystConduit;
-import sunsetsatellite.signalindustries.blocks.BlockConduit;
-import sunsetsatellite.signalindustries.blocks.BlockFluidConduit;
 
 import java.util.HashMap;
 
 public class CatalystConduitStateInterpreter extends MetaStateInterpreter {
     @Override
-    public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) { HashMap<String, String> states = new HashMap<>();
+    public HashMap<String, String> getStateMap(WorldSource worldSource, int i, int j, int k, Block block, int meta) {
+        HashMap<String, String> states = new HashMap<>();
         for (Direction direction : Direction.values()) {
             boolean show = false;
-            Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
+            Vec3i offset = new Vec3i(i, j, k).add(direction.getVec());
             Block neighbouringBlock = worldSource.getBlock(offset.x, offset.y, offset.z);
-            if(neighbouringBlock != null) {
-                if(block.getClass().isAssignableFrom(neighbouringBlock.getClass())){
+            if (neighbouringBlock != null) {
+                if (block.getClass().isAssignableFrom(neighbouringBlock.getClass())) {
                     show = true;
-                } else if(!(neighbouringBlock instanceof BlockCatalystConduit)) {
-                    if(neighbouringBlock instanceof BlockTileEntity){
+                } else if (!(neighbouringBlock instanceof BlockCatalystConduit)) {
+                    if (neighbouringBlock instanceof BlockTileEntity) {
                         TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
-                        if(neighbouringTile instanceof IEnergy){
+                        if (neighbouringTile instanceof IEnergy) {
                             show = true;
                         } else if (neighbouringBlock.hasTag(CatalystEnergy.ENERGY_CONDUITS_CONNECT)) {
                             show = true;

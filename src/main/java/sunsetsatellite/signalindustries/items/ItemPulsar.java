@@ -44,7 +44,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+    public boolean onUseItemOnBlock(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         if(entityplayer.isSneaking() && !itemstack.getData().getBoolean("charging")){
             SignalIndustries.displayGui(entityplayer,() -> new GuiPulsar(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new ContainerPulsar(entityplayer.inventory,entityplayer.inventory.getCurrentItem()),new InventoryPulsar(entityplayer.inventory.getCurrentItem()),itemstack);
             return true;
@@ -53,7 +53,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(!itemstack.getData().getBoolean("charging") && itemstack.getData().getByte("charge") < 100 && !entityplayer.isSneaking() && getFluidStack(0,itemstack).getInteger("amount") > 0) {
             itemstack.getData().putBoolean("charging", true);
             return itemstack;

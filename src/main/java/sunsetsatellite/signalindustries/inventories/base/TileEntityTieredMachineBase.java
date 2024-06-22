@@ -2,32 +2,20 @@ package sunsetsatellite.signalindustries.inventories.base;
 
 
 import com.mojang.nbt.CompoundTag;
-import com.mojang.nbt.Tag;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.entity.EntityItem;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.core.util.*;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
-import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.covers.DilithiumLensCover;
 import sunsetsatellite.signalindustries.covers.SwitchCover;
-import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 
 public class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IFluidIO, IItemIO, IHasIOPreview, IActiveForm {
@@ -87,21 +75,24 @@ public class TileEntityTieredMachineBase extends TileEntityTieredContainer imple
                     if (side.getOpposite() == dir) {
                         if(((TileEntityBooster) tile).tier == Tier.BASIC){
                             speedMultiplier = 1.5f;
-                            yield = 1.05f;
+                            //yield = 1.05f;
                             if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
-                                yield = 1.15f;
+                                speedMultiplier = 1.75f;
+                                //yield = 1.15f;
                             }
                         } else if(((TileEntityBooster) tile).tier == Tier.REINFORCED) {
                             speedMultiplier = 2;
-                            yield = 1.25f;
+                            //yield = 1.25f;
                             if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
-                                yield = 1.35f;
+                                speedMultiplier = 2.5f;
+                                //yield = 1.35f;
                             }
                         } else if (((TileEntityBooster) tile).tier == Tier.AWAKENED) {
                             speedMultiplier = 3;
-                            yield = 2f;
+                            //yield = 2f;
                             if(((TileEntityBooster) tile).hasCover(side, DilithiumLensCover.class)){
-                                yield = 2.1f;
+                                speedMultiplier = 4f;
+                                //yield = 2.1f;
                             }
                         }
                     }

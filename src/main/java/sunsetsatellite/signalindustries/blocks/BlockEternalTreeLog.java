@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.core.block.BlockRotatable;
 import net.minecraft.core.block.material.Material;
-import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 
 public class BlockEternalTreeLog extends BlockRotatable {
@@ -11,6 +10,7 @@ public class BlockEternalTreeLog extends BlockRotatable {
         super(key, id, material);
     }
 
-    public void setDefaultDirection(World world, int i, int j, int k) {}
+    public void setDefaultDirection(World world, int i, int j, int k) {
+    }
 
 }

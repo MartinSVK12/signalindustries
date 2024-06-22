@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -50,7 +49,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
         multiblock = Multiblock.multiblocks.get("dimensionalAnchor");
     }

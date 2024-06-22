@@ -5,9 +5,8 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
 import sunsetsatellite.signalindustries.containers.ContainerEnergyInjector;
@@ -15,7 +14,6 @@ import sunsetsatellite.signalindustries.gui.GuiEnergyInjector;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockEnergyInjector extends BlockMachineBase {
@@ -34,19 +32,16 @@ public class BlockEnergyInjector extends BlockMachineBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
-        if(world.isClientSide)
-        {
+        if (world.isClientSide) {
             return true;
-        } else
-        {
+        } else {
             TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
-            if(tile != null) {
-                SignalIndustries.displayGui(entityplayer,() -> new GuiEnergyInjector(entityplayer.inventory, tile),new ContainerEnergyInjector(entityplayer.inventory,tile),tile,i,j,k);
+            if (tile != null) {
+                SignalIndustries.displayGui(entityplayer, () -> new GuiEnergyInjector(entityplayer.inventory, tile), new ContainerEnergyInjector(entityplayer.inventory, tile), tile, i, j, k);
             }
             return true;
         }
@@ -56,7 +51,7 @@ public class BlockEnergyInjector extends BlockMachineBase {
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityEnergyInjector tile = (TileEntityEnergyInjector) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-           
+
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.getStackInSlot(l);

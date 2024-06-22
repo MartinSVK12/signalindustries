@@ -55,7 +55,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
+    public boolean onUseItemOnBlock(ItemStack itemstack, EntityPlayer entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         if(getAbility(itemstack) != null) {
             if (entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) {
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
@@ -75,7 +75,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(getAbility(itemstack) != null){
             if(entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness){
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
@@ -91,6 +91,6 @@ public class ItemTrigger extends Item implements ICustomDescription {
                 }
             }
         }
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 }

@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIAchievements;
@@ -27,7 +26,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.CRYSTAL_CHAMBER;
         itemInputs = new int[]{0,2};

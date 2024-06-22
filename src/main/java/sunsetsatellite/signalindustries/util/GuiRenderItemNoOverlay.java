@@ -20,7 +20,6 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.player.inventory.slot.SlotGuidebook;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.core.util.IFullbright;
 
 public class GuiRenderItemNoOverlay extends Gui {
@@ -105,7 +104,7 @@ public class GuiRenderItemNoOverlay extends Gui {
     }
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected) {
-        this.render(itemStack, x, y, isSelected, (Slot)null);
+        this.render(itemStack, x, y, isSelected, null);
     }
 
     public void render(ItemStack itemStack, int x, int y) {

@@ -98,9 +98,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         if (query.scope.getLeft() == SearchQuery.SearchScope.NONE) return true;
         if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE) {
             RecipeNamespace namespace = Registries.RECIPES.getItem(query.scope.getRight());
-            if (namespace == parent.getParent()) {
-                return true;
-            }
+            return namespace == parent.getParent();
         } else if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE_GROUP) {
             RecipeGroup<?> group;
             try {
@@ -108,9 +106,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
             } catch (IllegalArgumentException e) {
                 group = null;
             }
-            if (group == parent) {
-                return true;
-            }
+            return group == parent;
         }
         return false;
     }
@@ -120,9 +116,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
             String stackName = I18n.getInstance().translateNameKey(getOutput().getFluidName());
             if (query.strict && stackName.equalsIgnoreCase(query.query.getRight())) {
                 return true;
-            } else if (!query.strict && stackName.toLowerCase().contains(query.query.getRight().toLowerCase())) {
-                return true;
-            }
+            } else return !query.strict && stackName.toLowerCase().contains(query.query.getRight().toLowerCase());
         } else if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
             List<FluidStack> groupStacks = new RecipeExtendedSymbol(query.query.getRight()).resolveFluids();
             if (groupStacks == null) return false;

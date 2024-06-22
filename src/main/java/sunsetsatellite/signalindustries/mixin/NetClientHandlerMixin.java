@@ -6,28 +6,18 @@ import net.minecraft.client.net.handler.NetClientHandler;
 import net.minecraft.client.world.WorldClient;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.net.handler.NetHandler;
-import net.minecraft.core.net.packet.Packet23VehicleSpawn;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.gui.GuiBackpack;
 import sunsetsatellite.signalindustries.gui.GuiPulsar;
 import sunsetsatellite.signalindustries.interfaces.mixins.INetClientHandler;
-import sunsetsatellite.signalindustries.inventories.item.InventoryBackpack;
 import sunsetsatellite.signalindustries.inventories.item.InventoryPulsar;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
 
 
 @Mixin(
@@ -65,7 +55,7 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
 
     @Shadow protected abstract Entity getEntityByID(int i);
 
-    @Inject(
+    /*@Inject(
             method = "handleVehicleSpawn",
             at = @At(value = "FIELD",target = "Lnet/minecraft/core/net/packet/Packet23VehicleSpawn;type:I",shift = At.Shift.BEFORE),
             locals = LocalCapture.CAPTURE_FAILHARD,
@@ -91,7 +81,7 @@ public abstract class NetClientHandlerMixin extends NetHandler implements INetCl
             }
             ci.cancel();
         }
-    }
+    }*/
 
     /*@Override
     public void handlePipeItemSpawn(PacketPipeItemSpawn p) {

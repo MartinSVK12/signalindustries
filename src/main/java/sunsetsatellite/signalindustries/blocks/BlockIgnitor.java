@@ -14,16 +14,16 @@ public class BlockIgnitor extends BlockContainerTiered {
 
     public BlockIgnitor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
-        hasOverbright = true;
+
         withTags(SignalIndustries.SIGNALUM_CONDUITS_CONNECT);
     }
 
     @Override
     public void onBlockPlaced(World world, int x, int y, int z, Side side, EntityLiving entity, double sideHeight) {
-        if(world.getBlock(x,y-1,z) == this && world.getBlockMetadata(x,y-1,z) != 1){
-            world.setBlockMetadataWithNotify(x,y,z,1);
+        if (world.getBlock(x, y - 1, z) == this && world.getBlockMetadata(x, y - 1, z) != 1) {
+            world.setBlockMetadataWithNotify(x, y, z, 1);
         } else {
-            world.setBlockMetadataWithNotify(x,y,z,0);
+            world.setBlockMetadataWithNotify(x, y, z, 0);
         }
     }
 

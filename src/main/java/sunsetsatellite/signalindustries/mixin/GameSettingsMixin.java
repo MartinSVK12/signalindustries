@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.mixin;
 
 
+import net.minecraft.client.input.InputDevice;
 import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,13 +16,13 @@ public class GameSettingsMixin
     implements IKeybinds
 {
     @Unique
-    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bindKeyboard(24);
+    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bind(InputDevice.keyboard,24);
 
     @Unique
-    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility").bindKeyboard(54);
+    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility").bind(InputDevice.keyboard,54);
 
     @Unique
-    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bindKeyboard(50);
+    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bind(InputDevice.keyboard,50);
 
     @Unique
     public KeyBinding keyActivateHeadTopAttachment = new KeyBinding("key.signalindustries.headTopActivate");

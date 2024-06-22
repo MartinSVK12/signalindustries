@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.inventories.machines;
 
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -18,7 +17,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
 
     @Override

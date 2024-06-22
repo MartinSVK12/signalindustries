@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.server.entity.EntityTracker;
+import net.minecraft.server.entity.EntityTrackerEntry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +16,10 @@ import sunsetsatellite.signalindustries.entities.EntityCrystal;
         remap = false
 )
 public abstract class EntityTrackerMixin {
-    @Shadow public abstract void trackEntity(Entity entity, int i, int j, boolean flag);
+    //@Shadow public abstract void trackEntity(Entity entity, int i, int j, boolean flag);
+
+
+    @Shadow public abstract EntityTrackerEntry trackEntity(Entity entity, int trackingDistance, int packetDelay, boolean shouldSendMotionUpdates);
 
     @Inject(
             method = "trackEntity(Lnet/minecraft/core/entity/Entity;)V",

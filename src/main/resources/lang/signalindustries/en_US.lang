@@ -285,7 +285,7 @@ item.signalindustries.cover.switch.desc=Can turn off a machine according to a re
 item.signalindustries.cover.void.name=Void Cover
 item.signalindustries.cover.void.desc=Completely destroys any configured item or fluid.
 item.signalindustries.cover.dilithiumLens.name=Dilithium Lens Cover
-item.signalindustries.cover.dilithiumLens.desc=Increases yield if attached to a [Booster], reduces fuel usage for [Stabilizers], Must be attached at the machines output side.
+item.signalindustries.cover.dilithiumLens.desc=Increases speed even more if attached to a [Booster], reduces fuel usage for [Stabilizers], Must be attached at the machines output side.
 
 item.signalindustries.crystalChip.name=Crystal Chip
 item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy Core].

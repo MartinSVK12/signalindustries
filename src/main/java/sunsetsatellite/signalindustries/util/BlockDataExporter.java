@@ -7,7 +7,6 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.util.helper.Side;
 
-
 import java.io.DataOutputStream;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -15,7 +14,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class BlockDataExporter {
     //FIXME
@@ -36,7 +34,7 @@ public class BlockDataExporter {
             CompoundTag uv = new CompoundTag();
             for (Side side : Side.values()) {
                 if(side == Side.NONE) continue;
-                int index = block.atlasIndices[side.getId()];
+                //int index = block.atlasIndices[side.getId()];
                 String file = "";
                 /*for (Map.Entry<String, int[]> entry : TextureHelper.registeredBlockTextures.entrySet()) {
                     String K = entry.getKey();

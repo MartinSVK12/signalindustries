@@ -8,6 +8,7 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
 import org.useless.dragonfly.model.block.DFBlockModelBuilder;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockTransparent;
@@ -15,7 +16,6 @@ import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.states.*;
-import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.BlockBuilder;
@@ -145,7 +145,7 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.STONE)
                 .setHardness(3)
                 .setResistance(25)
-                .build(new BlockOreSignalum("signalumOre", config.getInt("BlockIDs.signalumOre")).withTags(BlockTags.MINEABLE_BY_PICKAXE).withOverbright());
+                .build(new BlockOreSignalum("signalumOre", config.getInt("BlockIDs.signalumOre")).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         dilithiumOre = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/dilithium_ore")
                 .setLuminance(3)

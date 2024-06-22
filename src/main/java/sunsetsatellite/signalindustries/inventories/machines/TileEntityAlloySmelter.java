@@ -3,14 +3,12 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
@@ -20,7 +18,7 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implem
     public TileEntityAlloySmelter(){
         itemContents = new ItemStack[3];
         fluidCapacity[0] = 2000;
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         energySlot = 0;
         recipeGroup = SIRecipes.ALLOY_SMELTER;
         itemInputs = new int[]{0,2};

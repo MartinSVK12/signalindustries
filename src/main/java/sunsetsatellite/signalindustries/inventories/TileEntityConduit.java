@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.inventories;
 
 
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
@@ -15,7 +14,7 @@ public class TileEntityConduit extends TileEntityFluidPipe {
 
     public TileEntityConduit(){
         acceptedFluids.get(0).clear();
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
 
     @Override

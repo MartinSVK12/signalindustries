@@ -42,7 +42,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids().stream().filter((F)->F.id != SIBlocks.energyFlowing.id).collect(Collectors.toList()));
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
     @Override
     public String getInvName() {

@@ -7,11 +7,11 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
@@ -24,19 +24,18 @@ import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockExtractor extends BlockMachineBase {
 
     public BlockExtractor(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
-        hasOverbright = true;
+
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        if(tier == Tier.REINFORCED){
+        if (tier == Tier.REINFORCED) {
             return new TileEntityReinforcedExtractor();
         }
         return new TileEntityExtractor();
@@ -44,9 +43,9 @@ public class BlockExtractor extends BlockMachineBase {
 
     @Override
     public String getDescription(ItemStack stack) {
-        if(tier == Tier.REINFORCED){
+        if (tier == Tier.REINFORCED) {
             String s = super.getDescription(stack);
-            return s+"\n"+ TextFormatting.YELLOW+"Multiblock"+ TextFormatting.WHITE;
+            return s + "\n" + TextFormatting.YELLOW + "Multiblock" + TextFormatting.WHITE;
         } else {
             return super.getDescription(stack);
         }
@@ -56,7 +55,7 @@ public class BlockExtractor extends BlockMachineBase {
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-           
+
             Random random = new Random();
             for (int l = 0; l < tile.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.getStackInSlot(l);
@@ -87,20 +86,18 @@ public class BlockExtractor extends BlockMachineBase {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
-    {
-        if(super.blockActivated(world, i, j, k, entityplayer)){
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer entityplayer, Side side, double xHit, double yHit) {
+        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
             return true;
         }
-        if(world.isClientSide)
-        {
+        if (world.isClientSide) {
             return true;
         } else {
             if (tier == Tier.REINFORCED) {
                 TileEntityReinforcedExtractor tile = (TileEntityReinforcedExtractor) world.getBlockTileEntity(i, j, k);
                 if (tile != null) {
-                    if(tile.multiblock != null && tile.multiblock.isValidAt(world,new BlockInstance(this,new Vec3i(i,j,k),tile),Direction.getDirectionFromSide(world.getBlockMetadata(i,j,k)))){
-                        SignalIndustries.displayGui(entityplayer,() -> new GuiReinforcedExtractor(entityplayer.inventory, tile),new ContainerReinforcedExtractor(entityplayer.inventory,tile),tile,i,j,k);
+                    if (tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)))) {
+                        SignalIndustries.displayGui(entityplayer, () -> new GuiReinforcedExtractor(entityplayer.inventory, tile), new ContainerReinforcedExtractor(entityplayer.inventory, tile), tile, i, j, k);
                         entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     } else {
                         entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");

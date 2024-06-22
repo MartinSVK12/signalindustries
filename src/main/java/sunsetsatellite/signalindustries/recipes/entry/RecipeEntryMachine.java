@@ -1,10 +1,10 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
-import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -80,9 +80,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         if (query.scope.getLeft() == SearchQuery.SearchScope.NONE) return true;
         if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE) {
             RecipeNamespace namespace = Registries.RECIPES.getItem(query.scope.getRight());
-            if (namespace == parent.getParent()) {
-                return true;
-            }
+            return namespace == parent.getParent();
         } else if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE_GROUP) {
             RecipeGroup<?> group;
             try {
@@ -90,9 +88,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
             } catch (IllegalArgumentException e) {
                 group = null;
             }
-            if (group == parent) {
-                return true;
-            }
+            return group == parent;
         }
         return false;
     }
@@ -101,9 +97,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
             if (query.strict && getOutput().getDisplayName().equalsIgnoreCase(query.query.getRight())) {
                 return true;
-            } else if (!query.strict && getOutput().getDisplayName().toLowerCase().contains(query.query.getRight().toLowerCase())) {
-                return true;
-            }
+            } else return !query.strict && getOutput().getDisplayName().toLowerCase().contains(query.query.getRight().toLowerCase());
         } else if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
             List<ItemStack> groupStacks = new RecipeSymbol(query.query.getRight()).resolve();
             if (groupStacks == null) return false;

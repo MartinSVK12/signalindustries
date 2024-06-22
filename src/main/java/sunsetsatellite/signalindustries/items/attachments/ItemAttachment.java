@@ -7,8 +7,8 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
-import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -57,7 +57,7 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
         return s.toString();
     }
 
-    public void tick(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world, int slot){};
+    public void tick(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world, int slot){}
 
     public void loadTexture(String texturePath)
     {

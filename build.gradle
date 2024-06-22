@@ -132,7 +132,8 @@ dependencies {
 
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
-	modImplementation "bta-halplibe:halplibe:${project.halplibe_version}"
+	implementation project(path: ":halplibe",configuration: "namedElements")
+
 
 	modImplementation "ModMenu:ModMenu:${project.modmenu_version}"
 
@@ -143,11 +144,11 @@ dependencies {
 	implementation project(path: ":catalyst:effects",configuration: "namedElements")
 
 	implementation project(path: ":retrostorage",configuration: "namedElements")
-	implementation project(path: ":kektech",configuration: "namedElements")
+
+	implementation project(path: ":btwaila",configuration: "namedElements")
 
 
 	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
-	modImplementation "BTWaila:btwaila:${project.btwaila_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"

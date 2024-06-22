@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.inventories.machines;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -11,7 +10,6 @@ import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3f;
-import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
@@ -64,7 +62,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(0).add((BlockFluid) SIBlocks.energyFlowing);
+        acceptedFluids.get(0).add(SIBlocks.energyFlowing);
         itemContents = new ItemStack[1];
         //acceptedFluids.get(1).add((BlockFluid) Block.fluidWaterFlowing);
     }

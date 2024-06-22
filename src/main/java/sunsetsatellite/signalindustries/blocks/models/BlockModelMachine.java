@@ -1,24 +1,15 @@
 package sunsetsatellite.signalindustries.blocks.models;
 
-import net.minecraft.client.render.block.model.BlockModelHorizontalRotation;
-import net.minecraft.client.render.block.model.BlockModelStandard;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
-import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.Vec3f;
-import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -26,19 +17,19 @@ import java.util.HashMap;
 
 public class BlockModelMachine extends BlockModelCoverable {
 
-    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(),SignalIndustries.arrayFill(new IconCoordinate[Side.values().length],BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(),SignalIndustries.arrayFill(new IconCoordinate[Side.values().length],BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> overbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(),SignalIndustries.arrayFill(new IconCoordinate[Side.values().length],null));
+    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> overbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], null));
 
     public BlockModelMachine(Block block) {
         super(block);
-        hasOverbright = true;
+
     }
 
-    public BlockModelMachine(Block block, Tier tier){
+    public BlockModelMachine(Block block, Tier tier) {
         super(block);
-        hasOverbright = true;
-        switch (tier){
+
+        switch (tier) {
             case PROTOTYPE:
                 withDefaultTexture("prototype_blank");
                 withActiveTexture("prototype_blank");
@@ -60,14 +51,14 @@ public class BlockModelMachine extends BlockModelCoverable {
 
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
-        TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof IHasIOPreview){
-            if(((IHasIOPreview) tileEntity).getPreview() != IOPreview.NONE){
+        TileEntity tileEntity = blockAccess.getBlockTileEntity(x, y, z);
+        if (tileEntity instanceof IHasIOPreview) {
+            if (((IHasIOPreview) tileEntity).getPreview() != IOPreview.NONE) {
                 return super.getBlockOverbrightTexture(blockAccess, x, y, z, side);
             }
         }
-        if(tileEntity instanceof IActiveForm){
-            if(((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()){
+        if (tileEntity instanceof IActiveForm) {
+            if (((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()) {
                 int data = blockAccess.getBlockMetadata(x, y, z);
                 int index = Sides.orientationLookUpHorizontal[6 * Math.min(data, 5) + side];
                 if (index >= Sides.orientationLookUpHorizontal.length) return null;
@@ -93,9 +84,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     @Override
     public IconCoordinate getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
         HashMap<Side, IconCoordinate> usingTextures = defaultTextures;
-        TileEntity tileEntity = blockAccess.getBlockTileEntity(x,y,z);
-        if(tileEntity instanceof IActiveForm){
-            if(((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()){
+        TileEntity tileEntity = blockAccess.getBlockTileEntity(x, y, z);
+        if (tileEntity instanceof IActiveForm) {
+            if (((IActiveForm) tileEntity).isBurning() && !((IActiveForm) tileEntity).isDisabled()) {
                 usingTextures = activeTextures;
             }
         }
@@ -120,24 +111,24 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withDefaultTexture(String texture) {
-        defaultTextures.replaceAll((S,I)-> TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replaceAll((S, I) -> TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveTexture(String texture) {
-        activeTextures.replaceAll((S,I)-> TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replaceAll((S, I) -> TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightTexture(String texture) {
-        overbrightTextures.replaceAll((S,I)-> TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replaceAll((S, I) -> TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultSideTextures(String texture) {
-        defaultTextures.replaceAll((S,I)-> {
-            if(S.isHorizontal()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        defaultTextures.replaceAll((S, I) -> {
+            if (S.isHorizontal()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -145,9 +136,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withActiveSideTextures(String texture) {
-        activeTextures.replaceAll((S,I)-> {
-            if(S.isHorizontal()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        activeTextures.replaceAll((S, I) -> {
+            if (S.isHorizontal()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -155,9 +146,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withOverbrightSideTextures(String texture) {
-        overbrightTextures.replaceAll((S,I)-> {
-            if(S.isHorizontal()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        overbrightTextures.replaceAll((S, I) -> {
+            if (S.isHorizontal()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -165,9 +156,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withDefaultTopBottomTextures(String texture) {
-        defaultTextures.replaceAll((S,I)-> {
-            if(S.isVertical()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        defaultTextures.replaceAll((S, I) -> {
+            if (S.isVertical()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -175,9 +166,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withActiveTopBottomTextures(String texture) {
-        activeTextures.replaceAll((S,I)-> {
-            if(S.isVertical()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        activeTextures.replaceAll((S, I) -> {
+            if (S.isVertical()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -185,9 +176,9 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withOverbrightTopBottomTextures(String texture) {
-        overbrightTextures.replaceAll((S,I)-> {
-            if(S.isVertical()){
-                return TextureRegistry.getTexture("signalindustries:block/"+texture);
+        overbrightTextures.replaceAll((S, I) -> {
+            if (S.isVertical()) {
+                return TextureRegistry.getTexture("signalindustries:block/" + texture);
             }
             return I;
         });
@@ -195,92 +186,92 @@ public class BlockModelMachine extends BlockModelCoverable {
     }
 
     public BlockModelMachine withDefaultTopTexture(String texture) {
-        defaultTextures.replace(Side.TOP,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.TOP, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveTopTexture(String texture) {
-        activeTextures.replace(Side.TOP,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.TOP, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightTopTexture(String texture) {
-        overbrightTextures.replace(Side.TOP,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.TOP, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultBottomTexture(String texture) {
-        defaultTextures.replace(Side.BOTTOM,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveBottomTexture(String texture) {
-        activeTextures.replace(Side.BOTTOM,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightBottomTexture(String texture) {
-        overbrightTextures.replace(Side.BOTTOM,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultNorthTexture(String texture) {
-        defaultTextures.replace(Side.NORTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveNorthTexture(String texture) {
-        activeTextures.replace(Side.NORTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightNorthTexture(String texture) {
-        overbrightTextures.replace(Side.NORTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultSouthTexture(String texture) {
-        defaultTextures.replace(Side.SOUTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveSouthTexture(String texture) {
-        activeTextures.replace(Side.SOUTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightSouthTexture(String texture) {
-        overbrightTextures.replace(Side.SOUTH,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.SOUTH, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultWestTexture(String texture) {
-        defaultTextures.replace(Side.WEST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.WEST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveWestTexture(String texture) {
-        activeTextures.replace(Side.WEST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.WEST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightWestTexture(String texture) {
-        overbrightTextures.replace(Side.WEST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.WEST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withDefaultEastTexture(String texture) {
-        defaultTextures.replace(Side.EAST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        defaultTextures.replace(Side.EAST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withActiveEastTexture(String texture) {
-        activeTextures.replace(Side.EAST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        activeTextures.replace(Side.EAST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 
     public BlockModelMachine withOverbrightEastTexture(String texture) {
-        overbrightTextures.replace(Side.EAST,TextureRegistry.getTexture("signalindustries:block/"+texture));
+        overbrightTextures.replace(Side.EAST, TextureRegistry.getTexture("signalindustries:block/" + texture));
         return this;
     }
 

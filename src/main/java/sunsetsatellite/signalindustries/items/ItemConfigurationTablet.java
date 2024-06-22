@@ -41,13 +41,13 @@ public class ItemConfigurationTablet extends Item implements IWrench, ISideInter
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+    public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         if(entityplayer.isSneaking()){
             int mode = itemstack.getData().getInteger("mode");
             mode = (mode + 1) % ConfigurationTabletMode.values().length;
             itemstack.getData().putInt("mode", mode);
             entityplayer.sendStatusMessage(itemstack.getDisplayName());
         }
-        return super.onItemRightClick(itemstack, world, entityplayer);
+        return super.onUseItem(itemstack, world, entityplayer);
     }
 }

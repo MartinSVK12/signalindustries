@@ -3,11 +3,10 @@ package sunsetsatellite.signalindustries.blocks;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockRail;
-import net.minecraft.core.block.entity.TileEntity;
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.util.RailLogic;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.world.World;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.util.RailLogic;
 
 
 public class BlockDilithiumRail extends BlockRail {
@@ -17,11 +16,11 @@ public class BlockDilithiumRail extends BlockRail {
     public BlockDilithiumRail(String key, int id, boolean isPowered) {
         super(key, id, isPowered);
         this.isPowered = isPowered;
-        hasOverbright = true;
+
     }
 
     public void onBlockAdded(World world, int x, int y, int z) {
-        super.onBlockAdded(world,x,y,z);
+        super.onBlockAdded(world, x, y, z);
         this.onNeighborBlockChange(world, x, y, z, this.id);
     }
 
@@ -51,7 +50,7 @@ public class BlockDilithiumRail extends BlockRail {
             }
 
             if (flag) {
-                this.dropBlockWithCause(world, EnumDropCause.WORLD, x, y, z, world.getBlockMetadata(x, y, z), (TileEntity)null);
+                this.dropBlockWithCause(world, EnumDropCause.WORLD, x, y, z, world.getBlockMetadata(x, y, z), null);
                 world.setBlockWithNotify(x, y, z, 0);
             } else if (this.id == SIBlocks.dilithiumRail.id) {
                 boolean flag1 = world.isBlockIndirectlyGettingPowered(x, y, z) || world.isBlockIndirectlyGettingPowered(x, y + 1, z);

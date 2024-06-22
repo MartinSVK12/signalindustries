@@ -4,14 +4,12 @@ package sunsetsatellite.signalindustries.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.GuiFluid;
 import sunsetsatellite.catalyst.fluids.impl.containers.ContainerFluidTank;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.TileEntityEnergyCell;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -49,7 +47,7 @@ public class GuiEnergyCell extends GuiFluid {
             return;
         }
         if (guibutton.id == 0) {
-            SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, (IInventory) tile, tile.x, tile.y, tile.z);
+            SignalIndustries.displayGui(entityplayer, () -> new GuiFluidIOConfig(entityplayer, inventorySlots, tile, this), inventorySlots, tile, tile.x, tile.y, tile.z);
         }
         if(tile.getTier() == Tier.INFINITE && guibutton.id == 1){
             tile.isInfiniteSource = !tile.isInfiniteSource;

@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class TileEntityCoverable extends TileEntityFluidItemContainer implements IAcceptsCovers {
 
-    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) SignalIndustries.mapOf(Direction.values(),new CoverBase[Direction.values().length]);;
+    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) SignalIndustries.mapOf(Direction.values(),new CoverBase[Direction.values().length]);
 
     @Override
     public void tick() {

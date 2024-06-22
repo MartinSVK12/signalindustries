@@ -21,29 +21,29 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
         /*if(!(worldSource.getBlockTileEntity(i,j,k) instanceof TileEntityItemConduit)){
             return states;
         }*/
-        TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(i,j,k);
+        TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getBlockTileEntity(i, j, k);
         for (Direction direction : Direction.values()) {
             boolean show = false;
-            if(tile != null && tile.noConnectDirections.get(direction)){
+            if (tile != null && tile.noConnectDirections.get(direction)) {
                 states.put(direction.getName().toLowerCase(), String.valueOf(show));
                 continue;
             }
-            Vec3i offset = new Vec3i(i,j,k).add(direction.getVec());
+            Vec3i offset = new Vec3i(i, j, k).add(direction.getVec());
             Block neighbouringBlock = worldSource.getBlock(offset.x, offset.y, offset.z);
-            if(neighbouringBlock != null) {
-                if(block.getClass().isAssignableFrom(neighbouringBlock.getClass())){
+            if (neighbouringBlock != null) {
+                if (block.getClass().isAssignableFrom(neighbouringBlock.getClass())) {
                     TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
-                    if(neighbouringTile instanceof TileEntityItemConduit){
-                        if(((TileEntityItemConduit) neighbouringTile).noConnectDirections.get(direction.getOpposite())){
+                    if (neighbouringTile instanceof TileEntityItemConduit) {
+                        if (((TileEntityItemConduit) neighbouringTile).noConnectDirections.get(direction.getOpposite())) {
                             states.put(direction.getName().toLowerCase(), String.valueOf(show));
                             continue;
                         }
                     }
                     show = true;
                 } else {
-                    if(neighbouringBlock instanceof BlockTileEntity){
+                    if (neighbouringBlock instanceof BlockTileEntity) {
                         TileEntity neighbouringTile = worldSource.getBlockTileEntity(offset.x, offset.y, offset.z);
-                        if(neighbouringTile instanceof IInventory){
+                        if (neighbouringTile instanceof IInventory) {
                             show = true;
                         } else if (neighbouringBlock.hasTag(SignalIndustries.ITEM_CONDUITS_CONNECT)) {
                             show = true;
@@ -54,14 +54,14 @@ public class ItemConduitStateInterpreter extends MetaStateInterpreter {
                 }
             }
             states.put(direction.getName().toLowerCase(), String.valueOf(show));
-            if(tile != null){
-                if(tile.type == PipeType.RESTRICT){
-                    states.put("restrict_"+direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
+            if (tile != null) {
+                if (tile.type == PipeType.RESTRICT) {
+                    states.put("restrict_" + direction.getName().toLowerCase(), String.valueOf(tile.restrictDirections.get(direction)));
                 } else if (tile.type == PipeType.SENSOR) {
-                    states.put("sensor_active",String.valueOf(tile.sensorActive));
+                    states.put("sensor_active", String.valueOf(tile.sensorActive));
 
                 }
-                states.put("mode",tile.mode.name());
+                states.put("mode", tile.mode.name());
             }
         }
         return states;

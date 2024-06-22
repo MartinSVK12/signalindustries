@@ -21,7 +21,7 @@ public abstract class BlockConduitBase extends BlockContainerTiered implements I
     }
 
     @Override
-    public boolean blockActivated(World world, int x, int y, int z, EntityPlayer player) {
+    public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit) {
         if (!isPlayerHoldingWrench(player)) {
             return false;
         }
@@ -60,10 +60,10 @@ public abstract class BlockConduitBase extends BlockContainerTiered implements I
     }
 
     private void handlePipeDisconnect(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, EntityPlayer player) {
-        TileEntity tile = world.getBlockTileEntity(x,y,z);
-        if(tile instanceof TileEntityItemConduit){
+        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        if (tile instanceof TileEntityItemConduit) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
-            ((TileEntityItemConduit) tile).noConnectDirections.put(dir,!((TileEntityItemConduit) tile).noConnectDirections.get(dir));
+            ((TileEntityItemConduit) tile).noConnectDirections.put(dir, !((TileEntityItemConduit) tile).noConnectDirections.get(dir));
         }
     }
 

@@ -52,10 +52,10 @@ public class DrawUtil {
         GL11.glBlendFunc(770, 771);
         GL11.glColor4f(r, g, b, a);
         tessellator.startDrawingQuads();
-        tessellator.addVertex((double)minX, (double)maxY, 0.0);
-        tessellator.addVertex((double)maxX, (double)maxY, 0.0);
-        tessellator.addVertex((double)maxX, (double)minY, 0.0);
-        tessellator.addVertex((double)minX, (double)minY, 0.0);
+        tessellator.addVertex(minX, maxY, 0.0);
+        tessellator.addVertex(maxX, maxY, 0.0);
+        tessellator.addVertex(maxX, minY, 0.0);
+        tessellator.addVertex(minX, minY, 0.0);
         tessellator.draw();
         GL11.glEnable(3553);
         GL11.glDisable(3042);
@@ -82,10 +82,10 @@ public class DrawUtil {
         GL11.glDisable(3553);
         GL11.glColor4f(r, g, b, a);
         tessellator.startDrawingQuads();
-        tessellator.addVertex((double)minX, (double)maxY, 0.0);
-        tessellator.addVertex((double)maxX, (double)maxY, 0.0);
-        tessellator.addVertex((double)maxX, (double)minY, 0.0);
-        tessellator.addVertex((double)minX, (double)minY, 0.0);
+        tessellator.addVertex(minX, maxY, 0.0);
+        tessellator.addVertex(maxX, maxY, 0.0);
+        tessellator.addVertex(maxX, minY, 0.0);
+        tessellator.addVertex(minX, minY, 0.0);
         tessellator.draw();
         GL11.glEnable(3553);
     }
@@ -99,10 +99,10 @@ public class DrawUtil {
         GL11.glDisable(3553);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertex((double)x, (double)y, 0.0);
-        tessellator.addVertex((double)x, (double)(y + height), 0.0);
-        tessellator.addVertex((double)(x + width), (double)(y + height), 0.0);
-        tessellator.addVertex((double)(x + width), (double)y, 0.0);
+        tessellator.addVertex(x, y, 0.0);
+        tessellator.addVertex(x, y + height, 0.0);
+        tessellator.addVertex(x + width, y + height, 0.0);
+        tessellator.addVertex(x + width, y, 0.0);
         tessellator.draw();
     }
 
@@ -123,11 +123,11 @@ public class DrawUtil {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorRGBA_F(r1, g1, b1, a1);
-        tessellator.addVertex((double)maxX, (double)minY, 0.0);
-        tessellator.addVertex((double)minX, (double)minY, 0.0);
+        tessellator.addVertex(maxX, minY, 0.0);
+        tessellator.addVertex(minX, minY, 0.0);
         tessellator.setColorRGBA_F(r2, g2, b2, a2);
-        tessellator.addVertex((double)minX, (double)maxY, 0.0);
-        tessellator.addVertex((double)maxX, (double)maxY, 0.0);
+        tessellator.addVertex(minX, maxY, 0.0);
+        tessellator.addVertex(maxX, maxY, 0.0);
         tessellator.draw();
         GL11.glShadeModel(7424);
         GL11.glDisable(3042);
@@ -200,15 +200,15 @@ public class DrawUtil {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
-                (double)(x + 0), (double)(y + height), (double)this.zLevel, (double)((float)(u + 0) * uScale), (double)((float)(v + height) * vScale)
+                x, y + height, this.zLevel, (float)(u) * uScale, (float)(v + height) * vScale
         );
         tessellator.addVertexWithUV(
-                (double)(x + width), (double)(y + height), (double)this.zLevel, (double)((float)(u + width) * uScale), (double)((float)(v + height) * vScale)
+                x + width, y + height, this.zLevel, (float)(u + width) * uScale, (float)(v + height) * vScale
         );
         tessellator.addVertexWithUV(
-                (double)(x + width), (double)(y + 0), (double)this.zLevel, (double)((float)(u + width) * uScale), (double)((float)(v + 0) * vScale)
+                x + width, y, this.zLevel, (float)(u + width) * uScale, (float)(v) * vScale
         );
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, (double)((float)(u + 0) * uScale), (double)((float)(v + 0) * vScale));
+        tessellator.addVertexWithUV(x, y, this.zLevel, (float)(u) * uScale, (float)(v) * vScale);
         tessellator.draw();
     }
 
@@ -217,12 +217,12 @@ public class DrawUtil {
         float vScale = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0.0, y + (double)height, (double)this.zLevel, (double)((float)(u + 0) * uScale), (double)((float)(v + uvHeight) * vScale));
+        tessellator.addVertexWithUV(x + 0.0, y + (double)height, this.zLevel, (float)(u) * uScale, (float)(v + uvHeight) * vScale);
         tessellator.addVertexWithUV(
-                x + (double)width, y + (double)height, (double)this.zLevel, (double)((float)(u + uvWidth) * uScale), (double)((float)(v + uvHeight) * vScale)
+                x + (double)width, y + (double)height, this.zLevel, (float)(u + uvWidth) * uScale, (float)(v + uvHeight) * vScale
         );
-        tessellator.addVertexWithUV(x + (double)width, y + 0.0, (double)this.zLevel, (double)((float)(u + uvWidth) * uScale), (double)((float)(v + 0) * vScale));
-        tessellator.addVertexWithUV(x + 0.0, y + 0.0, (double)this.zLevel, (double)((float)(u + 0) * uScale), (double)((float)(v + 0) * vScale));
+        tessellator.addVertexWithUV(x + (double)width, y + 0.0, this.zLevel, (float)(u + uvWidth) * uScale, (float)(v) * vScale);
+        tessellator.addVertexWithUV(x + 0.0, y + 0.0, this.zLevel, (float)(u) * uScale, (float)(v) * vScale);
         tessellator.draw();
     }
 
@@ -230,15 +230,15 @@ public class DrawUtil {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
-                (double)(x + 0), (double)(y + height), (double)this.zLevel, (double)((float)(u + 0) * scale), (double)((float)(v + uvWidth) * scale)
+                x, y + height, this.zLevel, (float)(u) * scale, (float)(v + uvWidth) * scale
         );
         tessellator.addVertexWithUV(
-                (double)(x + width), (double)(y + height), (double)this.zLevel, (double)((float)(u + uvWidth) * scale), (double)((float)(v + uvWidth) * scale)
+                x + width, y + height, this.zLevel, (float)(u + uvWidth) * scale, (float)(v + uvWidth) * scale
         );
         tessellator.addVertexWithUV(
-                (double)(x + width), (double)(y + 0), (double)this.zLevel, (double)((float)(u + uvWidth) * scale), (double)((float)(v + 0) * scale)
+                x + width, y, this.zLevel, (float)(u + uvWidth) * scale, (float)(v) * scale
         );
-        tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)this.zLevel, (double)((float)(u + 0) * scale), (double)((float)(v + 0) * scale));
+        tessellator.addVertexWithUV(x, y, this.zLevel, (float)(u) * scale, (float)(v) * scale);
         tessellator.draw();
     }
 }

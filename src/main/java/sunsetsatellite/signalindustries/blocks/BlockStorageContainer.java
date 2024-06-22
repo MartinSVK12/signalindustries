@@ -9,9 +9,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tool.ItemTool;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -51,19 +49,19 @@ public class BlockStorageContainer extends BlockContainerTiered {
     }
 
     @Override
-    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-        super.onBlockClicked(world, x, y, z, player);
+    public void onBlockLeftClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit) {
+        super.onBlockLeftClicked(world, x, y, z, player, side, xHit, yHit);
         TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getBlockTileEntity(x, y, z);
         if (tile != null) {
-            if(player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof ItemTool)){
+            if (player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof ItemTool)) {
                 ItemStack stack;
-                if(!player.isSneaking()){
+                if (!player.isSneaking()) {
                     stack = tile.extractStack(1);
                 } else {
                     stack = tile.extractStack();
                 }
-                if(stack != null){
-                    Vec3f vec = new Vec3f(x,y,z).add(Direction.getDirectionFromSide(world.getBlockMetadata(x,y,z)).getVecF()).add(0.5f);
+                if (stack != null) {
+                    Vec3f vec = new Vec3f(x, y, z).add(Direction.getDirectionFromSide(world.getBlockMetadata(x, y, z)).getVecF()).add(0.5f);
                     EntityItem entityitem = new EntityItem(world, vec.x, vec.y, vec.z, stack);
                     world.entityJoinedWorld(entityitem);
                 }
@@ -72,17 +70,16 @@ public class BlockStorageContainer extends BlockContainerTiered {
     }
 
     @Override
-    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer player)
-    {
+    public boolean onBlockRightClicked(World world, int i, int j, int k, EntityPlayer player, Side side, double xHit, double yHit) {
         TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-            if(player.getCurrentEquippedItem() != null) {
+            if (player.getCurrentEquippedItem() != null) {
                 if (player.getCurrentEquippedItem().animationsToGo <= 0) {
                     ItemStack stack = player.getCurrentEquippedItem().copy();
                     stack.stackSize = 1;
-                    if(tile.insertStack(stack)){
+                    if (tile.insertStack(stack)) {
                         player.getCurrentEquippedItem().stackSize--;
-                        if(player.getCurrentEquippedItem().stackSize <= 0){
+                        if (player.getCurrentEquippedItem().stackSize <= 0) {
                             player.destroyCurrentEquippedItem();
                         } else {
                             player.getCurrentEquippedItem().animationsToGo = 5;
@@ -90,7 +87,7 @@ public class BlockStorageContainer extends BlockContainerTiered {
                     }
                 } else {
                     tile.insertStack(player.getCurrentEquippedItem());
-                    if(player.getCurrentEquippedItem().stackSize <= 0){
+                    if (player.getCurrentEquippedItem().stackSize <= 0) {
                         player.destroyCurrentEquippedItem();
                     } else {
                         player.getCurrentEquippedItem().animationsToGo = 5;
@@ -98,11 +95,11 @@ public class BlockStorageContainer extends BlockContainerTiered {
                 }
                 return true;
             } else {
-                if(tile.infinite && player.gamemode == Gamemode.creative){
+                if (tile.infinite && player.gamemode == Gamemode.creative) {
                     tile.contents = null;
                 } else {
                     tile.locked = !tile.locked;
-                    if(tile.locked){
+                    if (tile.locked) {
                         player.sendTranslatedChatMessage("event.signalindustries.containerLocked");
                     } else {
                         player.sendTranslatedChatMessage("event.signalindustries.containerUnlocked");
