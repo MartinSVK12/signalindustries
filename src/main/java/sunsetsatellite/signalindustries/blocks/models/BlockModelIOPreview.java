@@ -21,6 +21,7 @@ public class BlockModelIOPreview extends BlockModelStandard<Block> {
 
     public BlockModelIOPreview(Block block) {
         super(block);
+        hasOverbright = true;
     }
 
     @Override

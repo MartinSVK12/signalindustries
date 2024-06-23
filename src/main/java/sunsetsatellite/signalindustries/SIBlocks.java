@@ -16,6 +16,8 @@ import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.states.*;
+import sunsetsatellite.signalindustries.items.itemblocks.ItemBlockSIFluidTank;
+import sunsetsatellite.signalindustries.items.models.ItemModelBlockSIFluidTank;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.BlockBuilder;
@@ -495,6 +497,8 @@ public class SIBlocks extends DataInitializer {
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(BlockModelCoverable::new)
+                .setItemModel(ItemModelBlockSIFluidTank::new)
+                .setItemBlock(ItemBlockSIFluidTank::new)
                 .build(new BlockSIFluidTank("prototype.fluidTank", config.getInt("BlockIDs.prototypeFluidTank"), Tier.PROTOTYPE, Material.glass));
         infiniteFluidTank = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_tank_prototype")
@@ -511,6 +515,8 @@ public class SIBlocks extends DataInitializer {
                 .setResistance(5)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(BlockModelCoverable::new)
+                .setItemModel(ItemModelBlockSIFluidTank::new)
+                .setItemBlock(ItemBlockSIFluidTank::new)
                 .build(new BlockSIFluidTank("basic.fluidTank", config.getInt("BlockIDs.basicFluidTank"), Tier.BASIC, Material.glass));
         prototypeExtractor = new BlockBuilder(MOD_ID)
                 .setHardness(1)

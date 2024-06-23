@@ -26,6 +26,7 @@ public class BlockModelExtendedIO extends BlockModelStandard<BlockExternalIO> {
 
     public BlockModelExtendedIO(Block block) {
         super(block);
+        hasOverbright = true;
     }
 
     @Override

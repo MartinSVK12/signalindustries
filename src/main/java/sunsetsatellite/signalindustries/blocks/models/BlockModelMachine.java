@@ -23,6 +23,7 @@ public class BlockModelMachine extends BlockModelCoverable {
 
     public BlockModelMachine(Block block) {
         super(block);
+        hasOverbright = true;
 
     }
 

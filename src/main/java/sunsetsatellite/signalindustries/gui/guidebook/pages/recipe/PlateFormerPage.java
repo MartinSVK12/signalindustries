@@ -130,7 +130,7 @@ public class PlateFormerPage
             RecipeEntryMachine recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
             drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition,0xFF808080);
-            drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition + 8,0xFFCC0000);
+            drawStringCenteredNoShadow(fr,(int)(recipe.getData().cost*((float)recipe.getData().ticks/200.0f))+" sE",x + list.get(list.size()-1).xDisplayPosition - 76, y +  list.get(list.size()-1).yDisplayPosition + 8,0xFFCC0000);
 
             //drawTexturedModalRect( 90, 35, 22, 15);
         }

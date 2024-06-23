@@ -17,6 +17,7 @@ public class BlockModelUVLamp extends BlockModelStandard<BlockUVLamp> {
 
     public BlockModelUVLamp(Block block) {
         super(block);
+        hasOverbright = true;
 
     }
 

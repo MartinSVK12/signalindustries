@@ -12,6 +12,7 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityCoverable;
 public class BlockModelCoverable extends BlockModelIOPreview {
     public BlockModelCoverable(Block block) {
         super(block);
+        hasOverbright = true;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.catalyst;
 
 
-import net.minecraft.core.block.BlockFluid;
 import org.slf4j.Logger;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.registry.FluidRegistryEntry;

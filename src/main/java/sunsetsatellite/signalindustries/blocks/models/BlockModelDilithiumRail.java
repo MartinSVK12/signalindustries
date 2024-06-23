@@ -8,6 +8,7 @@ import sunsetsatellite.signalindustries.blocks.BlockDilithiumRail;
 public class BlockModelDilithiumRail extends BlockModelRail<BlockDilithiumRail> {
     public BlockModelDilithiumRail(Block block) {
         super(block);
+        hasOverbright = true;
         powerActive = TextureRegistry.getTexture("signalindustries:block/dilithium_rail");
         powerActiveOverlay = TextureRegistry.getTexture("signalindustries:block/dilithium_rail_overlay");
     }

@@ -139,7 +139,7 @@ public class InfuserPage
             RecipeEntryMachine recipe = recipes.get(i-1);
             List<SlotGuidebook> list = map.get(recipe);
             drawStringCenteredNoShadow(fr,recipe.getData().ticks+"t",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 18,0xFF202020);
-            drawStringCenteredNoShadow(fr,recipe.getData().cost+" sE",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 26,0xFFCC0000);
+            drawStringCenteredNoShadow(fr,(int)(recipe.getData().cost*((float)recipe.getData().ticks/200.0f))+" sE",x + list.get(list.size()-1).xDisplayPosition - 20, y +  list.get(list.size()-1).yDisplayPosition + 26,0xFFCC0000);
 
             //drawTexturedModalRect( 90, 35, 22, 15);
         }

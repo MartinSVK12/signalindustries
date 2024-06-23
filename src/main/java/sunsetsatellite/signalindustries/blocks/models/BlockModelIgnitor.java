@@ -29,6 +29,8 @@ public class BlockModelIgnitor extends BlockModelStandard<BlockIgnitor> {
     public BlockModelIgnitor(Block block) {
         super(block);
 
+        hasOverbright = true;
+
         defaultTextures.put(Side.TOP, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_top_inactive"));
         defaultTextures.put(Side.BOTTOM, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_bottom_inactive"));
         defaultTextures.put(Side.NORTH, TextureRegistry.getTexture("signalindustries:block/reinforced_ignitor_inactive"));

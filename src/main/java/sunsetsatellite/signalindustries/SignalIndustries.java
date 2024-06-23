@@ -35,8 +35,10 @@ import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.NBTEditCommand;
+import sunsetsatellite.catalyst.fluids.registry.FluidRegistryEntry;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
@@ -424,7 +426,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         if(stack == null) {
             return 0;
         } else {
-            return stack.isFluidEqual(new FluidStack(SIBlocks.energyFlowing,1)) ? 100 : 0;
+            return stack.isFluidEqual(new FluidStack(SIBlocks.energyFlowing,1)) ? 200 : 0;
         }
     }
 
@@ -699,5 +701,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                 .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyActivateBootBackRAttachment()));
         OptionsPages.CONTROLS
                 .withComponent(category);
+
+        List<BlockFluid> fluidsWithoutSE = CatalystFluids.FLUIDS.getAllFluids().stream().filter((F) -> F != SIBlocks.energyFlowing).collect(Collectors.toList());
+        FluidRegistryEntry entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.prototypeFluidTank.id], Item.itemsList[SIBlocks.prototypeFluidTank.id], fluidsWithoutSE);
+        CatalystFluids.FLUIDS.register(SignalIndustries.key("prototypeFluidTank"),entry);
+        entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
+        CatalystFluids.FLUIDS.register(SignalIndustries.key("basicFluidTank"),entry);
     }
 }

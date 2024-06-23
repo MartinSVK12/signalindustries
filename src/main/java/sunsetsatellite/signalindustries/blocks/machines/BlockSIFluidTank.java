@@ -1,14 +1,18 @@
 package sunsetsatellite.signalindustries.blocks.machines;
 
 
+import com.mojang.nbt.CompoundTag;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemBucketEmpty;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.CatalystFluids;
@@ -92,5 +96,28 @@ public class BlockSIFluidTank extends BlockMachineBase {
     @Override
     public boolean isSolidRender() {
         return false;
+    }
+
+    @Override
+    public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
+        TileEntitySIFluidTank tile = (TileEntitySIFluidTank) tileEntity;
+        CompoundTag fluidContents = new CompoundTag();
+        ItemStack stack = new ItemStack(this);
+        if(tile != null && tile.getFluidInSlot(0) != null){
+            tile.getFluidInSlot(0).writeToNBT(fluidContents);
+            stack.getData().putCompound("Fluid",fluidContents);
+        }
+        return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[]{stack} : null;
+    }
+
+    @Override
+    public String getDescription(ItemStack stack) {
+        if(stack.getData().containsKey("Fluid")){
+            BlockFluid fluid = (BlockFluid) Block.blocksList[stack.getData().getCompound("Fluid").getShort("liquid")];
+            int amount = stack.getData().getCompound("Fluid").getInteger("amount");
+            int maxAmount = (int) Math.pow(2, this.tier.ordinal()) * 8000;
+            return super.getDescription(stack)+"\n"+String.format("Contains: %d/%d mB %s",amount, maxAmount, I18n.getInstance().translateNameKey(fluid.getKey()));
+        }
+        return super.getDescription(stack);
     }
 }
