@@ -90,8 +90,8 @@ public class SIBlocks extends DataInitializer {
     public static Block dimensionalAnchor;
     public static Block dilithiumStabilizer;
     public static Block redstoneBooster;
-    public static Block dilithiumBooster;//TODO: W.I.P.
-    public static Block awakenedBooster;
+    public static Block dilithiumBooster;
+    public static Block awakenedBooster; //TODO: W.I.P.
     public static Block prototypePump;
     public static Block basicPump;
     public static Block prototypeInserter;
