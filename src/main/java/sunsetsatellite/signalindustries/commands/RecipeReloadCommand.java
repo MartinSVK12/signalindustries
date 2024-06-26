@@ -35,7 +35,7 @@ public class RecipeReloadCommand extends Command {
             ITEM_GROUPS.forEach(list::add);
             list.forEach((L)->{
                 String key = ITEM_GROUPS.getKey(L);
-                ITEM_GROUPS.unregister(key);
+                if(key != null) ITEM_GROUPS.unregister(key);
             });
             list2.forEach((C)->{
                 String key = RECIPE_TYPES.getKey(C);

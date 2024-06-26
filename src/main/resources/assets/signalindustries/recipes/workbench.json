@@ -2328,5 +2328,231 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/blank_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      "CSC",
+      " C "
+    ],
+    "symbols": [
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.steelPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.blank",
+      "amount": 4,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/dilithium_lens",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " R ",
+      "RDR",
+      " R "
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.dilithiumLens",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/redstone_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "R",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "tile.torch.redstone.active",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cover.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.redstone",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/switch_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "L",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "tile.lever.cobble.stone",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cover.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.switch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/pump_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "B",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.bucket",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cover.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.fluid",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/conveyor_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "V",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "V",
+        "stack": {
+          "key": "tile.signalindustries.basic.conduit.item",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cover.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.item",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/void_cover",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "V",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "V",
+        "stack": {
+          "key": "tile.signalindustries.voidContainer",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.cover.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.cover.void",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]
