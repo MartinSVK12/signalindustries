@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.fx.EntityFX;
@@ -16,7 +15,8 @@ import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.client.render.stitcher.AtlasStitcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.core.block.*;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.tag.Tag;
@@ -62,7 +62,6 @@ import sunsetsatellite.signalindustries.inventories.machines.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
-import sunsetsatellite.signalindustries.util.*;
 import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -680,7 +679,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         loadTextures(TextureRegistry.particleAtlas);
         Minecraft.getMinecraft(Minecraft.class).renderEngine.refreshTextures(new ArrayList<>());
 
-        BlockDataExporter.export(this.getClass());
         AchievementHelper.addPage(ACHIEVEMENTS);
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");
         category
