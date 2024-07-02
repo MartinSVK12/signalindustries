@@ -1,9 +1,12 @@
 package sunsetsatellite.signalindustries.mixin;
 
 
-import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.WeightedRandomBag;
+import net.minecraft.core.WeightedRandomLootObject;
+import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeatureLabyrinth;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -16,25 +19,13 @@ import java.util.Random;
         remap = false
 )
 public class WorldGenLabyrinthMixin {
-    @Inject(
-            method = "pickCheckLootItem",
-            at = @At("TAIL"),
-            cancellable = true
-    )
-    private void pickCheckLootItem(Random random, CallbackInfoReturnable<ItemStack> cir) {
-        if (random.nextInt(64) == 0){
-            int j = random.nextInt(2);
-            switch (j){
-                case 0:
-                    cir.setReturnValue(new ItemStack(SIItems.romChipProjectile,1));
-                    break;
-                case 1:
-                    cir.setReturnValue(new ItemStack(SIItems.romChipBoost,1));
-                    break;
-            }
-        } else {
-            cir.setReturnValue(null);
-        }
+
+    @Shadow public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
+
+    @Inject(method = "generate",at = @At("TAIL"))
+    private void init(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
+        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 10);
+        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 10);
     }
 
 }
