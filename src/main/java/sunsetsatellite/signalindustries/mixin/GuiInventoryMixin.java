@@ -8,17 +8,40 @@ import net.minecraft.client.gui.GuiInventory;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.Container;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.items.ItemSmartWatch;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
+import sunsetsatellite.signalindustries.util.IndexRenderer;
 
+import java.util.Arrays;
+
+@Debug(export = true)
 @Mixin(value = GuiInventory.class,remap = false)
-public abstract class GuiInventoryMixin {
+public abstract class GuiInventoryMixin extends GuiContainer {
+
+
+    private GuiInventoryMixin(Container container) {
+        super(container);
+    }
+
+    @Override
+    public void keyTyped(char c, int i, int mouseX, int mouseY) {
+        IndexRenderer.keyTyped(c, i, mouseX, mouseY);
+        super.keyTyped(c, i, mouseX, mouseY);
+    }
+
+    @Inject(method = "drawScreen",at = @At("TAIL"))
+    public void drawScreen(int mouseX, int mouseY, float partialTick, CallbackInfo ci){
+        if(Arrays.stream(mc.thePlayer.inventory.mainInventory).anyMatch((S)->S != null && S.isItemEqual(SIItems.raziel.getDefaultStack()))){
+            IndexRenderer.drawScreen(mc,mouseX,mouseY,width,height,partialTick);
+        }
+    }
 
     @Inject(method = "updateOverlayButtons",at = @At(value = "FIELD", target = "Lnet/minecraft/core/item/ItemStack;itemID:I"))
     public void updateOverlayButtons(CallbackInfo ci, @Local(name = "item") ItemStack stack, @Local(name = "clock") LocalBooleanRef clock, @Local(name = "compass") LocalBooleanRef compass, @Local(name = "rotaryCalendar") LocalBooleanRef calendar) {

@@ -125,6 +125,8 @@ public class SIItems extends DataInitializer {
     public static ItemCover switchCover;
     public static ItemCover dilithiumLensCover;
 
+    public static Item raziel;
+
     public void init() {
         if (initialized) return;
         LOGGER.info("Initializing items...");
@@ -185,6 +187,7 @@ public class SIItems extends DataInitializer {
         condensedMilkCan = simpleItem("condensedMilkCan","condensedMilkCan","signalindustries:item/condensed_milk_can").setMaxStackSize(1);
         bucketCaramel = simpleItem("bucketCaramel","bucketCaramel","signalindustries:item/bucket_caramel").setMaxStackSize(1).setContainerItem(Item.bucket);
         caramelPlate = simpleItem("caramelPlate","caramelPlate","signalindustries:item/caramel_plate");
+        raziel = simpleItem("raziel","raziel","signalindustries:item/raziel").setMaxStackSize(1);
         krowka = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/krowka")
                 .setStackSize(8)

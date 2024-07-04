@@ -251,6 +251,8 @@ item.signalindustries.basic.portableWorkbench.name=Portable Workbench
 item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
 item.signalindustries.basic.smartWatch.name=Smartwatch
 item.signalindustries.basic.smartWatch.desc=Combines the utility of the Compass, Clock and Rotary Calendar.
+item.signalindustries.raziel.name=Raziel
+item.signalindustries.raziel.desc=Displays almost every block and item in the game when it is in your inventory.
 
 item.signalindustries.blankAbilityModule.name=Blank Application Module
 item.signalindustries.blankAbilityModule.desc=Base component of an [Application Module].
@@ -733,6 +735,8 @@ achievement.signalindustries.eclipse=Totality
 achievement.signalindustries.eclipse.desc=Experience a Solar Eclipse!
 achievement.signalindustries.starfall=Starfall
 achievement.signalindustries.starfall.desc=Experience a Meteor Shower!
+achievement.signalindustries.divineKnowledge=Divine Knowledge
+achievement.signalindustries.divineKnowledge.desc=Craft the block/item index, Raziel, containing almost enough items.
 
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability

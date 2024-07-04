@@ -54,6 +54,7 @@ public class SIAchievements extends DataInitializer {
     public static Achievement BLOOD_MOON;
     public static Achievement ECLIPSE;
     public static Achievement STARFALL;
+    public static Achievement DIVINE_KNOWLEDGE;
 
     public void init() {
         if(initialized) return;
@@ -100,6 +101,7 @@ public class SIAchievements extends DataInitializer {
         BLOOD_MOON = new Achievement(nextAchievementID++, langKey("bloodMoon"), -2, 2 - offsetY, SIItems.monsterShard, null);
         ECLIPSE = new Achievement(nextAchievementID++, langKey("eclipse"), -2, 4 - offsetY, SIItems.infernalFragment, null);
         STARFALL = new Achievement(nextAchievementID++, langKey("starfall"), -2, 8 - offsetY, Block.lampActive, null);
+        DIVINE_KNOWLEDGE = new Achievement(nextAchievementID++, langKey("divineKnowledge"), -2, 10 - offsetY, SIItems.raziel, null);
 
         Field[] achievements = SIAchievements.class.getDeclaredFields();
         Arrays.stream(achievements).filter((F)->F.getType().equals(Achievement.class)).forEach((F)->{

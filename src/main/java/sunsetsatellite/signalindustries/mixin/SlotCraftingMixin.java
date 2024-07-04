@@ -66,5 +66,8 @@ public class SlotCraftingMixin {
         if(item.id == SIBlocks.basicPump.id){
             thePlayer.triggerAchievement(SIAchievements.PUMP);
         }
+        if(item.id == SIItems.raziel.id){
+            thePlayer.triggerAchievement(SIAchievements.DIVINE_KNOWLEDGE);
+        }
     }
 }
