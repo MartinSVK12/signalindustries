@@ -252,7 +252,7 @@ item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
 item.signalindustries.basic.smartWatch.name=Smartwatch
 item.signalindustries.basic.smartWatch.desc=Combines the utility of the Compass, Clock and Rotary Calendar.
 item.signalindustries.raziel.name=Raziel
-item.signalindustries.raziel.desc=Displays almost every block and item in the game when it is in your inventory.
+item.signalindustries.raziel.desc=Displays almost every block and item in the game when it is in your inventory, or when it is placed in a <Application Module> of a activated <Signalum Power Suit>.
 
 item.signalindustries.blankAbilityModule.name=Blank Application Module
 item.signalindustries.blankAbilityModule.desc=Base component of an <Application Module>.
