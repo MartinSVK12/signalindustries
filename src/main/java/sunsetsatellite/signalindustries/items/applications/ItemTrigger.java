@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.items;
+package sunsetsatellite.signalindustries.items.applications;
 
 
 import com.mojang.nbt.CompoundTag;
@@ -13,6 +13,7 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.abilities.trigger.BoostAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ProjectileAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.TriggerBaseAbility;
+import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 
 import java.util.HashMap;
 

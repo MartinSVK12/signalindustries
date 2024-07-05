@@ -6,7 +6,12 @@ import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.material.ToolMaterial;
 import sunsetsatellite.signalindustries.covers.*;
 import sunsetsatellite.signalindustries.items.*;
-import sunsetsatellite.signalindustries.items.applications.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.applications.ItemRaziel;
+import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
+import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
+import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
+import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
@@ -187,7 +192,10 @@ public class SIItems extends DataInitializer {
         condensedMilkCan = simpleItem("condensedMilkCan","condensedMilkCan","signalindustries:item/condensed_milk_can").setMaxStackSize(1);
         bucketCaramel = simpleItem("bucketCaramel","bucketCaramel","signalindustries:item/bucket_caramel").setMaxStackSize(1).setContainerItem(Item.bucket);
         caramelPlate = simpleItem("caramelPlate","caramelPlate","signalindustries:item/caramel_plate");
-        raziel = simpleItem("raziel","raziel","signalindustries:item/raziel").setMaxStackSize(1);
+        raziel = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/raziel")
+                .setStackSize(1)
+                .build(new ItemRaziel("raziel", config.getInt("ItemIDs.raziel"), Tier.BASIC));
         krowka = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/krowka")
                 .setStackSize(8)

@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.items;
+package sunsetsatellite.signalindustries.items.attachments;
 
 
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -11,7 +11,6 @@ import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
 import sunsetsatellite.signalindustries.gui.GuiAbilityModule;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 

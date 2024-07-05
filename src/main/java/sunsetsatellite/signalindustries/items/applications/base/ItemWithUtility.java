@@ -1,9 +1,7 @@
-package sunsetsatellite.signalindustries.items.applications;
+package sunsetsatellite.signalindustries.items.applications.base;
 
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.interfaces.IApplicationItem;

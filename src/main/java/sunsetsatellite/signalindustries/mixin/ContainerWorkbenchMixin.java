@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemPortableWorkbench;
+import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(value = ContainerWorkbench.class,remap = false)
@@ -21,7 +21,14 @@ public class ContainerWorkbenchMixin {
             for (ItemStack content : powerSuit.module.contents) {
                 if(content != null && content.getItem() instanceof ItemPortableWorkbench){
                     cir.setReturnValue(true);
+                    return;
                 }
+            }
+        }
+        for (ItemStack content : entityplayer.inventory.mainInventory) {
+            if(content != null && content.getItem() instanceof ItemPortableWorkbench){
+                cir.setReturnValue(true);
+                return;
             }
         }
     }

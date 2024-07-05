@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
-import sunsetsatellite.signalindustries.items.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 
 public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 

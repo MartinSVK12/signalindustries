@@ -1,30 +1,30 @@
 tile.signalindustries.signalumEnergy.name=Signalum Energy
 tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically energetic properties. Used to power a new kind of technology.
 tile.signalindustries.burntSignalum.name=Burnt Signalum
-tile.signalindustries.burntSignalum.desc=[Signalum Energy] burnt out in an unstable reaction. But there's still beauty in the ashes, can you find it?
+tile.signalindustries.burntSignalum.desc=<Signalum Energy> burnt out in an unstable reaction. But there's still beauty in the ashes, can you find it?
 item.signalindustries.signalumCrystal.name=Signalum Crystal
-item.signalindustries.signalumCrystal.desc=A pure crystal used to transport [Signalum Energy]. Shines with a bright red glow.
+item.signalindustries.signalumCrystal.desc=A pure crystal used to transport <Signalum Energy>. Shines with a bright red glow. Can be used on any slot accepting <Signalum Energy> to drain or fill it.
 item.signalindustries.infiniteSignalumCrystal.name=Infinite Signalum Crystal
-item.signalindustries.infiniteSignalumCrystal.desc=A source of infinite and eternal power. Contains infinite [Signalum Energy]! Creative mode only.
+item.signalindustries.infiniteSignalumCrystal.desc=A source of infinite and eternal power. Contains infinite <Signalum Energy>! Creative mode only.
 item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
-item.signalindustries.signalumCrystalEmpty.desc=Unpowered [Signalum Crystal]. Still useful for its physical properties.
+item.signalindustries.signalumCrystalEmpty.desc=Unpowered <Signalum Crystal>. Still useful for its physical properties.
 item.signalindustries.rawSignalumCrystal.name=Raw Signalum Crystal
 item.signalindustries.rawSignalumCrystal.desc=The beginning of it all. Crude shards infused with a new kind of energy.
 item.signalindustries.volatileSignalumCrystal.name=Volatile Signalum Crystal
-item.signalindustries.volatileSignalumCrystal.desc=Designed to break on impact, releasing a burst of [Signalum Energy]. Handle with care.
+item.signalindustries.volatileSignalumCrystal.desc=Designed to break on impact, releasing a burst of <Signalum Energy>. Handle with care.
 item.signalindustries.awakenedSignalumCrystal.name=Awakened Signalum Crystal
 item.signalindustries.awakenedSignalumCrystal.desc=The pinnacle of Signalum technology. The power of the first star reborn. Shine!
 item.signalindustries.awakenedSignalumFragment.name=Awakened Signalum Fragment
 item.signalindustries.awakenedSignalumFragment.desc=Let me reach for the stars now, they're so close to me~
 
 item.signalindustries.crystalAlloyIngot.name=Crystal Alloy Ingot
-item.signalindustries.crystalAlloyIngot.desc=An alloy of steel and [Signalum Crystal Dust].
+item.signalindustries.crystalAlloyIngot.desc=An alloy of steel and <Signalum Crystal Dust>.
 item.signalindustries.saturatedSignalumAlloyIngot.name=Saturated Signalum Alloy Ingot
-item.signalindustries.saturatedSignalumAlloyIngot.desc=The result of infusing [Crystal Alloy] with [S. Energy].
+item.signalindustries.saturatedSignalumAlloyIngot.desc=The result of infusing <Crystal Alloy> with <S. Energy>.
 item.signalindustries.reinforcedCrystalAlloyIngot.name=Reinforced Crystal Alloy Ingot
-item.signalindustries.reinforcedCrystalAlloyIngot.desc=A better, stronger alloy made out of [Glowing Obsidian] and [Crystal Alloy].
+item.signalindustries.reinforcedCrystalAlloyIngot.desc=A better, stronger alloy made out of <Glowing Obsidian> and <Crystal Alloy>.
 item.signalindustries.voidAlloyIngot.name=Void Alloy Ingot
-item.signalindustries.voidAlloyIngot.desc=Woven [Fabric of Reality] combined with [R. C. Alloy].
+item.signalindustries.voidAlloyIngot.desc=Woven <Fabric of Reality> combined with <R. C. Alloy>.
 item.signalindustries.awakenedAlloyIngot.name=Awakened Alloy Ingot
 item.signalindustries.awakenedAlloyIngot.desc=The perfect alloy, shines with radiant glow.
 
@@ -42,26 +42,26 @@ item.signalindustries.awakenedSignalumCrystalDust.name=Awakened Signalum Crystal
 item.signalindustries.awakenedSignalumCrystalDust.desc=Ground up awakened signalum crystals.
 
 item.signalindustries.ironPlateHammer.name=Iron Plate Hammer
-item.signalindustries.ironPlateHammer.desc=Stop! It's hammer time! Makes [Plates] out of basic materials.
+item.signalindustries.ironPlateHammer.desc=Stop! It's hammer time! Makes <Plates> out of basic materials.
 
 item.signalindustries.cobblestonePlate.name=Cobblestone Plate
 item.signalindustries.cobblestonePlate.desc=A plate made out of cobblestone.
 item.signalindustries.stonePlate.name=Stone Plate
 item.signalindustries.stonePlate.desc=A plate made out of stone.
 item.signalindustries.crystalAlloyPlate.name=Crystal Alloy Plate
-item.signalindustries.crystalAlloyPlate.desc=A plate made out of [Crystal Alloy].
+item.signalindustries.crystalAlloyPlate.desc=A plate made out of <Crystal Alloy>.
 item.signalindustries.reinforcedCrystalAlloyPlate.name=Reinforced Crystal Alloy Plate
-item.signalindustries.reinforcedCrystalAlloyPlate.desc=A plate made out of [Reinforced Crystal Alloy].
+item.signalindustries.reinforcedCrystalAlloyPlate.desc=A plate made out of <Reinforced Crystal Alloy>.
 item.signalindustries.saturatedSignalumAlloyPlate.name=Saturated Signalum Alloy Plate
-item.signalindustries.saturatedSignalumAlloyPlate.desc=A plate made out of [Saturated Signalum Alloy].
+item.signalindustries.saturatedSignalumAlloyPlate.desc=A plate made out of <Saturated Signalum Alloy>.
 item.signalindustries.steelPlate.name=Steel Plate
 item.signalindustries.steelPlate.desc=A plate made out of steel.
 item.signalindustries.dilithiumPlate.name=Dilithium Plate
-item.signalindustries.dilithiumPlate.desc=A plate made out of [Dilithium Shards].
+item.signalindustries.dilithiumPlate.desc=A plate made out of <Dilithium Shards>.
 item.signalindustries.awakenedAlloyPlate.name=Awakened Alloy Plate
-item.signalindustries.awakenedAlloyPlate.desc=A plate made out of [Awakened Alloy].
+item.signalindustries.awakenedAlloyPlate.desc=A plate made out of <Awakened Alloy>.
 item.signalindustries.voidAlloyPlate.name=Void Alloy Plate
-item.signalindustries.voidAlloyPlate.desc=A plate made out of [Void Alloy].
+item.signalindustries.voidAlloyPlate.desc=A plate made out of <Void Alloy>.
 
 item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
 item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.
@@ -69,30 +69,30 @@ item.signalindustries.signalumCuttingGear.name=Signalum Cutting Gear
 item.signalindustries.signalumCuttingGear.desc=Even sharper gear for cutting tougher stuff.
 
 item.signalindustries.trigger.null.name=Null Trigger
-item.signalindustries.trigger.null.desc=Triggers are used to activate [S. P. Harness] abilities.
+item.signalindustries.trigger.null.desc=Triggers are used to activate <S. P. Harness> abilities.
 item.signalindustries.trigger.repair.name=Trigger: Repair
-item.signalindustries.trigger.repair.desc=Repairs a bit of the item next to this trigger for a bit of [Signalum Energy].
+item.signalindustries.trigger.repair.desc=Repairs a bit of the item next to this trigger for a bit of <Signalum Energy>.
 item.signalindustries.trigger.projectile.name=Trigger: Projectile
-item.signalindustries.trigger.projectile.desc=Shoots an orb of [Signalum Energy] from the core of the [S. P. Harness] you're wearing.
+item.signalindustries.trigger.projectile.desc=Shoots an orb of <Signalum Energy> from the core of the <S. P. Harness> you're wearing.
 item.signalindustries.trigger.boost.name=Trigger: Boost
 item.signalindustries.trigger.boost.desc=Launches you in the direction you're looking at.
 
 item.signalindustries.romChip.projectile.name=ROM Chip: Projectile
-item.signalindustries.romChip.projectile.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChip.projectile.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.boost.name=ROM Chip: Boost
-item.signalindustries.romChip.boost.desc=Contains code for a [Trigger] ability.
+item.signalindustries.romChip.boost.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 item.signalindustries.romChip.position.name=Position Memory Chip
-item.signalindustries.romChip.position.desc=Stores an XYZ location in the current world, unlike the [Warp Orb] it can only be used to logically link 2 points together.
+item.signalindustries.romChip.position.desc=Stores an XYZ location in the current world, unlike the <Warp Orb> it can only be used to logically link 2 points together.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
-item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing [Signalum Energy] either outwards into a powerful shockwave or inwards to break a slotted item inside.
+item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing <Signalum Energy> either outwards into a powerful shockwave or inwards to break a slotted item inside.
 
 item.signalindustries.reinforced.signalumSaber.name=Signalum Saber
 item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
 item.signalindustries.awakened.sunriseDawn.name=Sunrise Dawn
-item.signalindustries.awakened.sunriseDawn.desc=Allows you to summon a destructive beam of light anywhere near the range of any [Satellite].
+item.signalindustries.awakened.sunriseDawn.desc=Allows you to summon a destructive beam of light anywhere near the range of any <Satellite>.
 
 item.signalindustries.basic.signalumDrill.name=Basic Signalum Drill
 item.signalindustries.basic.signalumDrill.desc=A heavy-duty drill powered by Signalum Energy. Will not break when it runs out of energy.
@@ -104,7 +104,7 @@ item.signalindustries.dimensionalShard.desc=You can see a reflection of a differ
 item.signalindustries.dilithiumShard.name=Dilithium Shard
 item.signalindustries.dilithiumShard.desc=An extraterrestrial mineral used in machines to locally manipulate time.
 item.signalindustries.realityString.name=String of Reality
-item.signalindustries.realityString.desc=An individual thread of the [Fabric of Reality].
+item.signalindustries.realityString.desc=An individual thread of the <Fabric of Reality>.
 item.signalindustries.monsterShard.name=Monster Shard
 item.signalindustries.monsterShard.desc=Horrendous and corrupted.
 item.signalindustries.evilCatalyst.name=Evil Catalyst
@@ -120,16 +120,16 @@ item.signalindustries.awakenedCatalyst.name=Awakened Catalyst
 item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.fuelCell.name=Fuel Cell
-item.signalindustries.fuelCell.desc=A special container containing [Signalum Energy] for use in the [Signalum Reactor].
+item.signalindustries.fuelCell.desc=A special container containing <Signalum Energy> for use in the <Signalum Reactor>.
 
 item.signalindustries.warpOrb.name=Warp Orb
 item.signalindustries.warpOrb.desc=Can be encoded with a location in space. Wonder what would happen if you broke it?
 
 tile.signalindustries.signalumOre.name=Signalum Crystal Ore
-tile.signalindustries.signalumOre.desc=[Raw Signalum Crystals] encased in rock.
+tile.signalindustries.signalumOre.desc=<Raw Signalum Crystals> encased in rock.
 
 tile.signalindustries.dilithiumOre.name=Dilithium Ore
-tile.signalindustries.dilithiumOre.desc=[Dilithium Shards] encased in rock.
+tile.signalindustries.dilithiumOre.desc=<Dilithium Shards> encased in rock.
 
 tile.signalindustries.prototype.machine.name=Prototype Machine Core
 tile.signalindustries.prototype.machine.desc=Key component for Prototype-tier machines.
@@ -149,27 +149,27 @@ tile.signalindustries.reinforced.glass.desc=Does not shatter when broken.
 
 
 tile.signalindustries.prototype.conduit.name=Prototype Signalum Conduit
-tile.signalindustries.prototype.conduit.desc=Transfers [Signalum Energy].
+tile.signalindustries.prototype.conduit.desc=Transfers <Signalum Energy>.
 tile.signalindustries.basic.conduit.name=Basic Signalum Conduit
-tile.signalindustries.basic.conduit.desc=Transfers [Signalum Energy].
+tile.signalindustries.basic.conduit.desc=Transfers <Signalum Energy>.
 tile.signalindustries.reinforced.conduit.name=Reinforced Signalum Conduit
-tile.signalindustries.reinforced.conduit.desc=Transfers [Signalum Energy].
+tile.signalindustries.reinforced.conduit.desc=Transfers <Signalum Energy>.
 tile.signalindustries.awakened.conduit.name=Awakened Signalum Conduit
-tile.signalindustries.awakened.conduit.desc=Transfers [Signalum Energy].
+tile.signalindustries.awakened.conduit.desc=Transfers <Signalum Energy>.
 
 tile.signalindustries.basic.conduit.catalyst.name=Basic Universal Energy Conduit
-tile.signalindustries.basic.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
+tile.signalindustries.basic.conduit.catalyst.desc=Transfers <Catalyst's Universal Energy>.
 tile.signalindustries.reinforced.conduit.catalyst.name=Reinforced Universal Energy Conduit
-tile.signalindustries.reinforced.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
+tile.signalindustries.reinforced.conduit.catalyst.desc=Transfers <Catalyst's Universal Energy>.
 tile.signalindustries.awakened.conduit.catalyst.name=Awakened Universal Energy Conduit
-tile.signalindustries.awakened.conduit.catalyst.desc=Transfers [Catalyst's Universal Energy].
+tile.signalindustries.awakened.conduit.catalyst.desc=Transfers <Catalyst's Universal Energy>.
 
 tile.signalindustries.prototype.conduit.fluid.name=Prototype Fluid Conduit
-tile.signalindustries.prototype.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
+tile.signalindustries.prototype.conduit.fluid.desc=Transfers fluids, not suitable for <Signalum Energy>.
 tile.signalindustries.basic.conduit.fluid.name=Basic Fluid Conduit
-tile.signalindustries.basic.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
+tile.signalindustries.basic.conduit.fluid.desc=Transfers fluids, not suitable for <Signalum Energy>.
 tile.signalindustries.reinforced.conduit.fluid.name=Reinforced Fluid Conduit
-tile.signalindustries.reinforced.conduit.fluid.desc=Transfers fluids, not suitable for [Signalum Energy].
+tile.signalindustries.reinforced.conduit.fluid.desc=Transfers fluids, not suitable for <Signalum Energy>.
 
 tile.signalindustries.prototype.conduit.item.name=Prototype Item Conduit
 tile.signalindustries.prototype.conduit.item.desc=Transfers items.
@@ -192,40 +192,40 @@ tile.signalindustries.prototype.filter.name=Prototype Filter
 tile.signalindustries.prototype.filter.desc=Sorts items that pass through it into colored outputs,
 
 item.signalindustries.basic.prototypeHarness.name=Signalum Prototype Harness
-item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, but allows you to start using [Signalum Energy] on the go.
+item.signalindustries.basic.prototypeHarness.desc=Provides little to no armor, but allows you to start using <Signalum Energy> on the go.
 item.signalindustries.basic.prototypeHarnessGoggles.name=Prototype Goggles
-item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the [Signalum Prototype Harness] or other equipment. Provides information about the world and your equipment.
+item.signalindustries.basic.prototypeHarnessGoggles.desc=To be used with the <Signalum Prototype Harness> or other equipment. Provides information about the world and your equipment.
 
 item.signalindustries.reinforced.signalumpowersuit.helmet.name=Signalum Power Suit Helmet
-item.signalindustries.reinforced.signalumpowersuit.helmet.desc=Upgraded and armored version of the [Prototype Goggles]. Equipped with an AR HUD capable of overlaying information about the world and the suits state onto your vision. Functionality can be extended with [Attachments].
+item.signalindustries.reinforced.signalumpowersuit.helmet.desc=Upgraded and armored version of the <Prototype Goggles>. Equipped with an AR HUD capable of overlaying information about the world and the suits state onto your vision. Functionality can be extended with <Attachments>.
 item.signalindustries.reinforced.signalumpowersuit.chestplate.name=Signalum Power Suit Chestplate
-item.signalindustries.reinforced.signalumpowersuit.chestplate.desc=Core of the power suit. Contains the necessary technology for executing [Abilities]. Functionality can be extended with [Attachments].
+item.signalindustries.reinforced.signalumpowersuit.chestplate.desc=Core of the power suit. Contains the necessary technology for executing <Abilities>. Functionality can be extended with <Attachments>.
 item.signalindustries.reinforced.signalumpowersuit.leggings.name=Signalum Power Suit Leggings
-item.signalindustries.reinforced.signalumpowersuit.leggings.desc=Pants of the power suit that enhance your mobility. Functionality can be extended with [Attachments].
+item.signalindustries.reinforced.signalumpowersuit.leggings.desc=Pants of the power suit that enhance your mobility. Functionality can be extended with <Attachments>.
 item.signalindustries.reinforced.signalumpowersuit.boots.name=Signalum Power Suit Boots
-item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power suit. Help with jumping and negating fall damage. Functionality can be extended with [Attachments].
+item.signalindustries.reinforced.signalumpowersuit.boots.desc=Boots of the power suit. Help with jumping and negating fall damage. Functionality can be extended with <Attachments>.
 
 item.signalindustries.testingAbilityItem.name=Ability: Testing Ability
-item.signalindustries.testingAbilityItem.desc=Container for a [Signalum Power Suit] ability application.
+item.signalindustries.testingAbilityItem.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.abilityContainerCasing.name=Ability Container Casing
-item.signalindustries.abilityContainerCasing.desc=Casing for [Ability Containers].
+item.signalindustries.abilityContainerCasing.desc=Casing for <Ability Containers>.
 
 item.signalindustries.clockworkAbilityContainer.name=Ability: Clockwork
-item.signalindustries.clockworkAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
+item.signalindustries.clockworkAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.boostAbilityContainer.name=Ability: Boost
-item.signalindustries.boostAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
+item.signalindustries.boostAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.projectileAbilityContainer.name=Ability: Projectile
-item.signalindustries.projectileAbilityContainer.desc=Container for a [Signalum Power Suit] ability application.
+item.signalindustries.projectileAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.attachment.testingAttachment.name=Testing Attachment
 item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
 item.signalindustries.reinforced.attachment.extendedEnergyPack.name=Extended Energy Pack
-item.signalindustries.reinforced.attachment.extendedEnergyPack.desc=Provides an extra container for [Signalum Energy].
+item.signalindustries.reinforced.attachment.extendedEnergyPack.desc=Provides an extra container for <Signalum Energy>.
 item.signalindustries.reinforced.attachment.pulsar.name=The Pulsar (Attachment)
-item.signalindustries.reinforced.attachment.pulsar.desc=A modified version of [The Pulsar] that can be connected to a [Signalum Power Suit] allowing it to utilize its energy network.
+item.signalindustries.reinforced.attachment.pulsar.desc=A modified version of <The Pulsar> that can be connected to a <Signalum Power Suit> allowing it to utilize its energy network.
 item.signalindustries.basic.attachment.backpack.name=Basic Backpack
 item.signalindustries.basic.attachment.backpack.desc=Portable item & fluid storage. Capable of storing the same amount of items as a chest and 2 fluids (that aren't Signalum Energy).
 item.signalindustries.reinforced.attachment.backpack.name=Reinforced Backpack
@@ -237,13 +237,13 @@ item.signalindustries.reinforced.attachment.wings.desc=Rise above. These wings a
 item.signalindustries.reinforced.attachment.breathingApparatus.name=Breathing Apparatus
 item.signalindustries.reinforced.attachment.breathingApparatus.desc=Allows breathing in otherwise hostile environments. Can extract the oxygen out of water allowing for endless breathing underwater.
 item.signalindustries.reinforced.attachment.portableExtractor.name=Portable Extractor
-item.signalindustries.reinforced.attachment.portableExtractor.desc=Can extract the energy out of [Signalum Crystals] on the go.
+item.signalindustries.reinforced.attachment.portableExtractor.desc=Can extract the energy out of <Signalum Crystals> on the go.
 item.signalindustries.reinforced.attachment.energyMaterializer.name=Energy Materializer
-item.signalindustries.reinforced.attachment.energyMaterializer.desc=By altering the temperature of released [Signalum Energy] this gadget can place temporary blocks.
+item.signalindustries.reinforced.attachment.energyMaterializer.desc=By altering the temperature of released <Signalum Energy> this gadget can place temporary blocks.
 item.signalindustries.reinforced.attachment.movementBoosters.name=Movement Boosters
-item.signalindustries.reinforced.attachment.movementBoosters.desc=Tiny [Dilithium] engines to make you run even faster. Must be on both legs to function properly.
+item.signalindustries.reinforced.attachment.movementBoosters.desc=Tiny <Dilithium> engines to make you run even faster. Must be on both legs to function properly.
 item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.name=Auxiliary Energy Injector
-item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces cooldown of power suit [Abilities].
+item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces cooldown of power suit <Abilities>.
 item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Lens
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
 
@@ -255,11 +255,11 @@ item.signalindustries.raziel.name=Raziel
 item.signalindustries.raziel.desc=Displays almost every block and item in the game when it is in your inventory.
 
 item.signalindustries.blankAbilityModule.name=Blank Application Module
-item.signalindustries.blankAbilityModule.desc=Base component of an [Application Module].
+item.signalindustries.blankAbilityModule.desc=Base component of an <Application Module>.
 item.signalindustries.abilityModule.name=Application Module
-item.signalindustries.abilityModule.desc=Container for [Signalum Power Suit] ability or utility applications.
+item.signalindustries.abilityModule.desc=Container for <Signalum Power Suit> ability or utility applications.
 item.signalindustries.awakenedAbilityModule.name=Awakened Application Module
-item.signalindustries.awakenedAbilityModule.desc=Container for [Signalum Power Suit] ability or utility applications.
+item.signalindustries.awakenedAbilityModule.desc=Container for <Signalum Power Suit> ability or utility applications.
 
 item.signalindustries.meteorTracker.name=Meteor Tracker
 item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
@@ -283,34 +283,34 @@ item.signalindustries.cover.fluid.desc=Allows direct block-to-block transfer of 
 item.signalindustries.cover.redstone.name=Redstone Cover
 item.signalindustries.cover.redstone.desc=Responds to a set condition with redstone signal.
 item.signalindustries.cover.switch.name=Switch Cover
-item.signalindustries.cover.switch.desc=Can turn off a machine according to a redstone signal, pairs great with a [Redstone Cover].
+item.signalindustries.cover.switch.desc=Can turn off a machine according to a redstone signal, pairs great with a <Redstone Cover>.
 item.signalindustries.cover.void.name=Void Cover
 item.signalindustries.cover.void.desc=Completely destroys any configured item or fluid.
 item.signalindustries.cover.dilithiumLens.name=Dilithium Lens Cover
-item.signalindustries.cover.dilithiumLens.desc=Increases speed even more if attached to a [Booster], reduces fuel usage for [Stabilizers], Must be attached at the machines output side.
+item.signalindustries.cover.dilithiumLens.desc=Increases speed even more if attached to a <Booster>, reduces fuel usage for <Stabilizers>, Must be attached at the machines output side.
 
 item.signalindustries.crystalChip.name=Crystal Chip
-item.signalindustries.crystalChip.desc=A crude chip that powers a [Basic Energy Core].
+item.signalindustries.crystalChip.desc=A crude chip that powers a <Basic Energy Core>.
 item.signalindustries.pureCrystalChip.name=Pure Crystal Chip
-item.signalindustries.pureCrystalChip.desc=A better chip used in the [Reinforced Energy Core].
+item.signalindustries.pureCrystalChip.desc=A better chip used in the <Reinforced Energy Core>.
 item.signalindustries.basicEnergyCore.name=Basic Energy Core
 item.signalindustries.basicEnergyCore.desc=Powers some Basic-tier machines.
 item.signalindustries.reinforcedEnergyCore.name=Reinforced Energy Core
 item.signalindustries.reinforcedEnergyCore.desc=Powers some Reinforced-tier machines.
 item.signalindustries.basicDrillBit.name=Basic Drill Bit
-item.signalindustries.basicDrillBit.desc=A drill bit for a [Basic S. Drill]
+item.signalindustries.basicDrillBit.desc=A drill bit for a <Basic S. Drill>
 item.signalindustries.reinforcedDrillBit.name=Reinforced Drill Bit
-item.signalindustries.reinforcedDrillBit.desc=A drill bit for a [Reinforced S. Drill]
+item.signalindustries.reinforcedDrillBit.desc=A drill bit for a <Reinforced S. Drill>
 item.signalindustries.basicDrillCasing.name=Basic Drill Casing
-item.signalindustries.basicDrillCasing.desc=Casing needed to make a [Basic S. Drill].
+item.signalindustries.basicDrillCasing.desc=Casing needed to make a <Basic S. Drill>.
 item.signalindustries.reinforcedDrillCasing.name=Reinforced Drill Casing
-item.signalindustries.reinforcedDrillCasing.desc=Casing needed to make a [Reinforced S. Drill].
+item.signalindustries.reinforcedDrillCasing.desc=Casing needed to make a <Reinforced S. Drill>.
 item.signalindustries.pulsarShell.name=Pulsar Shell
-item.signalindustries.pulsarShell.desc=Shell of the [Pulsar].
+item.signalindustries.pulsarShell.desc=Shell of the <Pulsar>.
 item.signalindustries.pulsarInnerCore.name=Pulsar Inner Core
-item.signalindustries.pulsarInnerCore.desc=Inner core of the [Pulsar].
+item.signalindustries.pulsarInnerCore.desc=Inner core of the <Pulsar>.
 item.signalindustries.pulsarOuterCore.name=Pulsar Outer Core
-item.signalindustries.pulsarOuterCore.desc=Outer core of the [Pulsar].
+item.signalindustries.pulsarOuterCore.desc=Outer core of the <Pulsar>.
 item.signalindustries.itemManipulationCircuit.name=Item Manipulation Circuit
 item.signalindustries.itemManipulationCircuit.desc=A part of some machines that manipulate with items.
 item.signalindustries.fluidManipulationCircuit.name=Fluid Manipulation Circuit
@@ -320,11 +320,11 @@ item.signalindustries.dilithiumControlCore.desc=A part of some machines that man
 item.signalindustries.warpManipulatorCircuit.name=Warp Manipulator Circuit
 item.signalindustries.warpManipulatorCircuit.desc=A part of some machines that manipulate space.
 item.signalindustries.dilithiumChip.name=Dilithium Chip
-item.signalindustries.dilithiumChip.desc=The main part of the [Dilithium Control Core].
+item.signalindustries.dilithiumChip.desc=The main part of the <Dilithium Control Core>.
 item.signalindustries.dimensionalChip.name=Dimensional Chip
-item.signalindustries.dimensionalChip.desc=The main part of the [Warp Manipulator Circuit].
+item.signalindustries.dimensionalChip.desc=The main part of the <Warp Manipulator Circuit>.
 item.signalindustries.attachmentPoint.name=Attachment Point
-item.signalindustries.attachmentPoint.desc=Interface for [Attachments].
+item.signalindustries.attachmentPoint.desc=Interface for <Attachments>.
 
 item.signalindustries.condensedMilkCan.name=Condensed Milk Can
 item.signalindustries.condensedMilkCan.desc=Thick and sweet.
@@ -336,33 +336,33 @@ item.signalindustries.krowka.name=Krówka
 item.signalindustries.krowka.desc=Sweet caramel candy.
 
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
-tile.signalindustries.infinite.energyCell.desc=An unlimited source of [Signalum Energy]! Creative mode only.
+tile.signalindustries.infinite.energyCell.desc=An unlimited source of <Signalum Energy>! Creative mode only.
 tile.signalindustries.prototype.energyCell.name=Prototype Energy Cell
-tile.signalindustries.prototype.energyCell.desc=Buffer for storing [Signalum Energy].
+tile.signalindustries.prototype.energyCell.desc=Buffer for storing <Signalum Energy>.
 tile.signalindustries.basic.energyCell.name=Basic Energy Cell
-tile.signalindustries.basic.energyCell.desc=Buffer for storing [Signalum Energy].
+tile.signalindustries.basic.energyCell.desc=Buffer for storing <Signalum Energy>.
 tile.signalindustries.reinforced.energyCell.name=Reinforced Energy Cell
-tile.signalindustries.reinforced.energyCell.desc=Buffer for storing [Signalum Energy].
+tile.signalindustries.reinforced.energyCell.desc=Buffer for storing <Signalum Energy>.
 tile.signalindustries.awakened.energyCell.name=Awakened Energy Storage Array Controller
-tile.signalindustries.awakened.energyCell.desc=Huge expandable buffer for storing [Signalum Energy].
+tile.signalindustries.awakened.energyCell.desc=Huge expandable buffer for storing <Signalum Energy>.
 
 tile.signalindustries.infinite.fluidTank.name=Infinite Fluid Tank
 tile.signalindustries.infinite.fluidTank.desc=An unlimited source of any fluid! Creative mode only.
 tile.signalindustries.prototype.fluidTank.name=Prototype Fluid Tank
-tile.signalindustries.prototype.fluidTank.desc=Tank for storing various fluids. Unsuitable for [Signalum Energy].
+tile.signalindustries.prototype.fluidTank.desc=Tank for storing various fluids. Unsuitable for <Signalum Energy>.
 tile.signalindustries.basic.fluidTank.name=Basic Fluid Tank
-tile.signalindustries.basic.fluidTank.desc=Tank for storing various fluids. Unsuitable for [Signalum Energy].
+tile.signalindustries.basic.fluidTank.desc=Tank for storing various fluids. Unsuitable for <Signalum Energy>.
 tile.signalindustries.reinforced.fluidTank.name=Reinforced Fluid Tank
-tile.signalindustries.reinforced.fluidTank.desc=Tank for storing various fluids. Unsuitable for [Signalum Energy].
+tile.signalindustries.reinforced.fluidTank.desc=Tank for storing various fluids. Unsuitable for <Signalum Energy>.
 
 tile.signalindustries.prototype.extractor.name=Prototype Signalum Extractor
-tile.signalindustries.prototype.extractor.desc=Extracts [Signalum Energy] from [Raw Signalum Crystals].
+tile.signalindustries.prototype.extractor.desc=Extracts <Signalum Energy> from <Raw Signalum Crystals>.
 tile.signalindustries.basic.extractor.name=Basic Signalum Extractor
-tile.signalindustries.basic.extractor.desc=Extracts [Signalum Energy] from [Raw Signalum Crystals].
+tile.signalindustries.basic.extractor.desc=Extracts <Signalum Energy> from <Raw Signalum Crystals>.
 tile.signalindustries.reinforced.extractor.name=Reinforced Signalum Extraction Manifold
-tile.signalindustries.reinforced.extractor.desc=Extracts large amounts of [Signalum Energy] from several [Raw Signalum Crystals] at once.
+tile.signalindustries.reinforced.extractor.desc=Extracts large amounts of <Signalum Energy> from several <Raw Signalum Crystals> at once.
 tile.signalindustries.awakened.extractor.name=Awakened Signalum Collection Array Controller
-tile.signalindustries.awakened.extractor.desc=Will extract all [Signalum Energy] from any amount of [Raw Signalum Crystal] all at once with extraordinary efficiency.
+tile.signalindustries.awakened.extractor.desc=Will extract all <Signalum Energy> from any amount of <Raw Signalum Crystal> all at once with extraordinary efficiency.
 
 tile.signalindustries.prototype.crusher.name=Prototype Crusher
 tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
@@ -388,22 +388,22 @@ tile.signalindustries.infinite.storageContainer.name=Infinite Storage Container
 tile.signalindustries.infinite.storageContainer.desc=An infinite and unlimited supply of any item! Creative mode only.
 
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
-tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an [Evil Catalyst].
+tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Catalyst>.
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
 tile.signalindustries.reinforced.wrathBeacon.desc=Legends speak of a tree that feeds on the life force of others. Unfortunately, this was not a myth.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
 tile.signalindustries.reinforced.dimensionalAnchor.name=Dimensional Anchor
-tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for [Warp Orbs] to anchor to.
+tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for <Warp Orbs> to anchor to.
 
 tile.signalindustries.reinforced.signalumReactorCore.name=Signalum Reactor Core
-tile.signalindustries.reinforced.signalumReactorCore.desc=Burns [Signalum Energy] in search of something greater..
+tile.signalindustries.reinforced.signalumReactorCore.desc=Burns <Signalum Energy> in search of something greater..
 tile.signalindustries.awakened.signalumReactorCore.name=Awakened Signalum Ignition Facility Controller
 tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Signalum technology. Welcome to the far end of your adventure.
 
 tile.signalindustries.reinforced.ignitor.name=Reinforced Signalum Ignitor
-tile.signalindustries.reinforced.ignitor.desc=A core part of the [Signalum Reactor]. Drives the reaction by forcibly igniting [Signalum Energy].
+tile.signalindustries.reinforced.ignitor.desc=A core part of the <Signalum Reactor>. Drives the reaction by forcibly igniting <Signalum Energy>.
 
 tile.signalindustries.reinforced.energyConnector.name=Reinforced Energy Connector
 tile.signalindustries.reinforced.energyConnector.desc=A dedicated energy hatch for Reinforced-tier multiblocks.
@@ -428,7 +428,7 @@ tile.signalindustries.basic.itemOutputBus.name=Basic Item Output Bus
 tile.signalindustries.basic.itemOutputBus.desc=A dedicated item output for Basic-tier multiblocks.
 
 tile.signalindustries.basic.energyInjector.name=Basic Energy Injector
-tile.signalindustries.basic.energyInjector.desc=Provides an automatic way of filling appropriate items with [Signalum Energy].
+tile.signalindustries.basic.energyInjector.desc=Provides an automatic way of filling appropriate items with <Signalum Energy>.
 
 tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
 tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.
@@ -436,11 +436,11 @@ tile.signalindustries.awakened.centrifuge.name=Awakened Ultracentrifuge Controll
 tile.signalindustries.awakened.centrifuge.desc=Spins stuff REALLY FAST, beware of catastrophic failure. On the flip side, spins stuff REALLY WELL leading to increased efficiency.
 
 tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
-tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses [Dilithium] to make things super still. Required to stabilize some machines.
+tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses <Dilithium> to make things super still. Required to stabilize some machines.
 tile.signalindustries.basic.booster.name=Redstone Booster
-tile.signalindustries.basic.booster.desc=Crude device that tries to speed up other machines using [Redstone]. But maybe there's a material better suited for it?
+tile.signalindustries.basic.booster.desc=Crude device that tries to speed up other machines using <Redstone>. But maybe there's a material better suited for it?
 tile.signalindustries.reinforced.booster.name=Dilithium Booster
-tile.signalindustries.reinforced.booster.desc=Speeds up an adjacent machine that it points to using [Dilithium].
+tile.signalindustries.reinforced.booster.desc=Speeds up an adjacent machine that it points to using <Dilithium>.
 tile.signalindustries.awakened.booster.name=Awakened Dilithium Overbooster
 tile.signalindustries.awakened.booster.desc=Speeds up an adjacent machine that it points to significantly.
 tile.signalindustries.dilithiumRail.name=Dilithium Rail
@@ -463,7 +463,7 @@ tile.signalindustries.awakened.inductionSmelter.name=Awakened Quark-Gluon Plasma
 tile.signalindustries.awakened.inductionSmelter.desc=Smelts entire stacks at once using the heat of the early universe.
 
 tile.signalindustries.prototype.plateFormer.name=Prototype Plate Former
-tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more [Plates] than the [Plate Hammer] and out of more materials.
+tile.signalindustries.prototype.plateFormer.desc=Welcome to the hydraulic pressing channel. Makes more <Plates> than the <Plate Hammer> and out of more materials.
 tile.signalindustries.basic.plateFormer.name=Basic Metal Press
 tile.signalindustries.basic.plateFormer.desc=Bends and shapes metal ingots.
 tile.signalindustries.reinforced.plateFormer.name=Reinforced Compressor
@@ -472,16 +472,16 @@ tile.signalindustries.awakened.plateFormer.name=Awakened Singularity Compressor 
 tile.signalindustries.awakened.plateFormer.desc=The raw power of this machine would be capable of compressing materials into black holes if it wasn't controlled.
 
 tile.signalindustries.prototype.crystalCutter.name=Prototype Crystal Cutter
-tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from [Raw S. Crystals], turning them into brilliant [Signalum Crystals]!
+tile.signalindustries.prototype.crystalCutter.desc=Cuts and removes impurities from <Raw S. Crystals>, turning them into brilliant <Signalum Crystals>!
 tile.signalindustries.basic.crystalCutter.name=Basic Crystal Cutter
-tile.signalindustries.basic.crystalCutter.desc=An upgraded [Crystal Cutter] that can also cut a few more other things as well.
+tile.signalindustries.basic.crystalCutter.desc=An upgraded <Crystal Cutter> that can also cut a few more other things as well.
 tile.signalindustries.reinforced.crystalCutter.name=Reinforced Crystal Cutter
 tile.signalindustries.reinforced.crystalCutter.desc=Better, faster, stronger. Cuts most materials with precision and ease.
 tile.signalindustries.awakened.crystalCutter.name=Awakened Precision Laser Cutter Controller
 tile.signalindustries.awakened.crystalCutter.desc=Uses frigging laser beams to slice through almost anything! What more could you want.
 
 tile.signalindustries.basic.crystalChamber.name=Basic Crystal Chamber
-tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an [Alloy Smelter] and the pressure of a [Plate Former] to fuse 2 [S. Crystals] together!
+tile.signalindustries.basic.crystalChamber.desc=Combines the heat of an <Alloy Smelter> and the pressure of a <Plate Former> to fuse 2 <S. Crystals> together!
 tile.signalindustries.reinforced.crystalChamber.name=Reinforced Crystal Chamber
 tile.signalindustries.reinforced.crystalChamber.desc=Awakening awaits, this machine can fuse crystals of extraordinary size or power.
 tile.signalindustries.awakened.crystalChamber.name=Awakened Crystal Fusion Chamber Controller
@@ -506,7 +506,7 @@ tile.signalindustries.awakened.pump.desc=Can drain entire oceans without problem
 tile.signalindustries.prototype.blockBreaker.name=Prototype Block Breaker
 tile.signalindustries.prototype.blockBreaker.desc=Breaks the block next to where it is pointed when activated by redstone.
 tile.signalindustries.basic.automaticMiner.name=Basic Automatic Miner
-tile.signalindustries.basic.automaticMiner.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by [Signalum Energy].
+tile.signalindustries.basic.automaticMiner.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by <Signalum Energy>.
 tile.signalindustries.reinforced.automaticMiner.name=Reinforced Quarry
 tile.signalindustries.reinforced.automaticMiner.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
 tile.signalindustries.awakened.automaticMiner.name=Awakened Galactic Excavation Facility Controller
@@ -518,9 +518,9 @@ tile.signalindustries.reinforced.externalIO.name=Reinforced External I/O
 tile.signalindustries.reinforced.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively, remotely!
 
 tile.signalindustries.basic.programmer.name=EEPROM Programmer
-tile.signalindustries.basic.programmer.desc=Device for programming and configuring [Triggers].
+tile.signalindustries.basic.programmer.desc=Device for programming and configuring <Triggers>.
 tile.signalindustries.reinforced.programmer.name=Reinforced EEPROM Programmer
-tile.signalindustries.reinforced.programmer.desc=Device for programming and configuring [Ability Containers].
+tile.signalindustries.reinforced.programmer.desc=Device for programming and configuring <Ability Containers>.
 
 tile.signalindustries.basic.dynamo.name=Basic Signalum Dynamo
 tile.signalindustries.basic.dynamo.desc=Generates universal energy units using Signalum. Only available if Catalyst: Energy is installed.

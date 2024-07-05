@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.catalyst.fluids.impl.GuiItemFluid;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
-import sunsetsatellite.signalindustries.items.ItemAbilityModule;
+import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.catalyst.fluids.util.NBTHelper;
 import sunsetsatellite.signalindustries.util.Tier;

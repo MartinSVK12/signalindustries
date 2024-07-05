@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.items.applications;
+package sunsetsatellite.signalindustries.items.applications.base;
 
 
 import net.minecraft.core.item.Item;

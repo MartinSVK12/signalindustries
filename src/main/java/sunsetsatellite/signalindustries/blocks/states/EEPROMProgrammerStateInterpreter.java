@@ -5,7 +5,7 @@ import net.minecraft.core.world.WorldSource;
 import org.useless.dragonfly.model.blockstates.processed.MetaStateInterpreter;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityProgrammer;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
-import sunsetsatellite.signalindustries.items.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 
 import java.util.HashMap;
 

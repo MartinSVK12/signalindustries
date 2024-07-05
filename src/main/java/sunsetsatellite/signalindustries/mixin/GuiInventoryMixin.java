@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemSmartWatch;
+import sunsetsatellite.signalindustries.items.applications.ItemRaziel;
+import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.IndexRenderer;
 
@@ -40,6 +41,15 @@ public abstract class GuiInventoryMixin extends GuiContainer {
     public void drawScreen(int mouseX, int mouseY, float partialTick, CallbackInfo ci){
         if(Arrays.stream(mc.thePlayer.inventory.mainInventory).anyMatch((S)->S != null && S.isItemEqual(SIItems.raziel.getDefaultStack()))){
             IndexRenderer.drawScreen(mc,mouseX,mouseY,width,height,partialTick);
+        } else {
+            SignalumPowerSuit powerSuit = ((IPlayerPowerSuit) mc.thePlayer).getPowerSuit();
+            if(powerSuit != null && powerSuit.active && powerSuit.module != null){
+                for (ItemStack content : powerSuit.module.contents) {
+                    if(content != null && content.getItem() instanceof ItemRaziel){
+                        IndexRenderer.drawScreen(mc,mouseX,mouseY,width,height,partialTick);
+                    }
+                }
+            }
         }
     }
 
