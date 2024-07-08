@@ -22,7 +22,7 @@ public class BlockOreSignalum extends Block {
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
         Random random = new Random();
-        return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[]{new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(2) + 1)} : null;
+        return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[]{new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(2) + 2)} : null;
     }
 
     @Override
