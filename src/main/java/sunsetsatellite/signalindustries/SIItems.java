@@ -15,10 +15,7 @@ import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
-import sunsetsatellite.signalindustries.items.models.ItemModelConfigurationTablet;
-import sunsetsatellite.signalindustries.items.models.ItemModelFuelCell;
-import sunsetsatellite.signalindustries.items.models.ItemModelPulsar;
-import sunsetsatellite.signalindustries.items.models.ItemModelSaber;
+import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -323,6 +320,7 @@ public class SIItems extends DataInitializer {
                 .build(new ItemAbilityModule("awakenedAbilityModule", config.getInt("ItemIDs.awakenedAbilityModule"), Tier.AWAKENED));
         meteorTracker = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/meteor_tracker_uncalibrated")
+                .setItemModel((item -> new ItemModelMeteorTracker(item,MOD_ID)))
                 .build(new ItemMeteorTracker("meteorTracker", config.getInt("ItemIDs.meteorTracker")));
         configurationTablet = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/configuration_tablet_rotation")

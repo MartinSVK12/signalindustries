@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.mixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderEngine;
 import net.minecraft.client.render.dynamictexture.DynamicTexture;
-import net.minecraft.client.render.texturepack.TexturePack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,7 +33,6 @@ public abstract class RenderEngineMixin {
     )
     public void initSIDynamicTextures(List<Throwable> errors, CallbackInfo ci) {
         SignalIndustries.LOGGER.info("Loading dynamic textures..");
-        //FIXME:
-        //dynamicTextures.add(new DynamicTextureMeteorTracker(mc));
+        dynamicTextures.add(new DynamicTextureMeteorTracker(mc));
     }
 }
