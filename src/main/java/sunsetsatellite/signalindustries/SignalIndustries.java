@@ -31,7 +31,6 @@ import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +61,7 @@ import sunsetsatellite.signalindustries.inventories.machines.*;
 import sunsetsatellite.signalindustries.misc.SignalIndustriesAchievementPage;
 import sunsetsatellite.signalindustries.mp.packets.PacketOpenMachineGUI;
 import sunsetsatellite.signalindustries.render.*;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -88,7 +88,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final String MOD_ID = "signalindustries";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final TomlConfigHandler config;
-    public static List<ChunkCoordinates> meteorLocations = new ArrayList<>();
+    public static List<MeteorLocation> meteorLocations = new ArrayList<>();
     public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     static {
@@ -320,6 +320,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createTileEntity(TileEntityUVLamp.class,"Ultraviolet Lamp");
         EntityHelper.createTileEntity(TileEntityCatalystConduit.class,"Catalyst Energy Conduit");
         EntityHelper.createTileEntity(TileEntityVoidContainer.class,"Void Container");
+        EntityHelper.createTileEntity(TileEntityCollector.class,"Signalum Collector");
 
 
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
@@ -348,6 +349,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("Signalum Dynamo", GuiSignalumDynamo.class,TileEntitySignalumDynamo.class);
         addToNameGuiMap("EEPROM Programmer", GuiProgrammer.class,TileEntityProgrammer.class);
         addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
+        addToNameGuiMap("Signalum Collector", GuiCollector.class, TileEntityCollector.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);

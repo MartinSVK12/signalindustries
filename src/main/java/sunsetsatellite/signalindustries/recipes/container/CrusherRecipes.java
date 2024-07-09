@@ -81,7 +81,17 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
                         },
                         new ItemStack(SIItems.saturatedSignalumCrystalDust,2),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,40, Tier.PROTOTYPE,true)
+                )
+        );
+        group.register(
+                "basic_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
+                        },
+                        new ItemStack(SIItems.saturatedSignalumCrystalDust,4),
+                        new RecipeProperties(200,40, Tier.BASIC,false)
                 )
         );
         group.register(

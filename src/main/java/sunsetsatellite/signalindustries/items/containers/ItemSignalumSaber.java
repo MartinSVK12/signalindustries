@@ -89,6 +89,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
             } else {
                 CompoundTag data = new CompoundTag();
                 data.putInt("energy",saturation + amount);
+                fluidStack.amount -= amount;
                 stack.setData(data);
                 return stack;
             }

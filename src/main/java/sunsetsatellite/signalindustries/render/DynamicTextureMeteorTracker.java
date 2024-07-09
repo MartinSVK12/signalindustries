@@ -5,6 +5,7 @@ import net.minecraft.client.render.dynamictexture.DynamicTexture;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 import java.awt.image.BufferedImage;
 
@@ -64,10 +65,11 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
 		if(this.mc.theWorld != null && this.mc.thePlayer != null) {
 			ChunkCoordinates chunk = null;
 			double distance = Double.MAX_VALUE;
-			for (ChunkCoordinates meteorLocation : SignalIndustries.meteorLocations) {
-				if(meteorLocation.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z) < distance){
-					distance = meteorLocation.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z);
-					chunk = meteorLocation;
+			for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
+				ChunkCoordinates location = meteorLocation.location;
+				if(location.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z) < distance){
+					distance = location.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z);
+					chunk = location;
 				}
 			}
 			if(chunk != null){

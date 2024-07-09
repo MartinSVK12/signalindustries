@@ -3,7 +3,9 @@ tile.signalindustries.signalumEnergy.desc=Mysterious substance with magically en
 tile.signalindustries.burntSignalum.name=Burnt Signalum
 tile.signalindustries.burntSignalum.desc=<Signalum Energy> burnt out in an unstable reaction. But there's still beauty in the ashes, can you find it?
 item.signalindustries.signalumCrystal.name=Signalum Crystal
-item.signalindustries.signalumCrystal.desc=A pure crystal used to transport <Signalum Energy>. Shines with a bright red glow. Can be used on any slot accepting <Signalum Energy> to drain or fill it.
+item.signalindustries.signalumCrystal.desc=A pure crystal with <Signalum Energy> infused in it. Shines with a bright red glow.
+item.signalindustries.signalumCrystal.battery.name=Signalum Crystal (Battery)
+item.signalindustries.signalumCrystal.battery.desc=A modified <S. Crystal> that can repeatedly be infused and drained of <S. Energy>.
 item.signalindustries.infiniteSignalumCrystal.name=Infinite Signalum Crystal
 item.signalindustries.infiniteSignalumCrystal.desc=A source of infinite and eternal power. Contains infinite <Signalum Energy>! Creative mode only.
 item.signalindustries.signalumCrystalEmpty.name=Empty Signalum Crystal
@@ -325,6 +327,8 @@ item.signalindustries.dimensionalChip.name=Dimensional Chip
 item.signalindustries.dimensionalChip.desc=The main part of the <Warp Manipulator Circuit>.
 item.signalindustries.attachmentPoint.name=Attachment Point
 item.signalindustries.attachmentPoint.desc=Interface for <Attachments>.
+item.signalindustries.crystalWingPart.name=Crystal Wing Part
+item.signalindustries.crystalWingPart.desc=One of the 6 wings of the <Crystal Wings> attachment.
 
 item.signalindustries.condensedMilkCan.name=Condensed Milk Can
 item.signalindustries.condensedMilkCan.desc=Thick and sweet.
@@ -361,8 +365,15 @@ tile.signalindustries.basic.extractor.name=Basic Signalum Extractor
 tile.signalindustries.basic.extractor.desc=Extracts <Signalum Energy> from <Raw Signalum Crystals>.
 tile.signalindustries.reinforced.extractor.name=Reinforced Signalum Extraction Manifold
 tile.signalindustries.reinforced.extractor.desc=Extracts large amounts of <Signalum Energy> from several <Raw Signalum Crystals> at once.
-tile.signalindustries.awakened.extractor.name=Awakened Signalum Collection Array Controller
-tile.signalindustries.awakened.extractor.desc=Will extract all <Signalum Energy> from any amount of <Raw Signalum Crystal> all at once with extraordinary efficiency.
+tile.signalindustries.awakened.extractor.name=Awakened Signalum Extraction Facility Controller
+tile.signalindustries.awakened.extractor.desc=Will extract all <Signalum Energy> from a huge amount of <Raw Signalum Crystals> all at once with extraordinary efficiency.
+
+tile.signalindustries.basic.collector.name=Basic Signalum Collector
+tile.signalindustries.basic.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
+tile.signalindustries.reinforced.collector.name=Reinforced Signalum Absorber
+tile.signalindustries.reinforced.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
+tile.signalindustries.awakened.collector.name=Awakened Signalum Collection Array Controller
+tile.signalindustries.awakened.collector.desc=Captures lingering <Signalum Energy> in the air. More efficient near signalum meteor impact sites. Must be placed in an open environment.
 
 tile.signalindustries.prototype.crusher.name=Prototype Crusher
 tile.signalindustries.prototype.crusher.desc=Grinds materials into dusts.
@@ -764,6 +775,7 @@ guidebook.section.signalindustries.crystalCutter=Crystal Cutter
 guidebook.section.signalindustries.crystalChamber=Crystal Chamber
 guidebook.section.signalindustries.infuser=Infuser
 guidebook.section.signalindustries.centrifuge=Centrifuge
+guidebook.section.signalindustries.collector=Collector
 
 guidebook.section.mob.infernal.name=Infernal
 guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.

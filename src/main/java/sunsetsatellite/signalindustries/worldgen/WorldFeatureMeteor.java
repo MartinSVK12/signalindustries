@@ -8,6 +8,7 @@ import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.ExplosionNoDrops;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 import java.util.Random;
 
@@ -54,7 +55,7 @@ public class WorldFeatureMeteor extends WorldFeature {
             }
         }
 
-        SignalIndustries.meteorLocations.add(new ChunkCoordinates(i,j,k));
+        SignalIndustries.meteorLocations.add(new MeteorLocation(MeteorLocation.Type.getFromBlock(Block.blocksList[oreId]),new ChunkCoordinates(i,j,k)));
         //SignalIndustries.LOGGER.info("Meteor contains "+oreBlocks+" ore.");
         return true;
     }

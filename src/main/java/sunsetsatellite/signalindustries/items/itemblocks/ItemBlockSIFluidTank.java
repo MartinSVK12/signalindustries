@@ -48,6 +48,7 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
                         block.onBlockPlaced(world, blockX, blockY, blockZ, side, player, yPlaced);
                         world.playBlockSoundEffect(player, (double)((float)blockX + 0.5F), (double)((float)blockY + 0.5F), (double)((float)blockZ + 0.5F), block, EnumBlockSoundEffectType.PLACE);
                         TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getBlockTileEntity(blockX,blockY,blockZ);
+                        tile.tick();
                         if (stack.getData().containsKey("Fluid")) {
                             FluidStack fluidStack = new FluidStack(stack.getData().getCompound("Fluid"));
                             tile.insertFluid(0,fluidStack);

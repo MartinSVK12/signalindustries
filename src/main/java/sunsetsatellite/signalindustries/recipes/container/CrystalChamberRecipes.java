@@ -22,10 +22,10 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                 "size_up",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1,0,nbt)),
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1,0,nbt))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystalBattery,1,0,nbt)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystalBattery,1,0,nbt))
                         },
-                        new ItemStack(SIItems.signalumCrystal,1,0,nbt2),
+                        new ItemStack(SIItems.signalumCrystalBattery,1,0,nbt2),
                         new RecipeProperties(800,80, Tier.BASIC,false)
                 )
         );

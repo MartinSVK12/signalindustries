@@ -7,7 +7,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.gui.guidebook.pages.recipe.*;
-import sunsetsatellite.signalindustries.gui.guidebook.pages.wiki.IntroPage;
+import sunsetsatellite.signalindustries.gui.guidebook.pages.lore.IntroPage;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MultiblockSection;
@@ -32,6 +32,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
     private final SearchableGuidebookSubsection crystalChamber = new MachineSection(this,SIRecipes.CRYSTAL_CHAMBER.getAllRecipes(), CrystalChamberPage.class);
     private final SearchableGuidebookSubsection infuser = new MachineSection(this,SIRecipes.INFUSER.getAllRecipes(), InfuserPage.class);
     private final SearchableGuidebookSubsection centrifuge = new MachineSection(this,SIRecipes.CENTRIFUGE.getAllRecipes(), CentrifugePage.class);
+    private final SearchableGuidebookSubsection collector = new FluidMachineSection(this,SIRecipes.COLLECTOR.getAllRecipes(), CollectorPage.class);
 
 
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
@@ -39,6 +40,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         super("guidebook.section.signalindustries", new ItemStack(SIItems.signalumCrystal), 0xAA0000, 0xFF0000);
         reloadSection();
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.extractor"),extractor.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.collector"),collector.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.crusher"),crusher.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.alloySmelter"),alloySmelter.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.plateFormer"),plateFormer.getPages().get(0)));
@@ -51,6 +53,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.multiblocks"),multiblocks.getPages().get(0)));
 
         subsections.add(extractor);
+        subsections.add(collector);
         subsections.add(crusher);
         subsections.add(alloySmelter);
         subsections.add(plateFormer);

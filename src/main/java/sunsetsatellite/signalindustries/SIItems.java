@@ -26,6 +26,7 @@ import static sunsetsatellite.signalindustries.SignalIndustries.*;
 public class SIItems extends DataInitializer {
     public static Item signalumCrystalEmpty;
     public static Item signalumCrystal;
+    public static Item signalumCrystalBattery;
     public static Item infiniteSignalumCrystal;
     public static Item volatileSignalumCrystal;
     public static Item rawSignalumCrystal;
@@ -133,6 +134,7 @@ public class SIItems extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing items...");
         rawSignalumCrystal = simpleItem("rawSignalumCrystal", "signalindustries:item/rawsignalumcrystal");
+        signalumCrystal = simpleItem("signalumCrystal", "signalindustries:item/signalumcrystal");
         awakenedSignalumCrystal = simpleItem("awakenedSignalumCrystal", "signalindustries:item/awakenedsignalumcrystal").setMaxStackSize(1);
         awakenedSignalumFragment = simpleItem("awakenedSignalumFragment", "signalindustries:item/awakenedsignalumfragment");
         coalDust = simpleItem("coalDust", "signalindustries:item/coaldust");
@@ -204,13 +206,13 @@ public class SIItems extends DataInitializer {
                 .setStackSize(1)
                 .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
                 .build(new ItemSignalumCrystal("signalumCrystalEmpty", config.getInt("ItemIDs.signalumCrystalEmpty"),false));
-        signalumCrystal = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/signalumcrystal")
+        signalumCrystalBattery = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/signalumcrystalbattery")
                 .setStackSize(1)
                 .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
-                .build(new ItemSignalumCrystal("signalumCrystal", config.getInt("ItemIDs.signalumCrystal"),false));
+                .build(new ItemSignalumCrystal("signalumCrystal.battery", config.getInt("ItemIDs.signalumCrystalBattery"),false));
         infiniteSignalumCrystal = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/awakenedsignalumcrystal")
+                .setIcon("signalindustries:item/infinitesignalumcrystal")
                 .setStackSize(1)
                 .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
                 .build(new ItemSignalumCrystal("infiniteSignalumCrystal", config.getInt("ItemIDs.infiniteSignalumCrystal"),true));

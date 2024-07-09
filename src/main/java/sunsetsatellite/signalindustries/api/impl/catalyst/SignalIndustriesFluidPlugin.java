@@ -13,7 +13,7 @@ import java.util.Collections;
 public class SignalIndustriesFluidPlugin {
     public void initializePlugin(Logger logger) {
         logger.info("Loading fluids from signalindustries..");
-        FluidRegistryEntry entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumCrystal, SIItems.signalumCrystalEmpty, Collections.singletonList(SIBlocks.energyFlowing));
+        FluidRegistryEntry entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumCrystalBattery, SIItems.signalumCrystalEmpty, Collections.singletonList(SIBlocks.energyFlowing));
         CatalystFluids.FLUIDS.register(SignalIndustries.key("signalumEnergy"),entry);
         entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumSaber, SIItems.signalumSaber,  Collections.singletonList(SIBlocks.energyFlowing));
         CatalystFluids.FLUIDS.register(SignalIndustries.key("signalumSaber"),entry);

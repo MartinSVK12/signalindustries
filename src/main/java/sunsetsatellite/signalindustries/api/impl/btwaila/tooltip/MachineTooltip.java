@@ -1,8 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.btwaila.tooltip;
 
 import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.core.block.Block;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.*;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
@@ -28,6 +26,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityAutoMiner.class);
         addClass(TileEntityAssembler.class);
         addClass(TileEntityInductionSmelter.class);
+        addClass(TileEntityCollector.class);
     }
 
     @Override

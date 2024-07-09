@@ -37,6 +37,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> CRYSTAL_CHAMBER;
     public static RecipeGroupSI<RecipeEntryMachine> INFUSER;
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
+    public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
 
     @Override
     public void onRecipesReady() {
@@ -60,6 +61,7 @@ public class SIRecipes implements RecipeEntrypoint {
         CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCrystalChamber),new ItemStack(SIBlocks.reinforcedCrystalChamber))));
         INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInfuser))));
         CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedCentrifuge))));
+        COLLECTOR = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicCollector))));
     }
 
     public void load(){
@@ -90,6 +92,7 @@ public class SIRecipes implements RecipeEntrypoint {
         new CrystalChamberRecipes().addRecipes(CRYSTAL_CHAMBER);
         new InfuserRecipes().addRecipes(INFUSER);
         new CentrifugeRecipes().addRecipes(CENTRIFUGE);
+        new CollectorRecipes().addRecipes(COLLECTOR);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");
@@ -115,6 +118,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("crystal_chamber",CRYSTAL_CHAMBER);
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
+        SIGNAL_INDUSTRIES.register("collector",COLLECTOR);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 

@@ -26,18 +26,19 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,8))
                         },
-                        new ItemStack(SIItems.signalumCrystal,1,0,nbt),
-                        new RecipeProperties(200,80,0, Tier.PROTOTYPE,false)
+                        new ItemStack(SIItems.signalumCrystal,1,0),
+                        new RecipeProperties(200,80,0, Tier.PROTOTYPE,true)
                 )
         );
         group.register(
-                "krowka",
+                "signalum_crystal_battery",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.caramelPlate,1))
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1))
                         },
-                        new ItemStack(SIItems.krowka,8,0,nbt),
-                        new RecipeProperties(200,80,7, Tier.PROTOTYPE,false)
+                        new ItemStack(SIItems.signalumCrystalBattery,1,0,nbt),
+                        new RecipeProperties(100,80,1, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -48,7 +49,29 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,8))
                         },
                         new ItemStack(SIItems.signalumCrystalEmpty,1,0,nbt2),
-                        new RecipeProperties(200,80,1, Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,80,2, Tier.PROTOTYPE,true)
+                )
+        );
+        group.register(
+                "basic_signalum_crystal",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
+                        },
+                        new ItemStack(SIItems.signalumCrystal,1,0,nbt),
+                        new RecipeProperties(200,80,0, Tier.BASIC,false)
+                )
+        );
+        group.register(
+                "basic_empty_signalum_crystal",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
+                        },
+                        new ItemStack(SIItems.signalumCrystalEmpty,1,0,nbt2),
+                        new RecipeProperties(200,80,2, Tier.BASIC,false)
                 )
         );
         group.register(
@@ -59,7 +82,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1))
                         },
                         new ItemStack(SIItems.volatileSignalumCrystal,4,0),
-                        new RecipeProperties(200,80,2, Tier.BASIC,false)
+                        new RecipeProperties(200,80,3, Tier.BASIC,false)
                 )
         );
         group.register(
@@ -67,10 +90,10 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,500)),
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,2))
                         },
                         new ItemStack(SIItems.crystalChip,1,0),
-                        new RecipeProperties(100,80,3, Tier.BASIC,false)
+                        new RecipeProperties(100,80,4, Tier.BASIC,false)
                 )
         );
         group.register(
@@ -81,7 +104,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal,1))
                         },
                         new ItemStack(SIItems.pureCrystalChip,2,0),
-                        new RecipeProperties(100,80,4, Tier.REINFORCED,false)
+                        new RecipeProperties(100,80,5, Tier.REINFORCED,false)
                 )
         );
         group.register(
@@ -92,7 +115,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.dimensionalShard,1))
                         },
                         new ItemStack(SIItems.dimensionalChip,2,0),
-                        new RecipeProperties(200,160,5, Tier.REINFORCED,false)
+                        new RecipeProperties(200,160,6, Tier.REINFORCED,false)
                 )
         );
         group.register(
@@ -103,7 +126,17 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.dilithiumShard,1))
                         },
                         new ItemStack(SIItems.dilithiumChip,2,0),
-                        new RecipeProperties(100,160,6, Tier.REINFORCED,false)
+                        new RecipeProperties(100,160,7, Tier.REINFORCED,false)
+                )
+        );
+        group.register(
+                "krowka",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.caramelPlate,1))
+                        },
+                        new ItemStack(SIItems.krowka,8,0,nbt),
+                        new RecipeProperties(200,80,8, Tier.PROTOTYPE,false)
                 )
         );
     }

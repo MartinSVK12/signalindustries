@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.items.containers;
 
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -60,7 +59,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     @Override
     public boolean canDrain(ItemStack stack) {
         if(infinite) return true;
-        return getCapacity(stack) > getRemainingCapacity(stack) && stack.getItem().id == SIItems.signalumCrystal.id;
+        return getCapacity(stack) > getRemainingCapacity(stack) && stack.getItem().id == SIItems.signalumCrystalBattery.id;
     }
 
     @Override
@@ -79,7 +78,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             if(infinite) saturation = Integer.MAX_VALUE;
             int amount = fluidStack.amount;
             int size = stack.getData().getInteger("size");
-            ItemStack crystal = new ItemStack(SIItems.signalumCrystal,1);
+            ItemStack crystal = new ItemStack(SIItems.signalumCrystalBattery,1);
             if(infinite) crystal = new ItemStack(SIItems.infiniteSignalumCrystal);
             if(remaining == 0){
                 return null;
@@ -127,7 +126,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             if(infinite) saturation = Integer.MAX_VALUE;
             int amount = Math.min(fluidStack.amount,maxAmount);
             int size = stack.getData().getInteger("size");
-            ItemStack crystal = new ItemStack(SIItems.signalumCrystal,1);
+            ItemStack crystal = new ItemStack(SIItems.signalumCrystalBattery,1);
             if(infinite) crystal = new ItemStack(SIItems.infiniteSignalumCrystal);
             if(remaining == 0) return null;
             int result = Math.min(amount,remaining);
@@ -274,7 +273,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             text.append("Size: 1 | Saturation: Infinite");
         } else {
             text.append("Size: ").append(stack.getData().getInteger("size"));
-            if(stack.getItem().id == SIItems.signalumCrystal.id){
+            if(stack.getItem().id == SIItems.signalumCrystalBattery.id){
                 text.append(" | ").append("Saturation: ").append(stack.getData().getInteger("saturation"));
             }
         }

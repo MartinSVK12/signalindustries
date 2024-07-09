@@ -29,7 +29,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     public ItemSignalumDrill(String name, int id, Tier tier, ToolMaterial enumtoolmaterial) {
         super(name, id, enumtoolmaterial);
         this.tier = tier;
-        blockDestroyCost = 5 * tier.ordinal();
+        blockDestroyCost = 1;
     }
 
     public enum DrillMode{
@@ -198,6 +198,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
             } else {
                 CompoundTag data = new CompoundTag();
                 data.putInt("energy",saturation + amount);
+                fluidStack.amount -= amount;
                 stack.setData(data);
                 return stack;
             }

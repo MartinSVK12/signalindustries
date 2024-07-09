@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.items;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.dynamictexture.DynamicTexture;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -10,9 +9,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
-
-import static java.lang.Math.PI;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 public class ItemMeteorTracker extends Item implements ICustomDescription {
 
@@ -38,19 +35,23 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 
             ChunkCoordinates chunk = null;
             double distance = Double.MAX_VALUE;
+            MeteorLocation.Type type = null;
             Minecraft mc = Minecraft.getMinecraft(this);
-            for (ChunkCoordinates meteorLocation : SignalIndustries.meteorLocations) {
-                if(meteorLocation.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z) < distance){
-                    distance = meteorLocation.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
-                    chunk = meteorLocation;
+            for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
+                ChunkCoordinates location = meteorLocation.location;
+                if(location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z) < distance){
+                    distance = location.getSqDistanceTo((int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
+                    chunk = location;
+                    type = meteorLocation.type;
                 }
             }
             if(chunk != null){
                 if(entityplayer.isSneaking() && distance < 5){
                     mc.ingameGUI.addChatMessage("This meteor will no longer be tracked.");
-                    SignalIndustries.meteorLocations.remove(chunk);
+                    final ChunkCoordinates finalChunk = chunk;
+                    SignalIndustries.meteorLocations.removeIf((L)->L.location == finalChunk);
                 } else {
-                    mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks", distance));
+                    mc.ingameGUI.addChatMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
                 }
             } else {
                 mc.ingameGUI.addChatMessage("No meteors detected nearby.");
