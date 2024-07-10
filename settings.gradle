@@ -29,7 +29,8 @@ include(":catalyst:all")
 include(":retrostorage")
 include(":halplibe")
 include(":btwaila")
-
+include(":vintage-questing")
+include(":btg")
 
 project(":catalyst").projectDir = file("${rootProject.projectDir}/../catalyst")
 project(":catalyst:energy").projectDir = file("${project(":catalyst").projectDir}/energy")
@@ -40,3 +41,5 @@ project(":catalyst:all").projectDir = file("${project(":catalyst").projectDir}/a
 project(":retrostorage").projectDir = file("${rootProject.projectDir}/../retrostorage")
 project(":halplibe").projectDir = file("${rootProject.projectDir}/../bta-halplibe")
 project(":btwaila").projectDir = file("${rootProject.projectDir}/../BTWaila")
+project(":vintage-questing").projectDir = file("${rootProject.projectDir}/../../7.2/vintage-questing")
+project(":btg").projectDir = file("${rootProject.projectDir}/../../Foreign/btg")

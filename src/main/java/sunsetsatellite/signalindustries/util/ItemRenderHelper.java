@@ -21,6 +21,7 @@ public class ItemRenderHelper {
 	}
 	public static void renderItemStack(@Nullable ItemStack itemStack, int x, int y, double scaleX, double scaleY, float brightness, float alpha){
 		initMC();
+		boolean render = true;
 		GL11.glPushMatrix();
 		Lighting.enableInventoryLight();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -32,7 +33,12 @@ public class ItemRenderHelper {
 			ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(itemStack.getItem());
 			GL11.glTranslatef(x, y, 0);
 			GL11.glScaled(scaleX,scaleY,1);
-			itemModel.renderItemIntoGui(Tessellator.instance, mc.fontRenderer, mc.renderEngine, itemStack, 0, 0, brightness, alpha);
+			try {
+				itemModel.renderItemIntoGui(Tessellator.instance, mc.fontRenderer, mc.renderEngine, itemStack, 0, 0, brightness, alpha);
+			} catch (NullPointerException npe){
+				//fuck you
+			}
+
 		}
 
         GL11.glDisable(GL11.GL_DEPTH_TEST);

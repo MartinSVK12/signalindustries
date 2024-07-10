@@ -43,6 +43,7 @@ import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
 import sunsetsatellite.signalindustries.abilities.powersuit.*;
 import sunsetsatellite.signalindustries.api.impl.retrostorage.ReSPlugin;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.commands.RecipeReloadCommand;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
@@ -261,6 +262,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded("retrostorage")) {
             new ReSPlugin().initializePlugin(LOGGER);
+        }
+
+        if (FabricLoaderImpl.INSTANCE.isModLoaded("vintage-questing")) {
+            new VintageQuestingSIPlugin().initializePlugin(LOGGER);
         }
 
         addEntities();
