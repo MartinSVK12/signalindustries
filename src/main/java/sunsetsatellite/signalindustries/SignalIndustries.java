@@ -102,6 +102,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         defaultConfig.addCategory("ItemIDs");
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
+        defaultConfig.addEntry("Other.enableQuests",false);
         defaultConfig.addEntry("Other.eternityDimId", 3);
         defaultConfig.addEntry("Other.GuiId", 10);
         defaultConfig.addEntry("Other.machinePacketId", 113);
@@ -257,15 +258,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         ItemToolPickaxe.miningLevels.put(SIBlocks.basicCasing,3);
 
         CommandHelper.createCommand(new NBTEditCommand());
-        CommandHelper.createCommand(new RecipeReloadCommand("recipes"));
+        CommandHelper.createCommand(new RecipeReloadCommand("data"));
         CommandHelper.createCommand(new StructureCommand("structure","struct"));
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded("retrostorage")) {
             new ReSPlugin().initializePlugin(LOGGER);
-        }
-
-        if (FabricLoaderImpl.INSTANCE.isModLoaded("vintage-questing")) {
-            new VintageQuestingSIPlugin().initializePlugin(LOGGER);
         }
 
         addEntities();
@@ -604,7 +601,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     @Override
     public void afterGameStart() {
-
+        if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+            if(config.getBoolean("Other.enableQuests")){
+                new VintageQuestingSIPlugin().initializePlugin();
+            }
+        }
     }
 
     @Override

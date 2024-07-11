@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.commands;
 
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.legacy.CraftingManager;
@@ -12,6 +13,8 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 
 import java.util.ArrayList;
@@ -27,6 +30,10 @@ public class RecipeReloadCommand extends Command {
 
     @Override
     public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
+        if(commandHandler.isServer()){
+            commandSender.sendMessage("This command can only be used in singleplayer!");
+            return true;
+        }
         if(strings.length == 1 && Objects.equals(strings[0], "reload")){
             Registries.RECIPES = new RecipeRegistry();
             List<List<ItemStack>> list = new ArrayList<>();
@@ -61,6 +68,12 @@ public class RecipeReloadCommand extends Command {
             commandSender.sendMessage(String.format("%d item groups.",itemGroups));
             commandSender.sendMessage(String.format("%d recipes in %d groups in %d namespaces.",recipes,groups,namespaces));
             commandSender.sendMessage("Recipes reloaded!");
+            if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+                if (SignalIndustries.config.getBoolean("Other.enableQuests")) {
+                    new VintageQuestingSIPlugin().reset();
+                    commandSender.sendMessage("Quests reloaded!");
+                }
+            }
             return true;
         }
         return false;
