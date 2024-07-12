@@ -925,5 +925,79 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/crystal_wings",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "W W",
+      "WCW",
+      "WAW"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "item.signalindustries.crystalWingPart",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.attachmentPoint",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.reinforced.attachment.wings",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/crystal_wing_part",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "  P",
+      "SPS",
+      " SS"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.crystalWingPart",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

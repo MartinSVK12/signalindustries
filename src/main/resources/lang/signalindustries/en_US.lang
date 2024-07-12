@@ -64,6 +64,8 @@ item.signalindustries.awakenedAlloyPlate.name=Awakened Alloy Plate
 item.signalindustries.awakenedAlloyPlate.desc=A plate made out of <Awakened Alloy>.
 item.signalindustries.voidAlloyPlate.name=Void Alloy Plate
 item.signalindustries.voidAlloyPlate.desc=A plate made out of <Void Alloy>.
+item.signalindustries.signalumAlloyMesh.name=Signalum Alloy Mesh
+item.signalindustries.signalumAlloyMesh.desc=A thin plate of <Signalum Alloy> with a lot of small holes in it.
 
 item.signalindustries.diamondCuttingGear.name=Diamond Cutting Gear
 item.signalindustries.diamondCuttingGear.desc=Sharp! Used in a specific machine for cutting stuff.

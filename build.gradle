@@ -147,9 +147,7 @@ dependencies {
 
 	implementation project(path: ":btwaila",configuration: "namedElements")
 	implementation project(path: ":vintage-questing",configuration: "namedElements")
-	implementation project(path: ":btg",configuration: "namedElements")
-
-
+	//implementation project(path: ":btg",configuration: "namedElements")
 
 
 	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"

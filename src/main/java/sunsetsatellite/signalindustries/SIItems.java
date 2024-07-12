@@ -51,6 +51,7 @@ public class SIItems extends DataInitializer {
     public static Item crystalAlloyIngot;
     public static Item reinforcedCrystalAlloyIngot;
     public static Item saturatedSignalumAlloyIngot;
+    public static Item signalumAlloyMesh;
     public static Item voidAlloyIngot;
     public static Item awakenedAlloyIngot;
     public static Item diamondCuttingGear;
@@ -109,6 +110,7 @@ public class SIItems extends DataInitializer {
     public static Item dilithiumChip;
     public static Item dimensionalChip;
     public static Item attachmentPoint;
+    public static Item crystalWingPart;
     public static Item meteorTracker;
     public static Item configurationTablet;
     public static Item blankAbilityModule;
@@ -191,6 +193,8 @@ public class SIItems extends DataInitializer {
         condensedMilkCan = simpleItem("condensedMilkCan","condensedMilkCan","signalindustries:item/condensed_milk_can").setMaxStackSize(1);
         bucketCaramel = simpleItem("bucketCaramel","bucketCaramel","signalindustries:item/bucket_caramel").setMaxStackSize(1).setContainerItem(Item.bucket);
         caramelPlate = simpleItem("caramelPlate","caramelPlate","signalindustries:item/caramel_plate");
+        signalumAlloyMesh = simpleItem("signalumAlloyMesh","signalumAlloyMesh","signalindustries:item/signalum_alloy_mesh");
+        crystalWingPart = simpleItem("crystalWingPart","crystalWingPart","signalindustries:item/crystal_wing_part").setMaxStackSize(6);
         raziel = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/raziel")
                 .setStackSize(1)
