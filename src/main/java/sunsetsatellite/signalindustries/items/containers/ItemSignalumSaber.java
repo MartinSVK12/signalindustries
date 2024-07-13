@@ -20,7 +20,6 @@ import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -66,6 +65,11 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
         return new FluidStack(SIBlocks.energyFlowing,getCapacity(stack));
+    }
+
+    @Override
+    public void setCurrentFluid(FluidStack fluidStack, ItemStack stack) {
+
     }
 
     @Override
@@ -135,13 +139,18 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {}
+    public void drain(ItemStack stack, int slot, TileEntityFluidContainer tile) {}
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {}
+    public void drain(ItemStack stack, int slot, IFluidInventory tile) {}
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {}
+    public void drain(ItemStack stack, int slot, ItemInventoryFluid inv) {}
+
+    @Override
+    public FluidStack drain(ItemStack stack, int amount) {
+        return null;
+    }
 
     @Override
     public boolean hitEntity(ItemStack itemstack, EntityLiving victim, EntityLiving attacker) {

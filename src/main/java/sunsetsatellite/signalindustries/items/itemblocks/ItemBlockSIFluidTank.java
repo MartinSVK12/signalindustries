@@ -15,7 +15,6 @@ import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.ItemInventoryFluid;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.mixins.INBTCompound;
 import sunsetsatellite.signalindustries.inventories.TileEntitySIFluidTank;
@@ -94,6 +93,13 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
     }
 
     @Override
+    public void setCurrentFluid(FluidStack fluidStack, ItemStack stack) {
+        CompoundTag fluidNbt = new CompoundTag();
+        fluidStack.writeToNBT(fluidNbt);
+        stack.getData().putCompound("Fluid", fluidNbt);
+    }
+
+    @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
         FluidStack thisStack = getCurrentFluid(stack);
         if(CatalystFluids.FLUIDS.findFluidsWithAnyContainer(this).contains(fluidStack.liquid)){
@@ -151,16 +157,24 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
     }
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, TileEntityFluidContainer tile) {
+    public FluidStack drain(ItemStack stack, int amount) {
+        int actual = Math.min(getCurrentFluid(stack).amount,amount);
+        FluidStack currentFluid = getCurrentFluid(stack);
+        currentFluid.amount -= actual;
+        setCurrentFluid(currentFluid,stack);
+        return new FluidStack(currentFluid.getLiquid(),actual);
+    }
+
+    @Override
+    public void drain(ItemStack stack, int slot, TileEntityFluidContainer tile) {
         this.drain(stack,slot,(IFluidInventory) tile);
     }
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, IFluidInventory tile) {
+    public void drain(ItemStack stack, int slot, IFluidInventory tile) {
         FluidStack fluidStack = getCurrentFluid(stack);
-        int slotIndex = slot.slotIndex;
-        if(fluidStack != null && tile.getAllowedFluidsForSlot(slotIndex).contains(fluidStack.liquid) && tile.canInsertFluid(slotIndex,fluidStack)){
-            FluidStack returned = tile.insertFluid(slotIndex, fluidStack);
+        if(fluidStack != null && tile.getAllowedFluidsForSlot(slot).contains(fluidStack.liquid) && tile.canInsertFluid(slot,fluidStack)){
+            FluidStack returned = tile.insertFluid(slot, fluidStack);
             if(returned == null || returned.amount <= 0){
                 ((INBTCompound) stack.getData()).removeTag("Fluid");
                 return;
@@ -172,7 +186,7 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
     }
 
     @Override
-    public void drain(ItemStack stack, SlotFluid slot, ItemInventoryFluid inv) {
+    public void drain(ItemStack stack, int slot, ItemInventoryFluid inv) {
         this.drain(stack,slot,(IFluidInventory) inv);
     }
 }
