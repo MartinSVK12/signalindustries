@@ -130,13 +130,24 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 )
         );
         group.register(
+                "signalum_alloy_mesh",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack((BlockFluid) BlockFluid.fluidWaterFlowing,1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumAlloyPlate,1))
+                        },
+                        new ItemStack(SIItems.signalumAlloyMesh,1,0),
+                        new RecipeProperties(100,80,8, Tier.BASIC,false)
+                )
+        );
+        group.register(
                 "krowka",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.caramelPlate,1))
                         },
                         new ItemStack(SIItems.krowka,8,0,nbt),
-                        new RecipeProperties(200,80,8, Tier.PROTOTYPE,false)
+                        new RecipeProperties(50,20,9, Tier.PROTOTYPE,false)
                 )
         );
     }
