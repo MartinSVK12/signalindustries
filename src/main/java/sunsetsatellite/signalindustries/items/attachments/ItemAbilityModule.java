@@ -5,6 +5,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.containers.ContainerAbilityModule;
@@ -19,7 +20,7 @@ public class ItemAbilityModule extends ItemAttachment implements ITiered {
     public Tier tier;
 
     public ItemAbilityModule(String name, int id, Tier tier) {
-        super(name, id, SignalIndustries.listOf(AttachmentPoint.CORE_MODULE));
+        super(name, id, Catalyst.listOf(AttachmentPoint.CORE_MODULE));
         this.tier = tier;
     }
 

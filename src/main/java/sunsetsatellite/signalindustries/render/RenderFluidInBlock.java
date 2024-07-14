@@ -10,12 +10,12 @@ import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.multiblocks.HologramWorld;
-import sunsetsatellite.catalyst.core.util.IColorOverride;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
         float amount = Math.abs(fluidAmount / fluidMaxAmount - 0.02F);
         if (fluidId != 0) {
             Block block = Block.blocksList[fluidId];
-            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(block,new Vec3i(),0,null))));
+            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(block,new Vec3i(),0,null))));
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);

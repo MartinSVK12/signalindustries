@@ -10,7 +10,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.Arrays;

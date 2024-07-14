@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static sunsetsatellite.catalyst.Catalyst.listOf;
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 
 public class SIRecipes implements RecipeEntrypoint {

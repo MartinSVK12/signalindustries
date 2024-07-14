@@ -25,7 +25,7 @@ public class TileEntityVoidContainer extends TileEntityFluidItemContainer {
             activeFluidSlots.put(dir,0);
             acceptedFluids.clear();
             for (FluidStack ignored : fluidContents) {
-                acceptedFluids.add(new ArrayList<>(CatalystFluids.FLUIDS.getAllFluids()));
+                acceptedFluids.add(new ArrayList<>(CatalystFluids.CONTAINERS.getAllFluids()));
             }
         }
     }

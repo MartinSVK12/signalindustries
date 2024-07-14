@@ -7,9 +7,9 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.collection.Pair;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.Arrays;
@@ -38,7 +38,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
                 if(inputSymbol.hasFluid()){
                     List<FluidStack> fluid = subSymbol.resolveFluids();
                     List<FluidStack> inputFluid = inputSymbol.resolveFluids();
-                    List<Pair<FluidStack, FluidStack>> pairs = SignalIndustries.zip(fluid, inputFluid);
+                    List<Pair<FluidStack, FluidStack>> pairs = Catalyst.zip(fluid, inputFluid);
                     if (pairs.stream().anyMatch(pair -> pair.getLeft().amount < pair.getRight().amount)) {
                         return false;
                     }
@@ -46,7 +46,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
                 } else {
                     List<ItemStack> stack = subSymbol.resolve();
                     List<ItemStack> inputStack = inputSymbol.resolve();
-                    List<Pair<ItemStack, ItemStack>> pairs = SignalIndustries.zip(stack, inputStack);
+                    List<Pair<ItemStack, ItemStack>> pairs = Catalyst.zip(stack, inputStack);
                     if (pairs.stream().anyMatch(pair -> pair.getLeft().stackSize < pair.getRight().stackSize)) {
                         return false;
                     }

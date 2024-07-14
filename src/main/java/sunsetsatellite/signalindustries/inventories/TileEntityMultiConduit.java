@@ -7,6 +7,7 @@ import com.mojang.nbt.ListTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.energy.api.IEnergy;
@@ -17,7 +18,6 @@ import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -27,7 +27,7 @@ import java.util.*;
 
 public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IEnergy, IEnergySource, IEnergySink {
     public IConduitBlock[] conduits = new IConduitBlock[4];
-    public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) SignalIndustries.mapOf(Direction.values(),SignalIndustries.arrayFill(new Integer[Direction.values().length],-1));
+    public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(),Catalyst.arrayFill(new Integer[Direction.values().length],-1));
 
     //fluids
     public int maxRememberTicks = 100;
@@ -164,7 +164,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                         }
                     }
                     if(newConduit.getConduitCapability() == ConduitCapability.FLUID){
-                        acceptedFluids.get(acceptedFluids.size()-1).addAll(CatalystFluids.FLUIDS.getAllFluids());
+                        acceptedFluids.get(acceptedFluids.size()-1).addAll(CatalystFluids.CONTAINERS.getAllFluids());
                         acceptedFluids.get(acceptedFluids.size()-1).remove(SIBlocks.energyFlowing);
                     } else if (newConduit.getConduitCapability() == ConduitCapability.SIGNALUM) {
                         acceptedFluids.get(acceptedFluids.size()-1).add(SIBlocks.energyFlowing);
@@ -203,12 +203,12 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     }
 
     @Override
-    public int getActiveFluidSlot(Direction dir) {
+    public int getActiveFluidSlotForSide(Direction dir) {
         return conduitConnections.get(dir);
     }
 
     @Override
-    public Connection getConnection(Direction dir) {
+    public Connection getFluidIOForSide(Direction dir) {
         return Connection.BOTH;
     }
 

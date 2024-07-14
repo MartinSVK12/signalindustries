@@ -102,7 +102,7 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
         FluidStack thisStack = getCurrentFluid(stack);
-        if(CatalystFluids.FLUIDS.findFluidsWithAnyContainer(this).contains(fluidStack.liquid)){
+        if(CatalystFluids.CONTAINERS.findFluidsWithAnyContainer(this).contains(fluidStack.liquid)){
             if (thisStack == null || thisStack.amount <= 0) {
                 thisStack = fluidStack.copy();
                 fluidStack.amount = 0;
@@ -132,7 +132,7 @@ public class ItemBlockSIFluidTank extends ItemBlock implements IItemFluidContain
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
-        if(CatalystFluids.FLUIDS.findFluidsWithAnyContainer(this).contains(fluidStack.liquid)) {
+        if(CatalystFluids.CONTAINERS.findFluidsWithAnyContainer(this).contains(fluidStack.liquid)) {
             FluidStack thisStack = getCurrentFluid(stack);
             if (thisStack == null || thisStack.amount <= 0) {
                 thisStack = fluidStack.copy();

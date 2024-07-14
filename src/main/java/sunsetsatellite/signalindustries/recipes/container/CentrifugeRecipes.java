@@ -6,7 +6,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
 

@@ -43,7 +43,7 @@ public class RenderSignalumReactor extends RenderMultiblock {
             GL11.glDisable(2896);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA,GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glEnable( GL11.GL_BLEND );
-            //blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(Block.blocksList[fluidId],new Vec3i(),null))));
+            //blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(Block.blocksList[fluidId],new Vec3i(),null))));
             this.drawBlock(tessellator, model, 0);
             ((IFullbright) model).disableFullbright();
             ((IColorOverride)model).overrideColor(1,1,1,1);

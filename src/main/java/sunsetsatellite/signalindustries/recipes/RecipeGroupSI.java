@@ -5,11 +5,9 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
-
-import java.util.List;
 
 public class RecipeGroupSI<T extends RecipeEntrySI<?,?, RecipeProperties>> extends RecipeGroup<T> {
     public RecipeGroupSI(RecipeSymbol machine) {

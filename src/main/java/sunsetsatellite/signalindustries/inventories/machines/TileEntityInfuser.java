@@ -27,7 +27,7 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add(SIBlocks.energyFlowing);
-        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids());
+        acceptedFluids.get(1).addAll(CatalystFluids.CONTAINERS.getAllFluids());
         acceptedFluids.get(1).remove(SIBlocks.energyFlowing);
         itemContents = new ItemStack[3];
         energySlot = 0;

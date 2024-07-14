@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.items.attachments;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.entities.fx.EntityColorParticleFX;
@@ -21,7 +22,7 @@ public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
     @Override
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
         super.activate(stack, signalumPowerSuit, player, world);
-        if(signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.active && signalumPowerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))) {
+        if(signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.active && signalumPowerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters, Catalyst.listOf("bootBackL","bootBackR"))) {
             boolean state = stack.getData().getBoolean("active");
             stack.getData().putBoolean("active", !state);
         }

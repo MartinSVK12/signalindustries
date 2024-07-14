@@ -35,7 +35,7 @@ public class InventoryBackpack extends ItemInventoryFluid {
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
+        for (BlockFluid fluid : CatalystFluids.CONTAINERS.getAllFluids()) {
             if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }

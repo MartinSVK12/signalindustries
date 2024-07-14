@@ -16,8 +16,6 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredContain
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class TileEntitySIFluidTank extends TileEntityTieredContainer implements IHasIOPreview {
@@ -48,7 +46,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
-        for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
+        for (BlockFluid fluid : CatalystFluids.CONTAINERS.getAllFluids()) {
             if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }

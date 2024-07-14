@@ -30,6 +30,36 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     }
 
     @Override
+    public int getActiveFluidSlotForSide(Direction dir) {
+        if(externalTile instanceof IFluidIO){
+            return ((IFluidIO) externalTile).getActiveFluidSlotForSide(dir);
+        }
+        return 0;
+    }
+
+    @Override
+    public Connection getFluidIOForSide(Direction dir) {
+        if(externalTile instanceof IFluidIO){
+            return ((IFluidIO) externalTile).getFluidIOForSide(dir);
+        }
+        return Connection.NONE;
+    }
+
+    @Override
+    public void take(@NotNull FluidStack fluidStack, Direction dir, int slot) {
+        if (externalTile instanceof IFluidTransfer) {
+            ((IFluidTransfer) externalTile).take(fluidStack, dir, slot);
+        }
+    }
+
+    @Override
+    public void give(Direction dir, int slot, int otherSlot) {
+        if(externalTile instanceof IFluidTransfer){
+            ((IFluidTransfer) externalTile).give(dir, slot, otherSlot);
+        }
+    }
+
+    @Override
     public int getSizeInventory() {
         if(externalTile instanceof IInventory){
             return ((IInventory) externalTile).getSizeInventory();
@@ -70,18 +100,12 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void readFromNBT(CompoundTag tag) {
-        /*if(externalTile != null) {
-            externalTile.readFromNBT(CompoundTag1);
-        }*/
         super.readFromNBT(tag);
         externalTilePos = tag.getCompound("externalPosition");
     }
 
     @Override
     public void writeToNBT(CompoundTag tag) {
-        /*if(externalTile != null) {
-            externalTile.writeToNBT(CompoundTag1);
-        }*/
         tag.put("externalPosition",externalTilePos);
         super.writeToNBT(tag);
     }
@@ -141,14 +165,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     }
 
     @Override
-    public Connection getConnection(Direction dir) {
-        if(externalTile instanceof IFluidTransfer) {
-            return ((IFluidTransfer) externalTile).getConnection(dir);
-        }
-        return Connection.NONE;
-    }
-
-    @Override
     public FluidStack getFluidInSlot(int slot) {
         if(externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getFluidInSlot(slot);
@@ -198,14 +214,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     public int getTransferSpeed() {
         if(externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getTransferSpeed();
-        }
-        return 0;
-    }
-
-    @Override
-    public int getActiveFluidSlot(Direction dir) {
-        if(externalTile instanceof IFluidInventory) {
-            return ((IFluidInventory) externalTile).getActiveFluidSlot(dir);
         }
         return 0;
     }

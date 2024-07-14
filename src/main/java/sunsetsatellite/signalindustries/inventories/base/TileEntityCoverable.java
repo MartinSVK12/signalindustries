@@ -5,9 +5,9 @@ import com.mojang.nbt.Tag;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
 
@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class TileEntityCoverable extends TileEntityFluidItemContainer implements IAcceptsCovers {
 
-    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) SignalIndustries.mapOf(Direction.values(),new CoverBase[Direction.values().length]);
+    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) Catalyst.mapOf(Direction.values(),new CoverBase[Direction.values().length]);
 
     @Override
     public void tick() {

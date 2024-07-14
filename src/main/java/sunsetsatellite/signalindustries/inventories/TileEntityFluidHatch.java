@@ -17,7 +17,7 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer implements I
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = 8000;
-        acceptedFluids.get(0).addAll(CatalystFluids.FLUIDS.getAllFluids());
+        acceptedFluids.get(0).addAll(CatalystFluids.CONTAINERS.getAllFluids());
     }
 
     @Override

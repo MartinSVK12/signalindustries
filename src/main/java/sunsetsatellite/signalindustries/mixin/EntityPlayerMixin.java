@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
@@ -96,7 +96,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     )
     public void updateSpeed(CallbackInfo ci) {
         if(powerSuit != null && powerSuit.active){
-            if(powerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters,SignalIndustries.listOf("bootBackL","bootBackR"))){
+            if(powerSuit.hasAttachment((ItemAttachment) SIItems.movementBoosters, Catalyst.listOf("bootBackL","bootBackR"))){
                 if(powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters) != null && powerSuit.getAttachment((ItemAttachment) SIItems.movementBoosters).getData().getBoolean("active")){
                     speed += (float) (baseSpeed * 0.3);
                 }

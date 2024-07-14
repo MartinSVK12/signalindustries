@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.recipes.entry;
 
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 
 public abstract class RecipeEntrySI<I,O,D> extends RecipeEntryBase<I,O,D> {
 

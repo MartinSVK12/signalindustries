@@ -28,7 +28,6 @@ import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
-import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.server.entity.player.EntityPlayerMP;
@@ -37,7 +36,7 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.NBTEditCommand;
-import sunsetsatellite.catalyst.fluids.registry.FluidRegistryEntry;
+import sunsetsatellite.catalyst.fluids.registry.FluidContainerRegistryEntry;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multiblocks.StructureCommand;
@@ -364,36 +363,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createEntity(EntityInfernal.class,config.getInt("EntityIDs.infernalId"),"Infernal", () -> new MobRenderer<EntityInfernal>(new ModelZombie(),0.5F));
     }
 
-    public static <K,V> Map<K,V> mapOf(K[] keys, V[] values){
-        if(keys.length != values.length){
-            throw new IllegalArgumentException("Arrays differ in size!");
-        }
-        HashMap<K,V> map = new HashMap<>();
-        for (int i = 0; i < keys.length; i++) {
-            map.put(keys[i],values[i]);
-        }
-        return map;
-    }
-
-    public static <T,V> T[] arrayFill(T[] array,V value){
-        Arrays.fill(array,value);
-        return array;
-    }
-
-    @SafeVarargs
-    public static <T> List<T> listOf(T... values){
-        return new ArrayList<>(Arrays.asList(values));
-    }
-
-    public static <T,U> List<Pair<T,U>> zip(List<T> first, List<U> second){
-        List<Pair<T,U>> list = new ArrayList<>();
-        List<?> shortest = first.size() < second.size() ? first : second;
-        for (int i = 0; i < shortest.size(); i++) {
-            list.add(Pair.of(first.get(i),second.get(i)));
-        }
-        return list;
-    }
-
     public static void displayGui(EntityPlayer entityplayer, Supplier<GuiScreen> screenSupplier, Container container, IInventory tile, int x, int y, int z) {
         if(entityplayer instanceof EntityPlayerMP) {
             ((IEntityPlayerMP)entityplayer).displayGuiScreen_si(screenSupplier,container,tile,x,y,z);
@@ -708,10 +677,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         OptionsPages.CONTROLS
                 .withComponent(category);
 
-        List<BlockFluid> fluidsWithoutSE = CatalystFluids.FLUIDS.getAllFluids().stream().filter((F) -> F != SIBlocks.energyFlowing).collect(Collectors.toList());
-        FluidRegistryEntry entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.prototypeFluidTank.id], Item.itemsList[SIBlocks.prototypeFluidTank.id], fluidsWithoutSE);
-        CatalystFluids.FLUIDS.register(SignalIndustries.key("prototypeFluidTank"),entry);
-        entry = new FluidRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
-        CatalystFluids.FLUIDS.register(SignalIndustries.key("basicFluidTank"),entry);
+        List<BlockFluid> fluidsWithoutSE = CatalystFluids.CONTAINERS.getAllFluids().stream().filter((F) -> F != SIBlocks.energyFlowing).collect(Collectors.toList());
+        FluidContainerRegistryEntry entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.prototypeFluidTank.id], Item.itemsList[SIBlocks.prototypeFluidTank.id], fluidsWithoutSE);
+        CatalystFluids.CONTAINERS.register(SignalIndustries.key("prototypeFluidTank"),entry);
+        entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
+        CatalystFluids.CONTAINERS.register(SignalIndustries.key("basicFluidTank"),entry);
     }
 }

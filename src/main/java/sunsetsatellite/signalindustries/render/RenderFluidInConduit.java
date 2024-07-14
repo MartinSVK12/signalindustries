@@ -13,6 +13,7 @@ import net.minecraft.core.block.BlockTileEntity;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -67,7 +68,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 
         BlockModel<?> model = null;
         if(fluidId != -1){
-            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(fluidBlock,new Vec3i(),0,null))));
+            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(fluidBlock,new Vec3i(),0,null))));
             model = BlockModelDispatcher.getInstance().getDispatch(fluidBlock);
         }
 

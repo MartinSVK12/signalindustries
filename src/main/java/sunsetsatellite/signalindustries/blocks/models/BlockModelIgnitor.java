@@ -7,7 +7,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.blocks.BlockIgnitor;
 import sunsetsatellite.signalindustries.inventories.TileEntityIgnitor;
 
@@ -15,16 +15,16 @@ import java.util.HashMap;
 
 public class BlockModelIgnitor extends BlockModelStandard<BlockIgnitor> {
 
-    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> readyTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> invertedDefaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> invertedReadyTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> invertedActiveTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> readyOverbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> activeOverbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> invertedReadyOverbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> invertedActiveOverbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> readyTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> invertedDefaultTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> invertedReadyTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> invertedActiveTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> readyOverbrightTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> activeOverbrightTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> invertedReadyOverbrightTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> invertedActiveOverbrightTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
 
     public BlockModelIgnitor(Block block) {
         super(block);

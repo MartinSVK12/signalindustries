@@ -16,7 +16,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe{
 
     public TileEntityFluidConduit(){
         acceptedFluids.get(0).clear();
-        for (BlockFluid fluid : CatalystFluids.FLUIDS.getAllFluids()) {
+        for (BlockFluid fluid : CatalystFluids.CONTAINERS.getAllFluids()) {
             if(fluid != SIBlocks.energyFlowing) {
                 acceptedFluids.get(0).add(fluid);
             }

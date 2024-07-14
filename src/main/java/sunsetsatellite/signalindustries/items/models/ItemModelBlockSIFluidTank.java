@@ -13,10 +13,10 @@ import net.minecraft.core.block.BlockFluid;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlock;
 import org.lwjgl.opengl.GL11;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.HologramWorld;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class ItemModelBlockSIFluidTank extends ItemModelBlock {
 
             BlockModel<?> model = ((BlockModel<?>)BlockModelDispatcher.getInstance().getDispatch(fluid));
             if (model!= null) {
-                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) SignalIndustries.listOf(new BlockInstance(fluid,new Vec3i(),0,null))));
+                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(fluid,new Vec3i(),0,null))));
                 GL11.glBlendFunc(770, 771);
                 TextureRegistry.blockAtlas.bindTexture();
                 GL11.glPushMatrix();

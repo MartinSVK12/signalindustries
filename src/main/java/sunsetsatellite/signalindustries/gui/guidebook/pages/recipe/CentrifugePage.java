@@ -29,7 +29,7 @@ import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 
 import java.util.ArrayList;
 import java.util.HashMap;

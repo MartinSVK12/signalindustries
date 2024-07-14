@@ -54,14 +54,14 @@ public class BlockSIFluidTank extends BlockMachineBase {
                 ItemStack equippedStack = entityplayer.getCurrentEquippedItem();
                 if (equippedStack != null) {
                     Item equippedItem = equippedStack.getItem();
-                    if (!(CatalystFluids.FLUIDS.findFluidsWithFilledContainer(equippedItem).isEmpty())) {
-                        for (BlockFluid fluid : CatalystFluids.FLUIDS.findFluidsWithFilledContainer(equippedItem)) {
+                    if (!(CatalystFluids.CONTAINERS.findFluidsWithFilledContainer(equippedItem).isEmpty())) {
+                        for (BlockFluid fluid : CatalystFluids.CONTAINERS.findFluidsWithFilledContainer(equippedItem)) {
                             if (equippedItem instanceof ItemBucket) {
                                 FluidStack stack = new FluidStack(fluid, 1000);
                                 if (tile.canInsertFluid(0, stack) && tile.getRemainingCapacity(0) >= 1000) {
                                     if (tile.getAllowedFluidsForSlot(0).contains(fluid)) {
                                         tile.insertFluid(0, stack);
-                                        Item emptyContainer = CatalystFluids.FLUIDS.findEmptyContainersWithContainer(fluid, equippedItem).get(0);
+                                        Item emptyContainer = CatalystFluids.CONTAINERS.findEmptyContainersWithContainer(fluid, equippedItem).get(0);
                                         entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(emptyContainer);
                                         return true;
                                     }
@@ -70,13 +70,13 @@ public class BlockSIFluidTank extends BlockMachineBase {
                                 //TODO:
                             }
                         }
-                    } else if (!(CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem).isEmpty())) {
-                        for (BlockFluid fluid : CatalystFluids.FLUIDS.findFluidsWithEmptyContainer(equippedItem)) {
+                    } else if (!(CatalystFluids.CONTAINERS.findFluidsWithEmptyContainer(equippedItem).isEmpty())) {
+                        for (BlockFluid fluid : CatalystFluids.CONTAINERS.findFluidsWithEmptyContainer(equippedItem)) {
                             if (equippedItem instanceof ItemBucketEmpty) {
                                 if (tile.getFluidInSlot(0) != null && tile.getFluidInSlot(0).isFluidEqual(fluid)) {
                                     if (tile.getFluidInSlot(0).amount >= 1000) {
                                         tile.getFluidInSlot(0).amount -= 1000;
-                                        Item filledContainer = CatalystFluids.FLUIDS.findFilledContainersWithContainer(fluid, equippedItem).get(0);
+                                        Item filledContainer = CatalystFluids.CONTAINERS.findFilledContainersWithContainer(fluid, equippedItem).get(0);
                                         entityplayer.inventory.mainInventory[entityplayer.inventory.currentItem] = new ItemStack(filledContainer);
                                         return true;
                                     }

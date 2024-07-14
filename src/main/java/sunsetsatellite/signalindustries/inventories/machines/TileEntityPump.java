@@ -16,7 +16,7 @@ import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachine
 import sunsetsatellite.signalindustries.recipes.SIRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.signalindustries.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
-        acceptedFluids.get(1).addAll(CatalystFluids.FLUIDS.getAllFluids().stream().filter((F)->F.id != SIBlocks.energyFlowing.id).collect(Collectors.toList()));
+        acceptedFluids.get(1).addAll(CatalystFluids.CONTAINERS.getAllFluids().stream().filter((F)->F.id != SIBlocks.energyFlowing.id).collect(Collectors.toList()));
         acceptedFluids.get(0).add(SIBlocks.energyFlowing);
     }
     @Override

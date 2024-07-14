@@ -26,8 +26,9 @@ import java.util.Objects;
 
 import static sunsetsatellite.signalindustries.SIBlocks.*;
 import static sunsetsatellite.signalindustries.SIItems.*;
-import static sunsetsatellite.signalindustries.SignalIndustries.listOf;
-import static sunsetsatellite.signalindustries.SignalIndustries.zip;
+import static sunsetsatellite.vintagequesting.VintageQuesting.listOf;
+import static sunsetsatellite.vintagequesting.VintageQuesting.zip;
+
 
 public class VintageQuestingSIPlugin {
 

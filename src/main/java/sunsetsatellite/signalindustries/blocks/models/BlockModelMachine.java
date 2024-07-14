@@ -7,7 +7,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.util.IOPreview;
@@ -17,9 +17,9 @@ import java.util.HashMap;
 
 public class BlockModelMachine extends BlockModelCoverable {
 
-    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
-    protected HashMap<Side, IconCoordinate> overbrightTextures = (HashMap<Side, IconCoordinate>) SignalIndustries.mapOf(Side.values(), SignalIndustries.arrayFill(new IconCoordinate[Side.values().length], null));
+    protected HashMap<Side, IconCoordinate> defaultTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> activeTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], BLOCK_TEXTURE_UNASSIGNED));
+    protected HashMap<Side, IconCoordinate> overbrightTextures = (HashMap<Side, IconCoordinate>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new IconCoordinate[Side.values().length], null));
 
     public BlockModelMachine(Block block) {
         super(block);
