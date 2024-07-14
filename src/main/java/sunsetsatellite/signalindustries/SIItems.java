@@ -21,6 +21,7 @@ import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
 
+import static sunsetsatellite.catalyst.Catalyst.listOf;
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 
 public class SIItems extends DataInitializer {
