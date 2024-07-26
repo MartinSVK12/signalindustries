@@ -70,10 +70,9 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     }
 
     @Override
-    public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int j, int k, int l, EntityLiving entityliving) {
+    public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int j, int k, int l, Side side, EntityLiving entityliving) {
         int energy = itemstack.getData().getInteger("energy");
         Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
-        Side side = mc.objectMouseOver.side;
         DrillMode mode = getMode(itemstack);
         switch (mode) {
             case NORMAL:

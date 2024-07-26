@@ -14,6 +14,7 @@ import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
@@ -168,7 +169,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     }
 
     @Override
-    public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int j, int k, int l, EntityLiving entityliving) {
+    public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int j, int k, int l, Side side, EntityLiving entityliving) {
         Block block = Block.blocksList[i];
         int energy = itemstack.getData().getInteger("energy");
         if (block != null && block.getHardness() > 0.0F){

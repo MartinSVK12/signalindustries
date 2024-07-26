@@ -642,7 +642,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         }
 
         try {
-            TextureRegistry.initializeAllFiles(MOD_ID, stitcher);
+            TextureRegistry.initializeAllFiles(MOD_ID, stitcher,true);
         } catch (URISyntaxException | IOException e) {
             throw new RuntimeException("Failed to load textures.", e);
         }
@@ -683,4 +683,5 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("basicFluidTank"),entry);
     }
+
 }

@@ -19,7 +19,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol("minecraft:stones")
                         },
                         new ItemStack(SIItems.stonePlate,2),
-                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
+                        new RecipeProperties(100,20, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -29,7 +29,7 @@ public class PlateFormerRecipes implements MachineRecipesBase<RecipeGroup<Recipe
                                 new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
                         new ItemStack(SIItems.cobblestonePlate,2),
-                        new RecipeProperties(200,20, Tier.PROTOTYPE,false)
+                        new RecipeProperties(100,20, Tier.PROTOTYPE,false)
                 )
         );
         group.register(

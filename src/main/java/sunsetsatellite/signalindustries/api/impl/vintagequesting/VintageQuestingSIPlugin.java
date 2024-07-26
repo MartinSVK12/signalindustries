@@ -35,15 +35,18 @@ public class VintageQuestingSIPlugin {
     public void initializePlugin() {
 
         List<QuestTemplate> prototypeQuests = addPrototypeQuests();
+        List<QuestTemplate> reinforcedQuests = addReinforcedQuests();
+        List<QuestTemplate> basicQuests = addBasicQuests();
+        List<QuestTemplate> awakenedQuests = addAwakenedQuests();
 
         new ChapterTemplate("signalindustries:prototype",0, prototypeMachineCore,"chapter.signalindustries.prototype","chapter.signalindustries.prototype",
                 prototypeQuests);
         new ChapterTemplate("signalindustries:basic",1, basicMachineCore,"chapter.signalindustries.basic","chapter.signalindustries.basic",
-                listOf());
+                basicQuests);
         new ChapterTemplate("signalindustries:reinforced",2, reinforcedMachineCore,"chapter.signalindustries.reinforced","chapter.signalindustries.reinforced",
-                listOf());
+                reinforcedQuests);
         new ChapterTemplate("signalindustries:awakened",3, awakenedMachineCore,"chapter.signalindustries.awakened","chapter.signalindustries.awakened",
-                listOf());
+                awakenedQuests);
 
         for (QuestTemplate quest : VintageQuesting.QUESTS) {
             if(Objects.equals(quest.getTranslatedName(), quest.getName() + ".name") || Objects.equals(quest.getTranslatedDescription(), quest.getDescription() + ".desc")) {
@@ -270,6 +273,18 @@ public class VintageQuestingSIPlugin {
                 itemConduit,energyCell,fluidTank,pump,inserter,storageContainer,
                 crystal,crystalBattery
         );
+    }
+
+    public List<QuestTemplate> addBasicQuests(){
+        return listOf();
+    }
+
+    public List<QuestTemplate> addReinforcedQuests(){
+        return listOf();
+    }
+
+    public List<QuestTemplate> addAwakenedQuests(){
+        return listOf();
     }
 
     public QuestTemplate simpleQuest(
