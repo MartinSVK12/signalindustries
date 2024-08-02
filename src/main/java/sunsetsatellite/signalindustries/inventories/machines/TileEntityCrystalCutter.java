@@ -64,7 +64,7 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     @Override
     public void processItem() {
         super.processItem();
-        if(itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal && !Global.isServer){
+        if((itemContents[itemOutputs[0]].getItem() instanceof ItemSignalumCrystal || (itemContents[itemOutputs[0]] != null && itemContents[itemOutputs[0]].getItem() == SIItems.signalumCrystal)) && !Global.isServer){
             Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.SHINING);
         }
         if(itemContents[itemOutputs[0]].getItem() == SIItems.signalumCrystalEmpty){
