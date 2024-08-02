@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.items.attachments;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.render.model.ModelBiped;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -44,7 +45,7 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
     }
 
     @Override
-    public void renderWhenAttached(EntityPlayer player, ItemStack stack) {
+    public void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack) {
 
     }
 

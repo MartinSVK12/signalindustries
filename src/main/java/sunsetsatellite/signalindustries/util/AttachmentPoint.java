@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.util;
 
 public enum AttachmentPoint {
+    HEAD_LENS,
     HEAD_TOP,
     CORE_BACK,
     CORE_MODULE,

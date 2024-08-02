@@ -68,10 +68,10 @@ public class SIRecipes implements RecipeEntrypoint {
     public void load(){
         Registries.RECIPE_TYPES.register("signalindustries:machine", RecipeEntryMachine.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
-        List<ItemStack> abilityGroup = new ArrayList<>();
+        /*List<ItemStack> abilityGroup = new ArrayList<>();
         abilityGroup.add(SIItems.boostAbilityContainer.getDefaultStack());
         abilityGroup.add(SIItems.projectileAbilityContainer.getDefaultStack());
-        RecipeBuilder.addItemsToGroup(MOD_ID,"ability_containers",abilityGroup.toArray());
+        RecipeBuilder.addItemsToGroup(MOD_ID,"ability_containers",abilityGroup.toArray());*/
         List<ItemStack> romChipGroup = new ArrayList<>();
         romChipGroup.add(SIItems.romChipBoost.getDefaultStack());
         romChipGroup.add(SIItems.romChipProjectile.getDefaultStack());

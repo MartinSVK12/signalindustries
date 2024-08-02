@@ -84,6 +84,7 @@ public class SignalumPowerSuit {
         leggings = new InventoryPowerSuit(armor[1]);
         boots = new InventoryPowerSuit(armor[0]);
         attachmentLocations.put("headTop", new AttachmentLocation(0, helmet, AttachmentPoint.HEAD_TOP));
+        attachmentLocations.put("headLens", new AttachmentLocation(1, helmet, AttachmentPoint.HEAD_LENS));
         attachmentLocations.put("coreBack", new AttachmentLocation(1, chestplate, AttachmentPoint.CORE_BACK));
         attachmentLocations.put("armFrontL", new AttachmentLocation(2, chestplate, AttachmentPoint.ARM_FRONT));
         attachmentLocations.put("armFrontR", new AttachmentLocation(7, chestplate, AttachmentPoint.ARM_FRONT));
@@ -510,11 +511,12 @@ public class SignalumPowerSuit {
         DrawUtil drawUtil = new DrawUtil();
         if(!active){
             KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
-            fontRenderer.drawCenteredString(String.format("%s | Press Shift+%s",TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, openSuitKey.getKeyName()),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | Press [Shift+%s]",TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, openSuitKey.getKeyName()),width/2,height-64,0xFFFFFFFF);
             return;
         }
         if(status == Status.NO_ENERGY){
-            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
+            KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalIndustries$getKeyOpenSuit();
+            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | Press [%s] | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,openSuitKey.getKeyName(),String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
             return;
         }
 

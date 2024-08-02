@@ -29,7 +29,7 @@ public abstract class ItemWithUtility extends ItemTiered implements IApplication
     @Override
     public String getDescription(ItemStack stack) {
         String s = super.getDescription(stack);
-        return s + "\n" + TextFormatting.YELLOW + "Utility Application" + TextFormatting.WHITE;
+        return s + "\n" + TextFormatting.YELLOW + "Application" + TextFormatting.WHITE;
     }
 
     public abstract void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world);

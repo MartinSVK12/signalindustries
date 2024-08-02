@@ -22,6 +22,7 @@ public class ContainerPowerSuit extends ContainerItemFluid {
         switch (armorPiece.armorPiece){
             case 0:
                 addSlot(new SlotAttachment(inv,0,xSize/2-8, ySize/3-20, AttachmentPoint.HEAD_TOP, Tier.REINFORCED));
+                addSlot(new SlotAttachment(inv,1,xSize/2-8, ySize/3, AttachmentPoint.HEAD_LENS, Tier.REINFORCED));
                 break;
             case 1:
                 addFluidSlot(new SlotFluid(inv,0,xSize/2-8, ySize/3-20));

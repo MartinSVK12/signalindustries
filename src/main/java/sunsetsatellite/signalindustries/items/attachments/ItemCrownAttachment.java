@@ -14,10 +14,12 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.List;
 
-public class ItemWingsAttachment extends ItemTieredAttachment {
-    public ItemWingsAttachment(String name, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
+public class ItemCrownAttachment extends ItemTieredAttachment {
+    public ItemCrownAttachment(String name, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
         super(name, id, attachmentPoints, tier);
     }
+
+    private long t = 0;
 
     @Override
     public void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
@@ -41,14 +43,20 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
     }
 
     @Override
+    public void openSettings(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
+    }
+
+    @Override
     public void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack) {
         if(stack.getData().getBoolean("active")){
-            loadTexture("/assets/signalindustries/attachments/wings_texture.png");
-        } else {
-            loadTexture("/assets/signalindustries/attachments/wings_texture_inactive.png");
+            loadTexture("/assets/signalindustries/attachments/crown_spikes.png");
+            BenchEntityModel model = ModelHelper.getOrCreateEntityModel(SignalIndustries.MOD_ID, "crown_spikes.json", BenchEntityModel.class);
+            model.renderModel(0,0,0,0,0,0.0625f);
         }
-        BenchEntityModel model = ModelHelper.getOrCreateEntityModel(SignalIndustries.MOD_ID, "wings.json", BenchEntityModel.class);
-        GL11.glTranslatef(0f,0,0.1f);
+        modelBipedMain.bipedHead.postRender(0.0625F);
+        loadTexture("/assets/signalindustries/attachments/crown_base.png");
+        BenchEntityModel model = ModelHelper.getOrCreateEntityModel(SignalIndustries.MOD_ID, "crown_base.json", BenchEntityModel.class);
+        GL11.glTranslatef(0f,-0.1f,0f);
         model.renderModel(0,0,0,0,0,0.0625f);
     }
 }

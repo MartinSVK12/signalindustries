@@ -19,17 +19,13 @@ public class InventoryPowerSuit extends ItemInventoryFluid {
         if(item.getItem() instanceof ItemSignalumPowerSuit){
             ItemSignalumPowerSuit armorPiece = (ItemSignalumPowerSuit) item.getItem();
             switch (armorPiece.armorPiece){
-                case 0:
-                    fluidContents = new FluidStack[0];
-                    fluidCapacity = new int[0];
-                    contents = new ItemStack[1];
-                    break;
                 case 1:
                     fluidContents = new FluidStack[1];
                     fluidCapacity = new int[1];
                     fluidCapacity[0] = 32000;
                     contents = new ItemStack[8];
                     break;
+                case 0:
                 case 2:
                 case 3:
                     fluidContents = new FluidStack[0];

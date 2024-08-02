@@ -10,7 +10,6 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
-import sunsetsatellite.signalindustries.items.ItemPulsar;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
@@ -90,28 +88,28 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
             for (ItemStack content : powerSuit.helmet.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.chestplate.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.leggings.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.boots.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }

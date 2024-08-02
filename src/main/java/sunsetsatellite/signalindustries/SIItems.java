@@ -4,20 +4,18 @@ import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.material.ToolMaterial;
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.covers.*;
 import sunsetsatellite.signalindustries.items.*;
-import sunsetsatellite.signalindustries.items.applications.ItemRaziel;
-import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
+import sunsetsatellite.signalindustries.items.applications.ItemRaziel;
 import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
-import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.containers.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
-import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
 
@@ -83,14 +81,13 @@ public class SIItems extends DataInitializer {
     public static Item pulsarAttachment;
     public static Item extendedEnergyPack;
     public static Item crystalWings;
+    //public static Item annihilationCrown;
     public static Item basicBackpack;
     public static Item reinforcedBackpack;
     public static Item nightVisionLens;
     public static Item movementBoosters;
     public static ItemPortableWorkbench portableWorkbench;
     public static ItemSmartWatch smartWatch;
-    public static Item boostAbilityContainer;
-    public static Item projectileAbilityContainer;
     public static Item abilityModule;
     public static Item awakenedAbilityModule;
     public static Item crystalChip;
@@ -288,6 +285,9 @@ public class SIItems extends DataInitializer {
         extendedEnergyPack = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/extended_energy_pack")
                 .build(new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack", config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED));
+        /*annihilationCrown = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/crown")
+                .build(new ItemCrownAttachment("reinforced.attachment.crown", config.getInt("ItemIDs.annihilationCrown"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED));*/
         crystalWings = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/wings")
                 .build(new ItemWingsAttachment("reinforced.attachment.wings", config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED));
@@ -299,7 +299,7 @@ public class SIItems extends DataInitializer {
                 .build(new ItemBackpackAttachment("reinforced.attachment.backpack", config.getInt("ItemIDs.reinforcedBackpack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED));
         nightVisionLens = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/night_vision_goggles")
-                .build(new ItemNVGAttachment("reinforced.attachment.nightVisionLens", config.getInt("ItemIDs.nightVisionLens"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED));
+                .build(new ItemNVGAttachment("reinforced.attachment.nightVisionLens", config.getInt("ItemIDs.nightVisionLens"), listOf(AttachmentPoint.HEAD_LENS), Tier.REINFORCED));
         movementBoosters = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/movement_boosters")
                 .build(new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters", config.getInt("ItemIDs.movementBoosters"), listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED));
@@ -311,14 +311,14 @@ public class SIItems extends DataInitializer {
                 .setIcon("signalindustries:item/smartwatch")
                 .setStackSize(1)
                 .build(new ItemSmartWatch("basic.smartWatch", config.getInt("ItemIDs.smartWatch"), Tier.BASIC));
-        boostAbilityContainer = new ItemBuilder(MOD_ID)
+        /*boostAbilityContainer = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/ability2")
                 .setStackSize(1)
                 .build(new ItemWithAbility("boostAbilityContainer", config.getInt("ItemIDs.boostAbilityContainer"), boostAbility));
         projectileAbilityContainer = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/ability1")
                 .setStackSize(1)
-                .build(new ItemWithAbility("projectileAbilityContainer", config.getInt("ItemIDs.projectileAbilityContainer"), projectileAbility));
+                .build(new ItemWithAbility("projectileAbilityContainer", config.getInt("ItemIDs.projectileAbilityContainer"), projectileAbility));*/
         abilityModule = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/abilitymodule")
                 .build(new ItemAbilityModule("abilityModule", config.getInt("ItemIDs.abilityModule"), Tier.REINFORCED));

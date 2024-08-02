@@ -28,6 +28,9 @@ public class GameSettingsMixin
     public KeyBinding keyActivateHeadTopAttachment = new KeyBinding("key.signalindustries.headTopActivate");
 
     @Unique
+    public KeyBinding keyActivateHeadLensAttachment = new KeyBinding("key.signalindustries.headLensActivate");
+
+    @Unique
     public KeyBinding keyActivateCoreBackAttachment = new KeyBinding("key.signalindustries.coreBackActivate");
 
     @Unique
@@ -133,5 +136,10 @@ public class GameSettingsMixin
     @Override
     public KeyBinding signalIndustries$getKeySwitchMode() {
         return keySwitchMode;
+    }
+
+    @Override
+    public KeyBinding signalIndustries$getKeyActivateHeadLensAttachment() {
+        return keyActivateHeadLensAttachment;
     }
 }

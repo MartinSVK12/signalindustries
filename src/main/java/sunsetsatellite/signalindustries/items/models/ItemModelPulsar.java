@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.items.models;
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.render.ItemRenderer;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
@@ -39,6 +40,16 @@ public class ItemModelPulsar extends ItemModelStandard {
             }
         }
         return tex;
+    }
+
+    @Override
+    public void heldTransformFirstPerson(ItemRenderer renderer, Entity entity, ItemStack itemStack) {
+        //super.heldTransformFirstPerson(renderer, entity, itemStack);
+    }
+
+    @Override
+    public void heldTransformThirdPerson(ItemRenderer renderer, Entity entity, ItemStack itemStack) {
+        super.heldTransformThirdPerson(renderer,entity,itemStack);
     }
 
     public int getItemIdFromSlot(int id, ItemStack stack){

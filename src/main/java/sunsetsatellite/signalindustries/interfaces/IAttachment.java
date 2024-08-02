@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.interfaces;
 
+import net.minecraft.client.render.model.ModelBiped;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
@@ -15,5 +16,5 @@ public interface IAttachment {
 
     void openSettings(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world);
 
-    void renderWhenAttached(EntityPlayer player, ItemStack stack);
+    void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack);
 }
