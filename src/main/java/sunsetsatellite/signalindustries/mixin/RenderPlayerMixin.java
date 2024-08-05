@@ -88,28 +88,28 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
             for (ItemStack content : powerSuit.helmet.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.chestplate.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.leggings.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.boots.contents) {
                 if(content != null){
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, modelBipedMain, content);
+                    ((ItemAttachment)content.getItem()).renderWhenAttached(entityplayer, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }

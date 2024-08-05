@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
-import sunsetsatellite.signalindustries.recipes.SIRecipes;
+import sunsetsatellite.signalindustries.SIRecipes;
 
 import java.util.ArrayList;
 

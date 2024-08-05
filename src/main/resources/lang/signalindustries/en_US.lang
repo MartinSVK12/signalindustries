@@ -32,6 +32,10 @@ item.signalindustries.awakenedAlloyIngot.desc=The perfect alloy, shines with rad
 
 item.signalindustries.coalDust.name=Coal Dust
 item.signalindustries.coalDust.desc=Ground up coal.
+item.signalindustries.ironDust.name=Iron Dust
+item.signalindustries.ironDust.desc=Ground up iron.
+item.signalindustries.goldDust.name=Gold Dust
+item.signalindustries.goldDust.desc=Ground up gold.
 item.signalindustries.netherCoalDust.name=Nether Coal Dust
 item.signalindustries.netherCoalDust.desc=Ground up nether coal.
 item.signalindustries.tinyNetherCoalDust.name=Tiny Nether Coal Dust

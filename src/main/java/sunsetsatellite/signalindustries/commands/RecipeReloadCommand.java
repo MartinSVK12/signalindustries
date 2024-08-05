@@ -15,7 +15,7 @@ import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
-import sunsetsatellite.signalindustries.recipes.SIRecipes;
+import sunsetsatellite.signalindustries.SIRecipes;
 
 import java.util.ArrayList;
 import java.util.List;

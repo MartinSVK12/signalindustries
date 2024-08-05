@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.gui.guidebook.pages.lore.IntroPage;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.FluidMachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.gui.guidebook.sections.MultiblockSection;
-import sunsetsatellite.signalindustries.recipes.SIRecipes;
+import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.util.SearchableGuidebookSubsection;
 
 import java.util.ArrayList;

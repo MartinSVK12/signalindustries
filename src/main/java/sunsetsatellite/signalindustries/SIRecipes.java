@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.recipes;
+package sunsetsatellite.signalindustries;
 
 import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
 import net.minecraft.core.block.Block;
@@ -7,11 +7,12 @@ import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
+import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
+import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
 import sunsetsatellite.signalindustries.recipes.container.*;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
@@ -29,6 +30,7 @@ import static sunsetsatellite.signalindustries.SignalIndustries.*;
 public class SIRecipes implements RecipeEntrypoint {
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
     public static RecipeGroup<RecipeEntryCrafting<?,?>> WORKBENCH;
+    public static RecipeGroup<RecipeEntryFurnace> FURNACE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> EXTRACTOR;
     public static RecipeGroupSI<RecipeEntryMachine> CRUSHER;
     public static RecipeGroupSI<RecipeEntryMachine> ALLOY_SMELTER;
@@ -53,6 +55,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public void resetGroups(){
         SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
+        FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.furnaceStoneIdle)));
         EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeExtractor), new ItemStack(SIBlocks.basicExtractor), new ItemStack(SIBlocks.reinforcedExtractor))));
         CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrusher),new ItemStack(SIBlocks.basicCrusher),new ItemStack(SIBlocks.reinforcedCrusher))));
         ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeAlloySmelter),new ItemStack(SIBlocks.basicAlloySmelter),new ItemStack(SIBlocks.reinforcedAlloySmelter))));
@@ -80,6 +83,8 @@ public class SIRecipes implements RecipeEntrypoint {
         RecipeBuilder.addItemsToGroup("common_plates","stone",SIItems.stonePlate);
         RecipeBuilder.addItemsToGroup("common_plates","steel",SIItems.steelPlate);
         RecipeBuilder.addItemsToGroup("common_dusts","coal",SIItems.coalDust);
+        RecipeBuilder.addItemsToGroup("common_dusts","iron",SIItems.ironDust);
+        RecipeBuilder.addItemsToGroup("common_dusts","gold",SIItems.goldDust);
         RecipeBuilder.addItemsToGroup("common_dusts","nether_coal",SIItems.netherCoalDust);
         RecipeBuilder.addItemsToGroup("common_tiny_dusts","nether_coal",SIItems.tinyNetherCoalDust);
         Registries.ITEM_GROUPS.register("minecraft:water", listOf(new ItemStack(Block.fluidWaterFlowing),new ItemStack(Block.fluidWaterStill)));
@@ -99,6 +104,7 @@ public class SIRecipes implements RecipeEntrypoint {
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_reinforced.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_awakened.json");
+        DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/furnace.json");
         LOGGER.info(SIGNAL_INDUSTRIES.getAllRecipes().size()+" recipes in "+SIGNAL_INDUSTRIES.size()+" groups.");
     }
 
@@ -110,6 +116,7 @@ public class SIRecipes implements RecipeEntrypoint {
 
     public void registerNamespaces(){
         SIGNAL_INDUSTRIES.register("workbench",WORKBENCH);
+        SIGNAL_INDUSTRIES.register("furnace",FURNACE);
         SIGNAL_INDUSTRIES.register("extractor",EXTRACTOR);
         SIGNAL_INDUSTRIES.register("crusher",CRUSHER);
         SIGNAL_INDUSTRIES.register("alloy_smelter",ALLOY_SMELTER);

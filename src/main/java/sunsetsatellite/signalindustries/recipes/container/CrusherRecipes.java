@@ -55,6 +55,46 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                 )
         );
         group.register(
+                "prototype_raw_iron_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Item.oreRawIron))
+                        },
+                        new ItemStack(SIItems.ironDust,1),
+                        new RecipeProperties(100,40, Tier.PROTOTYPE,true)
+                )
+        );
+        group.register(
+                "prototype_raw_gold_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Item.oreRawGold))
+                        },
+                        new ItemStack(SIItems.goldDust,1),
+                        new RecipeProperties(100,40, Tier.PROTOTYPE,true)
+                )
+        );
+        group.register(
+                "basic_raw_iron_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Item.oreRawIron))
+                        },
+                        new ItemStack(SIItems.ironDust,2),
+                        new RecipeProperties(100,40, Tier.BASIC,false)
+                )
+        );
+        group.register(
+                "basic_raw_gold_dust",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Item.oreRawGold))
+                        },
+                        new ItemStack(SIItems.goldDust,2),
+                        new RecipeProperties(100,40, Tier.BASIC,false)
+                )
+        );
+        group.register(
                 "prototype_empty_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{

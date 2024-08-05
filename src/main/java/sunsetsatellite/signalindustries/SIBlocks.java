@@ -58,6 +58,7 @@ public class SIBlocks extends DataInitializer {
     public static Block infiniteEnergyCell;
     public static Block prototypeEnergyCell;
     public static Block basicEnergyCell;
+    public static Block reinforcedEnergyCell;
     public static Block prototypeFluidTank;
     public static Block infiniteFluidTank;
     public static Block basicFluidTank;
@@ -491,6 +492,14 @@ public class SIBlocks extends DataInitializer {
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(BlockModelCoverable::new)
                 .build(new BlockEnergyCell("basic.energyCell", config.getInt("BlockIDs.basicEnergyCell"), Tier.BASIC, Material.glass));
+        reinforcedEnergyCell = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/cell_reinforced")
+                .setLuminance(1)
+                .setHardness(1)
+                .setResistance(5)
+                .setBlockSound(BlockSounds.GLASS)
+                .setBlockModel(BlockModelCoverable::new)
+                .build(new BlockEnergyCell("reinforced.energyCell", config.getInt("BlockIDs.reinforcedEnergyCell"), Tier.REINFORCED, Material.glass));
         prototypeFluidTank = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/fluid_tank_prototype")
                 .setLuminance(0)

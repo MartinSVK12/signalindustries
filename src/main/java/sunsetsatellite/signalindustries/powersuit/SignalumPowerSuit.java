@@ -17,6 +17,7 @@ import net.minecraft.core.util.helper.Color;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.fluids.impl.ContainerItemFluid;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -26,9 +27,9 @@ import sunsetsatellite.signalindustries.interfaces.IApplicationItem;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 import sunsetsatellite.signalindustries.inventories.item.InventoryAbilityModule;
-import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithUtility;
+import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.util.ApplicationType;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -57,6 +58,25 @@ public class SignalumPowerSuit {
     public TickTimer saveTimer = new TickTimer(this, this::saveToStacks,60,true);
     public HashMap<SuitBaseAbility,Integer> cooldowns = new HashMap<>();
     public HashMap<SuitBaseEffectAbility,Integer> effectTimes = new HashMap<>();
+    public final List<LaserCannon> laserCannons = new ArrayList<>();
+
+    public final Vec3f[] cannonStartingPositions = new Vec3f[]{
+            new Vec3f(0,-2,-1),
+            new Vec3f(1,-2,0),
+            new Vec3f(-1,-2,0),
+            new Vec3f(1.5,-1.5,0),
+            new Vec3f(-1.5,-1.5,0),
+    };
+    public final Vec3f[] cannonStartingRotAxis = new Vec3f[]{
+            new Vec3f(0,1,0),
+            new Vec3f(-1,1,0),
+            new Vec3f(-1,-1,0),
+            new Vec3f(-1,1,0),
+            new Vec3f(-1,-1,0)
+    };
+    public final double[] cannonStartingAngles = new double[]{
+            90,45,45,45,45
+    };
 
     public float temperature;
 
@@ -71,6 +91,28 @@ public class SignalumPowerSuit {
             this.slot = slot;
             this.inv = inv;
             this.point = point;
+        }
+    }
+
+    public static class LaserCannon {
+        public Vec3f position;
+        public Vec3f rotationAxis;
+        public double angle;
+        public Entity target = null;
+
+        public LaserCannon(Vec3f position, Vec3f rotationAxis, double angle) {
+            this.position = position;
+            this.rotationAxis = rotationAxis;
+            this.angle = angle;
+        }
+    }
+
+    public void createDefaultLaserCannons(){
+        if(hasAttachment((ItemAttachment) SIItems.annihilationCrown) && laserCannons.isEmpty()){
+
+            for (int i = 0; i < 5; i++) {
+                laserCannons.add(new LaserCannon(cannonStartingPositions[i].copy(),cannonStartingRotAxis[i].copy(),cannonStartingAngles[i]));
+            }
         }
     }
 
@@ -109,6 +151,7 @@ public class SignalumPowerSuit {
 
     public void activateAttachment(KeyBinding attachmentKeybind) {
         boolean shift = (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
+        boolean alt = (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU));
         if (attachmentKeybind.isPressed()) {
             int slot = -1;
             InventoryPowerSuit inv = null;
@@ -123,8 +166,8 @@ public class SignalumPowerSuit {
                 ItemStack stack = inv.getStackInSlot(slot);
                 if(stack != null){
                     ItemAttachment attachment = (ItemAttachment) stack.getItem();
-                    if(shift){
-                        attachment.openSettings(stack,this,player,player.world);
+                    if(alt){
+                        attachment.altActivate(stack,this,player,player.world);
                     } else {
                         attachment.activate(stack,this,player,player.world);
                     }
@@ -306,6 +349,49 @@ public class SignalumPowerSuit {
             ItemStack content = contents[i];
             if (content != null) {
                 ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+            }
+        }
+
+        //cannons of the annihilation crown
+        for (int i = 0; i < laserCannons.size(); i++) {
+            LaserCannon laserCannon = laserCannons.get(i);
+            if (laserCannon.target != null) {
+                double dist = laserCannon.target.distanceTo(player);
+                /*double d = laserCannon.target.x - player.x;
+                double d1 = laserCannon.target.z - player.z;
+                double yaw = Math.atan2(d1, d) * 180.0 / 3.1415927410125732 - player.yRot;*/
+                if (dist > 16 || laserCannon.target.isRemoved()) {
+                    laserCannon.target = null;
+                    laserCannon.position = cannonStartingPositions[i].copy();
+                    laserCannon.rotationAxis = cannonStartingRotAxis[i].copy();
+                    laserCannon.angle = cannonStartingAngles[i];
+                    continue;
+                }
+
+                Vec3f[] cannonFocusRotAxis = new Vec3f[]{
+                        new Vec3f(0,0,0),
+                        new Vec3f(0,0,-1),
+                        new Vec3f(0,0,1),
+                        new Vec3f(1,0,0),
+                        new Vec3f(-1,0,0)
+                };
+
+                double[] cannonFocusAngles = new double[]{
+                        0,45,45,45,45
+                };
+
+                Vec3f[] cannonFocusOffsets = new Vec3f[]{
+                        new Vec3f(0,0.3,0),
+                        new Vec3f(0.3,0,0),
+                        new Vec3f(-0.3,0,0),
+                        new Vec3f(0,0,0.3),
+                        new Vec3f(0,0,-0.3)
+                };
+
+                laserCannon.position = cannonFocusOffsets[i].copy();
+                laserCannon.position.y += laserCannon.target.getHeadHeight() + 1.5;
+                laserCannon.rotationAxis = cannonFocusRotAxis[i].copy();
+                laserCannon.angle = cannonFocusAngles[i];
             }
         }
     }

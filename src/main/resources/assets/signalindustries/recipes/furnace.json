@@ -1,0 +1,26 @@
+[
+  {
+    "name": "signalindustries:furnace/dust_to_iron_ingot",
+    "type": "minecraft:smelting",
+    "input": {
+      "group": "common_dusts:iron"
+    },
+    "output": {
+      "key": "item.ingot.iron",
+      "amount": 1,
+      "meta": 0
+    }
+  },
+  {
+    "name": "signalindustries:furnace/dust_to_gold_ingot",
+    "type": "minecraft:smelting",
+    "input": {
+      "group": "common_dusts:gold"
+    },
+    "output": {
+      "key": "item.ingot.gold",
+      "amount": 1,
+      "meta": 0
+    }
+  }
+]

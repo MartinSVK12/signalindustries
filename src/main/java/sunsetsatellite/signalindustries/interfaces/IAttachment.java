@@ -14,7 +14,7 @@ public interface IAttachment {
 
     void activate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world);
 
-    void openSettings(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world);
+    void altActivate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world);
 
-    void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack);
+    void renderWhenAttached(EntityPlayer player, SignalumPowerSuit signalumPowerSuit, ModelBiped modelBipedMain, ItemStack stack);
 }

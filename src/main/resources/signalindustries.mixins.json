@@ -22,6 +22,7 @@
     "ItemModelBlockMixin",
     "ItemModelStandardMixin",
     "ItemStackMixin",
+    "LivingRendererMixin",
     "NBTTagCompoundMixin",
     "SaveHandlerBaseMixin",
     "SlotCraftingMixin",

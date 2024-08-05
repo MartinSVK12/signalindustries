@@ -41,7 +41,7 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
     }
 
     @Override
-    public void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack) {
+    public void renderWhenAttached(EntityPlayer player, SignalumPowerSuit signalumPowerSuit, ModelBiped modelBipedMain, ItemStack stack) {
         if(stack.getData().getBoolean("active")){
             loadTexture("/assets/signalindustries/attachments/wings_texture.png");
         } else {

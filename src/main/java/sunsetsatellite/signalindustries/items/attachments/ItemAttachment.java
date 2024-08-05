@@ -41,11 +41,11 @@ public class ItemAttachment extends Item implements IAttachment, ICustomDescript
     }
 
     @Override
-    public void openSettings(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
+    public void altActivate(ItemStack stack, SignalumPowerSuit signalumPowerSuit, EntityPlayer player, World world) {
     }
 
     @Override
-    public void renderWhenAttached(EntityPlayer player, ModelBiped modelBipedMain, ItemStack stack) {
+    public void renderWhenAttached(EntityPlayer player, SignalumPowerSuit signalumPowerSuit, ModelBiped modelBipedMain, ItemStack stack) {
 
     }
 

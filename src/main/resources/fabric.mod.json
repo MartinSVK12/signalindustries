@@ -38,7 +38,7 @@
       "sunsetsatellite.signalindustries.SignalIndustries"
     ],
     "recipesReady": [
-      "sunsetsatellite.signalindustries.recipes.SIRecipes"
+      "sunsetsatellite.signalindustries.SIRecipes"
     ],
     "terrain-api": [
       "sunsetsatellite.signalindustries.api.impl.terrainapi.TerrainAPISignalIndustriesPlugin"

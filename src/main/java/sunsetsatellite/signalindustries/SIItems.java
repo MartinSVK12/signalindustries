@@ -32,6 +32,8 @@ public class SIItems extends DataInitializer {
     public static Item awakenedSignalumCrystal;
     public static Item awakenedSignalumFragment;
     public static Item coalDust;
+    public static Item ironDust;
+    public static Item goldDust;
     public static Item netherCoalDust;
     public static Item tinyNetherCoalDust;
     public static Item emptySignalumCrystalDust;
@@ -81,7 +83,7 @@ public class SIItems extends DataInitializer {
     public static Item pulsarAttachment;
     public static Item extendedEnergyPack;
     public static Item crystalWings;
-    //public static Item annihilationCrown;
+    public static Item annihilationCrown;
     public static Item basicBackpack;
     public static Item reinforcedBackpack;
     public static Item nightVisionLens;
@@ -138,6 +140,8 @@ public class SIItems extends DataInitializer {
         awakenedSignalumCrystal = simpleItem("awakenedSignalumCrystal", "signalindustries:item/awakenedsignalumcrystal").setMaxStackSize(1);
         awakenedSignalumFragment = simpleItem("awakenedSignalumFragment", "signalindustries:item/awakenedsignalumfragment");
         coalDust = simpleItem("coalDust", "signalindustries:item/coaldust");
+        ironDust = simpleItem("ironDust", "signalindustries:item/iron_dust");
+        goldDust = simpleItem("goldDust", "signalindustries:item/gold_dust");
         netherCoalDust = simpleItem("netherCoalDust", "signalindustries:item/nethercoaldust");
         tinyNetherCoalDust = simpleItem("tinyNetherCoalDust", "signalindustries:item/tiny_nether_coal_dust");
         emptySignalumCrystalDust = simpleItem("emptySignalumCrystalDust", "signalumCrystalDust", "signalindustries:item/emptysignalumdust");
@@ -285,9 +289,9 @@ public class SIItems extends DataInitializer {
         extendedEnergyPack = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/extended_energy_pack")
                 .build(new ItemTieredAttachment("reinforced.attachment.extendedEnergyPack", config.getInt("ItemIDs.extendedEnergyPack"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED));
-        /*annihilationCrown = new ItemBuilder(MOD_ID)
+        annihilationCrown = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/crown")
-                .build(new ItemCrownAttachment("reinforced.attachment.crown", config.getInt("ItemIDs.annihilationCrown"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED));*/
+                .build(new ItemCrownAttachment("reinforced.attachment.crown", config.getInt("ItemIDs.annihilationCrown"), listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED));
         crystalWings = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/wings")
                 .build(new ItemWingsAttachment("reinforced.attachment.wings", config.getInt("ItemIDs.crystalWings"), listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED));
@@ -311,14 +315,6 @@ public class SIItems extends DataInitializer {
                 .setIcon("signalindustries:item/smartwatch")
                 .setStackSize(1)
                 .build(new ItemSmartWatch("basic.smartWatch", config.getInt("ItemIDs.smartWatch"), Tier.BASIC));
-        /*boostAbilityContainer = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/ability2")
-                .setStackSize(1)
-                .build(new ItemWithAbility("boostAbilityContainer", config.getInt("ItemIDs.boostAbilityContainer"), boostAbility));
-        projectileAbilityContainer = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/ability1")
-                .setStackSize(1)
-                .build(new ItemWithAbility("projectileAbilityContainer", config.getInt("ItemIDs.projectileAbilityContainer"), projectileAbility));*/
         abilityModule = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/abilitymodule")
                 .build(new ItemAbilityModule("abilityModule", config.getInt("ItemIDs.abilityModule"), Tier.REINFORCED));
