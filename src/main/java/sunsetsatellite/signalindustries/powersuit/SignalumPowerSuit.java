@@ -390,7 +390,7 @@ public class SignalumPowerSuit {
                 };
 
                 laserCannon.position = cannonFocusOffsets[i].copy();
-                laserCannon.position.y += laserCannon.target.getHeadHeight() + 2;
+                laserCannon.position.y += laserCannon.target.getHeadHeight() + 1;
                 laserCannon.rotationAxis = cannonFocusRotAxis[i].copy();
                 laserCannon.angle = cannonFocusAngles[i];
             }

@@ -7,17 +7,19 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
 public class BoostAbility extends TriggerBaseAbility {
+    public int effectTime;
+
     public BoostAbility(String name, int cost, int cooldown) {
         super(name, cost, cooldown);
     }
 
     @Override
-    public void activate(int i, int j, int k, EntityPlayer player, World world, ItemStack stack) {
+    public void activate(int x, int y, int z, EntityPlayer player, World world, ItemStack trigger, ItemStack harness) {
         boost(player,world);
     }
 
     @Override
-    public void activate(EntityPlayer player, World world, ItemStack stack) {
+    public void activate(EntityPlayer player, World world, ItemStack trigger, ItemStack harness) {
         boost(player,world);
     }
 

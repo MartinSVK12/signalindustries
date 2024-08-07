@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemCrownAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
@@ -35,6 +36,20 @@ public abstract class LivingRendererMixin<T extends EntityLiving> extends Entity
                             GL11.glPopMatrix();
                         }
                     }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelBase;setLivingAnimations(Lnet/minecraft/core/entity/EntityLiving;FFF)V", ordinal = 3, shift = At.Shift.AFTER))
+    public void enableAlphaForArmor(T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci){
+        if(entity instanceof EntityPlayer){
+            EntityPlayer player = (EntityPlayer)entity;
+            if (player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPrototypeHarness) {
+                if (player.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glDisable(GL11.GL_ALPHA_TEST);
                 }
             }
         }

@@ -73,6 +73,7 @@ public class SIItems extends DataInitializer {
     public static Item nullTrigger;
     public static Item romChipProjectile;
     public static Item romChipBoost;
+    public static Item romChipShield;
     public static Item energyCatalyst;
     public static Item signalumSaber;
     public static Item pulsar;
@@ -252,6 +253,7 @@ public class SIItems extends DataInitializer {
         nullTrigger = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/trigger")
                 .setStackSize(1)
+                .setItemModel((item) -> new ItemModelTrigger(item, MOD_ID))
                 .build(new ItemTrigger("trigger.null", config.getInt("ItemIDs.nullTrigger")));
         romChipProjectile = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip1")
@@ -259,6 +261,9 @@ public class SIItems extends DataInitializer {
         romChipBoost = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/chip2")
                 .build(new ItemRomChip("romChip.boost", config.getInt("ItemIDs.romChipBoost")));
+        romChipShield = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/chip3")
+                .build(new ItemRomChip("romChip.shield", config.getInt("ItemIDs.romChipShield")));
         energyCatalyst = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/energycatalyst")
                 .build(new Item("energyCatalyst", config.getInt("ItemIDs.energyCatalyst")));

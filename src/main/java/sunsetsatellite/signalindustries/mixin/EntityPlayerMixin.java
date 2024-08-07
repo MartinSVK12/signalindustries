@@ -128,6 +128,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
                 powerSuit.temperature += 0.5f;
             }
         }
+        if(inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT){
+            ci.cancel();
+        }
     }
 
     @Inject(

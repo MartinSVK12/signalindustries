@@ -26,6 +26,7 @@ public class WorldGenLabyrinthMixin {
     private void init(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 10);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 10);
+        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipShield.getDefaultStack()), 10);
     }
 
 }

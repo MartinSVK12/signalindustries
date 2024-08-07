@@ -47,7 +47,7 @@ public class ItemCrownAttachment extends ItemTieredAttachment {
                     List<SignalumPowerSuit.LaserCannon> laserCannons = signalumPowerSuit.laserCannons;
                     for (SignalumPowerSuit.LaserCannon laserCannon : laserCannons) {
                         if (laserCannon.target != null && signalumPowerSuit.getEnergy() > 100) {
-                            laserCannon.target.hurt(player, 2, DamageType.COMBAT);
+                            laserCannon.target.hurt(null, 2, DamageType.COMBAT);
                             laserCannon.target.heartsFlashTime = 0;
                             signalumPowerSuit.decrementEnergy(100);
                         }

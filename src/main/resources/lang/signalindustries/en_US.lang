@@ -82,6 +82,8 @@ item.signalindustries.trigger.repair.name=Trigger: Repair
 item.signalindustries.trigger.repair.desc=Repairs a bit of the item next to this trigger for a bit of <Signalum Energy>.
 item.signalindustries.trigger.projectile.name=Trigger: Projectile
 item.signalindustries.trigger.projectile.desc=Shoots an orb of <Signalum Energy> from the core of the <S. P. Harness> you're wearing.
+item.signalindustries.trigger.shield.name=Trigger: Shield
+item.signalindustries.trigger.shield.desc=Generates a shield of energy protecting you from combat damage for a short period of time.
 item.signalindustries.trigger.boost.name=Trigger: Boost
 item.signalindustries.trigger.boost.desc=Launches you in the direction you're looking at.
 
@@ -89,6 +91,9 @@ item.signalindustries.romChip.projectile.name=ROM Chip: Projectile
 item.signalindustries.romChip.projectile.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.boost.name=ROM Chip: Boost
 item.signalindustries.romChip.boost.desc=Contains code for a <Trigger> ability.
+item.signalindustries.romChip.shield.name=ROM Chip: Shield
+item.signalindustries.romChip.shield.desc=Contains code for a <Trigger> ability.
+
 item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 item.signalindustries.romChip.position.name=Position Memory Chip

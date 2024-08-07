@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.signalindustries.interfaces.mixins.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemArmorTiered;
+import sunsetsatellite.signalindustries.items.ItemSignalumPrototypeHarness;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
@@ -52,17 +53,35 @@ public class RenderPlayerMixin extends LivingRenderer<EntityPlayer> {
         Item item = itemstack.getItem();
         if(item instanceof ItemArmorTiered){
             ItemArmor itemarmor = (ItemArmor)item;
-            this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.identifier.value + "_" + (i != 2 ? 1 : 2) + ".png");
-            ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
-            modelbiped.bipedHead.showModel = i == 0;
-            modelbiped.bipedHeadOverlay.showModel = i == 0;
-            modelbiped.bipedBody.showModel = i == 1 || i == 2;
-            modelbiped.bipedRightArm.showModel = i == 1;
-            modelbiped.bipedLeftArm.showModel = i == 1;
-            modelbiped.bipedRightLeg.showModel = i == 2 || i == 3;
-            modelbiped.bipedLeftLeg.showModel = i == 2 || i == 3;
-            this.setRenderPassModel(modelbiped);
-            cir.setReturnValue(true);
+            if(itemarmor instanceof ItemSignalumPrototypeHarness && (i == 0 || i == 1) && entityplayer.inventory.armorItemInSlot(2) .getData().getBoolean("active_shield")){
+                if(entityplayer.inventory.armorItemInSlot(3) != null && entityplayer.inventory.armorItemInSlot(3).getItem() instanceof ItemSignalumPrototypeHarness){
+                    this.loadTexture("/assets/signalindustries/armor/signalumprototypeharness_shield_1.png");
+                } else {
+                    this.loadTexture("/assets/signalindustries/armor/signalumprototypeharness_shield_no_goggles_1.png");
+                }
+                ModelBiped modelbiped = this.modelArmor;
+                modelbiped.bipedHead.showModel = true;
+                modelbiped.bipedHeadOverlay.showModel = true;
+                modelbiped.bipedBody.showModel = true;
+                modelbiped.bipedRightArm.showModel = true;
+                modelbiped.bipedLeftArm.showModel = true;
+                modelbiped.bipedRightLeg.showModel = true;
+                modelbiped.bipedLeftLeg.showModel = true;
+                this.setRenderPassModel(modelbiped);
+                cir.setReturnValue(true);
+            } else {
+                this.loadTexture("/assets/signalindustries/armor/" + itemarmor.material.identifier.value + "_" + (i != 2 ? 1 : 2) + ".png");
+                ModelBiped modelbiped = i != 2 ? this.modelArmorChestplate : this.modelArmor;
+                modelbiped.bipedHead.showModel = i == 0;
+                modelbiped.bipedHeadOverlay.showModel = i == 0;
+                modelbiped.bipedBody.showModel = i == 1 || i == 2;
+                modelbiped.bipedRightArm.showModel = i == 1;
+                modelbiped.bipedLeftArm.showModel = i == 1;
+                modelbiped.bipedRightLeg.showModel = i == 2 || i == 3;
+                modelbiped.bipedLeftLeg.showModel = i == 2 || i == 3;
+                this.setRenderPassModel(modelbiped);
+                cir.setReturnValue(true);
+            }
         }
     }
 
