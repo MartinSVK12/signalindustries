@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.entities;
 
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.entity.fx.EntityFlameFX;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
@@ -17,7 +18,6 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.entities.fx.EntityMeteorTailFX;
 
 import java.util.List;
 
@@ -200,11 +200,17 @@ public class EntityFallingMeteor extends Entity {
             return;
         }
 
-        for (int j = 0; j < 4; j++) {
-            SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),256);
+        if(blockID == SIBlocks.signalumOre.id){
+            for (int j = 0; j < 4; j++) {
+                SignalIndustries.spawnParticle(new EntityFlameFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f, EntityFlameFX.Type.BLUE),256);
+            }
+            SignalIndustries.spawnParticle(new EntityFlameFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f, EntityFlameFX.Type.BLUE),256);
+        } else {
+            for (int j = 0; j < 4; j++) {
+                SignalIndustries.spawnParticle(new EntityFlameFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f, EntityFlameFX.Type.ORANGE),256);
+            }
+            SignalIndustries.spawnParticle(new EntityFlameFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f, EntityFlameFX.Type.ORANGE),256);
         }
-        SignalIndustries.spawnParticle(new EntityMeteorTailFX(this.world,this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1).setFullbright(true).setBlockId(blockID),256);
-        //SignalIndustries.spawnParticle(new EntityColorParticleFX(this.world,this.x + this.xd * 0.5, this.y + this.yd * 0.5, this.z + this.zd * 0.5, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,1,1f,1f,0.2f));
         ++this.ticksInAir;
         Vec3d oldPos = Vec3d.createVector(this.x, this.y, this.z);
         Vec3d newPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd, this.z + this.zd);

@@ -56,6 +56,8 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     @Shadow public int difficultySetting;
     @Unique
     private final World thisAs = (World)((Object)this);
+    @Unique
+    private boolean bloodMoonColorizer = false;
 
     @Inject(
             method = "getSkyColor",
@@ -73,8 +75,8 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     }
 
     @Inject(
-            method = "allChanged",
-            at = @At("HEAD")
+            method = "tick",
+            at = @At("TAIL")
     )
     public void doBloodMoon(CallbackInfo ci){
         //SignalIndustries.LOGGER.info(String.valueOf(worldType.getSunriseTick(thisAs)));
@@ -99,17 +101,19 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         }
         if (!Global.isServer){
             //FIXME:
-            /*if(getCurrentWeather() == SignalIndustries.weatherBloodMoon){
-                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/assets/signalindustries/misc/blood_moon_colorizer.png"));
-            } else {
-                ColorizerWater.updateColorData(Minecraft.getMinecraft(Minecraft.class).renderEngine.getTextureImageData("/misc/watercolor.png"));
+            /*if(getCurrentWeather() == SIWeather.weatherBloodMoon && !bloodMoonColorizer){
+                Colorizers.water.update(Colorizers.loadColorData(Colorizers.water.getTexturePack(),"/assets/signalindustries/misc/blood_moon_colorizer.png"));
+                bloodMoonColorizer = true;
+            } else if(getCurrentWeather() != SIWeather.weatherBloodMoon && bloodMoonColorizer) {
+                Colorizers.update(true);
+                bloodMoonColorizer = false;
             }*/
         }
     }
 
     @Inject(
-            method = "allChanged",
-            at = @At("HEAD")
+            method = "tick",
+            at = @At("TAIL")
     )
     public void doMeteorShower(CallbackInfo ci){
         //SignalIndustries.LOGGER.info(String.valueOf(worldType.getSunriseTick(thisAs)));
@@ -121,7 +125,7 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks+(nightTicks/4);
         if((dayTime == triggerTime && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
-            if(rand.nextInt(24) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
+            if(rand.nextInt(1) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
                 for (EntityPlayer player : players) {
                     player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
                     player.triggerAchievement(SIAchievements.STARFALL);
@@ -158,8 +162,8 @@ public abstract class WorldMixin implements IWorldDataAccessor {
     }
 
     @Inject(
-            method = "allChanged",
-            at = @At("HEAD")
+            method = "tick",
+            at = @At("TAIL")
     )
     public void doSolarEclipse(CallbackInfo ci){
         long worldTime = getWorldTime();

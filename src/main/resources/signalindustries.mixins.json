@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "AchievementMixin",
+    "BiomeMixin",
     "BlockFluidMixin",
     "BlockRailMixin",
     "ContainerWorkbenchMixin",
@@ -27,7 +28,6 @@
     "SaveHandlerBaseMixin",
     "SlotCraftingMixin",
     "SlotMixin",
-    "SpawnerMobsMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",
     "WorldTypeOverworldMixin"

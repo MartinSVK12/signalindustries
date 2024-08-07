@@ -3,6 +3,8 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 import net.minecraft.client.entity.fx.EntityFX;
 
+import net.minecraft.client.render.stitcher.IconCoordinate;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SIBlocks;
@@ -21,6 +23,8 @@ public class EntityMeteorTailFX extends EntityFX {
     public boolean fullbright = false;
 
     public int blockId = 0;
+
+    public final IconCoordinate tex = TextureRegistry.getTexture("signalindustries:particle/meteor_tail.png");
 
     public EntityMeteorTailFX(World world, double x, double y, double z, double xd, double yd, double zd, float f) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
@@ -88,6 +92,7 @@ public class EntityMeteorTailFX extends EntityFX {
         this.zo = this.z;
         if (this.particleAge++ >= this.particleMaxAge)
             remove();
+        this.particleTexture = tex;
         //this.particleTextureIndex = TextureHelper.getOrCreateParticleTextureIndex(SignalIndustries.MOD_ID,"meteor_tail.png");//7 - this.particleAge * 8 / this.particleMaxAge;
         move(this.xd, this.yd, this.zd);
         if (this.y == this.yo) {

@@ -584,7 +584,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
     //thanks kill05 ;)
     public void loadTextures(AtlasStitcher stitcher){
-        // This is awful, but required until 7.2-pre2 comes out
         String id = TextureRegistry.stitcherMap.entrySet().stream().filter((e)->e.getValue() == stitcher).map(Map.Entry::getKey).collect(Collectors.toSet()).stream().findFirst().orElse(null);
         if(id == null){
             throw new RuntimeException("Failed to load textures: invalid atlas provided!");
