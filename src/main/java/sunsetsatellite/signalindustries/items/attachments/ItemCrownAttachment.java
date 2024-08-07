@@ -35,25 +35,20 @@ public class ItemCrownAttachment extends ItemTieredAttachment {
             if (mc.objectMouseOver != null && mc.objectMouseOver.hitType == HitResult.HitType.ENTITY && mc.objectMouseOver.entity instanceof EntityLiving) {
                 if(stack.getData().getBoolean("active")) {
                     List<SignalumPowerSuit.LaserCannon> laserCannons = signalumPowerSuit.laserCannons;
-                    for (int i = 0; i < laserCannons.size(); i++) {
-                        SignalumPowerSuit.LaserCannon laserCannon = laserCannons.get(i);
-                        if(laserCannon.target == null){
+                    for (SignalumPowerSuit.LaserCannon laserCannon : laserCannons) {
+                        if (laserCannon.target == null) {
                             laserCannon.target = mc.objectMouseOver.entity;
-                        } else {
-                            if(signalumPowerSuit.getEnergy() > 100){
-                                laserCannon.target.hurt(player,2, DamageType.FIRE);
-                                signalumPowerSuit.decrementEnergy(100);
-                            }
+                            break;
                         }
                     }
                 }
             } else {
                 if(stack.getData().getBoolean("active")) {
                     List<SignalumPowerSuit.LaserCannon> laserCannons = signalumPowerSuit.laserCannons;
-                    for (int i = 0; i < laserCannons.size(); i++) {
-                        SignalumPowerSuit.LaserCannon laserCannon = laserCannons.get(i);
-                        if(laserCannon.target != null && signalumPowerSuit.getEnergy() > 100){
-                            laserCannon.target.hurt(player,2, DamageType.FIRE);
+                    for (SignalumPowerSuit.LaserCannon laserCannon : laserCannons) {
+                        if (laserCannon.target != null && signalumPowerSuit.getEnergy() > 100) {
+                            laserCannon.target.hurt(player, 2, DamageType.COMBAT);
+                            laserCannon.target.heartsFlashTime = 0;
                             signalumPowerSuit.decrementEnergy(100);
                         }
                     }

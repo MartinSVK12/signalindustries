@@ -77,6 +77,7 @@ public class SignalumPowerSuit {
     public final double[] cannonStartingAngles = new double[]{
             90,45,45,45,45
     };
+    private double cannonMaxDistance = 24;
 
     public float temperature;
 
@@ -352,7 +353,7 @@ public class SignalumPowerSuit {
             }
         }
 
-        //cannons of the annihilation crown
+        //move the cannons of the annihilation crown
         for (int i = 0; i < laserCannons.size(); i++) {
             LaserCannon laserCannon = laserCannons.get(i);
             if (laserCannon.target != null) {
@@ -360,7 +361,7 @@ public class SignalumPowerSuit {
                 /*double d = laserCannon.target.x - player.x;
                 double d1 = laserCannon.target.z - player.z;
                 double yaw = Math.atan2(d1, d) * 180.0 / 3.1415927410125732 - player.yRot;*/
-                if (dist > 16 || laserCannon.target.isRemoved()) {
+                if (dist > cannonMaxDistance || laserCannon.target.isRemoved()) {
                     laserCannon.target = null;
                     laserCannon.position = cannonStartingPositions[i].copy();
                     laserCannon.rotationAxis = cannonStartingRotAxis[i].copy();
@@ -389,7 +390,7 @@ public class SignalumPowerSuit {
                 };
 
                 laserCannon.position = cannonFocusOffsets[i].copy();
-                laserCannon.position.y += laserCannon.target.getHeadHeight() + 1.5;
+                laserCannon.position.y += laserCannon.target.getHeadHeight() + 2;
                 laserCannon.rotationAxis = cannonFocusRotAxis[i].copy();
                 laserCannon.angle = cannonFocusAngles[i];
             }
