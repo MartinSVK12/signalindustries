@@ -98,6 +98,8 @@ item.signalindustries.romChip.blank.name=Blank ROM Chip
 item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 item.signalindustries.romChip.position.name=Position Memory Chip
 item.signalindustries.romChip.position.desc=Stores an XYZ location in the current world, unlike the <Warp Orb> it can only be used to logically link 2 points together.
+item.signalindustries.romChip.precision.name=Precision Control Chip
+item.signalindustries.romChip.precision.desc=Allows <Automatic Miners> to execute finer control over their drills, collecting materials with silk touch.
 
 item.signalindustries.reinforced.pulsar.name=The Pulsar
 item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing <Signalum Energy> either outwards into a powerful shockwave or inwards to break a slotted item inside.
@@ -222,7 +224,7 @@ item.signalindustries.testingAbilityItem.name=Ability: Testing Ability
 item.signalindustries.testingAbilityItem.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.abilityContainerCasing.name=Ability Container Casing
-item.signalindustries.abilityContainerCasing.desc=Casing for <Ability Containers>.
+item.signalindustries.abilityContainerCasing.desc=A part of the base for an <Application Module>.
 
 item.signalindustries.clockworkAbilityContainer.name=Ability: Clockwork
 item.signalindustries.clockworkAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.

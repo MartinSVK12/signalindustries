@@ -118,6 +118,7 @@ public class SIItems extends DataInitializer {
     public static Item abilityContainerCasing;
     public static Item blankChip;
     public static Item positionMemoryChip;
+    public static Item precisionControlChip;
     public static Item condensedMilkCan;
     public static Item bucketCaramel;
     public static Item caramelPlate;
@@ -198,6 +199,7 @@ public class SIItems extends DataInitializer {
         caramelPlate = simpleItem("caramelPlate","caramelPlate","signalindustries:item/caramel_plate");
         signalumAlloyMesh = simpleItem("signalumAlloyMesh","signalumAlloyMesh","signalindustries:item/signalum_alloy_mesh");
         crystalWingPart = simpleItem("crystalWingPart","crystalWingPart","signalindustries:item/crystal_wing_part").setMaxStackSize(6);
+        precisionControlChip = simpleItem("precisionControlChip","romChip.precision","signalindustries:item/precision_control_chip");
         raziel = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/raziel")
                 .setStackSize(1)
@@ -337,7 +339,6 @@ public class SIItems extends DataInitializer {
         positionMemoryChip = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/position_chip")
                 .build(new ItemPositionChip("romChip.position", config.getInt("ItemIDs.positionMemoryChip")));
-
         blankCover = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/blank_cover")
                 .build(new ItemCover("cover.blank",config.getInt("ItemIDs.blankCover"), BlankCover::new));

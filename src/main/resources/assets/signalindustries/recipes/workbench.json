@@ -2595,5 +2595,38 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/precision_control_chip",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "GGG",
+      " C ",
+      "GGG"
+    ],
+    "symbols": [
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.block.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.romChip.blank",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.romChip.precision",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

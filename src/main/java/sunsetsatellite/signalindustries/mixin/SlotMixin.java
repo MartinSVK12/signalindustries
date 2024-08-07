@@ -15,6 +15,7 @@ import sunsetsatellite.signalindustries.SIItems;
 public class SlotMixin {
     @Inject(method = "onPickupFromSlot",at = @At("HEAD"))
     public void onPickupFromSlot(ItemStack itemStack, CallbackInfo ci) {
+        if(itemStack == null) return;
         Item item = itemStack.getItem();
         //TODO: check for item group instead
         if(item.id == SIItems.romChipProjectile.id || item.id == SIItems.romChipBoost.id){

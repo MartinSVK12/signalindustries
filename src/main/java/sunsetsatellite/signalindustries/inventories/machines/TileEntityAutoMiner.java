@@ -13,6 +13,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.inventories.TileEntityItemConduit;
@@ -67,6 +68,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             //SignalIndustries.LOGGER.info(String.valueOf(current.y));
             if(worldObj.getBlockId(current.x,current.y-1,current.z) != Block.bedrock.id){
                 Block block = Block.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
+                boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
                 if(block != null){
                     int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
                     Direction dir = null;
@@ -79,10 +81,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                     }
                     if(dir != null){
                         TileEntity tile = dir.getTileEntity(worldObj,this);
-                        ItemStack[] drops = block.getBreakResult(worldObj, EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
+                        ItemStack[] drops = block.getBreakResult(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
                         if(tile instanceof TileEntityChest){
                             if(drops == null){
-                                block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                                 worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                                 return;
                             }
@@ -96,7 +98,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                                     }
                                 }
                                 if(availableSlot == -1){
-                                    block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                    block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                                     worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                                 } else {
                                     ItemStack stack = ((TileEntityChest) tile).getStackInSlot(availableSlot);
@@ -114,18 +116,18 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                                     if(drop != null){
                                         boolean success = ((TileEntityItemConduit) tile).addItem(drop,dir.getOpposite());
                                         if(!success){
-                                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                                            block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                                         }
                                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                                     }
                                 }
                             }
                         } else {
-                            block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                            block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                             worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                         }
                     } else {
-                        block.dropBlockWithCause(worldObj, EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
+                        block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this);
                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                     }
                 }
@@ -159,6 +161,12 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                 current = new Vec3i(x-1,y+4,z+1);
             }
             workTimer.max = (int) (progressMaxTicks / speedMultiplier);
+            boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
+            if(silk){
+                cost = 4;
+            } else {
+                cost = 1;
+            }
         }
     }
 
