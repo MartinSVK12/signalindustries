@@ -23,6 +23,7 @@ public abstract class LivingRendererMixin<T extends EntityLiving> extends Entity
 
     @Inject(method = "passSpecialRender",at = @At("HEAD"))
     public void renderCannonOnTarget(T entity, double d, double d1, double d2, CallbackInfo ci){
+        if(entity.world == null) return;
         EntityPlayer player = entity.world.getClosestPlayerToEntity(entity, 16);
         if(player != null){
             SignalumPowerSuit powerSuit = ((IPlayerPowerSuit)player).getPowerSuit();

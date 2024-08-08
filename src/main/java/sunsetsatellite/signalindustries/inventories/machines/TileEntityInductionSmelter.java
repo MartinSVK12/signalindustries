@@ -138,28 +138,27 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
 
     private void processItem() {
         if (currentRecipe instanceof RecipeEntryFurnace && isValidMultiblock && canProcess()) {
-            RecipeEntryFurnace recipe = currentRecipe;
-            ItemStack stack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
+            ItemStack stack = currentRecipe.getOutput() == null ? null : currentRecipe.getOutput().copy();
             int parallelAmount = 1;
             int k = 0;
             if (stack != null) {
-                ItemStack inputStack = recipe.getInput().resolve().get(0);
-                for (int i = 0; i < inputStack.stackSize; i++) {
+                ItemStack recipeInputStack = currentRecipe.getInput().resolve().get(0);
+                for (int i = 0; i < recipeInputStack.stackSize; i++) {
                     ItemStack[] contents = input.itemContents;
                     for (int j = 0; j < contents.length; j++) {
-                        ItemStack itemContent = contents[j];
-                        if (itemContent != null && itemContent.isItemEqual(inputStack)) {
-                            parallelAmount = Math.min(itemContent.stackSize,16);
-                            itemContent.stackSize -= parallelAmount;
+                        ItemStack currentInputStack = contents[j];
+                        if (currentInputStack != null && currentInputStack.isItemEqual(recipeInputStack)) {
+                            parallelAmount = Math.min(currentInputStack.stackSize,16);
+                            currentInputStack.stackSize -= parallelAmount;
                             k++;
-                            if (itemContent.stackSize <= 0) {
+                            if (currentInputStack.stackSize <= 0) {
                                 contents[j] = null;
                             }
                             break;
                         }
                     }
                 }
-                if(k == inputStack.stackSize) {
+                if(k == recipeInputStack.stackSize) {
                     int multiplier = 1;
                     float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
                     if(fraction <= 0) fraction = 1;
@@ -168,11 +167,11 @@ public class TileEntityInductionSmelter extends TileEntityTieredMachineBase impl
                     }
                     ItemStack[] itemStacks = this.output.itemContents;
                     for (int i = 0; i < itemStacks.length; i++) {
-                        ItemStack itemContent = itemStacks[i];
-                        if (itemContent != null && itemContent.isItemEqual(itemContent)) {
-                            itemContent.stackSize += ((stack.stackSize * parallelAmount) * multiplier);
+                        ItemStack outputStack = itemStacks[i];
+                        if (outputStack != null && outputStack.isItemEqual(recipeInputStack)) {
+                            outputStack.stackSize += ((stack.stackSize * parallelAmount) * multiplier);
                             break;
-                        } else if (itemContent == null) {
+                        } else if (outputStack == null) {
                             stack.stackSize *= parallelAmount;
                             stack.stackSize *= multiplier;
                             output.setInventorySlotContents(i,stack);
