@@ -18,6 +18,7 @@ public class BlockModelCoverable extends BlockModelIOPreview {
     @Override
     public boolean render(Tessellator tessellator, int x, int y, int z) {
         TileEntity tile = renderBlocks.blockAccess.getBlockTileEntity(x, y, z);
+        if(tile == null) return false;
         if (tile instanceof TileEntityCoverable) {
             TileEntityCoverable machine = (TileEntityCoverable) tile;
             for (Direction dir : machine.getCovers().keySet()) {
@@ -27,6 +28,7 @@ public class BlockModelCoverable extends BlockModelIOPreview {
                 IconCoordinate tex = cover.getTexture();
                 renderBlocks.overrideBlockTexture = cover.getTexture();
                 renderBlocks.useInventoryTint = false;
+                renderBlocks.enableAO = true;
                 int side = dir.getSideNumber();
                 if (side == 0) {
                     this.renderBottomFace(tessellator, block, x + vec.x, y + vec.y, z + vec.z, tex);
