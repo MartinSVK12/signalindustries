@@ -6,6 +6,7 @@ import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.enums.EnumSleepStatus;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
@@ -40,6 +41,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
     @Shadow public InventoryPlayer inventory;
 
     @Shadow protected float baseSpeed;
+
+    @Shadow public Container inventorySlots;
 
     public EntityPlayerMixin(World world) {
         super(world);
@@ -128,7 +131,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements IPlayerP
                 powerSuit.temperature += 0.5f;
             }
         }
-        if(inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT){
+        if(inventory.armorItemInSlot(2) != null && inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT){
             ci.cancel();
         }
     }
