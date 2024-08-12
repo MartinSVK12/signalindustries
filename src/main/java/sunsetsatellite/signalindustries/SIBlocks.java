@@ -118,6 +118,7 @@ public class SIBlocks extends DataInitializer {
     public static Block basicEnergyInjector;
     public static Block basicSignalumDynamo;
     public static Block basicProgrammer;
+    public static Block reinforcedChunkloader;
     public static Block cobblestoneBricks;
     public static Block crystalAlloyBricks;
     public static Block reinforcedCrystalAlloyBricks;
@@ -1177,6 +1178,17 @@ public class SIBlocks extends DataInitializer {
                                         .build(block)
                 )
                 .build(new BlockProgrammer("basic.programmer", config.getInt("BlockIDs.basicProgrammer"), Tier.BASIC, Material.metal));
+        reinforcedChunkloader = new BlockBuilder(MOD_ID)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(1)
+                .setResistance(20)
+                .setLuminance(0)
+                .setBlockModel((block)->new BlockModelMachine(block,Tier.REINFORCED)
+                        .withDefaultTexture("spacetime_maintainer_side_inactive")
+                        .withActiveTexture("spacetime_maintainer_side_active")
+                        .withOverbrightTexture("spacetime_maintainer_overlay")
+                )
+                .build(new BlockChunkloader("reinforced.chunkLoader", config.getInt("BlockIDs.reinforcedChunkloader"), Tier.REINFORCED, Material.metal));
         cobblestoneBricks = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.STONE)
                 .setHardness(1)

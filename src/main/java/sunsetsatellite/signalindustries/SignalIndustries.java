@@ -30,6 +30,7 @@ import net.minecraft.core.player.inventory.Container;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final TomlConfigHandler config;
     public static List<MeteorLocation> meteorLocations = new ArrayList<>();
+    public static List<ChunkCoordinates> chunkLoaders = new ArrayList<>();
     public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     static {
@@ -101,6 +103,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         defaultConfig.addCategory("ItemIDs");
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
+        defaultConfig.addCategory("Experimental");
+        defaultConfig.addEntry("Experimental.enableDynamicChunkProvider","Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.",false);
         defaultConfig.addEntry("Other.enableQuests",false);
         defaultConfig.addEntry("Other.eternityDimId", 3);
         defaultConfig.addEntry("Other.GuiId", 10);
@@ -142,6 +146,38 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                     changed = true;
                 }
             }
+
+            if(!rawConfig.contains("EntityIDs.infernalId")){
+                rawConfig.addEntry("EntityIDs.infernalId", 100);
+                changed = true;
+            }
+
+
+            if(!rawConfig.contains("Experimental.enableDynamicChunkProvider")){
+                rawConfig.addEntry("Experimental.enableDynamicChunkProvider", false);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("Other.enableQuests")){
+                rawConfig.addEntry("Other.enableQuests", false);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("Other.eternityDimId")){
+                rawConfig.addEntry("Other.eternityDimId", 3);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("Other.GuiId")){
+                rawConfig.addEntry("Other.GuiId", 10);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("Other.machinePacketId")){
+                rawConfig.addEntry("Other.machinePacketId", 113);
+                changed = true;
+            }
+
             if (changed) {
                 config.setDefaults(rawConfig);
                 config.writeConfig();
@@ -321,6 +357,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createTileEntity(TileEntityCatalystConduit.class,"Catalyst Energy Conduit");
         EntityHelper.createTileEntity(TileEntityVoidContainer.class,"Void Container");
         EntityHelper.createTileEntity(TileEntityCollector.class,"Signalum Collector");
+        EntityHelper.createTileEntity(TileEntityChunkloader.class,"Spacetime Maintainer");
 
 
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);

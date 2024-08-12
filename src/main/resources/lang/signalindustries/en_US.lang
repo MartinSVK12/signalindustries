@@ -556,6 +556,11 @@ tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's bas
 tile.signaindustries.reinforced.satellite.name=Satellite
 tile.signaindustries.reinforced.satellite.desc=Satellite, shine on me tonight~ Release it into the skies to watch the world from above.
 
+tile.signalindustries.reinforced.chunkLoader.name=Spacetime Maintainer
+tile.signalindustries.reinforced.chunkLoader.desc=Keeps the chunk this machine is placed in loaded.
+tile.signalindustries.awakened.chunkLoader.name=Awakened Causality Sustainer Controller
+tile.signalindustries.awakened.chunkLoader.desc=Keeps several chunks loaded around it.
+
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
 

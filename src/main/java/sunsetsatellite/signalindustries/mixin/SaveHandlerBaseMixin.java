@@ -35,12 +35,21 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
         CompoundTag data = saveFormat.getDimensionDataRaw(worldDirName, dimensionId);
         if(data != null){
             CompoundTag meteorLocations = data.getCompound("MeteorLocations");
+            CompoundTag chunkloaders = data.getCompound("ChunkLoaders");
             SignalIndustries.meteorLocations.clear();
+            SignalIndustries.chunkLoaders.clear();
             for (Tag<?> value : meteorLocations.getValues()) {
                 if(value instanceof CompoundTag){
                     CompoundTag compoundTag = (CompoundTag) value;
                     ChunkCoordinates coordinates = new ChunkCoordinates(compoundTag.getInteger("x"),compoundTag.getInteger("y"),compoundTag.getInteger("z"));
                     SignalIndustries.meteorLocations.add(new MeteorLocation(MeteorLocation.Type.valueOf(Objects.equals(compoundTag.getString("type"), "") ? "UNKNOWN" : compoundTag.getString("type")),coordinates));
+                }
+            }
+            for (Tag<?> value : chunkloaders.getValues()) {
+                if(value instanceof CompoundTag){
+                    CompoundTag compoundTag = (CompoundTag) value;
+                    ChunkCoordinates coordinates = new ChunkCoordinates(compoundTag.getInteger("x"),compoundTag.getInteger("y"),compoundTag.getInteger("z"));
+                    SignalIndustries.chunkLoaders.add(coordinates);
                 }
             }
         }
@@ -49,6 +58,7 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
     @Inject(method = "saveDimensionDataRaw", at = @At("HEAD"))
     public void saveDimensionDataRaw(int dimensionId, CompoundTag dimensionDataTag, CallbackInfo ci) {
         CompoundTag meteorNbt = new CompoundTag();
+        CompoundTag chunkloaderNbt = new CompoundTag();
         List<MeteorLocation> meteorLocations = SignalIndustries.meteorLocations;
         for (int i = 0; i < meteorLocations.size(); i++) {
             ChunkCoordinates meteorLocation = meteorLocations.get(i).location;
@@ -58,8 +68,17 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
             locationNbt.putInt("z",meteorLocation.z);
             locationNbt.putString("type",meteorLocations.get(i).type.name());
             meteorNbt.putCompound(String.valueOf(i),locationNbt);
-
+        }
+        List<ChunkCoordinates> chunkLoaders = SignalIndustries.chunkLoaders;
+        for (int i = 0; i < chunkLoaders.size(); i++) {
+            ChunkCoordinates chunkLoader = chunkLoaders.get(i);
+            CompoundTag chunkNbt = new CompoundTag();
+            chunkNbt.putInt("x", chunkLoader.x);
+            chunkNbt.putInt("y", chunkLoader.y);
+            chunkNbt.putInt("z", chunkLoader.z);
+            chunkloaderNbt.putCompound(String.valueOf(i),chunkNbt);
         }
         dimensionDataTag.putCompound("MeteorLocations",meteorNbt);
+        dimensionDataTag.putCompound("ChunkLoaders",chunkloaderNbt);
     }
 }

@@ -30,7 +30,9 @@
     "SlotMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin",
-    "WorldTypeOverworldMixin"
+    "WorldTypeOverworldMixin",
+    "experimental.MinecraftMixin",
+    "experimental.WorldRendererMixin"
   ],
   "client": [
     "GameSettingsMixin",

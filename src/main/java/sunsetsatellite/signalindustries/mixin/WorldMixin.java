@@ -7,6 +7,9 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.Chunk;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
+import net.minecraft.core.world.chunk.provider.IChunkProvider;
 import net.minecraft.core.world.save.LevelStorage;
 import net.minecraft.core.world.season.SeasonManager;
 import net.minecraft.core.world.season.Seasons;
@@ -24,6 +27,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.experimental.ChunkProviderDynamic;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWorldDataAccessor;
 
 import java.util.List;
@@ -207,4 +212,14 @@ public abstract class WorldMixin implements IWorldDataAccessor {
         return saveHandler;
     }
 
+    @Inject(method = "spawnPlayerWithLoadedChunks", at = @At("RETURN"))
+    public void loadChunkloadedChunks(EntityPlayer player, CallbackInfo ci){
+        for (ChunkCoordinates coordinates : SignalIndustries.chunkLoaders) {
+            IChunkProvider chunkProvider = thisAs.getChunkProvider();
+            if(chunkProvider instanceof ChunkProviderDynamic){
+                ((ChunkProviderDynamic) chunkProvider).keepLoaded(Math.floorDiv(coordinates.x, Chunk.CHUNK_SIZE_X), Math.floorDiv(coordinates.z, Chunk.CHUNK_SIZE_Z));
+                thisAs.getChunkFromBlockCoords(coordinates.x,coordinates.z); //loads the chunk
+            }
+        }
+    }
 }

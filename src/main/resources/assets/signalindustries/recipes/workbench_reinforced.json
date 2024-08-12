@@ -1105,5 +1105,54 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/spacetime_maintainer",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " W ",
+      "DMD",
+      " L "
+    ],
+    "symbols": [
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "item.signalindustries.warpManipulatorCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "item.signalindustries.dilithiumControlCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.chunkLoader",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]
