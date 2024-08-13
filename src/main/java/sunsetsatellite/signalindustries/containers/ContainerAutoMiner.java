@@ -17,7 +17,7 @@ public class ContainerAutoMiner extends ContainerFluid {
 
         SlotFluid slot = new SlotFluid(tileEntity, 0, 9,53); //116 35
         addFluidSlot(slot);
-        this.addSlot(new Slot(tileEntity,0,130 + 4,31 + 4));
+        this.addSlot(new Slot(tileEntity,0,130,31 + 4));
 
         for(int j = 0; j < 3; j++)
         {

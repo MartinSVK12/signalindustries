@@ -49,23 +49,8 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                 fluidContents[0] = null;
             }
 
-            current.x--;
             current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-            if(current.y < 1){
-                current.y = y+4;
-                //workTimer.pause();
-            }
-            if(current.x < x-16){
-                current.x = x-1;
-                current.z++;
-                current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-                if(current.z > z+16){
-                    current.z = z+1;
-                    current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-                }
-            }
 
-            //SignalIndustries.LOGGER.info(String.valueOf(current.y));
             if(worldObj.getBlockId(current.x,current.y-1,current.z) != Block.bedrock.id){
                 Block block = Block.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
                 boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
@@ -132,6 +117,22 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
                     }
                 }
             }
+
+            current.x--;
+            if(current.y < 1){
+                current.y = y+4;
+                //workTimer.pause();
+            }
+            if(current.x < x-14){
+                current.x = x-1;
+                current.z++;
+                current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
+                if(current.z > z+14){
+                    current.z = z+1;
+                    current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
+                }
+            }
+
         }
     }
 
@@ -160,12 +161,13 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             if(current.equals(new Vec3i())){
                 current = new Vec3i(x-1,y+4,z+1);
             }
-            workTimer.max = (int) (progressMaxTicks / speedMultiplier);
             boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
             if(silk){
-                cost = 4;
+                cost = 2;
+                workTimer.max = ((int) (progressMaxTicks / speedMultiplier) * 2);
             } else {
                 cost = 1;
+                workTimer.max = (int) (progressMaxTicks / speedMultiplier);
             }
         }
     }

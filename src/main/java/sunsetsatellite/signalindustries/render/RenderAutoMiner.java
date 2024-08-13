@@ -84,30 +84,30 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
 
             //square above
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 17);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 15);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 0.5f, 0, 1, 8, x - 15, y + 4, z);
             //square
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + 17);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 0.5f, 0, 1, 8, x - 17, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + 15);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 0.5f, 0, 1, 8, x - 15, y, z);
             //down
             renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 17);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 17, y + 4, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 15, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + 15);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - 15, y + 4, z + 15);
             //down 2
             renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 17, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + 17);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 17, y, z + 17);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 15, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + 15);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - 15, y, z + 15);
             //square down
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 1, 1, 1, 2, x, y - ty, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - 17, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + 17);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 17, 1, 1, 1, 1, 2, x - 17, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + 15);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + 15, 1, 1, 1, 1, 2, x - 15, y - ty, z);
 
             //current lines
             renderLineBetweenTwoPoints(tx, ty, tz, cx, ty, tz, 1, 0, 0, 1, 8, x, y + 4, z + (cz - tz));
