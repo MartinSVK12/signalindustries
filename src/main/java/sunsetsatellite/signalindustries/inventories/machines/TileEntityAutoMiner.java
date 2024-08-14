@@ -53,7 +53,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
 
             if(worldObj.getBlockId(current.x,current.y-1,current.z) != Block.bedrock.id){
                 Block block = Block.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
-                boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
+                boolean silk = hasSilkTouch();
                 if(block != null){
                     int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
                     Direction dir = null;
@@ -161,7 +161,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
             if(current.equals(new Vec3i())){
                 current = new Vec3i(x-1,y+4,z+1);
             }
-            boolean silk = getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
+            boolean silk = hasSilkTouch();
             if(silk){
                 cost = 2;
                 workTimer.max = ((int) (progressMaxTicks / speedMultiplier) * 2);
@@ -191,5 +191,9 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     @Override
     public boolean isBurning() {
         return fluidContents[0] != null;
+    }
+
+    public boolean hasSilkTouch(){
+        return getStackInSlot(0) != null && getStackInSlot(0).getItem() == SIItems.precisionControlChip;
     }
 }

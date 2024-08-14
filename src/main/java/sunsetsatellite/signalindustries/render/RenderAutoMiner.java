@@ -4,9 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.LightmapHelper;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.IFullbright;
@@ -17,9 +19,9 @@ import java.util.Objects;
 
 public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
-    private RenderBlocks blockRenderer;
+    private RenderBlocks blockRenderer = new RenderBlocks();
 
-    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta) {
+    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta, int alpha) {
         TextureRegistry.blockAtlas.bindTexture();
         GL11.glPushMatrix();
         RenderBlocks renderBlocks = BlockModel.renderBlocks;
@@ -27,7 +29,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         ((IFullbright)model).enableFullbright();
-        model.renderBlockOnInventory(tessellator,meta,1,0.75f,null);
+        model.renderBlockOnInventory(tessellator,meta,1,alpha,null);
         BlockModel.setRenderBlocks(renderBlocks);
         ((IFullbright)model).disableFullbright();
         GL11.glDisable(GL11.GL_BLEND);
@@ -50,38 +52,32 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y + 4.25f, (float) z + (cz - tz) + 0.25f);
             GL11.glScalef(0.5f, 0.5f, 0.5f);
             GL11.glDisable(2896);
-            //this.drawBlock(renderDispatcher.renderEngine, SignalIndustries.basicMachineCore.id, 0, tileEntity);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
 
             if (cy - (ty + 4) < 0) {
                 GL11.glPushMatrix();
-                GL11.glTranslatef((float) x - (tx - cx) + 0.25f, (float) y - (ty - cy) + 0.5f, (float) z + (cz - tz) + 0.25f);
+                GL11.glTranslatef((float) x - (tx - cx) + 0.5f, (float) y - (ty - cy) + 1.2f, (float) z + (cz - tz) + 0.5f);
                 GL11.glScalef(0.50f, 1f, 0.50f);
                 GL11.glDisable(2896);
-                //this.drawBlock(renderDispatcher.renderEngine, Block.basalt.id, 0, tileEntity);
+                drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Block.basalt),0,1);
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
 
-            if (cy - (ty + 4) <= 0) {
+            if (cy - (ty + 4) < 0) {
                 GL11.glPushMatrix();
-                GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy), (float) z + (cz - tz) + 0.375f);
+                GL11.glTranslatef((float) x - (tx - cx) + 0.5f, (float) y - (ty - cy) + 0.3f, (float) z + (cz - tz) + 0.5f);
                 GL11.glScalef(0.25f, 0.75f, 0.25f);
                 GL11.glDisable(2896);
-                //this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
-                GL11.glEnable(2896);
-                GL11.glPopMatrix();
-            } else {
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) x - (tx - cx) + 0.375f, (float) y - (ty - cy) + 1f, (float) z + (cz - tz) + 0.375f);
-                GL11.glScalef(0.25f, 0.75f, 0.25f);
-                GL11.glDisable(2896);
-                //this.drawBlock(renderDispatcher.renderEngine, Block.blockDiamond.id, 0, tileEntity);
+                if(tileEntity.hasSilkTouch()){
+                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Block.blockGold),0,1);
+                } else {
+                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Block.blockDiamond),0,1);
+                }
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
-
 
             //square above
             renderLineBetweenTwoPoints(tx, ty, tz, tx - 15, ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
