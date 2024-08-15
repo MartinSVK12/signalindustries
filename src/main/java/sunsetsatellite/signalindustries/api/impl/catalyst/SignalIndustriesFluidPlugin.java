@@ -19,7 +19,7 @@ public class SignalIndustriesFluidPlugin {
         CatalystFluids.TYPES.register(new FluidType("signalindustries:energy",listOf(SIBlocks.energyFlowing,SIBlocks.energyStill)));
         CatalystFluids.TYPES.register(new FluidType("signalindustries:burntSignalum",listOf(SIBlocks.burntSignalumFlowing,SIBlocks.burntSignalumStill)));
         logger.info("Loading fluid containers from signalindustries..");
-        FluidContainerRegistryEntry entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumCrystalBattery, SIItems.signalumCrystalEmpty, Collections.singletonList(SIBlocks.energyFlowing));
+        FluidContainerRegistryEntry entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumCrystalBattery, SIItems.signalumCrystalBattery, Collections.singletonList(SIBlocks.energyFlowing));
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("signalumCrystal"),entry);
         entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, SIItems.signalumSaber, SIItems.signalumSaber,  Collections.singletonList(SIBlocks.energyFlowing));
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("signalumSaber"),entry);

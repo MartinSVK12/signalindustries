@@ -121,6 +121,6 @@ public class RecipeReloadCommand extends Command {
 
     @Override
     public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
-        commandSender.sendMessage("/recipes reload");
+        commandSender.sendMessage("/data reload");
     }
 }

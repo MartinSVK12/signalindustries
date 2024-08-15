@@ -142,7 +142,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         int capacity = tile.getFluidCapacityForSlot(slot);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
-            stack.itemID = SIItems.signalumCrystalEmpty.id;
             return;
         }
         FluidStack fluidStack = tile.getFluidInSlot(slot);
@@ -157,7 +156,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 fluidStack.amount += saturation;
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         } else {
             if(saturation > capacity){
@@ -171,7 +169,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 tile.setFluidInSlot(slot,fluid);
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         }
     }
@@ -183,7 +180,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         int capacity = tile.getFluidCapacityForSlot(slot);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
-            stack.itemID = SIItems.signalumCrystalEmpty.id;
             return;
         }
         FluidStack fluidStack = tile.getFluidInSlot(slot);
@@ -202,7 +198,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 fluidStack.amount += saturation;
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         } else {
             if(saturation > capacity){
@@ -224,7 +219,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 }
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         }
     }
@@ -236,7 +230,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
         int capacity = inv.getFluidCapacityForSlot(slot);
         int size = stack.getData().getInteger("size");
         if(saturation == 0){
-            stack.itemID = SIItems.signalumCrystalEmpty.id;
             return;
         }
         FluidStack fluidStack = inv.getFluidInSlot(slot);
@@ -255,7 +248,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 fluidStack.amount += saturation;
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         } else {
             if(saturation > capacity){
@@ -277,7 +269,6 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
                 }
                 stack.getData().putInt("saturation",0);
                 stack.getData().putInt("size",size);
-                if(!infinite) stack.itemID = SIItems.signalumCrystalEmpty.id;
             }
         }
     }
@@ -294,9 +285,7 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
             text.append("Size: 1 | Saturation: Infinite");
         } else {
             text.append("Size: ").append(stack.getData().getInteger("size"));
-            if(stack.getItem().id == SIItems.signalumCrystalBattery.id){
-                text.append(" | ").append("Saturation: ").append(stack.getData().getInteger("saturation"));
-            }
+            text.append(" | ").append("Saturation: ").append(stack.getData().getInteger("saturation"));
         }
         return text.toString();
     }

@@ -139,6 +139,7 @@ public class SIItems extends DataInitializer {
         LOGGER.info("Initializing items...");
         rawSignalumCrystal = simpleItem("rawSignalumCrystal", "signalindustries:item/rawsignalumcrystal");
         signalumCrystal = simpleItem("signalumCrystal", "signalindustries:item/signalumcrystal");
+        signalumCrystalEmpty = simpleItem("signalumCrystalEmpty", "signalindustries:item/signalumcrystalempty");
         awakenedSignalumCrystal = simpleItem("awakenedSignalumCrystal", "signalindustries:item/awakenedsignalumcrystal").setMaxStackSize(1);
         awakenedSignalumFragment = simpleItem("awakenedSignalumFragment", "signalindustries:item/awakenedsignalumfragment");
         coalDust = simpleItem("coalDust", "signalindustries:item/coaldust");
@@ -209,12 +210,6 @@ public class SIItems extends DataInitializer {
                 .setStackSize(8)
                 .setItemModel((item)->new ItemModelStandard(item, MOD_ID))
                 .build(new ItemFood("krowka",config.getInt("ItemIDs.krowka"),1,1,false,8));
-
-        signalumCrystalEmpty = new ItemBuilder(MOD_ID)
-                .setIcon("signalindustries:item/signalumcrystalempty")
-                .setStackSize(1)
-                .setItemModel((item) -> new ItemModelStandard(item, MOD_ID))
-                .build(new ItemSignalumCrystal("signalumCrystalEmpty", config.getInt("ItemIDs.signalumCrystalEmpty"),false));
         signalumCrystalBattery = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/signalumcrystalbattery")
                 .setStackSize(1)

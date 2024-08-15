@@ -40,6 +40,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         workTimer.pause();
         transferSpeed = 50;
         //.copy().add(new Vec3i(1,0,1));
+        itemConnections.replace(Direction.Y_POS,Connection.OUTPUT);
     }
 
     public void work(){
@@ -143,17 +144,6 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         }
         if(worldObj != null){
             applyModifiers();
-           /* for(Direction dir : Direction.values()){
-                TileEntity tile = dir.getTileEntity(worldObj,this);
-                if(tile instanceof TileEntityBooster){
-                    if(((TileEntityBooster) tile).isBurning()){
-                        int meta = tile.getMovedData();
-                        if(Direction.getDirectionFromSide(meta).getOpposite() == dir){
-                            speedMultiplier = 2;
-                        }
-                    }
-                }
-            }*/
             extractFluids();
             if(!workTimer.isPaused()){
                 workTimer.tick();
