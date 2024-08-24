@@ -152,16 +152,26 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
                 changed = true;
             }
 
-
-            if(!rawConfig.contains("Experimental.enableDynamicChunkProvider")){
+            try {
+                if(!rawConfig.contains("Experimental.enableDynamicChunkProvider")){
+                    rawConfig.addEntry("Experimental.enableDynamicChunkProvider", false);
+                    changed = true;
+                }
+            } catch (NullPointerException e){
                 rawConfig.addEntry("Experimental.enableDynamicChunkProvider", false);
                 changed = true;
             }
 
-            if(!rawConfig.contains("Other.enableQuests")){
+            try {
+                if(!rawConfig.contains("Other.enableQuests")){
+                    rawConfig.addEntry("Other.enableQuests", false);
+                    changed = true;
+                }
+            } catch (NullPointerException e){
                 rawConfig.addEntry("Other.enableQuests", false);
                 changed = true;
             }
+
 
             if(!rawConfig.contains("Other.eternityDimId")){
                 rawConfig.addEntry("Other.eternityDimId", 3);
