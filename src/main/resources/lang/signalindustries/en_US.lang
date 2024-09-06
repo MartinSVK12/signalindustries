@@ -344,6 +344,8 @@ item.signalindustries.attachmentPoint.name=Attachment Point
 item.signalindustries.attachmentPoint.desc=Interface for <Attachments>.
 item.signalindustries.crystalWingPart.name=Crystal Wing Part
 item.signalindustries.crystalWingPart.desc=One of the 6 wings of the <Crystal Wings> attachment.
+item.signalindustries.blueprint.name=Blueprint
+item.signalindustries.blueprint.desc=Written out instructions on how to build a structure.
 
 item.signalindustries.condensedMilkCan.name=Condensed Milk Can
 item.signalindustries.condensedMilkCan.desc=Thick and sweet.

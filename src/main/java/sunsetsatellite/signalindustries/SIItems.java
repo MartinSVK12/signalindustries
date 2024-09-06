@@ -123,6 +123,7 @@ public class SIItems extends DataInitializer {
     public static Item bucketCaramel;
     public static Item caramelPlate;
     public static Item krowka;
+    public static Item blueprint;
 
     public static ItemCover blankCover;
     public static ItemCover redstoneCover;
@@ -361,6 +362,10 @@ public class SIItems extends DataInitializer {
         dilithiumLensCover = new ItemBuilder(MOD_ID)
                 .setIcon("signalindustries:item/dilithium_lens")
                 .build(new ItemCover("cover.dilithiumLens", config.getInt("ItemIDs.dilithiumLensCover"), DilithiumLensCover::new));
+
+        blueprint = new ItemBuilder(MOD_ID)
+                .setIcon("signalindustries:item/blueprint")
+                .build(new ItemBlueprint("blueprint", config.getInt("ItemIDs.blueprint")));
 
         ironPlateHammer.setContainerItem(ironPlateHammer);
 

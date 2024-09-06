@@ -1,23 +1,9 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.render.RenderBlocks;
-import net.minecraft.client.render.block.model.BlockModel;
-import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
-import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.IColorOverride;
-import sunsetsatellite.catalyst.core.util.IFullbright;
-import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntitySignalumReactor;
-
-import java.util.ArrayList;
 
 
 public class RenderSignalumReactor extends RenderMultiblock {
@@ -26,7 +12,7 @@ public class RenderSignalumReactor extends RenderMultiblock {
     public void doRender(Tessellator tessellator, TileEntity tileEntity, double d, double e, double f, float g) {
         TileEntitySignalumReactor reactor = (TileEntitySignalumReactor) tileEntity;
         super.doRender(tessellator, tileEntity, d, e, f, g);
-        float fluidAmount = reactor.getFuel() + reactor.getDepletedFuel();
+        /*float fluidAmount = reactor.getFuel() + reactor.getDepletedFuel();
         float fluidMaxAmount = 4000*9;
         int fluidId = SIBlocks.energyFlowing.id;
 
@@ -49,6 +35,6 @@ public class RenderSignalumReactor extends RenderMultiblock {
             ((IColorOverride)model).overrideColor(1,1,1,1);
             GL11.glEnable(2896);
             GL11.glPopMatrix();
-        }
+        }*/
     }
 }
