@@ -18,6 +18,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.IFullbright;
+import sunsetsatellite.catalyst.core.util.NumberUtil;
 
 
 public class GuiRenderFakeItem extends Gui
@@ -30,7 +31,7 @@ public class GuiRenderFakeItem extends Gui
         this.mc = mc;
     }
 
-    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot)
+    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount)
     {
         boolean hasDrawnSlotBackground = false;
         boolean discovered = true;
@@ -41,12 +42,14 @@ public class GuiRenderFakeItem extends Gui
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         if (slot != null) {
             discovered = slot.getIsDiscovered(this.mc.thePlayer);
-            IconCoordinate iconIndex = TextureRegistry.getTexture(slot.getBackgroundIconId());
-            if (iconIndex != null && itemStack == null) {
-                GL11.glDisable(GL11.GL_LIGHTING);
-                this.drawTexturedIcon(x, y, 16, 16, iconIndex);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                hasDrawnSlotBackground = true;
+            if(slot.getBackgroundIconId() != null) {
+                IconCoordinate iconIndex = TextureRegistry.getTexture(slot.getBackgroundIconId());
+                if (itemStack == null) {
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    this.drawTexturedIcon(x, y, 16, 16, iconIndex);
+                    GL11.glEnable(GL11.GL_LIGHTING);
+                    hasDrawnSlotBackground = true;
+                }
             }
         }
 
@@ -62,6 +65,9 @@ public class GuiRenderFakeItem extends Gui
                 }
                 ((IFullbright)itemModel).enableFullbright();
                 itemModel.renderItemIntoGui(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, discovered ? 1.0F : 0.0F, 0.5F);
+                if(showAmount){
+                    itemModel.renderItemOverlayIntoGUI(Tessellator.instance, this.mc.fontRenderer, this.mc.renderEngine, itemStack, x, y, itemStack.stackSize <= 1 ? null : NumberUtil.format(itemStack.stackSize), 0.5F);
+                }
                 ((IFullbright)itemModel).disableFullbright();
                 if(itemModel instanceof ItemModelBlock){
                     BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Block.blocksList[itemStack.itemID]);
@@ -89,7 +95,7 @@ public class GuiRenderFakeItem extends Gui
 
     public void render(ItemStack itemStack, int x, int y, boolean isSelected)
     {
-        render(itemStack, x, y, isSelected, null);
+        render(itemStack, x, y, isSelected, null, false);
     }
 
     public void render(ItemStack itemStack, int x, int y)

@@ -8,26 +8,27 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
-import sunsetsatellite.signalindustries.containers.ContainerPlateFormer;
-import sunsetsatellite.signalindustries.gui.GuiPlateFormer;
-import sunsetsatellite.signalindustries.inventories.machines.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.containers.ContainerBuilder;
+import sunsetsatellite.signalindustries.gui.GuiBuilder;
+import sunsetsatellite.signalindustries.inventories.machines.TileEntityBuilder;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BlockPlateFormer extends BlockMachineBase {
+public class BlockSpatialBuilder extends BlockMachineBase {
 
-    public BlockPlateFormer(String key, int i, Tier tier, Material material) {
+
+    public BlockSpatialBuilder(String key, int i, Tier tier, Material material) {
         super(key, i, tier, material);
 
     }
 
     @Override
     protected TileEntity getNewBlockEntity() {
-        return new TileEntityPlateFormer();
+        return new TileEntityBuilder();
     }
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        dropContents(world, i, j, k);
+        dropContents(world,i,j,k);
 
         super.onBlockRemoved(world, i, j, k, data);
     }
@@ -40,11 +41,12 @@ public class BlockPlateFormer extends BlockMachineBase {
         if (world.isClientSide) {
             return true;
         } else {
-            TileEntityPlateFormer tile = (TileEntityPlateFormer) world.getBlockTileEntity(i, j, k);
+            TileEntityBuilder tile = (TileEntityBuilder) world.getBlockTileEntity(i, j, k);
             if (tile != null) {
-                SignalIndustries.displayGui(entityplayer, () -> new GuiPlateFormer(entityplayer.inventory, tile), new ContainerPlateFormer(entityplayer.inventory, tile), tile, i, j, k);
+                SignalIndustries.displayGui(entityplayer, () -> new GuiBuilder(entityplayer.inventory, tile), new ContainerBuilder(entityplayer.inventory, tile), tile, i, j, k);
             }
             return true;
         }
     }
+
 }

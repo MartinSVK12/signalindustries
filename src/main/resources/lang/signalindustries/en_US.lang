@@ -433,6 +433,13 @@ tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Sign
 tile.signalindustries.reinforced.ignitor.name=Reinforced Signalum Ignitor
 tile.signalindustries.reinforced.ignitor.desc=A core part of the <Signalum Reactor>. Drives the reaction by forcibly igniting <Signalum Energy>.
 
+tile.signalindustries.reinforced.builder.name=Reinforced Builder
+tile.signalindustries.reinforced.builder.desc=Builds structures according to <Blueprints>.
+tile.signalindustries.awakened.builder.name=Awakened Spatial Reconstructor
+tile.signalindustries.awakened.builder.desc=Builds more complicated structures according to <Blueprints>.
+tile.signalindustries.awakened.scanner.name=Awakened Spatial Encapsulator
+tile.signalindustries.awakened.scanner.desc=Creates a blueprint of an already built custom structure.
+
 tile.signalindustries.reinforced.energyConnector.name=Reinforced Energy Connector
 tile.signalindustries.reinforced.energyConnector.desc=A dedicated energy hatch for Reinforced-tier multiblocks.
 tile.signalindustries.reinforced.fluidInputHatch.name=Reinforced Fluid Input Hatch
@@ -809,7 +816,7 @@ guidebook.section.signalindustries.multiblocks=Multiblocks
 multiblock.signalindustries.dimensionalAnchor.name=Dimensional Anchor
 multiblock.signalindustries.signalumReactor.name=Signalum Reactor
 multiblock.signalindustries.wrathTree.name=Wrath Tree
-multiblock.signalindustries.reinforcedExtractor.name=Extraction Manifold
+multiblock.signalindustries.extractionManifold.name=Extraction Manifold
 multiblock.signalindustries.basicInductionSmelter.name=Basic Induction Smelter
 
 gui.options.page.controls.category.signalindustries=Signal Industries

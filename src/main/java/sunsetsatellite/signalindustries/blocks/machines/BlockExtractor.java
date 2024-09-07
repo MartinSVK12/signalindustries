@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.blocks.machines;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
-import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
@@ -19,12 +18,9 @@ import sunsetsatellite.signalindustries.containers.ContainerExtractor;
 import sunsetsatellite.signalindustries.containers.ContainerReinforcedExtractor;
 import sunsetsatellite.signalindustries.gui.GuiExtractor;
 import sunsetsatellite.signalindustries.gui.GuiReinforcedExtractor;
-import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityReinforcedExtractor;
 import sunsetsatellite.signalindustries.util.Tier;
-
-import java.util.Random;
 
 public class BlockExtractor extends BlockMachineBase {
 
@@ -53,34 +49,7 @@ public class BlockExtractor extends BlockMachineBase {
 
     @Override
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
-        TileEntityTieredMachineBase tile = (TileEntityTieredMachineBase) world.getBlockTileEntity(i, j, k);
-        if (tile != null) {
-
-            Random random = new Random();
-            for (int l = 0; l < tile.getSizeInventory(); ++l) {
-                ItemStack itemstack = tile.getStackInSlot(l);
-                if (itemstack != null) {
-                    float f = random.nextFloat() * 0.8F + 0.1F;
-                    float f1 = random.nextFloat() * 0.8F + 0.1F;
-                    float f2 = random.nextFloat() * 0.8F + 0.1F;
-
-                    while (itemstack.stackSize > 0) {
-                        int i1 = random.nextInt(21) + 10;
-                        if (i1 > itemstack.stackSize) {
-                            i1 = itemstack.stackSize;
-                        }
-
-                        itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
-                        float f3 = 0.05F;
-                        entityitem.xd = (float) random.nextGaussian() * f3;
-                        entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
-                        entityitem.zd = (float) random.nextGaussian() * f3;
-                        world.entityJoinedWorld(entityitem);
-                    }
-                }
-            }
-        }
+        dropContents(world, i, j, k);
 
         super.onBlockRemoved(world, i, j, k, data);
     }
@@ -96,7 +65,7 @@ public class BlockExtractor extends BlockMachineBase {
             if (tier == Tier.REINFORCED) {
                 TileEntityReinforcedExtractor tile = (TileEntityReinforcedExtractor) world.getBlockTileEntity(i, j, k);
                 if (tile != null) {
-                    if (tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)))) {
+                    if (tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)).getOpposite())) {
                         SignalIndustries.displayGui(entityplayer, () -> new GuiReinforcedExtractor(entityplayer.inventory, tile), new ContainerReinforcedExtractor(entityplayer.inventory, tile), tile, i, j, k);
                         entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     } else {

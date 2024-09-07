@@ -1,26 +1,29 @@
 package sunsetsatellite.signalindustries;
 
+import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
-import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.util.SIMultiblock;
+import sunsetsatellite.signalindustries.util.Tier;
 
-import static sunsetsatellite.signalindustries.SignalIndustries.*;
+import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
+import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 
 public class SIMultiblocks extends DataInitializer {
-    public static Multiblock dimAnchorMultiblock;
-    public static Multiblock wrathTree;
-    public static Multiblock signalumReactor;
-    public static Multiblock extractionManifold;
-    public static Multiblock inductionSmelterBasic;
+    public static SIMultiblock dimAnchorMultiblock;
+    public static SIMultiblock wrathTree;
+    public static SIMultiblock signalumReactor;
+    public static SIMultiblock extractionManifold;
+    public static SIMultiblock inductionSmelterBasic;
 
     public void init(){
         if(initialized) return;
         LOGGER.info("Initializing multiblocks...");
-        dimAnchorMultiblock = new Multiblock(MOD_ID, new Class[]{SIBlocks.class}, "dimensionalAnchor", "dimensionalAnchor", false);
-        wrathTree = new Multiblock(MOD_ID, new Class[]{SIBlocks.class}, "wrathTree", "reinforcedWrathBeacon", false);
-        signalumReactor = new Multiblock(MOD_ID, new Class[]{SIBlocks.class}, "signalumReactor", "signalumReactor", false);
-        extractionManifold = new Multiblock(MOD_ID, new Class[]{SIBlocks.class}, "reinforcedExtractor", "reinforcedExtractor", false);
-        inductionSmelterBasic = new Multiblock(MOD_ID, new Class[]{SIBlocks.class}, "basicInductionSmelter", "basicInductionSmelter", false);
+        dimAnchorMultiblock = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "dimensionalAnchor", "dimensionalAnchor", false, Tier.REINFORCED);
+        wrathTree = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
+        signalumReactor = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
+        extractionManifold = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
+        inductionSmelterBasic = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "basicInductionSmelter", "basicInductionSmelter", false, Tier.BASIC);
         Multiblock.multiblocks.put("dimensionalAnchor", dimAnchorMultiblock);
         Multiblock.multiblocks.put("wrathTree", wrathTree);
         Multiblock.multiblocks.put("signalumReactor", signalumReactor);

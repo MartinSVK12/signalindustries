@@ -342,6 +342,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityReinforcedWrathBeacon.class, "Reinforced Wrath Beacon", RenderReinforcedWrathBeacon::new);
         EntityHelper.createSpecialTileEntity(TileEntityInductionSmelter.class,"Induction Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
+        EntityHelper.createSpecialTileEntity(TileEntityBuilder.class,"Builder", RenderBuilderPreview::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -368,7 +369,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createTileEntity(TileEntityVoidContainer.class,"Void Container");
         EntityHelper.createTileEntity(TileEntityCollector.class,"Signalum Collector");
         EntityHelper.createTileEntity(TileEntityChunkloader.class,"Spacetime Maintainer");
-
 
         addToNameGuiMap("Energy Cell", GuiEnergyCell.class, TileEntityEnergyCell.class);
         addToNameGuiMap("SI Fluid Tank", GuiSIFluidTank.class, TileEntitySIFluidTank.class);
@@ -397,6 +397,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("EEPROM Programmer", GuiProgrammer.class,TileEntityProgrammer.class);
         addToNameGuiMap("Filter", GuiFilter.class, TileEntityFilter.class);
         addToNameGuiMap("Signalum Collector", GuiCollector.class, TileEntityCollector.class);
+        addToNameGuiMap("Builder", GuiBuilder.class, TileEntityBuilder.class);
 
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);

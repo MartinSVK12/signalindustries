@@ -26,31 +26,8 @@ public class BlockAssembler extends BlockMachineBase {
     public void onBlockRemoved(World world, int i, int j, int k, int data) {
         TileEntityAssembler tile = (TileEntityAssembler) world.getBlockTileEntity(i, j, k);
         if (tile != null) {
-
             Random random = new Random();
-            for (int l = 0; l < tile.getSizeInventory(); ++l) {
-                ItemStack itemstack = tile.getStackInSlot(l);
-                if (itemstack != null) {
-                    float f = random.nextFloat() * 0.8F + 0.1F;
-                    float f1 = random.nextFloat() * 0.8F + 0.1F;
-                    float f2 = random.nextFloat() * 0.8F + 0.1F;
-
-                    while (itemstack.stackSize > 0) {
-                        int i1 = random.nextInt(21) + 10;
-                        if (i1 > itemstack.stackSize) {
-                            i1 = itemstack.stackSize;
-                        }
-
-                        itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
-                        float f3 = 0.05F;
-                        entityitem.xd = (float) random.nextGaussian() * f3;
-                        entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
-                        entityitem.zd = (float) random.nextGaussian() * f3;
-                        world.entityJoinedWorld(entityitem);
-                    }
-                }
-            }
+            dropContents(world, i, j, k);
             for (int l = 0; l < tile.template.getSizeInventory(); ++l) {
                 ItemStack itemstack = tile.template.getStackInSlot(l);
                 if (itemstack != null) {
@@ -65,7 +42,7 @@ public class BlockAssembler extends BlockMachineBase {
                         }
 
                         itemstack.stackSize -= i1;
-                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata()));
+                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, new ItemStack(itemstack.itemID, i1, itemstack.getMetadata(), itemstack.getData()));
                         float f3 = 0.05F;
                         entityitem.xd = (float) random.nextGaussian() * f3;
                         entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;

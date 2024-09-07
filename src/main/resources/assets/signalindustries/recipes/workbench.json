@@ -2628,5 +2628,38 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/blueprint",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "LLL",
+      "LPL",
+      "LLL"
+    ],
+    "symbols": [
+      {
+        "symbol": "L",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 4
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.paper",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.blueprint",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

@@ -1154,5 +1154,54 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_builder",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " B ",
+      "LML",
+      " E "
+    ],
+    "symbols": [
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "tile.block.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "E",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "B",
+        "stack": {
+          "key": "item.signalindustries.blueprint",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key":  "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.builder",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

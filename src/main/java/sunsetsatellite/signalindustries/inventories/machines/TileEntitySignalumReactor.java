@@ -40,7 +40,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     private void verifyIntegrity() {
         BlockContainerTiered block = (BlockContainerTiered) getBlockType();
         if(block != null){
-            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)));
+            isValidMultiblock = multiblock.isValidAtSilent(worldObj,new BlockInstance(block,new Vec3i(x,y,z),this),Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite());
         } else {
             isValidMultiblock = false;
         }

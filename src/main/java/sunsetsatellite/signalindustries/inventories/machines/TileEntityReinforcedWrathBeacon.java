@@ -9,14 +9,19 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
-import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.*;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.entities.ExplosionEnergy;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
-import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
@@ -188,7 +193,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                     Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Time has ran out... Brace yourself!");
                 }
             }
-            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x, y, z)))){
+            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x, y, z)).getOpposite())){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("The wrath beacon loses all its strength suddenly..");
                 worldObj.setBlockWithNotify(x,y,z,0);
                 EntityItem entityitem2 = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
@@ -207,7 +212,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessage("Now is not the time..");
                 return;
             }
-            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)))){
+            if(!multiblock.isValidAt(worldObj, new BlockInstance(getBlockType(), new Vec3i(x, y, z), this), Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getOpposite())){
                 Minecraft.getMinecraft(Minecraft.class).ingameGUI.addChatMessageTranslate("event.signalindustries.invalidMultiblock");
                 return;
             }

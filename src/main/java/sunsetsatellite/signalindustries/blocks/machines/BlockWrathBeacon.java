@@ -55,7 +55,7 @@ public class BlockWrathBeacon extends BlockMachineBase {
                 }
             } else {
                 TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getBlockTileEntity(i, j, k);
-                if (tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)))) {
+                if (tile != null && tile.multiblock != null && tile.multiblock.isValidAt(world, new BlockInstance(this, new Vec3i(i, j, k), tile), Direction.getDirectionFromSide(world.getBlockMetadata(i, j, k)).getOpposite())) {
                     tile.activate(entityplayer);
                     entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     //Minecraft.getMinecraft(this).ingameGUI.addChatMessage("This world does not know such evil yet.");
