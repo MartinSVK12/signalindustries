@@ -35,8 +35,8 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         itemContents = new ItemStack[1];
         fluidCapacity[0] = Short.MAX_VALUE/2;
         acceptedFluids.get(0).add(SIBlocks.energyFlowing);
-        from = new Vec3i(0,4,0);
-        to = new Vec3i(-16,-y-4,16);
+        from = new Vec3i(0,0,0);
+        to = new Vec3i(16,16,16);
         workTimer.pause();
         transferSpeed = 50;
         //.copy().add(new Vec3i(1,0,1));

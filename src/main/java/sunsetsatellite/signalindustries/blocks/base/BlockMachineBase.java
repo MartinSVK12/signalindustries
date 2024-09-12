@@ -33,7 +33,7 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
 
     @Override
     public boolean onBlockRightClicked(World world, int x, int y, int z, EntityPlayer player, Side side, double xHit, double yHit) {
-        if (!isPlayerHoldingSIdeInteractableItem(player)) {
+        if (!isPlayerHoldingSideInteractableItem(player)) {
             return false;
         }
 
@@ -93,7 +93,7 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
         return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemCover;
     }
 
-    private boolean isPlayerHoldingSIdeInteractableItem(EntityPlayer player) {
+    private boolean isPlayerHoldingSideInteractableItem(EntityPlayer player) {
         return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ISideInteractable;
     }
 

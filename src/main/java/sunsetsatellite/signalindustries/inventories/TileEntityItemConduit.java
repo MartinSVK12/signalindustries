@@ -9,7 +9,10 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet140TileEntityData;
 import net.minecraft.core.player.inventory.IInventory;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.*;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.blocks.BlockItemConduit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityWithName;
@@ -24,7 +27,7 @@ import java.util.stream.Collectors;
 //TODO: double chests don't work
 //TODO: do a second try for items that failed to insert
 
-public class TileEntityItemConduit extends TileEntityWithName {
+public class TileEntityItemConduit extends TileEntityWithName implements ISupportsMultiparts {
 
     public static int TRANSFER_TICKS = 20*3;
     public static int EXTRACT_TICKS = 20*2;
@@ -43,6 +46,8 @@ public class TileEntityItemConduit extends TileEntityWithName {
     public boolean sensorUseMeta = true;
     public boolean sensorUseData = false;
     public ItemStack sensorStack = null;
+
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
 
     public TileEntityItemConduit(){
         for (Direction dir : Direction.values()) {
@@ -434,6 +439,13 @@ public class TileEntityItemConduit extends TileEntityWithName {
             }
         }
 
+        CompoundTag coversNbt = nbttagcompound.getCompound("Parts");
+
+        for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
+            Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
+            CompoundTag partTag = (CompoundTag) entry.getValue();
+            parts.put(dir,new Multipart(partTag));
+        }
 
     }
 
@@ -478,6 +490,22 @@ public class TileEntityItemConduit extends TileEntityWithName {
             sensorStack.writeToNBT(itemNbt);
             nbttagcompound.putCompound("SensorStack",itemNbt);
         }
+
+        CompoundTag coversNbt = new CompoundTag();
+
+        for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
+            if(entry.getValue() == null) continue;
+            CompoundTag partNbt = new CompoundTag();
+            entry.getValue().writeToNbt(partNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),partNbt);
+        }
+
+        nbttagcompound.putCompound("Parts",coversNbt);
+    }
+
+    @Override
+    public HashMap<Direction, Multipart> getParts() {
+        return parts;
     }
 
 

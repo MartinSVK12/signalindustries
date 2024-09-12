@@ -9,7 +9,7 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.api.impl.catalyst.SignalIndustriesFluidPlugin;
+import sunsetsatellite.signalindustries.api.impl.catalyst.fluid.SignalIndustriesFluidPlugin;
 import sunsetsatellite.signalindustries.entities.mob.EntityInfernal;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;

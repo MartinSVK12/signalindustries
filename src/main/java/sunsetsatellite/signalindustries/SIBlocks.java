@@ -8,7 +8,10 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
 import org.useless.dragonfly.model.block.DFBlockModelBuilder;
+import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.catalyst.multipart.block.model.BlockModelMultipart;
+import sunsetsatellite.catalyst.multipart.block.model.MultipartBlockModelBuilder;
 import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
 import sunsetsatellite.signalindustries.blocks.base.BlockTransparent;
@@ -257,12 +260,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/energy/prototype/conduit_all.json")
-                                        .setBlockState("prototype_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/energy/prototype/conduit_all.json")
+                                    .setBlockState("prototype_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockConduit("prototype.conduit", config.getInt("BlockIDs.prototypeConduit"), Tier.PROTOTYPE, Material.glass));
         basicConduit = new BlockBuilder(MOD_ID)
@@ -272,12 +280,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/energy/basic/conduit_all.json")
-                                        .setBlockState("basic_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/energy/basic/conduit_all.json")
+                                    .setBlockState("basic_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockConduit("basic.conduit", config.getInt("BlockIDs.basicConduit"), Tier.BASIC, Material.glass));
         reinforcedConduit = new BlockBuilder(MOD_ID)
@@ -287,12 +300,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/energy/reinforced/conduit_all.json")
-                                        .setBlockState("reinforced_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/energy/reinforced/conduit_all.json")
+                                    .setBlockState("reinforced_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockConduit("reinforced.conduit", config.getInt("BlockIDs.reinforcedConduit"), Tier.REINFORCED, Material.glass));
         awakenedConduit = new BlockBuilder(MOD_ID)
@@ -302,12 +320,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/energy/awakened/conduit_all.json")
-                                        .setBlockState("awakened_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/energy/awakened/conduit_all.json")
+                                    .setBlockState("awakened_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockConduit("awakened.conduit", config.getInt("BlockIDs.awakenedConduit"), Tier.AWAKENED, Material.glass));
         basicCatalystConduit = new BlockBuilder(MOD_ID)
@@ -317,12 +340,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/catalyst/basic/conduit_all.json")
-                                        .setBlockState("basic_catalyst_conduit.json")
-                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                .setBlockModel("cover.json")
+                                .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/catalyst/basic/conduit_all.json")
+                                    .setBlockState("basic_catalyst_conduit.json")
+                                    .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockCatalystConduit("basic.conduit.catalyst", config.getInt("BlockIDs.basicCatalystConduit"), Tier.BASIC, Material.glass));
         reinforcedCatalystConduit = new BlockBuilder(MOD_ID)
@@ -332,12 +360,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/catalyst/reinforced/conduit_all.json")
-                                        .setBlockState("reinforced_catalyst_conduit.json")
-                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/catalyst/reinforced/conduit_all.json")
+                                    .setBlockState("reinforced_catalyst_conduit.json")
+                                    .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockCatalystConduit("reinforced.conduit.catalyst", config.getInt("BlockIDs.reinforcedCatalystConduit"), Tier.REINFORCED, Material.glass));
         awakenedCatalystConduit = new BlockBuilder(MOD_ID)
@@ -347,12 +380,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/catalyst/awakened/conduit_all.json")
-                                        .setBlockState("awakened_catalyst_conduit.json")
-                                        .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/catalyst/awakened/conduit_all.json")
+                                    .setBlockState("awakened_catalyst_conduit.json")
+                                    .setMetaStateInterpreter(new CatalystConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockCatalystConduit("awakened.conduit.catalyst", config.getInt("BlockIDs.awakenedCatalystConduit"), Tier.AWAKENED, Material.glass));
         prototypeFluidConduit = new BlockBuilder(MOD_ID)
@@ -362,12 +400,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/fluid/prototype/conduit_all.json")
                                         .setBlockState("prototype_fluid_conduit.json")
                                         .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                                        .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockFluidConduit("prototype.conduit.fluid", config.getInt("BlockIDs.prototypeFluidConduit"), Tier.PROTOTYPE, Material.glass));
         basicFluidConduit = new BlockBuilder(MOD_ID)
@@ -377,12 +420,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/fluid/basic/conduit_all.json")
-                                        .setBlockState("basic_fluid_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/fluid/basic/conduit_all.json")
+                                    .setBlockState("basic_fluid_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockFluidConduit("basic.conduit.fluid", config.getInt("BlockIDs.basicFluidConduit"), Tier.BASIC, Material.glass));
         reinforcedFluidConduit = new BlockBuilder(MOD_ID)
@@ -392,12 +440,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/fluid/reinforced/conduit_all.json")
-                                        .setBlockState("reinforced_fluid_conduit.json")
-                                        .setMetaStateInterpreter(new ConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/fluid/reinforced/conduit_all.json")
+                                    .setBlockState("reinforced_fluid_conduit.json")
+                                    .setMetaStateInterpreter(new ConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockFluidConduit("reinforced.conduit.fluid", config.getInt("BlockIDs.reinforcedFluidConduit"), Tier.REINFORCED, Material.glass));
         prototypeItemConduit = new BlockBuilder(MOD_ID)
@@ -407,12 +460,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/item/prototype/conduit_all.json")
-                                        .setBlockState("prototype_item_conduit.json")
-                                        .setMetaStateInterpreter(new ItemConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/item/prototype/conduit_all.json")
+                                    .setBlockState("prototype_item_conduit.json")
+                                    .setMetaStateInterpreter(new ItemConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockItemConduit("prototype.conduit.item", config.getInt("BlockIDs.prototypeItemConduit"), Tier.PROTOTYPE, Material.glass, PipeType.NORMAL));
         basicItemConduit = new BlockBuilder(MOD_ID)
@@ -422,12 +480,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/item/basic/conduit_all.json")
-                                        .setBlockState("basic_item_conduit.json")
-                                        .setMetaStateInterpreter(new ItemConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                            .setBlockModel("conduit/item/basic/conduit_all.json")
+                                            .setBlockState("basic_item_conduit.json")
+                                            .setMetaStateInterpreter(new ItemConduitStateInterpreter())
+                                            .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockItemConduit("basic.conduit.item", config.getInt("BlockIDs.basicItemConduit"), Tier.BASIC, Material.glass, PipeType.NORMAL));
         basicRestrictItemConduit = new BlockBuilder(MOD_ID)
@@ -437,12 +500,17 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
-                                        .setBlockModel("conduit/item/basic/restrict/conduit_all.json")
-                                        .setBlockState("basic_item_conduit_restrict.json")
-                                        .setMetaStateInterpreter(new ItemConduitStateInterpreter())
-                                        .build(block)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("conduit/item/basic/restrict/conduit_all.json")
+                                    .setBlockState("basic_item_conduit_restrict.json")
+                                    .setMetaStateInterpreter(new ItemConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockItemConduit("basic.conduit.item.restrict", config.getInt("BlockIDs.basicRestrictItemConduit"), Tier.BASIC, Material.glass, PipeType.RESTRICT));
         basicSensorItemConduit = new BlockBuilder(MOD_ID)
@@ -452,23 +520,35 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(1)
                 .setBlockSound(BlockSounds.GLASS)
                 .setBlockModel(
-                        block ->
-                                new DFBlockModelBuilder(MOD_ID)
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/item/basic/sensor/off/conduit_all.json")
                                         .setBlockState("basic_item_conduit_sensor.json")
                                         .setMetaStateInterpreter(new ItemConduitStateInterpreter())
-                                        .build(block)
+                                        .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockItemConduit("basic.conduit.item.sensor", config.getInt("BlockIDs.basicSensorItemConduit"), Tier.BASIC, Material.glass, PipeType.SENSOR));
         multiConduit = new BlockBuilder(MOD_ID)
                 .setHardness(1)
                 .setResistance(3)
                 .setBlockSound(BlockSounds.METAL)
-                .setBlockModel((block)->new DFBlockModelBuilder(MOD_ID)
-                        .setBlockModel("multi_conduit/frame.json")
-                        .setBlockState("multi_conduit.json")
-                        .setMetaStateInterpreter(new MultiConduitStateInterpreter())
-                        .build(block)
+                .setBlockModel(
+                        block -> {
+                            BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
+                                    .setBlockModel("cover.json")
+                                    .build(block);
+                            modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
+                                    .setBlockModel("multi_conduit/frame.json")
+                                    .setBlockState("multi_conduit.json")
+                                    .setMetaStateInterpreter(new MultiConduitStateInterpreter())
+                                    .build(block);
+                            return modelMultipart;
+                        }
                 )
                 .build(new BlockMultiConduit("reinforced.conduit.multi", config.getInt("BlockIDs.multiConduit"), Tier.REINFORCED, Material.metal ).withTags(SIGNALUM_CONDUITS_CONNECT,ITEM_CONDUITS_CONNECT,FLUID_CONDUITS_CONNECT));
         infiniteEnergyCell = new BlockBuilder(MOD_ID)
@@ -1353,6 +1433,35 @@ public class SIBlocks extends DataInitializer {
                 .setTextures("signalindustries:block/burnt_signalum")
                 .setBlockModel(BlockModelFluid::new)
                 .build(new BlockFluidStill("burntSignalum", config.getInt("BlockIDs.burntSignalumStill"), Material.water).withTags(BlockTags.NOT_IN_CREATIVE_MENU, BlockTags.PLACE_OVERWRITES));
+
+        cobblestoneBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        crystalAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedCrystalAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        glowingObsidian.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        voidContainer.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        uvLamp.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        eternalTreeLog.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        fueledEternalTreeLog.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        realityFabric.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        rootedFabric.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        signalumOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        dilithiumOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        dimensionalShardOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        basicCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedGlass.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedSignalumCrystalBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        dilithiumBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        dilithiumCrystalBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        emptyCrystalBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        rawCrystalBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedMachineCore.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        basicMachineCore.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedMachineCore.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        prototypeMachineCore.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedAlloyCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        dilithiumCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        signalumAlloyCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
 
         setInitialized(true);
     }

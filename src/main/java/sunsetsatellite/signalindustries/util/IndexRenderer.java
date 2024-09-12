@@ -21,6 +21,7 @@ import net.minecraft.core.util.collection.Pair;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import sunsetsatellite.catalyst.core.util.Vec2i;
+import sunsetsatellite.signalindustries.api.impl.catalyst.multipart.SIMultipartIndexPlugin;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class IndexRenderer {
             final int finalId = id;
             items.computeIfAbsent(new IdMetaPair(id,0),(P)-> Item.itemsList[finalId] == null ? null : Item.itemsList[finalId].getDefaultStack());
         }
+        new SIMultipartIndexPlugin().add(items);
         sortedEntries = items.entrySet().stream().sorted((E1,E2)->{
             if(E1.getKey().id == E2.getKey().id){
                 return Integer.compare(E1.getKey().meta,E2.getKey().meta);
@@ -85,7 +87,7 @@ public class IndexRenderer {
 
         Set<Map.Entry<IdMetaPair, ItemStack>> itemEntries = sortedEntries.stream().skip(beginIndex).limit(maxItemsPerPage).collect(Collectors.toCollection(LinkedHashSet::new));
         //int[] i = items.entrySet().subSet(beginIndex,endIndex).stream().mapToInt((n)->n).toArray();
-        List<Pair<Vec2i,IdMetaPair>> itemPositions = new ArrayList<>();
+        List<Pair<Vec2i,ItemStack>> itemPositions = new ArrayList<>();
 
         int n = 0;
         for (Map.Entry<IdMetaPair, ItemStack> entry : itemEntries) {
@@ -103,7 +105,7 @@ public class IndexRenderer {
                 }
                 int y = 8 + (yOffset * 16) + (2 * yOffset);;
                 ItemRenderHelper.renderItemStack(conv, x, y, 1, 1, 1, 1);
-                itemPositions.add(Pair.of(new Vec2i(x, y), entry.getKey()));
+                itemPositions.add(Pair.of(new Vec2i(x, y), entry.getValue()));
                 xOffset++;
             } else {
                 int x;
@@ -114,14 +116,14 @@ public class IndexRenderer {
                 }
                 int y = 8 + (yOffset * 16) + (2 * yOffset);;
                 ItemRenderHelper.renderItemStack(Block.pistonMoving.getDefaultStack(), x, y, 1, 1, 1, 1);
-                itemPositions.add(Pair.of(new Vec2i(x, y), entry.getKey()));
+                itemPositions.add(Pair.of(new Vec2i(x, y), entry.getValue()));
                 xOffset++;
             }
             n++;
         }
 
-        for (Pair<Vec2i, IdMetaPair> pair : itemPositions) {
-            ItemStack stack = new ItemStack(pair.getRight().id,1,pair.getRight().meta);
+        for (Pair<Vec2i, ItemStack> pair : itemPositions) {
+            ItemStack stack = pair.getRight();
             int x = pair.getLeft().x;
             int y = pair.getLeft().y;
             if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16) {
@@ -135,16 +137,16 @@ public class IndexRenderer {
                             tooltipText = tooltip.getTooltipText(stack, control);
                         }
                     } catch (NullPointerException npe){
-                        tooltipText = "<tooltip error> #"+pair.getRight().id+":"+pair.getRight().meta+"\n"+TextFormatting.LIGHT_GRAY+stack.getItemKey();
+                        tooltipText = "<tooltip error> #"+pair.getRight().itemID+":"+pair.getRight().getMetadata()+"\n"+TextFormatting.LIGHT_GRAY+stack.getItemKey();
                     }
 
                     if(mc.thePlayer.gamemode == Gamemode.creative && debounce <= 0){
                         if(Mouse.isButtonDown(0)){
                             debounce = 20;
-                            mc.thePlayer.inventory.insertItem(stack,false);
+                            mc.thePlayer.inventory.insertItem(stack.copy(),false);
                         } else if (Mouse.isButtonDown(1)) {
                             debounce = 20;
-                            mc.thePlayer.inventory.insertItem(new ItemStack(stack.itemID,64,stack.getMetadata()),false);
+                            mc.thePlayer.inventory.insertItem(new ItemStack(stack.itemID,64,stack.getMetadata(),stack.getData()),false);
                         }
                     }
                     if(mc.gameSettings.keyShowRecipe.isPressed()){
@@ -209,9 +211,9 @@ public class IndexRenderer {
                         }
                     }
                 } else {
-                    tooltipText = "<null "+(pair.getRight().id < 16384 ? "block>": "item>")+" #"+pair.getRight()+":0";
+                    tooltipText = "<null "+(pair.getRight().itemID < 16384 ? "block>": "item>")+" #"+pair.getRight().itemID+":0";
                 }
-                if(pair.getRight().id == 0){
+                if(pair.getRight().itemID == 0){
                     tooltipText = "Air";
                 }
 

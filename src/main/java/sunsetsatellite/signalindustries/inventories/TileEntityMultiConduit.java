@@ -4,6 +4,7 @@ import com.b100.utils.ReflectUtils;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
+import com.mojang.nbt.Tag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
@@ -17,6 +18,8 @@ import sunsetsatellite.catalyst.energy.api.IEnergySource;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.impl.tiles.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -25,7 +28,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IEnergy, IEnergySource, IEnergySink {
+public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IEnergy, IEnergySource, IEnergySink, ISupportsMultiparts {
     public IConduitBlock[] conduits = new IConduitBlock[4];
     public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(),Catalyst.arrayFill(new Integer[Direction.values().length],-1));
 
@@ -42,6 +45,9 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public TickTimer lastTransferMemory;
     public int maxReceive = 0;
     public int maxProvide = 0;
+
+    //multipart
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
 
     public TileEntityMultiConduit(){
         fluidContents = new FluidStack[0];
@@ -235,6 +241,17 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         tag.putInt("maxReceive",maxReceive);
         tag.putInt("maxProvide",maxProvide);
 
+        CompoundTag coversNbt = new CompoundTag();
+
+        for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
+            if(entry.getValue() == null) continue;
+            CompoundTag partNbt = new CompoundTag();
+            entry.getValue().writeToNbt(partNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),partNbt);
+        }
+
+        tag.putCompound("Parts",coversNbt);
+
         super.writeToNBT(tag);
     }
 
@@ -253,6 +270,15 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         for (Object con : connectionsTag.getValues()) {
             conduitConnections.replace(Direction.values()[Integer.parseInt(((IntTag)con).getTagName())],((IntTag) con).getValue());
         }
+
+        CompoundTag coversNbt = tag.getCompound("Parts");
+
+        for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
+            Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
+            CompoundTag partTag = (CompoundTag) entry.getValue();
+            parts.put(dir,new Multipart(partTag));
+        }
+
         super.readFromNBT(tag);
     }
 
@@ -446,5 +472,10 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public void setTransfer(int amount){
         maxProvide = amount;
         maxReceive = amount;
+    }
+
+    @Override
+    public HashMap<Direction, Multipart> getParts() {
+        return parts;
     }
 }

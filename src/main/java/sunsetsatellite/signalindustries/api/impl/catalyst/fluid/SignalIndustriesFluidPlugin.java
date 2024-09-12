@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.catalyst;
+package sunsetsatellite.signalindustries.api.impl.catalyst.fluid;
 
 
 import org.slf4j.Logger;

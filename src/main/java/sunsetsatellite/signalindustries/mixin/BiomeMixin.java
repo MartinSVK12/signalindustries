@@ -24,6 +24,9 @@ public class BiomeMixin {
 
     @Inject(method = "getSpawnableList", at = @At("HEAD"), cancellable = true)
     public void getSpawnableList(EnumCreatureType creatureType, CallbackInfoReturnable<List<SpawnListEntry>> cir) {
+        if(Minecraft.getMinecraft(Minecraft.class).theWorld == null) {
+            return;
+        }
         if(!Global.isServer && creatureType == EnumCreatureType.monster){
             if(Minecraft.getMinecraft(Minecraft.class).theWorld.getCurrentWeather() == SIWeather.weatherEclipse){
                 cir.setReturnValue(infernals);

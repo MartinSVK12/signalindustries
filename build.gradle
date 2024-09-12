@@ -129,6 +129,7 @@ dependencies {
 
 	modRuntimeOnly "objects:client:43db9b498cb67058d2e12d394e6507722e71bb45" // https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
 	modImplementation "fabric-loader:fabric-loader:${project.loader_version}"
+	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.4.1")))
 
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
@@ -142,16 +143,18 @@ dependencies {
 	implementation project(path: ":catalyst:fluids",configuration: "namedElements")
 	implementation project(path: ":catalyst:multiblocks",configuration: "namedElements")
 	implementation project(path: ":catalyst:effects",configuration: "namedElements")
+	implementation project(path: ":catalyst:multipart",configuration: "namedElements")
 
 	implementation project(path: ":retrostorage",configuration: "namedElements")
 
 	implementation project(path: ":btwaila",configuration: "namedElements")
 	implementation project(path: ":vintage-questing",configuration: "namedElements")
-	//implementation project(path: ":dragonfly",configuration: "namedElements")
+
+	implementation project(path: ":dragonfly",configuration: "namedElements")
 	//implementation project(path: ":btg",configuration: "namedElements")
 
 
-	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
+	//modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
