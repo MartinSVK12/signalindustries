@@ -1,11 +1,11 @@
 package sunsetsatellite.signalindustries.api.impl.retrostorage;
 
-import net.minecraft.core.block.BlockFluid;
 import org.slf4j.Logger;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.retrostorage.RetroStorage;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 public class ReSPlugin {
     public void initializePlugin(Logger logger) {
-        //RetroStorage.DISALLOWED_FLUIDS.add((BlockFluid) SignalIndustries.energyFlowing);
+        RetroStorage.DISALLOWED_FLUIDS.add((SIBlocks.energyFlowing));
     }
 }
