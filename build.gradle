@@ -1,6 +1,16 @@
+import java.nio.file.Files
+
+buildscript {
+	dependencies {
+		classpath 'org.kohsuke:github-api:1.135'
+	}
+}
+
 plugins {
 	id 'babric-loom' version '1.4.+'
 	id 'java'
+	id 'maven-publish'
+	id "com.modrinth.minotaur" version "2.+"
 }
 
 group = project.mod_group
@@ -24,6 +34,10 @@ repositories {
 	maven {
 		name = 'Fabric'
 		url = 'https://maven.fabricmc.net/'
+	}
+	maven {
+		name = 'Signalum Maven'
+		url = 'https://maven.thesignalumproject.net/'
 	}
 	ivy {
 		url = "https://github.com/Better-than-Adventure"
@@ -150,11 +164,11 @@ dependencies {
 	implementation project(path: ":btwaila",configuration: "namedElements")
 	implementation project(path: ":vintage-questing",configuration: "namedElements")
 
-	implementation project(path: ":dragonfly",configuration: "namedElements")
+	//implementation project(path: ":dragonfly",configuration: "namedElements")
 	//implementation project(path: ":btg",configuration: "namedElements")
 
 
-	//modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
+	modImplementation "DragonFly:dragonfly:${project.dragonfly_version}"
 	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
@@ -176,7 +190,7 @@ java {
 	withSourcesJar()
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
 	options.release.set 8
 }
 
@@ -196,4 +210,102 @@ processResources {
 
 remapJar {
 	archiveVersion.set(archiveVersion.get()+"-${bta_version}")
+}
+
+static boolean checkVersion(String group, String name, String version) {
+	try {
+		def xml = new URL("https://maven.thesignalumproject.net/releases/${group}/${name}/maven-metadata.xml").text
+		def metadata = new XmlSlurper().parseText(xml)
+		def versions = metadata.versioning.versions.version*.text();
+		if (versions.contains(version)) {
+			System.err.println("Version ${version} of ${group}.${name} already exists!")
+			return false
+		}
+		return true
+	} catch (FileNotFoundException ignored){
+		return true
+	}
+}
+
+allprojects {
+	apply plugin:'maven-publish'
+	apply plugin:'java'
+
+	def publishedProjectsList = ["signalindustries","catalyst","retrostorage","vintage-questing"]
+	def modrinthPublishedProjectsList = ["signalindustries","catalyst","retrostorage"]
+
+	for (final def p in publishedProjectsList) {
+		if(project.name != "catalyst" && project.mod_name.contains(p)) {
+			if(checkVersion(project.mod_group,project.mod_name,project.mod_version)){
+				publishing {
+					repositories {
+						maven {
+							name = "signalumMaven"
+							url = "https://maven.thesignalumproject.net/releases"
+							credentials(PasswordCredentials)
+							authentication {
+								basic(BasicAuthentication)
+							}
+						}
+					}
+
+					publications {
+						maven(MavenPublication) {
+							groupId = project.mod_group
+							artifactId = project.mod_name
+							version = project.mod_version
+							from components.java
+						}
+					}
+				}
+			}
+		} else if(project.name == "catalyst" && project.core_mod_name.contains(p)){
+			if(checkVersion(project.core_mod_group,project.core_mod_name,project.core_mod_version)) {
+				publishing {
+					repositories {
+						maven {
+							name = "signalumMaven"
+							url = "https://maven.thesignalumproject.net/releases"
+							credentials(PasswordCredentials)
+							authentication {
+								basic(BasicAuthentication)
+							}
+						}
+					}
+
+					publications {
+						maven(MavenPublication) {
+							groupId = project.core_mod_group
+							artifactId = project.core_mod_name
+							version = project.core_mod_version
+							from components.java
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+modrinth {
+	token = modrinthToken
+	projectId = "signal-industries" // This can be the project ID or the slug. Either will work!
+	versionNumber = project.mod_version // You don't need to set this manually. Will fail if Modrinth has this version already
+	versionType = "alpha" // This is the default -- can also be `beta` or `alpha`
+	uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+	gameVersions = ["b1.7.3"] // Must be an array, even with only one version
+	loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
+	changelog = Files.readString(java.nio.file.Path.of("${rootProject.projectDir}/CHANGELOG.md"))
+	debugMode = true
+	dependencies { // A special DSL for creating dependencies
+		// scope.type
+		// The scope can be `required`, `optional`, `incompatible`, or `embedded`
+		// The type can either be `project` or `version`
+		//required.project "fabric-api" // Creates a new required dependency on Fabric API
+		//optional.version "sodium", "mc1.19.3-0.4.8" // Creates a new optional dependency on this specific version of Sodium
+		required.project "halplibe"
+		required.project "catalyst"
+		required.project "dragonfly-model-library"
+		required.project "terrainapi"
+	}
 }

@@ -144,6 +144,7 @@ public abstract class BlockMachineBase extends BlockContainerTiered implements I
         if (tile instanceof IFluidIO) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
             if (dir == null) return;
+            //TODO: some blocks have some io blocked and this ignores it
             ((IFluidIO) tile).setFluidIOForSide(dir, Connection.values()[(((IFluidIO) tile).getFluidIOForSide(dir).ordinal() + 1) % Connection.values().length]);
             if (tile instanceof IHasIOPreview) {
                 ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.FLUID, 100);
