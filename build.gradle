@@ -296,7 +296,6 @@ modrinth {
 	gameVersions = ["b1.7.3"] // Must be an array, even with only one version
 	loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Loom or ForgeGradle
 	changelog = Files.readString(java.nio.file.Path.of("${rootProject.projectDir}/CHANGELOG.md"))
-	debugMode = true
 	dependencies { // A special DSL for creating dependencies
 		// scope.type
 		// The scope can be `required`, `optional`, `incompatible`, or `embedded`
