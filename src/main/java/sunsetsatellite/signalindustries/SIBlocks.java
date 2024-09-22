@@ -262,7 +262,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/energy/prototype/conduit_all.json")
@@ -282,7 +281,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/energy/basic/conduit_all.json")
@@ -302,7 +300,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/energy/reinforced/conduit_all.json")
@@ -322,7 +319,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/energy/awakened/conduit_all.json")
@@ -342,7 +338,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                .setBlockModel("cover.json")
                                 .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/catalyst/basic/conduit_all.json")
@@ -362,7 +357,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/catalyst/reinforced/conduit_all.json")
@@ -382,7 +376,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/catalyst/awakened/conduit_all.json")
@@ -402,7 +395,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/fluid/prototype/conduit_all.json")
@@ -422,7 +414,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/fluid/basic/conduit_all.json")
@@ -442,7 +433,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel =  new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/fluid/reinforced/conduit_all.json")
@@ -462,7 +452,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/item/prototype/conduit_all.json")
@@ -482,7 +471,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                             .setBlockModel("conduit/item/basic/conduit_all.json")
@@ -502,7 +490,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("conduit/item/basic/restrict/conduit_all.json")
@@ -522,7 +509,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                         .setBlockModel("conduit/item/basic/sensor/off/conduit_all.json")
@@ -540,7 +526,6 @@ public class SIBlocks extends DataInitializer {
                 .setBlockModel(
                         block -> {
                             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
-                                    .setBlockModel("cover.json")
                                     .build(block);
                             modelMultipart.parentModel = new DFBlockModelBuilder(MOD_ID)
                                     .setBlockModel("multi_conduit/frame.json")

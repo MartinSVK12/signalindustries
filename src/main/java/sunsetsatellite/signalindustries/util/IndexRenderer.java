@@ -228,9 +228,9 @@ public class IndexRenderer {
     }
 
     public static void keyTyped(char c, int i, int mouseX, int mouseY) {
-        if(c == Keyboard.KEY_ADD || c == Keyboard.KEY_RIGHT){
+        if(i == Keyboard.KEY_ADD || i == Keyboard.KEY_RIGHT){
             if(page < pageMax) page++;
-        } else if (c == Keyboard.KEY_SUBTRACT || c == Keyboard.KEY_LEFT) {
+        } else if (i == Keyboard.KEY_SUBTRACT || i == Keyboard.KEY_LEFT) {
             if(page > 0) page--;
         }
     }
