@@ -105,7 +105,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         defaultConfig.addCategory("Other");
         defaultConfig.addCategory("Experimental");
         defaultConfig.addEntry("Experimental.enableDynamicChunkProvider","Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.",false);
-        defaultConfig.addEntry("Other.enableQuests",false);
+        defaultConfig.addEntry("Other.enableQuests",true);
         defaultConfig.addEntry("Other.eternityDimId", 3);
         defaultConfig.addEntry("Other.GuiId", 10);
         defaultConfig.addEntry("Other.machinePacketId", 113);
@@ -164,11 +164,11 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
 
             try {
                 if(!rawConfig.contains("Other.enableQuests")){
-                    rawConfig.addEntry("Other.enableQuests", false);
+                    rawConfig.addEntry("Other.enableQuests", true);
                     changed = true;
                 }
             } catch (NullPointerException e){
-                rawConfig.addEntry("Other.enableQuests", false);
+                rawConfig.addEntry("Other.enableQuests", true);
                 changed = true;
             }
 
@@ -270,6 +270,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         new SIWorldTypes().init();
         new SIDimensions().init();
         new SIMultiblocks().init();
+        new SIArt().init();
 
         List<Field> fields = new ArrayList<>(Arrays.asList(SIBlocks.class.getDeclaredFields()));
         fields.removeIf((F)->F.getType() != Block.class);
@@ -700,6 +701,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         loadTextures(TextureRegistry.blockAtlas);
         loadTextures(TextureRegistry.itemAtlas);
         loadTextures(TextureRegistry.particleAtlas);
+        loadTextures(TextureRegistry.artAtlas);
         Minecraft.getMinecraft(Minecraft.class).renderEngine.refreshTextures(new ArrayList<>());
 
         AchievementHelper.addPage(ACHIEVEMENTS);
