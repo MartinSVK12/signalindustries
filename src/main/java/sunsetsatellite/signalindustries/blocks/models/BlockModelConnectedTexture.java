@@ -7,12 +7,21 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.WorldSource;
 
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.List;
 
 //thanks Felix170905 & Useless
 public class BlockModelConnectedTexture extends BlockModelTransparent<Block> {
-    public BlockModelConnectedTexture(Block block, String key) {
+    public List<Block> connectsTo;
+
+    public BlockModelConnectedTexture(Block block, String key){
+        this(block, key, new ArrayList<>());
+    }
+
+    public BlockModelConnectedTexture(Block block, String key, List<Block> connectsTo) {
         super(block, false);
+        this.connectsTo = connectsTo;
         texCoord = new IconCoordinate[]{
                 TextureRegistry.getTexture(key + "_0"),
                 TextureRegistry.getTexture(key + "_14"),
@@ -33,7 +42,7 @@ public class BlockModelConnectedTexture extends BlockModelTransparent<Block> {
         };
     }
 
-    private static final int[][] relCoords = {
+    protected static final int[][] relCoords = {
             {2, 5, 3, 4}, //up 0
             {2, 5, 3, 4}, //down 1
             {1, 4, 0, 5}, //north 2
@@ -44,8 +53,8 @@ public class BlockModelConnectedTexture extends BlockModelTransparent<Block> {
 
     @Override
     public IconCoordinate getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        int meta = checkNeighbors(blockAccess, x, y, z);
-        BitSet bits = intToBitSet(meta, 6), subbits = new BitSet(4);
+        int state = checkNeighbors(blockAccess, x, y, z);
+        BitSet bits = intToBitSet(state, 6), subbits = new BitSet(4);
         for (int i = 0; i < 4; i++) {
             subbits.set(i, bits.get(relCoords[side.getId()][i]));
         }
@@ -53,18 +62,18 @@ public class BlockModelConnectedTexture extends BlockModelTransparent<Block> {
         return texCoord[toInt(subbits)];
     }
 
-    private int checkNeighbors(WorldSource world, int x, int y, int z) {
+    protected int checkNeighbors(WorldSource world, int x, int y, int z) {
         int state = 0;
         for (Side s : Side.values()) {
             if (s != Side.NONE) {
                 int j = x + s.getOffsetX(), k = y + s.getOffsetY(), l = z + s.getOffsetZ(); //offset coords
-                if (world.getBlockId(j, k, l) == block.id) state += (int) Math.pow(2, s.getId());
+                if (world.getBlockId(j, k, l) == block.id || connectsTo.contains(world.getBlock(j,k,l))) state += (int) Math.pow(2, s.getId());
             }
         }
         return state & 0x3F;
     }
 
-    private final IconCoordinate[] texCoord;
+    protected final IconCoordinate[] texCoord;
 
     public static int toInt(BitSet s) {
         int v = 0;

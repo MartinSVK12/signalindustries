@@ -2,15 +2,11 @@ package sunsetsatellite.signalindustries.entities.fx;
 
 
 import net.minecraft.client.entity.fx.EntityFX;
-
 import net.minecraft.client.render.stitcher.IconCoordinate;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SIBlocks;
-
-
-import java.awt.*;
 
 public class EntityMeteorTailFX extends EntityFX {
     public float red;
@@ -117,11 +113,5 @@ public class EntityMeteorTailFX extends EntityFX {
         }
     }
 
-    public Color mixColors(Color color1, Color color2, double percent){
-        double inverse_percent = 1.0 - percent;
-        int redPart = (int) (color1.getRed()*percent + color2.getRed()*inverse_percent);
-        int greenPart = (int) (color1.getGreen()*percent + color2.getGreen()*inverse_percent);
-        int bluePart = (int) (color1.getBlue()*percent + color2.getBlue()*inverse_percent);
-        return new Color(redPart, greenPart, bluePart);
-    }
+
 }

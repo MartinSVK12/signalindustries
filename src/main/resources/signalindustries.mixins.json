@@ -25,6 +25,7 @@
     "ItemStackMixin",
     "LivingRendererMixin",
     "NBTTagCompoundMixin",
+    "PlayerControllerMixin",
     "SaveHandlerBaseMixin",
     "SlotCraftingMixin",
     "SlotMixin",

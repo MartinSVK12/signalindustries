@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.blocks.base;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -26,7 +27,7 @@ public abstract class BlockConduitBase extends BlockContainerTiered implements I
             return false;
         }
 
-        Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player);
+        Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player, Minecraft.getMinecraft(this).objectMouseOver);
         Side playerFacing = Catalyst.calculatePlayerFacing(player.yRot);
         if (pairIsInvalid(pair)) {
             return false;

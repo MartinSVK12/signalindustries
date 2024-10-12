@@ -24,7 +24,7 @@ public class RenderMultiblockInGuidebook {
         int k = 0;
         Direction dir = Direction.X_NEG;
         ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(),dir);
-        blocks.add(multiblock.getOrigin());
+        blocks.add(multiblock.getOrigin(new Vec3i(),dir));
         blockRenderer = new RenderBlocks(new HologramWorld(blocks));
         for (BlockInstance block : blocks) {
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block.block);

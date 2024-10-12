@@ -236,8 +236,8 @@ allprojects {
 
 	for (final def p in publishedProjectsList) {
 		if(project.name != "catalyst" && project.mod_name.contains(p)) {
-			if(checkVersion(project.mod_group,project.mod_name,project.mod_version)){
-				publishing {
+			publishing {
+				if(checkVersion(project.mod_group,project.mod_name,project.mod_version)) {
 					repositories {
 						maven {
 							name = "signalumMaven"
@@ -260,8 +260,8 @@ allprojects {
 				}
 			}
 		} else if(project.name == "catalyst" && project.core_mod_name.contains(p)){
-			if(checkVersion(project.core_mod_group,project.core_mod_name,project.core_mod_version)) {
-				publishing {
+			publishing {
+				if(checkVersion(project.core_mod_group,project.core_mod_name,project.core_mod_version)) {
 					repositories {
 						maven {
 							name = "signalumMaven"

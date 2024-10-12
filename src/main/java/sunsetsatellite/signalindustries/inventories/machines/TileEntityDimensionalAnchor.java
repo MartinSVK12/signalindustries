@@ -63,7 +63,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
         if(!isValidMultiblock){
             return;
         }
-        Direction dir = Direction.getDirectionFromSide(getMovedData());
+        Direction dir = Direction.getDirectionFromSide(getMovedData()).getOpposite();
         ArrayList<BlockInstance> tileEntities = multiblock.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
         for (BlockInstance tileEntity : tileEntities) {
             if(tileEntity.tile instanceof TileEntityStabilizer){

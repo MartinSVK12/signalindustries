@@ -36,6 +36,8 @@ public class MultiblockSection extends SearchableGuidebookSubsection {
         pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.extractionManifold));
         pages.add(new MultiblockPage(parent, SIMultiblocks.inductionSmelterBasic));
         pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.inductionSmelterBasic));
+        pages.add(new MultiblockPage(parent, SIMultiblocks.warpGate));
+        pages.add(new MultiblockMaterialsPage(parent, SIMultiblocks.warpGate));
     }
 
     @Override

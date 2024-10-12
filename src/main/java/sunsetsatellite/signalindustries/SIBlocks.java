@@ -8,13 +8,14 @@ import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
 import org.useless.dragonfly.model.block.DFBlockModelBuilder;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.catalyst.multipart.block.model.BlockModelMultipart;
 import sunsetsatellite.catalyst.multipart.block.model.MultipartBlockModelBuilder;
 import sunsetsatellite.signalindustries.blocks.*;
+import sunsetsatellite.signalindustries.blocks.base.BlockNonSolid;
 import sunsetsatellite.signalindustries.blocks.base.BlockTiered;
-import sunsetsatellite.signalindustries.blocks.base.BlockTransparent;
 import sunsetsatellite.signalindustries.blocks.base.BlockUndroppable;
 import sunsetsatellite.signalindustries.blocks.machines.*;
 import sunsetsatellite.signalindustries.blocks.models.*;
@@ -42,6 +43,12 @@ public class SIBlocks extends DataInitializer {
     public static Block awakenedMachineCore;
     public static Block basicCasing;
     public static Block reinforcedCasing;
+    public static Block reinforcedCasing2;
+    public static Block awakenedCasing;
+    public static Block awakenedSocketCasing;
+    public static Block awakenedCasing2;
+    public static Block basicCasing2;
+    //public static Block connectedTexture;
     public static Block reinforcedGlass;
     public static Block prototypeConduit;
     public static Block basicConduit;
@@ -108,6 +115,7 @@ public class SIBlocks extends DataInitializer {
     public static Block reinforcedCentrifuge;
     public static Block reinforcedIgnitor;
     public static Block signalumReactorCore;
+    public static Block awakenedEnergyConnector;
     public static Block reinforcedEnergyConnector;
     public static Block basicEnergyConnector;
     public static Block basicFluidInputHatch;
@@ -123,6 +131,7 @@ public class SIBlocks extends DataInitializer {
     public static Block basicProgrammer;
     public static Block reinforcedChunkloader;
     public static Block reinforcedBuilder;
+    public static Block warpGate;
 
     public static Block cobblestoneBricks;
     public static Block crystalAlloyBricks;
@@ -131,6 +140,7 @@ public class SIBlocks extends DataInitializer {
     public static Block dilithiumCoil;
     public static Block awakenedAlloyCoil;
 
+    //public static Block warpGatePortal;
     public static Block portalEternity;
     public static Block realityFabric;
     public static Block rootedFabric;
@@ -149,6 +159,7 @@ public class SIBlocks extends DataInitializer {
     public void init() {
         if(initialized) return;
         LOGGER.info("Initializing blocks...");
+
         signalumOre = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/signalum_ore")
                 .setLuminance(3)
@@ -245,14 +256,62 @@ public class SIBlocks extends DataInitializer {
                 .setHardness(10)
                 .setResistance(2000)
                 .build(new Block("reinforced.casing", config.getInt("BlockIDs.reinforcedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        awakenedCasing = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/awakened_casing_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTexture(block,"signalindustries:block/awakened_casing", Catalyst.listOf(awakenedSocketCasing))))
+                .build(new Block("awakened.casing", config.getInt("BlockIDs.awakenedCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        awakenedSocketCasing = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/awakened_socket_casing_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/awakened_socket_casing", "signalindustries:block/awakened_socket_casing_active", "signalindustries:block/awakened_socket_overlay", Catalyst.listOf(awakenedCasing))))
+                .build(new Block("awakened.casing.socket", config.getInt("BlockIDs.awakenedSocketCasing"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        awakenedCasing2 = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/awakened_casing_2_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/awakened_casing_2","signalindustries:block/awakened_casing_2_active")))
+                .build(new BlockNonSolid("awakened.casing2", config.getInt("BlockIDs.awakenedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        basicCasing2 = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/basic_casing_2_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTexture(block,"signalindustries:block/basic_casing_2")))
+                .build(new BlockNonSolid("basic.casing2", config.getInt("BlockIDs.basicCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        reinforcedCasing2 = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/reinforced_casing_2_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTextureExtra(block,"signalindustries:block/reinforced_casing_2","signalindustries:block/reinforced_casing_2_active")))
+                .build(new BlockNonSolid("reinforced.casing2", config.getInt("BlockIDs.reinforcedCasing2"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+        /*connectedTexture = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/connected_texture_0")
+                .setLuminance(0)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(10)
+                .setResistance(2000)
+                .setBlockModel((block -> new BlockModelConnectedTexture(block,"signalindustries:block/connected_texture")))
+                .build(new Block("connectedTexture", config.getInt("BlockIDs.connectedTexture"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));*/
         reinforcedGlass = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/reinforced_glass_0")
                 .setLuminance(0)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(4)
                 .setResistance(2000)
-                .setBlockModel((block)->new BlockModelConnectedTexture(block,"signalindustries:block/reinforced_glass"))
-                .build(new BlockTransparent("reinforced.glass", config.getInt("BlockIDs.reinforcedGlass"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
+                .setBlockModel((block)->new BlockModelConnectedTexture(block,"signalindustries:block/reinforced_glass", Catalyst.listOf(awakenedEnergyConnector)))
+                .build(new BlockNonSolid("reinforced.glass", config.getInt("BlockIDs.reinforcedGlass"), Material.metal).withTags(BlockTags.MINEABLE_BY_PICKAXE));
         prototypeConduit = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/conduit_prototype")
                 .setLuminance(0)
@@ -1146,6 +1205,13 @@ public class SIBlocks extends DataInitializer {
                 .setLuminance(1)
                 .setTextures("signalindustries:block/reinforced_energy_connector")
                 .build(new BlockEnergyConnector("reinforced.energyConnector", config.getInt("BlockIDs.reinforcedEnergyConnector"), Tier.REINFORCED, Material.metal));
+        awakenedEnergyConnector = new BlockBuilder(MOD_ID)
+                .setBlockSound(BlockSounds.METAL)
+                .setHardness(1)
+                .setResistance(20)
+                .setLuminance(1)
+                .setTextures("signalindustries:block/awakened_energy_connector")
+                .build(new BlockEnergyConnector("awakened.energyConnector", config.getInt("BlockIDs.awakenedEnergyConnector"), Tier.AWAKENED, Material.metal));
         basicEnergyConnector = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1)
@@ -1270,6 +1336,30 @@ public class SIBlocks extends DataInitializer {
                         .withOverbrightNorthTexture("builder_overlay")
                 )
                 .build(new BlockSpatialBuilder("reinforced.builder", config.getInt("BlockIDs.reinforcedBuilder"), Tier.REINFORCED, Material.metal));
+        warpGate = new BlockBuilder(MOD_ID)
+                .setHardness(1)
+                .setResistance(3)
+                .setBlockSound(BlockSounds.METAL)
+                .setTextures("signalindustries:block/awakened_blank")
+                .setSideTextures("signalindustries:block/warp_gate_side_inactive")
+                .setSouthTexture("signalindustries:block/warp_gate_front_inactive")
+                .setNorthTexture("signalindustries:block/warp_gate_back")
+                .setTopTexture("signalindustries:block/warp_gate_top")
+                .setBlockModel((block) -> new BlockModelMachine(block, Tier.AWAKENED)
+                        .withDefaultSideTextures("warp_gate_side_inactive")
+                        .withDefaultNorthTexture("warp_gate_front_inactive")
+                        .withDefaultTopTexture("warp_gate_top")
+                        .withDefaultSouthTexture("warp_gate_back")
+                        .withActiveSideTextures("warp_gate_side_active")
+                        .withActiveNorthTexture("warp_gate_front_active")
+                        .withActiveSouthTexture("warp_gate_back_filled")
+                        .withActiveTopTexture("warp_gate_top")
+                        .withOverbrightSouthTexture("warp_gate_back_overlay")
+                        .withOverbrightEastTexture("warp_gate_side_overlay")
+                        .withOverbrightWestTexture("warp_gate_side_overlay")
+                )
+                .build(new BlockWarpGate("awakened.warpGate", config.getInt("BlockIDs.warpGate"), Tier.AWAKENED, Material.metal));
+
         cobblestoneBricks = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.STONE)
                 .setHardness(1)
@@ -1301,7 +1391,8 @@ public class SIBlocks extends DataInitializer {
                 .setEastTexture("signalindustries:block/signalum_alloy_coil_2")
                 .setWestTexture("signalindustries:block/signalum_alloy_coil_2")
                 .setTopBottomTextures("signalindustries:block/signalum_alloy_coil_top")
-                .build(new Block("signalumAlloyCoil", config.getInt("BlockIDs.signalumAlloyCoil"), Material.metal));
+                .setBlockModel(BlockModelCoil::new)
+                .build(new BlockCoil("signalumAlloyCoil", config.getInt("BlockIDs.signalumAlloyCoil"), Material.metal));
         dilithiumCoil = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1)
@@ -1309,7 +1400,8 @@ public class SIBlocks extends DataInitializer {
                 .setLuminance(0)
                 .setSideTextures("signalindustries:block/dilithium_coil")
                 .setTopBottomTextures("signalindustries:block/dilithium_coil_top")
-                .build(new Block("dilithiumCoil", config.getInt("BlockIDs.dilithiumCoil"), Material.metal));
+                .setBlockModel(BlockModelCoil::new)
+                .build(new BlockCoil("dilithiumCoil", config.getInt("BlockIDs.dilithiumCoil"), Material.metal));
         awakenedAlloyCoil = new BlockBuilder(MOD_ID)
                 .setBlockSound(BlockSounds.METAL)
                 .setHardness(1)
@@ -1320,7 +1412,15 @@ public class SIBlocks extends DataInitializer {
                 .setEastTexture("signalindustries:block/awakened_alloy_coil_2")
                 .setWestTexture("signalindustries:block/awakened_alloy_coil_2")
                 .setTopBottomTextures("signalindustries:block/awakened_alloy_coil_top")
-                .build(new Block("awakenedAlloyCoil", config.getInt("BlockIDs.awakenedAlloyCoil"), Material.metal));
+                .setBlockModel(BlockModelCoil::new)
+                .build(new BlockCoil("awakenedAlloyCoil", config.getInt("BlockIDs.awakenedAlloyCoil"), Material.metal));
+
+        /*warpGatePortal = new BlockBuilder(MOD_ID)
+                .setTextures("signalindustries:block/warp_gate_portal")
+                .setBlockSound(BlockSounds.GLASS)
+                .setLuminance(1)
+                .setBlockModel(block1 -> new BlockModelPortal<>(block1).withOverbrightTexture("signalindustries:block/warp_gate_portal"))
+                .build(new BlockWarpGatePortal("warpGatePortal", config.getInt("BlockIDs.warpGatePortal"), Material.portal));*/
 
         portalEternity = new BlockBuilder(MOD_ID)
                 .setTextures("signalindustries:block/reality_fabric")
@@ -1432,8 +1532,6 @@ public class SIBlocks extends DataInitializer {
         signalumOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         dilithiumOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         dimensionalShardOre.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
-        basicCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
-        reinforcedCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         reinforcedGlass.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         awakenedSignalumCrystalBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         dilithiumBlock.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
@@ -1447,6 +1545,13 @@ public class SIBlocks extends DataInitializer {
         awakenedAlloyCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         dilithiumCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         signalumAlloyCoil.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        basicCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        reinforcedCasing2.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        basicCasing2.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedSocketCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedCasing.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedCasing2.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
 
         setInitialized(true);
     }

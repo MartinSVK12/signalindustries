@@ -45,6 +45,7 @@ import sunsetsatellite.signalindustries.abilities.powersuit.*;
 import sunsetsatellite.signalindustries.api.impl.retrostorage.ReSPlugin;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.commands.RecipeReloadCommand;
+import sunsetsatellite.signalindustries.commands.StructMakerCommand;
 import sunsetsatellite.signalindustries.entities.EntityCrystal;
 import sunsetsatellite.signalindustries.entities.EntityEnergyOrb;
 import sunsetsatellite.signalindustries.entities.EntityFallingMeteor;
@@ -305,6 +306,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         CommandHelper.createCommand(new NBTEditCommand());
         CommandHelper.createCommand(new RecipeReloadCommand("data"));
         CommandHelper.createCommand(new StructureCommand("structure","struct"));
+        CommandHelper.createCommand(new StructMakerCommand("s"));
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded("retrostorage")) {
             new ReSPlugin().initializePlugin(LOGGER);
@@ -344,6 +346,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         EntityHelper.createSpecialTileEntity(TileEntityInductionSmelter.class,"Induction Smelter", RenderMultiblock::new);
         EntityHelper.createSpecialTileEntity(TileEntityMultiConduit.class,"Multi Conduit", RenderFluidInMultiConduit::new);
         EntityHelper.createSpecialTileEntity(TileEntityBuilder.class,"Builder", RenderBuilderPreview::new);
+        EntityHelper.createSpecialTileEntity(TileEntityWarpGate.class,"Warp Gate", RenderMultiblock::new);
 
         EntityHelper.createTileEntity(TileEntityInserter.class, "Inserter");
         EntityHelper.createTileEntity(TileEntityExtractor.class,"Extractor");
@@ -731,6 +734,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("prototypeFluidTank"),entry);
         entry = new FluidContainerRegistryEntry(SignalIndustries.MOD_ID, Item.itemsList[SIBlocks.basicFluidTank.id], Item.itemsList[SIBlocks.basicFluidTank.id], fluidsWithoutSE);
         CatalystFluids.CONTAINERS.register(SignalIndustries.key("basicFluidTank"),entry);
+
+        //BlockDataExporter.export(SIBlocks.class);
     }
 
 }

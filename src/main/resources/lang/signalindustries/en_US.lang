@@ -157,8 +157,18 @@ tile.signalindustries.awakened.machine.desc=Key component for Awakened-tier mach
 
 tile.signalindustries.basic.casing.name=Basic Casing
 tile.signalindustries.basic.casing.desc=Used for Basic-tier and above multiblock machines.
+tile.signalindustries.basic.casing2.name=Basic Casing (Type 2)
+tile.signalindustries.basic.casing2.desc=Alternative casing used for Basic-tier and above multiblock machines.
 tile.signalindustries.reinforced.casing.name=Reinforced Casing
 tile.signalindustries.reinforced.casing.desc=Used for Reinforced-tier multiblock machines.
+tile.signalindustries.reinforced.casing2.name=Reinforced Casing (Type 2)
+tile.signalindustries.reinforced.casing2.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
+tile.signalindustries.awakened.casing.name=Awakened Casing
+tile.signalindustries.awakened.casing.desc=Used for Awakened-tier multiblock machines.
+tile.signalindustries.awakened.casing.socket.name=Awakened Socket Casing
+tile.signalindustries.awakened.casing.socket.desc=Used for Awakened-tier multiblock machines. Additionally a dimensional shard can be slotted in.
+tile.signalindustries.awakened.casing2.name=Awakened Casing (Type 2)
+tile.signalindustries.awakened.casing2.desc=Alternative casing used for Awakened-tier multiblock machines.
 tile.signalindustries.reinforced.glass.name=Reinforced Glass
 tile.signalindustries.reinforced.glass.desc=Does not shatter when broken.
 
@@ -451,6 +461,9 @@ tile.signalindustries.reinforced.itemInputBus.desc=A dedicated item input for Re
 tile.signalindustries.reinforced.itemOutputBus.name=Reinforced Item Output Bus
 tile.signalindustries.reinforced.itemOutputBus.desc=A dedicated item output for Reinforced-tier multiblocks.
 
+tile.signalindustries.awakened.energyConnector.name=Awakened Energy Connector
+tile.signalindustries.awakened.energyConnector.desc=A dedicated energy hatch for Awakened-tier multiblocks.
+
 tile.signalindustries.basic.energyConnector.name=Basic Energy Connector
 tile.signalindustries.basic.energyConnector.desc=A dedicated energy hatch for Basic-tier multiblocks.
 tile.signalindustries.basic.fluidInputHatch.name=Basic Fluid Input Hatch
@@ -569,6 +582,9 @@ tile.signalindustries.reinforced.chunkLoader.name=Spacetime Maintainer
 tile.signalindustries.reinforced.chunkLoader.desc=Keeps the chunk this machine is placed in loaded.
 tile.signalindustries.awakened.chunkLoader.name=Awakened Causality Sustainer Controller
 tile.signalindustries.awakened.chunkLoader.desc=Keeps several chunks loaded around it.
+
+tile.signalindustries.awakened.warpGate.name=Awakened Quantum Warp Gate Controller
+tile.signalindustries.awakened.warpGate.desc=Permanently links 2 locations together even across dimensions, allows same-dimension teleportation of fluids and items.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -818,6 +834,7 @@ multiblock.signalindustries.signalumReactor.name=Signalum Reactor
 multiblock.signalindustries.wrathTree.name=Wrath Tree
 multiblock.signalindustries.extractionManifold.name=Extraction Manifold
 multiblock.signalindustries.basicInductionSmelter.name=Basic Induction Smelter
+multiblock.signalindustries.warpGate.name=Warp Gate
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 
@@ -865,7 +882,7 @@ quest.signalindustries.energyCell.desc=This block can store a fair amount of <S.
 quest.signalindustries.energyConduit.name=Prototype Signalum Conduit
 quest.signalindustries.energyConduit.desc=Transfers <Signalum Energy>, usually tries to balance out its contents across the whole pipe line. Contents are lost when the conduit is broken.
 quest.signalindustries.fluidConduit.name=Prototype Fluid Conduit
-quest.signalindustries.fluidConduit.desc=Transfers any other apart from <Signalum Energy>, usually tries to balance out its contents across the whole pipe line. Contents are lost when the conduit is broken.
+quest.signalindustries.fluidConduit.desc=Transfers any other fluid apart from <Signalum Energy>, usually tries to balance out its contents across the whole pipe line. Contents are lost when the conduit is broken.
 quest.signalindustries.fluidTank.name=Prototype Fluid Tank
 quest.signalindustries.fluidTank.desc=Can store a few buckets of one type of fluid. Contents are *preserved* when this block is broken, allowing it to also function as basically a bigger bucket. Can interact with fluid slots.
 quest.signalindustries.inserter.name=Prototype Inserter
