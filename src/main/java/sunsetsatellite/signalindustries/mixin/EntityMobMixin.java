@@ -75,8 +75,12 @@ public class EntityMobMixin extends EntityLiving {
     @Override
     public void onDeath(Entity entity) {
         super.onDeath(entity);
-        if(random.nextInt(64) == 0){
+        if(random.nextInt(32) == 0){
             spawnAtLocation(SIItems.monsterShard.id,1);
+        } else if (world.getCurrentWeather() == SIWeather.weatherBloodMoon) {
+            if(random.nextInt(16) == 0){
+                spawnAtLocation(SIItems.monsterShard.id,1);
+            }
         }
     }
 }
