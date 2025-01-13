@@ -147,7 +147,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public boolean addConduit(IConduitBlock newConduit){
         for (int i = 0; i < conduits.length; i++) {
             IConduitBlock conduit = conduits[i];
-            if(newConduit.getConduitCapability() == ConduitCapability.NETWORK && conduit != null && conduit.getConduitCapability() == ConduitCapability.NETWORK){
+            if(newConduit.getConduitCapability() == ConduitCapability.RES_NETWORK && conduit != null && conduit.getConduitCapability() == ConduitCapability.RES_NETWORK){
                 return false;
             }
             if (conduit == null) {

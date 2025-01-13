@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Vec3i;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.core.util.HologramWorld;
 
 import java.util.ArrayList;
 

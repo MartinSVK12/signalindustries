@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.*;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.signalindustries.blocks.BlockMultiConduit;
 import sunsetsatellite.catalyst.core.util.IConduitBlock;
 import sunsetsatellite.signalindustries.inventories.TileEntityMultiConduit;

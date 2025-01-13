@@ -13,7 +13,7 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.IColorOverride;
 import sunsetsatellite.catalyst.core.util.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTieredMachineSimple;
 
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.*;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.signalindustries.inventories.machines.TileEntityBuilder;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.util.SIMultiblock;

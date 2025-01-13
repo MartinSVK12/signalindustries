@@ -9,7 +9,7 @@ import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.client.render.tessellator.Tessellator;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.*;
-import sunsetsatellite.catalyst.multiblocks.HologramWorld;
+import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 
 import java.util.ArrayList;

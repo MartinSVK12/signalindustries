@@ -255,6 +255,7 @@ allprojects {
 							artifactId = project.mod_name
 							version = project.mod_version
 							from components.java
+							println("Version ${project.mod_version} of ${project.mod_group}.${project.mod_name} ready for release!")
 						}
 					}
 				}
@@ -279,6 +280,7 @@ allprojects {
 							artifactId = project.core_mod_name
 							version = project.core_mod_version
 							from components.java
+							println("Version ${project.core_mod_version} of ${project.core_mod_group}.${project.core_mod_name} ready for release!")
 						}
 					}
 				}

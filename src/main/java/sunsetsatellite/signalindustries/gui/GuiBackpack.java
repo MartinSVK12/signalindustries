@@ -34,14 +34,14 @@ public class GuiBackpack extends GuiItemFluid {
 
     protected void drawGuiContainerBackgroundLayer(float f)
     {
-        int i = mc.renderEngine.getTexture("assets/signalindustries/gui/basic_backpack.png");
+        int i = mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_backpack.png");
         if(backpack.getItem() instanceof ItemBackpackAttachment){
             switch (((ItemBackpackAttachment) backpack.getItem()).tier){
                 case BASIC:
-                    i = mc.renderEngine.getTexture("assets/signalindustries/gui/basic_backpack.png");
+                    i = mc.renderEngine.getTexture("/assets/signalindustries/gui/basic_backpack.png");
                     break;
                 case REINFORCED:
-                    i = mc.renderEngine.getTexture("assets/signalindustries/gui/reinforced_backpack.png");
+                    i = mc.renderEngine.getTexture("/assets/signalindustries/gui/reinforced_backpack.png");
                     break;
             }
         }

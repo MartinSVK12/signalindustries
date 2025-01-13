@@ -4,6 +4,7 @@ import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.IInventory;
+import sunsetsatellite.catalyst.core.util.mixin.interfaces.UnlimitedItemStack;
 import sunsetsatellite.signalindustries.inventories.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -46,6 +47,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements IInv
         locked = nbttagcompound.getBoolean("Locked");
         if(nbttagcompound.containsKey("Contents")){
             contents = new ItemStack(1,1,0);
+            ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize((int) (4096 * (Math.pow(2, tier.ordinal()))));
             contents.readFromNBT(nbttagcompound.getCompound("Contents"));
             contents.stackSize = nbttagcompound.getCompound("Contents").getInteger("Count");
         }
@@ -156,7 +158,11 @@ public class TileEntityStorageContainer extends TileEntityTiered implements IInv
 
     @Override
     public ItemStack getStackInSlot(int paramInt) {
-        if (paramInt == 0) return contents;
+        if (paramInt == 0) {
+            if(contents == null) return null;
+            ((UnlimitedItemStack)(Object) contents).enableCustomMaxSize((int) (4096 * (Math.pow(2, tier.ordinal()))));
+            return contents;
+        }
         return null;
     }
 

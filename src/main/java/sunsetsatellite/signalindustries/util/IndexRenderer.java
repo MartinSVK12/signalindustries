@@ -41,7 +41,7 @@ public class IndexRenderer {
     public static HashMap<IdMetaPair,ItemStack> items = new HashMap<>();
     private static HashSet<Map.Entry<IdMetaPair, ItemStack>> sortedEntries;
     private static boolean initialized = false;
-    public static boolean show = true;
+    public static boolean show = false;
 
     public static void init() {
         for (ItemStack stack : ContainerPlayerCreative.creativeItems) {
@@ -236,7 +236,7 @@ public class IndexRenderer {
     public static void keyTyped(char c, int i, int mouseX, int mouseY) {
         KeyBinding showIndexKey = ((IKeybinds) Minecraft.getMinecraft(Minecraft.class).gameSettings).signalindustries$getKeyShowIndex();
         if(showIndexKey.isPressed()){
-            show = !show;
+            show = false;
         }
         if(i == Keyboard.KEY_ADD || i == Keyboard.KEY_RIGHT){
             if(page < pageMax) page++;
