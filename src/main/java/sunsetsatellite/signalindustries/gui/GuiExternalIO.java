@@ -1,18 +1,13 @@
 package sunsetsatellite.signalindustries.gui;
 
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiContainer;
-import net.minecraft.client.gui.GuiTooltip;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.IInventory;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.Side;
-import net.minecraft.server.entity.player.EntityPlayerMP;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Vec3f;
 import sunsetsatellite.catalyst.core.util.Vec3i;
@@ -76,8 +71,8 @@ public class GuiExternalIO extends GuiContainer {
                 fontRenderer.drawCenteredString("No position.",x,y+12,0xFFFF0000);
             } else if(tile.externalTilePos.containsKey("x") && tile.externalTilePos.containsKey("y") && tile.externalTilePos.containsKey("z") && tile.externalTilePos.containsKey("dim") && tile.externalTilePos.containsKey("side")){
                 if(tile.externalTile != null){
-                    fontRenderer.drawCenteredString("Connected.",x,y,0xFF00FF00);
-                    fontRenderer.drawCenteredString(tile.externalTile.getClass().getSimpleName()+ " @ " + tile.externalTile.x +" "+tile.externalTile.y+" "+tile.externalTile.z,x,y+12,0xFF00FF00);
+                    fontRenderer.drawCenteredString("Connected!",x,y,0xFF00FF00);
+                    fontRenderer.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity","")+ " @ " + tile.externalTile.x +" "+tile.externalTile.y+" "+tile.externalTile.z,x,y+12,0xFF00FF00);
                     fontRenderer.drawCenteredString(String.valueOf(Side.getSideById(tile.externalTilePos.getInteger("side"))),x,y+24,0xFF00FF00);
                 } else {
                     int eX = tile.externalTilePos.getInteger("x");
@@ -97,8 +92,8 @@ public class GuiExternalIO extends GuiContainer {
             }
         } else {
             if(tile.externalTile != null){
-                fontRenderer.drawCenteredString("Connected.",x,y,0xFF00FF00);
-                fontRenderer.drawCenteredString(tile.externalTile.getClass().getSimpleName()+ " @ " + tile.externalTileSide.getName(),x,y+12,0xFF00FF00);
+                fontRenderer.drawCenteredString("Connected!",x,y,0xFF00FF00);
+                fontRenderer.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity","")+ " @ " + tile.externalTileSide.getName(),x,y+12,0xFF00FF00);
             } else {
                 fontRenderer.drawCenteredString("Disconnected.",x,y,0xFFFF0000);
             }

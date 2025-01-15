@@ -3,10 +3,12 @@ package sunsetsatellite.signalindustries.inventories;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.core.block.BlockFluid;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
@@ -40,6 +42,9 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     }
 
     public TileEntitySIFluidTank(){
+        fluidContents = new FluidStack[1];
+        fluidCapacity = new int[1];
+        itemContents = new ItemStack[0];
         fluidCapacity[0] = 8000;
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);

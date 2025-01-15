@@ -105,7 +105,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     static {
-
         List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
 
