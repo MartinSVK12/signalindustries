@@ -1,9 +1,14 @@
-- ROM chips can now spawn in dungeons and are more common in general.
-- Movement boosters got a speed increase.
-- Fix movement booster energy usage bug.
-- Reduced dynamo energy cost from 40 to 20.
-- Fixed reinforced chamber not being capable of combining larger crystals.
-- Removed energy cost from night vision attachment (you still need to have some amount of it though).
-- Dilithium crystal blocks no longer have a random chance to drop nothing.
-- Several fixes by bigjango13, thanks!
-- Other fixes.
+- Added a way to control the wings flight speed.
+- Made the drill work as a shovel too.
+- Added Too Many Blocks support.
+- Added quest to explain the working of the pulsar attachment.
+- Power suit now saves state (no more falling out of the sky while using wings on world reload).
+- Updated to use the new simple energy API from Catalyst.
+- Made monster shard drops more common.
+- Added the Parallel Processors!
+  - Allows machines to carry out multiple recipes at once.
+- Added GUIs to multiblocks that did not have them already, displaying their status.
+- Added a system to allow replacing casings of multiblocks with other auxiliary blocks.
+- Fixed conveyor covers. 
+- Other small fixes.
+- Disabled the Tome of Raziel for now (awaits rework).
