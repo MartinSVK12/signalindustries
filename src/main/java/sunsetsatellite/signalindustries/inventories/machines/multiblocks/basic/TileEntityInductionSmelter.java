@@ -22,6 +22,11 @@ public class TileEntityInductionSmelter extends TileEntityTieredMultiblock {
 
         multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("basicInductionSmelter"));
 
-        parallel = 16;
+        baseParallel = 16;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 }

@@ -263,6 +263,13 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
     public static final Tag<Block> SIGNALUM_CONDUITS_CONNECT = Tag.of("signalum_conduits_connect");
     public static final Tag<Block> FLUID_CONDUITS_CONNECT = Tag.of("fluid_conduits_connect");
     public static final Tag<Block> ITEM_CONDUITS_CONNECT = Tag.of("item_conduits_connect");
+    public static final Tag<Block> CASING = Tag.of("casing");
+    public static final Tag<Block> REPLACEABLE_CASING = Tag.of("replaceable_casing");
+    public static final Tag<Block> PROTOTYPE_CASING = Tag.of("prototype_casing");
+    public static final Tag<Block> BASIC_CASING = Tag.of("basic_casing");
+    public static final Tag<Block> REINFORCED_CASING = Tag.of("reinforced_casing");
+    public static final Tag<Block> AWAKENED_CASING = Tag.of("awakened_casing");
+
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumprototypeharness",1200,10,10,10,10);
     public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"signalumpowersuit",9999,50,50,50,50);
@@ -433,6 +440,12 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         addToNameGuiMap("Builder", GuiBuilder.class, TileEntityBuilder.class);
         addToNameGuiMap("Warp Gate", GuiWarpGate.class, TileEntityWarpGate.class);
 
+        addToNameGuiMap("Induction Smelter", GuiMultiblock.class, TileEntityInductionSmelter.class);
+        addToNameGuiMap("Waking Alloy Smelter", GuiMultiblock.class, TileEntityWakingAlloySmelter.class);
+        addToNameGuiMap("Waking Crusher", GuiMultiblock.class, TileEntityWakingCrusher.class);
+        addToNameGuiMap("Waking Plate Former", GuiMultiblock.class, TileEntityWakingPlateFormer.class);
+        addToNameGuiMap("Waking Infuser", GuiMultiblock.class, TileEntityWakingInfuser.class);
+
         addToNameGuiMap("The Pulsar", GuiPulsar.class, InventoryPulsar.class);
         addToNameGuiMap("Signalum Prototype Harness", GuiHarness.class, InventoryHarness.class);
         addToNameGuiMap("Backpack", GuiBackpack.class, InventoryBackpack.class);
@@ -523,16 +536,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         return false;
     }
 
-    public static ArrayList<ItemStack> condenseList(List<ItemStack> list){
+    public static ArrayList<ItemStack> condenseList(List<ItemStack> list) {
         ArrayList<ItemStack> stacks = new ArrayList<>();
         for (ItemStack stack : list) {
-            if(stack != null){
-                Optional<ItemStack> existing = stacks.stream().filter((S) -> S.itemID == stack.itemID).findAny();
-                if (existing.isPresent()) {
-                    existing.get().stackSize += stack.stackSize;
-                } else {
-                    stacks.add(stack.copy());
+            if (stack != null) {
+                boolean found = false;
+                for (ItemStack S : stacks) {
+                    if (S.isItemEqual(stack) && (S.getData().equals(stack.getData()))) {
+                        S.stackSize += stack.stackSize;
+                        found = true;
+                    }
                 }
+                if(!found) stacks.add(stack.copy());
             }
         }
         return stacks;
@@ -542,12 +557,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint, Cl
         ArrayList<FluidStack> stacks = new ArrayList<>();
         for (FluidStack stack : list) {
             if (stack != null) {
-                Optional<FluidStack> existing = stacks.stream().filter((S) -> S.liquid.id == stack.liquid.id).findAny();
-                if (existing.isPresent()) {
-                    existing.get().amount += stack.amount;
-                } else {
-                    stacks.add(stack.copy());
+                boolean found = false;
+                for (FluidStack S : stacks) {
+                    if (S.isFluidEqual(stack)) {
+                        S.amount += stack.amount;
+                        found = true;
+                    }
                 }
+                if(!found) stacks.add(stack.copy());
             }
         }
         return stacks;

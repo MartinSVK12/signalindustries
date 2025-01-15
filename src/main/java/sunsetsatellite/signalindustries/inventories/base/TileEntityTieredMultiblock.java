@@ -12,10 +12,7 @@ import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.blocks.BlockFluidInputHatch;
-import sunsetsatellite.signalindustries.blocks.BlockFluidOutputHatch;
-import sunsetsatellite.signalindustries.blocks.BlockInputBus;
-import sunsetsatellite.signalindustries.blocks.BlockOutputBus;
+import sunsetsatellite.signalindustries.blocks.*;
 import sunsetsatellite.signalindustries.blocks.base.BlockContainerTiered;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -55,6 +52,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public Random random = new Random();
 
     public int parallel = 1;
+    public int baseParallel = 1;
 
     public TileEntityTieredMultiblock(){
         super();
@@ -105,7 +103,27 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     ((IMultiblockPart) tileEntity.tile).connect(this);
                 }
             }
+            parallel = baseParallel;
+            ArrayList<BlockInstance> extraBlocks = multiblock.data.getSubstitutions(new Vec3i(x,y,z), dir);
+            for (BlockInstance extraBlock : extraBlocks) {
+                if(extraBlock.exists(worldObj)){
+                    if(extraBlock.block instanceof BlockParallelProcessor){
+                        parallel = baseParallel * ((BlockParallelProcessor) extraBlock.block).maxParallel;
+                    }
+                }
+            }
             if(block != null && allPartsPresent()) {
+                int oldParallel = parallel;
+                parallel = 1;
+                setCurrentRecipe();
+                parallel = oldParallel;
+                if(currentRecipe != null){
+                    int recipeInputSum = Arrays.stream(((RecipeExtendedSymbol[]) currentRecipe.getInput())).map(RecipeExtendedSymbol::resolve).map(L -> L.get(0)).mapToInt(S -> S.stackSize).sum();
+                    int effectiveParallel = SignalIndustries.condenseList(Arrays.asList(itemInput.itemContents)).stream().mapToInt(S -> S.stackSize).sum() / recipeInputSum;
+                    if(parallel > effectiveParallel && effectiveParallel > 0){
+                        parallel = effectiveParallel;
+                    }
+                }
                 setCurrentRecipe();
                 work();
             }

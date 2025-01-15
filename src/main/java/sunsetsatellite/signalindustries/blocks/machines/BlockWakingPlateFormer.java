@@ -8,7 +8,10 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.base.BlockMachineBase;
+import sunsetsatellite.signalindustries.containers.ContainerMultiblock;
+import sunsetsatellite.signalindustries.gui.GuiMultiblock;
 import sunsetsatellite.signalindustries.inventories.machines.multiblocks.waking.TileEntityWakingPlateFormer;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -32,6 +35,7 @@ public class BlockWakingPlateFormer extends BlockMachineBase {
         } else {
             TileEntityWakingPlateFormer tile = (TileEntityWakingPlateFormer) world.getBlockTileEntity(i, j, k);
             if (tile.getMultiblock() != null && tile.getMultiblock().isValid()) {
+                SignalIndustries.displayGui(entityplayer, () -> new GuiMultiblock(entityplayer.inventory, tile), new ContainerMultiblock(entityplayer.inventory, tile), tile, i, j, k);
                 entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                 entityplayer.triggerAchievement(SIAchievements.WAKING2);
             } else {

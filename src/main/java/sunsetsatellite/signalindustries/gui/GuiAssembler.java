@@ -50,7 +50,7 @@ public class GuiAssembler extends GuiFluid {
             if (y > j + 40 && y < j + 46) {
                 I18n translator = I18n.getInstance();
                 String name = translator.translateKey(tile.getBlockType().getLanguageKey(0)+".name");
-                ////GuidebookPlusPlus.nameFocus = ">"+ name;
+                //GuidebookPlusPlus.nameFocus = ">"+ name;
                 if(entityplayer instanceof EntityPlayerSP){
                     ((EntityPlayerSP)entityplayer).displayGUIGuidebook();
                 } else if (entityplayer instanceof EntityPlayerMP) {
