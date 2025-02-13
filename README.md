@@ -1,5 +1,5 @@
 # Signal Industries
-A technomagical mod for Better Than Adventure 7.2.
+A technomagical mod for Better Than Adventure 7.2_01.
 
 Multiplayer is ***not supported*** for now.
 
