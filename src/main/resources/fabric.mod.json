@@ -31,6 +31,36 @@
   "entrypoints": {
     "main": [
       "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "afterBlockInit": [
+      "sunsetsatellite.signalindustries.SIBlocks"
+    ],
+    "afterItemInit": [
+      "sunsetsatellite.signalindustries.SIItems"
+    ],
+    "recipesReady": [
+      "sunsetsatellite.signalindustries.SIRecipes"
+    ],
+    "client": [
+      "sunsetsatellite.signalindustries.SignalIndustriesClient"
+    ],
+    "beforeClientStart": [
+      "sunsetsatellite.signalindustries.SignalIndustriesClient"
+    ],
+    "afterClientStart": [
+      "sunsetsatellite.signalindustries.SignalIndustriesClient"
+    ],
+    "beforeGameStart": [
+      "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "afterGameStart": [
+      "sunsetsatellite.signalindustries.SignalIndustries"
+    ],
+    "server": [
+      "sunsetsatellite.signalindustries.SignalIndustriesServer"
+    ],
+    "initModels": [
+      "sunsetsatellite.signalindustries.SIModels"
     ]
   },
   "mixins": [
