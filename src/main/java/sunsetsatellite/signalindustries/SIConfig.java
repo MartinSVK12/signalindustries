@@ -37,6 +37,10 @@ public class SIConfig {
         defaultConfig.addEntry("Other.dilithiumMiningLevel", 4);
         defaultConfig.addEntry("Other.awakenedMiningLevel", 5);
         defaultConfig.addEntry("EntityIDs.infernalId", 100);
+        defaultConfig.addEntry("EntityIDs.volatileCrystalId",50);
+        defaultConfig.addEntry("EntityIDs.energyOrbId",51);
+        defaultConfig.addEntry("EntityIDs.fallingMeteorId",52);
+        defaultConfig.addEntry("EntityIDs.sunbeamId",53);
 
         int blockId = blockIdStart;
         int itemId = itemIdStart;
@@ -84,6 +88,27 @@ public class SIConfig {
 
             if(!rawConfig.contains("EntityIDs.infernalId")){
                 rawConfig.addEntry("EntityIDs.infernalId", 100);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("EntityIDs.volatileCrystalId")){
+                rawConfig.addEntry("EntityIDs.volatileCrystalId", 50);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("EntityIDs.energyOrbId")){
+                rawConfig.addEntry("EntityIDs.energyOrbId", 51);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("EntityIDs.fallingMeteorId")){
+                rawConfig.addEntry("EntityIDs.fallingMeteorId", 52);
+                changed = true;
+            }
+
+
+            if(!rawConfig.contains("EntityIDs.sunbeamId")){
+                rawConfig.addEntry("EntityIDs.sunbeamId", 53);
                 changed = true;
             }
 
@@ -151,5 +176,13 @@ public class SIConfig {
                 throw new RuntimeException("Failed to generate config!", e);
             }
         }
+    }
+
+    public static int item(String cfgId) {
+        return config.getInt("ItemIDs." + cfgId);
+    }
+
+    public static int block(String cfgId) {
+        return config.getInt("BlockIDs." + cfgId);
     }
 }

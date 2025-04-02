@@ -4,12 +4,41 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
+    "BlockLogicRailMixin",
+    "ChunkDecoratorOverworldMixin",
+    "ContainerInventoryMixin",
+    "EntityMinecartMixin",
+    "ItemStackMixin",
+    "MenuCraftingMixin",
+    "MinecraftMixin",
+    "MobMixin",
+    "MobMonsterMixin",
+    "PlayerMixin",
+    "ProjectileArrowMixin",
+    "SaveHandlerBaseMixin",
+    "SlotResultMixin",
+    "SpawnerMobsMixin",
+    "WorldMixin"
   ],
   "client": [
-
+    "GameSettingsMixin",
+    "HudIngameMixin",
+    "MobRendererMixin",
+    "MobRendererPlayerMixin",
+    "PacketHandlerClientMixin",
+    "PlayerLocalMixin",
+    "PlayerRemoteMixin",
+    "RenderGlobalMixin",
+    "ScreenInventoryMixin",
+    "TextureManagerMixin",
+    "WorldClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "server": [
+    "PacketHandlerLoginMixin",
+    "PlayerListMixin",
+    "PlayerServerMixin"
+  ]
 }

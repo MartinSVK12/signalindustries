@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "signalindustries:block/basic_energy_injector_bottom",
-		"2": "signalindustries:block/basic_energy_injector_core"
+		"2": "signalindustries:block/basic_energy_injector_core",
+		"particle": "#1"
 	},
 	"elements": [
 		{

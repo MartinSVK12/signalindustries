@@ -99,9 +99,13 @@ dependencies {
     implementation(project(path: ":energy", configuration: "namedElements"))
     implementation(project(path: ":fluids", configuration: "namedElements"))
     implementation(project(path: ":multiblocks", configuration: "namedElements"))
+    implementation(project(path: ":multipart", configuration: "namedElements"))
 
-    modImplementation(project(path: ":tmb", configuration: "namedElements"))
+    implementation(project(path: ":tmb", configuration: "namedElements"))
     implementation(project(path: ":btwaila", configuration: "namedElements"))
+    implementation(project(path: ":dragonfly", configuration: "namedElements"))
+    implementation(project(path: ":vq", configuration: "namedElements"))
+    //implementation(project(path: ":retrostorage", configuration: "namedElements"))
 
     implementation "org.slf4j:slf4j-api:1.8.0-beta4"
     implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"

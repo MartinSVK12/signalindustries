@@ -61,6 +61,9 @@
     ],
     "initModels": [
       "sunsetsatellite.signalindustries.SIModels"
+    ],
+    "gatherTMBPlugins": [
+      "sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
     ]
   },
   "mixins": [
@@ -69,10 +72,11 @@
   "depends": {
     "minecraft": "~7.3",
     "fabricloader": ">=0.15.5",
-    "catalyst-core": ">=2.0.0-alpha.1",
-    "catalyst-fluids": ">=2.0.0-alpha.1",
-    "catalyst-multiblocks": ">=2.0.0-alpha.1",
-    "catalyst-energy": ">=2.0.2-alpha.1",
+    "catalyst-core": ">=2.0.0",
+    "catalyst-fluids": ">=2.0.01",
+    "catalyst-multiblocks": ">=2.0.0",
+    "catalyst-energy": ">=2.0.2",
+    "catalyst-multipart": ">=2.0.0",
     "halplibe": ">=5.2.0"
   }
 }

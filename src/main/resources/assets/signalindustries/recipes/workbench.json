@@ -1550,7 +1550,7 @@
       }
     ],
     "result": {
-      "key": "item.signalindustries.reinforced.signalumpowersuit.helmet",
+      "key": "item.signalindustries.reinforced.powerSuit.helmet",
       "amount": 1,
       "meta": 0
     },
@@ -1615,7 +1615,7 @@
       }
     ],
     "result": {
-      "key": "item.signalindustries.reinforced.signalumpowersuit.chestplate",
+      "key": "item.signalindustries.reinforced.powerSuit.chestplate",
       "amount": 1,
       "meta": 0
     },
@@ -1672,7 +1672,7 @@
       }
     ],
     "result": {
-      "key": "item.signalindustries.reinforced.signalumpowersuit.leggings",
+      "key": "item.signalindustries.reinforced.powerSuit.leggings",
       "amount": 1,
       "meta": 0
     },
@@ -1729,7 +1729,7 @@
       }
     ],
     "result": {
-      "key": "item.signalindustries.reinforced.signalumpowersuit.boots",
+      "key": "item.signalindustries.reinforced.powerSuit.boots",
       "amount": 1,
       "meta": 0
     },
