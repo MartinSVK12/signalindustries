@@ -76,10 +76,10 @@ public class VintageQuestingSIPlugin {
                         listOf(
                                 new ItemStack(rawSignalumCrystal,32)
                         )),
-                zip(listOf("reward"),
+                /*zip(listOf("reward"),
                         listOf(
                                 new ItemStack(rawSignalumCrystal,32)
-                        )),
+                        )),*/
                 listOf(welcome),welcome,
                 0,
                 1);
@@ -1056,8 +1056,8 @@ public class VintageQuestingSIPlugin {
             retrievalTasks.add(new RetrievalTaskTemplate("signalindustries:"+id+"/"+task.getLeft(),task.getRight()));
         }
         List<RewardTemplate> itemRewards = new ArrayList<>();
-        for (Pair<String, ItemStack> task : tasks) {
-            itemRewards.add(new ItemRewardTemplate("signalindustries:"+id+"/"+task.getLeft(),task.getRight()));
+        for (Pair<String, ItemStack> reward : rewards) {
+            itemRewards.add(new ItemRewardTemplate("signalindustries:"+id+"/"+reward.getLeft(),reward.getRight()));
         }
         return new QuestTemplate("signalindustries:"+id,"quest.signalindustries."+id,icon,Logic.AND,Logic.AND)
                 .setPreRequisites(preRequisites)
