@@ -56,8 +56,8 @@ public class SIRecipes implements RecipeEntrypoint {
     @Override
     public void onRecipesReady() {
         LOGGER.info("Loading SI recipes...");
-        resetGroups();
-        registerNamespaces();
+        //resetGroups();
+        //registerNamespaces();
         load();
     }
 
@@ -65,7 +65,6 @@ public class SIRecipes implements RecipeEntrypoint {
     public void initNamespaces() {
         LOGGER.info("Loading SI recipe namespaces...");
         resetGroups();
-
         registerNamespaces();
     }
 
@@ -93,10 +92,11 @@ public class SIRecipes implements RecipeEntrypoint {
     }
 
     public void resetGroups(){
+        Registries.RECIPES.unregister("signalindustries");
         SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
         WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Blocks.WORKBENCH)));
         FURNACE = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Blocks.FURNACE_STONE_IDLE)));
-        EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeExtractor)/*, new ItemStack(SIBlocks.basicExtractor), new ItemStack(SIBlocks.reinforcedExtractor)*/)));
+        EXTRACTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeExtractor), new ItemStack(SIBlocks.basicExtractor), new ItemStack(SIBlocks.reinforcedExtractor))));
         CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrusher),new ItemStack(SIBlocks.basicCrusher),new ItemStack(SIBlocks.reinforcedCrusher))));
         ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeAlloySmelter),new ItemStack(SIBlocks.basicAlloySmelter),new ItemStack(SIBlocks.reinforcedAlloySmelter))));
         PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePlateFormer),new ItemStack(SIBlocks.basicPlateFormer),new ItemStack(SIBlocks.reinforcedPlateFormer))));
