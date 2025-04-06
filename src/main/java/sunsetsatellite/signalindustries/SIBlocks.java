@@ -1414,7 +1414,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "basic_signalum_dynamo",
                 "basicSignalumDynamo",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntitySignalumDynamo::new, "dynamo"),
+                (block)->new BlockLogicEnergyMachine(block, Material.metal, Tier.BASIC, TileEntitySignalumDynamo::new, "dynamo"),
                 new MachineTextures()
         );
 
