@@ -35,6 +35,11 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     }
 
     @Override
+    public int getFluidAmount(ItemStack stack) {
+        return stack.getData().getInteger("fuel");
+    }
+
+    @Override
     public boolean canFill(ItemStack stack) {
         return getRemainingCapacity(stack) > 0;
     }

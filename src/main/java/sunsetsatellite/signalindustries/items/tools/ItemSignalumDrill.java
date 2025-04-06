@@ -174,6 +174,11 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     }
 
     @Override
+    public int getFluidAmount(ItemStack stack) {
+        return stack.getData().getInteger("energy");
+    }
+
+    @Override
     public boolean canFill(ItemStack stack) {
         return getRemainingCapacity(stack) > 0;
     }

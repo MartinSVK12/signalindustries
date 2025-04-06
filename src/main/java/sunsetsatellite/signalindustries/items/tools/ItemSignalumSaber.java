@@ -47,6 +47,11 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     }
 
     @Override
+    public int getFluidAmount(ItemStack stack) {
+        return stack.getData().getInteger("energy");
+    }
+
+    @Override
     public boolean canFill(ItemStack stack) {
         return getRemainingCapacity(stack) > 0;
     }

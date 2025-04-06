@@ -38,6 +38,11 @@ public class ItemSignalumCrystal extends Item implements IItemFluidContainer, IC
     }
 
     @Override
+    public int getFluidAmount(ItemStack stack) {
+        return stack.getData().getInteger("saturation");
+    }
+
+    @Override
     public boolean canFill(ItemStack stack) {
         return getRemainingCapacity(stack) > 0;
     }
