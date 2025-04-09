@@ -18,6 +18,12 @@ pluginManagement {
             url = 'https://maven.thesignalumproject.net/infrastructure'
         }
     }
+    plugins {
+        id 'org.jetbrains.kotlin.jvm' version '2.1.20'
+    }
+}
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 
 // catalyst
@@ -34,6 +40,9 @@ include(":btwaila")
 include(":dragonfly")
 include(":vq")
 include(":retrostorage")
+//include(":halplibe")
+//include(":cc")
+//include(":vm")
 
 // catalyst
 project(":catalyst").projectDir = file("${rootProject.projectDir}/../catalyst")
@@ -49,3 +58,6 @@ project(":btwaila").projectDir = file("${rootProject.projectDir}/../btwaila")
 project(":dragonfly").projectDir = file("${rootProject.projectDir}/../dragonfly")
 project(":vq").projectDir = file("${rootProject.projectDir}/../vintage-questing")
 project(":retrostorage").projectDir = file("${rootProject.projectDir}/../retrostorage")
+//project(":halplibe").projectDir = file("${rootProject.projectDir}/../bta-halplibe")
+//project(":cc").projectDir = file("${rootProject.projectDir}/../computercraft")
+//project(":vm").projectDir = file("${rootProject.projectDir}/../vm")

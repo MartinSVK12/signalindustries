@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version '1.7.bta'
     id 'java'
     id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 import org.gradle.internal.os.OperatingSystem
@@ -91,6 +92,7 @@ dependencies {
 
     // Helper library
     // If you do not need Halplibe you can comment this line out or delete this line
+    //implementation(project(path: ":halplibe", configuration: "namedElements"))
     modImplementation("turniplabs:halplibe:${project.halplibe_version}")
 
     modImplementation("turniplabs:modmenu-bta:${project.mod_menu_version}")
@@ -107,6 +109,8 @@ dependencies {
     implementation(project(path: ":dragonfly", configuration: "namedElements"))
     implementation(project(path: ":vq", configuration: "namedElements"))
     implementation(project(path: ":retrostorage", configuration: "namedElements"))
+    //implementation(project(path: ":cc", configuration: "namedElements"))
+    //implementation(project(":vm"))
 
     implementation "org.slf4j:slf4j-api:1.8.0-beta4"
     implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
@@ -135,11 +139,10 @@ dependencies {
     implementation "org.lwjgl:lwjgl-openal:$lwjglVersion"
     implementation "org.lwjgl:lwjgl-opengl:$lwjglVersion"
     implementation "org.lwjgl:lwjgl-stb:$lwjglVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
     withSourcesJar()
 }
 
@@ -193,6 +196,10 @@ publishing {
             }
         }
     }
+}
+
+kotlin {
+    jvmToolchain(8)
 }
 
 static boolean checkVersion(String group, String name, String version) {

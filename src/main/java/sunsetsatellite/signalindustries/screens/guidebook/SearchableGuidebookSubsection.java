@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.util;
+package sunsetsatellite.signalindustries.screens.guidebook;
 
 import net.minecraft.client.gui.guidebook.GuidebookPage;
 import net.minecraft.client.gui.guidebook.GuidebookSection;

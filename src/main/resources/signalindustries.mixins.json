@@ -22,6 +22,7 @@
   ],
   "client": [
     "GameSettingsMixin",
+    "GuidebookSectionsMixin",
     "HudIngameMixin",
     "MobRendererMixin",
     "MobRendererPlayerMixin",
@@ -38,7 +39,6 @@
   },
   "server": [
     "PacketHandlerLoginMixin",
-    "PlayerListMixin",
     "PlayerServerMixin"
   ]
 }
