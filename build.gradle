@@ -11,7 +11,6 @@ plugins {
     id 'fabric-loom' version '1.7.bta'
     id 'java'
     id 'maven-publish'
-    id 'org.jetbrains.kotlin.jvm'
     id "com.modrinth.minotaur" version "2.+"
 }
 
@@ -151,7 +150,6 @@ dependencies {
     implementation "org.lwjgl:lwjgl-openal:$lwjglVersion"
     implementation "org.lwjgl:lwjgl-opengl:$lwjglVersion"
     implementation "org.lwjgl:lwjgl-stb:$lwjglVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 java {
@@ -249,10 +247,6 @@ tasks.register('github') {
         release.uploadAsset(project.file(remapJar.getArchiveFile().get().getAsFile()),"application/java-archive")
         release.uploadAsset(project.file(remapSourcesJar.getArchiveFile().get().getAsFile()),"application/java-archive")
     }
-}
-
-kotlin {
-    jvmToolchain(8)
 }
 
 static boolean checkVersion(String group, String name, String version) {
