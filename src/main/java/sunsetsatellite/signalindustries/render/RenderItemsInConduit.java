@@ -39,7 +39,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
             Axis endAxis = end.getAxis();
             double v = 0;
             boolean positive = (begin == Direction.Z_POS || begin == Direction.Y_POS || begin == Direction.X_POS);
-            v = Catalyst.map(content.getTicks(), TileEntityItemConduit.TRANSFER_TICKS, 0, 1, -1);
+            v = Catalyst.map(content.getTicks() + g, TileEntityItemConduit.TRANSFER_TICKS, 0, 1, -1);
             Vec3f base = new Vec3f(0.5d);
             Vec3f pos = new Vec3f(x,y,z);
             float lerped = 0;
@@ -83,9 +83,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                 ((IFullbright)blockModel).enableFullbright();
             }
             GL11.glPushMatrix();
-            //GL11.glTranslated(p.x,p.y,p.z);
             itemRenderer.render(tessellator, content.getStack(), p.x,p.y,p.z,0, g);
-            //model.renderItemInWorld(tessellator,null,content.getStack(),1,0,true);
             ((IFullbright) model).disableFullbright();
             if(model instanceof ItemModelBlock){
                 BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Blocks.blocksList[content.getStack().itemID]);

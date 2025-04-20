@@ -132,7 +132,7 @@ public class ScreenItemIOConfig extends Screen {
 
             if(button.id > 5 && button.id < 12){
                 Direction dir = Direction.values()[button.id-6];
-                tile.cycleActiveFluidSlotForSide(dir,false);
+                tile.cycleActiveItemSlotForSide(dir,false);
                 button.displayString = String.valueOf(tile.activeItemSlots.get(dir));
                 currentButtonId = button.id;
             }
@@ -192,7 +192,7 @@ public class ScreenItemIOConfig extends Screen {
     protected void buttonClickedAlt(ButtonElement button) {
         if(button.id > 5 && button.id < 12){
             Direction dir = Direction.values()[button.id-6];
-            tile.cycleActiveFluidSlotForSide(dir,true);
+            tile.cycleActiveItemSlotForSide(dir,true);
             button.displayString = tile.activeItemSlots.get(dir) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(dir));
 
             if(EnvironmentHelper.isClientWorld()){
