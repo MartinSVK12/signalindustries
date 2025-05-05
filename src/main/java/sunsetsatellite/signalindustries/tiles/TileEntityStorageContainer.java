@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.mixin.interfaces.UnlimitedItemStack;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
+//TODO: make better with item conduits
 public class TileEntityStorageContainer extends TileEntityTiered implements Container {
     public ItemStack contents = null;
     public int capacity = 4096;

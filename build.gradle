@@ -103,8 +103,8 @@ dependencies {
 
     // Helper library
     // If you do not need Halplibe you can comment this line out or delete this line
-    //implementation(project(path: ":halplibe", configuration: "namedElements"))
     modImplementation("turniplabs:halplibe:${project.halplibe_version}")
+    //implementation(project(path: ":halplibe", configuration: "namedElements"))
 
     modImplementation("turniplabs:modmenu-bta:${project.mod_menu_version}")
 
