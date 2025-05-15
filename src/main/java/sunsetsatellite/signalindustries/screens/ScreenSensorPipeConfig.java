@@ -7,6 +7,7 @@ import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.gui.ItemElement;
 import net.minecraft.client.gui.TooltipElement;
 import net.minecraft.client.gui.container.ScreenContainerAbstract;
+import net.minecraft.client.option.enums.DescriptionPromptEnum;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
@@ -71,7 +72,7 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
         if(mouseX >= pseudoSlotX - 1 && mouseX < pseudoSlotX + 16 + 1 && mouseY >= pseudoSlotY - 1 && mouseY < pseudoSlotY + 16 + 1){
             guiRenderItem.render(tile.sensorStack,k+45,l+35,true);
             if (grabbedItem == null && tile.sensorStack != null) {
-                boolean showDescription = Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) || this.mc.gameSettings.alwaysShowDescriptions.value;
+                boolean showDescription = Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) || this.mc.gameSettings.itemDescriptions.value == DescriptionPromptEnum.ALWAYS_SHOW;
                 String str = this.TooltipElement.getTooltipText(tile.sensorStack, showDescription);
                 if (!str.isEmpty()) {
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
