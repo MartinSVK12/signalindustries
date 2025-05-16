@@ -1529,7 +1529,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "reinforced_chunkloader",
                 "reinforcedChunkloader",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityChunkloader::new, null),
+                (block) -> new BlockLogicChunkloader(block, Material.metal, Tier.REINFORCED, TileEntityChunkloader::new, null),
                 new MachineTextures(Tier.REINFORCED)
                         .withDefaultTexture("spacetime_maintainer_side_inactive")
                         .withActiveTexture("spacetime_maintainer_side_active")

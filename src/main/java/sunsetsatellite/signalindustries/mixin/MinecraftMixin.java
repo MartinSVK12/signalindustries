@@ -3,15 +3,17 @@ package sunsetsatellite.signalindustries.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.client.player.controller.PlayerController;
+import net.minecraft.client.world.chunk.provider.ChunkProviderDynamic;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.IChunkLoader;
+import net.minecraft.core.world.chunk.provider.IChunkProvider;
 import org.lwjgl.input.Keyboard;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,12 +21,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.catalyst.core.util.Direction;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.catalyst.core.util.vector.Vec2f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
+import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.KeyboardHandler;
 
@@ -108,5 +111,12 @@ public abstract class MinecraftMixin {
             return original.call(instance, player, world, itemstack, blockX, blockY, blockZ, side, clickPosition.x, clickPosition.y);
         }
         return original.call(instance, player, world, itemstack, blockX, blockY, blockZ, side, xPlaced, yPlaced);
+    }
+
+    @Inject(method = "createChunkProvider",at = @At("HEAD"),cancellable = true)
+    public void switchProvider(World world, IChunkLoader chunkLoader, CallbackInfoReturnable<IChunkProvider> cir){
+        if(SIConfig.config.getBoolean("Experimental.enableDynamicChunkProvider")){
+            cir.setReturnValue(new ChunkProviderDynamic(world,chunkLoader,world.getWorldType().createChunkGenerator(world)));
+        }
     }
 }
