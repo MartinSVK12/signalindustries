@@ -419,7 +419,7 @@
       {
         "symbol": "L",
         "stack": {
-          "key":  "item.tool.pickaxe.steel",
+          "key":  "item.tool.pickaxe.diamond",
           "amount": 1,
           "meta": 0
         }

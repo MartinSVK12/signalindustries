@@ -1,17 +1,13 @@
 package sunsetsatellite.signalindustries;
 
-import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
-import net.minecraft.client.render.worldtype.WorldTypeFX;
-import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.tag.Tag;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
-import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.net.entity.NetEntityHandler;
-import net.minecraft.core.net.entity.entries.NetEntryArrow;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.slf4j.Logger;
@@ -71,6 +67,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Tag<Block<?>> BASIC_CASING = Tag.of("basic_casing");
     public static final Tag<Block<?>> REINFORCED_CASING = Tag.of("reinforced_casing");
     public static final Tag<Block<?>> AWAKENED_CASING = Tag.of("awakened_casing");
+    public static final Tag<Block<?>> ORE_BLOCK = Tag.of("ore_block");
 
     @SuppressWarnings("InstantiationOfUtilityClass")
     @Override
@@ -124,6 +121,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityWarpGate.class, id("warp_gate"));
         EntityHelper.createTileEntity(TileEntityMultiConduit.class, id("multi_conduit"));
         EntityHelper.createTileEntity(TileEntityProgrammer.class,id("programmer"));
+        //EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar")); //todo
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");
@@ -150,6 +148,17 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         NetworkHandler.registerNetworkMessage(NetworkMessageMeteorLocationSync::new);
         NetworkHandler.registerNetworkMessage(NetworkMessageSensorPipeSetFilter::new);
         NetworkHandler.registerNetworkMessage(NetworkMessagePowerSuitRemoteSync::new);
+
+        BlockTags.TAG_LIST.add(SIGNALUM_CONDUITS_CONNECT);
+        BlockTags.TAG_LIST.add(FLUID_CONDUITS_CONNECT);
+        BlockTags.TAG_LIST.add(ITEM_CONDUITS_CONNECT);
+        BlockTags.TAG_LIST.add(CASING);
+        BlockTags.TAG_LIST.add(REPLACEABLE_CASING);
+        BlockTags.TAG_LIST.add(PROTOTYPE_CASING);
+        BlockTags.TAG_LIST.add(BASIC_CASING);
+        BlockTags.TAG_LIST.add(REINFORCED_CASING);
+        BlockTags.TAG_LIST.add(AWAKENED_CASING);
+        BlockTags.TAG_LIST.add(ORE_BLOCK);
 
         LOGGER.info("Signal Industries is loading... Shine!");
     }

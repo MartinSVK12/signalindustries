@@ -136,13 +136,15 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicWrathBeacon;
     public static Block<? extends BlockLogic> reinforcedWrathBeacon;
 
+    //public static Block<? extends BlockLogic> pulsarBlock; //todo
+
     public static Block<? extends BlockLogic> dimensionalAnchor;
 
     public static Block<? extends BlockLogic> dilithiumStabilizer;
 
     public static Block<? extends BlockLogic> redstoneBooster;
     public static Block<? extends BlockLogic> dilithiumBooster;
-    public static Block<? extends BlockLogic> awakenedBooster; //TODO: W.I.P.
+    public static Block<? extends BlockLogic> awakenedBooster;
 
     public static Block<? extends BlockLogic> prototypePump;
     public static Block<? extends BlockLogic> basicPump;
@@ -155,6 +157,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> prototypeFilter;
 
     public static Block<? extends BlockLogic> basicAutomaticMiner;
+    public static Block<? extends BlockLogic> reinforcedAutomaticMiner;
 
     public static Block<? extends BlockLogic> externalIo;
     public static Block<? extends BlockLogic> reinforcedExternalIo;
@@ -929,6 +932,18 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withOverbrightNorthTexture("auto_miner_overlay")
         );
 
+        reinforcedAutomaticMiner = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.automaticMiner",
+                "reinforced_automatic_miner",
+                "reinforcedAutomaticMiner",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityAutoMiner::new, "auto_miner"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultNorthTexture("reinforced_automatic_miner")
+                        .withActiveNorthTexture("reinforced_automatic_miner")
+                        .withOverbrightNorthTexture("auto_miner_overlay")
+        );
+
         externalIo = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.externalIO",
                 "basic_external_io",
@@ -1510,6 +1525,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withActiveSideTextures("reinforced_wrath_beacon_active")
         );
 
+        //todo
+        /*pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.pulsar",
+                "pulsar",
+                "pulsarBlock",
+                3,
+                (block) -> new BlockLogicPulsar(block, Material.metal, Tier.REINFORCED).setSolid(false),
+                new MachineTextures(Tier.REINFORCED)
+        );*/
+
         reinforcedBuilder = customBlock(defaultBuilder(Tier.REINFORCED),
                 "reinforced.builder",
                 "reinforced_builder",
@@ -1726,9 +1751,24 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
 
         );
 
-        List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
+        //Arrays.stream(Blocks.class.getDeclaredFields()).filter().filter((F)->F.getName().contains("ORE_")).forEach((F)->{((Block) F.get(null))})
+        
+         Arrays.stream(Blocks.class.getDeclaredFields())
+                 .filter((F) -> Block.class.isAssignableFrom(F.getType()))
+                 .filter((F)->F.getName().contains("ORE_"))
+                 .forEach((F)->{
+                     try {
+                         ((Block<?>) F.get(null)).withTags(ORE_BLOCK);
+                     } catch (IllegalAccessException e) {
+                         throw new RuntimeException(e);
+                     }
+                 });
 
-        int unknownAmount = 0;
+         dilithiumOre.withTags(ORE_BLOCK);
+         signalumOre.withTags(ORE_BLOCK);
+         dimensionalShardOre.withTags(ORE_BLOCK);
+
+        /*int unknownAmount = 0;
         int itemAmount = blockFields.size();
         for (Field field : blockFields) {
             try {
@@ -1748,7 +1788,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
-        }
+        }*/
 
         //LOGGER.info("Block progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
 

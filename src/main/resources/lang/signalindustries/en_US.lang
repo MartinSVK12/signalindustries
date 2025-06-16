@@ -114,8 +114,8 @@ item.signalindustries.romChip.precision.desc=Allows <Automatic Miners> to execut
 item.signalindustries.romChip.unlimited.name=Unlimited Power Chip
 item.signalindustries.romChip.unlimited.desc=Allows some machines to ignore their requirements. Creative mode only.
 
-item.signalindustries.reinforced.pulsar.name=The Pulsar
-item.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing <Signaling Energy> either outwards into a powerful shockwave or inwards to break a slotted item inside.
+item.signalindustries.reinforced.pulsar.name=The Pulsar (Portable)
+item.signalindustries.reinforced.pulsar.desc=A significantly smaller and portable version of the <Pulsar> fitted inside a gauntlet. Still powerful enough to do its job properly.
 
 item.signalindustries.reinforced.signalumSaber.name=Signalite Saber
 item.signalindustries.reinforced.signalumSaber.desc=A heated blade capable of cutting almost anything if powered.
@@ -329,6 +329,8 @@ item.signalindustries.configurationTablet.disconnect.name=Configuration Tablet (
 item.signalindustries.configurationTablet.disconnect.desc=Used to disconnect conduits and remove covers. Shift+RMB to change mode.
 item.signalindustries.configurationTablet.config.name=Configuration Tablet (Configurator)
 item.signalindustries.configurationTablet.config.desc=Used to configure covers. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.copy.name=Configuration Tablet (Copy & Paste)
+item.signalindustries.configurationTablet.copy.desc=Work in progress, doesn't work currently. Copies configurations from machine to another. Shift+RMB to change mode.
 
 item.signalindustries.cover.blank.name=Blank Cover
 item.signalindustries.cover.blank.desc=Covers can be attached to any side of a machine for extended functionality, although this cover doesn't have any.
@@ -463,6 +465,9 @@ tile.signalindustries.reinforced.wrathBeacon.desc=Legends speak of a tree that f
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
+tile.signalindustries.reinforced.pulsar.name=The Pulsar
+tile.signalindustries.reinforced.pulsar.desc=An energy weapon capable of focusing <Signaling Energy> either outwards into a powerful shockwave or inwards to break a slotted item inside.
+
 tile.signalindustries.reinforced.dimensionalAnchor.name=Dimensional Anchor
 tile.signalindustries.reinforced.dimensionalAnchor.desc=Provides a static point in space for <Warp Orbs> to anchor to.
 
@@ -594,8 +599,10 @@ tile.signalindustries.basic.automaticMiner.name=Basic Automatic Miner
 tile.signalindustries.basic.automaticMiner.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by <Signaling Energy>.
 tile.signalindustries.reinforced.automaticMiner.name=Reinforced Quarry
 tile.signalindustries.reinforced.automaticMiner.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
+tile.signalindustries.reinforced.wakingMiner.name=Waking Reinforced Quarry
+tile.signalindustries.reinforced.wakingMiner.desc=Digs below bedrock to uncover massive amounts of previously unavailable ore. Yields 3x the material for any ore found.
 tile.signalindustries.awakened.automaticMiner.name=Awakened Galactic Excavation Facility Controller
-tile.signalindustries.awakened.automaticMiner.name=Can mine out whole worlds across the galaxy in search of rare ore remotely!
+tile.signalindustries.awakened.automaticMiner.name=Maintains a small wormhole and an array of mining drills to extract ore from far, far away. Returns with 4x the material for any ore found.
 
 tile.signalindustries.basic.stoneworks.name=Basic Stoneworks
 tile.signalindustries.basic.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
@@ -1137,10 +1144,12 @@ quest.signalindustries.dimensionalChip.name=Dimensional Chip
 quest.signalindustries.dimensionalChip.desc=A cutout piece of a <Dimensional Shard>. Used in a specific circuit making use of the minerals special properties.
 quest.signalindustries.eternity.name=Eternity
 quest.signalindustries.eternity.desc=The world filling the space between dimensions.\n\nSurprisingly not empty and instead filled with odd wonders.
-quest.signalindustries.pulsar.name=The Pulsar
-quest.signalindustries.pulsar.desc=A gadget capable of unleashing a shockwave of <Signaling Energy>, dealing AOE damage to nearby enemies.\n\nAlternatively, can focus its stored energy into a singular point in its center where an item can also be slotted in.\n\nTo mind comes a particular orb that might need this kind and amount of force to "open".
+quest.signalindustries.pulsarBlock.name=The Pulsar
+quest.signalindustries.pulsarBlock.desc=A machine capable of unleashing a large shockwave of <Signaling Energy>, dealing massive AOE damage to nearby enemies.\n\nAlternatively, can focus its stored energy into a singular point in its center where an item can also be slotted in.\n\nTo mind comes a particular orb that might need this kind and amount of force to "open".\n\nCan be activated remotely via redstone.
+quest.signalindustries.pulsar.name=The Pulsar (Portable)
+quest.signalindustries.pulsar.desc=A portable, item form of the <Pulsar>, weaker than the block counterpart but can still do the same stuff.
 quest.signalindustries.pulsarAttachment.name=The Pulsar (Attachment)
-quest.signalindustries.pulsarAttachment.desc=This is an attachment version of <The Pulsar> that can be connected to a <Signalum Power Suit>.\n\nAlt+Keybind to open inventory.\nShift+Keybind to charge.\nKeybind to activate.
+quest.signalindustries.pulsarAttachment.desc=This is an attachment version of the portable <Pulsar> that can be connected to a <Signalum Power Suit>.\n\nAlt+Keybind to open inventory.\nShift+Keybind to charge.\nKeybind to activate.
 quest.signalindustries.signalumSaber.name=Signalite Saber
 quest.signalindustries.signalumSaber.desc=A sword whose blade is maintained by <Signaling Energy>.\n\nAs such has to be powered to be effective, but can inflict severe damage if so.
 quest.signalindustries.saturatedKey.name=Saturated Key
@@ -1194,6 +1203,7 @@ container.signalindustries.storageContainer.name=Storage Container
 container.signalindustries.energyInjector.name=Energy Injector
 container.signalindustries.programmer.name=EEPROM Programmer
 container.signalindustries.pulsar.name=Pulsar
+container.signalindustries.pulsarBlock.name=Pulsar
 container.signalindustries.backpack.name=Backpack
 container.signalindustries.harness.name=Signalum Power Harness
 container.signalindustries.powerSuit.name=Signalum Power Suit

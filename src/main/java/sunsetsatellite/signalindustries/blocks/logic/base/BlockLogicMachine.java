@@ -65,10 +65,6 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
         return this;
     }
 
-    public boolean isSolid() {
-        return solid;
-    }
-
     @Override
     public boolean isSolidRender() {
         return solid;

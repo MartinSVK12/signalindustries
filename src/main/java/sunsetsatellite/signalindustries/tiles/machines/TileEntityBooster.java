@@ -161,6 +161,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
             if(itemContents[0].stackSize <= 0){
                 itemContents[0] = null;
             }
+            progressTicks = progressMaxTicks;
         }
     }
 
@@ -168,9 +169,9 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
         if(canProcess() && progressTicks <= 0) {
             if (tier == Tier.BASIC) {
                 if (itemContents[0].getItem().equals(Items.DUST_REDSTONE)) {
-                    progressMaxTicks = 20 * speedMultiplier;
+                    progressMaxTicks = 150 * speedMultiplier;
                 } else if (itemContents[0].itemID == Blocks.BLOCK_REDSTONE.id()) {
-                    progressMaxTicks = 200 * speedMultiplier;
+                    progressMaxTicks = 1500 * speedMultiplier;
                 }
             } else {
                 if (itemContents[0].getItem().equals(SIItems.dilithiumShard)) {
@@ -178,9 +179,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
                 } else if (itemContents[0].itemID == SIBlocks.dilithiumBlock.id()) {
                     progressMaxTicks = 3000 * speedMultiplier;
                 }
-
             }
-            progressTicks = progressMaxTicks;
         }
     }
 

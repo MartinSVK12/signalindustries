@@ -11,128 +11,149 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.IScreenActionListener;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.vector.Vec2i;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.Tier;
 
-public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements IBoostable {
+public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements IBoostable, IScreenActionListener {
 
     //TODO: conduit output is broken
 
-    public Vec3i from = new Vec3i();
-    public Vec3i to = new Vec3i();
+    public Vec2i maxSize;
+    public Vec2i size;
     public Vec3i current = new Vec3i();
     public TickTimer workTimer = new TickTimer(this,this::work,progressMaxTicks,true);
     public int cost;
+    public int multiplier = 1;
     public TileEntityAutoMiner(){
-        progressMaxTicks = 20;
+        progressMaxTicks = 5;
+        fuelMaxBurnTicks = 20;
         cost = 1;
         itemContents = new ItemStack[1];
         fluidCapacity[0] = Short.MAX_VALUE/2;
         acceptedFluids.get(0).add(SIFluids.ENERGY);
-        from = new Vec3i(0,0,0);
-        to = new Vec3i(16,16,16);
         workTimer.pause();
         transferSpeed = 50;
         //.copy().add(new Vec3i(1,0,1));
         itemConnections.replace(Direction.Y_POS,Connection.OUTPUT);
     }
 
+    @Override
+    public void init(Block<?> block) {
+        super.init(block);
+        maxSize = tier == Tier.BASIC ? new Vec2i(16,16) : new Vec2i(32,32);
+        size = maxSize.copy();
+        multiplier = tier == Tier.BASIC ? 1 : 2;
+    }
+
     public void work(){
-        if(fluidContents[0] != null && fluidContents[0].amount > cost){
+        if(fuelBurnTicks == 0 && fluidContents[0] != null && fluidContents[0].amount > cost) {
             fluidContents[0].amount -= cost;
-            if(fluidContents[0].amount <= 0){
+            fuelBurnTicks = fuelMaxBurnTicks;
+            if (fluidContents[0].amount <= 0) {
                 fluidContents[0] = null;
             }
+        }
+        if(fuelBurnTicks > 0){
+            fuelBurnTicks--;
+            for (int m = 0; m < multiplier; m++) {
+                current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
 
-            current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-
-            if(worldObj.getBlockId(current.x,current.y-1,current.z) != Blocks.BEDROCK.id()){
-                Block<?> block = Blocks.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
-                boolean silk = hasSilkTouch();
-                if(block != null){
-                    int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
-                    Direction dir = null;
-                    for (Direction direction : Direction.values()) {
-                        if(itemConnections.get(direction) == Connection.OUTPUT || itemConnections.get(direction) == Connection.BOTH){
-                            if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest || direction.getTileEntity(worldObj,this) instanceof TileEntityItemConduit){
-                                dir = direction;
+                if(worldObj.getBlockId(current.x,current.y-1,current.z) != Blocks.BEDROCK.id()){
+                    Block<?> block = Blocks.getBlock(worldObj.getBlockId(current.x,current.y-1,current.z));
+                    boolean silk = hasSilkTouch();
+                    if(block != null){
+                        int meta = worldObj.getBlockMetadata(current.x, current.y-1, current.z);
+                        Direction dir = null;
+                        for (Direction direction : Direction.values()) {
+                            if(itemConnections.get(direction) == Connection.OUTPUT || itemConnections.get(direction) == Connection.BOTH){
+                                if(direction.getTileEntity(worldObj,this) instanceof TileEntityChest || direction.getTileEntity(worldObj,this) instanceof TileEntityItemConduit){
+                                    dir = direction;
+                                }
                             }
                         }
-                    }
-                    if(dir != null){
-                        TileEntity tile = dir.getTileEntity(worldObj,this);
-                        ItemStack[] drops = block.getBreakResult(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
-                        if(tile instanceof TileEntityChest){
-                            if(drops == null){
-                                block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this,null);
-                                worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
-                                return;
-                            }
-                            for (ItemStack drop : drops) {
-                                int availableSlot = -1;
-                                for (int i = 0; i < ((TileEntityChest) tile).getContainerSize(); i++) {
-                                    ItemStack stack = ((TileEntityChest) tile).getItem(i);
-                                    if(stack == null || (stack.isItemEqual(drop)) && stack.stackSize < stack.getMaxStackSize()) {
-                                        availableSlot = i;
-                                        break;
-                                    }
+                        if(dir != null){
+                            TileEntity tile = dir.getTileEntity(worldObj,this);
+                            ItemStack[] drops = block.getBreakResult(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y,z,meta,tile);
+                            if(block.hasTag(SignalIndustries.ORE_BLOCK) && tier == Tier.REINFORCED){
+                                for (ItemStack drop : drops) {
+                                    drop.stackSize *= 2;
                                 }
-                                if(availableSlot == -1){
+                            }
+                            if(tile instanceof TileEntityChest){
+                                if(drops == null){
                                     block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this,null);
                                     worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
-                                } else {
-                                    ItemStack stack = ((TileEntityChest) tile).getItem(availableSlot);
-                                    if(stack == null){
-                                        ((TileEntityChest) tile).setItem(availableSlot,drop);
-                                    } else if (stack.isItemEqual(drop)){
-                                        stack.stackSize+=drop.stackSize;
-                                    }
-                                    worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                    return;
                                 }
-                            }
-                        } else if(tile instanceof TileEntityItemConduit) {
-                            if(drops != null){
                                 for (ItemStack drop : drops) {
-                                    if(drop != null){
-                                        boolean success = ((TileEntityItemConduit) tile).addItem(drop,dir.getOpposite());
-                                        if(!success){
-                                            block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this, null);
+                                    int availableSlot = -1;
+                                    for (int i = 0; i < ((TileEntityChest) tile).getContainerSize(); i++) {
+                                        ItemStack stack = ((TileEntityChest) tile).getItem(i);
+                                        if(stack == null || (stack.isItemEqual(drop)) && stack.stackSize < stack.getMaxStackSize()) {
+                                            availableSlot = i;
+                                            break;
+                                        }
+                                    }
+                                    if(availableSlot == -1){
+                                        block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this,null);
+                                        worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                    } else {
+                                        ItemStack stack = ((TileEntityChest) tile).getItem(availableSlot);
+                                        if(stack == null){
+                                            ((TileEntityChest) tile).setItem(availableSlot,drop);
+                                        } else if (stack.isItemEqual(drop)){
+                                            stack.stackSize+=drop.stackSize;
                                         }
                                         worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                                     }
                                 }
+                            } else if(tile instanceof TileEntityItemConduit) {
+                                if(drops != null){
+                                    for (ItemStack drop : drops) {
+                                        if(drop != null){
+                                            boolean success = ((TileEntityItemConduit) tile).addItem(drop,dir.getOpposite());
+                                            if(!success){
+                                                block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this, null);
+                                            }
+                                            worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                                        }
+                                    }
+                                }
+                            } else {
+                                block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this, null);
+                                worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                             }
                         } else {
                             block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this, null);
                             worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
                         }
-                    } else {
-                        block.dropBlockWithCause(worldObj, silk ? EnumDropCause.SILK_TOUCH : EnumDropCause.PROPER_TOOL,x,y+1,z,meta,this, null);
-                        worldObj.setBlockWithNotify(current.x,current.y-1,current.z,0);
+                    }
+                }
+
+                current.x--;
+                if(current.y < 1){
+                    current.y = y+4;
+                    //workTimer.pause();
+                }
+                if(current.x < x-(size.x-2)){
+                    current.x = x-1;
+                    current.z++;
+                    current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
+                    if(current.z > z+(size.y-2)){
+                        current.z = z+1;
+                        current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
                     }
                 }
             }
-
-            current.x--;
-            if(current.y < 1){
-                current.y = y+4;
-                //workTimer.pause();
-            }
-            if(current.x < x-14){
-                current.x = x-1;
-                current.z++;
-                current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-                if(current.z > z+14){
-                    current.z = z+1;
-                    current.y = findTopSolidNonLiquidBlockLimited(worldObj,current.x, current.z,y+4);
-                }
-            }
-
         }
     }
 
@@ -186,5 +207,31 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     @Override
     public String getNameTranslationKey() {
         return "container.signalindustries.autoMiner";
+    }
+
+    @Override
+    public void buttonClicked(int id, int button, int channel) {
+        switch (id) {
+            case 3:
+                if (size.x < maxSize.x) {
+                    size.x++;
+                }
+                break;
+            case 4:
+                if (size.x > 1) {
+                    size.x--;
+                }
+                break;
+            case 5:
+                if (size.y < maxSize.y) {
+                    size.y++;
+                }
+                break;
+            case 6:
+                if (size.y > 1) {
+                    size.y--;
+                }
+                break;
+        }
     }
 }
