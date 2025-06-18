@@ -1,11 +1,13 @@
 package sunsetsatellite.signalindustries.dim;
 
 import net.minecraft.core.Global;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.biome.provider.BiomeProviderSingleBiome;
 import net.minecraft.core.world.config.season.SeasonConfig;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
+import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkGeneratorOverworld;
 import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.weather.Weather;
@@ -15,6 +17,9 @@ import sunsetsatellite.signalindustries.SIBiomes;
 import sunsetsatellite.signalindustries.SIBlocks;
 
 public class WorldTypeEternity extends WorldType {
+
+    public int fillerBlock = SIBlocks.realityFabric.id();
+
     public WorldTypeEternity(String languageKey) {
         super(Properties.of(languageKey)
                 .defaultWeather(Weathers.OVERWORLD_CLEAR)
@@ -59,7 +64,7 @@ public class WorldTypeEternity extends WorldType {
 
     @Override
     public int getFillerBlockId() {
-        return SIBlocks.realityFabric.id();
+        return fillerBlock;
     }
 
     @Override

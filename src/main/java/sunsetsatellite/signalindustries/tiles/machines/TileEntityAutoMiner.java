@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
@@ -27,8 +28,8 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
 
     //TODO: conduit output is broken
 
-    public Vec2i maxSize;
-    public Vec2i size;
+    public Vec2i maxSize = new Vec2i(16,16);
+    public Vec2i size = new Vec2i(0,0);
     public Vec3i current = new Vec3i();
     public TickTimer workTimer = new TickTimer(this,this::work,progressMaxTicks,true);
     public int cost;
@@ -50,7 +51,9 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     public void init(Block<?> block) {
         super.init(block);
         maxSize = tier == Tier.BASIC ? new Vec2i(16,16) : new Vec2i(32,32);
-        size = maxSize.copy();
+        if(size.x == 0 || size.y == 0){
+            size = maxSize.copy();
+        }
         multiplier = tier == Tier.BASIC ? 1 : 2;
     }
 
@@ -179,7 +182,22 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         }
     }
 
-    public int findTopSolidNonLiquidBlockLimited(World world,  int x, int z, int yLimit) {
+    @Override
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
+        CompoundTag sizeTag = new CompoundTag();
+        size.writeToNBT(sizeTag);
+        tag.put("Size",sizeTag);
+    }
+
+    @Override
+    public void readFromNBT(CompoundTag tag) {
+        super.readFromNBT(tag);
+        CompoundTag sizeTag = tag.getCompound("Size");
+        size.readFromNBT(sizeTag);
+    }
+
+    public int findTopSolidNonLiquidBlockLimited(World world, int x, int z, int yLimit) {
         Chunk chunk = world.getChunkFromBlockCoords(x, z);
         int k = Math.min(yLimit,world.getHeightBlocks() - 1);
         x &= 15;

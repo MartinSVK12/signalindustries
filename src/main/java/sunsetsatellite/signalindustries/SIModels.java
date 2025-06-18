@@ -21,6 +21,7 @@ import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multipart.block.model.BlockModelMultipart;
 import sunsetsatellite.catalyst.multipart.block.model.MultipartBlockModelBuilder;
+import sunsetsatellite.signalindustries.blocks.color.BlockColorUnraveledFabric;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicStorageContainer;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
@@ -371,6 +372,6 @@ public class SIModels implements ModelEntrypoint {
 
     @Override
     public void initBlockColors(BlockColorDispatcher dispatcher) {
-
+        //ModelHelper.setBlockColor(unraveledFabric, BlockColorUnraveledFabric::new);
     }
 }

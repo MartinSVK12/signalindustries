@@ -208,6 +208,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogicPortal> portalEternity;
     public static Block<? extends BlockLogic> realityFabric;
     public static Block<? extends BlockLogic> rootedFabric;
+    //public static Block<? extends BlockLogic> unraveledFabric;
     public static Block<? extends BlockLogic> dilithiumRail;
     public static Block<? extends BlockLogic> eternalTreeLog;
     public static Block<? extends BlockLogic> fueledEternalTreeLog;
@@ -216,9 +217,11 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> voidContainer;
 
     public static Block<? extends BlockLogic> energyStill;
+    public static Block<? extends BlockLogic> energyFlowing;
     public static Block<? extends BlockLogic> burntSignalumFlowing;
     public static Block<? extends BlockLogic> burntSignalumStill;
-    public static Block<? extends BlockLogic> energyFlowing;
+    public static Block<? extends BlockLogic> worldResinStill;
+    public static Block<? extends BlockLogic> worldResinFlowing;
 
     @Override
     public void init() {
@@ -257,6 +260,24 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 0,
                 (block)-> new BlockLogicFluidFlowing(block,Material.water,energyStill),
                 new MachineTextures().withDefaultTexture("burnt_signalum"))
+                .withTags(BlockTags.NOT_IN_CREATIVE_MENU);
+
+        worldResinFlowing = customBlock(new BlockBuilder(MOD_ID),
+                "worldResin.flowing",
+                "world_resin_flowing",
+                "worldResinFlowing",
+                0,
+                (block)-> new BlockLogicFluidFlowing(block,Material.water,worldResinStill),
+                new MachineTextures().withDefaultTexture("world_resin_transparent"))
+                .withTags(BlockTags.NOT_IN_CREATIVE_MENU);
+
+        worldResinStill =  customBlock(new BlockBuilder(MOD_ID),
+                "worldResin.still",
+                "world_resin_still",
+                "worldResinStill",
+                0,
+                (block)-> new BlockLogicFluidFlowing(block,Material.water,worldResinStill),
+                new MachineTextures().withDefaultTexture("world_resin_transparent"))
                 .withTags(BlockTags.NOT_IN_CREATIVE_MENU);
 
         signalumOre = customBlock(new BlockBuilder(MOD_ID)
@@ -1718,6 +1739,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures()
                         .withDefaultTexture("reality_fabric")
         );
+
+        /*unraveledFabric = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.STONE).setHardness(150).setResistance(50000),
+                "unraveledFabric",
+                "unraveled_fabric",
+                "unraveledFabric",
+                config.getInt("Other.awakenedMiningLevel"),
+                (block)-> new BlockLogicUndroppable(block, Material.stone),
+                new MachineTextures()
+                        .withDefaultTexture("unraveled_fabric")
+        );*/
 
         eternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setHardness(75).setResistance(50000).setLuminance(12),
                 "eternalTreeLog",

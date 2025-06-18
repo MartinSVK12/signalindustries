@@ -8,8 +8,10 @@ import net.minecraft.core.world.generate.CavesLargeFeature;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
 import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
 import net.minecraft.core.world.generate.chunk.perlin.SurfaceGenerator;
+import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkGeneratorOverworld;
 import net.minecraft.core.world.noise.CombinedPerlinNoise;
 import net.minecraft.core.world.noise.PerlinNoise;
+import sunsetsatellite.signalindustries.SIBlocks;
 
 public class ChunkGeneratorEternity extends ChunkGenerator
 {
@@ -20,12 +22,14 @@ public class ChunkGeneratorEternity extends ChunkGenerator
     private final PerlinNoise octavesA;
     private final PerlinNoise octavesB;
 
+    private final ChunkGeneratorEternityFarlands farlandsGenerator;
+
     private final SurfaceGenerator sg;
-    private final CavesLargeFeature cg;
 
     public ChunkGeneratorEternity(World world)
     {
         super(world, new ChunkDecoratorEternity(world));
+        this.farlandsGenerator = new ChunkGeneratorEternityFarlands(world);
         long seed = world.getRandomSeed();
 
         combinedA = new CombinedPerlinNoise(new PerlinNoise(seed, 8, 0), new PerlinNoise(seed, 8, 8));
@@ -37,12 +41,18 @@ public class ChunkGeneratorEternity extends ChunkGenerator
         octavesB = new PerlinNoise(seed, 8, 70);
 
         sg = new SurfaceGeneratorEternity(world);
-        cg = new CavesLargeFeature();
     }
 
     @Override
     protected ChunkGeneratorResult doBlockGeneration(Chunk chunk)
     {
+        /*if(chunk.xPosition * 16 > 12550824 || chunk.zPosition * 16 > 12550824 ) {
+            ((WorldTypeEternity) world.getWorldType()).fillerBlock = SIBlocks.unraveledFabric.id();
+            return farlandsGenerator.doBlockGeneration(chunk);
+        }*/
+
+        ((WorldTypeEternity) world.getWorldType()).fillerBlock = SIBlocks.realityFabric.id();
+
         ChunkGeneratorResult result = new ChunkGeneratorResult();
 
         int chunkX = chunk.xPosition;
@@ -134,7 +144,6 @@ public class ChunkGeneratorEternity extends ChunkGenerator
         }
 
         sg.generateSurface(chunk, result);
-        cg.generate(world, chunkX, chunkZ, result);
 
         return result;
     }
