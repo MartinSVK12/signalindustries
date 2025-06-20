@@ -3,7 +3,7 @@ sunsetsatellite - supreme leader
 --Direct contributions--
 beatrice - crystal, sword texture
 theRandomHat - plate texture
-theMidford - ideas, emotional support, icons
+theMidford - ideas, balancing, icons, diamond and signalite gear textures
 watermelonMojito - automatic miner texture
 felix170905 - connected textures code
 mzov - basic tier texture remakes
