@@ -140,7 +140,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
             pos.putInt("z",z);
             stack.getData().put("position",pos);
             stack.getData().putInt("dim",worldObj.dimension.id);
-            //Minecraft.getMinecraft().thePlayer.triggerAchievement(SIAchievements.ANCHOR);
+            //Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.ANCHOR);
         }
     }
 

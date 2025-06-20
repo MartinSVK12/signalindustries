@@ -90,7 +90,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
         }
         if(powerSuit == null){
             powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object)this);
-            triggerAchievement(SIAchievements.POWER_SUIT);
+            //triggerAchievement(SIAchievements.POWER_SUIT);
         } else {
             powerSuit.tick();
         }

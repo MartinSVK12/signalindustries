@@ -88,7 +88,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
                 fluidContents[0].amount += stack.amount;
             }
             /*if(!Global.isServer){
-                Minecraft.getMinecraft(this).thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
+                Minecraft.getMinecraft(this).//thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
             }*/
             if(this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());

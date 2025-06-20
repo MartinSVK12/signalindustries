@@ -66,7 +66,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
                     CompoundTag energy = ((ItemSignalumPowerHarness) harness.getItem()).getFluidStack(0, harness);
                     int amount = energy.getInteger("amount");
                     if (amount >= ability.cost) {
-                        entityplayer.triggerAchievement(SIAchievements.TRIGGER);
+                        //entityplayer.triggerAchievement(SIAchievements.TRIGGER);
                         if(ability instanceof TriggerBaseEffectAbility){
                             boolean active = harness.getData().getBoolean("active_" + getAbilityName(itemstack));
                             if(active) {
@@ -135,7 +135,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
                     CompoundTag energy = ((ItemSignalumPowerHarness)harness.getItem()).getFluidStack(0,harness);
                     int amount = energy.getInteger("amount");
                     if(amount >= ability.cost){
-                        entityplayer.triggerAchievement(SIAchievements.TRIGGER);
+                        //entityplayer.triggerAchievement(SIAchievements.TRIGGER);
                         if(ability instanceof TriggerBaseEffectAbility){
                             boolean active = harness.getData().getBoolean("active_" + getAbilityName(itemstack));
                             if(active) {

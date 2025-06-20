@@ -41,7 +41,7 @@ public class SlotAttachment extends Slot implements IAttachable {
     public void set(ItemStack itemstack) {
         super.set(itemstack);
         /*if(itemstack.getItem() instanceof ItemWingsAttachment && !Global.isServer){
-            Minecraft.getMinecraft().thePlayer.triggerAchievement(SIAchievements.WINGS);
+            Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.WINGS);
         }*/
     }
 

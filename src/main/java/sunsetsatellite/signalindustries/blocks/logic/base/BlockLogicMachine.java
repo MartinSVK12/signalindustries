@@ -46,7 +46,7 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
             if(tile instanceof IMultiblock){
                 if (((IMultiblock) tile).getMultiblock() != null && ((IMultiblock) tile).getMultiblock().isValid()) {
                     Catalyst.displayGui(entityplayer, tile, key("gui/"+guiId));
-                    entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                    //entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     return true;
                 } else {
                     entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");

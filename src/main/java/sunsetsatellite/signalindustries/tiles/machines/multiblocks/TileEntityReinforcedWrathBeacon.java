@@ -145,7 +145,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             for (Player player : worldObj.players) {
                 if(player.distanceToSqr(x,y,z) > 64) continue;
                 player.sendMessage("Challenge complete!!");
-                player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
+                //player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
             }
             for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(x, y, z), Direction.Z_POS)) {
                 if(worldObj.getBlockId(bi.pos.x,bi.pos.y,bi.pos.z) == SIBlocks.fueledEternalTreeLog.id()){

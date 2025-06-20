@@ -23,7 +23,7 @@ public class BlockLogicOreSignalite extends BlockLogic {
     @Override
     public void onBlockDestroyedByPlayer(World world, int x, int y, int z, Side side, int meta, Player player, Item item) {
         super.onBlockDestroyedByPlayer(world, x, y, z, side, meta, player, item);
-        //player.triggerAchievement(SIAchievements.INIT);
+        ////player.triggerAchievement(SIAchievements.INIT);
     }
 
     @Override

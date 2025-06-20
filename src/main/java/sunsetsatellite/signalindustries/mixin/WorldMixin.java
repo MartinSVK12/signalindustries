@@ -62,7 +62,7 @@ public abstract class WorldMixin {
             if(rand.nextInt(16) == 15 && !(getDifficulty() == Difficulty.PEACEFUL) && getCurrentWeather() != SIWeather.weatherBloodMoon){
                 for (Player player : players) {
                     player.sendMessage(TextFormatting.RED+"A Blood Moon is rising!");
-                    //player.triggerAchievement(SIAchievements.BLOOD_MOON);
+                    ////player.triggerAchievement(SIAchievements.BLOOD_MOON);
                 }
                 weatherManager.overrideWeather(SIWeather.weatherBloodMoon,13000,1);
             }
@@ -83,7 +83,7 @@ public abstract class WorldMixin {
         if(dayTime > 6680 && dayTime < 6700 && dimension != Dimension.NETHER && seasonManager.getDayInSeason() == 6 && seasonManager.getCurrentSeason() == Seasons.OVERWORLD_SUMMER && getCurrentWeather() != SIWeather.weatherEclipse){
             for (Player player : players) {
                 player.sendMessage(TextFormatting.ORANGE+"A Solar Eclipse is happening!");
-                //player.triggerAchievement(SIAchievements.ECLIPSE);
+                ////player.triggerAchievement(SIAchievements.ECLIPSE);
             }
             weatherManager.overrideWeather(SIWeather.weatherEclipse,Global.DAY_LENGTH_TICKS,1);
         }
@@ -105,7 +105,7 @@ public abstract class WorldMixin {
             if(rand.nextInt(16) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
                 for (Player player : players) {
                     player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
-                    //player.triggerAchievement(SIAchievements.STARFALL);
+                    ////player.triggerAchievement(SIAchievements.STARFALL);
                 }
                 weatherManager.overrideWeather(SIWeather.weatherMeteorShower,60*20,1);
             }

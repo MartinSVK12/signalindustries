@@ -43,7 +43,7 @@ public class BlockLogicWrathBeacon extends BlockLogicTiered {
                 TileEntityReinforcedWrathBeacon tile = (TileEntityReinforcedWrathBeacon) world.getTileEntity(i, j, k);
                 if (tile != null && tile.multiblock != null && tile.multiblock.isValid()) {
                     tile.activate(entityplayer);
-                    entityplayer.triggerAchievement(SIAchievements.HORIZONS);
+                    //entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                 } else {
                     entityplayer.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
                 }

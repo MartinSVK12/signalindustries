@@ -78,7 +78,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
             ItemStack trigger = itemContents[1];
             String[] key = chip.getItemKey().split("\\.");
             trigger.getData().putString("ability",key[key.length-1]);
-            //Minecraft.getMinecraft().thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
+            //Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
         }
     }
 

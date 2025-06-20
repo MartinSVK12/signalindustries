@@ -90,7 +90,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             for (Player player : worldObj.players) {
                 if(player.distanceToSqr(x,y,z) > 64) continue;
                 player.sendMessage("Challenge complete!!");
-                player.triggerAchievement(SIAchievements.VICTORY);
+                //player.triggerAchievement(SIAchievements.VICTORY);
             }
             active = false;
             started = false;
@@ -144,7 +144,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                 for (Player player : worldObj.players) {
                     if(player.distanceToSqr(x,y,z) > 64) continue;
                     player.sendTranslatedChatMessage("event.signalindustries.wrathBeaconActivated");
-                    player.triggerAchievement(SIAchievements.CHALLENGE);
+                    //player.triggerAchievement(SIAchievements.CHALLENGE);
                 }
                 active = true;
                 startWave();

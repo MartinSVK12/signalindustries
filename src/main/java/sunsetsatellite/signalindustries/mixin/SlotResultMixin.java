@@ -25,52 +25,52 @@ public class SlotResultMixin {
     public void onPickupFromSlot(ItemStack itemStack, CallbackInfo ci) {
         Item item = itemStack.getItem();
         if(item.id == SIBlocks.prototypeMachineCore.id()){
-            thePlayer.triggerAchievement(SIAchievements.THE_PROTOTYPE);
+            //thePlayer.triggerAchievement(SIAchievements.THE_PROTOTYPE);
         }
         if(item.id == SIBlocks.prototypeConduit.id()){
-            thePlayer.triggerAchievement(SIAchievements.TRANSFER);
+            //thePlayer.triggerAchievement(SIAchievements.TRANSFER);
         }
         if(item.id == SIBlocks.prototypeEnergyCell.id()){
-            thePlayer.triggerAchievement(SIAchievements.BUFFER);
+            //thePlayer.triggerAchievement(SIAchievements.BUFFER);
         }
         if(item.id == SIBlocks.prototypeCrusher.id()){
-            thePlayer.triggerAchievement(SIAchievements.CRUSHER);
+            //thePlayer.triggerAchievement(SIAchievements.CRUSHER);
         }
         if(item.id == SIBlocks.prototypeAlloySmelter.id()){
-            thePlayer.triggerAchievement(SIAchievements.ALLOY_SMELTER);
+            //thePlayer.triggerAchievement(SIAchievements.ALLOY_SMELTER);
         }
         if(item.id == SIBlocks.prototypePlateFormer.id()){
-            thePlayer.triggerAchievement(SIAchievements.PLATE_FORMER);
+            //thePlayer.triggerAchievement(SIAchievements.PLATE_FORMER);
         }
         if(item.id == SIBlocks.basicMachineCore.id()){
-            thePlayer.triggerAchievement(SIAchievements.BASIC);
+            //thePlayer.triggerAchievement(SIAchievements.BASIC);
         }
         if(item.id == SIBlocks.reinforcedMachineCore.id()){
-            thePlayer.triggerAchievement(SIAchievements.REINFORCED);
+            //thePlayer.triggerAchievement(SIAchievements.REINFORCED);
         }
         if(item.id == SIBlocks.dilithiumBooster.id()){
-            thePlayer.triggerAchievement(SIAchievements.BOOST);
+            //thePlayer.triggerAchievement(SIAchievements.BOOST);
         }
         if(item.id == SIItems.warpOrb.id){
-            thePlayer.triggerAchievement(SIAchievements.WARP_ORB);
+            //thePlayer.triggerAchievement(SIAchievements.WARP_ORB);
         }
         if(item.id == SIItems.signalumSaber.id){
-            thePlayer.triggerAchievement(SIAchievements.BLADE);
+            //thePlayer.triggerAchievement(SIAchievements.BLADE);
         }
         if(item.id == SIItems.signalumPrototypeHarness.id){
-            thePlayer.triggerAchievement(SIAchievements.HARNESS);
+            //thePlayer.triggerAchievement(SIAchievements.HARNESS);
         }
         if(item.id == SIBlocks.basicAutomaticMiner.id()){
-            thePlayer.triggerAchievement(SIAchievements.MINER);
+            //thePlayer.triggerAchievement(SIAchievements.MINER);
         }
         if(item.id == SIBlocks.basicPump.id()){
-            thePlayer.triggerAchievement(SIAchievements.PUMP);
+            //thePlayer.triggerAchievement(SIAchievements.PUMP);
         }
         /*if(item.id == SIItems.raziel.id){
-            thePlayer.triggerAchievement(SIAchievements.DIVINE_KNOWLEDGE);
+            //thePlayer.triggerAchievement(SIAchievements.DIVINE_KNOWLEDGE);
         }*/
         if(item.id == SIBlocks.awakenedMachineCore.id()){
-            thePlayer.triggerAchievement(SIAchievements.ENDGAME);
+            //thePlayer.triggerAchievement(SIAchievements.ENDGAME);
         }
     }
 }

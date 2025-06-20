@@ -150,9 +150,9 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
                             CompoundTag data = itemContents[0].getData();
                             CompoundTag warpPosition = data.getCompound("position");
                             if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
-                                closestPlayer.triggerAchievement(SIAchievements.TELEPORT_SUCCESS);
+                                //closestPlayer.triggerAchievement(SIAchievements.TELEPORT_SUCCESS);
                                 if(closestPlayer.dimension == SIDimensions.ETERNITY.id){
-                                    closestPlayer.triggerAchievement(SIAchievements.FALSE_ETERNITY);
+                                    //closestPlayer.triggerAchievement(SIAchievements.FALSE_ETERNITY);
                                 }
                                 if(data.getInteger("dim") != closestPlayer.dimension){
                                     ((IWarpPlayer) closestPlayer).warp(data.getInteger("dim"));
@@ -162,7 +162,7 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
                                 //ex.doExplosionA();
                                 //ex.doExplosionB(true,0.7f,0.0f,0.7f);
                             } else {
-                                closestPlayer.triggerAchievement(SIAchievements.TELEPORT_FAIL);
+                                //closestPlayer.triggerAchievement(SIAchievements.TELEPORT_FAIL);
                                 ((IWarpPlayer) closestPlayer).warp(SIDimensions.ETERNITY.id);
                             }
                         }

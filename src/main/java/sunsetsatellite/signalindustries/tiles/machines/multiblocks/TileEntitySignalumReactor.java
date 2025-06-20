@@ -149,7 +149,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     public void depleteRandomFuelCell(){
-        //Minecraft.getMinecraft(Minecraft.class).thePlayer.triggerAchievement(SIAchievements.REACTOR);
+        //Minecraft.getMinecraft(Minecraft.class).//thePlayer.triggerAchievement(SIAchievements.REACTOR);
         Random random = new Random();
         if(random.nextFloat() <= 1.25){
             //TODO: actually pick a random cell
