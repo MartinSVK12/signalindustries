@@ -29,7 +29,7 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new FluidStack(SIFluids.ENERGY,240),
+                        new FluidStack(SIFluids.ENERGY,320),
                         new RecipeProperties(100, Tier.BASIC,true))
         );
         group.register(
@@ -38,7 +38,7 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
                         },
-                        new FluidStack(SIFluids.ENERGY,480*4),
+                        new FluidStack(SIFluids.ENERGY,640*4),
                         new RecipeProperties(200, Tier.REINFORCED,true))
         );
     }
