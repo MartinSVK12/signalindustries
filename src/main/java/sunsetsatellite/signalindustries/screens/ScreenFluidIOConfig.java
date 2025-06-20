@@ -174,7 +174,12 @@ public class ScreenFluidIOConfig extends Screen {
                         NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.FLUID, slot, tile.getClass()));
                     }
                 } else {
-                    Direction dir = Direction.values()[currentButtonId];
+                    Direction dir = Direction.Y_POS;
+                    if(currentButtonId < 5 && currentButtonId >= 0){
+                        dir = Direction.values()[currentButtonId];
+                    } else if(currentButtonId < 12) {
+                        dir = Direction.values()[currentButtonId - 6];
+                    }
                     Vec3i position = tile.getPosition();
                     Connection connection = tile.fluidConnections.get(dir);
                     int slot = tile.activeFluidSlots.get(dir);

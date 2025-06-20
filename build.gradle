@@ -120,7 +120,7 @@ dependencies {
     implementation(project(path: ":dragonfly", configuration: "namedElements"))
     implementation(project(path: ":vq", configuration: "namedElements"))
     implementation(project(path: ":retrostorage", configuration: "namedElements"))
-    implementation(project(path: ":cc", configuration: "namedElements"))
+    //implementation(project(path: ":cc", configuration: "namedElements"))
     //implementation(project(path: ":ee", configuration: "namedElements"))
     //implementation(project(path: ":minimap", configuration: "namedElements"))
 
