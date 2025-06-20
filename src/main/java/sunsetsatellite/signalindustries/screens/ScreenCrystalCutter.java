@@ -133,11 +133,13 @@ public class ScreenCrystalCutter extends ScreenFluid {
         if (button.id == 2) {
             if (EnvironmentHelper.isClientWorld()) {
                 if (tile.recipeId > 0 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54))) {
+                    button.displayString = String.valueOf(tile.recipeId - 1);
                     NetworkHandler.sendToServer(new NetworkMessageRecipeIdChange(tile.recipeId - 1, new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
                 } else {
+                    button.displayString = String.valueOf(tile.recipeId + 1);
                     NetworkHandler.sendToServer(new NetworkMessageRecipeIdChange(tile.recipeId + 1, new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
                 }
-                button.displayString = String.valueOf(tile.recipeId + 1);
+
             } else {
                 if (tile.recipeId > 0 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54))) {
                     tile.recipeId--;
