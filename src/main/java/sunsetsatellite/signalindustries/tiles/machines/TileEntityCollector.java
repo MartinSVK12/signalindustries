@@ -97,13 +97,13 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
     }
 
     public boolean canProcess(){
-    if (currentRecipe instanceof RecipeEntryMachineFluid) {
-        if(!worldObj.canExistingBlockSeeTheSky(x,y,z)) return false;
-        RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
-        FluidStack fluidStack = recipe.getOutput();
-        if(fluidStack == null){
-            return false;
-        }
+        if (currentRecipe instanceof RecipeEntryMachineFluid) {
+            if(!worldObj.canExistingBlockSeeTheSky(x,y,z)) return false;
+            RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
+            FluidStack fluidStack = recipe.getOutput();
+            if(fluidStack == null){
+                return false;
+            }
             return areFluidOutputsValid(fluidStack);
         }
         return false;

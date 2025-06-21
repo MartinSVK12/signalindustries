@@ -55,13 +55,6 @@ public class BlockLogicItemConduit extends BlockLogicConduitBase {
     }
 
     @Override
-    public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        super.onBlockRemoved(world, x, y, z, data);
-        TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(x, y, z);
-        tile.dropContents(world, x, y, z);
-    }
-
-    @Override
     public boolean isSignalSource() {
         return true;
     }

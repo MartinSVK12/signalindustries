@@ -27,14 +27,6 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
     }
 
     @Override
-    public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        if(!EnvironmentHelper.isClientWorld()){
-            world.getTileEntity(x,y,z).dropContents(world,x,y,z);
-        }
-        super.onBlockRemoved(world, x, y, z, data);
-    }
-
-    @Override
     public boolean onBlockRightClicked(World world, int i, int j, int k, Player entityplayer, Side side, double xHit, double yHit) {
         if (world.isClientSide) {
             return true;
