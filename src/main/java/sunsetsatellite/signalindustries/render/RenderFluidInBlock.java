@@ -10,6 +10,7 @@ import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.util.helper.MathHelper;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
@@ -33,13 +34,15 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
         float fluidAmount = 0.0F;
         float fluidMaxAmount = 1.0F;
         int fluidId = -1;
-       if (((TileEntityFluidContainer)tileEntity1).fluidContents[0] != null && ((TileEntityFluidContainer)tileEntity1).fluidContents[0].fluid != null) {
+        if (((TileEntityFluidContainer)tileEntity1).fluidContents[0] != null && ((TileEntityFluidContainer)tileEntity1).fluidContents[0].fluid != null) {
             fluidMaxAmount = (float)((TileEntityFluidContainer)tileEntity1).getFluidCapacityForSlot(0);
             fluidAmount = (float)((TileEntityFluidContainer)tileEntity1).fluidContents[0].amount;
             fluidId = ((TileEntityFluidContainer)tileEntity1).fluidContents[0].fluid.getFirstId();
         }
 
         float amount = Math.abs(fluidAmount / fluidMaxAmount - 0.02F);
+        amount = MathHelper.clamp(amount, 0.0F, 1.0F);
+
         if (fluidId != -1) {
             Block<?> block = Blocks.blocksList[fluidId];
             blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(block,new Vec3i(),0,null))));
