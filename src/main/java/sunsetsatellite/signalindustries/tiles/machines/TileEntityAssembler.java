@@ -199,11 +199,11 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     }
 
     @Override
-    public void writeToNBT(CompoundTag nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
         CompoundTag templateTag = new CompoundTag();
         template.writeToNBT(templateTag);
-        nBTTagCompound1.put("Template", templateTag);
+        tag.put("Template", templateTag);
     }
 
     @Override

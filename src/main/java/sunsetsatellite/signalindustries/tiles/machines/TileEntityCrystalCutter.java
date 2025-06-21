@@ -37,8 +37,8 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     }
 
     @Override
-    public void writeToNBT(CompoundTag nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
     }
 
     @Override

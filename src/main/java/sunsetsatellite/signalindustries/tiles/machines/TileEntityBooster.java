@@ -218,12 +218,12 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     }
 
     @Override
-    public void writeToNBT(CompoundTag nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
-        nBTTagCompound1.putShort("BurnTime", (short)this.fuelBurnTicks);
-        nBTTagCompound1.putShort("ProcessTime", (short)this.progressTicks);
-        nBTTagCompound1.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        nBTTagCompound1.putInt("MaxProcessTime",this.progressMaxTicks);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
+        tag.putShort("BurnTime", (short)this.fuelBurnTicks);
+        tag.putShort("ProcessTime", (short)this.progressTicks);
+        tag.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
+        tag.putInt("MaxProcessTime",this.progressMaxTicks);
     }
 
     @Override

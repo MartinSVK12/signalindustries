@@ -12,12 +12,12 @@ import sunsetsatellite.catalyst.energy.simple.impl.TileEntityEnergyConductor;
 public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMachineBase implements IEnergyContainer, NetworkComponentTile {
 
     @Override
-    public void writeToNBT(CompoundTag CompoundTag) {
-        CompoundTag.putLong("energy",energy);
-        CompoundTag.putLong("capacity",capacity);
-        CompoundTag.putLong("maxReceive",maxReceive);
-        CompoundTag.putLong("maxProvide",maxProvide);
-        super.writeToNBT(CompoundTag);
+    public void writeToNBT(CompoundTag tag) {
+        tag.putLong("energy",energy);
+        tag.putLong("capacity",capacity);
+        tag.putLong("maxReceive",maxReceive);
+        tag.putLong("maxProvide",maxProvide);
+        super.writeToNBT(tag);
     }
 
     @Override

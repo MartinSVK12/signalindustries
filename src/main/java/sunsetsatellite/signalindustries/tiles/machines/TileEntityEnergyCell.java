@@ -85,8 +85,8 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
         super.tick();
     }
     @Override
-    public void writeToNBT(CompoundTag nBTTagCompound1) {
-        super.writeToNBT(nBTTagCompound1);
+    public void writeToNBT(CompoundTag tag) {
+        super.writeToNBT(tag);
     }
 
     @Override

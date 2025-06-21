@@ -18,6 +18,8 @@
     "SaveHandlerBaseMixin",
     "SlotResultMixin",
     "SpawnerMobsMixin",
+    "WorldGenDungeonMixin",
+    "WorldGenLabyrinthMixin",
     "WorldMixin"
   ],
   "client": [
