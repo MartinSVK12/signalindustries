@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.tiles;
 
 
+import com.mojang.nbt.tags.ByteTag;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
@@ -40,6 +41,8 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
                 contentsTag.putCompound("Data", contents.getData());
             }
             nbttagcompound.put("Contents", contentsTag);
+        } else {
+            nbttagcompound.put("Empty", new ByteTag());
         }
     }
 
@@ -54,6 +57,8 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize((int) (4096 * (Math.pow(2, tier.ordinal()))));
             contents.readFromNBT(nbttagcompound.getCompound("Contents"));
             contents.stackSize = nbttagcompound.getCompound("Contents").getInteger("Count");
+        } else if(nbttagcompound.containsKey("Empty")){
+            contents = null;
         }
     }
 
@@ -109,6 +114,9 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             ItemStack stack = contents.copy();
             stack.stackSize = contents.getMaxStackSize();
             contents.stackSize -= contents.getMaxStackSize();
+            if(contents.stackSize <= 0 && !locked){
+                contents = null;
+            }
             return stack;
         }
     }

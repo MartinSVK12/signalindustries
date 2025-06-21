@@ -464,7 +464,7 @@ tile.signalindustries.infinite.storageContainer.name=Infinite Storage Container
 tile.signalindustries.infinite.storageContainer.desc=An infinite and unlimited supply of any item! Creative mode only.
 
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
-tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Catalyst>.
+tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Eye>.
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
 tile.signalindustries.reinforced.wrathBeacon.desc=Legends speak of a tree that feeds on the life force of others. Unfortunately, this was not a myth.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
@@ -702,6 +702,13 @@ tile.signalindustries.dilithiumCoil.name=Dilithium Coil
 tile.signalindustries.dilithiumCoil.desc=A coil of Dilithium.
 tile.signalindustries.awakenedAlloyCoil.name=Awakened Alloy Coil
 tile.signalindustries.awakenedAlloyCoil.desc=A coil of Awakened Alloy.
+
+tile.signalindustries.ancient.lunarTotem.name=Cursed Lunar Totem
+tile.signalindustries.ancient.lunarTotem.desc=A carved totem depicting the Moon with strange inscriptions at the base.
+tile.signalindustries.ancient.eclipseTotem.name=Total Eclipse Totem
+tile.signalindustries.ancient.eclipseTotem.desc=A carved totem depicting the Sun with strange inscriptions at the base.
+tile.signalindustries.ancient.skyTotem.name=Falling Sky Totem
+tile.signalindustries.ancient.skyTotem.desc=A carved totem depicting the Earth and Outer Space with strange inscriptions at the base.
 
 dimension.signalindustries.eternity.name=Eternity
 biome.eternity=Eternity
