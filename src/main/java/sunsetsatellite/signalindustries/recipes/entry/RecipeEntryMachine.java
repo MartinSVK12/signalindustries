@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -12,11 +13,11 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> {
+
+    public static final ItemStack AIR = new ItemStack(0,0,0, new CompoundTag());
 
     public RecipeEntryMachine(RecipeExtendedSymbol[] input, ItemStack output, RecipeProperties data) {
         super(input, output, data);
@@ -31,31 +32,26 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         if(symbols.length != getInput().length){
             return false;
         }
-        for (RecipeExtendedSymbol subSymbol : symbols) {
-            if (Arrays.stream(getInput()).anyMatch((S)->S.matches(subSymbol))) {
-                RecipeExtendedSymbol inputSymbol = Arrays.stream(getInput()).filter((S) -> S.matches(subSymbol)).findFirst().orElse(null);
-                if(inputSymbol == null) return false;
-                if(inputSymbol.hasFluid()){
-                    List<FluidStack> fluid = subSymbol.resolveFluids();
-                    List<FluidStack> inputFluid = inputSymbol.resolveFluids();
-                    List<Pair<FluidStack, FluidStack>> pairs = Catalyst.zip(fluid, inputFluid);
-                    if (pairs.stream().anyMatch(pair -> pair.getLeft().amount < pair.getRight().amount)) {
-                        return false;
-                    }
-
-                } else {
-                    List<ItemStack> stack = subSymbol.resolve();
-                    List<ItemStack> inputStack = inputSymbol.resolve();
-                    List<Pair<ItemStack, ItemStack>> pairs = Catalyst.zip(stack, inputStack);
-                    if (pairs.stream().anyMatch(pair -> pair.getLeft().stackSize < pair.getRight().stackSize)) {
-                        return false;
-                    }
+        //key is recipe input, value is inventory input
+        HashMap<RecipeExtendedSymbol,RecipeExtendedSymbol> alreadyMatched = new HashMap<>();
+        for (RecipeExtendedSymbol invInputSymbol : symbols) {
+            for (RecipeExtendedSymbol recipeInputSymbol : getInput()) {
+                if (recipeInputSymbol.matches(invInputSymbol) && !alreadyMatched.containsKey(recipeInputSymbol)) {
+                    alreadyMatched.put(recipeInputSymbol, invInputSymbol);
+                    break;
                 }
-            } else {
-                return false;
             }
         }
-        return true;
+        if(alreadyMatched.size() != getInput().length) return false;
+        HashMap<List<ItemStack>,List<ItemStack>> alreadyMatchedResolved = new HashMap<>();
+        alreadyMatched.forEach((recipeInputSymbol,invInputSymbol)->{
+            alreadyMatchedResolved.put(recipeInputSymbol.asNormalSymbol().resolve(),invInputSymbol.asNormalSymbol().resolve());
+        });
+
+        return alreadyMatchedResolved.entrySet().stream()
+                .allMatch((e)->e.getKey().stream()
+                        .anyMatch((s)->e.getValue().stream()
+                                .anyMatch((s2)->s.stackSize <= s2.stackSize)));
     }
 
     public boolean matchesQuery(SearchQuery query) {

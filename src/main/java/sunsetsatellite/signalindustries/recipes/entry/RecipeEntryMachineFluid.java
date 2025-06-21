@@ -12,6 +12,7 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,45 +32,26 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         if(symbols.length != getInput().length){
             return false;
         }
-        List<FluidStack> recipeFluids = Arrays.stream(getInput()).flatMap((S) -> {
-            if(S.hasFluid()) {
-                return S.resolveFluids().stream();
-            }
-            return null;
-        }).collect(Collectors.toList());
-        List<ItemStack> recipeStacks = Arrays.stream(getInput()).flatMap((S) -> S.resolve().stream()).collect(Collectors.toList());
-        for (RecipeExtendedSymbol symbol : symbols) {
-            if(symbol.hasFluid()){
-                List<FluidStack> fluids = symbol.resolveFluids();
-                if(fluids == null) return false;
-                if(fluids.isEmpty()) return false;
-                for (FluidStack fluid : fluids) {
-                    if(Catalyst.listContains(recipeFluids,fluid,FluidStack::areFluidsEqual)){
-                        FluidStack recipeFluid = recipeFluids.get(fluids.indexOf(fluid));
-                        if(fluid.amount < recipeFluid.amount){
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
-                }
-            } else {
-                List<ItemStack> stacks = symbol.resolve();
-                if(stacks == null) return false;
-                if(stacks.isEmpty()) return false;
-                for (ItemStack stack : stacks) {
-                    if(Catalyst.listContains(recipeStacks,stack,ItemStack::isItemEqual)){
-                        ItemStack recipeStack = recipeStacks.get(stacks.indexOf(stack));
-                        if(stack.stackSize < recipeStack.stackSize){
-                            return false;
-                        }
-                    } else {
-                        return false;
-                    }
+        //key is recipe input, value is inventory input
+        HashMap<RecipeExtendedSymbol,RecipeExtendedSymbol> alreadyMatched = new HashMap<>();
+        for (RecipeExtendedSymbol invInputSymbol : symbols) {
+            for (RecipeExtendedSymbol recipeInputSymbol : getInput()) {
+                if (recipeInputSymbol.matches(invInputSymbol) && !alreadyMatched.containsKey(recipeInputSymbol)) {
+                    alreadyMatched.put(recipeInputSymbol, invInputSymbol);
+                    break;
                 }
             }
         }
-        return true;
+        if(alreadyMatched.size() != getInput().length) return false;
+        HashMap<List<ItemStack>,List<ItemStack>> alreadyMatchedResolved = new HashMap<>();
+        alreadyMatched.forEach((recipeInputSymbol,invInputSymbol)->{
+            alreadyMatchedResolved.put(recipeInputSymbol.asNormalSymbol().resolve(),invInputSymbol.asNormalSymbol().resolve());
+        });
+
+        return alreadyMatchedResolved.entrySet().stream()
+                .allMatch((e)->e.getKey().stream()
+                        .anyMatch((s)->e.getValue().stream()
+                                .anyMatch((s2)->s.stackSize <= s2.stackSize)));
     }
 
     public boolean matchesQuery(SearchQuery query) {
