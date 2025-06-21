@@ -10,6 +10,7 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 import java.util.function.Supplier;
 
@@ -27,7 +28,9 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
 
     @Override
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        world.getTileEntity(x,y,z).dropContents(world,x,y,z);
+        if(!EnvironmentHelper.isClientWorld()){
+            world.getTileEntity(x,y,z).dropContents(world,x,y,z);
+        }
         super.onBlockRemoved(world, x, y, z, data);
     }
 

@@ -22,6 +22,7 @@ import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 import java.util.Objects;
 import java.util.function.Supplier;
@@ -68,11 +69,13 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
 
     @Override
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile instanceof TileEntityCoverable) {
-            Direction[] covers = ((TileEntityCoverable) tile).getCovers().keySet().toArray(new Direction[0]);
-            for (Direction dir : covers) {
-                ((TileEntityCoverable) tile).removeCover(dir);
+        if(!EnvironmentHelper.isClientWorld()){
+            TileEntity tile = world.getTileEntity(x, y, z);
+            if (tile instanceof TileEntityCoverable) {
+                Direction[] covers = ((TileEntityCoverable) tile).getCovers().keySet().toArray(new Direction[0]);
+                for (Direction dir : covers) {
+                    ((TileEntityCoverable) tile).removeCover(dir);
+                }
             }
         }
         super.onBlockRemoved(world, x, y, z, data);
