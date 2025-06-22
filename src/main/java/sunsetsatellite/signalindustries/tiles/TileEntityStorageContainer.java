@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.tiles;
 
 import com.mojang.nbt.tags.ByteTag;
 import com.mojang.nbt.tags.CompoundTag;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -235,5 +236,10 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             item.zd *= 0.5;
             item.pickupDelay = 0;
         }
+    }
+
+    @Override
+    public boolean canBeCarried(World world, Entity potentialHolder) {
+        return true;
     }
 }

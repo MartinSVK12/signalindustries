@@ -1,9 +1,13 @@
 package sunsetsatellite.signalindustries.menus;
 
+import net.minecraft.core.InventoryAction;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
+
+import java.util.List;
 
 public class MenuAlloySmelter extends MenuMachine {
     public MenuAlloySmelter(ContainerInventory inv, TileEntityFluidItemContainer tile) {
@@ -29,5 +33,14 @@ public class MenuAlloySmelter extends MenuMachine {
         {
             addSlot(new Slot(inv, k, 8 + k * 18, 142));
         }
+    }
+
+    @Override
+    public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
+        int lastDeviceSlot = tile.getContainerSize() - 1;
+        if (slot.index <= lastDeviceSlot) {
+            return getSlots(lastDeviceSlot+1, 36, true);
+        }
+        return getSlots(1, Math.max(lastDeviceSlot+1,1), false);
     }
 }
