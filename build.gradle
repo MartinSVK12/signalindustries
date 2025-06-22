@@ -114,6 +114,7 @@ dependencies {
     implementation(project(path: ":fluids", configuration: "namedElements"))
     implementation(project(path: ":multiblocks", configuration: "namedElements"))
     implementation(project(path: ":multipart", configuration: "namedElements"))
+    implementation(project(path: ":effects", configuration: "namedElements"))
 
     implementation(project(path: ":tmb", configuration: "namedElements"))
     implementation(project(path: ":btwaila", configuration: "namedElements"))

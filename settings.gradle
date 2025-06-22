@@ -33,6 +33,7 @@ include(":fluids")
 include(":multiblocks")
 include(":energy")
 include(":multipart")
+include(":effects")
 // catalyst
 
 include(":tmb")
@@ -53,6 +54,7 @@ project(":fluids").projectDir = file("${rootProject.projectDir}/../catalyst/flui
 project(":multiblocks").projectDir = file("${rootProject.projectDir}/../catalyst/multiblocks")
 project(":energy").projectDir = file("${rootProject.projectDir}/../catalyst/energy")
 project(":multipart").projectDir = file("${rootProject.projectDir}/../catalyst/multipart")
+project(":effects").projectDir = file("${rootProject.projectDir}/../catalyst/effects")
 // catalyst
 
 project(":tmb").projectDir = file("${rootProject.projectDir}/../tmb")

@@ -48,8 +48,7 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
             alreadyMatchedResolved.put(recipeInputSymbol.asNormalSymbol().resolve(),invInputSymbol.asNormalSymbol().resolve());
         });
 
-        return alreadyMatchedResolved.entrySet().stream()
-                .allMatch((e)->e.getKey().stream()
+        return alreadyMatchedResolved.entrySet().stream().allMatch((e)->e.getKey().stream()
                         .anyMatch((s)->e.getValue().stream()
                                 .anyMatch((s2)->s.stackSize <= s2.stackSize)));
     }
