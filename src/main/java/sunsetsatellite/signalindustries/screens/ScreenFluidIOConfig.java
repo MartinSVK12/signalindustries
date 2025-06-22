@@ -177,7 +177,7 @@ public class ScreenFluidIOConfig extends Screen {
                     Direction dir = Direction.Y_POS;
                     if(currentButtonId < 5 && currentButtonId >= 0){
                         dir = Direction.values()[currentButtonId];
-                    } else if(currentButtonId < 12) {
+                    } else if(currentButtonId > 5 && currentButtonId < 12) {
                         dir = Direction.values()[currentButtonId - 6];
                     }
                     Vec3i position = tile.getPosition();
