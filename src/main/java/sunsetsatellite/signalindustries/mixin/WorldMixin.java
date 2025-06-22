@@ -149,5 +149,16 @@ public abstract class WorldMixin {
         }
     }
 
+    @Inject(
+            method = "wakeUpAllPlayers",
+            at = @At("HEAD")
+    )
+    protected void wakeUpAllPlayers(CallbackInfo ci) {
+
+        if (getCurrentWeather() != null && (getCurrentWeather() == SIWeather.weatherEclipse || getCurrentWeather() == SIWeather.weatherBloodMoon)) {
+            weatherManager.overrideWeather(Weathers.OVERWORLD_CLEAR);
+        }
+
+    }
 
 }
