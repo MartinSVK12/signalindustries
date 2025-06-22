@@ -76,7 +76,7 @@
     "minecraft": "~7.3",
     "fabricloader": ">=0.15.5",
     "catalyst-core": ">=2.0.4",
-    "catalyst-fluids": ">=2.1.2",
+    "catalyst-fluids": ">=2.1.3",
     "catalyst-multiblocks": ">=2.0.0",
     "catalyst-energy": ">=2.0.4",
     "catalyst-multipart": ">=2.0.2",
