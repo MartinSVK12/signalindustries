@@ -41,7 +41,7 @@ public abstract class MobRendererPlayerMixin extends MobRenderer<Player> {
     protected void prepareArmor(Player entity, int layer, float partialTick, CallbackInfoReturnable<Boolean> cir, @Local(name = "item") Item item) {
         if(item instanceof ItemArmorTiered){
             if(item instanceof ItemSignalumPowerHarness){
-                if((layer == 0 || layer == 1) && entity.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
+                if((layer == 0 || layer == 1) && entity.inventory.armorItemInSlot(2) != null && entity.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
                     if(entity.inventory.armorItemInSlot(3) != null && entity.inventory.armorItemInSlot(3).getItem() instanceof ItemSignalumPowerHarness){
                         bindTexture("/assets/signalindustries/textures/armor/harness_shield_1.png");
                     } else {
