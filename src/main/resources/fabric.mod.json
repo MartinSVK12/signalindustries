@@ -64,6 +64,9 @@
     ],
     "gatherTMBPlugins": [
       "sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
+    ],
+    "btwaila": [
+      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
     ]
   },
   "mixins": [

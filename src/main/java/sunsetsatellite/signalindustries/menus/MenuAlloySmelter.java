@@ -7,6 +7,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAlloySmelter extends MenuMachine {
@@ -41,6 +42,6 @@ public class MenuAlloySmelter extends MenuMachine {
         if (slot.index <= lastDeviceSlot) {
             return getSlots(lastDeviceSlot+1, 36, true);
         }
-        return getSlots(1, Math.max(lastDeviceSlot+1,1), false);
+        return new ArrayList<Integer>() {{add(0); add(2);}};
     }
 }
