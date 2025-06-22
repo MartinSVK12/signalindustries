@@ -67,7 +67,7 @@ public abstract class WorldMixin {
                 weatherManager.overrideWeather(SIWeather.weatherBloodMoon,13000,1);
             }
         }
-        if(dayTime == 0 && getCurrentWeather() == SIWeather.weatherBloodMoon){
+        if(dayTime > worldType.getSunriseTick(thisAs) && dayTime < triggerTime && getCurrentWeather() == SIWeather.weatherBloodMoon){
             weatherManager.overrideWeather(Weathers.OVERWORLD_CLEAR);
         }
     }
