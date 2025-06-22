@@ -178,7 +178,7 @@ public class ScreenItemIOConfig extends Screen {
                     }
                 } else {
                     Direction dir = Direction.Y_POS;
-                    if(currentButtonId < 5 && currentButtonId >= 0){
+                    if(currentButtonId <= 5 && currentButtonId >= 0){
                         dir = Direction.values()[currentButtonId];
                     } else if(currentButtonId > 5 && currentButtonId < 12) {
                         dir = Direction.values()[currentButtonId - 6];
