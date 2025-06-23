@@ -1544,8 +1544,8 @@
     "type": "minecraft:crafting/shaped",
     "pattern": [
       "PCP",
-      "CMC",
-      "PCP"
+      "CSC",
+      "PMP"
     ],
     "symbols": [
       {
@@ -1559,6 +1559,14 @@
       {
         "symbol": "C",
         "group": "minecraft:chests"
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.prototype.storageContainer",
+          "amount": 1,
+          "meta": 0
+        }
       },
       {
         "symbol": "P",

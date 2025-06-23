@@ -55,7 +55,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         locked = nbttagcompound.getBoolean("Locked");
         if(nbttagcompound.containsKey("Contents")){
             contents = new ItemStack(1,1,0);
-            ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize((int) (4096 * (Math.pow(2, tier.ordinal()))));
+            ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize(getTieredCapacity());
             contents.readFromNBT(nbttagcompound.getCompound("Contents"));
             contents.stackSize = nbttagcompound.getCompound("Contents").getInteger("Count");
         } else if(nbttagcompound.containsKey("Empty")){
@@ -151,7 +151,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             infinite = true;
             unlimited = true;
         }
-        capacity = unlimited ? Integer.MAX_VALUE : (int) (4096 * (Math.pow(2, tier.ordinal())));
+        capacity = unlimited ? Integer.MAX_VALUE : getTieredCapacity();
 
         if(contents != null){
             if(infinite){
@@ -173,7 +173,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     public ItemStack getItem(int slot) {
         if (slot == 0) {
             if(contents == null) return null;
-            ((UnlimitedItemStack)(Object) contents).enableCustomMaxSize((int) (4096 * (Math.pow(2, tier.ordinal()))));
+            ((UnlimitedItemStack)(Object) contents).enableCustomMaxSize(getTieredCapacity());
             return contents;
         }
         return null;
@@ -207,7 +207,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 
     @Override
     public int getMaxStackSize() {
-        return unlimited ? Integer.MAX_VALUE : (int) (4096 * (Math.pow(2, tier.ordinal())));
+        return unlimited ? Integer.MAX_VALUE : getTieredCapacity();
     }
 
     @Override
@@ -236,6 +236,22 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             item.zd *= 0.5;
             item.pickupDelay = 0;
         }
+    }
+
+    public int getTieredCapacity(){
+        switch (tier){
+            case PROTOTYPE:
+                return 4096;
+            case BASIC:
+                return 16384;
+            case REINFORCED:
+                return 65535;
+            case AWAKENED:
+                return 262140;
+            case INFINITE:
+                return Integer.MAX_VALUE;
+        }
+        return 4096;
     }
 
     @Override
