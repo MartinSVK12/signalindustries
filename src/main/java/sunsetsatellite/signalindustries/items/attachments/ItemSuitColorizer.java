@@ -23,7 +23,7 @@ public class ItemSuitColorizer extends ItemTieredAttachment {
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        List<ItemSuitColorizer> list = new ArrayList<>();
+        /*List<ItemSuitColorizer> list = new ArrayList<>();
         list.add(SIItems.suitColorizerWhite);
         list.add(SIItems.suitColorizerBlue);
         list.add(SIItems.suitColorizerPurple);
@@ -33,7 +33,7 @@ public class ItemSuitColorizer extends ItemTieredAttachment {
         if(i != -1){
             ItemSuitColorizer colorizer = list.get((i + 1) % list.size());
             itemstack.itemID = colorizer.id;
-        }
+        }*/
         return super.onUseItem(itemstack, world, entityplayer);
     }
 
