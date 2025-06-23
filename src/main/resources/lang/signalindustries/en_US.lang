@@ -296,15 +296,15 @@ item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Le
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
 
 item.signalindustries.reinforced.attachment.colorizer.white.name=Power Suit Colorizer (White)
-item.signalindustries.reinforced.attachment.colorizer.white.desc=Colorizers change the appearance of your <Signalum Power Suit>! Right click to change color.
+item.signalindustries.reinforced.attachment.colorizer.white.desc=Colorizers change the appearance of your <Signalum Power Suit>!
 item.signalindustries.reinforced.attachment.colorizer.blue.name=Power Suit Colorizer (Blue)
-item.signalindustries.reinforced.attachment.colorizer.blue.desc=Colorizers change the appearance of your <Signalum Power Suit>! Right click to change color.
+item.signalindustries.reinforced.attachment.colorizer.blue.desc=Colorizers change the appearance of your <Signalum Power Suit>!
 item.signalindustries.reinforced.attachment.colorizer.purple.name=Power Suit Colorizer (Purple)
-item.signalindustries.reinforced.attachment.colorizer.purple.desc=Colorizers change the appearance of your <Signalum Power Suit>! Right click to change color.
+item.signalindustries.reinforced.attachment.colorizer.purple.desc=Colorizers change the appearance of your <Signalum Power Suit>!
 item.signalindustries.reinforced.attachment.colorizer.transparent.name=Power Suit Colorizer (Transparent)
-item.signalindustries.reinforced.attachment.colorizer.transparent.desc=Colorizers change the appearance of your <Signalum Power Suit>! Right click to change color.
+item.signalindustries.reinforced.attachment.colorizer.transparent.desc=Colorizers change the appearance of your <Signalum Power Suit>!
 item.signalindustries.reinforced.attachment.colorizer.inverted.name=Power Suit Colorizer (Inverted)
-item.signalindustries.reinforced.attachment.colorizer.inverted.desc=Colorizers change the appearance of your <Signalum Power Suit>! Right click to change color.
+item.signalindustries.reinforced.attachment.colorizer.inverted.desc=Colorizers change the appearance of your <Signalum Power Suit>!
 
 item.signalindustries.basic.portableWorkbench.name=Portable Workbench
 item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
