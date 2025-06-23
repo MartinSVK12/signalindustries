@@ -188,6 +188,10 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         CompoundTag sizeTag = new CompoundTag();
         size.writeToNBT(sizeTag);
         tag.put("Size",sizeTag);
+        tag.putBoolean("Active", !workTimer.isPaused());
+        CompoundTag currentTag = new CompoundTag();
+        current.writeToNBT(currentTag);
+        tag.put("Current",currentTag);
     }
 
     @Override
@@ -195,6 +199,14 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
         super.readFromNBT(tag);
         CompoundTag sizeTag = tag.getCompound("Size");
         size.readFromNBT(sizeTag);
+        boolean active = tag.getBoolean("Active");
+        if(active && workTimer.isPaused()){
+            workTimer.unpause();
+        } else {
+            workTimer.pause();
+        }
+        CompoundTag currentTag = tag.getCompound("Current");
+        current.readFromNBT(currentTag);
     }
 
     public int findTopSolidNonLiquidBlockLimited(World world, int x, int z, int yLimit) {
