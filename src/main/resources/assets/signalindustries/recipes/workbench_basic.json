@@ -1543,9 +1543,9 @@
     "name": "signalindustries:workbench/basic_storage_container",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PCP",
+      " C ",
       "CSC",
-      "PMP"
+      " M "
     ],
     "symbols": [
       {
@@ -1563,7 +1563,7 @@
       {
         "symbol": "S",
         "stack": {
-          "key": "item.signalindustries.prototype.storageContainer",
+          "key": "tile.signalindustries.prototype.storageContainer",
           "amount": 1,
           "meta": 0
         }
