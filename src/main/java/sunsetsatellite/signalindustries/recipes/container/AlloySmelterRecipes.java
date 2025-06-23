@@ -22,7 +22,18 @@ public class AlloySmelterRecipes implements MachineRecipesBase<RecipeGroup<Recip
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.tinyNetherCoalDust))
                         },
                         new ItemStack(Items.INGOT_STEEL,1),
-                        new RecipeProperties(200,40,Tier.PROTOTYPE,false)
+                        new RecipeProperties(200,40,Tier.PROTOTYPE,true)
+                )
+        );
+        group.register(
+                "basic_steel_ingot",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Items.INGOT_IRON)),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.tinyNetherCoalDust))
+                        },
+                        new ItemStack(Items.INGOT_STEEL,2),
+                        new RecipeProperties(200,40,Tier.BASIC,false)
                 )
         );
         group.register(

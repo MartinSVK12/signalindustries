@@ -21,7 +21,7 @@ import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrystalCutter;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
-public class ScreenCrystalCutter extends ScreenFluid {
+public class ScreenCrystalCutter extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityCrystalCutter tile;

@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.menus.MenuPlateFormer;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityPlateFormer;
 
-public class ScreenPlateFormer extends ScreenFluid {
+public class ScreenPlateFormer extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityPlateFormer tile;

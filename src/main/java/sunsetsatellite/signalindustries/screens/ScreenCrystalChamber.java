@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.menus.MenuCrystalCutter;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrystalChamber;
 
-public class ScreenCrystalChamber extends ScreenFluid {
+public class ScreenCrystalChamber extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityCrystalChamber tile;

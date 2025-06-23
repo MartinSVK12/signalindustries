@@ -14,7 +14,7 @@ import sunsetsatellite.signalindustries.menus.MenuExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 
-public class ScreenCrusher extends ScreenFluid {
+public class ScreenCrusher extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityCrusher tile;

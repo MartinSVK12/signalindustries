@@ -22,18 +22,18 @@ public class WakingAlloySmelterRecipes implements MachineRecipesBase<RecipeGroup
                                 new RecipeExtendedSymbol(new ItemStack(Items.INGOT_IRON)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.tinyNetherCoalDust))
                         },
-                        new ItemStack(Items.INGOT_STEEL, 1),
+                        new ItemStack(Items.INGOT_STEEL, 2),
                         new RecipeProperties(100, 40, Tier.REINFORCED, false)
                 )
         );
         group.register(
-                "crystal_alloy_ingot_2",
+                "crystal_alloy_ingot",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Items.INGOT_STEEL)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.emptySignalumCrystalDust))
                         },
-                        new ItemStack(SIItems.crystalAlloyIngot, 2),
+                        new ItemStack(SIItems.crystalAlloyIngot, 4),
                         new RecipeProperties(100, 40, Tier.REINFORCED, false)
                 )
         );
@@ -44,7 +44,7 @@ public class WakingAlloySmelterRecipes implements MachineRecipesBase<RecipeGroup
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot)),
                                 new RecipeExtendedSymbol(new ItemStack(SIBlocks.glowingObsidian, 2))
                         },
-                        new ItemStack(SIItems.reinforcedCrystalAlloyIngot, 1),
+                        new ItemStack(SIItems.reinforcedCrystalAlloyIngot, 2),
                         new RecipeProperties(100, 80, Tier.REINFORCED, false)
                 )
         );

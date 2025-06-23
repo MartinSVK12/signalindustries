@@ -14,7 +14,7 @@ import sunsetsatellite.signalindustries.menus.MenuInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityInfuser;
 
-public class ScreenInfuser extends ScreenFluid {
+public class ScreenInfuser extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityInfuser tile;

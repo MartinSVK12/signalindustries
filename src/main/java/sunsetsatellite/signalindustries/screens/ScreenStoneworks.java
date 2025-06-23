@@ -20,7 +20,7 @@ import sunsetsatellite.signalindustries.tiles.machines.TileEntityStoneworks;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
-public class ScreenStoneworks extends ScreenFluid {
+public class ScreenStoneworks extends ScreenMachineSimple {
 
     public Player player;
     public TileEntityStoneworks tile;

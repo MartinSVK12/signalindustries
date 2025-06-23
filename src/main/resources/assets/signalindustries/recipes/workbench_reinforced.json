@@ -1730,7 +1730,7 @@
       {
         "symbol": "W",
         "stack": {
-          "key": 16479,
+          "id": 16479,
           "amount": 1,
           "meta": 15
         }
@@ -1771,7 +1771,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": 16479,
+          "id": 16479,
           "amount": 1,
           "meta": 4
         }
@@ -1812,7 +1812,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": 16479,
+          "id": 16479,
           "amount": 1,
           "meta": 5
         }

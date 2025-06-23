@@ -38,17 +38,17 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 )
         );
         group.register(
-                "prototype_raw_dust",
+                "raw_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new ItemStack(SIItems.saturatedSignalumCrystalDust,1),
+                        new ItemStack(SIItems.saturatedSignalumCrystalDust,2),
                         new RecipeProperties(100,40, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "prototype_coal_dust",
+                "coal_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Items.COAL))
@@ -58,57 +58,57 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                 )
         );
         group.register(
-                "basic_raw_iron_dust",
+                "raw_iron_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Items.ORE_RAW_IRON))
                         },
-                        new ItemStack(SIItems.ironDust,2),
+                        new ItemStack(SIItems.ironDust, 4),
                         new RecipeProperties(50,40, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "basic_raw_gold_dust",
+                "raw_gold_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Items.ORE_RAW_GOLD))
                         },
-                        new ItemStack(SIItems.goldDust,2),
+                        new ItemStack(SIItems.goldDust,4),
                         new RecipeProperties(50,40, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "basic_empty_dust",
+                "empty_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystalEmpty))
                         },
-                        new ItemStack(SIItems.emptySignalumCrystalDust,4),
+                        new ItemStack(SIItems.emptySignalumCrystalDust,8),
                         new RecipeProperties(100,40, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "basic_dust",
+                "dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
                         },
-                        new ItemStack(SIItems.saturatedSignalumCrystalDust,4),
+                        new ItemStack(SIItems.saturatedSignalumCrystalDust,8),
                         new RecipeProperties(100,40, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "basic_nether_coal_dust",
+                "nether_coal_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(Items.NETHERCOAL))
                         },
-                        new ItemStack(SIItems.netherCoalDust,1),
+                        new ItemStack(SIItems.netherCoalDust,2),
                         new RecipeProperties(50,80, Tier.REINFORCED,false)
                 )
         );
         group.register(
-                "basic_tiny_nether_coal_dust",
+                "tiny_nether_coal_dust",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.netherCoalDust))

@@ -26,7 +26,7 @@ public class WakingInfuserRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Blocks.OBSIDIAN,1)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.netherCoalDust,1))
                         },
-                        new ItemStack(SIBlocks.glowingObsidian,1),
+                        new ItemStack(SIBlocks.glowingObsidian,2),
                         new RecipeProperties(100,80,Tier.REINFORCED,false)
                 )
         );
@@ -38,7 +38,7 @@ public class WakingInfuserRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.crystalAlloyIngot,1)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.saturatedSignalumCrystalDust,1))
                         },
-                        new ItemStack(SIItems.saturatedSignalumAlloyIngot,1),
+                        new ItemStack(SIItems.saturatedSignalumAlloyIngot,2),
                         new RecipeProperties(100,80,Tier.REINFORCED,false)
                 )
         );
