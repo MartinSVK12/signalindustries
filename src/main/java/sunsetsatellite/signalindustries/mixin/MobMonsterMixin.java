@@ -41,11 +41,13 @@ public abstract class MobMonsterMixin extends Mob {
     @Override
     public void onDeath(Entity entity) {
         super.onDeath(entity);
-        if(random.nextInt(32) == 0){
-            dropItem(SIItems.monsterShard.id,1);
-        } else if (world != null && world.getCurrentWeather() == SIWeather.weatherBloodMoon) {
-            if (random.nextInt(16) == 0) {
+        if (this.world != null && !this.world.isClientSide) {
+            if (random.nextInt(32) == 0) {
                 dropItem(SIItems.monsterShard.id, 1);
+            } else if (world != null && world.getCurrentWeather() == SIWeather.weatherBloodMoon) {
+                if (random.nextInt(16) == 0) {
+                    dropItem(SIItems.monsterShard.id, 1);
+                }
             }
         }
     }

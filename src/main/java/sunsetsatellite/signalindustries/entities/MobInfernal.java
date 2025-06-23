@@ -38,7 +38,7 @@ public class MobInfernal extends MobMonster {
         } else {
             this.moveSpeed = 0.40f;
         }
-        SignalIndustries.LOGGER.info(String.valueOf(moveSpeed));
+        //SignalIndustries.LOGGER.info(String.valueOf(moveSpeed));
         double d = entity.x - x;
         double d1 = entity.z - z;
         if(attackTime <= 0)

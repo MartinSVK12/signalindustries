@@ -121,6 +121,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityWarpGate.class, id("warp_gate"));
         EntityHelper.createTileEntity(TileEntityMultiConduit.class, id("multi_conduit"));
         EntityHelper.createTileEntity(TileEntityProgrammer.class,id("programmer"));
+        EntityHelper.createTileEntity(TileEntityWrathBeacon.class,id("wrath_beacon"));
         //EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar")); //todo
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");

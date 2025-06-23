@@ -16,8 +16,8 @@ public class SIFluids extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing fluids...");
 
-        ENERGY = new Fluid(SignalIndustries.id("fluid/energy"), "fluid.signalindustries.energy.name", Catalyst.listOf(SIBlocks.energyFlowing, SIBlocks.energyStill));
-        BURNT_ENERGY = new Fluid(SignalIndustries.id("fluid/burnt_energy"), "fluid.signalindustries.burntEnergy.name", Catalyst.listOf(SIBlocks.burntSignalumFlowing, SIBlocks.burntSignalumStill));
+        ENERGY = new Fluid(SignalIndustries.id("fluid/energy"), "fluid.signalindustries.energy", Catalyst.listOf(SIBlocks.energyFlowing, SIBlocks.energyStill));
+        BURNT_ENERGY = new Fluid(SignalIndustries.id("fluid/burnt_energy"), "fluid.signalindustries.burntEnergy", Catalyst.listOf(SIBlocks.burntSignalumFlowing, SIBlocks.burntSignalumStill));
 
         setInitialized(true);
     }

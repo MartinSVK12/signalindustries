@@ -9,6 +9,7 @@ import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
+import sunsetsatellite.signalindustries.items.tools.blocks.ItemBlockSIFluidTank;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
@@ -556,32 +557,32 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withOverbrightSideTextures("crystal_overlay")
         );
 
-        prototypeFluidTank = customBlock(defaultBuilder(Tier.PROTOTYPE),
+        prototypeFluidTank = customBlock(defaultBuilder(Tier.PROTOTYPE).setBlockItem((block)->new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
                 "prototype.fluidTank",
                 "prototype_fluid_tank",
                 "prototypeFluidTank",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("fluid_tank_prototype")
         );
 
-        basicFluidTank = customBlock(defaultBuilder(Tier.BASIC),
+        basicFluidTank = customBlock(defaultBuilder(Tier.BASIC).setBlockItem((block)->new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
                 "basic.fluidTank",
                 "basic_fluid_tank",
                 "basicFluidTank",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.BASIC, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.BASIC, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
                 new MachineTextures(Tier.BASIC)
                         .withDefaultTexture("fluid_tank_basic")
         );
 
-        infiniteFluidTank = customBlock(defaultBuilder(Tier.INFINITE),
+        infiniteFluidTank = customBlock(defaultBuilder(Tier.INFINITE).setBlockItem((block)->new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
                 "infinite.fluidTank",
                 "infinite_fluid_tank",
                 "infiniteFluidTank",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("fluid_tank_prototype")
         );

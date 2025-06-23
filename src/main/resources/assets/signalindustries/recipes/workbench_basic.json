@@ -975,27 +975,11 @@
     "name": "signalindustries:workbench/basic_drill",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      " SB",
-      "ICS",
-      "EI "
+      "  B",
+      " C ",
+      "E  "
     ],
     "symbols": [
-      {
-        "symbol": "S",
-        "stack": {
-          "key": "item.signalindustries.steelPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "I",
-        "stack": {
-          "key": "item.signalindustries.saturatedSignalumAlloyIngot",
-          "amount": 1,
-          "meta": 0
-        }
-      },
       {
         "symbol": "B",
         "stack": {

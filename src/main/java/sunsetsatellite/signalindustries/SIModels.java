@@ -13,6 +13,8 @@ import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.*;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.item.block.ItemBlock;
 import net.minecraft.core.util.collection.NamespaceID;
 import org.useless.DragonFly;
 import org.useless.dragonfly.models.block.BlockModelDFJava;
@@ -331,6 +333,12 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setItemModel(reinforcedMeteorTracker,()->new ItemModelMeteorTracker(fuelCell, MOD_ID, Tier.REINFORCED));
         ModelHelper.setItemModel(nullTrigger,()->new ItemModelTrigger(nullTrigger, MOD_ID));
         ModelHelper.setItemModel(pulsar,()->new ItemModelPulsar(pulsar, MOD_ID));
+        ItemBlock<?> prototypeTankItem = (ItemBlock<?>) Item.getItem(prototypeFluidTank.id());
+        ModelHelper.setItemModel(prototypeTankItem,()-> new ItemModelBlockSIFluidTank(prototypeTankItem));
+        ItemBlock<?> basicTankItem = (ItemBlock<?>) Item.getItem(basicFluidTank.id());
+        ModelHelper.setItemModel(basicTankItem,()-> new ItemModelBlockSIFluidTank(basicTankItem));
+        ItemBlock<?> infTankItem = (ItemBlock<?>) Item.getItem(infiniteFluidTank.id());
+        ModelHelper.setItemModel(infTankItem,()-> new ItemModelBlockSIFluidTank(infTankItem));
     }
 
     @Override

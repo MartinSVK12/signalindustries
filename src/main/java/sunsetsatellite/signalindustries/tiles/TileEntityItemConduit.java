@@ -26,6 +26,7 @@ import sunsetsatellite.signalindustries.tiles.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -345,6 +346,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 extractTimer.max = EXTRACT_TICKS;
                 break;
         }
+        if(EnvironmentHelper.isClientWorld()) return;
         extractTimer.tick();
         contents.removeIf((P)->P.stack == null);
         final Iterator<PipeItem> iter = contents.iterator();

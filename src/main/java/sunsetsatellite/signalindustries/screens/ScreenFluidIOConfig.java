@@ -5,7 +5,6 @@ import net.minecraft.client.gui.Screen;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
@@ -84,7 +83,7 @@ public class ScreenFluidIOConfig extends Screen {
             buttons.add(new ButtonElement(14, (width / 2) + 60, (height / 2) - 75, 20, 20, "P"));
         }
 
-        if(tile.getContainerSize() == 1){
+        if(tile.getFluidInventorySize() == 1){
             buttons.get(6).enabled = false;
             buttons.get(7).enabled = false;
             buttons.get(8).enabled = false;

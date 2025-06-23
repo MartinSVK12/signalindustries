@@ -396,7 +396,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     public void cycleActiveFluidSlotForSide(Direction dir, boolean backwards) {
         int i = activeFluidSlots.get(dir);
         if(!backwards){
-            if(i < getContainerSize()-1){
+            if(i < getFluidInventorySize()-1){
                 activeFluidSlots.replace(dir,i+1);
             } else {
                 activeFluidSlots.replace(dir,0);

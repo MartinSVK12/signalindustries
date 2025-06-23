@@ -101,13 +101,13 @@ public class ScreenAutoMiner extends ScreenFluid {
 
     @Override
     public void init() {
-        ButtonElement fluidIo = new ButtonElement(0, Math.round((float) width / 2) + 60, tile.tier == Tier.BASIC ? 90 : 50, 20, 20, "F");
+        ButtonElement fluidIo = new ButtonElement(0, Math.round((float) width / 2) + 60, tile.tier == Tier.BASIC ? Math.round(width / 2f) - 190 :  Math.round(width / 2f) - 230, 20, 20, "F");
         buttons.add(fluidIo);
-        ButtonElement itemIo = new ButtonElement(1, Math.round((float) width / 2) + 60, tile.tier == Tier.BASIC ? 110 : 70, 20, 20, "I");
+        ButtonElement itemIo = new ButtonElement(1, Math.round((float) width / 2) + 60, tile.tier == Tier.BASIC ? Math.round(width / 2f) - 170 :  Math.round(width / 2f) - 210, 20, 20, "I");
         buttons.add(itemIo);
         fluidIoButton = fluidIo;
         itemIoButton = itemIo;
-        buttons.add(new ButtonElement(2, Math.round((float) width / 2) - 81, tile.tier == Tier.BASIC ? 90 : 50, 20, 20, tile.workTimer.isPaused() ? "OFF" : "ON"));
+        buttons.add(new ButtonElement(2, Math.round((float) width / 2) - 81, tile.tier == Tier.BASIC ? Math.round(width / 2f) - 190 : Math.round(width / 2f) - 230, 20, 20, tile.workTimer.isPaused() ? "OFF" : "ON"));
 
         if(tile.tier == Tier.REINFORCED){
             buttons.add(new ButtonElement(4, Math.round(width / 2f) - 75, Math.round(height / 2f) - 30, 20, 20, "-"));

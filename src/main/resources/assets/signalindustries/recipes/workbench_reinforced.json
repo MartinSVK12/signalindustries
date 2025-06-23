@@ -404,27 +404,11 @@
     "name": "signalindustries:workbench/reinforced_drill",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PSB",
-      "SCS",
-      "ESP"
+      "  B",
+      " C ",
+      "E  "
     ],
     "symbols": [
-      {
-        "symbol": "P",
-        "stack": {
-          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "S",
-        "stack": {
-          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
       {
         "symbol": "B",
         "stack": {

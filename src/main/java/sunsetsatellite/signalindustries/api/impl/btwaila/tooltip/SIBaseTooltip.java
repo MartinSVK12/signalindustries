@@ -29,7 +29,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.fluid.blocks.get(0));
                     ProgressBarOptions options = new ProgressBarOptions(
                             152,
-                            I18n.getInstance().translateKey(stack.fluid.getTranslationKey())
+                            stack.fluid.getName()
                                     .replace("Flowing ","")
                                     .replace("Still ","")
                                     .replace("Signaling Energy","sE")
@@ -55,7 +55,7 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.fluid.blocks.get(0));
                     ProgressBarOptions options = new ProgressBarOptions(
                             152,
-                            I18n.getInstance().translateKey(stack.fluid.getTranslationKey())
+                            stack.fluid.getName()
                                     .replace("Flowing ","")
                                     .replace("Still ","")
                                     .replace("Signaling Energy","sE")
