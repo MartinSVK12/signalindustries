@@ -13,6 +13,7 @@ import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.api.ModInitializer;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.mp.entity.entry.NetEntryEnergyOrb;
@@ -34,9 +35,7 @@ import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static sunsetsatellite.signalindustries.SIConfig.config;
@@ -50,6 +49,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
 
     public static List<MeteorLocation> meteorLocations = new ArrayList<>();
     public static List<ChunkCoordinates> chunkLoaders = new ArrayList<>();
+    public static Set<BlockInstance> uvLamps = new HashSet<>();
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"harness",1200,10,10,10,10);
     public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"power_suit",9999,50,50,50,50);
@@ -122,6 +122,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityMultiConduit.class, id("multi_conduit"));
         EntityHelper.createTileEntity(TileEntityProgrammer.class,id("programmer"));
         EntityHelper.createTileEntity(TileEntityWrathBeacon.class,id("wrath_beacon"));
+        EntityHelper.createTileEntity(TileEntityUVLamp.class,id("uv_lamp"));
         //EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar")); //todo
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");

@@ -1516,14 +1516,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withDefaultTexture("container_void")
         ).withEntity(TileEntityVoidContainer::new);
 
-        uvLamp = simpleBlock(defaultBuilder(Tier.BASIC),
+        uvLamp = customBlock(defaultBuilder(Tier.BASIC),
                 "uvLamp",
                 "uv_lamp",
                 "uvLamp",
                 3,
-                Material.metal,
+                (block) -> new BlockLogicUVLamp(block, Material.metal),
                 new MachineTextures()
                         .withDefaultTexture("uv_lamp_inactive")
+                        .withActiveTexture("uv_lamp_active")
+                        .withOverbrightTextures("uv_lamp_overlay")
         );
 
         basicWrathBeacon = customBlock(defaultBuilder(Tier.BASIC),

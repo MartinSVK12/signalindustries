@@ -271,6 +271,8 @@ public class SIModels implements ModelEntrypoint {
 
         ModelHelper.setBlockModel(dilithiumRail, () -> new BlockModelDilithiumRail(dilithiumRail));
 
+        ModelHelper.setBlockModel(uvLamp, () -> new BlockModelMachine(uvLamp, blockTextures.get(uvLamp)));
+
         blockTextures.forEach((block, tex)-> {
             //LOGGER.info("Loading block model for '{}'", block.namespaceId());
             if (dispatcher.hasDispatch(block)) return;

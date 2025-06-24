@@ -16,9 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.signalindustries.SIDimensions;
-import sunsetsatellite.signalindustries.SIItems;
-import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
@@ -53,6 +52,16 @@ public abstract class MobMixin extends Entity {
     {
         if (world != null && world.dimension == SIDimensions.ETERNITY) {
             cir.setReturnValue(false);
+        }
+
+        SignalIndustries.uvLamps.removeIf((B)->world.getBlock(B.pos.x,B.pos.y,B.pos.z) != SIBlocks.uvLamp);
+        for (BlockInstance lamp : SignalIndustries.uvLamps) {
+            if(world.getBlockMetadata(lamp.pos.x, lamp.pos.y, lamp.pos.z) == 1){
+                if(distanceTo(lamp.pos.x,lamp.pos.y,lamp.pos.z) < 20){
+                    cir.setReturnValue(false);
+                    break;
+                }
+            }
         }
     }
 
