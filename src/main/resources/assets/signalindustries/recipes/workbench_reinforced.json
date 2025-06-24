@@ -893,9 +893,9 @@
     "name": "signalindustries:workbench/reinforced_storage_container",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "PCP",
-      "CMC",
-      "PCP"
+      " C ",
+      "CSC",
+      " M "
     ],
     "symbols": [
       {
@@ -907,16 +907,16 @@
         }
       },
       {
-        "symbol": "C",
-        "group": "minecraft:chests"
-      },
-      {
-        "symbol": "P",
+        "symbol": "S",
         "stack": {
-          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "key": "tile.signalindustries.basic.storageContainer",
           "amount": 1,
           "meta": 0
         }
+      },
+      {
+        "symbol": "C",
+        "group": "minecraft:chests"
       }
     ],
     "result": {
