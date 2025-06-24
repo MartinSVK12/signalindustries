@@ -38,7 +38,10 @@ public class BlockLogicChunkloader extends BlockLogicMachine {
         if (world.isClientSide) {
             return true;
         } else {
-            TileEntityChunkloader tile = (TileEntityChunkloader) world.getTileEntity(x, y, z);
+            player.sendMessage("The functionality of this block has been temporarily disabled.");
+            player.sendMessage("In the meantime, please check out TinyChunkloader by gungun974 instead!");
+            player.sendMessage("https://github.com/gungun974/BTA-Tiny-ChunkLoader");
+            /*TileEntityChunkloader tile = (TileEntityChunkloader) world.getTileEntity(x, y, z);
             if (world.getChunkProvider() instanceof ChunkProviderDynamic) {
                 tile.active = !tile.active;
                 if (tile.active) {
@@ -60,7 +63,7 @@ public class BlockLogicChunkloader extends BlockLogicMachine {
             } else {
                 player.sendMessage("Chunkloading requires the experimental dynamic chunk provider, please enable it in the Signal Industries configuration file.");
                 player.sendMessage("It can be found in your instances config folder as signalindustries.cfg.");
-            }
+            }*/
         }
         return true;
     }

@@ -636,9 +636,9 @@ tile.signaindustries.reinforced.satellite.name=Reinforced Satellite
 tile.signaindustries.reinforced.satellite.desc=Satellite, shine on me tonight~ Release it into the skies to watch the world from above.
 
 tile.signalindustries.reinforced.chunkLoader.name=Spacetime Maintainer
-tile.signalindustries.reinforced.chunkLoader.desc=Keeps the chunk this machine is placed in loaded.
+tile.signalindustries.reinforced.chunkLoader.desc=The functionality of this block has been temporarily disabled.
 tile.signalindustries.awakened.chunkLoader.name=Awakened Causality Sustainer Controller
-tile.signalindustries.awakened.chunkLoader.desc=Keeps several chunks loaded around it.
+tile.signalindustries.awakened.chunkLoader.desc=The functionality of this block has been temporarily disabled.
 
 tile.signalindustries.awakened.warpGate.name=Awakened Quantum Warp Gate Controller
 tile.signalindustries.awakened.warpGate.desc=Permanently links 2 locations together even across dimensions.
