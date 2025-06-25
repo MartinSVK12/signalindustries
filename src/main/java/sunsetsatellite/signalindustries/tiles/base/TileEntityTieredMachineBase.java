@@ -118,6 +118,10 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         disabled = tag.getBoolean("Disabled");
     }
 
+    public int getTieredProgressDuration(int defaultTicks){
+        return (int) (((float) defaultTicks / (tier.ordinal()+1)) / speedMultiplier);
+    }
+
     public int getProgressScaled(int paramInt) {
         return this.progressTicks * paramInt / progressMaxTicks;
     }

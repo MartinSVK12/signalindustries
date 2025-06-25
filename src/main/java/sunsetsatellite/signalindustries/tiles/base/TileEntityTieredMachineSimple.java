@@ -52,7 +52,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         if(areAllInputsNull()){
             progressTicks = 0;
         } else if(canProcess()) {
-            progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
+            progressMaxTicks = getTieredProgressDuration(currentRecipe.getData().ticks); //(int) (currentRecipe.getData().ticks / speedMultiplier);
         }
         if(!worldObj.isClientSide){
             if (progressTicks == 0 && canProcess()){
@@ -88,7 +88,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[energySlot]);
         if(burn > 0 && canProcess() && currentRecipe != null && fuelBurnTicks <= 0){
             if(fluidContents[energySlot].amount >= currentRecipe.getData().cost){
-                progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
+                progressMaxTicks = getTieredProgressDuration(currentRecipe.getData().ticks);
                 fuelMaxBurnTicks = fuelBurnTicks = burn;
                 fluidContents[energySlot].amount -= currentRecipe.getData().cost;
                 if (fluidContents[energySlot].amount == 0) {
