@@ -83,6 +83,8 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
                     if (getConduitCapability() != ((IConduitBlock) b.getLogic()).getConduitCapability()) {
                         continue;
                     }
+                } else {
+                    continue;
                 }
             }
             if (v.x > 0) tx = 1.0f;
