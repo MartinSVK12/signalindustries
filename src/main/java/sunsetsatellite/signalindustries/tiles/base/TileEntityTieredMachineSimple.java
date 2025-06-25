@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.base;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -308,12 +309,18 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
         tag.putInt("RecipeId",recipeId);
+        if(currentRecipe != null) {
+            tag.putString("CurrentRecipe",currentRecipe.toString());
+        }
     }
 
     @Override
     public void readFromNBT(CompoundTag tag) {
         super.readFromNBT(tag);
         recipeId = tag.getInteger("RecipeId");
+        if(currentRecipe == null && tag.containsKey("CurrentRecipe")) {
+            currentRecipe = (RecipeEntrySI<?, ?, RecipeProperties>) Registries.RECIPES.getRecipeFromKey(tag.getString("CurrentRecipe")).recipe;
+        }
     }
 
     @Override
