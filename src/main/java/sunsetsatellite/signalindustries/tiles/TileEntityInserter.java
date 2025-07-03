@@ -9,7 +9,9 @@ import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.util.phys.AABB;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
@@ -82,24 +84,21 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
                 if(slot == -1){
                     return;
                 }
-                ItemStack stack = ((Container) inv).getItem(slot);
-                ItemStack split;
                 int maxSplit = (int) Math.min(64,(4 * speedMultiplier) * (tier.ordinal()+1));
-                if(stack.stackSize >= maxSplit){
-                    split = stack.splitStack(maxSplit);
-                } else {
-                    split = stack.splitStack(stack.stackSize);
-                }
-                //safeguard against immutable stacks
-                ((Container) inv).setItem(slot,stack);
-                boolean success = ((TileEntityItemConduit) pipe).addItem(split,output.getOpposite());
+                ItemStack stack = ((Container) inv).getItem(slot);
+                if(stack == null) return;
+                InventoryWrapper wrapper = new InventoryWrapper((Container) inv);
+
+                ItemStack toInsert = wrapper.removeUntil(stack.itemID, stack.getMetadata(), maxSplit, stack.getData(), false, false);
+
+                boolean success = ((TileEntityItemConduit) pipe).addItem(toInsert,output.getOpposite());
                 if(!success){
-                    stack.stackSize += split.stackSize;
-                    //safeguard against immutable stacks
-                    ((Container) inv).setItem(slot,stack);
-                }
-                if(stack.stackSize <= 0){
-                    ((Container) inv).setItem(slot,null);
+                    ItemStack leftovers = wrapper.add(toInsert);
+                    if(leftovers != null){
+                        Vec3f vec = new Vec3f(x,y,z).add(Direction.getDirectionFromSide(worldObj.getBlockMetadata(x,y,z)).getVecF()).add(0.5f);
+                        EntityItem entityitem = new EntityItem(worldObj, vec.x, vec.y, vec.z, leftovers);
+                        worldObj.entityJoinedWorld(entityitem);
+                    }
                 }
             } else {
                 TileEntityStorageContainer container = (TileEntityStorageContainer) inv;
