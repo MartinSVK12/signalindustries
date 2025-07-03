@@ -90,9 +90,13 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
                 } else {
                     split = stack.splitStack(stack.stackSize);
                 }
+                //safeguard against immutable stacks
+                ((Container) inv).setItem(slot,stack);
                 boolean success = ((TileEntityItemConduit) pipe).addItem(split,output.getOpposite());
                 if(!success){
                     stack.stackSize += split.stackSize;
+                    //safeguard against immutable stacks
+                    ((Container) inv).setItem(slot,stack);
                 }
                 if(stack.stackSize <= 0){
                     ((Container) inv).setItem(slot,null);

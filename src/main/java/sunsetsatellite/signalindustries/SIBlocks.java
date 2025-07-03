@@ -1524,7 +1524,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 (block) -> new BlockLogicUVLamp(block, Material.metal),
                 new MachineTextures()
                         .withDefaultTexture("uv_lamp_inactive")
-                        .withActiveTexture("uv_lamp_active")
+                        .withActiveTexture("uv_lamp")
                         .withOverbrightTextures("uv_lamp_overlay")
         );
 

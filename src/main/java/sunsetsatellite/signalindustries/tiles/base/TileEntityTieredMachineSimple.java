@@ -319,7 +319,10 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         super.readFromNBT(tag);
         recipeId = tag.getInteger("RecipeId");
         if(currentRecipe == null && tag.containsKey("CurrentRecipe")) {
-            currentRecipe = (RecipeEntrySI<?, ?, RecipeProperties>) Registries.RECIPES.getRecipeFromKey(tag.getString("CurrentRecipe")).recipe;
+            //todo: why does this not work
+            try {
+                currentRecipe = (RecipeEntrySI<?, ?, RecipeProperties>) Registries.RECIPES.getRecipeFromKey(tag.getString("CurrentRecipe")).recipe;
+            } catch (IllegalArgumentException ignored) {}
         }
     }
 

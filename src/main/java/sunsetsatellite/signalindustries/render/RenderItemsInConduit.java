@@ -83,6 +83,9 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
                 ((IFullbright)blockModel).enableFullbright();
             }
             GL11.glPushMatrix();
+            if(content.getStack().itemID > 16384){
+                p.y -= 0.25f;
+            }
             itemRenderer.render(tessellator, content.getStack(), p.x,p.y,p.z,0, g);
             ((IFullbright) model).disableFullbright();
             if(model instanceof ItemModelBlock){
