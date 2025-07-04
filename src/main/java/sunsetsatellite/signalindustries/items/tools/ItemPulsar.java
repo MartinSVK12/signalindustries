@@ -5,11 +5,14 @@ import net.minecraft.client.gui.hud.HudIngame;
 import net.minecraft.client.render.Font;
 import net.minecraft.client.render.entity.EntityRendererItem;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
@@ -24,6 +27,9 @@ import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.items.ItemTiered;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
+
+import java.util.List;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
 
@@ -67,6 +73,24 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 itemstack.getData().getCompound("inventory").getValue().remove(String.valueOf(0));
             } else {
                 world.spawnParticle("signalindustries.shockwave", player.x, player.y-1, player.z, 0.0, 0.0, 0.0,0);
+                if (EnvironmentHelper.isServerEnvironment() || EnvironmentHelper.isSinglePlayer()) {
+                    AABB bb = AABB.getTemporaryBB(player.x-5,player.y-1,player.z-5,player.x+5,player.y+1,player.z+5);
+                    List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, bb);
+                    for (Entity entity : list) {
+                        if(entity instanceof Mob){
+                            entity.hurt(player,15, DamageType.BLAST);
+                            double d = player.x - entity.x;
+
+                            double d1;
+                            for(d1 = player.z - entity.z; d * d + d1 * d1 < 1.0E-4; d1 = (Math.random() - Math.random()) * 0.01) {
+                                d = (Math.random() - Math.random()) * 0.01;
+                            }
+
+                            ((Mob) entity).attackedAtYaw = (float)(Math.atan2(d1, d) * 180.0 / 3.1415927410125732) - entity.yRot;
+                            ((Mob) entity).knockBack(entity, 15, d, d1);
+                        }
+                    }
+                }
             }
         }
         return itemstack;

@@ -46,24 +46,6 @@ public class ParticleShockwave extends Particle {
             this.world.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D,0);
         }
 
-        if (!this.world.isClientSide) {
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.expand(this.xd, this.yd, this.zd).grow(timeSinceStart, timeSinceStart, timeSinceStart));
-            for (Entity entity : list) {
-                if(entity instanceof Mob){
-                    entity.hurt(this,15, DamageType.BLAST);
-                    double d = this.x - entity.x;
-
-                    double d1;
-                    for(d1 = this.z - entity.z; d * d + d1 * d1 < 1.0E-4; d1 = (Math.random() - Math.random()) * 0.01) {
-                        d = (Math.random() - Math.random()) * 0.01;
-                    }
-
-                    ((Mob) entity).attackedAtYaw = (float)(Math.atan2(d1, d) * 180.0 / 3.1415927410125732) - entity.yRot;
-                    ((Mob) entity).knockBack(entity, 15, d, d1);
-                }
-            }
-        }
-
         ++this.timeSinceStart;
         if(this.timeSinceStart == this.maximumTime) {
             this.remove();
