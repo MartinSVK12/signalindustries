@@ -24,6 +24,7 @@ import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryHarness;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -52,6 +53,10 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
 
     public CompoundTag getFluidStack(int id, ItemStack stack){
         return stack.getData().getCompound("fluidInventory").getCompound(String.valueOf(id));
+    }
+
+    public void setFluidStack(int id, ItemStack stack, CompoundTag fluidStack){
+        stack.getData().getCompound("fluidInventory").putCompound(String.valueOf(id),fluidStack);
     }
 
     @Override
@@ -123,6 +128,23 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
                 }
             });
         }
+        if(itemstack.isItemDamaged() && getEnergy(itemstack) > 0){
+            if (decrementEnergy(itemstack,1)) {
+                itemstack.repairItem(1);
+            }
+        }
+    }
+
+    public int getEnergy(ItemStack armor){
+       return ((ItemSignalumPowerHarness) armor.getItem()).getFluidStack(0, armor).getInteger("amount");
+    }
+
+    public boolean decrementEnergy(ItemStack armor, int amount){
+        if(getEnergy(armor) < amount) return false;
+        CompoundTag fluidStack = getFluidStack(0, armor);
+        fluidStack.putInt("amount",fluidStack.getInteger("amount")-amount);
+        setFluidStack(0, armor, fluidStack);
+        return true;
     }
 
     @Override

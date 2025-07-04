@@ -310,4 +310,9 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
         return block.hasTag(BlockTags.MINEABLE_BY_PICKAXE) || block.hasTag(BlockTags.MINEABLE_BY_SHOVEL);
     }
+
+    @Override
+    public boolean hitEntity(ItemStack itemstack, Mob target, Mob attacker) {
+        return true;
+    }
 }

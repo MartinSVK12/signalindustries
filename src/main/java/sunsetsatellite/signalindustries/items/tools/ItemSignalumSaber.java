@@ -4,6 +4,9 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.client.gui.hud.HudIngame;
 import net.minecraft.client.render.Font;
 import net.minecraft.client.render.entity.EntityRendererItem;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.entity.TileEntityActivator;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
@@ -12,6 +15,8 @@ import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
+import net.minecraft.core.util.helper.Direction;
+import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
@@ -27,6 +32,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFluidContainer, IVariableDamageWeapon, IHasOverlay {
 
@@ -174,7 +180,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         if(energy <= 0){
             itemstack.getData().putBoolean("active",false);
         }
-        return super.hitEntity(itemstack, target, attacker);
+        return true;
     }
 
     @Override
@@ -213,5 +219,21 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     @Override
     public void renderOverlay(ItemStack stack, IPowerSuit signalumPowerSuit, HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Font fontRenderer, EntityRendererItem itemRenderer) {
 
+    }
+
+    @Override
+    public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int x, int y, int z, Side side, Mob mob) {
+        return true;
+    }
+
+    @Override
+    public void onUseByActivator(ItemStack itemStack, TileEntityActivator activatorBlock, World world, Random random, int blockX, int blockY, int blockZ, double offX, double offY, double offZ, Direction direction) {
+        blockX += direction.getOffsetX();
+        blockY += direction.getOffsetY();
+        blockZ += direction.getOffsetZ();
+        Block<?> b = world.getBlock(blockX, blockY, blockZ);
+        if (b == Blocks.PUMPKIN) {
+            world.setBlockAndMetadata(blockX, blockY, blockZ, Blocks.PUMPKIN_CARVED_IDLE.id(), direction.getOpposite().getId());
+        }
     }
 }

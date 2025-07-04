@@ -324,6 +324,9 @@ public class SIModels implements ModelEntrypoint {
             ModelHelper.setItemModel(item,()->{
                 ItemModelStandard model = new ItemModelStandard(item, MOD_ID);
                 model.icon = TextureRegistry.getTexture(NamespaceID.getTemp(MOD_ID,"item/"+texture));
+                if(item == basicSignalumDrill || item == reinforcedSignalumDrill){
+                    model.setFull3D();
+                }
                 return model;
             });
         });
