@@ -58,12 +58,15 @@ public class ProjectileFallingMeteor extends Projectile {
 
     @Override
     public void onHit(HitResult hitResult) {
-        if(blockID == SIBlocks.signalumOre.id()){
-            EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
-            if (world != null) {
-                world.entityJoinedWorld(entityitem);
+        if(world != null && !world.isClientSide){
+            if(blockID == SIBlocks.signalumOre.id()){
+                EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
+                if (world != null) {
+                    world.entityJoinedWorld(entityitem);
+                }
             }
         }
+
         super.onHit(hitResult);
     }
 }
