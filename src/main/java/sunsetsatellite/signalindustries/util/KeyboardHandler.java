@@ -77,7 +77,11 @@ public class KeyboardHandler {
             }
             if(openSuitKey.isPressed()){
                 debounce = 10;
-                if(!shift && mc.currentScreen == null && mc.thePlayer.inventory.armorItemInSlot(2) != null && mc.thePlayer.inventory.armorItemInSlot(2).getItem().equals(SIItems.signalumPowerSuitChestplate)){
+                if(!shift && mc.currentScreen == null
+                        && mc.thePlayer.inventory.armorItemInSlot(2) != null
+                        && mc.thePlayer.inventory.armorItemInSlot(2).getItem().equals(SIItems.signalumPowerSuitChestplate)
+                        && powerSuit != null
+                ){
                     if(mc.currentWorld.isClientSide){
                         NetworkHandler.sendToServer(new NetworkMessageOpenSuit(2));
                     } else {
