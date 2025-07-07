@@ -4,6 +4,7 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockLogicFarmlandMixin",
     "BlockLogicRailMixin",
     "ChunkDecoratorOverworldMixin",
     "ContainerInventoryMixin",
