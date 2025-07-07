@@ -134,5 +134,27 @@ public class StoneworksRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
                         new RecipeProperties(100,20, 10, Tier.BASIC,false)
                 )
         );
+        group.register(
+                "marble",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.LAVA,0)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,0)),
+                        },
+                        new ItemStack(Blocks.MARBLE,1),
+                        new RecipeProperties(10,20, 11, Tier.BASIC,false)
+                )
+        );
+        group.register(
+                "slate",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.LAVA,0)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,0))
+                        },
+                        new ItemStack(Blocks.SLATE,1),
+                        new RecipeProperties(10,20, 12, Tier.BASIC,false)
+                )
+        );
     }
 }

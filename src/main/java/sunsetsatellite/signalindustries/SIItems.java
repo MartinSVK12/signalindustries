@@ -306,16 +306,16 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
 
         positionMemoryChip = customItem(() -> new ItemPositionChip("romChip.position",key("item/position_chip"),item("positionMemoryChip")),"position_chip").setMaxStackSize(1);
 
-        basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"),item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack");
-        reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"),item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack");
+        basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"),item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack").setMaxStackSize(1);
+        reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"),item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack").setMaxStackSize(1);
 
-        signalumPrototypeHarness = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarness", key("item/harness") ,item("signalumPrototypeHarness"), armorPrototypeHarness, 2, Tier.BASIC),"harness");
-        signalumPrototypeHarnessGoggles = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarnessGoggles", key("item/harness_goggles") ,item("signalumPrototypeHarnessGoggles"), armorPrototypeHarness, 3, Tier.BASIC),"goggles");
+        signalumPrototypeHarness = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarness", key("item/harness") ,item("signalumPrototypeHarness"), armorPrototypeHarness, 2, Tier.BASIC),"harness").setMaxStackSize(1);
+        signalumPrototypeHarnessGoggles = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarnessGoggles", key("item/harness_goggles") ,item("signalumPrototypeHarnessGoggles"), armorPrototypeHarness, 3, Tier.BASIC),"goggles").setMaxStackSize(1);
 
-        signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, 3, Tier.REINFORCED),"signalumpowersuit_helmet");
-        signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, 2, Tier.REINFORCED),"signalumpowersuit_chestplate");
-        signalumPowerSuitLeggings = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.leggings", key("item/power_suit_leggings"), item("signalumPowerSuitLeggings"), armorSignalumPowerSuit, 1, Tier.REINFORCED),"signalumpowersuit_leggings");
-        signalumPowerSuitBoots = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.boots", key("item/power_suit_boots"), item("signalumPowerSuitBoots"), armorSignalumPowerSuit, 0, Tier.REINFORCED),"signalumpowersuit_boots");
+        signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, 3, Tier.REINFORCED),"signalumpowersuit_helmet").setMaxStackSize(1);
+        signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, 2, Tier.REINFORCED),"signalumpowersuit_chestplate").setMaxStackSize(1);
+        signalumPowerSuitLeggings = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.leggings", key("item/power_suit_leggings"), item("signalumPowerSuitLeggings"), armorSignalumPowerSuit, 1, Tier.REINFORCED),"signalumpowersuit_leggings").setMaxStackSize(1);
+        signalumPowerSuitBoots = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.boots", key("item/power_suit_boots"), item("signalumPowerSuitBoots"), armorSignalumPowerSuit, 0, Tier.REINFORCED),"signalumpowersuit_boots").setMaxStackSize(1);
 
         romChipProjectile = customItem(() -> new ItemRomChip("romChip.projectile",key("item/rom_chip_projectile"),item("romChipProjectile")),"chip1").setMaxStackSize(1);
         romChipBoost = customItem(() -> new ItemRomChip("romChip.boost",key("item/rom_chip_boost"),item("romChipBoost")),"chip2").setMaxStackSize(1);
