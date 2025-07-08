@@ -138,7 +138,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicWrathBeacon;
     public static Block<? extends BlockLogic> reinforcedWrathBeacon;
 
-    //public static Block<? extends BlockLogic> pulsarBlock; //todo
+    public static Block<? extends BlockLogic> pulsarBlock; //todo
 
     public static Block<? extends BlockLogic> dimensionalAnchor;
 
@@ -1550,15 +1550,14 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withActiveSideTextures("reinforced_wrath_beacon_active")
         );
 
-        //todo
-        /*pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),
+        pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),
                 "reinforced.pulsar",
                 "pulsar",
                 "pulsarBlock",
                 3,
                 (block) -> new BlockLogicPulsar(block, Material.metal, Tier.REINFORCED).setSolid(false),
                 new MachineTextures(Tier.REINFORCED)
-        );*/
+        );
 
         reinforcedBuilder = customBlock(defaultBuilder(Tier.REINFORCED),
                 "reinforced.builder",

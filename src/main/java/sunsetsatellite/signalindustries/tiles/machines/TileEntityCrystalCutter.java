@@ -51,8 +51,10 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     public void processItem() {
         super.processItem();
         if(itemContents[itemOutputs[0]].getItem().equals(SIItems.signalumCrystalEmpty)){
-            if(fluidContents[energySlot].amount+1000 <= fluidCapacity[energySlot]){
+            if(fluidContents[energySlot] != null && fluidContents[energySlot].amount+1000 <= fluidCapacity[energySlot]){
                 fluidContents[energySlot].amount += 1000;
+            } else if(fluidContents[energySlot] == null){
+                fluidContents[energySlot] = new FluidStack(SIFluids.ENERGY,1000);
             }
         }
     }

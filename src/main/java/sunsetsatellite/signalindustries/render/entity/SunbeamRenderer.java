@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.render;
+package sunsetsatellite.signalindustries.render.entity;
 
 
 import net.minecraft.client.render.entity.EntityRenderer;

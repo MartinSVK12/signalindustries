@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.render;
+package sunsetsatellite.signalindustries.render.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.LightmapHelper;
@@ -13,10 +13,8 @@ import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlock;
-import net.minecraft.core.util.helper.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.catalyst.core.util.model.IFullbright;
 
 import java.util.Random;
 

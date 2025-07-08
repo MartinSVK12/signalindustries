@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
@@ -18,6 +17,7 @@ import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.catalyst.core.util.model.IColorOverride;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
+import sunsetsatellite.signalindustries.render.entity.EntityRendererFakeItem;
 
 import java.util.ArrayList;
 

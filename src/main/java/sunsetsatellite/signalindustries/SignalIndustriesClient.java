@@ -85,6 +85,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
         Catalyst.GUIS.register(key("gui/filter"),new MpGuiEntryClient(TileEntityFilter.class, ScreenFilter.class, MenuFilter.class));
         Catalyst.GUIS.register(key("gui/pulsar"),new MpGuiEntryClient(InventoryPulsar.class, ScreenPulsar.class, MenuPulsar.class));
         Catalyst.GUIS.register(key("gui/pulsar_attch"),new MpGuiEntryClient(InventoryPulsar.class, ScreenPulsarAttachment.class, MenuPulsarAttachment.class));
+        Catalyst.GUIS.register(key("gui/pulsar_block"),new MpGuiEntryClient(TileEntityPulsar.class, ScreenPulsarBlock.class, MenuPulsarBlock.class));
         Catalyst.GUIS.register(key("gui/backpack"),new MpGuiEntryClient(InventoryBackpack.class, ScreenBackpack.class, MenuBackpack.class));
         Catalyst.GUIS.register(key("gui/harness"),new MpGuiEntryClient(InventoryHarness.class, ScreenHarness.class, MenuHarness.class));
         Catalyst.GUIS.register(key("gui/power_suit"),new MpGuiEntryClient(InventoryPowerSuit.class, ScreenPowerSuit.class, MenuPowerSuit.class));

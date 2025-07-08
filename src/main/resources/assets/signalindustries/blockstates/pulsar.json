@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "active=true,warp=false": {
+      "model": "signalindustries:pulsar/active"
+    },
+    "active=true,warp=true": {
+      "model": "signalindustries:pulsar/warp"
+    },
+    "active=false": {
+      "model": "signalindustries:pulsar/inactive"
+    }
+  }
+}

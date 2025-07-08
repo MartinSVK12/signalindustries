@@ -57,6 +57,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
         Catalyst.GUIS.register(key("gui/filter"),new MpGuiEntry(TileEntityFilter.class, MenuFilter.class));
         Catalyst.GUIS.register(key("gui/pulsar"),new MpGuiEntry(InventoryPulsar.class, MenuPulsar.class));
         Catalyst.GUIS.register(key("gui/pulsar_attch"),new MpGuiEntry(InventoryPulsar.class, MenuPulsarAttachment.class));
+        Catalyst.GUIS.register(key("gui/pulsar_block"),new MpGuiEntry(TileEntityPulsar.class, MenuPulsarBlock.class));
         Catalyst.GUIS.register(key("gui/backpack"),new MpGuiEntry(InventoryBackpack.class, MenuBackpack.class));
         Catalyst.GUIS.register(key("gui/harness"),new MpGuiEntry(InventoryHarness.class, MenuHarness.class));
         Catalyst.GUIS.register(key("gui/power_suit"),new MpGuiEntry(InventoryPowerSuit.class, MenuPowerSuit.class));

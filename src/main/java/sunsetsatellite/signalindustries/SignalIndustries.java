@@ -123,13 +123,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityProgrammer.class,id("programmer"));
         EntityHelper.createTileEntity(TileEntityWrathBeacon.class,id("wrath_beacon"));
         EntityHelper.createTileEntity(TileEntityUVLamp.class,id("uv_lamp"));
-        //EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar")); //todo
+        EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar")); //todo
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");
         EntityHelper.createEntity(ProjectileEnergyOrb.class, id("energy_orb"), "entity.signalindustries.energyOrb");
         EntityHelper.createEntity(ProjectileSunbeam.class, id("sunbeam"), "entity.signalindustries.sunbeam");
         EntityHelper.createEntity(MobInfernal.class, id("infernal"), "entity.signalindustries.infernal");
+        EntityHelper.createEntity(EntityRealityTear.class, id("reality_tear"), "entity.signalindustries.realityTear");
+        EntityHelper.createEntity(EntityShockwave.class, id("shockwave"), "entity.signalindustries.shockwave");
 
         NetEntityHandler.registerNetworkEntry(new NetEntryVolatileCrystal(),config.getInt("EntityIDs.volatileCrystalId"));
         NetEntityHandler.registerNetworkEntry(new NetEntryFallingMeteor(),config.getInt("EntityIDs.fallingMeteorId"));

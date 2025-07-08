@@ -23,7 +23,6 @@ import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.catalyst.multipart.block.model.BlockModelMultipart;
 import sunsetsatellite.catalyst.multipart.block.model.MultipartBlockModelBuilder;
-import sunsetsatellite.signalindustries.blocks.color.BlockColorUnraveledFabric;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicStorageContainer;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
@@ -32,6 +31,10 @@ import sunsetsatellite.signalindustries.blocks.states.*;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.render.*;
+import sunsetsatellite.signalindustries.render.entity.FallingMeteorRenderer;
+import sunsetsatellite.signalindustries.render.entity.RealityTearRenderer;
+import sunsetsatellite.signalindustries.render.entity.ShockwaveRenderer;
+import sunsetsatellite.signalindustries.render.entity.SunbeamRenderer;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
@@ -74,6 +77,11 @@ public class SIModels implements ModelEntrypoint {
                 new BlockModelDFJava<>(basicSignalumDynamo, DragonFly.loadBlockModel("signalindustries:signalum_dynamo"))
                         .setStateInterpreter(new RotatableStateInterpreter())
                         .setStateData("signalindustries:dynamo")
+        );
+        ModelHelper.setBlockModel(pulsarBlock, ()->
+                new BlockModelDFJava<>(pulsarBlock, DragonFly.loadBlockModel("signalindustries:pulsar/inactive"))
+                        .setStateInterpreter(new PulsarStateInterpreter())
+                        .setStateData("signalindustries:pulsar")
         );
         ModelHelper.setBlockModel(externalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) externalIo));
         ModelHelper.setBlockModel(reinforcedExternalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) reinforcedExternalIo));
@@ -354,6 +362,8 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setEntityModel(ProjectileEnergyOrb.class, ()-> new EntityRendererSprite<ProjectileCrystal>(TextureRegistry.getTexture("signalindustries:item/energyorb")));
         ModelHelper.setEntityModel(ProjectileSunbeam.class, SunbeamRenderer::new);
         ModelHelper.setEntityModel(MobInfernal.class, ()->new MobRenderer<MobInfernal>(new ModelZombie(),0.5f));
+        ModelHelper.setEntityModel(EntityRealityTear.class, RealityTearRenderer::new);
+        ModelHelper.setEntityModel(EntityShockwave.class, ShockwaveRenderer::new);
     }
 
     @Override
@@ -381,6 +391,7 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setTileEntityModel(TileEntityAutoMiner.class, RenderAutoMiner::new);
         ModelHelper.setTileEntityModel(TileEntityReinforcedWrathBeacon.class, RenderMultiblock::new);
         ModelHelper.setTileEntityModel(TileEntityMultiConduit.class, RenderFluidInMultiConduit::new);
+        ModelHelper.setTileEntityModel(TileEntityPulsar.class, RenderPulsar::new);
     }
 
     @Override

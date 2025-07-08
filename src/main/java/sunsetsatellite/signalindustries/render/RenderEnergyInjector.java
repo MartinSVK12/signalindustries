@@ -1,10 +1,9 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.render.RenderBlocks;
-import net.minecraft.client.render.entity.EntityRendererItem;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.entity.EntityItem;
+import sunsetsatellite.signalindustries.render.entity.EntityRendererFakeItem;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyInjector;
 
 import java.util.Random;
