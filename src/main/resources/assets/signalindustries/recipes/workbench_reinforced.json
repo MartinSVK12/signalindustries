@@ -1780,9 +1780,9 @@
     "name": "signalindustries:workbench/pulsar_block",
     "type": "minecraft:crafting/shaped",
     "pattern": [
-      "RIR",
+      " I ",
       "SES",
-      " M "
+      "RMR"
     ],
     "symbols": [
       {
@@ -1796,7 +1796,7 @@
       {
         "symbol": "R",
         "stack": {
-          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "key": "tile.signalindustries.reinforced.casing",
           "amount": 1,
           "meta": 0
         }

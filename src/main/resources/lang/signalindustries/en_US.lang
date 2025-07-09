@@ -650,6 +650,13 @@ tile.signalindustries.awakened.parallelProcessor.desc=Allows a machine to carry 
 tile.signalindustries.awakened.parallelProcessor.8x.name=Awakened 8x Parallel Hyperprocessor
 tile.signalindustries.awakened.parallelProcessor.8x.desc=Creates and collapses multiple timelines inside a machine to carry out 8 recipes at once!
 
+tile.signalindustries.basic.greenhouse.name=Basic Miniature Greenhouse
+tile.signalindustries.basic.greenhouse.desc=
+tile.signalindustries.reinforced.greenhouse.name=Reinforced Closed Ecosystem
+tile.signalindustries.reinforced.greenhouse.desc=
+tile.signalindustries.awakened.greenhouse.name=Awakened Gaia's Garden
+tile.signalindustries.awakened.greenhouse.desc=
+
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
 
@@ -705,8 +712,8 @@ tile.signalindustries.awakenedAlloyCoil.desc=A coil of Awakened Alloy.
 
 tile.signalindustries.ancient.lunarTotem.name=Cursed Lunar Totem
 tile.signalindustries.ancient.lunarTotem.desc=A carved totem depicting the Moon with strange inscriptions at the base.
-tile.signalindustries.ancient.eclipseTotem.name=Total Eclipse Totem
-tile.signalindustries.ancient.eclipseTotem.desc=A carved totem depicting the Sun with strange inscriptions at the base.
+tile.signalindustries.ancient.solarTotem.name=Shining Solar Totem
+tile.signalindustries.ancient.solarTotem.desc=A carved totem depicting the Sun with strange inscriptions at the base.
 tile.signalindustries.ancient.skyTotem.name=Falling Sky Totem
 tile.signalindustries.ancient.skyTotem.desc=A carved totem depicting the Earth and Outer Space with strange inscriptions at the base.
 
@@ -839,7 +846,7 @@ achievement.signalindustries.victory.reinforced=Crimson Warrior
 achievement.signalindustries.victory.reinforced.desc=Activate a Reinforced Wrath Beacon and complete the Wrath Tree challenge.
 achievement.signalindustries.victory.awakened=Destroyer
 achievement.signalindustries.victory.awakened.desc=Walk backwards into hell and complete the Awakened Wrath Beacon challenge receiving an ancient artifact.
-achievement.signalindustries.annihilator=ANNIHILATOR
+achievement.signalindustries.annihilator=Annihilator
 achievement.signalindustries.annihilator.desc=Complete the Awakened Wrath Beacon challenge under the shine of the Blood Moon! The devil bows down to you.
 
 achievement.signalindustries.comingSoon=Work in Progress

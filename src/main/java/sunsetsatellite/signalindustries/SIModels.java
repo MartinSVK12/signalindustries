@@ -86,6 +86,14 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(externalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) externalIo));
         ModelHelper.setBlockModel(reinforcedExternalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) reinforcedExternalIo));
 
+        ModelHelper.setBlockModel(lunarTotem, ()->
+                new BlockModelDFJava<>(lunarTotem, DragonFly.loadBlockModel("signalindustries:lunar_totem"))
+        );
+
+        ModelHelper.setBlockModel(solarTotem, ()->
+                new BlockModelDFJava<>(solarTotem, DragonFly.loadBlockModel("signalindustries:solar_totem"))
+        );
+
         ModelHelper.setBlockModel(prototypeFluidConduit, ()->{
             BlockModelMultipart modelMultipart = new MultipartBlockModelBuilder(CatalystMultipart.MOD_ID)
                     .build(prototypeFluidConduit);

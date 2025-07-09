@@ -218,6 +218,9 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> uvLamp;
     public static Block<? extends BlockLogic> voidContainer;
 
+    public static Block<? extends BlockLogic> lunarTotem;
+    public static Block<? extends BlockLogic> solarTotem;
+
     public static Block<? extends BlockLogic> energyStill;
     public static Block<? extends BlockLogic> energyFlowing;
     public static Block<? extends BlockLogic> burntSignalumFlowing;
@@ -1741,6 +1744,24 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 (block)-> new BlockLogicUndroppable(block, Material.stone),
                 new MachineTextures()
                         .withDefaultTexture("reality_fabric")
+        );
+
+        lunarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE),
+                "ancient.lunarTotem",
+                "lunar_totem",
+                "lunarTotem",
+                1,
+                (block)-> new BlockLogicLunarTotem(block, Material.stone),
+                new MachineTextures()
+        );
+
+        solarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE),
+                "ancient.solarTotem",
+                "solar_totem",
+                "solarTotem",
+                1,
+                (block)-> new BlockLogicSolarTotem(block, Material.stone),
+                new MachineTextures()
         );
 
         /*unraveledFabric = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.STONE).setHardness(150).setResistance(50000),
