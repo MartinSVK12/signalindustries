@@ -28,7 +28,7 @@ public class BlockLogicLunarTotem extends BlockLogic implements ICustomDescripti
 
         if (!world.isClientSide) {
             long time = world.getWorldTime() % 24000L;
-            ItemStack stack = player.inventory.getHeldItemStack();
+            ItemStack stack = player.getCurrentEquippedItem();
             if (stack != null) {
                 if (stack.itemID == SIItems.clearKey.id) {
                     SignalIndustries.bloodMoonsDisabled = !SignalIndustries.bloodMoonsDisabled;
@@ -37,10 +37,12 @@ public class BlockLogicLunarTotem extends BlockLogic implements ICustomDescripti
                     } else {
                         player.sendTranslatedChatMessage("event.signalindustries.bloodMoonUnblock");
                     }
+                    return true;
                 } else if (stack.itemID == SIItems.monsterShard.id && time >= 0 && time < 13000L) {
-                    player.inventory.getHeldItemStack().consumeItem(player);
+                    player.getCurrentEquippedItem().consumeItem(player);
                     world.setWorldTime(world.getWorldTime() - world.getWorldTime() % 24000L + 13000L);
                     player.sendTranslatedChatMessage("event.signalindustries.lunarTotemUse");
+                    return true;
                 }
             }
         }

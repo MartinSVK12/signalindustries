@@ -106,7 +106,7 @@ public abstract class WorldMixin {
             if(rand.nextInt(16) == 0 && getCurrentWeather() != SIWeather.weatherMeteorShower){
                 for (Player player : players) {
                     player.sendMessage(TextFormatting.LIGHT_BLUE+"A Meteor Shower is happening!");
-                    ////player.triggerAchievement(SIAchievements.STARFALL);
+                    //player.triggerAchievement(SIAchievements.STARFALL);
                 }
                 weatherManager.overrideWeather(SIWeather.weatherMeteorShower,60*20,1);
             }
