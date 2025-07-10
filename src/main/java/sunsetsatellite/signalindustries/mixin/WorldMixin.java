@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.List;
 import java.util.Random;
@@ -58,11 +59,11 @@ public abstract class WorldMixin {
         int dayLength = Global.DAY_LENGTH_TICKS;
         int dayTime = (int)(worldTime % (long)dayLength);
         int triggerTime = worldType.getSunriseTick(thisAs)+dayTicks;
-        if((dayTime == triggerTime && dimension != Dimension.NETHER && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
+        if(!SignalIndustries.bloodMoonsDisabled && (dayTime == triggerTime && dimension != Dimension.NETHER && (getCurrentWeather() != SIWeather.weatherBloodMoon || getCurrentWeather() != SIWeather.weatherEclipse))){
             if(rand.nextInt(16) == 15 && !(getDifficulty() == Difficulty.PEACEFUL) && getCurrentWeather() != SIWeather.weatherBloodMoon){
                 for (Player player : players) {
                     player.sendMessage(TextFormatting.RED+"A Blood Moon is rising!");
-                    ////player.triggerAchievement(SIAchievements.BLOOD_MOON);
+                    //player.triggerAchievement(SIAchievements.BLOOD_MOON);
                 }
                 weatherManager.overrideWeather(SIWeather.weatherBloodMoon,13000,1);
             }
@@ -160,5 +161,4 @@ public abstract class WorldMixin {
         }
 
     }
-
 }

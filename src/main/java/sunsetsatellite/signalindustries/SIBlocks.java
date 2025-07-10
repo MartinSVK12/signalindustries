@@ -1755,7 +1755,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures()
         );
 
-        solarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE),
+        solarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE).setLuminance(15),
                 "ancient.solarTotem",
                 "solar_totem",
                 "solarTotem",

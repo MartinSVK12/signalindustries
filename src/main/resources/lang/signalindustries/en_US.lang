@@ -739,6 +739,12 @@ event.signalindustries.bloodMoon=A blood moon is rising!
 event.signalindustries.solarEclipse=A solar eclipse is happening!
 event.signalindustries.invalidMultiblock=Multiblock incomplete or invalid!
 event.signalindustries.modeChanged=Changed mode to:
+event.signalindustries.lunarTotemUse=The night answers your call!
+event.signalindustries.solarTotemUse=The light of dawn shines above the horizon!
+event.signalindustries.bloodMoonBlock=Blood moons will no longer appear.
+event.signalindustries.bloodMoonUnblock=Blood moons will appear again.
+event.signalindustries.solarTotemOvertake=The power of the Solar Totem overrides the cursed night!
+event.signalindustries.totemNoPermission=You're not worthy of controlling the skies.
 
 signalindustries.warning=Warning!
 

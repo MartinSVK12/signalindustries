@@ -3,9 +3,14 @@ package sunsetsatellite.signalindustries.blocks.logic.base;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class BlockLogicLunarTotem extends BlockLogic implements ICustomDescription {
     public BlockLogicLunarTotem(Block<?> block, Material material) {
@@ -14,6 +19,32 @@ public class BlockLogicLunarTotem extends BlockLogic implements ICustomDescripti
 
     @Override
     public boolean isSolidRender() {
+        return false;
+    }
+
+    @Override
+    public boolean onBlockRightClicked(World world, int x, int y, int z, Player player, Side side, double xHit, double yHit) {
+        super.onBlockRightClicked(world, x, y, z, player, side, xHit, yHit);
+
+        if (!world.isClientSide) {
+            long time = world.getWorldTime() % 24000L;
+            ItemStack stack = player.inventory.getHeldItemStack();
+            if (stack != null) {
+                if (stack.itemID == SIItems.clearKey.id) {
+                    SignalIndustries.bloodMoonsDisabled = !SignalIndustries.bloodMoonsDisabled;
+                    if (SignalIndustries.bloodMoonsDisabled) {
+                        player.sendTranslatedChatMessage("event.signalindustries.bloodMoonBlock");
+                    } else {
+                        player.sendTranslatedChatMessage("event.signalindustries.bloodMoonUnblock");
+                    }
+                } else if (stack.itemID == SIItems.monsterShard.id && time >= 0 && time < 13000L) {
+                    player.inventory.getHeldItemStack().consumeItem(player);
+                    world.setWorldTime(world.getWorldTime() - world.getWorldTime() % 24000L + 13000L);
+                    player.sendTranslatedChatMessage("event.signalindustries.lunarTotemUse");
+                }
+            }
+        }
+
         return false;
     }
 
