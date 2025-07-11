@@ -10,6 +10,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 public class TileEntityWakingAlloySmelter extends TileEntityTieredMultiblock {
     @Override
     public void init(Block<?> block) {
+        super.init(block);
         usesEnergy = true;
         usesItemInput = true;
         usesItemOutput = true;

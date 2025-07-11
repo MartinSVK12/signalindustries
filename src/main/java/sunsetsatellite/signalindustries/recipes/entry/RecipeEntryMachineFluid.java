@@ -29,9 +29,6 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         if(symbols.length == 0){
             return false;
         }
-        if(symbols.length != getInput().length){
-            return false;
-        }
         //key is recipe input, value is inventory input
         HashMap<RecipeExtendedSymbol,RecipeExtendedSymbol> alreadyMatched = new HashMap<>();
         for (RecipeExtendedSymbol invInputSymbol : symbols) {

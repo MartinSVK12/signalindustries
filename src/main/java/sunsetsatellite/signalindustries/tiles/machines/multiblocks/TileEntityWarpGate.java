@@ -59,6 +59,7 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
 
     @Override
     public void init(Block<?> block) {
+        super.init(block);
         multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("warpGate"));
     }
 

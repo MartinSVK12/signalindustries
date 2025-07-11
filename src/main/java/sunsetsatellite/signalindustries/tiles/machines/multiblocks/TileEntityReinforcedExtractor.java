@@ -44,7 +44,8 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
     }
 
     @Override
-    public void init(Block block) {
+    public void init(Block<?> block) {
+        super.init(block);
         multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("extractionManifold"));
     }
 

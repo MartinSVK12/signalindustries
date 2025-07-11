@@ -9,7 +9,8 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 public class TileEntityWakingInfuser extends TileEntityTieredMultiblock {
     @Override
-    public void init(Block block) {
+    public void init(Block<?> block) {
+        super.init(block);
         usesEnergy = true;
         usesItemInput = true;
         usesItemOutput = true;
