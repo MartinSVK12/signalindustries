@@ -5,6 +5,7 @@ import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -29,6 +30,7 @@ public class InventoryBackpack extends InventoryItemFluid {
         for (int i = 0; i < fluidContents.length; i++) {
             acceptedFluids.add(new ArrayList<>());
             acceptedFluids.get(i).addAll(Fluid.fluidMap.values());
+            acceptedFluids.get(i).remove(SIFluids.ENERGY);
         }
     }
 
