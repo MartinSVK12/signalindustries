@@ -10,10 +10,13 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.weather.Weather;
 import net.minecraft.core.world.weather.Weathers;
+import net.minecraft.server.entity.player.PlayerServer;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescription {
     public BlockLogicSolarTotem(Block<?> block, Material material) {
@@ -30,6 +33,12 @@ public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescripti
         super.onBlockRightClicked(world, x, y, z, player, side, xHit, yHit);
 
         if (!world.isClientSide) {
+            if(EnvironmentHelper.isServerEnvironment() && SIConfig.config.getBoolean("Other.totemsRequireOP")){
+                if (!((PlayerServer) player).mcServer.playerList.isOp(player.uuid)) {
+                    player.sendTranslatedChatMessage("event.signalindustries.totemNoPermission");
+                    return true;
+                }
+            }
             long time = world.getWorldTime() % 24000L;
             ItemStack stack = player.getCurrentEquippedItem();
             if (stack != null) {

@@ -31,6 +31,7 @@ public class SIConfig {
         defaultConfig.addCategory("Experimental");
         defaultConfig.addEntry("Experimental.enableDynamicChunkProvider","Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.",false);
         defaultConfig.addEntry("Other.enableQuests",true);
+        defaultConfig.addEntry("Other.totemsRequireOP",false);
         defaultConfig.addEntry("Other.eternityDimId", 3);
         defaultConfig.addEntry("Other.GuiId", 10);
         defaultConfig.addEntry("Other.machinePacketId", 113);
@@ -132,6 +133,15 @@ public class SIConfig {
                 changed = true;
             }
 
+            try {
+                if(!rawConfig.contains("Other.totemsRequireOP")){
+                    rawConfig.addEntry("Other.totemsRequireOP", false);
+                    changed = true;
+                }
+            } catch (NullPointerException e){
+                rawConfig.addEntry("Other.totemsRequireOP", false);
+                changed = true;
+            }
 
             if(!rawConfig.contains("Other.eternityDimId")){
                 rawConfig.addEntry("Other.eternityDimId", 3);
