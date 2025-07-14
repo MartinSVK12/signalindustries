@@ -230,6 +230,9 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         for(int i = 0; i < this.getContainerSize(); i++) {
             ItemStack itemStack = this.getItem(i);
             if(itemStack == null) continue;
+            itemStack = itemStack.copy();
+            ((UnlimitedItemStack) (Object) itemStack).disableCustomMaxSize();
+            ((UnlimitedItemStack) (Object) itemStack).setUnlimited(false);
             EntityItem item = world.dropItem(x, y, z, itemStack);
             item.xd *= 0.5;
             item.yd *= 0.5;
