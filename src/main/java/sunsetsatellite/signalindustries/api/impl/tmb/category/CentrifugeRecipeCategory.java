@@ -73,18 +73,7 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<MachineRecipeTr
     public void drawRecipe(ITMBRuntime runtime, MachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
 
         RecipeProperties data = recipe.getOriginal().getData();
-        RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
-        for (int i = 0; i < 4; i++) {
-            if(i >= input.length){
-                ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
-                continue;
-            }
-            RecipeExtendedSymbol symbol = input[i];
-            ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
-        }
-        ingredients.add(4, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(5, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
-
+        getIngredients(recipe, layout, context, ingredients);
         if (data.thisTierOnly) {
             runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
         } else {
@@ -96,6 +85,22 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<MachineRecipeTr
 
         runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 59, (background.getHeight() / 2) - 14,0xFFFFFFFF);
         runtime.getGuiHelper().getMinecraft().font.drawCenteredString((data.chance*100)+"%",x + 59, (background.getHeight() / 2) + 14,0xFFFFFFFF);
+    }
+
+    @Override
+    public void getIngredients(MachineRecipeTranslator recipe, IRecipeLayout layout, ILookupContext context, List<IIngredientList> ingredients) {
+        RecipeProperties data = recipe.getOriginal().getData();
+        RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
+        for (int i = 0; i < 4; i++) {
+            if(i >= input.length){
+                ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
+                continue;
+            }
+            RecipeExtendedSymbol symbol = input[i];
+            ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
+        }
+        ingredients.add(4, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
+        ingredients.add(5, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
     }
 
     @Override
