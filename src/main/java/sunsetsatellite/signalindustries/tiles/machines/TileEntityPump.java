@@ -21,10 +21,7 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TileEntityPump extends TileEntityTieredMachineBase implements IBoostable {
@@ -34,6 +31,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
     public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
     public TickTimer pumpTimer = new TickTimer(this,this::findFluid,20,true);
     public int range = 3;
+    public Random rand = new Random();
 
 
     public TileEntityPump(){
@@ -55,17 +53,20 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         if(currentBlock == null || currentRecipe == null || currentFluid == null){
             Set<Fluid> pumpableFluids = new HashSet<>();
             for (RecipeEntryMachineFluid recipe : SIRecipes.PUMP.getAllRecipes()) {
-                for (RecipeExtendedSymbol symbol : recipe.getInput()) {
-                    for (FluidStack stack : symbol.resolveFluids()) {
-                        pumpableFluids.add(stack.fluid);
-                    }
-                }
+                pumpableFluids.add(recipe.getOutput().fluid);
             }
             for (int pumpX = x-range; pumpX < x+range; pumpX++) {
                 for (int pumpY = y-1; pumpY > y-range-1; pumpY--) {
                     for (int pumpZ = z-range; pumpZ < z + range; pumpZ++) {
                         Block<?> block = worldObj.getBlock(pumpX,pumpY,pumpZ);
+                        int metadata = worldObj.getBlockMetadata(pumpX, pumpY, pumpZ);
                         BlockLogicFluid logic = Catalyst.blockLogic(block, BlockLogicFluid.class);
+                        if(block != null && block == SIBlocks.eternalTreeLog && metadata == 1){
+                            currentBlock = new BlockInstance(block,new Vec3i(pumpX,pumpY,pumpZ),metadata,null);
+                            currentFluid = SIFluids.WORLD_RESIN;
+                            currentRecipe = SIRecipes.PUMP.getItem("world_resin");
+                            return;
+                        }
                         if(block != null && logic != null){
                             List<Fluid> fluids = pumpableFluids.stream().filter((F) -> F.blocks.contains(block)).collect(Collectors.toList());
                             if(!fluids.isEmpty()){
@@ -79,6 +80,12 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
                 }
             }
         }
+    }
+
+    @Override
+    public void init(Block<?> block) {
+        super.init(block);
+        range = 3 * (tier.ordinal()+1);
     }
 
     @Override
@@ -141,14 +148,23 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
     }
 
     public void processItem(){
-        if(canProcess()){
+        if(canProcess() && worldObj != null){
             FluidStack stack = SIRecipes.PUMP.findFluidOutput(new FluidStack(currentFluid),tier);
+            if(currentBlock.block == SIBlocks.eternalTreeLog && currentBlock.meta == 1){
+                stack = SIRecipes.PUMP.getItem("world_resin").getOutput();
+            }
             if(fluidContents[1] == null){
                 setFluidInSlot(1, stack);
             } else if(getFluidInSlot(1).fluid == stack.fluid) {
                 fluidContents[1].amount += stack.amount;
             }
-            worldObj.setBlockWithNotify(currentBlock.pos.x,currentBlock.pos.y,currentBlock.pos.z,0);
+            if(currentBlock.block == SIBlocks.eternalTreeLog && currentBlock.meta == 1){
+                if(rand.nextInt(8) == 0){
+                    worldObj.setBlockMetadataWithNotify(currentBlock.pos.x,currentBlock.pos.y,currentBlock.pos.z,0);
+                }
+            } else {
+                worldObj.setBlockWithNotify(currentBlock.pos.x,currentBlock.pos.y,currentBlock.pos.z,0);
+            }
             currentBlock = null;
             currentFluid = null;
         }
@@ -157,6 +173,10 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
     private boolean canProcess() {
         if(currentBlock == null || currentRecipe == null || currentFluid == null){
             return false;
+        }
+        if(currentBlock.block == SIBlocks.eternalTreeLog && currentBlock.meta == 1){
+            FluidStack stack = SIRecipes.PUMP.getItem("world_resin").getOutput();
+            return stack != null && (fluidContents[1] == null || (fluidContents[1].isFluidEqual(stack) && (fluidContents[1].amount + stack.amount <= fluidCapacity[1])));
         }
         FluidStack stack = SIRecipes.PUMP.findFluidOutput(new FluidStack(currentFluid),tier);
         return stack != null && (fluidContents[1] == null || (fluidContents[1].isFluidEqual(stack) && (fluidContents[1].amount + stack.amount <= fluidCapacity[1])));

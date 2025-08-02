@@ -9,12 +9,12 @@ public class MenuCrystalChamber extends MenuMachine {
     public MenuCrystalChamber(ContainerInventory inv, TileEntityFluidItemContainer tile) {
         super(inv, tile);
 
-        SlotFluid slot = new SlotFluid(tile, 0, 56,53); //116 35
-        addFluidSlot(slot);
+        addFluidSlot(new SlotFluid(tile, 0, 8,61));
+        addFluidSlot(new SlotFluid(tile, 1, 80,61));
 
-        this.addSlot(new Slot(tile, 0, 56, 17));
-        this.addSlot(new Slot(tile, 1, 116, 35)); //56 53
-        this.addSlot(new Slot(tile, 2, 28, 17));
+        this.addSlot(new Slot(tile, 0, 30, 34));
+        this.addSlot(new Slot(tile, 1, 80, 34));
+        this.addSlot(new Slot(tile, 2, 130, 34));
 
         for(int j = 0; j < 3; j++)
         {

@@ -29,16 +29,14 @@ public class ScreenCrystalChamber extends ScreenMachineSimple {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/crystallizer_basic.png");
         switch (tile.tier){
             case PROTOTYPE:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
-                break;
             case BASIC:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_basic_machine_double.png");
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/crystallizer_basic.png");
                 break;
             case REINFORCED:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_reinforced_machine_double.png");
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/crystallizer_reinforced.png");
                 break;
             case AWAKENED:
                 break;
@@ -51,11 +49,12 @@ public class ScreenCrystalChamber extends ScreenMachineSimple {
         int counter;
         if(this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
-            this.drawTexturedModalRect(x + 56, y + 36 + 12 - counter, 176, 12 - counter, 14, counter + 2);
+            this.drawTexturedModalRect(x + 8, y + 44 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(24);
-        this.drawTexturedModalRect(x + 79, y + 34, 176, 14, counter + 1, 16);
+        this.drawTexturedModalRect(x + 49, y + 34, 176, 14, counter + 1, 16);
+        this.drawTexturedModalRect(x + 126 - counter, y + 34, 199 - counter, 30, counter + 1, 16);
         if(this.tile.speedMultiplier > 1){
             this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }

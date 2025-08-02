@@ -40,8 +40,14 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
                 } else {
-                    ProgressBarOptions options = new ProgressBarOptions().setBoxWidth(152).setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
-                    c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
+                    ProgressBarOptions options = new ProgressBarOptions(
+                            152,
+                            "Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ",
+                            false,
+                            true,
+                            new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
+                            new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")));
+                    c.drawProgressBarTextureWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }
         } else {
@@ -66,8 +72,14 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
                             new TextureOptions(0xFFFFFF, model.getBlockTextureFromSideAndMetadata(Side.TOP,0)));
                     c.drawProgressBarTextureWithText(stack.amount,inv.getFluidCapacityForSlot(id),options,0);
                 } else if(!collapse) {
-                    ProgressBarOptions options = new ProgressBarOptions().setBoxWidth(152).setValues(false).setText("Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ");
-                    c.drawProgressBarWithText(0,inv.getFluidCapacityForSlot(id),options,0);
+                    ProgressBarOptions options = new ProgressBarOptions(
+                            152,
+                            "Empty: 0/"+NumberUtil.format(inv.getFluidCapacityForSlot(id))+" ",
+                            false,
+                            true,
+                            new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
+                            new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")));
+                    c.drawProgressBarTextureWithText(0,inv.getFluidCapacityForSlot(id),options,0);
                 }
             }
             c.drawItemList(stacks.toArray(new ItemStack[0]), 0);

@@ -1,9 +1,12 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -24,6 +27,13 @@ public class PumpRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMa
                 },
                 new FluidStack(Fluids.LAVA,1000),
                 new RecipeProperties(300,5, Tier.BASIC,false)
+        ));
+        group.register("world_resin",new RecipeEntryMachineFluid(
+                new RecipeExtendedSymbol[]{
+                        new RecipeExtendedSymbol(SIBlocks.eternalTreeLog.getDefaultStack())
+                },
+                new FluidStack(SIFluids.WORLD_RESIN,100),
+                new RecipeProperties(400,20, Tier.REINFORCED,false)
         ));
     }
 }

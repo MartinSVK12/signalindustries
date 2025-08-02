@@ -37,6 +37,8 @@ public class ScreenPump extends ScreenFluid {
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_pump.png");
                 break;
             case REINFORCED:
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/reinforced_pump.png");
+                break;
             case AWAKENED:
                 break;
         }

@@ -51,7 +51,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
 
     @Override
     public String getName() {
-        return "Crystal Chamber";
+        return "Crystallizer";
     }
 
     @Override

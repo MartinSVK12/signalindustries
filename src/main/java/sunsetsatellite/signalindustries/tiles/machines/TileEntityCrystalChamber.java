@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple implements IBoostable {
 
     public TileEntityCrystalChamber(){
-        fluidContents = new FluidStack[1];
-        fluidCapacity = new int[1];
+        fluidContents = new FluidStack[2];
+        fluidCapacity = new int[2];
         fluidCapacity[0] = 4000;
+        fluidCapacity[1] = 4000;
         itemContents = new ItemStack[3];
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
@@ -23,6 +24,7 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
         recipeGroup = SIRecipes.CRYSTAL_CHAMBER;
         itemInputs = new int[]{0,2};
         itemOutputs = new int[]{1};
+        fluidInputs = new int[]{1};
     }
 
     @Override

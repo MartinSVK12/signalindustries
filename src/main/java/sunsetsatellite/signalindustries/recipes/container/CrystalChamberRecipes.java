@@ -3,7 +3,9 @@ package sunsetsatellite.signalindustries.recipes.container;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -39,6 +41,18 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                         new ItemStack(SIItems.awakenedSignalumCrystal,1,0),
                         new RecipeProperties(3000,320, Tier.REINFORCED,false)
                 )
+        );
+        group.register(
+                "dimensional_shard_grow",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.dimensionalShard,1,0)),
+                                new RecipeExtendedSymbol(new FluidStack(SIFluids.WORLD_RESIN,1000))
+                        },
+                        new ItemStack(SIItems.dimensionalShard,2,0),
+                        new RecipeProperties(600,80, Tier.REINFORCED,false)
+                )
+
         );
     }
 }

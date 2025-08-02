@@ -78,6 +78,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
 
         runtime.getRecipeIndex().registerCatalyst(pumpCategory, TypedIngredient.itemStackIngredient(SIBlocks.prototypePump.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(pumpCategory, TypedIngredient.itemStackIngredient(SIBlocks.basicPump.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst(pumpCategory, TypedIngredient.itemStackIngredient(SIBlocks.reinforcedPump.getDefaultStack()));
 
         runtime.getRecipeIndex().registerCatalyst(wAlloySmelterCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingAlloySmelter.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(wCrusherCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingCrusher.getDefaultStack()));

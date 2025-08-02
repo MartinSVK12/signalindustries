@@ -150,6 +150,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
 
     public static Block<? extends BlockLogic> prototypePump;
     public static Block<? extends BlockLogic> basicPump;
+    public static Block<? extends BlockLogic> reinforcedPump;
 
     public static Block<? extends BlockLogic> basicStoneworks;
 
@@ -189,6 +190,9 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicSignalumDynamo;
 
     public static Block<? extends BlockLogic> basicProgrammer;
+
+    public static Block<? extends BlockLogic> basicGreenhouse;
+    public static Block<? extends BlockLogic> reinforcedGreenhouse;
 
     public static Block<? extends BlockLogic> reinforcedChunkloader;
 
@@ -931,6 +935,19 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withDefaultTopTexture("basic_pump_top_empty")
         );
 
+        reinforcedPump = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.pump",
+                "reinforced_pump",
+                "reinforcedPump",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityPump::new, "pump"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultSideTextures("reinforced_pump_side_empty")
+                        .withDefaultTopTexture("reinforced_pump_top_empty")
+                        .withActiveSideTextures("reinforced_pump_side_active")
+                        .withActiveTopTexture("reinforced_pump_top_active")
+        );
+
         basicAssembler = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.assembler",
                 "basic_assembler",
@@ -1468,6 +1485,25 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures()
                         .withDefaultTexture("programmer_top")
         );
+
+        basicGreenhouse = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.greenhouse",
+                "basic_greenhouse",
+                "basicGreenhouse",
+                3,
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityGreenhouse::new, "alloy_smelter").setSolid(false),
+                new MachineTextures()
+        );
+
+        reinforcedGreenhouse = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.greenhouse",
+                "reinforced_greenhouse",
+                "reinforcedGreenhouse",
+                3,
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityGreenhouse::new, "alloy_smelter").setSolid(false),
+                new MachineTextures()
+        );
+
 
         prototypeStorageContainer = customBlock(defaultBuilder(Tier.PROTOTYPE),
                 "prototype.storageContainer",
