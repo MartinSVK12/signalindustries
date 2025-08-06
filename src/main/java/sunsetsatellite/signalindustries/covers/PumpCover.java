@@ -58,7 +58,6 @@ public class PumpCover extends CoverBase {
                         fluidTransfer.give(dir);
                     }
                 }
-
             }
         }
     }

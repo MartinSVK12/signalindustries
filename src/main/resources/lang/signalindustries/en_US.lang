@@ -672,7 +672,9 @@ tile.signalindustries.unraveledFabric.desc=How?
 tile.signalindustries.eternalTreeLog.name=Ashen Tree Log
 tile.signalindustries.eternalTreeLog.desc=An ethereal wood-like material only present in Eternity. Cannot burn.
 tile.signalindustries.fueledEternalTreeLog.name=Infected Ashen Tree Log
-tile.signalindustries.fueledEternalTreeLog.desc=Malevolent forces have infested this tree, time is running out.
+tile.signalindustries.fueledEternalTreeLog.desc=A great evil has seeped deep into this tree, time is running out.
+tile.signalindustries.rebornEternalTreeSapling.name=Reborn Ashen Tree Sapling
+tile.signalindustries.rebornEternalTreeSapling.desc=A normal sapling infused with the primordial power of Eternity turned into a living Ashen Tree.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
 tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 

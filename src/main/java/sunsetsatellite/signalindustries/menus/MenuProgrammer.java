@@ -4,16 +4,17 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class MenuProgrammer extends MenuMachine {
     public MenuProgrammer(ContainerInventory inv, TileEntityFluidItemContainer tile) {
         super(inv, tile);
 
-        SlotFluid slot = new SlotFluid(tile, 0, 9,53);
+        SlotFluid slot = new SlotFluid(tile, 0, 9,55); //116 35
         addFluidSlot(slot);
-
-        this.addSlot(new Slot(tile, 0, 44, 33));
-        this.addSlot(new Slot(tile, 1, 116, 33));
+        this.addSlot(new Slot(tile,0,127,55));
+        this.addSlot(new Slot(tile, 1, 127, 17));
 
         for(int j = 0; j < 3; j++)
         {

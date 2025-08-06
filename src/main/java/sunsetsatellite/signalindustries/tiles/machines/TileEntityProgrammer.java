@@ -82,7 +82,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
         }
     }
 
-    private boolean canProcess() {
+    public boolean canProcess() {
         if(itemContents[0] == null || itemContents[1] == null) {
             return false;
         } else {
