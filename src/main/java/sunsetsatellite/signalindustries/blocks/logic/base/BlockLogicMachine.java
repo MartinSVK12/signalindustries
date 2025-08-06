@@ -19,7 +19,7 @@ import static sunsetsatellite.signalindustries.SignalIndustries.key;
 public class BlockLogicMachine extends BlockLogicMachineBase {
 
     public final String guiId;
-    private boolean solid = false;
+
 
     public BlockLogicMachine(Block<?> block, Material material, Tier tier, Supplier<TileEntity> tileEntitySupplier, String guiId) {
         super(block, material, tier, tileEntitySupplier);
@@ -53,15 +53,5 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
             return false;
         }
         return true;
-    }
-
-    public BlockLogicMachine setSolid(boolean solid) {
-        this.solid = solid;
-        return this;
-    }
-
-    @Override
-    public boolean isSolidRender() {
-        return solid;
     }
 }

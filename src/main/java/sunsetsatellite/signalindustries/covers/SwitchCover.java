@@ -13,6 +13,7 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWithName;
 
@@ -20,6 +21,8 @@ public class SwitchCover extends CoverBase {
 
     protected final String on = "signalindustries:block/switch_cover_on";
     protected final String off = "signalindustries:block/switch_cover_off";
+
+    public boolean controlledByRedstone = false;
 
     @Override
     public void openConfiguration(Player player, Direction dir) {
@@ -35,16 +38,21 @@ public class SwitchCover extends CoverBase {
     @Override
     public void writeToNbt(CompoundTag tag) {
         super.writeToNbt(tag);
+        tag.putBoolean("RedstoneControl", controlledByRedstone);
     }
 
     @Override
     public void readFromNbt(CompoundTag tag) {
         super.readFromNbt(tag);
+        controlledByRedstone = tag.getBoolean("RedstoneControl");
     }
 
     @Override
     public void tick() {
-
+        if(machine instanceof TileEntityTieredMachineBase && controlledByRedstone && machine.hasCoverAnywhere(RedstoneCover.class)){
+            RedstoneCover cover = machine.getCover(RedstoneCover.class);
+            ((TileEntityTieredMachineBase) machine).disabled = cover.sensorActive;
+        }
     }
 
     @Override

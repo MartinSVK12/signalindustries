@@ -32,11 +32,11 @@ public class ScreenVoidCoverConfig extends Screen {
 
     public VoidCover cover;
     public Player player;
-    public TileEntityTieredMachineBase tile;
+    public TileEntityCoverable tile;
 
     public ScreenVoidCoverConfig(ContainerInventory playerInv, TileEntity tile, CompoundTag data) {
         this.player = playerInv.player;
-        this.tile = (TileEntityTieredMachineBase) tile;
+        this.tile = (TileEntityCoverable) tile;
         this.cover = (VoidCover) ((TileEntityCoverable) tile).getCovers().get(Direction.values()[data.getInteger("side")]);
     }
 

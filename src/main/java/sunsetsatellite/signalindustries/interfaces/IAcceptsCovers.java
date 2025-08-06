@@ -24,5 +24,7 @@ public interface IAcceptsCovers {
 
     boolean hasCoverAnywhere(Class<? extends CoverBase> cover);
 
+    <T extends CoverBase> T getCover(Class<T> cover);
+
     Map<Direction, CoverBase> getCovers();
 }

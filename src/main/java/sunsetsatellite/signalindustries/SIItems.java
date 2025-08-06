@@ -390,7 +390,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         conveyorCover = (ItemCover) customItem(()-> new ItemCover("cover.item",key("item/conveyor_cover"),item("conveyorCover"), ConveyorCover::new),"conveyor_cover");
         pumpCover = (ItemCover) customItem(()-> new ItemCover("cover.fluid",key("item/pump_cover"),item("pumpCover"), PumpCover::new),"pump_cover");
         switchCover = (ItemCover) customItem(()-> new ItemCover("cover.switch",key("item/switch_cover"),item("switchCover"), SwitchCover::new),"switch_cover");
-        redstoneCover = (ItemCover) customItem(()-> new ItemCover("cover.redstone",key("item/redstone_cover"),item("redstoneCover"), BlankCover::new),"redstone_cover");
+        redstoneCover = (ItemCover) customItem(()-> new ItemCover("cover.redstone",key("item/redstone_cover"),item("redstoneCover"), RedstoneCover::new),"redstone_cover");
         voidCover = (ItemCover) customItem(()-> new ItemCover("cover.void",key("item/void_cover"),item("voidCover"), VoidCover::new),"void_cover");
 
         List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).collect(Collectors.toList());

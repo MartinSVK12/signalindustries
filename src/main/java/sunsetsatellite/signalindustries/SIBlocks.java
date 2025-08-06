@@ -21,11 +21,8 @@ import sunsetsatellite.signalindustries.util.*;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.util.BlockInitEntrypoint;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static sunsetsatellite.signalindustries.SIConfig.block;
 import static sunsetsatellite.signalindustries.SIConfig.config;
@@ -569,7 +566,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype_fluid_tank",
                 "prototypeFluidTank",
                 3,
-                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("fluid_tank_prototype")
         );
@@ -579,7 +576,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "basic_fluid_tank",
                 "basicFluidTank",
                 3,
-                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.BASIC, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.BASIC, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
                 new MachineTextures(Tier.BASIC)
                         .withDefaultTexture("fluid_tank_basic")
         );
@@ -589,7 +586,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "infinite_fluid_tank",
                 "infiniteFluidTank",
                 3,
-                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setSolid(false),
+                (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("fluid_tank_prototype")
         );
@@ -599,7 +596,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype_energy_cell",
                 "prototypeEnergyCell",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.PROTOTYPE, TileEntityEnergyCell::new, "energy_cell").setSolid(false),
+                (block) -> new BlockLogicMachine(block, Material.glass, Tier.PROTOTYPE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("cell_prototype")
         );
@@ -609,7 +606,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "basic_energy_cell",
                 "basicEnergyCell",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.BASIC, TileEntityEnergyCell::new, "energy_cell").setSolid(false),
+                (block) -> new BlockLogicMachine(block, Material.glass, Tier.BASIC, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
                 new MachineTextures(Tier.BASIC)
                         .withDefaultTexture("cell_basic")
         );
@@ -619,7 +616,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "reinforced_energy_cell",
                 "reinforcedEnergyCell",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.REINFORCED, TileEntityEnergyCell::new, "energy_cell").setSolid(false),
+                (block) -> new BlockLogicMachine(block, Material.glass, Tier.REINFORCED, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
                 new MachineTextures(Tier.REINFORCED)
                         .withDefaultTexture("cell_reinforced")
         );
@@ -629,7 +626,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "infinite_energy_cell",
                 "infiniteEnergyCell",
                 3,
-                (block) -> new BlockLogicMachine(block, Material.glass, Tier.INFINITE, TileEntityEnergyCell::new, "energy_cell").setSolid(false),
+                (block) -> new BlockLogicMachine(block, Material.glass, Tier.INFINITE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("cell_prototype")
         );
@@ -1491,7 +1488,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "basic_greenhouse",
                 "basicGreenhouse",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityGreenhouse::new, "alloy_smelter").setSolid(false),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityGreenhouse::new, "alloy_smelter").setNonSolid(),
                 new MachineTextures()
         );
 
@@ -1500,7 +1497,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "reinforced_greenhouse",
                 "reinforcedGreenhouse",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityGreenhouse::new, "alloy_smelter").setSolid(false),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityGreenhouse::new, "alloy_smelter").setNonSolid(),
                 new MachineTextures()
         );
 
@@ -1594,7 +1591,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "pulsar",
                 "pulsarBlock",
                 3,
-                (block) -> new BlockLogicPulsar(block, Material.metal, Tier.REINFORCED).setSolid(false),
+                (block) -> new BlockLogicPulsar(block, Material.metal, Tier.REINFORCED).setNonSolid(),
                 new MachineTextures(Tier.REINFORCED)
         );
 

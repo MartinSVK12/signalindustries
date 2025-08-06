@@ -493,7 +493,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         nbttagcompound.putInt("CheckAmount",sensorAmount);
         nbttagcompound.putInt("SensorMode",sensorMode);
         nbttagcompound.putBoolean("UseMeta",sensorUseMeta);
-        nbttagcompound.putBoolean("UseDeta",sensorUseData);
+        nbttagcompound.putBoolean("UseData",sensorUseData);
         if(sensorStack != null){
             CompoundTag itemNbt = new CompoundTag();
             sensorStack.writeToNBT(itemNbt);

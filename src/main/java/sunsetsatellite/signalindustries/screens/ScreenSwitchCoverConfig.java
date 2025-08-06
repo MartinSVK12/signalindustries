@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
+import sunsetsatellite.signalindustries.covers.RedstoneCover;
 import sunsetsatellite.signalindustries.covers.SwitchCover;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
@@ -72,19 +73,37 @@ public class ScreenSwitchCoverConfig extends Screen {
     protected void drawGuiContainerForegroundLayer()
     {
         font.drawString("Configure: Switch", 45, 6, 0xFF404040);
+        if(tile.hasCoverAnywhere(RedstoneCover.class)){
+            font.drawString("Control by Redstone Cover?", 20, 50, 0xFF404040);
+        }
     }
 
     @Override
     public void init() {
-        buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 10, 30, 20,  tile.disabled ? "OFF" : "ON"));
+        if(tile.hasCoverAnywhere(RedstoneCover.class)){
+            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 25, 30, 20,  tile.disabled ? "OFF" : "ON"));
+            buttons.add(new ButtonElement(1, (width / 2) - 15, (height / 2) + 20, 30, 20,  cover.controlledByRedstone ? "Yes" : "No"));
+        } else {
+            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 10, 30, 20,  tile.disabled ? "OFF" : "ON"));
+        }
+
+        if(cover.controlledByRedstone){
+            buttons.get(0).enabled = false;
+        }
 
         super.init();
     }
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        tile.disabled = !tile.disabled;
-        button.displayString = tile.disabled ? "OFF" : "ON";
+        if(button.id == 0){
+            tile.disabled = !tile.disabled;
+            button.displayString = tile.disabled ? "OFF" : "ON";
+        } else if(button.id == 1){
+            cover.controlledByRedstone = !cover.controlledByRedstone;
+            button.displayString = cover.controlledByRedstone ? "Yes" : "No";
+            buttons.get(0).enabled = !cover.controlledByRedstone;
+        }
         if(EnvironmentHelper.isClientWorld()){
             NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,TileEntityCoverable.CHANNEL_COVERS_START+cover.getDir().getSideNumber(),new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
         }

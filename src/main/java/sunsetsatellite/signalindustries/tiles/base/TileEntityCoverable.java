@@ -68,6 +68,7 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
             try {
                 CoverBase cover = (CoverBase) Class.forName(type).getConstructor().newInstance();
                 cover.setup(dir,this);
+                cover.readFromNbt(coverTag);
                 covers.put(dir, cover);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException | ClassNotFoundException e) {
@@ -156,6 +157,17 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public boolean hasCoverAnywhere(Class<? extends CoverBase> cover) {
         return covers.values().stream().anyMatch((C)-> C != null && cover.isAssignableFrom(C.getClass()));
+    }
+
+    @Override
+    public <T extends CoverBase> T getCover(Class<T> cover) {
+        for (Direction dir : Direction.values()) {
+            CoverBase c = covers.get(dir);
+            if(c != null && cover.isAssignableFrom(c.getClass())){
+                return (T) c;
+            }
+        }
+        return null;
     }
 
     @Override

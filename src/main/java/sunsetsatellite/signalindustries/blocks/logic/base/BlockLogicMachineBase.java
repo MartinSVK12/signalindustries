@@ -7,6 +7,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -15,6 +16,7 @@ import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.section.BlockSection;
 import sunsetsatellite.catalyst.core.util.section.ISideInteractable;
 import sunsetsatellite.catalyst.core.util.vector.Vec2f;
+import sunsetsatellite.signalindustries.covers.RedstoneCover;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
@@ -30,6 +32,8 @@ import java.util.function.Supplier;
 public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInteractable {
 
     protected boolean vertical = false;
+    protected boolean solid = false;
+    protected boolean forceNonSolid = false;
 
     public BlockLogicMachineBase(Block<?> block, Material material, Tier tier, Supplier<TileEntity> tileEntitySupplier) {
         super(block, material, tier);
@@ -190,5 +194,53 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
             return;
         }
         world.setBlockMetadata(x, y, z, side);
+    }
+
+    @Override
+    public boolean isSignalSource() {
+        return true;
+    }
+
+    @Override
+    public boolean getSignal(WorldSource world, int x, int y, int z, Side side) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityCoverable) {
+            if (((TileEntityCoverable) tile).hasCoverAnywhere(RedstoneCover.class)) {
+                RedstoneCover cover = ((TileEntityCoverable) tile).getCover(RedstoneCover.class);
+                solid = false;
+                return cover.sensorActive;
+            }
+        }
+        solid = true;
+        return false;
+    }
+
+    @Override
+    public boolean getDirectSignal(World world, int x, int y, int z, Side side) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileEntityCoverable) {
+            if (((TileEntityCoverable) tile).hasCoverAnywhere(RedstoneCover.class)) {
+                RedstoneCover cover = ((TileEntityCoverable) tile).getCover(RedstoneCover.class);
+                solid = false;
+                return cover.sensorActive;
+            }
+        }
+        solid = true;
+        return false;
+    }
+
+    public BlockLogicMachineBase setNonSolid() {
+        this.forceNonSolid = true;
+        return this;
+    }
+
+    @Override
+    public boolean isSolidRender() {
+        return solid && !forceNonSolid;
+    }
+
+    @Override
+    public boolean renderAsNormalBlockOnCondition(WorldSource world, int x, int y, int z) {
+        return solid && !forceNonSolid;
     }
 }

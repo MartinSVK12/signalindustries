@@ -109,6 +109,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
 
         Catalyst.GUIS.register(key("gui/switch_cover"),new MpGuiEntryClient(TileEntityCoverable.class, ScreenSwitchCoverConfig.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"),new MpGuiEntryClient(TileEntityCoverable.class, ScreenVoidCoverConfig.class, MenuCover.class));
+        Catalyst.GUIS.register(key("gui/redstone_cover"),new MpGuiEntryClient(TileEntityCoverable.class, ScreenRedstoneCoverConfig.class, MenuCover.class));
 
         try {
             TextureRegistry.initializeAllFiles(SignalIndustries.MOD_ID, TextureRegistry.blockAtlas, true);
