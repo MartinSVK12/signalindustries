@@ -86,8 +86,16 @@ public class SwitchCover extends CoverBase {
 
     @Override
     public void buttonClicked(int id, int button, int channel) {
-        if(machine instanceof TileEntityTieredMachineBase){
-            ((TileEntityTieredMachineBase) machine).disabled = !((TileEntityTieredMachineBase) machine).disabled;
+        switch (id) {
+            case 0:
+                if (machine instanceof TileEntityTieredMachineBase) {
+                    ((TileEntityTieredMachineBase) machine).disabled = !((TileEntityTieredMachineBase) machine).disabled;
+                }
+                break;
+            case 1:
+                controlledByRedstone = !controlledByRedstone;
+                break;
         }
+
     }
 }

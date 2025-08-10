@@ -154,6 +154,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         NetworkHandler.registerNetworkMessage(NetworkMessageMeteorLocationSync::new);
         NetworkHandler.registerNetworkMessage(NetworkMessageSensorPipeSetFilter::new);
         NetworkHandler.registerNetworkMessage(NetworkMessagePowerSuitRemoteSync::new);
+        NetworkHandler.registerNetworkMessage(NetworkMessageRedstoneCoverSetFilter::new);
 
         BlockTags.TAG_LIST.add(SIGNALUM_CONDUITS_CONNECT);
         BlockTags.TAG_LIST.add(FLUID_CONDUITS_CONNECT);

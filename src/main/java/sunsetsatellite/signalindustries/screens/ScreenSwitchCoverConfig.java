@@ -96,13 +96,16 @@ public class ScreenSwitchCoverConfig extends Screen {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(button.id == 0){
-            tile.disabled = !tile.disabled;
-            button.displayString = tile.disabled ? "OFF" : "ON";
-        } else if(button.id == 1){
-            cover.controlledByRedstone = !cover.controlledByRedstone;
-            button.displayString = cover.controlledByRedstone ? "Yes" : "No";
-            buttons.get(0).enabled = !cover.controlledByRedstone;
+        switch (button.id) {
+            case 0:
+                tile.disabled = !tile.disabled;
+                button.displayString = tile.disabled ? "OFF" : "ON";
+                break;
+            case 1:
+                cover.controlledByRedstone = !cover.controlledByRedstone;
+                button.displayString = cover.controlledByRedstone ? "Yes" : "No";
+                buttons.get(0).enabled = !cover.controlledByRedstone;
+                break;
         }
         if(EnvironmentHelper.isClientWorld()){
             NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,TileEntityCoverable.CHANNEL_COVERS_START+cover.getDir().getSideNumber(),new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));

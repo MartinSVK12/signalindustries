@@ -81,6 +81,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 
         Catalyst.GUIS.register(key("gui/switch_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
+        Catalyst.GUIS.register(key("gui/redstone_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
 
         LOGGER.info("SI Server initialized.");
     }

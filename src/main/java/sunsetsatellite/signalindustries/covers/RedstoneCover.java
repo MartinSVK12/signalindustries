@@ -11,6 +11,7 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWithName;
+import sunsetsatellite.signalindustries.util.PipeMode;
 import sunsetsatellite.signalindustries.util.PipeType;
 
 public class RedstoneCover extends CoverBase {
@@ -150,6 +151,31 @@ public class RedstoneCover extends CoverBase {
 
     @Override
     public void buttonClicked(int id, int button, int channel) {
-
+        switch (id) {
+            case 2:
+                if (sensorAmount > 0) sensorAmount--;
+                break;
+            case 1:
+                sensorAmount++;
+                break;
+            case 3:
+                sensorUseMeta = !sensorUseMeta;
+                break;
+            case 4:
+                sensorUseData = !sensorUseData;
+                break;
+            case 0:
+                sensorMode++;
+                if (sensorMode == 6) sensorMode = 0;
+                break;
+            case 5:
+                if (machine instanceof Container && sensorSlot < ((Container) machine).getContainerSize() - 1) {
+                    sensorSlot++;
+                }
+                break;
+            case 6:
+                if (sensorSlot >= 0) sensorSlot--;
+                break;
+        }
     }
 }

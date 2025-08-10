@@ -24,6 +24,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.covers.RedstoneCover;
 import sunsetsatellite.signalindustries.menus.MenuCover;
+import sunsetsatellite.signalindustries.mp.message.NetworkMessageRedstoneCoverSetFilter;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageSensorPipeSetFilter;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
@@ -159,7 +160,7 @@ public class ScreenRedstoneCoverConfig extends ScreenContainerAbstract {
                 cover.sensorStack = null;
             }
             if(EnvironmentHelper.isClientWorld()){
-                //NetworkHandler.sendToServer(new NetworkMessageSensorPipeSetFilter(new Vec3i(tile.x, tile.y, tile.z), cover.sensorStack, tile.getClass()));
+                NetworkHandler.sendToServer(new NetworkMessageRedstoneCoverSetFilter(new Vec3i(tile.x, tile.y, tile.z), cover.sensorStack, tile.getClass(), cover.getDir()));
             }
         }
     }
@@ -170,8 +171,7 @@ public class ScreenRedstoneCoverConfig extends ScreenContainerAbstract {
             return;
         }
         if (button.id == 2) {
-            if(cover.sensorAmount > 0)
-                cover.sensorAmount--;
+            if(cover.sensorAmount > 0) cover.sensorAmount--;
         }
         if (button.id == 1) {
             cover.sensorAmount++;
@@ -185,13 +185,10 @@ public class ScreenRedstoneCoverConfig extends ScreenContainerAbstract {
             button.displayString = cover.sensorUseData ? "D" : "!D";
         }
         if (button.id == 6) {
-            if(cover.sensorSlot >= 0)
-                cover.sensorSlot--;
+            if(cover.sensorSlot >= 0) cover.sensorSlot--;
         }
         if (button.id == 5) {
-            if(cover.sensorSlot < tile.itemContents.length-1){
-                cover.sensorSlot++;
-            }
+            if(cover.sensorSlot < tile.itemContents.length-1) cover.sensorSlot++;
         }
         if(button.id == 0) {
             cover.sensorMode++;
