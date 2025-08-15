@@ -19,6 +19,7 @@ import sunsetsatellite.signalindustries.recipes.container.waking.WakingInfuserRe
 import sunsetsatellite.signalindustries.recipes.container.waking.WakingPlateFormerRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
@@ -52,6 +53,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
     public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
+    public static RecipeGroupSI<RecipeEntryMachineRandomOutput> LASER_DRILL;
 
     @Override
     public void onRecipesReady() {
@@ -88,6 +90,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("waking_alloy_smelter",WAKING_ALLOY_SMELTER);
         SIGNAL_INDUSTRIES.register("waking_infuser",WAKING_INFUSER);
         SIGNAL_INDUSTRIES.register("induction_smelter",INDUCTION_SMELTER);
+        SIGNAL_INDUSTRIES.register("laser_drill",LASER_DRILL);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 
@@ -100,7 +103,7 @@ public class SIRecipes implements RecipeEntrypoint {
         CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrusher),new ItemStack(SIBlocks.basicCrusher),new ItemStack(SIBlocks.reinforcedCrusher))));
         ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeAlloySmelter),new ItemStack(SIBlocks.basicAlloySmelter),new ItemStack(SIBlocks.reinforcedAlloySmelter))));
         PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePlateFormer),new ItemStack(SIBlocks.basicPlateFormer),new ItemStack(SIBlocks.reinforcedPlateFormer))));
-        PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePump),new ItemStack(SIBlocks.basicPump))));
+        PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypePump),new ItemStack(SIBlocks.basicPump),new ItemStack(SIBlocks.reinforcedPump))));
         STONEWORKS = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicStoneworks))));
         CRYSTAL_CUTTER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.prototypeCrystalCutter),new ItemStack(SIBlocks.basicCrystalCutter),new ItemStack(SIBlocks.reinforcedCrystalCutter))));
         CRYSTAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCrystalChamber),new ItemStack(SIBlocks.reinforcedCrystalChamber))));
@@ -112,6 +115,7 @@ public class SIRecipes implements RecipeEntrypoint {
         WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));
         WAKING_INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingInfuser))));
         INDUCTION_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
+        LASER_DRILL = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedLaserDrill))));
     }
 
     public static void loadSpecial(){
@@ -152,6 +156,7 @@ public class SIRecipes implements RecipeEntrypoint {
         new WakingPlateFormerRecipes().addRecipes(WAKING_PLATE_FORMER);
         new WakingAlloySmelterRecipes().addRecipes(WAKING_ALLOY_SMELTER);
         new WakingInfuserRecipes().addRecipes(WAKING_INFUSER);
+        new LaserDrillRecipes().addRecipes(LASER_DRILL);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");

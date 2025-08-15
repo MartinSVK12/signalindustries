@@ -1,7 +1,9 @@
 package sunsetsatellite.signalindustries.tiles.base;
 
 
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
@@ -24,6 +26,7 @@ import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.tiles.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
@@ -128,8 +131,15 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 setCurrentRecipe();
                 parallel = oldParallel;
                 if(currentRecipe != null){
-                    int recipeInputSum = Arrays.stream(((RecipeExtendedSymbol[]) currentRecipe.getInput())).map(RecipeExtendedSymbol::resolve).map(L -> L.get(0)).mapToInt(S -> S.stackSize).sum();
-                    int effectiveParallel = Catalyst.condenseItemList(Arrays.asList(itemInput.itemContents)).stream().mapToInt(S -> S.stackSize).sum() / recipeInputSum;
+                    int recipeInputSum = Arrays.stream(((RecipeExtendedSymbol[]) currentRecipe.getInput())).map(RecipeExtendedSymbol::asNormalSymbol).map(RecipeSymbol::resolve).map(L -> L.get(0)).mapToInt(S -> S.stackSize).sum();
+                    int inputSum = 0;
+                    if(itemInput != null){
+                        inputSum += Catalyst.condenseItemList(Arrays.asList(itemInput.itemContents)).stream().mapToInt(S -> S.stackSize).sum();
+                    }
+                    if(fluidInput != null){
+                        inputSum += CatalystFluids.condenseFluidList(Arrays.asList(fluidInput.fluidContents)).stream().mapToInt(S -> S.amount).sum();
+                    }
+                    int effectiveParallel = inputSum / recipeInputSum;
                     if(parallel > effectiveParallel && effectiveParallel > 0){
                         parallel = effectiveParallel;
                     }
@@ -175,7 +185,8 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 fuelBurnTicks--;
             }
             ArrayList<ItemStack> inputContents = getItemInputContents();
-            if(inputContents.isEmpty()){
+            ArrayList<FluidStack> fluidInputContents = getFluidInputContents();
+            if(inputContents.isEmpty() && fluidInputContents.isEmpty()){
                 progressTicks = 0;
             } else if(canProcess()) {
                 progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
@@ -314,6 +325,19 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     return false;
                 }
                 return areFluidOutputsValid(fluidStack);
+            } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+                RecipeEntryMachineRandomOutput recipe = ((RecipeEntryMachineRandomOutput) currentRecipe);
+                for (WeightedRandomLootObject entry : recipe.getOutput().getEntries()) {
+                    ItemStack stack = entry.getDefinedItemStack();
+                    if(stack == null){
+                        return false;
+                    }
+                    stack.copy().stackSize = entry.isRandomYield() ? entry.getMaxYield() : entry.getFixedYield();
+                    if(!areItemOutputsValid(stack)){
+                        return false;
+                    }
+                }
+                return true;
             }
         }
         return false;
@@ -471,6 +495,48 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                         }
                     }
                 }
+            } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+                RecipeEntryMachineRandomOutput recipe = ((RecipeEntryMachineRandomOutput) currentRecipe);
+                ItemStack stack = recipe.getOutput() == null ? null : recipe.getOutput().getRandom().getItemStack();
+                if (stack != null) {
+                    consumeInputs();
+                    if(random.nextFloat() <= recipe.getData().chance){
+                        int multiplier = 1;
+                        /*float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
+                        if(fraction <= 0) fraction = 1;
+                        if(yield > 1 && random.nextFloat() <= fraction){
+                            multiplier = (int) Math.ceil(yield);
+                        }*/
+                        multiplier *= parallel;
+                        int outputAmountRemaining = stack.stackSize * multiplier;
+                        for (int i = 0; i < itemOutput.itemContents.length; i++) {
+                            ItemStack outputStack = itemOutput.itemContents[i];
+                            if (outputStack == null) {
+                                int maxAmountInSlot = stack.getMaxStackSize();
+                                if(maxAmountInSlot <= 0) continue;
+                                int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                if(willTake <= 0) continue;
+                                ItemStack copy = stack.copy();
+                                copy.stackSize = willTake;
+                                itemOutput.setItem(i,copy);
+                                outputAmountRemaining -= willTake;
+                                if(outputAmountRemaining <= 0){
+                                    break;
+                                }
+                            } else if (outputStack.isItemEqual(stack)) {
+                                int maxAmountInSlot = stack.getMaxStackSize() - outputStack.stackSize;
+                                if(maxAmountInSlot <= 0) continue;
+                                int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                if(willTake <= 0) continue;
+                                outputStack.stackSize += willTake;
+                                outputAmountRemaining -= willTake;
+                                if(outputAmountRemaining <= 0){
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -529,7 +595,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                                 }
                             });
                         });
-                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
+                        //recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
                         }
@@ -590,7 +656,67 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                                 }
                             });
                         });
-                        recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
+                        //recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
+                        if (inputStack.amount <= 0) {
+                            fluidInput.setFluidInSlot(i, null);
+                        }
+                    }
+                }
+            }
+        } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+            RecipeEntryMachineRandomOutput recipe = ((RecipeEntryMachineRandomOutput) currentRecipe);
+            if(usesItemInput){
+                List<ItemStack> recipeStacks = Catalyst.condenseItemList(
+                        Arrays.stream(recipe.getInput())
+                                .flatMap(symbol -> symbol.resolve().stream())
+                                .filter(Objects::nonNull)
+                                .map(ItemStack::copy).collect(Collectors.toList())
+                );
+                List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).collect(Collectors.toList());
+                for (int i = 0; i < itemInput.itemContents.length; i++) {
+                    ItemStack inputStack = itemInput.getItem(i);
+                    if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                        itemInput.setItem(i, new ItemStack(inputStack.getItem().getContainerItem()));
+                    } else if (inputStack != null){
+                        Optional<ItemStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        Optional<ItemStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.stackSize > 0){
+                                    int willTake = Math.min(stack.stackSize * parallel, inputStack.stackSize);
+                                    inputStack.stackSize -= willTake;
+                                    remainingStack.stackSize -= stack.stackSize;
+                                }
+                            });
+                        });
+                        if (inputStack.stackSize <= 0) {
+                            itemInput.setItem(i, null);
+                        }
+                    }
+                }
+            }
+            if(usesFluidInput){
+                for (int i = 0; i < fluidInput.fluidContents.length; i++) {
+                    FluidStack inputStack = fluidInput.getFluidInSlot(i);
+                    List<FluidStack> recipeStacks = Arrays.stream(recipe.getInput())
+                            .flatMap(symbol -> symbol.resolveFluids().stream())
+                            .filter(Objects::nonNull)
+                            .map(FluidStack::copy)
+                            .collect(Collectors.toList());
+                    List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).collect(Collectors.toList());
+                    if(inputStack != null){
+                        Optional<FluidStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        Optional<FluidStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                        recipeStack.ifPresent(stack -> {
+                            remainingRecipeStack.ifPresent(remainingStack -> {
+                                if(remainingStack.amount > 0){
+                                    int willTake = Math.min(stack.amount * parallel, inputStack.amount);
+                                    inputStack.amount -= willTake;
+                                    remainingStack.amount -= stack.amount;
+                                }
+                            });
+                        });
+                        //recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
                         if (inputStack.amount <= 0) {
                             fluidInput.setFluidInSlot(i, null);
                         }

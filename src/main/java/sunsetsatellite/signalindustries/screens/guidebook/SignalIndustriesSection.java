@@ -10,6 +10,7 @@ import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.screens.guidebook.pages.lore.IntroPage;
 import sunsetsatellite.signalindustries.screens.guidebook.pages.recipe.*;
 import sunsetsatellite.signalindustries.screens.guidebook.sections.FluidMachineSection;
+import sunsetsatellite.signalindustries.screens.guidebook.sections.MachineRandomOutputSection;
 import sunsetsatellite.signalindustries.screens.guidebook.sections.MachineSection;
 import sunsetsatellite.signalindustries.screens.guidebook.sections.MultiblockSection;
 
@@ -37,6 +38,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
     private final SearchableGuidebookSubsection centrifuge = new MachineSection(this,SIRecipes.CENTRIFUGE.getAllRecipes(), CentrifugePage.class);
     private final SearchableGuidebookSubsection collector = new FluidMachineSection(this,SIRecipes.COLLECTOR.getAllRecipes(), CollectorPage.class);
     private final SearchableGuidebookSubsection wakingInfuser = new MachineSection(this,SIRecipes.WAKING_INFUSER.getAllRecipes(), WakingInfuserPage.class);
+    private final SearchableGuidebookSubsection laserDrill = new MachineRandomOutputSection(this,SIRecipes.LASER_DRILL.getAllRecipes(), LaserDrillPage.class);
 
 
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
@@ -58,6 +60,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.infuser"),infuser.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.wakingInfuser"),infuser.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.centrifuge"),centrifuge.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.laserDrill"),laserDrill.getPages().get(0)));
 
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.multiblocks"),multiblocks.getPages().get(0)));
 
@@ -76,6 +79,7 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         subsections.add(infuser);
         subsections.add(wakingInfuser);
         subsections.add(centrifuge);
+        subsections.add(laserDrill);
         subsections.add(multiblocks);
     }
 

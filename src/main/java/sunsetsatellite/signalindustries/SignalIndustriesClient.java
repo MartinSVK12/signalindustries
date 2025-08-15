@@ -106,6 +106,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
         Catalyst.GUIS.register(key("gui/injector"),new MpGuiEntryClient(TileEntityEnergyInjector.class, ScreenInjector.class, MenuInjector.class));
         Catalyst.GUIS.register(key("gui/programmer"),new MpGuiEntryClient(TileEntityProgrammer.class, ScreenProgrammer.class, MenuProgrammer.class));
         Catalyst.GUIS.register(key("gui/warp_gate"),new MpGuiEntryClient(TileEntityWarpGate.class, ScreenWarpGate.class, MenuWarpGate.class));
+        Catalyst.GUIS.register(key("gui/laser_drill"),new MpGuiEntryClient(TileEntityLaserDrill.class, ScreenMultiblock.class, MenuMultiblock.class));
 
         Catalyst.GUIS.register(key("gui/switch_cover"),new MpGuiEntryClient(TileEntityCoverable.class, ScreenSwitchCoverConfig.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"),new MpGuiEntryClient(TileEntityCoverable.class, ScreenVoidCoverConfig.class, MenuCover.class));

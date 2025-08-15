@@ -8,6 +8,7 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,6 +98,14 @@ public class ScanAbility extends TriggerBaseEffectAbility {
             }
         });
         player.sendMessage("--------------------");
+
+        /*int sum = SignalIndustries.ORE_BLOCK_COUNT.values().stream().mapToInt(Integer::intValue).sum();
+
+        player.sendMessage(String.format("Ore count: %d", sum));
+        SignalIndustries.ORE_BLOCK_COUNT.forEach((block,count) -> {
+            player.sendMessage(String.format("%s | Count: %d (%d%%)",block.asItem().getTranslatedName(block.getDefaultStack()), count, (int)Math.round(count*100.0/sum)));
+        });*/
+
     }
 
     public static class OreInfo {

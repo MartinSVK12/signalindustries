@@ -19,6 +19,7 @@
     "SaveHandlerBaseMixin",
     "SlotResultMixin",
     "SpawnerMobsMixin",
+    "WorldFeatureOreMixin",
     "WorldGenDungeonMixin",
     "WorldGenLabyrinthMixin",
     "WorldMixin"
@@ -35,6 +36,7 @@
     "RenderGlobalMixin",
     "ScreenInventoryMixin",
     "TextureManagerMixin",
+    "TooltipElementMixin",
     "WorldClientMixin"
   ],
   "injectors": {

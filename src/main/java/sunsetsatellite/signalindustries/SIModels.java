@@ -415,6 +415,7 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setTileEntityModel(TileEntityReinforcedWrathBeacon.class, RenderMultiblock::new);
         ModelHelper.setTileEntityModel(TileEntityMultiConduit.class, RenderFluidInMultiConduit::new);
         ModelHelper.setTileEntityModel(TileEntityPulsar.class, RenderPulsar::new);
+        ModelHelper.setTileEntityModel(TileEntityLaserDrill.class, RenderMultiblock::new);
     }
 
     @Override

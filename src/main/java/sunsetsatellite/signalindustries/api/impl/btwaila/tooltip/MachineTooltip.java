@@ -6,6 +6,7 @@ import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
@@ -38,6 +39,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityWakingCrusher.class);
         addClass(TileEntityWakingAlloySmelter.class);
         addClass(TileEntityWakingPlateFormer.class);
+        addClass(TileEntityLaserDrill.class);
     }
 
     @Override

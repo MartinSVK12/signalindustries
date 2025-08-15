@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.tiles;
 
+import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.CatalystFluids;
@@ -7,6 +8,7 @@ import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class TileEntityFluidHatch extends TileEntityTieredContainer implements IMultiblockPart {
 
@@ -18,6 +20,16 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer implements I
         fluidCapacity = new int[1];
         fluidCapacity[0] = 8000;
         acceptedFluids.get(0).addAll(Fluid.fluidMap.values());
+    }
+
+    @Override
+    public void init(Block<?> block) {
+        super.init(block);
+        if(tier == Tier.PROTOTYPE){
+            fluidCapacity[0] = 8000;
+        } else {
+            fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 16000;
+        }
     }
 
     @Override

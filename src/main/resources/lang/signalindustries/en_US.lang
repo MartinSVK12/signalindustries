@@ -185,6 +185,8 @@ tile.signalindustries.reinforced.casing2.name=Reinforced Casing (Type 2)
 tile.signalindustries.reinforced.casing2.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
 tile.signalindustries.reinforced.grate.name=Reinforced Grate
 tile.signalindustries.reinforced.grate.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
+tile.signalindustries.reinforced.frame.name=Reinforced Frame
+tile.signalindustries.reinforced.frame.desc=Alternative casing used for Reinforced-tier and above multiblock machines.
 tile.signalindustries.awakened.casing.name=Awakened Casing
 tile.signalindustries.awakened.casing.desc=Used for Awakened-tier multiblock machines.
 tile.signalindustries.awakened.casing.socket.name=Awakened Socket Casing
@@ -607,8 +609,8 @@ tile.signalindustries.basic.automaticMiner.name=Basic Automatic Miner
 tile.signalindustries.basic.automaticMiner.desc=Breaks blocks in a 16x16 radius all the way to bedrock when supplied by <Signaling Energy>.
 tile.signalindustries.reinforced.automaticMiner.name=Reinforced Quarry
 tile.signalindustries.reinforced.automaticMiner.desc=Can fully mine out a several chunk wide area, possibly digging out 2x the material for any ore block!
-tile.signalindustries.reinforced.wakingMiner.name=Waking Reinforced Quarry
-tile.signalindustries.reinforced.wakingMiner.desc=Digs below bedrock to uncover massive amounts of previously unavailable ore. Yields 3x the material for any ore found.
+tile.signalindustries.reinforced.laserDrill.name=Reinforced Laser Drill
+tile.signalindustries.reinforced.laserDrill.desc=Digs below bedrock to uncover massive amounts of previously unavailable ore. Yields 3x the material for any ore found.
 tile.signalindustries.awakened.automaticMiner.name=Awakened Galactic Excavation Facility Controller
 tile.signalindustries.awakened.automaticMiner.name=Maintains a small wormhole and an array of mining drills to extract ore from far, far away. Returns with 4x the material for any ore found.
 
@@ -616,6 +618,7 @@ tile.signalindustries.basic.stoneworks.name=Basic Stoneworks
 tile.signalindustries.basic.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
 tile.signalindustries.reinforced.stoneworks.name=Reinforced Stoneworks
 tile.signalindustries.reinforced.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
+
 
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
@@ -944,6 +947,7 @@ multiblock.signalindustries.wakingCrusher.name=Waking Crusher
 multiblock.signalindustries.wakingAlloySmelter.name=Waking Alloy Smelter
 multiblock.signalindustries.wakingPlateFormer.name=Waking Plate Former
 multiblock.signalindustries.wakingInfuser.name=Waking Infuser
+multiblock.signalindustries.laserDrill.name=Laser Drill
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 

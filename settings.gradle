@@ -36,7 +36,7 @@ include(":catalyst-multipart")
 include(":catalyst-effects")
 // catalyst
 
-//include(":tmb")
+include(":tmb")
 //include(":btwaila")
 //include(":dragonfly")
 //include(":vintage-questing")
@@ -57,7 +57,7 @@ project(":catalyst-multipart").projectDir = file("${rootProject.projectDir}/../c
 project(":catalyst-effects").projectDir = file("${rootProject.projectDir}/../catalyst/effects")
 // catalyst
 
-//project(":tmb").projectDir = file("${rootProject.projectDir}/../tmb")
+project(":tmb").projectDir = file("${rootProject.projectDir}/../tmb")
 //project(":btwaila").projectDir = file("${rootProject.projectDir}/../btwaila")
 //project(":dragonfly").projectDir = file("${rootProject.projectDir}/../dragonfly")
 //project(":vintage-questing").projectDir = file("${rootProject.projectDir}/../vintage-questing")

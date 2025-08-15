@@ -53,6 +53,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> reinforcedCasing;
     public static Block<? extends BlockLogic> reinforcedCasing2;
     public static Block<? extends BlockLogic> reinforcedGrate;
+    public static Block<? extends BlockLogic> reinforcedFrame;
     public static Block<? extends BlockLogic> awakenedCasing;
     public static Block<? extends BlockLogic> awakenedSocketCasing;
     public static Block<? extends BlockLogic> awakenedCasing2;
@@ -158,6 +159,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
 
     public static Block<? extends BlockLogic> basicAutomaticMiner;
     public static Block<? extends BlockLogic> reinforcedAutomaticMiner;
+    public static Block<? extends BlockLogic> reinforcedLaserDrill;
 
     public static Block<? extends BlockLogic> externalIo;
     public static Block<? extends BlockLogic> reinforcedExternalIo;
@@ -984,6 +986,18 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withOverbrightNorthTexture("auto_miner_overlay")
         );
 
+        reinforcedLaserDrill = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.laserDrill",
+                "reinforced_laser_drill",
+                "reinforcedLaserDrill",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityLaserDrill::new, "laser_drill"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultNorthTexture("reinforced_laser_drill")
+                        .withActiveNorthTexture("reinforced_laser_drill_active")
+                        .withOverbrightNorthTexture("laser_drill_overlay")
+        );
+
         externalIo = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.externalIO",
                 "basic_external_io",
@@ -1239,6 +1253,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 3,
                 (block) -> new BlockLogicNonSolid(block, Material.metal),
                 new MachineTextures().withDefaultTexture("reinforced_grate")
+        ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        reinforcedFrame = customBlock(
+                defaultBuilder(Tier.REINFORCED),
+                "reinforced.frame",
+                "reinforced_frame",
+                "reinforcedFrame",
+                3,
+                (block) -> new BlockLogicNonSolid(block, Material.metal),
+                new MachineTextures().withDefaultTexture("reinforced_frame")
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         reinforcedGlass = customBlock(

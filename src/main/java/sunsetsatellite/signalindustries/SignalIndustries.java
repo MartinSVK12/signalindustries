@@ -70,6 +70,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static final Tag<Block<?>> AWAKENED_CASING = Tag.of("awakened_casing");
     public static final Tag<Block<?>> ORE_BLOCK = Tag.of("ore_block");
 
+    public static final Map<Block<?>, Integer> ORE_BLOCK_COUNT = new HashMap<>();
+
     @SuppressWarnings("InstantiationOfUtilityClass")
     @Override
     public void onInitialize() {
@@ -126,6 +128,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityUVLamp.class,id("uv_lamp"));
         EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar"));
         EntityHelper.createTileEntity(TileEntityGreenhouse.class,id("greenhouse"));
+        EntityHelper.createTileEntity(TileEntityLaserDrill.class,id("laser_drill"));
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");

@@ -21,6 +21,22 @@ public class SIMultiblock extends Multiblock {
     public SIMultiblock(String modId, Class<?>[] modClasses, String translateKey, CompoundTag data, boolean includeAir, Tier tier) {
         super(modId, modClasses, translateKey, data, includeAir);
         this.tier = tier;
+        CompoundTag subsTag = this.data.getCompound("Substitutions");
+        int i = 0;
+        for (Map.Entry<String, Tag<?>> blockTag : this.data.getCompound("Blocks").getValue().entrySet()) {
+            for (String extraBlock : extraBlocks) {
+                CompoundTag newSubTag = new CompoundTag();
+                Block<?> block = Blocks.getBlock(getBlockId((CompoundTag) blockTag.getValue()));
+                if (block != null && block.hasTag(SignalIndustries.REPLACEABLE_CASING)) {
+                    newSubTag.putCompound("pos", ((CompoundTag) blockTag.getValue()).getCompound("pos"));
+                    newSubTag.putInt("meta", -1);
+                    newSubTag.putBoolean("tile", false);
+                    newSubTag.putString("id", SIBlocks.class.getName() + ":" + extraBlock);
+                    subsTag.putCompound(String.valueOf(i), newSubTag);
+                    i++;
+                }
+            }
+        }
     }
 
     public SIMultiblock(String modId, Class<?>[] modClasses, String translateKey, String filePath, boolean includeAir, Tier tier) {
