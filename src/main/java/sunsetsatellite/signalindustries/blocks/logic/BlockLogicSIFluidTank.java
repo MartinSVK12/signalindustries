@@ -46,7 +46,7 @@ public class BlockLogicSIFluidTank extends BlockLogicMachine {
             }
             Fluid fluid = Fluid.fluidMap.get(fluidId);
             int amount = stack.getData().getCompound("Fluid").getInteger("amount");
-            int maxAmount = (int) Math.pow(2, this.tier.ordinal()) * 8000;
+            int maxAmount = (int) Math.pow(2, tier.ordinal()) * 16000;
             return super.getDescription(stack)+"\n"+String.format("Contains: %d/%d mB %s",amount, maxAmount, fluid.getName());
         }
         return super.getDescription(stack);
