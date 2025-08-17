@@ -38,6 +38,7 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
     @Override
     public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Font fontRenderer, EntityRendererItem itemRenderer) {
         Minecraft mc = Minecraft.getMinecraft();
+        boolean isBackgroundShown = ((IKeybinds) mc.gameSettings).signalindustries$isSuitBackgroundShown().value;
         Tier mode = Tier.BASIC;
         if (!mc.gameSettings.immersiveMode.drawOverlays()) {
             return;
@@ -59,15 +60,17 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
         int color = mode.getColor(0x40);//0x40808080;
         int color2 = mode.getColor();//0xFF808080;
 
-        //top
-        drawUtil.drawGradientRect(0,0,width,16,color,color);
-        drawUtil.drawGradientRect(0,16,width/2-100,20,color,color2);
-        drawUtil.drawGradientRect(width/2+100,16,width,20,color,color2);
-        drawUtil.drawGradientRect(width/2-100,36,width/2+100,40,color,color2);
-        drawUtil.drawGradientRect(width/2-102,20,width/2-100,40,color2,color2);
-        drawUtil.drawGradientRect(width/2+100,20,width/2+102,40,color2,color2);
+        if(isBackgroundShown) {
+            //top
+            drawUtil.drawGradientRect(0,0,width,16,color,color);
+            drawUtil.drawGradientRect(0,16,width/2-100,20,color,color2);
+            drawUtil.drawGradientRect(width/2+100,16,width,20,color,color2);
+            drawUtil.drawGradientRect(width/2-100,36,width/2+100,40,color,color2);
+            drawUtil.drawGradientRect(width/2-102,20,width/2-100,40,color2,color2);
+            drawUtil.drawGradientRect(width/2+100,20,width/2+102,40,color2,color2);
 
-        drawUtil.drawGradientRect(width/2-100,16,width/2+100,36,color,color);
+            drawUtil.drawGradientRect(width/2-100,16,width/2+100,36,color,color);
+        }
 
         if(module == null){
             fontRenderer.drawCenteredString(String.format("%s","No module."),width/2,25,color2);
@@ -101,20 +104,22 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
             }
         }
 
-        //bottom
-        drawUtil.drawGradientRect(0,height-20,width,height,color,color);
-        drawUtil.drawGradientRect(width/2-170,height-24,width/2-100,height-20,color2,color);
-        drawUtil.drawGradientRect(width/2+100,height-24,width,height-20,color2,color);
-        drawUtil.drawGradientRect(width/2-100,height-44,width/2+100,height-40,color2,color);
-        drawUtil.drawGradientRect(width/2-102,height-44,width/2-100,height-24,color2,color2);
-        drawUtil.drawGradientRect(width/2+100,height-44,width/2+102,height-24,color2,color2);
+        if(isBackgroundShown) {
+            //bottom
+            drawUtil.drawGradientRect(0, height - 20, width, height, color, color);
+            drawUtil.drawGradientRect(width / 2 - 170, height - 24, width / 2 - 100, height - 20, color2, color);
+            drawUtil.drawGradientRect(width / 2 + 100, height - 24, width, height - 20, color2, color);
+            drawUtil.drawGradientRect(width / 2 - 100, height - 44, width / 2 + 100, height - 40, color2, color);
+            drawUtil.drawGradientRect(width / 2 - 102, height - 44, width / 2 - 100, height - 24, color2, color2);
+            drawUtil.drawGradientRect(width / 2 + 100, height - 44, width / 2 + 102, height - 24, color2, color2);
 
-        drawUtil.drawGradientRect(width/2-100,height-40,width/2+100,height-20,color,color);
+            drawUtil.drawGradientRect(width / 2 - 100, height - 40, width / 2 + 100, height - 20, color, color);
 
-        //armor display
-        drawUtil.drawGradientRect(0,height-74,width/2-170,height-70,color2,color);
-        drawUtil.drawGradientRect(width/2-168,height-24,width/2-170,height-74,color2,color2);
-        drawUtil.drawGradientRect(0,height-74,width/2-170,height-20,color,color);
+            //armor display
+            drawUtil.drawGradientRect(0, height - 74, width / 2 - 170, height - 70, color2, color);
+            drawUtil.drawGradientRect(width / 2 - 168, height - 24, width / 2 - 170, height - 74, color2, color2);
+            drawUtil.drawGradientRect(0, height - 74, width / 2 - 170, height - 20, color, color);
+        }
 
         //ability hotbar
         if(module == null){

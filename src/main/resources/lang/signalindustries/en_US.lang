@@ -950,6 +950,8 @@ multiblock.signalindustries.wakingInfuser.name=Waking Infuser
 multiblock.signalindustries.laserDrill.name=Laser Drill
 
 gui.options.page.controls.category.signalindustries=Signal Industries
+gui.options.page.signalindustries=Signal Industries
+options.signalindustries.showSuitBackground=Show Suit Background
 
 chapter.signalindustries.prototype.name=Prototype-tier
 chapter.signalindustries.prototype.desc=The beginning of the mod, contains quests for the Prototype tier.

@@ -6,8 +6,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.particle.ParticleDispatcher;
 import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
+import net.minecraft.client.gui.options.components.BooleanOptionComponent;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
+import net.minecraft.client.gui.options.data.OptionsPage;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
@@ -15,6 +17,7 @@ import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.world.Dimension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -162,25 +165,31 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
             }
         }
 
+        IKeybinds gameSettings = (IKeybinds) Minecraft.getMinecraft().gameSettings;
+
+        OptionsPage optionsPage = new OptionsPage("gui.options.page.signalindustries", SIItems.signalumCrystal.getDefaultStack());
+        optionsPage.withComponent(new BooleanOptionComponent(gameSettings.signalindustries$isSuitBackgroundShown()));
+        OptionsPages.register(optionsPage);
+
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");
         category
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyOpenSuit()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateAbility()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeySwitchMode()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyOpenSuit()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateAbility()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeySwitchMode()))
                 //.withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalindustries$getKeyShowIndex()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateHeadTopAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateHeadLensAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmBackLAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmBackRAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmFrontLAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmFrontRAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmSideLAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateArmSideRAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateCoreBackAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateLegSideLAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateLegSideRAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateBootBackLAttachment()))
-                .withComponent(new KeyBindingComponent(((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyActivateBootBackRAttachment()));
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateHeadTopAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateHeadLensAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmBackLAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmBackRAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmFrontLAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmFrontRAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmSideLAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateArmSideRAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateCoreBackAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateLegSideLAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateLegSideRAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateBootBackLAttachment()))
+                .withComponent(new KeyBindingComponent(gameSettings.signalIndustries$getKeyActivateBootBackRAttachment()));
         OptionsPages.CONTROLS
                 .withComponent(category);
     }

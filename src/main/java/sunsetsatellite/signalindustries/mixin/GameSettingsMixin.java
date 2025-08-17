@@ -4,6 +4,7 @@ package sunsetsatellite.signalindustries.mixin;
 import net.minecraft.client.input.InputDevice;
 import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.OptionBoolean;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
@@ -15,6 +16,19 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 public class GameSettingsMixin
     implements IKeybinds
 {
+
+    @Unique
+    private final GameSettings thisAs = ((GameSettings)(Object)this);
+
+    @Unique
+    public OptionBoolean showSuitBackground = new OptionBoolean(thisAs,"signalindustries.showSuitBackground",true);
+
+    @Unique
+    @Override
+    public OptionBoolean signalindustries$isSuitBackgroundShown() {
+        return showSuitBackground;
+    }
+
     @Unique
     public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bind(InputDevice.keyboard,24);
 

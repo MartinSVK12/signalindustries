@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Blocks;
