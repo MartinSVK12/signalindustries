@@ -47,7 +47,7 @@ public class SIConfig {
         defaultConfig.addEntry("WorldGen.ironMeteorChance","Default is 256",256);
         defaultConfig.addEntry("WorldGen.signaliteMeteorChance","Default is 512",512);
         defaultConfig.addEntry("WorldGen.dilithiumMeteorChance","Default is 1024",1024);
-        defaultConfig.addEntry("WorldGen.obeliskMeteorChance","Default is 2048",2048);
+        defaultConfig.addEntry("WorldGen.obeliskChance","Default is 2048",2048);
 
         int blockId = blockIdStart;
         int itemId = itemIdStart;
@@ -119,7 +119,7 @@ public class SIConfig {
             }
 
             if(!rawConfig.contains("WorldGen.obeliskChance")){
-                rawConfig.addEntry("WorldGen.obeliskMeteorChance","Default is 2048",2048);
+                rawConfig.addEntry("WorldGen.obeliskChance","Default is 2048",2048);
                 changed = true;
             }
 
