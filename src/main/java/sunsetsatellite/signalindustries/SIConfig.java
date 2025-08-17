@@ -29,6 +29,7 @@ public class SIConfig {
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
         defaultConfig.addCategory("Experimental");
+        defaultConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10.","WorldGen");
         defaultConfig.addEntry("Experimental.enableDynamicChunkProvider","Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.",false);
         defaultConfig.addEntry("Other.enableQuests",true);
         defaultConfig.addEntry("Other.totemsRequireOP",false);
@@ -42,6 +43,11 @@ public class SIConfig {
         defaultConfig.addEntry("EntityIDs.energyOrbId",51);
         defaultConfig.addEntry("EntityIDs.fallingMeteorId",52);
         defaultConfig.addEntry("EntityIDs.sunbeamId",53);
+        defaultConfig.addEntry("WorldGen.signaliteGeodeChance","Default is 10",10);
+        defaultConfig.addEntry("WorldGen.ironMeteorChance","Default is 256",256);
+        defaultConfig.addEntry("WorldGen.signaliteMeteorChance","Default is 512",512);
+        defaultConfig.addEntry("WorldGen.dilithiumMeteorChance","Default is 1024",1024);
+        defaultConfig.addEntry("WorldGen.obeliskMeteorChance","Default is 2048",2048);
 
         int blockId = blockIdStart;
         int itemId = itemIdStart;
@@ -85,6 +91,36 @@ public class SIConfig {
                     rawConfig.addEntry("ItemIDs." + F.getName(), newNextItemId++);
                     changed = true;
                 }
+            }
+
+            if(!rawConfig.contains("WorldGen")){
+                rawConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10.","WorldGen");
+                changed = true;
+            }
+
+            if(!rawConfig.contains("WorldGen.signaliteGeodeChance")){
+                rawConfig.addEntry("WorldGen.signaliteGeodeChance","Default is 10",10);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("WorldGen.ironMeteorChance")){
+                rawConfig.addEntry("WorldGen.ironMeteorChance","Default is 256",256);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("WorldGen.signaliteMeteorChance")){
+                rawConfig.addEntry("WorldGen.signaliteMeteorChance","Default is 512",512);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("WorldGen.dilithiumMeteorChance")){
+                rawConfig.addEntry("WorldGen.dilithiumMeteorChance","Default is 1024",1024);
+                changed = true;
+            }
+
+            if(!rawConfig.contains("WorldGen.obeliskChance")){
+                rawConfig.addEntry("WorldGen.obeliskMeteorChance","Default is 2048",2048);
+                changed = true;
             }
 
             if(!rawConfig.contains("EntityIDs.infernalId")){

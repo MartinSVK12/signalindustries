@@ -49,9 +49,9 @@ public class WorldFeatureMeteor extends WorldFeature {
                     if (isPointInsideSphere(x, y, z, radius)) {
                         if (oreId != 0 && random.nextInt(100) < oreChance){
                             world.setBlockAndMetadataWithNotify(x+i, (y+j)-8, z+k, oreId, oreMeta);
-                            if(oreId == SIBlocks.signalumOre.id()){
-                                SignalIndustries.ORE_BLOCK_COUNT.compute(SIBlocks.signalumOre,(ignored,v) -> v == null ? 1 : v + 1);
-                            }
+                            //if(oreId == SIBlocks.signalumOre.id()){
+                            //    SignalIndustries.ORE_BLOCK_COUNT.compute(SIBlocks.signalumOre,(ignored,v) -> v == null ? 1 : v + 1);
+                            //}
                             oreBlocks++;
                         } else {
                             world.setBlockAndMetadataWithNotify(x+i, (y+j)-8, z+k, Blocks.BASALT.id(), 0);

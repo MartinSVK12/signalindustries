@@ -26,10 +26,10 @@ public class WorldFeatureOreMixin {
 
     @Inject(method = "place", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;setBlock(IIII)Z", ordinal = 0))
     public void place(World world, Random random, int xStart, int yStart, int zStart, CallbackInfoReturnable<Boolean> cir) {
-        Block<?> block = Blocks.getBlock(this.variantMap.get(Blocks.STONE.id()));
-        if(block != null && block.hasTag(SignalIndustries.ORE_BLOCK)){
-            SignalIndustries.ORE_BLOCK_COUNT.compute(block,(k,v) -> v == null ? 1 : v + 1);
-        }
+        //Block<?> block = Blocks.getBlock(this.variantMap.get(Blocks.STONE.id()));
+        //if(block != null && block.hasTag(SignalIndustries.ORE_BLOCK)){
+        //    SignalIndustries.ORE_BLOCK_COUNT.compute(block,(k,v) -> v == null ? 1 : v + 1);
+        //}
         //SignalIndustries.LOGGER.info("Ore Count: {}", SignalIndustries.ORE_BLOCK_COUNT.values().stream().mapToInt(Integer::intValue).sum());
     }
 }

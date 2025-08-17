@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.worldgen.WorldFeatureGeode;
 import sunsetsatellite.signalindustries.worldgen.WorldFeatureMeteor;
 import sunsetsatellite.signalindustries.worldgen.WorldFeatureObelisk;
@@ -47,35 +48,35 @@ public class ChunkDecoratorOverworldMixin {
         long l2 = (rand.nextLong() / 2L) * 2L + 1L;
         rand.setSeed((long) chunkX * l1 + (long) chunkZ * l2 ^ world.getRandomSeed());
 
-        if(rand.nextInt(10) == 0){
+        if(rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteGeodeChance")) == 0){
             int i = x + rand.nextInt(16);
             int j = (minY + 12) + rand.nextInt(rangeY / 8);
             int k = z + rand.nextInt(16);
             new WorldFeatureGeode(SIBlocks.signalumOre.id(),0,20,4).place(world, rand, i, j, k);
         }
 
-        if(rand.nextInt(256) == 0) {
+        if(rand.nextInt(SIConfig.config.getInt("WorldGen.ironMeteorChance")) == 0) {
             int i = x + rand.nextInt(16);
             int k = z + rand.nextInt(16);
             int j = world.getHeightValue(i, k);
             new WorldFeatureMeteor(Blocks.ORE_IRON_BASALT.id(),0,25).place(world, rand, i, j, k);
         }
 
-        if(rand.nextInt(512) == 0) {
+        if(rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteMeteorChance")) == 0) {
             int i = x + rand.nextInt(16);
             int k = z + rand.nextInt(16);
             int j = world.getHeightValue(i, k);
             new WorldFeatureMeteor(SIBlocks.signalumOre.id(),0,15).place(world, rand, i, j, k);
         }
 
-        if(rand.nextInt(1024) == 0) {
+        if(rand.nextInt(SIConfig.config.getInt("WorldGen.dilithiumMeteorChance")) == 0) {
             int i = x + rand.nextInt(16);
             int k = z + rand.nextInt(16);
             int j = world.getHeightValue(i, k);
             new WorldFeatureMeteor(SIBlocks.dilithiumOre.id(),0,5).place(world, rand, i, j, k);
         }
 
-        if(rand.nextInt(2048) == 0) {
+        if(rand.nextInt(SIConfig.config.getInt("WorldGen.obeliskChance")) == 0) {
             int i = x + rand.nextInt(16);
             int k = z + rand.nextInt(16);
             int j = world.getHeightValue(i, k);
