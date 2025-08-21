@@ -40,6 +40,7 @@ public class ItemBlockSIFluidTank extends ItemBlock<BlockLogicSIFluidTank> {
                         }
 
                         TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getTileEntity(x,y,z);
+                        tile.fluidCapacity[0] = (int) Math.pow(2, block.getLogic().tier.ordinal()) * 16000;
                         if (stack.getData().containsKey("Fluid")) {
                             FluidStack fluidStack = new FluidStack(stack.getData().getCompound("Fluid"));
                             tile.insertFluid(0,fluidStack);
