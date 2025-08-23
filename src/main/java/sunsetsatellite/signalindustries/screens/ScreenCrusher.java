@@ -42,7 +42,7 @@ public class ScreenCrusher extends ScreenMachineSimple {
             case AWAKENED:
                 break;
         }
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;

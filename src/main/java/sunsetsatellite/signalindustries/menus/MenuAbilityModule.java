@@ -69,7 +69,7 @@ public class MenuAbilityModule extends MenuFluid {
 
     @Override
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
-        int lastDeviceSlot = slots.size() - 1;
+        int lastDeviceSlot = (slots.size() - 36) - 1;
         if (slot.index <= lastDeviceSlot) {
             return getSlots(lastDeviceSlot+1, 36, true);
         }

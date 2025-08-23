@@ -52,13 +52,13 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
             GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
             GL11.glScalef(0.98F, amount, 0.98F);
             GL11.glTranslatef(0.51F, 0.505F, 0.51F);
-            GL11.glDisable(2896);
+            GL11.glDisable(GL11.GL_LIGHTING);
             if(block == Blocks.FLUID_WATER_FLOWING || block == Blocks.FLUID_WATER_STILL){
                 ((IColorOverride) model).enableColorOverride();
                 ((IColorOverride)model).overrideColor(0,0.5f,1,0.75f);
             }
             this.drawBlock(tessellator, model, 0);
-            GL11.glEnable(2896);
+            GL11.glEnable(GL11.GL_LIGHTING);
             ((IColorOverride)model).overrideColor(1,1,1,1f);
             ((IColorOverride) model).disableColorOverride();
             GL11.glPopMatrix();
