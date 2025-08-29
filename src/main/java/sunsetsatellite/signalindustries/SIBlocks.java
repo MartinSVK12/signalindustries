@@ -136,9 +136,10 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicWrathBeacon;
     public static Block<? extends BlockLogic> reinforcedWrathBeacon;
 
-    public static Block<? extends BlockLogic> pulsarBlock; //todo
+    public static Block<? extends BlockLogic> pulsarBlock;
 
     public static Block<? extends BlockLogic> dimensionalAnchor;
+
 
     public static Block<? extends BlockLogic> dilithiumStabilizer;
 

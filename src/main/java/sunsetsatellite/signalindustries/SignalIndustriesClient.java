@@ -104,7 +104,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
         Catalyst.GUIS.register(key("gui/centrifuge"),new MpGuiEntryClient(TileEntityCentrifuge.class, ScreenCentrifuge.class, MenuCentrifuge.class));
         Catalyst.GUIS.register(key("gui/reactor"),new MpGuiEntryClient(TileEntitySignalumReactor.class, ScreenSignalumReactor.class, MenuSignalumReactor.class));
         Catalyst.GUIS.register(key("gui/dim_anchor"),new MpGuiEntryClient(TileEntityDimensionalAnchor.class, ScreenDimAnchor.class, MenuDimAnchor.class));
-        Catalyst.GUIS.register(key("gui/r_extractor"),new MpGuiEntryClient(TileEntityReinforcedExtractor.class, ScreenExtractor.class, MenuReinforcedExtractor.class));
+        Catalyst.GUIS.register(key("gui/r_extractor"),new MpGuiEntryClient(TileEntityReinforcedExtractor.class, ScreenReinforcedExtractor.class, MenuReinforcedExtractor.class));
         Catalyst.GUIS.register(key("gui/builder"),new MpGuiEntryClient(TileEntityBuilder.class, ScreenBuilder.class, MenuBuilder.class));
         Catalyst.GUIS.register(key("gui/injector"),new MpGuiEntryClient(TileEntityEnergyInjector.class, ScreenInjector.class, MenuInjector.class));
         Catalyst.GUIS.register(key("gui/programmer"),new MpGuiEntryClient(TileEntityProgrammer.class, ScreenProgrammer.class, MenuProgrammer.class));
