@@ -78,6 +78,8 @@ public class SIConfig {
             }
             int newNextBlockId = blockIdStart + maxBlocks;
             int newNextItemId = itemIdStart + maxItems;
+            SignalIndustries.LOGGER.info("Using {} block IDs and {} item IDs.", maxBlocks, maxItems);
+            SignalIndustries.LOGGER.info("Next block ID will be {}, next item ID will be {}.", newNextBlockId, newNextItemId);
             boolean changed = false;
 
             for (Field F : blockFields) {

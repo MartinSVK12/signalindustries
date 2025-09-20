@@ -1,5 +1,9 @@
 package sunsetsatellite.signalindustries.util;
 
+import net.minecraft.core.world.Dimension;
+
+import java.util.List;
+
 public class RecipeProperties {
     public Tier tier;
     public int cost;
@@ -9,6 +13,8 @@ public class RecipeProperties {
 
     public boolean thisTierOnly;
     public boolean consumeContainers = false;
+
+    public List<Dimension> allowedDimensions;
 
     public RecipeProperties(){}
 
@@ -44,6 +50,11 @@ public class RecipeProperties {
 
     public RecipeProperties setConsumeContainers(){
         this.consumeContainers = true;
+        return this;
+    }
+
+    public RecipeProperties setAllowedDimensions(List<Dimension> allowedDimensions) {
+        this.allowedDimensions = allowedDimensions;
         return this;
     }
 

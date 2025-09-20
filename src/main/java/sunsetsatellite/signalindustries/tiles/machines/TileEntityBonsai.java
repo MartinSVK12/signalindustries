@@ -6,9 +6,9 @@ import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 
-public class TileEntityGreenhouse extends TileEntityTieredMachineSimple implements IBoostable {
+public class TileEntityBonsai extends TileEntityTieredMachineSimple implements IBoostable {
 
-    public TileEntityGreenhouse(){
+    public TileEntityBonsai(){
         itemContents = new ItemStack[3];
         fluidCapacity[0] = 2000;
         acceptedFluids.get(0).add(SIFluids.ENERGY);

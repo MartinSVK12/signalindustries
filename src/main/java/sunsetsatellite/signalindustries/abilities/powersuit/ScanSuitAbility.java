@@ -1,49 +1,65 @@
-package sunsetsatellite.signalindustries.abilities.trigger;
+package sunsetsatellite.signalindustries.abilities.powersuit;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.OreInfo;
+import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ScanAbility extends TriggerBaseEffectAbility {
+public class ScanSuitAbility extends SuitBaseEffectAbility {
 
     public static HashMap<Block, OreInfo> oreMap = new HashMap<>();
 
-    public ScanAbility(String name, int cost, int cooldown, int effectTime, int costPerTick) {
-        super(name, cost, cooldown, effectTime, costPerTick);
+    public ScanSuitAbility() {
+        super(Tier.BASIC, SignalIndustries.MOD_ID, "scan", 100, 3, 200);
     }
 
     @Override
-    public void deactivate(int x, int y, int z, Player player, World world, ItemStack trigger, ItemStack harness) {
-        deactivate(player, world, trigger, harness);
+    public void deactivate(int x, int y, int z, Player player, World world, IPowerSuit powerSuit) {
+        deactivate(player, world, powerSuit);
     }
 
     @Override
-    public void deactivate(Player player, World world, ItemStack trigger, ItemStack harness) {
+    public void deactivate(Player player, World world, IPowerSuit powerSuit) {
         oreMap.clear();
     }
 
     @Override
-    public void tick(Player player, World world, ItemStack trigger, ItemStack harness) {
+    public void deactivate(Player player, Entity target, World world, IPowerSuit powerSuit) {
+        deactivate(player, world, powerSuit);
+    }
+
+    @Override
+    public void tick(int x, int y, int z, Player player, World world, IPowerSuit powerSuit) {
 
     }
 
     @Override
-    public void activate(int x, int y, int z, Player player, World world, ItemStack trigger, ItemStack harness) {
-        activate(player, world, trigger, harness);
+    public void tick(Player player, World world, IPowerSuit powerSuit) {
+
     }
 
     @Override
-    public void activate(Player player, World world, ItemStack trigger, ItemStack harness) {
+    public void tick(Player player, Entity target, World world, IPowerSuit powerSuit) {
+
+    }
+
+    @Override
+    public void activate(int x, int y, int z, Player player, World world, IPowerSuit powerSuit) {
+        activate(player, world, powerSuit);
+    }
+
+    @Override
+    public void activate(Player player, World world, IPowerSuit powerSuit) {
         int range = 16;
 
         oreMap.clear();
@@ -99,13 +115,11 @@ public class ScanAbility extends TriggerBaseEffectAbility {
             }
         });
         player.sendMessage("--------------------");
-
-        /*int sum = SignalIndustries.ORE_BLOCK_COUNT.values().stream().mapToInt(Integer::intValue).sum();
-
-        player.sendMessage(String.format("Ore count: %d", sum));
-        SignalIndustries.ORE_BLOCK_COUNT.forEach((block,count) -> {
-            player.sendMessage(String.format("%s | Count: %d (%d%%)",block.asItem().getTranslatedName(block.getDefaultStack()), count, (int)Math.round(count*100.0/sum)));
-        });*/
-
     }
+
+    @Override
+    public void activate(Player player, Entity target, World world, IPowerSuit powerSuit) {
+        activate(player, world, powerSuit);
+    }
+
 }

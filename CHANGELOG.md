@@ -1,0 +1,13 @@
+- Fixed wrong machines showing up in TMB recipes.
+- Hopefully fixed storage containers dropping a single stack of 1000+ items.
+- Fixed a crash involving backpacks.
+- Added the Reinforced Pump.
+- Added a new fluid.
+- Renamed Crystal Chambers to Crystallizers.
+- Slightly improved the GUI of the EEPROM Programmer.
+- Remade the texture for Triggers.
+- Implemented the Redstone Cover.
+- Added interaction between Switch and Redstone covers.
+- Added the Laser Drill, for later game resource collection.
+- Added an option to hide the suits HUD background.
+- Made world gen features configurable.

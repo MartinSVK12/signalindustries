@@ -33,6 +33,9 @@ public class ScreenProgrammer extends ScreenFluid {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/programmer_basic_new.png");
                 break;
+            case REINFORCED:
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/programmer_reinforced_new.png");
+                break;
         }
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
@@ -127,9 +130,9 @@ public class ScreenProgrammer extends ScreenFluid {
 
     @Override
     public void init() {
-        ButtonElement fluidIo = new ButtonElement(0, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 80, 20, 20, "F");
+        ButtonElement fluidIo = new ButtonElement(0, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 60, 20, 20, "F");
         buttons.add(fluidIo);
-        ButtonElement itemIo = new ButtonElement(1, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 60, 20, 20, "I");
+        ButtonElement itemIo = new ButtonElement(1, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 40, 20, 20, "I");
         buttons.add(itemIo);
         fluidIoButton = fluidIo;
         itemIoButton = itemIo;

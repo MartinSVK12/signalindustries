@@ -253,20 +253,23 @@ item.signalindustries.reinforced.powerSuit.leggings.desc=Pants of the power suit
 item.signalindustries.reinforced.powerSuit.boots.name=Signalum Power Suit Boots
 item.signalindustries.reinforced.powerSuit.boots.desc=Boots of the power suit. Help with jumping and negating fall damage. Functionality can be extended with <Attachments>.
 
-item.signalindustries.testingAbilityItem.name=Ability: Testing Ability
-item.signalindustries.testingAbilityItem.desc=Container for a <Signalum Power Suit> ability application.
+item.signalindustries.ability.testing.name=Ability: Testing Ability
+item.signalindustries.ability.testing.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.abilityContainerCasing.name=Ability Container Casing
 item.signalindustries.abilityContainerCasing.desc=A part of the base for an <Application Module>.
 
-item.signalindustries.clockworkAbilityContainer.name=Ability: Clockwork
-item.signalindustries.clockworkAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
+item.signalindustries.ability.clockwork.name=Ability: Clockwork
+item.signalindustries.ability.clockwork.desc=Container for a <Signalum Power Suit> ability application.
 
-item.signalindustries.boostAbilityContainer.name=Ability: Boost
-item.signalindustries.boostAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
+item.signalindustries.ability.boost.name=Ability: Boost
+item.signalindustries.ability.boost.desc=Container for a <Signalum Power Suit> ability application.
 
-item.signalindustries.projectileAbilityContainer.name=Ability: Projectile
-item.signalindustries.projectileAbilityContainer.desc=Container for a <Signalum Power Suit> ability application.
+item.signalindustries.ability.projectile.name=Ability: Projectile
+item.signalindustries.ability.projectile.desc=Container for a <Signalum Power Suit> ability application.
+
+item.signalindustries.ability.scan.name=Ability: Scan
+item.signalindustries.ability.scan.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.attachment.testingAttachment.name=Testing Attachment
 item.signalindustries.attachment.testingAttachment.desc=Provides no additional function. Can attach anywhere. Used only for testing.
@@ -627,7 +630,7 @@ tile.signalindustries.reinforced.externalIO.desc=Allows item/fluid I/O configura
 
 tile.signalindustries.basic.programmer.name=EEPROM Programmer
 tile.signalindustries.basic.programmer.desc=Device for programming and configuring <Triggers>.
-tile.signalindustries.reinforced.programmer.name=Reinforced EEPROM Programmer
+tile.signalindustries.reinforced.programmer.name=NAND Flash Reprogrammer
 tile.signalindustries.reinforced.programmer.desc=Device for programming and configuring <Ability Containers>.
 
 tile.signalindustries.basic.dynamo.name=Basic Signalite Dynamo
@@ -653,12 +656,13 @@ tile.signalindustries.awakened.parallelProcessor.desc=Allows a machine to carry 
 tile.signalindustries.awakened.parallelProcessor.8x.name=Awakened 8x Parallel Hyperprocessor
 tile.signalindustries.awakened.parallelProcessor.8x.desc=Creates and collapses multiple timelines inside a machine to carry out 8 recipes at once!
 
-tile.signalindustries.basic.greenhouse.name=Basic Miniature Greenhouse
-tile.signalindustries.basic.greenhouse.desc=
-tile.signalindustries.reinforced.greenhouse.name=Reinforced Closed Ecosystem
-tile.signalindustries.reinforced.greenhouse.desc=
-tile.signalindustries.awakened.greenhouse.name=Awakened Gaia's Garden
-tile.signalindustries.awakened.greenhouse.desc=
+tile.signalindustries.basic.greenhouse.name=Basic Greenhouse
+tile.signalindustries.basic.greenhouse.desc=The perfect environment for all your crops and plants.
+
+tile.signalindustries.basic.bonsai.name=Basic Bonsai Pot
+tile.signalindustries.basic.bonsai.desc=Allows you to grow trees in a compact space.
+tile.signalindustries.reinforced.bonsai.name=Reinforced Unnatural Bonsai Pot
+tile.signalindustries.reinforced.bonsai.desc=Allows you to grow trees (even those from the bottom of reality) in a compact space.
 
 tile.signalindustries.recipeMaker.name=Recipe Maker
 tile.signalindustries.recipeMaker.desc=Development utility.
@@ -1246,6 +1250,7 @@ container.signalindustries.ignitor.name=Ignitor
 container.signalindustries.storageContainer.name=Storage Container
 container.signalindustries.energyInjector.name=Energy Injector
 container.signalindustries.programmer.name=EEPROM Programmer
+container.signalindustries.reinforcedProgrammer.name=NAND Flash Reprogrammer
 container.signalindustries.pulsar.name=Pulsar
 container.signalindustries.pulsarBlock.name=Pulsar
 container.signalindustries.backpack.name=Backpack

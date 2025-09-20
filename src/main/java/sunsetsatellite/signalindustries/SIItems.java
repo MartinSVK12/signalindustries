@@ -5,11 +5,13 @@ import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.abilities.powersuit.ScanSuitAbility;
 import sunsetsatellite.signalindustries.covers.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
@@ -81,10 +83,6 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static Item reinforcedSignalumDrill;
     public static Item fuelCell;
     public static Item nullTrigger;
-    public static Item romChipProjectile;
-    public static Item romChipBoost;
-    public static Item romChipShield;
-    public static Item romChipScan;
     public static Item clearKey;
     public static Item saturatedKey;
     public static Item signalumSaber;
@@ -93,18 +91,6 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static ItemSignalumPowerSuit signalumPowerSuitChestplate;
     public static ItemSignalumPowerSuit signalumPowerSuitLeggings;
     public static ItemSignalumPowerSuit signalumPowerSuitBoots;
-    public static ItemAttachment pulsarAttachment;
-    public static ItemAttachment extendedEnergyPack;
-    public static ItemWingsAttachment crystalWings;
-    public static ItemAttachment annihilationCrown;
-    public static ItemAttachment basicBackpack;
-    public static ItemAttachment reinforcedBackpack;
-    public static ItemAttachment nightVisionLens;
-    public static ItemAttachment movementBoosters;
-    public static ItemPortableWorkbench portableWorkbench;
-    public static ItemSmartWatch smartWatch;
-    public static ItemAttachment abilityModule;
-    public static ItemAttachment awakenedAbilityModule;
     public static Item crystalChip;
     public static Item pureCrystalChip;
     public static Item basicEnergyCore;
@@ -138,6 +124,26 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static Item caramelPlate;
     public static Item krowka;
     public static Item blueprint;
+
+    public static ItemAttachment pulsarAttachment;
+    public static ItemAttachment extendedEnergyPack;
+    public static ItemWingsAttachment crystalWings;
+    public static ItemAttachment annihilationCrown;
+    public static ItemAttachment basicBackpack;
+    public static ItemAttachment reinforcedBackpack;
+    public static ItemAttachment nightVisionLens;
+    public static ItemAttachment movementBoosters;
+    public static ItemPortableWorkbench portableWorkbench;
+    public static ItemSmartWatch smartWatch;
+    public static ItemAttachment abilityModule;
+    public static ItemAttachment awakenedAbilityModule;
+
+    public static Item romChipProjectile;
+    public static Item romChipBoost;
+    public static Item romChipShield;
+    public static Item romChipScan;
+
+    public static Item scanAbilityContainer;
 
     public static ItemCover blankCover;
     public static ItemCover redstoneCover;
@@ -216,7 +222,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         dimensionalChip = simpleItem("dimensionalChip", "dimensional_chip", "dimensionalChip", "dimensional_chip");
         attachmentPoint = simpleItem("attachmentPoint", "attachment_point", "attachmentPoint", "attachment_point");
         blankAbilityModule = simpleItem("blankAbilityModule", "blank_ability_module", "blankAbilityModule", "blank_module");
-        abilityContainerCasing = simpleItem("abilityContainerCasing", "ability_container_casing", "abilityContainerCasing", "abilitycontainercasing");
+        abilityContainerCasing = simpleItem("abilityContainerCasing", "ability_container_casing", "abilityContainerCasing", "ability_container_casing");
         blankChip = simpleItem("blankChip", "blank_chip", "romChip.blank", "blank_chip");
         condensedMilkCan = simpleItem("condensedMilkCan", "condensed_milk_can","condensedMilkCan","condensed_milk_can").setMaxStackSize(1);
         bucketCaramel = simpleItem("bucketCaramel", "bucket_caramel","bucketCaramel","bucket_caramel").setMaxStackSize(1).setContainerItem(Items.BUCKET);
@@ -339,6 +345,8 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         awakenedAbilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("awakenedAbilityModule",key("item/awakened_ability_module"),item("awakenedAbilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.AWAKENED),"awakened_ability_module").setMaxStackSize(1);
 
         blueprint = customItem(() -> new ItemBlueprint("blueprint",key("item/blueprint"),item("blueprint")),"blueprint").setMaxStackSize(1);
+
+        scanAbilityContainer = customItem(()-> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()),"ability4").setMaxStackSize(1);
 
         suitColorizerWhite = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.white",

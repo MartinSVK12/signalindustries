@@ -9,6 +9,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 
@@ -97,6 +98,9 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 
     @Override
     public String getNameTranslationKey() {
+        if(tier == Tier.REINFORCED){
+            return "container.signalindustries.reinforcedProgrammer";
+        }
         return "container.signalindustries.programmer";
     }
 }

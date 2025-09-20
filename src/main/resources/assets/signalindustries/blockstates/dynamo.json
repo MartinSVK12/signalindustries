@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo_180"
+        "model": "signalindustries:signalum_dynamo"
       },
       "when": {
         "side": "north"
@@ -10,7 +10,8 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo"
+        "model": "signalindustries:signalum_dynamo",
+        "y": 180
       },
       "when": {
         "side": "south"
@@ -18,23 +19,8 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo"
-      },
-      "when": {
-        "side": "top"
-      }
-    },
-    {
-      "apply":{
-        "model": "signalindustries:signalum_dynamo"
-      },
-      "when": {
-        "side": "bottom"
-      }
-    },
-    {
-      "apply":{
-        "model": "signalindustries:signalum_dynamo_90"
+        "model": "signalindustries:signalum_dynamo",
+        "y": 90
       },
       "when": {
         "side": "east"
@@ -42,7 +28,8 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo_270"
+        "model": "signalindustries:signalum_dynamo",
+        "y": 270
       },
       "when": {
         "side": "west"

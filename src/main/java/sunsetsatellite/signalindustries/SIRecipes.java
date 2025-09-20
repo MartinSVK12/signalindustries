@@ -4,6 +4,7 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
@@ -164,6 +165,16 @@ public class SIRecipes implements RecipeEntrypoint {
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_awakened.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/furnace.json");
         LOGGER.info("{} recipes in {} groups.", SIGNAL_INDUSTRIES.getAllRecipes().size(), SIGNAL_INDUSTRIES.size());
+    }
+
+    public static <T extends RecipeEntryBase<?,?,?>> List<T> getAllRecipesOfType(Class<T> clazz){
+        List<T> recipes = new ArrayList<>();
+        for (RecipeEntryBase<?, ?, ?> recipe : Registries.RECIPES.getAllRecipes()) {
+            if (clazz.isAssignableFrom(recipe.getClass())) {
+                recipes.add(clazz.cast(recipe));
+            }
+        }
+        return Collections.unmodifiableList(recipes);
     }
 
 }

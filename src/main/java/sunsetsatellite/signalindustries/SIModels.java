@@ -73,6 +73,11 @@ public class SIModels implements ModelEntrypoint {
                         .setStateInterpreter(new EEPROMProgrammerStateInterpreter())
                         .setStateData("signalindustries:eeprom_programmer")
         );
+        /*ModelHelper.setBlockModel(reinforcedProgrammer, ()->
+                new BlockModelDFJava<>(reinforcedProgrammer, DragonFly.loadBlockModel("signalindustries:flash_reprogrammer"))
+                        .setStateInterpreter(new NANDProgrammerStateInterpreter())
+                        .setStateData("signalindustries:nand_programmer")
+        );*/
         ModelHelper.setBlockModel(basicSignalumDynamo, ()->
                 new BlockModelDFJava<>(basicSignalumDynamo, DragonFly.loadBlockModel("signalindustries:signalum_dynamo"))
                         .setStateInterpreter(new RotatableStateInterpreter())
@@ -86,8 +91,8 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(externalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) externalIo));
         ModelHelper.setBlockModel(reinforcedExternalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) reinforcedExternalIo));
 
-        ModelHelper.setBlockModel(basicGreenhouse, ()->
-                new BlockModelGreenhouse(basicGreenhouse, DragonFly.loadBlockModel("signalindustries:greenhouse"))
+        ModelHelper.setBlockModel(basicBonsai, ()->
+                new BlockModelGreenhouse(basicBonsai, DragonFly.loadBlockModel("signalindustries:greenhouse"))
         );
         ModelHelper.setBlockModel(reinforcedGreenhouse, ()->
                 new BlockModelGreenhouse(reinforcedGreenhouse, DragonFly.loadBlockModel("signalindustries:reinforced_greenhouse"))

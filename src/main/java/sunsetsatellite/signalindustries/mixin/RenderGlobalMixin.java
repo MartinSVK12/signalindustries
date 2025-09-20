@@ -14,6 +14,7 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.client.render.worldtype.WorldTypeFX;
 import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.util.phys.Vec3;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
@@ -29,9 +30,12 @@ import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.catalyst.core.util.model.IFullbright;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIWeather;
+import sunsetsatellite.signalindustries.abilities.powersuit.ScanSuitAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ScanAbility;
+import sunsetsatellite.signalindustries.util.OreInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Mixin(
         value = RenderGlobal.class,
@@ -113,15 +117,24 @@ public class RenderGlobalMixin {
         double x = camera.getX(partialTick);
         double y = camera.getY(partialTick);
         double z = camera.getZ(partialTick);
+
+        HashMap<Block, OreInfo> oreMap = new HashMap<>();
         if(!ScanAbility.oreMap.isEmpty()){
+            oreMap = ScanAbility.oreMap;
+        }
+        if(!ScanSuitAbility.oreMap.isEmpty()){
+            oreMap = ScanSuitAbility.oreMap;
+        }
+
+        if(!oreMap.isEmpty()){
             ArrayList<BlockInstance> list = new ArrayList<>();
-            ScanAbility.oreMap.forEach((block, oreInfo)->{
+              oreMap.forEach((block, oreInfo)->{
                 oreInfo.positions.forEach(position->{
                     list.add(new BlockInstance(block,position,null));
                 });
             });
             blockRenderer = new RenderBlocks(new HologramWorld(list));
-            ScanAbility.oreMap.forEach((block, oreInfo)->{
+            oreMap.forEach((block, oreInfo)->{
                 oreInfo.positions.forEach(position->{
                     GL11.glPushMatrix();
                     GL11.glDisable(GL11.GL_LIGHTING);

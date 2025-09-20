@@ -190,8 +190,9 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicSignalumDynamo;
 
     public static Block<? extends BlockLogic> basicProgrammer;
+    //public static Block<? extends BlockLogic> reinforcedProgrammer;
 
-    public static Block<? extends BlockLogic> basicGreenhouse;
+    public static Block<? extends BlockLogic> basicBonsai;
     public static Block<? extends BlockLogic> reinforcedGreenhouse;
 
     public static Block<? extends BlockLogic> reinforcedChunkloader;
@@ -1508,12 +1509,21 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withDefaultTexture("programmer_top")
         );
 
-        basicGreenhouse = customBlock(defaultBuilder(Tier.BASIC),
-                "basic.greenhouse",
-                "basic_greenhouse",
-                "basicGreenhouse",
+        /*reinforcedProgrammer = customBlock(defaultBuilder(Tier.BASIC),
+                "reinforced.programmer",
+                "reinforced_programmer",
+                "reinforcedProgrammer",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityGreenhouse::new, "alloy_smelter").setNonSolid(),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityProgrammer::new, "programmer"),
+                new MachineTextures(Tier.REINFORCED)
+        );*/
+
+        basicBonsai = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.bonsai",
+                "basic_bonsai",
+                "basicBonsai",
+                3,
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityBonsai::new, "alloy_smelter").setNonSolid(),
                 new MachineTextures()
         );
 
@@ -1522,7 +1532,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "reinforced_greenhouse",
                 "reinforcedGreenhouse",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityGreenhouse::new, "alloy_smelter").setNonSolid(),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityBonsai::new, "alloy_smelter").setNonSolid(),
                 new MachineTextures()
         );
 
