@@ -38,7 +38,9 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
         if(stack.getItem().equals(SIItems.signalumPowerSuitChestplate)){
             InventoryPowerSuit inv = new InventoryPowerSuit(stack);
             InventorySerializer.loadInvFromNBT(stack,inv,8,1);
-            return inv.getFluidInSlot(0).amount < inv.getFluidCapacityForSlot(0);
+            FluidStack fluidStack = inv.getFluidInSlot(0);
+            if(fluidStack == null) return true;
+            return fluidStack.amount < inv.getFluidCapacityForSlot(0);
         }
         return false;
     }
