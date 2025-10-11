@@ -11,3 +11,10 @@
 - Added the Laser Drill, for later game resource collection.
 - Added an option to hide the suits HUD background.
 - Made world gen features configurable.
+- Fixed fluid tank tooltip.
+- Fixed bug with fluid tanks.
+- Buffed prototype fluid tanks capacity (8000 -> 16000).
+- Fixed a bug where the GUI of the reinforced extractor couldn't be opened.
+- Fixed bug where you couldn't shift click into item inventories (like the backpack).
+- Fixed a couple crashes.
+- Added new greenhouse multiblock.
