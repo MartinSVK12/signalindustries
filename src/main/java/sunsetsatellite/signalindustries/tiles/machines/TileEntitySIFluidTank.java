@@ -46,7 +46,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         itemContents = new ItemStack[0];
-        fluidCapacity[0] = 8000;
+        fluidCapacity[0] = 16000;
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
@@ -86,11 +86,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
                 }
             }
         } else {
-            if(tier == Tier.PROTOTYPE){
-                fluidCapacity[0] = 8000;
-            } else {
-                fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 16000;
-            }
+            fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 16000;
             transferSpeed = 50 * (tier.ordinal() + 1);
         }
         extractFluids();
