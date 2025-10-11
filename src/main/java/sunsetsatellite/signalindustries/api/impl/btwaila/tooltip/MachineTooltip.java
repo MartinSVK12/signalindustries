@@ -5,6 +5,7 @@ import sunsetsatellite.signalindustries.tiles.TileEntitySignalumDynamo;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -40,6 +41,8 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityWakingAlloySmelter.class);
         addClass(TileEntityWakingPlateFormer.class);
         addClass(TileEntityLaserDrill.class);
+        addClass(TileEntityGreenhouse.class);
+        addClass(TileEntityBonsaiPot.class);
     }
 
     @Override

@@ -11,13 +11,13 @@ import org.useless.dragonfly.data.block.BlockModelData;
 import org.useless.dragonfly.models.block.BlockModelDFJava;
 import org.useless.dragonfly.models.block.StaticBlockModel;
 
-public class BlockModelGreenhouse extends BlockModelDFJava {
+public class BlockModelBonsaiPot extends BlockModelDFJava {
 
-    public BlockModelGreenhouse(@NotNull Block block, @NotNull StaticBlockModel baseModel) {
+    public BlockModelBonsaiPot(@NotNull Block block, @NotNull StaticBlockModel baseModel) {
         super(block, baseModel);
     }
 
-    public BlockModelGreenhouse(@NotNull Block block, @NotNull BlockModelData baseModel) {
+    public BlockModelBonsaiPot(@NotNull Block block, @NotNull BlockModelData baseModel) {
         super(block, baseModel);
     }
 

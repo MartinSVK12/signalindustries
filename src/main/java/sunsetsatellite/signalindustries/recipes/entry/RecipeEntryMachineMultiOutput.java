@@ -1,8 +1,5 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
-import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.core.WeightedRandomBag;
-import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -15,19 +12,19 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
+import sunsetsatellite.signalindustries.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtendedSymbol[], WeightedRandomBag<WeightedRandomLootObject>, RecipeProperties> {
+public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedSymbol[], RecipeOutputStack[], RecipeProperties>{
 
-    public RecipeEntryMachineRandomOutput(RecipeExtendedSymbol[] input, WeightedRandomBag<WeightedRandomLootObject> output, RecipeProperties data) {
+    public RecipeEntryMachineMultiOutput(RecipeExtendedSymbol[] input, RecipeOutputStack[] output, RecipeProperties data) {
         super(input, output, data);
     }
 
-    public RecipeEntryMachineRandomOutput() {}
-
+    @Override
     public boolean matches(RecipeExtendedSymbol[] symbols) {
         if(symbols.length == 0){
             return false;
@@ -49,10 +46,11 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
         });
 
         return alreadyMatchedResolved.entrySet().stream().allMatch((e)->e.getKey().stream()
-                        .anyMatch((s)->e.getValue().stream()
-                                .anyMatch((s2)->s.stackSize <= s2.stackSize)));
+                .anyMatch((s)->e.getValue().stream()
+                        .anyMatch((s2)->s.stackSize <= s2.stackSize)));
     }
 
+    @Override
     public boolean matchesQuery(SearchQuery query) {
         switch (query.mode) {
             case ALL: {
@@ -71,6 +69,7 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
         return false;
     }
 
+    @Override
     public boolean matchesScope(SearchQuery query) {
         if (query.scope.getLeft() == SearchQuery.SearchScope.NONE) return true;
         if (query.scope.getLeft() == SearchQuery.SearchScope.NAMESPACE) {
@@ -88,19 +87,45 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
         return false;
     }
 
+    @Override
     public boolean matchesRecipe(SearchQuery query) {
         if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
-            if (query.strict && getOutput().getEntries().stream().map(WeightedRandomLootObject::getDefinedItemStack).anyMatch(s -> s != null && s.getDisplayName().equalsIgnoreCase(query.query.getRight()))) {
-                return true;
-            } else return !query.strict && getOutput().getEntries().stream().map(WeightedRandomLootObject::getDefinedItemStack).anyMatch(s -> s != null && s.getDisplayName().toLowerCase().contains(query.query.getRight().toLowerCase()));
+            if(!query.strict) {
+                return Arrays.stream(getOutput()).anyMatch((O)->{
+                    if(O.isItem()){
+                        return O.stack.getDisplayName().toLowerCase().contains(query.query.getRight().toLowerCase());
+                    } else if (O.isFluid()) {
+                        return O.fluid.fluid.getName().toLowerCase().contains(query.query.getRight().toLowerCase());
+                    }
+                    return false;
+                });
+            } else {
+                return Arrays.stream(getOutput()).anyMatch((O)->{
+                    if(O.isItem()){
+                        return O.stack.getDisplayName().equalsIgnoreCase(query.query.getRight());
+                    } else if (O.isFluid()) {
+                        return O.fluid.fluid.getName().equalsIgnoreCase(query.query.getRight());
+                    }
+                    return false;
+                });
+            }
+
         } else if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
             List<ItemStack> groupStacks = new RecipeSymbol(query.query.getRight()).resolve();
             if (groupStacks == null) return false;
-            return groupStacks.contains(getOutput().getEntries().stream().map(WeightedRandomLootObject::getDefinedItemStack).filter(Objects::nonNull).findFirst().orElse(null));
+            return Arrays.stream(getOutput()).anyMatch((O)->{
+                if(O.isItem()){
+                    return groupStacks.stream().anyMatch((S)->S.isItemEqual(O.stack));
+                } else if (O.isFluid()) {
+                    return groupStacks.stream().anyMatch((S)->S.isItemEqual(O.fluid.toItemStack()));
+                }
+                return false;
+            });
         }
         return false;
     }
 
+    @Override
     public boolean matchesUsage(SearchQuery query) {
         RecipeExtendedSymbol[] symbols = getInput();
         for (RecipeExtendedSymbol symbol : symbols) {
@@ -191,14 +216,19 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
 
     @Override
     public boolean canMultiblockProcess(TileEntityTieredMultiblock multiblock) {
-        for (WeightedRandomLootObject entry : getOutput().getEntries()) {
-            ItemStack stack = entry.getDefinedItemStack();
-            if(stack == null){
-                return false;
-            }
-            stack.copy().stackSize = entry.isRandomYield() ? entry.getMaxYield() : entry.getFixedYield();
-            if(!multiblock.areItemOutputsValid(stack)){
-                return false;
+        for (RecipeOutputStack output : getOutput()) {
+            if(output.isItem()){
+                ItemStack stack = output.stack.copy();
+                stack.stackSize = output.randomAmount ? output.amountMax : stack.stackSize;
+                if(!multiblock.areItemOutputsValid(stack)){
+                    return false;
+                }
+            } else if (output.isFluid()){
+                FluidStack stack = output.fluid.copy();
+                stack.amount = output.randomAmount ? output.amountMax : stack.amount;
+                if(!multiblock.areFluidOutputsValid(stack)){
+                    return false;
+                }
             }
         }
         return true;
@@ -206,41 +236,87 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
 
     @Override
     public void processMultiblockRecipe(TileEntityTieredMultiblock multiblock) {
-        ItemStack stack = getOutput() == null ? null : getOutput().getRandom().getItemStack();
-        if (stack != null) {
-            multiblock.consumeInputs();
-            if(multiblock.random.nextFloat() <= getData().chance){
-                int multiplier = 1;
-                multiplier *= multiblock.parallel;
-                int outputAmountRemaining = stack.stackSize * multiplier;
-                for (int i = 0; i < multiblock.itemOutput.itemContents.length; i++) {
-                    ItemStack outputStack = multiblock.itemOutput.itemContents[i];
-                    if (outputStack == null) {
-                        int maxAmountInSlot = stack.getMaxStackSize();
-                        if(maxAmountInSlot <= 0) continue;
-                        int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
-                        if(willTake <= 0) continue;
-                        ItemStack copy = stack.copy();
-                        copy.stackSize = willTake;
-                        multiblock.itemOutput.setItem(i,copy);
-                        outputAmountRemaining -= willTake;
-                        if(outputAmountRemaining <= 0){
-                            break;
+        multiblock.consumeInputs();
+        if(multiblock.random.nextFloat() <= getData().chance) {
+            for (RecipeOutputStack outputStack : getOutput()) {
+                if (outputStack.isItem()) {
+                    ItemStack stack = getOutput() == null ? null : outputStack.stack.copy();
+                    if(stack != null && outputStack.randomAmount){
+                        stack.stackSize = Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax + 1);
+                    }
+                    if (stack != null) {
+                        if (multiblock.random.nextFloat() <= outputStack.chance) {
+                            int multiplier = 1;
+                            multiplier *= multiblock.parallel;
+                            int outputAmountRemaining = stack.stackSize * multiplier;
+                            for (int i = 0; i < multiblock.itemOutput.itemContents.length; i++) {
+                                ItemStack busStack = multiblock.itemOutput.itemContents[i];
+                                if (busStack == null) {
+                                    int maxAmountInSlot = stack.getMaxStackSize();
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    ItemStack copy = stack.copy();
+                                    copy.stackSize = willTake;
+                                    multiblock.itemOutput.setItem(i, copy);
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                } else if (busStack.isItemEqual(stack)) {
+                                    int maxAmountInSlot = stack.getMaxStackSize() - busStack.stackSize;
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    busStack.stackSize += willTake;
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                }
+                            }
                         }
-                    } else if (outputStack.isItemEqual(stack)) {
-                        int maxAmountInSlot = stack.getMaxStackSize() - outputStack.stackSize;
-                        if(maxAmountInSlot <= 0) continue;
-                        int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
-                        if(willTake <= 0) continue;
-                        outputStack.stackSize += willTake;
-                        outputAmountRemaining -= willTake;
-                        if(outputAmountRemaining <= 0){
-                            break;
+                    }
+                } else if (outputStack.isFluid()) {
+                    FluidStack fluidStack = getOutput() == null ? null : outputStack.fluid.copy();
+                    if(fluidStack != null && outputStack.randomAmount){
+                        fluidStack.amount =  Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax + 1);
+                    }
+                    if (fluidStack != null) {
+                        if(multiblock.random.nextFloat() <= outputStack.chance) {
+                            int multiplier = 1;
+                            multiplier *= multiblock.parallel;
+                            int outputAmountRemaining = fluidStack.amount * multiplier;
+                            for (int i = 0; i < multiblock.fluidOutput.itemContents.length; i++) {
+                                FluidStack hatchStack = multiblock.fluidOutput.fluidContents[i];
+                                if (hatchStack == null) {
+                                    int maxAmountInSlot = multiblock.fluidOutput.getFluidInSlot(i).amount;
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    FluidStack copy = fluidStack.copy();
+                                    copy.amount = willTake;
+                                    multiblock.fluidOutput.setFluidInSlot(i, copy);
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                } else if (hatchStack.isFluidEqual(fluidStack)) {
+                                    int maxAmountInSlot = multiblock.fluidOutput.getFluidCapacityForSlot(i) - hatchStack.amount;
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    hatchStack.amount += willTake;
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
-
 }

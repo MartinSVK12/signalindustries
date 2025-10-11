@@ -1032,7 +1032,7 @@
     ],
     "result": {
       "key":  "tile.signalindustries.basic.casing",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
@@ -1944,6 +1944,55 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.stoneworks",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_greenhouse",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " S ",
+      "PDP",
+      " M "
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "tile.dirt",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.seeds.wheat",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.greenhouse",
       "amount": 1,
       "meta": 0
     },

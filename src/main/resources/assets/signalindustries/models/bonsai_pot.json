@@ -2,11 +2,11 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "signalindustries:block/basic_greenhouse_top",
-		"1": "signalindustries:block/basic_greenhouse_glass",
-		"2": "signalindustries:block/basic_greenhouse_side",
+		"0": "signalindustries:block/basic_bonsai_top",
+		"1": "signalindustries:block/basic_bonsai_glass",
+		"2": "signalindustries:block/basic_bonsai_side",
 		"3": "signalindustries:block/basic_blank",
-		"particle": "signalindustries:block/basic_greenhouse_top"
+		"particle": "signalindustries:block/basic_bonsai_top"
 	},
 	"elements": [
 		{

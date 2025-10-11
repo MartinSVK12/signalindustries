@@ -88,39 +88,6 @@ public abstract class MinecraftMixin {
         return original;
     }
 
-    @WrapOperation(method = "clickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/controller/PlayerController;useOrPlaceItemStackOnTile(Lnet/minecraft/core/entity/player/Player;Lnet/minecraft/core/world/World;Lnet/minecraft/core/item/ItemStack;IIILnet/minecraft/core/util/helper/Side;DD)Z"))
-    private boolean fixUsagePosition(PlayerController instance, Player player, World world, ItemStack itemstack, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced, Operation<Boolean> original){
-        HitResult hit = objectMouseOver;
-        if (hit.hitType == HitResult.HitType.TILE) {
-            Vec3f vec3f = new Vec3f(hit.location.x,hit.location.y,hit.location.z);
-            Vec2f clickPosition = vec3f.subtract(vec3f.copy().floor()).abs().set(hit.side.getAxis(),0).toVec2f();
-            switch (hit.side) {
-                case NORTH:
-                    clickPosition.x = 1 - clickPosition.x;
-                    break;
-                case EAST: {
-                    double temp1 = clickPosition.y;
-                    double temp2 = clickPosition.x;
-                    clickPosition.x = 1 - temp1;
-                    clickPosition.y = temp2;
-                    break;
-                }
-                case SOUTH:
-                    //no change needed
-                    break;
-                case WEST: {
-                    double temp1 = clickPosition.y;
-                    double temp2 = clickPosition.x;
-                    clickPosition.x = temp1;
-                    clickPosition.y = temp2;
-                    break;
-                }
-            }
-            return original.call(instance, player, world, itemstack, blockX, blockY, blockZ, side, clickPosition.x, clickPosition.y);
-        }
-        return original.call(instance, player, world, itemstack, blockX, blockY, blockZ, side, xPlaced, yPlaced);
-    }
-
     @Inject(method = "createChunkProvider",at = @At("HEAD"),cancellable = true)
     public void switchProvider(World world, IChunkLoader chunkLoader, CallbackInfoReturnable<IChunkProvider> cir){
         if(SIConfig.config.getBoolean("Experimental.enableDynamicChunkProvider")){

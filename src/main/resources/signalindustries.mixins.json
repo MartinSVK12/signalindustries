@@ -9,6 +9,7 @@
     "ChunkDecoratorOverworldMixin",
     "ContainerInventoryMixin",
     "EntityMinecartMixin",
+    "ItemSeedsMixin",
     "ItemStackMixin",
     "MenuCraftingMixin",
     "MinecraftMixin",

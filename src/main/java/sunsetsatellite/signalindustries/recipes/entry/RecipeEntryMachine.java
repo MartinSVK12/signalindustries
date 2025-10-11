@@ -11,9 +11,13 @@ import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> {
 
@@ -122,6 +126,112 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
 
         }
         return false;
+    }
+
+    @Override
+    public void consumeMultiblockInputs(TileEntityTieredMultiblock multiblock) {
+        if(multiblock.usesItemInput){
+            List<ItemStack> recipeStacks = Catalyst.condenseItemList(
+                    Arrays.stream(getInput())
+                            .flatMap(symbol -> symbol.resolve().stream())
+                            .filter(Objects::nonNull)
+                            .map(ItemStack::copy).collect(Collectors.toList())
+            );
+            List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).collect(Collectors.toList());
+            for (int i = 0; i < multiblock.itemInput.itemContents.length; i++) {
+                ItemStack inputStack = multiblock.itemInput.getItem(i);
+                if(inputStack != null && inputStack.getItem().hasContainerItem() && !getData().consumeContainers){
+                    multiblock.itemInput.setItem(i, new ItemStack(inputStack.getItem().getContainerItem()));
+                } else if (inputStack != null){
+                    Optional<ItemStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                    Optional<ItemStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
+                    recipeStack.ifPresent(stack -> {
+                        remainingRecipeStack.ifPresent(remainingStack -> {
+                            if(remainingStack.stackSize > 0){
+                                int willTake = Math.min(stack.stackSize * multiblock.parallel, inputStack.stackSize);
+                                inputStack.stackSize -= willTake;
+                                remainingStack.stackSize -= stack.stackSize;
+                            }
+                        });
+                    });
+                    if (inputStack.stackSize <= 0) {
+                        multiblock.itemInput.setItem(i, null);
+                    }
+                }
+            }
+        }
+        if(multiblock.usesFluidInput){
+            for (int i = 0; i < multiblock.fluidInput.fluidContents.length; i++) {
+                FluidStack inputStack = multiblock.fluidInput.getFluidInSlot(i);
+                List<FluidStack> recipeStacks = Arrays.stream(getInput())
+                        .flatMap(symbol -> symbol.resolveFluids().stream())
+                        .filter(Objects::nonNull)
+                        .map(FluidStack::copy)
+                        .collect(Collectors.toList());
+                List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).collect(Collectors.toList());
+                if(inputStack != null){
+                    Optional<FluidStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                    Optional<FluidStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();
+                    recipeStack.ifPresent(stack -> {
+                        remainingRecipeStack.ifPresent(remainingStack -> {
+                            if(remainingStack.amount > 0){
+                                int willTake = Math.min(stack.amount * multiblock.parallel, inputStack.amount);
+                                inputStack.amount -= willTake;
+                                remainingStack.amount -= stack.amount;
+                            }
+                        });
+                    });
+                    //recipeStack.ifPresent(stack -> inputStack.amount -= stack.amount * parallel);
+                    if (inputStack.amount <= 0) {
+                        multiblock.fluidInput.setFluidInSlot(i, null);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean canMultiblockProcess(TileEntityTieredMultiblock multiblock) {
+        return multiblock.areItemOutputsValid(getOutput());
+    }
+
+    @Override
+    public void processMultiblockRecipe(TileEntityTieredMultiblock multiblock) {
+        ItemStack stack = getOutput() == null ? null : getOutput().copy();
+        if (stack != null) {
+            multiblock.consumeInputs();
+            if(multiblock.random.nextFloat() <= getData().chance){
+                int multiplier = 1;
+                multiplier *= multiblock.parallel;
+                int outputAmountRemaining = stack.stackSize * multiplier;
+                for (int i = 0; i < multiblock.itemOutput.itemContents.length; i++) {
+                    ItemStack outputStack = multiblock.itemOutput.itemContents[i];
+                    if (outputStack == null) {
+                        int maxAmountInSlot = stack.getMaxStackSize();
+                        if(maxAmountInSlot <= 0) continue;
+                        int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                        if(willTake <= 0) continue;
+                        ItemStack copy = stack.copy();
+                        copy.stackSize = willTake;
+                        multiblock.itemOutput.setItem(i,copy);
+                        outputAmountRemaining -= willTake;
+                        if(outputAmountRemaining <= 0){
+                            break;
+                        }
+                    } else if (outputStack.isItemEqual(stack)) {
+                        int maxAmountInSlot = stack.getMaxStackSize() - outputStack.stackSize;
+                        if(maxAmountInSlot <= 0) continue;
+                        int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                        if(willTake <= 0) continue;
+                        outputStack.stackSize += willTake;
+                        outputAmountRemaining -= willTake;
+                        if(outputAmountRemaining <= 0){
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -285,7 +285,7 @@ item.signalindustries.basic.attachment.jetpack.name=Jetpack
 item.signalindustries.basic.attachment.jetpack.desc=A simple jetpack with limited flight capabilities.
 item.signalindustries.reinforced.attachment.wings.name=Crystal Wings
 item.signalindustries.reinforced.attachment.wings.desc=Rise above. These wings allow you to fly freely and also act as a heat sink.
-item.signalindustries.reinforced.attachment.crown.name=Annihilation Crown
+item.signalindustries.reinforced.attachment.crown.name=Laser Crown
 item.signalindustries.reinforced.attachment.crown.desc=Grants access to several laser cannons, how you use them, is up to you ;)
 item.signalindustries.reinforced.attachment.breathingApparatus.name=Breathing Apparatus
 item.signalindustries.reinforced.attachment.breathingApparatus.desc=Allows breathing in otherwise hostile environments. Can extract the oxygen out of water allowing for endless breathing underwater.
@@ -512,6 +512,14 @@ tile.signalindustries.reinforced.itemOutputBus.desc=A dedicated item output for 
 
 tile.signalindustries.awakened.energyConnector.name=Awakened Energy Connector
 tile.signalindustries.awakened.energyConnector.desc=A dedicated energy hatch for Awakened-tier multiblocks.
+tile.signalindustries.awakened.fluidInputHatch.name=Awakened Fluid Input Hatch
+tile.signalindustries.awakened.fluidInputHatch.desc=A dedicated fluid input for Awakened-tier multiblocks.
+tile.signalindustries.awakened.fluidOutputHatch.name=Awakened Fluid Output Hatch
+tile.signalindustries.awakened.fluidOutputHatch.desc=A dedicated fluid output for Awakened-tier multiblocks.
+tile.signalindustries.awakened.itemInputBus.name=Awakened Item Input Bus
+tile.signalindustries.awakened.itemInputBus.desc=A dedicated item input for Awakened-tier multiblocks.
+tile.signalindustries.awakened.itemOutputBus.name=Awakened Item Output Bus
+tile.signalindustries.awakened.itemOutputBus.desc=A dedicated item output for Awakened-tier multiblocks.
 
 tile.signalindustries.basic.energyConnector.name=Basic Energy Connector
 tile.signalindustries.basic.energyConnector.desc=A dedicated energy hatch for Basic-tier multiblocks.
@@ -934,6 +942,7 @@ guidebook.section.signalindustries.crystalChamber=Crystal Chamber
 guidebook.section.signalindustries.infuser=Infuser
 guidebook.section.signalindustries.centrifuge=Centrifuge
 guidebook.section.signalindustries.collector=Collector
+guidebook.section.signalindustries.laserDrill=Laser Drill
 
 guidebook.section.mob.infernal.name=Infernal
 guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.
@@ -952,6 +961,7 @@ multiblock.signalindustries.wakingAlloySmelter.name=Waking Alloy Smelter
 multiblock.signalindustries.wakingPlateFormer.name=Waking Plate Former
 multiblock.signalindustries.wakingInfuser.name=Waking Infuser
 multiblock.signalindustries.laserDrill.name=Laser Drill
+multiblock.signalindustries.greenhouse.name=Greenhouse
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 gui.options.page.signalindustries=Signal Industries

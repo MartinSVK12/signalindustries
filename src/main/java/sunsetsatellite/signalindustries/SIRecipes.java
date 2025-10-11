@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.recipes.container.waking.WakingInfuserRe
 import sunsetsatellite.signalindustries.recipes.container.waking.WakingPlateFormerRecipes;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.util.RecipeEntrypoint;
@@ -55,6 +56,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
     public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
     public static RecipeGroupSI<RecipeEntryMachineRandomOutput> LASER_DRILL;
+    public static RecipeGroupSI<RecipeEntryMachineMultiOutput> GREENHOUSE;
 
     @Override
     public void onRecipesReady() {
@@ -92,6 +94,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("waking_infuser",WAKING_INFUSER);
         SIGNAL_INDUSTRIES.register("induction_smelter",INDUCTION_SMELTER);
         SIGNAL_INDUSTRIES.register("laser_drill",LASER_DRILL);
+        SIGNAL_INDUSTRIES.register("greenhouse",GREENHOUSE);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 
@@ -117,6 +120,7 @@ public class SIRecipes implements RecipeEntrypoint {
         WAKING_INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingInfuser))));
         INDUCTION_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
         LASER_DRILL = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedLaserDrill))));
+        GREENHOUSE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicGreenhouse))));
     }
 
     public static void loadSpecial(){
@@ -126,6 +130,8 @@ public class SIRecipes implements RecipeEntrypoint {
     public void load(){
         Registries.RECIPE_TYPES.register("signalindustries:machine", RecipeEntryMachine.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/fluid", RecipeEntryMachineFluid.class);
+        Registries.RECIPE_TYPES.register("signalindustries:machine/random", RecipeEntryMachineRandomOutput.class);
+        Registries.RECIPE_TYPES.register("signalindustries:machine/multi", RecipeEntryMachineMultiOutput.class);
         List<ItemStack> romChipGroup = new ArrayList<>();
         romChipGroup.add(SIItems.romChipBoost.getDefaultStack());
         romChipGroup.add(SIItems.romChipProjectile.getDefaultStack());
@@ -158,6 +164,7 @@ public class SIRecipes implements RecipeEntrypoint {
         new WakingAlloySmelterRecipes().addRecipes(WAKING_ALLOY_SMELTER);
         new WakingInfuserRecipes().addRecipes(WAKING_INFUSER);
         new LaserDrillRecipes().addRecipes(LASER_DRILL);
+        new GreenhouseRecipes().addRecipes(GREENHOUSE);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");

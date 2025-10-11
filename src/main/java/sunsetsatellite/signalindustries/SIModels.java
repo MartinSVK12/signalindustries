@@ -92,10 +92,10 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(reinforcedExternalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) reinforcedExternalIo));
 
         ModelHelper.setBlockModel(basicBonsai, ()->
-                new BlockModelGreenhouse(basicBonsai, DragonFly.loadBlockModel("signalindustries:greenhouse"))
+                new BlockModelBonsaiPot(basicBonsai, DragonFly.loadBlockModel("signalindustries:bonsai_pot"))
         );
-        ModelHelper.setBlockModel(reinforcedGreenhouse, ()->
-                new BlockModelGreenhouse(reinforcedGreenhouse, DragonFly.loadBlockModel("signalindustries:reinforced_greenhouse"))
+        ModelHelper.setBlockModel(reinforcedBonsai, ()->
+                new BlockModelBonsaiPot(reinforcedBonsai, DragonFly.loadBlockModel("signalindustries:reinforced_bonsai_pot"))
         );
 
         ModelHelper.setBlockModel(lunarTotem, ()->
@@ -421,6 +421,7 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setTileEntityModel(TileEntityMultiConduit.class, RenderFluidInMultiConduit::new);
         ModelHelper.setTileEntityModel(TileEntityPulsar.class, RenderPulsar::new);
         ModelHelper.setTileEntityModel(TileEntityLaserDrill.class, RenderMultiblock::new);
+        ModelHelper.setTileEntityModel(TileEntityGreenhouse.class, RenderGreenhouse::new);
     }
 
     @Override
