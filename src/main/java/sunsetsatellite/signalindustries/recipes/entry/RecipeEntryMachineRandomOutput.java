@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
-import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.data.registry.Registries;
@@ -13,9 +12,7 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.retrostorage.util.FluidInventoryWrapper;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 

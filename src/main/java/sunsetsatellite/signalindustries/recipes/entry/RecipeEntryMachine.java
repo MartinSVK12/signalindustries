@@ -7,14 +7,11 @@ import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.retrostorage.util.FluidInventoryWrapper;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
