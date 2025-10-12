@@ -10,6 +10,7 @@ import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.RecipeNamespaceSI;
@@ -146,6 +147,10 @@ public class SIRecipes implements RecipeEntrypoint {
         RecipeBuilder.addItemsToGroup("common_dusts","gold",SIItems.goldDust);
         RecipeBuilder.addItemsToGroup("common_dusts","nether_coal",SIItems.netherCoalDust);
         RecipeBuilder.addItemsToGroup("common_tiny_dusts","nether_coal",SIItems.tinyNetherCoalDust);
+        RecipeBuilder.addItemsToGroup("minecraft","saplings",
+                Blocks.SAPLING_OAK, Blocks.SAPLING_BIRCH, Blocks.SAPLING_CACAO,
+                Blocks.SAPLING_CHERRY, Blocks.SAPLING_EUCALYPTUS, Blocks.SAPLING_THORN,
+                Blocks.SAPLING_SHRUB, Blocks.SAPLING_PALM, Blocks.SAPLING_PINE, Blocks.SAPLING_OAK_RETRO);
         Registries.ITEM_GROUPS.register("minecraft:water", listOf(new ItemStack(Blocks.FLUID_WATER_FLOWING),new ItemStack(Blocks.FLUID_WATER_FLOWING)));
         Registries.ITEM_GROUPS.register("minecraft:lava", listOf(new ItemStack(Blocks.FLUID_LAVA_STILL),new ItemStack(Blocks.FLUID_LAVA_FLOWING)));
         new ExtractorRecipes().addRecipes(EXTRACTOR);

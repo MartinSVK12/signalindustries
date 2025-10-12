@@ -397,6 +397,8 @@ item.signalindustries.crystalWingPart.name=Crystal Wing Part
 item.signalindustries.crystalWingPart.desc=One of the 6 wings of the <Crystal Wings> attachment.
 item.signalindustries.blueprint.name=Blueprint
 item.signalindustries.blueprint.desc=Written out instructions on how to build a structure.
+item.signalindustries.sapling.ashen.name=Reborn Ashen Tree Sapling
+item.signalindustries.sapling.ashen.desc=A sapling infused with the primordial power of Eternity turned into a living Ashen Tree once again, can only grow in a specialized environment.
 
 item.signalindustries.condensedMilkCan.name=Condensed Milk Can
 item.signalindustries.condensedMilkCan.desc=Thick and sweet.
@@ -688,8 +690,6 @@ tile.signalindustries.eternalTreeLog.name=Ashen Tree Log
 tile.signalindustries.eternalTreeLog.desc=An ethereal wood-like material only present in Eternity. Cannot burn.
 tile.signalindustries.fueledEternalTreeLog.name=Infected Ashen Tree Log
 tile.signalindustries.fueledEternalTreeLog.desc=A great evil has seeped deep into this tree, time is running out.
-tile.signalindustries.rebornEternalTreeSapling.name=Reborn Ashen Tree Sapling
-tile.signalindustries.rebornEternalTreeSapling.desc=A normal sapling infused with the primordial power of Eternity turned into a living Ashen Tree.
 tile.signalindustries.dimensionalShardOre.name=Dimensional Shard Ore
 tile.signalindustries.dimensionalShardOre.desc=Shards from other worlds stuck between the fibers of reality.
 
@@ -1268,6 +1268,7 @@ container.signalindustries.harness.name=Signalum Power Harness
 container.signalindustries.powerSuit.name=Signalum Power Suit
 container.signalindustries.abilityModule.name=Application Module
 container.signalindustries.awakenedAbilityModule.name=Awakened Application Module
+container.signalindustries.bonsai.name=Bonsai Pot
 
 entity.signalindustries.volatileCrystal.name=Volatile Crystal
 entity.signalindustries.fallingMeteor.name=Falling Meteor

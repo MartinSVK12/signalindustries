@@ -47,10 +47,11 @@ public class CrystalChamberRecipes implements MachineRecipesBase<RecipeGroup<Rec
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.dimensionalShard,1,0)),
-                                new RecipeExtendedSymbol(new FluidStack(SIFluids.WORLD_RESIN,1000))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.dimensionalShard,1,0)),
+                                new RecipeExtendedSymbol(new FluidStack(SIFluids.WORLD_RESIN,2000))
                         },
-                        new ItemStack(SIItems.dimensionalShard,2,0),
-                        new RecipeProperties(600,80, Tier.REINFORCED,false)
+                        new ItemStack(SIItems.dimensionalShard,4,0),
+                        new RecipeProperties(900,80, Tier.REINFORCED,false)
                 )
 
         );

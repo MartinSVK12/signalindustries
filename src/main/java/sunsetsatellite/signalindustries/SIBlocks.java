@@ -192,8 +192,8 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicProgrammer;
     //public static Block<? extends BlockLogic> reinforcedProgrammer;
 
-    //public static Block<? extends BlockLogic> basicBonsai;
-    //public static Block<? extends BlockLogic> reinforcedBonsai;
+    public static Block<? extends BlockLogic> basicBonsai;
+    public static Block<? extends BlockLogic> reinforcedBonsai;
 
     public static Block<? extends BlockLogic> basicGreenhouse;
 
@@ -1520,12 +1520,12 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures(Tier.REINFORCED)
         );*/
 
-        /*basicBonsai = customBlock(defaultBuilder(Tier.BASIC),
+        basicBonsai = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.bonsai",
                 "basic_bonsai",
                 "basicBonsai",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityBonsaiPot::new, null).setNonSolid(),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityBonsaiPot::new, "bonsai_pot").setNonSolid(),
                 new MachineTextures()
         );
 
@@ -1534,9 +1534,9 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "reinforced_bonsai",
                 "reinforcedBonsai",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityBonsaiPot::new, null).setNonSolid(),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityBonsaiPot::new, "bonsai_pot").setNonSolid(),
                 new MachineTextures()
-        );*/
+        );
 
         basicGreenhouse = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.greenhouse",

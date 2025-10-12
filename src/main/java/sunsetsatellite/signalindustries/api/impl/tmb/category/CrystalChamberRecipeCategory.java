@@ -91,7 +91,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
     public void getIngredients(MachineRecipeTranslator recipe, IRecipeLayout layout, ILookupContext context, List<IIngredientList> ingredients) {
         RecipeProperties data = recipe.getOriginal().getData();
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             if(i >= input.length){
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
@@ -109,7 +109,8 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
                 .addInputSlot(0, VanillaTypes.ITEM_STACK).setPosition(x, (background.getHeight() / 2) - 6).build()
                 .addInputSlot(1, VanillaTypes.ITEM_STACK).setPosition(x - 20, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(2, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 6).build()
-                .addSlot(3,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addSlot(3, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(x + 56 + 30, (background.getHeight() / 2) - 6).build()
+                .addInputSlot(4,TMBFluidPlugin.FLUID_STACK).setPosition(14, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

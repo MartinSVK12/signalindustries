@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -137,6 +138,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                         inputSum += CatalystFluids.condenseFluidList(Arrays.asList(fluidInput.fluidContents)).stream().mapToInt(S -> S.amount).sum();
                     }
                     int effectiveParallel = inputSum / recipeInputSum;
+
                     if(parallel > effectiveParallel && effectiveParallel > 0){
                         parallel = effectiveParallel;
                     }
@@ -320,6 +322,8 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         outputAmountRemaining = stack.stackSize;
 
         outputAmountRemaining *= parallel;
+        stack = stack.copy();
+        stack.stackSize *= parallel;
 
         if(outputAmountRemaining <= 0) return true;
         for (ItemStack outputStack : itemOutput.itemContents) {
@@ -330,7 +334,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     outputAmountRemaining -= willTake;
                 }
             } else {
-                int maxFreeAmountInSlot = itemOutput.getMaxStackSize();
+                int maxFreeAmountInSlot = Math.min(itemOutput.getMaxStackSize(),stack.getMaxStackSize());
                 int willTake = Math.min(outputAmountRemaining, maxFreeAmountInSlot);
                 outputAmountRemaining -= willTake;
             }

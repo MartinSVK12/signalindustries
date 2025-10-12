@@ -124,6 +124,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static Item caramelPlate;
     public static Item krowka;
     public static Item blueprint;
+    public static Item ashenTreeSapling;
 
     public static ItemAttachment pulsarAttachment;
     public static ItemAttachment extendedEnergyPack;
@@ -233,6 +234,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         clearKey = simpleItem("clearKey", "clear_key","clearKey","clear_key");
         saturatedKey = simpleItem("saturatedKey", "saturated_key","saturatedKey","saturated_key");
         unlimitedChip = simpleItem("unlimitedChip", "unlimited_chip","romChip.unlimited","unlimited_chip");
+        ashenTreeSapling = simpleItem("ashenTreeSapling", "ashen_tree_sapling","sapling.ashen","ashen_tree_sapling");
 
         raziel = simpleItem("raziel", "raziel","raziel","raziel");
 

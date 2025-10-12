@@ -91,12 +91,12 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(externalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) externalIo));
         ModelHelper.setBlockModel(reinforcedExternalIo, ()->new BlockModelExternalIO((Block<BlockLogicMachine>) reinforcedExternalIo));
 
-        /*ModelHelper.setBlockModel(basicBonsai, ()->
+        ModelHelper.setBlockModel(basicBonsai, ()->
                 new BlockModelBonsaiPot(basicBonsai, DragonFly.loadBlockModel("signalindustries:bonsai_pot"))
         );
         ModelHelper.setBlockModel(reinforcedBonsai, ()->
                 new BlockModelBonsaiPot(reinforcedBonsai, DragonFly.loadBlockModel("signalindustries:reinforced_bonsai_pot"))
-        );*/
+        );
 
         ModelHelper.setBlockModel(lunarTotem, ()->
                 new BlockModelDFJava<>(lunarTotem, DragonFly.loadBlockModel("signalindustries:lunar_totem"))

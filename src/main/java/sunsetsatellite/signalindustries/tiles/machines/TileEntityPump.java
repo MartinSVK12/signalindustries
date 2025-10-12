@@ -151,7 +151,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         if(canProcess() && worldObj != null){
             FluidStack stack = SIRecipes.PUMP.findFluidOutput(new FluidStack(currentFluid),tier);
             if(currentBlock.block == SIBlocks.eternalTreeLog && currentBlock.meta == 1){
-                stack = SIRecipes.PUMP.getItem("world_resin").getOutput();
+                stack = SIRecipes.PUMP.getItem("world_resin").getOutput().copy();
             }
             if(fluidContents[1] == null){
                 setFluidInSlot(1, stack);

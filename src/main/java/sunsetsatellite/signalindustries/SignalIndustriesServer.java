@@ -80,6 +80,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
         Catalyst.GUIS.register(key("gui/warp_gate"),new MpGuiEntry(TileEntityWarpGate.class, MenuWarpGate.class));
         Catalyst.GUIS.register(key("gui/laser_drill"),new MpGuiEntry(TileEntityLaserDrill.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/greenhouse"),new MpGuiEntry(TileEntityGreenhouse.class, MenuMultiblock.class));
+        Catalyst.GUIS.register(key("gui/bonsai_pot"),new MpGuiEntry(TileEntityBonsaiPot.class, MenuBonsaiPot.class));
 
         Catalyst.GUIS.register(key("gui/switch_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));

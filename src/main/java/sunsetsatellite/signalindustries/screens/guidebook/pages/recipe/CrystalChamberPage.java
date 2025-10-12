@@ -88,8 +88,9 @@ public class CrystalChamberPage
             outputSymbol = new RecipeSymbol(recipe.getOutput());
             recipeSlots.add(new SlotGuidebook(0, (width/2)-52, 36*(map.size()+1)-16, inputSymbol.get(0), false,recipe));
             recipeSlots.add(new SlotGuidebook(1, (width/2)-32, 36*(map.size()+1)-16, inputSymbol.get(1), false,recipe));
-            recipeSlots.add(new SlotGuidebook(3,(width/2)+48, 36*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
-            recipeSlots.add(new SlotGuidebook(2, (width/2)+24, 36*(map.size()+1)-16, outputSymbol, false,recipe));
+            recipeSlots.add(new SlotGuidebook(2, (width/2)-72, 36*(map.size()+1)-16, inputSymbol.size() <= 2 ? null : inputSymbol.get(2), false,recipe));
+            recipeSlots.add(new SlotGuidebook(4,(width/2)+48, 36*(map.size()+1)-16,new RecipeSymbol(acceptedMachines),false,recipe));
+            recipeSlots.add(new SlotGuidebook(3, (width/2)+24, 36*(map.size()+1)-16, outputSymbol, false,recipe));
             map.put(recipe,recipeSlots);
             slots.addAll(recipeSlots);
         }
@@ -111,7 +112,7 @@ public class CrystalChamberPage
                     ticks = 0;
                 }
             }
-            if(slot.index != 3){
+            if(slot.index != 4){
                 drawSlot(x+slot.x-1,y+slot.y-1,0xFFFFFFFF);
             }
             if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
