@@ -7,6 +7,7 @@ import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
@@ -134,25 +135,13 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
                             .filter(Objects::nonNull)
                             .map(ItemStack::copy).collect(Collectors.toList())
             );
-            List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).collect(Collectors.toList());
-            for (int i = 0; i < multiblock.itemInput.itemContents.length; i++) {
-                ItemStack inputStack = multiblock.itemInput.getItem(i);
-                if(inputStack != null && inputStack.getItem().hasContainerItem() && !getData().consumeContainers){
-                    multiblock.itemInput.setItem(i, new ItemStack(inputStack.getItem().getContainerItem()));
-                } else if (inputStack != null){
-                    Optional<ItemStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
-                    Optional<ItemStack> remainingRecipeStack = remainingRecipeStacks.stream().filter(stack -> stack.isItemEqual(inputStack)).findFirst();
-                    recipeStack.ifPresent(stack -> {
-                        remainingRecipeStack.ifPresent(remainingStack -> {
-                            if(remainingStack.stackSize > 0){
-                                int willTake = Math.min(stack.stackSize * multiblock.parallel, inputStack.stackSize);
-                                inputStack.stackSize -= willTake;
-                                remainingStack.stackSize -= stack.stackSize;
-                            }
-                        });
-                    });
-                    if (inputStack.stackSize <= 0) {
-                        multiblock.itemInput.setItem(i, null);
+            List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).peek(I-> I.stackSize *= multiblock.parallel).collect(Collectors.toList());
+            InventoryWrapper wrapper = new InventoryWrapper(multiblock.itemInput);
+            for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
+                ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
+                if(stack.isStackEqual(remainingRecipeStack)){
+                    if(stack.getItem().hasContainerItem() && !getData().consumeContainers){
+                        wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
                     }
                 }
             }
