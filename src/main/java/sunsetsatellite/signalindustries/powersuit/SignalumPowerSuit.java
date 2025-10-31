@@ -115,8 +115,11 @@ public class SignalumPowerSuit implements IPowerSuit {
 
         if(temperature > 100){
             status = Status.OVERHEAT;
-            for (ItemStack itemStack : player.inventory.armorInventory) {
-                itemStack.damageItem(1,player);
+            ItemStack[] armorInventory = player.inventory.armorInventory;
+            for (int i = 0; i < armorInventory.length; i++) {
+                if(i > 3) continue;
+                ItemStack itemStack = armorInventory[i];
+                itemStack.damageItem(1, player);
             }
         }
 
@@ -246,8 +249,11 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
 
         // repair armor
-        for (ItemStack itemStack : player.inventory.armorInventory) {
-            if(itemStack.isItemDamaged() && getEnergy() > 0 && status != Status.OVERHEAT){
+        ItemStack[] armorInventory = player.inventory.armorInventory;
+        for (int i = 0; i < armorInventory.length; i++) {
+            if(i > 3) continue;
+            ItemStack itemStack = armorInventory[i];
+            if (itemStack.isItemDamaged() && getEnergy() > 0 && status != Status.OVERHEAT) {
                 decrementEnergy(1);
                 itemStack.repairItem(1);
             }

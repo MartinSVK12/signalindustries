@@ -77,12 +77,14 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
     )
     public void powerSuitUpdate(CallbackInfo ci) {
         ItemStack[] armorInventory = inventory.armorInventory;
-        for (ItemStack itemStack : armorInventory) {
-            if(itemStack == null){
+        for (int i = 0; i < armorInventory.length; i++) {
+            if(i > 3) continue;
+            ItemStack itemStack = armorInventory[i];
+            if (itemStack == null) {
                 powerSuit = null;
                 toggleNightVision(false, null);
                 return;
-            } else if(!(itemStack.getItem() instanceof ItemSignalumPowerSuit)){
+            } else if (!(itemStack.getItem() instanceof ItemSignalumPowerSuit)) {
                 toggleNightVision(false, null);
                 powerSuit = null;
                 return;
