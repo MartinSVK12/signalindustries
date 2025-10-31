@@ -16,11 +16,17 @@ public class BlockLogicUndroppable extends BlockLogic {
 
     @Override
     public ItemStack @Nullable [] getBreakResult(World world, EnumDropCause dropCause, int meta, TileEntity tileEntity) {
+        if(dropCause == EnumDropCause.PICK_BLOCK){
+            return new ItemStack[]{new ItemStack(this)};
+        }
         return null;
     }
 
     @Override
     public ItemStack @Nullable [] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
+        if(dropCause == EnumDropCause.PICK_BLOCK){
+            return new ItemStack[]{new ItemStack(this)};
+        }
         return null;
     }
 }
