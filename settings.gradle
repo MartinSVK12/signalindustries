@@ -46,6 +46,7 @@ include(":retrostorage")
 //include(":vm")
 //include(":ee")
 //include(":minimap")
+//include(":bwa")
 
 // catalyst
 project(":catalyst-all").projectDir = file("${rootProject.projectDir}/../catalyst")
@@ -67,3 +68,4 @@ project(":retrostorage").projectDir = file("${rootProject.projectDir}/../retrost
 //project(":vm").projectDir = file("${rootProject.projectDir}/../vm")
 //project(":ee").projectDir = file("${rootProject.projectDir}/../equivalentexchange-bta")
 //project(":minimap").projectDir = file("${rootProject.projectDir}/../BTA-Minimap")
+//project(":bwa").projectDir = file("${rootProject.projectDir}/../bwa")
