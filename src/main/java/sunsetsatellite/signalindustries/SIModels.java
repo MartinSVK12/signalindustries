@@ -60,6 +60,7 @@ public class SIModels implements ModelEntrypoint {
         LOGGER.info("Initializing block models...");
 
         ModelHelper.setBlockModel(dilithiumCrystalBlock, () -> new BlockModelTransparent<>(dilithiumCrystalBlock,false).setAllTextures(0,"signalindustries:block/dilithium_crystal_block").onRenderLayer(1));
+        ModelHelper.setBlockModel(dimensionalCrystalBlock, () -> new BlockModelTransparent<>(dimensionalCrystalBlock,false).setAllTextures(0,"signalindustries:block/dimensional_crystal_block").onRenderLayer(1));
         ModelHelper.setBlockModel(awakenedSocketCasing,() -> new BlockModelConnectedTextureExtra(awakenedSocketCasing,"signalindustries:block/awakened_socket_casing", "signalindustries:block/awakened_socket_casing_active", "signalindustries:block/awakened_socket_overlay", Catalyst.listOf(awakenedCasing)));
         ModelHelper.setBlockModel(awakenedCasing,() -> new BlockModelConnectedTexture(awakenedCasing,"signalindustries:block/awakened_casing", Catalyst.listOf(awakenedSocketCasing)));
         ModelHelper.setBlockModel(awakenedCasing2,() -> new BlockModelConnectedTextureExtra(awakenedCasing2,"signalindustries:block/awakened_casing_2","signalindustries:block/awakened_casing_2_active"));
@@ -68,6 +69,7 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(reinforcedGlass,() -> new BlockModelConnectedTexture(reinforcedGlass,"signalindustries:block/reinforced_glass", Catalyst.listOf(awakenedEnergyConnector)));
         ModelHelper.setBlockModel(reinforcedIgnitor, () -> new BlockModelIgnitor(reinforcedIgnitor));
         ModelHelper.setBlockModel(basicEnergyInjector, ()-> new BlockModelDFJava<>(basicEnergyInjector, DragonFly.loadBlockModel("signalindustries:basic_energy_injector")));
+        ModelHelper.setBlockModel(ashenTreeSapling,()-> new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(0,"signalindustries:block/ashen_tree_sapling"));
         ModelHelper.setBlockModel(basicProgrammer, ()->
                 new BlockModelDFJava<>(basicProgrammer, DragonFly.loadBlockModel("signalindustries:eeprom_programmer"))
                         .setStateInterpreter(new EEPROMProgrammerStateInterpreter())

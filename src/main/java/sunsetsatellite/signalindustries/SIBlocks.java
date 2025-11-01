@@ -3,6 +3,8 @@ package sunsetsatellite.signalindustries;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.data.tag.Tag;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.CatalystMultipart;
@@ -43,6 +45,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> awakenedSignalumCrystalBlock;
 
     public static Block<? extends BlockLogic> dilithiumCrystalBlock;
+    public static Block<? extends BlockLogic> dimensionalCrystalBlock;
 
     public static Block<? extends BlockLogic> prototypeMachineCore;
     public static Block<? extends BlockLogic> basicMachineCore;
@@ -220,6 +223,8 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     //public static Block<? extends BlockLogic> unraveledFabric;
     public static Block<? extends BlockLogic> dilithiumRail;
     public static Block<? extends BlockLogic> eternalTreeLog;
+    public static Block<? extends BlockLogic> etherealLeaves;
+    public static Block<? extends BlockLogic> ashenTreeSapling;
     public static Block<? extends BlockLogic> fueledEternalTreeLog;
     public static Block<? extends BlockLogic> glowingObsidian;
     public static Block<? extends BlockLogic> uvLamp;
@@ -330,6 +335,18 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures().withDefaultTexture("dilithium_crystal_block")
         );
 
+        dimensionalCrystalBlock = customBlock(new BlockBuilder(MOD_ID)
+                        .setLuminance(1)
+                        .setHardness(20)
+                        .setResistance(1000).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+                "dimensionalCrystalBlock",
+                "dimensional_crystal_block",
+                "dimensionalCrystalBlock",
+                config.getInt("Other.dilithiumMiningLevel"),
+                (block)->new BlockLogicTransparent(block, Material.glass),
+                new MachineTextures().withDefaultTexture("dimensional_crystal_block")
+        );
+
         dimensionalShardOre = customBlock(new BlockBuilder(MOD_ID)
                         .setLuminance(3)
                         .setBlockSound(BlockSounds.STONE)
@@ -347,7 +364,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.machine",
                 "prototype_machine_block",
                 "prototypeMachineCore",
-                3,
+                2,
                 (block)->new BlockLogicTiered(block, Material.stone, Tier.PROTOTYPE),
                 new MachineTextures().withDefaultTexture("machine_prototype"));
 
@@ -379,7 +396,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.conduit.fluid",
                 "prototype_fluid_conduit",
                 "prototypeFluidConduit",
-                3,
+                2,
                 (block)->new BlockLogicFluidConduit(block, Material.glass, Tier.PROTOTYPE, TileEntityFluidConduit::new),
                 new MachineTextures().withDefaultTexture("fluid_conduit_prototype")
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
@@ -406,7 +423,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.conduit",
                 "prototype_conduit",
                 "prototypeConduit",
-                3,
+                2,
                 (block)->new BlockLogicConduit(block, Material.glass, Tier.PROTOTYPE, TileEntityConduit::new),
                 new MachineTextures().withDefaultTexture("conduit_prototype")
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
@@ -460,7 +477,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.conduit.item",
                 "prototype_item_conduit",
                 "prototypeItemConduit",
-                3,
+                2,
                 (block)->new BlockLogicItemConduit(block, Material.glass, Tier.PROTOTYPE, PipeType.NORMAL, TileEntityItemConduit::new),
                 new MachineTextures().withDefaultTexture("item_conduit_prototype")
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
@@ -505,7 +522,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.extractor",
                 "prototype_extractor",
                 "prototypeExtractor",
-                3,
+                2,
                 (block)->new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityExtractor::new, "extractor"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultSideTextures("extractor_prototype_side_empty")
@@ -571,7 +588,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.fluidTank",
                 "prototype_fluid_tank",
                 "prototypeFluidTank",
-                3,
+                2,
                 (block) -> new BlockLogicSIFluidTank(block, Material.glass, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("fluid_tank_prototype")
@@ -601,7 +618,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.energyCell",
                 "prototype_energy_cell",
                 "prototypeEnergyCell",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.glass, Tier.PROTOTYPE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTexture("cell_prototype")
@@ -641,7 +658,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.crusher",
                 "prototype_crusher",
                 "prototypeCrusher",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityCrusher::new, "crusher"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTopTexture("crusher_prototype_top_inactive")
@@ -683,7 +700,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.alloySmelter",
                 "prototype_alloy_smelter",
                 "prototypeAlloySmelter",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityAlloySmelter::new, "alloy_smelter"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultNorthTexture("alloy_smelter_prototype_inactive")
@@ -719,7 +736,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.plateFormer",
                 "prototype_plate_former",
                 "prototypePlateFormer",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityPlateFormer::new, "plate_former"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultNorthTexture("plate_former_prototype_inactive")
@@ -779,7 +796,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.crystalCutter",
                 "prototype_crystal_cutter",
                 "prototypeCrystalCutter",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityCrystalCutter::new, "crystal_cutter"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultNorthTexture("crystal_cutter_prototype_inactive")
@@ -918,7 +935,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.pump",
                 "prototype_pump",
                 "prototypePump",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityPump::new, "pump"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultSideTextures("prototype_pump_side_empty")
@@ -1016,7 +1033,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.inserter",
                 "prototype_inserter",
                 "prototypeInserter",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityInserter::new, null).setVertical(),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultNorthTexture("inserter_input")
@@ -1044,7 +1061,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.filter",
                 "prototype_filter",
                 "prototypeFilter",
-                3,
+                2,
                 (block) -> new BlockLogicMachine(block, Material.stone, Tier.PROTOTYPE, TileEntityFilter::new, "filter"),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultTopTexture("filter_red")
@@ -1080,7 +1097,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.bricks",
                 "cobblestone_bricks",
                 "cobblestoneBricks",
-                3,
+                1,
                 Material.stone,
                 new MachineTextures().withDefaultTexture("cobblestone_bricks")
         );
@@ -1553,7 +1570,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "prototype.storageContainer",
                 "prototype_storage_container",
                 "prototypeStorageContainer",
-                3,
+                2,
                 (block) -> new BlockLogicStorageContainer(block, Material.stone, Tier.PROTOTYPE),
                 new MachineTextures(Tier.PROTOTYPE)
                         .withDefaultNorthTexture("container_prototype_front")
@@ -1864,6 +1881,27 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withDefaultTexture("eternal_tree_log")
                         .withDefaultTopBottomTextures("eternal_tree_log_top")
         );
+
+        etherealLeaves = customBlock(new BlockBuilder(MOD_ID),
+                "leaves.ethereal",
+                "ethereal_leaves",
+                "etherealLeaves",
+                0,
+                (block)-> new BlockLogicLeavesEthereal(block, Material.grass),
+                new MachineTextures()
+                        .withDefaultTexture("ethereal_leaves")
+                        .withOverbrightTextures("ethereal_leaves")
+        ).withSound(BlockSounds.GRASS).withHardness(0.2F).withLightBlock(1).withDisabledNeighborNotifyOnMetadataChange().withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS);
+
+        ashenTreeSapling = customBlock(new BlockBuilder(MOD_ID),
+                "sapling.ashen",
+                "ashen_tree_sapling",
+                "ashenTreeSapling",
+                0,
+                (block)->new BlockLogicTransparent(block, Material.plant),
+                new MachineTextures()
+                        .withDefaultTexture("ashen_tree_sapling")
+        ).withSound(BlockSounds.GRASS).withHardness(0.0F).withDisabledNeighborNotifyOnMetadataChange().withTags(BlockTags.PLANTABLE_IN_JAR);
 
         fueledEternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setUnbreakable().setResistance(18000000).setLuminance(15),
                 "fueledEternalTreeLog",

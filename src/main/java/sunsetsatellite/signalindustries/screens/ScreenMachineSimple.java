@@ -20,7 +20,7 @@ public class ScreenMachineSimple extends ScreenFluid implements IExtendedScreenD
 
     @Override
     public void drawAfterSlotAndButtonRendering(int mouseX, int mouseY, float partialTick) {
-        FakeItemElement fakeItemRenderer = new FakeItemElement(mc);
+        /*FakeItemElement fakeItemRenderer = new FakeItemElement(mc);
         if (tile.currentRecipe != null) {
             if(tile.currentRecipe.getOutput() instanceof ItemStack){
                 for (int itemOutput : tile.itemOutputs) {
@@ -33,6 +33,6 @@ public class ScreenMachineSimple extends ScreenFluid implements IExtendedScreenD
                     fakeItemRenderer.render(((FluidStack) tile.currentRecipe.getOutput()).toItemStack(), slot.x, slot.y, false, slot, true);
                 }
             }
-        }
+        }*/
     }
 }

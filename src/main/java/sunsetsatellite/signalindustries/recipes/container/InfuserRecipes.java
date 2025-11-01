@@ -7,6 +7,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -47,6 +48,18 @@ public class InfuserRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                         },
                         new ItemStack(SIItems.saturatedSignalumAlloyIngot,1),
                         new RecipeProperties(400,80,Tier.REINFORCED,false)
+                )
+        );
+        group.register(
+                "reborn_ashen_tree_sapling",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(SIFluids.WORLD_RESIN,8000)),
+                                new RecipeExtendedSymbol("minecraft:saplings"),
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.awakenedSignalumFragment,1))
+                        },
+                        new ItemStack(SIBlocks.ashenTreeSapling,1),
+                        new RecipeProperties(800,160,Tier.REINFORCED,false)
                 )
         );
     }

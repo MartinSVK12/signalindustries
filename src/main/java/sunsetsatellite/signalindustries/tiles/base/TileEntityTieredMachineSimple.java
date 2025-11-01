@@ -14,7 +14,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
+import sunsetsatellite.signalindustries.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
@@ -101,6 +103,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         return false;
     }
 
+    //TODO: move code to recipe entry classes
     public void processItem(){
         if(canProcess()){
             if(currentRecipe instanceof RecipeEntryMachine){
@@ -143,10 +146,13 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                         }
                     }
                 }
+            } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
+                currentRecipe.processMachineRecipe(this);
             }
         }
     }
 
+    //TODO: move code to recipe entry classes
     public void consumeInputs(){
         if(currentRecipe instanceof RecipeEntryMachine) {
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
@@ -221,9 +227,12 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                     }
                 }
             }
+        } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
+            currentRecipe.consumeMachineInputs(this);
         }
     }
 
+    //TODO: move code to recipe entry classes
     public boolean canProcess(){
         if(currentRecipe instanceof RecipeEntryMachine){
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
@@ -239,8 +248,79 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                 return false;
             }
             return areFluidOutputsValid(fluidStack);
+        } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
+            return currentRecipe.canMachineProcess(this);
         }
         return false;
+    }
+
+    public boolean areRecipeOutputsValid(RecipeOutputStack[] stacks){
+        Set<Integer> occupiedItemSlots = new HashSet<>();
+        Set<Integer> occupiedFluidSlots = new HashSet<>();
+        for (RecipeOutputStack output : stacks) {
+            if(output.isItem()){
+                ItemStack stack = output.stack.copy();
+                stack.stackSize = output.randomAmount ? output.amountMax : stack.stackSize;
+                boolean valid = false;
+                for (int itemOutput : itemOutputs) {
+                    if(occupiedItemSlots.contains(itemOutput)) continue;
+                    ItemStack outputStack = getItem(itemOutput);
+                    if (outputStack != null && outputStack.isItemEqual(stack)) {
+                        if(yield > 1){
+                            int n = outputStack.stackSize+(stack.stackSize*((int) Math.ceil(yield)));
+                            if ((n <= getMaxStackSize() && n <= outputStack.getMaxStackSize()) || n <= stack.getMaxStackSize()) {
+                                occupiedItemSlots.add(itemOutput);
+                                valid = true;
+                                break;
+                            }
+                        } else {
+                            int n = outputStack.stackSize+stack.stackSize;
+                            if ((n <= getMaxStackSize() && n <= outputStack.getMaxStackSize()) || n <= stack.getMaxStackSize()) {
+                                occupiedItemSlots.add(itemOutput);
+                                valid = true;
+                                break;
+                            }
+                        }
+                    } else if(outputStack == null) {
+                        occupiedItemSlots.add(itemOutput);
+                        valid = true;
+                        break;
+                    }
+                }
+                if(!valid) return false;
+            } else if(output.isFluid()){
+                FluidStack stack = output.fluid.copy();
+                stack.amount = output.randomAmount ? output.amountMax : stack.amount;
+                boolean valid = false;
+                for (int fluidOutput : fluidOutputs) {
+                    if(occupiedFluidSlots.contains(fluidOutput)) continue;
+                    FluidStack outputStack = getFluidInSlot(fluidOutput);
+                    if (outputStack != null) {
+                        if (outputStack.isFluidEqual(stack)) {
+                            if (yield > 1) {
+                                if (!(stack.amount * Math.ceil(yield) > getRemainingCapacity(fluidOutput))) {
+                                    occupiedFluidSlots.add(fluidOutput);
+                                    valid = true;
+                                    break;
+                                }
+                            } else {
+                                if (stack.amount <= getRemainingCapacity(fluidOutput)) {
+                                    occupiedFluidSlots.add(fluidOutput);
+                                    valid = true;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        occupiedFluidSlots.add(fluidOutput);
+                        valid = true;
+                        break;
+                    }
+                }
+                if(!valid) return false;
+            }
+        }
+        return true;
     }
 
     public boolean areItemOutputsValid(ItemStack stack){
@@ -309,20 +389,20 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
         tag.putInt("RecipeId",recipeId);
-        if(currentRecipe != null) {
+        /*if(currentRecipe != null) {
             tag.putString("CurrentRecipe",currentRecipe.toString());
-        }
+        }*/
     }
 
     @Override
     public void readFromNBT(CompoundTag tag) {
         super.readFromNBT(tag);
         recipeId = tag.getInteger("RecipeId");
-        if(currentRecipe == null && tag.containsKey("CurrentRecipe")) {
+        /*if(currentRecipe == null && tag.containsKey("CurrentRecipe")) {
             //todo: why does this not work
             try {
                 currentRecipe = (RecipeEntrySI<?, ?, RecipeProperties>) Registries.RECIPES.getRecipeFromKey(tag.getString("CurrentRecipe")).recipe;
             } catch (IllegalArgumentException ignored) {}
-        }
+        }*/
     }
 }

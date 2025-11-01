@@ -1,7 +1,9 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
+import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -23,12 +25,15 @@ public class TileEntityBonsaiPot extends TileEntityTieredMachineSimple implement
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add(SIFluids.ENERGY);
+        acceptedFluids.get(1).add(Fluids.WATER);
+        acceptedFluids.get(2).addAll(Fluid.fluidMap.values());
+        acceptedFluids.get(2).remove(SIFluids.ENERGY);
         energySlot = 0;
-        recipeGroup = SIRecipes.ALLOY_SMELTER;
+        recipeGroup = SIRecipes.BONSAI_POT;
         itemInputs = new int[]{0};
         fluidInputs = new int[]{1};
         itemOutputs = new int[]{1,2,3};
-        fluidInputs = new int[]{2};
+        fluidOutputs = new int[]{2};
     }
 
     @Override

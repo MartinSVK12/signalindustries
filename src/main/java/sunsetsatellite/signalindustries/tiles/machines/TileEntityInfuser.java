@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Global;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -11,6 +12,7 @@ import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,14 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
         itemInputs = new int[]{0,1};
         itemOutputs = new int[]{2};
         fluidInputs = new int[]{1};
+    }
+
+    @Override
+    public void init(Block<?> block) {
+        super.init(block);
+        if(tier == Tier.REINFORCED){
+            fluidCapacity[1] = 16000;
+        }
     }
 
     @Override

@@ -58,6 +58,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
     public static RecipeGroupSI<RecipeEntryMachineRandomOutput> LASER_DRILL;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> GREENHOUSE;
+    public static RecipeGroupSI<RecipeEntryMachineMultiOutput> BONSAI_POT;
 
     @Override
     public void onRecipesReady() {
@@ -96,6 +97,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("induction_smelter",INDUCTION_SMELTER);
         SIGNAL_INDUSTRIES.register("laser_drill",LASER_DRILL);
         SIGNAL_INDUSTRIES.register("greenhouse",GREENHOUSE);
+        SIGNAL_INDUSTRIES.register("bonsai_pot",BONSAI_POT);
         Registries.RECIPES.register("signalindustries",SIGNAL_INDUSTRIES);
     }
 
@@ -122,6 +124,7 @@ public class SIRecipes implements RecipeEntrypoint {
         INDUCTION_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
         LASER_DRILL = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedLaserDrill))));
         GREENHOUSE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicGreenhouse))));
+        BONSAI_POT = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicBonsai),new ItemStack(SIBlocks.reinforcedBonsai))));
     }
 
     public static void loadSpecial(){
@@ -170,6 +173,7 @@ public class SIRecipes implements RecipeEntrypoint {
         new WakingInfuserRecipes().addRecipes(WAKING_INFUSER);
         new LaserDrillRecipes().addRecipes(LASER_DRILL);
         new GreenhouseRecipes().addRecipes(GREENHOUSE);
+        new BonsaiPotRecipes().addRecipes(BONSAI_POT);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_basic.json");
