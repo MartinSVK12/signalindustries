@@ -12,6 +12,7 @@ import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -203,6 +204,22 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
                 }
             }
         }
+    }
+
+    @Override
+    public void consumeMachineInputs(TileEntityTieredMachineSimple machine) {
+        //todo
+    }
+
+    @Override
+    public boolean canMachineProcess(TileEntityTieredMachineSimple machine) {
+        //todo
+        return false;
+    }
+
+    @Override
+    public void processMachineRecipe(TileEntityTieredMachineSimple machine) {
+        //todo
     }
 
 }

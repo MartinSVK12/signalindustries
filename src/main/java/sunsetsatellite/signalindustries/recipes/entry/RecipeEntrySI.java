@@ -5,6 +5,7 @@ import net.minecraft.core.data.registry.recipe.SearchQuery;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -32,4 +33,10 @@ public abstract class RecipeEntrySI<I,O,D> extends RecipeEntryBase<I,O,D> {
     public abstract boolean canMultiblockProcess(TileEntityTieredMultiblock multiblock);
 
     public abstract void processMultiblockRecipe(TileEntityTieredMultiblock multiblock);
+
+    public abstract void consumeMachineInputs(TileEntityTieredMachineSimple machine);
+
+    public abstract boolean canMachineProcess(TileEntityTieredMachineSimple machine);
+
+    public abstract void processMachineRecipe(TileEntityTieredMachineSimple machine);
 }

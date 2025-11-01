@@ -12,6 +12,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -193,7 +194,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
                 for (int i = 0; i <  multiblock.fluidOutput.itemContents.length; i++) {
                     FluidStack outputStack =  multiblock.fluidOutput.fluidContents[i];
                     if (outputStack == null) {
-                        int maxAmountInSlot =  multiblock.fluidOutput.getFluidInSlot(i).amount;
+                        int maxAmountInSlot = multiblock.fluidOutput.getFluidCapacityForSlot(i);
                         if(maxAmountInSlot <= 0) continue;
                         int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
                         if(willTake <= 0) continue;
@@ -218,6 +219,22 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
                 }
             }
         }
+    }
+
+    @Override
+    public void consumeMachineInputs(TileEntityTieredMachineSimple machine) {
+        //todo
+    }
+
+    @Override
+    public boolean canMachineProcess(TileEntityTieredMachineSimple machine) {
+        return false;
+        //todo
+    }
+
+    @Override
+    public void processMachineRecipe(TileEntityTieredMachineSimple machine) {
+        //todo
     }
 
 }

@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -214,7 +215,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                 if (outputStack.isItem()) {
                     ItemStack stack = getOutput() == null ? null : outputStack.stack.copy();
                     if(stack != null && outputStack.randomAmount){
-                        stack.stackSize = Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax + 1);
+                        stack.stackSize = Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax);
                     }
                     if (stack != null) {
                         if (multiblock.random.nextFloat() <= outputStack.chance) {
@@ -252,7 +253,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                 } else if (outputStack.isFluid()) {
                     FluidStack fluidStack = getOutput() == null ? null : outputStack.fluid.copy();
                     if(fluidStack != null && outputStack.randomAmount){
-                        fluidStack.amount =  Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax + 1);
+                        fluidStack.amount =  Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax);
                     }
                     if (fluidStack != null) {
                         if(multiblock.random.nextFloat() <= outputStack.chance) {
@@ -262,7 +263,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                             for (int i = 0; i < multiblock.fluidOutput.itemContents.length; i++) {
                                 FluidStack hatchStack = multiblock.fluidOutput.fluidContents[i];
                                 if (hatchStack == null) {
-                                    int maxAmountInSlot = multiblock.fluidOutput.getFluidInSlot(i).amount;
+                                    int maxAmountInSlot = multiblock.fluidOutput.getFluidCapacityForSlot(i);
                                     if (maxAmountInSlot <= 0) continue;
                                     int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
                                     if (willTake <= 0) continue;
@@ -275,6 +276,140 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                                     }
                                 } else if (hatchStack.isFluidEqual(fluidStack)) {
                                     int maxAmountInSlot = multiblock.fluidOutput.getFluidCapacityForSlot(i) - hatchStack.amount;
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    hatchStack.amount += willTake;
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void consumeMachineInputs(TileEntityTieredMachineSimple machine) {
+        InventoryWrapper wrapper = new InventoryWrapper(machine);
+        FluidInventoryWrapper fluidWrapper = new FluidInventoryWrapper(machine);
+        List<ItemStack> remainingRecipeStacks = Catalyst.condenseItemList(
+                Arrays.stream(getInput())
+                        .flatMap(symbol -> symbol.resolve().stream())
+                        .filter(Objects::nonNull)
+                        .map(ItemStack::copy).collect(Collectors.toList())
+        );
+        for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
+            ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
+            if(stack.isStackEqual(remainingRecipeStack)){
+                if(stack.getItem().hasContainerItem() && !getData().consumeContainers){
+                    wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
+                }
+            }
+        }
+        List<FluidStack> fluidRecipeStacks = Arrays.stream(getInput())
+                .flatMap(symbol -> symbol.resolveFluids().stream())
+                .filter(Objects::nonNull)
+                .map(FluidStack::copy)
+                .collect(Collectors.toList());
+        for (FluidStack fluidStack : fluidRecipeStacks) {
+            fluidWrapper.removeUntil(fluidStack.fluid.getFirstId(),fluidStack.amount,false);
+        }
+    }
+
+    @Override
+    public boolean canMachineProcess(TileEntityTieredMachineSimple machine) {
+        /*for (RecipeOutputStack output : getOutput()) {
+            if(output.isItem()){
+                ItemStack stack = output.stack.copy();
+                stack.stackSize = output.randomAmount ? output.amountMax : stack.stackSize;
+                if(!machine.areItemOutputsValid(stack)){
+                    return false;
+                }
+            } else if (output.isFluid()){
+                FluidStack stack = output.fluid.copy();
+                stack.amount = output.randomAmount ? output.amountMax : stack.amount;
+                if(!machine.areFluidOutputsValid(stack)){
+                    return false;
+                }
+            }
+        }*/
+        return machine.areRecipeOutputsValid(getOutput());
+    }
+
+    @Override
+    public void processMachineRecipe(TileEntityTieredMachineSimple machine) {
+        machine.consumeInputs();
+        if(machine.random.nextFloat() <= getData().chance) {
+            for (RecipeOutputStack outputStack : getOutput()) {
+                if (outputStack.isItem()) {
+                    ItemStack stack = getOutput() == null ? null : outputStack.stack.copy();
+                    if(stack != null && outputStack.randomAmount){
+                        stack.stackSize = Catalyst.random(machine.random, outputStack.amountMin, outputStack.amountMax);
+                    }
+                    if (stack != null) {
+                        if (machine.random.nextFloat() <= outputStack.chance) {
+                            int multiplier = 1;
+                            //multiplier *= multiblock.parallel;
+                            int outputAmountRemaining = stack.stackSize * multiplier;
+                            for (int i : machine.itemOutputs) {
+                                ItemStack busStack = machine.itemContents[i];
+                                if (busStack == null) {
+                                    int maxAmountInSlot = stack.getMaxStackSize();
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    ItemStack copy = stack.copy();
+                                    copy.stackSize = willTake;
+                                    machine.setItem(i, copy);
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                } else if (busStack.isItemEqual(stack)) {
+                                    int maxAmountInSlot = stack.getMaxStackSize() - busStack.stackSize;
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    busStack.stackSize += willTake;
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (outputStack.isFluid()) {
+                    FluidStack fluidStack = getOutput() == null ? null : outputStack.fluid.copy();
+                    if(fluidStack != null && outputStack.randomAmount){
+                        fluidStack.amount =  Catalyst.random(machine.random, outputStack.amountMin,outputStack.amountMax + 1);
+                    }
+                    if (fluidStack != null) {
+                        if(machine.random.nextFloat() <= outputStack.chance) {
+                            int multiplier = 1;
+                            //multiplier *= multiblock.parallel;
+                            int outputAmountRemaining = fluidStack.amount * multiplier;
+                            for (int i : machine.fluidOutputs) {
+                                FluidStack hatchStack = machine.fluidContents[i];
+                                if (hatchStack == null) {
+                                    int maxAmountInSlot = machine.getFluidCapacityForSlot(i);
+                                    if (maxAmountInSlot <= 0) continue;
+                                    int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
+                                    if (willTake <= 0) continue;
+                                    FluidStack copy = fluidStack.copy();
+                                    copy.amount = willTake;
+                                    machine.setFluidInSlot(i, copy);
+                                    outputAmountRemaining -= willTake;
+                                    if (outputAmountRemaining <= 0) {
+                                        break;
+                                    }
+                                } else if (hatchStack.isFluidEqual(fluidStack)) {
+                                    int maxAmountInSlot = machine.getFluidCapacityForSlot(i) - hatchStack.amount;
                                     if (maxAmountInSlot <= 0) continue;
                                     int willTake = Math.min(outputAmountRemaining, maxAmountInSlot);
                                     if (willTake <= 0) continue;
