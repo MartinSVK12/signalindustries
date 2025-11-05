@@ -947,6 +947,8 @@ guidebook.section.signalindustries.infuser=Infuser
 guidebook.section.signalindustries.centrifuge=Centrifuge
 guidebook.section.signalindustries.collector=Collector
 guidebook.section.signalindustries.laserDrill=Laser Drill
+guidebook.section.signalindustries.bonsaiPot=Bonsai Pot
+guidebook.section.signalindustries.greenhouse=Greenhouse
 
 guidebook.section.mob.infernal.name=Infernal
 guidebook.section.mob.infernal.desc=Infernals are fiery creatures that only show up during an Eclipse and attack with fire and light.

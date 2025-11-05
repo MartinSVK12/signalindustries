@@ -6,7 +6,7 @@ import sunsetsatellite.catalyst.fluids.api.impl.tmb.ExtendedTypedIngredient;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.TMBFluidPlugin;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.api.impl.tmb.FluidMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
 import turing.tmb.api.ItemStackIngredientRenderer;

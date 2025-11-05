@@ -9,6 +9,10 @@ import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingAlloy
 import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingCrusherRecipeCategory;
 import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingInfuserRecipeCategory;
 import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingPlateFormerRecipeCategory;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.screens.guidebook.pages.recipe.GreenhousePage;
 import turing.tmb.TMB;
 import turing.tmb.TypedIngredient;
 import turing.tmb.api.ITMBPlugin;
@@ -29,6 +33,8 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
     public static CentrifugeRecipeCategory centrifugeCategory;
     public static StoneworksRecipeCategory stoneworksCategory;
     public static PumpRecipeCategory pumpCategory;
+    public static BonsaiPotRecipeCategory bonsaiCategory;
+    public static GreenhouseRecipeCategory greenhouseCategory;
 
     public static WakingAlloySmelterRecipeCategory wAlloySmelterCategory;
     public static WakingCrusherRecipeCategory wCrusherCategory;
@@ -80,6 +86,11 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         runtime.getRecipeIndex().registerCatalyst(pumpCategory, TypedIngredient.itemStackIngredient(SIBlocks.basicPump.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(pumpCategory, TypedIngredient.itemStackIngredient(SIBlocks.reinforcedPump.getDefaultStack()));
 
+        runtime.getRecipeIndex().registerCatalyst(bonsaiCategory, TypedIngredient.itemStackIngredient(SIBlocks.basicBonsai.getDefaultStack()));
+        runtime.getRecipeIndex().registerCatalyst(bonsaiCategory, TypedIngredient.itemStackIngredient(SIBlocks.reinforcedBonsai.getDefaultStack()));
+
+        runtime.getRecipeIndex().registerCatalyst(greenhouseCategory, TypedIngredient.itemStackIngredient(SIBlocks.basicGreenhouse.getDefaultStack()));
+
         runtime.getRecipeIndex().registerCatalyst(wAlloySmelterCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingAlloySmelter.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(wCrusherCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingCrusher.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(wInfuserRecipeCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingInfuser.getDefaultStack()));
@@ -99,6 +110,8 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         centrifugeCategory = runtime.getRecipeIndex().registerCategory(new CentrifugeRecipeCategory());
         stoneworksCategory = runtime.getRecipeIndex().registerCategory(new StoneworksRecipeCategory());
         pumpCategory = runtime.getRecipeIndex().registerCategory(new PumpRecipeCategory());
+        bonsaiCategory = runtime.getRecipeIndex().registerCategory(new BonsaiPotRecipeCategory());
+        greenhouseCategory = runtime.getRecipeIndex().registerCategory(new GreenhouseRecipeCategory());
 
         wAlloySmelterCategory = runtime.getRecipeIndex().registerCategory(new WakingAlloySmelterRecipeCategory());
         wCrusherCategory = runtime.getRecipeIndex().registerCategory(new WakingCrusherRecipeCategory());
@@ -119,6 +132,8 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         runtime.getRecipeIndex().registerRecipes(centrifugeCategory, SIRecipes.CENTRIFUGE.getAllRecipes(), MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(stoneworksCategory, SIRecipes.STONEWORKS.getAllRecipes(), MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(pumpCategory, SIRecipes.PUMP.getAllRecipes(), FluidMachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes(bonsaiCategory, SIRecipes.BONSAI_POT.getAllRecipes(), MultiMachineRecipeTranslator::new);
+        runtime.getRecipeIndex().registerRecipes(greenhouseCategory, SIRecipes.GREENHOUSE.getAllRecipes(), MultiMachineRecipeTranslator::new);
 
         runtime.getRecipeIndex().registerRecipes(wAlloySmelterCategory, SIRecipes.WAKING_ALLOY_SMELTER.getAllRecipes(), MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(wCrusherCategory, SIRecipes.WAKING_CRUSHER.getAllRecipes(), MachineRecipeTranslator::new);

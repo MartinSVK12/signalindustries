@@ -13,7 +13,7 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
-import sunsetsatellite.signalindustries.util.RecipeOutputStack;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.*;

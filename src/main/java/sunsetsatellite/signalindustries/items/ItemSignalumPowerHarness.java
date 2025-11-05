@@ -15,6 +15,12 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.effects.api.attribute.Attributes;
+import sunsetsatellite.catalyst.effects.api.effect.IHasEffects;
+import sunsetsatellite.catalyst.effects.api.modifier.IItemWithModifiers;
+import sunsetsatellite.catalyst.effects.api.modifier.Modifier;
+import sunsetsatellite.catalyst.effects.api.modifier.ModifierType;
+import sunsetsatellite.catalyst.effects.api.modifier.type.IntModifier;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIItems;
@@ -29,6 +35,8 @@ import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;

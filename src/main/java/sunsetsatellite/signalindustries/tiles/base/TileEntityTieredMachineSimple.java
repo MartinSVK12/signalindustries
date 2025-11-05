@@ -2,10 +2,7 @@ package sunsetsatellite.signalindustries.tiles.base;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.core.util.Connection;
-import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -16,7 +13,7 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.signalindustries.util.RecipeOutputStack;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 

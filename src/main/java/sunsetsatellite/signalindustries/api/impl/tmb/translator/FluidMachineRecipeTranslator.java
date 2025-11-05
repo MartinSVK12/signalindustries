@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.api.impl.tmb;
+package sunsetsatellite.signalindustries.api.impl.tmb.translator;
 
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.TMBFluidPlugin;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;

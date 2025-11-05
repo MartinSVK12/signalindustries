@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.api.impl.tmb.category;
 
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.net.command.TextFormatting;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.ExtendedIngredientList;
@@ -10,30 +11,29 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
-import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
-import turing.tmb.TypedIngredient;
 import turing.tmb.api.ItemStackIngredientRenderer;
 import turing.tmb.api.VanillaTypes;
 import turing.tmb.api.drawable.IDrawable;
 import turing.tmb.api.drawable.IDrawableAnimated;
 import turing.tmb.api.drawable.IIngredientList;
-import turing.tmb.api.recipe.ILookupContext;
-import turing.tmb.api.recipe.IRecipeCategory;
-import turing.tmb.api.recipe.IRecipeLayout;
-import turing.tmb.api.recipe.RecipeIngredientRole;
+import turing.tmb.api.ingredient.IIngredientType;
+import turing.tmb.api.recipe.*;
 import turing.tmb.api.runtime.ITMBRuntime;
 import turing.tmb.client.DrawableAnimated;
 import turing.tmb.client.DrawableBlank;
 import turing.tmb.client.DrawableIngredient;
 import turing.tmb.client.DrawableTexture;
 import turing.tmb.util.IngredientList;
+import turing.tmb.vanilla.TrommelRecipeTranslator;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTranslator> {
+public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineRecipeTranslator> {
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -43,16 +43,16 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
     //private final IDrawable powerBack;
     private final int x = 54;
 
-    public StoneworksRecipeCategory() {
-        this.background = new DrawableBlank(120, 60);
-        this.icon = new DrawableIngredient<>(SIBlocks.basicStoneworks.getDefaultStack(), ItemStackIngredientRenderer.INSTANCE);
+    public BonsaiPotRecipeCategory() {
+        this.background = new DrawableBlank(120, 80);
+        this.icon = new DrawableIngredient<>(SIBlocks.basicBonsai.getDefaultStack(), ItemStackIngredientRenderer.INSTANCE);
         this.arrow = new DrawableAnimated(new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 82, 128, 24, 16, 0, 0, 0, 0, 24, 16), 1, IDrawableAnimated.StartDirection.LEFT, false);
         this.arrowBack = new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 24, 133, 24, 16, 0, 0, 0, 0, 24, 16);
     }
 
     @Override
     public String getName() {
-        return "Stoneworks";
+        return "Bonsai Pot";
     }
 
     @Override
@@ -71,29 +71,29 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
     }
 
     @Override
-    public void drawRecipe(ITMBRuntime runtime, MachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
+    public void drawRecipe(ITMBRuntime runtime, MultiMachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
 
         RecipeProperties data = recipe.getOriginal().getData();
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
         runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
-        runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("ID: "+data.id,x + 80, (background.getHeight() / 2),0xFFFFFFFF);
     }
 
     @Override
-    public void getIngredients(MachineRecipeTranslator recipe, IRecipeLayout layout, ILookupContext context, List<IIngredientList> ingredients) {
+    public void getIngredients(MultiMachineRecipeTranslator recipe, IRecipeLayout layout, ILookupContext context, List<IIngredientList> ingredients) {
         RecipeProperties data = recipe.getOriginal().getData();
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
-        for (int i = 0; i < 3; i++) {
+        RecipeOutputStack[] output = recipe.getOriginal().getOutput();
+        for (int i = 0; i < 2; i++) {
             if(i >= input.length){
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
@@ -101,17 +101,27 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
             RecipeExtendedSymbol symbol = input[i];
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
-        ingredients.add(2, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(3, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        for (int i = 0; i < 4; i++) {
+            if(i >= output.length){
+                ingredients.add(i+2, ExtendedIngredientList.fromRecipeSymbol(null));
+                continue;
+            }
+            RecipeOutputStack symbol = output[i];
+            ingredients.add(i+2, ExtendedIngredientList.fromRecipeOutput(symbol));
+        }
+        ingredients.add(6, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
     }
 
     @Override
     public IRecipeLayout getRecipeLayout() {
         return new RecipeLayoutBuilder()
-                .addInputSlot(0, TMBFluidPlugin.FLUID_STACK).setPosition(x, (background.getHeight() / 2) - 6).build()
-                .addInputSlot(1, TMBFluidPlugin.FLUID_STACK).setPosition(x - 20, (background.getHeight() / 2) - 6).build()
+                .addInputSlot(0, VanillaTypes.ITEM_STACK).setPosition(x, (background.getHeight() / 2) - 28).build()
+                .addInputSlot(1, TMBFluidPlugin.FLUID_STACK).setPosition(x, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(2, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 6).build()
-                .addSlot(3,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addOutputSlot(3, VanillaTypes.ITEM_STACK).setPosition(x + 76, (background.getHeight() / 2) - 6).build()
+                .addOutputSlot(4, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 28).build()
+                .addOutputSlot(5, TMBFluidPlugin.FLUID_STACK).setPosition(x + 76, (background.getHeight() / 2) - 28).build()
+                .addSlot(6,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

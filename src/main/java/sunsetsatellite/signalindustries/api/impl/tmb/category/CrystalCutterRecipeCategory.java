@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
-import sunsetsatellite.signalindustries.api.impl.tmb.MachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
 import turing.tmb.TypedIngredient;

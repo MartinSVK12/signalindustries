@@ -9,10 +9,7 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.screens.guidebook.pages.lore.IntroPage;
 import sunsetsatellite.signalindustries.screens.guidebook.pages.recipe.*;
-import sunsetsatellite.signalindustries.screens.guidebook.sections.FluidMachineSection;
-import sunsetsatellite.signalindustries.screens.guidebook.sections.MachineRandomOutputSection;
-import sunsetsatellite.signalindustries.screens.guidebook.sections.MachineSection;
-import sunsetsatellite.signalindustries.screens.guidebook.sections.MultiblockSection;
+import sunsetsatellite.signalindustries.screens.guidebook.sections.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,8 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
     private final SearchableGuidebookSubsection collector = new FluidMachineSection(this,SIRecipes.COLLECTOR.getAllRecipes(), CollectorPage.class);
     private final SearchableGuidebookSubsection wakingInfuser = new MachineSection(this,SIRecipes.WAKING_INFUSER.getAllRecipes(), WakingInfuserPage.class);
     private final SearchableGuidebookSubsection laserDrill = new MachineRandomOutputSection(this,SIRecipes.LASER_DRILL.getAllRecipes(), LaserDrillPage.class);
+    private final SearchableGuidebookSubsection bonsaiPot = new MachineMultiOutputSection(this,SIRecipes.BONSAI_POT.getAllRecipes(), BonsaiPotPage.class);
+    private final SearchableGuidebookSubsection greenhouse = new MachineMultiOutputSection(this,SIRecipes.GREENHOUSE.getAllRecipes(), GreenhousePage.class);
 
 
     private final SearchableGuidebookSubsection multiblocks = new MultiblockSection(this);
@@ -61,6 +60,8 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.wakingInfuser"),infuser.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.centrifuge"),centrifuge.getPages().get(0)));
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.laserDrill"),laserDrill.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.bonsaiPot"),bonsaiPot.getPages().get(0)));
+        indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.greenhouse"),bonsaiPot.getPages().get(0)));
 
         indices.add(new Index(I18n.getInstance().translateKey( "guidebook.section.signalindustries.multiblocks"),multiblocks.getPages().get(0)));
 
@@ -80,6 +81,8 @@ public class SignalIndustriesSection extends SearchableGuidebookSection {
         subsections.add(wakingInfuser);
         subsections.add(centrifuge);
         subsections.add(laserDrill);
+        subsections.add(bonsaiPot);
+        subsections.add(greenhouse);
         subsections.add(multiblocks);
     }
 
