@@ -33,6 +33,126 @@ public class BonsaiPotRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                 )
         );
         group.register(
+                "grow_birch",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_BIRCH, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_BIRCH, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_BIRCH, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_BIRCH, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_pine",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_PINE, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_PINE, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_PINE, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_PINE, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_cherry",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_BIRCH, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_CHERRY, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_CHERRY, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_CHERRY, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_eucalyptus",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_EUCALYPTUS, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_EUCALYPTUS, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_EUCALYPTUS, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_EUCALYPTUS, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_shrub",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_SHRUB, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_OAK, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_SHRUB, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_SHRUB, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_cacao",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_CACAO, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_OAK_MOSSY, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_CACAO, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_CACAO, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_thorn",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_THORN, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_THORN, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_THORN, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_THORN, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_palm",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.SAPLING_PALM, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.LOG_PALM, 4)),
+                                new RecipeOutputStack(new ItemStack(Blocks.SAPLING_PALM, 1)).randomYield(0,2),
+                                new RecipeOutputStack(new ItemStack(Blocks.LEAVES_PALM, 1)).randomYield(0,4)
+                        },
+                        new RecipeProperties(800, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
                 "grow_ashen",
                 new RecipeEntryMachineMultiOutput(
                         new RecipeExtendedSymbol[]{
