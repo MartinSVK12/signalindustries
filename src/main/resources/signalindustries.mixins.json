@@ -6,7 +6,9 @@
   "mixins": [
     "BlockLogicFarmlandMixin",
     "BlockLogicRailMixin",
+    "ChunkDecoratorOverworldHellMixin",
     "ChunkDecoratorOverworldMixin",
+    "ChunkDecoratorOverworldRetroMixin",
     "ContainerInventoryMixin",
     "EntityMinecartMixin",
     "ItemSeedsMixin",
