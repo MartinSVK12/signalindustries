@@ -41,7 +41,7 @@ public class EntityRealityTear extends Entity {
         for (Entity entity : entities) {
             if(entity instanceof Player){
                 Player player = ((Player) entity);
-                CompoundTag data = orb.getData().getCompound("Data");
+                CompoundTag data = orb.getData();
                 CompoundTag warpPosition = data.getCompound("position");
                 if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")) {
                     if (data.getInteger("dim") != world.dimension.id) {
