@@ -266,7 +266,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
                     fuelMaxBurnTicks = fuelBurnTicks = burn;
                     energy.getFluidInSlot(0).amount -= currentRecipe.getData().cost;
-                    if (energy.getFluidInSlot(0).amount <= 0) {
+                    if (energy.getFluidInSlot(0) != null && energy.getFluidInSlot(0).amount <= 0) {
                         energy.setFluidInSlot(0,null);
                     }
                     return true;
