@@ -63,7 +63,7 @@ public class TileEntityPulsar extends TileEntityTieredMachineBase {
                 EntityShockwave s = new EntityShockwave(worldObj, getPosition());
                 worldObj.entityJoinedWorld(s);
             }
-        } else if(fuelBurnTicks <= 0 && fluidContents[0] != null && (getItem(0) == null && fluidContents[0].amount >= 4000) || (getItem(0) != null && getItem(0).getItem() instanceof ItemWarpOrb && fluidContents[0].amount >= 8000)) {
+        } else if(fuelBurnTicks <= 0 && fluidContents[0] != null && (getItem(0) == null && fluidContents[0] != null && fluidContents[0].amount >= 4000) || (getItem(0) != null && getItem(0).getItem() instanceof ItemWarpOrb && fluidContents[0] != null && fluidContents[0].amount >= 8000)) {
             charging = true;
         }
     }
