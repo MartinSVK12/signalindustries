@@ -2,16 +2,15 @@ package sunsetsatellite.signalindustries.recipes.entry;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.recipe.RecipeGroup;
-import net.minecraft.core.data.registry.recipe.RecipeNamespace;
-import net.minecraft.core.data.registry.recipe.RecipeSymbol;
-import net.minecraft.core.data.registry.recipe.SearchQuery;
+import net.minecraft.core.data.registry.recipe.*;
+import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
+import sunsetsatellite.signalindustries.recipes.adapter.RecipeMachineJsonAdapter;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -19,7 +18,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> {
+public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> implements HasJsonAdapter {
 
     public static final ItemStack AIR = new ItemStack(0,0,0, new CompoundTag());
 
@@ -222,4 +221,8 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         //todo
     }
 
+    @Override
+    public RecipeJsonAdapter<?> getAdapter() {
+        return new RecipeMachineJsonAdapter();
+    }
 }

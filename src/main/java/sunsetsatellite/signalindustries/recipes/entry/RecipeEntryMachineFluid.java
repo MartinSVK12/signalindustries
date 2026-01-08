@@ -1,15 +1,18 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.HasJsonAdapter;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
+import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.recipes.adapter.RecipeMachineFluidJsonAdapter;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
@@ -19,7 +22,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[], FluidStack, RecipeProperties> {
+public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[], FluidStack, RecipeProperties> implements HasJsonAdapter {
 
     public RecipeEntryMachineFluid(RecipeExtendedSymbol[] input, FluidStack output, RecipeProperties data) {
         super(input, output, data);
@@ -237,4 +240,8 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         //todo
     }
 
+    @Override
+    public RecipeJsonAdapter<?> getAdapter() {
+        return new RecipeMachineFluidJsonAdapter();
+    }
 }
