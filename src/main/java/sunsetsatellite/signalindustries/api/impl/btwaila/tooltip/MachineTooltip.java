@@ -36,6 +36,8 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityAssembler.class);
         addClass(TileEntityInductionSmelter.class);
         addClass(TileEntityCollector.class);
+        addClass(TileEntityStoneworks.class);
+        addClass(TileEntityEnergyInjector.class);
         addClass(TileEntityWakingInfuser.class);
         addClass(TileEntityWakingCrusher.class);
         addClass(TileEntityWakingAlloySmelter.class);
