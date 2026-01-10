@@ -9,13 +9,20 @@ import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import net.minecraft.core.util.collection.NamespaceID;
+import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
+import net.minecraft.core.world.save.LevelStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.fabricmc.api.ModInitializer;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
+import sunsetsatellite.catalyst.core.util.Signal;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.signalindustries.entities.*;
+import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.mp.entity.entry.NetEntryEnergyOrb;
 import sunsetsatellite.signalindustries.mp.entity.entry.NetEntryFallingMeteor;
 import sunsetsatellite.signalindustries.mp.entity.entry.NetEntrySunbeam;
@@ -28,6 +35,7 @@ import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEn
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.util.CustomStructure;
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.EntityHelper;
@@ -50,6 +58,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static List<MeteorLocation> meteorLocations = new ArrayList<>();
     public static List<ChunkCoordinates> chunkLoaders = new ArrayList<>();
     public static Set<BlockInstance> uvLamps = new HashSet<>();
+    public static HashMap<String,CustomStructure> customStructures = new HashMap<>();
     public static boolean bloodMoonsDisabled = false;
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"harness",1200,10,10,10,10);
@@ -131,6 +140,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityBonsaiPot.class,id("bonsai"));
         EntityHelper.createTileEntity(TileEntityLaserDrill.class,id("laser_drill"));
         EntityHelper.createTileEntity(TileEntityGreenhouse.class,id("greenhouse"));
+        EntityHelper.createTileEntity(TileEntityEncapsulator.class,id("encapsulator"));
+        EntityHelper.createTileEntity(TileEntityPedestal.class,id("pedestal"));
+        EntityHelper.createTileEntity(TileEntitySITrommel.class,id("trommel"));
+        EntityHelper.createTileEntity(TileEntityRedstoneClock.class,id("redstone_clock"));
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");
@@ -171,6 +184,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         BlockTags.TAG_LIST.add(REINFORCED_CASING);
         BlockTags.TAG_LIST.add(AWAKENED_CASING);
         BlockTags.TAG_LIST.add(ORE_BLOCK);
+
+        Catalyst.WORLD_LOAD_SIGNAL.connect(new LoadListener());
 
         LOGGER.info("Signal Industries is loading... Shine!");
     }
@@ -232,5 +247,32 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
             }
         }
         return s == sReq;
+    }
+
+    public static Structure getStructureFromBlueprint(ItemStack blueprint, World world){
+        if(blueprint != null && blueprint.getItem() instanceof ItemBlueprint) {
+            String key = blueprint.getData().getStringOrDefault("multiblock", "");
+            String customKey = blueprint.getData().getStringOrDefault("structure", "");
+            if (!key.isEmpty()) {
+                return Multiblock.multiblocks.get(key.replace("multiblock.signalindustries.", ""));
+            } else if (!customKey.isEmpty()) {
+                if(SignalIndustries.customStructures.containsKey(customKey)){
+                    return SignalIndustries.customStructures.get(customKey);
+                } else {
+                    CustomStructure structure = new CustomStructure(customKey, world, false, false);
+                    SignalIndustries.customStructures.put(customKey, structure);
+                    return structure;
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+
+    public static class LoadListener implements Signal.Listener<LevelStorage> {
+        @Override
+        public void signalEmitted(Signal<LevelStorage> signal, LevelStorage levelStorage) {
+            customStructures.clear();
+        }
     }
 }

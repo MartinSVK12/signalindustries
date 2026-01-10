@@ -8,10 +8,8 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SIFluids;
-import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.catalyst.multiblocks.Structure;
+import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
@@ -20,7 +18,6 @@ import sunsetsatellite.signalindustries.util.SIMultiblock;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TileEntityBuilder extends TileEntityTieredMachineBase implements IBoostable {
@@ -31,7 +28,7 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     public Vec3i offset = new Vec3i();
     public Direction rotation = Direction.Z_NEG;
 
-    public SIMultiblock buildingMultiblock;
+    public Structure buildingMultiblock;
     public ArrayList<BlockInstance> buildingBlocks = new ArrayList<>();
     public Vec3i currentlyBuilding = new Vec3i();
     public int buildingBlockIndex = 0;
@@ -47,7 +44,7 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     }
 
     public void work(){
-        SIMultiblock multiblock = getMultiblock();
+        Structure multiblock = SignalIndustries.getStructureFromBlueprint(itemContents[0], worldObj);
         if (multiblock != null) {
             setStructureToBuild();
             if(buildingBlocks.isEmpty()){
@@ -119,12 +116,12 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     }
 
     public void setStructureToBuild(){
-        SIMultiblock multiblock = getMultiblock();
+        Structure multiblock = SignalIndustries.getStructureFromBlueprint(itemContents[0], worldObj);
         if (multiblock != null) {
             if (buildingMultiblock == null && buildingBlocks.isEmpty()) {
                 buildingMultiblock = multiblock;
                 ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(x, y, z).add(offset), rotation);
-                blocks.add(multiblock.getOrigin(new Vec3i(x, y, z).add(offset), rotation));
+                if(multiblock instanceof SIMultiblock) blocks.add(multiblock.getOrigin(new Vec3i(x, y, z).add(offset), rotation));
                 buildingBlocks = blocks;
             } else if (buildingMultiblock != multiblock) {
                 buildingBlockIndex = 0;
@@ -132,7 +129,7 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
                 currentlyBuilding = new Vec3i();
                 buildingMultiblock = multiblock;
                 ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(x, y, z).add(offset), rotation);
-                blocks.add(multiblock.getOrigin(new Vec3i(x, y, z).add(offset), rotation));
+                if(multiblock instanceof SIMultiblock) blocks.add(multiblock.getOrigin(new Vec3i(x, y, z).add(offset), rotation));
                 buildingBlocks = blocks;
             }
         }
@@ -155,24 +152,6 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     @Override
     public boolean isBurning() {
         return fluidContents[0] != null && !workTimer.isPaused();
-    }
-
-    public SIMultiblock getMultiblock(){
-        if(itemContents[0] != null && itemContents[0].getItem() instanceof ItemBlueprint) {
-            String key = itemContents[0].getData().getStringOrDefault("multiblock", "");
-            if (Objects.equals(key, "")) {
-                return null;
-            }
-            SIMultiblock multiblock = (SIMultiblock) Multiblock.multiblocks.get(key.replace("multiblock.signalindustries.", ""));
-            if (multiblock == null) {
-                return null;
-            }
-            /*if (multiblock.tier.ordinal() > tier.ordinal() ) {
-                return null;
-            }*/
-            return multiblock;
-        }
-        return null;
     }
 
     @Override

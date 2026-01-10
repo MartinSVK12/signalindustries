@@ -26,7 +26,7 @@ public class PumpRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMa
                         new RecipeExtendedSymbol(new FluidStack(Fluids.LAVA))
                 },
                 new FluidStack(Fluids.LAVA,1000),
-                new RecipeProperties(300,5, Tier.BASIC,false)
+                new RecipeProperties(200,5, Tier.BASIC,false)
         ));
         group.register("world_resin",new RecipeEntryMachineFluid(
                 new RecipeExtendedSymbol[]{

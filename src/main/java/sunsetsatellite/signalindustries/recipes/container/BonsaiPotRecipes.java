@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.recipes.container;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
@@ -166,6 +167,32 @@ public class BonsaiPotRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                                 new RecipeOutputStack(new FluidStack(SIFluids.WORLD_RESIN,100))
                         },
                         new RecipeProperties(1800, 120, Tier.REINFORCED, false)
+                )
+        );
+        group.register(
+                "grow_flower_red",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_RED, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.FLOWER_RED, 8)),
+                        },
+                        new RecipeProperties(400, 60, Tier.BASIC, false)
+                )
+        );
+        group.register(
+                "grow_flower_yellow",
+                new RecipeEntryMachineMultiOutput(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_YELLOW, 1)),
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER,100))
+                        },
+                        new RecipeOutputStack[]{
+                                new RecipeOutputStack(new ItemStack(Blocks.FLOWER_YELLOW, 8)),
+                        },
+                        new RecipeProperties(400, 60, Tier.BASIC, false)
                 )
         );
     }

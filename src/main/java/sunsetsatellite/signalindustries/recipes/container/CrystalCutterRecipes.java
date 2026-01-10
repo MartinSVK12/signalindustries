@@ -146,7 +146,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.caramelPlate,1))
                         },
-                        new ItemStack(SIItems.krowka,8,0,nbt),
+                        new ItemStack(SIItems.krowka,8,0),
                         new RecipeProperties(50,20,9, Tier.PROTOTYPE,false)
                 )
         );

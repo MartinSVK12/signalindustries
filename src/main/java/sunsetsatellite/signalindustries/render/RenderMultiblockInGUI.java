@@ -16,8 +16,9 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RenderMultiblockInGuidebook {
+public class RenderMultiblockInGUI {
     private RenderBlocks blockRenderer;
 
     public void doRender(Multiblock multiblock, TextureManager re, Font fe, double d, double e, double f, float g) {
@@ -38,21 +39,44 @@ public class RenderMultiblockInGuidebook {
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glTranslatef((float)d+(pos.x-i), (float)e+(pos.y-j), (float)f+(pos.z-k));
-            drawBlock(Tessellator.instance, model, meta);
+            drawBlock(Tessellator.instance, model, meta, 0.75f);
             ((IFullbright)model).disableFullbright();
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
     }
 
-    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta) {
+    public void doRender(ArrayList<BlockInstance> blocks, TextureManager re, Font fe, double d, double e, double f, float g) {
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        Direction dir = Direction.X_NEG;
+        blockRenderer = new RenderBlocks(new HologramWorld(blocks));
+        for (BlockInstance block : blocks) {
+            BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block.block);
+            //((IFullbright)model).enableFullbright();
+            Vec3i pos = block.pos;
+            int id = block.block.id();
+            int meta = block.meta == -1 ? 0 : block.meta;
+            GL11.glPushMatrix();
+            //GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glTranslatef((float)d+(pos.x-i), (float)e+(pos.y-j), (float)f+(pos.z-k));
+            drawBlock(Tessellator.instance, model, meta, g);
+           // ((IFullbright)model).disableFullbright();
+            //GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glPopMatrix();
+        }
+    }
+
+    public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta, float alpha) {
         TextureRegistry.blockAtlas.bind();
         GL11.glPushMatrix();
         RenderBlocks renderBlocks = BlockModel.renderBlocks;
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        model.renderBlockOnInventory(tessellator,meta,1,0.75f,null);
+        model.renderBlockOnInventory(tessellator,meta,1,alpha,null);
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();

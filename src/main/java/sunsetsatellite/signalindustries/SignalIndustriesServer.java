@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.MpGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.MpGuiEntryClient;
-import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
-import sunsetsatellite.signalindustries.invs.InventoryBackpack;
-import sunsetsatellite.signalindustries.invs.InventoryHarness;
-import sunsetsatellite.signalindustries.invs.InventoryPulsar;
+import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.menus.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
@@ -81,6 +78,10 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
         Catalyst.GUIS.register(key("gui/laser_drill"),new MpGuiEntry(TileEntityLaserDrill.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/greenhouse"),new MpGuiEntry(TileEntityGreenhouse.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/bonsai_pot"),new MpGuiEntry(TileEntityBonsaiPot.class, MenuBonsaiPot.class));
+        Catalyst.GUIS.register(key("gui/encapsulator"),new MpGuiEntry(TileEntityEncapsulator.class, MenuEncapsulator.class));
+        Catalyst.GUIS.register(key("gui/blueprint"),new MpGuiEntry(InventoryBlueprint.class, MenuBlueprint.class));
+        Catalyst.GUIS.register(key("gui/trommel"),new MpGuiEntry(TileEntitySITrommel.class, MenuSITrommel.class));
+        Catalyst.GUIS.register(key("gui/redstone_clock"),new MpGuiEntry(TileEntityRedstoneClock.class, null));
 
         Catalyst.GUIS.register(key("gui/switch_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"),new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));

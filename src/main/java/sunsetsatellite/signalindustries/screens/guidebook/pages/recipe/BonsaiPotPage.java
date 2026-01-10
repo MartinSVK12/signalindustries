@@ -67,7 +67,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
                 }*/
             }
 
-            int centerY = (recipeSlots.get(recipeSlots.size() - 1).y + recipeSlots.get(recipeSlots.size() - 3).y) / 2;
+            int centerY = (recipeSlots.get(recipeSlots.size() - 1).y + recipeSlots.get(0).y) / 2;
             recipeSlots.add(new SlotGuidebook(slotsAmount, 19, centerY, recipe.getInput()[0].asNormalSymbol(), false, recipe));
             if(recipe.getInput().length > 1){
                 recipeSlots.add(new SlotGuidebook(slotsAmount+1, 19, centerY + 20, recipe.getInput()[1].asNormalSymbol(), false, recipe));

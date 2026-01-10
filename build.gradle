@@ -43,10 +43,10 @@ loom {
 repositories {
     mavenCentral()
     maven { url = "https://jitpack.io" }
-    maven {
+    /*maven {
         name = 'Babric'
         url = 'https://maven.glass-launcher.net/babric'
-    }
+    }*/
     maven {
         name = 'Fabric'
         url = 'https://maven.fabricmc.net/'

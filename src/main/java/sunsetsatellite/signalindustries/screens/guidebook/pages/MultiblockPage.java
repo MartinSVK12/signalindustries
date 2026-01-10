@@ -9,7 +9,7 @@ import net.minecraft.client.render.TextureManager;
 import net.minecraft.core.lang.I18n;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
-import sunsetsatellite.signalindustries.render.RenderMultiblockInGuidebook;
+import sunsetsatellite.signalindustries.render.RenderMultiblockInGUI;
 
 public class MultiblockPage
     extends GuidebookPage {
@@ -70,7 +70,7 @@ public class MultiblockPage
         GL11.glRotatef(-(float)Math.atan(f6 / 40F) * 60F, 1.0F, 0.0F, 0.0F);
         GL11.glRotatef(-(float)Math.atan(f5 / 40F) * 80F,0,1F,0);
         GL11.glTranslatef(0.0F, 0, 0.0F);
-        RenderMultiblockInGuidebook r = new RenderMultiblockInGuidebook();
+        RenderMultiblockInGUI r = new RenderMultiblockInGUI();
         r.doRender(multiblock,re,fr,0,0,0,0);
         GL11.glPopMatrix();
         Lighting.disable();

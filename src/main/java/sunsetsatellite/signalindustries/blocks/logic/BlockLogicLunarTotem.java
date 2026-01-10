@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.blocks.logic.base;
+package sunsetsatellite.signalindustries.blocks.logic;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
@@ -8,18 +8,15 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.weather.Weather;
-import net.minecraft.core.world.weather.Weathers;
 import net.minecraft.server.entity.player.PlayerServer;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
-import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
-public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescription {
-    public BlockLogicSolarTotem(Block<?> block, Material material) {
+public class BlockLogicLunarTotem extends BlockLogic implements ICustomDescription {
+    public BlockLogicLunarTotem(Block<?> block, Material material) {
         super(block, material);
     }
 
@@ -42,15 +39,18 @@ public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescripti
             long time = world.getWorldTime() % 24000L;
             ItemStack stack = player.getCurrentEquippedItem();
             if (stack != null) {
-                if (stack.itemID == SIItems.infernalFragment.id && time >= 13000) {
-                    player.getCurrentEquippedItem().consumeItem(player);
-                    world.setWorldTime(world.getWorldTime() - world.getWorldTime() % 24000L + 1000L);
-                    if(world.getCurrentWeather() == SIWeather.weatherBloodMoon){
-                        player.sendTranslatedChatMessage("event.signalindustries.solarTotemOvertake");
-                        world.weatherManager.overrideWeather(Weathers.OVERWORLD_CLEAR);
-                        return true;
+                if (stack.itemID == SIItems.clearKey.id) {
+                    SignalIndustries.bloodMoonsDisabled = !SignalIndustries.bloodMoonsDisabled;
+                    if (SignalIndustries.bloodMoonsDisabled) {
+                        player.sendTranslatedChatMessage("event.signalindustries.bloodMoonBlock");
+                    } else {
+                        player.sendTranslatedChatMessage("event.signalindustries.bloodMoonUnblock");
                     }
-                    player.sendTranslatedChatMessage("event.signalindustries.solarTotemUse");
+                    return true;
+                } else if (stack.itemID == SIItems.monsterShard.id && time >= 0 && time < 13000L) {
+                    player.getCurrentEquippedItem().consumeItem(player);
+                    world.setWorldTime(world.getWorldTime() - world.getWorldTime() % 24000L + 13000L);
+                    player.sendTranslatedChatMessage("event.signalindustries.lunarTotemUse");
                     return true;
                 }
             }

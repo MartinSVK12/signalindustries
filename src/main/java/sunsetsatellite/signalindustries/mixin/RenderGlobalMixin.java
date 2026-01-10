@@ -57,6 +57,7 @@ public class RenderGlobalMixin {
     )
     public void eternitySky(float partialTick, CallbackInfo ci){
         if(this.mc.currentWorld.dimension == SIDimensions.ETERNITY){
+            GL11.glDepthMask(false);
             textureManager.loadTexture("/assets/signalindustries/textures/colormap/stars/default.png").bind();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glCallList(starGLCallList);

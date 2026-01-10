@@ -61,7 +61,7 @@ public class RecipePropertiesJsonAdapter implements JsonDeserializer<RecipePrope
         }
         obj.addProperty("thisTierOnly",src.thisTierOnly);
         obj.addProperty("consumeContainers",src.consumeContainers);
-        if(!src.allowedDimensions.isEmpty()){
+        if(src.allowedDimensions != null && !src.allowedDimensions.isEmpty()){
             JsonArray array = new JsonArray();
             src.allowedDimensions.forEach(dim -> array.add(dim.languageKey));
             obj.add("allowedDimensions",array);

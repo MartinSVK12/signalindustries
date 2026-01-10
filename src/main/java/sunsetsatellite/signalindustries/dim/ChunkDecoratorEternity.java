@@ -14,14 +14,15 @@ import java.util.Random;
 public class ChunkDecoratorEternity implements ChunkDecorator {
 
     public World world;
+    public Random random = new Random();
 
     public ChunkDecoratorEternity(World world) {
         this.world = world;
+        this.random.setSeed(world.getRandomSeed());
     }
 
     @Override
     public void decorate(Chunk chunk) {
-        Random random = new Random();
         int x = chunk.xPosition * 16;
         int z = chunk.zPosition * 16;
         int y = this.world.getHeightValue(x, z);

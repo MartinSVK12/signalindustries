@@ -122,6 +122,10 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         return (int) (((float) defaultTicks / (tier.ordinal()+1)) / speedMultiplier);
     }
 
+    public int getProgressDuration(int defaultTicks){
+        return (int) (defaultTicks / speedMultiplier);
+    }
+
     public int getProgressScaled(int paramInt) {
         return this.progressTicks * paramInt / progressMaxTicks;
     }

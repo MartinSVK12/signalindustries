@@ -28,7 +28,11 @@ public class FakeItemElement extends Gui
         this.mc = mc;
     }
 
-    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount)
+    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount) {
+        render(itemStack, x, y, isSelected, slot, showAmount, 0.5f);
+    }
+
+    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount, float alpha)
     {
         boolean hasDrawnSlotBackground = false;
         boolean discovered = true;
@@ -37,7 +41,7 @@ public class FakeItemElement extends Gui
         Lighting.enableInventoryLight();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1, 1, 1, 0.5f);
+        GL11.glColor4f(1, 1, 1, alpha);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
         // Draw slot background
@@ -71,9 +75,9 @@ public class FakeItemElement extends Gui
             if (itemStack != null){
                 BlockModel.setRenderBlocks(EntityRenderDispatcher.instance.itemRenderer.renderBlocksInstance);
                 ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(itemStack.getItem());
-                itemModel.renderItemIntoGui(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? 1.0f : 0.0f, 0.5f);
+                itemModel.renderItemIntoGui(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? 1.0f : 0.0f, alpha);
                 if(showAmount){
-                    itemModel.renderItemOverlayIntoGUI(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? null : "?", 0.5f);
+                    itemModel.renderItemOverlayIntoGUI(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? null : "?", alpha);
                 }
             }
             GL11.glDisable(GL11.GL_DEPTH_TEST);

@@ -316,7 +316,7 @@ item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
 item.signalindustries.basic.smartWatch.name=Smartwatch
 item.signalindustries.basic.smartWatch.desc=Combines the utility of the Compass, Clock and Rotary Calendar.
 item.signalindustries.raziel.name=Tome of Raziel
-item.signalindustries.raziel.desc=This item is disabled and awaits rework.
+item.signalindustries.raziel.desc=Stores blueprints and reveals the secrets of dimensional creation.
 
 item.signalindustries.blankAbilityModule.name=Blank Application Module
 item.signalindustries.blankAbilityModule.desc=Base component of an <Application Module>.
@@ -397,6 +397,8 @@ item.signalindustries.crystalWingPart.name=Crystal Wing Part
 item.signalindustries.crystalWingPart.desc=One of the 6 wings of the <Crystal Wings> attachment.
 item.signalindustries.blueprint.name=Blueprint
 item.signalindustries.blueprint.desc=Written out instructions on how to build a structure.
+item.signalindustries.goldprint.name=Goldprint
+item.signalindustries.goldprint.desc=Contains a section of physical space cut out by a <Spatial Encapsulator>.
 
 item.signalindustries.condensedMilkCan.name=Condensed Milk Can
 item.signalindustries.condensedMilkCan.desc=Thick and sweet.
@@ -406,6 +408,9 @@ item.signalindustries.caramelPlate.name=Caramel Plate
 item.signalindustries.caramelPlate.desc=A plate made out of... caramel?
 item.signalindustries.krowka.name=Krówka
 item.signalindustries.krowka.desc=Sweet caramel candy.
+
+item.signalindustries.dimensionMaker.name=Dimension Maker
+item.signalindustries.dimensionMaker.desc=Development utility.
 
 tile.signalindustries.infinite.energyCell.name=Infinite Energy Cell
 tile.signalindustries.infinite.energyCell.desc=An unlimited source of <Signaling Energy>! Creative mode only.
@@ -454,6 +459,11 @@ tile.signalindustries.reinforced.wakingCrusher.desc=A bigger version of the <Rei
 tile.signalindustries.awakened.crusher.name=Awakened Atomic Pulverizer Controller
 tile.signalindustries.awakened.crusher.desc=Will it blend? Only one way to find out!
 
+tile.signalindustries.basic.trommel.name=Basic Trommel
+tile.signalindustries.basic.trommel.desc=Like the regular trommel but powered with <Signaling Energy> and faster.
+tile.signalindustries.reinforced.trommel.name=Reinforced Trommel
+tile.signalindustries.reinforced.trommel.desc=Like the regular trommel but powered with <Signaling Energy> and a lot faster.
+
 tile.signalindustries.basic.assembler.name=Basic Assembler
 tile.signalindustries.basic.assembler.desc=Crafts items, automatically!
 
@@ -489,15 +499,19 @@ tile.signalindustries.awakened.signalumReactorCore.desc=The cutting edge of Sign
 tile.signalindustries.reinforced.ignitor.name=Reinforced Signalite Ignitor
 tile.signalindustries.reinforced.ignitor.desc=A core part of the <Signalite Reactor>. Drives the reaction by forcibly igniting <Signaling Energy>.
 
+tile.signalindustries.basic.marker.name=Basic Marker
+tile.signalindustries.basic.marker.desc=Place these at the corners of a cuboid shape to define the working area for other machines.
 tile.signalindustries.reinforced.builder.name=Reinforced Builder
 tile.signalindustries.reinforced.builder.desc=Builds structures according to <Blueprints>.
 tile.signalindustries.awakened.builder.name=Awakened Spatial Reconstructor
-tile.signalindustries.awakened.builder.desc=Builds more complicated structures according to <Blueprints>.
-tile.signalindustries.awakened.scanner.name=Awakened Spatial Encapsulator
-tile.signalindustries.awakened.scanner.desc=Creates a blueprint of an already built custom structure.
+tile.signalindustries.awakened.builder.desc=Builds more complicated structures according to <Blueprints> or can recreate the space encapsulated in a <Goldprint>.
+tile.signalindustries.reinforced.encapsulator.name=Reinforced Structure Scanner
+tile.signalindustries.reinforced.encapsulator.desc=Creates a blueprint of an already built custom structure.
+tile.signalindustries.awakened.encapsulator.name=Awakened Spatial Encapsulator
+tile.signalindustries.awakened.encapsulator.desc=Creates a blueprint of an already built custom structure, can also cut out parts of the world and store them in <Goldprints>.
 
-tile.signalindustries.awakened.worldMaker.name=Awakened Reality Extruder
-tile.signalindustries.awakened.worldMaker.desc=Now I have become Life, the creator of worlds.
+tile.signalindustries.awakened.creationAltar.name=Awakened Altar of Creation
+tile.signalindustries.awakened.creationAltar.desc=Now I have become Life, the creator of worlds.
 
 tile.signalindustries.reinforced.energyConnector.name=Reinforced Energy Connector
 tile.signalindustries.reinforced.energyConnector.desc=A dedicated energy hatch for Reinforced-tier multiblocks.
@@ -701,6 +715,8 @@ tile.signalindustries.uvLamp.name=Ultraviolet Lamp
 tile.signalindustries.uvLamp.desc=A special lamp that emits ultraviolet light. Stops mobs from spawning in a moderate radius without affecting the light level.
 tile.signalindustries.voidContainer.name=Void Container
 tile.signalindustries.voidContainer.desc=Completely destroys any item or fluid.
+tile.signalindustries.redstoneClock.name=Redstone Clock
+tile.signalindustries.redstoneClock.desc=A compact redstone clock with configurable on/off duration.
 
 tile.signalindustries.dilithiumBlock.name=Block of Dilithium
 tile.signalindustries.dilithiumBlock.desc=A solid block of Dilithium.
@@ -737,6 +753,8 @@ tile.signalindustries.ancient.solarTotem.name=Shining Solar Totem
 tile.signalindustries.ancient.solarTotem.desc=A carved totem depicting the Sun with strange inscriptions at the base.
 tile.signalindustries.ancient.skyTotem.name=Falling Sky Totem
 tile.signalindustries.ancient.skyTotem.desc=A carved totem depicting the Earth and Outer Space with strange inscriptions at the base.
+tile.signalindustries.ancient.pedestal.name=Otherworldly Pedestal
+tile.signalindustries.ancient.pedestal.desc=Holder for a certain book. Also allows you to browse between every structure or dimension recorded in it.
 
 dimension.signalindustries.eternity.name=Eternity
 biome.eternity=Eternity
@@ -894,6 +912,14 @@ achievement.signalindustries.endgame=The Final Chapter
 achievement.signalindustries.endgame.desc=Reach the end game and final tier of Signal Industries by creating an Awakened Machine Core.
 achievement.signalindustries.gate=Thinking with Portals
 achievement.signalindustries.gate.desc=Construct a Warp Gate to link any two points in space permanently.
+achievement.signalindustries.encapsulator=WorldEdit
+achievement.signalindustries.encapsulator.desc=Cut out a piece of space with a Spatial Encapsulator.
+achievement.signalindustries.recreator=Domain Expansion
+achievement.signalindustries.recreator.desc=Recreate space encapsulated in a Goldprint.
+achievement.signalindustries.altar=Deus Ex Machina
+achievement.signalindustries.altar.desc=Construct the controller for the Altar of Creation.
+achievement.signalindustries.customDimension=Other Worlds Than These
+achievement.signalindustries.customDimension.desc=Enter a custom dimension.
 achievement.signalindustries.orbitalWeapon=The Sun Is A Deadly Laser
 achievement.signalindustries.orbitalWeapon.desc=Cast your divine fury upon your enemies and have them experience the unmatched power of the Sun.
 
@@ -906,8 +932,10 @@ achievement.signalindustries.eclipse=Totality
 achievement.signalindustries.eclipse.desc=Experience a Solar Eclipse!
 achievement.signalindustries.starfall=Starfall
 achievement.signalindustries.starfall.desc=Experience a Meteor Shower!
-achievement.signalindustries.divineKnowledge=Divine Knowledge
-achievement.signalindustries.divineKnowledge.desc=Craft the Tome of Raziel, containing an index of too many items.
+achievement.signalindustries.divineKnowledge=Secret Knowledge
+achievement.signalindustries.divineKnowledge.desc=Find a mystical tome revealing knowledge about the worlds you've (not) seen.
+achievement.signalindustries.help.name=Need Help?
+achievement.signalindustries.help.desc=Try installing the Vintage Questing mod for more detailed explanations of stuff in this mod.
 
 gui.achievements.page.signalindustries.name=Signal Industries
 gui.achievements.page.signalindustries.desc=Achievements from Signal Industries!
@@ -915,7 +943,6 @@ gui.achievements.page.signalindustries.desc=Achievements from Signal Industries!
 key.signalindustries.openSuit=Open Suit
 key.signalindustries.activateAbility=Activate Suit Ability
 key.signalindustries.switchMode=Switch Mode
-key.signalindustries.razielIndex=Show/Hide Index (Tome of Raziel)
 key.signalindustries.headTopActivate=Activate Head Top Attachment
 key.signalindustries.headLensActivate=Activate Head Lens Attachment
 key.signalindustries.armBackLActivate=Activate Arm Back Left Attachment
@@ -1275,6 +1302,9 @@ container.signalindustries.powerSuit.name=Signalum Power Suit
 container.signalindustries.abilityModule.name=Application Module
 container.signalindustries.awakenedAbilityModule.name=Awakened Application Module
 container.signalindustries.bonsai.name=Bonsai Pot
+container.signalindustries.encapsulator.name=Spatial Encapsulator
+container.signalindustries.blueprint.name=Blueprint
+container.signalindustries.trommel.name=Trommel
 
 entity.signalindustries.volatileCrystal.name=Volatile Crystal
 entity.signalindustries.fallingMeteor.name=Falling Meteor

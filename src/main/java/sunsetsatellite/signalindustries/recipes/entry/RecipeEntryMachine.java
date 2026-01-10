@@ -18,7 +18,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> implements HasJsonAdapter {
+public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], ItemStack, RecipeProperties> /*fixme: implements HasJsonAdapter*/ {
 
     public static final ItemStack AIR = new ItemStack(0,0,0, new CompoundTag());
 
@@ -221,8 +221,8 @@ public class RecipeEntryMachine extends RecipeEntrySI<RecipeExtendedSymbol[], It
         //todo
     }
 
-    @Override
+    /*@Override
     public RecipeJsonAdapter<?> getAdapter() {
         return new RecipeMachineJsonAdapter();
-    }
+    }*/
 }

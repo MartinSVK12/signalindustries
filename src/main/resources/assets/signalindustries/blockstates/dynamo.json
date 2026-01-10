@@ -10,7 +10,7 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo",
+        "model": "signalindustries:signalum_dynamo_180",
         "y": 180
       },
       "when": {
@@ -19,7 +19,7 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo",
+        "model": "signalindustries:signalum_dynamo_90",
         "y": 90
       },
       "when": {
@@ -28,7 +28,7 @@
     },
     {
       "apply":{
-        "model": "signalindustries:signalum_dynamo",
+        "model": "signalindustries:signalum_dynamo_270",
         "y": 270
       },
       "when": {

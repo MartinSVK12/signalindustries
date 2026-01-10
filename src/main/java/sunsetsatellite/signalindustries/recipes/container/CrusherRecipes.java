@@ -23,7 +23,7 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                                 new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
                         new ItemStack(Blocks.GRAVEL,1),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(40,40, Tier.PROTOTYPE,false)
                 )
         );
         group.register(
@@ -33,7 +33,7 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                                 new RecipeExtendedSymbol(new ItemStack(Blocks.GRAVEL,1))
                         },
                         new ItemStack(Blocks.SAND,1),
-                        new RecipeProperties(200,40, Tier.PROTOTYPE,false)
+                        new RecipeProperties(40,40, Tier.PROTOTYPE,false)
                 )
         );
         group.register(

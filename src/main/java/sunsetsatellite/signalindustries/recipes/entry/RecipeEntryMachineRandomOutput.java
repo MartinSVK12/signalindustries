@@ -19,7 +19,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtendedSymbol[], WeightedRandomBag<WeightedRandomLootObject>, RecipeProperties> implements HasJsonAdapter {
+public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtendedSymbol[], WeightedRandomBag<WeightedRandomLootObject>, RecipeProperties> /*fixme: implements HasJsonAdapter*/ {
 
     public RecipeEntryMachineRandomOutput(RecipeExtendedSymbol[] input, WeightedRandomBag<WeightedRandomLootObject> output, RecipeProperties data) {
         super(input, output, data);
@@ -216,22 +216,71 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
 
     @Override
     public void consumeMachineInputs(TileEntityTieredMachineSimple machine) {
-        //todo
+        InventoryWrapper wrapper = new InventoryWrapper(machine);
+        FluidInventoryWrapper fluidWrapper = new FluidInventoryWrapper(machine);
+        List<ItemStack> remainingRecipeStacks = Catalyst.condenseItemList(
+                Arrays.stream(getInput())
+                        .flatMap(symbol -> symbol.resolve().stream())
+                        .filter(Objects::nonNull)
+                        .map(ItemStack::copy).collect(Collectors.toList())
+        );
+        for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
+            ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
+            if(stack.isStackEqual(remainingRecipeStack)){
+                if(stack.getItem().hasContainerItem() && !getData().consumeContainers){
+                    wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
+                }
+            }
+        }
+        List<FluidStack> fluidRecipeStacks = Arrays.stream(getInput())
+                .flatMap(symbol -> symbol.resolveFluids().stream())
+                .filter(Objects::nonNull)
+                .map(FluidStack::copy)
+                .collect(Collectors.toList());
+        for (FluidStack fluidStack : fluidRecipeStacks) {
+            fluidWrapper.removeUntil(fluidStack.fluid.getFirstId(),fluidStack.amount,false);
+        }
     }
 
     @Override
     public boolean canMachineProcess(TileEntityTieredMachineSimple machine) {
-        return false;
-        //todo
+        for (WeightedRandomLootObject entry : getOutput().getEntries()) {
+            ItemStack stack = entry.getDefinedItemStack();
+            if(stack == null){
+                return false;
+            }
+            stack.copy().stackSize = entry.isRandomYield() ? entry.getMaxYield() : entry.getFixedYield();
+            if(!machine.areItemOutputsValid(stack)){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void processMachineRecipe(TileEntityTieredMachineSimple machine) {
-        //todo
+        ItemStack stack = getOutput() == null ? null : getOutput().getRandom().getItemStack();
+        if (stack != null) {
+            machine.consumeInputs();
+            if(machine.random.nextFloat() <= getData().chance){
+                int multiplier = 1;
+                float fraction = Float.parseFloat("0."+(String.valueOf(machine.yield).split("\\.")[1]));
+                if(fraction <= 0) fraction = 1;
+                if(machine.yield > 1 && machine.random.nextFloat() <= fraction){
+                    multiplier = (int) Math.ceil(machine.yield);
+                }
+                if (machine.itemContents[machine.itemOutputs[0]] == null) {
+                    stack.stackSize *= multiplier;
+                    machine.setItem(machine.itemOutputs[0], stack);
+                } else if (machine.itemContents[machine.itemOutputs[0]].isItemEqual(stack)) {
+                    machine.itemContents[machine.itemOutputs[0]].stackSize += (stack.stackSize * multiplier);
+                }
+            }
+        }
     }
 
-    @Override
+    /*@Override
     public RecipeJsonAdapter<?> getAdapter() {
         return new RecipeMachineRandomOutputJsonAdapter();
-    }
+    }*/
 }

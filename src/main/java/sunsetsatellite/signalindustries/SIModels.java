@@ -26,6 +26,7 @@ import sunsetsatellite.catalyst.multipart.block.model.MultipartBlockModelBuilder
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicStorageContainer;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.states.*;
 import sunsetsatellite.signalindustries.entities.*;
@@ -70,6 +71,11 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(reinforcedIgnitor, () -> new BlockModelIgnitor(reinforcedIgnitor));
         ModelHelper.setBlockModel(basicEnergyInjector, ()-> new BlockModelDFJava<>(basicEnergyInjector, DragonFly.loadBlockModel("signalindustries:basic_energy_injector")));
         ModelHelper.setBlockModel(ashenTreeSapling,()-> new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(0,"signalindustries:block/ashen_tree_sapling"));
+        ModelHelper.setBlockModel(pedestal, ()->
+                new BlockModelDFJava<>(pedestal, DragonFly.loadBlockModel("signalindustries:pedestal"))
+                        .setStateInterpreter(new RotatableStateInterpreter())
+                        .setStateData("signalindustries:pedestal")
+        );
         ModelHelper.setBlockModel(basicProgrammer, ()->
                 new BlockModelDFJava<>(basicProgrammer, DragonFly.loadBlockModel("signalindustries:eeprom_programmer"))
                         .setStateInterpreter(new EEPROMProgrammerStateInterpreter())
@@ -307,9 +313,13 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(basicWrathBeacon, () -> new BlockModelMachine(basicWrathBeacon, blockTextures.get(basicWrathBeacon)));
         ModelHelper.setBlockModel(reinforcedWrathBeacon, () -> new BlockModelMachine(reinforcedWrathBeacon, blockTextures.get(reinforcedWrathBeacon)));
 
+        ModelHelper.setBlockModel(spatialEncapsulator, ()->new BlockModelMachine(spatialEncapsulator, blockTextures.get(spatialEncapsulator)));
+        ModelHelper.setBlockModel(creationAltar, ()->new BlockModelMachine(creationAltar, blockTextures.get(creationAltar)));
+
         ModelHelper.setBlockModel(dilithiumRail, () -> new BlockModelDilithiumRail(dilithiumRail));
 
         ModelHelper.setBlockModel(uvLamp, () -> new BlockModelMachine(uvLamp, blockTextures.get(uvLamp)));
+        ModelHelper.setBlockModel(redstoneClock, () -> new BlockModelMachine(redstoneClock, blockTextures.get(redstoneClock)));
 
         blockTextures.forEach((block, tex)-> {
             //LOGGER.info("Loading block model for '{}'", block.namespaceId());
@@ -424,6 +434,8 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setTileEntityModel(TileEntityPulsar.class, RenderPulsar::new);
         ModelHelper.setTileEntityModel(TileEntityLaserDrill.class, RenderMultiblock::new);
         ModelHelper.setTileEntityModel(TileEntityGreenhouse.class, RenderGreenhouse::new);
+        ModelHelper.setTileEntityModel(TileEntityEncapsulator.class, RenderEncapsulator::new);
+        ModelHelper.setTileEntityModel(TileEntityPedestal.class, RenderPedestal::new);
     }
 
     @Override

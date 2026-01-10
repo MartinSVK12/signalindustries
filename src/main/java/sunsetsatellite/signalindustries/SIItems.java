@@ -124,6 +124,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static Item caramelPlate;
     public static Item krowka;
     public static Item blueprint;
+    public static Item goldprint;
 
     public static ItemAttachment pulsarAttachment;
     public static ItemAttachment extendedEnergyPack;
@@ -160,6 +161,8 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static ItemSuitColorizer suitColorizerPurple;
     public static ItemSuitColorizer suitColorizerTransparent;
     public static ItemSuitColorizer suitColorizerInverted;
+
+    public static Item dimensionMaker;
 
     @Override
     public void init() {
@@ -346,6 +349,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         awakenedAbilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("awakenedAbilityModule",key("item/awakened_ability_module"),item("awakenedAbilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.AWAKENED),"awakened_ability_module").setMaxStackSize(1);
 
         blueprint = customItem(() -> new ItemBlueprint("blueprint",key("item/blueprint"),item("blueprint")),"blueprint").setMaxStackSize(1);
+        goldprint = customItem(() -> new ItemGoldprint("goldprint",key("item/goldprint"),item("goldprint")),"goldprint").setMaxStackSize(1);
 
         scanAbilityContainer = customItem(()-> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()),"ability4").setMaxStackSize(1);
 
@@ -401,6 +405,8 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         switchCover = (ItemCover) customItem(()-> new ItemCover("cover.switch",key("item/switch_cover"),item("switchCover"), SwitchCover::new),"switch_cover");
         redstoneCover = (ItemCover) customItem(()-> new ItemCover("cover.redstone",key("item/redstone_cover"),item("redstoneCover"), RedstoneCover::new),"redstone_cover");
         voidCover = (ItemCover) customItem(()-> new ItemCover("cover.void",key("item/void_cover"),item("voidCover"), VoidCover::new),"void_cover");
+
+        dimensionMaker = customItem(()-> new ItemDimensionMaker("dimensionMaker",key("item/dimension_maker"),item("dimensionMaker")),"dimension_maker").setMaxStackSize(1);
 
         List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).collect(Collectors.toList());
 

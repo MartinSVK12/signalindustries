@@ -102,9 +102,12 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
             }
             case X3_UNSAFE:
             case X3: {
+                //todo: change to normal (1)
+                int size = 1;
+                blockDestroyCost = 0;
                 if(side.getAxis() == Axis.Y){
-                    for (int x = -1; x <= 1; x++) {
-                        for (int z = -1; z <= 1; z++) {
+                    for (int x = -size; x <= size; x++) {
+                        for (int z = -size; z <= size; z++) {
                             Block<?> block = world.getBlock(ox + x, oy, oz + z);
                             if(energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);
@@ -119,8 +122,8 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
                         }
                     }
                 } else if (side.getAxis() == Axis.Z) {
-                    for (int x = -1; x <= 1; x++) {
-                        for (int y = -1; y <= 1; y++) {
+                    for (int x = -size; x <= size; x++) {
+                        for (int y = -size; y <= size; y++) {
                             Block<?> block = world.getBlock(ox + x, oy + y, oz);
                             if(energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);
@@ -135,8 +138,8 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
                         }
                     }
                 } else if (side.getAxis() == Axis.X) {
-                    for (int z = -1; z <= 1; z++) {
-                        for (int y = -1; y <= 1; y++) {
+                    for (int z = -size; z <= size; z++) {
+                        for (int y = -size; y <= size; y++) {
                             Block<?> block = world.getBlock(ox, oy + y, oz + z);
                             if(energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);

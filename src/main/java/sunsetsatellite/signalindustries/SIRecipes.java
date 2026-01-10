@@ -55,6 +55,7 @@ public class SIRecipes implements RecipeEntrypoint {
     public static RecipeGroupSI<RecipeEntryMachine> WAKING_INFUSER;
     public static RecipeGroupSI<RecipeEntryMachine> CENTRIFUGE;
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
+    public static RecipeGroupSI<RecipeEntryMachineRandomOutput> TROMMEL;
     public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
     public static RecipeGroupSI<RecipeEntryMachineRandomOutput> LASER_DRILL;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> GREENHOUSE;
@@ -90,6 +91,7 @@ public class SIRecipes implements RecipeEntrypoint {
         SIGNAL_INDUSTRIES.register("infuser",INFUSER);
         SIGNAL_INDUSTRIES.register("centrifuge",CENTRIFUGE);
         SIGNAL_INDUSTRIES.register("collector",COLLECTOR);
+        SIGNAL_INDUSTRIES.register("trommel",TROMMEL);
         SIGNAL_INDUSTRIES.register("waking_crusher",WAKING_CRUSHER);
         SIGNAL_INDUSTRIES.register("waking_plate_former",WAKING_PLATE_FORMER);
         SIGNAL_INDUSTRIES.register("waking_alloy_smelter",WAKING_ALLOY_SMELTER);
@@ -117,6 +119,7 @@ public class SIRecipes implements RecipeEntrypoint {
         INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicInfuser),new ItemStack(SIBlocks.reinforcedInfuser))));
         CENTRIFUGE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedCentrifuge))));
         COLLECTOR = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicCollector),new ItemStack(SIBlocks.reinforcedCollector))));
+        TROMMEL = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicTrommel), new ItemStack(SIBlocks.reinforcedTrommel))));
         WAKING_CRUSHER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingCrusher))));
         WAKING_PLATE_FORMER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingPlateFormer))));
         WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));
@@ -129,6 +132,7 @@ public class SIRecipes implements RecipeEntrypoint {
 
     public static void loadSpecial(){
         new InductionSmelterRecipes().addRecipes(SIRecipes.INDUCTION_SMELTER);
+        new SITrommelRecipes().addRecipes(SIRecipes.TROMMEL);
     }
 
     public void load(){

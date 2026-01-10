@@ -19,11 +19,13 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedSymbol[], RecipeOutputStack[], RecipeProperties> implements HasJsonAdapter {
+public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedSymbol[], RecipeOutputStack[], RecipeProperties> /*fixme: implements HasJsonAdapter*/ {
 
     public RecipeEntryMachineMultiOutput(RecipeExtendedSymbol[] input, RecipeOutputStack[] output, RecipeProperties data) {
         super(input, output, data);
     }
+
+    public RecipeEntryMachineMultiOutput(){}
 
     @Override
     public boolean matches(RecipeExtendedSymbol[] symbols) {
@@ -427,8 +429,8 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
         }
     }
 
-    @Override
+    /*@Override
     public RecipeJsonAdapter<?> getAdapter() {
         return new RecipeMachineMultiOutputJsonAdapter();
-    }
+    }*/
 }

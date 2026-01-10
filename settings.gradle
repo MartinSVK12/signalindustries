@@ -10,10 +10,6 @@ pluginManagement {
             url = 'https://jitpack.io'
         }
         maven {
-            name = 'Babric'
-            url = 'https://maven.glass-launcher.net/babric'
-        }
-        maven {
             name = 'SignalumMavenInfrastructure'
             url = 'https://maven.thesignalumproject.net/infrastructure'
         }

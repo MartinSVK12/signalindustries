@@ -2046,5 +2046,58 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_trommel",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PGP",
+      "PTP",
+      "LML"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "T",
+        "stack": {
+          "key": "tile.trommel.idle",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.mesh.gold",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "group": "minecraft:logs"
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.trommel",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

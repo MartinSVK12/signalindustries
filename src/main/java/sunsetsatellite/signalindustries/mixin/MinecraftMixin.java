@@ -3,18 +3,27 @@ package sunsetsatellite.signalindustries.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.nbt.NbtIo;
+import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.Tag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.client.player.controller.PlayerController;
 import net.minecraft.client.render.terrain.TerrainRenderer;
 import net.minecraft.client.world.chunk.provider.ChunkProviderDynamic;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
+import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.IChunkLoader;
 import net.minecraft.core.world.chunk.provider.IChunkProvider;
+import net.minecraft.core.world.save.LevelData;
+import net.minecraft.core.world.type.WorldType;
+import net.minecraft.core.world.type.WorldTypeGroups;
+import net.minecraft.core.world.type.WorldTypes;
 import org.lwjgl.input.Keyboard;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,9 +37,20 @@ import sunsetsatellite.catalyst.core.util.vector.Vec2f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
+import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
+import sunsetsatellite.signalindustries.dim.custom.WorldTypeCustom;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.util.KeyboardHandler;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Iterator;
+import java.util.Map;
 
 @Mixin(
         value = Minecraft.class,
@@ -48,6 +68,9 @@ public abstract class MinecraftMixin {
     @Shadow public abstract void resize();
 
     @Shadow public TerrainRenderer terrainRenderer;
+
+    @Shadow
+    private File mcDataDir;
 
     @Inject(
             method = "runTick",
@@ -92,6 +115,39 @@ public abstract class MinecraftMixin {
     public void switchProvider(World world, IChunkLoader chunkLoader, CallbackInfoReturnable<IChunkProvider> cir){
         if(SIConfig.config.getBoolean("Experimental.enableDynamicChunkProvider")){
             cir.setReturnValue(new ChunkProviderDynamic(world,chunkLoader,world.getWorldType().createChunkGenerator(world)));
+        }
+    }
+
+    @Inject(method = "startWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/core/world/type/WorldTypeGroups$Group;)V", at = @At(value = "INVOKE", target = "Ljava/lang/System;gc()V"))
+    public void startWorld(String worldDirName, String worldName, long seed, WorldTypeGroups.Group worldTypeGroup, CallbackInfo ci) {
+        try {
+            Map<Integer, Dimension> dimensionMap = ((IMutableDimensionListAccess) Dimension.OVERWORLD).getMutableDimensionList();
+            //todo: might not be the best idea, probably remove them when player exists the level (with the save & quit button)
+            dimensionMap.entrySet().removeIf(entry -> entry.getValue() instanceof DimensionCustom);
+            Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
+            while (iter.hasNext()) {
+                WorldType worldType = iter.next();
+                if(worldType instanceof WorldTypeCustom){
+                    iter.remove();
+                }
+            }
+            File saveFile = new File(this.mcDataDir, "saves/" + worldDirName);
+            File worldLevelDat = new File(saveFile, "level.dat");
+            if (worldLevelDat.exists()) {
+                CompoundTag nbt = NbtIo.readCompressed(Files.newInputStream(worldLevelDat.toPath())).getCompound("Data");
+                CompoundTag dimensionsTag = nbt.getCompound("CustomDimensions");
+                for (Tag<?> tag : dimensionsTag.getValues()) {
+                    if(tag instanceof CompoundTag){
+                        CompoundTag dimTag = (CompoundTag) tag;
+                        CustomDimensionData data = new CustomDimensionData(dimTag);
+                        WorldTypes.register(SignalIndustries.key("custom/"+data.name),data.getWorldType());
+                        DimensionCustom dim = new DimensionCustom(data);
+                        Dimension.registerDimension(data.id, dim);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

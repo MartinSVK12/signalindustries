@@ -14,22 +14,18 @@ import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.catalyst.multiblocks.Multiblock;
+import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.menus.MenuBuilder;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageBuilderConfig;
 import sunsetsatellite.signalindustries.render.FakeItemElement;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBuilder;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
-import sunsetsatellite.signalindustries.util.SIMultiblock;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ScreenBuilder extends ScreenFluid {
@@ -51,24 +47,25 @@ public class ScreenBuilder extends ScreenFluid {
         int j = (height - ySize) / 2;
         FakeItemElement guiRenderFakeItem = new FakeItemElement(mc);
         if(tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint) {
-            String key = tile.itemContents[0].getData().getStringOrDefault("multiblock", "");
-            if (Objects.equals(key, "")) {
-                return;
-            }
-            SIMultiblock multiblock = (SIMultiblock) Multiblock.multiblocks.get(key.replace("multiblock.signalindustries.", ""));
-            if (multiblock == null) {
-                return;
-            }
-            List<ItemStack> blocksUncondensed = tile.buildingBlocks
-                    .stream()
-                    .map((B) -> new ItemStack(B.block, 1, B.meta == -1 ? 0 : B.meta))
-                    .collect(Collectors.toList());
-            List<ItemStack> blocks = Catalyst.condenseItemList(blocksUncondensed);
+            Structure multiblock = SignalIndustries.getStructureFromBlueprint(tile.itemContents[0], tile.worldObj);
+            if(multiblock != null) {
+                List<ItemStack> blocksUncondensed = tile.buildingBlocks
+                        .stream()
+                        .map((B) -> {
+                            ItemStack stack = new ItemStack(B.block, 1, B.meta == -1 ? 0 : B.meta);
+                            if(!stack.getHasSubtypes()) {
+                                stack.setMetadata(0);
+                            }
+                            return stack;
+                        })
+                        .collect(Collectors.toList());
+                List<ItemStack> blocks = Catalyst.condenseItemList(blocksUncondensed);
 
-            for (int k = 1; k < Math.min(tile.getContainerSize()+1, blocks.size()+1); k++) {
-                Slot slot = inventorySlots.getSlot(k);
-                if(slot != null && slot.getItemStack() == null){
-                    guiRenderFakeItem.render(blocks.get(k-1),i+slot.x,j+slot.y, false, null, true);
+                for (int k = 1; k < Math.min(tile.getContainerSize() + 1, blocks.size() + 1); k++) {
+                    Slot slot = inventorySlots.getSlot(k);
+                    if (slot != null && slot.getItemStack() == null) {
+                        guiRenderFakeItem.render(blocks.get(k - 1), i + slot.x, j + slot.y, false, null, true);
+                    }
                 }
             }
         }

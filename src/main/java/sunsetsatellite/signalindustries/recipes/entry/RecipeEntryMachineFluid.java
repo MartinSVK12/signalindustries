@@ -22,7 +22,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[], FluidStack, RecipeProperties> implements HasJsonAdapter {
+public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[], FluidStack, RecipeProperties> /*fixme: implements HasJsonAdapter*/ {
 
     public RecipeEntryMachineFluid(RecipeExtendedSymbol[] input, FluidStack output, RecipeProperties data) {
         super(input, output, data);
@@ -240,8 +240,8 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
         //todo
     }
 
-    @Override
+    /*@Override
     public RecipeJsonAdapter<?> getAdapter() {
         return new RecipeMachineFluidJsonAdapter();
-    }
+    }*/
 }

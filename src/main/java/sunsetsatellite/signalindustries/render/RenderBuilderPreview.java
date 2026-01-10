@@ -18,6 +18,8 @@ import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.catalyst.core.util.model.IColorOverride;
 import sunsetsatellite.catalyst.core.util.model.IFullbright;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
+import sunsetsatellite.catalyst.multiblocks.Structure;
+import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBuilder;
 import sunsetsatellite.signalindustries.util.SIMultiblock;
@@ -36,12 +38,12 @@ public class RenderBuilderPreview extends TileEntityRenderer<TileEntity> {
         TileEntityBuilder builder = (TileEntityBuilder) tileEntity;
         Direction dir = builder.rotation;
         if(builder.itemContents[0] != null && builder.itemContents[0].getItem() instanceof ItemBlueprint){
-            SIMultiblock multiblock = builder.getMultiblock();
+            Structure multiblock = SignalIndustries.getStructureFromBlueprint(builder.itemContents[0], world);
             if (multiblock == null) {
                 return;
             }
             ArrayList<BlockInstance> blocks = multiblock.getBlocks(new Vec3i(i, j, k).add(builder.offset),dir);
-            blocks.add(multiblock.getOrigin(new Vec3i(i, j, k).add(builder.offset),dir.getOpposite().shiftAxis()));
+            if(multiblock instanceof SIMultiblock) blocks.add(multiblock.getOrigin(new Vec3i(i, j, k).add(builder.offset),dir.getOpposite().shiftAxis()));
             ArrayList<BlockInstance> substitutions = multiblock.getSubstitutions(new Vec3i(i, j, k).add(builder.offset),dir);
             blockRenderer = new RenderBlocks(new HologramWorld(blocks));
             for (BlockInstance block : blocks) {

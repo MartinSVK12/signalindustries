@@ -29,15 +29,16 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
     public RenderFluidInBlock() {
     }
 
-    public void doRender(Tessellator tessellator, TileEntity tileEntity1, double d2, double d4, double d6, float f8) {
+    public void doRender(Tessellator tessellator, TileEntity tileEntity, double d2, double d4, double d6, float f8) {
 
         float fluidAmount = 0.0F;
         float fluidMaxAmount = 1.0F;
         int fluidId = -1;
-        if (((TileEntityFluidContainer)tileEntity1).fluidContents[0] != null && ((TileEntityFluidContainer)tileEntity1).fluidContents[0].fluid != null) {
-            fluidMaxAmount = (float)((TileEntityFluidContainer)tileEntity1).getFluidCapacityForSlot(0);
-            fluidAmount = (float)((TileEntityFluidContainer)tileEntity1).fluidContents[0].amount;
-            fluidId = ((TileEntityFluidContainer)tileEntity1).fluidContents[0].fluid.getFirstId();
+        TileEntityFluidContainer fluidContainer = (TileEntityFluidContainer) tileEntity;
+        if (fluidContainer.fluidContents[0] != null && fluidContainer.fluidContents[0].fluid != null) {
+            fluidMaxAmount = (float) fluidContainer.getFluidCapacityForSlot(0);
+            fluidAmount = (float) fluidContainer.fluidContents[0].amount;
+            fluidId = fluidContainer.fluidContents[0].fluid.getFirstId();
         }
 
         float amount = Math.abs(fluidAmount / fluidMaxAmount - 0.02F);
@@ -45,7 +46,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
 
         if (fluidId != -1) {
             Block<?> block = Blocks.blocksList[fluidId];
-            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(block,new Vec3i(),0,null))));
+            blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(block,new Vec3i(),0,null))));
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
             GL11.glPushMatrix();
             GL11.glTranslatef((float)d2, (float)d4, (float)d6);

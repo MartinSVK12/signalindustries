@@ -3,8 +3,6 @@ package sunsetsatellite.signalindustries;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
-import net.minecraft.core.data.tag.Tag;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.CatalystMultipart;
@@ -131,6 +129,9 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
 
     public static Block<? extends BlockLogic> basicAssembler;
 
+    public static Block<? extends BlockLogic> basicTrommel;
+    public static Block<? extends BlockLogic> reinforcedTrommel;
+
     public static Block<? extends BlockLogic> prototypeStorageContainer;
     public static Block<? extends BlockLogic> infiniteStorageContainer;
     public static Block<? extends BlockLogic> basicStorageContainer;
@@ -202,7 +203,10 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
 
     public static Block<? extends BlockLogic> reinforcedChunkloader;
 
+    public static Block<? extends BlockLogic> basicMarker;
     public static Block<? extends BlockLogic> reinforcedBuilder;
+    public static Block<? extends BlockLogic> spatialEncapsulator;
+    public static Block<? extends BlockLogic> creationAltar;
 
     public static Block<? extends BlockLogic> warpGate;
 
@@ -229,9 +233,11 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> glowingObsidian;
     public static Block<? extends BlockLogic> uvLamp;
     public static Block<? extends BlockLogic> voidContainer;
+    public static Block<? extends BlockLogic> redstoneClock;
 
     public static Block<? extends BlockLogic> lunarTotem;
     public static Block<? extends BlockLogic> solarTotem;
+    public static Block<? extends BlockLogic> pedestal;
 
     public static Block<? extends BlockLogic> energyStill;
     public static Block<? extends BlockLogic> energyFlowing;
@@ -983,6 +989,41 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withOverbrightNorthTexture("assembler_overlay_front")
         );
 
+        basicTrommel = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.trommel",
+                "basic_trommel",
+                "basicTrommel",
+                3,
+                (block)-> new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntitySITrommel::new, "trommel"),
+                new MachineTextures(Tier.BASIC)
+                        .withDefaultSideTextures("basic_trommel_side")
+                        .withDefaultTopTexture("basic_trommel_top")
+                        .withDefaultBottomTexture("basic_trommel_bottom")
+                        .withDefaultNorthTexture("basic_trommel_front_inactive")
+                        .withDefaultSouthTexture("basic_trommel_front_inactive")
+                        .withActiveNorthTexture("basic_trommel_front_active")
+                        .withActiveSouthTexture("basic_trommel_front_active")
+        );
+
+        reinforcedTrommel = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.trommel",
+                "reinforced_trommel",
+                "reinforcedTrommel",
+                3,
+                (block)-> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntitySITrommel::new, "trommel"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultSideTextures("reinforced_trommel_side_inactive")
+                        .withDefaultTopTexture("reinforced_trommel_top_inactive")
+                        .withDefaultBottomTexture("reinforced_trommel_bottom")
+                        .withDefaultNorthTexture("reinforced_trommel_front_inactive")
+                        .withDefaultSouthTexture("reinforced_trommel_front_inactive")
+                        .withActiveTexture("reinforced_blank_active")
+                        .withActiveTopTexture("reinforced_trommel_top_active")
+                        .withActiveSideTextures("reinforced_trommel_side_active")
+                        .withActiveNorthTexture("reinforced_trommel_front_active")
+                        .withActiveSouthTexture("reinforced_trommel_front_active")
+        );
+
         basicAutomaticMiner = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.automaticMiner",
                 "basic_automatic_miner",
@@ -1324,7 +1365,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         awakenedAlloyCoil = customBlock(
-                defaultBuilder(Tier.REINFORCED),
+                defaultBuilder(Tier.REINFORCED).setLuminance(15),
                 "awakenedAlloyCoil",
                 "awakened_alloy_coil",
                 "awakenedAlloyCoil",
@@ -1504,7 +1545,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 "basic_energy_injector",
                 "basicEnergyInjector",
                 3,
-                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityEnergyInjector::new, "injector"),
+                (block)->new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityEnergyInjector::new, "injector").setNonSolid(),
                 new MachineTextures()
                         .withDefaultTexture("basic_energy_injector_bottom")
         );
@@ -1628,6 +1669,17 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withOverbrightTextures("uv_lamp_overlay")
         );
 
+        redstoneClock = customBlock(defaultBuilder(Tier.PROTOTYPE),
+                "redstoneClock",
+                "redstone_clock",
+                "redstoneClock",
+                1,
+                (block) -> new BlockLogicRedstoneClock(block, Material.stone),
+                new MachineTextures()
+                        .withDefaultTexture("redstone_clock")
+                        .withActiveTexture("redstone_clock_active")
+        );
+
         basicWrathBeacon = customBlock(defaultBuilder(Tier.BASIC),
                 "basic.wrathBeacon",
                 "basic_wrath_beacon",
@@ -1659,6 +1711,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures(Tier.REINFORCED)
         );
 
+        basicMarker = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.marker",
+                "basic_marker",
+                "basicMarker",
+                1,
+                (block)-> new BlockLogicTiered(block, Material.metal, Tier.BASIC),
+                new MachineTextures(Tier.BASIC)
+                        .withDefaultTexture("basic_marker")
+        );
+
         reinforcedBuilder = customBlock(defaultBuilder(Tier.REINFORCED),
                 "reinforced.builder",
                 "reinforced_builder",
@@ -1671,6 +1733,29 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withActiveTopTexture("reinforced_builder_top_active")
                         .withActiveNorthTexture("reinforced_builder_front_active")
                         .withOverbrightNorthTexture("builder_overlay")
+        );
+
+        spatialEncapsulator = customBlock(defaultBuilder(Tier.AWAKENED),
+                "awakened.encapsulator",
+                "awakened_encapsulator",
+                "spatialEncapsulator",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.AWAKENED, TileEntityEncapsulator::new, "encapsulator"),
+                new MachineTextures(Tier.AWAKENED)
+                        .withDefaultNorthTexture("awakened_encapsulator_front_inactive")
+                        .withActiveNorthTexture("awakened_encapsulator_front_active")
+        );
+
+        creationAltar = customBlock(defaultBuilder(Tier.AWAKENED),
+                "awakened.creationAltar",
+                "awakened_creation_altar",
+                "creationAltar",
+                3,
+                (block) -> new BlockLogicTiered(block, Material.metal, Tier.AWAKENED),
+                new MachineTextures(Tier.AWAKENED)
+                        .withDefaultSideTextures("awakened_creation_altar_side")
+                        .withDefaultNorthTexture("awakened_creation_altar_front_inactive")
+                        .withDefaultTopTexture("awakened_creation_altar_top_inactive")
         );
 
         reinforcedChunkloader = customBlock(defaultBuilder(Tier.REINFORCED),
@@ -1859,6 +1944,15 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 1,
                 (block)-> new BlockLogicSolarTotem(block, Material.stone),
                 new MachineTextures()
+        );
+
+        pedestal = customBlock(defaultBuilder(Tier.PROTOTYPE).setLuminance(15),
+                "ancient.pedestal",
+                "pedestal",
+                "pedestal",
+                1,
+                (block)->new BlockLogicPedestal(block),
+                new MachineTextures().withDefaultTexture("rooted_fabric")
         );
 
         /*unraveledFabric = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.STONE).setHardness(150).setResistance(50000),

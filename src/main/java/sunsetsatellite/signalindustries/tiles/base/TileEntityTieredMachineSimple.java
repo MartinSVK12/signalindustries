@@ -9,10 +9,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
+import sunsetsatellite.signalindustries.recipes.entry.*;
 import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turniplabs.halplibe.helper.EnvironmentHelper;
@@ -143,6 +140,8 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                         }
                     }
                 }
+            } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+                currentRecipe.processMachineRecipe(this);
             } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
                 currentRecipe.processMachineRecipe(this);
             }
@@ -224,6 +223,8 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                     }
                 }
             }
+        } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+            currentRecipe.consumeMachineInputs(this);
         } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
             currentRecipe.consumeMachineInputs(this);
         }
@@ -245,6 +246,8 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                 return false;
             }
             return areFluidOutputsValid(fluidStack);
+        } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
+          return currentRecipe.canMachineProcess(this);
         } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
             return currentRecipe.canMachineProcess(this);
         }
@@ -358,7 +361,6 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                             return false;
                         }
                     }
-                    return false;
                 } else {
                     return false;
                 }

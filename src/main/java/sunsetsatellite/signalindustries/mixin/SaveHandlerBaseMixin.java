@@ -1,12 +1,12 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
-import net.minecraft.core.world.save.DimensionData;
-import net.minecraft.core.world.save.ISaveFormat;
-import net.minecraft.core.world.save.LevelStorage;
-import net.minecraft.core.world.save.SaveHandlerBase;
+import net.minecraft.core.world.save.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,9 +16,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
+import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -81,5 +84,20 @@ public abstract class SaveHandlerBaseMixin implements LevelStorage {
         }
         dimensionDataTag.putCompound("MeteorLocations",meteorNbt);
         dimensionDataTag.putCompound("ChunkLoaders",chunkloaderNbt);
+    }
+
+    @Inject(method = "saveLevelDataAndPlayerData", at = @At(value = "NEW", target = "()Lcom/mojang/nbt/tags/CompoundTag;"))
+    public void saveLevelDataAndPlayerData(LevelData levelData, List<Player> playerList, CallbackInfo ci, @Local CompoundTag dataTag){
+        CompoundTag dimensionsTag = new CompoundTag();
+        for (Map.Entry<Integer, Dimension> dimensionEntry : Dimension.getDimensionList().entrySet()) {
+            Dimension d = dimensionEntry.getValue();
+            CompoundTag dimensionTag = new CompoundTag();
+            if(d instanceof DimensionCustom){
+                DimensionCustom dim = (DimensionCustom) d;
+                dim.data.writeToNbt(dimensionTag);
+                dimensionsTag.putCompound(String.valueOf(dimensionEntry.getKey()),dimensionTag);
+            }
+        }
+        dataTag.putCompound("CustomDimensions",dimensionsTag);
     }
 }

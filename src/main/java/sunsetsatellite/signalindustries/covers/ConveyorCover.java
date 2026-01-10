@@ -76,7 +76,7 @@ public class ConveyorCover extends CoverBase {
                 } else if (con == Connection.OUTPUT) {
                     Optional<ItemStack> stack = Optional.ofNullable(inv.remove(activeSlot,false,false));
                     AtomicReference<Optional<ItemStack>> leftovers = new AtomicReference<>(Optional.empty());
-                    stack.ifPresent(S -> leftovers.set(Optional.ofNullable(otherInv.add(externalActiveSlot,S))));
+                    stack.ifPresent(S -> leftovers.set(Optional.ofNullable(otherInv.add(S))));
                     leftovers.get().ifPresent(S -> inv.add(activeSlot,S));
                 }
             }
