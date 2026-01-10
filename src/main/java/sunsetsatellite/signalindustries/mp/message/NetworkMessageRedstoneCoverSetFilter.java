@@ -8,9 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.covers.RedstoneCover;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
-import sunsetsatellite.signalindustries.util.PipeType;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
 import turniplabs.halplibe.helper.network.UniversalPacket;
@@ -29,7 +27,8 @@ public class NetworkMessageRedstoneCoverSetFilter implements NetworkMessage {
         this.dir = dir;
     }
 
-    public NetworkMessageRedstoneCoverSetFilter() {}
+    public NetworkMessageRedstoneCoverSetFilter() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -38,7 +37,7 @@ public class NetworkMessageRedstoneCoverSetFilter implements NetworkMessage {
         pos.writeToNBT(nbt);
         packet.writeCompoundTag(nbt);
         packet.writeString(TileEntityDispatcher.getIDFromClass(tileClass).toString());
-        if(stack == null) {
+        if (stack == null) {
             packet.writeInt(-1);
         } else {
             packet.writeInt(1);
@@ -53,7 +52,7 @@ public class NetworkMessageRedstoneCoverSetFilter implements NetworkMessage {
         dir = Direction.values()[packet.readInt()];
         pos = new Vec3i(packet.readCompoundTag());
         tileClass = TileEntityDispatcher.getClassFromID(packet.readString());
-        if(packet.readInt() == -1) {
+        if (packet.readInt() == -1) {
             stack = null;
         } else {
             stack = ItemStack.readItemStackFromNbt(packet.readCompoundTag());
@@ -62,10 +61,10 @@ public class NetworkMessageRedstoneCoverSetFilter implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if(tileEntity instanceof TileEntityCoverable && tileEntity.worldObj != null){
+                if (tileEntity instanceof TileEntityCoverable && tileEntity.worldObj != null) {
                     TileEntityCoverable machine = (TileEntityCoverable) tileEntity;
                     ((RedstoneCover) machine.getCovers().get(dir)).sensorStack = stack;
                 }

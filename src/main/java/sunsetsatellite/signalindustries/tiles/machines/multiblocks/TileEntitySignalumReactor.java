@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.tiles.machines.multiblocks;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
@@ -10,7 +9,6 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
@@ -43,7 +41,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void init(Block<?> block) {
-        multiblock = new MultiblockInstance(this,Multiblock.multiblocks.get("signalumReactor"));
+        multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("signalumReactor"));
     }
 
     @Override
@@ -75,55 +73,52 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void tick() {
-        if(multiblock == null){
+        if (multiblock == null) {
             return;
         }
         super.tick();
         stabilizers.clear();
         ignitors.clear();
-        if(!multiblock.isValid()){
+        if (!multiblock.isValid()) {
             state = State.INACTIVE;
             return;
         }
         Direction dir = Direction.getDirectionFromSide(getBlockMeta());
-        ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z),dir);
+        ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj, new Vec3i(x, y, z), dir);
         for (BlockInstance tileEntity : tileEntities) {
-            if(tileEntity.tile instanceof IMultiblockPart){
-                if(tileEntity.tile instanceof TileEntityStabilizer){
+            if (tileEntity.tile instanceof IMultiblockPart) {
+                if (tileEntity.tile instanceof TileEntityStabilizer) {
                     stabilizers.add((TileEntityStabilizer) tileEntity.tile);
-                }
-                else if(tileEntity.tile instanceof TileEntityIgnitor){
+                } else if (tileEntity.tile instanceof TileEntityIgnitor) {
                     ignitors.add((TileEntityIgnitor) tileEntity.tile);
-                }
-                else if(tileEntity.tile instanceof TileEntityItemBus){
-                    if(tileEntity.block == SIBlocks.reinforcedItemInputBus){
+                } else if (tileEntity.tile instanceof TileEntityItemBus) {
+                    if (tileEntity.block == SIBlocks.reinforcedItemInputBus) {
                         input = (TileEntityItemBus) tileEntity.tile;
                     } else if (tileEntity.block == SIBlocks.reinforcedItemOutputBus) {
                         output = (TileEntityItemBus) tileEntity.tile;
                     }
-                }
-                else if(tileEntity.tile instanceof TileEntityEnergyConnector){
+                } else if (tileEntity.tile instanceof TileEntityEnergyConnector) {
                     connector = (TileEntityEnergyConnector) tileEntity.tile;
                 }
                 ((IMultiblockPart) tileEntity.tile).connect(this);
             }
         }
-        if(state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()){
+        if (state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()) {
             state = State.RUNNING;
         }
         //TODO: state machine maybe?
-        if(state == State.RUNNING && checkIfStabilizersReady() && getFuel() > 0){
+        if (state == State.RUNNING && checkIfStabilizersReady() && getFuel() > 0) {
             depleteRandomFuelCell();
         } else if (state == State.RUNNING) {
             state = State.INACTIVE;
         }
-        if(state == State.RUNNING){
+        if (state == State.RUNNING) {
             ItemStack[] itemContents = input.itemContents;
             for (int i = 0; i < itemContents.length; i++) {
                 ItemStack stack = itemContents[i];
                 if (stack != null && stack.getItem() instanceof ItemFuelCell) {
                     if (stack.getData().getInteger("fuel") <= 0) {
-                        if(output.itemContents[i] == null){
+                        if (output.itemContents[i] == null) {
                             output.itemContents[i] = stack;
                             input.itemContents[i] = null;
                         }
@@ -131,11 +126,11 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
                 }
             }
 
-            if(getFuel() <= 0){
+            if (getFuel() <= 0) {
                 state = State.INACTIVE;
             }
             for (TileEntityIgnitor ignitor : ignitors) {
-                if(ignitor.isEmpty()){
+                if (ignitor.isEmpty()) {
                     state = State.INACTIVE;
                     break;
                 }
@@ -148,34 +143,34 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         }
     }
 
-    public void depleteRandomFuelCell(){
+    public void depleteRandomFuelCell() {
         //Minecraft.getMinecraft(Minecraft.class).//thePlayer.triggerAchievement(SIAchievements.REACTOR);
         Random random = new Random();
-        if(random.nextFloat() <= 1.25){
+        if (random.nextFloat() <= 1.25) {
             //TODO: actually pick a random cell
             for (ItemStack stack : input.itemContents) {
                 if (stack != null && stack.getItem() instanceof ItemFuelCell) {
                     int fuel = stack.getData().getInteger("fuel");
                     int depleted = stack.getData().getInteger("depleted");
-                    if(fuel >= 0){
-                        stack.getData().putInt("fuel",fuel-1);
-                        stack.getData().putInt("depleted",depleted+1);
+                    if (fuel >= 0) {
+                        stack.getData().putInt("fuel", fuel - 1);
+                        stack.getData().putInt("depleted", depleted + 1);
                     }
                 }
             }
         }
     }
 
-    public boolean checkIfIgnitorsReady(){
+    public boolean checkIfIgnitorsReady() {
         for (TileEntityIgnitor ignitor : ignitors) {
-            if(!ignitor.isReady()){
+            if (!ignitor.isReady()) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean checkIfStabilizersReady(){
+    public boolean checkIfStabilizersReady() {
         boolean ready = true;
         for (TileEntityStabilizer stabilizer : stabilizers) {
             if (!stabilizer.canProcess()) {
@@ -185,22 +180,22 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         return ready;
     }
 
-    public int getFuel(){
-        if(input == null) return 0;
+    public int getFuel() {
+        if (input == null) return 0;
         int fuel = 0;
         for (ItemStack stack : input.itemContents) {
-            if(stack != null && stack.getItem() instanceof ItemFuelCell){
+            if (stack != null && stack.getItem() instanceof ItemFuelCell) {
                 fuel += stack.getData().getInteger("fuel");
             }
         }
         return fuel;
     }
 
-    public int getDepletedFuel(){
-        if(input == null) return 0;
+    public int getDepletedFuel() {
+        if (input == null) return 0;
         int depleted = 0;
         for (ItemStack stack : input.itemContents) {
-            if(stack != null && stack.getItem() instanceof ItemFuelCell){
+            if (stack != null && stack.getItem() instanceof ItemFuelCell) {
                 depleted += stack.getData().getInteger("depleted");
             }
         }
@@ -208,7 +203,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     }
 
     public void start() {
-        if(getFuel() > 0 && state == State.INACTIVE){
+        if (getFuel() > 0 && state == State.INACTIVE) {
             state = State.IGNITING;
         } else if (state == State.IGNITING || state == State.RUNNING) {
             state = State.INACTIVE;
@@ -220,7 +215,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         return multiblock;
     }
 
-    public Vec3i getPosition(){
-        return new Vec3i(x,y,z);
+    public Vec3i getPosition() {
+        return new Vec3i(x, y, z);
     }
 }

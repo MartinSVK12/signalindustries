@@ -21,9 +21,12 @@ import java.util.Collection;
 )
 public abstract class TextureManagerMixin {
 
-    @Shadow @Final public Minecraft mc;
+    @Shadow
+    @Final
+    public Minecraft mc;
 
-    @Shadow protected abstract void addDynamicTexture(DynamicTexture texture);
+    @Shadow
+    protected abstract void addDynamicTexture(DynamicTexture texture);
 
     @Inject(
             method = "initDynamicTextures",

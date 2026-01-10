@@ -9,7 +9,7 @@ import toufoumaster.btwaila.tooltips.TooltipRegistry;
 public class BTWailaSIPlugin implements BTWailaCustomTooltipPlugin {
     @Override
     public void initializePlugin(TooltipRegistry tooltipRegistry, Logger logger) {
-        logger.info("Loading tooltips from "+SignalIndustries.MOD_ID+"..");
+        logger.info("Loading tooltips from " + SignalIndustries.MOD_ID + "..");
         tooltipRegistry.register(new FluidTooltip());
         tooltipRegistry.register(new MachineTooltip());
         tooltipRegistry.register(new BoosterTooltip());

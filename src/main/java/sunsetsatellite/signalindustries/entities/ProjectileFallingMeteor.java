@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.entities;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.projectile.Projectile;
-import net.minecraft.core.entity.projectile.ProjectileArrow;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
@@ -44,23 +43,23 @@ public class ProjectileFallingMeteor extends Projectile {
         if (this.world != null) {
             if (blockID == SIBlocks.signalumOre.id()) {
                 for (int j = 0; j < 4; j++) {
-                    this.world.spawnParticle("blueflame",this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,0 ,256);
+                    this.world.spawnParticle("blueflame", this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double) 0.05f, this.yd * (double) 0.05f - (double) 0.1f, this.zd * (double) 0.05f, 0, 256);
                 }
-                this.world.spawnParticle("blueflame",this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,0 ,256);
+                this.world.spawnParticle("blueflame", this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double) 0.05f, this.yd * (double) 0.05f - (double) 0.1f, this.zd * (double) 0.05f, 0, 256);
             } else {
                 for (int j = 0; j < 4; j++) {
-                    this.world.spawnParticle("flame",this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,0 ,256);
+                    this.world.spawnParticle("flame", this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double) 0.05f, this.yd * (double) 0.05f - (double) 0.1f, this.zd * (double) 0.05f, 0, 256);
                 }
-                this.world.spawnParticle("flame",this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double)0.05f, this.yd * (double)0.05f - (double)0.1f, this.zd * (double)0.05f,0 ,256);
+                this.world.spawnParticle("flame", this.x + 0.5f, this.y, this.z + 0.5f, this.xd * (double) 0.05f, this.yd * (double) 0.05f - (double) 0.1f, this.zd * (double) 0.05f, 0, 256);
             }
         }
     }
 
     @Override
     public void onHit(HitResult hitResult) {
-        if(world != null && !world.isClientSide){
-            if(blockID == SIBlocks.signalumOre.id()){
-                EntityItem entityitem = new EntityItem(world, (float)x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3)+1));
+        if (world != null && !world.isClientSide) {
+            if (blockID == SIBlocks.signalumOre.id()) {
+                EntityItem entityitem = new EntityItem(world, (float) x, (float) y, (float) z, new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(3) + 1));
                 if (world != null) {
                     world.entityJoinedWorld(entityitem);
                 }

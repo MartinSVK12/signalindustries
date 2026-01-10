@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.util;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
 
@@ -22,8 +21,8 @@ public class MeteorLocation {
         DILITHIUM,
         UNKNOWN;
 
-        public static Type getFromBlock(Block<?> block){
-            if(block == SIBlocks.signalumOre){
+        public static Type getFromBlock(Block<?> block) {
+            if (block == SIBlocks.signalumOre) {
                 return SIGNALUM;
             } else if (block == SIBlocks.dilithiumOre) {
                 return DILITHIUM;

@@ -12,6 +12,6 @@ public class WorldTypeFXEternity extends WorldTypeFX {
 
     @Override
     public Vec3 getFogColor(World world, double x, double y, double z, float celestialAngle, float partialTick) {
-        return Vec3.getTempVec3(0.7,0.7,0.7);
+        return Vec3.getTempVec3(0.7, 0.7, 0.7);
     }
 }

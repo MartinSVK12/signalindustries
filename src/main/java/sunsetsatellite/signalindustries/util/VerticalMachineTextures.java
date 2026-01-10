@@ -1,10 +1,7 @@
 package sunsetsatellite.signalindustries.util;
 
-import net.minecraft.client.render.texture.stitcher.IconCoordinate;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.signalindustries.blocks.models.BlockModelVerticalMachine;
 
 import java.util.HashMap;
 
@@ -21,7 +18,7 @@ public class VerticalMachineTextures {
         this.overbrightVerticalTextures = (HashMap<Side, String>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new String[Side.values().length], null));
     }
 
-    public VerticalMachineTextures(Tier tier){
+    public VerticalMachineTextures(Tier tier) {
         this.defaultVerticalTextures = (HashMap<Side, String>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new String[Side.values().length], "minecraft:block/texture_unassigned"));
         this.activeVerticalTextures = (HashMap<Side, String>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new String[Side.values().length], "minecraft:block/texture_unassigned"));
         this.overbrightVerticalTextures = (HashMap<Side, String>) Catalyst.mapOf(Side.values(), Catalyst.arrayFill(new String[Side.values().length], null));

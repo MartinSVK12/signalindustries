@@ -10,7 +10,6 @@ import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.util.MachineTextures;
-import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.VerticalMachineTextures;
 
 import java.util.HashMap;
@@ -112,7 +111,7 @@ public class BlockModelVerticalMachine extends BlockModelMachine {
         return verticalMachineTextures;
     }
 
-    public MachineTextures textures(){
+    public MachineTextures textures() {
         return machineTextures;
     }
 }

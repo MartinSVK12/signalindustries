@@ -7,7 +7,6 @@ import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -17,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 
-@Mixin(value = TooltipElement.class,remap = false)
+@Mixin(value = TooltipElement.class, remap = false)
 public class TooltipElementMixin {
 
     @Inject(method = "getTooltipText(Lnet/minecraft/core/item/ItemStack;ZLnet/minecraft/core/player/inventory/slot/Slot;)Ljava/lang/String;", at = @At(value = "INVOKE", target = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;", ordinal = 0, shift = At.Shift.AFTER))
@@ -31,7 +30,7 @@ public class TooltipElementMixin {
                     WeightedRandomBag<WeightedRandomLootObject> bag = recipe.getOutput();
                     double percent = bag.getAsPercentage(slot.getItemStack());
                     WeightedRandomLootObject lootObject = bag.getEntries().get(slot.index);
-                    if(lootObject.isRandomYield()){
+                    if (lootObject.isRandomYield()) {
                         text.append("\n").append(TextFormatting.LIGHT_GRAY).append(String.format("%d-%d", lootObject.getMinYield(), lootObject.getMaxYield()));
                     }
                     text.append('\n').append(TextFormatting.LIGHT_GRAY).append(String.format("%.2f", percent)).append("%");

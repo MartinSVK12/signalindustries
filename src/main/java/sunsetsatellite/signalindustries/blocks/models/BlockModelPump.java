@@ -3,10 +3,8 @@ package sunsetsatellite.signalindustries.blocks.models;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityPump;
@@ -24,7 +22,7 @@ public class BlockModelPump extends BlockModelMachine {
     @Override
     public boolean render(Tessellator tessellator, int x, int y, int z) {
         TileEntityPump tile = (TileEntityPump) renderBlocks.blockAccess.getTileEntity(x, y, z);
-        if(tile != null && tile.currentFluid != null) {
+        if (tile != null && tile.currentFluid != null) {
             IconCoordinate tex = BlockModelDispatcher.getInstance().getDispatch(tile.currentFluid.blocks.get(0)).getBlockTextureFromSideAndMetadata(Side.TOP, 0);
             Vec3f vec = new Vec3f(1).divide(100);
             renderBlocks.overrideBlockTexture = tex;

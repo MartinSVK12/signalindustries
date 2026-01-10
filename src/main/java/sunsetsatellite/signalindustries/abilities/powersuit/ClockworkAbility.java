@@ -7,7 +7,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class ClockworkAbility extends SuitBaseEffectAbility{
+public class ClockworkAbility extends SuitBaseEffectAbility {
     public ClockworkAbility() {
         super(Tier.AWAKENED, SignalIndustries.MOD_ID, "clockwork", 16000, 1800, 100);
     }

@@ -32,6 +32,7 @@ public interface IPowerSuit {
     boolean isActive();
 
     void loadData(CompoundTag suitTag);
+
     void saveData(CompoundTag suitTag);
 
     InventoryPowerSuit getArmorPiece(int i);

@@ -39,14 +39,14 @@ public class ItemBlockSIFluidTank extends ItemBlock<BlockLogicSIFluidTank> {
                             this.block.onBlockPlacedByMob(world, x, y, z, side, player, xPlaced, yPlaced);
                         }
 
-                        TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getTileEntity(x,y,z);
+                        TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getTileEntity(x, y, z);
                         tile.fluidCapacity[0] = (int) Math.pow(2, block.getLogic().tier.ordinal()) * 16000;
                         if (stack.getData().containsKey("Fluid")) {
                             FluidStack fluidStack = new FluidStack(stack.getData().getCompound("Fluid"));
-                            tile.insertFluid(0,fluidStack);
+                            tile.insertFluid(0, fluidStack);
                         }
 
-                        world.playBlockSoundEffect(player, (float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F, this.block, EnumBlockSoundEffectType.PLACE);
+                        world.playBlockSoundEffect(player, (float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F, this.block, EnumBlockSoundEffectType.PLACE);
                         return true;
                     }
 

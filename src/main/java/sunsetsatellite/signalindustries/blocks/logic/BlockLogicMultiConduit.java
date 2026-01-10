@@ -1,7 +1,5 @@
 package sunsetsatellite.signalindustries.blocks.logic;
 
-import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.Blocks;
@@ -9,7 +7,6 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
@@ -17,16 +14,11 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.conduit.IConduitBlock;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
-import sunsetsatellite.signalindustries.screens.ScreenItemIOConfig;
-import sunsetsatellite.signalindustries.screens.ScreenMultiConduitConfig;
 import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
@@ -49,7 +41,7 @@ public class BlockLogicMultiConduit extends BlockLogicTiered {
                 float yr = random.nextFloat() * 0.8F + 0.1F;
                 float zr = random.nextFloat() * 0.8F + 0.1F;
 
-                EntityItem entityitem = new EntityItem(world, (float) x + xr, (float) y + yr, (float) z + zr, new ItemStack((BlockLogic)conduit));
+                EntityItem entityitem = new EntityItem(world, (float) x + xr, (float) y + yr, (float) z + zr, new ItemStack((BlockLogic) conduit));
                 float f3 = 0.05F;
                 entityitem.xd = (float) random.nextGaussian() * f3;
                 entityitem.yd = (float) random.nextGaussian() * f3 + 0.2F;
@@ -65,7 +57,7 @@ public class BlockLogicMultiConduit extends BlockLogicTiered {
         if (player.getCurrentEquippedItem() != null) {
             if (player.getCurrentEquippedItem().itemID < 16384) {
                 Block<?> b = Blocks.getBlock(player.getCurrentEquippedItem().itemID);
-                if(b == null) return false;
+                if (b == null) return false;
                 BlockLogic block = b.getLogic();
                 if (block instanceof IConduitBlock) {
                     IConduitBlock conduit = (IConduitBlock) block;
@@ -86,7 +78,7 @@ public class BlockLogicMultiConduit extends BlockLogicTiered {
                 Vec3i pos = new Vec3i(x, y, z);
                 for (Direction dir : Direction.values()) {
                     Block<?> b = dir.getBlock(world, pos);
-                    if(b == null) continue;
+                    if (b == null) continue;
                     BlockLogic connectedBlock = b.getLogic();
                     if (connectedBlock instanceof IConduitBlock) {
                         normalConduitsConnected = true;

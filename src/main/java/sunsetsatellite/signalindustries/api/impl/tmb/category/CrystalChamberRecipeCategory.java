@@ -76,15 +76,15 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
         RecipeProperties data = recipe.getOriginal().getData();
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
         for (int i = 0; i < 4; i++) {
-            if(i >= input.length){
+            if (i >= input.length) {
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
@@ -100,7 +100,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
         ingredients.add(2, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(3, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(3, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
                 .addInputSlot(1, VanillaTypes.ITEM_STACK).setPosition(x - 20, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(2, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 6).build()
                 .addSlot(3, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(x + 56 + 30, (background.getHeight() / 2) - 6).build()
-                .addInputSlot(4,TMBFluidPlugin.FLUID_STACK).setPosition(14, (background.getHeight() / 2) - 6).build()
+                .addInputSlot(4, TMBFluidPlugin.FLUID_STACK).setPosition(14, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

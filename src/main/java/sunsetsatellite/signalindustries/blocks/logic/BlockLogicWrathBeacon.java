@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWrathBeaconBase;
@@ -57,7 +56,7 @@ public class BlockLogicWrathBeacon extends BlockLogicTiered {
         TileEntityWrathBeaconBase tile = (TileEntityWrathBeaconBase) world.getTileEntity(i, j, k);
         if (tile != null && tile.active) {
             for (Player player : world.players) {
-                if(player.distanceToSqr(i,j,k) > 64) continue;
+                if (player.distanceToSqr(i, j, k) > 64) continue;
                 player.sendMessage("Challenge failed!");
             }
 
@@ -87,8 +86,7 @@ public class BlockLogicWrathBeacon extends BlockLogicTiered {
 
     public static final int MASK_DIRECTION = 0b0000_0111;
 
-    public static net.minecraft.core.util.helper.Direction getDirectionFromMeta(int meta)
-    {
+    public static net.minecraft.core.util.helper.Direction getDirectionFromMeta(int meta) {
         return net.minecraft.core.util.helper.Direction.getDirectionById(meta & MASK_DIRECTION);
     }
 
@@ -107,10 +105,8 @@ public class BlockLogicWrathBeacon extends BlockLogicTiered {
         world.setBlockMetadataWithNotify(x, y, z, BlockLogicRotatable.setDirection(0, side.getDirection()));
     }
 
-    public static void setDefaultDirection(World world, int x, int y, int z)
-    {
-        if(world.isClientSide)
-        {
+    public static void setDefaultDirection(World world, int x, int y, int z) {
+        if (world.isClientSide) {
             return;
         }
         int bN = world.getBlockId(x, y, z - 1);
@@ -118,20 +114,16 @@ public class BlockLogicWrathBeacon extends BlockLogicTiered {
         int bW = world.getBlockId(x - 1, y, z);
         int bE = world.getBlockId(x + 1, y, z);
         net.minecraft.core.util.helper.Direction direction = net.minecraft.core.util.helper.Direction.NORTH;
-        if(Blocks.solid[bN] && !Blocks.solid[bS])
-        {
+        if (Blocks.solid[bN] && !Blocks.solid[bS]) {
             direction = net.minecraft.core.util.helper.Direction.SOUTH;
         }
-        if(Blocks.solid[bS] && !Blocks.solid[bN])
-        {
+        if (Blocks.solid[bS] && !Blocks.solid[bN]) {
             direction = net.minecraft.core.util.helper.Direction.NORTH;
         }
-        if(Blocks.solid[bW] && !Blocks.solid[bE])
-        {
+        if (Blocks.solid[bW] && !Blocks.solid[bE]) {
             direction = net.minecraft.core.util.helper.Direction.EAST;
         }
-        if(Blocks.solid[bE] && !Blocks.solid[bW])
-        {
+        if (Blocks.solid[bE] && !Blocks.solid[bW]) {
             direction = net.minecraft.core.util.helper.Direction.WEST;
         }
         world.setBlockMetadataWithNotify(x, y, z, setDirection(world.getBlockMetadata(x, y, z), direction));

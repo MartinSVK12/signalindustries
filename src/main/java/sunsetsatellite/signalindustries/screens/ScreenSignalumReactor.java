@@ -50,13 +50,13 @@ public class ScreenSignalumReactor extends Screen {
         font.drawCenteredString(I18n.getInstance().translateNameKey("container.signalindustries.reactor"), 128, 6, 0xFFFF0000);
         //fontRenderer.drawCenteredString("State: "+tile.state,128,20,0xFFFFFFFF);
         //fontRenderer.drawCenteredString("Fuel: "+tile.getFuel()+"|"+tile.getDepletedFuel(),128,30,0xFFFFFFFF);
-        float capacity = ((float)(tile.getFuel()+tile.getDepletedFuel())/(4000*9))*100;
-        float fill = 100-((float)tile.getDepletedFuel()/(tile.getFuel()+tile.getDepletedFuel()))*100;
-        if(Float.isNaN(fill)){
+        float capacity = ((float) (tile.getFuel() + tile.getDepletedFuel()) / (4000 * 9)) * 100;
+        float fill = 100 - ((float) tile.getDepletedFuel() / (tile.getFuel() + tile.getDepletedFuel())) * 100;
+        if (Float.isNaN(fill)) {
             fill = 0;
         }
         int color = 0xFFFFFFF;
-        switch (tile.state){
+        switch (tile.state) {
             case INACTIVE:
                 color = 0xFF404040;
                 break;
@@ -67,9 +67,9 @@ public class ScreenSignalumReactor extends Screen {
                 color = 0xFF00FF00;
                 break;
         }
-        font.drawCenteredString(String.format("%.0f%%",fill),128,63,0xFFFFFFFF);
-        font.drawCenteredString(String.valueOf(tile.state),128,77,color);
-        font.drawCenteredString(String.format("%.0f%%",capacity),128,90,0xFF808080);
+        font.drawCenteredString(String.format("%.0f%%", fill), 128, 63, 0xFFFFFFFF);
+        font.drawCenteredString(String.valueOf(tile.state), 128, 77, color);
+        font.drawCenteredString(String.format("%.0f%%", capacity), 128, 90, 0xFF808080);
     }
 
     private void drawGuiContainerBackgroundLayer(float partialTick) {
@@ -79,10 +79,10 @@ public class ScreenSignalumReactor extends Screen {
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
-        int h = (tile.getFuel()+tile.getDepletedFuel()) * 64 / (4000*9);
-        int depletedH = (int) ((tile.getDepletedFuel() * h) / ((tile.getFuel()+tile.getDepletedFuel()) == 0 ? Float.MIN_VALUE : tile.getFuel()+tile.getDepletedFuel()));
-        this.drawTexturedModalRect(x+96, y+50+(64-h), 0, 166+(64-h), 64, h);
-        this.drawTexturedModalRect(x+96, y+50+(64-depletedH), 64, 166+(64-depletedH), 64, depletedH);
+        int h = (tile.getFuel() + tile.getDepletedFuel()) * 64 / (4000 * 9);
+        int depletedH = (int) ((tile.getDepletedFuel() * h) / ((tile.getFuel() + tile.getDepletedFuel()) == 0 ? Float.MIN_VALUE : tile.getFuel() + tile.getDepletedFuel()));
+        this.drawTexturedModalRect(x + 96, y + 50 + (64 - h), 0, 166 + (64 - h), 64, h);
+        this.drawTexturedModalRect(x + 96, y + 50 + (64 - depletedH), 64, 166 + (64 - depletedH), 64, depletedH);
     }
 
     @Override
@@ -95,8 +95,8 @@ public class ScreenSignalumReactor extends Screen {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(button.id == 0) {
-            if(EnvironmentHelper.isClientWorld()){
+        if (button.id == 0) {
+            if (EnvironmentHelper.isClientWorld()) {
                 NetworkHandler.sendToServer(new NetworkMessageReactorStart(tile.getPosition(), tile.getClass()));
             }
             tile.start();
@@ -109,8 +109,7 @@ public class ScreenSignalumReactor extends Screen {
     }
 
     @Override
-    public void init()
-    {
+    public void init() {
         buttons.add(new ButtonElement(0, Math.round((float) width / 2) - 30, Math.round((float) height / 2) + 50, 60, 20, "ON/OFF"));
         super.init();
     }

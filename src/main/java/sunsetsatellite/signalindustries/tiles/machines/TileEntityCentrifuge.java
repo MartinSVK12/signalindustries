@@ -1,11 +1,10 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Global;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.*;
+import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 
@@ -14,11 +13,11 @@ import java.util.Arrays;
 
 
 public class TileEntityCentrifuge extends TileEntityTieredMachineSimple implements IBoostable {
-    public TileEntityCentrifuge(){
+    public TileEntityCentrifuge() {
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[5];
         fluidCapacity = new int[5];
-        Arrays.fill(fluidCapacity,8000);
+        Arrays.fill(fluidCapacity, 8000);
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
@@ -31,7 +30,7 @@ public class TileEntityCentrifuge extends TileEntityTieredMachineSimple implemen
 
         energySlot = 4;
         itemOutputs = new int[]{0};
-        fluidInputs = new int[]{0,1,2,3};
+        fluidInputs = new int[]{0, 1, 2, 3};
         recipeGroup = SIRecipes.CENTRIFUGE;
 
     }

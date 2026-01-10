@@ -4,7 +4,6 @@ import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.gui.achievements.data.AchievementPage;
 import net.minecraft.client.gui.achievements.data.AchievementPages;
 import net.minecraft.core.achievement.Achievement;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
@@ -70,7 +69,7 @@ public class SIAchievements extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing achievements...");
 
         INIT = new Achievement(id("init"), langKey("init"), SIItems.rawSignalumCrystal, null).setType(Achievement.TYPE_SPECIAL);
@@ -178,7 +177,7 @@ public class SIAchievements extends DataInitializer {
         AchievementPages.register(SIGNAL_INDUSTRIES);
 
         if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
-            if(SIConfig.config.getBoolean("Other.enableQuests")){
+            if (SIConfig.config.getBoolean("Other.enableQuests")) {
                 new VintageQuestingSIPlugin().initializePlugin();
             }
         }

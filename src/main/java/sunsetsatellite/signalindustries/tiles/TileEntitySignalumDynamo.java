@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.tiles;
 
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredEnergyGenerator;
@@ -11,7 +10,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
 
     public int cost;
 
-    public TileEntitySignalumDynamo(){
+    public TileEntitySignalumDynamo() {
         cost = 5;
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[1];
@@ -25,18 +24,18 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         extractFluids();
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
 
-        if(!worldObj.isClientSide){
-            if(isBurning() && canProcess()){
+        if (!worldObj.isClientSide) {
+            if (isBurning() && canProcess()) {
                 generateEnergy(25);
-            } else if(canProcess()){
+            } else if (canProcess()) {
                 fuel();
-                if(fuelBurnTicks > 0){
+                if (fuelBurnTicks > 0) {
                     fuelBurnTicks++;
                 }
             }
@@ -55,12 +54,12 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
 
     }
 
-    public boolean fuel(){
+    public boolean fuel() {
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
-        if(burn > 0 && canProcess() && fluidContents[0].amount >= cost){
+        if (burn > 0 && canProcess() && fluidContents[0].amount >= cost) {
             fuelMaxBurnTicks = fuelBurnTicks = burn;
             fluidContents[0].amount -= cost;
-            if(fluidContents[0].amount == 0) {
+            if (fluidContents[0].amount == 0) {
                 fluidContents[0] = null;
             }
             return true;
@@ -69,7 +68,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
     }
 
     private boolean canProcess() {
-        if(fluidContents[0] == null) {
+        if (fluidContents[0] == null) {
             return false;
         } else {
             return fluidContents[0].fluid == SIFluids.ENERGY && fluidContents[0].amount >= cost && getEnergy() < getCapacity();

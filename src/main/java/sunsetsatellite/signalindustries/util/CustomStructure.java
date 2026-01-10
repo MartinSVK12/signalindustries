@@ -31,17 +31,16 @@ public class CustomStructure extends Structure {
 
     @Override
     public String getFullFilePath() {
-        return world.getSaveHandler().getDataFile("struct_"+translateKey).getPath();
+        return world.getSaveHandler().getDataFile("struct_" + translateKey).getPath();
     }
 
     @Override
     protected void loadFromNBT(String id) {
         try {
-            File file = world.getSaveHandler().getDataFile("struct_"+id);
+            File file = world.getSaveHandler().getDataFile("struct_" + id);
             if (file == null) return;
             data = NbtIo.readCompressed(Files.newInputStream(file.toPath()));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             SignalIndustries.LOGGER.error("Failed to load structure: " + id);
             e.printStackTrace();
         }

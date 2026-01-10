@@ -7,11 +7,8 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.menus.MenuInfuser;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityInfuser;
 
 public class ScreenInfuser extends ScreenMachineSimple {
@@ -29,7 +26,7 @@ public class ScreenInfuser extends ScreenMachineSimple {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/infuser_basic.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/infuser_basic.png");
                 break;
@@ -43,15 +40,15 @@ public class ScreenInfuser extends ScreenMachineSimple {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 9, y + 39 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(x + 79, y + 35, 176, 14, counter + 1, 18);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -59,7 +56,7 @@ public class ScreenInfuser extends ScreenMachineSimple {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -91,11 +88,11 @@ public class ScreenInfuser extends ScreenMachineSimple {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

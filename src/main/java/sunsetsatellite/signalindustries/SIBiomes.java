@@ -12,7 +12,7 @@ public class SIBiomes extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing biomes...");
         biomeEternity = Biomes.register("signalindustries:eternity", new Biome("eternity").setFillerBlock(SIBlocks.realityFabric.id()).setTopBlock(SIBlocks.realityFabric.id()).setColor(0x808080));
         setInitialized(true);

@@ -12,7 +12,7 @@ import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.render.RenderMultiblockInGUI;
 
 public class MultiblockPage
-    extends GuidebookPage {
+        extends GuidebookPage {
     public final Multiblock multiblock;
 
 
@@ -23,18 +23,18 @@ public class MultiblockPage
 
     @Override
     protected void renderBackground(TextureManager re, int x, int y) {
-        super.renderBackground(re,x,y);
+        super.renderBackground(re, x, y);
     }
 
     @Override
     protected void renderForeground(TextureManager re, Font fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        if(multiblock != null){
+        if (multiblock != null) {
             drawStringCenteredNoShadow(fr, I18n.getInstance().translateNameKey(multiblock.translateKey), x + 158 / 2, y + 10, 0x000000);
         } else {
-            drawStringCenteredNoShadow(fr,"No results :(" ,x+width/2,y+height/2,0xFF808080);
+            drawStringCenteredNoShadow(fr, "No results :(", x + width / 2, y + height / 2, 0xFF808080);
         }
 
-        renderMultiblock(re,fr,x, y, mouseX, mouseY, partialTicks);
+        renderMultiblock(re, fr, x, y, mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MultiblockPage
     }
 
     private void renderMultiblock(TextureManager re, Font fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        if(multiblock == null) return;
+        if (multiblock == null) return;
 
         float heightFactor = 50f / 1.8f;
 
@@ -52,7 +52,7 @@ public class MultiblockPage
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        GL11.glScissor(x  * mc.resolution.getScale(), y * mc.resolution.getScale(), 158 * mc.resolution.getScale(), 220 * mc.resolution.getScale()); //158, 220
+        GL11.glScissor(x * mc.resolution.getScale(), y * mc.resolution.getScale(), 158 * mc.resolution.getScale(), 220 * mc.resolution.getScale()); //158, 220
 
         GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
         GL11.glEnable(2903 /*GL_COLOR_MATERIAL*/);
@@ -62,16 +62,16 @@ public class MultiblockPage
         float f1 = 12F;
         GL11.glScalef(-f1, f1, f1);
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        float f5 = (float)(x + 78) - mouseX;
-        float f6 = (float)(y + 44 + 32) - (heightFactor * 1) - mouseY;
+        float f5 = (float) (x + 78) - mouseX;
+        float f6 = (float) (y + 44 + 32) - (heightFactor * 1) - mouseY;
         GL11.glRotatef(135F, 0.0F, 1.0F, 0.0F);
         Lighting.enableLight();
         GL11.glRotatef(-135F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(-(float)Math.atan(f6 / 40F) * 60F, 1.0F, 0.0F, 0.0F);
-        GL11.glRotatef(-(float)Math.atan(f5 / 40F) * 80F,0,1F,0);
+        GL11.glRotatef(-(float) Math.atan(f6 / 40F) * 60F, 1.0F, 0.0F, 0.0F);
+        GL11.glRotatef(-(float) Math.atan(f5 / 40F) * 80F, 0, 1F, 0);
         GL11.glTranslatef(0.0F, 0, 0.0F);
         RenderMultiblockInGUI r = new RenderMultiblockInGUI();
-        r.doRender(multiblock,re,fr,0,0,0,0);
+        r.doRender(multiblock, re, fr, 0, 0, 0, 0);
         GL11.glPopMatrix();
         Lighting.disable();
         GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);

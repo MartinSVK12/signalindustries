@@ -7,9 +7,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class TestingAbility extends SuitBaseAbility{
+public class TestingAbility extends SuitBaseAbility {
     public TestingAbility() {
-        super(Tier.REINFORCED, SignalIndustries.MOD_ID,"testingAbility",100,60);
+        super(Tier.REINFORCED, SignalIndustries.MOD_ID, "testingAbility", 100, 60);
     }
 
     @Override

@@ -14,14 +14,13 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
         remap = false
 )
 public class GameSettingsMixin
-    implements IKeybinds
-{
+        implements IKeybinds {
 
     @Unique
-    private final GameSettings thisAs = ((GameSettings)(Object)this);
+    private final GameSettings thisAs = ((GameSettings) (Object) this);
 
     @Unique
-    public OptionBoolean showSuitBackground = new OptionBoolean(thisAs,"signalindustries.showSuitBackground",true);
+    public OptionBoolean showSuitBackground = new OptionBoolean(thisAs, "signalindustries.showSuitBackground", true);
 
     @Unique
     @Override
@@ -30,13 +29,13 @@ public class GameSettingsMixin
     }
 
     @Unique
-    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bind(InputDevice.keyboard,24);
+    public KeyBinding keyOpenSuit = new KeyBinding("key.signalindustries.openSuit").bind(InputDevice.keyboard, 24);
 
     @Unique
-    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility").bind(InputDevice.keyboard,54);
+    public KeyBinding keyActivateAbility = new KeyBinding("key.signalindustries.activateAbility").bind(InputDevice.keyboard, 54);
 
     @Unique
-    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bind(InputDevice.keyboard,50);
+    public KeyBinding keySwitchMode = new KeyBinding("key.signalindustries.switchMode").bind(InputDevice.keyboard, 50);
 
     @Unique
     public KeyBinding keyRazielIndex = new KeyBinding("key.signalindustries.razielIndex").bind(InputDevice.keyboard, 23);

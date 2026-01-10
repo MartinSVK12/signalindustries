@@ -4,7 +4,6 @@ import net.minecraft.client.render.block.model.BlockModelRail;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.Blocks;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.SIBlocks;
@@ -19,18 +18,15 @@ public class BlockModelDilithiumRail extends BlockModelRail<BlockLogicDilithiumR
     }
 
     @Override
-    public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side)
-    {
+    public IconCoordinate getBlockOverbrightTexture(WorldSource blockAccess, int x, int y, int z, int side) {
         if (!block.getLogic().isPowered || (blockAccess.getBlockMetadata(x, y, z) & 8) == 0) return null;
 
         return powerActiveOverlay;
     }
 
     @Override
-    public IconCoordinate getBlockTextureFromSideAndMetadata(Side side, int data)
-    {
-        if(block == SIBlocks.dilithiumRail && (data & 8) != 0)
-        {
+    public IconCoordinate getBlockTextureFromSideAndMetadata(Side side, int data) {
+        if (block == SIBlocks.dilithiumRail && (data & 8) != 0) {
             return powerActive;
         }
         return super.getBlockTextureFromSideAndMetadata(side, data);

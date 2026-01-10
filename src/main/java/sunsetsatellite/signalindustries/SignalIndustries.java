@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries;
 
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
@@ -14,7 +15,6 @@ import net.minecraft.core.world.chunk.ChunkCoordinates;
 import net.minecraft.core.world.save.LevelStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.fabricmc.api.ModInitializer;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Signal;
@@ -58,15 +58,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static List<MeteorLocation> meteorLocations = new ArrayList<>();
     public static List<ChunkCoordinates> chunkLoaders = new ArrayList<>();
     public static Set<BlockInstance> uvLamps = new HashSet<>();
-    public static HashMap<String,CustomStructure> customStructures = new HashMap<>();
+    public static HashMap<String, CustomStructure> customStructures = new HashMap<>();
     public static boolean bloodMoonsDisabled = false;
 
-    public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"harness",1200,10,10,10,10);
-    public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID,"power_suit",9999,50,50,50,50);
+    public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "harness", 1200, 10, 10, 10, 10);
+    public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "power_suit", 9999, 50, 50, 50, 50);
 
-    public static final ToolMaterial toolMaterialBasic = new ToolMaterial().setDurability(9999).setMiningLevel(3).setEfficiency(25,50);
-    public static final ToolMaterial toolMaterialReinforced = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.dilithiumMiningLevel")).setEfficiency(45,80);
-    public static final ToolMaterial toolMaterialAwakened = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.awakenedMiningLevel")).setEfficiency(60,100);
+    public static final ToolMaterial toolMaterialBasic = new ToolMaterial().setDurability(9999).setMiningLevel(3).setEfficiency(25, 50);
+    public static final ToolMaterial toolMaterialReinforced = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.dilithiumMiningLevel")).setEfficiency(45, 80);
+    public static final ToolMaterial toolMaterialAwakened = new ToolMaterial().setDurability(9999).setMiningLevel(config.getInt("Other.awakenedMiningLevel")).setEfficiency(60, 100);
 
     public static final Tag<Block<?>> SIGNALUM_CONDUITS_CONNECT = Tag.of("signalum_conduits_connect");
     public static final Tag<Block<?>> FLUID_CONDUITS_CONNECT = Tag.of("fluid_conduits_connect");
@@ -132,18 +132,18 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityChunkloader.class, id("chunkloader"));
         EntityHelper.createTileEntity(TileEntityWarpGate.class, id("warp_gate"));
         EntityHelper.createTileEntity(TileEntityMultiConduit.class, id("multi_conduit"));
-        EntityHelper.createTileEntity(TileEntityProgrammer.class,id("programmer"));
-        EntityHelper.createTileEntity(TileEntityReinforcedWrathBeacon.class,id("reinforced_wrath_beacon"));
-        EntityHelper.createTileEntity(TileEntityWrathBeacon.class,id("wrath_beacon"));
-        EntityHelper.createTileEntity(TileEntityUVLamp.class,id("uv_lamp"));
-        EntityHelper.createTileEntity(TileEntityPulsar.class,id("pulsar"));
-        EntityHelper.createTileEntity(TileEntityBonsaiPot.class,id("bonsai"));
-        EntityHelper.createTileEntity(TileEntityLaserDrill.class,id("laser_drill"));
-        EntityHelper.createTileEntity(TileEntityGreenhouse.class,id("greenhouse"));
-        EntityHelper.createTileEntity(TileEntityEncapsulator.class,id("encapsulator"));
-        EntityHelper.createTileEntity(TileEntityPedestal.class,id("pedestal"));
-        EntityHelper.createTileEntity(TileEntitySITrommel.class,id("trommel"));
-        EntityHelper.createTileEntity(TileEntityRedstoneClock.class,id("redstone_clock"));
+        EntityHelper.createTileEntity(TileEntityProgrammer.class, id("programmer"));
+        EntityHelper.createTileEntity(TileEntityReinforcedWrathBeacon.class, id("reinforced_wrath_beacon"));
+        EntityHelper.createTileEntity(TileEntityWrathBeacon.class, id("wrath_beacon"));
+        EntityHelper.createTileEntity(TileEntityUVLamp.class, id("uv_lamp"));
+        EntityHelper.createTileEntity(TileEntityPulsar.class, id("pulsar"));
+        EntityHelper.createTileEntity(TileEntityBonsaiPot.class, id("bonsai"));
+        EntityHelper.createTileEntity(TileEntityLaserDrill.class, id("laser_drill"));
+        EntityHelper.createTileEntity(TileEntityGreenhouse.class, id("greenhouse"));
+        EntityHelper.createTileEntity(TileEntityEncapsulator.class, id("encapsulator"));
+        EntityHelper.createTileEntity(TileEntityPedestal.class, id("pedestal"));
+        EntityHelper.createTileEntity(TileEntitySITrommel.class, id("trommel"));
+        EntityHelper.createTileEntity(TileEntityRedstoneClock.class, id("redstone_clock"));
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");
@@ -153,10 +153,10 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createEntity(EntityRealityTear.class, id("reality_tear"), "entity.signalindustries.realityTear");
         EntityHelper.createEntity(EntityShockwave.class, id("shockwave"), "entity.signalindustries.shockwave");
 
-        NetEntityHandler.registerNetworkEntry(new NetEntryVolatileCrystal(),config.getInt("EntityIDs.volatileCrystalId"));
-        NetEntityHandler.registerNetworkEntry(new NetEntryFallingMeteor(),config.getInt("EntityIDs.fallingMeteorId"));
-        NetEntityHandler.registerNetworkEntry(new NetEntryEnergyOrb(),config.getInt("EntityIDs.energyOrbId"));
-        NetEntityHandler.registerNetworkEntry(new NetEntrySunbeam(),config.getInt("EntityIDs.sunbeamId"));
+        NetEntityHandler.registerNetworkEntry(new NetEntryVolatileCrystal(), config.getInt("EntityIDs.volatileCrystalId"));
+        NetEntityHandler.registerNetworkEntry(new NetEntryFallingMeteor(), config.getInt("EntityIDs.fallingMeteorId"));
+        NetEntityHandler.registerNetworkEntry(new NetEntryEnergyOrb(), config.getInt("EntityIDs.energyOrbId"));
+        NetEntityHandler.registerNetworkEntry(new NetEntrySunbeam(), config.getInt("EntityIDs.sunbeamId"));
 
         NetworkHandler.registerNetworkMessage(NetworkMessageRecipeIdChange::new);
         NetworkHandler.registerNetworkMessage(NetworkMessageIOChange::new);
@@ -203,15 +203,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         SIRecipes.loadSpecial();
     }
 
-    public static void addMeteorLocation(MeteorLocation location){
+    public static void addMeteorLocation(MeteorLocation location) {
         meteorLocations.add(location);
-        if(EnvironmentHelper.isServerEnvironment()){
+        if (EnvironmentHelper.isServerEnvironment()) {
             NetworkHandler.sendToAllPlayers(new NetworkMessageMeteorLocationSync(location));
         }
     }
 
     public static int getEnergyBurnTime(FluidStack stack) {
-        if(stack == null) {
+        if (stack == null) {
             return 0;
         } else {
             return stack.isFluidEqual(new FluidStack(SIFluids.ENERGY)) ? 200 : 0;
@@ -222,15 +222,15 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         return NamespaceID.getPermanent(MOD_ID, id);
     }
 
-    public static String key(String key){
-        return MOD_ID+":"+key;
+    public static String key(String key) {
+        return MOD_ID + ":" + key;
     }
 
-    public static String langKey(String key){
-        return MOD_ID+"."+key;
+    public static String langKey(String key) {
+        return MOD_ID + "." + key;
     }
 
-    public static boolean hasItems(List<RecipeSymbol> symbols, List<ItemStack> available){
+    public static boolean hasItems(List<RecipeSymbol> symbols, List<ItemStack> available) {
         symbols.removeIf(Objects::isNull);
         List<ItemStack> copy = available.stream().map(ItemStack::copy).collect(Collectors.toList());
         int s = 0;
@@ -238,8 +238,8 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         label:
         for (RecipeSymbol symbol : symbols) {
             for (ItemStack stack : copy) {
-                if(symbol.matches(stack)){
-                    if(stack == null || stack.stackSize <= 0) continue;
+                if (symbol.matches(stack)) {
+                    if (stack == null || stack.stackSize <= 0) continue;
                     stack.stackSize--;
                     s++;
                     continue label;
@@ -249,14 +249,14 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         return s == sReq;
     }
 
-    public static Structure getStructureFromBlueprint(ItemStack blueprint, World world){
-        if(blueprint != null && blueprint.getItem() instanceof ItemBlueprint) {
+    public static Structure getStructureFromBlueprint(ItemStack blueprint, World world) {
+        if (blueprint != null && blueprint.getItem() instanceof ItemBlueprint) {
             String key = blueprint.getData().getStringOrDefault("multiblock", "");
             String customKey = blueprint.getData().getStringOrDefault("structure", "");
             if (!key.isEmpty()) {
                 return Multiblock.multiblocks.get(key.replace("multiblock.signalindustries.", ""));
             } else if (!customKey.isEmpty()) {
-                if(SignalIndustries.customStructures.containsKey(customKey)){
+                if (SignalIndustries.customStructures.containsKey(customKey)) {
                     return SignalIndustries.customStructures.get(customKey);
                 } else {
                     CustomStructure structure = new CustomStructure(customKey, world, false, false);

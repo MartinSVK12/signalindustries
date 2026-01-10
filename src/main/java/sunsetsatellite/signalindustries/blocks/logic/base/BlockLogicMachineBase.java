@@ -55,7 +55,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
             return false;
         }
 
-        Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player, side, new Vec2f(xHit,yHit));
+        Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player, side, new Vec2f(xHit, yHit));
         Side playerFacing = Catalyst.calculatePlayerFacing(player.yRot);
         if (pairIsInvalid(pair)) {
             return false;
@@ -73,7 +73,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
 
     @Override
     public void onBlockRemoved(World world, int x, int y, int z, int data) {
-        if(!EnvironmentHelper.isClientWorld()){
+        if (!EnvironmentHelper.isClientWorld()) {
             TileEntity tile = world.getTileEntity(x, y, z);
             if (tile instanceof TileEntityCoverable) {
                 Direction[] covers = ((TileEntityCoverable) tile).getCovers().keySet().toArray(new Direction[0]);

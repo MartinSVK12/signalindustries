@@ -6,7 +6,7 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public abstract class SuitBaseEffectAbility extends SuitBaseAbility{
+public abstract class SuitBaseEffectAbility extends SuitBaseAbility {
 
     public int effectTime = 0;
 
@@ -16,11 +16,15 @@ public abstract class SuitBaseEffectAbility extends SuitBaseAbility{
     }
 
     public abstract void deactivate(int x, int y, int z, Player player, World world, IPowerSuit powerSuit);
+
     public abstract void deactivate(Player player, World world, IPowerSuit powerSuit);
+
     public abstract void deactivate(Player player, Entity target, World world, IPowerSuit powerSuit);
 
     public abstract void tick(int x, int y, int z, Player player, World world, IPowerSuit powerSuit);
+
     public abstract void tick(Player player, World world, IPowerSuit powerSuit);
+
     public abstract void tick(Player player, Entity target, World world, IPowerSuit powerSuit);
 
 }

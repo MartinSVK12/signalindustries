@@ -10,7 +10,6 @@ import net.minecraft.core.net.packet.PacketAddEntity;
 import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
 import sunsetsatellite.signalindustries.entities.ProjectileEnergyOrb;
 
 public class NetEntryEnergyOrb implements IVehicleEntry<ProjectileEnergyOrb>, ITrackedEntry<ProjectileEnergyOrb> {

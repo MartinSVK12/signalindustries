@@ -14,7 +14,7 @@ public class ItemRaziel extends ItemWithUtility {
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world) {
 
     }
 }

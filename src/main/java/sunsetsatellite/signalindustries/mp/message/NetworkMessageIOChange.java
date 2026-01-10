@@ -3,14 +3,12 @@ package sunsetsatellite.signalindustries.mp.message;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
-import net.minecraft.core.util.helper.Side;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
@@ -34,7 +32,8 @@ public class NetworkMessageIOChange implements NetworkMessage {
         this.tileClass = tileClass;
     }
 
-    public NetworkMessageIOChange() {}
+    public NetworkMessageIOChange() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -60,20 +59,20 @@ public class NetworkMessageIOChange implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
                 switch (io) {
                     case NONE:
                         return;
                     case ITEM:
-                        if(tileClass == tileEntity.getClass() && tileEntity instanceof IItemIO) {
+                        if (tileClass == tileEntity.getClass() && tileEntity instanceof IItemIO) {
                             ((IItemIO) tileEntity).setItemIOForSide(dir, connection);
                             ((IItemIO) tileEntity).setActiveItemSlotForSide(dir, slot);
                         }
                         break;
                     case FLUID:
-                        if(tileClass == tileEntity.getClass() && tileEntity instanceof IFluidIO) {
+                        if (tileClass == tileEntity.getClass() && tileEntity instanceof IFluidIO) {
                             ((IFluidIO) tileEntity).setFluidIOForSide(dir, connection);
                             ((IFluidIO) tileEntity).setActiveFluidSlotForSide(dir, slot);
                         }

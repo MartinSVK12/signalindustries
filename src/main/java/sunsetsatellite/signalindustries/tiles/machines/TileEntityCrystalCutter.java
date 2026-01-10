@@ -5,7 +5,9 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
-import sunsetsatellite.signalindustries.*;
+import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple implements IBoostable {
 
-    public TileEntityCrystalCutter(){
+    public TileEntityCrystalCutter() {
         itemContents = new ItemStack[2];
         fluidContents = new FluidStack[2];
         fluidCapacity = new int[2];
@@ -43,18 +45,18 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
 
     @Override
     public void tick() {
-        fluidCapacity[1] = (int) (1000 * (Math.pow(2,tier.ordinal())));
+        fluidCapacity[1] = (int) (1000 * (Math.pow(2, tier.ordinal())));
         super.tick();
     }
 
     @Override
     public void processItem() {
         super.processItem();
-        if(itemContents[itemOutputs[0]].getItem().equals(SIItems.signalumCrystalEmpty)){
-            if(fluidContents[energySlot] != null && fluidContents[energySlot].amount+1000 <= fluidCapacity[energySlot]){
+        if (itemContents[itemOutputs[0]].getItem().equals(SIItems.signalumCrystalEmpty)) {
+            if (fluidContents[energySlot] != null && fluidContents[energySlot].amount + 1000 <= fluidCapacity[energySlot]) {
                 fluidContents[energySlot].amount += 1000;
-            } else if(fluidContents[energySlot] == null){
-                fluidContents[energySlot] = new FluidStack(SIFluids.ENERGY,1000);
+            } else if (fluidContents[energySlot] == null) {
+                fluidContents[energySlot] = new FluidStack(SIFluids.ENERGY, 1000);
             }
         }
     }

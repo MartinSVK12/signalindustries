@@ -12,22 +12,22 @@ import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
-@Mixin(value = MenuCrafting.class,remap = false)
+@Mixin(value = MenuCrafting.class, remap = false)
 public class MenuCraftingMixin {
 
-    @Inject(method = "stillValid",at = @At("HEAD"), cancellable = true)
+    @Inject(method = "stillValid", at = @At("HEAD"), cancellable = true)
     public void isUsableByPlayer(Player entityplayer, CallbackInfoReturnable<Boolean> cir) {
         SignalumPowerSuit powerSuit = ((IPlayerPowerSuit<SignalumPowerSuit>) entityplayer).getPowerSuit();
-        if(powerSuit != null && powerSuit.active && powerSuit.module != null){
+        if (powerSuit != null && powerSuit.active && powerSuit.module != null) {
             for (ItemStack content : powerSuit.module.contents) {
-                if(content != null && content.getItem() instanceof ItemPortableWorkbench){
+                if (content != null && content.getItem() instanceof ItemPortableWorkbench) {
                     cir.setReturnValue(true);
                     return;
                 }
             }
         }
         for (ItemStack content : entityplayer.inventory.mainInventory) {
-            if(content != null && content.getItem() instanceof ItemPortableWorkbench){
+            if (content != null && content.getItem() instanceof ItemPortableWorkbench) {
                 cir.setReturnValue(true);
                 return;
             }

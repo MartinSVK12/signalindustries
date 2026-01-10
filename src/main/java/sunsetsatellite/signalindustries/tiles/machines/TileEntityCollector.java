@@ -1,11 +1,9 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -24,7 +22,7 @@ import java.util.Random;
 public class TileEntityCollector extends TileEntityTieredMachineBase implements IBoostable {
 
     public RecipeGroupSI<?> recipeGroup;
-    public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
+    public RecipeEntrySI<?, ?, RecipeProperties> currentRecipe;
     public int recipeId = 0;
     public boolean enhanced = false;
 
@@ -33,7 +31,7 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
     public Random random = new Random();
 
 
-    public TileEntityCollector(){
+    public TileEntityCollector() {
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
@@ -43,22 +41,22 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         recipeGroup = SIRecipes.COLLECTOR;
     }
 
-    public void work(){
+    public void work() {
         boolean update = false;
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
-        if(areAllInputsNull()){
+        if (areAllInputsNull()) {
             progressTicks = 0;
             fuelBurnTicks = 0;
-        } else if(canProcess()) {
+        } else if (canProcess()) {
             progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
             fuelBurnTicks = 1;
         }
-        if(!worldObj.isClientSide){
-            if(isBurning() && canProcess()){
+        if (!worldObj.isClientSide) {
+            if (isBurning() && canProcess()) {
                 progressTicks++;
-                if(progressTicks >= progressMaxTicks){
+                if (progressTicks >= progressMaxTicks) {
                     progressTicks = 0;
                     processItem();
                     update = true;
@@ -66,22 +64,22 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
             }
         }
 
-        if(update) {
+        if (update) {
             this.setChanged();
         }
     }
 
-    public void processItem(){
-        if(canProcess()){
+    public void processItem() {
+        if (canProcess()) {
             if (currentRecipe instanceof RecipeEntryMachineFluid) {
                 RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
                 FluidStack fluidStack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
                 if (fluidStack != null) {
-                    if(random.nextFloat() <= recipe.getData().chance) {
+                    if (random.nextFloat() <= recipe.getData().chance) {
                         int multiplier = 1;
-                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
-                        if(fraction <= 0) fraction = 1;
-                        if(yield > 1 && random.nextFloat() <= fraction){
+                        float fraction = Float.parseFloat("0." + (String.valueOf(yield).split("\\.")[1]));
+                        if (fraction <= 0) fraction = 1;
+                        if (yield > 1 && random.nextFloat() <= fraction) {
                             multiplier = (int) Math.ceil(yield);
                         }
                         if (fluidContents[fluidOutputs[0]] == null) {
@@ -96,12 +94,12 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         }
     }
 
-    public boolean canProcess(){
+    public boolean canProcess() {
         if (currentRecipe instanceof RecipeEntryMachineFluid) {
-            if(!worldObj.canExistingBlockSeeTheSky(x,y,z)) return false;
+            if (!worldObj.canExistingBlockSeeTheSky(x, y, z)) return false;
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
             FluidStack fluidStack = recipe.getOutput();
-            if(fluidStack == null){
+            if (fluidStack == null) {
                 return false;
             }
             return areFluidOutputsValid(fluidStack);
@@ -109,13 +107,13 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         return false;
     }
 
-    public boolean areFluidOutputsValid(FluidStack stack){
+    public boolean areFluidOutputsValid(FluidStack stack) {
         for (int fluidOutput : fluidOutputs) {
             FluidStack outputStack = getFluidInSlot(fluidOutput);
             if (outputStack != null) {
                 if (outputStack.isFluidEqual(stack)) {
-                    if(yield > 1){
-                        if (stack.amount*Math.ceil(yield) > getRemainingCapacity(fluidOutput)) {
+                    if (yield > 1) {
+                        if (stack.amount * Math.ceil(yield) > getRemainingCapacity(fluidOutput)) {
                             return false;
                         }
                     } else {
@@ -131,33 +129,33 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         return true;
     }
 
-    public boolean areAllInputsNull(){
+    public boolean areAllInputsNull() {
         return Arrays.stream(itemInputs).allMatch(slot -> itemContents[slot] == null);
     }
 
-    public void setCurrentRecipe(){
+    public void setCurrentRecipe() {
         ArrayList<RecipeExtendedSymbol> symbols = new ArrayList<>();
-        Arrays.stream(itemInputs).forEach((id)->{
+        Arrays.stream(itemInputs).forEach((id) -> {
             if (getItem(id) != null) {
                 symbols.add(new RecipeExtendedSymbol(getItem(id)));
             }
         });
-        currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]),tier,recipeId);
+        currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]), tier, recipeId);
     }
 
     @Override
     public void tick() {
         super.tick();
         extractFluids();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
-        if(getBlock() != null){
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
+        if (getBlock() != null) {
             setCurrentRecipe();
-            if(!disabled) work();
-            if(!enhanced){
+            if (!disabled) work();
+            if (!enhanced) {
                 double distance = 24;
                 for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
                     Vec3i location = meteorLocation.location;
-                    if(location.getSqDistanceTo(x, y, z) < distance && meteorLocation.type == MeteorLocation.Type.SIGNALUM){
+                    if (location.getSqDistanceTo(x, y, z) < distance && meteorLocation.type == MeteorLocation.Type.SIGNALUM) {
                         enhanced = true;
                     }
                 }

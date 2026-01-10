@@ -14,7 +14,7 @@ public class MenuSITrommel extends MenuMachine {
         this.addSlot(new Slot(tile, 2, 125, 50));
         this.addSlot(new Slot(tile, 3, 105, 70));
 
-        this.addFluidSlot(new SlotFluid(tile, 0, 33,30));
+        this.addFluidSlot(new SlotFluid(tile, 0, 33, 30));
 
         this.addSlot(new Slot(tile, 4, 33, 70));
 

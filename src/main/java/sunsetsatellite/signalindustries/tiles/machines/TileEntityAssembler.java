@@ -15,7 +15,6 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -43,8 +42,8 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     public void tick() {
         super.tick();
         extractFluids();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
-        if(getBlock() != null && worldObj != null){
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
+        if (getBlock() != null && worldObj != null) {
             work();
         }
     }
@@ -53,59 +52,58 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     public void applyModifiers() {
         super.applyModifiers();
         yield = 1;
-        if(speedMultiplier > 1){
+        if (speedMultiplier > 1) {
             speedMultiplier *= 1.25f;
         }
     }
 
     private void work() {
         boolean update = false;
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
-        if(!canProcess()){
+        if (!canProcess()) {
             progressTicks = 0;
-        } else
-        if(canProcess()) {
+        } else if (canProcess()) {
             progressMaxTicks = (int) (90 / speedMultiplier);
         }
-        if(!worldObj.isClientSide){
-            if (progressTicks == 0 && canProcess()){
+        if (!worldObj.isClientSide) {
+            if (progressTicks == 0 && canProcess()) {
                 update = fuel();
             }
-            if(isBurning() && canProcess()){
+            if (isBurning() && canProcess()) {
                 progressTicks++;
-                if(progressTicks >= progressMaxTicks){
+                if (progressTicks >= progressMaxTicks) {
                     progressTicks = 0;
                     processItem();
                     update = true;
                 }
-            } else if(canProcess()){
+            } else if (canProcess()) {
                 fuel();
-                if(fuelBurnTicks > 0){
+                if (fuelBurnTicks > 0) {
                     fuelBurnTicks++;
                 }
             }
         }
 
-        if(update) {
+        if (update) {
             this.setChanged();
         }
     }
 
     public void processItem() {
-        if(!canProcess()) return;
-        if(recipe == null) return;
+        if (!canProcess()) return;
+        if (recipe == null) return;
         ArrayList<ItemStack> condensedInv = Catalyst.condenseItemList(Arrays.asList(itemContents));
         ArrayList<RecipeSymbol> recipeInputs = new ArrayList<>();
-        if(recipe.getInput() instanceof RecipeSymbol[]){
+        if (recipe.getInput() instanceof RecipeSymbol[]) {
             recipeInputs = new ArrayList<>(Arrays.asList(((RecipeSymbol[]) recipe.getInput())));
         } else if (recipe.getInput() instanceof List) {
             recipeInputs = (ArrayList<RecipeSymbol>) recipe.getInput();
         }
-        if(recipeInputs.isEmpty()) return;
+        if (recipeInputs.isEmpty()) return;
         recipeInputs.removeIf(Objects::isNull);
-        if(!(SignalIndustries.hasItems(recipeInputs,condensedInv))){
+        if (!(SignalIndustries.hasItems(recipeInputs, condensedInv))) {
             return;
         }
         int s = 0;
@@ -113,10 +111,10 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         label:
         for (RecipeSymbol symbol : recipeInputs) {
             for (ItemStack stack : itemContents) {
-                if(symbol.matches(stack)){
-                    if(stack == null || stack.stackSize <= 0) continue;
+                if (symbol.matches(stack)) {
+                    if (stack == null || stack.stackSize <= 0) continue;
                     stack.stackSize--;
-                    if(stack.getItem().hasContainerItem()){
+                    if (stack.getItem().hasContainerItem()) {
                         ItemStack container = new ItemStack(stack.getItem().getContainerItem());
                         boolean added = false;
                         for (int i = 1; i < itemContents.length; i++) {
@@ -131,8 +129,8 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
                                 break;
                             }
                         }
-                        if(!added){
-                            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float)y+1, (float)z, container);
+                        if (!added) {
+                            EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y + 1, (float) z, container);
                             worldObj.entityJoinedWorld(entityitem);
                         }
                     }
@@ -141,8 +139,8 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
                 }
             }
         }
-        itemContents = Arrays.stream(itemContents).filter((S)->S == null || S.stackSize > 0).toArray((A)-> new ItemStack[19]);
-        if(s == sReq){
+        itemContents = Arrays.stream(itemContents).filter((S) -> S == null || S.stackSize > 0).toArray((A) -> new ItemStack[19]);
+        if (s == sReq) {
             final int multiplier = 1;
             /*float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
             if(fraction <= 0) fraction = 1;
@@ -150,8 +148,9 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
                 multiplier = (int) Math.ceil(yield);
             }*/
             ItemStack output = recipe.getOutput().copy();
-            if(itemContents[0] != null && (!(itemContents[0].isItemEqual(output)) || itemContents[0].stackSize+(output.stackSize*multiplier) > itemContents[0].getMaxStackSize())) return;
-            if(itemContents[0] == null){
+            if (itemContents[0] != null && (!(itemContents[0].isItemEqual(output)) || itemContents[0].stackSize + (output.stackSize * multiplier) > itemContents[0].getMaxStackSize()))
+                return;
+            if (itemContents[0] == null) {
                 output.stackSize *= multiplier;
                 itemContents[0] = output;
             } else {
@@ -160,8 +159,8 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         }
     }
 
-    public boolean canProcess(){
-        if(recipe == null) return false;
+    public boolean canProcess() {
+        if (recipe == null) return false;
         final int multiplier = 1;
         /*float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
         if(fraction <= 0) fraction = 1;
@@ -169,23 +168,24 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
             multiplier = (int) Math.ceil(yield);
         }*/
         ItemStack output = recipe.getOutput().copy();
-        if(itemContents[0] != null && (!(itemContents[0].isItemEqual(output)) || itemContents[0].stackSize+(output.stackSize*multiplier) > itemContents[0].getMaxStackSize())) return false;
+        if (itemContents[0] != null && (!(itemContents[0].isItemEqual(output)) || itemContents[0].stackSize + (output.stackSize * multiplier) > itemContents[0].getMaxStackSize()))
+            return false;
         ArrayList<ItemStack> condensedInv = Catalyst.condenseItemList(Arrays.asList(itemContents));
         ArrayList<RecipeSymbol> recipeInputs = new ArrayList<>();
-        if(recipe.getInput() instanceof RecipeSymbol[]){
-           recipeInputs = new ArrayList<>(Arrays.asList(((RecipeSymbol[]) recipe.getInput())));
+        if (recipe.getInput() instanceof RecipeSymbol[]) {
+            recipeInputs = new ArrayList<>(Arrays.asList(((RecipeSymbol[]) recipe.getInput())));
         } else if (recipe.getInput() instanceof List) {
             recipeInputs = (ArrayList<RecipeSymbol>) recipe.getInput();
         }
-        if(recipeInputs.isEmpty()) return false;
+        if (recipeInputs.isEmpty()) return false;
         recipeInputs.removeIf(Objects::isNull);
-        return SignalIndustries.hasItems(recipeInputs,condensedInv);
+        return SignalIndustries.hasItems(recipeInputs, condensedInv);
     }
 
-    public boolean fuel(){
+    public boolean fuel() {
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[0]);
-        if(burn > 0 && canProcess() && recipe != null){
-            if(fluidContents[0].amount >= 100){
+        if (burn > 0 && canProcess() && recipe != null) {
+            if (fluidContents[0].amount >= 100) {
                 progressMaxTicks = (int) (90 / speedMultiplier);
                 fuelMaxBurnTicks = fuelBurnTicks = burn;
                 fluidContents[0].amount -= 100;
@@ -215,17 +215,17 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
 
     @Override
     public int getActiveItemSlotForSide(Direction dir, ItemStack stack) {
-        if(activeItemSlots.get(dir) == -1) {
+        if (activeItemSlots.get(dir) == -1) {
             if (itemConnections.get(dir) == Connection.INPUT) {
                 for (int i = 1; i < itemContents.length; i++) {
                     ItemStack content = itemContents[i];
-                    if (content == null || (content.isItemEqual(stack) && content.stackSize+stack.stackSize <= content.getMaxStackSize())) {
+                    if (content == null || (content.isItemEqual(stack) && content.stackSize + stack.stackSize <= content.getMaxStackSize())) {
                         return i;
                     }
                 }
             }
         }
-        return super.getActiveItemSlotForSide(dir,stack);
+        return super.getActiveItemSlotForSide(dir, stack);
     }
 
     @Override
@@ -254,16 +254,16 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
 
         @Override
         public ItemStack removeItem(int i1, int i2) {
-            if(this.itemContents[i1] != null) {
+            if (this.itemContents[i1] != null) {
                 ItemStack itemStack3;
-                if(this.itemContents[i1].stackSize <= i2) {
+                if (this.itemContents[i1].stackSize <= i2) {
                     itemStack3 = this.itemContents[i1];
                     this.itemContents[i1] = null;
                     this.setChanged();
                     return itemStack3;
                 } else {
                     itemStack3 = this.itemContents[i1].splitStack(i2);
-                    if(this.itemContents[i1].stackSize == 0) {
+                    if (this.itemContents[i1].stackSize == 0) {
                         this.itemContents[i1] = null;
                     }
 
@@ -278,7 +278,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         @Override
         public void setItem(int i1, ItemStack itemStack2) {
             this.itemContents[i1] = itemStack2;
-            if(itemStack2 != null && itemStack2.stackSize > this.getMaxStackSize()) {
+            if (itemStack2 != null && itemStack2.stackSize > this.getMaxStackSize()) {
                 itemStack2.stackSize = this.getMaxStackSize();
             }
 
@@ -289,10 +289,10 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
             ListTag nBTTagList2 = CompoundTag1.getList("Items");
             this.itemContents = new ItemStack[this.getContainerSize()];
 
-            for(int i3 = 0; i3 < nBTTagList2.tagCount(); ++i3) {
-                CompoundTag CompoundTag4 = (CompoundTag)nBTTagList2.tagAt(i3);
+            for (int i3 = 0; i3 < nBTTagList2.tagCount(); ++i3) {
+                CompoundTag CompoundTag4 = (CompoundTag) nBTTagList2.tagAt(i3);
                 int i5 = CompoundTag4.getByte("Slot") & 255;
-                if(i5 >= 0 && i5 < this.itemContents.length) {
+                if (i5 >= 0 && i5 < this.itemContents.length) {
                     this.itemContents[i5] = ItemStack.readItemStackFromNbt(CompoundTag4);
                 }
             }
@@ -301,10 +301,10 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         public void writeToNBT(CompoundTag CompoundTag1) {
             ListTag nbtTagList = new ListTag();
 
-            for(int i3 = 0; i3 < this.itemContents.length; ++i3) {
-                if(this.itemContents[i3] != null) {
+            for (int i3 = 0; i3 < this.itemContents.length; ++i3) {
+                if (this.itemContents[i3] != null) {
                     CompoundTag CompoundTag4 = new CompoundTag();
-                    CompoundTag4.putByte("Slot", (byte)i3);
+                    CompoundTag4.putByte("Slot", (byte) i3);
                     this.itemContents[i3].writeToNBT(CompoundTag4);
                     nbtTagList.addTag(CompoundTag4);
                 }
@@ -330,12 +330,10 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         }
 
 
-        public RecipeEntryCrafting<?,ItemStack> findMatchingRecipe(AssemblerTemplate template){
-            for(int i = 0; i < Registries.RECIPES.getAllCraftingRecipes().size(); i++)
-            {
-                RecipeEntryCrafting<?,?> recipe =  Registries.RECIPES.getAllCraftingRecipes().get(i);
-                if(recipe.matches(template) && !(recipe instanceof RecipeEntryCraftingDynamic))
-                {
+        public RecipeEntryCrafting<?, ItemStack> findMatchingRecipe(AssemblerTemplate template) {
+            for (int i = 0; i < Registries.RECIPES.getAllCraftingRecipes().size(); i++) {
+                RecipeEntryCrafting<?, ?> recipe = Registries.RECIPES.getAllCraftingRecipes().get(i);
+                if (recipe.matches(template) && !(recipe instanceof RecipeEntryCraftingDynamic)) {
                     return (RecipeEntryCrafting<?, ItemStack>) recipe;
                 }
             }

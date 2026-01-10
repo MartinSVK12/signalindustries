@@ -4,7 +4,6 @@ import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
-import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 

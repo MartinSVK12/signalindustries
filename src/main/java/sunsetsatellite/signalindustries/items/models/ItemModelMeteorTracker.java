@@ -27,7 +27,7 @@ public class ItemModelMeteorTracker extends ItemModelStandard {
 
     @Override
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemStack) {
-        if(itemStack.getMetadata() == 1){
+        if (itemStack.getMetadata() == 1) {
             return tier == Tier.REINFORCED ? calibrated_reinforced : calibrated;
         }
         return tier == Tier.REINFORCED ? uncalibrated_reinforced : uncalibrated;

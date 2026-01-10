@@ -8,15 +8,12 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.IExtendedScreenDraw;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.SIMultiblocks;
 import sunsetsatellite.signalindustries.menus.MenuEncapsulator;
 import sunsetsatellite.signalindustries.render.RenderMultiblockInGUI;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityEncapsulator;
@@ -47,15 +44,15 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 8, y + 17 + 12 - counter, 176, 16 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(25);
-        this.drawTexturedModalRect(x + 149, y + 29, 176, 29, 12, counter+1);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 45,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        this.drawTexturedModalRect(x + 149, y + 29, 176, 29, 12, counter + 1);
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 45, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -89,22 +86,22 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
 
-        if(button.id == 2){
+        if (button.id == 2) {
             tile.state = TileEntityEncapsulator.State.STORING;
-        } else if(button.id == 3){
+        } else if (button.id == 3) {
             tile.state = TileEntityEncapsulator.State.CUTTING;
         }
 
-        if(EnvironmentHelper.isClientWorld()){
-            NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,0,tile.getPosition(), tile.getClass()));
+        if (EnvironmentHelper.isClientWorld()) {
+            NetworkHandler.sendToServer(new PacketScreenAction(button.id, 0, 0, tile.getPosition(), tile.getClass()));
         }
         super.buttonClicked(button);
     }
@@ -126,7 +123,7 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
         Lighting.enableLight();
         GL11.glTranslatef(0.0F, 0, 0.0F);
         RenderMultiblockInGUI r = new RenderMultiblockInGUI();
-        r.doRender(tile.structure,mc.textureManager,mc.font,0,0,0,1);
+        r.doRender(tile.structure, mc.textureManager, mc.font, 0, 0, 0, 1);
         GL11.glPopMatrix();
         Lighting.disable();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);

@@ -68,7 +68,7 @@
       {
         "symbol": "F",
         "stack": {
-          "key":   "tile.signalindustries.prototype.plateFormer",
+          "key": "tile.signalindustries.prototype.plateFormer",
           "amount": 1,
           "meta": 0
         }
@@ -76,14 +76,14 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.plateFormer",
+      "key": "tile.signalindustries.basic.plateFormer",
       "amount": 1,
       "meta": 0
     },
@@ -109,7 +109,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "tile.signalindustries.prototype.energyCell",
+          "key": "tile.signalindustries.prototype.energyCell",
           "amount": 1,
           "meta": 0
         }
@@ -117,14 +117,14 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.energyCell",
+      "key": "tile.signalindustries.basic.energyCell",
       "amount": 1,
       "meta": 0
     },
@@ -150,7 +150,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "tile.signalindustries.prototype.conduit",
+          "key": "tile.signalindustries.prototype.conduit",
           "amount": 1,
           "meta": 0
         }
@@ -158,7 +158,7 @@
       {
         "symbol": "G",
         "stack": {
-          "key":  "tile.glass",
+          "key": "tile.glass",
           "amount": 1,
           "meta": 0
         }
@@ -166,14 +166,14 @@
       {
         "symbol": "D",
         "stack": {
-          "key":  "item.signalindustries.saturatedSignalumCrystalDust",
+          "key": "item.signalindustries.saturatedSignalumCrystalDust",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.conduit",
+      "key": "tile.signalindustries.basic.conduit",
       "amount": 4,
       "meta": 0
     },
@@ -199,7 +199,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "tile.signalindustries.prototype.conduit.fluid",
+          "key": "tile.signalindustries.prototype.conduit.fluid",
           "amount": 1,
           "meta": 0
         }
@@ -207,7 +207,7 @@
       {
         "symbol": "G",
         "stack": {
-          "key":  "tile.glass",
+          "key": "tile.glass",
           "amount": 1,
           "meta": 0
         }
@@ -215,14 +215,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.steelPlate",
+          "key": "item.signalindustries.steelPlate",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.conduit.fluid",
+      "key": "tile.signalindustries.basic.conduit.fluid",
       "amount": 8,
       "meta": 0
     },
@@ -248,7 +248,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -256,7 +256,7 @@
       {
         "symbol": "E",
         "stack": {
-          "key":  "tile.signalindustries.prototype.extractor",
+          "key": "tile.signalindustries.prototype.extractor",
           "amount": 1,
           "meta": 0
         }
@@ -264,7 +264,7 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.signalumCrystal",
+          "key": "item.signalindustries.signalumCrystal",
           "amount": 1,
           "meta": 0
         }
@@ -272,14 +272,14 @@
       {
         "symbol": "F",
         "stack": {
-          "key":  "tile.furnace.stone.idle",
+          "key": "tile.furnace.stone.idle",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.extractor",
+      "key": "tile.signalindustries.basic.extractor",
       "amount": 1,
       "meta": 0
     },
@@ -305,7 +305,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -313,7 +313,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "tile.signalindustries.prototype.crusher",
+          "key": "tile.signalindustries.prototype.crusher",
           "amount": 1,
           "meta": 0
         }
@@ -321,14 +321,14 @@
       {
         "symbol": "F",
         "stack": {
-          "key":  "item.flint",
+          "key": "item.flint",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.crusher",
+      "key": "tile.signalindustries.basic.crusher",
       "amount": 1,
       "meta": 0
     },
@@ -354,7 +354,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -362,7 +362,7 @@
       {
         "symbol": "A",
         "stack": {
-          "key":  "tile.signalindustries.prototype.alloySmelter",
+          "key": "tile.signalindustries.prototype.alloySmelter",
           "amount": 1,
           "meta": 0
         }
@@ -370,7 +370,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "tile.furnace.blast.idle",
+          "key": "tile.furnace.blast.idle",
           "amount": 1,
           "meta": 0
         }
@@ -378,14 +378,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.saturatedSignalumAlloyPlate",
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.alloySmelter",
+      "key": "tile.signalindustries.basic.alloySmelter",
       "amount": 1,
       "meta": 0
     },
@@ -411,7 +411,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -419,7 +419,7 @@
       {
         "symbol": "L",
         "stack": {
-          "key":  "item.tool.pickaxe.diamond",
+          "key": "item.tool.pickaxe.diamond",
           "amount": 1,
           "meta": 0
         }
@@ -427,7 +427,7 @@
       {
         "symbol": "E",
         "stack": {
-          "key":  "item.signalindustries.basicEnergyCore",
+          "key": "item.signalindustries.basicEnergyCore",
           "amount": 1,
           "meta": 0
         }
@@ -435,14 +435,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.saturatedSignalumAlloyPlate",
+          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.automaticMiner",
+      "key": "tile.signalindustries.basic.automaticMiner",
       "amount": 1,
       "meta": 0
     },
@@ -468,7 +468,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -476,7 +476,7 @@
       {
         "symbol": "A",
         "stack": {
-          "key":  "tile.signalindustries.prototype.alloySmelter",
+          "key": "tile.signalindustries.prototype.alloySmelter",
           "amount": 1,
           "meta": 0
         }
@@ -484,7 +484,7 @@
       {
         "symbol": "F",
         "stack": {
-          "key":  "tile.signalindustries.prototype.plateFormer",
+          "key": "tile.signalindustries.prototype.plateFormer",
           "amount": 1,
           "meta": 0
         }
@@ -492,14 +492,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.signalumCrystal",
+          "key": "item.signalindustries.signalumCrystal",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.crystalChamber",
+      "key": "tile.signalindustries.basic.crystalChamber",
       "amount": 1,
       "meta": 0
     },
@@ -525,7 +525,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -533,7 +533,7 @@
       {
         "symbol": "E",
         "stack": {
-          "key":  "item.signalindustries.basicEnergyCore",
+          "key": "item.signalindustries.basicEnergyCore",
           "amount": 1,
           "meta": 0
         }
@@ -541,14 +541,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.signalumCrystal",
+          "key": "item.signalindustries.signalumCrystal",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.energyInjector",
+      "key": "tile.signalindustries.basic.energyInjector",
       "amount": 1,
       "meta": 0
     },
@@ -574,7 +574,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -582,7 +582,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "item.bone",
+          "key": "item.bone",
           "amount": 1,
           "meta": 0
         }
@@ -590,7 +590,7 @@
       {
         "symbol": "W",
         "stack": {
-          "key":  "tile.mobspawner.deactivated",
+          "key": "tile.mobspawner.deactivated",
           "amount": 1,
           "meta": 0
         }
@@ -598,14 +598,14 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.monsterShard",
+          "key": "item.signalindustries.monsterShard",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.wrathBeacon",
+      "key": "tile.signalindustries.basic.wrathBeacon",
       "amount": 1,
       "meta": 0
     },
@@ -631,7 +631,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -639,7 +639,7 @@
       {
         "symbol": "I",
         "stack": {
-          "key":  "item.signalindustries.signalumCrystal",
+          "key": "item.signalindustries.signalumCrystal",
           "amount": 1,
           "meta": 0
         }
@@ -655,14 +655,14 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "item.bucket",
+          "key": "item.bucket",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.infuser",
+      "key": "tile.signalindustries.basic.infuser",
       "amount": 1,
       "meta": 0
     },
@@ -688,7 +688,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -696,7 +696,7 @@
       {
         "symbol": "I",
         "stack": {
-          "key":  "item.signalindustries.itemManipulationCircuit",
+          "key": "item.signalindustries.itemManipulationCircuit",
           "amount": 1,
           "meta": 0
         }
@@ -704,14 +704,14 @@
       {
         "symbol": "F",
         "stack": {
-          "key":  "item.signalindustries.fluidManipulationCircuit",
+          "key": "item.signalindustries.fluidManipulationCircuit",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.externalIO",
+      "key": "tile.signalindustries.basic.externalIO",
       "amount": 1,
       "meta": 0
     },
@@ -737,7 +737,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -745,7 +745,7 @@
       {
         "symbol": "G",
         "stack": {
-          "key":  "item.signalindustries.diamondCuttingGear",
+          "key": "item.signalindustries.diamondCuttingGear",
           "amount": 1,
           "meta": 0
         }
@@ -761,14 +761,14 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "tile.signalindustries.prototype.crystalCutter",
+          "key": "tile.signalindustries.prototype.crystalCutter",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.crystalCutter",
+      "key": "tile.signalindustries.basic.crystalCutter",
       "amount": 1,
       "meta": 0
     },
@@ -794,7 +794,7 @@
       {
         "symbol": "M",
         "stack": {
-          "key":  "tile.signalindustries.basic.machine",
+          "key": "tile.signalindustries.basic.machine",
           "amount": 1,
           "meta": 0
         }
@@ -802,7 +802,7 @@
       {
         "symbol": "T",
         "stack": {
-          "key":  "item.signalindustries.steelPlate",
+          "key": "item.signalindustries.steelPlate",
           "amount": 1,
           "meta": 0
         }
@@ -810,7 +810,7 @@
       {
         "symbol": "E",
         "stack": {
-          "key":  "item.signalindustries.basicEnergyCore",
+          "key": "item.signalindustries.basicEnergyCore",
           "amount": 1,
           "meta": 0
         }
@@ -826,14 +826,14 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "tile.signalindustries.rawCrystalBlock",
+          "key": "tile.signalindustries.rawCrystalBlock",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.dynamo",
+      "key": "tile.signalindustries.basic.dynamo",
       "amount": 1,
       "meta": 0
     },
@@ -859,7 +859,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "item.signalindustries.crystalChip",
+          "key": "item.signalindustries.crystalChip",
           "amount": 1,
           "meta": 0
         }
@@ -874,7 +874,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.basicEnergyCore",
+      "key": "item.signalindustries.basicEnergyCore",
       "amount": 1,
       "meta": 0
     },
@@ -899,7 +899,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.basicDrillCasing",
+      "key": "item.signalindustries.basicDrillCasing",
       "amount": 1,
       "meta": 0
     },
@@ -932,7 +932,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.reinforcedDrillCasing",
+      "key": "item.signalindustries.reinforcedDrillCasing",
       "amount": 1,
       "meta": 0
     },
@@ -965,7 +965,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.basicDrillBit",
+      "key": "item.signalindustries.basicDrillBit",
       "amount": 1,
       "meta": 0
     },
@@ -1006,7 +1006,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.basic.signalumDrill",
+      "key": "item.signalindustries.basic.signalumDrill",
       "amount": 1,
       "meta": 0
     },
@@ -1031,7 +1031,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.casing",
+      "key": "tile.signalindustries.basic.casing",
       "amount": 8,
       "meta": 0
     },
@@ -1064,7 +1064,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.basic.casing2",
+      "key": "tile.signalindustries.basic.casing2",
       "amount": 4,
       "meta": 0
     },
@@ -1181,7 +1181,6 @@
     },
     "consumeContainers": false
   },
-
   {
     "name": "signalindustries:workbench/basic_prototype_goggles",
     "type": "minecraft:crafting/shaped",
@@ -1480,7 +1479,6 @@
     },
     "consumeContainers": false
   },
-
   {
     "name": "signalindustries:workbench/basic_assembler",
     "type": "minecraft:crafting/shaped",
@@ -1538,7 +1536,6 @@
     },
     "consumeContainers": false
   },
-
   {
     "name": "signalindustries:workbench/basic_storage_container",
     "type": "minecraft:crafting/shaped",

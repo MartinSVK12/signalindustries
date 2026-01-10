@@ -10,12 +10,9 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrystalCutter;
 import sunsetsatellite.signalindustries.menus.MenuStoneworks;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageRecipeIdChange;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrystalCutter;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStoneworks;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
@@ -35,7 +32,7 @@ public class ScreenStoneworks extends ScreenMachineSimple {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine_double.png");
                 break;
@@ -54,15 +51,15 @@ public class ScreenStoneworks extends ScreenMachineSimple {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 56, y + 36 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(x + 79, y + 34, 176, 14, counter + 1, 16);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -70,7 +67,7 @@ public class ScreenStoneworks extends ScreenMachineSimple {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -97,12 +94,12 @@ public class ScreenStoneworks extends ScreenMachineSimple {
         int yOffset = 52;
         int size = 20;
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        if(mx > i+xOffset && mx < i+xOffset+size){
-            if(my > j+yOffset && my < j+yOffset+size){
+        if (mx > i + xOffset && mx < i + xOffset + size) {
+            if (my > j + yOffset && my < j + yOffset + size) {
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 TooltipElement tooltip = new TooltipElement(mc);
-                tooltip.render("Click to increment ID of recipe that will be performed.\nShift+click to decrement.",mx,my,8,-8);
+                tooltip.render("Click to increment ID of recipe that will be performed.\nShift+click to decrement.", mx, my, 8, -8);
             }
         }
     }
@@ -126,7 +123,7 @@ public class ScreenStoneworks extends ScreenMachineSimple {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
         if (button.id == 2) {
             if (EnvironmentHelper.isClientWorld()) {
@@ -146,9 +143,9 @@ public class ScreenStoneworks extends ScreenMachineSimple {
             }
         }
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

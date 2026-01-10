@@ -17,7 +17,7 @@ public class MachineMultiOutputSection extends SearchableGuidebookSubsection {
     protected final List<RecipeEntryMachineMultiOutput> recipes;
     protected final Class<? extends GuidebookPage> pageClass;
     private final List<GuidebookPage> pages = new ArrayList<>();
-    private Pair<String,List<GuidebookPage>> filteredPages = null;
+    private Pair<String, List<GuidebookPage>> filteredPages = null;
     private final int recipesPerPage;
 
     public MachineMultiOutputSection(GuidebookSection parent, List<RecipeEntryMachineMultiOutput> recipes, Class<? extends GuidebookPage> pageClass) {
@@ -36,14 +36,15 @@ public class MachineMultiOutputSection extends SearchableGuidebookSubsection {
     public void reloadSection() {
         pages.clear();
         int totalRecipes = recipes.size();
-        int totalPages = (int) Math.ceil((float)totalRecipes / recipesPerPage);
-        if(totalPages == 0) totalPages = 1;
+        int totalPages = (int) Math.ceil((float) totalRecipes / recipesPerPage);
+        if (totalPages == 0) totalPages = 1;
         for (int i = 0; i < totalPages; i++) {
-            int j = i*recipesPerPage;
-            ArrayList<RecipeEntryMachineMultiOutput> list = new ArrayList<>(recipes.subList(j,Math.min(j+recipesPerPage,totalRecipes)));
+            int j = i * recipesPerPage;
+            ArrayList<RecipeEntryMachineMultiOutput> list = new ArrayList<>(recipes.subList(j, Math.min(j + recipesPerPage, totalRecipes)));
             try {
-                pages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent,list));
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                pages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent, list));
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -51,10 +52,10 @@ public class MachineMultiOutputSection extends SearchableGuidebookSubsection {
 
     @Override
     public List<GuidebookPage> searchPages(SearchQuery query) {
-        if(filteredPages == null || !Objects.equals(filteredPages.getLeft(), query.rawQuery)) {
+        if (filteredPages == null || !Objects.equals(filteredPages.getLeft(), query.rawQuery)) {
             ArrayList<RecipeEntryMachineMultiOutput> filteredRecipes = new ArrayList<>();
             for (RecipeEntryMachineMultiOutput recipe : recipes) {
-                if(recipe.matchesQuery(query)){
+                if (recipe.matchesQuery(query)) {
                     filteredRecipes.add(recipe);
                 }
             }
@@ -67,8 +68,9 @@ public class MachineMultiOutputSection extends SearchableGuidebookSubsection {
                 ArrayList<RecipeEntryMachineMultiOutput> list = new ArrayList<>(filteredRecipes.subList(j, Math.min(j + recipesPerPage, filteredRecipeSize)));
                 if (!list.isEmpty()) {
                     try {
-                        guidebookPages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent,list));
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                        guidebookPages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent, list));
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                             NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
                 }

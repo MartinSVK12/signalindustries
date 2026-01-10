@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.guidebook.SlotGuidebook;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.block.model.BlockModel;
@@ -11,20 +10,15 @@ import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
-import net.minecraft.core.WeightedRandomBag;
-import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class FakeItemElement extends Gui
-{
+public class FakeItemElement extends Gui {
     public Minecraft mc;
 
-    public FakeItemElement(Minecraft mc)
-    {
+    public FakeItemElement(Minecraft mc) {
         this.mc = mc;
     }
 
@@ -32,8 +26,7 @@ public class FakeItemElement extends Gui
         render(itemStack, x, y, isSelected, slot, showAmount, 0.5f);
     }
 
-    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount, float alpha)
-    {
+    public void render(ItemStack itemStack, int x, int y, boolean isSelected, Slot slot, boolean showAmount, float alpha) {
         boolean hasDrawnSlotBackground = false;
         boolean discovered = true;
 
@@ -45,13 +38,11 @@ public class FakeItemElement extends Gui
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 
         // Draw slot background
-        if (slot != null)
-        {
+        if (slot != null) {
             discovered = slot.getIsDiscovered(mc.thePlayer);
             if (slot.getItemIcon() != null) {
                 final IconCoordinate iconIndex = TextureRegistry.getTexture(slot.getItemIcon());
-                if (itemStack == null)
-                {
+                if (itemStack == null) {
                     GL11.glDisable(GL11.GL_LIGHTING);
                     drawTexturedIcon(x, y, 16, 16, iconIndex);
                     GL11.glEnable(GL11.GL_LIGHTING);
@@ -69,14 +60,13 @@ public class FakeItemElement extends Gui
         }
 
         // Draw item
-        if (!hasDrawnSlotBackground)
-        {
+        if (!hasDrawnSlotBackground) {
             GL11.glEnable(GL11.GL_DEPTH_TEST);
-            if (itemStack != null){
+            if (itemStack != null) {
                 BlockModel.setRenderBlocks(EntityRenderDispatcher.instance.itemRenderer.renderBlocksInstance);
                 ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(itemStack.getItem());
                 itemModel.renderItemIntoGui(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? 1.0f : 0.0f, alpha);
-                if(showAmount){
+                if (showAmount) {
                     itemModel.renderItemOverlayIntoGUI(Tessellator.instance, mc.font, mc.textureManager, itemStack, x, y, discovered ? null : "?", alpha);
                 }
             }
@@ -84,8 +74,7 @@ public class FakeItemElement extends Gui
         }
 
         // Draw selection overlay
-        if (isSelected)
-        {
+        if (isSelected) {
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             drawRect(x, y, x + 16, y + 16, 0x80FFFFFF);
@@ -102,13 +91,11 @@ public class FakeItemElement extends Gui
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    public void render(ItemStack itemStack, int x, int y, boolean isSelected)
-    {
+    public void render(ItemStack itemStack, int x, int y, boolean isSelected) {
         render(itemStack, x, y, isSelected, null, false);
     }
 
-    public void render(ItemStack itemStack, int x, int y)
-    {
+    public void render(ItemStack itemStack, int x, int y) {
         render(itemStack, x, y, false);
     }
 }

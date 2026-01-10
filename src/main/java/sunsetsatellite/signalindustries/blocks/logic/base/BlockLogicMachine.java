@@ -8,9 +8,7 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.util.Tier;
-import turniplabs.halplibe.helper.EnvironmentHelper;
 
 import java.util.function.Supplier;
 
@@ -38,9 +36,9 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
 
         TileEntity tile = world.getTileEntity(i, j, k);
         if (tile != null && guiId != null) {
-            if(tile instanceof IMultiblock){
+            if (tile instanceof IMultiblock) {
                 if (((IMultiblock) tile).getMultiblock() != null && ((IMultiblock) tile).getMultiblock().isValid()) {
-                    Catalyst.displayGui(entityplayer, tile, key("gui/"+guiId));
+                    Catalyst.displayGui(entityplayer, tile, key("gui/" + guiId));
                     //entityplayer.triggerAchievement(SIAchievements.HORIZONS);
                     return true;
                 } else {
@@ -48,7 +46,7 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
                     return true;
                 }
             }
-            Catalyst.displayGui(entityplayer, tile, key("gui/"+guiId));
+            Catalyst.displayGui(entityplayer, tile, key("gui/" + guiId));
         } else {
             return false;
         }

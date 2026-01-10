@@ -4,7 +4,8 @@ import net.minecraft.core.world.Dimension;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 
 import static sunsetsatellite.signalindustries.SIConfig.config;
-import static sunsetsatellite.signalindustries.SignalIndustries.*;
+import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
+import static sunsetsatellite.signalindustries.SignalIndustries.langKey;
 
 public class SIDimensions extends DataInitializer {
 
@@ -13,10 +14,10 @@ public class SIDimensions extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing dimensions...");
 
-        ETERNITY = new Dimension(langKey("eternity"),Dimension.OVERWORLD,1, SIBlocks.portalEternity, SIWorldTypes.ETERNITY_WORLD);
+        ETERNITY = new Dimension(langKey("eternity"), Dimension.OVERWORLD, 1, SIBlocks.portalEternity, SIWorldTypes.ETERNITY_WORLD);
         Dimension.registerDimension(config.getInt("Other.eternityDimId"), ETERNITY);
 
         setInitialized(true);

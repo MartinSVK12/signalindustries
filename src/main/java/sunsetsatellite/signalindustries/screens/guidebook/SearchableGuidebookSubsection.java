@@ -10,7 +10,7 @@ public abstract class SearchableGuidebookSubsection {
 
     public GuidebookSection parent;
 
-    public SearchableGuidebookSubsection(GuidebookSection parent){
+    public SearchableGuidebookSubsection(GuidebookSection parent) {
         this.parent = parent;
     }
 

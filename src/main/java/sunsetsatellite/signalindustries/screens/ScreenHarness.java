@@ -7,7 +7,6 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
-import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.menus.MenuHarness;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 
@@ -37,8 +36,7 @@ public class ScreenHarness extends ScreenFluid {
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         font.drawCenteredString(I18n.getInstance().translateNameKey(fluidSlots.itemInventory.getNameTranslationKey()), 90, 6, 0xFFFF8080);
     }
@@ -46,6 +44,6 @@ public class ScreenHarness extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex),fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), fluidSlots.itemInventory);
     }
 }

@@ -1,4 +1,3 @@
-
 package sunsetsatellite.signalindustries.screens;
 
 import net.minecraft.client.gui.ButtonElement;
@@ -8,11 +7,8 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.menus.MenuPlateFormer;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityPlateFormer;
 
 public class ScreenPlateFormer extends ScreenMachineSimple {
@@ -30,7 +26,7 @@ public class ScreenPlateFormer extends ScreenMachineSimple {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/generic_prototype_machine.png");
                 break;
@@ -49,15 +45,15 @@ public class ScreenPlateFormer extends ScreenMachineSimple {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 56, y + 36 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(x + 79, y + 34, 176, 14, counter + 1, 16);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -65,7 +61,7 @@ public class ScreenPlateFormer extends ScreenMachineSimple {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -98,11 +94,11 @@ public class ScreenPlateFormer extends ScreenMachineSimple {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

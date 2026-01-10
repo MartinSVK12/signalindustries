@@ -25,9 +25,9 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
     @Override
     public void onBlockLeftClicked(World world, int x, int y, int z, Player player, Side side, double xHit, double yHit) {
         super.onBlockLeftClicked(world, x, y, z, player, side, xHit, yHit);
-        if(!EnvironmentHelper.isClientWorld()){
+        if (!EnvironmentHelper.isClientWorld()) {
             TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(x, y, z);
-            if(tile != null){
+            if (tile != null) {
                 if (player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof ItemTool)) {
                     ItemStack stack;
                     if (!player.isSneaking()) {
@@ -48,7 +48,7 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
     @Override
     public boolean onBlockRightClicked(World world, int x, int y, int z, Player player, Side side, double xHit, double yHit) {
         super.onBlockRightClicked(world, x, y, z, player, side, xHit, yHit);
-        if(!EnvironmentHelper.isClientWorld()) {
+        if (!EnvironmentHelper.isClientWorld()) {
             TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(x, y, z);
             if (tile != null) {
                 if (player.getCurrentEquippedItem() != null) {

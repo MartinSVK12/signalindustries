@@ -11,11 +11,8 @@ import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.camera.ICamera;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
-import net.minecraft.client.render.worldtype.WorldTypeFX;
-import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.util.phys.Vec3;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +21,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.HologramWorld;
 import sunsetsatellite.catalyst.core.util.model.IFullbright;
@@ -43,20 +39,27 @@ import java.util.HashMap;
 )
 public class RenderGlobalMixin {
 
-    @Shadow @Final private Minecraft mc;
+    @Shadow
+    @Final
+    private Minecraft mc;
 
-    @Shadow private WorldClient worldObj;
+    @Shadow
+    private WorldClient worldObj;
 
-    @Shadow @Final private TextureManager textureManager;
+    @Shadow
+    @Final
+    private TextureManager textureManager;
 
-    @Shadow @Final private int starGLCallList;
+    @Shadow
+    @Final
+    private int starGLCallList;
 
     @Inject(
             method = "drawSky",
             at = @At("HEAD")
     )
-    public void eternitySky(float partialTick, CallbackInfo ci){
-        if(this.mc.currentWorld.dimension == SIDimensions.ETERNITY){
+    public void eternitySky(float partialTick, CallbackInfo ci) {
+        if (this.mc.currentWorld.dimension == SIDimensions.ETERNITY) {
             GL11.glDepthMask(false);
             textureManager.loadTexture("/assets/signalindustries/textures/colormap/stars/default.png").bind();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -79,28 +82,28 @@ public class RenderGlobalMixin {
             at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER)
     )
     public void renderBloodMoon(float partialTicks, CallbackInfo ci) {
-        if(worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon){
-            GL11.glColor4f(1.0f,0.0f,0.0f,1.0f);
+        if (worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon) {
+            GL11.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
         }
     }
 
     @Inject(
             method = "drawSky",
-            at = @At(value = "INVOKE",target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER)
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glColor4f(FFFF)V", ordinal = 1, shift = At.Shift.AFTER)
     )
     public void renderMeteorShower(float partialTicks, CallbackInfo ci, @Local(name = "sunAlpha") LocalFloatRef f6) {
-        if(worldObj.getCurrentWeather() == SIWeather.weatherMeteorShower){
+        if (worldObj.getCurrentWeather() == SIWeather.weatherMeteorShower) {
             f6.set(1.5f);
-            GL11.glColor4f( 1,1, 1,1.0f);
+            GL11.glColor4f(1, 1, 1, 1.0f);
         }
     }
 
     @Inject(
             method = "drawSky",
-            at = @At(value = "INVOKE",target = "Lnet/minecraft/client/render/tessellator/Tessellator;draw()V", ordinal = 1, shift = At.Shift.AFTER)
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/tessellator/Tessellator;draw()V", ordinal = 1, shift = At.Shift.AFTER)
     )
     public void renderSolar(float partialTick, CallbackInfo ci, @Local Tessellator t) {
-        if(worldObj.getCurrentWeather() == SIWeather.weatherEclipse){
+        if (worldObj.getCurrentWeather() == SIWeather.weatherEclipse) {
             float size = 30F;
             textureManager.loadTexture("/assets/signalindustries/misc/solar_eclipse.png").bind();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0f);
@@ -114,39 +117,39 @@ public class RenderGlobalMixin {
     }
 
     @Inject(method = "renderEntities", at = @At("TAIL"))
-    public void renderWorld(ICamera camera, float partialTick, CallbackInfo ci){
+    public void renderWorld(ICamera camera, float partialTick, CallbackInfo ci) {
         double x = camera.getX(partialTick);
         double y = camera.getY(partialTick);
         double z = camera.getZ(partialTick);
 
         HashMap<Block, OreInfo> oreMap = new HashMap<>();
-        if(!ScanAbility.oreMap.isEmpty()){
+        if (!ScanAbility.oreMap.isEmpty()) {
             oreMap = ScanAbility.oreMap;
         }
-        if(!ScanSuitAbility.oreMap.isEmpty()){
+        if (!ScanSuitAbility.oreMap.isEmpty()) {
             oreMap = ScanSuitAbility.oreMap;
         }
 
-        if(!oreMap.isEmpty()){
+        if (!oreMap.isEmpty()) {
             ArrayList<BlockInstance> list = new ArrayList<>();
-              oreMap.forEach((block, oreInfo)->{
-                oreInfo.positions.forEach(position->{
-                    list.add(new BlockInstance(block,position,null));
+            oreMap.forEach((block, oreInfo) -> {
+                oreInfo.positions.forEach(position -> {
+                    list.add(new BlockInstance(block, position, null));
                 });
             });
             blockRenderer = new RenderBlocks(new HologramWorld(list));
-            oreMap.forEach((block, oreInfo)->{
-                oreInfo.positions.forEach(position->{
+            oreMap.forEach((block, oreInfo) -> {
+                oreInfo.positions.forEach(position -> {
                     GL11.glPushMatrix();
                     GL11.glDisable(GL11.GL_LIGHTING);
                     GL11.glDisable(GL11.GL_DEPTH_TEST);
                     BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
-                    GL11.glTranslated(position.x - x + 0.5f , position.y - y + 0.5f, position.z - z + 0.5f);
-                    ((IFullbright)model).enableFullbright();
+                    GL11.glTranslated(position.x - x + 0.5f, position.y - y + 0.5f, position.z - z + 0.5f);
+                    ((IFullbright) model).enableFullbright();
                     drawBlock(Tessellator.instance,
                             model
                     );
-                    ((IFullbright)model).disableFullbright();
+                    ((IFullbright) model).disableFullbright();
                     GL11.glEnable(GL11.GL_LIGHTING);
                     GL11.glEnable(GL11.GL_DEPTH_TEST);
                     GL11.glPopMatrix();
@@ -163,7 +166,7 @@ public class RenderGlobalMixin {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        model.renderBlockOnInventory(tessellator, 0,1,null);
+        model.renderBlockOnInventory(tessellator, 0, 1, null);
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();

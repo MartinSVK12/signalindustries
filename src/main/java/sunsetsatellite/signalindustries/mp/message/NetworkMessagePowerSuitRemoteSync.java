@@ -18,7 +18,8 @@ public class NetworkMessagePowerSuitRemoteSync implements NetworkMessage {
     public UUID uuid;
     public String username;
 
-    public NetworkMessagePowerSuitRemoteSync() {}
+    public NetworkMessagePowerSuitRemoteSync() {
+    }
 
     public NetworkMessagePowerSuitRemoteSync(String username, UUID uuid, CompoundTag data) {
         this.data = data;
@@ -44,11 +45,11 @@ public class NetworkMessagePowerSuitRemoteSync implements NetworkMessage {
     public void handle(NetworkContext context) {
         if (context.player.world != null) {
             for (Player player : context.player.world.players) {
-                if(player instanceof PlayerRemote){
-                    if((player.uuid == null && player.username.equals(username)) || Objects.equals(player.uuid, uuid)){
-                        if(player instanceof IPlayerPowerSuit<?>){
+                if (player instanceof PlayerRemote) {
+                    if ((player.uuid == null && player.username.equals(username)) || Objects.equals(player.uuid, uuid)) {
+                        if (player instanceof IPlayerPowerSuit<?>) {
                             IPowerSuit suit = ((IPlayerPowerSuit<?>) player).getPowerSuit();
-                            if(suit != null){
+                            if (suit != null) {
                                 suit.loadData(data.getCompound("PowerSuit"));
                             }
                         }

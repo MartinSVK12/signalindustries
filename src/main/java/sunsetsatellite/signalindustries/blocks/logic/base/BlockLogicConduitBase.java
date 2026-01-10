@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.blocks.logic.base;
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
@@ -67,7 +66,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
         TileEntity tile = world.getTileEntity(x, y, z);
         if (tile instanceof ISupportsMultiparts) {
             if (((ISupportsMultiparts) tile).getParts().values().stream().anyMatch(Objects::nonNull)) {
-                setBlockBounds(0,0,0,1,1,1);
+                setBlockBounds(0, 0, 0, 1, 1, 1);
                 return;
             }
         }
@@ -152,24 +151,24 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
     @Override
     public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
         ItemStack[] breakResult = super.getBreakResult(world, dropCause, x, y, z, meta, tileEntity);
-        if(tileEntity instanceof ISupportsMultiparts){
+        if (tileEntity instanceof ISupportsMultiparts) {
             List<ItemStack> list = new ArrayList<>();
             for (Multipart multipart : ((ISupportsMultiparts) tileEntity).getParts().values()) {
-                if(multipart == null) continue;
-                ItemStack stack = new ItemStack(CatalystMultipart.multipartItem,1, 0);
+                if (multipart == null) continue;
+                ItemStack stack = new ItemStack(CatalystMultipart.multipartItem, 1, 0);
                 CompoundTag tag = new CompoundTag();
                 CompoundTag multipartTag = new CompoundTag();
-                multipartTag.putString("Type",multipart.type.name);
+                multipartTag.putString("Type", multipart.type.name);
                 multipartTag.putInt("Block", multipart.block.id());
                 multipartTag.putInt("Meta", multipart.meta);
-                if(multipart.side != null){
+                if (multipart.side != null) {
                     multipartTag.putInt("Side", multipart.side.getId());
                 }
-                tag.putCompound("Multipart",multipartTag);
+                tag.putCompound("Multipart", multipartTag);
                 stack.setData(tag);
                 list.add(stack);
             }
-            if(breakResult != null) list.add(breakResult[0]);
+            if (breakResult != null) list.add(breakResult[0]);
             return list.toArray(new ItemStack[0]);
         }
         return breakResult;

@@ -76,15 +76,15 @@ public class GreenhouseRecipeCategory implements IRecipeCategory<MultiMachineRec
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight()), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight()), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class GreenhouseRecipeCategory implements IRecipeCategory<MultiMachineRec
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
         RecipeOutputStack[] output = recipe.getOriginal().getOutput();
         for (int i = 0; i < 2; i++) {
-            if(i >= input.length){
+            if (i >= input.length) {
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
@@ -101,14 +101,14 @@ public class GreenhouseRecipeCategory implements IRecipeCategory<MultiMachineRec
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
         for (int i = 0; i < 4; i++) {
-            if(i >= output.length){
-                ingredients.add(i+2, ExtendedIngredientList.fromRecipeSymbol(null));
+            if (i >= output.length) {
+                ingredients.add(i + 2, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
             RecipeOutputStack symbol = output[i];
-            ingredients.add(i+2, ExtendedIngredientList.fromRecipeOutput(symbol));
+            ingredients.add(i + 2, ExtendedIngredientList.fromRecipeOutput(symbol));
         }
-        ingredients.add(6, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(6, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override
@@ -120,7 +120,7 @@ public class GreenhouseRecipeCategory implements IRecipeCategory<MultiMachineRec
                 .addOutputSlot(3, VanillaTypes.ITEM_STACK).setPosition(x + 76, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(4, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 28).build()
                 .addOutputSlot(5, TMBFluidPlugin.FLUID_STACK).setPosition(x + 76, (background.getHeight() / 2) - 28).build()
-                .addSlot(6,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addSlot(6, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

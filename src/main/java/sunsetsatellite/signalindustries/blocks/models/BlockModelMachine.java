@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.blocks.models;
 
-import net.minecraft.client.render.TextureManager;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
@@ -13,7 +12,6 @@ import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.util.IOPreview;
 import sunsetsatellite.signalindustries.util.MachineTextures;
-import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.HashMap;
 

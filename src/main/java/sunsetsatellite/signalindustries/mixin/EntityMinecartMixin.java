@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIBlocks;
 
-@Mixin(value = EntityMinecart.class,remap = false)
+@Mixin(value = EntityMinecart.class, remap = false)
 public abstract class EntityMinecartMixin extends Entity implements Container {
     private EntityMinecartMixin(@Nullable World world) {
         super(world);
@@ -25,15 +25,16 @@ public abstract class EntityMinecartMixin extends Entity implements Container {
         int blockX = MathHelper.floor(x);
         int blockY = MathHelper.floor(y);
         int blockZ = MathHelper.floor(z);
-        if(block == SIBlocks.dilithiumRail && world != null) {
+        if (block == SIBlocks.dilithiumRail && world != null) {
             onPoweredPoweredRail.set((world.getBlockMetadata(blockX, blockY, blockZ) & 0b1000) != 0);
             onUnpoweredPoweredRail.set(!onPoweredPoweredRail.get());
-            if(onPoweredPoweredRail.get()){
-                world.spawnParticle("reddust",x+0.4,y,z+0.4,0,0,0,0);
-                world.spawnParticle("reddust",x-0.4,y,z+0.4,0,0,0,0);
+            if (onPoweredPoweredRail.get()) {
+                world.spawnParticle("reddust", x + 0.4, y, z + 0.4, 0, 0, 0, 0);
+                world.spawnParticle("reddust", x - 0.4, y, z + 0.4, 0, 0, 0, 0);
             }
         }
     }
+
     @ModifyConstant(method = "motionIteration", constant = @Constant(doubleValue = 0.06D), slice = @Slice(from = @At(value = "INVOKE", target = "Ljava/lang/Math;hypot(DD)D", ordinal = 8), to = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;isBlockNormalCube(III)Z", ordinal = 0)))
     public double dilithiumRail2(double constant) {
         int blockX = MathHelper.floor(x);

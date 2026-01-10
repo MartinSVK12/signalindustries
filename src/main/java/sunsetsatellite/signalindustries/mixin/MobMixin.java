@@ -21,16 +21,16 @@ import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
-import java.util.Iterator;
 import java.util.List;
 
 @Mixin(value = Mob.class, remap = false)
 public abstract class MobMixin extends Entity {
 
     @Unique
-    private final Mob thisAs = (Mob) ((Object)this);
+    private final Mob thisAs = (Mob) ((Object) this);
 
-    @Shadow protected abstract List<WeightedRandomLootObject> getMobDrops();
+    @Shadow
+    protected abstract List<WeightedRandomLootObject> getMobDrops();
 
     private MobMixin(@Nullable World world) {
         super(world);
@@ -41,23 +41,22 @@ public abstract class MobMixin extends Entity {
             at = @At("HEAD"),
             cancellable = true
     )
-    public void bloodMoonSpawning(CallbackInfoReturnable<Integer> cir){
+    public void bloodMoonSpawning(CallbackInfoReturnable<Integer> cir) {
         if (world != null) {
             cir.setReturnValue(world.getCurrentWeather() == SIWeather.weatherBloodMoon ? 16 : 4);
         }
     }
 
-    @Inject(method = "canSpawnHere",at = @At("HEAD"),cancellable = true)
-    public void canSpawnHere(CallbackInfoReturnable<Boolean> cir)
-    {
+    @Inject(method = "canSpawnHere", at = @At("HEAD"), cancellable = true)
+    public void canSpawnHere(CallbackInfoReturnable<Boolean> cir) {
         if (world != null && world.dimension == SIDimensions.ETERNITY) {
             cir.setReturnValue(false);
         }
 
-        SignalIndustries.uvLamps.removeIf((B)->world.getBlock(B.pos.x,B.pos.y,B.pos.z) != SIBlocks.uvLamp);
+        SignalIndustries.uvLamps.removeIf((B) -> world.getBlock(B.pos.x, B.pos.y, B.pos.z) != SIBlocks.uvLamp);
         for (BlockInstance lamp : SignalIndustries.uvLamps) {
-            if(world.getBlockMetadata(lamp.pos.x, lamp.pos.y, lamp.pos.z) == 1){
-                if(distanceTo(lamp.pos.x,lamp.pos.y,lamp.pos.z) < 20){
+            if (world.getBlockMetadata(lamp.pos.x, lamp.pos.y, lamp.pos.z) == 1) {
+                if (distanceTo(lamp.pos.x, lamp.pos.y, lamp.pos.z) < 20) {
                     cir.setReturnValue(false);
                     break;
                 }
@@ -83,13 +82,13 @@ public abstract class MobMixin extends Entity {
 
     @ModifyExpressionValue(
             method = "moveEntityWithHeading",
-            at = @At(value = "FIELD", target = "Lnet/minecraft/core/entity/Mob;noPhysics:Z",opcode = Opcodes.GETFIELD)
+            at = @At(value = "FIELD", target = "Lnet/minecraft/core/entity/Mob;noPhysics:Z", opcode = Opcodes.GETFIELD)
     )
-    private boolean flyWithWings(boolean original){
-        if(thisAs instanceof Player){
+    private boolean flyWithWings(boolean original) {
+        if (thisAs instanceof Player) {
             Player player = ((Player) thisAs);
-            SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>)player).getPowerSuit();
-            if(ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)){
+            SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>) player).getPowerSuit();
+            if (ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
                 return original || ps.getAttachment(SIItems.crystalWings).getData().getBoolean("active");
             } else {
                 return original;
@@ -101,11 +100,11 @@ public abstract class MobMixin extends Entity {
 
     @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
     protected void causeFallDamage(float f, CallbackInfo ci) {
-        if(thisAs instanceof Player) {
+        if (thisAs instanceof Player) {
             Player player = ((Player) thisAs);
             SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>) player).getPowerSuit();
             if (ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
-                if(ps.getAttachment(SIItems.crystalWings).getData().getBoolean("active")){
+                if (ps.getAttachment(SIItems.crystalWings).getData().getBoolean("active")) {
                     ci.cancel();
                 }
             }

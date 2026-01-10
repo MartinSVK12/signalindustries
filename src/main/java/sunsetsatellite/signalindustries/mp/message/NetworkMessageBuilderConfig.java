@@ -30,7 +30,8 @@ public class NetworkMessageBuilderConfig implements NetworkMessage {
         this.tileClass = tileClass;
     }
 
-    public NetworkMessageBuilderConfig() {}
+    public NetworkMessageBuilderConfig() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -52,28 +53,28 @@ public class NetworkMessageBuilderConfig implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if(tileEntity instanceof TileEntityBuilder && tileEntity.worldObj != null){
+                if (tileEntity instanceof TileEntityBuilder && tileEntity.worldObj != null) {
                     TileEntityBuilder builder = (TileEntityBuilder) tileEntity;
-                    if(!pos.equals(builder.offset) || !dir.equals(builder.rotation)){
+                    if (!pos.equals(builder.offset) || !dir.equals(builder.rotation)) {
                         builder.offset = pos;
                         builder.rotation = dir;
                         builder.reset();
                     }
-                    if(toggle && builder.workTimer.isPaused()){
-                        if(builder.fluidContents[0] != null && builder.itemContents[0] != null && builder.itemContents[0].getItem() instanceof ItemBlueprint) {
+                    if (toggle && builder.workTimer.isPaused()) {
+                        if (builder.fluidContents[0] != null && builder.itemContents[0] != null && builder.itemContents[0].getItem() instanceof ItemBlueprint) {
                             builder.workTimer.unpause();
                             builder.setStructureToBuild();
                         }
                         for (BlockInstance block : new ArrayList<>(builder.buildingBlocks)) {
-                            if(block.exists(builder.worldObj)){
+                            if (block.exists(builder.worldObj)) {
                                 builder.buildingBlocks.remove(block);
                                 builder.builtBlocks++;
                             }
                         }
-                        if(builder.buildingBlockIndex >= builder.buildingBlocks.size()){
+                        if (builder.buildingBlockIndex >= builder.buildingBlocks.size()) {
                             builder.buildingBlockIndex = 0;
                         }
                     } else {

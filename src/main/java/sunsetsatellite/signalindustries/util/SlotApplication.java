@@ -15,13 +15,13 @@ public class SlotApplication extends Slot {
         this.tier = tier;
     }
 
-    public Container getInventory(){
+    public Container getInventory() {
         return this.container;
     }
 
     @Override
     public boolean mayPlace(ItemStack itemstack) {
-        if(itemstack != null && (itemstack.getItem() instanceof IApplicationItem)){
+        if (itemstack != null && (itemstack.getItem() instanceof IApplicationItem)) {
             return ((IApplicationItem<?>) itemstack.getItem()).getTier().ordinal() <= tier.ordinal();
         }
         return false;

@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;

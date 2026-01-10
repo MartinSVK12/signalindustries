@@ -41,7 +41,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<FluidMachineReci
         this.icon = new DrawableIngredient<>(SIBlocks.prototypeExtractor.getDefaultStack(), ItemStackIngredientRenderer.INSTANCE);
         this.arrow = new DrawableAnimated(new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 82, 128, 24, 16, 0, 0, 0, 0, 24, 16), 1, IDrawableAnimated.StartDirection.LEFT, false);
         this.arrowBack = new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 24, 133, 24, 16, 0, 0, 0, 0, 24, 16);
-        this.flame = new DrawableAnimated(new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 82, 114, 14, 14, 0, 0,0, 0, 14, 14), 1, IDrawableAnimated.StartDirection.TOP, true);
+        this.flame = new DrawableAnimated(new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 82, 114, 14, 14, 0, 0, 0, 0, 14, 14), 1, IDrawableAnimated.StartDirection.TOP, true);
         this.flameBack = new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 1, 134, 14, 14, 0, 0, 0, 0, 14, 14);
     }
 
@@ -69,12 +69,12 @@ public class ExtractorRecipeCategory implements IRecipeCategory<FluidMachineReci
     public void drawRecipe(ITMBRuntime runtime, FluidMachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
 
         RecipeProperties data = recipe.getOriginal().getData();
-        getIngredients( recipe, layout, context, ingredients);
+        getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
@@ -82,7 +82,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<FluidMachineReci
         flameBack.draw(runtime.getGuiHelper(), 10, (background.getHeight() / 2) - 5);
         flame.draw(runtime.getGuiHelper(), 10, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override

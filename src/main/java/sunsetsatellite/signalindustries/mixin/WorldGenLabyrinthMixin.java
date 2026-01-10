@@ -3,13 +3,8 @@ package sunsetsatellite.signalindustries.mixin;
 
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.block.Blocks;
-import net.minecraft.core.block.entity.TileEntityChest;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeatureLabyrinth;
-import org.objectweb.asm.Opcodes;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
 import java.util.Random;
 
@@ -28,10 +22,11 @@ import java.util.Random;
 )
 public class WorldGenLabyrinthMixin {
 
-    @Shadow public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
+    @Shadow
+    public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
 
-    @Inject(method = "place",at = @At(value = "INVOKE",target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V",ordinal = 0,shift = At.Shift.AFTER))
-    private void init(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
+    @Inject(method = "place", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void init(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipShield.getDefaultStack()), 30);
@@ -42,7 +37,7 @@ public class WorldGenLabyrinthMixin {
 
     @Inject(method = "generateDungeon", at = @At("TAIL"))
     private void generateDungeon(World world, Random random, int blockX, int blockY, int blockZ, boolean doSpawner, CallbackInfo ci) {
-        if(doSpawner){
+        if (doSpawner) {
             if (random.nextInt(4) == 0) {
                 if (random.nextBoolean()) {
                     world.setBlockWithNotify(blockX, blockY - 1, blockZ, SIBlocks.solarTotem.id());

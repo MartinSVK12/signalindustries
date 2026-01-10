@@ -8,7 +8,6 @@ import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import net.minecraft.core.sound.SoundCategory;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -46,7 +45,7 @@ public class ScreenSwitchCoverConfig extends Screen {
         Lighting.enableInventoryLight();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
+        GL11.glTranslatef((float) centerX, (float) centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
         GL11.glDisable(32826);
@@ -60,8 +59,7 @@ public class ScreenSwitchCoverConfig extends Screen {
         GL11.glEnable(2929);
     }
 
-    protected void drawGuiContainerBackgroundLayer(float f)
-    {
+    protected void drawGuiContainerBackgroundLayer(float f) {
         @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/gui/config.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);
@@ -70,24 +68,23 @@ public class ScreenSwitchCoverConfig extends Screen {
         drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         font.drawString("Configure: Switch", 45, 6, 0xFF404040);
-        if(tile.hasCoverAnywhere(RedstoneCover.class)){
+        if (tile.hasCoverAnywhere(RedstoneCover.class)) {
             font.drawString("Control by Redstone Cover?", 20, 50, 0xFF404040);
         }
     }
 
     @Override
     public void init() {
-        if(tile.hasCoverAnywhere(RedstoneCover.class)){
-            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 25, 30, 20,  tile.disabled ? "OFF" : "ON"));
-            buttons.add(new ButtonElement(1, (width / 2) - 15, (height / 2) + 20, 30, 20,  cover.controlledByRedstone ? "Yes" : "No"));
+        if (tile.hasCoverAnywhere(RedstoneCover.class)) {
+            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 25, 30, 20, tile.disabled ? "OFF" : "ON"));
+            buttons.add(new ButtonElement(1, (width / 2) - 15, (height / 2) + 20, 30, 20, cover.controlledByRedstone ? "Yes" : "No"));
         } else {
-            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 10, 30, 20,  tile.disabled ? "OFF" : "ON"));
+            buttons.add(new ButtonElement(0, (width / 2) - 15, (height / 2) - 10, 30, 20, tile.disabled ? "OFF" : "ON"));
         }
 
-        if(cover.controlledByRedstone){
+        if (cover.controlledByRedstone) {
             buttons.get(0).enabled = false;
         }
 
@@ -107,8 +104,8 @@ public class ScreenSwitchCoverConfig extends Screen {
                 buttons.get(0).enabled = !cover.controlledByRedstone;
                 break;
         }
-        if(EnvironmentHelper.isClientWorld()){
-            NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,TileEntityCoverable.CHANNEL_COVERS_START+cover.getDir().getSideNumber(),new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
+        if (EnvironmentHelper.isClientWorld()) {
+            NetworkHandler.sendToServer(new PacketScreenAction(button.id, 0, TileEntityCoverable.CHANNEL_COVERS_START + cover.getDir().getSideNumber(), new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
         }
     }
 }

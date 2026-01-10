@@ -32,9 +32,9 @@ public class TileEntityLaserDrill extends TileEntityTieredMultiblock {
     @Override
     public boolean canProcess() {
         boolean previous = super.canProcess();
-        if(!previous) return false;
+        if (!previous) return false;
 
-        if(currentRecipe instanceof RecipeEntryMachineRandomOutput){
+        if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
             RecipeEntryMachineRandomOutput recipe = ((RecipeEntryMachineRandomOutput) currentRecipe);
             return worldObj != null && recipe.getData().allowedDimensions.contains(worldObj.dimension);
         }

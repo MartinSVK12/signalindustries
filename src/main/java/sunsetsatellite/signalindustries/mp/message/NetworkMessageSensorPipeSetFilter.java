@@ -7,7 +7,6 @@ import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntitySignalumReactor;
 import sunsetsatellite.signalindustries.util.PipeType;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
@@ -25,7 +24,8 @@ public class NetworkMessageSensorPipeSetFilter implements NetworkMessage {
         this.tileClass = tileClass;
     }
 
-    public NetworkMessageSensorPipeSetFilter() {}
+    public NetworkMessageSensorPipeSetFilter() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -33,7 +33,7 @@ public class NetworkMessageSensorPipeSetFilter implements NetworkMessage {
         pos.writeToNBT(nbt);
         packet.writeCompoundTag(nbt);
         packet.writeString(TileEntityDispatcher.getIDFromClass(tileClass).toString());
-        if(stack == null) {
+        if (stack == null) {
             packet.writeInt(-1);
         } else {
             packet.writeInt(1);
@@ -47,7 +47,7 @@ public class NetworkMessageSensorPipeSetFilter implements NetworkMessage {
     public void decodeFromUniversalPacket(@NotNull UniversalPacket packet) {
         pos = new Vec3i(packet.readCompoundTag());
         tileClass = TileEntityDispatcher.getClassFromID(packet.readString());
-        if(packet.readInt() == -1) {
+        if (packet.readInt() == -1) {
             stack = null;
         } else {
             stack = ItemStack.readItemStackFromNbt(packet.readCompoundTag());
@@ -56,12 +56,12 @@ public class NetworkMessageSensorPipeSetFilter implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if(tileEntity instanceof TileEntityItemConduit && tileEntity.worldObj != null){
+                if (tileEntity instanceof TileEntityItemConduit && tileEntity.worldObj != null) {
                     TileEntityItemConduit itemConduit = (TileEntityItemConduit) tileEntity;
-                    if(itemConduit.type == PipeType.SENSOR){
+                    if (itemConduit.type == PipeType.SENSOR) {
                         itemConduit.sensorStack = stack;
                     }
                 }

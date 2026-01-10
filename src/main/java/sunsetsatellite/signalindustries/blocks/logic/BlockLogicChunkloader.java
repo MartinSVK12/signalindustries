@@ -11,8 +11,6 @@ import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
-import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
-import sunsetsatellite.signalindustries.tiles.TileEntityChunkloader;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.function.Supplier;
@@ -28,7 +26,7 @@ public class BlockLogicChunkloader extends BlockLogicMachine {
         if (world.getChunkProvider() instanceof ChunkProviderDynamic) {
             Chunk chunk = world.getChunkFromBlockCoords(x, z);
             ((ChunkProviderDynamic) world.getChunkProvider()).removeFromForceLoaded(chunk.xPosition, chunk.zPosition);
-            SignalIndustries.chunkLoaders.remove(new ChunkCoordinates(x,y,z));
+            SignalIndustries.chunkLoaders.remove(new ChunkCoordinates(x, y, z));
         }
         super.onBlockRemoved(world, x, y, z, data);
     }

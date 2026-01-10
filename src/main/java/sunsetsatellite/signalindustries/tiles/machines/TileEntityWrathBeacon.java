@@ -2,14 +2,16 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.monster.*;
+import net.minecraft.core.entity.monster.MobCreeper;
+import net.minecraft.core.entity.monster.MobSkeleton;
+import net.minecraft.core.entity.monster.MobSpider;
+import net.minecraft.core.entity.monster.MobZombie;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.Difficulty;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import sunsetsatellite.catalyst.core.util.TickTimer;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWrathBeaconBase;
@@ -27,60 +29,61 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
     public boolean started = false;
     public ArrayList<Mob> enemiesLeft = new ArrayList<>();
     public static ArrayList<Wave> waves = new ArrayList<>();
-    public TickTimer spawnTimer = new TickTimer(this,this::spawn,20,true);
-    public TickTimer intermissionTimer = new TickTimer(this,this::startWave,300,false);
+    public TickTimer spawnTimer = new TickTimer(this, this::spawn, 20, true);
+    public TickTimer intermissionTimer = new TickTimer(this, this::startWave, 300, false);
+
     {
-            spawnTimer.pause();
-            intermissionTimer.pause();
+        spawnTimer.pause();
+        intermissionTimer.pause();
     }
 
-    public TileEntityWrathBeacon(){
+    public TileEntityWrathBeacon() {
         ArrayList<Class<? extends Mob>> mobList = new ArrayList<>();
         mobList.add(MobZombie.class);
         mobList.add(MobSkeleton.class);
-        waves.add(new Wave(mobList,3,6,20));
-        waves.add(new Wave(mobList,5,10,20));
-        waves.add(new Wave(mobList,6,12,20));
+        waves.add(new Wave(mobList, 3, 6, 20));
+        waves.add(new Wave(mobList, 5, 10, 20));
+        waves.add(new Wave(mobList, 6, 12, 20));
         mobList = new ArrayList<>();
         mobList.add(MobCreeper.class);
-        waves.add(new Wave(mobList,2,4,20));
+        waves.add(new Wave(mobList, 2, 4, 20));
         mobList = new ArrayList<>();
         mobList.add(MobZombie.class);
         mobList.add(MobSkeleton.class);
         mobList.add(MobSpider.class);
-        waves.add(new Wave(mobList,8,10,20));
+        waves.add(new Wave(mobList, 8, 10, 20));
         mobList = new ArrayList<>();
         mobList.add(MobZombie.class);
         mobList.add(MobSkeleton.class);
         mobList.add(MobSpider.class);
         mobList.add(MobCreeper.class);
-        waves.add(new Wave(mobList,10,16,20));
+        waves.add(new Wave(mobList, 10, 16, 20));
         //final wave, boss not included
-        waves.add(new Wave(mobList,10,16,20));
+        waves.add(new Wave(mobList, 10, 16, 20));
 
     }
 
     @Override
     public void tick() {
-        if(worldObj == null) return;
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
-        if(active){
+        if (worldObj == null) return;
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
+        if (active) {
             spawnTimer.tick();
             intermissionTimer.tick();
         }
 
-        enemiesLeft.removeIf((E)-> !E.isAlive());
-        if(active && worldObj.getDifficulty() == Difficulty.PEACEFUL){
+        enemiesLeft.removeIf((E) -> !E.isAlive());
+        if (active && worldObj.getDifficulty() == Difficulty.PEACEFUL) {
             for (Player player : worldObj.players) {
-                if(player.distanceToSqr(x,y,z) > 64) continue;
+                if (player.distanceToSqr(x, y, z) > 64) continue;
                 player.sendMessage("The wrath beacon loses all its strength suddenly..");
             }
-            worldObj.setBlockWithNotify(x,y,z,0);
+            worldObj.setBlockWithNotify(x, y, z, 0);
         }
-        if(active && started && enemiesLeft.isEmpty() && wave < 5){
+        if (active && started && enemiesLeft.isEmpty() && wave < 5) {
             for (Player player : worldObj.players) {
-                if(player.distanceToSqr(x,y,z) > 64) continue;
-                player.sendMessage("Wave "+wave+" complete! Next wave in: "+(intermissionTimer.max/20)+"s.");
+                if (player.distanceToSqr(x, y, z) > 64) continue;
+                player.sendMessage("Wave " + wave + " complete! Next wave in: " + (intermissionTimer.max / 20) + "s.");
             }
             started = false;
             intermissionTimer.unpause();
@@ -88,7 +91,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             wave++;
         } else if (active && started && enemiesLeft.isEmpty() && wave == 5) {
             for (Player player : worldObj.players) {
-                if(player.distanceToSqr(x,y,z) > 64) continue;
+                if (player.distanceToSqr(x, y, z) > 64) continue;
                 player.sendMessage("Challenge complete!!");
                 //player.triggerAchievement(SIAchievements.VICTORY);
             }
@@ -99,31 +102,31 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             intermissionTimer.pause();
             wave = 0;
             currentMaxAmount = 0;
-            worldObj.setBlockWithNotify(x,y,z,0);
-            worldObj.spawnParticle("signalindustries.shockwave", x, y, z, 0.0, 0.0, 0.0,0);
+            worldObj.setBlockWithNotify(x, y, z, 0);
+            worldObj.spawnParticle("signalindustries.shockwave", x, y, z, 0.0, 0.0, 0.0, 0);
             EntityItem entityitem = new EntityItem(worldObj, (float) x, (float) y, (float) z, new ItemStack(SIItems.clearKey, 1));
             worldObj.entityJoinedWorld(entityitem);
         }
-        if(active){
-            for (float y1 = y; y1 < 256; y1+=0.1f) {
-                worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0,0);
+        if (active) {
+            for (float y1 = y; y1 < 256; y1 += 0.1f) {
+                worldObj.spawnParticle("reddust", x + 0.5, y1, z + 0.5, 0, 0, 0, 0);
             }
         }
-        if(worldObj != null && getBlock() != null){
-            tier = ((ITiered)getBlock().getLogic()).getTier();
+        if (worldObj != null && getBlock() != null) {
+            tier = ((ITiered) getBlock().getLogic()).getTier();
         }
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
         //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));
 
     }
 
-    public void activate(Player activator){
-        if(!active && worldObj != null){
-            if(worldObj.getDifficulty() == Difficulty.PEACEFUL){
+    public void activate(Player activator) {
+        if (!active && worldObj != null) {
+            if (worldObj.getDifficulty() == Difficulty.PEACEFUL) {
                 activator.sendMessage("This world is far too peaceful..");
                 return;
             }
-            if(worldObj.isDaytime()){
+            if (worldObj.isDaytime()) {
                 activator.sendMessage("Now is not the time..");
                 return;
             }
@@ -139,10 +142,10 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                     }
                 }
             }*/
-            if(activator.getHeldItem() != null && activator.getHeldItem().itemID == SIItems.evilEye.id){
+            if (activator.getHeldItem() != null && activator.getHeldItem().itemID == SIItems.evilEye.id) {
                 activator.getHeldItem().consumeItem(activator);
                 for (Player player : worldObj.players) {
-                    if(player.distanceToSqr(x,y,z) > 64) continue;
+                    if (player.distanceToSqr(x, y, z) > 64) continue;
                     player.sendTranslatedChatMessage("event.signalindustries.wrathBeaconActivated");
                     //player.triggerAchievement(SIAchievements.CHALLENGE);
                 }
@@ -154,12 +157,12 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
         }
     }
 
-    public void startWave(){
-        if(active && worldObj != null){
+    public void startWave() {
+        if (active && worldObj != null) {
             for (Player player : worldObj.players) {
-                if(player.distanceToSqr(x,y,z) > 64) continue;
-                player.sendMessage("Wave "+wave);
-                if(wave == 5){
+                if (player.distanceToSqr(x, y, z) > 64) continue;
+                player.sendMessage("Wave " + wave);
+                if (wave == 5) {
                     player.sendMessage("FINAL WAVE!");
                 }
             }
@@ -167,18 +170,19 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             intermissionTimer.pause();
             spawnTimer.unpause();
             spawnTimer.max = waves.get(wave).spawnFrequency;
-            currentMaxAmount = waves.get(wave).lowerBound + random.nextInt(waves.get(wave).upperBound-waves.get(wave).lowerBound);
+            currentMaxAmount = waves.get(wave).lowerBound + random.nextInt(waves.get(wave).upperBound - waves.get(wave).lowerBound);
         }
     }
 
-    public void spawn(){
-        if(enemiesLeft.size() < currentMaxAmount && worldObj != null){
+    public void spawn() {
+        if (enemiesLeft.size() < currentMaxAmount && worldObj != null) {
             started = true;
             ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, this.x, this.z);
             Mob mob;
             try {
                 mob = waves.get(wave).chooseRandomMob().getConstructor(World.class).newInstance(worldObj);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
             mob.setPos(randomPos.x, randomPos.y, randomPos.z);

@@ -37,6 +37,7 @@ import java.util.Random;
 public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFluidContainer, IVariableDamageWeapon, IHasOverlay {
 
     public Tier tier;
+
     public ItemSignalumSaber(String name, String namespaceId, int id, ToolMaterial enumtoolmaterial, Tier tier) {
         super(name, namespaceId, id, enumtoolmaterial);
         this.tier = tier;
@@ -49,7 +50,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public int getRemainingCapacity(ItemStack stack) {
-        return 500-stack.getData().getInteger("energy");
+        return 500 - stack.getData().getInteger("energy");
     }
 
     @Override
@@ -69,36 +70,36 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SIFluids.ENERGY,getCapacity(stack));
+        return new FluidStack(SIFluids.ENERGY, getCapacity(stack));
     }
 
     @Override
     public void setCurrentFluid(FluidStack fluidStack, ItemStack stack) {
-        if(fluidStack.fluid != SIFluids.ENERGY) return;
-        stack.getData().putInt("saturation",fluidStack.amount);
+        if (fluidStack.fluid != SIFluids.ENERGY) return;
+        stack.getData().putInt("saturation", fluidStack.amount);
     }
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = fluidStack.amount;
-            if(remaining == 0){
+            if (remaining == 0) {
                 return null;
             }
-            if(amount > remaining){
+            if (amount > remaining) {
                 fluidStack.amount -= remaining;
                 CompoundTag data = new CompoundTag();
-                data.putInt("energy",getCapacity(stack));
+                data.putInt("energy", getCapacity(stack));
                 stack.setData(data);
                 return stack;
             } else {
                 CompoundTag data = new CompoundTag();
-                data.putInt("energy",saturation + amount);
+                data.putInt("energy", saturation + amount);
                 fluidStack.amount -= amount;
                 stack.setData(data);
                 return stack;
@@ -109,24 +110,24 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile) {
-        return fill(fluidStack,stack);
+        return fill(fluidStack, stack);
     }
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile, int maxAmount) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
-            int amount = Math.min(fluidStack.amount,maxAmount);
-            if(remaining == 0) return null;
-            int result = Math.min(amount,remaining);
-            if(result == 0) return null;
+            int amount = Math.min(fluidStack.amount, maxAmount);
+            if (remaining == 0) return null;
+            int result = Math.min(amount, remaining);
+            if (result == 0) return null;
             fluidStack.amount -= result;
             CompoundTag data = new CompoundTag();
-            data.putInt("energy",saturation+result);
+            data.putInt("energy", saturation + result);
             stack.setData(data);
             return stack;
         }
@@ -135,7 +136,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IItemFluidContainer inv) {
-        return fill(fluidStack,stack);
+        return fill(fluidStack, stack);
     }
 
     @Override
@@ -171,21 +172,21 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
     @Override
     public boolean hitEntity(ItemStack itemstack, Mob target, Mob attacker) {
         int energy = itemstack.getData().getInteger("energy");
-        if(itemstack.getData().getBoolean("active")){
-            if(energy > 0){
-                itemstack.getData().putInt("energy",energy-1);
+        if (itemstack.getData().getBoolean("active")) {
+            if (energy > 0) {
+                itemstack.getData().putInt("energy", energy - 1);
                 target.remainingFireTicks = 60;
             }
         }
-        if(energy <= 0){
-            itemstack.getData().putBoolean("active",false);
+        if (energy <= 0) {
+            itemstack.getData().putBoolean("active", false);
         }
         return true;
     }
 
     @Override
     public int getDamageVsEntity(Entity entity, ItemStack stack) {
-        if(stack.getData().getBoolean("active")){
+        if (stack.getData().getBoolean("active")) {
             return 10;
         } else {
             return 4;
@@ -194,15 +195,15 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        if(itemstack.getData().getInteger("energy") > 0){
-            itemstack.getData().putBoolean("active",!itemstack.getData().getBoolean("active"));
+        if (itemstack.getData().getInteger("energy") > 0) {
+            itemstack.getData().putBoolean("active", !itemstack.getData().getBoolean("active"));
         }
         return super.onUseItem(itemstack, world, entityplayer);
     }
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getTextColor() + tier.getRank()+"\n"+"Energy: "+ TextFormatting.RED+stack.getData().getInteger("energy")+TextFormatting.WHITE;
+        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + TextFormatting.WHITE;
     }
 
     @Override
@@ -213,7 +214,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
         fontRenderer.drawStringWithShadow("Signalite Saber", 4, i += 16, 0xFFFF0000);
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow(String.valueOf(saber.getData().getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
-        fontRenderer.drawStringWithShadow(saber.getData().getBoolean("active") ? "Active" : "Inactive", 4, i +=10, saber.getData().getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
+        fontRenderer.drawStringWithShadow(saber.getData().getBoolean("active") ? "Active" : "Inactive", 4, i += 10, saber.getData().getBoolean("active") ? 0xFF00FF00 : 0xFF808080);
     }
 
     @Override

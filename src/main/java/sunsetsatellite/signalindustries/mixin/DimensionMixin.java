@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListA
 
 import java.util.Map;
 
-@Mixin(value = Dimension.class,remap = false)
+@Mixin(value = Dimension.class, remap = false)
 public class DimensionMixin implements IMutableDimensionListAccess {
 
     @Shadow

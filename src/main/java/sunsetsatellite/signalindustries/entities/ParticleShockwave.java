@@ -2,14 +2,7 @@ package sunsetsatellite.signalindustries.entities;
 
 import net.minecraft.client.entity.particle.Particle;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.Mob;
-import net.minecraft.core.util.helper.DamageType;
-import net.minecraft.core.util.phys.HitResult;
-import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
-
-import java.util.List;
 
 public class ParticleShockwave extends Particle {
 
@@ -34,20 +27,20 @@ public class ParticleShockwave extends Particle {
 
     @Override
     public void render(Tessellator t, float partialTick, double xOff, double yOff, double zOff, float xa, float ya, float za, float xa2, float za2) {
-        
+
     }
 
     @Override
     public void tick() {
-        for(int i1 = 0; i1 < 120; ++i1) {
+        for (int i1 = 0; i1 < 120; ++i1) {
             double d2 = this.x + (this.random.nextDouble() - this.random.nextDouble()) * timeSinceStart;
             double d4 = this.y - 0.3;
             double d6 = this.z + (this.random.nextDouble() - this.random.nextDouble()) * timeSinceStart;
-            this.world.spawnParticle("reddust", d2, d4, d6, (float)this.timeSinceStart / (float)this.maximumTime, 0.0D, 0.0D,0);
+            this.world.spawnParticle("reddust", d2, d4, d6, (float) this.timeSinceStart / (float) this.maximumTime, 0.0D, 0.0D, 0);
         }
 
         ++this.timeSinceStart;
-        if(this.timeSinceStart == this.maximumTime) {
+        if (this.timeSinceStart == this.maximumTime) {
             this.remove();
         }
 

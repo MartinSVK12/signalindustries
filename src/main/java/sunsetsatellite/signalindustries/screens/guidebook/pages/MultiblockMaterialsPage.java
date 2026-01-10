@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ItemElement;
 import net.minecraft.client.gui.TooltipElement;
 import net.minecraft.client.gui.guidebook.*;
-import net.minecraft.client.gui.guidebook.SlotGuidebook;
 import net.minecraft.client.gui.guidebook.search.GuidebookPageSearch;
 import net.minecraft.client.render.Font;
 import net.minecraft.client.render.TextureManager;
@@ -51,7 +50,7 @@ public class MultiblockMaterialsPage extends GuidebookPage {
                 .map((B) -> new ItemStack(B.block, 1, B.meta == -1 ? 0 : B.meta))
                 .collect(Collectors.toList());
         List<ItemStack> blocks = Catalyst.condenseItemList(blocksUncondensed);
-        ItemStack origin = new ItemStack(multiblock.getOrigin().block,1, multiblock.getOrigin().meta == -1 ? 0 : multiblock.getOrigin().meta);
+        ItemStack origin = new ItemStack(multiblock.getOrigin().block, 1, multiblock.getOrigin().meta == -1 ? 0 : multiblock.getOrigin().meta);
 
         // Annoying special case for when the origin isn't that special
         boolean matched = false;
@@ -69,7 +68,7 @@ public class MultiblockMaterialsPage extends GuidebookPage {
         int i = 0;
         int maxSlotsInRow = 7;
         for (ItemStack block : blocks) {
-            slots.add(new SlotGuidebook(i,18 + 18 * (i % maxSlotsInRow),24 + 18 * (i / maxSlotsInRow),new RecipeSymbol(block),false,null));
+            slots.add(new SlotGuidebook(i, 18 + 18 * (i % maxSlotsInRow), 24 + 18 * (i / maxSlotsInRow), new RecipeSymbol(block), false, null));
             i++;
         }
 
@@ -78,55 +77,54 @@ public class MultiblockMaterialsPage extends GuidebookPage {
 
     @Override
     protected void renderForeground(TextureManager re, Font fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        if(multiblock != null){
+        if (multiblock != null) {
             drawStringCenteredNoShadow(fr, I18n.getInstance().translateNameKey(multiblock.translateKey), x + 158 / 2, y + 10, 0x000000);
         } else {
-            drawStringCenteredNoShadow(fr,"No results :(" ,x+width/2,y+height/2,0xFF808080);
+            drawStringCenteredNoShadow(fr, "No results :(", x + width / 2, y + height / 2, 0xFF808080);
         }
         SlotGuidebook mouseOverSlot = null;
         ticks++;
         for (SlotGuidebook slot : slots) {
-            if(ticks > 100) {
+            if (ticks > 100) {
                 slot.showRandomItem();
-                if(slots.get(slots.size()-1) == slot){
+                if (slots.get(slots.size() - 1) == slot) {
                     ticks = 0;
                 }
             }
-            drawSlot(x+slot.x-1,y+slot.y-1,0xFFFFFFFF);
-            if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
-            if(slot.item != null && slot.item.itemID < 16384 && (Blocks.getBlock(slot.item.itemID) == Blocks.FLUID_WATER_FLOWING || Blocks.getBlock(slot.item.itemID) == Blocks.FLUID_WATER_STILL) && mc.gameSettings.biomeWater.value){
+            drawSlot(x + slot.x - 1, y + slot.y - 1, 0xFFFFFFFF);
+            if (getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) mouseOverSlot = slot;
+            if (slot.item != null && slot.item.itemID < 16384 && (Blocks.getBlock(slot.item.itemID) == Blocks.FLUID_WATER_FLOWING || Blocks.getBlock(slot.item.itemID) == Blocks.FLUID_WATER_STILL) && mc.gameSettings.biomeWater.value) {
                 BlockModel<?> blockModel = BlockModelDispatcher.getInstance().getDispatch(Blocks.getBlock(slot.item.itemID));
                 ItemModel itemModel = ItemModelDispatcher.getInstance().getDispatch(slot.getItemStack().getItem());
                 int waterColor = BlockColorDispatcher.getInstance().getDispatch(Blocks.FLUID_WATER_FLOWING).getWorldColor(mc.currentWorld, (int) mc.thePlayer.x, (int) mc.thePlayer.y, (int) mc.thePlayer.z);
                 Color c = new Color().setARGB(waterColor);
-                c.setRGBA(c.getRed(),c.getGreen(),c.getBlue(),0x40);
-                ((IColorOverride)blockModel).overrideColor(c.getRed(),c.getGreen(),c.getBlue(),c.getAlpha());
-                
-                guiRenderItem.render(slot.getItemStack(),x+slot.x,y+slot.y,mouseOverSlot == slot,slot);
-                ((IColorOverride)blockModel).overrideColor(1,1,1,1);
-                
+                c.setRGBA(c.getRed(), c.getGreen(), c.getBlue(), 0x40);
+                ((IColorOverride) blockModel).overrideColor(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+
+                guiRenderItem.render(slot.getItemStack(), x + slot.x, y + slot.y, mouseOverSlot == slot, slot);
+                ((IColorOverride) blockModel).overrideColor(1, 1, 1, 1);
+
             } else {
-                guiRenderItem.render(slot.getItemStack(),x+slot.x,y+slot.y,mouseOverSlot == slot,slot);
+                guiRenderItem.render(slot.getItemStack(), x + slot.x, y + slot.y, mouseOverSlot == slot, slot);
             }
         }
     }
 
-    public boolean getIsMouseOverSlot(final Slot slot, int x, int y, int mouseX, int mouseY)
-    {
-        return mouseX >= x+slot.x - 1 && mouseX < x+slot.x + 16 + 1 && mouseY >= y+slot.y - 1 && mouseY < y+slot.y + 16 + 1;
+    public boolean getIsMouseOverSlot(final Slot slot, int x, int y, int mouseX, int mouseY) {
+        return mouseX >= x + slot.x - 1 && mouseX < x + slot.x + 16 + 1 && mouseY >= y + slot.y - 1 && mouseY < y + slot.y + 16 + 1;
     }
 
     @Override
     public boolean keyTyped(char c, int key, int x, int y, int mouseX, int mouseY) {
         super.keyTyped(c, key, x, y, mouseX, mouseY);
-        if(mc.gameSettings.keyShowRecipe.isKeyboardKey(key)){
-            SlotGuidebook hoveringSlot= null;
+        if (mc.gameSettings.keyShowRecipe.isKeyboardKey(key)) {
+            SlotGuidebook hoveringSlot = null;
             for (SlotGuidebook slot : slots) {
-                if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) hoveringSlot = slot;
+                if (getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) hoveringSlot = slot;
             }
-            if(hoveringSlot != null){
-                if(hoveringSlot.hasItem()){
-                    String query = "r:"+hoveringSlot.getItemStack().getDisplayName()+"!";
+            if (hoveringSlot != null) {
+                if (hoveringSlot.hasItem()) {
+                    String query = "r:" + hoveringSlot.getItemStack().getDisplayName() + "!";
                     GuidebookPageManager.searchQuery = SearchQuery.resolve(query);
                     GuidebookPageSearch.searchField.setText(query);
                     ScreenGuidebook.getPageManager().updatePages();
@@ -135,11 +133,11 @@ public class MultiblockMaterialsPage extends GuidebookPage {
                 }
             }
         } else if (mc.gameSettings.keyShowUsage.isKeyboardKey(key)) {
-            SlotGuidebook hoveringSlot= null;
+            SlotGuidebook hoveringSlot = null;
             for (SlotGuidebook slot : slots) {
-                if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) hoveringSlot = slot;
+                if (getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) hoveringSlot = slot;
             }
-            if(hoveringSlot != null) {
+            if (hoveringSlot != null) {
                 if (hoveringSlot.hasItem()) {
                     String query = "u:" + hoveringSlot.getItemStack().getDisplayName() + "!";
                     GuidebookPageManager.searchQuery = SearchQuery.resolve(query);
@@ -158,14 +156,12 @@ public class MultiblockMaterialsPage extends GuidebookPage {
         super.renderOverlay(re, fr, x, y, mouseX, mouseY, partialTicks);
         SlotGuidebook mouseOverSlot = null;
         for (SlotGuidebook slot : slots) {
-            if(getIsMouseOverSlot(slot,x,y,mouseX,mouseY)) mouseOverSlot = slot;
+            if (getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) mouseOverSlot = slot;
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            if (mouseOverSlot != null && mouseOverSlot.hasItem())
-            {
+            if (mouseOverSlot != null && mouseOverSlot.hasItem()) {
                 boolean showDescription = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
                 String str = guiTooltip.getTooltipText(mouseOverSlot.getItemStack(), showDescription, mouseOverSlot);
-                if(!str.isEmpty())
-                {
+                if (!str.isEmpty()) {
                     guiTooltip.render(str, mouseX, mouseY, 8, -8);
                 }
             }

@@ -1,18 +1,14 @@
 package sunsetsatellite.signalindustries.screens;
 
-import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
-import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAbilityModule;
-import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.menus.MenuAbilityModule;
-import sunsetsatellite.signalindustries.menus.MenuBackpack;
 import sunsetsatellite.signalindustries.util.DrawUtil;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -29,7 +25,7 @@ public class ScreenAbilityModule extends ScreenFluid {
         this.slotIndex = slotIndex;
         this.isArmor = isArmor;
         this.player = inventoryPlayer.player;
-        if(isArmor){
+        if (isArmor) {
             this.module = ((IPlayerPowerSuit<?>) inventoryPlayer.player).getPowerSuit().getAttachmentClass(ItemAbilityModule.class);
         } else {
             this.module = inventoryPlayer.getItem(slotIndex);
@@ -59,13 +55,12 @@ public class ScreenAbilityModule extends ScreenFluid {
         }
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         String name = I18n.getInstance().translateNameKey(fluidSlots.itemInventory.getNameTranslationKey());
         Tier tier = ((ItemAbilityModule) module.getItem()).getTier();
-        if(module.getItem() instanceof ItemAbilityModule){
-            switch (tier){
+        if (module.getItem() instanceof ItemAbilityModule) {
+            switch (tier) {
                 case REINFORCED:
                     name = I18n.getInstance().translateNameKey("container.signalindustries.abilityModule");
                     break;
@@ -80,11 +75,11 @@ public class ScreenAbilityModule extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        if(isArmor){
+        if (isArmor) {
             this.module = ((IPlayerPowerSuit<?>) player).getPowerSuit().getAttachmentClass(ItemAbilityModule.class);
         } else {
             this.module = player.inventory.getItem(slotIndex);
         }
-        InventorySerializer.saveInvToNBT(module,fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(module, fluidSlots.itemInventory);
     }
 }

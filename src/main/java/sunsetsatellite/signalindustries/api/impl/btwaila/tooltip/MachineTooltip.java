@@ -51,15 +51,15 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
     @Override
     public void drawAdvancedTooltip(TileEntityTieredMachineBase tile, AdvancedInfoComponent c) {
         long coversCount = tile.getCovers().values().stream().filter(Objects::nonNull).count();
-        if(coversCount > 0){
-            c.drawStringWithShadow(coversCount+" "+(coversCount > 1 ? "covers" : "cover")+" installed.",0);
+        if (coversCount > 0) {
+            c.drawStringWithShadow(coversCount + " " + (coversCount > 1 ? "covers" : "cover") + " installed.", 0);
         }
         ProgressBarOptions options = new ProgressBarOptions()
                 .setForegroundOptions(new TextureOptions(0x00FF00, TextureRegistry.getTexture("minecraft:block/sand")))
-                .setBackgroundOptions(new TextureOptions(0,TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
+                .setBackgroundOptions(new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                 .setText("Progress: ");
-        c.drawProgressBarTextureWithText(tile.progressTicks,tile.progressMaxTicks,options,0);
-        drawFluids(tile,c,true);
+        c.drawProgressBarTextureWithText(tile.progressTicks, tile.progressMaxTicks, options, 0);
+        drawFluids(tile, c, true);
         c.drawInventory(tile, 0);
     }
 

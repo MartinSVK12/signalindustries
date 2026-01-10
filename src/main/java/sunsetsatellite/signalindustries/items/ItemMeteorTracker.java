@@ -5,7 +5,6 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.chunk.ChunkCoordinates;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -19,7 +18,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        if(itemstack.getMetadata() == 0){
+        if (itemstack.getMetadata() == 0) {
             itemstack.setMetadata(1);
         } else {
 
@@ -28,19 +27,19 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
             MeteorLocation.Type type = null;
             for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
                 Vec3i location = meteorLocation.location;
-                if(location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z) < distance){
+                if (location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z) < distance) {
                     distance = location.getSqDistanceTo((int) entityplayer.x, (int) entityplayer.y, (int) entityplayer.z);
                     chunk = location;
                     type = meteorLocation.type;
                 }
             }
-            if(chunk != null){
-                if(entityplayer.isSneaking() && distance < 5){
+            if (chunk != null) {
+                if (entityplayer.isSneaking() && distance < 5) {
                     entityplayer.sendStatusMessage("This meteor will no longer be tracked.");
                     final Vec3i finalChunk = chunk;
-                    SignalIndustries.meteorLocations.removeIf((L)->L.location == finalChunk);
+                    SignalIndustries.meteorLocations.removeIf((L) -> L.location == finalChunk);
                 } else {
-                    entityplayer.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance,type));
+                    entityplayer.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance, type));
                 }
             } else {
                 entityplayer.sendStatusMessage("No meteors detected nearby.");
@@ -51,8 +50,8 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 
     @Override
     public String getDescription(ItemStack stack) {
-        if(stack.getMetadata() != 1){
-            return "Uncalibrated!\n"+ TextFormatting.GRAY +"Right-click while holding in your hand to calibrate.";
+        if (stack.getMetadata() != 1) {
+            return "Uncalibrated!\n" + TextFormatting.GRAY + "Right-click while holding in your hand to calibrate.";
         }
         return "Calibrated.";
     }

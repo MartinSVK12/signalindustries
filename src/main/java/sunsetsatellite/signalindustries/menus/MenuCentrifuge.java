@@ -14,7 +14,7 @@ public class MenuCentrifuge extends MenuMachine {
         this.addFluidSlot(new SlotFluid(tile, 2, 125, 50));
         this.addFluidSlot(new SlotFluid(tile, 3, 105, 70));
 
-        this.addFluidSlot(new SlotFluid(tile, 4, 33,30));
+        this.addFluidSlot(new SlotFluid(tile, 4, 33, 30));
 
         this.addSlot(new Slot(tile, 0, 33, 70));
 

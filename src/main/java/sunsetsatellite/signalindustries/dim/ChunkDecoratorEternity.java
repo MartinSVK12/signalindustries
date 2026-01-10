@@ -26,17 +26,17 @@ public class ChunkDecoratorEternity implements ChunkDecorator {
         int x = chunk.xPosition * 16;
         int z = chunk.zPosition * 16;
         int y = this.world.getHeightValue(x, z);
-        if(random.nextInt(16) == 0){
+        if (random.nextInt(16) == 0) {
             WorldFeature tree = new WorldFeatureEternalTree(0, SIBlocks.eternalTreeLog.id());
-            tree.place(world,random,x,y,z);
+            tree.place(world, random, x, y, z);
         }
-        if(random.nextInt(128) == 0){
+        if (random.nextInt(128) == 0) {
             WorldFeature obelisk = new WorldFeatureObelisk();
-            obelisk.place(world,random,x,y,z);
+            obelisk.place(world, random, x, y, z);
         }
-        if(random.nextInt(64) == 0){
+        if (random.nextInt(64) == 0) {
             WorldFeature crystal = new WorldFeatureDilithiumCrystal();
-            crystal.place(world,random,x,y,z);
+            crystal.place(world, random, x, y, z);
         }
     }
 }

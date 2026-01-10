@@ -11,7 +11,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.List;
 
 //TODO: implement
-public class ItemCrownAttachment extends ItemTieredAttachment{
+public class ItemCrownAttachment extends ItemTieredAttachment {
     public ItemCrownAttachment(String translationKey, String namespaceId, int id, List<AttachmentPoint> attachmentPoints, Tier tier) {
         super(translationKey, namespaceId, id, attachmentPoints, tier);
     }
@@ -22,7 +22,7 @@ public class ItemCrownAttachment extends ItemTieredAttachment{
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
 
     }
 

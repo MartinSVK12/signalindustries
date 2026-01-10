@@ -10,7 +10,6 @@ import net.minecraft.core.net.packet.PacketAddEntity;
 import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sunsetsatellite.signalindustries.entities.ProjectileEnergyOrb;
 import sunsetsatellite.signalindustries.entities.ProjectileSunbeam;
 
 public class NetEntrySunbeam implements IVehicleEntry<ProjectileSunbeam>, ITrackedEntry<ProjectileSunbeam> {

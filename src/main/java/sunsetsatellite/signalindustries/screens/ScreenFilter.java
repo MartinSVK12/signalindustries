@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.menus.MenuFilter;
-import sunsetsatellite.signalindustries.mp.message.NetworkMessageExternalIOLinkBreak;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageFilterConfig;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import turniplabs.halplibe.helper.EnvironmentHelper;
@@ -45,7 +44,7 @@ public class ScreenFilter extends ScreenFluid {
         int color = 0x404040;
         String s = I18n.getInstance().translateNameKey(tile.getNameTranslationKey());
         int stringWidth = font.getStringWidth(s);
-        font.drawString(s, 90 - stringWidth/2, 6, color);
+        font.drawString(s, 90 - stringWidth / 2, 6, color);
     }
 
     public ButtonElement defaultSide;
@@ -55,9 +54,9 @@ public class ScreenFilter extends ScreenFluid {
     public void init() {
         int w = (this.width - this.xSize) / 2;
         int h = (this.height - this.ySize) / 2;
-        ButtonElement defaultSide = new ButtonElement(0,w+8+22,h+128,120,20,"Default: "+(tile.defaultSide.ordinal()+1)+" ("+tile.defaultSide.name()+")");
+        ButtonElement defaultSide = new ButtonElement(0, w + 8 + 22, h + 128, 120, 20, "Default: " + (tile.defaultSide.ordinal() + 1) + " (" + tile.defaultSide.name() + ")");
         buttons.add(defaultSide);
-        ButtonElement ignoreMeta = new ButtonElement(1,w+8,h+128,20,20, tile.ignoreMeta ? "!M" : "M");
+        ButtonElement ignoreMeta = new ButtonElement(1, w + 8, h + 128, 20, 20, tile.ignoreMeta ? "!M" : "M");
         buttons.add(ignoreMeta);
         this.ignoreMeta = ignoreMeta;
         this.defaultSide = defaultSide;
@@ -66,22 +65,22 @@ public class ScreenFilter extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == defaultSide){
+        if (button == defaultSide) {
             int ord = tile.defaultSide.ordinal();
-            if(ord++ >= TileEntityFilter.FilterSide.values().length-1){
+            if (ord++ >= TileEntityFilter.FilterSide.values().length - 1) {
                 ord = 0;
             }
             tile.defaultSide = TileEntityFilter.FilterSide.values()[ord];
-            button.displayString = "Default: " + (ord+1) + " ("+tile.defaultSide.name()+")";
-            if(EnvironmentHelper.isClientWorld()){
+            button.displayString = "Default: " + (ord + 1) + " (" + tile.defaultSide.name() + ")";
+            if (EnvironmentHelper.isClientWorld()) {
                 NetworkHandler.sendToServer(new NetworkMessageFilterConfig(tile.getPosition(), tile.getClass(), tile.defaultSide, tile.ignoreMeta));
             }
-        } else if(button == ignoreMeta){
+        } else if (button == ignoreMeta) {
             tile.ignoreMeta = !tile.ignoreMeta;
             button.displayString = tile.ignoreMeta ? "!M" : "M";
-            if(EnvironmentHelper.isClientWorld()){
+            if (EnvironmentHelper.isClientWorld()) {
                 NetworkHandler.sendToServer(new NetworkMessageFilterConfig(tile.getPosition(), tile.getClass(), tile.defaultSide, tile.ignoreMeta));
             }
         }

@@ -21,18 +21,18 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
 
     @Override
     public void tick(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, int slot) {
-        if(signalumPowerSuit.getEnergy() < 1){
-            stack.getData().putBoolean("active",false);
+        if (signalumPowerSuit.getEnergy() < 1) {
+            stack.getData().putBoolean("active", false);
             return;
         }
-        if(stack.getData().getBoolean("active")){
+        if (stack.getData().getBoolean("active")) {
             signalumPowerSuit.decrementEnergy(1);
         }
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
-        if(signalumPowerSuit.getEnergy() >= 1) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
+        if (signalumPowerSuit.getEnergy() >= 1) {
             boolean state = stack.getData().getBoolean("active");
             stack.getData().putBoolean("active", !state);
         }
@@ -45,7 +45,7 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
 
     @Override
     public void renderWhenAttached(Player player, IPowerSuit signalumPowerSuit, ModelBiped modelBipedMain, ItemStack stack) {
-        if(stack.getData().getBoolean("active")){
+        if (stack.getData().getBoolean("active")) {
             loadTexture("/assets/signalindustries/attachments/wings_texture.png");
         } else {
             loadTexture("/assets/signalindustries/attachments/wings_texture_inactive.png");
@@ -53,7 +53,7 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
         StaticEntityModel model = DragonFly.loadEntityModel("geometry.signalindustries.wings", 0);
         GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
         GL11.glScalef(0.0625f, 0.0625f, 0.0625f);
-        GL11.glTranslatef(0f,0,0.1f);
+        GL11.glTranslatef(0f, 0, 0.1f);
         model.render(Tessellator.instance);
     }
 

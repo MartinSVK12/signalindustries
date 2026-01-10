@@ -6,7 +6,6 @@ import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ProjectileEnergyOrb extends Projectile {
     public void tick() {
         super.tick();
         HitResult hit = getHitResult();
-        if(hit != null){
+        if (hit != null) {
             if (this.world != null && !this.world.isClientSide) {
                 List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(this, bb.expand(xd, yd, zd).grow(1.0D, 1.0D, 1.0D));
 

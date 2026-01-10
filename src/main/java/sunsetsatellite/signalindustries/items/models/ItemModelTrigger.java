@@ -23,7 +23,7 @@ public class ItemModelTrigger extends ItemModelStandard {
 
     @Override
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemStack) {
-        if(entity instanceof Player){
+        if (entity instanceof Player) {
             Player player = (Player) entity;
             ItemTrigger trigger = (ItemTrigger) itemStack.getItem();
             if (player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness) {

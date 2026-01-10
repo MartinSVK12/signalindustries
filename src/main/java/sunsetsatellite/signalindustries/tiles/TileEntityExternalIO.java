@@ -31,12 +31,12 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     public CompoundTag externalTilePos;
     public static int range = 5;
 
-    public TileEntityExternalIO(){
+    public TileEntityExternalIO() {
     }
 
     @Override
     public int getActiveFluidSlotForSide(Direction dir) {
-        if(externalTile instanceof IFluidIO){
+        if (externalTile instanceof IFluidIO) {
             return ((IFluidIO) externalTile).getActiveFluidSlotForSide(dir);
         }
         return 0;
@@ -44,7 +44,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public Connection getFluidIOForSide(Direction dir) {
-        if(externalTile instanceof IFluidIO){
+        if (externalTile instanceof IFluidIO) {
             return ((IFluidIO) externalTile).getFluidIOForSide(dir);
         }
         return Connection.NONE;
@@ -59,7 +59,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void give(Direction dir, int slot, int otherSlot) {
-        if(externalTile instanceof IFluidTransfer){
+        if (externalTile instanceof IFluidTransfer) {
             ((IFluidTransfer) externalTile).give(dir, slot, otherSlot);
         }
     }
@@ -67,36 +67,36 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     @Override
     public void readFromNBT(CompoundTag tag) {
         super.readFromNBT(tag);
-        if(tag.containsKey("externalPosition")){
+        if (tag.containsKey("externalPosition")) {
             externalTilePos = tag.getCompound("externalPosition");
         }
     }
 
     @Override
     public void writeToNBT(CompoundTag tag) {
-        if(externalTilePos != null){
-            tag.put("externalPosition",externalTilePos);
+        if (externalTilePos != null) {
+            tag.put("externalPosition", externalTilePos);
         }
         super.writeToNBT(tag);
     }
 
     @Override
     public void take(@NotNull FluidStack fluidStack, Direction dir) {
-        if(externalTile instanceof IFluidTransfer){
+        if (externalTile instanceof IFluidTransfer) {
             ((IFluidTransfer) externalTile).take(fluidStack, dir);
         }
     }
 
     @Override
     public void give(Direction dir) {
-        if(externalTile instanceof IFluidTransfer) {
+        if (externalTile instanceof IFluidTransfer) {
             ((IFluidTransfer) externalTile).give(dir);
         }
     }
 
     @Override
     public FluidStack insertFluid(int slot, FluidStack fluidStack) {
-        if(externalTile instanceof IFluidInventory){
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).insertFluid(slot, fluidStack);
         }
         return null;
@@ -104,7 +104,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public int getRemainingCapacity(int slot) {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getRemainingCapacity(slot);
         }
         return 0;
@@ -112,7 +112,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public boolean canInsertFluid(int slot, FluidStack fluidStack) {
-        if(externalTile instanceof IFluidInventory){
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).canInsertFluid(slot, fluidStack);
         }
         return false;
@@ -120,7 +120,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public FluidStack getFluidInSlot(int slot) {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getFluidInSlot(slot);
         }
         return null;
@@ -128,7 +128,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public int getFluidCapacityForSlot(int slot) {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getFluidCapacityForSlot(slot);
         }
         return 0;
@@ -136,7 +136,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public ArrayList<Fluid> getAllowedFluidsForSlot(int slot) {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getAllowedFluidsForSlot(slot);
         }
         return new ArrayList<>();
@@ -144,14 +144,14 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void setFluidInSlot(int slot, FluidStack fluid) {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             ((IFluidInventory) externalTile).setFluidInSlot(slot, fluid);
         }
     }
 
     @Override
     public int getFluidInventorySize() {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getFluidInventorySize();
         }
         return 0;
@@ -159,14 +159,14 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void onFluidInventoryChanged() {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             ((IFluidInventory) externalTile).onFluidInventoryChanged();
         }
     }
 
     @Override
     public int getTransferSpeed() {
-        if(externalTile instanceof IFluidInventory) {
+        if (externalTile instanceof IFluidInventory) {
             return ((IFluidInventory) externalTile).getTransferSpeed();
         }
         return 0;
@@ -174,16 +174,16 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public int getActiveItemSlotForSide(Direction dir, ItemStack stack) {
-        if(externalTile instanceof Container){
-            if(activeItemSlots.get(dir) == -1){
-                if(itemConnections.get(dir) == Connection.INPUT){
+        if (externalTile instanceof Container) {
+            if (activeItemSlots.get(dir) == -1) {
+                if (itemConnections.get(dir) == Connection.INPUT) {
                     for (int i = 0; i < ((Container) externalTile).getContainerSize(); i++) {
                         ItemStack content = ((Container) externalTile).getItem(i);
                         if (content == null || content.isItemEqual(stack)) {
                             return i;
                         }
                     }
-                } else if(itemConnections.get(dir) == Connection.OUTPUT) {
+                } else if (itemConnections.get(dir) == Connection.OUTPUT) {
                     for (int i = 0; i < ((Container) externalTile).getContainerSize(); i++) {
                         ItemStack content = ((Container) externalTile).getItem(i);
                         if (content != null) {
@@ -229,7 +229,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public int getContainerSize() {
-        if(externalTile instanceof Container) {
+        if (externalTile instanceof Container) {
             return ((Container) externalTile).getContainerSize();
         }
         return 0;
@@ -237,7 +237,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public @Nullable ItemStack getItem(int index) {
-        if(externalTile instanceof Container) {
+        if (externalTile instanceof Container) {
             return ((Container) externalTile).getItem(index);
         }
         return null;
@@ -245,7 +245,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public @Nullable ItemStack removeItem(int index, int takeAmount) {
-        if(externalTile instanceof Container) {
+        if (externalTile instanceof Container) {
             return ((Container) externalTile).removeItem(index, takeAmount);
         }
         return null;
@@ -253,14 +253,14 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void setItem(int index, @Nullable ItemStack itemstack) {
-        if(externalTile instanceof Container) {
+        if (externalTile instanceof Container) {
             ((Container) externalTile).setItem(index, itemstack);
         }
     }
 
     @Override
     public int getMaxStackSize() {
-        if(externalTile instanceof Container) {
+        if (externalTile instanceof Container) {
             return ((Container) externalTile).getMaxStackSize();
         }
         return 0;
@@ -268,8 +268,8 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public int getActiveItemSlotForSide(Direction dir) {
-        if(externalTile instanceof IItemIO) {
-           return ((IItemIO) externalTile).getActiveItemSlotForSide(dir);
+        if (externalTile instanceof IItemIO) {
+            return ((IItemIO) externalTile).getActiveItemSlotForSide(dir);
         }
         return 0;
     }
@@ -283,7 +283,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public Connection getItemIOForSide(Direction dir) {
-        if(externalTile instanceof IItemIO) {
+        if (externalTile instanceof IItemIO) {
             return ((IItemIO) externalTile).getItemIOForSide(dir);
         }
         return Connection.NONE;
@@ -314,8 +314,8 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     public void tick() {
         super.tick();
         worldObj.markBlocksDirty(x, y, z, x, y, z);
-        if(externalTile == null){
-            if(tier == Tier.BASIC){
+        if (externalTile == null) {
+            if (tier == Tier.BASIC) {
                 for (Direction dir : Direction.values()) {
                     TileEntity tile = dir.getTileEntity(worldObj, this);
                     if (tile instanceof Container || tile instanceof IFluidInventory) {
@@ -333,16 +333,16 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
                     }
                 }
             } else if (tier == Tier.REINFORCED) {
-                if(externalTilePos != null){
-                    if(externalTilePos.containsKey("x") && externalTilePos.containsKey("y") && externalTilePos.containsKey("z") && externalTilePos.containsKey("dim") && externalTilePos.containsKey("side")){
+                if (externalTilePos != null) {
+                    if (externalTilePos.containsKey("x") && externalTilePos.containsKey("y") && externalTilePos.containsKey("z") && externalTilePos.containsKey("dim") && externalTilePos.containsKey("side")) {
                         int eX = externalTilePos.getInteger("x");
                         int eY = externalTilePos.getInteger("y");
                         int eZ = externalTilePos.getInteger("z");
                         int dim = externalTilePos.getInteger("dim");
-                        Vec3i pos = new Vec3i(eX,eY,eZ);
-                        Vec3f selfPos = new Vec3f(x,y,z);
-                        if(pos.distanceTo(selfPos) < range && dim == worldObj.dimension.id){
-                            TileEntity tile = worldObj.getTileEntity(externalTilePos.getInteger("x"),externalTilePos.getInteger("y"),externalTilePos.getInteger("z"));
+                        Vec3i pos = new Vec3i(eX, eY, eZ);
+                        Vec3f selfPos = new Vec3f(x, y, z);
+                        if (pos.distanceTo(selfPos) < range && dim == worldObj.dimension.id) {
+                            TileEntity tile = worldObj.getTileEntity(externalTilePos.getInteger("x"), externalTilePos.getInteger("y"), externalTilePos.getInteger("z"));
                             if (tile instanceof Container || tile instanceof IFluidInventory) {
                                 if (!(tile instanceof TileEntityExternalIO)) {
                                     externalTile = tile;
@@ -354,7 +354,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
                 }
             }
         } else {
-            if(worldObj.getTileEntity(externalTile.x,externalTile.y,externalTile.z) != externalTile){
+            if (worldObj.getTileEntity(externalTile.x, externalTile.y, externalTile.z) != externalTile) {
                 externalTile = null;
                 externalTileSide = null;
                 externalTilePos = null;
@@ -377,9 +377,9 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 
     @Override
     public void receivePosition(int x, int y, int z, Side side, int dim) {
-        if(tier == Tier.REINFORCED){
-            Vec3i pos = new Vec3i(x,y,z);
-            Vec3f selfPos = new Vec3f(this.x,this.y,this.z);
+        if (tier == Tier.REINFORCED) {
+            Vec3i pos = new Vec3i(x, y, z);
+            Vec3f selfPos = new Vec3f(this.x, this.y, this.z);
             CompoundTag tag = new CompoundTag();
             tag.putInt("x", x);
             tag.putInt("y", y);
@@ -387,10 +387,10 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
             tag.putInt("side", side.getId());
             tag.putInt("dim", dim);
             externalTilePos = tag;
-            TileEntity tile = worldObj.getTileEntity(x,y,z);
-            if(pos.distanceTo(selfPos) < range){
-                if(dim == worldObj.dimension.id){
-                    if(tile instanceof Container || tile instanceof IFluidInventory) {
+            TileEntity tile = worldObj.getTileEntity(x, y, z);
+            if (pos.distanceTo(selfPos) < range) {
+                if (dim == worldObj.dimension.id) {
+                    if (tile instanceof Container || tile instanceof IFluidInventory) {
                         if (!(tile instanceof TileEntityExternalIO)) {
                             externalTile = tile;
                             externalTileSide = Direction.getDirectionFromSide(side.getId());

@@ -71,7 +71,8 @@ public class BlockModelConnectedTexture extends BlockModelTransparent<BlockLogic
         for (Side s : Side.values()) {
             if (s != Side.NONE) {
                 int j = x + s.getOffsetX(), k = y + s.getOffsetY(), l = z + s.getOffsetZ(); //offset coords
-                if (world.getBlockId(j, k, l) == block.id() || connectsTo.contains(world.getBlock(j,k,l))) state += (int) Math.pow(2, s.getId());
+                if (world.getBlockId(j, k, l) == block.id() || connectsTo.contains(world.getBlock(j, k, l)))
+                    state += (int) Math.pow(2, s.getId());
             }
         }
         return state & 0x3F;

@@ -18,10 +18,8 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.covers.SwitchCover;
 import sunsetsatellite.signalindustries.covers.VoidCover;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
-import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
@@ -51,7 +49,7 @@ public class ScreenVoidCoverConfig extends Screen {
         Lighting.enableInventoryLight();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
+        GL11.glTranslatef((float) centerX, (float) centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(32826);
         GL11.glDisable(32826);
@@ -65,8 +63,7 @@ public class ScreenVoidCoverConfig extends Screen {
         GL11.glEnable(2929);
     }
 
-    protected void drawGuiContainerBackgroundLayer(float f)
-    {
+    protected void drawGuiContainerBackgroundLayer(float f) {
         @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/gui/config.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);
@@ -75,26 +72,25 @@ public class ScreenVoidCoverConfig extends Screen {
         drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         font.drawString("Configure: Voiding", 45, 6, 0xFF404040);
-        font.drawString("Item Slot", xSize/2 - 50, 23, 0xFF404040);
-        font.drawString("Fluid Slot",  xSize/2 + 10, 23, 0xFF404040);
-        font.drawString("Activate",  xSize/2-20, 60, 0xFF404040);
+        font.drawString("Item Slot", xSize / 2 - 50, 23, 0xFF404040);
+        font.drawString("Fluid Slot", xSize / 2 + 10, 23, 0xFF404040);
+        font.drawString("Activate", xSize / 2 - 20, 60, 0xFF404040);
     }
 
     @Override
     public void init() {
         String voidSlotItemStr;
         String voidSlotFluidStr;
-        if(cover.voidingItemSlot == -2){
+        if (cover.voidingItemSlot == -2) {
             voidSlotItemStr = "*";
         } else if (cover.voidingItemSlot == -1) {
             voidSlotItemStr = "X";
         } else {
             voidSlotItemStr = String.valueOf(cover.voidingItemSlot);
         }
-        if(cover.voidingFluidSlot == -2){
+        if (cover.voidingFluidSlot == -2) {
             voidSlotFluidStr = "*";
         } else if (cover.voidingFluidSlot == -1) {
             voidSlotFluidStr = "X";
@@ -111,20 +107,20 @@ public class ScreenVoidCoverConfig extends Screen {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(tile != null){
-            switch (button.id){
+        if (tile != null) {
+            switch (button.id) {
                 case 0: {
                     cover.active = !cover.active;
                     button.displayString = cover.active ? "ON" : "OFF";
                     break;
                 }
                 case 1: {
-                    int max = tile.getContainerSize()-1;
-                    if(cover.voidingItemSlot < max){
+                    int max = tile.getContainerSize() - 1;
+                    if (cover.voidingItemSlot < max) {
                         cover.voidingItemSlot++;
                     }
                     String voidSlotItemStr;
-                    if(cover.voidingItemSlot == -2){
+                    if (cover.voidingItemSlot == -2) {
                         voidSlotItemStr = "*";
                     } else if (cover.voidingItemSlot == -1) {
                         voidSlotItemStr = "X";
@@ -135,12 +131,12 @@ public class ScreenVoidCoverConfig extends Screen {
                     break;
                 }
                 case 2: {
-                    int max = tile.getFluidInventorySize()-1;
-                    if(cover.voidingFluidSlot < max){
+                    int max = tile.getFluidInventorySize() - 1;
+                    if (cover.voidingFluidSlot < max) {
                         cover.voidingFluidSlot++;
                     }
                     String voidSlotFluidStr;
-                    if(cover.voidingFluidSlot == -2){
+                    if (cover.voidingFluidSlot == -2) {
                         voidSlotFluidStr = "*";
                     } else if (cover.voidingFluidSlot == -1) {
                         voidSlotFluidStr = "X";
@@ -153,13 +149,13 @@ public class ScreenVoidCoverConfig extends Screen {
             }
         }
         super.buttonClicked(button);
-        if(EnvironmentHelper.isClientWorld()){
-            NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,TileEntityCoverable.CHANNEL_COVERS_START+cover.getDir().getSideNumber(),new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
+        if (EnvironmentHelper.isClientWorld()) {
+            NetworkHandler.sendToServer(new PacketScreenAction(button.id, 0, TileEntityCoverable.CHANNEL_COVERS_START + cover.getDir().getSideNumber(), new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
         }
     }
 
     public void mouseClicked(int x, int y, int button) {
-        super.mouseClicked(x,y,button);
+        super.mouseClicked(x, y, button);
         if (button == 1) {
             for (ButtonElement guibutton : this.buttons) {
                 if (guibutton.mouseClicked(this.mc, x, y)) {
@@ -171,12 +167,12 @@ public class ScreenVoidCoverConfig extends Screen {
     }
 
     private void action2Performed(ButtonElement guibutton) {
-        if(tile != null){
-            switch (guibutton.id){
+        if (tile != null) {
+            switch (guibutton.id) {
                 case 1: {
-                    if(cover.voidingItemSlot > -2){
+                    if (cover.voidingItemSlot > -2) {
                         cover.voidingItemSlot--;
-                        if(cover.voidingItemSlot == -2){
+                        if (cover.voidingItemSlot == -2) {
                             PopupScreen popup = new PopupBuilder(this, 246)
                                     .withLabel("signalindustries.warning")
                                     .withMessageBox("warning", 128, "Setting a voiding slot to \"*\" will\n" + TextFormatting.RED + ">> REMOVE EVERY ITEM <<\n" + TextFormatting.WHITE + "in the inventory of the machine this cover\nis attached to.\n\nClick outside this popup to continue.", 44)
@@ -189,7 +185,7 @@ public class ScreenVoidCoverConfig extends Screen {
                         }
                     }
                     String voidSlotItemStr;
-                    if(cover.voidingItemSlot == -2){
+                    if (cover.voidingItemSlot == -2) {
                         voidSlotItemStr = "*";
                     } else if (cover.voidingItemSlot == -1) {
                         voidSlotItemStr = "X";
@@ -200,9 +196,9 @@ public class ScreenVoidCoverConfig extends Screen {
                     break;
                 }
                 case 2: {
-                    if(cover.voidingFluidSlot > -2){
+                    if (cover.voidingFluidSlot > -2) {
                         cover.voidingFluidSlot--;
-                        if(cover.voidingFluidSlot == -2){
+                        if (cover.voidingFluidSlot == -2) {
                             PopupScreen popup = new PopupBuilder(this, 246)
                                     .withLabel("signalindustries.warning")
                                     .withMessageBox("warning", 128, "Setting a voiding slot to \"*\" will\n" + TextFormatting.RED + ">> REMOVE EVERY FLUID <<\n" + TextFormatting.WHITE + "in the inventory of the machine this cover\nis attached to.\n\nClick outside this popup to continue.", 44)
@@ -215,7 +211,7 @@ public class ScreenVoidCoverConfig extends Screen {
                         }
                     }
                     String voidSlotFluidStr;
-                    if(cover.voidingFluidSlot == -2){
+                    if (cover.voidingFluidSlot == -2) {
                         voidSlotFluidStr = "*";
                     } else if (cover.voidingFluidSlot == -1) {
                         voidSlotFluidStr = "X";
@@ -226,8 +222,8 @@ public class ScreenVoidCoverConfig extends Screen {
                     break;
                 }
             }
-            if(EnvironmentHelper.isClientWorld()){
-                NetworkHandler.sendToServer(new PacketScreenAction(guibutton.id,1,TileEntityCoverable.CHANNEL_COVERS_START+cover.getDir().getSideNumber(),new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
+            if (EnvironmentHelper.isClientWorld()) {
+                NetworkHandler.sendToServer(new PacketScreenAction(guibutton.id, 1, TileEntityCoverable.CHANNEL_COVERS_START + cover.getDir().getSideNumber(), new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
             }
         }
     }

@@ -14,12 +14,9 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.menus.MenuExternalIO;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageExternalIOLinkBreak;
-import sunsetsatellite.signalindustries.mp.message.NetworkMessageReactorStart;
 import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
@@ -39,7 +36,7 @@ public class ScreenExternalIO extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_gui_blank.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_gui_blank.png");
@@ -61,7 +58,7 @@ public class ScreenExternalIO extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -78,37 +75,37 @@ public class ScreenExternalIO extends ScreenFluid {
 
         int x = (this.xSize) / 2;
         int y = (this.ySize) / 4;
-        if(tile.tier == Tier.REINFORCED){
-            if(tile.externalTilePos == null){
-                font.drawCenteredString("Disconnected.",x,y,0xFFFF0000);
-                font.drawCenteredString("No position.",x,y+12,0xFFFF0000);
-            } else if(tile.externalTilePos.containsKey("x") && tile.externalTilePos.containsKey("y") && tile.externalTilePos.containsKey("z") && tile.externalTilePos.containsKey("dim") && tile.externalTilePos.containsKey("side")){
-                if(tile.externalTile != null){
-                    font.drawCenteredString("Connected!",x,y,0xFF00FF00);
-                    font.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity","")+ " @ " + tile.externalTile.x +" "+tile.externalTile.y+" "+tile.externalTile.z,x,y+12,0xFF00FF00);
-                    font.drawCenteredString(String.valueOf(Side.getSideById(tile.externalTilePos.getInteger("side"))),x,y+24,0xFF00FF00);
+        if (tile.tier == Tier.REINFORCED) {
+            if (tile.externalTilePos == null) {
+                font.drawCenteredString("Disconnected.", x, y, 0xFFFF0000);
+                font.drawCenteredString("No position.", x, y + 12, 0xFFFF0000);
+            } else if (tile.externalTilePos.containsKey("x") && tile.externalTilePos.containsKey("y") && tile.externalTilePos.containsKey("z") && tile.externalTilePos.containsKey("dim") && tile.externalTilePos.containsKey("side")) {
+                if (tile.externalTile != null) {
+                    font.drawCenteredString("Connected!", x, y, 0xFF00FF00);
+                    font.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity", "") + " @ " + tile.externalTile.x + " " + tile.externalTile.y + " " + tile.externalTile.z, x, y + 12, 0xFF00FF00);
+                    font.drawCenteredString(String.valueOf(Side.getSideById(tile.externalTilePos.getInteger("side"))), x, y + 24, 0xFF00FF00);
                 } else {
                     int eX = tile.externalTilePos.getInteger("x");
                     int eY = tile.externalTilePos.getInteger("y");
                     int eZ = tile.externalTilePos.getInteger("z");
                     int dim = tile.externalTilePos.getInteger("dim");
-                    Vec3i pos = new Vec3i(eX,eY,eZ);
-                    Vec3f selfPos = new Vec3f(tile.x,tile.y,tile.z);
-                    if(tile.worldObj != null && dim != tile.worldObj.dimension.id){
-                        font.drawCenteredString("Can't connect.",x,y,0xFFFFA500);
-                        font.drawCenteredString("Outside this world.",x,y+12,0xFFFFA500);
-                    } else if(pos.distanceTo(selfPos) > TileEntityExternalIO.range){
-                        font.drawCenteredString("Can't connect.",x,y,0xFFFFA500);
-                        font.drawCenteredString("Out of reach.",x,y+12,0xFFFFA500);
+                    Vec3i pos = new Vec3i(eX, eY, eZ);
+                    Vec3f selfPos = new Vec3f(tile.x, tile.y, tile.z);
+                    if (tile.worldObj != null && dim != tile.worldObj.dimension.id) {
+                        font.drawCenteredString("Can't connect.", x, y, 0xFFFFA500);
+                        font.drawCenteredString("Outside this world.", x, y + 12, 0xFFFFA500);
+                    } else if (pos.distanceTo(selfPos) > TileEntityExternalIO.range) {
+                        font.drawCenteredString("Can't connect.", x, y, 0xFFFFA500);
+                        font.drawCenteredString("Out of reach.", x, y + 12, 0xFFFFA500);
                     }
                 }
             }
         } else {
-            if(tile.externalTile != null){
-                font.drawCenteredString("Connected!",x,y,0xFF00FF00);
-                font.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity","")+ " @ " + tile.externalTileSide.getName(),x,y+12,0xFF00FF00);
+            if (tile.externalTile != null) {
+                font.drawCenteredString("Connected!", x, y, 0xFF00FF00);
+                font.drawCenteredString(tile.externalTile.getClass().getSimpleName().replace("TileEntity", "") + " @ " + tile.externalTileSide.getName(), x, y + 12, 0xFF00FF00);
             } else {
-                font.drawCenteredString("Disconnected.",x,y,0xFFFF0000);
+                font.drawCenteredString("Disconnected.", x, y, 0xFFFF0000);
             }
         }
     }
@@ -123,15 +120,15 @@ public class ScreenExternalIO extends ScreenFluid {
         buttons.add(fluidIo);
         ButtonElement itemIo = new ButtonElement(1, Math.round((float) width / 2) + 60, Math.round((float) height / 2) - 60, 20, 20, "I");
         buttons.add(itemIo);
-        ButtonElement removeLink = new ButtonElement(2, Math.round((float)width / 2) - 80, Math.round((float) height / 2) - 80, 20, 20, "X");
+        ButtonElement removeLink = new ButtonElement(2, Math.round((float) width / 2) - 80, Math.round((float) height / 2) - 80, 20, 20, "X");
         buttons.add(removeLink);
         fluidIoButton = fluidIo;
         itemIoButton = itemIo;
         removeLinkButton = removeLink;
-        if(!(tile.externalTile instanceof Container)){
+        if (!(tile.externalTile instanceof Container)) {
             itemIo.enabled = false;
         }
-        if(!(tile.externalTile instanceof IFluidInventory)){
+        if (!(tile.externalTile instanceof IFluidInventory)) {
             fluidIo.enabled = false;
         }
         super.init();
@@ -139,14 +136,14 @@ public class ScreenExternalIO extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         } else if (button == removeLinkButton) {
-            if(EnvironmentHelper.isClientWorld()){
+            if (EnvironmentHelper.isClientWorld()) {
                 NetworkHandler.sendToServer(new NetworkMessageExternalIOLinkBreak(tile.getPosition(), tile.getClass()));
             }
             player.sendMessage("Link removed!");

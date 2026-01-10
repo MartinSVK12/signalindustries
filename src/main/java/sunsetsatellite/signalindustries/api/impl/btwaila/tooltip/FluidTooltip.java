@@ -15,6 +15,6 @@ public class FluidTooltip extends SIBaseTooltip<IFluidInventory> {
 
     @Override
     public void drawAdvancedTooltip(IFluidInventory inv, AdvancedInfoComponent c) {
-        drawFluids(inv,c,true);
+        drawFluids(inv, c, true);
     }
 }

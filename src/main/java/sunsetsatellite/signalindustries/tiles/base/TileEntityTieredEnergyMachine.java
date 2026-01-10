@@ -13,10 +13,10 @@ public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMach
 
     @Override
     public void writeToNBT(CompoundTag tag) {
-        tag.putLong("energy",energy);
-        tag.putLong("capacity",capacity);
-        tag.putLong("maxReceive",maxReceive);
-        tag.putLong("maxProvide",maxProvide);
+        tag.putLong("energy", energy);
+        tag.putLong("capacity", capacity);
+        tag.putLong("maxReceive", maxReceive);
+        tag.putLong("maxProvide", maxProvide);
         super.writeToNBT(tag);
     }
 
@@ -72,12 +72,12 @@ public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMach
 
     @Override
     public Vec3i getPosition() {
-        return new Vec3i(x,y,z);
+        return new Vec3i(x, y, z);
     }
 
     @Override
     public boolean isConnected(Direction direction) {
-        return direction.getTileEntity(worldObj,this) instanceof TileEntityEnergyConductor;
+        return direction.getTileEntity(worldObj, this) instanceof TileEntityEnergyConductor;
     }
 
     @Override

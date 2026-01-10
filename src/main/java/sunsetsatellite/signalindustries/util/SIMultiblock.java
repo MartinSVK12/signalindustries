@@ -5,7 +5,6 @@ import com.mojang.nbt.tags.Tag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.catalyst.CatalystMultiblocks;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -15,13 +14,13 @@ import java.util.Map;
 
 public class SIMultiblock extends Multiblock {
 
-    public List<String> extraBlocks = Catalyst.listOf("reinforcedParallelProcessor","awakenedParallelProcessor","awakenedParallelProcessor8x");
+    public List<String> extraBlocks = Catalyst.listOf("reinforcedParallelProcessor", "awakenedParallelProcessor", "awakenedParallelProcessor8x");
 
     public final Tier tier;
 
     public SIMultiblock(String modId, Class<?>[] modClasses, String translateKey, CompoundTag data, boolean includeAir, Tier tier) {
         super(modId, modClasses, translateKey, data, includeAir);
-        SignalIndustries.LOGGER.info(String.format("Multiblock '%s' contains %d blocks.",translateKey,this.data.getCompound("Blocks").getValues().size()));
+        SignalIndustries.LOGGER.info(String.format("Multiblock '%s' contains %d blocks.", translateKey, this.data.getCompound("Blocks").getValues().size()));
         this.tier = tier;
         CompoundTag subsTag = this.data.getCompound("Substitutions");
         int i = 0;
@@ -43,7 +42,7 @@ public class SIMultiblock extends Multiblock {
 
     public SIMultiblock(String modId, Class<?>[] modClasses, String translateKey, String filePath, boolean includeAir, Tier tier) {
         super(modId, modClasses, translateKey, filePath, includeAir);
-        SignalIndustries.LOGGER.info(String.format("Multiblock '%s' contains %d blocks.",translateKey,this.data.getCompound("Blocks").getValues().size()));
+        SignalIndustries.LOGGER.info(String.format("Multiblock '%s' contains %d blocks.", translateKey, this.data.getCompound("Blocks").getValues().size()));
         this.tier = tier;
         CompoundTag subsTag = data.getCompound("Substitutions");
         int i = 0;

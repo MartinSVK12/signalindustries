@@ -18,13 +18,13 @@ public class BoosterTooltip extends SIBaseTooltip<TileEntityBooster> {
         ProgressBarOptions options = new ProgressBarOptions()
                 .setBackgroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                 .setText("Fuel: ");
-        if(tile.tier == Tier.BASIC){
+        if (tile.tier == Tier.BASIC) {
             options.setForegroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("minecraft:block/block_redstone")));
         } else {
             options.setForegroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("signalindustries:block/dilithium_crystal_block")));
         }
-        c.drawProgressBarTextureWithText(tile.progressTicks,tile.progressMaxTicks,options,0);
-        drawFluids(tile,c,false);
+        c.drawProgressBarTextureWithText(tile.progressTicks, tile.progressMaxTicks, options, 0);
+        drawFluids(tile, c, false);
         c.drawInventory(tile, 0);
     }
 

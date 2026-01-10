@@ -1,16 +1,13 @@
 package sunsetsatellite.signalindustries.dim;
 
 import net.minecraft.core.Global;
-import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.biome.provider.BiomeProviderSingleBiome;
 import net.minecraft.core.world.config.season.SeasonConfig;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
-import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkGeneratorOverworld;
 import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.type.WorldType;
-import net.minecraft.core.world.weather.Weather;
 import net.minecraft.core.world.weather.Weathers;
 import net.minecraft.core.world.wind.WindProviderGeneric;
 import sunsetsatellite.signalindustries.SIBiomes;
@@ -34,8 +31,8 @@ public class WorldTypeEternity extends WorldType {
         float[] brightnessRamp = new float[32];
         float f = 0.1F;
 
-        for(int i = 0; i <= 15; ++i) {
-            float f1 = 1.0F - (float)i / 15.0F;
+        for (int i = 0; i <= 15; ++i) {
+            float f1 = 1.0F - (float) i / 15.0F;
             brightnessRamp[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
         }
 

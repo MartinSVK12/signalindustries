@@ -14,33 +14,33 @@ public class StorageContainerTooltip extends SIBaseTooltip<TileEntityStorageCont
 
     @Override
     public void drawAdvancedTooltip(TileEntityStorageContainer tile, AdvancedInfoComponent c) {
-        if(tile.contents != null){
+        if (tile.contents != null) {
             int color = 0x00FF00;
             float ratio = (float) tile.contents.stackSize / tile.capacity;
-            if(ratio >= 0.5f && ratio < 0.8f){
+            if (ratio >= 0.5f && ratio < 0.8f) {
                 color = 0xFFFF00;
             } else if (ratio >= 0.8f) {
                 color = 0xFF0000;
             }
-            if(tile.locked){
-                c.drawStringWithShadow("Locked",0,0xFFFF00);
+            if (tile.locked) {
+                c.drawStringWithShadow("Locked", 0, 0xFFFF00);
             }
-            c.drawStringWithShadow("Holding: "+tile.contents.stackSize+"x "+tile.contents.getDisplayName(),0);
+            c.drawStringWithShadow("Holding: " + tile.contents.stackSize + "x " + tile.contents.getDisplayName(), 0);
             ProgressBarOptions options = new ProgressBarOptions()
                     .setForegroundOptions(new TextureOptions(color, TextureRegistry.getTexture("minecraft:block/sand")))
                     .setBackgroundOptions(new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                     .setText("Capacity: ");
-            c.drawProgressBarTextureWithText(tile.contents.stackSize,tile.capacity,options,0);
+            c.drawProgressBarTextureWithText(tile.contents.stackSize, tile.capacity, options, 0);
         } else {
-            if(tile.locked){
-                c.drawStringWithShadow("Locked",0,0xFFFF00);
+            if (tile.locked) {
+                c.drawStringWithShadow("Locked", 0, 0xFFFF00);
             }
-            c.drawStringWithShadow("Empty",0);
+            c.drawStringWithShadow("Empty", 0);
             ProgressBarOptions options = new ProgressBarOptions()
                     .setForegroundOptions(new TextureOptions(0x00FF00, TextureRegistry.getTexture("minecraft:block/sand")))
                     .setBackgroundOptions(new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                     .setText("Capacity: ");
-            c.drawProgressBarTextureWithText(0,tile.capacity,options,0);
+            c.drawProgressBarTextureWithText(0, tile.capacity, options, 0);
         }
 
     }

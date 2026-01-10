@@ -13,7 +13,7 @@ public class ItemVolatileSignalumCrystal extends Item {
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        if(world.isClientSide){
+        if (world.isClientSide) {
             return super.onUseItem(itemstack, world, entityplayer);
         }
         world.entityJoinedWorld(new ProjectileCrystal(world, entityplayer));

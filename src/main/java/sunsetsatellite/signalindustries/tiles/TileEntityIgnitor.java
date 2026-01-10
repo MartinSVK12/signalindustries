@@ -8,7 +8,6 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 
@@ -18,21 +17,21 @@ import java.util.Random;
 
 public class TileEntityIgnitor extends TileEntityFluidItemContainer implements IMultiblockPart {
     public boolean isActivated = false;
-    private final TickTimer timer = new TickTimer(this,this::work,20,true);
+    private final TickTimer timer = new TickTimer(this, this::work, 20, true);
     public TileEntity connectedTo;
 
-    public TileEntityIgnitor(){
+    public TileEntityIgnitor() {
         itemContents = new ItemStack[0];
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
-        Arrays.fill(fluidCapacity,1000);
+        Arrays.fill(fluidCapacity, 1000);
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add(SIFluids.ENERGY);
         for (Direction dir : Direction.values()) {
             fluidConnections.put(dir, Connection.INPUT);
-            activeFluidSlots.put(dir,0);
+            activeFluidSlots.put(dir, 0);
         }
         transferSpeed = 10;
     }
@@ -43,11 +42,11 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         timer.tick();
         Random random = new Random();
         spreadFluids(Direction.Y_POS);
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         extractFluids();
-        if(getFluidInSlot(0) != null && getFluidInSlot(0).amount <= 0) fluidContents[0] = null;
-        if(isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5){
-            if(random.nextFloat() < 0.25){
+        if (getFluidInSlot(0) != null && getFluidInSlot(0).amount <= 0) fluidContents[0] = null;
+        if (isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5) {
+            if (random.nextFloat() < 0.25) {
                 float xd = random.nextFloat() / 10 - 0.05f;
                 float yd = random.nextFloat() / 10 - 0.05f;
                 float zd = random.nextFloat() / 10 - 0.05f;
@@ -59,9 +58,9 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         }
     }
 
-    public void work(){
-        if(isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5){
-            getFluidInSlot(0).amount-=5;
+    public void work() {
+        if (isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5) {
+            getFluidInSlot(0).amount -= 5;
         }
     }
 
@@ -69,7 +68,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         for (Direction direction : Direction.values()) {
             fluidConnections.put(dir, Connection.BOTH);
         }
-        if(getFluidInSlot(0) != null){
+        if (getFluidInSlot(0) != null) {
             this.give(dir);
         }
         for (Direction direction : Direction.values()) {
@@ -77,15 +76,15 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         }
     }
 
-    public boolean isBurning(){
+    public boolean isBurning() {
         return fluidContents[0] != null && fluidContents[0].fluid == SIFluids.ENERGY && fluidContents[0].amount > 0 && isActivated;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return fluidContents[0] == null || fluidContents[0].fluid == SIFluids.ENERGY && fluidContents[0].amount == 0;
     }
 
-    public boolean isReady(){
+    public boolean isReady() {
         return fluidContents[0] != null && fluidContents[0].fluid == SIFluids.ENERGY && fluidContents[0].amount >= fluidCapacity[0];
     }
 

@@ -5,12 +5,10 @@ import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.IntTag;
 import com.mojang.nbt.tags.ListTag;
 import com.mojang.nbt.tags.Tag;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -25,7 +23,6 @@ import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.INamedTileEntity;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -36,7 +33,7 @@ import java.util.*;
 //TODO: reimplement catalyst energy support
 public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IScreenActionListener, /*IEnergy, IEnergySource, IEnergySink,*/ ISupportsMultiparts {
     public IConduitBlock[] conduits = new IConduitBlock[4];
-    public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(),Catalyst.arrayFill(new Integer[Direction.values().length],-1));
+    public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(), Catalyst.arrayFill(new Integer[Direction.values().length], -1));
 
     //fluids
     public int maxRememberTicks = 100;
@@ -53,41 +50,41 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public int maxProvide = 0;*/
 
     //multipart
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
-    public TileEntityMultiConduit(){
+    public TileEntityMultiConduit() {
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
         transferSpeed = 0;
         acceptedFluids.clear();
-        fluidConnections.replaceAll((D,C)->Connection.BOTH);
+        fluidConnections.replaceAll((D, C) -> Connection.BOTH);
         //this.lastTransferMemory = new TickTimer(this,this::clearLastTransfers,10,true);
     }
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(x,y,z);
+        worldObj.markBlockDirty(x, y, z);
         //lastTransferMemory.tick();
-        if(Arrays.stream(conduits).allMatch(Objects::isNull) && !acceptedFluids.isEmpty()){
+        if (Arrays.stream(conduits).allMatch(Objects::isNull) && !acceptedFluids.isEmpty()) {
             acceptedFluids.clear();
         }
         for (int i = 0; i < conduits.length; i++) {
             IConduitBlock conduit = conduits[i];
             if (conduit != null) {
-               rememberTicks++;
-               if(rememberTicks >= maxRememberTicks){
-                   rememberTicks = 0;
-                   Arrays.fill(lastPipes, null);
-               }
+                rememberTicks++;
+                if (rememberTicks >= maxRememberTicks) {
+                    rememberTicks = 0;
+                    Arrays.fill(lastPipes, null);
+                }
                 HashMap<Direction, TileEntity> neighbors = new HashMap<>();
                 for (Direction dir : Direction.values()) {
-                    neighbors.put(dir,dir.getTileEntity(worldObj,this));
+                    neighbors.put(dir, dir.getTileEntity(worldObj, this));
                 }
                 int finalI = i;
                 neighbors.forEach((side, tile) -> {
-                    if(tile instanceof TileEntityMultiConduit && !tile.equals(lastPipes[finalI])){
+                    if (tile instanceof TileEntityMultiConduit && !tile.equals(lastPipes[finalI])) {
                         TileEntityMultiConduit multiConduit = (TileEntityMultiConduit) tile;
-                        if(multiConduit.fluidContents.length <= finalI || fluidContents.length <= finalI){
+                        if (multiConduit.fluidContents.length <= finalI || fluidContents.length <= finalI) {
                             return;
                         }
                         FluidStack intFluid = getFluidInSlot(finalI);
@@ -95,41 +92,41 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                         if (intFluid != null && extFluid == null) {
                             lastPipes[finalI] = (TileEntityMultiConduit) tile;
                             ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
-                            give(side,finalI,finalI);
+                            give(side, finalI, finalI);
                         } else if (intFluid == null && extFluid != null) {
                             lastPipes[finalI] = (TileEntityMultiConduit) tile;
                             ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
-                            take(extFluid,side,finalI);
+                            take(extFluid, side, finalI);
                         } else if (intFluid != null) { //if both internal and external aren't null
                             lastPipes[finalI] = (TileEntityMultiConduit) tile;
                             ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
                             if (intFluid.amount < extFluid.amount) {
-                                take(extFluid,side,finalI);
+                                take(extFluid, side, finalI);
                             } else {
-                                give(side,finalI,finalI);
+                                give(side, finalI, finalI);
                             }
                         }
                     } else if (tile instanceof TileEntityFluidPipe && !tile.equals(lastPipes[finalI])) {
                         TileEntityFluidPipe inv = (TileEntityFluidPipe) tile;
                         int activeSlot = conduitConnections.get(side);
-                        if(activeSlot == -1) return;
+                        if (activeSlot == -1) return;
                         FluidStack intFluid = getFluidInSlot(activeSlot);
                         FluidStack extFluid = inv.getFluidInSlot(0);
                         if (intFluid != null && extFluid == null) {
                             lastPipes[finalI] = (TileEntityFluidPipe) tile;
                             ((TileEntityFluidPipe) tile).last = this;
-                            give(side,activeSlot,0);
+                            give(side, activeSlot, 0);
                         } else if (intFluid == null && extFluid != null) {
                             lastPipes[finalI] = (TileEntityFluidPipe) tile;
                             ((TileEntityFluidPipe) tile).last = this;
-                            take(extFluid,side,activeSlot);
+                            take(extFluid, side, activeSlot);
                         } else if (intFluid != null) { //if both internal and external aren't null
                             lastPipes[finalI] = (TileEntityFluidPipe) tile;
                             ((TileEntityFluidPipe) tile).last = this;
                             if (intFluid.amount < extFluid.amount) {
-                                take(extFluid,side,activeSlot);
+                                take(extFluid, side, activeSlot);
                             } else {
-                                give(side,activeSlot,0);
+                                give(side, activeSlot, 0);
                             }
                         }
                     }
@@ -155,31 +152,30 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         }*/
     }
 
-    public boolean addConduit(IConduitBlock newConduit){
+    public boolean addConduit(IConduitBlock newConduit) {
         for (int i = 0; i < conduits.length; i++) {
             IConduitBlock conduit = conduits[i];
-            if(newConduit.getConduitCapability() == ConduitCapability.RES_NETWORK && conduit != null && conduit.getConduitCapability() == ConduitCapability.RES_NETWORK){
+            if (newConduit.getConduitCapability() == ConduitCapability.RES_NETWORK && conduit != null && conduit.getConduitCapability() == ConduitCapability.RES_NETWORK) {
                 return false;
             }
             if (conduit == null) {
                 conduits[i] = newConduit;
-                if(newConduit.getConduitCapability() == ConduitCapability.FLUID || newConduit.getConduitCapability() == ConduitCapability.SIGNALUM){
-                    fluidContents = Arrays.copyOf(fluidContents,fluidContents.length + 1);
+                if (newConduit.getConduitCapability() == ConduitCapability.FLUID || newConduit.getConduitCapability() == ConduitCapability.SIGNALUM) {
+                    fluidContents = Arrays.copyOf(fluidContents, fluidContents.length + 1);
                     fluidCapacity = Arrays.copyOf(fluidCapacity, fluidCapacity.length + 1);
                     acceptedFluids.add(new ArrayList<>());
-                    if(newConduit instanceof ITiered){
-                        fluidCapacity[fluidCapacity.length-1] = (int) Math.pow(2,((ITiered)newConduit).getTier().ordinal()) * 1000;
-                        int value = (int) Math.pow(2,((ITiered)newConduit).getTier().ordinal()) * 20;
-                        if(transferSpeed < value)
-                        {
+                    if (newConduit instanceof ITiered) {
+                        fluidCapacity[fluidCapacity.length - 1] = (int) Math.pow(2, ((ITiered) newConduit).getTier().ordinal()) * 1000;
+                        int value = (int) Math.pow(2, ((ITiered) newConduit).getTier().ordinal()) * 20;
+                        if (transferSpeed < value) {
                             transferSpeed = value;
                         }
                     }
-                    if(newConduit.getConduitCapability() == ConduitCapability.FLUID){
-                        acceptedFluids.get(acceptedFluids.size()-1).addAll(Fluid.fluidMap.values());
-                        acceptedFluids.get(acceptedFluids.size()-1).remove(SIFluids.ENERGY);
+                    if (newConduit.getConduitCapability() == ConduitCapability.FLUID) {
+                        acceptedFluids.get(acceptedFluids.size() - 1).addAll(Fluid.fluidMap.values());
+                        acceptedFluids.get(acceptedFluids.size() - 1).remove(SIFluids.ENERGY);
                     } else if (newConduit.getConduitCapability() == ConduitCapability.SIGNALUM) {
-                        acceptedFluids.get(acceptedFluids.size()-1).add(SIFluids.ENERGY);
+                        acceptedFluids.get(acceptedFluids.size() - 1).add(SIFluids.ENERGY);
                     }
                 } else {
                    /* if(newConduit.getConduitCapability() == ConduitCapability.CATALYST_ENERGY){
@@ -193,10 +189,10 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                             }
                         }
                     }*/
-                    fluidContents = Arrays.copyOf(fluidContents,fluidContents.length + 1);
+                    fluidContents = Arrays.copyOf(fluidContents, fluidContents.length + 1);
                     fluidCapacity = Arrays.copyOf(fluidCapacity, fluidCapacity.length + 1);
                     acceptedFluids.add(new ArrayList<>());
-                    fluidCapacity[fluidCapacity.length-1] = 0;
+                    fluidCapacity[fluidCapacity.length - 1] = 0;
                 }
                 return true;
             }
@@ -204,7 +200,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         return false;
     }
 
-    public int getAmountOfConduits(){
+    public int getAmountOfConduits() {
         int n = 0;
         for (IConduitBlock conduit : conduits) {
             if (conduit != null) {
@@ -229,17 +225,17 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         ListTag conduitList = new ListTag();
         CompoundTag conduitConnectionsTag = new CompoundTag();
         for (IConduitBlock conduit : conduits) {
-            if(conduit == null) continue;
+            if (conduit == null) continue;
             BlockLogic block = (BlockLogic) conduit;
             conduitList.addTag(new IntTag(block.id()));
         }
         for (Map.Entry<Direction, Integer> entry : conduitConnections.entrySet()) {
             Direction dir = entry.getKey();
             int n = entry.getValue();
-            conduitConnectionsTag.putInt(String.valueOf(dir.ordinal()),n);
+            conduitConnectionsTag.putInt(String.valueOf(dir.ordinal()), n);
         }
         tag.putList("conduits", conduitList);
-        tag.putCompound("conduitConnections",conduitConnectionsTag);
+        tag.putCompound("conduitConnections", conduitConnectionsTag);
 
         /*tag.putInt("energy",energy);
         tag.putInt("capacity",capacity);
@@ -250,13 +246,13 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         CompoundTag coversNbt = new CompoundTag();
 
         for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
-            if(entry.getValue() == null) continue;
+            if (entry.getValue() == null) continue;
             CompoundTag partNbt = new CompoundTag();
             entry.getValue().writeToNbt(partNbt);
-            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),partNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()), partNbt);
         }
 
-        tag.putCompound("Parts",coversNbt);
+        tag.putCompound("Parts", coversNbt);
 
         super.writeToNBT(tag);
     }
@@ -264,7 +260,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     @Override
     public void readFromNBT(CompoundTag tag) {
         ListTag conduitList = tag.getList("conduits");
-        conduitList.forEach((C)->addConduit((IConduitBlock) Blocks.getBlock((int) C.getValue()).getLogic()));
+        conduitList.forEach((C) -> addConduit((IConduitBlock) Blocks.getBlock((int) C.getValue()).getLogic()));
 
         /*maxReceive = tag.getInteger("maxReceive");
         maxProvide = tag.getInteger("maxProvide");
@@ -274,7 +270,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 
         CompoundTag connectionsTag = tag.getCompound("conduitConnections");
         for (Object con : connectionsTag.getValues()) {
-            conduitConnections.replace(Direction.values()[Integer.parseInt(((IntTag)con).getTagName())],((IntTag) con).getValue());
+            conduitConnections.replace(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], ((IntTag) con).getValue());
         }
 
         CompoundTag coversNbt = tag.getCompound("Parts");
@@ -282,7 +278,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
             Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
             CompoundTag partTag = (CompoundTag) entry.getValue();
-            parts.put(dir,new Multipart(partTag));
+            parts.put(dir, new Multipart(partTag));
         }
 
         super.readFromNBT(tag);
@@ -290,15 +286,15 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 
     @Override
     public String getName() {
-        Field field = ReflectUtils.getField(TileEntity.class,"classToNameMap");
-        return ReflectUtils.getValue(field,null,String.class);
+        Field field = ReflectUtils.getField(TileEntity.class, "classToNameMap");
+        return ReflectUtils.getValue(field, null, String.class);
     }
 
     @Override
     public boolean supports(ConduitCapability capability) {
         for (IConduitBlock conduit : conduits) {
-            if(conduit == null) continue;
-            if(conduit.getConduitCapability() == capability){
+            if (conduit == null) continue;
+            if (conduit.getConduitCapability() == capability) {
                 return true;
             }
         }
@@ -381,13 +377,13 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
         return true;
     }*/
 
-    public BlockInstance toInstance(){
-        return new BlockInstance(Blocks.blocksList[worldObj.getBlockId(x,y,z)],new Vec3i(x,y,z),this);
+    public BlockInstance toInstance() {
+        return new BlockInstance(Blocks.blocksList[worldObj.getBlockId(x, y, z)], new Vec3i(x, y, z), this);
     }
 
     @Override
     public void buttonClicked(int id, int button, int channel) {
-        if(button == 0){
+        if (button == 0) {
             if (id > 5 && id < 12) {
                 Direction dir = Direction.values()[id - 6];
                 Integer currentValue = conduitConnections.get(dir);
@@ -396,11 +392,11 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                 }
             }
         } else if (button == 1) {
-            if(id > 5 && id < 12){
-                Direction dir = Direction.values()[Math.min(6,Math.max(0,id-6))];
+            if (id > 5 && id < 12) {
+                Direction dir = Direction.values()[Math.min(6, Math.max(0, id - 6))];
                 Integer currentValue = conduitConnections.get(dir);
-                if(currentValue > -1){
-                    conduitConnections.put(dir,currentValue-1);
+                if (currentValue > -1) {
+                    conduitConnections.put(dir, currentValue - 1);
                 }
             }
         }

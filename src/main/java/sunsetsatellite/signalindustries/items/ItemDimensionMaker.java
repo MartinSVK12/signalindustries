@@ -22,18 +22,18 @@ public class ItemDimensionMaker extends Item {
         int customDimId = 100;
         ItemStack warpOrb = new ItemStack(SIItems.warpOrb);
         CompoundTag pos = new CompoundTag();
-        pos.putInt("x",0);
-        pos.putInt("y",100);
-        pos.putInt("z",0);
-        warpOrb.getData().put("position",pos);
-        warpOrb.getData().putInt("dim",customDimId);
-        if(Dimension.getDimensionList().containsKey(customDimId)){
+        pos.putInt("x", 0);
+        pos.putInt("y", 100);
+        pos.putInt("z", 0);
+        warpOrb.getData().put("position", pos);
+        warpOrb.getData().putInt("dim", customDimId);
+        if (Dimension.getDimensionList().containsKey(customDimId)) {
             return warpOrb;
         }
         CustomDimensionData data = new CustomDimensionData("custom", customDimId);
-        WorldTypes.register(SignalIndustries.key("custom/custom"),data.getWorldType());
+        WorldTypes.register(SignalIndustries.key("custom/custom"), data.getWorldType());
         DimensionCustom dim = new DimensionCustom(data);
-        Dimension.registerDimension(customDimId,dim);
+        Dimension.registerDimension(customDimId, dim);
 
         return warpOrb;
     }

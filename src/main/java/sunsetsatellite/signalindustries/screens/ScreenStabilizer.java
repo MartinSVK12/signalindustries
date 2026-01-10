@@ -9,9 +9,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuBooster;
 import sunsetsatellite.signalindustries.menus.MenuStabilizer;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 
 public class ScreenStabilizer extends ScreenFluid {
@@ -29,7 +27,7 @@ public class ScreenStabilizer extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/redstone_booster.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/redstone_booster.png");
                 break;
@@ -46,15 +44,15 @@ public class ScreenStabilizer extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 44, y + 21 + 12 - counter, 176, 44 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(32);
         this.drawTexturedModalRect(x + 72, y + 62 - counter, 176, 32 - counter, 32, counter);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -62,7 +60,7 @@ public class ScreenStabilizer extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -76,10 +74,10 @@ public class ScreenStabilizer extends ScreenFluid {
                 break;
         }
         font.drawCenteredString(I18n.getInstance().translateNameKey(tile.getNameTranslationKey()), 90, 6, color);
-        if(tile.connectedTo != null){
-            font.drawCenteredString("Connected!",90,70,0xFF00FF00);
+        if (tile.connectedTo != null) {
+            font.drawCenteredString("Connected!", 90, 70, 0xFF00FF00);
         } else {
-            font.drawCenteredString("Nothing to stabilize.",90,70,0xFFFF0000);
+            font.drawCenteredString("Nothing to stabilize.", 90, 70, 0xFFFF0000);
         }
     }
 
@@ -99,11 +97,11 @@ public class ScreenStabilizer extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

@@ -22,7 +22,7 @@ public class ItemModelSaber extends ItemModelStandard {
 
     @Override
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemStack) {
-        if(itemStack.getData().getBoolean("active")){
+        if (itemStack.getData().getBoolean("active")) {
             return saberEnabled;
         }
         return saberDisabled;

@@ -7,7 +7,6 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
-import sunsetsatellite.signalindustries.invs.InventoryBackpack;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 

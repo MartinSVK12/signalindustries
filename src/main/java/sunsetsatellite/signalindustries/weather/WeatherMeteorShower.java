@@ -16,16 +16,16 @@ public class WeatherMeteorShower extends Weather {
 
     @Override
     public float[] modifyFogColor(float r, float g, float b, float intensity) {
-        return new float[]{ 0, (173.0f/255.0f) * intensity, 1 * intensity };
+        return new float[]{0, (173.0f / 255.0f) * intensity, 1 * intensity};
     }
 
     @Override
     public void doEnvironmentUpdate(World world, Random rand, int x, int z) {
         int y = world.getHeightValue(x, z);
-        Player player = world.getClosestPlayer(x,y,z,255);
-        if(rand.nextInt(500) == 0 && player != null){
+        Player player = world.getClosestPlayer(x, y, z, 255);
+        if (rand.nextInt(500) == 0 && player != null) {
             ProjectileFallingMeteor meteor;
-            if(rand.nextInt(10) == 0){
+            if (rand.nextInt(10) == 0) {
                 meteor = new ProjectileFallingMeteor(world, x, 255, z, SIBlocks.signalumOre.id());
             } else {
                 meteor = new ProjectileFallingMeteor(world, x, 255, z, Blocks.BASALT.id());

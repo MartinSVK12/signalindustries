@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.net.packet.PacketLogin;
 import net.minecraft.server.entity.player.PlayerServer;
 import net.minecraft.server.net.handler.PacketHandlerLogin;
@@ -14,7 +13,7 @@ import sunsetsatellite.signalindustries.mp.message.NetworkMessageMeteorLocationS
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
-@Mixin(value = PacketHandlerLogin.class,remap = false)
+@Mixin(value = PacketHandlerLogin.class, remap = false)
 public class PacketHandlerLoginMixin {
 
     @Inject(method = "doLogin", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/net/handler/PacketHandlerServer;sendPacket(Lnet/minecraft/core/net/packet/Packet;)V", ordinal = 13))

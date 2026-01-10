@@ -23,7 +23,7 @@ public class ItemModelFuelCell extends ItemModelStandard {
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemStack) {
         int fuel = itemStack.getData().getInteger("fuel");
         int depleted = itemStack.getData().getInteger("depleted");
-        if(fuel <= 0 && depleted <= 0){
+        if (fuel <= 0 && depleted <= 0) {
             return cellEmpty;
         } else if (fuel <= 0) {
             return cellDepleted;

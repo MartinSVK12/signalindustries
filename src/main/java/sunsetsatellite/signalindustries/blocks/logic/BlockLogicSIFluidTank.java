@@ -6,12 +6,10 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.HardIllegalArgumentException;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
-import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntitySIFluidTank;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -28,16 +26,16 @@ public class BlockLogicSIFluidTank extends BlockLogicMachine {
         TileEntitySIFluidTank tile = (TileEntitySIFluidTank) tileEntity;
         CompoundTag fluidContents = new CompoundTag();
         ItemStack stack = new ItemStack(this);
-        if(tile != null && tile.getFluidInSlot(0) != null){
+        if (tile != null && tile.getFluidInSlot(0) != null) {
             tile.getFluidInSlot(0).writeToNBT(fluidContents);
-            stack.getData().putCompound("Fluid",fluidContents);
+            stack.getData().putCompound("Fluid", fluidContents);
         }
         return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[]{stack} : null;
     }
 
     @Override
     public String getDescription(ItemStack stack) {
-        if(stack.getData().containsKey("Fluid")){
+        if (stack.getData().containsKey("Fluid")) {
             NamespaceID fluidId;
             try {
                 fluidId = NamespaceID.getTemp(stack.getData().getCompound("Fluid").getString("fluid"));
@@ -47,7 +45,7 @@ public class BlockLogicSIFluidTank extends BlockLogicMachine {
             Fluid fluid = Fluid.fluidMap.get(fluidId);
             int amount = stack.getData().getCompound("Fluid").getInteger("amount");
             int maxAmount = (int) Math.pow(2, tier.ordinal()) * 16000;
-            return super.getDescription(stack)+"\n"+String.format("Contains: %d/%d mB %s",amount, maxAmount, fluid.getName());
+            return super.getDescription(stack) + "\n" + String.format("Contains: %d/%d mB %s", amount, maxAmount, fluid.getName());
         }
         return super.getDescription(stack);
     }

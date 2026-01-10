@@ -1,12 +1,8 @@
 package sunsetsatellite.signalindustries.screens;
 
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.IExtendedScreenDraw;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.render.FakeItemElement;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 
 public class ScreenMachineSimple extends ScreenFluid implements IExtendedScreenDraw {

@@ -14,18 +14,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(value = PlayerServer.class, remap = false)
 public abstract class PlayerServerMixin extends Player implements IWarpPlayer, IPlayerPowerSuit<SignalumPowerSuit> {
 
-    @Shadow public MinecraftServer mcServer;
+    @Shadow
+    public MinecraftServer mcServer;
 
     @Unique
     public SignalumPowerSuit powerSuit = null;
@@ -57,7 +56,7 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
             at = @At("HEAD")
     )
     public void saveSuitData(CompoundTag tag, CallbackInfo ci) {
-        if(powerSuit != null){
+        if (powerSuit != null) {
             //powerSuit.saveToStacks();
             powerSuit.saveData(tag);
         }
@@ -70,17 +69,17 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
     public void powerSuitUpdate(CallbackInfo ci) {
         ItemStack[] armorInventory = inventory.armorInventory;
         for (ItemStack itemStack : armorInventory) {
-            if(itemStack == null){
+            if (itemStack == null) {
                 powerSuit = null;
                 //ItemNVGAttachment.disable();
                 return;
-            } else if(!(itemStack.getItem() instanceof ItemSignalumPowerSuit)){
+            } else if (!(itemStack.getItem() instanceof ItemSignalumPowerSuit)) {
                 //ItemNVGAttachment.disable();
                 powerSuit = null;
                 return;
             }
         }
-        if(powerSuit == null){
+        if (powerSuit == null) {
             powerSuit = new SignalumPowerSuit(this);
             //triggerAchievement(SIAchievements.POWER_SUIT);
         } else {
@@ -89,8 +88,7 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci)
-    {
+    public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
         if (tag.containsKey("PowerSuit")) {
             powerSuitData = tag.getCompound("PowerSuit");
         }
@@ -101,23 +99,23 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
     protected void damageEntity(int damage, DamageType damageType) {
         float protection = 1.0f - this.inventory.getTotalProtectionAmount(damageType);
         protection = Math.max(protection, 0.01f);
-        double d = (float)damage * protection;
-        int newDamage = (int)((double)this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
+        double d = (float) damage * protection;
+        int newDamage = (int) ((double) this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
         int preventedDamage = damage - newDamage;
-        if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT ) {
-            if(powerSuit.getEnergy() >= newDamage){
+        if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT) {
+            if (powerSuit.getEnergy() >= newDamage) {
                 if (damageType != null && damageType.shouldDamageArmor()) {
-                    int armorDamage = (int)Math.ceil((double)preventedDamage / 4.0);
+                    int armorDamage = (int) Math.ceil((double) preventedDamage / 4.0);
                     this.inventory.damageArmor(armorDamage);
                 }
                 powerSuit.decrementEnergy(newDamage);
                 return;
             }
-            if(damageType == DamageType.FIRE){
+            if (damageType == DamageType.FIRE) {
                 powerSuit.temperature += 0.5f;
             }
         }
-        if(inventory.armorItemInSlot(2) != null && inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT){
+        if (inventory.armorItemInSlot(2) != null && inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT) {
             return;
         }
 
@@ -129,9 +127,9 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
             at = @At("TAIL")
     )
     public void updateSpeed(CallbackInfo ci) {
-        if(powerSuit != null && powerSuit.active){
-            if(powerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L))){
-                if(powerSuit.getAttachment(SIItems.movementBoosters) != null && powerSuit.getAttachment(SIItems.movementBoosters).getData().getBoolean("active")){
+        if (powerSuit != null && powerSuit.active) {
+            if (powerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L))) {
+                if (powerSuit.getAttachment(SIItems.movementBoosters) != null && powerSuit.getAttachment(SIItems.movementBoosters).getData().getBoolean("active")) {
                     speed += (float) (baseSpeed * 1.5);
                 }
             }

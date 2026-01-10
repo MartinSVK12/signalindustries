@@ -11,26 +11,23 @@ public class MenuAutoMiner extends MenuMachine {
     public MenuAutoMiner(ContainerInventory inv, TileEntityFluidItemContainer tile) {
         super(inv, tile);
 
-        if(tile instanceof ITiered){
+        if (tile instanceof ITiered) {
             Tier tier = ((ITiered) tile).getTier();
 
             int offset = tier == Tier.BASIC ? 0 : 83;
 
-            SlotFluid slot = new SlotFluid(tile, 0, 9,53); //116 35
+            SlotFluid slot = new SlotFluid(tile, 0, 9, 53); //116 35
             addFluidSlot(slot);
-            this.addSlot(new Slot(tile,0,127,31 + 4));
+            this.addSlot(new Slot(tile, 0, 127, 31 + 4));
 
-            for(int j = 0; j < 3; j++)
-            {
-                for(int i1 = 0; i1 < 9; i1++)
-                {
+            for (int j = 0; j < 3; j++) {
+                for (int i1 = 0; i1 < 9; i1++) {
                     addSlot(new Slot(inv, i1 + j * 9 + 9, 8 + i1 * 18, (84 + offset) + j * 18));
                 }
 
             }
 
-            for(int k = 0; k < 9; k++)
-            {
+            for (int k = 0; k < 9; k++) {
                 addSlot(new Slot(inv, k, 8 + k * 18, 142 + offset));
             }
         }

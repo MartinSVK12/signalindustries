@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.core.util.section.ISideInteractable;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 
 public class ItemConfigurationTablet extends Item implements IWrench, ISideInteractable {
-    
+
     public ItemConfigurationTablet(String translationKey, String namespaceId, int id) {
         super(translationKey, namespaceId, id);
     }
@@ -19,14 +19,14 @@ public class ItemConfigurationTablet extends Item implements IWrench, ISideInter
     @Override
     public CompoundTag getDefaultTag() {
         CompoundTag data = new CompoundTag();
-        data.putInt("mode",0);
+        data.putInt("mode", 0);
         return data;
     }
 
     @Override
     public String getLanguageKey(ItemStack itemstack) {
         ConfigurationTabletMode mode = ConfigurationTabletMode.values()[itemstack.getData().getInteger("mode")];
-        switch (mode){
+        switch (mode) {
             case ROTATION:
                 return "item.signalindustries.configurationTablet.rotation";
             case ITEM:
@@ -43,7 +43,7 @@ public class ItemConfigurationTablet extends Item implements IWrench, ISideInter
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        if(entityplayer.isSneaking()){
+        if (entityplayer.isSneaking()) {
             int mode = itemstack.getData().getInteger("mode");
             mode = (mode + 1) % ConfigurationTabletMode.values().length;
             itemstack.getData().putInt("mode", mode);

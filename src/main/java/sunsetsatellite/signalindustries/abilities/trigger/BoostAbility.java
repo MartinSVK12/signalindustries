@@ -14,17 +14,17 @@ public class BoostAbility extends TriggerBaseAbility {
 
     @Override
     public void activate(int x, int y, int z, Player player, World world, ItemStack trigger, ItemStack harness) {
-        boost(player,world);
+        boost(player, world);
     }
 
     @Override
     public void activate(Player player, World world, ItemStack trigger, ItemStack harness) {
-        boost(player,world);
+        boost(player, world);
     }
 
     private void boost(Player player, World world) {
-        double x = 1 * Math.cos(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI/180);
-        double z = 1 * Math.sin(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI/180);
+        double x = 1 * Math.cos(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
+        double z = 1 * Math.sin(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
         player.zd += x;
         player.xd -= z;
     }

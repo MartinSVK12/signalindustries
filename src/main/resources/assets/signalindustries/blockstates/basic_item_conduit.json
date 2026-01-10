@@ -16,7 +16,12 @@
     {
       "when": {
         "AND": [
-          {"up": "true"},{"mode": "SPLIT"}
+          {
+            "up": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -26,18 +31,27 @@
     {
       "when": {
         "AND": [
-          {"up": "true"},{"mode": "RANDOM"}
+          {
+            "up": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {
         "model": "signalindustries:conduit/item/basic/conduit_up"
       }
     },
-
     {
       "when": {
         "AND": [
-          {"down": "true"},{"mode": "SPLIT"}
+          {
+            "down": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -47,18 +61,27 @@
     {
       "when": {
         "AND": [
-          {"down": "true"},{"mode": "RANDOM"}
+          {
+            "down": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {
         "model": "signalindustries:conduit/item/basic/conduit_down"
       }
     },
-
     {
       "when": {
         "AND": [
-          {"north": "true"},{"mode": "SPLIT"}
+          {
+            "north": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -68,18 +91,27 @@
     {
       "when": {
         "AND": [
-          {"north": "true"},{"mode": "RANDOM"}
+          {
+            "north": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {
         "model": "signalindustries:conduit/item/basic/conduit_north"
       }
     },
-
     {
       "when": {
         "AND": [
-          {"south": "true"},{"mode": "SPLIT"}
+          {
+            "south": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -89,18 +121,27 @@
     {
       "when": {
         "AND": [
-          {"south": "true"},{"mode": "RANDOM"}
+          {
+            "south": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {
         "model": "signalindustries:conduit/item/basic/conduit_south"
       }
     },
-
     {
       "when": {
         "AND": [
-          {"east": "true"},{"mode": "SPLIT"}
+          {
+            "east": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -110,18 +151,27 @@
     {
       "when": {
         "AND": [
-          {"east": "true"},{"mode": "RANDOM"}
+          {
+            "east": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {
         "model": "signalindustries:conduit/item/basic/conduit_east"
       }
     },
-
     {
       "when": {
         "AND": [
-          {"west": "true"},{"mode": "SPLIT"}
+          {
+            "west": "true"
+          },
+          {
+            "mode": "SPLIT"
+          }
         ]
       },
       "apply": {
@@ -131,7 +181,12 @@
     {
       "when": {
         "AND": [
-          {"west": "true"},{"mode": "RANDOM"}
+          {
+            "west": "true"
+          },
+          {
+            "mode": "RANDOM"
+          }
         ]
       },
       "apply": {

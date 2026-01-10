@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public abstract class TileEntityCoverable extends TileEntityFluidItemContainer implements IAcceptsCovers, IScreenActionListener {
 
-    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) Catalyst.mapOf(Direction.values(),new CoverBase[Direction.values().length]);
+    protected final HashMap<Direction, CoverBase> covers = (HashMap<Direction, CoverBase>) Catalyst.mapOf(Direction.values(), new CoverBase[Direction.values().length]);
 
     public static final int CHANNEL_COVERS_START = 100;
     public static final int CHANNEL_COVER_BOTTOM = 100;
@@ -33,7 +33,7 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(x,y,z);
+        worldObj.markBlockDirty(x, y, z);
         covers.values().stream().filter(Objects::nonNull).forEach(CoverBase::tick);
         super.tick();
     }
@@ -44,13 +44,13 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
         CompoundTag coversNbt = new CompoundTag();
 
         for (Map.Entry<Direction, CoverBase> entry : covers.entrySet()) {
-            if(entry.getValue() == null) continue;
+            if (entry.getValue() == null) continue;
             CompoundTag coverNbt = new CompoundTag();
             entry.getValue().writeToNbt(coverNbt);
-            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),coverNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()), coverNbt);
         }
 
-        tag.putCompound("Covers",coversNbt);
+        tag.putCompound("Covers", coversNbt);
     }
 
     @Override
@@ -67,7 +67,7 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
             String type = coverTag.getString("Type");
             try {
                 CoverBase cover = (CoverBase) Class.forName(type).getConstructor().newInstance();
-                cover.setup(dir,this);
+                cover.setup(dir, this);
                 cover.readFromNbt(coverTag);
                 covers.put(dir, cover);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
@@ -79,9 +79,9 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
 
     @Override
     public boolean installCover(Direction dir, CoverBase cover, Player player) {
-        if(covers.get(dir) == null){
+        if (covers.get(dir) == null) {
             covers.put(dir, cover);
-            cover.onInstalled(dir,this,player);
+            cover.onInstalled(dir, this, player);
             return true;
         }
         return false;
@@ -89,9 +89,9 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
 
     @Override
     public boolean installCover(Direction dir, CoverBase cover) {
-        if(covers.get(dir) == null){
+        if (covers.get(dir) == null) {
             covers.put(dir, cover);
-            cover.onInstalled(dir,this);
+            cover.onInstalled(dir, this);
             return true;
         }
         return false;
@@ -100,8 +100,8 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public boolean removeCover(Direction dir, CoverBase cover, Player player) {
         CoverBase installedCover = covers.get(dir);
-        if(installedCover != null && installedCover == cover){
-            EntityItem entityItem = new EntityItem(worldObj,x,y,z, new ItemStack(installedCover.getItem()));
+        if (installedCover != null && installedCover == cover) {
+            EntityItem entityItem = new EntityItem(worldObj, x, y, z, new ItemStack(installedCover.getItem()));
             player.world.entityJoinedWorld(entityItem);
             installedCover.onRemoved(player);
             covers.remove(dir);
@@ -113,8 +113,8 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public boolean removeCover(Direction dir, CoverBase cover) {
         CoverBase installedCover = covers.get(dir);
-        if(installedCover != null && installedCover == cover){
-            EntityItem entityItem = new EntityItem(worldObj,x,y,z, new ItemStack(installedCover.getItem()));
+        if (installedCover != null && installedCover == cover) {
+            EntityItem entityItem = new EntityItem(worldObj, x, y, z, new ItemStack(installedCover.getItem()));
             worldObj.entityJoinedWorld(entityItem);
             installedCover.onRemoved();
             covers.remove(dir);
@@ -126,8 +126,8 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public boolean removeCover(Direction dir, Player player) {
         CoverBase installedCover = covers.get(dir);
-        if(installedCover != null){
-            EntityItem entityItem = new EntityItem(worldObj,x,y,z, new ItemStack(installedCover.getItem()));
+        if (installedCover != null) {
+            EntityItem entityItem = new EntityItem(worldObj, x, y, z, new ItemStack(installedCover.getItem()));
             worldObj.entityJoinedWorld(entityItem);
             installedCover.onRemoved(player);
             covers.remove(dir);
@@ -139,8 +139,8 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public boolean removeCover(Direction dir) {
         CoverBase installedCover = covers.get(dir);
-        if(installedCover != null){
-            EntityItem entityItem = new EntityItem(worldObj,x,y,z, new ItemStack(installedCover.getItem()));
+        if (installedCover != null) {
+            EntityItem entityItem = new EntityItem(worldObj, x, y, z, new ItemStack(installedCover.getItem()));
             worldObj.entityJoinedWorld(entityItem);
             installedCover.onRemoved();
             covers.remove(dir);
@@ -156,14 +156,14 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
 
     @Override
     public boolean hasCoverAnywhere(Class<? extends CoverBase> cover) {
-        return covers.values().stream().anyMatch((C)-> C != null && cover.isAssignableFrom(C.getClass()));
+        return covers.values().stream().anyMatch((C) -> C != null && cover.isAssignableFrom(C.getClass()));
     }
 
     @Override
     public <T extends CoverBase> T getCover(Class<T> cover) {
         for (Direction dir : Direction.values()) {
             CoverBase c = covers.get(dir);
-            if(c != null && cover.isAssignableFrom(c.getClass())){
+            if (c != null && cover.isAssignableFrom(c.getClass())) {
                 return (T) c;
             }
         }
@@ -177,10 +177,10 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
 
     @Override
     public void buttonClicked(int id, int button, int channel) {
-        if(channel >= CHANNEL_COVERS_START && channel <= CHANNEL_COVERS_END){
+        if (channel >= CHANNEL_COVERS_START && channel <= CHANNEL_COVERS_END) {
             Direction dir = Direction.getDirectionFromSide(channel - CHANNEL_COVERS_START);
             CoverBase cover = covers.get(dir);
-            if(cover != null){
+            if (cover != null) {
                 cover.buttonClicked(id, button, channel);
             }
         }

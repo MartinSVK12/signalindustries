@@ -22,10 +22,10 @@ public abstract class WorldClientMixin extends World {
             at = @At("HEAD"),
             cancellable = true)
     public void getSkyColor(ICamera camera, float renderPartialTicks, CallbackInfoReturnable<Vec3> cir) {
-        if(getCurrentWeather() == SIWeather.weatherEclipse){
+        if (getCurrentWeather() == SIWeather.weatherEclipse) {
             cir.setReturnValue(Vec3.getTempVec3(0, 0, 0));
-        } else if(dimension == SIDimensions.ETERNITY){
-            cir.setReturnValue(Vec3.getTempVec3(0.70,0.70,0.70));
+        } else if (dimension == SIDimensions.ETERNITY) {
+            cir.setReturnValue(Vec3.getTempVec3(0.70, 0.70, 0.70));
         }
     }
 

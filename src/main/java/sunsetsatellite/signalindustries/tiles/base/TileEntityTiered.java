@@ -10,7 +10,7 @@ public class TileEntityTiered extends TileEntityWithName {
     @Override
     public void tick() {
         super.tick();
-        if(worldObj != null && getBlock() != null){
+        if (worldObj != null && getBlock() != null) {
             tier = Catalyst.blockLogic(getBlock(), BlockLogicTiered.class).tier;
         }
     }

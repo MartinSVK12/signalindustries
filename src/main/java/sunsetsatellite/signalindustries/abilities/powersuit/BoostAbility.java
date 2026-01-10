@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BoostAbility extends SuitBaseAbility{
+public class BoostAbility extends SuitBaseAbility {
     public BoostAbility() {
         super(Tier.BASIC, SignalIndustries.MOD_ID, "boost", 150, 40);
     }
@@ -29,8 +29,8 @@ public class BoostAbility extends SuitBaseAbility{
     }
 
     private void boost(Player player) {
-        double x = 5 * Math.cos(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI/180);
-        double z = 5 * Math.sin(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI/180);
+        double x = 5 * Math.cos(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
+        double z = 5 * Math.sin(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
         player.zd += x;
         player.xd -= z;
     }

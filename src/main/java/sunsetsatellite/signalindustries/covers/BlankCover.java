@@ -2,8 +2,6 @@ package sunsetsatellite.signalindustries.covers;
 
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.render.texture.stitcher.IconCoordinate;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.entity.player.Player;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.signalindustries.SIItems;

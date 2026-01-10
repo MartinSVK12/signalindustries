@@ -14,7 +14,7 @@ public class TileEntitySITrommel extends TileEntityTieredMachineSimple implement
         acceptedFluids.get(0).add(SIFluids.ENERGY);
         energySlot = 0;
         recipeGroup = SIRecipes.TROMMEL;
-        itemInputs = new int[]{0,1,2,3};
+        itemInputs = new int[]{0, 1, 2, 3};
         itemOutputs = new int[]{4};
     }
 

@@ -9,7 +9,6 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.HologramWorld;
@@ -32,16 +31,16 @@ public class RenderGreenhouse extends RenderMultiblock {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_LIGHTING);
         Vec3i middle = greenhouse.getPosition().add(Direction.getDirectionFromSide(greenhouse.getBlockMeta()).getVec().multiply(3));
-        Vec3i offset = middle.copy().add(new Vec3i(2,0,2));
+        Vec3i offset = middle.copy().add(new Vec3i(2, 0, 2));
         ArrayList<BlockInstance> blocks = new ArrayList<>();
         for (int v = 0; v < 5; v++) {
             for (int w = 0; w < 5; w++) {
                 if (offset.x - v == middle.x && offset.z - w == middle.z) continue;
-                BlockInstance block = new BlockInstance(Blocks.CROPS_WHEAT, new Vec3i(offset.x-v, offset.y, offset.z-w), greenhouse.getProgressScaled(7), greenhouse);
+                BlockInstance block = new BlockInstance(Blocks.CROPS_WHEAT, new Vec3i(offset.x - v, offset.y, offset.z - w), greenhouse.getProgressScaled(7), greenhouse);
                 blocks.add(block);
             }
         }
-        GL11.glTranslated(d,e,f);
+        GL11.glTranslated(d, e, f);
         blockRenderer = new RenderBlocks(new HologramWorld(blocks));
         for (BlockInstance block : blocks) {
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block.block);
@@ -67,8 +66,8 @@ public class RenderGreenhouse extends RenderMultiblock {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         tessellator.startDrawingQuads();
-        GL11.glTranslated(-x + (i-x),-y + (j-y),-z + (k-z));
-        model.render(tessellator,x,y,z);
+        GL11.glTranslated(-x + (i - x), -y + (j - y), -z + (k - z));
+        model.render(tessellator, x, y, z);
         tessellator.draw();
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);

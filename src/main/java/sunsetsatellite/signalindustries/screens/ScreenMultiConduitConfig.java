@@ -7,19 +7,12 @@ import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
-import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.mp.message.NetworkMessageIOChange;
 import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
-import sunsetsatellite.signalindustries.util.IOPreview;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
@@ -50,7 +43,7 @@ public class ScreenMultiConduitConfig extends Screen {
         Lighting.enableInventoryLight();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
+        GL11.glTranslatef((float) centerX, (float) centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
@@ -70,7 +63,7 @@ public class ScreenMultiConduitConfig extends Screen {
         buttons.add(new ButtonElement(4, (width / 2) - 10, (height / 2) - 48, 15, 15, "B")); //Z+
         buttons.add(new ButtonElement(3, (width / 2) - 10, (height / 2) - 33, 15, 15, "B")); //Y-
         buttons.add(new ButtonElement(0, (width / 2) + 4, (height / 2) - 48, 15, 15, "B")); //X+
-        buttons.add(new ButtonElement(1, (width / 2) - 24, (height / 2) - 48, 15, 15,"B")); //X-
+        buttons.add(new ButtonElement(1, (width / 2) - 24, (height / 2) - 48, 15, 15, "B")); //X-
         buttons.add(new ButtonElement(5, (width / 2) + 4, (height / 2) - 33, 15, 15, "B")); //Z-
 
         buttons.add(new ButtonElement(8, (width / 2) - 10 + 50, (height / 2) - 63, 15, 15, tile.conduitConnections.get(Direction.Y_POS) == -1 ? "X" : String.valueOf(tile.conduitConnections.get(Direction.Y_POS))));
@@ -94,7 +87,7 @@ public class ScreenMultiConduitConfig extends Screen {
         buttons.get(4).enabled = false;
         buttons.get(5).enabled = false;
 
-        if(Arrays.stream(tile.conduits).allMatch(Objects::isNull)){
+        if (Arrays.stream(tile.conduits).allMatch(Objects::isNull)) {
             buttons.get(6).enabled = false;
             buttons.get(7).enabled = false;
             buttons.get(8).enabled = false;
@@ -108,7 +101,7 @@ public class ScreenMultiConduitConfig extends Screen {
 
     @Override
     public void keyPressed(char eventCharacter, int eventKey, int mx, int my) {
-        if(eventKey == 1){
+        if (eventKey == 1) {
             mc.thePlayer.closeScreen();
         }
     }
@@ -116,9 +109,9 @@ public class ScreenMultiConduitConfig extends Screen {
     @Override
     public void mouseClicked(int mx, int my, int buttonNum) {
         super.mouseClicked(mx, my, buttonNum);
-        if(buttonNum == 1){
+        if (buttonNum == 1) {
             for (ButtonElement button : buttons) {
-                if(button.mouseClicked(mc,mx,my)){
+                if (button.mouseClicked(mc, mx, my)) {
                     this.mc.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
                     buttonClickedAlt(button);
                 }
@@ -128,7 +121,7 @@ public class ScreenMultiConduitConfig extends Screen {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(tile != null){
+        if (tile != null) {
             if (button.id > 5 && button.id < 12) {
                 Direction dir = Direction.values()[button.id - 6];
                 Integer currentValue = tile.conduitConnections.get(dir);
@@ -138,29 +131,28 @@ public class ScreenMultiConduitConfig extends Screen {
 
                 button.displayString = String.valueOf(tile.conduitConnections.get(dir));
             }
-            if(EnvironmentHelper.isClientWorld()){
-                NetworkHandler.sendToServer(new PacketScreenAction(button.id,0,0,tile.getPosition(), tile.getClass()));
+            if (EnvironmentHelper.isClientWorld()) {
+                NetworkHandler.sendToServer(new PacketScreenAction(button.id, 0, 0, tile.getPosition(), tile.getClass()));
             }
         }
         super.buttonClicked(button);
     }
 
     protected void buttonClickedAlt(ButtonElement button) {
-        if(button.id > 5 && button.id < 12){
-            Direction dir = Direction.values()[Math.min(6,Math.max(0,button.id-6))];
+        if (button.id > 5 && button.id < 12) {
+            Direction dir = Direction.values()[Math.min(6, Math.max(0, button.id - 6))];
             Integer currentValue = tile.conduitConnections.get(dir);
-            if(currentValue > -1){
-                tile.conduitConnections.put(dir,currentValue-1);
+            if (currentValue > -1) {
+                tile.conduitConnections.put(dir, currentValue - 1);
                 button.displayString = tile.conduitConnections.get(dir) == -1 ? "X" : String.valueOf(tile.conduitConnections.get(dir));
             }
         }
-        if(EnvironmentHelper.isClientWorld()){
-            NetworkHandler.sendToServer(new PacketScreenAction(button.id,1,0,tile.getPosition(), tile.getClass()));
+        if (EnvironmentHelper.isClientWorld()) {
+            NetworkHandler.sendToServer(new PacketScreenAction(button.id, 1, 0, tile.getPosition(), tile.getClass()));
         }
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         font.drawString("Configure: Multi Conduit", 45, 6, 0xFF404040);
         font.drawString("I/O", 78, 70, 0xFF404040);
         font.drawString("Conduit", 128, 70, 0xFF404040);
@@ -172,8 +164,7 @@ public class ScreenMultiConduitConfig extends Screen {
         font.drawString("X-", 8, 40, 0xFFFFFFFF);
     }
 
-    protected void drawGuiContainerBackgroundLayer(float f)
-    {
+    protected void drawGuiContainerBackgroundLayer(float f) {
         Texture i = mc.textureManager.loadTexture("/assets/signalindustries/gui/ioconfig.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);

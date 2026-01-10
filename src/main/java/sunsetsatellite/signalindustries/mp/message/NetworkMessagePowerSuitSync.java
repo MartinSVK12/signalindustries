@@ -4,7 +4,6 @@ import com.mojang.nbt.tags.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
-import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import turniplabs.halplibe.helper.network.NetworkMessage;
 import turniplabs.halplibe.helper.network.UniversalPacket;
 
@@ -16,7 +15,8 @@ public class NetworkMessagePowerSuitSync implements NetworkMessage {
         this.data = data;
     }
 
-    public NetworkMessagePowerSuitSync() {}
+    public NetworkMessagePowerSuitSync() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -31,7 +31,7 @@ public class NetworkMessagePowerSuitSync implements NetworkMessage {
     @Override
     public void handle(NetworkContext context) {
         IPowerSuit suit = ((IPlayerPowerSuit<?>) context.player).getPowerSuit();
-        if(suit != null){
+        if (suit != null) {
             suit.loadData(data.getCompound("PowerSuit"));
         }
     }

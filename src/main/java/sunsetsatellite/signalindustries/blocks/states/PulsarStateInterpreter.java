@@ -14,7 +14,7 @@ public class PulsarStateInterpreter extends MetaStateInterpreter {
         HashMap<String, String> result = new HashMap<>();
         TileEntityPulsar pulsar = (TileEntityPulsar) worldSource.getTileEntity(x, y, z);
 
-        result.put("active", pulsar.isBurning() ? "true" : "false" );
+        result.put("active", pulsar.isBurning() ? "true" : "false");
         result.put("warp", (pulsar.getItem(0) != null && pulsar.getItem(0).getItem() instanceof ItemWarpOrb) ? "true" : "false");
 
         return result;

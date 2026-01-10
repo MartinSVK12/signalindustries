@@ -30,7 +30,7 @@ public class MenuBackpack extends MenuFluid {
 
         ItemStack backpack;
 
-        if(isArmor){
+        if (isArmor) {
             backpack = ((IPlayerPowerSuit<?>) playerInv.player).getPowerSuit().getAttachmentClass(ItemBackpackAttachment.class);
         } else {
             backpack = playerInv.getItem(backpackSlotIndex);
@@ -109,9 +109,9 @@ public class MenuBackpack extends MenuFluid {
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
         int lastDeviceSlot = (slots.size() - 36) - 1;
         if (slot.index <= lastDeviceSlot) {
-            return getSlots(lastDeviceSlot+1, 36, true);
+            return getSlots(lastDeviceSlot + 1, 36, true);
         }
-        return getSlots(0, Math.max(lastDeviceSlot+1,1), false);
+        return getSlots(0, Math.max(lastDeviceSlot + 1, 1), false);
     }
 
     @Override
@@ -120,15 +120,14 @@ public class MenuBackpack extends MenuFluid {
 
         ItemStack backpack;
 
-        if(isArmor){
+        if (isArmor) {
             backpack = ((IPlayerPowerSuit<?>) player).getPowerSuit().getAttachmentClass(ItemBackpackAttachment.class);
         } else {
             backpack = player.inventory.getItem(backpackSlotIndex);
         }
 
-        InventorySerializer.saveInvToNBT(backpack,itemInventory);
-        for(int i = 0; i < slots.size(); i++)
-        {
+        InventorySerializer.saveInvToNBT(backpack, itemInventory);
+        for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();
                 stack = stack != null ? stack.copy() : null;

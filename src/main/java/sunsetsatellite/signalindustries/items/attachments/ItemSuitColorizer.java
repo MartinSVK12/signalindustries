@@ -4,12 +4,10 @@ import net.minecraft.client.render.model.ModelBiped;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemSuitColorizer extends ItemTieredAttachment {
@@ -43,7 +41,7 @@ public class ItemSuitColorizer extends ItemTieredAttachment {
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
 
     }
 

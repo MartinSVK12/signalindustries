@@ -1,7 +1,7 @@
 {
   "multipart": [
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:signalum_dynamo"
       },
       "when": {
@@ -9,7 +9,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:signalum_dynamo_180",
         "y": 180
       },
@@ -18,7 +18,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:signalum_dynamo_90",
         "y": 90
       },
@@ -27,7 +27,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:signalum_dynamo_270",
         "y": 270
       },

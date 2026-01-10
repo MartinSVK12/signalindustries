@@ -20,7 +20,7 @@ public class BlockModelCoverable extends BlockModelIOPreview {
     @Override
     public boolean render(Tessellator tessellator, int x, int y, int z) {
         TileEntity tile = renderBlocks.blockAccess.getTileEntity(x, y, z);
-        if(tile == null) {
+        if (tile == null) {
             return super.render(tessellator, x, y, z);
         }
         if (tile instanceof TileEntityCoverable) {

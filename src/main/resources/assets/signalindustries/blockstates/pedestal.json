@@ -1,7 +1,7 @@
 {
   "multipart": [
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:pedestal"
       },
       "when": {
@@ -9,7 +9,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:pedestal",
         "y": 180
       },
@@ -18,7 +18,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:pedestal",
         "y": 90
       },
@@ -27,7 +27,7 @@
       }
     },
     {
-      "apply":{
+      "apply": {
         "model": "signalindustries:pedestal",
         "y": 270
       },

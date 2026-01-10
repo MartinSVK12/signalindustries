@@ -13,8 +13,8 @@ import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
-import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -168,7 +168,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public void init() {
         if (initialized) return;
         LOGGER.info("Initializing items...");
-        rawSignalumCrystal = simpleItem("rawSignalumCrystal", "raw_signalite_crystal", "rawSignalumCrystal","rawsignalumcrystal");
+        rawSignalumCrystal = simpleItem("rawSignalumCrystal", "raw_signalite_crystal", "rawSignalumCrystal", "rawsignalumcrystal");
         signalumCrystal = simpleItem("signalumCrystal", "signalite_crystal", "signalumCrystal", "signalumcrystal");
         signalumCrystalEmpty = simpleItem("signalumCrystalEmpty", "signalite_crystal_empty", "signalumCrystalEmpty", "signalumcrystalempty");
         awakenedSignalumCrystal = simpleItem("awakenedSignalumCrystal", "awakened_signalite_crystal", "awakenedSignalumCrystal", "awakenedsignalumcrystal").setMaxStackSize(1);
@@ -227,30 +227,30 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         blankAbilityModule = simpleItem("blankAbilityModule", "blank_ability_module", "blankAbilityModule", "blank_module");
         abilityContainerCasing = simpleItem("abilityContainerCasing", "ability_container_casing", "abilityContainerCasing", "ability_container_casing");
         blankChip = simpleItem("blankChip", "blank_chip", "romChip.blank", "blank_chip");
-        condensedMilkCan = simpleItem("condensedMilkCan", "condensed_milk_can","condensedMilkCan","condensed_milk_can").setMaxStackSize(1);
-        bucketCaramel = simpleItem("bucketCaramel", "bucket_caramel","bucketCaramel","bucket_caramel").setMaxStackSize(1).setContainerItem(Items.BUCKET);
-        caramelPlate = simpleItem("caramelPlate", "caramel_plate","caramelPlate","caramel_plate");
-        signalumAlloyMesh = simpleItem("signalumAlloyMesh", "signalum_alloy_mesh","signalumAlloyMesh","signalum_alloy_mesh");
-        crystalWingPart = simpleItem("crystalWingPart", "crystal_wing_part","crystalWingPart","crystal_wing_part").setMaxStackSize(6);
-        precisionControlChip = simpleItem("precisionControlChip", "precision_control_chip","romChip.precision","precision_control_chip");
-        clearKey = simpleItem("clearKey", "clear_key","clearKey","clear_key");
-        saturatedKey = simpleItem("saturatedKey", "saturated_key","saturatedKey","saturated_key");
-        unlimitedChip = simpleItem("unlimitedChip", "unlimited_chip","romChip.unlimited","unlimited_chip");
+        condensedMilkCan = simpleItem("condensedMilkCan", "condensed_milk_can", "condensedMilkCan", "condensed_milk_can").setMaxStackSize(1);
+        bucketCaramel = simpleItem("bucketCaramel", "bucket_caramel", "bucketCaramel", "bucket_caramel").setMaxStackSize(1).setContainerItem(Items.BUCKET);
+        caramelPlate = simpleItem("caramelPlate", "caramel_plate", "caramelPlate", "caramel_plate");
+        signalumAlloyMesh = simpleItem("signalumAlloyMesh", "signalum_alloy_mesh", "signalumAlloyMesh", "signalum_alloy_mesh");
+        crystalWingPart = simpleItem("crystalWingPart", "crystal_wing_part", "crystalWingPart", "crystal_wing_part").setMaxStackSize(6);
+        precisionControlChip = simpleItem("precisionControlChip", "precision_control_chip", "romChip.precision", "precision_control_chip");
+        clearKey = simpleItem("clearKey", "clear_key", "clearKey", "clear_key");
+        saturatedKey = simpleItem("saturatedKey", "saturated_key", "saturatedKey", "saturated_key");
+        unlimitedChip = simpleItem("unlimitedChip", "unlimited_chip", "romChip.unlimited", "unlimited_chip");
         //ashenTreeSapling = simpleItem("ashenTreeSapling", "ashen_tree_sapling","sapling.ashen","ashen_tree_sapling");
 
-        raziel = simpleItem("raziel", "raziel","raziel","raziel");
+        raziel = simpleItem("raziel", "raziel", "raziel", "raziel");
 
-        signalumCrystalBattery = customItem(()->
-            new ItemSignalumCrystal(
-                    "signalumCrystal.battery",
-                    key("item/signalite_crystal_battery"),
-                    item("signalumCrystalBattery"),
-                    false
-            ),
-            "signalumcrystalbattery")
-            .setMaxStackSize(1);
+        signalumCrystalBattery = customItem(() ->
+                        new ItemSignalumCrystal(
+                                "signalumCrystal.battery",
+                                key("item/signalite_crystal_battery"),
+                                item("signalumCrystalBattery"),
+                                false
+                        ),
+                "signalumcrystalbattery")
+                .setMaxStackSize(1);
 
-        infiniteSignalumCrystal = customItem(()->
+        infiniteSignalumCrystal = customItem(() ->
                         new ItemSignalumCrystal(
                                 "infiniteSignalumCrystal",
                                 key("item/infinite_signalite_crystal"),
@@ -260,15 +260,15 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
                 "infinitesignalumcrystal")
                 .setMaxStackSize(1);
 
-        portableWorkbench = (ItemPortableWorkbench) customItem(()-> new ItemPortableWorkbench(
-                "basic.portableWorkbench",
-                key("item/portable_workbench"),
-                item("portableWorkbench"),
-                Tier.BASIC),
+        portableWorkbench = (ItemPortableWorkbench) customItem(() -> new ItemPortableWorkbench(
+                        "basic.portableWorkbench",
+                        key("item/portable_workbench"),
+                        item("portableWorkbench"),
+                        Tier.BASIC),
                 "portable_workbench")
                 .setMaxStackSize(1);
 
-        smartWatch = (ItemSmartWatch) customItem(()-> new ItemSmartWatch(
+        smartWatch = (ItemSmartWatch) customItem(() -> new ItemSmartWatch(
                         "basic.smartWatch",
                         key("item/smart_watch"),
                         item("smartWatch"),
@@ -277,9 +277,9 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
                 .setMaxStackSize(1);
 
         basicSignalumDrill = customItem(() -> new ItemSignalumDrill(
-                "basic.signalumDrill",
-                key("item/basic_signalite_drill"),
-                item("basicSignalumDrill"), toolMaterialBasic, Tier.BASIC),
+                        "basic.signalumDrill",
+                        key("item/basic_signalite_drill"),
+                        item("basicSignalumDrill"), toolMaterialBasic, Tier.BASIC),
                 "signalum_drill"
         ).setMaxStackSize(1);
 
@@ -309,104 +309,104 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
                 "volatile_signalum_crystal"
         ).setMaxStackSize(4);
 
-        meteorTracker = customItem(() -> new ItemMeteorTracker("meteorTracker",key("item/meteor_tracker"),item("meteorTracker")),"meteor_tracker_uncalibrated").setMaxStackSize(1);
-        reinforcedMeteorTracker = customItem(() -> new ItemReinforcedMeteorTracker("reinforced.meteorTracker",key("item/reinforced_meteor_tracker"),item("reinforcedMeteorTracker")),"reinforced_meteor_tracker_uncalibrated").setMaxStackSize(1);
+        meteorTracker = customItem(() -> new ItemMeteorTracker("meteorTracker", key("item/meteor_tracker"), item("meteorTracker")), "meteor_tracker_uncalibrated").setMaxStackSize(1);
+        reinforcedMeteorTracker = customItem(() -> new ItemReinforcedMeteorTracker("reinforced.meteorTracker", key("item/reinforced_meteor_tracker"), item("reinforcedMeteorTracker")), "reinforced_meteor_tracker_uncalibrated").setMaxStackSize(1);
 
-        warpOrb = customItem(() -> new ItemWarpOrb("warpOrb",key("item/warp_orb"),item("warpOrb")),"warp_orb").setMaxStackSize(1);
+        warpOrb = customItem(() -> new ItemWarpOrb("warpOrb", key("item/warp_orb"), item("warpOrb")), "warp_orb").setMaxStackSize(1);
 
-        positionMemoryChip = customItem(() -> new ItemPositionChip("romChip.position",key("item/position_chip"),item("positionMemoryChip")),"position_chip").setMaxStackSize(1);
+        positionMemoryChip = customItem(() -> new ItemPositionChip("romChip.position", key("item/position_chip"), item("positionMemoryChip")), "position_chip").setMaxStackSize(1);
 
-        basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"),item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack").setMaxStackSize(1);
-        reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"),item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack").setMaxStackSize(1);
+        basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"), item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack").setMaxStackSize(1);
+        reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"), item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack").setMaxStackSize(1);
 
-        signalumPrototypeHarness = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarness", key("item/harness") ,item("signalumPrototypeHarness"), armorPrototypeHarness, 2, Tier.BASIC),"harness").setMaxStackSize(1);
-        signalumPrototypeHarnessGoggles = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarnessGoggles", key("item/harness_goggles") ,item("signalumPrototypeHarnessGoggles"), armorPrototypeHarness, 3, Tier.BASIC),"goggles").setMaxStackSize(1);
+        signalumPrototypeHarness = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarness", key("item/harness"), item("signalumPrototypeHarness"), armorPrototypeHarness, 2, Tier.BASIC), "harness").setMaxStackSize(1);
+        signalumPrototypeHarnessGoggles = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarnessGoggles", key("item/harness_goggles"), item("signalumPrototypeHarnessGoggles"), armorPrototypeHarness, 3, Tier.BASIC), "goggles").setMaxStackSize(1);
 
-        signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, 3, Tier.REINFORCED),"signalumpowersuit_helmet").setMaxStackSize(1);
-        signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, 2, Tier.REINFORCED),"signalumpowersuit_chestplate").setMaxStackSize(1);
-        signalumPowerSuitLeggings = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.leggings", key("item/power_suit_leggings"), item("signalumPowerSuitLeggings"), armorSignalumPowerSuit, 1, Tier.REINFORCED),"signalumpowersuit_leggings").setMaxStackSize(1);
-        signalumPowerSuitBoots = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.boots", key("item/power_suit_boots"), item("signalumPowerSuitBoots"), armorSignalumPowerSuit, 0, Tier.REINFORCED),"signalumpowersuit_boots").setMaxStackSize(1);
+        signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, 3, Tier.REINFORCED), "signalumpowersuit_helmet").setMaxStackSize(1);
+        signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, 2, Tier.REINFORCED), "signalumpowersuit_chestplate").setMaxStackSize(1);
+        signalumPowerSuitLeggings = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.leggings", key("item/power_suit_leggings"), item("signalumPowerSuitLeggings"), armorSignalumPowerSuit, 1, Tier.REINFORCED), "signalumpowersuit_leggings").setMaxStackSize(1);
+        signalumPowerSuitBoots = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.boots", key("item/power_suit_boots"), item("signalumPowerSuitBoots"), armorSignalumPowerSuit, 0, Tier.REINFORCED), "signalumpowersuit_boots").setMaxStackSize(1);
 
-        romChipProjectile = customItem(() -> new ItemRomChip("romChip.projectile",key("item/rom_chip_projectile"),item("romChipProjectile")),"chip1").setMaxStackSize(1);
-        romChipBoost = customItem(() -> new ItemRomChip("romChip.boost",key("item/rom_chip_boost"),item("romChipBoost")),"chip2").setMaxStackSize(1);
-        romChipShield = customItem(() -> new ItemRomChip("romChip.shield",key("item/rom_chip_shield"),item("romChipShield")),"chip3").setMaxStackSize(1);
-        romChipScan = customItem(() -> new ItemRomChip("romChip.scan",key("item/rom_chip_scab"),item("romChipScan")),"chip4").setMaxStackSize(1);
+        romChipProjectile = customItem(() -> new ItemRomChip("romChip.projectile", key("item/rom_chip_projectile"), item("romChipProjectile")), "chip1").setMaxStackSize(1);
+        romChipBoost = customItem(() -> new ItemRomChip("romChip.boost", key("item/rom_chip_boost"), item("romChipBoost")), "chip2").setMaxStackSize(1);
+        romChipShield = customItem(() -> new ItemRomChip("romChip.shield", key("item/rom_chip_shield"), item("romChipShield")), "chip3").setMaxStackSize(1);
+        romChipScan = customItem(() -> new ItemRomChip("romChip.scan", key("item/rom_chip_scab"), item("romChipScan")), "chip4").setMaxStackSize(1);
 
-        nullTrigger = customItem(() -> new ItemTrigger("trigger.null",key("item/trigger"),item("nullTrigger")),"trigger").setMaxStackSize(1);
+        nullTrigger = customItem(() -> new ItemTrigger("trigger.null", key("item/trigger"), item("nullTrigger")), "trigger").setMaxStackSize(1);
 
-        fuelCell = customItem(() -> new ItemFuelCell("fuelCell",key("item/fuel_cell"),item("fuelCell")),"fuelcellempty").setMaxStackSize(1);
+        fuelCell = customItem(() -> new ItemFuelCell("fuelCell", key("item/fuel_cell"), item("fuelCell")), "fuelcellempty").setMaxStackSize(1);
 
-        pulsar = customItem(() -> new ItemPulsar("reinforced.pulsar",key("item/pulsar"),item("pulsar"),Tier.REINFORCED),"pulsar_inactive").setMaxStackSize(1);
+        pulsar = customItem(() -> new ItemPulsar("reinforced.pulsar", key("item/pulsar"), item("pulsar"), Tier.REINFORCED), "pulsar_inactive").setMaxStackSize(1);
 
-        movementBoosters = (ItemAttachment) customItem(()-> new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters",key("item/movement_boosters"),item("movementBoosters"), Catalyst.listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED),"movement_boosters").setMaxStackSize(2);
-        crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings",key("item/crystal_wings"),item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"wings").setMaxStackSize(1);
-        nightVisionLens = (ItemAttachment) customItem(() -> new ItemNVGAttachment("reinforced.attachment.nightVisionLens",key("item/night_vision_lens"),item("nightVisionLens"), Catalyst.listOf(AttachmentPoint.HEAD_LENS), Tier.REINFORCED),"night_vision_goggles").setMaxStackSize(1);
-        extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack",key("item/extended_energy_pack"),item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED),"extended_energy_pack").setMaxStackSize(1);
-        pulsarAttachment = (ItemAttachment) customItem(() -> new ItemPulsarAttachment("reinforced.attachment.pulsar",key("item/pulsar_attachment"),item("pulsarAttachment"), Catalyst.listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED),"pulsar_attachment").setMaxStackSize(1);
-        annihilationCrown = (ItemAttachment) customItem(() -> new ItemCrownAttachment("reinforced.attachment.crown",key("item/annihilation_crown"),item("annihilationCrown"), Catalyst.listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED),"crown").setMaxStackSize(1);
+        movementBoosters = (ItemAttachment) customItem(() -> new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters", key("item/movement_boosters"), item("movementBoosters"), Catalyst.listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED), "movement_boosters").setMaxStackSize(2);
+        crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
+        nightVisionLens = (ItemAttachment) customItem(() -> new ItemNVGAttachment("reinforced.attachment.nightVisionLens", key("item/night_vision_lens"), item("nightVisionLens"), Catalyst.listOf(AttachmentPoint.HEAD_LENS), Tier.REINFORCED), "night_vision_goggles").setMaxStackSize(1);
+        extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);
+        pulsarAttachment = (ItemAttachment) customItem(() -> new ItemPulsarAttachment("reinforced.attachment.pulsar", key("item/pulsar_attachment"), item("pulsarAttachment"), Catalyst.listOf(AttachmentPoint.ARM_FRONT), Tier.REINFORCED), "pulsar_attachment").setMaxStackSize(1);
+        annihilationCrown = (ItemAttachment) customItem(() -> new ItemCrownAttachment("reinforced.attachment.crown", key("item/annihilation_crown"), item("annihilationCrown"), Catalyst.listOf(AttachmentPoint.HEAD_TOP), Tier.REINFORCED), "crown").setMaxStackSize(1);
 
-        abilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("abilityModule",key("item/ability_module"),item("abilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.REINFORCED),"ability_module").setMaxStackSize(1);
-        awakenedAbilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("awakenedAbilityModule",key("item/awakened_ability_module"),item("awakenedAbilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.AWAKENED),"awakened_ability_module").setMaxStackSize(1);
+        abilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("abilityModule", key("item/ability_module"), item("abilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.REINFORCED), "ability_module").setMaxStackSize(1);
+        awakenedAbilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("awakenedAbilityModule", key("item/awakened_ability_module"), item("awakenedAbilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.AWAKENED), "awakened_ability_module").setMaxStackSize(1);
 
-        blueprint = customItem(() -> new ItemBlueprint("blueprint",key("item/blueprint"),item("blueprint")),"blueprint").setMaxStackSize(1);
-        goldprint = customItem(() -> new ItemGoldprint("goldprint",key("item/goldprint"),item("goldprint")),"goldprint").setMaxStackSize(1);
+        blueprint = customItem(() -> new ItemBlueprint("blueprint", key("item/blueprint"), item("blueprint")), "blueprint").setMaxStackSize(1);
+        goldprint = customItem(() -> new ItemGoldprint("goldprint", key("item/goldprint"), item("goldprint")), "goldprint").setMaxStackSize(1);
 
-        scanAbilityContainer = customItem(()-> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()),"ability4").setMaxStackSize(1);
+        scanAbilityContainer = customItem(() -> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()), "ability4").setMaxStackSize(1);
 
         suitColorizerWhite = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.white",
                 key("item/suit_colorizer_white"),
                 item("suitColorizerWhite"),
                 listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-                "/assets/signalindustries/textures/armor/power_suit_white"),"colorizer_white").setMaxStackSize(1);
+                "/assets/signalindustries/textures/armor/power_suit_white"), "colorizer_white").setMaxStackSize(1);
 
         suitColorizerBlue = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.blue",
                 key("item/suit_colorizer_blue"),
                 item("suitColorizerBlue"),
                 listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-                "/assets/signalindustries/textures/armor/power_suit_blue"),"colorizer_blue").setMaxStackSize(1);
+                "/assets/signalindustries/textures/armor/power_suit_blue"), "colorizer_blue").setMaxStackSize(1);
 
         suitColorizerPurple = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.purple",
                 key("item/suit_colorizer_purple"),
                 item("suitColorizerPurple"),
                 listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-                "/assets/signalindustries/textures/armor/power_suit_purple"),"colorizer_purple").setMaxStackSize(1);
+                "/assets/signalindustries/textures/armor/power_suit_purple"), "colorizer_purple").setMaxStackSize(1);
 
         suitColorizerTransparent = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.transparent",
                 key("item/suit_colorizer_transparent"),
                 item("suitColorizerTransparent"),
                 listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-                "/assets/signalindustries/textures/armor/power_suit_transparent"),"colorizer_transparent").setMaxStackSize(1);
+                "/assets/signalindustries/textures/armor/power_suit_transparent"), "colorizer_transparent").setMaxStackSize(1);
 
         suitColorizerInverted = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
                 "reinforced.attachment.colorizer.inverted",
                 key("item/suit_colorizer_inverted"),
                 item("suitColorizerInverted"),
                 listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-                "/assets/signalindustries/textures/armor/power_suit_inverted"),"colorizer_inverted").setMaxStackSize(1);
+                "/assets/signalindustries/textures/armor/power_suit_inverted"), "colorizer_inverted").setMaxStackSize(1);
 
         krowka = customItem(() -> new ItemFood(
-                "krowka",
-                key("item/krowka"),
-                item("krowka"),
-                1,
-                1,
-                false,8),
+                        "krowka",
+                        key("item/krowka"),
+                        item("krowka"),
+                        1,
+                        1,
+                        false, 8),
                 "krowka"
         );
 
-        blankCover = (ItemCover) customItem(()-> new ItemCover("cover.blank",key("item/blank_cover"),item("blankCover"), BlankCover::new),"blank_cover");
-        dilithiumLensCover = (ItemCover) customItem(()-> new ItemCover("cover.dilithiumLens",key("item/dilithium_lens_cover"),item("dilithiumLensCover"), DilithiumLensCover::new),"dilithium_lens");
-        conveyorCover = (ItemCover) customItem(()-> new ItemCover("cover.item",key("item/conveyor_cover"),item("conveyorCover"), ConveyorCover::new),"conveyor_cover");
-        pumpCover = (ItemCover) customItem(()-> new ItemCover("cover.fluid",key("item/pump_cover"),item("pumpCover"), PumpCover::new),"pump_cover");
-        switchCover = (ItemCover) customItem(()-> new ItemCover("cover.switch",key("item/switch_cover"),item("switchCover"), SwitchCover::new),"switch_cover");
-        redstoneCover = (ItemCover) customItem(()-> new ItemCover("cover.redstone",key("item/redstone_cover"),item("redstoneCover"), RedstoneCover::new),"redstone_cover");
-        voidCover = (ItemCover) customItem(()-> new ItemCover("cover.void",key("item/void_cover"),item("voidCover"), VoidCover::new),"void_cover");
+        blankCover = (ItemCover) customItem(() -> new ItemCover("cover.blank", key("item/blank_cover"), item("blankCover"), BlankCover::new), "blank_cover");
+        dilithiumLensCover = (ItemCover) customItem(() -> new ItemCover("cover.dilithiumLens", key("item/dilithium_lens_cover"), item("dilithiumLensCover"), DilithiumLensCover::new), "dilithium_lens");
+        conveyorCover = (ItemCover) customItem(() -> new ItemCover("cover.item", key("item/conveyor_cover"), item("conveyorCover"), ConveyorCover::new), "conveyor_cover");
+        pumpCover = (ItemCover) customItem(() -> new ItemCover("cover.fluid", key("item/pump_cover"), item("pumpCover"), PumpCover::new), "pump_cover");
+        switchCover = (ItemCover) customItem(() -> new ItemCover("cover.switch", key("item/switch_cover"), item("switchCover"), SwitchCover::new), "switch_cover");
+        redstoneCover = (ItemCover) customItem(() -> new ItemCover("cover.redstone", key("item/redstone_cover"), item("redstoneCover"), RedstoneCover::new), "redstone_cover");
+        voidCover = (ItemCover) customItem(() -> new ItemCover("cover.void", key("item/void_cover"), item("voidCover"), VoidCover::new), "void_cover");
 
-        dimensionMaker = customItem(()-> new ItemDimensionMaker("dimensionMaker",key("item/dimension_maker"),item("dimensionMaker")),"dimension_maker").setMaxStackSize(1);
+        dimensionMaker = customItem(() -> new ItemDimensionMaker("dimensionMaker", key("item/dimension_maker"), item("dimensionMaker")), "dimension_maker").setMaxStackSize(1);
 
         List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).collect(Collectors.toList());
 
@@ -415,7 +415,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         for (Field field : itemFields) {
             try {
                 Item item = (Item) field.get(null);
-                if(item == null) {
+                if (item == null) {
                     unknownAmount++;
                     field.set(null, simpleItem(field.getName(), field.getName(), field.getName(), "unknown"));
                 }
@@ -435,7 +435,7 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     }
 
     public Item simpleItem(String configId, String name, String lang, String texture) {
-        Item item = new Item(lang, key("item/"+name), item(configId));
+        Item item = new Item(lang, key("item/" + name), item(configId));
         itemTextures.put(item, texture);
         //LOGGER.info("Registering item '" + item.namespaceID.toString() + "' with texture 'signalindustries:item/" + texture + "'.");
         return new ItemBuilder(MOD_ID).build(item);

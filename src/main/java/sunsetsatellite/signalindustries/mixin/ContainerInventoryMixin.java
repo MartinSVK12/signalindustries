@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.mixin;
 
-import net.fabricmc.api.Environment;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
@@ -18,9 +17,11 @@ import sunsetsatellite.signalindustries.menus.MenuBackpack;
 )
 public class ContainerInventoryMixin {
 
-    @Shadow public ItemStack[] armorInventory;
+    @Shadow
+    public ItemStack[] armorInventory;
 
-    @Shadow public Player player;
+    @Shadow
+    public Player player;
 
     @Shadow
     protected int currentItem;
@@ -38,7 +39,7 @@ public class ContainerInventoryMixin {
 
     @Inject(method = "currentItemLocked", at = @At("HEAD"), cancellable = true)
     public void currentItemLocked(CallbackInfoReturnable<Boolean> cir) {
-        if(this.player.craftingInventory instanceof MenuBackpack){
+        if (this.player.craftingInventory instanceof MenuBackpack) {
             cir.setReturnValue(true);
         }
     }

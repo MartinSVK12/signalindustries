@@ -15,7 +15,9 @@ public abstract class TriggerBaseEffectAbility extends TriggerBaseAbility {
     }
 
     public abstract void deactivate(int x, int y, int z, Player player, World world, ItemStack trigger, ItemStack harness);
+
     public abstract void deactivate(Player player, World world, ItemStack trigger, ItemStack harness);
+
     //public abstract void tick(int x, int y, int z, Player player, World world, ItemStack stack);
     public abstract void tick(Player player, World world, ItemStack trigger, ItemStack harness);
 }

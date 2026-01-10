@@ -1,26 +1,19 @@
 package sunsetsatellite.signalindustries.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.nbt.NbtIo;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
-import net.minecraft.client.player.controller.PlayerController;
 import net.minecraft.client.render.terrain.TerrainRenderer;
 import net.minecraft.client.world.chunk.provider.ChunkProviderDynamic;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.IChunkLoader;
 import net.minecraft.core.world.chunk.provider.IChunkProvider;
-import net.minecraft.core.world.save.LevelData;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.WorldTypeGroups;
 import net.minecraft.core.world.type.WorldTypes;
@@ -33,8 +26,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import sunsetsatellite.catalyst.core.util.vector.Vec2f;
-import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -59,25 +50,30 @@ import java.util.Map;
 public abstract class MinecraftMixin {
 
 
-    @Shadow public PlayerLocal thePlayer;
+    @Shadow
+    public PlayerLocal thePlayer;
 
-    @Shadow public HitResult objectMouseOver;
+    @Shadow
+    public HitResult objectMouseOver;
 
-    @Shadow protected abstract void clickMouse(int par1, boolean par2, boolean par3);
+    @Shadow
+    protected abstract void clickMouse(int par1, boolean par2, boolean par3);
 
-    @Shadow public abstract void resize();
+    @Shadow
+    public abstract void resize();
 
-    @Shadow public TerrainRenderer terrainRenderer;
+    @Shadow
+    public TerrainRenderer terrainRenderer;
 
     @Shadow
     private File mcDataDir;
 
     @Inject(
             method = "runTick",
-            at = @At(value = "INVOKE",target = "Lorg/lwjgl/input/Keyboard;next()Z",shift = At.Shift.AFTER)
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/input/Keyboard;next()Z", shift = At.Shift.AFTER)
     )
-    public void handleKeyboard(CallbackInfo ci){
-        KeyboardHandler.handleKeyboard((Minecraft) (Object)this, ci);
+    public void handleKeyboard(CallbackInfo ci) {
+        KeyboardHandler.handleKeyboard((Minecraft) (Object) this, ci);
         /*SignalIndustries.LOGGER.info(String.format("Shift: %s | Control: %S",shift,control));
         SignalIndustries.LOGGER.info(String.format("Key: %s | Char: %s | State: %s",Keyboard.getEventKey(),Keyboard.getKeyName(Keyboard.getEventKey()),Keyboard.getEventKeyState()));*/
 
@@ -88,33 +84,33 @@ public abstract class MinecraftMixin {
     }
 
     @ModifyArg(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/util/helper/MathHelper;clamp(FFF)F"), index = 2)
-    public float modifyMaxFlySpeed(float original){
+    public float modifyMaxFlySpeed(float original) {
         return 5.0f;
     }
 
     @ModifyExpressionValue(method = "runTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/entity/player/PlayerLocal;noPhysics:Z"))
-    public boolean modifyWingsFlightSpeed(boolean original){
-        SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>)thePlayer).getPowerSuit();
-        if(ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
+    public boolean modifyWingsFlightSpeed(boolean original) {
+        SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>) thePlayer).getPowerSuit();
+        if (ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
             return original || ps.getAttachment(SIItems.crystalWings).getData().getBoolean("active");
         }
         return original;
     }
 
     @ModifyExpressionValue(method = "runTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/Minecraft;toggleFlyPressed:Z"))
-    public boolean modifyWingsFlightSpeed2(boolean original){
+    public boolean modifyWingsFlightSpeed2(boolean original) {
         boolean control = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
-        SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>)thePlayer).getPowerSuit();
-        if(ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
+        SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>) thePlayer).getPowerSuit();
+        if (ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {
             return original || (ps.getAttachment(SIItems.crystalWings).getData().getBoolean("active") && control);
         }
         return original;
     }
 
-    @Inject(method = "createChunkProvider",at = @At("HEAD"),cancellable = true)
-    public void switchProvider(World world, IChunkLoader chunkLoader, CallbackInfoReturnable<IChunkProvider> cir){
-        if(SIConfig.config.getBoolean("Experimental.enableDynamicChunkProvider")){
-            cir.setReturnValue(new ChunkProviderDynamic(world,chunkLoader,world.getWorldType().createChunkGenerator(world)));
+    @Inject(method = "createChunkProvider", at = @At("HEAD"), cancellable = true)
+    public void switchProvider(World world, IChunkLoader chunkLoader, CallbackInfoReturnable<IChunkProvider> cir) {
+        if (SIConfig.config.getBoolean("Experimental.enableDynamicChunkProvider")) {
+            cir.setReturnValue(new ChunkProviderDynamic(world, chunkLoader, world.getWorldType().createChunkGenerator(world)));
         }
     }
 
@@ -127,7 +123,7 @@ public abstract class MinecraftMixin {
             Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
             while (iter.hasNext()) {
                 WorldType worldType = iter.next();
-                if(worldType instanceof WorldTypeCustom){
+                if (worldType instanceof WorldTypeCustom) {
                     iter.remove();
                 }
             }
@@ -137,10 +133,10 @@ public abstract class MinecraftMixin {
                 CompoundTag nbt = NbtIo.readCompressed(Files.newInputStream(worldLevelDat.toPath())).getCompound("Data");
                 CompoundTag dimensionsTag = nbt.getCompound("CustomDimensions");
                 for (Tag<?> tag : dimensionsTag.getValues()) {
-                    if(tag instanceof CompoundTag){
+                    if (tag instanceof CompoundTag) {
                         CompoundTag dimTag = (CompoundTag) tag;
                         CustomDimensionData data = new CustomDimensionData(dimTag);
-                        WorldTypes.register(SignalIndustries.key("custom/"+data.name),data.getWorldType());
+                        WorldTypes.register(SignalIndustries.key("custom/" + data.name), data.getWorldType());
                         DimensionCustom dim = new DimensionCustom(data);
                         Dimension.registerDimension(data.id, dim);
                     }

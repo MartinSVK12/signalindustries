@@ -26,21 +26,21 @@ public class TileEntityPedestal extends TileEntity {
     @Override
     public void tick() {
         super.tick();
-        if(worldObj == null) return;
+        if (worldObj == null) return;
         this.bookSpreadPrev = this.bookSpread;
         this.bookRotPrev = this.bookRot2;
         Player closestPlayer = this.worldObj.getClosestPlayer(x + 0.5f, y + 0.5f, z + 0.5f, 3);
-        if(closestPlayer != null){
-            double xPos = closestPlayer.x - x+0.5f;
-            double zPos = closestPlayer.z - z+0.5f;
+        if (closestPlayer != null) {
+            double xPos = closestPlayer.x - x + 0.5f;
+            double zPos = closestPlayer.z - z + 0.5f;
             this.bookRot = 0;
             //this.bookRot = (float) Math.atan2(zPos, xPos);
             this.bookSpread += 0.1f;
 
-            if(bookSpreadPrev < 0.5f || rand.nextInt(40) == 0){
+            if (bookSpreadPrev < 0.5f || rand.nextInt(40) == 0) {
                 float startingFlipRot = this.flipRot;
                 do {
-                    this.flipRot += (float)(rand.nextInt(4) - rand.nextInt(4));
+                    this.flipRot += (float) (rand.nextInt(4) - rand.nextInt(4));
                 } while (startingFlipRot == this.flipRot);
             }
         } else {
@@ -48,38 +48,38 @@ public class TileEntityPedestal extends TileEntity {
             this.bookSpread -= 0.1f;
         }
 
-        while (this.bookRot2 >= (float)Math.PI * 2) {
-            this.bookRot2 -= ((float)Math.PI * 4F);
+        while (this.bookRot2 >= (float) Math.PI * 2) {
+            this.bookRot2 -= ((float) Math.PI * 4F);
         }
 
-        while (this.bookRot2 < -(float)Math.PI * 2) {
-            this.bookRot2 += ((float)Math.PI * 4F);
+        while (this.bookRot2 < -(float) Math.PI * 2) {
+            this.bookRot2 += ((float) Math.PI * 4F);
         }
 
-        while (this.bookRot >= (float)Math.PI * 2) {
-            this.bookRot -= ((float)Math.PI * 4F);
+        while (this.bookRot >= (float) Math.PI * 2) {
+            this.bookRot -= ((float) Math.PI * 4F);
         }
 
-        while (this.bookRot < -(float)Math.PI * 2) {
+        while (this.bookRot < -(float) Math.PI * 2) {
             this.bookRot += ((float) Math.PI * 4F);
         }
 
         float startingBookRot = this.bookRot - this.bookRot2;
-        while (startingBookRot >= (float)Math.PI * 2) {
+        while (startingBookRot >= (float) Math.PI * 2) {
             startingBookRot -= ((float) Math.PI * 4F);
         }
 
-        while (startingBookRot < -(float)Math.PI * 2) {
+        while (startingBookRot < -(float) Math.PI * 2) {
             startingBookRot += ((float) Math.PI * 4F);
         }
 
         this.bookRot2 = startingBookRot * 0.4f;
 
-        if(this.bookSpread < 0f){
+        if (this.bookSpread < 0f) {
             this.bookSpread = 0f;
         }
 
-        if(bookSpread > 1f){
+        if (bookSpread > 1f) {
             bookSpread = 1f;
         }
 
@@ -87,10 +87,10 @@ public class TileEntityPedestal extends TileEntity {
         flipPrev = flip;
 
         float currentFlip = (flipRot - flip) * 0.4f;
-        if(currentFlip < -0.2f){
+        if (currentFlip < -0.2f) {
             currentFlip = -0.2f;
         }
-        if(currentFlip > 0.2f){
+        if (currentFlip > 0.2f) {
             currentFlip = 0.2f;
         }
         flipRot2 += (currentFlip - flipRot2) * 0.9f;

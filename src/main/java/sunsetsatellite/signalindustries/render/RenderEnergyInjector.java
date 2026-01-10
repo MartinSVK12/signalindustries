@@ -17,13 +17,13 @@ public class RenderEnergyInjector extends TileEntityRenderer<TileEntityEnergyInj
     @Override
     public void doRender(Tessellator tessellator, TileEntityEnergyInjector tileEntity, double x, double y, double z, float g) {
         counter++;
-        if(counter >= 360){
+        if (counter >= 360) {
             counter = 0;
         }
 
-        if(tileEntity.getItem(0) != null){
+        if (tileEntity.getItem(0) != null) {
             EntityItem entityItem = new EntityItem(tileEntity.worldObj, tileEntity.x, tileEntity.y, tileEntity.z, tileEntity.getItem(0));
-            itemRenderer.render(tessellator, entityItem,x+0.5,y+0.5,z+0.5, counter, g);
+            itemRenderer.render(tessellator, entityItem, x + 0.5, y + 0.5, z + 0.5, counter, g);
         }
 
     }

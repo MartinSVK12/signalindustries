@@ -21,8 +21,8 @@ public abstract class SuitBaseAbility {
 
     public SuitBaseAbility(Tier tier, String modId, String translateKey, int cost, int cooldown) {
         this.tier = tier;
-        this.name = "ability."+modId+"."+ tier.name().toLowerCase()+"."+translateKey+".name";
-        this.desc = "ability."+modId+"."+ tier.name().toLowerCase()+"."+translateKey+".desc";
+        this.name = "ability." + modId + "." + tier.name().toLowerCase() + "." + translateKey + ".name";
+        this.desc = "ability." + modId + "." + tier.name().toLowerCase() + "." + translateKey + ".desc";
         this.cost = cost;
         this.cooldown = cooldown;
         abilities.add(this);
@@ -36,6 +36,8 @@ public abstract class SuitBaseAbility {
 
 
     public abstract void activate(int x, int y, int z, Player player, World world, IPowerSuit powerSuit);
+
     public abstract void activate(Player player, World world, IPowerSuit powerSuit);
+
     public abstract void activate(Player player, Entity target, World world, IPowerSuit powerSuit);
 }

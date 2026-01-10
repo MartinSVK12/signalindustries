@@ -16,20 +16,21 @@ public class RecipeProperties {
 
     public List<Dimension> allowedDimensions;
 
-    public RecipeProperties(){}
+    public RecipeProperties() {
+    }
 
-    public RecipeProperties(Tier tier){
+    public RecipeProperties(Tier tier) {
         this.tier = tier;
     }
 
-    public RecipeProperties(int ticks, int cost, Tier tier, boolean thisTierOnly){
+    public RecipeProperties(int ticks, int cost, Tier tier, boolean thisTierOnly) {
         this.tier = tier;
         this.ticks = ticks;
         this.cost = cost;
         this.thisTierOnly = thisTierOnly;
     }
 
-    public RecipeProperties(int ticks, int cost, int id, Tier tier, boolean thisTierOnly){
+    public RecipeProperties(int ticks, int cost, int id, Tier tier, boolean thisTierOnly) {
         this.tier = tier;
         this.ticks = ticks;
         this.cost = cost;
@@ -37,18 +38,18 @@ public class RecipeProperties {
         this.thisTierOnly = thisTierOnly;
     }
 
-    public RecipeProperties(int ticks, Tier tier, boolean thisTierOnly){
+    public RecipeProperties(int ticks, Tier tier, boolean thisTierOnly) {
         this.tier = tier;
         this.ticks = ticks;
         this.thisTierOnly = thisTierOnly;
     }
 
-    public RecipeProperties setChance(float chance){
+    public RecipeProperties setChance(float chance) {
         this.chance = chance;
         return this;
     }
 
-    public RecipeProperties setConsumeContainers(){
+    public RecipeProperties setConsumeContainers() {
         this.consumeContainers = true;
         return this;
     }
@@ -58,7 +59,7 @@ public class RecipeProperties {
         return this;
     }
 
-    public boolean isCorrectTier(Tier tier){
+    public boolean isCorrectTier(Tier tier) {
         return thisTierOnly ? this.tier == tier : tier.ordinal() >= this.tier.ordinal();
     }
 }

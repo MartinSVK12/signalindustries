@@ -5,12 +5,10 @@ import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.TextureManager;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
-import net.minecraft.client.render.font.FontRenderer;
 import net.minecraft.client.render.item.model.ItemModelBlock;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
-import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlock;
 import net.minecraft.core.util.HardIllegalArgumentException;
@@ -32,7 +30,7 @@ public class ItemModelBlockSIFluidTank extends ItemModelBlock {
     @Override
     public void renderItemIntoGui(Tessellator tessellator, Font font, TextureManager textureManager, ItemStack itemStack, int x, int y, float brightness, float alpha) {
         if (itemStack != null) {
-            if(!itemStack.getData().containsKey("Fluid")) {
+            if (!itemStack.getData().containsKey("Fluid")) {
                 super.renderItemIntoGui(tessellator, font, textureManager, itemStack, x, y, brightness, alpha);
                 return;
             }
@@ -41,20 +39,20 @@ public class ItemModelBlockSIFluidTank extends ItemModelBlock {
             GL11.glEnable(2884);
             NamespaceID fluidId;
             try {
-               fluidId = NamespaceID.getTemp(itemStack.getData().getCompound("Fluid").getString("fluid"));
+                fluidId = NamespaceID.getTemp(itemStack.getData().getCompound("Fluid").getString("fluid"));
             } catch (HardIllegalArgumentException e) {
                 throw new RuntimeException(e);
             }
             Block<?> fluid = Fluid.fluidMap.get(fluidId).blocks.get(0);
             int fluidAmount = itemStack.getData().getCompound("Fluid").getInteger("amount");
 
-            BlockModel<?> model = ((BlockModel<?>) BlockModelDispatcher.getInstance().getDispatch(fluid));
-            if (model!= null) {
-                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(fluid,new Vec3i(),0,null))));
+            BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(fluid);
+            if (model != null) {
+                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(fluid, new Vec3i(), 0, null))));
                 GL11.glBlendFunc(770, 771);
                 TextureRegistry.blockAtlas.bind();
                 GL11.glPushMatrix();
-                GL11.glTranslatef((float)(x - 2), (float)(y + 3), -3.0F);
+                GL11.glTranslatef((float) (x - 2), (float) (y + 3), -3.0F);
                 GL11.glScalef(10.0F, 10.0F, 10.0F);
                 GL11.glTranslatef(1.0F, 0.5F, 1.0F);
                 GL11.glScalef(1.0F, 1.0F, -1.0F);
@@ -62,9 +60,9 @@ public class ItemModelBlockSIFluidTank extends ItemModelBlock {
                 GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
                 if (this.useColor) {
                     int color = this.getColor(itemStack);
-                    float r = (float)(color >> 16 & 255) / 255.0F;
-                    float g = (float)(color >> 8 & 255) / 255.0F;
-                    float b = (float)(color & 255) / 255.0F;
+                    float r = (float) (color >> 16 & 255) / 255.0F;
+                    float g = (float) (color >> 8 & 255) / 255.0F;
+                    float b = (float) (color & 255) / 255.0F;
                     GL11.glColor4f(r * brightness, g * brightness, b * brightness, alpha);
                 } else {
                     GL11.glColor4f(brightness, brightness, brightness, alpha);

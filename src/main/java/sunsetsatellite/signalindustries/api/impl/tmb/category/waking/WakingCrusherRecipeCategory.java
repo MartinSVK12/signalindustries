@@ -7,7 +7,6 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
@@ -80,7 +79,7 @@ public class WakingCrusherRecipeCategory implements IRecipeCategory<MachineRecip
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -89,7 +88,7 @@ public class WakingCrusherRecipeCategory implements IRecipeCategory<MachineRecip
 
         ingredients.add(0, IngredientList.fromRecipeSymbol(recipe.getOriginal().getInput()[0].asNormalSymbol()));
         ingredients.add(1, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(2, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(2, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override

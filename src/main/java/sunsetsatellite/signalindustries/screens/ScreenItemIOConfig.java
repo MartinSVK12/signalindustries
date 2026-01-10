@@ -5,13 +5,10 @@ import net.minecraft.client.gui.Screen;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.net.NetworkManager;
-import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
@@ -50,7 +47,7 @@ public class ScreenItemIOConfig extends Screen {
         Lighting.enableInventoryLight();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)centerX, (float)centerY, 0.0F);
+        GL11.glTranslatef((float) centerX, (float) centerY, 0.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
@@ -80,14 +77,14 @@ public class ScreenItemIOConfig extends Screen {
         buttons.add(new ButtonElement(7, Math.round(width / 2f) - 24 + 50, Math.round(height / 2f) - 48, 15, 15, tile.activeItemSlots.get(Direction.X_NEG) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.X_NEG))));
         buttons.add(new ButtonElement(11, Math.round(width / 2f) + 4 + 50, Math.round(height / 2f) - 33, 15, 15, tile.activeItemSlots.get(Direction.Z_NEG) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(Direction.Z_NEG))));
 
-        buttons.add(new ButtonElement(12,(width / 2) - 85, (height / 2)-12, 30, 15, "All I"));
-        buttons.add(new ButtonElement(13, (width / 2) - 55, (height / 2)-12, 30, 15, "All O"));
+        buttons.add(new ButtonElement(12, (width / 2) - 85, (height / 2) - 12, 30, 15, "All I"));
+        buttons.add(new ButtonElement(13, (width / 2) - 55, (height / 2) - 12, 30, 15, "All O"));
 
-        if(tile instanceof IHasIOPreview){
+        if (tile instanceof IHasIOPreview) {
             buttons.add(new ButtonElement(14, (width / 2) + 60, (height / 2) - 75, 20, 20, "P"));
         }
 
-        if(tile.getContainerSize() == 1){
+        if (tile.getContainerSize() == 1) {
             buttons.get(6).enabled = false;
             buttons.get(7).enabled = false;
             buttons.get(8).enabled = false;
@@ -101,7 +98,7 @@ public class ScreenItemIOConfig extends Screen {
 
     @Override
     public void keyPressed(char eventCharacter, int eventKey, int mx, int my) {
-        if(eventKey == 1){
+        if (eventKey == 1) {
             mc.thePlayer.closeScreen();
         }
     }
@@ -109,9 +106,9 @@ public class ScreenItemIOConfig extends Screen {
     @Override
     public void mouseClicked(int mx, int my, int buttonNum) {
         super.mouseClicked(mx, my, buttonNum);
-        if(buttonNum == 1){
+        if (buttonNum == 1) {
             for (ButtonElement button : buttons) {
-                if(button.mouseClicked(mc,mx,my)){
+                if (button.mouseClicked(mc, mx, my)) {
                     this.mc.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
                     buttonClickedAlt(button);
                 }
@@ -121,40 +118,40 @@ public class ScreenItemIOConfig extends Screen {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(tile != null){
+        if (tile != null) {
             int currentButtonId = -1;
-            if(button.id >= 0 && button.id <= 5){
+            if (button.id >= 0 && button.id <= 5) {
                 Direction dir = Direction.values()[button.id];
                 tile.cycleItemIOForSide(dir);
                 button.displayString = tile.itemConnections.get(dir).getLetter();
                 currentButtonId = button.id;
             }
 
-            if(button.id > 5 && button.id < 12){
-                Direction dir = Direction.values()[button.id-6];
-                tile.cycleActiveItemSlotForSide(dir,false);
+            if (button.id > 5 && button.id < 12) {
+                Direction dir = Direction.values()[button.id - 6];
+                tile.cycleActiveItemSlotForSide(dir, false);
                 button.displayString = String.valueOf(tile.activeItemSlots.get(dir));
                 currentButtonId = button.id;
             }
 
-            if(button.id == 12) {
+            if (button.id == 12) {
                 for (Direction direction : Direction.values()) {
                     tile.itemConnections.replace(direction, Connection.INPUT);
                 }
                 for (ButtonElement b : buttons) {
-                    if(b.id >= 0 && b.id < 6){
+                    if (b.id >= 0 && b.id < 6) {
                         b.displayString = tile.itemConnections.get(Direction.values()[b.id]).getLetter();
                     }
                 }
                 currentButtonId = button.id;
             }
 
-            if(button.id == 13) {
+            if (button.id == 13) {
                 for (Direction direction : Direction.values()) {
                     tile.itemConnections.replace(direction, Connection.OUTPUT);
                 }
                 for (ButtonElement b : buttons) {
-                    if(b.id >= 0 && b.id < 6){
+                    if (b.id >= 0 && b.id < 6) {
                         b.displayString = tile.itemConnections.get(Direction.values()[b.id]).getLetter();
                     }
                 }
@@ -168,8 +165,8 @@ public class ScreenItemIOConfig extends Screen {
                 }
             }
 
-            if(EnvironmentHelper.isClientWorld() && currentButtonId != -1){
-                if(currentButtonId == 12 || currentButtonId == 13){
+            if (EnvironmentHelper.isClientWorld() && currentButtonId != -1) {
+                if (currentButtonId == 12 || currentButtonId == 13) {
                     for (Direction dir : Direction.values()) {
                         Vec3i position = tile.getPosition();
                         Connection connection = tile.itemConnections.get(dir);
@@ -178,9 +175,9 @@ public class ScreenItemIOConfig extends Screen {
                     }
                 } else {
                     Direction dir = Direction.Y_POS;
-                    if(currentButtonId <= 5 && currentButtonId >= 0){
+                    if (currentButtonId <= 5 && currentButtonId >= 0) {
                         dir = Direction.values()[currentButtonId];
-                    } else if(currentButtonId > 5 && currentButtonId < 12) {
+                    } else if (currentButtonId > 5 && currentButtonId < 12) {
                         dir = Direction.values()[currentButtonId - 6];
                     }
                     Vec3i position = tile.getPosition();
@@ -195,12 +192,12 @@ public class ScreenItemIOConfig extends Screen {
     }
 
     protected void buttonClickedAlt(ButtonElement button) {
-        if(button.id > 5 && button.id < 12){
-            Direction dir = Direction.values()[button.id-6];
-            tile.cycleActiveItemSlotForSide(dir,true);
+        if (button.id > 5 && button.id < 12) {
+            Direction dir = Direction.values()[button.id - 6];
+            tile.cycleActiveItemSlotForSide(dir, true);
             button.displayString = tile.activeItemSlots.get(dir) == -1 ? "*" : String.valueOf(tile.activeItemSlots.get(dir));
 
-            if(EnvironmentHelper.isClientWorld()){
+            if (EnvironmentHelper.isClientWorld()) {
                 Vec3i position = tile.getPosition();
                 Connection connection = tile.itemConnections.get(dir);
                 int slot = tile.activeItemSlots.get(dir);
@@ -209,8 +206,7 @@ public class ScreenItemIOConfig extends Screen {
         }
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         font.drawString("Configure: Items", 45, 6, 0xFF404040);
         font.drawString("I/O", 78, 70, 0xFF404040);
         font.drawString("Slot", 128, 70, 0xFF404040);
@@ -222,8 +218,7 @@ public class ScreenItemIOConfig extends Screen {
         font.drawString("X-", 8, 40, 0xFFFFFFFF);
     }
 
-    protected void drawGuiContainerBackgroundLayer(float f)
-    {
+    protected void drawGuiContainerBackgroundLayer(float f) {
         Texture i = mc.textureManager.loadTexture("/assets/signalindustries/gui/ioconfig.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);

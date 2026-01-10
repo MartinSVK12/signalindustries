@@ -11,10 +11,8 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.menus.MenuAssembler;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.render.FakeItemElement;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAssembler;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 
 public class ScreenAssembler extends ScreenFluid {
 
@@ -32,7 +30,7 @@ public class ScreenAssembler extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_assembler_gui.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_assembler_gui.png");
@@ -47,15 +45,15 @@ public class ScreenAssembler extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 153, y + 18 + 12 - counter, 176, 28 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(x + 85, y + 35, 176, 0, counter + 1, 16);
-        if(this.tile.speedMultiplier > 1){
-            this.drawString(font, this.tile.speedMultiplier+"x",x + 6,y + 6,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawString(font, this.tile.speedMultiplier + "x", x + 6, y + 6, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -63,7 +61,7 @@ public class ScreenAssembler extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -100,18 +98,18 @@ public class ScreenAssembler extends ScreenFluid {
         int j = (height - ySize) / 2;
         Slot slot = this.inventorySlots.slots.get(0);
         FakeItemElement guiRenderFakeItem = new FakeItemElement(mc);
-        if(tile.recipe != null && slot.getItemStack() == null){
-            guiRenderFakeItem.render(tile.recipe.getOutput(),i+slot.x,j+slot.y);
+        if (tile.recipe != null && slot.getItemStack() == null) {
+            guiRenderFakeItem.render(tile.recipe.getOutput(), i + slot.x, j + slot.y);
         }
     }
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

@@ -29,9 +29,6 @@
         "split": "true"
       }
     },
-    
-    
-    
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
@@ -120,9 +117,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
@@ -211,9 +205,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
@@ -302,10 +293,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
@@ -394,9 +381,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
@@ -485,9 +469,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
@@ -576,9 +557,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
@@ -667,9 +645,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
@@ -758,9 +733,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
@@ -849,14 +821,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
@@ -945,9 +909,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
@@ -1036,9 +997,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
@@ -1127,10 +1085,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
@@ -1219,9 +1173,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
@@ -1310,9 +1261,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
@@ -1401,9 +1349,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
@@ -1492,9 +1437,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
@@ -1583,9 +1525,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
@@ -1674,13 +1613,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/prototype_energy_conduit_1",
@@ -1769,9 +1701,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/basic_energy_conduit_1",
@@ -1860,9 +1789,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/reinforced_energy_conduit_1",
@@ -1951,10 +1877,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/energy/1/awakened_energy_conduit_1",
@@ -2043,9 +1965,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/prototype_fluid_conduit_1",
@@ -2134,9 +2053,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/basic_fluid_conduit_1",
@@ -2225,9 +2141,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/fluid/1/reinforced_fluid_conduit_1",
@@ -2316,9 +2229,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/prototype_item_conduit_1",
@@ -2407,9 +2317,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/item/1/basic_item_conduit_1",
@@ -2498,13 +2405,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/network/1/network_cable_1",
@@ -2581,13 +2481,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/network/1/network_cable_1",
@@ -2664,13 +2557,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/network/1/network_cable_1",
@@ -2747,14 +2633,6 @@
         ]
       }
     },
-
-
-
-
-
-
-    
-    
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
@@ -2843,9 +2721,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
@@ -2934,10 +2809,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",
@@ -3026,13 +2897,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
@@ -3121,9 +2985,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
@@ -3212,10 +3073,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",
@@ -3304,13 +3161,6 @@
         ]
       }
     },
-
-
-
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/basic_catalyst_conduit_1",
@@ -3399,9 +3249,6 @@
         ]
       }
     },
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/reinforced_catalyst_conduit_1",
@@ -3490,10 +3337,6 @@
         ]
       }
     },
-
-
-
-
     {
       "apply": {
         "model": "signalindustries:multi_conduit/catalyst/1/awakened_catalyst_conduit_1",

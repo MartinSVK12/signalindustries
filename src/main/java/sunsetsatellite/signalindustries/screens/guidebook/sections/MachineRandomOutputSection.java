@@ -5,7 +5,6 @@ import net.minecraft.client.gui.guidebook.GuidebookSection;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.util.collection.Pair;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 import sunsetsatellite.signalindustries.screens.guidebook.SearchableGuidebookSubsection;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +17,7 @@ public class MachineRandomOutputSection extends SearchableGuidebookSubsection {
     protected final List<RecipeEntryMachineRandomOutput> recipes;
     protected final Class<? extends GuidebookPage> pageClass;
     private final List<GuidebookPage> pages = new ArrayList<>();
-    private Pair<String,List<GuidebookPage>> filteredPages = null;
+    private Pair<String, List<GuidebookPage>> filteredPages = null;
     private final int recipesPerPage;
 
     public MachineRandomOutputSection(GuidebookSection parent, List<RecipeEntryMachineRandomOutput> recipes, Class<? extends GuidebookPage> pageClass) {
@@ -37,14 +36,15 @@ public class MachineRandomOutputSection extends SearchableGuidebookSubsection {
     public void reloadSection() {
         pages.clear();
         int totalRecipes = recipes.size();
-        int totalPages = (int) Math.ceil((float)totalRecipes / recipesPerPage);
-        if(totalPages == 0) totalPages = 1;
+        int totalPages = (int) Math.ceil((float) totalRecipes / recipesPerPage);
+        if (totalPages == 0) totalPages = 1;
         for (int i = 0; i < totalPages; i++) {
-            int j = i*recipesPerPage;
-            ArrayList<RecipeEntryMachineRandomOutput> list = new ArrayList<>(recipes.subList(j,Math.min(j+recipesPerPage,totalRecipes)));
+            int j = i * recipesPerPage;
+            ArrayList<RecipeEntryMachineRandomOutput> list = new ArrayList<>(recipes.subList(j, Math.min(j + recipesPerPage, totalRecipes)));
             try {
-                pages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent,list));
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                pages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent, list));
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -52,10 +52,10 @@ public class MachineRandomOutputSection extends SearchableGuidebookSubsection {
 
     @Override
     public List<GuidebookPage> searchPages(SearchQuery query) {
-        if(filteredPages == null || !Objects.equals(filteredPages.getLeft(), query.rawQuery)) {
+        if (filteredPages == null || !Objects.equals(filteredPages.getLeft(), query.rawQuery)) {
             ArrayList<RecipeEntryMachineRandomOutput> filteredRecipes = new ArrayList<>();
             for (RecipeEntryMachineRandomOutput recipe : recipes) {
-                if(recipe.matchesQuery(query)){
+                if (recipe.matchesQuery(query)) {
                     filteredRecipes.add(recipe);
                 }
             }
@@ -68,8 +68,9 @@ public class MachineRandomOutputSection extends SearchableGuidebookSubsection {
                 ArrayList<RecipeEntryMachineRandomOutput> list = new ArrayList<>(filteredRecipes.subList(j, Math.min(j + recipesPerPage, filteredRecipeSize)));
                 if (!list.isEmpty()) {
                     try {
-                        guidebookPages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent,list));
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                        guidebookPages.add(pageClass.getConstructor(GuidebookSection.class, ArrayList.class).newInstance(parent, list));
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                             NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
                 }

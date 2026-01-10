@@ -16,10 +16,10 @@ import java.util.Map;
 
 public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupportsMultiparts {
 
-    public TileEntityFluidConduit(){
+    public TileEntityFluidConduit() {
         acceptedFluids.get(0).clear();
         for (Fluid fluid : Fluid.fluidMap.values()) {
-            if(fluid != SIFluids.ENERGY){
+            if (fluid != SIFluids.ENERGY) {
                 acceptedFluids.get(0).add(fluid);
             }
         }
@@ -27,18 +27,18 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
 
     @Override
     public void tick() {
-        if(fluidContents[0] != null && fluidContents[0].amount < 0){
+        if (fluidContents[0] != null && fluidContents[0].amount < 0) {
             fluidContents[0] = null;
         }
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
-        if(tiered != null){
-            fluidCapacity[0] = (int) Math.pow(2,tiered.getTier().ordinal()) * 1000;
-            transferSpeed = 20 * (tiered.getTier().ordinal()+1);
+        if (tiered != null) {
+            fluidCapacity[0] = (int) Math.pow(2, tiered.getTier().ordinal()) * 1000;
+            transferSpeed = 20 * (tiered.getTier().ordinal() + 1);
         }
         super.tick();
     }
 
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
     @Override
     public void writeToNBT(CompoundTag tag) {
@@ -46,13 +46,13 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
         CompoundTag coversNbt = new CompoundTag();
 
         for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
-            if(entry.getValue() == null) continue;
+            if (entry.getValue() == null) continue;
             CompoundTag partNbt = new CompoundTag();
             entry.getValue().writeToNbt(partNbt);
-            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),partNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()), partNbt);
         }
 
-        tag.putCompound("Parts",coversNbt);
+        tag.putCompound("Parts", coversNbt);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
         for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
             Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
             CompoundTag partTag = (CompoundTag) entry.getValue();
-            parts.put(dir,new Multipart(partTag));
+            parts.put(dir, new Multipart(partTag));
         }
     }
 

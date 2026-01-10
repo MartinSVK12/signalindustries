@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.mp.entity.entry;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.net.entity.EntityTracker;
 import net.minecraft.core.net.entity.EntityTrackerEntry;
 import net.minecraft.core.net.entity.ITrackedEntry;

@@ -39,12 +39,12 @@ public class WorldFeatureEternalTree extends WorldFeature {
     }
 
     void func_521_a() {
-        this.height = (int)((double)this.treeHeight * this.field_876_g);
+        this.height = (int) ((double) this.treeHeight * this.field_876_g);
         if (this.height >= this.treeHeight) {
             this.height = this.treeHeight - 1;
         }
 
-        int i = (int)(1.381 + Math.pow(this.field_872_k * (double)this.treeHeight / 7.0, 2.0));
+        int i = (int) (1.381 + Math.pow(this.field_872_k * (double) this.treeHeight / 7.0, 2.0));
         if (i < 1) {
             i = 1;
         }
@@ -60,29 +60,29 @@ public class WorldFeatureEternalTree extends WorldFeature {
         ai[0][3] = l;
         --j;
 
-        while(true) {
-            while(i1 >= 0) {
+        while (true) {
+            while (i1 >= 0) {
                 int j1 = 0;
                 float f = this.func_528_a(i1);
                 if (f < 0.0F) {
                     --j;
                     --i1;
                 } else {
-                    for(double d = 0.5; j1 < i; ++j1) {
-                        double d1 = this.field_873_j * (double)f * ((double)this.rand.nextFloat() + 0.328);
-                        double d2 = (double)this.rand.nextFloat() * 2.0 * 3.14159;
-                        int k1 = MathHelper.floor(d1 * Math.sin(d2) + (double)this.basePos[0] + d);
-                        int l1 = MathHelper.floor(d1 * Math.cos(d2) + (double)this.basePos[2] + d);
+                    for (double d = 0.5; j1 < i; ++j1) {
+                        double d1 = this.field_873_j * (double) f * ((double) this.rand.nextFloat() + 0.328);
+                        double d2 = (double) this.rand.nextFloat() * 2.0 * 3.14159;
+                        int k1 = MathHelper.floor(d1 * Math.sin(d2) + (double) this.basePos[0] + d);
+                        int l1 = MathHelper.floor(d1 * Math.cos(d2) + (double) this.basePos[2] + d);
                         int[] ai1 = new int[]{k1, j, l1};
                         int[] ai2 = new int[]{k1, j + this.field_869_n, l1};
                         if (this.func_524_a(ai1, ai2) == -1) {
                             int[] ai3 = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]};
                             double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - ai1[0]), 2.0) + Math.pow(Math.abs(this.basePos[2] - ai1[2]), 2.0));
                             double d4 = d3 * this.field_874_i;
-                            if ((double)ai1[1] - d4 > (double)l) {
+                            if ((double) ai1[1] - d4 > (double) l) {
                                 ai3[1] = l;
                             } else {
-                                ai3[1] = (int)((double)ai1[1] - d4);
+                                ai3[1] = (int) ((double) ai1[1] - d4);
                             }
 
                             if (this.func_524_a(ai3, ai1) == -1) {
@@ -107,7 +107,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
     }
 
     void placeLeaves(int i, int j, int k, float f, byte byte0, int l) {
-        int i1 = (int)((double)f + 0.618);
+        int i1 = (int) ((double) f + 0.618);
         byte byte1 = field_882_a[byte0];
         byte byte2 = field_882_a[byte0 + 3];
         int[] ai = new int[]{i, j, k};
@@ -115,18 +115,18 @@ public class WorldFeatureEternalTree extends WorldFeature {
         int j1 = -i1;
 
         label33:
-        for(ai1[byte0] = ai[byte0]; j1 <= i1; ++j1) {
+        for (ai1[byte0] = ai[byte0]; j1 <= i1; ++j1) {
             ai1[byte1] = ai[byte1] + j1;
             int l1 = -i1;
 
-            while(true) {
-                while(true) {
+            while (true) {
+                while (true) {
                     if (l1 > i1) {
                         continue label33;
                     }
 
-                    double d = Math.sqrt(Math.pow((double)Math.abs(j1) + 0.5, 4.0) + Math.pow((double)Math.abs(l1) + 0.5, 4.0));
-                    if (d > (double)f) {
+                    double d = Math.sqrt(Math.pow((double) Math.abs(j1) + 0.5, 4.0) + Math.pow((double) Math.abs(l1) + 0.5, 4.0));
+                    if (d > (double) f) {
                         ++l1;
                     } else {
                         ai1[byte2] = ai[byte2] + l1;
@@ -145,18 +145,18 @@ public class WorldFeatureEternalTree extends WorldFeature {
     }
 
     float func_528_a(int i) {
-        if ((double)i < (double)((float)this.treeHeight) * 0.3) {
+        if ((double) i < (double) ((float) this.treeHeight) * 0.3) {
             return -1.618F;
         } else {
-            float f = (float)this.treeHeight / 2.0F;
-            float f1 = (float)this.treeHeight / 2.0F - (float)i;
+            float f = (float) this.treeHeight / 2.0F;
+            float f1 = (float) this.treeHeight / 2.0F - (float) i;
             float f2;
             if (f1 == 0.0F) {
                 f2 = f;
             } else if (Math.abs(f1) >= f) {
                 f2 = 0.0F;
             } else {
-                f2 = (float)Math.sqrt(Math.pow(Math.abs(f), 2.0) - Math.pow(Math.abs(f1), 2.0));
+                f2 = (float) Math.sqrt(Math.pow(Math.abs(f), 2.0) - Math.pow(Math.abs(f1), 2.0));
             }
 
             f2 *= 0.5F;
@@ -175,9 +175,9 @@ public class WorldFeatureEternalTree extends WorldFeature {
     void func_520_a(int i, int j, int k) {
         int l = j;
 
-        for(int i1 = j + this.field_869_n; l < i1; ++l) {
+        for (int i1 = j + this.field_869_n; l < i1; ++l) {
             float f = this.func_526_b(l - j);
-            this.placeLeaves(i, l, k, f, (byte)1, this.leavesID);
+            this.placeLeaves(i, l, k, f, (byte) 1, this.leavesID);
         }
 
     }
@@ -185,7 +185,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
     void func_518_b() {
         int i = 0;
 
-        for(int j = this.field_868_o.length; i < j; ++i) {
+        for (int j = this.field_868_o.length; i < j; ++i) {
             int k = this.field_868_o[i][0];
             int l = this.field_868_o[i][1];
             int i1 = this.field_868_o[i][2];
@@ -199,7 +199,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
         byte byte0 = 0;
 
         byte j;
-        for(j = 0; byte0 < 3; ++byte0) {
+        for (j = 0; byte0 < 3; ++byte0) {
             ai2[byte0] = ai1[byte0] - ai[byte0];
             if (Math.abs(ai2[byte0]) > Math.abs(ai2[j])) {
                 j = byte0;
@@ -216,15 +216,15 @@ public class WorldFeatureEternalTree extends WorldFeature {
                 byte3 = -1;
             }
 
-            double d = (double)ai2[byte1] / (double)ai2[j];
-            double d1 = (double)ai2[byte2] / (double)ai2[j];
+            double d = (double) ai2[byte1] / (double) ai2[j];
+            double d1 = (double) ai2[byte2] / (double) ai2[j];
             int[] ai3 = new int[]{0, 0, 0};
             int k = 0;
 
-            for(int l = ai2[j] + byte3; k != l; k += byte3) {
-                ai3[j] = MathHelper.floor((double)(ai[j] + k) + 0.5);
-                ai3[byte1] = MathHelper.floor((double)ai[byte1] + (double)k * d + 0.5);
-                ai3[byte2] = MathHelper.floor((double)ai[byte2] + (double)k * d1 + 0.5);
+            for (int l = ai2[j] + byte3; k != l; k += byte3) {
+                ai3[j] = MathHelper.floor((double) (ai[j] + k) + 0.5);
+                ai3[byte1] = MathHelper.floor((double) ai[byte1] + (double) k * d + 0.5);
+                ai3[byte2] = MathHelper.floor((double) ai[byte2] + (double) k * d1 + 0.5);
                 this.worldObj.setBlockAndMetadataWithNotify(ai3[0], ai3[1], ai3[2], i, 1);
             }
 
@@ -232,7 +232,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
     }
 
     boolean func_527_c(int i) {
-        return (double)i >= (double)this.treeHeight * 0.2;
+        return (double) i >= (double) this.treeHeight * 0.2;
     }
 
     void func_529_c() {
@@ -261,7 +261,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
         int i = 0;
         int j = this.field_868_o.length;
 
-        for(int[] ai = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]}; i < j; ++i) {
+        for (int[] ai = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]}; i < j; ++i) {
             int[] ai1 = this.field_868_o[i];
             int[] ai2 = new int[]{ai1[0], ai1[1], ai1[2]};
             ai[1] = ai1[3];
@@ -278,7 +278,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
         byte byte0 = 0;
 
         byte i;
-        for(i = 0; byte0 < 3; ++byte0) {
+        for (i = 0; byte0 < 3; ++byte0) {
             ai2[byte0] = ai1[byte0] - ai[byte0];
             if (Math.abs(ai2[byte0]) > Math.abs(ai2[i])) {
                 i = byte0;
@@ -297,16 +297,16 @@ public class WorldFeatureEternalTree extends WorldFeature {
                 byte3 = -1;
             }
 
-            double d = (double)ai2[byte1] / (double)ai2[i];
-            double d1 = (double)ai2[byte2] / (double)ai2[i];
+            double d = (double) ai2[byte1] / (double) ai2[i];
+            double d1 = (double) ai2[byte2] / (double) ai2[i];
             int[] ai3 = new int[]{0, 0, 0};
             int j = 0;
 
             int k;
-            for(k = ai2[i] + byte3; j != k; j += byte3) {
+            for (k = ai2[i] + byte3; j != k; j += byte3) {
                 ai3[i] = ai[i] + j;
-                ai3[byte1] = MathHelper.floor((double)ai[byte1] + (double)j * d);
-                ai3[byte2] = MathHelper.floor((double)ai[byte2] + (double)j * d1);
+                ai3[byte1] = MathHelper.floor((double) ai[byte1] + (double) j * d);
+                ai3[byte2] = MathHelper.floor((double) ai[byte2] + (double) j * d1);
                 int l = this.worldObj.getBlockId(ai3[0], ai3[1], ai3[2]);
                 if (l != 0 && l != this.leavesID) {
                     break;
@@ -333,7 +333,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
     }
 
     public void func_517_a(double d, double d1, double d2) {
-        this.treeMaxHeight = (int)(d * 20.0);
+        this.treeMaxHeight = (int) (d * 20.0);
         if (d > 0.5) {
             this.field_869_n = 5;
         }
@@ -353,7 +353,7 @@ public class WorldFeatureEternalTree extends WorldFeature {
         if (this.treeHeight == 0) {
             this.treeHeight = 8 + this.rand.nextInt(this.treeMaxHeight);
         }
-        if(this.treeHeight == 8){
+        if (this.treeHeight == 8) {
             return false;
         }
 
@@ -363,8 +363,8 @@ public class WorldFeatureEternalTree extends WorldFeature {
         } else {
             for (int x = -3; x < 2; x++) {
                 for (int z = -3; z < 2; z++) {
-                    if(random.nextInt(2) == 0){
-                        world.setBlockAndMetadataWithNotify(this.basePos[0]+x,this.basePos[1]-1,this.basePos[2]+z,  SIBlocks.rootedFabric.id(), 1);
+                    if (random.nextInt(2) == 0) {
+                        world.setBlockAndMetadataWithNotify(this.basePos[0] + x, this.basePos[1] - 1, this.basePos[2] + z, SIBlocks.rootedFabric.id(), 1);
                     }
                 }
             }

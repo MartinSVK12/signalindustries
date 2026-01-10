@@ -16,35 +16,35 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
     public boolean ignoreMeta = false;
     public FilterSide defaultSide = FilterSide.MAGENTA;
 
-    public TileEntityFilter(){
+    public TileEntityFilter() {
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
-        itemContents = new ItemStack[9*6];
+        itemContents = new ItemStack[9 * 6];
     }
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(x,y,z);
+        worldObj.markBlockDirty(x, y, z);
         super.tick();
     }
 
-    public void sort(Direction inputDir, TileEntityItemConduit.PipeItem item, TileEntityItemConduit conduit){
+    public void sort(Direction inputDir, TileEntityItemConduit.PipeItem item, TileEntityItemConduit conduit) {
         FilterSide outputSide = getFilterColor(item.getStack());
-        if(outputSide == null){
-            conduit.dropItem(item,null);
+        if (outputSide == null) {
+            conduit.dropItem(item, null);
             return;
         }
         Set<Direction> directionSet = getSurroundings().keySet();
         if (!directionSet.contains(outputSide.getDirection())) {
-            conduit.dropItem(item,null);
+            conduit.dropItem(item, null);
             return;
         }
         for (Map.Entry<Direction, TileEntityItemConduit> entry : getSurroundings().entrySet()) {
-            if(entry.getKey() == outputSide.getDirection()){
+            if (entry.getKey() == outputSide.getDirection()) {
                 TileEntityItemConduit tile = entry.getValue();
                 boolean success = tile.addItem(item.getStack(), outputSide.getDirection().getOpposite());
-                if(!success){
-                    conduit.dropItem(item,null);
+                if (!success) {
+                    conduit.dropItem(item, null);
                     return;
                 } else {
                     conduit.getContents().remove(item);
@@ -54,12 +54,12 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
         }
     }
 
-    public HashMap<Direction, TileEntityItemConduit> getSurroundings(){
+    public HashMap<Direction, TileEntityItemConduit> getSurroundings() {
         HashMap<Direction, TileEntityItemConduit> surroundings = new HashMap<>();
         for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if(tile != null){
-                if(tile instanceof TileEntityItemConduit){
+            TileEntity tile = dir.getTileEntity(worldObj, this);
+            if (tile != null) {
+                if (tile instanceof TileEntityItemConduit) {
                     surroundings.put(dir, (TileEntityItemConduit) tile);
                 }
             }
@@ -68,9 +68,9 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
     }
 
     public FilterSide getFilterColor(ItemStack stack) {
-        for(int i2 = 0; i2 < this.itemContents.length; ++i2) {
-            if(this.itemContents[i2] != null && this.itemContents[i2].itemID == stack.itemID && (this.itemContents[i2].getMetadata() == stack.getMetadata()) || ignoreMeta) {
-                return FilterSide.values()[i2/9];
+        for (int i2 = 0; i2 < this.itemContents.length; ++i2) {
+            if (this.itemContents[i2] != null && this.itemContents[i2].itemID == stack.itemID && (this.itemContents[i2].getMetadata() == stack.getMetadata()) || ignoreMeta) {
+                return FilterSide.values()[i2 / 9];
             }
         }
 
@@ -80,8 +80,8 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putBoolean("IgnoreMeta",ignoreMeta);
-        tag.putInt("DefaultSide",defaultSide.ordinal());
+        tag.putBoolean("IgnoreMeta", ignoreMeta);
+        tag.putInt("DefaultSide", defaultSide.ordinal());
     }
 
     @Override
@@ -114,9 +114,9 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
             return direction;
         }
 
-        public static FilterSide getFromDirection(Direction dir){
+        public static FilterSide getFromDirection(Direction dir) {
             for (FilterSide side : values()) {
-                if(side.getDirection() == dir){
+                if (side.getDirection() == dir) {
                     return side;
                 }
             }

@@ -1,5 +1,3 @@
-
-
 package sunsetsatellite.signalindustries.screens;
 
 import net.minecraft.client.Minecraft;
@@ -23,15 +21,13 @@ import sunsetsatellite.signalindustries.util.PipeMode;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
-public class ScreenSensorPipeConfig extends ScreenContainerAbstract
-{
+public class ScreenSensorPipeConfig extends ScreenContainerAbstract {
 
     public ItemElement guiRenderItem;
     public TooltipElement TooltipElement;
     public ContainerInventory inventoryPlayer;
 
-    public ScreenSensorPipeConfig(ContainerInventory inventoryplayer, TileEntityItemConduit conduit)
-    {
+    public ScreenSensorPipeConfig(ContainerInventory inventoryplayer, TileEntityItemConduit conduit) {
         super(new MenuSensorPipe(inventoryplayer, conduit));
         inventoryPlayer = inventoryplayer;
         tile = conduit;
@@ -51,8 +47,7 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
         drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         font.drawString("Configure: Sensor", 45, 6, 0x404040);
         font.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
         font.drawString(String.valueOf(tile.sensorAmount), 120, 42, 0x404040);
@@ -69,19 +64,19 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
         int pseudoSlotX = 45;
         int pseudoSlotY = 35;
         ItemStack grabbedItem = inventoryPlayer.getHeldItemStack();
-        if(mouseX >= pseudoSlotX - 1 && mouseX < pseudoSlotX + 16 + 1 && mouseY >= pseudoSlotY - 1 && mouseY < pseudoSlotY + 16 + 1){
-            guiRenderItem.render(tile.sensorStack,k+45,l+35,true);
+        if (mouseX >= pseudoSlotX - 1 && mouseX < pseudoSlotX + 16 + 1 && mouseY >= pseudoSlotY - 1 && mouseY < pseudoSlotY + 16 + 1) {
+            guiRenderItem.render(tile.sensorStack, k + 45, l + 35, true);
             if (grabbedItem == null && tile.sensorStack != null) {
                 boolean showDescription = Keyboard.isKeyDown(29) || Keyboard.isKeyDown(157) || this.mc.gameSettings.itemDescriptions.value == DescriptionPromptEnum.ALWAYS_SHOW;
                 String str = this.TooltipElement.getTooltipText(tile.sensorStack, showDescription);
                 if (!str.isEmpty()) {
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                    this.TooltipElement.render(str, k+mouseX, l+mouseY, 8, -8);
+                    this.TooltipElement.render(str, k + mouseX, l + mouseY, 8, -8);
                 }
             }
         } else {
-            if(tile.sensorStack != null){
-                guiRenderItem.render(tile.sensorStack,k+45,l+35,false);
+            if (tile.sensorStack != null) {
+                guiRenderItem.render(tile.sensorStack, k + 45, l + 35, false);
             }
         }
         GL11.glEnable(2929);
@@ -97,31 +92,30 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
         int pseudoSlotX = 45;
         int pseudoSlotY = 35;
         ItemStack grabbedItem = inventoryPlayer.getHeldItemStack();
-        if(mouseX >= pseudoSlotX - 1 && mouseX < pseudoSlotX + 16 + 1 && mouseY >= pseudoSlotY - 1 && mouseY < pseudoSlotY + 16 + 1){
-            if(mouseButton == 0 && grabbedItem != null){
+        if (mouseX >= pseudoSlotX - 1 && mouseX < pseudoSlotX + 16 + 1 && mouseY >= pseudoSlotY - 1 && mouseY < pseudoSlotY + 16 + 1) {
+            if (mouseButton == 0 && grabbedItem != null) {
                 ItemStack copy = grabbedItem.copy();
                 copy.stackSize = 1;
                 tile.sensorStack = copy;
             } else if (mouseButton == 1) {
                 tile.sensorStack = null;
             }
-            if(EnvironmentHelper.isClientWorld()){
+            if (EnvironmentHelper.isClientWorld()) {
                 NetworkHandler.sendToServer(new NetworkMessageSensorPipeSetFilter(new Vec3i(tile.x, tile.y, tile.z), tile.sensorStack, tile.getClass()));
             }
         }
     }
 
-    public void init()
-    {
+    public void init() {
         super.init();
-        ButtonElement guibutton = new ButtonElement(0, Math.round((float)width / 2 - 10), Math.round((float)height / 2 - 50), 20, 20, "=");
+        ButtonElement guibutton = new ButtonElement(0, Math.round((float) width / 2 - 10), Math.round((float) height / 2 - 50), 20, 20, "=");
         buttons.add(guibutton);
-        buttons.add(new ButtonElement(1, Math.round((float) width / 2 + 30) , Math.round((float)height / 2 - 65), 20, 20, "+"));
-        buttons.add(new ButtonElement(2, Math.round((float) width / 2 + 30), Math.round((float)height / 2 - 30), 20, 20, "-"));
-        buttons.add(new ButtonElement(3, Math.round((float)width / 2 + 60) , Math.round((float)height / 2) - 75, 20, 20, tile.sensorUseMeta ? "M" : "!M"));
-        buttons.add(new ButtonElement(4, Math.round((float)width / 2 + 60) , Math.round((float)height / 2) - 55, 20, 20, tile.sensorUseData ? "D" : "!D"));
-        buttons.add(new ButtonElement(5, Math.round((float)width / 2) - 25, Math.round((float)height / 2) - 25, 50, 15, String.valueOf(tile.mode)));
-        switch (tile.sensorMode){
+        buttons.add(new ButtonElement(1, Math.round((float) width / 2 + 30), Math.round((float) height / 2 - 65), 20, 20, "+"));
+        buttons.add(new ButtonElement(2, Math.round((float) width / 2 + 30), Math.round((float) height / 2 - 30), 20, 20, "-"));
+        buttons.add(new ButtonElement(3, Math.round((float) width / 2 + 60), Math.round((float) height / 2) - 75, 20, 20, tile.sensorUseMeta ? "M" : "!M"));
+        buttons.add(new ButtonElement(4, Math.round((float) width / 2 + 60), Math.round((float) height / 2) - 55, 20, 20, tile.sensorUseData ? "D" : "!D"));
+        buttons.add(new ButtonElement(5, Math.round((float) width / 2) - 25, Math.round((float) height / 2) - 25, 50, 15, String.valueOf(tile.mode)));
+        switch (tile.sensorMode) {
             case 0:
                 guibutton.displayString = "=";
                 break;
@@ -153,23 +147,23 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
             return;
         }
         if (guibutton.id == 2) {
-            if(tile.sensorAmount > 0)
+            if (tile.sensorAmount > 0)
                 tile.sensorAmount--;
         }
         if (guibutton.id == 1) {
             tile.sensorAmount++;
         }
-        if(guibutton.id == 3){
+        if (guibutton.id == 3) {
             tile.sensorUseMeta = !tile.sensorUseMeta;
             guibutton.displayString = tile.sensorUseMeta ? "M" : "!M";
         }
-        if(guibutton.id == 4){
+        if (guibutton.id == 4) {
             tile.sensorUseData = !tile.sensorUseData;
             guibutton.displayString = tile.sensorUseData ? "D" : "!D";
         }
-        if(guibutton.id == 0) {
+        if (guibutton.id == 0) {
             tile.sensorMode++;
-            switch (tile.sensorMode){
+            switch (tile.sensorMode) {
                 case 0:
                     guibutton.displayString = "=";
                     break;
@@ -194,8 +188,8 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
                     break;
             }
         }
-        if(guibutton.id == 5){
-            switch (tile.mode){
+        if (guibutton.id == 5) {
+            switch (tile.mode) {
                 case RANDOM:
                     tile.mode = PipeMode.SPLIT;
                     break;
@@ -205,8 +199,8 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract
             }
             guibutton.displayString = String.valueOf(tile.mode);
         }
-        if(EnvironmentHelper.isClientWorld()){
-            NetworkHandler.sendToServer(new PacketScreenAction(guibutton.id,0,0,new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
+        if (EnvironmentHelper.isClientWorld()) {
+            NetworkHandler.sendToServer(new PacketScreenAction(guibutton.id, 0, 0, new Vec3i(tile.x, tile.y, tile.z), tile.getClass()));
         }
 
     }

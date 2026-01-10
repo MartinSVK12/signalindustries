@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class TileEntityBonsaiPot extends TileEntityTieredMachineSimple implements IBoostable {
 
-    public TileEntityBonsaiPot(){
+    public TileEntityBonsaiPot() {
         itemContents = new ItemStack[4];
         fluidContents = new FluidStack[3];
         fluidCapacity = new int[3];
@@ -32,16 +32,16 @@ public class TileEntityBonsaiPot extends TileEntityTieredMachineSimple implement
         recipeGroup = SIRecipes.BONSAI_POT;
         itemInputs = new int[]{0};
         fluidInputs = new int[]{1};
-        itemOutputs = new int[]{1,2,3};
+        itemOutputs = new int[]{1, 2, 3};
         fluidOutputs = new int[]{2};
     }
 
     @Override
     public void tick() {
         super.tick();
-        fluidCapacity[0] = 2000 * (tier.ordinal()+1);
-        fluidCapacity[1] = 2000 * (tier.ordinal()+1);
-        fluidCapacity[2] = 2000 * (tier.ordinal()+1);
+        fluidCapacity[0] = 2000 * (tier.ordinal() + 1);
+        fluidCapacity[1] = 2000 * (tier.ordinal() + 1);
+        fluidCapacity[2] = 2000 * (tier.ordinal() + 1);
     }
 
     @Override

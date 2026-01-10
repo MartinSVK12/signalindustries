@@ -2,11 +2,8 @@ package sunsetsatellite.signalindustries.menus;
 
 import net.minecraft.core.InventoryAction;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import net.minecraft.core.player.inventory.menu.MenuAbstract;
 import net.minecraft.core.player.inventory.slot.Slot;
-import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 
@@ -27,9 +24,9 @@ public abstract class MenuMachine extends MenuFluid {
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
         int lastDeviceSlot = tile.getContainerSize() - 1;
         if (slot.index <= lastDeviceSlot) {
-            return getSlots(lastDeviceSlot+1, 36, true);
+            return getSlots(lastDeviceSlot + 1, 36, true);
         }
-        return getSlots(0, Math.max(lastDeviceSlot+1,1), false);
+        return getSlots(0, Math.max(lastDeviceSlot + 1, 1), false);
     }
 
     @Override

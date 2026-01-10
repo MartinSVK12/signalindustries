@@ -8,7 +8,6 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
-import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
@@ -25,7 +24,7 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
     public boolean isInfiniteSource = true;
 
     public IOPreview preview = IOPreview.NONE;
-    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+    public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
 
     @Override
     public void disableIOPreview() {
@@ -40,7 +39,7 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
         this.preview = preview;
     }
 
-    public TileEntityEnergyCell(){
+    public TileEntityEnergyCell() {
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         itemContents = new ItemStack[0];
@@ -54,26 +53,26 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
     @Override
     public void tick() {
         IOPreviewTimer.tick();
-        if(tier == Tier.INFINITE){
+        if (tier == Tier.INFINITE) {
             for (Map.Entry<Direction, Connection> entry : fluidConnections.entrySet()) {
-                if(isInfiniteSource){
-                    if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
+                if (isInfiniteSource) {
+                    if (entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH) {
                         entry.setValue(Connection.OUTPUT);
                     }
                 } else {
-                    if(entry.getValue() == Connection.OUTPUT || entry.getValue() == Connection.BOTH){
+                    if (entry.getValue() == Connection.OUTPUT || entry.getValue() == Connection.BOTH) {
                         entry.setValue(Connection.INPUT);
                     }
                 }
             }
-            if(isInfiniteSource){
+            if (isInfiniteSource) {
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
                 fluidContents[0] = new FluidStack(SIFluids.ENERGY, Integer.MAX_VALUE);
             } else {
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
-                if(fluidContents[0] != null){
+                if (fluidContents[0] != null) {
                     fluidContents[0] = null;
                 }
             }
@@ -84,6 +83,7 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
         extractFluids();
         super.tick();
     }
+
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);

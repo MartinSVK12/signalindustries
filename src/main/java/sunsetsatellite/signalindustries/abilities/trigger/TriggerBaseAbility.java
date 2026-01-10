@@ -17,6 +17,7 @@ public abstract class TriggerBaseAbility {
     }
 
     public abstract void activate(int x, int y, int z, Player player, World world, ItemStack trigger, ItemStack harness);
+
     public abstract void activate(Player player, World world, ItemStack trigger, ItemStack harness);
 
 }

@@ -28,7 +28,7 @@ public class ItemPortableWorkbench extends ItemWithUtility {
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world) {
         player.displayWorkbenchScreen((int) player.x, (int) player.y, (int) player.z);
     }
 }

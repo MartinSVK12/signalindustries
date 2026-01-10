@@ -1,8 +1,5 @@
 package sunsetsatellite.signalindustries.dim.custom;
 
-import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.core.block.Blocks;
-import net.minecraft.core.block.material.Material;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;

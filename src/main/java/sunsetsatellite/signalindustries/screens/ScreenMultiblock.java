@@ -27,7 +27,7 @@ public class ScreenMultiblock extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f1) {
         Texture bgTex = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/prototype_multiblock_gui.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 bgTex = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/prototype_multiblock_gui.png");
                 break;
@@ -47,7 +47,7 @@ public class ScreenMultiblock extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 56, y + 36 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
@@ -59,11 +59,10 @@ public class ScreenMultiblock extends ScreenFluid {
         }*/
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -78,17 +77,17 @@ public class ScreenMultiblock extends ScreenFluid {
         }
         font.drawStringWithShadow(name, 10, 10, color);
         if (tile.isBurning()) {
-            font.drawStringWithShadow("Current Parallel: "+ TextFormatting.ORANGE+tile.parallel, 10, 20, 0xFFFFFFFF);
+            font.drawStringWithShadow("Current Parallel: " + TextFormatting.ORANGE + tile.parallel, 10, 20, 0xFFFFFFFF);
         } else {
-            font.drawStringWithShadow("Max Parallel: "+ TextFormatting.ORANGE+tile.parallel, 10, 20, 0xFFFFFFFF);
+            font.drawStringWithShadow("Max Parallel: " + TextFormatting.ORANGE + tile.parallel, 10, 20, 0xFFFFFFFF);
         }
-        font.drawStringWithShadow("Speed Multiplier: "+ TextFormatting.MAGENTA+tile.speedMultiplier+"x", 10, 30, 0xFFFFFFFF);
-        if(tile.isDisabled()){
+        font.drawStringWithShadow("Speed Multiplier: " + TextFormatting.MAGENTA + tile.speedMultiplier + "x", 10, 30, 0xFFFFFFFF);
+        if (tile.isDisabled()) {
             font.drawStringWithShadow("Disabled", 10, 50, 0xFFFF0000);
         } else if (tile.isBurning()) {
-            font.drawStringWithShadow(String.format("Processing: %d%%",tile.getProgressScaled(100)), 10, 50, 0xFF00FF00);
+            font.drawStringWithShadow(String.format("Processing: %d%%", tile.getProgressScaled(100)), 10, 50, 0xFF00FF00);
         } else {
-            font.drawStringWithShadow(TextFormatting.LIGHT_GRAY+"Idling..", 10, 50, 0xFFFFFFFF);
+            font.drawStringWithShadow(TextFormatting.LIGHT_GRAY + "Idling..", 10, 50, 0xFFFFFFFF);
         }
     }
 }

@@ -12,15 +12,15 @@ public class MachineTextures {
     public HashMap<Side, String> overbrightTextures;
 
     public MachineTextures() {
-        this.defaultTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], "minecraft:block/texture_unassigned"));
-        this.activeTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], "minecraft:block/texture_unassigned"));
-        this.overbrightTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], null));
+        this.defaultTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], "minecraft:block/texture_unassigned"));
+        this.activeTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], "minecraft:block/texture_unassigned"));
+        this.overbrightTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], null));
     }
 
-    public MachineTextures(Tier tier){
-        this.defaultTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], "minecraft:block/texture_unassigned"));
-        this.activeTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], "minecraft:block/texture_unassigned"));
-        this.overbrightTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s)-> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length-1], null));
+    public MachineTextures(Tier tier) {
+        this.defaultTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], "minecraft:block/texture_unassigned"));
+        this.activeTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], "minecraft:block/texture_unassigned"));
+        this.overbrightTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], null));
 
         switch (tier) {
             case PROTOTYPE:

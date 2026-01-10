@@ -37,8 +37,8 @@ import java.util.stream.Collectors;
 
 public class TileEntityItemConduit extends TileEntityWithName implements IScreenActionListener, ISupportsMultiparts {
 
-    public static int TRANSFER_TICKS = 20*3;
-    public static int EXTRACT_TICKS = 20*2;
+    public static int TRANSFER_TICKS = 20 * 3;
+    public static int EXTRACT_TICKS = 20 * 2;
     private final TickTimer extractTimer = new TickTimer(this, this::extractItem, EXTRACT_TICKS, true);
     private final List<PipeItem> contents = new ArrayList<>();
     public PipeMode mode = PipeMode.RANDOM;
@@ -55,12 +55,12 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     public boolean sensorUseData = false;
     public ItemStack sensorStack = null;
 
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(),new Multipart[Direction.values().length]);
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
-    public TileEntityItemConduit(){
+    public TileEntityItemConduit() {
         for (Direction dir : Direction.values()) {
-            restrictDirections.put(dir,false);
-            noConnectDirections.put(dir,false);
+            restrictDirections.put(dir, false);
+            noConnectDirections.put(dir, false);
         }
     }
 
@@ -69,26 +69,26 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     }
 
     //returns true if successful, false otherwise
-    public boolean addItem(ItemStack stack, Direction entry){
+    public boolean addItem(ItemStack stack, Direction entry) {
         HashMap<Direction, TileEntity> surroundings = getSurroundings();
         List<Map.Entry<Direction, TileEntity>> exitList = surroundings.entrySet().stream().filter((E) -> E.getKey() != entry).collect(Collectors.toList());
-        if(exitList.isEmpty()){
+        if (exitList.isEmpty()) {
             return false;
         }
         Direction exit = null;
         //select the exit direction based on mode
-        if(mode == PipeMode.RANDOM){
-            exit = pickRandomExitDirection(exitList,stack);
+        if (mode == PipeMode.RANDOM) {
+            exit = pickRandomExitDirection(exitList, stack);
         } else if (mode == PipeMode.SPLIT) {
             //split stack into multiple pipe items going into every possible direction
-            List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
-            if(exits.isEmpty()) return false;
+            List<Direction> exits = exitList.stream().filter((E) -> surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
+            if (exits.isEmpty()) return false;
             //if stack size is divisible by the exit size
-            if(stack.stackSize % exits.size() == 0){
+            if (stack.stackSize % exits.size() == 0) {
                 int split = stack.stackSize / exits.size();
                 for (Direction dir : exits) {
-                    if(split > 0){
-                        contents.add(new PipeItem(new ItemStack(stack.itemID,split,stack.getMetadata()),entry,dir));
+                    if (split > 0) {
+                        contents.add(new PipeItem(new ItemStack(stack.itemID, split, stack.getMetadata()), entry, dir));
                     }
                 }
             } else {
@@ -96,15 +96,15 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 int split = stack.stackSize / exits.size();
                 int remaider = stack.stackSize % exits.size();
                 for (Direction dir : exits) {
-                    if(split+remaider > 0){
-                        contents.add(new PipeItem(new ItemStack(stack.itemID,split+remaider,stack.getMetadata()),entry,dir));
+                    if (split + remaider > 0) {
+                        contents.add(new PipeItem(new ItemStack(stack.itemID, split + remaider, stack.getMetadata()), entry, dir));
                         remaider = 0;
                     }
                 }
             }
             return true;
         }
-        if(exit == null){
+        if (exit == null) {
             return false;
         }
         //check if exit tile exists and is correct
@@ -118,17 +118,17 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         return true;
     }
 
-    public void dropItem(PipeItem item, Iterator<PipeItem> iter){
-        if(contents.contains(item)){
+    public void dropItem(PipeItem item, Iterator<PipeItem> iter) {
+        if (contents.contains(item)) {
             Vec3f dirVec = item.exit.getVecF().divide(2);
-            Vec3f offset = new Vec3f(x,y,z).add(dirVec).add(0.5);
+            Vec3f offset = new Vec3f(x, y, z).add(dirVec).add(0.5);
             EntityItem entityitem = new EntityItem(worldObj, (float) offset.x, (float) offset.y, (float) offset.z, item.stack);
             float multiplier = 0.05F;
             entityitem.xd = dirVec.x * multiplier;
             entityitem.yd = dirVec.y * multiplier;
             entityitem.zd = dirVec.z * multiplier;
             worldObj.entityJoinedWorld(entityitem);
-            if(iter != null){
+            if (iter != null) {
                 iter.remove();
             } else {
                 contents.remove(item);
@@ -136,30 +136,30 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         }
     }
 
-    public void extractItem(){
+    public void extractItem() {
         //get surroundings blocks, filter out item conduits
         HashMap<Direction, TileEntity> surroundings = getSurroundings();
         List<Map.Entry<Direction, TileEntity>> entryList = surroundings.entrySet().stream().filter((E) -> !(E.getValue() instanceof TileEntityItemConduit)).collect(Collectors.toList());
-        if(entryList.isEmpty()){
+        if (entryList.isEmpty()) {
             return;
         }
         Direction entry = null;
         //select the entry direction randomly
         entry = entryList.get(random.nextInt(entryList.size())).getKey();
-        if(entry == null){
+        if (entry == null) {
             return;
         }
         //conduits can only extract from tiles that implement IItemIO for now
         TileEntity entryTile = surroundings.get(entry);
-        if(entryTile instanceof IItemIO && entryTile instanceof Container){
+        if (entryTile instanceof IItemIO && entryTile instanceof Container) {
             IItemIO io = ((IItemIO) entryTile);
             Container inv = ((Container) entryTile);
             //connection check
-            if(io.getItemIOForSide(entry.getOpposite()) == Connection.OUTPUT || io.getItemIOForSide(entry.getOpposite()) == Connection.BOTH){
+            if (io.getItemIOForSide(entry.getOpposite()) == Connection.OUTPUT || io.getItemIOForSide(entry.getOpposite()) == Connection.BOTH) {
                 int slot = io.getActiveItemSlotForSide(entry.getOpposite());
-                if(inv.getItem(slot) != null){
+                if (inv.getItem(slot) != null) {
                     ItemStack stack = inv.getItem(slot);
-                    if(stack.stackSize >= 8){
+                    if (stack.stackSize >= 8) {
                         stack = stack.splitStack(8);
                     } else {
                         stack = stack.splitStack(stack.stackSize);
@@ -167,23 +167,23 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                     Direction finalEntry = entry;
                     //filter out the entry direction
                     List<Map.Entry<Direction, TileEntity>> exitList = surroundings.entrySet().stream().filter((E) -> E.getKey() != finalEntry).collect(Collectors.toList());
-                    if(exitList.isEmpty()){
+                    if (exitList.isEmpty()) {
                         return;
                     }
                     Direction exit = null;
                     //select the exit direction based on mode
-                    if(mode == PipeMode.RANDOM){
-                        exit = pickRandomExitDirection(exitList,stack);
+                    if (mode == PipeMode.RANDOM) {
+                        exit = pickRandomExitDirection(exitList, stack);
                     } else if (mode == PipeMode.SPLIT) {
                         //split stack into multiple pipe items going into every possible direction
-                        List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof TileEntityStorageContainer || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
-                        if(exits.isEmpty()) return;
+                        List<Direction> exits = exitList.stream().filter((E) -> surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof TileEntityStorageContainer || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
+                        if (exits.isEmpty()) return;
                         //if stack size is divisible by the exit size
-                        if(stack.stackSize % exits.size() == 0){
+                        if (stack.stackSize % exits.size() == 0) {
                             int split = stack.stackSize / exits.size();
                             for (Direction dir : exits) {
-                                if(split > 0){
-                                    contents.add(new PipeItem(new ItemStack(stack.itemID,split,stack.getMetadata()),entry,dir));
+                                if (split > 0) {
+                                    contents.add(new PipeItem(new ItemStack(stack.itemID, split, stack.getMetadata()), entry, dir));
                                 }
                             }
                         } else {
@@ -191,18 +191,18 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                             int split = stack.stackSize / exits.size();
                             int remaider = stack.stackSize % exits.size();
                             for (Direction dir : exits) {
-                                if(split+remaider > 0){
-                                    contents.add(new PipeItem(new ItemStack(stack.itemID,split+remaider,stack.getMetadata()),entry,dir));
+                                if (split + remaider > 0) {
+                                    contents.add(new PipeItem(new ItemStack(stack.itemID, split + remaider, stack.getMetadata()), entry, dir));
                                     remaider = 0;
                                 }
                             }
                         }
-                        if(stack.stackSize <= 0){
-                            inv.setItem(slot,null);
+                        if (stack.stackSize <= 0) {
+                            inv.setItem(slot, null);
                         }
                         return;
                     }
-                    if(exit == null){
+                    if (exit == null) {
                         return;
                     }
                     //check if exit tile exists and is correct
@@ -213,40 +213,40 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                     //add item to conduit
                     PipeItem pipeItem = new PipeItem(stack, entry, exit);
                     contents.add(pipeItem);
-                    if(inv.getItem(slot).stackSize <= 0){
-                        inv.setItem(slot,null);
+                    if (inv.getItem(slot).stackSize <= 0) {
+                        inv.setItem(slot, null);
                     }
                 }
             }
         }
     }
 
-    private void acceptItem(Direction entry, PipeItem item, TileEntityItemConduit conduit){
+    private void acceptItem(Direction entry, PipeItem item, TileEntityItemConduit conduit) {
         //get surroundings and keep only surrounding pipes
         HashMap<Direction, TileEntity> surroundings = getSurroundings();
         List<Map.Entry<Direction, TileEntity>> entryList = surroundings.entrySet().stream().filter((E) -> E.getValue() instanceof TileEntityItemConduit).collect(Collectors.toList());
         List<Direction> directions = entryList.stream().map(Map.Entry::getKey).collect(Collectors.toList());
         //validate entry direction
-        if(directions.contains(entry)){
+        if (directions.contains(entry)) {
             //filter out the entry direction and select exit direction based on mode
             List<Map.Entry<Direction, TileEntity>> exitList = surroundings.entrySet().stream().filter((E) -> E.getKey() != entry).collect(Collectors.toList());
-            if(exitList.isEmpty()){
+            if (exitList.isEmpty()) {
                 return;
             }
             Direction exit = null;
-            if(mode == PipeMode.RANDOM){
+            if (mode == PipeMode.RANDOM) {
                 exit = pickRandomExitDirection(exitList, item.stack);
             } else if (mode == PipeMode.SPLIT) {
                 //split stack into multiple pipe items going into every possible direction
-                List<Direction> exits = exitList.stream().filter((E)->surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof TileEntityStorageContainer || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
-                if(exits.isEmpty()) return;
+                List<Direction> exits = exitList.stream().filter((E) -> surroundings.get(E.getKey()) instanceof IItemIO || surroundings.get(E.getKey()) instanceof TileEntityStorageContainer || surroundings.get(E.getKey()) instanceof Container || surroundings.get(E.getKey()) instanceof TileEntityItemConduit).map(Map.Entry::getKey).collect(Collectors.toList());
+                if (exits.isEmpty()) return;
                 //if stack size is divisible by the exit size
-                if(item.stack.stackSize % exits.size() == 0){
+                if (item.stack.stackSize % exits.size() == 0) {
                     int split = item.stack.stackSize / exits.size();
                     conduit.contents.remove(item);
                     for (Direction dir : exits) {
-                        if(split > 0){
-                            contents.add(new PipeItem(new ItemStack(item.stack.itemID,split,item.stack.getMetadata()),entry,dir));
+                        if (split > 0) {
+                            contents.add(new PipeItem(new ItemStack(item.stack.itemID, split, item.stack.getMetadata()), entry, dir));
                         }
                     }
                 } else {
@@ -255,15 +255,15 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                     int remaider = item.stack.stackSize % exits.size();
                     conduit.contents.remove(item);
                     for (Direction dir : exits) {
-                        if(split+remaider > 0){
-                            contents.add(new PipeItem(new ItemStack(item.stack.itemID,split+remaider,item.stack.getMetadata()),entry,dir));
+                        if (split + remaider > 0) {
+                            contents.add(new PipeItem(new ItemStack(item.stack.itemID, split + remaider, item.stack.getMetadata()), entry, dir));
                             remaider = 0;
                         }
                     }
                 }
                 return;
             }
-            if(exit == null){
+            if (exit == null) {
                 return;
             }
             //validate exit tile and transfer item
@@ -272,17 +272,17 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 return;
             }
             conduit.contents.remove(item);
-            contents.add(new PipeItem(item.stack,entry,exit));
+            contents.add(new PipeItem(item.stack, entry, exit));
         }
     }
 
-    private Direction pickRandomExitDirection(List<Map.Entry<Direction, TileEntity>> exitList, ItemStack stack){
+    private Direction pickRandomExitDirection(List<Map.Entry<Direction, TileEntity>> exitList, ItemStack stack) {
         List<Direction> blockedDirs = new ArrayList<>();
         for (Map.Entry<Direction, TileEntity> exitEntry : exitList) {
-            if(exitEntry.getValue() instanceof IItemIO || exitEntry.getValue() instanceof Container){
-                if(exitEntry.getValue() instanceof IItemIO){
+            if (exitEntry.getValue() instanceof IItemIO || exitEntry.getValue() instanceof Container) {
+                if (exitEntry.getValue() instanceof IItemIO) {
                     IItemIO io = (IItemIO) exitEntry.getValue();
-                    if(io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.INPUT || io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.BOTH){
+                    if (io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.INPUT || io.getItemIOForSide(exitEntry.getKey().getOpposite()) == Connection.BOTH) {
                         return exitEntry.getKey();
                     } else {
                         blockedDirs.add(exitEntry.getKey());
@@ -290,9 +290,9 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 } else {
                     Container inv = (Container) exitEntry.getValue();
                     for (int i = 0; i < inv.getContainerSize(); i++) {
-                        if(inv.getItem(i) == null){
+                        if (inv.getItem(i) == null) {
                             return exitEntry.getKey();
-                        } else if (inv.getItem(i).isItemEqual(stack) && inv.getItem(i).stackSize+stack.stackSize <= inv.getMaxStackSize() && inv.getItem(i).stackSize+stack.stackSize <= inv.getItem(i).getMaxStackSize(inv)) {
+                        } else if (inv.getItem(i).isItemEqual(stack) && inv.getItem(i).stackSize + stack.stackSize <= inv.getMaxStackSize() && inv.getItem(i).stackSize + stack.stackSize <= inv.getItem(i).getMaxStackSize(inv)) {
                             return exitEntry.getKey();
                         }
                     }
@@ -306,18 +306,18 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 blockedDirs.add(exitEntry.getKey());
             }
         }
-        restrictDirections.forEach((D,B)->{
-            if(B && !blockedDirs.contains(D)){
+        restrictDirections.forEach((D, B) -> {
+            if (B && !blockedDirs.contains(D)) {
                 blockedDirs.add(D);
             }
         });
-        noConnectDirections.forEach((D,B)->{
-            if(B && !blockedDirs.contains(D)){
+        noConnectDirections.forEach((D, B) -> {
+            if (B && !blockedDirs.contains(D)) {
                 blockedDirs.add(D);
             }
         });
-        exitList = exitList.stream().filter((E)->!(blockedDirs.contains(E.getKey()))).collect(Collectors.toList());
-        if(exitList.isEmpty()){
+        exitList = exitList.stream().filter((E) -> !(blockedDirs.contains(E.getKey()))).collect(Collectors.toList());
+        if (exitList.isEmpty()) {
             return null;
         } else if (exitList.size() == 1) {
             return exitList.get(0).getKey();
@@ -328,41 +328,41 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlockDirty(x,y,z);
-        worldObj.notifyBlocksOfNeighborChange(x,y,z,sensorActive ? 15 : 0);
-        if(worldObj != null && getBlock() != null){
-            tier = ((ITiered)getBlock().getLogic()).getTier();
-            type = ((BlockLogicItemConduit)getBlock().getLogic()).type;
+        worldObj.markBlockDirty(x, y, z);
+        worldObj.notifyBlocksOfNeighborChange(x, y, z, sensorActive ? 15 : 0);
+        if (worldObj != null && getBlock() != null) {
+            tier = ((ITiered) getBlock().getLogic()).getTier();
+            type = ((BlockLogicItemConduit) getBlock().getLogic()).type;
         }
-        switch (tier){
+        switch (tier) {
             case BASIC:
-                TRANSFER_TICKS = 20*3;
-                EXTRACT_TICKS = 20*2;
+                TRANSFER_TICKS = 20 * 3;
+                EXTRACT_TICKS = 20 * 2;
                 extractTimer.max = EXTRACT_TICKS;
                 break;
             default:
-                TRANSFER_TICKS = 20*6;
-                EXTRACT_TICKS = 20*4;
+                TRANSFER_TICKS = 20 * 6;
+                EXTRACT_TICKS = 20 * 4;
                 extractTimer.max = EXTRACT_TICKS;
                 break;
         }
-        if(EnvironmentHelper.isClientWorld()) return;
+        if (EnvironmentHelper.isClientWorld()) return;
         extractTimer.tick();
-        contents.removeIf((P)->P.stack == null);
+        contents.removeIf((P) -> P.stack == null);
         final Iterator<PipeItem> iter = contents.iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             PipeItem next = iter.next();
 
-            if(next.insertTimer.isPaused()){
-                dropItem(next,iter);
+            if (next.insertTimer.isPaused()) {
+                dropItem(next, iter);
             }
         }
         sensorActive = false;
         for (PipeItem pipeItem : contents.toArray(new PipeItem[0])) {
             pipeItem.insertTimer.tick();
             ItemStack stack = pipeItem.stack;
-            if(stack != null && sensorStack != null && type == PipeType.SENSOR){
-                if(stack.itemID == sensorStack.itemID){
+            if (stack != null && sensorStack != null && type == PipeType.SENSOR) {
+                if (stack.itemID == sensorStack.itemID) {
                     sensorActive = checkIfValidForSensor(stack);
                 }
             }
@@ -371,7 +371,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
 
     private boolean checkIfValidForSensor(ItemStack stack) {
         boolean yes = false;
-        switch (sensorMode){
+        switch (sensorMode) {
             case 0:
                 yes = stack.stackSize == sensorAmount;
                 break;
@@ -391,23 +391,23 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                 yes = stack.stackSize <= sensorAmount;
                 break;
         }
-        if(sensorUseMeta && stack.getMetadata() != sensorStack.getMetadata()){
+        if (sensorUseMeta && stack.getMetadata() != sensorStack.getMetadata()) {
             yes = false;
         }
-        if(sensorUseData && !stack.getData().equals(sensorStack.getData())){
+        if (sensorUseData && !stack.getData().equals(sensorStack.getData())) {
             yes = false;
         }
         return yes;
     }
 
-    public HashMap<Direction, TileEntity> getSurroundings(){
+    public HashMap<Direction, TileEntity> getSurroundings() {
         HashMap<Direction, TileEntity> surroundings = new HashMap<>();
         for (Direction dir : Direction.values()) {
-            TileEntity tile = dir.getTileEntity(worldObj,this);
-            if(tile != null){
-                if(tile instanceof Container || tile instanceof TileEntityItemConduit || tile instanceof TileEntityStorageContainer){
-                    if(!noConnectDirections.get(dir)){
-                        surroundings.put(dir,tile);
+            TileEntity tile = dir.getTileEntity(worldObj, this);
+            if (tile != null) {
+                if (tile instanceof Container || tile instanceof TileEntityItemConduit || tile instanceof TileEntityStorageContainer) {
+                    if (!noConnectDirections.get(dir)) {
+                        surroundings.put(dir, tile);
                     }
                 }
             }
@@ -423,7 +423,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         sensorAmount = nbttagcompound.getInteger("CheckAmount");
         sensorUseMeta = nbttagcompound.getBoolean("UseMeta");
         sensorUseData = nbttagcompound.getBoolean("UseData");
-        if(nbttagcompound.containsKey("SensorStack")){
+        if (nbttagcompound.containsKey("SensorStack")) {
             sensorStack = ItemStack.readItemStackFromNbt(nbttagcompound.getCompound("SensorStack"));
         }
         CompoundTag items = nbttagcompound.getCompound("Items");
@@ -431,19 +431,19 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         CompoundTag noConnect = nbttagcompound.getCompound("NoConnect");
         contents.clear();
         for (Tag<?> value : items.getValues()) {
-            if(value instanceof CompoundTag){
+            if (value instanceof CompoundTag) {
                 CompoundTag itemNbt = (CompoundTag) value;
                 PipeItem item = new PipeItem(itemNbt);
                 contents.add(item);
             }
         }
         for (Tag<?> value : restrict.getValues()) {
-            if(value instanceof ByteTag){
+            if (value instanceof ByteTag) {
                 restrictDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
             }
         }
         for (Tag<?> value : noConnect.getValues()) {
-            if(value instanceof ByteTag){
+            if (value instanceof ByteTag) {
                 noConnectDirections.replace(Direction.getFromName(value.getTagName()), ((Byte) value.getValue()) == 1);
             }
         }
@@ -453,7 +453,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
             Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
             CompoundTag partTag = (CompoundTag) entry.getValue();
-            parts.put(dir,new Multipart(partTag));
+            parts.put(dir, new Multipart(partTag));
         }
 
     }
@@ -483,33 +483,33 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
             CompoundTag itemNbt = new CompoundTag();
             PipeItem item = contents.get(i);
             item.writeToNBT(itemNbt);
-            items.put(String.valueOf(i),itemNbt);
+            items.put(String.valueOf(i), itemNbt);
         }
-        nbttagcompound.put("NoConnect",noConnect);
-        nbttagcompound.put("Restrictions",restrict);
-        nbttagcompound.put("Items",items);
+        nbttagcompound.put("NoConnect", noConnect);
+        nbttagcompound.put("Restrictions", restrict);
+        nbttagcompound.put("Items", items);
 
-        nbttagcompound.putBoolean("IsActive",sensorActive);
-        nbttagcompound.putInt("CheckAmount",sensorAmount);
-        nbttagcompound.putInt("SensorMode",sensorMode);
-        nbttagcompound.putBoolean("UseMeta",sensorUseMeta);
-        nbttagcompound.putBoolean("UseData",sensorUseData);
-        if(sensorStack != null){
+        nbttagcompound.putBoolean("IsActive", sensorActive);
+        nbttagcompound.putInt("CheckAmount", sensorAmount);
+        nbttagcompound.putInt("SensorMode", sensorMode);
+        nbttagcompound.putBoolean("UseMeta", sensorUseMeta);
+        nbttagcompound.putBoolean("UseData", sensorUseData);
+        if (sensorStack != null) {
             CompoundTag itemNbt = new CompoundTag();
             sensorStack.writeToNBT(itemNbt);
-            nbttagcompound.putCompound("SensorStack",itemNbt);
+            nbttagcompound.putCompound("SensorStack", itemNbt);
         }
 
         CompoundTag coversNbt = new CompoundTag();
 
         for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
-            if(entry.getValue() == null) continue;
+            if (entry.getValue() == null) continue;
             CompoundTag partNbt = new CompoundTag();
             entry.getValue().writeToNbt(partNbt);
-            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()),partNbt);
+            coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()), partNbt);
         }
 
-        nbttagcompound.putCompound("Parts",coversNbt);
+        nbttagcompound.putCompound("Parts", coversNbt);
     }
 
     @Override
@@ -550,15 +550,15 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     public void buttonClicked(int id, int button, int channel) {
         switch (type) {
             case RESTRICT: {
-                if(id >= 0 && id < 6){
+                if (id >= 0 && id < 6) {
                     if (restrictDirections.get(Direction.values()[id])) {
                         restrictDirections.replace(Direction.values()[id], false);
                     } else {
                         restrictDirections.replace(Direction.values()[id], true);
                     }
                 }
-                if(id == 6){
-                    switch (mode){
+                if (id == 6) {
+                    switch (mode) {
                         case RANDOM:
                             mode = PipeMode.SPLIT;
                             break;
@@ -571,25 +571,25 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
             }
             case SENSOR: {
                 if (id == 2) {
-                    if(sensorAmount > 0) sensorAmount--;
+                    if (sensorAmount > 0) sensorAmount--;
                 }
                 if (id == 1) {
                     sensorAmount++;
                 }
-                if(id == 3){
+                if (id == 3) {
                     sensorUseMeta = !sensorUseMeta;
                 }
-                if(id == 4){
+                if (id == 4) {
                     sensorUseData = !sensorUseData;
                 }
-                if(id == 0) {
+                if (id == 0) {
                     sensorMode++;
                     if (sensorMode == 6) {
                         sensorMode = 0;
                     }
                 }
-                if(id == 5){
-                    switch (mode){
+                if (id == 5) {
+                    switch (mode) {
                         case RANDOM:
                             mode = PipeMode.SPLIT;
                             break;
@@ -604,7 +604,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
 
     }
 
-    ///////
+    /// ////
 
 
     public class PipeItem {
@@ -635,7 +635,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
             this.exit = exit;
         }
 
-        public PipeItem(CompoundTag tag){
+        public PipeItem(CompoundTag tag) {
             this.stack = ItemStack.readItemStackFromNbt(tag.getCompound("stack"));
             this.entry = Direction.getDirectionFromSide(tag.getInteger("entry"));
             this.exit = Direction.getDirectionFromSide(tag.getInteger("exit"));
@@ -645,61 +645,61 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         public void writeToNBT(CompoundTag compoundTag) {
             CompoundTag stackNbt = new CompoundTag();
             stack.writeToNBT(stackNbt);
-            compoundTag.putInt("entry",entry.getSideNumber());
-            compoundTag.putInt("exit",exit.getSideNumber());
+            compoundTag.putInt("entry", entry.getSideNumber());
+            compoundTag.putInt("exit", exit.getSideNumber());
             compoundTag.putInt("ticks", insertTimer.value);
-            compoundTag.putCompound("stack",stackNbt);
+            compoundTag.putCompound("stack", stackNbt);
         }
 
-        public void insertItem(){
+        public void insertItem() {
             TileEntity tileEntity = exit.getTileEntity(worldObj, TileEntityItemConduit.this);
             Direction entry = exit.getOpposite();
             //treat the filter as a special case
-            if(tileEntity instanceof TileEntityFilter){
-                ((TileEntityFilter)tileEntity).sort(entry.getOpposite(),this,TileEntityItemConduit.this);
+            if (tileEntity instanceof TileEntityFilter) {
+                ((TileEntityFilter) tileEntity).sort(entry.getOpposite(), this, TileEntityItemConduit.this);
                 return;
             }
-            if(tileEntity instanceof TileEntityStorageContainer){
+            if (tileEntity instanceof TileEntityStorageContainer) {
                 TileEntityStorageContainer container = (TileEntityStorageContainer) tileEntity;
                 container.insertStack(this.stack);
             }
             if (tileEntity instanceof IItemIO && tileEntity instanceof Container) {
                 IItemIO io = ((IItemIO) tileEntity);
                 Container inv = ((Container) tileEntity);
-                if(io.getItemIOForSide(entry) == Connection.INPUT || io.getItemIOForSide(entry) == Connection.BOTH){
-                    int slot = io.getActiveItemSlotForSide(entry,stack);
+                if (io.getItemIOForSide(entry) == Connection.INPUT || io.getItemIOForSide(entry) == Connection.BOTH) {
+                    int slot = io.getActiveItemSlotForSide(entry, stack);
                     ItemStack tileStack = inv.getItem(slot);
-                    if(tileStack == null || (tileStack.isItemEqual(stack) && tileStack.stackSize+stack.stackSize <= tileStack.getMaxStackSize())){
-                        if(tileStack == null){
-                            inv.setItem(slot,stack);
+                    if (tileStack == null || (tileStack.isItemEqual(stack) && tileStack.stackSize + stack.stackSize <= tileStack.getMaxStackSize())) {
+                        if (tileStack == null) {
+                            inv.setItem(slot, stack);
                         } else {
                             tileStack.stackSize += stack.stackSize;
                         }
                         contents.remove(this);
                     } else if (tileStack.isItemEqual(stack)) {
                         int remainder = Math.min(tileStack.getMaxStackSize() - tileStack.stackSize, stack.stackSize);
-                        if(remainder <= 0){
+                        if (remainder <= 0) {
                             return;
                         }
                         stack.stackSize -= remainder;
                         tileStack.stackSize += remainder;
                     }
                 }
-            } else if (!(tileEntity instanceof IItemIO) && tileEntity instanceof Container){
+            } else if (!(tileEntity instanceof IItemIO) && tileEntity instanceof Container) {
                 Container inv = ((Container) tileEntity);
                 int slot = 0;
-                while (stack.stackSize > 0){
-                    if(slot >= inv.getContainerSize()){
+                while (stack.stackSize > 0) {
+                    if (slot >= inv.getContainerSize()) {
                         break;
                     }
                     ItemStack tileStack = inv.getItem(slot);
-                    if(tileStack == null) {
-                        inv.setItem(slot,stack);
+                    if (tileStack == null) {
+                        inv.setItem(slot, stack);
                         contents.remove(this);
                         break;
-                    } else if(tileStack.isItemEqual(stack)){
+                    } else if (tileStack.isItemEqual(stack)) {
                         int remainder = Math.min(tileStack.getMaxStackSize() - tileStack.stackSize, stack.stackSize);
-                        if(remainder <= 0){
+                        if (remainder <= 0) {
                             slot++;
                             continue;
                         }
@@ -708,11 +708,11 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
                     }
                     slot++;
                 }
-                if(stack.stackSize <= 0){
+                if (stack.stackSize <= 0) {
                     contents.remove(this);
                 }
-            } else if(tileEntity instanceof TileEntityItemConduit) {
-                ((TileEntityItemConduit) tileEntity).acceptItem(entry,this,TileEntityItemConduit.this);
+            } else if (tileEntity instanceof TileEntityItemConduit) {
+                ((TileEntityItemConduit) tileEntity).acceptItem(entry, this, TileEntityItemConduit.this);
             }
         }
     }

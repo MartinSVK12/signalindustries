@@ -7,10 +7,10 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class TestingEffectAbility extends SuitBaseEffectAbility{
+public class TestingEffectAbility extends SuitBaseEffectAbility {
 
     public TestingEffectAbility() {
-        super(Tier.REINFORCED, SignalIndustries.MOD_ID,"testingAbility",100,200, 100);
+        super(Tier.REINFORCED, SignalIndustries.MOD_ID, "testingAbility", 100, 200, 100);
     }
 
     @Override

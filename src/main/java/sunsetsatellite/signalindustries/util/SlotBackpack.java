@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.util;
 
 
-
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.slot.Slot;
@@ -14,7 +13,7 @@ public class SlotBackpack extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack itemstack) {
-        if(itemstack.getItem() instanceof ItemBackpackAttachment){
+        if (itemstack.getItem() instanceof ItemBackpackAttachment) {
             return false;
         }
         return super.mayPlace(itemstack);

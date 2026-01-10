@@ -18,22 +18,22 @@ public class TileEntityRedstoneClock extends TileEntity implements IActiveForm, 
     @Override
     public void tick() {
         super.tick();
-        if(worldObj == null) return;
-        worldObj.markBlockDirty(x,y,z);
+        if (worldObj == null) return;
+        worldObj.markBlockDirty(x, y, z);
         worldObj.notifyBlocksOfNeighborChange(x, y, z, active ? 15 : 0);
-        if(disabled){
+        if (disabled) {
             active = false;
             return;
         }
-        if(!active){
+        if (!active) {
             timer++;
-            if(timer >= ticksOff){
+            if (timer >= ticksOff) {
                 active = true;
                 timer = 0;
             }
         } else {
             timer++;
-            if(timer >= ticksOn){
+            if (timer >= ticksOn) {
                 active = false;
                 timer = 0;
             }
@@ -43,10 +43,10 @@ public class TileEntityRedstoneClock extends TileEntity implements IActiveForm, 
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putBoolean("Active",active);
-        tag.putBoolean("Disabled",disabled);
-        tag.putInt("TicksOn",ticksOn);
-        tag.putInt("TicksOff",ticksOff);
+        tag.putBoolean("Active", active);
+        tag.putBoolean("Disabled", disabled);
+        tag.putInt("TicksOn", ticksOn);
+        tag.putInt("TicksOff", ticksOff);
     }
 
     @Override
@@ -71,14 +71,14 @@ public class TileEntityRedstoneClock extends TileEntity implements IActiveForm, 
 
     @Override
     public void buttonClicked(int id, int button, int channel) {
-        if(id == 1){
+        if (id == 1) {
             ticksOn++;
-        } else if(id == 2 && ticksOn > 1){
+        } else if (id == 2 && ticksOn > 1) {
             ticksOn--;
         }
-        if(id == 3){
+        if (id == 3) {
             ticksOff++;
-        } else if(id == 4 && ticksOff > 1){
+        } else if (id == 4 && ticksOff > 1) {
             ticksOff--;
         }
     }

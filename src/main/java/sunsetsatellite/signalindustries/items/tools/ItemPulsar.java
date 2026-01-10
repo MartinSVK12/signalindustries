@@ -17,7 +17,8 @@ import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.*;
+import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
@@ -43,7 +44,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
         if (world.isClientSide) {
             return true;
         } else {
-            if(player.isSneaking() && !itemstack.getData().getBoolean("charging")){
+            if (player.isSneaking() && !itemstack.getData().getBoolean("charging")) {
                 Catalyst.displayGui(player, new InventoryPulsar(itemstack), player.inventory.getCurrentItemIndex(), false, key("gui/pulsar"));
                 return true;
             }
@@ -53,40 +54,40 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player player) {
-        if(!itemstack.getData().getBoolean("charging") && itemstack.getData().getByte("charge") < 100 && !player.isSneaking() && getFluidStack(0,itemstack).getInteger("amount") > 0) {
+        if (!itemstack.getData().getBoolean("charging") && itemstack.getData().getByte("charge") < 100 && !player.isSneaking() && getFluidStack(0, itemstack).getInteger("amount") > 0) {
             itemstack.getData().putBoolean("charging", true);
             return itemstack;
         }
-        if(itemstack.getData().getByte("charge") >= 100) {
+        if (itemstack.getData().getByte("charge") >= 100) {
             itemstack.getData().putByte("charge", (byte) 0);
-            if(getAbility(itemstack).contains("Warp")){
-                CompoundTag data = getItemFromSlot(0,itemstack).getCompound("Data");
+            if (getAbility(itemstack).contains("Warp")) {
+                CompoundTag data = getItemFromSlot(0, itemstack).getCompound("Data");
                 CompoundTag warpPosition = data.getCompound("position");
-                if(warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")){
-                    if(data.getInteger("dim") != player.dimension){
+                if (warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")) {
+                    if (data.getInteger("dim") != player.dimension) {
                         ((IWarpPlayer) player).warp(data.getInteger("dim"));
                     }
-                    player.setPos(warpPosition.getInteger("x"),warpPosition.getInteger("y"),warpPosition.getInteger("z"));
+                    player.setPos(warpPosition.getInteger("x"), warpPosition.getInteger("y"), warpPosition.getInteger("z"));
                 } else {
                     ((IWarpPlayer) player).warp(SIDimensions.ETERNITY.id);
                 }
                 itemstack.getData().getCompound("inventory").getValue().remove(String.valueOf(0));
             } else {
-                world.spawnParticle("signalindustries.shockwave", player.x, player.y-1, player.z, 0.0, 0.0, 0.0,0);
+                world.spawnParticle("signalindustries.shockwave", player.x, player.y - 1, player.z, 0.0, 0.0, 0.0, 0);
                 if (EnvironmentHelper.isServerEnvironment() || EnvironmentHelper.isSinglePlayer()) {
-                    AABB bb = AABB.getTemporaryBB(player.x-5,player.y-1,player.z-5,player.x+5,player.y+1,player.z+5);
+                    AABB bb = AABB.getTemporaryBB(player.x - 5, player.y - 1, player.z - 5, player.x + 5, player.y + 1, player.z + 5);
                     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, bb);
                     for (Entity entity : list) {
-                        if(entity instanceof Mob){
-                            entity.hurt(player,15, DamageType.BLAST);
+                        if (entity instanceof Mob) {
+                            entity.hurt(player, 15, DamageType.BLAST);
                             double d = player.x - entity.x;
 
                             double d1;
-                            for(d1 = player.z - entity.z; d * d + d1 * d1 < 1.0E-4; d1 = (Math.random() - Math.random()) * 0.01) {
+                            for (d1 = player.z - entity.z; d * d + d1 * d1 < 1.0E-4; d1 = (Math.random() - Math.random()) * 0.01) {
                                 d = (Math.random() - Math.random()) * 0.01;
                             }
 
-                            ((Mob) entity).attackedAtYaw = (float)(Math.atan2(d1, d) * 180.0 / 3.1415927410125732) - entity.yRot;
+                            ((Mob) entity).attackedAtYaw = (float) (Math.atan2(d1, d) * 180.0 / 3.1415927410125732) - entity.yRot;
                             ((Mob) entity).knockBack(entity, 15, d, d1);
                         }
                     }
@@ -100,23 +101,23 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     public void inventoryTick(ItemStack itemstack, World world, Entity entity, int slotId, boolean flag) {
         boolean charging = itemstack.getData().getBoolean("charging");
         byte charge = itemstack.getData().getByte("charge");
-        int energy = getFluidStack(0,itemstack).getInteger("amount");
-        if(itemstack.getData().getBoolean("charging")){
-            if(charge < 100){
-                if(energy <= 0){
-                    getFluidStack(0,itemstack).putInt("amount",0);
-                    itemstack.getData().putBoolean("charging",false);
-                    ((Player) entity).sendMessage(TextFormatting.RED+"[Pulsar] Ran out of energy while charging!");
+        int energy = getFluidStack(0, itemstack).getInteger("amount");
+        if (itemstack.getData().getBoolean("charging")) {
+            if (charge < 100) {
+                if (energy <= 0) {
+                    getFluidStack(0, itemstack).putInt("amount", 0);
+                    itemstack.getData().putBoolean("charging", false);
+                    ((Player) entity).sendMessage(TextFormatting.RED + "[Pulsar] Ran out of energy while charging!");
                     return;
                 }
-                if(getItemIdFromSlot(0,itemstack) == SIItems.warpOrb.id){
-                    getFluidStack(0,itemstack).putInt("amount",energy-80); //charging takes 100 ticks
+                if (getItemIdFromSlot(0, itemstack) == SIItems.warpOrb.id) {
+                    getFluidStack(0, itemstack).putInt("amount", energy - 80); //charging takes 100 ticks
                 } else {
-                    getFluidStack(0,itemstack).putInt("amount",energy-40); //charging takes 100 ticks
+                    getFluidStack(0, itemstack).putInt("amount", energy - 40); //charging takes 100 ticks
                 }
-                itemstack.getData().putByte("charge", (byte) (charge+1));
+                itemstack.getData().putByte("charge", (byte) (charge + 1));
             } else {
-                itemstack.getData().putBoolean("charging",false);
+                itemstack.getData().putBoolean("charging", false);
             }
 
         }
@@ -145,39 +146,39 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     @Override
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         InventoryPulsar inv = new InventoryPulsar(stack);
-        InventorySerializer.loadInvFromNBT(stack,inv,1,1);
-        inv.insertFluid(0,fluidStack.splitStack(Math.min(maxAmount,fluidStack.amount)));
-        InventorySerializer.saveInvToNBT(stack,inv);
+        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1);
+        inv.insertFluid(0, fluidStack.splitStack(Math.min(maxAmount, fluidStack.amount)));
+        InventorySerializer.saveInvToNBT(stack, inv);
     }
 
     @Override
     public String getDescription(ItemStack stack) {
         String text = super.getDescription(stack);
         String ability = getAbility(stack);
-        text += "\nCharge: "+ (stack.getData().getByte("charge") >= 100 ? TextFormatting.RED : TextFormatting.LIGHT_GRAY) +stack.getData().getByte("charge")+"%"+TextFormatting.WHITE+" | Ability: "+ability;
+        text += "\nCharge: " + (stack.getData().getByte("charge") >= 100 ? TextFormatting.RED : TextFormatting.LIGHT_GRAY) + stack.getData().getByte("charge") + "%" + TextFormatting.WHITE + " | Ability: " + ability;
         return text;
     }
 
     @Override
     public boolean canFill(ItemStack stack) {
         InventoryPulsar inv = new InventoryPulsar(stack);
-        InventorySerializer.loadInvFromNBT(stack,inv,1,1);
+        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1);
         return inv.fluidContents[0] == null || inv.fluidContents[0].amount < inv.getFluidCapacityForSlot(0);
     }
 
-    public int getItemIdFromSlot(int id, ItemStack stack){
+    public int getItemIdFromSlot(int id, ItemStack stack) {
         return stack.getData().getCompound("inventory").getCompound(String.valueOf(id)).getShort("id");
     }
 
-    public CompoundTag getItemFromSlot(int id, ItemStack stack){
+    public CompoundTag getItemFromSlot(int id, ItemStack stack) {
         return stack.getData().getCompound("inventory").getCompound(String.valueOf(id));
     }
 
-    public CompoundTag getFluidStack(int id, ItemStack stack){
+    public CompoundTag getFluidStack(int id, ItemStack stack) {
         return stack.getData().getCompound("fluidInventory").getCompound(String.valueOf(id));
     }
 
-    public String getAbility(ItemStack stack){
-        return getItemIdFromSlot(0,stack) == SIItems.warpOrb.id ? TextFormatting.PURPLE+"Warp" : TextFormatting.RED+"Pulse";
+    public String getAbility(ItemStack stack) {
+        return getItemIdFromSlot(0, stack) == SIItems.warpOrb.id ? TextFormatting.PURPLE + "Warp" : TextFormatting.RED + "Pulse";
     }
 }

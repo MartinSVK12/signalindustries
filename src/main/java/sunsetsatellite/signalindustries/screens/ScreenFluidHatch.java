@@ -8,12 +8,9 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
-import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.menus.MenuFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 
 public class ScreenFluidHatch extends ScreenFluid {
 
@@ -31,7 +28,7 @@ public class ScreenFluidHatch extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_fluid_hatch.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_fluid_hatch.png");
                 break;
@@ -52,7 +49,7 @@ public class ScreenFluidHatch extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -87,11 +84,11 @@ public class ScreenFluidHatch extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

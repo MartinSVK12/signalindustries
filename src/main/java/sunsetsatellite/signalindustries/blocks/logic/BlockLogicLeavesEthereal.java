@@ -1,7 +1,5 @@
 package sunsetsatellite.signalindustries.blocks.logic;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.option.GameSettings;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicLeavesBase;

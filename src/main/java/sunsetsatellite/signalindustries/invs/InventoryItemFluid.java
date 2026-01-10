@@ -27,11 +27,11 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
         this.container = container;
     }
 
-    public void save(){
+    public void save() {
         InventorySerializer.saveInvToNBT(container, this);
     }
 
-    public void load(){
+    public void load() {
         InventorySerializer.loadInvFromNBT(container, this, getContainerSize(), getFluidInventorySize());
     }
 
@@ -89,15 +89,15 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
     }
 
     @Override
-    public boolean canInsertFluid(int slot,FluidStack fluidStack){
-        if(getFluidInSlot(slot) != null) if(!getFluidInSlot(slot).isFluidEqual(fluidStack)) return false;
-        return Math.min(fluidStack.amount,getRemainingCapacity(slot)) > 0;
+    public boolean canInsertFluid(int slot, FluidStack fluidStack) {
+        if (getFluidInSlot(slot) != null) if (!getFluidInSlot(slot).isFluidEqual(fluidStack)) return false;
+        return Math.min(fluidStack.amount, getRemainingCapacity(slot)) > 0;
     }
 
     @Override
     public FluidStack getFluidInSlot(int slot) {
-        if(this.fluidContents.length == 0) return null;
-        if(this.fluidContents[slot] == null || this.fluidContents[slot].fluid == null || this.fluidContents[slot].amount == 0){
+        if (this.fluidContents.length == 0) return null;
+        if (this.fluidContents[slot] == null || this.fluidContents[slot].fluid == null || this.fluidContents[slot].amount == 0) {
             this.fluidContents[slot] = null;
         }
         return fluidContents[slot];
@@ -116,12 +116,12 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
 
     @Override
     public void setFluidInSlot(int slot, FluidStack fluid) {
-        if(fluid == null || fluid.amount == 0 || fluid.fluid == null){
+        if (fluid == null || fluid.amount == 0 || fluid.fluid == null) {
             this.fluidContents[slot] = null;
             this.onFluidInventoryChanged();
             return;
         }
-        if(acceptedFluids.get(slot).contains(fluid.fluid) || acceptedFluids.get(slot).isEmpty()){
+        if (acceptedFluids.get(slot).contains(fluid.fluid) || acceptedFluids.get(slot).isEmpty()) {
             this.fluidContents[slot] = fluid;
             this.onFluidInventoryChanged();
         }
@@ -131,8 +131,8 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
     @Override
     public FluidStack insertFluid(int slot, FluidStack fluidStack) {
         FluidStack stack = fluidContents[slot];
-        FluidStack split = fluidStack.splitStack(Math.min(fluidStack.amount,getRemainingCapacity(slot)));
-        if(stack != null && split.amount > 0){
+        FluidStack split = fluidStack.splitStack(Math.min(fluidStack.amount, getRemainingCapacity(slot)));
+        if (stack != null && split.amount > 0) {
             fluidContents[slot].amount += split.amount;
         } else {
             fluidContents[slot] = split;
@@ -142,10 +142,10 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
 
     @Override
     public int getRemainingCapacity(int slot) {
-        if(fluidContents[slot] == null){
+        if (fluidContents[slot] == null) {
             return fluidCapacity[slot];
         }
-        return fluidCapacity[slot]-fluidContents[slot].amount;
+        return fluidCapacity[slot] - fluidContents[slot].amount;
     }
 
     @Override

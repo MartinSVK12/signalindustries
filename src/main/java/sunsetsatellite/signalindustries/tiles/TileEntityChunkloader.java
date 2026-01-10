@@ -15,13 +15,13 @@ public class TileEntityChunkloader extends TileEntity implements IActiveForm {
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(x,y,z);
+        worldObj.markBlockDirty(x, y, z);
         super.tick();
     }
 
     @Override
     public void writeToNBT(CompoundTag nbttagcompound) {
-        nbttagcompound.putBoolean("Active",active);
+        nbttagcompound.putBoolean("Active", active);
         super.writeToNBT(nbttagcompound);
     }
 

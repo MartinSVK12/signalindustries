@@ -1,22 +1,25 @@
 package sunsetsatellite.signalindustries.recipes.entry;
 
-import com.formdev.flatlaf.json.Json;
 import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.data.registry.recipe.*;
-import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
+import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.data.registry.recipe.RecipeNamespace;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
+import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.catalyst.fluids.util.FluidInventoryWrapper;
-import sunsetsatellite.signalindustries.recipes.adapter.RecipeMachineMultiOutputJsonAdapter;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
-import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedSymbol[], RecipeOutputStack[], RecipeProperties> /*fixme: implements HasJsonAdapter*/ {
@@ -25,15 +28,16 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
         super(input, output, data);
     }
 
-    public RecipeEntryMachineMultiOutput(){}
+    public RecipeEntryMachineMultiOutput() {
+    }
 
     @Override
     public boolean matches(RecipeExtendedSymbol[] symbols) {
-        if(symbols.length == 0){
+        if (symbols.length == 0) {
             return false;
         }
         //key is recipe input, value is inventory input
-        HashMap<RecipeExtendedSymbol,RecipeExtendedSymbol> alreadyMatched = new HashMap<>();
+        HashMap<RecipeExtendedSymbol, RecipeExtendedSymbol> alreadyMatched = new HashMap<>();
         for (RecipeExtendedSymbol invInputSymbol : symbols) {
             for (RecipeExtendedSymbol recipeInputSymbol : getInput()) {
                 if (recipeInputSymbol.matches(invInputSymbol) && !alreadyMatched.containsKey(recipeInputSymbol)) {
@@ -42,15 +46,15 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                 }
             }
         }
-        if(alreadyMatched.size() != getInput().length) return false;
-        HashMap<List<ItemStack>,List<ItemStack>> alreadyMatchedResolved = new HashMap<>();
-        alreadyMatched.forEach((recipeInputSymbol,invInputSymbol)->{
-            alreadyMatchedResolved.put(recipeInputSymbol.asNormalSymbol().resolve(),invInputSymbol.asNormalSymbol().resolve());
+        if (alreadyMatched.size() != getInput().length) return false;
+        HashMap<List<ItemStack>, List<ItemStack>> alreadyMatchedResolved = new HashMap<>();
+        alreadyMatched.forEach((recipeInputSymbol, invInputSymbol) -> {
+            alreadyMatchedResolved.put(recipeInputSymbol.asNormalSymbol().resolve(), invInputSymbol.asNormalSymbol().resolve());
         });
 
-        return alreadyMatchedResolved.entrySet().stream().allMatch((e)->e.getKey().stream()
-                .anyMatch((s)->e.getValue().stream()
-                        .anyMatch((s2)->s.stackSize <= s2.stackSize)));
+        return alreadyMatchedResolved.entrySet().stream().allMatch((e) -> e.getKey().stream()
+                .anyMatch((s) -> e.getValue().stream()
+                        .anyMatch((s2) -> s.stackSize <= s2.stackSize)));
     }
 
     @Override
@@ -93,9 +97,9 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
     @Override
     public boolean matchesRecipe(SearchQuery query) {
         if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
-            if(!query.strict) {
-                return Arrays.stream(getOutput()).anyMatch((O)->{
-                    if(O.isItem()){
+            if (!query.strict) {
+                return Arrays.stream(getOutput()).anyMatch((O) -> {
+                    if (O.isItem()) {
                         return O.stack.getDisplayName().toLowerCase().contains(query.query.getRight().toLowerCase());
                     } else if (O.isFluid()) {
                         return O.fluid.fluid.getName().toLowerCase().contains(query.query.getRight().toLowerCase());
@@ -103,8 +107,8 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                     return false;
                 });
             } else {
-                return Arrays.stream(getOutput()).anyMatch((O)->{
-                    if(O.isItem()){
+                return Arrays.stream(getOutput()).anyMatch((O) -> {
+                    if (O.isItem()) {
                         return O.stack.getDisplayName().equalsIgnoreCase(query.query.getRight());
                     } else if (O.isFluid()) {
                         return O.fluid.fluid.getName().equalsIgnoreCase(query.query.getRight());
@@ -116,11 +120,11 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
         } else if (query.query.getLeft() == SearchQuery.QueryType.GROUP && !Objects.equals(query.query.getRight(), "")) {
             List<ItemStack> groupStacks = new RecipeSymbol(query.query.getRight()).resolve();
             if (groupStacks == null) return false;
-            return Arrays.stream(getOutput()).anyMatch((O)->{
-                if(O.isItem()){
-                    return groupStacks.stream().anyMatch((S)->S.isItemEqual(O.stack));
+            return Arrays.stream(getOutput()).anyMatch((O) -> {
+                if (O.isItem()) {
+                    return groupStacks.stream().anyMatch((S) -> S.isItemEqual(O.stack));
                 } else if (O.isFluid()) {
-                    return groupStacks.stream().anyMatch((S)->S.isItemEqual(O.fluid.toItemStack()));
+                    return groupStacks.stream().anyMatch((S) -> S.isItemEqual(O.fluid.toItemStack()));
                 }
                 return false;
             });
@@ -135,7 +139,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
             if (symbol == null) continue;
             List<ItemStack> stacks = symbol.resolve();
             if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
-                if(stacks == null) return false;
+                if (stacks == null) return false;
                 for (ItemStack stack : stacks) {
                     if (query.strict && stack.getDisplayName().equalsIgnoreCase(query.query.getRight())) {
                         return true;
@@ -157,34 +161,34 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
 
     @Override
     public void consumeMultiblockInputs(TileEntityTieredMultiblock multiblock) {
-        if(multiblock.usesItemInput){
+        if (multiblock.usesItemInput) {
             List<ItemStack> recipeStacks = Catalyst.condenseItemList(
                     Arrays.stream(getInput())
                             .flatMap(symbol -> symbol.resolve().stream())
                             .filter(Objects::nonNull)
                             .map(ItemStack::copy).collect(Collectors.toList())
             );
-            List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).peek(I-> I.stackSize *= multiblock.parallel).collect(Collectors.toList());
+            List<ItemStack> remainingRecipeStacks = recipeStacks.stream().map(ItemStack::copy).peek(I -> I.stackSize *= multiblock.parallel).collect(Collectors.toList());
             InventoryWrapper wrapper = new InventoryWrapper(multiblock.itemInput);
             for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
                 ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
-                if(stack.isStackEqual(remainingRecipeStack)){
-                    if(stack.getItem().hasContainerItem() && !getData().consumeContainers){
+                if (stack.isStackEqual(remainingRecipeStack)) {
+                    if (stack.getItem().hasContainerItem() && !getData().consumeContainers) {
                         wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
                     }
                 }
             }
         }
-        if(multiblock.usesFluidInput){
+        if (multiblock.usesFluidInput) {
             List<FluidStack> recipeStacks = Arrays.stream(getInput())
                     .flatMap(symbol -> symbol.resolveFluids().stream())
                     .filter(Objects::nonNull)
                     .map(FluidStack::copy)
                     .collect(Collectors.toList());
-            List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).peek(F->F.amount *= multiblock.parallel).collect(Collectors.toList());
+            List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).peek(F -> F.amount *= multiblock.parallel).collect(Collectors.toList());
             FluidInventoryWrapper wrapper = new FluidInventoryWrapper(multiblock.fluidInput);
             for (FluidStack remainingRecipeStack : remainingRecipeStacks) {
-                wrapper.removeUntil(remainingRecipeStack.fluid.getFirstId(),remainingRecipeStack.amount,false);
+                wrapper.removeUntil(remainingRecipeStack.fluid.getFirstId(), remainingRecipeStack.amount, false);
             }
         }
     }
@@ -192,16 +196,16 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
     @Override
     public boolean canMultiblockProcess(TileEntityTieredMultiblock multiblock) {
         for (RecipeOutputStack output : getOutput()) {
-            if(output.isItem()){
+            if (output.isItem()) {
                 ItemStack stack = output.stack.copy();
                 stack.stackSize = output.randomAmount ? output.amountMax : stack.stackSize;
-                if(!multiblock.areItemOutputsValid(stack)){
+                if (!multiblock.areItemOutputsValid(stack)) {
                     return false;
                 }
-            } else if (output.isFluid()){
+            } else if (output.isFluid()) {
                 FluidStack stack = output.fluid.copy();
                 stack.amount = output.randomAmount ? output.amountMax : stack.amount;
-                if(!multiblock.areFluidOutputsValid(stack)){
+                if (!multiblock.areFluidOutputsValid(stack)) {
                     return false;
                 }
             }
@@ -212,12 +216,12 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
     @Override
     public void processMultiblockRecipe(TileEntityTieredMultiblock multiblock) {
         multiblock.consumeInputs();
-        if(multiblock.random.nextFloat() <= getData().chance) {
+        if (multiblock.random.nextFloat() <= getData().chance) {
             for (RecipeOutputStack outputStack : getOutput()) {
                 if (outputStack.isItem()) {
                     ItemStack stack = getOutput() == null ? null : outputStack.stack.copy();
-                    if(stack != null && outputStack.randomAmount){
-                        stack.stackSize = Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax);
+                    if (stack != null && outputStack.randomAmount) {
+                        stack.stackSize = Catalyst.random(multiblock.random, outputStack.amountMin, outputStack.amountMax);
                     }
                     if (stack != null) {
                         if (multiblock.random.nextFloat() <= outputStack.chance) {
@@ -254,11 +258,11 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                     }
                 } else if (outputStack.isFluid()) {
                     FluidStack fluidStack = getOutput() == null ? null : outputStack.fluid.copy();
-                    if(fluidStack != null && outputStack.randomAmount){
-                        fluidStack.amount =  Catalyst.random(multiblock.random, outputStack.amountMin,outputStack.amountMax);
+                    if (fluidStack != null && outputStack.randomAmount) {
+                        fluidStack.amount = Catalyst.random(multiblock.random, outputStack.amountMin, outputStack.amountMax);
                     }
                     if (fluidStack != null) {
-                        if(multiblock.random.nextFloat() <= outputStack.chance) {
+                        if (multiblock.random.nextFloat() <= outputStack.chance) {
                             int multiplier = 1;
                             multiplier *= multiblock.parallel;
                             int outputAmountRemaining = fluidStack.amount * multiplier;
@@ -307,8 +311,8 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
         );
         for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
             ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
-            if(stack.isStackEqual(remainingRecipeStack)){
-                if(stack.getItem().hasContainerItem() && !getData().consumeContainers){
+            if (stack.isStackEqual(remainingRecipeStack)) {
+                if (stack.getItem().hasContainerItem() && !getData().consumeContainers) {
                     wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
                 }
             }
@@ -319,7 +323,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                 .map(FluidStack::copy)
                 .collect(Collectors.toList());
         for (FluidStack fluidStack : fluidRecipeStacks) {
-            fluidWrapper.removeUntil(fluidStack.fluid.getFirstId(),fluidStack.amount,false);
+            fluidWrapper.removeUntil(fluidStack.fluid.getFirstId(), fluidStack.amount, false);
         }
     }
 
@@ -346,11 +350,11 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
     @Override
     public void processMachineRecipe(TileEntityTieredMachineSimple machine) {
         machine.consumeInputs();
-        if(machine.random.nextFloat() <= getData().chance) {
+        if (machine.random.nextFloat() <= getData().chance) {
             for (RecipeOutputStack outputStack : getOutput()) {
                 if (outputStack.isItem()) {
                     ItemStack stack = getOutput() == null ? null : outputStack.stack.copy();
-                    if(stack != null && outputStack.randomAmount){
+                    if (stack != null && outputStack.randomAmount) {
                         stack.stackSize = Catalyst.random(machine.random, outputStack.amountMin, outputStack.amountMax);
                     }
                     if (stack != null) {
@@ -388,11 +392,11 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                     }
                 } else if (outputStack.isFluid()) {
                     FluidStack fluidStack = getOutput() == null ? null : outputStack.fluid.copy();
-                    if(fluidStack != null && outputStack.randomAmount){
-                        fluidStack.amount =  Catalyst.random(machine.random, outputStack.amountMin,outputStack.amountMax + 1);
+                    if (fluidStack != null && outputStack.randomAmount) {
+                        fluidStack.amount = Catalyst.random(machine.random, outputStack.amountMin, outputStack.amountMax + 1);
                     }
                     if (fluidStack != null) {
-                        if(machine.random.nextFloat() <= outputStack.chance) {
+                        if (machine.random.nextFloat() <= outputStack.chance) {
                             int multiplier = 1;
                             //multiplier *= multiblock.parallel;
                             int outputAmountRemaining = fluidStack.amount * multiplier;

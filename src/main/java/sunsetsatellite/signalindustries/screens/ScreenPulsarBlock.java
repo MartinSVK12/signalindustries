@@ -14,12 +14,8 @@ import org.useless.dragonfly.models.entity.StaticEntityModel;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.IExtendedScreenDraw;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.items.ItemWarpOrb;
-import sunsetsatellite.signalindustries.menus.MenuAlloySmelter;
 import sunsetsatellite.signalindustries.menus.MenuPulsarBlock;
-import sunsetsatellite.signalindustries.render.FakeItemElement;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityPulsar;
 
 public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDraw {
@@ -43,7 +39,7 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 56, y + 36 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
@@ -53,11 +49,11 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
         /*if(this.tile.speedMultiplier > 1){
             this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }*/
-        this.drawString(font,(int)((tile.progressTicks/(float)tile.progressMaxTicks)*100)+"%",x+24,y+36,0xFFFFFFFF);
-        if(tile.getItem(0) != null && tile.getItem(0).getItem() instanceof ItemWarpOrb){
-            this.drawStringCentered(font,"Warp",x+140,y+36,0xFFFF00FF);
+        this.drawString(font, (int) ((tile.progressTicks / (float) tile.progressMaxTicks) * 100) + "%", x + 24, y + 36, 0xFFFFFFFF);
+        if (tile.getItem(0) != null && tile.getItem(0).getItem() instanceof ItemWarpOrb) {
+            this.drawStringCentered(font, "Warp", x + 140, y + 36, 0xFFFF00FF);
         } else {
-            this.drawStringCentered(font,"Pulse",x+140,y+36,0xFFFF0000);
+            this.drawStringCentered(font, "Pulse", x + 140, y + 36, 0xFFFF0000);
         }
 
     }
@@ -66,7 +62,7 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -98,9 +94,9 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);
@@ -109,9 +105,9 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
     @Override
     public void drawAfterSlotAndButtonRendering(int mouseX, int mouseY, float partialTick) {
         GL11.glPushMatrix();
-        GL11.glScalef(2,2,2);
+        GL11.glScalef(2, 2, 2);
         Minecraft.getMinecraft().textureManager.loadTexture("/assets/signalindustries/textures/block/pulsar.png").bind();
-        if(tile.getItem(0) != null && tile.getItem(0).getItem() instanceof ItemWarpOrb){
+        if (tile.getItem(0) != null && tile.getItem(0).getItem() instanceof ItemWarpOrb) {
             Minecraft.getMinecraft().textureManager.loadTexture("/assets/signalindustries/textures/block/pulsar_warp.png").bind();
         }
         StaticEntityModel item = DragonFly.loadEntityModel("geometry.signalindustries.pulsar_item", 0);
@@ -119,13 +115,13 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
         StaticEntityModel outerCore = DragonFly.loadEntityModel("geometry.signalindustries.pulsar_outer_core", 0);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glTranslatef(44,-10,0);
-        GL11.glRotatef(tile.orbRotation * 20 + partialTick,0,1,0);
-        GL11.glScalef(1.3f,1.3f,1.3f);
-        if(tile.fuelBurnTicks <= 0){
+        GL11.glTranslatef(44, -10, 0);
+        GL11.glRotatef(tile.orbRotation * 20 + partialTick, 0, 1, 0);
+        GL11.glScalef(1.3f, 1.3f, 1.3f);
+        if (tile.fuelBurnTicks <= 0) {
             item.render(Tessellator.instance);
         }
-        if(tile.progressTicks > tile.progressMaxTicks/2){
+        if (tile.progressTicks > tile.progressMaxTicks / 2) {
             innerCore.render(Tessellator.instance);
         }
         if (tile.progressTicks >= tile.progressMaxTicks) {

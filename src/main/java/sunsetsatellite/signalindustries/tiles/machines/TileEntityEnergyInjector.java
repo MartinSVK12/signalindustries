@@ -11,7 +11,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
 
     public int injectSpeed = 5;
 
-    public TileEntityEnergyInjector(){
+    public TileEntityEnergyInjector() {
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[1];
         fluidCapacity[0] = 4000;
@@ -24,21 +24,21 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
             worldObj.markBlocksDirty(x, y, z, x, y, z);
         }
         extractFluids();
-        if(isBurning()){
+        if (isBurning()) {
             ItemStack stack = getItem(0);
-            if(stack != null){
-                if(stack.getItem() instanceof IItemFluidContainer){
+            if (stack != null) {
+                if (stack.getItem() instanceof IItemFluidContainer) {
                     IItemFluidContainer item = (IItemFluidContainer) getItem(0).getItem();
-                    if(item.canFill(stack)){
-                        ItemStack itemStack = item.fill(getFluidInSlot(0),stack,this,injectSpeed);
-                        if(itemStack != null){
-                            setItem(0,itemStack);
+                    if (item.canFill(stack)) {
+                        ItemStack itemStack = item.fill(getFluidInSlot(0), stack, this, injectSpeed);
+                        if (itemStack != null) {
+                            setItem(0, itemStack);
                         }
                     }
-                } else if (stack.getItem() instanceof IInjectable){
+                } else if (stack.getItem() instanceof IInjectable) {
                     IInjectable item = (IInjectable) getItem(0).getItem();
-                    if(item.canFill(stack)){
-                        item.fill(getFluidInSlot(0),stack,this,injectSpeed);
+                    if (item.canFill(stack)) {
+                        item.fill(getFluidInSlot(0), stack, this, injectSpeed);
                     }
                 }
 
@@ -55,9 +55,8 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
         if (getFluidInSlot(0) != null
                 && getFluidInSlot(0).amount >= transferSpeed
                 && stack != null
-                && (stack.getItem() instanceof IItemFluidContainer || stack.getItem() instanceof IInjectable))
-        {
-            if(stack.getItem() instanceof IItemFluidContainer){
+                && (stack.getItem() instanceof IItemFluidContainer || stack.getItem() instanceof IInjectable)) {
+            if (stack.getItem() instanceof IItemFluidContainer) {
                 return ((IItemFluidContainer) stack.getItem()).canFill(stack);
             } else {
                 return ((IInjectable) stack.getItem()).canFill(stack);

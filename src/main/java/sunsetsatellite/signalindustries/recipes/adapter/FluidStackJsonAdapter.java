@@ -16,7 +16,7 @@ public class FluidStackJsonAdapter implements JsonDeserializer<FluidStack>, Json
         int amount = obj.get("amount").getAsInt();
         try {
             Fluid fluid = Fluid.fluidMap.get(NamespaceID.getPermanent(fluidName));
-            return new FluidStack(fluid,amount);
+            return new FluidStack(fluid, amount);
         } catch (HardIllegalArgumentException e) {
             throw new RuntimeException(e);
         }
@@ -25,8 +25,8 @@ public class FluidStackJsonAdapter implements JsonDeserializer<FluidStack>, Json
     @Override
     public JsonElement serialize(FluidStack src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject obj = new JsonObject();
-        obj.addProperty("id",src.fluid.id.toString());
-        obj.addProperty("amount",src.amount);
+        obj.addProperty("id", src.fluid.id.toString());
+        obj.addProperty("amount", src.amount);
         return obj;
     }
 }

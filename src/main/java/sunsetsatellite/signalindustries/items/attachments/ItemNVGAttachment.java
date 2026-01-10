@@ -20,8 +20,8 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
-        if(signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.isActive() && signalumPowerSuit.hasAttachment(SIItems.nightVisionLens, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.HEAD_LENS))) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
+        if (signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.isActive() && signalumPowerSuit.hasAttachment(SIItems.nightVisionLens, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.HEAD_LENS))) {
             boolean state = stack.getData().getBoolean("active");
             stack.getData().putBoolean("active", !state);
         }
@@ -39,8 +39,8 @@ public class ItemNVGAttachment extends ItemTieredAttachment {
 
     @Override
     public void tick(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, int slot) {
-        if(signalumPowerSuit.getEnergy() < 1){
-            stack.getData().putBoolean("active",false);
+        if (signalumPowerSuit.getEnergy() < 1) {
+            stack.getData().putBoolean("active", false);
         }
     }
 }

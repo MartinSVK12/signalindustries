@@ -18,8 +18,8 @@ public class StabilizerTooltip extends SIBaseTooltip<TileEntityStabilizer> {
                 .setForegroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("signalindustries:block/dilithium_crystal_block")))
                 .setBackgroundOptions(new TextureOptions(0xFFFFFF, TextureRegistry.getTexture("signalindustries:block/reality_fabric")))
                 .setText("Fuel: ");
-        c.drawProgressBarTextureWithText(tile.progressTicks,tile.progressMaxTicks,options,0);
-        drawFluids(tile,c,false);
+        c.drawProgressBarTextureWithText(tile.progressTicks, tile.progressMaxTicks, options, 0);
+        drawFluids(tile, c, false);
         c.drawInventory(tile, 0);
     }
 

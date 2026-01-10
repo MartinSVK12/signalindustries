@@ -11,6 +11,7 @@ public interface IKeybinds {
     KeyBinding signalIndustries$getKeyActivateAbility();
 
     KeyBinding signalIndustries$getKeySwitchMode();
+
     KeyBinding signalindustries$getKeyShowIndex();
 
     KeyBinding signalIndustries$getKeyActivateHeadLensAttachment();

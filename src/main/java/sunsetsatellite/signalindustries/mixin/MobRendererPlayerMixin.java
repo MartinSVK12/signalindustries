@@ -25,13 +25,15 @@ import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemSuitColorizer;
-import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 @Mixin(value = MobRendererPlayer.class, remap = false)
 public abstract class MobRendererPlayerMixin extends MobRenderer<Player> {
-    @Shadow private ModelBiped modelBipedMain;
+    @Shadow
+    private ModelBiped modelBipedMain;
 
-    @Shadow @Final private ModelBiped modelArmor;
+    @Shadow
+    @Final
+    private ModelBiped modelArmor;
 
     private MobRendererPlayerMixin(ModelBase model, float shadowSize) {
         super(model, shadowSize);
@@ -39,29 +41,29 @@ public abstract class MobRendererPlayerMixin extends MobRenderer<Player> {
 
     @Inject(method = "prepareArmor(Lnet/minecraft/core/entity/player/Player;IF)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/MobRendererPlayer;bindTexture(Ljava/lang/String;)V", ordinal = 3, shift = At.Shift.AFTER))
     protected void prepareArmor(Player entity, int layer, float partialTick, CallbackInfoReturnable<Boolean> cir, @Local(name = "item") Item item) {
-        if(item instanceof ItemArmorTiered){
-            if(item instanceof ItemSignalumPowerHarness){
-                if((layer == 0 || layer == 1) && entity.inventory.armorItemInSlot(2) != null && entity.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
-                    if(entity.inventory.armorItemInSlot(3) != null && entity.inventory.armorItemInSlot(3).getItem() instanceof ItemSignalumPowerHarness){
+        if (item instanceof ItemArmorTiered) {
+            if (item instanceof ItemSignalumPowerHarness) {
+                if ((layer == 0 || layer == 1) && entity.inventory.armorItemInSlot(2) != null && entity.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
+                    if (entity.inventory.armorItemInSlot(3) != null && entity.inventory.armorItemInSlot(3).getItem() instanceof ItemSignalumPowerHarness) {
                         bindTexture("/assets/signalindustries/textures/armor/harness_shield_1.png");
                     } else {
                         bindTexture("/assets/signalindustries/textures/armor/harness_shield_no_goggles_1.png");
                     }
                 }
             } else if (item instanceof ItemSignalumPowerSuit) {
-                IPowerSuit powerSuit = ((IPlayerPowerSuit<?>)entity).getPowerSuit();
-                if(powerSuit != null){
-                    if(powerSuit.hasAttachment(SIItems.awakenedAbilityModule)){
+                IPowerSuit powerSuit = ((IPlayerPowerSuit<?>) entity).getPowerSuit();
+                if (powerSuit != null) {
+                    if (powerSuit.hasAttachment(SIItems.awakenedAbilityModule)) {
                         ItemStack stack = powerSuit.getAttachment(SIItems.awakenedAbilityModule);
-                        if(stack != null){
+                        if (stack != null) {
                             bindTexture("/assets/signalindustries/textures/armor/power_suit_awakened" + "_" + (layer != 2 ? 1 : 2) + ".png");
                         }
                     }
-                    if(powerSuit.hasAttachmentClass(ItemSuitColorizer.class)){
+                    if (powerSuit.hasAttachmentClass(ItemSuitColorizer.class)) {
                         ItemStack stack = powerSuit.getAttachmentClass(ItemSuitColorizer.class);
-                        if(stack != null){
+                        if (stack != null) {
                             ItemSuitColorizer suitColorizer = (ItemSuitColorizer) stack.getItem();
-                            bindTexture( suitColorizer.path + "_" + (layer != 2 ? 1 : 2) + ".png");
+                            bindTexture(suitColorizer.path + "_" + (layer != 2 ? 1 : 2) + ".png");
                         }
                     }
                 }
@@ -74,33 +76,33 @@ public abstract class MobRendererPlayerMixin extends MobRenderer<Player> {
             at = @At("HEAD")
     )
     protected void renderAdditional(Player player, float partialTick, CallbackInfo ci) {
-        IPowerSuit powerSuit = ((IPlayerPowerSuit<?>)player).getPowerSuit();
-        if(powerSuit != null){
+        IPowerSuit powerSuit = ((IPlayerPowerSuit<?>) player).getPowerSuit();
+        if (powerSuit != null) {
             for (ItemStack content : powerSuit.getArmorPiece(IArmorItem.PIECE_HEAD).contents) {
-                if(content != null){
+                if (content != null) {
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
+                    ((ItemAttachment) content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.getArmorPiece(IArmorItem.PIECE_CHEST).contents) {
-                if(content != null){
+                if (content != null) {
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
+                    ((ItemAttachment) content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.getArmorPiece(IArmorItem.PIECE_LEGS).contents) {
-                if(content != null){
+                if (content != null) {
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
+                    ((ItemAttachment) content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }
             for (ItemStack content : powerSuit.getArmorPiece(IArmorItem.PIECE_BOOTS).contents) {
-                if(content != null){
+                if (content != null) {
                     GL11.glPushMatrix();
-                    ((ItemAttachment)content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
+                    ((ItemAttachment) content.getItem()).renderWhenAttached(player, powerSuit, modelBipedMain, content);
                     GL11.glPopMatrix();
                 }
             }

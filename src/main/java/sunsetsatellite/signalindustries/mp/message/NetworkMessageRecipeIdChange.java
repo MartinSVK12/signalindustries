@@ -22,7 +22,8 @@ public class NetworkMessageRecipeIdChange implements NetworkMessage {
         this.tileClass = tileClass;
     }
 
-    public NetworkMessageRecipeIdChange() {}
+    public NetworkMessageRecipeIdChange() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -42,10 +43,10 @@ public class NetworkMessageRecipeIdChange implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if(tileClass == tileEntity.getClass() && tileEntity instanceof TileEntityTieredMachineSimple) {
+                if (tileClass == tileEntity.getClass() && tileEntity instanceof TileEntityTieredMachineSimple) {
                     ((TileEntityTieredMachineSimple) tileEntity).recipeId = recipeId;
                 }
             }

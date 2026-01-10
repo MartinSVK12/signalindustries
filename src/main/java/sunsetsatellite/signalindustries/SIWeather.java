@@ -17,7 +17,7 @@ public class SIWeather extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing weather...");
         weatherBloodMoon = new WeatherBloodMoon(10).setLanguageKey("bloodMoon");
         weatherEclipse = new WeatherEclipse(11).setLanguageKey("solarEclipse");

@@ -31,12 +31,12 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         nbttagcompound.putBoolean("Infinite", infinite);
         nbttagcompound.putBoolean("Unlimited", unlimited);
         nbttagcompound.putBoolean("Locked", locked);
-        if(contents != null){
+        if (contents != null) {
             CompoundTag contentsTag = new CompoundTag();
-            contentsTag.putShort("id", (short)contents.itemID);
+            contentsTag.putShort("id", (short) contents.itemID);
             contentsTag.putInt("Count", contents.stackSize);
-            contentsTag.putShort("Damage", (short)contents.getMetadata());
-            contentsTag.putByte("Expanded", (byte)1);
+            contentsTag.putShort("Damage", (short) contents.getMetadata());
+            contentsTag.putByte("Expanded", (byte) 1);
             contentsTag.putInt("Version", 19134);
             if (!contents.getData().getValue().isEmpty()) {
                 contentsTag.putCompound("Data", contents.getData());
@@ -53,27 +53,27 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         infinite = nbttagcompound.getBoolean("Infinite");
         unlimited = nbttagcompound.getBoolean("Unlimited");
         locked = nbttagcompound.getBoolean("Locked");
-        if(nbttagcompound.containsKey("Contents")){
-            contents = new ItemStack(1,1,0);
+        if (nbttagcompound.containsKey("Contents")) {
+            contents = new ItemStack(1, 1, 0);
             ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize(getTieredCapacity());
             contents.readFromNBT(nbttagcompound.getCompound("Contents"));
             contents.stackSize = nbttagcompound.getCompound("Contents").getInteger("Count");
-        } else if(nbttagcompound.containsKey("Empty")){
+        } else if (nbttagcompound.containsKey("Empty")) {
             contents = null;
         }
     }
 
     public boolean insertStack(ItemStack stack) {
-        if(stack == null) return false;
-        if(infinite){
+        if (stack == null) return false;
+        if (infinite) {
             contents = stack.copy();
-            if(contents.isItemEqual(stack)){
+            if (contents.isItemEqual(stack)) {
                 stack.stackSize = 0;
             }
             return true;
         }
-        if(contents == null){
-            if(capacity >= stack.stackSize){
+        if (contents == null) {
+            if (capacity >= stack.stackSize) {
                 contents = stack.copy();
                 stack.stackSize = 0;
                 return true;
@@ -84,11 +84,11 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
                 return true;
             }
         } else {
-            if(!(contents.isItemEqual(stack))) return false;
-            if(!(contents.getData()).equals(stack.getData())) return false;
-            if(contents.stackSize >= capacity) return false;
-            if(contents.stackSize+stack.stackSize > capacity){
-                int remainder = (contents.stackSize+stack.stackSize) - capacity;
+            if (!(contents.isItemEqual(stack))) return false;
+            if (!(contents.getData()).equals(stack.getData())) return false;
+            if (contents.stackSize >= capacity) return false;
+            if (contents.stackSize + stack.stackSize > capacity) {
+                int remainder = (contents.stackSize + stack.stackSize) - capacity;
                 contents.stackSize = capacity;
                 stack.stackSize -= remainder;
             } else {
@@ -100,12 +100,12 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     }
 
     //extracts maximum amount possible for the stack
-    public ItemStack extractStack(){
-        if(contents == null) return null;
-        if(contents.stackSize <= 0) return null;
-        if(contents.stackSize <= contents.getMaxStackSize()){
+    public ItemStack extractStack() {
+        if (contents == null) return null;
+        if (contents.stackSize <= 0) return null;
+        if (contents.stackSize <= contents.getMaxStackSize()) {
             ItemStack stack = contents.copy();
-            if(!locked){
+            if (!locked) {
                 contents = null;
             } else {
                 contents.stackSize = 0;
@@ -115,7 +115,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
             ItemStack stack = contents.copy();
             stack.stackSize = contents.getMaxStackSize();
             contents.stackSize -= contents.getMaxStackSize();
-            if(contents.stackSize <= 0 && !locked){
+            if (contents.stackSize <= 0 && !locked) {
                 contents = null;
             }
             return stack;
@@ -123,13 +123,13 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     }
 
     //extracts specific amount capped bu the items max stack size
-    public ItemStack extractStack(int amount){
-        if(contents == null) return null;
-        if(contents.stackSize <= 0) return null;
-        amount = Math.min(contents.getMaxStackSize(),amount);
-        if(contents.stackSize <= contents.getMaxStackSize() && contents.stackSize <= amount){
+    public ItemStack extractStack(int amount) {
+        if (contents == null) return null;
+        if (contents.stackSize <= 0) return null;
+        amount = Math.min(contents.getMaxStackSize(), amount);
+        if (contents.stackSize <= contents.getMaxStackSize() && contents.stackSize <= amount) {
             ItemStack stack = contents.copy();
-            if(!locked){
+            if (!locked) {
                 contents = null;
             } else {
                 contents.stackSize = 0;
@@ -146,18 +146,18 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
-        if(tier == Tier.INFINITE){
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
+        if (tier == Tier.INFINITE) {
             infinite = true;
             unlimited = true;
         }
         capacity = unlimited ? Integer.MAX_VALUE : getTieredCapacity();
 
-        if(contents != null){
-            if(infinite){
+        if (contents != null) {
+            if (infinite) {
                 contents.stackSize = Integer.MAX_VALUE;
             }
-            if(!locked && contents.stackSize <= 0){
+            if (!locked && contents.stackSize <= 0) {
                 contents = null;
             }
         }
@@ -172,8 +172,8 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     @Override
     public ItemStack getItem(int slot) {
         if (slot == 0) {
-            if(contents == null) return null;
-            ((UnlimitedItemStack)(Object) contents).enableCustomMaxSize(getTieredCapacity());
+            if (contents == null) return null;
+            ((UnlimitedItemStack) (Object) contents).enableCustomMaxSize(getTieredCapacity());
             return contents;
         }
         return null;
@@ -212,8 +212,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 
     @Override
     public boolean stillValid(Player player) {
-        if(worldObj == null || worldObj.getTileEntity(x, y, z) != this)
-        {
+        if (worldObj == null || worldObj.getTileEntity(x, y, z) != this) {
             return false;
         }
         return player.distanceToSqr((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D) <= 64D;
@@ -227,9 +226,9 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     @Override
     public void dropContents(World world, int x, int y, int z) {
         super.dropContents(world, x, y, z);
-        for(int i = 0; i < this.getContainerSize(); i++) {
+        for (int i = 0; i < this.getContainerSize(); i++) {
             ItemStack itemStack = this.getItem(i);
-            if(itemStack == null) continue;
+            if (itemStack == null) continue;
             itemStack = itemStack.copy();
             ((UnlimitedItemStack) (Object) itemStack).disableCustomMaxSize();
             ((UnlimitedItemStack) (Object) itemStack).setUnlimited(false);
@@ -241,8 +240,8 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         }
     }
 
-    public int getTieredCapacity(){
-        switch (tier){
+    public int getTieredCapacity() {
+        switch (tier) {
             case PROTOTYPE:
                 return 4096;
             case BASIC:

@@ -23,21 +23,18 @@ public class MenuHarness extends MenuFluid {
         ItemStack armor = playerInv.getItem(slotIndex);
 
         if (armor != null && armor.getItem() instanceof ItemSignalumPowerHarness) {
-            InventorySerializer.loadInvFromNBT(armor,itemInventory,0,1);
+            InventorySerializer.loadInvFromNBT(armor, itemInventory, 0, 1);
 
-            addFluidSlot(new SlotFluid(fluidInventory,0,80,33));
+            addFluidSlot(new SlotFluid(fluidInventory, 0, 80, 33));
 
-            for(int j = 0; j < 3; j++)
-            {
-                for(int i1 = 0; i1 < 9; i1++)
-                {
+            for (int j = 0; j < 3; j++) {
+                for (int i1 = 0; i1 < 9; i1++) {
                     addSlot(new Slot(playerInv, i1 + j * 9 + 9, 8 + i1 * 18, 84 + j * 18));
                 }
 
             }
 
-            for(int k = 0; k < 9; k++)
-            {
+            for (int k = 0; k < 9; k++) {
                 addSlot(new Slot(playerInv, k, 8 + k * 18, 142));
             }
         }
@@ -47,9 +44,8 @@ public class MenuHarness extends MenuFluid {
     @Override
     public void onCraftGuiClosed(Player player) {
         super.onCraftGuiClosed(player);
-        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex),itemInventory);
-        for(int i = 0; i < slots.size(); i++)
-        {
+        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), itemInventory);
+        for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();
                 stack = stack != null ? stack.copy() : null;

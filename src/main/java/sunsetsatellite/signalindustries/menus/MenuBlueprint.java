@@ -5,9 +5,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
-import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.invs.InventoryBlueprint;
-import sunsetsatellite.signalindustries.invs.InventoryItemFluid;
 
 import java.util.ArrayList;
 import java.util.List;

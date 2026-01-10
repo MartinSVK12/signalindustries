@@ -39,14 +39,14 @@ public class RecipeExtendedSymbolJsonAdapter implements JsonDeserializer<RecipeE
 
         RecipeExtendedSymbol exSymbol = null;
 
-        if(stack != null){
+        if (stack != null) {
             exSymbol = new RecipeExtendedSymbol(symbol, stack, group);
-            if(amount != 1){
+            if (amount != 1) {
                 exSymbol.setAmount(amount);
             }
         } else if (fluidStack != null) {
             exSymbol = new RecipeExtendedSymbol(symbol, fluidStack);
-            if(amount != 1){
+            if (amount != 1) {
                 exSymbol.setAmount(amount);
             }
         }

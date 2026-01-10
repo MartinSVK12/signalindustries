@@ -30,7 +30,7 @@ public class SIMultiblocks extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing multiblocks...");
 
         wrathTree = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
@@ -80,11 +80,11 @@ public class SIMultiblocks extends DataInitializer {
                 .mapSymbol('1', new ItemStack(SIBlocks.reinforcedCasing, 1, -1))
                 .mapSymbol('2', new ItemStack(SIBlocks.reinforcedCasing2, 1, -1))
                 .mapSymbol('F', new ItemStack(SIBlocks.reinforcedFrame, 1, -1))
-                .mapSymbol('G', new ItemStack(SIBlocks.reinforcedGrate,1, -1))
-                .mapSymbol('S', new ItemStack(SIBlocks.rawCrystalBlock,1,-1))
+                .mapSymbol('G', new ItemStack(SIBlocks.reinforcedGrate, 1, -1))
+                .mapSymbol('S', new ItemStack(SIBlocks.rawCrystalBlock, 1, -1))
                 .mapSymbol('I', new ItemStack(SIBlocks.reinforcedFluidInputHatch, 1, -1))
-                .mapSymbol('O', new ItemStack(SIBlocks.reinforcedItemOutputBus,1, -1))
-                .mapSymbol('E', new ItemStack(SIBlocks.reinforcedEnergyConnector,1, -1))
+                .mapSymbol('O', new ItemStack(SIBlocks.reinforcedItemOutputBus, 1, -1))
+                .mapSymbol('E', new ItemStack(SIBlocks.reinforcedEnergyConnector, 1, -1))
                 .build();
 
         laserDrill = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "laserDrill", laserDrillData, false, Tier.REINFORCED);

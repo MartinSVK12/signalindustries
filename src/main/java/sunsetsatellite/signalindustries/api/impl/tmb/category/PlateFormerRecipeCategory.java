@@ -8,7 +8,6 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
@@ -73,15 +72,15 @@ public class PlateFormerRecipeCategory implements IRecipeCategory<MachineRecipeT
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -90,7 +89,7 @@ public class PlateFormerRecipeCategory implements IRecipeCategory<MachineRecipeT
 
         ingredients.add(0, IngredientList.fromRecipeSymbol(recipe.getOriginal().getInput()[0].asNormalSymbol()));
         ingredients.add(1, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(2, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(2, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override

@@ -22,7 +22,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     public float speedMultiplier = 1;
     public float yield = 1;
     public IOPreview preview = IOPreview.NONE;
-    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+    public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
     public boolean disabled = false;
 
 
@@ -40,7 +40,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     }
 
     @Override
-    public boolean isBurning(){
+    public boolean isBurning() {
         return fuelBurnTicks > 0;
     }
 
@@ -55,39 +55,39 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         if (worldObj.isClientSide) return;
         IOPreviewTimer.tick();
         Block<?> block = getBlock();
-        if(block != null){
+        if (block != null) {
             applyModifiers();
         }
     }
 
-    public void applyModifiers(){
+    public void applyModifiers() {
         speedMultiplier = 1;
         yield = 1;
-        for(Direction dir : Direction.values()) {
+        for (Direction dir : Direction.values()) {
             TileEntity tile = dir.getTileEntity(worldObj, this);
             if (tile instanceof IBooster && this instanceof IBoostable) {
                 if (((IBooster) tile).isBurning()) {
                     int meta = tile.getBlockMeta();
                     Direction side = Direction.getDirectionFromSide(meta);
                     if (side.getOpposite() == dir) {
-                        if(((IBooster) tile).getTier() == Tier.BASIC){
+                        if (((IBooster) tile).getTier() == Tier.BASIC) {
                             speedMultiplier = 1.5f;
                             //yield = 1.05f;
-                            if(((IBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                            if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
                                 speedMultiplier = 1.75f;
                                 //yield = 1.15f;
                             }
-                        } else if(((IBooster) tile).getTier() == Tier.REINFORCED) {
+                        } else if (((IBooster) tile).getTier() == Tier.REINFORCED) {
                             speedMultiplier = 2;
                             //yield = 1.25f;
-                            if(((IBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                            if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
                                 speedMultiplier = 2.5f;
                                 //yield = 1.35f;
                             }
                         } else if (((IBooster) tile).getTier() == Tier.AWAKENED) {
                             speedMultiplier = 3;
                             //yield = 2f;
-                            if(((IBooster) tile).hasCover(side, DilithiumLensCover.class)){
+                            if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
                                 speedMultiplier = 4f;
                                 //yield = 2.1f;
                             }
@@ -101,11 +101,11 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putShort("BurnTime", (short)this.fuelBurnTicks);
-        tag.putShort("ProcessTime", (short)this.progressTicks);
-        tag.putShort("MaxBurnTime", (short)this.fuelMaxBurnTicks);
-        tag.putInt("MaxProcessTime",this.progressMaxTicks);
-        tag.putBoolean("Disabled",disabled);
+        tag.putShort("BurnTime", (short) this.fuelBurnTicks);
+        tag.putShort("ProcessTime", (short) this.progressTicks);
+        tag.putShort("MaxBurnTime", (short) this.fuelMaxBurnTicks);
+        tag.putInt("MaxProcessTime", this.progressMaxTicks);
+        tag.putBoolean("Disabled", disabled);
     }
 
     @Override
@@ -118,11 +118,11 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         disabled = tag.getBoolean("Disabled");
     }
 
-    public int getTieredProgressDuration(int defaultTicks){
-        return (int) (((float) defaultTicks / (tier.ordinal()+1)) / speedMultiplier);
+    public int getTieredProgressDuration(int defaultTicks) {
+        return (int) (((float) defaultTicks / (tier.ordinal() + 1)) / speedMultiplier);
     }
 
-    public int getProgressDuration(int defaultTicks){
+    public int getProgressDuration(int defaultTicks) {
         return (int) (defaultTicks / speedMultiplier);
     }
 
@@ -131,7 +131,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     }
 
     public int getBurnTimeRemainingScaled(int paramInt) {
-        if(this.fuelMaxBurnTicks == 0) {
+        if (this.fuelMaxBurnTicks == 0) {
             this.fuelMaxBurnTicks = 200;
         }
         return this.fuelBurnTicks * paramInt / this.fuelMaxBurnTicks;
@@ -147,8 +147,8 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         this.preview = preview;
     }
 
-    public void onPoweredBlockChange(boolean powered){
-        if(hasCoverAnywhere(SwitchCover.class)){
+    public void onPoweredBlockChange(boolean powered) {
+        if (hasCoverAnywhere(SwitchCover.class)) {
             disabled = powered;
         }
     }

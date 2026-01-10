@@ -16,7 +16,7 @@ public class GuidebookSectionsMixin {
     @Inject(
             method = "init", at = @At("TAIL")
     )
-    private static void init(CallbackInfo ci){
+    private static void init(CallbackInfo ci) {
         GuidebookSections.register(new SignalIndustriesSection());
     }
 }

@@ -48,7 +48,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
         fontRenderer.drawStringWithShadow("Signalite Drill", 4, i += 16, 0xFFFF0000);
         fontRenderer.drawStringWithShadow("Energy: ", 4, i += 16, 0xFFFFFFFF);
         fontRenderer.drawStringWithShadow(String.valueOf(drill.getData().getInteger("energy")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
-        fontRenderer.drawStringWithShadow(getModeString(drill), 4, i +=10, 0xFFFFFFFF);
+        fontRenderer.drawStringWithShadow(getModeString(drill), 4, i += 10, 0xFFFFFFFF);
     }
 
     @Override
@@ -56,40 +56,40 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     }
 
-    public enum DrillMode{
+    public enum DrillMode {
         NORMAL,
         X3,
         X3_UNSAFE
     }
 
-    public String getModeString(ItemStack stack){
+    public String getModeString(ItemStack stack) {
         DrillMode mode = getMode(stack);
-        switch (mode){
+        switch (mode) {
             case NORMAL:
-                return TextFormatting.GRAY+"Normal";
+                return TextFormatting.GRAY + "Normal";
             case X3:
-                return TextFormatting.YELLOW+"3x3";
+                return TextFormatting.YELLOW + "3x3";
             case X3_UNSAFE:
-                return TextFormatting.RED+"3x3 (Unsafe)";
+                return TextFormatting.RED + "3x3 (Unsafe)";
         }
-        return TextFormatting.GRAY+"Normal";
+        return TextFormatting.GRAY + "Normal";
     }
 
     public DrillMode getMode(ItemStack stack) {
         try {
             return DrillMode.valueOf(stack.getData().getString("mode"));
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return DrillMode.NORMAL;
         }
     }
 
-    public void setMode(ItemStack stack, DrillMode mode){
-        stack.getData().putString("mode",mode.toString());
+    public void setMode(ItemStack stack, DrillMode mode) {
+        stack.getData().putString("mode", mode.toString());
     }
 
     @Override
     public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int ox, int oy, int oz, Side side, Mob mob) {
-        if(world.isClientSide) return true;
+        if (world.isClientSide) return true;
         int energy = itemstack.getData().getInteger("energy");
         DrillMode mode = getMode(itemstack);
 
@@ -105,18 +105,18 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
                 //todo: change to normal (1)
                 int size = 1;
                 blockDestroyCost = 0;
-                if(side.getAxis() == Axis.Y){
+                if (side.getAxis() == Axis.Y) {
                     for (int x = -size; x <= size; x++) {
                         for (int z = -size; z <= size; z++) {
                             Block<?> block = world.getBlock(ox + x, oy, oz + z);
-                            if(energy >= blockDestroyCost) {
+                            if (energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);
                                 energy = itemstack.getData().getInteger("energy");
                                 int meta = world.getBlockMetadata(ox + x, oy, oz + z);
                                 TileEntity tile = world.getTileEntity(ox + x, oy, oz + z);
-                                if((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)){
-                                    block.harvestBlock(world, (Player) mob,ox + x, oy, oz + z,meta,null);
-                                    world.setBlockWithNotify(ox + x, oy, oz + z,0);
+                                if ((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)) {
+                                    block.harvestBlock(world, (Player) mob, ox + x, oy, oz + z, meta, null);
+                                    world.setBlockWithNotify(ox + x, oy, oz + z, 0);
                                 }
                             }
                         }
@@ -125,14 +125,14 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
                     for (int x = -size; x <= size; x++) {
                         for (int y = -size; y <= size; y++) {
                             Block<?> block = world.getBlock(ox + x, oy + y, oz);
-                            if(energy >= blockDestroyCost) {
+                            if (energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);
                                 energy = itemstack.getData().getInteger("energy");
                                 int meta = world.getBlockMetadata(ox + x, oy + y, oz);
                                 TileEntity tile = world.getTileEntity(ox + x, oy + y, oz);
-                                if((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)){
-                                    block.harvestBlock(world, (Player) mob,ox + x, oy + y, oz, meta, null);
-                                    world.setBlockWithNotify(ox + x, oy + y, oz,0);
+                                if ((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)) {
+                                    block.harvestBlock(world, (Player) mob, ox + x, oy + y, oz, meta, null);
+                                    world.setBlockWithNotify(ox + x, oy + y, oz, 0);
                                 }
                             }
                         }
@@ -141,14 +141,14 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
                     for (int z = -size; z <= size; z++) {
                         for (int y = -size; y <= size; y++) {
                             Block<?> block = world.getBlock(ox, oy + y, oz + z);
-                            if(energy >= blockDestroyCost) {
+                            if (energy >= blockDestroyCost) {
                                 itemstack.getData().putInt("energy", energy - blockDestroyCost);
                                 energy = itemstack.getData().getInteger("energy");
                                 int meta = world.getBlockMetadata(ox, oy + y, oz + z);
                                 TileEntity tile = world.getTileEntity(ox, oy + y, oz + z);
-                                if((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)){
-                                    block.harvestBlock(world, (Player) mob,ox, oy + y, oz + z, meta, null);
-                                    world.setBlockWithNotify(ox, oy + y, oz + z,0);
+                                if ((((Player) mob)).canHarvestBlock(block) && (tile == null || getMode(itemstack) == DrillMode.X3_UNSAFE)) {
+                                    block.harvestBlock(world, (Player) mob, ox, oy + y, oz + z, meta, null);
+                                    world.setBlockWithNotify(ox, oy + y, oz + z, 0);
                                 }
                             }
                         }
@@ -173,7 +173,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public int getRemainingCapacity(ItemStack stack) {
-        return getCapacity(stack)-stack.getData().getInteger("energy");
+        return getCapacity(stack) - stack.getData().getInteger("energy");
     }
 
     @Override
@@ -193,36 +193,36 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SIFluids.ENERGY,getCapacity(stack));
+        return new FluidStack(SIFluids.ENERGY, getCapacity(stack));
     }
 
     @Override
     public void setCurrentFluid(FluidStack fluidStack, ItemStack stack) {
-        if(fluidStack.fluid != SIFluids.ENERGY) return;
-        stack.getData().putInt("saturation",fluidStack.amount);
+        if (fluidStack.fluid != SIFluids.ENERGY) return;
+        stack.getData().putInt("saturation", fluidStack.amount);
     }
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
             int amount = fluidStack.amount;
-            if(remaining == 0){
+            if (remaining == 0) {
                 return null;
             }
-            if(amount > remaining){
+            if (amount > remaining) {
                 fluidStack.amount -= remaining;
                 CompoundTag data = new CompoundTag();
-                data.putInt("energy",getCapacity(stack));
+                data.putInt("energy", getCapacity(stack));
                 stack.setData(data);
                 return stack;
             } else {
                 CompoundTag data = new CompoundTag();
-                data.putInt("energy",saturation + amount);
+                data.putInt("energy", saturation + amount);
                 fluidStack.amount -= amount;
                 stack.setData(data);
                 return stack;
@@ -233,24 +233,24 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile) {
-        return fill(fluidStack,stack);
+        return fill(fluidStack, stack);
     }
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile, int maxAmount) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("energy");
-            int amount = Math.min(fluidStack.amount,maxAmount);
-            if(remaining == 0) return null;
-            int result = Math.min(amount,remaining);
-            if(result == 0) return null;
+            int amount = Math.min(fluidStack.amount, maxAmount);
+            if (remaining == 0) return null;
+            int result = Math.min(amount, remaining);
+            if (result == 0) return null;
             fluidStack.amount -= result;
             CompoundTag data = new CompoundTag();
-            data.putInt("energy",saturation+result);
+            data.putInt("energy", saturation + result);
             stack.setData(data);
             return stack;
         }
@@ -259,7 +259,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IItemFluidContainer inv) {
-        return fill(fluidStack,stack);
+        return fill(fluidStack, stack);
     }
 
     @Override
@@ -289,17 +289,17 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getTextColor() + tier.getRank()+"\n"+"Mode: "+ getModeString(stack)+"\n"+"Energy: "+ TextFormatting.RED+stack.getData().getInteger("energy")+"/"+getCapacity(stack)+TextFormatting.WHITE;
+        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + "Mode: " + getModeString(stack) + "\n" + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + "/" + getCapacity(stack) + TextFormatting.WHITE;
     }
 
     @Override
     public float getStrVsBlock(ItemStack itemstack, Block<?> block) {
-        float superValue = super.getStrVsBlock(itemstack,block);
-        if(block.hasTag(BlockTags.MINEABLE_BY_SHOVEL)){
+        float superValue = super.getStrVsBlock(itemstack, block);
+        if (block.hasTag(BlockTags.MINEABLE_BY_SHOVEL)) {
             superValue = material.getEfficiency(false);
         }
-        if(superValue == 1.0f) return 1.0f;
-        if(itemstack.getData().getInteger("energy") >= blockDestroyCost){
+        if (superValue == 1.0f) return 1.0f;
+        if (itemstack.getData().getInteger("energy") >= blockDestroyCost) {
             return this.material.getEfficiency(false);
         } else {
             return 1.0f;
@@ -309,7 +309,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     @Override
     public boolean canHarvestBlock(Mob mob, ItemStack itemStack, Block<?> block) {
         Integer miningLevel = miningLevels.get(block);
-        if(miningLevel != null) return material.getMiningLevel() >= miningLevel;
+        if (miningLevel != null) return material.getMiningLevel() >= miningLevel;
 
         return block.hasTag(BlockTags.MINEABLE_BY_PICKAXE) || block.hasTag(BlockTags.MINEABLE_BY_SHOVEL);
     }

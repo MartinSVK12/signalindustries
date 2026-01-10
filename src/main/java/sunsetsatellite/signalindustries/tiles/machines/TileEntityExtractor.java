@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 
 public class TileEntityExtractor extends TileEntityTieredMachineBase implements IBoostable {
 
-    public TileEntityExtractor(){
+    public TileEntityExtractor() {
         itemContents = new ItemStack[2];
         fluidCapacity[0] = 2000;
         acceptedFluids.get(0).add(SIFluids.ENERGY);
@@ -19,55 +19,55 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         extractFluids();
-        for(int i = 0; i < itemContents.length; i++){
-            if(itemContents[i] != null && itemContents[i].stackSize <= 0){
+        for (int i = 0; i < itemContents.length; i++) {
+            if (itemContents[i] != null && itemContents[i].stackSize <= 0) {
                 itemContents[i] = null;
             }
         }
         boolean update = false;
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
-        if(itemContents[0] == null){
+        if (itemContents[0] == null) {
             progressTicks = 0;
-        } else if(canProcess()) {
+        } else if (canProcess()) {
             progressMaxTicks = (int) (200 / speedMultiplier);
         }
-        if(!worldObj.isClientSide){
-            if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2){
+        if (!worldObj.isClientSide) {
+            if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2) {
                 update = fuel();
             }
-            if(isBurning() && canProcess()){
+            if (isBurning() && canProcess()) {
                 progressTicks++;
-                if(progressTicks >= progressMaxTicks){
+                if (progressTicks >= progressMaxTicks) {
                     progressTicks = 0;
                     processItem();
                     update = true;
                 }
-            } else if(canProcess()){
-                if(fuelBurnTicks < 2){
+            } else if (canProcess()) {
+                if (fuelBurnTicks < 2) {
                     fuel();
                 }
             }
         }
 
-        if(update) {
+        if (update) {
             this.setChanged();
         }
     }
 
-    public boolean fuel(){
+    public boolean fuel() {
         int burn = getItemBurnTime(itemContents[1]);
-        if(burn > 0 && canProcess()){
+        if (burn > 0 && canProcess()) {
             progressMaxTicks = (int) (200 / speedMultiplier);
             fuelMaxBurnTicks = fuelBurnTicks = burn;
-            if(itemContents[1].getItem().hasContainerItem()) {
+            if (itemContents[1].getItem().hasContainerItem()) {
                 itemContents[1] = new ItemStack(itemContents[1].getItem().getContainerItem());
             } else {
                 itemContents[1].stackSize--;
-                if(itemContents[1].stackSize == 0) {
+                if (itemContents[1].stackSize == 0) {
                     itemContents[1] = null;
                 }
             }
@@ -76,36 +76,36 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
         return false;
     }
 
-    public void processItem(){
-        if(canProcess()){
-            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0],tier);
-            if(stack == null){
+    public void processItem() {
+        if (canProcess()) {
+            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0], tier);
+            if (stack == null) {
                 return;
             }
-            if(fluidContents[0] == null || getFluidInSlot(0).fluid == null){
+            if (fluidContents[0] == null || getFluidInSlot(0).fluid == null) {
                 setFluidInSlot(0, stack);
-            } else if(getFluidInSlot(0).fluid == stack.fluid) {
+            } else if (getFluidInSlot(0).fluid == stack.fluid) {
                 fluidContents[0].amount += stack.amount;
             }
             /*if(!Global.isServer){
                 Minecraft.getMinecraft(this).//thePlayer.triggerAchievement(SIAchievements.FROM_WITHIN);
             }*/
-            if(this.itemContents[0].getItem().hasContainerItem()) {
+            if (this.itemContents[0].getItem().hasContainerItem()) {
                 this.itemContents[0] = new ItemStack(this.itemContents[0].getItem().getContainerItem());
             } else {
                 --this.itemContents[0].stackSize;
             }
-            if(this.itemContents[0].stackSize <= 0) {
+            if (this.itemContents[0].stackSize <= 0) {
                 this.itemContents[0] = null;
             }
         }
     }
 
     private boolean canProcess() {
-        if(itemContents[0] == null) {
+        if (itemContents[0] == null) {
             return false;
         } else {
-            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0],tier);
+            FluidStack stack = SIRecipes.EXTRACTOR.findFluidOutput(itemContents[0], tier);
             return stack != null && (fluidContents[0] == null || (fluidContents[0].isFluidEqual(stack) && (fluidContents[0].amount + stack.amount <= fluidCapacity[0])));
         }
     }

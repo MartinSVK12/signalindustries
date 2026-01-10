@@ -40,8 +40,7 @@ public abstract class ItemAttachment extends Item implements IAttachment, ICusto
 
     public abstract void tick(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, int slot);
 
-    public void loadTexture(String texturePath)
-    {
+    public void loadTexture(String texturePath) {
         TextureManager t = Minecraft.getMinecraft().textureManager;
         t.bindTexture(t.loadTexture(texturePath));
     }

@@ -3,13 +3,10 @@ package sunsetsatellite.signalindustries.recipes.entry;
 import net.minecraft.core.data.registry.recipe.RecipeEntryBase;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
-import sunsetsatellite.signalindustries.util.RecipeProperties;
 
-public abstract class RecipeEntrySI<I,O,D> extends RecipeEntryBase<I,O,D> {
+public abstract class RecipeEntrySI<I, O, D> extends RecipeEntryBase<I, O, D> {
 
     public RecipeEntrySI(I input, O output, D data) {
         super(input, output, data);

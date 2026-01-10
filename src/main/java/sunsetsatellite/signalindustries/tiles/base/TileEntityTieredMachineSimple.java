@@ -7,10 +7,10 @@ import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.*;
-import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
@@ -19,7 +19,7 @@ import java.util.*;
 public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMachineBase implements IFluidIO, IItemIO {
 
     public RecipeGroupSI<?> recipeGroup;
-    public RecipeEntrySI<?,?, RecipeProperties> currentRecipe;
+    public RecipeEntrySI<?, ?, RecipeProperties> currentRecipe;
     public int recipeId = 0;
     public int[] itemInputs = new int[0];
     public int[] itemOutputs = new int[0];
@@ -31,60 +31,60 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlocksDirty(x,y,z,x,y,z);
+        worldObj.markBlocksDirty(x, y, z, x, y, z);
         extractFluids();
         Block<?> block = getBlock();
-        if(block != null){
+        if (block != null) {
             setCurrentRecipe();
-            if(!disabled) work();
+            if (!disabled) work();
         }
     }
 
-    public void work(){
-        if(EnvironmentHelper.isClientWorld()) return;
+    public void work() {
+        if (EnvironmentHelper.isClientWorld()) return;
         boolean update = false;
-        if(fuelBurnTicks > 0){
+        if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
         }
-        if(areAllInputsNull()){
+        if (areAllInputsNull()) {
             progressTicks = 0;
-        } else if(canProcess()) {
+        } else if (canProcess()) {
             progressMaxTicks = getTieredProgressDuration(currentRecipe.getData().ticks); //(int) (currentRecipe.getData().ticks / speedMultiplier);
         }
-        if(!worldObj.isClientSide){
-            if (progressTicks == 0 && canProcess()){
+        if (!worldObj.isClientSide) {
+            if (progressTicks == 0 && canProcess()) {
                 update = fuel();
             }
-            if(isBurning() && canProcess()){
+            if (isBurning() && canProcess()) {
                 progressTicks++;
-                if(progressTicks >= progressMaxTicks){
+                if (progressTicks >= progressMaxTicks) {
                     progressTicks = 0;
                     processItem();
                     update = true;
                 }
-            } else if(canProcess()){
+            } else if (canProcess()) {
                 fuel();
-                if(fuelBurnTicks > 0){
+                if (fuelBurnTicks > 0) {
                     fuelBurnTicks++;
                 }
             }
         }
 
-        if(update) {
+        if (update) {
             this.setChanged();
         }
     }
 
-    public boolean areAllInputsNull(){
+    public boolean areAllInputsNull() {
         boolean itemsNull = Arrays.stream(itemInputs).allMatch(slot -> itemContents[slot] == null);
         boolean fluidsNull = Arrays.stream(fluidInputs).allMatch(slot -> fluidContents[slot] == null);
         return itemsNull && fluidsNull;
     }
 
-    public boolean fuel(){
+    public boolean fuel() {
         int burn = SignalIndustries.getEnergyBurnTime(fluidContents[energySlot]);
-        if(burn > 0 && canProcess() && currentRecipe != null && fuelBurnTicks <= 0){
-            if(fluidContents[energySlot].amount >= currentRecipe.getData().cost){
+        if (burn > 0 && canProcess() && currentRecipe != null && fuelBurnTicks <= 0) {
+            if (fluidContents[energySlot].amount >= currentRecipe.getData().cost) {
                 progressMaxTicks = getTieredProgressDuration(currentRecipe.getData().ticks);
                 fuelMaxBurnTicks = fuelBurnTicks = burn;
                 fluidContents[energySlot].amount -= currentRecipe.getData().cost;
@@ -98,18 +98,18 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     }
 
     //TODO: move code to recipe entry classes
-    public void processItem(){
-        if(canProcess()){
-            if(currentRecipe instanceof RecipeEntryMachine){
+    public void processItem() {
+        if (canProcess()) {
+            if (currentRecipe instanceof RecipeEntryMachine) {
                 RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
                 ItemStack stack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
                 if (stack != null) {
                     consumeInputs();
-                    if(random.nextFloat() <= recipe.getData().chance){
+                    if (random.nextFloat() <= recipe.getData().chance) {
                         int multiplier = 1;
-                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
-                        if(fraction <= 0) fraction = 1;
-                        if(yield > 1 && random.nextFloat() <= fraction){
+                        float fraction = Float.parseFloat("0." + (String.valueOf(yield).split("\\.")[1]));
+                        if (fraction <= 0) fraction = 1;
+                        if (yield > 1 && random.nextFloat() <= fraction) {
                             multiplier = (int) Math.ceil(yield);
                         }
                         if (itemContents[itemOutputs[0]] == null) {
@@ -125,11 +125,11 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                 FluidStack fluidStack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
                 if (fluidStack != null) {
                     consumeInputs();
-                    if(random.nextFloat() <= recipe.getData().chance) {
+                    if (random.nextFloat() <= recipe.getData().chance) {
                         int multiplier = 1;
-                        float fraction = Float.parseFloat("0."+(String.valueOf(yield).split("\\.")[1]));
-                        if(fraction <= 0) fraction = 1;
-                        if(yield > 1 && random.nextFloat() <= fraction){
+                        float fraction = Float.parseFloat("0." + (String.valueOf(yield).split("\\.")[1]));
+                        if (fraction <= 0) fraction = 1;
+                        if (yield > 1 && random.nextFloat() <= fraction) {
                             multiplier = (int) Math.ceil(yield);
                         }
                         if (fluidContents[fluidOutputs[0]] == null) {
@@ -149,12 +149,12 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     }
 
     //TODO: move code to recipe entry classes
-    public void consumeInputs(){
-        if(currentRecipe instanceof RecipeEntryMachine) {
+    public void consumeInputs() {
+        if (currentRecipe instanceof RecipeEntryMachine) {
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
             for (int itemInput : itemInputs) {
                 ItemStack inputStack = getItem(itemInput);
-                if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                if (inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
                     setItem(itemInput, new ItemStack(inputStack.getItem().getContainerItem()));
                 } else if (inputStack != null) {
                     Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
@@ -162,7 +162,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                             .filter(Objects::nonNull)
                             .filter(stack -> stack.isItemEqual(inputStack))
                             .findFirst();
-                    if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                    if (inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
                         setItem(itemInput, inputStack.getItem().getContainerItem().getDefaultStack());
                     } else {
                         recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
@@ -175,7 +175,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
             }
             for (int fluidInput : fluidInputs) {
                 FluidStack inputStack = getFluidInSlot(fluidInput);
-                if(inputStack != null){
+                if (inputStack != null) {
                     Optional<FluidStack> recipeStack = Arrays.stream(recipe.getInput())
                             .flatMap(symbol -> symbol.resolveFluids().stream())
                             .filter(Objects::nonNull)
@@ -191,7 +191,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
             for (int itemInput : itemInputs) {
                 ItemStack inputStack = getItem(itemInput);
-                if(inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                if (inputStack != null && inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
                     setItem(itemInput, new ItemStack(inputStack.getItem().getContainerItem()));
                 } else if (inputStack != null) {
                     Optional<ItemStack> recipeStack = Arrays.stream(recipe.getInput())
@@ -199,7 +199,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                             .filter(Objects::nonNull)
                             .filter(stack -> stack.isItemEqual(inputStack))
                             .findFirst();
-                    if(inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers){
+                    if (inputStack.getItem().hasContainerItem() && !recipe.getData().consumeContainers) {
                         setItem(itemInput, inputStack.getItem().getContainerItem().getDefaultStack());
                     } else {
                         recipeStack.ifPresent(stack -> inputStack.stackSize -= stack.stackSize);
@@ -211,7 +211,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
             }
             for (int fluidInput : fluidInputs) {
                 FluidStack inputStack = getFluidInSlot(fluidInput);
-                if(inputStack != null){
+                if (inputStack != null) {
                     Optional<FluidStack> recipeStack = Arrays.stream(recipe.getInput())
                             .flatMap(symbol -> symbol.resolveFluids().stream())
                             .filter(Objects::nonNull)
@@ -231,8 +231,8 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     }
 
     //TODO: move code to recipe entry classes
-    public boolean canProcess(){
-        if(currentRecipe instanceof RecipeEntryMachine){
+    public boolean canProcess() {
+        if (currentRecipe instanceof RecipeEntryMachine) {
             RecipeEntryMachine recipe = ((RecipeEntryMachine) currentRecipe);
             ItemStack stack = recipe.getOutput();
             if (stack == null) {
@@ -242,58 +242,58 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         } else if (currentRecipe instanceof RecipeEntryMachineFluid) {
             RecipeEntryMachineFluid recipe = ((RecipeEntryMachineFluid) currentRecipe);
             FluidStack fluidStack = recipe.getOutput();
-            if(fluidStack == null){
+            if (fluidStack == null) {
                 return false;
             }
             return areFluidOutputsValid(fluidStack);
         } else if (currentRecipe instanceof RecipeEntryMachineRandomOutput) {
-          return currentRecipe.canMachineProcess(this);
+            return currentRecipe.canMachineProcess(this);
         } else if (currentRecipe instanceof RecipeEntryMachineMultiOutput) {
             return currentRecipe.canMachineProcess(this);
         }
         return false;
     }
 
-    public boolean areRecipeOutputsValid(RecipeOutputStack[] stacks){
+    public boolean areRecipeOutputsValid(RecipeOutputStack[] stacks) {
         Set<Integer> occupiedItemSlots = new HashSet<>();
         Set<Integer> occupiedFluidSlots = new HashSet<>();
         for (RecipeOutputStack output : stacks) {
-            if(output.isItem()){
+            if (output.isItem()) {
                 ItemStack stack = output.stack.copy();
                 stack.stackSize = output.randomAmount ? output.amountMax : stack.stackSize;
                 boolean valid = false;
                 for (int itemOutput : itemOutputs) {
-                    if(occupiedItemSlots.contains(itemOutput)) continue;
+                    if (occupiedItemSlots.contains(itemOutput)) continue;
                     ItemStack outputStack = getItem(itemOutput);
                     if (outputStack != null && outputStack.isItemEqual(stack)) {
-                        if(yield > 1){
-                            int n = outputStack.stackSize+(stack.stackSize*((int) Math.ceil(yield)));
+                        if (yield > 1) {
+                            int n = outputStack.stackSize + (stack.stackSize * ((int) Math.ceil(yield)));
                             if ((n <= getMaxStackSize() && n <= outputStack.getMaxStackSize()) || n <= stack.getMaxStackSize()) {
                                 occupiedItemSlots.add(itemOutput);
                                 valid = true;
                                 break;
                             }
                         } else {
-                            int n = outputStack.stackSize+stack.stackSize;
+                            int n = outputStack.stackSize + stack.stackSize;
                             if ((n <= getMaxStackSize() && n <= outputStack.getMaxStackSize()) || n <= stack.getMaxStackSize()) {
                                 occupiedItemSlots.add(itemOutput);
                                 valid = true;
                                 break;
                             }
                         }
-                    } else if(outputStack == null) {
+                    } else if (outputStack == null) {
                         occupiedItemSlots.add(itemOutput);
                         valid = true;
                         break;
                     }
                 }
-                if(!valid) return false;
-            } else if(output.isFluid()){
+                if (!valid) return false;
+            } else if (output.isFluid()) {
                 FluidStack stack = output.fluid.copy();
                 stack.amount = output.randomAmount ? output.amountMax : stack.amount;
                 boolean valid = false;
                 for (int fluidOutput : fluidOutputs) {
-                    if(occupiedFluidSlots.contains(fluidOutput)) continue;
+                    if (occupiedFluidSlots.contains(fluidOutput)) continue;
                     FluidStack outputStack = getFluidInSlot(fluidOutput);
                     if (outputStack != null) {
                         if (outputStack.isFluidEqual(stack)) {
@@ -317,24 +317,24 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
                         break;
                     }
                 }
-                if(!valid) return false;
+                if (!valid) return false;
             }
         }
         return true;
     }
 
-    public boolean areItemOutputsValid(ItemStack stack){
+    public boolean areItemOutputsValid(ItemStack stack) {
         for (int itemOutput : itemOutputs) {
             ItemStack outputStack = getItem(itemOutput);
             if (outputStack != null) {
                 if (outputStack.isItemEqual(stack)) {
-                    if(yield > 1){
-                        int n = outputStack.stackSize+(stack.stackSize*((int) Math.ceil(yield)));
+                    if (yield > 1) {
+                        int n = outputStack.stackSize + (stack.stackSize * ((int) Math.ceil(yield)));
                         if ((n > getMaxStackSize() || n > outputStack.getMaxStackSize()) && n > stack.getMaxStackSize()) {
                             return false;
                         }
                     } else {
-                        int n = outputStack.stackSize+stack.stackSize;
+                        int n = outputStack.stackSize + stack.stackSize;
                         if ((n > getMaxStackSize() || n > outputStack.getMaxStackSize()) && n > stack.getMaxStackSize()) {
                             return false;
                         }
@@ -347,13 +347,13 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         return true;
     }
 
-    public boolean areFluidOutputsValid(FluidStack stack){
+    public boolean areFluidOutputsValid(FluidStack stack) {
         for (int fluidOutput : fluidOutputs) {
             FluidStack outputStack = getFluidInSlot(fluidOutput);
             if (outputStack != null) {
                 if (outputStack.isFluidEqual(stack)) {
-                    if(yield > 1){
-                        if (stack.amount*Math.ceil(yield) > getRemainingCapacity(fluidOutput)) {
+                    if (yield > 1) {
+                        if (stack.amount * Math.ceil(yield) > getRemainingCapacity(fluidOutput)) {
                             return false;
                         }
                     } else {
@@ -369,25 +369,25 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         return true;
     }
 
-    public void setCurrentRecipe(){
+    public void setCurrentRecipe() {
         ArrayList<RecipeExtendedSymbol> symbols = new ArrayList<>();
-        Arrays.stream(itemInputs).forEach((id)->{
+        Arrays.stream(itemInputs).forEach((id) -> {
             if (getItem(id) != null) {
                 symbols.add(new RecipeExtendedSymbol(getItem(id)));
             }
         });
-        Arrays.stream(fluidInputs).forEach((id)->{
+        Arrays.stream(fluidInputs).forEach((id) -> {
             if (getFluidInSlot(id) != null) {
                 symbols.add(new RecipeExtendedSymbol(getFluidInSlot(id)));
             }
         });
-        currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]),tier,recipeId);
+        currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]), tier, recipeId);
     }
 
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putInt("RecipeId",recipeId);
+        tag.putInt("RecipeId", recipeId);
         /*if(currentRecipe != null) {
             tag.putString("CurrentRecipe",currentRecipe.toString());
         }*/

@@ -12,7 +12,6 @@ import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingPlate
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
-import sunsetsatellite.signalindustries.screens.guidebook.pages.recipe.GreenhousePage;
 import turing.tmb.TMB;
 import turing.tmb.TypedIngredient;
 import turing.tmb.api.ITMBPlugin;
@@ -143,7 +142,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
 
     @Override
     public void onGatherPlugins(boolean isReload) {
-        TMB.LOGGER.info("Loading plugin: "+this.getClass().getSimpleName()+" from "+ SignalIndustries.MOD_ID);
+        TMB.LOGGER.info("Loading plugin: " + this.getClass().getSimpleName() + " from " + SignalIndustries.MOD_ID);
         TMB.registerPlugin(this);
     }
 }

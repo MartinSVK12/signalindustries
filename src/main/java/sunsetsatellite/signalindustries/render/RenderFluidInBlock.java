@@ -19,8 +19,6 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.render.entity.EntityRendererFakeItem;
 
-import java.util.ArrayList;
-
 
 public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
     private RenderBlocks blockRenderer;
@@ -46,21 +44,21 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
 
         if (fluidId != -1) {
             Block<?> block = Blocks.blocksList[fluidId];
-            blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(block,new Vec3i(),0,null))));
+            blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(block, new Vec3i(), 0, null))));
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)d2, (float)d4, (float)d6);
+            GL11.glTranslatef((float) d2, (float) d4, (float) d6);
             GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
             GL11.glScalef(0.98F, amount, 0.98F);
             GL11.glTranslatef(0.51F, 0.505F, 0.51F);
             GL11.glDisable(GL11.GL_LIGHTING);
-            if(block == Blocks.FLUID_WATER_FLOWING || block == Blocks.FLUID_WATER_STILL){
+            if (block == Blocks.FLUID_WATER_FLOWING || block == Blocks.FLUID_WATER_STILL) {
                 ((IColorOverride) model).enableColorOverride();
-                ((IColorOverride)model).overrideColor(0,0.5f,1,0.75f);
+                ((IColorOverride) model).overrideColor(0, 0.5f, 1, 0.75f);
             }
             this.drawBlock(tessellator, model, 0);
             GL11.glEnable(GL11.GL_LIGHTING);
-            ((IColorOverride)model).overrideColor(1,1,1,1f);
+            ((IColorOverride) model).overrideColor(1, 1, 1, 1f);
             ((IColorOverride) model).disableColorOverride();
             GL11.glPopMatrix();
         }
@@ -74,7 +72,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        model.renderBlockOnInventory(tessellator,meta,1,0.75f,null);
+        model.renderBlockOnInventory(tessellator, meta, 1, 0.75f, null);
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();

@@ -1,8 +1,6 @@
 package sunsetsatellite.signalindustries.tiles;
 
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
@@ -20,8 +18,8 @@ public class TileEntityVoidContainer extends TileEntityFluidItemContainer {
         for (Direction dir : Direction.values()) {
             itemConnections.put(dir, Connection.INPUT);
             fluidConnections.put(dir, Connection.INPUT);
-            activeItemSlots.put(dir,0);
-            activeFluidSlots.put(dir,0);
+            activeItemSlots.put(dir, 0);
+            activeFluidSlots.put(dir, 0);
         }
         acceptedFluids.clear();
         for (FluidStack ignored : fluidContents) {
@@ -39,7 +37,7 @@ public class TileEntityVoidContainer extends TileEntityFluidItemContainer {
         super.tick();
         extractFluids();
         if (worldObj != null) {
-            worldObj.markBlockDirty(x,y,z);
+            worldObj.markBlockDirty(x, y, z);
         }
         fluidContents[0] = null;
         itemContents[0] = null;

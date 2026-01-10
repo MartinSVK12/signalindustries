@@ -44,8 +44,8 @@ public class SignalumPowerSuit implements IPowerSuit {
     public InventoryAbilityModule module;
     public int selectedApplicationSlot = 0;
 
-    public HashMap<SuitBaseAbility,Integer> cooldowns = new HashMap<>();
-    public HashMap<SuitBaseEffectAbility,Integer> effectTimes = new HashMap<>();
+    public HashMap<SuitBaseAbility, Integer> cooldowns = new HashMap<>();
+    public HashMap<SuitBaseEffectAbility, Integer> effectTimes = new HashMap<>();
 
     public SignalumPowerSuit(Player player) {
         this.player = player;
@@ -55,7 +55,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         leggings = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_LEGS));
         boots = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_BOOTS));
 
-        if(((IPlayerPowerSuit<?>) player).getPowerSuitData() != null){
+        if (((IPlayerPowerSuit<?>) player).getPowerSuitData() != null) {
             loadData(((IPlayerPowerSuit<?>) player).getPowerSuitData());
         }
 
@@ -64,26 +64,26 @@ public class SignalumPowerSuit implements IPowerSuit {
 
     @Override
     public int getEnergy() {
-        if(chestplate.fluidContents[0] == null){
+        if (chestplate.fluidContents[0] == null) {
             return 0;
         }
         return chestplate.fluidContents[0].amount;
     }
 
     @Override
-    public int getMaxEnergy(){
+    public int getMaxEnergy() {
         return chestplate.fluidCapacity[0];
     }
 
     @Override
-    public float getEnergyPercent(){
-        return ((float)getEnergy()/(float)getMaxEnergy()*100);
+    public float getEnergyPercent() {
+        return ((float) getEnergy() / (float) getMaxEnergy() * 100);
     }
 
 
     @Override
     public void decrementEnergy(int amount) {
-        if(chestplate.fluidContents[0] == null){
+        if (chestplate.fluidContents[0] == null) {
             return;
         }
         chestplate.fluidContents[0].amount -= amount;
@@ -93,31 +93,31 @@ public class SignalumPowerSuit implements IPowerSuit {
 
     @Override
     public void tick() {
-       verify();
+        verify();
 
         if (player.world != null && player.world.isClientSide) return;
 
-        if(EnvironmentHelper.isServerEnvironment()){
+        if (EnvironmentHelper.isServerEnvironment()) {
             CompoundTag data = new CompoundTag();
             saveData(data);
-            NetworkHandler.sendToPlayer(player,new NetworkMessagePowerSuitSync(data));
+            NetworkHandler.sendToPlayer(player, new NetworkMessagePowerSuitSync(data));
             NetworkHandler.sendToAllPlayers(new NetworkMessagePowerSuitRemoteSync(player.username, player.uuid, data));
         }
 
         // set status based on energy levels
-       if(getEnergyPercent() == 0){
-           status = Status.NO_ENERGY;
-       } else if (getEnergyPercent() < 15) {
-           status = Status.LOW_ENERGY;
-       } else {
-           status = Status.OK;
-       }
+        if (getEnergyPercent() == 0) {
+            status = Status.NO_ENERGY;
+        } else if (getEnergyPercent() < 15) {
+            status = Status.LOW_ENERGY;
+        } else {
+            status = Status.OK;
+        }
 
-        if(temperature > 100){
+        if (temperature > 100) {
             status = Status.OVERHEAT;
             ItemStack[] armorInventory = player.inventory.armorInventory;
             for (int i = 0; i < armorInventory.length; i++) {
-                if(i > 3) continue;
+                if (i > 3) continue;
                 ItemStack itemStack = armorInventory[i];
                 itemStack.damageItem(1, player);
             }
@@ -136,35 +136,35 @@ public class SignalumPowerSuit implements IPowerSuit {
         }*/
 
         // temperature regulation
-        if(temperature > 75 && !cooling){
+        if (temperature > 75 && !cooling) {
             cooling = true;
         }
-        if(temperature <= 20 && cooling){
+        if (temperature <= 20 && cooling) {
             cooling = false;
         }
-        if(player.isInLava()){
+        if (player.isInLava()) {
             temperature += 0.25f;
         }
-        if(cooling){
+        if (cooling) {
             float value = 0.05f;
 
-            if(player.isInWaterOrRain()){
+            if (player.isInWaterOrRain()) {
                 value += 0.20f;
             }
-            if(hasAttachment((ItemAttachment) SIItems.crystalWings)){
-                ItemStack wings = getAttachment((ItemAttachment) SIItems.crystalWings);
-                if(wings != null && wings.getData().getBoolean("active")){
+            if (hasAttachment(SIItems.crystalWings)) {
+                ItemStack wings = getAttachment(SIItems.crystalWings);
+                if (wings != null && wings.getData().getBoolean("active")) {
                     value += 0.80f;
                 }
             }
             temperature -= value;
             decrementEnergy(1);
         }
-        if(temperature > 20){
+        if (temperature > 20) {
             temperature -= 0.01f;
-            if(hasAttachment((ItemAttachment) SIItems.crystalWings)){
-                ItemStack wings = getAttachment((ItemAttachment) SIItems.crystalWings);
-                if(wings != null && wings.getData().getBoolean("active")){
+            if (hasAttachment(SIItems.crystalWings)) {
+                ItemStack wings = getAttachment(SIItems.crystalWings);
+                if (wings != null && wings.getData().getBoolean("active")) {
                     temperature -= 0.49f;
                 }
             }
@@ -178,65 +178,65 @@ public class SignalumPowerSuit implements IPowerSuit {
         for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
             ItemStack content = contents[i];
             if (content != null) {
-                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+                ((ItemAttachment) content.getItem()).tick(content, this, player, player.world, i);
             }
         }
         contents = chestplate.contents;
         for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
             ItemStack content = contents[i];
             if (content != null) {
-                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+                ((ItemAttachment) content.getItem()).tick(content, this, player, player.world, i);
             }
         }
         contents = leggings.contents;
         for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
             ItemStack content = contents[i];
             if (content != null) {
-                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+                ((ItemAttachment) content.getItem()).tick(content, this, player, player.world, i);
             }
         }
         contents = boots.contents;
         for (int i = 0, contentsLength = contents.length; i < contentsLength; i++) {
             ItemStack content = contents[i];
             if (content != null) {
-                ((ItemAttachment)content.getItem()).tick(content, this, player, player.world, i);
+                ((ItemAttachment) content.getItem()).tick(content, this, player, player.world, i);
             }
         }
 
         List<SuitBaseAbility> temp = new ArrayList<>();
         // count down cooldowns
         for (Map.Entry<SuitBaseAbility, Integer> entry : cooldowns.entrySet()) {
-            entry.setValue(entry.getValue()-1);
-            if(entry.getValue() <= 0){
+            entry.setValue(entry.getValue() - 1);
+            if (entry.getValue() <= 0) {
                 temp.add(entry.getKey());
             }
         }
 
 
         for (Map.Entry<SuitBaseEffectAbility, Integer> entry : effectTimes.entrySet()) {
-            entry.setValue(entry.getValue()-1);
+            entry.setValue(entry.getValue() - 1);
             switch (entry.getKey().activationType) {
                 case POSITION:
-                    entry.getKey().tick(player,player.world,this);
+                    entry.getKey().tick(player, player.world, this);
                     //TODO: figure out how to do this (should it be the current pos, or the pos at activation?)
                 case SELF:
-                    entry.getKey().tick(player,player.world,this);
+                    entry.getKey().tick(player, player.world, this);
                     break;
                 case TARGET:
-                    entry.getKey().tick(player,player.world,this);
+                    entry.getKey().tick(player, player.world, this);
                     //TODO: later
                     break;
             }
-            if(entry.getValue() <= 0){
+            if (entry.getValue() <= 0) {
                 switch (entry.getKey().activationType) {
                     case POSITION:
-                        entry.getKey().deactivate(player,player.world,this);
+                        entry.getKey().deactivate(player, player.world, this);
                         break;
                     case SELF:
-                        entry.getKey().deactivate(player,player.world,this);
+                        entry.getKey().deactivate(player, player.world, this);
                         break;
                     case TARGET:
-                        entry.getKey().deactivate(player,player.world,this);
+                        entry.getKey().deactivate(player, player.world, this);
                         break;
                 }
                 cooldowns.put(entry.getKey(), entry.getKey().cooldown);
@@ -251,7 +251,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         // repair armor
         ItemStack[] armorInventory = player.inventory.armorInventory;
         for (int i = 0; i < armorInventory.length; i++) {
-            if(i > 3) continue;
+            if (i > 3) continue;
             ItemStack itemStack = armorInventory[i];
             if (itemStack.isItemDamaged() && getEnergy() > 0 && status != Status.OVERHEAT) {
                 decrementEnergy(1);
@@ -260,34 +260,34 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
     }
 
-    public void verify(){
+    public void verify() {
         // Validate that the references have not changed, and if they did update them
-        if(helmet.container != player.inventory.armorItemInSlot(PIECE_HEAD)) {
+        if (helmet.container != player.inventory.armorItemInSlot(PIECE_HEAD)) {
             helmet = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_HEAD));
         }
-        if(chestplate.container != player.inventory.armorItemInSlot(PIECE_CHEST)) {
+        if (chestplate.container != player.inventory.armorItemInSlot(PIECE_CHEST)) {
             chestplate = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_CHEST));
         }
-        if(leggings.container != player.inventory.armorItemInSlot(PIECE_LEGS)) {
+        if (leggings.container != player.inventory.armorItemInSlot(PIECE_LEGS)) {
             leggings = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_LEGS));
         }
-        if(boots.container != player.inventory.armorItemInSlot(PIECE_BOOTS)) {
+        if (boots.container != player.inventory.armorItemInSlot(PIECE_BOOTS)) {
             boots = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_BOOTS));
         }
 
-        if(getModule() != null) {
+        if (getModule() != null) {
             module = new InventoryAbilityModule(getModule());
         } else {
             module = null;
         }
     }
 
-    public void reload(){
-        if(player.inventory.armorItemInSlot(PIECE_HEAD) != null
+    public void reload() {
+        if (player.inventory.armorItemInSlot(PIECE_HEAD) != null
                 && player.inventory.armorItemInSlot(PIECE_CHEST) != null
                 && player.inventory.armorItemInSlot(PIECE_LEGS) != null
                 && player.inventory.armorItemInSlot(PIECE_BOOTS) != null
-        ){
+        ) {
             helmet = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_HEAD));
             chestplate = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_CHEST));
             leggings = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_LEGS));
@@ -295,12 +295,12 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
     }
 
-    public ItemStack getModule(){
+    public ItemStack getModule() {
         return chestplate.contents[0];
     }
 
-    public InventoryPowerSuit getArmorPiece(int i){
-        switch (i){
+    public InventoryPowerSuit getArmorPiece(int i) {
+        switch (i) {
             case 3:
                 return helmet;
             case 2:
@@ -323,12 +323,12 @@ public class SignalumPowerSuit implements IPowerSuit {
     }*/
 
     @Override
-    public boolean hasAttachment(ItemAttachment attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public boolean hasAttachment(ItemAttachment attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(content.getItem().equals(attachment)){
+                if (content != null) {
+                    if (content.getItem().equals(attachment)) {
                         return true;
                     }
                 }
@@ -338,12 +338,12 @@ public class SignalumPowerSuit implements IPowerSuit {
     }
 
     @Override
-    public boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(attachment.isInstance(content.getItem())){
+                if (content != null) {
+                    if (attachment.isInstance(content.getItem())) {
                         return true;
                     }
                 }
@@ -353,11 +353,11 @@ public class SignalumPowerSuit implements IPowerSuit {
     }
 
     @Override
-    public boolean hasAttachment(ItemAttachment attachment, List<AttachmentLocation> locations){
+    public boolean hasAttachment(ItemAttachment attachment, List<AttachmentLocation> locations) {
         for (AttachmentLocation location : locations) {
             InventoryPowerSuit armorPieceInv = getArmorPiece(location.armorPiece);
             ItemStack armorPieceAttachment = armorPieceInv.getItem(location.slot);
-            if(armorPieceAttachment != null && armorPieceAttachment.getItem().equals(attachment)){
+            if (armorPieceAttachment != null && armorPieceAttachment.getItem().equals(attachment)) {
                 return true;
             }
         }
@@ -365,12 +365,12 @@ public class SignalumPowerSuit implements IPowerSuit {
     }
 
     @Override
-    public ItemStack getAttachment(ItemAttachment attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public ItemStack getAttachment(ItemAttachment attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(content.getItem().equals(attachment)){
+                if (content != null) {
+                    if (content.getItem().equals(attachment)) {
                         return content;
                     }
                 }
@@ -380,12 +380,12 @@ public class SignalumPowerSuit implements IPowerSuit {
     }
 
     @Override
-    public ItemStack getAttachmentClass(Class<? extends ItemAttachment> attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public ItemStack getAttachmentClass(Class<? extends ItemAttachment> attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(attachment.isInstance(content.getItem())){
+                if (content != null) {
+                    if (attachment.isInstance(content.getItem())) {
                         return content;
                     }
                 }
@@ -399,53 +399,53 @@ public class SignalumPowerSuit implements IPowerSuit {
         return active;
     }
 
-    public void activateApplication(){
-        if(module != null && module.contents[selectedApplicationSlot] != null) {
+    public void activateApplication() {
+        if (module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
-            if(app.getType() == ApplicationType.ABILITY){
+            if (app.getType() == ApplicationType.ABILITY) {
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
-                if(selectedAbility instanceof SuitBaseEffectAbility){
-                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                        if(getEnergy() >= selectedAbility.cost){
+                if (selectedAbility instanceof SuitBaseEffectAbility) {
+                    if (!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
                             decrementEnergy(selectedAbility.cost);
-                            selectedAbility.activate(player,player.world,this);
+                            selectedAbility.activate(player, player.world, this);
                             selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
-                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility, ((SuitBaseEffectAbility) selectedAbility).effectTime);
                         }
                     }
-                }else {
-                    if(!cooldowns.containsKey(selectedAbility)){
-                        if(getEnergy() >= selectedAbility.cost){
-                            cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                } else {
+                    if (!cooldowns.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
+                            cooldowns.put(selectedAbility, selectedAbility.cooldown);
                             decrementEnergy(selectedAbility.cost);
-                            selectedAbility.activate(player,player.world,this);
+                            selectedAbility.activate(player, player.world, this);
                             selectedAbility.activationType = SuitBaseAbility.ActivationType.SELF;
                         }
                     }
                 }
-            } else if(app.getType() == ApplicationType.UTILITY){
+            } else if (app.getType() == ApplicationType.UTILITY) {
                 ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
-                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
+                item.activate(module.contents[selectedApplicationSlot], this, player, player.world);
             }
         }
 
     }
 
-    public void activateApplication(Entity entity){
-        if(module != null && module.contents[selectedApplicationSlot] != null) {
+    public void activateApplication(Entity entity) {
+        if (module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
-            if(app.getType() == ApplicationType.ABILITY){
+            if (app.getType() == ApplicationType.ABILITY) {
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
-                if(selectedAbility instanceof SuitBaseEffectAbility){
-                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                        if(getEnergy() >= selectedAbility.cost){
+                if (selectedAbility instanceof SuitBaseEffectAbility) {
+                    if (!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
                             decrementEnergy(selectedAbility.cost);
-                            selectedAbility.activate(player, entity, player.world,this);
+                            selectedAbility.activate(player, entity, player.world, this);
                             selectedAbility.activationType = SuitBaseAbility.ActivationType.TARGET;
-                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility, ((SuitBaseEffectAbility) selectedAbility).effectTime);
                         }
                     }
-                }else {
+                } else {
                     if (!cooldowns.containsKey(selectedAbility)) {
                         if (getEnergy() >= selectedAbility.cost) {
                             cooldowns.put(selectedAbility, selectedAbility.cooldown);
@@ -455,40 +455,40 @@ public class SignalumPowerSuit implements IPowerSuit {
                         }
                     }
                 }
-            } else if(app.getType() == ApplicationType.UTILITY){
+            } else if (app.getType() == ApplicationType.UTILITY) {
                 ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
-                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
+                item.activate(module.contents[selectedApplicationSlot], this, player, player.world);
             }
         }
     }
 
-    public void activateApplication(int x, int y, int z){
-        if(module != null && module.contents[selectedApplicationSlot] != null) {
+    public void activateApplication(int x, int y, int z) {
+        if (module != null && module.contents[selectedApplicationSlot] != null) {
             IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
-            if(app.getType() == ApplicationType.ABILITY){
+            if (app.getType() == ApplicationType.ABILITY) {
                 SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
-                if(selectedAbility instanceof SuitBaseEffectAbility){
-                    if(!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)){
-                        if(getEnergy() >= selectedAbility.cost){
+                if (selectedAbility instanceof SuitBaseEffectAbility) {
+                    if (!cooldowns.containsKey(selectedAbility) && !effectTimes.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
                             decrementEnergy(selectedAbility.cost);
-                            selectedAbility.activate(x,y,z,player,player.world,this);
+                            selectedAbility.activate(x, y, z, player, player.world, this);
                             selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
-                            effectTimes.put((SuitBaseEffectAbility) selectedAbility,((SuitBaseEffectAbility) selectedAbility).effectTime);
+                            effectTimes.put((SuitBaseEffectAbility) selectedAbility, ((SuitBaseEffectAbility) selectedAbility).effectTime);
                         }
                     }
-                }else {
-                    if(!cooldowns.containsKey(selectedAbility)){
-                        if(getEnergy() >= selectedAbility.cost){
-                            cooldowns.put(selectedAbility,selectedAbility.cooldown);
+                } else {
+                    if (!cooldowns.containsKey(selectedAbility)) {
+                        if (getEnergy() >= selectedAbility.cost) {
+                            cooldowns.put(selectedAbility, selectedAbility.cooldown);
                             decrementEnergy(selectedAbility.cost);
-                            selectedAbility.activate(x,y,z,player,player.world,this);
+                            selectedAbility.activate(x, y, z, player, player.world, this);
                             selectedAbility.activationType = SuitBaseAbility.ActivationType.POSITION;
                         }
                     }
                 }
-            } else if(app.getType() == ApplicationType.UTILITY){
+            } else if (app.getType() == ApplicationType.UTILITY) {
                 ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
-                item.activate(module.contents[selectedApplicationSlot],this,player,player.world);
+                item.activate(module.contents[selectedApplicationSlot], this, player, player.world);
             }
         }
     }
@@ -503,14 +503,14 @@ public class SignalumPowerSuit implements IPowerSuit {
                 break;
             }
         }
-        if(slot != -1 && inv != null){
+        if (slot != -1 && inv != null) {
             ItemStack stack = inv.getItem(slot);
-            if(stack != null){
+            if (stack != null) {
                 ItemAttachment attachment = (ItemAttachment) stack.getItem();
-                if(alt){
-                    attachment.altActivate(stack,this,player,player.world, shift, alt, ctrl);
+                if (alt) {
+                    attachment.altActivate(stack, this, player, player.world, shift, alt, ctrl);
                 } else {
-                    attachment.activate(stack,this,player,player.world, shift, alt, ctrl);
+                    attachment.activate(stack, this, player, player.world, shift, alt, ctrl);
                 }
             }
         }
@@ -520,8 +520,8 @@ public class SignalumPowerSuit implements IPowerSuit {
         CompoundTag suitTag = new CompoundTag();
         suitTag.putFloat("Temperature", temperature);
         suitTag.putBoolean("Active", active);
-        suitTag.putInt("Status",status.ordinal());
-        suitTag.putInt("SelectedApplicationSlot",selectedApplicationSlot);
+        suitTag.putInt("Status", status.ordinal());
+        suitTag.putInt("SelectedApplicationSlot", selectedApplicationSlot);
         InventorySerializer.saveInvToNBT(helmet.container, helmet);
         InventorySerializer.saveInvToNBT(chestplate.container, chestplate);
         InventorySerializer.saveInvToNBT(leggings.container, leggings);
@@ -538,7 +538,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         suitTag.put("Chestplate", chestplateTag);
         suitTag.put("Leggings", leggingsTag);
         suitTag.put("Boots", bootsTag);
-        tag.putCompound("PowerSuit",suitTag);
+        tag.putCompound("PowerSuit", suitTag);
     }
 
     public void loadData(CompoundTag suitTag) {
@@ -547,7 +547,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         status = Status.values()[suitTag.getInteger("Status")];
         selectedApplicationSlot = suitTag.getInteger("SelectedApplicationSlot");
 
-        if(suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")){
+        if (suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")) {
             CompoundTag helmetTag = suitTag.getCompound("Helmet");
             CompoundTag chestplateTag = suitTag.getCompound("Chestplate");
             CompoundTag leggingsTag = suitTag.getCompound("Leggings");
@@ -562,19 +562,19 @@ public class SignalumPowerSuit implements IPowerSuit {
 
     public enum AttachmentLocation {
         HEAD_TOP("headTop", 0, 3, AttachmentPoint.HEAD_TOP),
-        HEAD_LENS("headLens",1, 3, AttachmentPoint.HEAD_LENS),
-        COLORIZER("colorizer",8, 2, AttachmentPoint.COLORIZER),
-        CORE_BACK("coreBack",1, 2, AttachmentPoint.CORE_BACK),
-        ARM_FRONT_L("armFrontL",2, 2, AttachmentPoint.ARM_FRONT),
-        ARM_FRONT_R("armFrontR",7, 2, AttachmentPoint.ARM_FRONT),
-        ARM_BACK_L("armBackL",3, 2, AttachmentPoint.ARM_BACK),
-        ARM_BACK_R("armBackR",6, 2, AttachmentPoint.ARM_BACK),
-        ARM_SIDE_L("armSideL",4, 2, AttachmentPoint.ARM_SIDE),
-        ARM_SIDE_R("armSideR",5, 2, AttachmentPoint.ARM_SIDE),
-        LEG_SIDE_L("legSideL",0, 1, AttachmentPoint.LEG_SIDE),
-        LEG_SIDE_R("legSideR",1, 1, AttachmentPoint.LEG_SIDE),
-        BOOT_BACK_L("bootBackL",0, 0, AttachmentPoint.BOOT_BACK),
-        BOOT_BACK_R("bootBackR",1, 0, AttachmentPoint.BOOT_BACK);
+        HEAD_LENS("headLens", 1, 3, AttachmentPoint.HEAD_LENS),
+        COLORIZER("colorizer", 8, 2, AttachmentPoint.COLORIZER),
+        CORE_BACK("coreBack", 1, 2, AttachmentPoint.CORE_BACK),
+        ARM_FRONT_L("armFrontL", 2, 2, AttachmentPoint.ARM_FRONT),
+        ARM_FRONT_R("armFrontR", 7, 2, AttachmentPoint.ARM_FRONT),
+        ARM_BACK_L("armBackL", 3, 2, AttachmentPoint.ARM_BACK),
+        ARM_BACK_R("armBackR", 6, 2, AttachmentPoint.ARM_BACK),
+        ARM_SIDE_L("armSideL", 4, 2, AttachmentPoint.ARM_SIDE),
+        ARM_SIDE_R("armSideR", 5, 2, AttachmentPoint.ARM_SIDE),
+        LEG_SIDE_L("legSideL", 0, 1, AttachmentPoint.LEG_SIDE),
+        LEG_SIDE_R("legSideR", 1, 1, AttachmentPoint.LEG_SIDE),
+        BOOT_BACK_L("bootBackL", 0, 0, AttachmentPoint.BOOT_BACK),
+        BOOT_BACK_R("bootBackR", 1, 0, AttachmentPoint.BOOT_BACK);
 
         public final int slot;
         public final int armorPiece;
@@ -597,13 +597,14 @@ public class SignalumPowerSuit implements IPowerSuit {
         CRITICAL_DAMAGE(TextFormatting.RED);
 
         private final TextFormatting color;
+
         Status(TextFormatting color) {
             this.color = color;
         }
 
         @Override
         public String toString() {
-            return color+super.toString().replace("_"," ")+TextFormatting.WHITE;
+            return color + super.toString().replace("_", " ") + TextFormatting.WHITE;
         }
     }
 

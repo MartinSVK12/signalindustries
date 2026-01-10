@@ -4,17 +4,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.LightmapHelper;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModel;
-import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
-import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.model.IFullbright;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityEncapsulator;
 
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ import java.util.Objects;
 
 public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulator> {
 
-    private RenderBlocks blockRenderer = new RenderBlocks();
+    private final RenderBlocks blockRenderer = new RenderBlocks();
 
     public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta, int alpha) {
         TextureRegistry.blockAtlas.bind();
@@ -31,10 +28,10 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        ((IFullbright)model).enableFullbright();
-        model.renderBlockOnInventory(tessellator,meta,1,alpha,null);
+        ((IFullbright) model).enableFullbright();
+        model.renderBlockOnInventory(tessellator, meta, 1, alpha, null);
         BlockModel.setRenderBlocks(renderBlocks);
-        ((IFullbright)model).disableFullbright();
+        ((IFullbright) model).disableFullbright();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -47,12 +44,12 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
         int tz = tile.z;
         World world = this.renderDispatcher.textureManager.mc.currentWorld;
 
-        if(!tile.areMarkersValid()) return;
+        if (!tile.areMarkersValid()) return;
 
         if (!Objects.equals(world.getLevelData().getWorldName(), "modelviewer")) {
 
             Direction side = Direction.getDirectionFromSide(tile.getBlockMeta()).getOpposite();
-            Vec3f pos = new Vec3f(x,y,z).add(side.getVecF());
+            Vec3f pos = new Vec3f(x, y, z).add(side.getVecF());
 
             int ox = tile.originMarker.pos.x;
             int oy = tile.originMarker.pos.y;
@@ -81,28 +78,28 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
             GL11.glEnable(2896);
             GL11.glPopMatrix();
 
-            renderLineBetweenTwoPoints(ox,oy,oz,hx,hy,hz,0,0,1,1,8,pos.x, pos.y, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,hx,hy,hz,0,0,1,1,8,pos.x-offsetX, pos.y, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,hx,hy,hz,0,0,1,1,8,pos.x-offsetX, pos.y, pos.z-offsetZ);
-            renderLineBetweenTwoPoints(ox,oy,oz,hx,hy,hz,0,0,1,1,8,pos.x, pos.y, pos.z-offsetZ);
+            renderLineBetweenTwoPoints(ox, oy, oz, hx, hy, hz, 0, 0, 1, 1, 8, pos.x, pos.y, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, hx, hy, hz, 0, 0, 1, 1, 8, pos.x - offsetX, pos.y, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, hx, hy, hz, 0, 0, 1, 1, 8, pos.x - offsetX, pos.y, pos.z - offsetZ);
+            renderLineBetweenTwoPoints(ox, oy, oz, hx, hy, hz, 0, 0, 1, 1, 8, pos.x, pos.y, pos.z - offsetZ);
 
-            renderLineBetweenTwoPoints(ox,oy,oz,dx,dy,dz,0,0,1,1,8,pos.x, pos.y-offsetY, pos.z-offsetZ);
-            renderLineBetweenTwoPoints(ox,oy,oz,dx,dy,dz,0,0,1,1,8,pos.x, pos.y-offsetY, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,wx,wy,wz,0,0,1,1,8,pos.x, pos.y-offsetY, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,wx,wy,wz,0,0,1,1,8,pos.x-offsetX, pos.y-offsetY, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, dx, dy, dz, 0, 0, 1, 1, 8, pos.x, pos.y - offsetY, pos.z - offsetZ);
+            renderLineBetweenTwoPoints(ox, oy, oz, dx, dy, dz, 0, 0, 1, 1, 8, pos.x, pos.y - offsetY, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, wx, wy, wz, 0, 0, 1, 1, 8, pos.x, pos.y - offsetY, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, wx, wy, wz, 0, 0, 1, 1, 8, pos.x - offsetX, pos.y - offsetY, pos.z);
 
-            renderLineBetweenTwoPoints(ox,oy,oz,dx,dy,dz,0,0,1,1,8,pos.x, pos.y, pos.z-offsetZ);
-            renderLineBetweenTwoPoints(ox,oy,oz,dx,dy,dz,0,0,1,1,8,pos.x, pos.y, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,wx,wy,wz,0,0,1,1,8,pos.x, pos.y, pos.z);
-            renderLineBetweenTwoPoints(ox,oy,oz,wx,wy,wz,0,0,1,1,8,pos.x-offsetX, pos.y, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, dx, dy, dz, 0, 0, 1, 1, 8, pos.x, pos.y, pos.z - offsetZ);
+            renderLineBetweenTwoPoints(ox, oy, oz, dx, dy, dz, 0, 0, 1, 1, 8, pos.x, pos.y, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, wx, wy, wz, 0, 0, 1, 1, 8, pos.x, pos.y, pos.z);
+            renderLineBetweenTwoPoints(ox, oy, oz, wx, wy, wz, 0, 0, 1, 1, 8, pos.x - offsetX, pos.y, pos.z);
         }
     }
 
     public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, double x, double y, double z) {
-        renderLineBetweenTwoPoints(x1,y1,z1,x2,y2,z2,red,green,blue,alpha,width,new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),false,false,false,x,y,z);
+        renderLineBetweenTwoPoints(x1, y1, z1, x2, y2, z2, red, green, blue, alpha, width, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, false, false, x, y, z);
     }
 
-    public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, ArrayList<Integer> xadd, ArrayList<Integer> yadd, ArrayList<Integer> zadd, ArrayList<Integer> sideadd, boolean backwired, boolean firstblocksided, boolean secondblocksided, double x, double y, double z){
+    public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, ArrayList<Integer> xadd, ArrayList<Integer> yadd, ArrayList<Integer> zadd, ArrayList<Integer> sideadd, boolean backwired, boolean firstblocksided, boolean secondblocksided, double x, double y, double z) {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -113,14 +110,14 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
         GL11.glTranslated(x, y, z);
         GL11.glDepthMask(false);
         GL11.glBegin(GL11.GL_LINE_STRIP);
-        LightmapHelper.setLightmapCoord(15,15);
+        LightmapHelper.setLightmapCoord(15, 15);
         //First
-        if(!backwired) {
-            if(firstblocksided){
+        if (!backwired) {
+            if (firstblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
-                switch(Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)){
+                switch (Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)) {
                     case 0:
                         xoffset = 0.5f;
                         yoffset = 0.9f;
@@ -156,8 +153,8 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
             } else {
                 GL11.glVertex3f(0.5f, 0.5f, 0.5f);
             }
-        } else{
-            if(secondblocksided) {
+        } else {
+            if (secondblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
@@ -193,17 +190,17 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
                         zoffset = 0.5f;
                         break;
                 }
-                GL11.glVertex3d(-(x1 - x2) + xoffset,-(y1 - y2) + yoffset, -(z1 - z2) + zoffset);
+                GL11.glVertex3d(-(x1 - x2) + xoffset, -(y1 - y2) + yoffset, -(z1 - z2) + zoffset);
             } else {
                 GL11.glVertex3d(-(x1 - x2) + 0.5f, -(y1 - y2) + 0.5f, -(z1 - z2) + 0.5f);
             }
         }
         //Middle
-        for(int i = xadd.size() - 1; i >= 0 ; i--){
+        for (int i = xadd.size() - 1; i >= 0; i--) {
             float xoffset = 0;
             float yoffset = 0;
             float zoffset = 0;
-            switch(sideadd.get(i)){
+            switch (sideadd.get(i)) {
                 case 0:
                     xoffset = 0.5f;
                     yoffset = -0.1f;
@@ -238,12 +235,12 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
             GL11.glVertex3d(-(x1 - xadd.get(i)) + xoffset, -(y1 - yadd.get(i)) + yoffset, -(z1 - zadd.get(i)) + zoffset);
         }
         //Second
-        if(backwired) {
-            if(firstblocksided){
+        if (backwired) {
+            if (firstblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
-                switch(Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)){
+                switch (Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)) {
                     case 0:
                         xoffset = 0.5f;
                         yoffset = 0.9f;
@@ -279,8 +276,8 @@ public class RenderEncapsulator extends TileEntityRenderer<TileEntityEncapsulato
             } else {
                 GL11.glVertex3f(0.5f, 0.5f, 0.5f);
             }
-        } else{
-            if(secondblocksided) {
+        } else {
+            if (secondblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;

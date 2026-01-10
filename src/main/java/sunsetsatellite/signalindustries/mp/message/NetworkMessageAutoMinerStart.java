@@ -6,7 +6,6 @@ import net.minecraft.core.block.entity.TileEntityDispatcher;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAutoMiner;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntitySignalumReactor;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
 import turniplabs.halplibe.helper.network.UniversalPacket;
@@ -21,7 +20,8 @@ public class NetworkMessageAutoMinerStart implements NetworkMessage {
         this.tileClass = tileClass;
     }
 
-    public NetworkMessageAutoMinerStart() {}
+    public NetworkMessageAutoMinerStart() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -39,11 +39,11 @@ public class NetworkMessageAutoMinerStart implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if(tileEntity instanceof TileEntityAutoMiner && tileEntity.worldObj != null){
-                    if(((TileEntityAutoMiner) tileEntity).workTimer.isPaused()){
+                if (tileEntity instanceof TileEntityAutoMiner && tileEntity.worldObj != null) {
+                    if (((TileEntityAutoMiner) tileEntity).workTimer.isPaused()) {
                         ((TileEntityAutoMiner) tileEntity).workTimer.unpause();
                     } else {
                         ((TileEntityAutoMiner) tileEntity).workTimer.pause();

@@ -18,18 +18,18 @@ public class SlotAttachment extends Slot implements IAttachable {
         this.tier = tier;
     }
 
-    public Container getInventory(){
+    public Container getInventory() {
         return this.container;
     }
 
     @Override
     public boolean mayPlace(ItemStack itemstack) {
-        if(getInventory().locked(index)) return false;
-        if(itemstack != null && itemstack.getItem() instanceof IAttachment){
-            if(itemstack.getItem() instanceof ITiered && ((ITiered) itemstack.getItem()).getTier().ordinal() > tier.ordinal() && attachmentPoint != AttachmentPoint.CORE_MODULE){
+        if (getInventory().locked(index)) return false;
+        if (itemstack != null && itemstack.getItem() instanceof IAttachment) {
+            if (itemstack.getItem() instanceof ITiered && ((ITiered) itemstack.getItem()).getTier().ordinal() > tier.ordinal() && attachmentPoint != AttachmentPoint.CORE_MODULE) {
                 return false;
             }
-            if(attachmentPoint == AttachmentPoint.ANY || ((IAttachment) itemstack.getItem()).getAttachmentPoints().contains(AttachmentPoint.ANY)){
+            if (attachmentPoint == AttachmentPoint.ANY || ((IAttachment) itemstack.getItem()).getAttachmentPoints().contains(AttachmentPoint.ANY)) {
                 return true;
             }
             return ((IAttachment) itemstack.getItem()).getAttachmentPoints().contains(attachmentPoint);

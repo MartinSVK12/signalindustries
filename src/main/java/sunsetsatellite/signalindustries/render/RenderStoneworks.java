@@ -34,18 +34,18 @@ public class RenderStoneworks extends TileEntityRenderer<TileEntity> {
         float fluidMaxAmount = 0.0F;
         int fluidId;
         for (int i = 0; i < tile.fluidCapacity.length; i++) {
-            if(i == tile.energySlot) continue;
+            if (i == tile.energySlot) continue;
             fluidMaxAmount += tile.fluidCapacity[i];
         }
         ArrayList<BlockInstance> list = new ArrayList<>();
         for (int i = 0; i < fluidContents.length; i++) {
-            if(i == tile.energySlot) continue;
+            if (i == tile.energySlot) continue;
             FluidStack fluidStack = fluidContents[i];
             if (fluidStack == null) continue;
             Block<?> block = Blocks.blocksList[fluidStack.fluid.getFirstId()];
             list.add(new BlockInstance(block, new Vec3i(), 0, null));
         }
-        if(fluidMaxAmount <= 0) fluidMaxAmount = 1;
+        if (fluidMaxAmount <= 0) fluidMaxAmount = 1;
         blockRenderer = new RenderBlocks(new HologramWorld(list));
         float i = 0;
         for (int j = 0; j < fluidContents.length; j++) {
@@ -86,7 +86,7 @@ public class RenderStoneworks extends TileEntityRenderer<TileEntity> {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        model.renderBlockOnInventory(tessellator,meta,1,0.75f,null);
+        model.renderBlockOnInventory(tessellator, meta, 1, 0.75f, null);
         BlockModel.setRenderBlocks(renderBlocks);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();

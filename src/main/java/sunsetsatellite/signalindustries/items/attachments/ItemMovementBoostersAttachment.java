@@ -23,8 +23,8 @@ public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
     }
 
     @Override
-   public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
-        if(signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.isActive() && signalumPowerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R))) {
+    public void activate(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, boolean shift, boolean ctrl, boolean alt) {
+        if (signalumPowerSuit.getEnergy() >= 1 && signalumPowerSuit.isActive() && signalumPowerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R))) {
             boolean state = stack.getData().getBoolean("active");
             stack.getData().putBoolean("active", !state);
         }
@@ -42,12 +42,12 @@ public class ItemMovementBoostersAttachment extends ItemTieredAttachment {
 
     @Override
     public void tick(ItemStack stack, IPowerSuit signalumPowerSuit, Player player, World world, int slot) {
-        if(signalumPowerSuit.getEnergy() < 1){
-            stack.getData().putBoolean("active",false);
+        if (signalumPowerSuit.getEnergy() < 1) {
+            stack.getData().putBoolean("active", false);
             return;
         }
-        if(stack.getData().getBoolean("active")){
-            if(!alreadyTookEnergy) {
+        if (stack.getData().getBoolean("active")) {
+            if (!alreadyTookEnergy) {
                 signalumPowerSuit.decrementEnergy(1);
                 alreadyTookEnergy = true;
             } else {

@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 import org.useless.DragonFly;
 import org.useless.dragonfly.models.entity.StaticEntityModel;
 import org.useless.dragonfly.renderer.EntityRenderer;
-import sunsetsatellite.signalindustries.entities.EntityRealityTear;
 import sunsetsatellite.signalindustries.entities.EntityShockwave;
 
 public class ShockwaveRenderer extends EntityRenderer<EntityShockwave> {
@@ -19,10 +18,10 @@ public class ShockwaveRenderer extends EntityRenderer<EntityShockwave> {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glTranslatef((float) x + 0.5f, (float) y + 0.5f, (float) z + 0.5f);
-        GL11.glColor4f(1,1,1,1f/entity.tickCount);
-        GL11.glScalef(entity.tickCount/10f,entity.tickCount/10f,-entity.tickCount/10f);
+        GL11.glColor4f(1, 1, 1, 1f / entity.tickCount);
+        GL11.glScalef(entity.tickCount / 10f, entity.tickCount / 10f, -entity.tickCount / 10f);
         s.render(tessellator);
-        GL11.glScalef(entity.tickCount/10f,entity.tickCount/10f,-entity.tickCount/10f);
+        GL11.glScalef(entity.tickCount / 10f, entity.tickCount / 10f, -entity.tickCount / 10f);
         s.render(tessellator);
         //GL11.glScaled(1f/(Math.pow(entity.tickCount,2)),1f/(Math.pow(entity.tickCount,2)),-1f/(Math.pow(entity.tickCount,2)));
 

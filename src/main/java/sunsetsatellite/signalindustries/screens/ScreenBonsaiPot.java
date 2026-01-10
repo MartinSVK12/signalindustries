@@ -10,9 +10,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.menus.MenuAlloySmelter;
 import sunsetsatellite.signalindustries.menus.MenuBonsaiPot;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBonsaiPot;
 import turniplabs.halplibe.helper.RecipeBuilder;
 
@@ -31,7 +29,7 @@ public class ScreenBonsaiPot extends ScreenMachineSimple {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_bonsai_pot_gui.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_bonsai_pot_gui.png");
@@ -48,29 +46,29 @@ public class ScreenBonsaiPot extends ScreenMachineSimple {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         ItemStack stack = tile.getItem(0);
-        if(stack != null){
-            if (RecipeBuilder.getItemGroup("minecraft","saplings").stream().anyMatch(s -> s.isItemEqual(stack))) {
-                this.drawTexturedModalRect(x+43, y+14, 176, 26, 54, 57);
+        if (stack != null) {
+            if (RecipeBuilder.getItemGroup("minecraft", "saplings").stream().anyMatch(s -> s.isItemEqual(stack))) {
+                this.drawTexturedModalRect(x + 43, y + 14, 176, 26, 54, 57);
             }
-            if(stack.getItem().id == SIBlocks.ashenTreeSapling.id()){
-                this.drawTexturedModalRect(x+43, y+14, 176, 83, 54, 57);
+            if (stack.getItem().id == SIBlocks.ashenTreeSapling.id()) {
+                this.drawTexturedModalRect(x + 43, y + 14, 176, 83, 54, 57);
             }
         }
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 9, y + 39 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
 
         counter = this.tile.getProgressScaled(12);
-        if(stack != null && stack.getItem().id == SIBlocks.ashenTreeSapling.id()){
+        if (stack != null && stack.getItem().id == SIBlocks.ashenTreeSapling.id()) {
             this.drawTexturedModalRect(x + 64, y + 17 + 12 - counter, 189, 14 + 12 - counter, 12, counter);
         } else {
             this.drawTexturedModalRect(x + 64, y + 17 + 12 - counter, 176, 14 + 12 - counter, 12, counter);
         }
 
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -78,7 +76,7 @@ public class ScreenBonsaiPot extends ScreenMachineSimple {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -110,9 +108,9 @@ public class ScreenBonsaiPot extends ScreenMachineSimple {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

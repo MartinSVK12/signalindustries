@@ -8,11 +8,7 @@ import sunsetsatellite.catalyst.CatalystEnergy;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.energy.simple.api.IEnergyContainer;
-import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicCatalystConduit;
-import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
-import sunsetsatellite.signalindustries.blocks.logic.BlockLogicFluidConduit;
 
 import java.util.HashMap;
 

@@ -10,7 +10,6 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
@@ -77,16 +76,16 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
-        runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("ID: "+data.id,x + 80, (background.getHeight() / 2),0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("ID: " + data.id, x + 80, (background.getHeight() / 2), 0xFFFFFFFF);
     }
 
     @Override
@@ -94,7 +93,7 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
         RecipeProperties data = recipe.getOriginal().getData();
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
         for (int i = 0; i < 3; i++) {
-            if(i >= input.length){
+            if (i >= input.length) {
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
@@ -102,7 +101,7 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
         ingredients.add(2, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(3, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(3, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override
@@ -111,7 +110,7 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
                 .addInputSlot(0, TMBFluidPlugin.FLUID_STACK).setPosition(x, (background.getHeight() / 2) - 6).build()
                 .addInputSlot(1, VanillaTypes.ITEM_STACK).setPosition(x - 20, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(2, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 6).build()
-                .addSlot(3,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addSlot(3, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

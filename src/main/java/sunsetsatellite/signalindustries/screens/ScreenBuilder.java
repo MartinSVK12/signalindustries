@@ -46,14 +46,14 @@ public class ScreenBuilder extends ScreenFluid {
         int i = (width - xSize) / 2;
         int j = (height - ySize) / 2;
         FakeItemElement guiRenderFakeItem = new FakeItemElement(mc);
-        if(tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint) {
+        if (tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint) {
             Structure multiblock = SignalIndustries.getStructureFromBlueprint(tile.itemContents[0], tile.worldObj);
-            if(multiblock != null) {
+            if (multiblock != null) {
                 List<ItemStack> blocksUncondensed = tile.buildingBlocks
                         .stream()
                         .map((B) -> {
                             ItemStack stack = new ItemStack(B.block, 1, B.meta == -1 ? 0 : B.meta);
-                            if(!stack.getHasSubtypes()) {
+                            if (!stack.getHasSubtypes()) {
                                 stack.setMetadata(0);
                             }
                             return stack;
@@ -81,12 +81,12 @@ public class ScreenBuilder extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 153, y + 18 + 12 - counter, 176, 28 - counter, 14, counter + 2);
         }
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16, (int) (y + (ySize/1.5f) - 10),tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, (int) (y + (ySize / 1.5f) - 10), tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -94,7 +94,7 @@ public class ScreenBuilder extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -111,11 +111,11 @@ public class ScreenBuilder extends ScreenFluid {
         font.drawCenteredString("Offset", 42, 12, 0xFFFFFFFF);
         font.drawCenteredString("Rotation", 108, 35, 0xFFFFFFFF);
 
-        font.drawString(String.valueOf(tile.offset.x),35,30,0xFFFFFFFF,true);
-        font.drawString(String.valueOf(tile.offset.y),35,55,0xFFFFFFFF,true);
-        font.drawString(String.valueOf(tile.offset.z),35,80,0xFFFFFFFF,true);
+        font.drawString(String.valueOf(tile.offset.x), 35, 30, 0xFFFFFFFF, true);
+        font.drawString(String.valueOf(tile.offset.y), 35, 55, 0xFFFFFFFF, true);
+        font.drawString(String.valueOf(tile.offset.z), 35, 80, 0xFFFFFFFF, true);
 
-        font.drawString(String.valueOf(tile.rotation.getName().charAt(0)),105,55,0xFFFFFFFF,true);
+        font.drawString(String.valueOf(tile.rotation.getName().charAt(0)), 105, 55, 0xFFFFFFFF, true);
     }
 
     public ButtonElement itemIoButton;
@@ -145,16 +145,16 @@ public class ScreenBuilder extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
 
-        if(EnvironmentHelper.isClientWorld()){
-            switch (button.id){
+        if (EnvironmentHelper.isClientWorld()) {
+            switch (button.id) {
                 case 2:
                     NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, !tile.workTimer.isPaused(), tile.getClass()));
                     button.displayString = tile.workTimer.isPaused() ? "OFF" : "ON";
@@ -191,8 +191,8 @@ public class ScreenBuilder extends ScreenFluid {
                     break;
                 case 9: {
                     int i = tile.rotation.getSideNumber();
-                    i+=1;
-                    if (i > 5){
+                    i += 1;
+                    if (i > 5) {
                         i = 2;
                     }
                     tile.rotation = Direction.getDirectionFromSide(i);
@@ -202,8 +202,8 @@ public class ScreenBuilder extends ScreenFluid {
                 }
                 case 10: {
                     int i = tile.rotation.getSideNumber();
-                    i-=1;
-                    if (i < 2){
+                    i -= 1;
+                    if (i < 2) {
                         i = 5;
                     }
                     tile.rotation = Direction.getDirectionFromSide(i);
@@ -215,9 +215,9 @@ public class ScreenBuilder extends ScreenFluid {
                     break;
             }
         } else {
-            switch (button.id){
+            switch (button.id) {
                 case 2:
-                    if(tile.workTimer.isPaused() && (tile.fluidContents[0] != null && tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint)){
+                    if (tile.workTimer.isPaused() && (tile.fluidContents[0] != null && tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint)) {
                         tile.workTimer.unpause();
                         tile.setStructureToBuild();
                         for (BlockInstance block : new ArrayList<>(tile.buildingBlocks)) {
@@ -226,7 +226,7 @@ public class ScreenBuilder extends ScreenFluid {
                                 tile.builtBlocks++;
                             }
                         }
-                        if(tile.buildingBlockIndex >= tile.buildingBlocks.size()){
+                        if (tile.buildingBlockIndex >= tile.buildingBlocks.size()) {
                             tile.buildingBlockIndex = 0;
                         }
                     } else {
@@ -261,8 +261,8 @@ public class ScreenBuilder extends ScreenFluid {
                     break;
                 case 9: {
                     int i = tile.rotation.getSideNumber();
-                    i+=1;
-                    if (i > 5){
+                    i += 1;
+                    if (i > 5) {
                         i = 2;
                     }
                     tile.rotation = Direction.getDirectionFromSide(i);
@@ -271,8 +271,8 @@ public class ScreenBuilder extends ScreenFluid {
                 }
                 case 10: {
                     int i = tile.rotation.getSideNumber();
-                    i-=1;
-                    if (i < 2){
+                    i -= 1;
+                    if (i < 2) {
                         i = 5;
                     }
                     tile.rotation = Direction.getDirectionFromSide(i);

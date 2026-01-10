@@ -15,7 +15,6 @@ import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
-import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitClient;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -28,18 +27,18 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
     @Override
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         InventoryPowerSuit inv = new InventoryPowerSuit(stack);
-        InventorySerializer.loadInvFromNBT(stack,inv,8,1);
-        inv.insertFluid(0,fluidStack.splitStack(Math.min(maxAmount,fluidStack.amount)));
-        InventorySerializer.saveInvToNBT(stack,inv);
+        InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
+        inv.insertFluid(0, fluidStack.splitStack(Math.min(maxAmount, fluidStack.amount)));
+        InventorySerializer.saveInvToNBT(stack, inv);
     }
 
     @Override
     public boolean canFill(ItemStack stack) {
-        if(stack.getItem().equals(SIItems.signalumPowerSuitChestplate)){
+        if (stack.getItem().equals(SIItems.signalumPowerSuitChestplate)) {
             InventoryPowerSuit inv = new InventoryPowerSuit(stack);
-            InventorySerializer.loadInvFromNBT(stack,inv,8,1);
+            InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
             FluidStack fluidStack = inv.getFluidInSlot(0);
-            if(fluidStack == null) return true;
+            if (fluidStack == null) return true;
             return fluidStack.amount < inv.getFluidCapacityForSlot(0);
         }
         return false;
@@ -47,8 +46,8 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
 
     @Override
     public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Font fontRenderer, EntityRendererItem itemRenderer) {
-        IPowerSuit ps = ((IPlayerPowerSuit<?>)player).getPowerSuit();
-        if(ps instanceof SignalumPowerSuitClient && getArmorPiece() == 3){
+        IPowerSuit ps = ((IPlayerPowerSuit<?>) player).getPowerSuit();
+        if (ps instanceof SignalumPowerSuitClient && getArmorPiece() == 3) {
             ((SignalumPowerSuitClient) ps).renderOverlay(guiIngame, player, height, width, mouseX, mouseY, fontRenderer, itemRenderer);
         }
     }

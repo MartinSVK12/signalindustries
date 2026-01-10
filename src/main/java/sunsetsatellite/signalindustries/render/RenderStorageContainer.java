@@ -23,19 +23,19 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
         float rot;
         int i16 = tileEntity.getBlockMeta();
         rot = 0.0F;
-        if(i16 == 2) {
+        if (i16 == 2) {
             rot = 180.0F;
         }
 
-        if(i16 == 4) {
+        if (i16 == 4) {
             rot = 90.0F;
         }
 
-        if(i16 == 5) {
+        if (i16 == 5) {
             rot = -90.0F;
         }
 
-        GL11.glTranslatef((float)x + 0.5F, (float)y + 0.75F * scale, (float)z + 0.5F);
+        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.75F * scale, (float) z + 0.5F);
         GL11.glRotatef(-rot, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(0.0F, -0.3125F, -0.4375F);
 
@@ -53,7 +53,7 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
         String name = "";
         String amount = "";
 
-        if(tileEntity.contents != null) {
+        if (tileEntity.contents != null) {
             stack = tileEntity.contents;
             /*name = stack.getDisplayName();
             if(tileEntity.locked){
@@ -65,12 +65,12 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
             name = "* Locked *";
         }
 
-        if(tileEntity.infinite){
+        if (tileEntity.infinite) {
             amount = "Infinite!";
             color = 0xFFFF00FF;
         }
         int i14 = -6;
-        GL11.glTranslatef(0,28,82);
+        GL11.glTranslatef(0, 28, 82);
        /* if(split.length > 1){
             for (int i = 0; i < split.length; i++) {
                 String s = split[i];
@@ -81,10 +81,10 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
         getFont().drawString(name, -getFont().getStringWidth(name) / 2, (i14 * 10 - 5), color);
         getFont().drawString(amount, -getFont().getStringWidth(amount) / 2, i14 * 10 + 64, color);
         ((IFullbright) getFont()).disableFullbright();
-        GL11.glTranslatef(0,-28,-82);
-        GL11.glScalef(2.5f,2.5f,0.3f);
-        GL11.glTranslatef(0,0,240);
-        drawItemStack(stack,-8, -8);
+        GL11.glTranslatef(0, -28, -82);
+        GL11.glScalef(2.5f, 2.5f, 0.3f);
+        GL11.glTranslatef(0, 0, 240);
+        drawItemStack(stack, -8, -8);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glDepthMask(true);
@@ -94,7 +94,7 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
 
 
     private void drawItemStack(ItemStack stack, int x, int y) {
-        if(stack != null) {
+        if (stack != null) {
             GL11.glPushMatrix();
             GL11.glRotatef(120.0F, 1.0F, 0.0F, 0.0F);
             GL11.glDisable(GL11.GL_LIGHTING);

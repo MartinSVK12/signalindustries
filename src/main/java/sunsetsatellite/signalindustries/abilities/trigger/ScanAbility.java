@@ -8,10 +8,8 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.util.OreInfo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ScanAbility extends TriggerBaseEffectAbility {
@@ -48,32 +46,32 @@ public class ScanAbility extends TriggerBaseEffectAbility {
 
         oreMap.clear();
 
-        oreMap.put(Blocks.ORE_COAL_STONE,new OreInfo());
-        oreMap.put(Blocks.ORE_IRON_STONE,new OreInfo());
-        oreMap.put(Blocks.ORE_GOLD_STONE,new OreInfo());
-        oreMap.put(Blocks.ORE_LAPIS_STONE,new OreInfo());
-        oreMap.put(Blocks.ORE_REDSTONE_STONE,new OreInfo());
+        oreMap.put(Blocks.ORE_COAL_STONE, new OreInfo());
+        oreMap.put(Blocks.ORE_IRON_STONE, new OreInfo());
+        oreMap.put(Blocks.ORE_GOLD_STONE, new OreInfo());
+        oreMap.put(Blocks.ORE_LAPIS_STONE, new OreInfo());
+        oreMap.put(Blocks.ORE_REDSTONE_STONE, new OreInfo());
 
-        oreMap.put(Blocks.ORE_COAL_BASALT,new OreInfo());
-        oreMap.put(Blocks.ORE_IRON_BASALT,new OreInfo());
-        oreMap.put(Blocks.ORE_GOLD_BASALT,new OreInfo());
-        oreMap.put(Blocks.ORE_LAPIS_BASALT,new OreInfo());
-        oreMap.put(Blocks.ORE_REDSTONE_BASALT,new OreInfo());
+        oreMap.put(Blocks.ORE_COAL_BASALT, new OreInfo());
+        oreMap.put(Blocks.ORE_IRON_BASALT, new OreInfo());
+        oreMap.put(Blocks.ORE_GOLD_BASALT, new OreInfo());
+        oreMap.put(Blocks.ORE_LAPIS_BASALT, new OreInfo());
+        oreMap.put(Blocks.ORE_REDSTONE_BASALT, new OreInfo());
 
-        oreMap.put(Blocks.ORE_COAL_LIMESTONE,new OreInfo());
-        oreMap.put(Blocks.ORE_IRON_LIMESTONE,new OreInfo());
-        oreMap.put(Blocks.ORE_GOLD_LIMESTONE,new OreInfo());
-        oreMap.put(Blocks.ORE_LAPIS_LIMESTONE,new OreInfo());
-        oreMap.put(Blocks.ORE_REDSTONE_LIMESTONE,new OreInfo());
+        oreMap.put(Blocks.ORE_COAL_LIMESTONE, new OreInfo());
+        oreMap.put(Blocks.ORE_IRON_LIMESTONE, new OreInfo());
+        oreMap.put(Blocks.ORE_GOLD_LIMESTONE, new OreInfo());
+        oreMap.put(Blocks.ORE_LAPIS_LIMESTONE, new OreInfo());
+        oreMap.put(Blocks.ORE_REDSTONE_LIMESTONE, new OreInfo());
 
-        oreMap.put(Blocks.ORE_COAL_GRANITE,new OreInfo());
-        oreMap.put(Blocks.ORE_IRON_GRANITE,new OreInfo());
-        oreMap.put(Blocks.ORE_GOLD_GRANITE,new OreInfo());
-        oreMap.put(Blocks.ORE_LAPIS_GRANITE,new OreInfo());
-        oreMap.put(Blocks.ORE_REDSTONE_GRANITE,new OreInfo());
+        oreMap.put(Blocks.ORE_COAL_GRANITE, new OreInfo());
+        oreMap.put(Blocks.ORE_IRON_GRANITE, new OreInfo());
+        oreMap.put(Blocks.ORE_GOLD_GRANITE, new OreInfo());
+        oreMap.put(Blocks.ORE_LAPIS_GRANITE, new OreInfo());
+        oreMap.put(Blocks.ORE_REDSTONE_GRANITE, new OreInfo());
 
-        oreMap.put(SIBlocks.signalumOre,new OreInfo());
-        oreMap.put(SIBlocks.dilithiumOre,new OreInfo());
+        oreMap.put(SIBlocks.signalumOre, new OreInfo());
+        oreMap.put(SIBlocks.dilithiumOre, new OreInfo());
 
         for (int i = -range; i < range; i++) {
             for (int j = -range; j < range; j++) {
@@ -83,9 +81,9 @@ public class ScanAbility extends TriggerBaseEffectAbility {
                     int finalI = (int) (player.x + i);
                     int finalJ = (int) (player.z + j);
                     oreMap.forEach((block, oreInfo) -> {
-                        if(blockId == block.id()){
+                        if (blockId == block.id()) {
                             oreInfo.count++;
-                            oreInfo.positions.add(new Vec3i(finalI,finalK, finalJ));
+                            oreInfo.positions.add(new Vec3i(finalI, finalK, finalJ));
                         }
                     });
                 }
@@ -94,8 +92,8 @@ public class ScanAbility extends TriggerBaseEffectAbility {
 
         player.sendMessage("--- SCAN RESULTS ---");
         oreMap.forEach((block, oreInfo) -> {
-            if(oreInfo.count > 0){
-                player.sendMessage(String.format("%s%s | Count: %s%d",block.asItem().getTranslatedName(block.getDefaultStack()), TextFormatting.LIGHT_GRAY, TextFormatting.WHITE, oreInfo.count));
+            if (oreInfo.count > 0) {
+                player.sendMessage(String.format("%s%s | Count: %s%d", block.asItem().getTranslatedName(block.getDefaultStack()), TextFormatting.LIGHT_GRAY, TextFormatting.WHITE, oreInfo.count));
             }
         });
         player.sendMessage("--------------------");

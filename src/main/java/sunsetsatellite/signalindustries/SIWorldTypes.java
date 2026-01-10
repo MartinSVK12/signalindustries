@@ -1,12 +1,9 @@
 package sunsetsatellite.signalindustries;
 
-import net.minecraft.client.render.worldtype.WorldTypeFX;
-import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.WorldTypes;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.dim.WorldTypeEternity;
-import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
 
@@ -16,7 +13,7 @@ public class SIWorldTypes extends DataInitializer {
 
     @Override
     public void init() {
-        if(initialized) return;
+        if (initialized) return;
         LOGGER.info("Initializing world types...");
         ETERNITY_WORLD = WorldTypes.register("signalindustries:eternity", new WorldTypeEternity("signalindustries.eternity"));
 

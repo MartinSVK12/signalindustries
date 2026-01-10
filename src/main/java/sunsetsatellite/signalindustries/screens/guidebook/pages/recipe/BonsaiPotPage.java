@@ -20,11 +20,9 @@ import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryTrommel;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 
 import java.util.ArrayList;
@@ -53,11 +51,11 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         int recipeAmount = 0;
         int yOffset = 20;
 
-        for(RecipeEntryMachineMultiOutput recipe : recipes) {
+        for (RecipeEntryMachineMultiOutput recipe : recipes) {
             List<SlotGuidebook> recipeSlots = new ArrayList();
-            int slotsAmount = Math.min(4,recipe.getOutput().length);
+            int slotsAmount = Math.min(4, recipe.getOutput().length);
 
-            for(int i = 0; i < slotsAmount; ++i) {
+            for (int i = 0; i < slotsAmount; ++i) {
                 recipeSlots.add((new SlotGuidebook(i, 81 + 20 * (i % 2), 1 + 20 * (i / 2 + recipeAmount * 2) + yOffset, recipe.getOutput()[i].asSymbol(), false, recipe)).setAsOutput());
                 /*if (((WeightedRandomBag)recipe.getOutput()).getEntries().size() > i) {
                     ItemStack stack = ((WeightedRandomLootObject)((WeightedRandomBag)recipe.getOutput()).getEntries().get(i)).getItemStack();
@@ -69,8 +67,8 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
 
             int centerY = (recipeSlots.get(recipeSlots.size() - 1).y + recipeSlots.get(0).y) / 2;
             recipeSlots.add(new SlotGuidebook(slotsAmount, 19, centerY, recipe.getInput()[0].asNormalSymbol(), false, recipe));
-            if(recipe.getInput().length > 1){
-                recipeSlots.add(new SlotGuidebook(slotsAmount+1, 19, centerY + 20, recipe.getInput()[1].asNormalSymbol(), false, recipe));
+            if (recipe.getInput().length > 1) {
+                recipeSlots.add(new SlotGuidebook(slotsAmount + 1, 19, centerY + 20, recipe.getInput()[1].asNormalSymbol(), false, recipe));
             }
             this.map.put(recipe, recipeSlots);
             this.slots.addAll(recipeSlots);
@@ -83,7 +81,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
     public void onTick() {
         ++ticks;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             if (ticks > 20L) {
                 slot.showRandomItem();
                 if (this.slots.get(this.slots.size() - 1) == slot) {
@@ -96,18 +94,18 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         if (ticks2 > 25L) {
             ticks2 = 0L;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (slot.recipe instanceof RecipeEntryTrommel) {
-                    RecipeSymbol input = (RecipeSymbol)slot.recipe.getInput();
+                    RecipeSymbol input = (RecipeSymbol) slot.recipe.getInput();
                     if (!input.matches(slot.getItemStack()) && slot.recipeAmount > 8) {
-                        int recipeIndexMax = Math.round((float)slot.recipeAmount / 9.0F);
+                        int recipeIndexMax = Math.round((float) slot.recipeAmount / 9.0F);
                         if (slot.recipeIndex >= recipeIndexMax) {
                             slot.recipeIndex = 0;
                         } else {
                             ++slot.recipeIndex;
                         }
 
-                        WeightedRandomBag<WeightedRandomLootObject> loot = (WeightedRandomBag)slot.recipe.getOutput();
+                        WeightedRandomBag<WeightedRandomLootObject> loot = (WeightedRandomBag) slot.recipe.getOutput();
                         int index = slot.index + 9 * slot.recipeIndex;
                         if (index > slot.recipeAmount) {
                             slot.item = null;
@@ -122,7 +120,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
     }
 
     protected void renderForeground(TextureManager re, Font fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        drawStringCenteredNoShadow(fr, "Bonsai Pot", x+width - 158 / 2, y+5, 0xFF808080);
+        drawStringCenteredNoShadow(fr, "Bonsai Pot", x + width - 158 / 2, y + 5, 0xFF808080);
 
         if (this.recipes.isEmpty()) {
             this.drawStringCenteredNoShadow(fr, I18n.getInstance().translateKey("guidebook.section.search.error.no_recipes"), x + 79, y + 110, -8355712);
@@ -130,7 +128,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
 
         SlotGuidebook mouseOverSlot = null;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             this.drawSlot(x + slot.x - 1, y + slot.y - 1, -1);
             if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                 mouseOverSlot = slot;
@@ -150,7 +148,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         if (mc.gameSettings.keyShowRecipe.isKeyboardKey(key)) {
             SlotGuidebook hoveringSlot = null;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                     hoveringSlot = slot;
                 }
@@ -167,7 +165,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         } else if (mc.gameSettings.keyShowUsage.isKeyboardKey(key)) {
             SlotGuidebook hoveringSlot = null;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                     hoveringSlot = slot;
                 }
@@ -194,7 +192,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         super.renderBackground(re, x, y);
         re.bindTexture(re.loadTexture("/assets/minecraft/textures/gui/container/guidebook/guidebook.png"));
 
-        for(int i = 1; i <= this.recipes.size(); ++i) {
+        for (int i = 1; i <= this.recipes.size(); ++i) {
             RecipeEntryMachineMultiOutput recipe = this.recipes.get(i - 1);
             List<SlotGuidebook> list = this.map.get(recipe);
             this.drawTexturedModalRect(x + list.get(list.size() - 1).x + 25, y + list.get(list.size() - 1).y, 234, 0, 22, 15);
@@ -206,7 +204,7 @@ public class BonsaiPotPage extends RecipePage<RecipeEntryMachineMultiOutput> {
         super.renderOverlay(re, fr, x, y, mouseX, mouseY, partialTicks);
         SlotGuidebook mouseOverSlot = null;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                 mouseOverSlot = slot;
             }

@@ -27,7 +27,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "tile.signalindustries.reinforced.machine",
+          "key": "tile.signalindustries.reinforced.machine",
           "amount": 1,
           "meta": 0
         }
@@ -149,7 +149,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.awakened.casing",
+      "key": "tile.signalindustries.awakened.casing",
       "amount": 4,
       "meta": 0
     },
@@ -182,7 +182,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.awakened.casing2",
+      "key": "tile.signalindustries.awakened.casing2",
       "amount": 4,
       "meta": 0
     },
@@ -223,7 +223,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.awakened.casing.socket",
+      "key": "tile.signalindustries.awakened.casing.socket",
       "amount": 4,
       "meta": 0
     },
@@ -280,7 +280,7 @@
       }
     ],
     "result": {
-      "key":  "tile.signalindustries.awakened.warpGate",
+      "key": "tile.signalindustries.awakened.warpGate",
       "amount": 1,
       "meta": 0
     },

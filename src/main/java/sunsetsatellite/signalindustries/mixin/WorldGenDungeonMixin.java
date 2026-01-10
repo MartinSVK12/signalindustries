@@ -17,10 +17,11 @@ import sunsetsatellite.signalindustries.SIItems;
 )
 public class WorldGenDungeonMixin {
 
-    @Shadow public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
+    @Shadow
+    public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
 
-    @Inject(method = "<init>",at = @At(value = "INVOKE",target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V",ordinal = 0,shift = At.Shift.AFTER))
-    private void init(int blockIdWalls, int blockIdFloor, String mobOverride, CallbackInfo ci){
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V", ordinal = 0, shift = At.Shift.AFTER))
+    private void init(int blockIdWalls, int blockIdFloor, String mobOverride, CallbackInfo ci) {
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipShield.getDefaultStack()), 30);

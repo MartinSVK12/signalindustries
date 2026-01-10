@@ -17,7 +17,8 @@ import sunsetsatellite.signalindustries.interfaces.IVariableDamageWeapon;
 )
 public abstract class ItemStackMixin {
 
-    @Shadow public abstract @NotNull Item getItem();
+    @Shadow
+    public abstract @NotNull Item getItem();
 
     @Inject(
             method = "getDamageVsEntity",
@@ -25,8 +26,8 @@ public abstract class ItemStackMixin {
             cancellable = true
     )
     public void getDamageVsEntity(Entity entity, CallbackInfoReturnable<Integer> cir) {
-        if(getItem() instanceof IVariableDamageWeapon){
-            cir.setReturnValue((((IVariableDamageWeapon) getItem()).getDamageVsEntity(entity,(ItemStack) ((Object)this))));
+        if (getItem() instanceof IVariableDamageWeapon) {
+            cir.setReturnValue((((IVariableDamageWeapon) getItem()).getDamageVsEntity(entity, (ItemStack) ((Object) this))));
         }
     }
 

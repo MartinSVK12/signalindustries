@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.dim.custom;
 
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
-import net.minecraft.core.world.generate.chunk.ChunkDecorator;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
 import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
 

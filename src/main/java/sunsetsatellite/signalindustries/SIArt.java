@@ -13,7 +13,7 @@ public class SIArt extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing art...");
 
-        eternityBeyondReality = new ArtType("EternityBeyondReality","Eternity Beyond Reality","theMidford","signalindustries:art/eternity_beyond_reality",32,16);
+        eternityBeyondReality = new ArtType("EternityBeyondReality", "Eternity Beyond Reality", "theMidford", "signalindustries:art/eternity_beyond_reality", 32, 16);
 
         setInitialized(true);
     }

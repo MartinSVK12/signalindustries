@@ -6,10 +6,8 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
-import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.menus.MenuBackpack;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
@@ -26,7 +24,7 @@ public class ScreenBackpack extends ScreenFluid {
         this.backpackSlotIndex = backpackSlotIndex;
         this.isArmor = isArmor;
         this.player = inventoryPlayer.player;
-        if(isArmor){
+        if (isArmor) {
             this.backpack = ((IPlayerPowerSuit<?>) inventoryPlayer.player).getPowerSuit().getAttachmentClass(ItemBackpackAttachment.class);
         } else {
             this.backpack = inventoryPlayer.getItem(backpackSlotIndex);
@@ -47,7 +45,7 @@ public class ScreenBackpack extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_backpack.png");
-        switch (((ItemBackpackAttachment) backpack.getItem()).getTier()){
+        switch (((ItemBackpackAttachment) backpack.getItem()).getTier()) {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_backpack.png");
                 break;
@@ -62,14 +60,13 @@ public class ScreenBackpack extends ScreenFluid {
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
         String name = "";
-        if(backpack.getItem() instanceof ItemBackpackAttachment){
+        if (backpack.getItem() instanceof ItemBackpackAttachment) {
             name = I18n.getInstance().translateNameKey(fluidSlots.itemInventory.getNameTranslationKey());
-            switch (((ItemBackpackAttachment) backpack.getItem()).tier){
+            switch (((ItemBackpackAttachment) backpack.getItem()).tier) {
                 case BASIC:
                     color = 0xFFFF8080;
                     break;
@@ -84,11 +81,11 @@ public class ScreenBackpack extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        if(isArmor){
+        if (isArmor) {
             this.backpack = ((IPlayerPowerSuit<?>) player).getPowerSuit().getAttachmentClass(ItemBackpackAttachment.class);
         } else {
             this.backpack = player.inventory.getItem(backpackSlotIndex);
         }
-        InventorySerializer.saveInvToNBT(backpack,fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(backpack, fluidSlots.itemInventory);
     }
 }

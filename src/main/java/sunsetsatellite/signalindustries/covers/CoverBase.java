@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries.covers;
 
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.core.entity.player.Player;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IScreenActionListener;
@@ -28,8 +27,8 @@ public abstract class CoverBase implements IScreenActionListener {
     public abstract void openConfiguration(Player player, Direction dir);
 
     public void writeToNbt(CompoundTag tag) {
-        tag.putString("Type",getClass().getCanonicalName());
-        tag.putInt("Direction",dir.ordinal());
+        tag.putString("Type", getClass().getCanonicalName());
+        tag.putInt("Direction", dir.ordinal());
     }
 
     public void readFromNbt(CompoundTag tag) {
@@ -38,7 +37,7 @@ public abstract class CoverBase implements IScreenActionListener {
 
 
     //should be only called before readFromNbt when loading machine covers on world/chunk load
-    public void setup(Direction dir, IAcceptsCovers machine){
+    public void setup(Direction dir, IAcceptsCovers machine) {
         this.dir = dir;
         this.machine = machine;
     }

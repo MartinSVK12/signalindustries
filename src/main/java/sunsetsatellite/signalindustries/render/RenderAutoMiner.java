@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 
-    private RenderBlocks blockRenderer = new RenderBlocks();
+    private final RenderBlocks blockRenderer = new RenderBlocks();
 
     public void drawBlock(Tessellator tessellator, BlockModel<?> model, int meta, int alpha) {
         TextureRegistry.blockAtlas.bind();
@@ -28,10 +28,10 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         BlockModel.setRenderBlocks(blockRenderer);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        ((IFullbright)model).enableFullbright();
-        model.renderBlockOnInventory(tessellator,meta,1,alpha,null);
+        ((IFullbright) model).enableFullbright();
+        model.renderBlockOnInventory(tessellator, meta, 1, alpha, null);
         BlockModel.setRenderBlocks(renderBlocks);
-        ((IFullbright)model).disableFullbright();
+        ((IFullbright) model).disableFullbright();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glPopMatrix();
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -60,7 +60,7 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                 GL11.glTranslatef((float) x - (tx - cx) + 0.5f, (float) y - (ty - cy) + 1.2f, (float) z + (cz - tz) + 0.5f);
                 GL11.glScalef(0.50f, 1f, 0.50f);
                 GL11.glDisable(2896);
-                drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BASALT),0,1);
+                drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BASALT), 0, 1);
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
@@ -70,40 +70,40 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                 GL11.glTranslatef((float) x - (tx - cx) + 0.5f, (float) y - (ty - cy) + 0.3f, (float) z + (cz - tz) + 0.5f);
                 GL11.glScalef(0.25f, 0.75f, 0.25f);
                 GL11.glDisable(2896);
-                if(tile.hasSilkTouch()){
-                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BLOCK_GOLD),0,1);
+                if (tile.hasSilkTouch()) {
+                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BLOCK_GOLD), 0, 1);
                 } else {
-                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BLOCK_DIAMOND),0,1);
+                    drawBlock(tessellator, BlockModelDispatcher.getInstance().getDispatch(Blocks.BLOCK_DIAMOND), 0, 1);
                 }
                 GL11.glEnable(2896);
                 GL11.glPopMatrix();
             }
 
             //square above
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y-1));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 0.5f, 0, 1, 8, x - (tile.size.x-1), y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x, y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y - 1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z);
             //square
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 0.5f, 0, 1, 8, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + (tile.size.y-1));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 0.5f, 0, 1, 8, x - (tile.size.x-1), y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x, y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + (tile.size.y - 1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y, z);
             //down
             renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x-1), y + 4, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y-1));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x-1), y + 4, z + (tile.size.y-1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y - 1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z + (tile.size.y - 1));
             //down 2
             renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x-1), y, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + (tile.size.y-1));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x-1), y, z + (tile.size.y-1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x - 1), y, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + (tile.size.y - 1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x - 1), y, z + (tile.size.y - 1));
             //square down
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 1, 1, 1, 2, x, y - ty, z);
-            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x-1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + (tile.size.y-1));
-            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y-1), 1, 1, 1, 1, 2, x - (tile.size.x-1), y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 1, 1, 1, 2, x, y - ty, z);
+            renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + (tile.size.y - 1));
+            renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 1, 1, 1, 2, x - (tile.size.x - 1), y - ty, z);
 
             //current lines
             renderLineBetweenTwoPoints(tx, ty, tz, cx, ty, tz, 1, 0, 0, 1, 8, x, y + 4, z + (cz - tz));
@@ -113,10 +113,10 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
     }
 
     public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, double x, double y, double z) {
-        renderLineBetweenTwoPoints(x1,y1,z1,x2,y2,z2,red,green,blue,alpha,width,new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),false,false,false,x,y,z);
+        renderLineBetweenTwoPoints(x1, y1, z1, x2, y2, z2, red, green, blue, alpha, width, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, false, false, x, y, z);
     }
 
-    public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, ArrayList<Integer> xadd, ArrayList<Integer> yadd, ArrayList<Integer> zadd, ArrayList<Integer> sideadd, boolean backwired, boolean firstblocksided, boolean secondblocksided, double x, double y, double z){
+    public void renderLineBetweenTwoPoints(int x1, int y1, int z1, long x2, long y2, long z2, float red, float green, float blue, float alpha, float width, ArrayList<Integer> xadd, ArrayList<Integer> yadd, ArrayList<Integer> zadd, ArrayList<Integer> sideadd, boolean backwired, boolean firstblocksided, boolean secondblocksided, double x, double y, double z) {
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_LIGHTING);
@@ -127,14 +127,14 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
         GL11.glTranslated(x, y, z);
         GL11.glDepthMask(false);
         GL11.glBegin(GL11.GL_LINE_STRIP);
-        LightmapHelper.setLightmapCoord(15,15);
+        LightmapHelper.setLightmapCoord(15, 15);
         //First
-        if(!backwired) {
-            if(firstblocksided){
+        if (!backwired) {
+            if (firstblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
-                switch(Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)){
+                switch (Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)) {
                     case 0:
                         xoffset = 0.5f;
                         yoffset = 0.9f;
@@ -170,8 +170,8 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             } else {
                 GL11.glVertex3f(0.5f, 0.5f, 0.5f);
             }
-        } else{
-            if(secondblocksided) {
+        } else {
+            if (secondblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
@@ -207,17 +207,17 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
                         zoffset = 0.5f;
                         break;
                 }
-                GL11.glVertex3d(-(x1 - x2) + xoffset,-(y1 - y2) + yoffset, -(z1 - z2) + zoffset);
+                GL11.glVertex3d(-(x1 - x2) + xoffset, -(y1 - y2) + yoffset, -(z1 - z2) + zoffset);
             } else {
                 GL11.glVertex3d(-(x1 - x2) + 0.5f, -(y1 - y2) + 0.5f, -(z1 - z2) + 0.5f);
             }
         }
         //Middle
-        for(int i = xadd.size() - 1; i >= 0 ; i--){
+        for (int i = xadd.size() - 1; i >= 0; i--) {
             float xoffset = 0;
             float yoffset = 0;
             float zoffset = 0;
-            switch(sideadd.get(i)){
+            switch (sideadd.get(i)) {
                 case 0:
                     xoffset = 0.5f;
                     yoffset = -0.1f;
@@ -252,12 +252,12 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             GL11.glVertex3d(-(x1 - xadd.get(i)) + xoffset, -(y1 - yadd.get(i)) + yoffset, -(z1 - zadd.get(i)) + zoffset);
         }
         //Second
-        if(backwired) {
-            if(firstblocksided){
+        if (backwired) {
+            if (firstblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;
-                switch(Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)){
+                switch (Minecraft.getMinecraft().currentWorld.getBlockMetadata(x1, y1, z1)) {
                     case 0:
                         xoffset = 0.5f;
                         yoffset = 0.9f;
@@ -293,8 +293,8 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
             } else {
                 GL11.glVertex3f(0.5f, 0.5f, 0.5f);
             }
-        } else{
-            if(secondblocksided) {
+        } else {
+            if (secondblocksided) {
                 float xoffset = 0;
                 float yoffset = 0;
                 float zoffset = 0;

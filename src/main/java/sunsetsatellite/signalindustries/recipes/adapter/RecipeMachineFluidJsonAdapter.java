@@ -3,10 +3,8 @@ package sunsetsatellite.signalindustries.recipes.adapter;
 import com.google.gson.*;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
-import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -19,7 +17,7 @@ public class RecipeMachineFluidJsonAdapter implements RecipeJsonAdapter<RecipeEn
         FluidStack result = context.deserialize(obj.get("result").getAsJsonObject(), FluidStack.class);
         RecipeProperties properties = context.deserialize(obj.get("properties").getAsJsonObject(), RecipeProperties.class);
         RecipeExtendedSymbol[] symbols = obj.get("symbols").getAsJsonArray().asList().stream().map((E) -> (RecipeExtendedSymbol) context.deserialize(E, RecipeExtendedSymbol.class)).toArray(RecipeExtendedSymbol[]::new);
-        return new RecipeEntryMachineFluid(symbols,result,properties);
+        return new RecipeEntryMachineFluid(symbols, result, properties);
     }
 
     @Override

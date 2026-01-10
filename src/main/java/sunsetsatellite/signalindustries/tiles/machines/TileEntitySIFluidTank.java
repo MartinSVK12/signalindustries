@@ -2,8 +2,6 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.motion.CarriedBlock;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
@@ -27,7 +25,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     public boolean isInfiniteSource = true;
 
     public IOPreview preview = IOPreview.NONE;
-    public TickTimer IOPreviewTimer = new TickTimer(this,this::disableIOPreview,20,false);
+    public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
 
     @Override
     public void disableIOPreview() {
@@ -42,7 +40,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         this.preview = preview;
     }
 
-    public TileEntitySIFluidTank(){
+    public TileEntitySIFluidTank() {
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         itemContents = new ItemStack[0];
@@ -50,8 +48,8 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         transferSpeed = 50;
         fluidConnections.replace(Direction.Y_POS, Connection.INPUT);
         fluidConnections.replace(Direction.Y_NEG, Connection.OUTPUT);
-        Fluid.fluidMap.forEach((K,V)->{
-            if(V != SIFluids.ENERGY){
+        Fluid.fluidMap.forEach((K, V) -> {
+            if (V != SIFluids.ENERGY) {
                 acceptedFluids.get(0).add(V);
             }
         });
@@ -60,28 +58,28 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
     @Override
     public void tick() {
         IOPreviewTimer.tick();
-        if(tier == Tier.INFINITE){
+        if (tier == Tier.INFINITE) {
             for (Map.Entry<Direction, Connection> entry : fluidConnections.entrySet()) {
-                if(isInfiniteSource){
-                    if(entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH){
+                if (isInfiniteSource) {
+                    if (entry.getValue() == Connection.INPUT || entry.getValue() == Connection.BOTH) {
                         entry.setValue(Connection.OUTPUT);
                     }
                 } else {
-                    if(entry.getValue() == Connection.OUTPUT || entry.getValue() == Connection.BOTH){
+                    if (entry.getValue() == Connection.OUTPUT || entry.getValue() == Connection.BOTH) {
                         entry.setValue(Connection.INPUT);
                     }
                 }
             }
-            if(isInfiniteSource){
+            if (isInfiniteSource) {
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
-                if(fluidContents[0] != null){
+                if (fluidContents[0] != null) {
                     fluidContents[0].amount = Integer.MAX_VALUE;
                 }
             } else {
                 fluidCapacity[0] = Integer.MAX_VALUE;
                 transferSpeed = Integer.MAX_VALUE;
-                if(fluidContents[0] != null){
+                if (fluidContents[0] != null) {
                     fluidContents[0] = null;
                 }
             }
@@ -92,6 +90,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
         extractFluids();
         super.tick();
     }
+
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);

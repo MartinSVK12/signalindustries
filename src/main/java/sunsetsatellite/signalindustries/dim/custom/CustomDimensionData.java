@@ -6,11 +6,8 @@ import net.minecraft.core.world.biome.Biomes;
 import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.biome.provider.BiomeProviderSingleBiome;
 import net.minecraft.core.world.config.season.SeasonConfig;
-import net.minecraft.core.world.config.season.SeasonConfigBuilder;
 import net.minecraft.core.world.generate.chunk.ChunkDecorator;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
-import net.minecraft.core.world.generate.chunk.empty.ChunkGeneratorEmpty;
-import net.minecraft.core.world.season.SeasonNull;
 import net.minecraft.core.world.season.Seasons;
 import net.minecraft.core.world.type.WorldType;
 import net.minecraft.core.world.type.overworld.WorldTypeOverworld;
@@ -39,12 +36,12 @@ public class CustomDimensionData {
         readFromNbt(tag);
     }
 
-    public void readFromNbt(CompoundTag tag){
+    public void readFromNbt(CompoundTag tag) {
         name = tag.getString("Name");
         id = tag.getInteger("Id");
     }
 
-    public void writeToNbt(CompoundTag tag){
+    public void writeToNbt(CompoundTag tag) {
         tag.putString("Name", name);
         tag.putInt("Id", id);
     }
@@ -58,22 +55,22 @@ public class CustomDimensionData {
     }
 
     public BiomeProvider getBiomeProvider(World world) {
-        if(biome == null) biome = new BiomeProviderSingleBiome(Biomes.OVERWORLD_PLAINS, 1, 1, 1);
+        if (biome == null) biome = new BiomeProviderSingleBiome(Biomes.OVERWORLD_PLAINS, 1, 1, 1);
         return biome;
     }
 
     public ChunkGenerator getChunkGenerator(World world) {
-        if(chunkGenerator == null) chunkGenerator = new ChunkGeneratorCustom(world, this);
+        if (chunkGenerator == null) chunkGenerator = new ChunkGeneratorCustom(world, this);
         return chunkGenerator;
     }
 
     public ChunkDecorator getChunkDecorator(World world) {
-        if(chunkDecorator == null) chunkDecorator = new ChunkDecoratorCustom(world, this);
+        if (chunkDecorator == null) chunkDecorator = new ChunkDecoratorCustom(world, this);
         return chunkDecorator;
     }
 
     public WorldType getWorldType() {
-        if(worldType == null) worldType = new WorldTypeCustom(this);
+        if (worldType == null) worldType = new WorldTypeCustom(this);
         return worldType;
     }
 }

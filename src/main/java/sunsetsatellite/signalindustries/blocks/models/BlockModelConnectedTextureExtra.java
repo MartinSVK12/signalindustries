@@ -49,7 +49,7 @@ public class BlockModelConnectedTextureExtra extends BlockModelConnectedTexture 
 
     @Override
     public IconCoordinate getBlockTexture(WorldSource world, int x, int y, int z, Side side) {
-        if (world.getBlockMetadata(x,y,z) == 1) {
+        if (world.getBlockMetadata(x, y, z) == 1) {
             int state = checkNeighbors(world, x, y, z);
             BitSet bits = intToBitSet(state, 6), subbits = new BitSet(4);
             for (int i = 0; i < 4; i++) {
@@ -63,7 +63,7 @@ public class BlockModelConnectedTextureExtra extends BlockModelConnectedTexture 
 
     @Override
     public IconCoordinate getBlockOverbrightTexture(WorldSource world, int x, int y, int z, int side) {
-        if (world.getBlockMetadata(x,y,z) == 1) {
+        if (world.getBlockMetadata(x, y, z) == 1) {
             return overlayTexture;
         }
         return super.getBlockOverbrightTexture(world, x, y, z, side);

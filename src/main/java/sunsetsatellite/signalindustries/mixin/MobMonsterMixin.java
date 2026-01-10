@@ -14,10 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
 
-@Mixin(value = MobMonster.class,remap = false)
+@Mixin(value = MobMonster.class, remap = false)
 public abstract class MobMonsterMixin extends Mob {
 
-    @Shadow protected int attackStrength;
+    @Shadow
+    protected int attackStrength;
 
     private MobMonsterMixin(@Nullable World world) {
         super(world);
@@ -28,7 +29,7 @@ public abstract class MobMonsterMixin extends Mob {
             at = @At("HEAD"),
             cancellable = true
     )
-    public void attackEntity(Entity entity, float f, CallbackInfo ci){
+    public void attackEntity(Entity entity, float f, CallbackInfo ci) {
         if (world != null && world.getCurrentWeather() == SIWeather.weatherBloodMoon) {
             if (this.attackTime <= 0 && f < 2.0F && entity.bb.maxY > this.bb.minY && entity.bb.minY < this.bb.maxY) {
                 this.attackTime = 15;

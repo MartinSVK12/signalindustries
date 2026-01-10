@@ -9,9 +9,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.menus.MenuProgrammer;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityProgrammer;
 
 public class ScreenProgrammer extends ScreenFluid {
@@ -29,7 +27,7 @@ public class ScreenProgrammer extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/programmer_basic_new.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/programmer_basic_new.png");
                 break;
@@ -43,7 +41,7 @@ public class ScreenProgrammer extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(this.tile.isBurning()) {
+        if (this.tile.isBurning()) {
             counter = this.tile.getBurnTimeRemainingScaled(12);
             this.drawTexturedModalRect(x + 9, y + 36 + 14 - counter, 176, 12 - counter, 14, counter + 2);
         }
@@ -68,10 +66,10 @@ public class ScreenProgrammer extends ScreenFluid {
 
         }*/
 
-        counter = Math.min(this.tile.getProgressScaled(22),22);
+        counter = Math.min(this.tile.getProgressScaled(22), 22);
         this.drawTexturedModalRect(x + 121, y + 34, 176, 14, counter + 1, 20);
-        if(this.tile.speedMultiplier > 1){
-            this.drawStringCentered(font, this.tile.speedMultiplier+"x",x + xSize - 16,y + ySize/2 - 16,tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+        if (this.tile.speedMultiplier > 1) {
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 
@@ -79,7 +77,7 @@ public class ScreenProgrammer extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -94,32 +92,32 @@ public class ScreenProgrammer extends ScreenFluid {
         }
         int progress = tile.getProgressScaled(100);
         font.drawCenteredString(I18n.getInstance().translateNameKey(tile.getNameTranslationKey()), 90, 6, color);
-        if(tile.isBurning() && tile.canProcess()){
+        if (tile.isBurning() && tile.canProcess()) {
             StringBuilder s = new StringBuilder();
             int count = tile.getProgressScaled(100) / 15;
-            for(int i = 0; i < count; i++){
+            for (int i = 0; i < count; i++) {
                 s.append("#");
             }
-            for(int i = 0; i < 7-count; i++){
+            for (int i = 0; i < 7 - count; i++) {
                 s.append("-");
             }
-            font.drawStringWithShadow(String.format("[%s] %d%%", s,progress),38,60,color);
+            font.drawStringWithShadow(String.format("[%s] %d%%", s, progress), 38, 60, color);
         }
-        if(!tile.isBurning()){
-            if(tile.progressTicks > 0){
-                font.drawStringWithShadow("Out of energy!",38,20,0xFFFF0000);
+        if (!tile.isBurning()) {
+            if (tile.progressTicks > 0) {
+                font.drawStringWithShadow("Out of energy!", 38, 20, 0xFFFF0000);
             } else {
-                font.drawStringWithShadow("Idle...",38,20,color);
+                font.drawStringWithShadow("Idle...", 38, 20, color);
             }
-        } else if(!tile.canProcess()){
-            font.drawStringWithShadow("Interrupted!",38,20,0xFFFF0000);
+        } else if (!tile.canProcess()) {
+            font.drawStringWithShadow("Interrupted!", 38, 20, 0xFFFF0000);
         } else {
-            font.drawStringWithShadow("Working...",38,20,0xFF00FF00);
-            if(progress > 10){
-                font.drawStringWithShadow("Reading...",38,30,0xFF00FF00);
+            font.drawStringWithShadow("Working...", 38, 20, 0xFF00FF00);
+            if (progress > 10) {
+                font.drawStringWithShadow("Reading...", 38, 30, 0xFF00FF00);
             }
-            if(progress > 25){
-                font.drawStringWithShadow("Copying...",38,40,0xFF00FF00);
+            if (progress > 25) {
+                font.drawStringWithShadow("Copying...", 38, 40, 0xFF00FF00);
             }
         }
 
@@ -141,11 +139,11 @@ public class ScreenProgrammer extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

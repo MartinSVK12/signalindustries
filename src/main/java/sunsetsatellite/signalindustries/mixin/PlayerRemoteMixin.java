@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
-import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitRemote;
 
 
@@ -34,18 +33,18 @@ public abstract class PlayerRemoteMixin extends Player implements IPlayerPowerSu
     public void powerSuitUpdate(CallbackInfo ci) {
         ItemStack[] armorInventory = inventory.armorInventory;
         for (ItemStack itemStack : armorInventory) {
-            if(itemStack == null){
+            if (itemStack == null) {
                 powerSuit = null;
                 //ItemNVGAttachment.disable();
                 return;
-            } else if(!(itemStack.getItem() instanceof ItemSignalumPowerSuit)){
+            } else if (!(itemStack.getItem() instanceof ItemSignalumPowerSuit)) {
                 //ItemNVGAttachment.disable();
                 powerSuit = null;
                 return;
             }
         }
-        if(powerSuit == null){
-            powerSuit = new SignalumPowerSuitRemote((PlayerRemote) (Object)this);
+        if (powerSuit == null) {
+            powerSuit = new SignalumPowerSuitRemote((PlayerRemote) (Object) this);
             //triggerAchievement(SIAchievements.POWER_SUIT);
         } else {
             powerSuit.tick();

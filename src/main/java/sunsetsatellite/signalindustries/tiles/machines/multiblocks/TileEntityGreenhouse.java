@@ -1,17 +1,9 @@
 package sunsetsatellite.signalindustries.tiles.machines.multiblocks;
 
 import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockLogicFlower;
-import net.minecraft.core.block.Blocks;
-import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIRecipes;
-import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.interfaces.mixins.ICrop;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
 

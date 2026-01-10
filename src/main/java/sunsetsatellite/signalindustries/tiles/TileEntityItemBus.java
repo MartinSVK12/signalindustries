@@ -14,7 +14,7 @@ public class TileEntityItemBus extends TileEntityTieredContainer implements IMul
     public TileEntity connectedTo;
     private boolean init = false;
 
-    public TileEntityItemBus(){
+    public TileEntityItemBus() {
         itemContents = new ItemStack[9];
         fluidContents = new FluidStack[0];
         fluidCapacity = new int[0];
@@ -25,9 +25,9 @@ public class TileEntityItemBus extends TileEntityTieredContainer implements IMul
     public void tick() {
         super.tick();
         extractFluids();
-        if(!init){
+        if (!init) {
             if (tier == Tier.BASIC) {
-                itemContents = Arrays.copyOf(itemContents,4);
+                itemContents = Arrays.copyOf(itemContents, 4);
                 init = true;
             }
         }

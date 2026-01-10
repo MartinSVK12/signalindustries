@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.base;
 
 
-import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.item.ItemStack;
@@ -11,7 +10,6 @@ import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
@@ -25,7 +23,7 @@ import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPartBlock;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
-import sunsetsatellite.signalindustries.recipes.entry.*;
+import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.tiles.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
@@ -61,7 +59,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public int parallel = 1;
     public int baseParallel = 1;
 
-    public TileEntityTieredMultiblock(){
+    public TileEntityTieredMultiblock() {
         super();
         itemContents = new ItemStack[0];
         fluidContents = new FluidStack[0];
@@ -70,12 +68,12 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
     @Override
     public void tick() {
-        if(multiblock == null){
+        if (multiblock == null) {
             return;
         }
         super.tick();
         if (worldObj != null) {
-            worldObj.markBlocksDirty(x,y,z,x,y,z);
+            worldObj.markBlocksDirty(x, y, z, x, y, z);
         }
         Block<?> block = getBlock();
         itemInput = null;
@@ -83,30 +81,30 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         fluidInput = null;
         fluidOutput = null;
         energy = null;
-        if(multiblock.isValid()){
+        if (multiblock.isValid()) {
             Direction dir = Direction.getDirectionFromSide(getBlockMeta());
-            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj,new Vec3i(x,y,z), dir);
+            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj, new Vec3i(x, y, z), dir);
             for (BlockInstance tileEntity : tileEntities) {
                 IMultiblockPartBlock multiblockPart = Catalyst.blockLogic(tileEntity.block, IMultiblockPartBlock.class);
                 if (tileEntity.tile instanceof IMultiblockPart && multiblockPart instanceof ITiered) {
-                    if(multiblockPart.getType() == MultiblockPart.Type.ITEM && multiblockPart.getIO() == MultiblockPart.IO.INPUT){
-                        if(((ITiered) multiblockPart).getTier().ordinal() >= minimumItemInputTier.ordinal()){
+                    if (multiblockPart.getType() == MultiblockPart.Type.ITEM && multiblockPart.getIO() == MultiblockPart.IO.INPUT) {
+                        if (((ITiered) multiblockPart).getTier().ordinal() >= minimumItemInputTier.ordinal()) {
                             itemInput = (TileEntityItemBus) tileEntity.tile;
                         }
-                    } else if(multiblockPart.getType() == MultiblockPart.Type.ITEM && multiblockPart.getIO() == MultiblockPart.IO.OUTPUT){
-                        if(((ITiered) multiblockPart).getTier().ordinal() >= minimumItemOutputTier.ordinal()){
+                    } else if (multiblockPart.getType() == MultiblockPart.Type.ITEM && multiblockPart.getIO() == MultiblockPart.IO.OUTPUT) {
+                        if (((ITiered) multiblockPart).getTier().ordinal() >= minimumItemOutputTier.ordinal()) {
                             itemOutput = (TileEntityItemBus) tileEntity.tile;
                         }
-                    } else if(tileEntity.tile instanceof TileEntityEnergyConnector){
-                        if(((ITiered) multiblockPart).getTier().ordinal() >= minimumEnergyTier.ordinal()){
+                    } else if (tileEntity.tile instanceof TileEntityEnergyConnector) {
+                        if (((ITiered) multiblockPart).getTier().ordinal() >= minimumEnergyTier.ordinal()) {
                             energy = (TileEntityEnergyConnector) tileEntity.tile;
                         }
-                    } else if(multiblockPart.getType() == MultiblockPart.Type.FLUID && multiblockPart.getIO() == MultiblockPart.IO.INPUT){
-                        if(((ITiered) multiblockPart).getTier().ordinal() >= minimumFluidInputTier.ordinal()){
+                    } else if (multiblockPart.getType() == MultiblockPart.Type.FLUID && multiblockPart.getIO() == MultiblockPart.IO.INPUT) {
+                        if (((ITiered) multiblockPart).getTier().ordinal() >= minimumFluidInputTier.ordinal()) {
                             fluidInput = (TileEntityFluidHatch) tileEntity.tile;
                         }
-                    } else if(multiblockPart.getType() == MultiblockPart.Type.FLUID && multiblockPart.getIO() == MultiblockPart.IO.INPUT){
-                        if(((ITiered) multiblockPart).getTier().ordinal() >= minimumFluidOutputTier.ordinal()){
+                    } else if (multiblockPart.getType() == MultiblockPart.Type.FLUID && multiblockPart.getIO() == MultiblockPart.IO.INPUT) {
+                        if (((ITiered) multiblockPart).getTier().ordinal() >= minimumFluidOutputTier.ordinal()) {
                             fluidOutput = (TileEntityFluidHatch) tileEntity.tile;
                         }
                     }
@@ -114,7 +112,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 }
             }
             parallel = baseParallel;
-            ArrayList<BlockInstance> extraBlocks = multiblock.data.getSubstitutions(new Vec3i(x,y,z), dir);
+            ArrayList<BlockInstance> extraBlocks = multiblock.data.getSubstitutions(new Vec3i(x, y, z), dir);
             for (BlockInstance extraBlock : extraBlocks) {
                 if (worldObj != null && extraBlock.exists(worldObj)) {
                     BlockLogicParallelProcessor multiblockPart = Catalyst.blockLogic(extraBlock.block, BlockLogicParallelProcessor.class);
@@ -123,23 +121,23 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                     }
                 }
             }
-            if(block != null && allPartsPresent()) {
+            if (block != null && allPartsPresent()) {
                 int oldParallel = parallel;
                 parallel = 1;
                 setCurrentRecipe();
                 parallel = oldParallel;
-                if(currentRecipe != null){
+                if (currentRecipe != null) {
                     int recipeInputSum = Arrays.stream(((RecipeExtendedSymbol[]) currentRecipe.getInput())).map(RecipeExtendedSymbol::asNormalSymbol).map(RecipeSymbol::resolve).map(L -> L.get(0)).mapToInt(S -> S.stackSize).sum();
                     int inputSum = 0;
-                    if(itemInput != null){
+                    if (itemInput != null) {
                         inputSum += Catalyst.condenseItemList(Arrays.asList(itemInput.itemContents)).stream().mapToInt(S -> S.stackSize).sum();
                     }
-                    if(fluidInput != null){
+                    if (fluidInput != null) {
                         inputSum += CatalystFluids.condenseFluidList(Arrays.asList(fluidInput.fluidContents)).stream().mapToInt(S -> S.amount).sum();
                     }
                     int effectiveParallel = inputSum / recipeInputSum;
 
-                    if(parallel > effectiveParallel && effectiveParallel > 0){
+                    if (parallel > effectiveParallel && effectiveParallel > 0) {
                         parallel = effectiveParallel;
                     }
                 }
@@ -147,10 +145,10 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 work();
             }
 
-            if(isBurning()){
+            if (isBurning()) {
                 ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
                 for (BlockInstance structBlock : blocks) {
-                    if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
+                    if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) != 1) {
                             worldObj.setBlockMetadata(structBlock.pos.x, structBlock.pos.y, structBlock.pos.z, 1);
                         }
@@ -159,7 +157,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
             } else {
                 ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(x, y, z), dir);
                 for (BlockInstance structBlock : blocks) {
-                    if(structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
+                    if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) == 1) {
                             worldObj.setBlockMetadata(structBlock.pos.x, structBlock.pos.y, structBlock.pos.z, 0);
                         }
@@ -169,7 +167,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         }
     }
 
-    public boolean allPartsPresent(){
+    public boolean allPartsPresent() {
         return (itemInput != null || !usesItemInput)
                 && (itemOutput != null || !usesItemOutput)
                 && (fluidInput != null || !usesFluidInput)
@@ -177,17 +175,17 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 && (energy != null || !usesEnergy);
     }
 
-    public void work(){
-        if(multiblock.isValid() && allPartsPresent()){
+    public void work() {
+        if (multiblock.isValid() && allPartsPresent()) {
             boolean update = false;
-            if(fuelBurnTicks > 0){
+            if (fuelBurnTicks > 0) {
                 fuelBurnTicks--;
             }
             ArrayList<ItemStack> inputContents = getItemInputContents();
             ArrayList<FluidStack> fluidInputContents = getFluidInputContents();
-            if(inputContents.isEmpty() && fluidInputContents.isEmpty()){
+            if (inputContents.isEmpty() && fluidInputContents.isEmpty()) {
                 progressTicks = 0;
-            } else if(canProcess()) {
+            } else if (canProcess()) {
                 progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
             }
             if (worldObj != null && !worldObj.isClientSide) {
@@ -209,7 +207,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 }
             }
 
-            if(update) {
+            if (update) {
                 this.setChanged();
             }
         }
@@ -217,13 +215,13 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
     @Override
     public boolean isBurning() {
-        if(multiblock == null) return false;
+        if (multiblock == null) return false;
         return super.isBurning() && multiblock.isValid();
     }
 
     @NotNull
     private ArrayList<ItemStack> getItemInputContents() {
-        if(!allPartsPresent() || !usesItemInput){
+        if (!allPartsPresent() || !usesItemInput) {
             return new ArrayList<>();
         }
         return Catalyst.condenseItemList(Arrays.asList(itemInput.itemContents));
@@ -231,7 +229,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
     @NotNull
     private ArrayList<ItemStack> getItemOutputContents() {
-        if(!allPartsPresent() || !usesItemOutput){
+        if (!allPartsPresent() || !usesItemOutput) {
             return new ArrayList<>();
         }
         return Catalyst.condenseItemList(Arrays.asList(itemOutput.itemContents));
@@ -239,7 +237,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
     @NotNull
     private ArrayList<FluidStack> getFluidInputContents() {
-        if(!allPartsPresent() || !usesFluidInput){
+        if (!allPartsPresent() || !usesFluidInput) {
             return new ArrayList<>();
         }
         return CatalystFluids.condenseFluidList(Arrays.asList(fluidInput.fluidContents));
@@ -247,7 +245,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
 
     @NotNull
     private ArrayList<FluidStack> getFluidOutputContents() {
-        if(!allPartsPresent() || !usesFluidOutput){
+        if (!allPartsPresent() || !usesFluidOutput) {
             return new ArrayList<>();
         }
         return CatalystFluids.condenseFluidList(Arrays.asList(fluidOutput.fluidContents));
@@ -258,16 +256,16 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         return multiblock;
     }
 
-    public boolean fuel(){
-        if(allPartsPresent() && energy.getFluidInSlot(0) != null){
+    public boolean fuel() {
+        if (allPartsPresent() && energy.getFluidInSlot(0) != null) {
             int burn = SignalIndustries.getEnergyBurnTime(energy.getFluidInSlot(0));
-            if(burn > 0 && canProcess() && currentRecipe != null){
-                if(energy.getFluidInSlot(0).amount >= currentRecipe.getData().cost){
+            if (burn > 0 && canProcess() && currentRecipe != null) {
+                if (energy.getFluidInSlot(0).amount >= currentRecipe.getData().cost) {
                     progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
                     fuelMaxBurnTicks = fuelBurnTicks = burn;
                     energy.getFluidInSlot(0).amount -= currentRecipe.getData().cost;
                     if (energy.getFluidInSlot(0) != null && energy.getFluidInSlot(0).amount <= 0) {
-                        energy.setFluidInSlot(0,null);
+                        energy.setFluidInSlot(0, null);
                     }
                     return true;
                 }
@@ -276,21 +274,21 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         return false;
     }
 
-    public void setCurrentRecipe(){
-        if(allPartsPresent()){
+    public void setCurrentRecipe() {
+        if (allPartsPresent()) {
             List<Object> objs = new ArrayList<>();
-            if(usesItemInput) {
+            if (usesItemInput) {
                 List<ItemStack> items = getItemInputContents().stream().map(ItemStack::copy).collect(Collectors.toList());
                 items.forEach(stack -> stack.stackSize /= parallel);
                 objs.addAll(items);
             }
-            if(usesFluidInput) {
+            if (usesFluidInput) {
                 List<FluidStack> fluids = getFluidInputContents().stream().map(FluidStack::copy).collect(Collectors.toList());
                 fluids.forEach(stack -> stack.amount /= parallel);
                 objs.addAll(fluids);
             }
             objs = objs.stream().map(o -> {
-                if(o instanceof ItemStack){
+                if (o instanceof ItemStack) {
                     if (((ItemStack) o).stackSize <= 0) {
                         return null;
                     }
@@ -304,20 +302,20 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 return o;
             }).filter(Objects::nonNull).collect(Collectors.toList());
             RecipeExtendedSymbol[] symbols = RecipeExtendedSymbol.arrayOf(objs);
-            currentRecipe = recipeGroup.findRecipe(symbols,tier);
+            currentRecipe = recipeGroup.findRecipe(symbols, tier);
         }
     }
 
 
-    public boolean canProcess(){
-        if(allPartsPresent() && currentRecipe != null) {
+    public boolean canProcess() {
+        if (allPartsPresent() && currentRecipe != null) {
             return currentRecipe.canMultiblockProcess(this);
         }
         return false;
     }
 
-    public boolean areItemOutputsValid(ItemStack stack){
-        if(!usesItemOutput) return true;
+    public boolean areItemOutputsValid(ItemStack stack) {
+        if (!usesItemOutput) return true;
         int outputAmountRemaining;
         outputAmountRemaining = stack.stackSize;
 
@@ -325,20 +323,20 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         stack = stack.copy();
         stack.stackSize *= parallel;
 
-        if(outputAmountRemaining <= 0) return true;
+        if (outputAmountRemaining <= 0) return true;
         for (ItemStack outputStack : itemOutput.itemContents) {
             if (outputStack != null) {
-                if(outputStack.isItemEqual(stack)){
-                    int maxFreeAmountInSlot = Math.min(outputStack.getMaxStackSize(),itemOutput.getMaxStackSize()) - outputStack.stackSize;
+                if (outputStack.isItemEqual(stack)) {
+                    int maxFreeAmountInSlot = Math.min(outputStack.getMaxStackSize(), itemOutput.getMaxStackSize()) - outputStack.stackSize;
                     int willTake = Math.min(outputAmountRemaining, maxFreeAmountInSlot);
                     outputAmountRemaining -= willTake;
                 }
             } else {
-                int maxFreeAmountInSlot = Math.min(itemOutput.getMaxStackSize(),stack.getMaxStackSize());
+                int maxFreeAmountInSlot = Math.min(itemOutput.getMaxStackSize(), stack.getMaxStackSize());
                 int willTake = Math.min(outputAmountRemaining, maxFreeAmountInSlot);
                 outputAmountRemaining -= willTake;
             }
-            if(outputAmountRemaining <= 0){
+            if (outputAmountRemaining <= 0) {
                 break;
             }
         }
@@ -346,14 +344,14 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         return outputAmountRemaining <= 0;
     }
 
-    public boolean areFluidOutputsValid(FluidStack stack){
-        if(!usesFluidOutput) return true;
+    public boolean areFluidOutputsValid(FluidStack stack) {
+        if (!usesFluidOutput) return true;
         int outputAmountRemaining;
         outputAmountRemaining = stack.amount;
 
         outputAmountRemaining *= parallel;
 
-        if(outputAmountRemaining <= 0) return true;
+        if (outputAmountRemaining <= 0) return true;
         FluidStack[] contents = fluidOutput.fluidContents;
         for (int i = 0; i < contents.length; i++) {
             FluidStack outputStack = contents[i];
@@ -376,26 +374,26 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         return outputAmountRemaining <= 0;
     }
 
-    public void processItem(){
-        if(canProcess()){
+    public void processItem() {
+        if (canProcess()) {
             currentRecipe.processMultiblockRecipe(this);
         }
     }
 
-    public void consumeInputs(){
-        if(currentRecipe != null){
+    public void consumeInputs() {
+        if (currentRecipe != null) {
             currentRecipe.consumeMultiblockInputs(this);
         }
     }
 
     @Override
     public void setActiveFluidSlotForSide(Direction dir, int slot) {
-        activeFluidSlots.replace(dir,slot);
+        activeFluidSlots.replace(dir, slot);
     }
 
     @Override
     public void setActiveItemSlotForSide(Direction dir, int slot) {
-        activeItemSlots.replace(dir,slot);
+        activeItemSlots.replace(dir, slot);
     }
 
     @Override
@@ -419,17 +417,17 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     @Override
     public void cycleActiveItemSlotForSide(Direction dir, boolean backwards) {
         int i = activeItemSlots.get(dir);
-        if(!backwards){
-            if(i < getContainerSize()-1){
-                activeItemSlots.replace(dir,i+1);
+        if (!backwards) {
+            if (i < getContainerSize() - 1) {
+                activeItemSlots.replace(dir, i + 1);
             } else {
-                activeItemSlots.replace(dir,0);
+                activeItemSlots.replace(dir, 0);
             }
         } else {
-            if(i > -1){
-                activeItemSlots.replace(dir,i-1);
+            if (i > -1) {
+                activeItemSlots.replace(dir, i - 1);
             } else {
-                activeItemSlots.replace(dir,getContainerSize()-1);
+                activeItemSlots.replace(dir, getContainerSize() - 1);
             }
         }
     }
@@ -455,17 +453,17 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     @Override
     public void cycleActiveFluidSlotForSide(Direction dir, boolean backwards) {
         int i = activeFluidSlots.get(dir);
-        if(!backwards){
-            if(i < getContainerSize()-1){
-                activeFluidSlots.replace(dir,i+1);
+        if (!backwards) {
+            if (i < getContainerSize() - 1) {
+                activeFluidSlots.replace(dir, i + 1);
             } else {
-                activeFluidSlots.replace(dir,0);
+                activeFluidSlots.replace(dir, 0);
             }
         } else {
-            if(i > -1){
-                activeFluidSlots.replace(dir,i-1);
+            if (i > -1) {
+                activeFluidSlots.replace(dir, i - 1);
             } else {
-                activeFluidSlots.replace(dir,getContainerSize()-1);
+                activeFluidSlots.replace(dir, getContainerSize() - 1);
             }
         }
     }

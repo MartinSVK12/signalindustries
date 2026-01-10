@@ -10,7 +10,6 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.abilities.trigger.*;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 
@@ -22,35 +21,36 @@ public class ItemTrigger extends Item implements ICustomDescription {
 
     public ItemTrigger(String translationKey, String namespaceId, int id) {
         super(translationKey, namespaceId, id);
-        abilities.put("projectile",new ProjectileAbility("Projectlie",50,1));
-        abilities.put("boost",new BoostAbility("Boost",150,5));
-        abilities.put("shield",new ShieldAbility("Shield",300,15,10,5));
-        abilities.put("scan",new ScanAbility("Scan",150,3,15,1));
+        abilities.put("projectile", new ProjectileAbility("Projectlie", 50, 1));
+        abilities.put("boost", new BoostAbility("Boost", 150, 5));
+        abilities.put("shield", new ShieldAbility("Shield", 300, 15, 10, 5));
+        abilities.put("scan", new ScanAbility("Scan", 150, 3, 15, 1));
     }
 
     @Override
     public String getDescription(ItemStack stack) {
-        if(getAbility(stack) != null){
-            return "Ability: "+ TextFormatting.RED+getAbility(stack).name+TextFormatting.WHITE+" | Cost: "+TextFormatting.RED+getAbility(stack).cost+TextFormatting.WHITE+" | Cooldown: "+TextFormatting.RED+getAbility(stack).cooldown;
+        if (getAbility(stack) != null) {
+            return "Ability: " + TextFormatting.RED + getAbility(stack).name + TextFormatting.WHITE + " | Cost: " + TextFormatting.RED + getAbility(stack).cost + TextFormatting.WHITE + " | Cooldown: " + TextFormatting.RED + getAbility(stack).cooldown;
         }
         return "Unconfigured!";
     }
 
-    public TriggerBaseAbility getAbility(ItemStack stack){
-        if(stack.getData().containsKey("ability") && abilities.containsKey(stack.getData().getString("ability"))){
+    public TriggerBaseAbility getAbility(ItemStack stack) {
+        if (stack.getData().containsKey("ability") && abilities.containsKey(stack.getData().getString("ability"))) {
             return abilities.get(stack.getData().getString("ability"));
         }
         return null;
     }
-    public String getAbilityName(ItemStack stack){
+
+    public String getAbilityName(ItemStack stack) {
         return stack.getData().getString("ability");
     }
 
 
     @Override
     public String getLanguageKey(ItemStack stack) {
-        if(getAbility(stack) != null){
-            return "item.signalindustries.trigger."+stack.getData().getString("ability");
+        if (getAbility(stack) != null) {
+            return "item.signalindustries.trigger." + stack.getData().getString("ability");
         } else {
             return "item.signalindustries.trigger.null";
         }
@@ -59,7 +59,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
     @Override
     public boolean onUseItemOnBlock(ItemStack itemstack, Player entityplayer, World world, int blockX, int blockY, int blockZ, Side side, double xPlaced, double yPlaced) {
         TriggerBaseAbility ability = getAbility(itemstack);
-        if(ability != null) {
+        if (ability != null) {
             if (entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness) {
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
                 if (harness.getData().getInteger("cooldown_" + getAbilityName(itemstack)) <= 0) {
@@ -67,16 +67,16 @@ public class ItemTrigger extends Item implements ICustomDescription {
                     int amount = energy.getInteger("amount");
                     if (amount >= ability.cost) {
                         //entityplayer.triggerAchievement(SIAchievements.TRIGGER);
-                        if(ability instanceof TriggerBaseEffectAbility){
+                        if (ability instanceof TriggerBaseEffectAbility) {
                             boolean active = harness.getData().getBoolean("active_" + getAbilityName(itemstack));
-                            if(active) {
-                                harness.getData().putBoolean("active_" + getAbilityName(itemstack),false);
+                            if (active) {
+                                harness.getData().putBoolean("active_" + getAbilityName(itemstack), false);
                                 harness.getData().getValue().remove("effectTime_" + getAbilityName(itemstack));
                                 harness.getData().putInt("cooldown_" + getAbilityName(itemstack), ability.cooldown);
                                 ((TriggerBaseEffectAbility) ability).deactivate(blockX, blockY, blockZ, entityplayer, world, itemstack, harness);
                             } else {
-                                harness.getData().putBoolean("active_" + getAbilityName(itemstack),true);
-                                harness.getData().putInt("effectTime_" + getAbilityName(itemstack),((TriggerBaseEffectAbility) ability).effectTime);
+                                harness.getData().putBoolean("active_" + getAbilityName(itemstack), true);
+                                harness.getData().putInt("effectTime_" + getAbilityName(itemstack), ((TriggerBaseEffectAbility) ability).effectTime);
                                 energy.putInt("amount", amount - ability.cost);
                                 ability.activate(blockX, blockY, blockZ, entityplayer, world, itemstack, harness);
                             }
@@ -103,19 +103,19 @@ public class ItemTrigger extends Item implements ICustomDescription {
                 CompoundTag energy = ((ItemSignalumPowerHarness) harness.getItem()).getFluidStack(0, harness);
                 int amount = energy.getInteger("amount");
                 TriggerBaseAbility trigger = getAbility(itemstack);
-                if(trigger instanceof TriggerBaseEffectAbility && active){
+                if (trigger instanceof TriggerBaseEffectAbility && active) {
                     TriggerBaseEffectAbility ability = (TriggerBaseEffectAbility) trigger;
-                    if(amount >= ability.costPerTick){
+                    if (amount >= ability.costPerTick) {
                         energy.putInt("amount", amount - ability.costPerTick);
                         ability.tick(player, world, itemstack, harness);
                     } else {
-                        harness.getData().putBoolean("active_" + getAbilityName(itemstack),false);
+                        harness.getData().putBoolean("active_" + getAbilityName(itemstack), false);
                         harness.getData().getValue().remove("effectTime_" + getAbilityName(itemstack));
                         harness.getData().putInt("cooldown_" + getAbilityName(itemstack), ability.cooldown);
                         ability.deactivate(player, world, itemstack, harness);
                     }
                     if (harness.getData().getInteger("effectTime_" + getAbilityName(itemstack)) <= 0) {
-                        harness.getData().putBoolean("active_" + getAbilityName(itemstack),false);
+                        harness.getData().putBoolean("active_" + getAbilityName(itemstack), false);
                         harness.getData().getValue().remove("effectTime_" + getAbilityName(itemstack));
                         harness.getData().putInt("cooldown_" + getAbilityName(itemstack), ability.cooldown);
                         ability.deactivate(player, world, itemstack, harness);
@@ -128,31 +128,31 @@ public class ItemTrigger extends Item implements ICustomDescription {
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
         TriggerBaseAbility ability = getAbility(itemstack);
-        if(ability != null){
-            if(entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness){
+        if (ability != null) {
+            if (entityplayer.inventory.armorItemInSlot(2) != null && entityplayer.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness) {
                 ItemStack harness = entityplayer.inventory.armorItemInSlot(2);
-                if(harness.getData().getInteger("cooldown_"+getAbilityName(itemstack)) <= 0){
-                    CompoundTag energy = ((ItemSignalumPowerHarness)harness.getItem()).getFluidStack(0,harness);
+                if (harness.getData().getInteger("cooldown_" + getAbilityName(itemstack)) <= 0) {
+                    CompoundTag energy = ((ItemSignalumPowerHarness) harness.getItem()).getFluidStack(0, harness);
                     int amount = energy.getInteger("amount");
-                    if(amount >= ability.cost){
+                    if (amount >= ability.cost) {
                         //entityplayer.triggerAchievement(SIAchievements.TRIGGER);
-                        if(ability instanceof TriggerBaseEffectAbility){
+                        if (ability instanceof TriggerBaseEffectAbility) {
                             boolean active = harness.getData().getBoolean("active_" + getAbilityName(itemstack));
-                            if(active) {
-                                harness.getData().putBoolean("active_" + getAbilityName(itemstack),false);
+                            if (active) {
+                                harness.getData().putBoolean("active_" + getAbilityName(itemstack), false);
                                 harness.getData().getValue().remove("effectTime_" + getAbilityName(itemstack));
                                 harness.getData().putInt("cooldown_" + getAbilityName(itemstack), ability.cooldown);
                                 ((TriggerBaseEffectAbility) ability).deactivate(entityplayer, world, itemstack, harness);
                             } else {
-                                harness.getData().putBoolean("active_" + getAbilityName(itemstack),true);
-                                harness.getData().putInt("effectTime_" + getAbilityName(itemstack),((TriggerBaseEffectAbility) ability).effectTime);
+                                harness.getData().putBoolean("active_" + getAbilityName(itemstack), true);
+                                harness.getData().putInt("effectTime_" + getAbilityName(itemstack), ((TriggerBaseEffectAbility) ability).effectTime);
                                 energy.putInt("amount", amount - ability.cost);
                                 ability.activate(entityplayer, world, itemstack, harness);
                             }
                         } else {
-                            energy.putInt("amount",amount- ability.cost);
-                            harness.getData().putInt("cooldown_"+getAbilityName(itemstack), ability.cooldown);
-                            ability.activate(entityplayer, world, itemstack,harness);
+                            energy.putInt("amount", amount - ability.cost);
+                            harness.getData().putInt("cooldown_" + getAbilityName(itemstack), ability.cooldown);
+                            ability.activate(entityplayer, world, itemstack, harness);
                         }
                     }
                 }

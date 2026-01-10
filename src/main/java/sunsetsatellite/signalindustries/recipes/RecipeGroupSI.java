@@ -9,96 +9,98 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class RecipeGroupSI<T extends RecipeEntrySI<?,?, RecipeProperties>> extends RecipeGroup<T> {
+public class RecipeGroupSI<T extends RecipeEntrySI<?, ?, RecipeProperties>> extends RecipeGroup<T> {
     public RecipeGroupSI(RecipeSymbol machine) {
         super(machine);
     }
 
-    public FluidStack findFluidOutput(ItemStack stack){
+    public FluidStack findFluidOutput(ItemStack stack) {
         for (T recipe : this.getAllRecipes()) {
             RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));
             if (recipe.matches(new RecipeExtendedSymbol[]{symbol})) {
-                return ((FluidStack)recipe.getOutput()).copy();
-            }
-        }
-        return null;
-    }
-    public FluidStack findFluidOutput(ItemStack stack, Tier tier){
-        for (T recipe : this.getAllRecipes()) {
-            RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));
-            if (recipe.matches(new RecipeExtendedSymbol[]{symbol}) && recipe.getData().isCorrectTier(tier)) {
-                return ((FluidStack)recipe.getOutput()).copy();
+                return ((FluidStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public FluidStack findFluidOutput(FluidStack stack, Tier tier){
+    public FluidStack findFluidOutput(ItemStack stack, Tier tier) {
+        for (T recipe : this.getAllRecipes()) {
+            RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));
+            if (recipe.matches(new RecipeExtendedSymbol[]{symbol}) && recipe.getData().isCorrectTier(tier)) {
+                return ((FluidStack) recipe.getOutput()).copy();
+            }
+        }
+        return null;
+    }
+
+    public FluidStack findFluidOutput(FluidStack stack, Tier tier) {
         for (T recipe : this.getAllRecipes()) {
             RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(stack.copy());
             if (recipe.matches(new RecipeExtendedSymbol[]{symbol}) && recipe.getData().isCorrectTier(tier)) {
-                return ((FluidStack)recipe.getOutput()).copy();
+                return ((FluidStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public FluidStack findFluidOutput(RecipeExtendedSymbol[] symbols, Tier tier){
+    public FluidStack findFluidOutput(RecipeExtendedSymbol[] symbols, Tier tier) {
         for (T recipe : this.getAllRecipes()) {
-            if(recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)){
-                return ((FluidStack)recipe.getOutput()).copy();
+            if (recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)) {
+                return ((FluidStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public ItemStack findOutput(ItemStack stack){
+    public ItemStack findOutput(ItemStack stack) {
         for (T recipe : this.getAllRecipes()) {
             RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));
             if (recipe.matches(new RecipeExtendedSymbol[]{symbol})) {
-                return ((ItemStack)recipe.getOutput()).copy();
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
-    public ItemStack findOutput(ItemStack stack, Tier tier){
+
+    public ItemStack findOutput(ItemStack stack, Tier tier) {
         for (T recipe : this.getAllRecipes()) {
             RecipeExtendedSymbol symbol = new RecipeExtendedSymbol(new ItemStack(stack.itemID, 1, stack.getMetadata()));
             if (recipe.matches(new RecipeExtendedSymbol[]{symbol}) && recipe.getData().isCorrectTier(tier)) {
-                return ((ItemStack)recipe.getOutput()).copy();
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public ItemStack findOutput(RecipeExtendedSymbol[] symbols){
+    public ItemStack findOutput(RecipeExtendedSymbol[] symbols) {
         for (T recipe : this.getAllRecipes()) {
-            if(recipe.matches(symbols)){
-                return ((ItemStack)recipe.getOutput()).copy();
+            if (recipe.matches(symbols)) {
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, Tier tier){
+    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, Tier tier) {
         for (T recipe : this.getAllRecipes()) {
-            if(recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)){
-                return ((ItemStack)recipe.getOutput()).copy();
+            if (recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)) {
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, Tier tier, int id){
+    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, Tier tier, int id) {
         for (T recipe : this.getAllRecipes()) {
-            if(recipe.matches(symbols) && recipe.getData().isCorrectTier(tier) && recipe.getData().id == id){
-                return ((ItemStack)recipe.getOutput()).copy();
+            if (recipe.matches(symbols) && recipe.getData().isCorrectTier(tier) && recipe.getData().id == id) {
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;
     }
 
-    public T findRecipe(RecipeExtendedSymbol[] symbols, Tier tier, int id){
+    public T findRecipe(RecipeExtendedSymbol[] symbols, Tier tier, int id) {
         for (T recipe : this.getAllRecipes()) {
             if (recipe.matches(symbols) && recipe.getData().isCorrectTier(tier) && recipe.getData().id == id) {
                 return recipe;
@@ -107,7 +109,7 @@ public class RecipeGroupSI<T extends RecipeEntrySI<?,?, RecipeProperties>> exten
         return null;
     }
 
-    public T findRecipe(RecipeExtendedSymbol[] symbols, Tier tier){
+    public T findRecipe(RecipeExtendedSymbol[] symbols, Tier tier) {
         for (T recipe : this.getAllRecipes()) {
             if (recipe.matches(symbols) && recipe.getData().isCorrectTier(tier)) {
                 return recipe;
@@ -116,10 +118,10 @@ public class RecipeGroupSI<T extends RecipeEntrySI<?,?, RecipeProperties>> exten
         return null;
     }
 
-    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, int id){
+    public ItemStack findOutput(RecipeExtendedSymbol[] symbols, int id) {
         for (T recipe : this.getAllRecipes()) {
-            if(recipe.matches(symbols) && recipe.getData().id == id){
-                return ((ItemStack)recipe.getOutput()).copy();
+            if (recipe.matches(symbols) && recipe.getData().id == id) {
+                return ((ItemStack) recipe.getOutput()).copy();
             }
         }
         return null;

@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.tiles;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.catalyst.CatalystFluids;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
@@ -14,7 +13,7 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer implements I
 
     public TileEntity connectedTo;
 
-    public TileEntityFluidHatch(){
+    public TileEntityFluidHatch() {
         itemContents = new ItemStack[0];
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
@@ -25,7 +24,7 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer implements I
     @Override
     public void init(Block<?> block) {
         super.init(block);
-        if(tier == Tier.PROTOTYPE){
+        if (tier == Tier.PROTOTYPE) {
             fluidCapacity[0] = 8000;
         } else {
             fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 16000;

@@ -26,16 +26,16 @@ public class ItemModelPulsar extends ItemModelStandard {
 
     @Override
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemstack) {
-        if(getFluidStack(0,itemstack).getInteger("amount") <= 0 && itemstack.getData().getByte("charge") <= 0){
+        if (getFluidStack(0, itemstack).getInteger("amount") <= 0 && itemstack.getData().getByte("charge") <= 0) {
             return pulsarInactive;
         }
         IconCoordinate tex = pulsarActive;
-        if(itemstack.getData().getByte("charge") >= 100){
+        if (itemstack.getData().getByte("charge") >= 100) {
             tex = pulsarCharged;
         }
-        if(getItemIdFromSlot(0,itemstack) == SIItems.warpOrb.id){
+        if (getItemIdFromSlot(0, itemstack) == SIItems.warpOrb.id) {
             tex = pulsarWarpActive;
-            if(itemstack.getData().getByte("charge") >= 100){
+            if (itemstack.getData().getByte("charge") >= 100) {
                 tex = pulsarWarpCharged;
             }
         }
@@ -49,14 +49,14 @@ public class ItemModelPulsar extends ItemModelStandard {
 
     @Override
     public void heldTransformThirdPerson(ItemRenderer renderer, Entity entity, ItemStack itemStack) {
-        super.heldTransformThirdPerson(renderer,entity,itemStack);
+        super.heldTransformThirdPerson(renderer, entity, itemStack);
     }
 
-    public int getItemIdFromSlot(int id, ItemStack stack){
+    public int getItemIdFromSlot(int id, ItemStack stack) {
         return stack.getData().getCompound("inventory").getCompound(String.valueOf(id)).getShort("id");
     }
 
-    public CompoundTag getFluidStack(int id, ItemStack stack){
+    public CompoundTag getFluidStack(int id, ItemStack stack) {
         return stack.getData().getCompound("fluidInventory").getCompound(String.valueOf(id));
     }
 }

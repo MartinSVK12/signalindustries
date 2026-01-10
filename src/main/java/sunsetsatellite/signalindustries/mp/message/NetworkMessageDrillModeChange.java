@@ -15,7 +15,8 @@ public class NetworkMessageDrillModeChange implements NetworkMessage {
         this.drillMode = drillMode;
     }
 
-    public NetworkMessageDrillModeChange() {}
+    public NetworkMessageDrillModeChange() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {
@@ -29,7 +30,7 @@ public class NetworkMessageDrillModeChange implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 ContainerInventory inv = context.player.inventory;
                 if (inv.getCurrentItem() != null && inv.getCurrentItem().getItem() instanceof ItemSignalumDrill) {

@@ -17,7 +17,7 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
         int range = 4;
-        if(itemstack.getMetadata() == 0){
+        if (itemstack.getMetadata() == 0) {
             itemstack.setMetadata(1);
         } else {
             int oreFound = 0;
@@ -37,8 +37,8 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
             }
             if (oreFound > 0 && oreYLevel < entityplayer.y) {
                 entityplayer.sendStatusMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks underground.", oreFound, (int) entityplayer.y - oreYLevel));
-            } else if(oreFound > 0 && oreYLevel > entityplayer.y) {
-                entityplayer.sendStatusMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks above.", oreFound,  oreYLevel - (int) entityplayer.y));
+            } else if (oreFound > 0 && oreYLevel > entityplayer.y) {
+                entityplayer.sendStatusMessage(String.format("%d Signalite Ore blocks detected, approx. %d blocks above.", oreFound, oreYLevel - (int) entityplayer.y));
             } else {
                 entityplayer.sendStatusMessage("No nearby traces of Signalite could be found.");
             }
@@ -48,8 +48,8 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
 
     @Override
     public String getDescription(ItemStack stack) {
-        if(stack.getMetadata() != 1){
-            return "Uncalibrated!\n"+ TextFormatting.GRAY +"Right-click while holding in your hand to calibrate.";
+        if (stack.getMetadata() != 1) {
+            return "Uncalibrated!\n" + TextFormatting.GRAY + "Right-click while holding in your hand to calibrate.";
         }
         return "Calibrated.";
     }

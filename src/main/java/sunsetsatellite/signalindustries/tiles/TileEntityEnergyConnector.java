@@ -5,7 +5,6 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
@@ -15,7 +14,7 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
 
     public TileEntity connectedTo;
 
-    public TileEntityEnergyConnector(){
+    public TileEntityEnergyConnector() {
         itemContents = new ItemStack[1];
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
@@ -27,13 +26,13 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
     @Override
     public void tick() {
         super.tick();
-        if(isConnected()){
+        if (isConnected()) {
             /*if(connectedTo instanceof TileEntitySignalumReactor){
                 if(((TileEntitySignalumReactor) connectedTo).state != TileEntitySignalumReactor.State.INACTIVE){
                     extractFluids();
                 }
             } else {*/
-                extractFluids();
+            extractFluids();
             //}
         }
     }

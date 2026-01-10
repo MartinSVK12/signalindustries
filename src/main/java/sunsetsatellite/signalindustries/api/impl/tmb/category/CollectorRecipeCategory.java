@@ -65,18 +65,18 @@ public class CollectorRecipeCategory implements IRecipeCategory<FluidMachineReci
     public void drawRecipe(ITMBRuntime runtime, FluidMachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
 
         RecipeProperties data = recipe.getOriginal().getData();
-        getIngredients( recipe, layout, context, ingredients);
+        getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight() - 10),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -97,8 +97,8 @@ public class CollectorRecipeCategory implements IRecipeCategory<FluidMachineReci
 
     @Override
     public <I, T extends IIngredientType<I>> List<String> getTooltips(FluidMachineRecipeTranslator recipe, IRecipeSlot<I, T> slot, int mouseX, int mouseY) {
-        if(slot.getRole() == RecipeIngredientRole.INPUT){
-            return Collections.singletonList(TextFormatting.ORANGE+"Not consumed!");
+        if (slot.getRole() == RecipeIngredientRole.INPUT) {
+            return Collections.singletonList(TextFormatting.ORANGE + "Not consumed!");
         }
         return IRecipeCategory.super.getTooltips(recipe, slot, mouseX, mouseY);
     }

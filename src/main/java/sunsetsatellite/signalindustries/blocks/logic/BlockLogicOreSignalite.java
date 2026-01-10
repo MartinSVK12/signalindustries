@@ -10,7 +10,6 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Random;

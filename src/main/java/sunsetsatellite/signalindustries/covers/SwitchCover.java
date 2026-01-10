@@ -1,19 +1,15 @@
 package sunsetsatellite.signalindustries.covers;
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.render.texture.stitcher.IconCoordinate;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.Container;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.core.util.IScreenActionListener;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
-import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWithName;
 
@@ -26,7 +22,7 @@ public class SwitchCover extends CoverBase {
 
     @Override
     public void openConfiguration(Player player, Direction dir) {
-        if(machine instanceof Container && machine instanceof TileEntity){
+        if (machine instanceof Container && machine instanceof TileEntity) {
             TileEntity tile = (TileEntity) machine;
             Catalyst.displayGui(player, tile, SignalIndustries.key("gui/switch_cover"), Catalyst.compoundOf(new String[]{"side"}, dir.ordinal()));
         } else if (machine instanceof TileEntityWithName) {
@@ -49,7 +45,7 @@ public class SwitchCover extends CoverBase {
 
     @Override
     public void tick() {
-        if(machine instanceof TileEntityTieredMachineBase && controlledByRedstone && machine.hasCoverAnywhere(RedstoneCover.class)){
+        if (machine instanceof TileEntityTieredMachineBase && controlledByRedstone && machine.hasCoverAnywhere(RedstoneCover.class)) {
             RedstoneCover cover = machine.getCover(RedstoneCover.class);
             ((TileEntityTieredMachineBase) machine).disabled = cover.sensorActive;
         }
@@ -57,7 +53,7 @@ public class SwitchCover extends CoverBase {
 
     @Override
     public String getTexture() {
-        if(machine instanceof TileEntityTieredMachineBase){
+        if (machine instanceof TileEntityTieredMachineBase) {
             return ((TileEntityTieredMachineBase) machine).disabled ? off : on;
         }
 
@@ -77,7 +73,7 @@ public class SwitchCover extends CoverBase {
 
     @Override
     public void onRemoved(Player player) {
-        if(machine instanceof TileEntityTieredMachineBase){
+        if (machine instanceof TileEntityTieredMachineBase) {
             ((TileEntityTieredMachineBase) machine).disabled = false;
         }
         player.sendMessage("Cover removed!");

@@ -33,7 +33,7 @@ public class NetworkMessageOpenSuit implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if(EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isServerEnvironment()) {
             if (context.player.world != null) {
                 Catalyst.displayGui(context.player, new InventoryPowerSuit(context.player.inventory.armorItemInSlot(part)), part, true, key("gui/power_suit"));
             }

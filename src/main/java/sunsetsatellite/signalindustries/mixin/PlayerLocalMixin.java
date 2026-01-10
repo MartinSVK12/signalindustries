@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.mixin;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
-import net.minecraft.client.entity.player.PlayerLocalMultiplayer;
 import net.minecraft.client.render.shader.Shaders;
 import net.minecraft.client.render.shader.ShadersRenderer;
 import net.minecraft.core.entity.player.Player;
@@ -17,13 +16,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustriesClient;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitClient;
 import sunsetsatellite.signalindustries.render.ShadersRendererSI;
@@ -31,7 +28,8 @@ import sunsetsatellite.signalindustries.render.ShadersRendererSI;
 @Mixin(value = PlayerLocal.class, remap = false)
 public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IPlayerPowerSuit<SignalumPowerSuitClient> {
 
-    @Shadow protected Minecraft mc;
+    @Shadow
+    protected Minecraft mc;
     @Unique
     public SignalumPowerSuitClient powerSuit = null;
 
@@ -65,7 +63,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
             at = @At("HEAD")
     )
     public void saveSuitData(CompoundTag tag, CallbackInfo ci) {
-        if(powerSuit != null){
+        if (powerSuit != null) {
             //powerSuit.saveToStacks();
             powerSuit.saveData(tag);
         }
@@ -78,7 +76,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
     public void powerSuitUpdate(CallbackInfo ci) {
         ItemStack[] armorInventory = inventory.armorInventory;
         for (int i = 0; i < armorInventory.length; i++) {
-            if(i > 3) continue;
+            if (i > 3) continue;
             ItemStack itemStack = armorInventory[i];
             if (itemStack == null) {
                 powerSuit = null;
@@ -90,18 +88,18 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
                 return;
             }
         }
-        if(powerSuit == null){
-            powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object)this);
+        if (powerSuit == null) {
+            powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object) this);
             //triggerAchievement(SIAchievements.POWER_SUIT);
         } else {
             powerSuit.tick();
         }
 
         SignalumPowerSuit ps = this.getPowerSuit();
-        if(ps != null && ps.active &&ps.hasAttachment(SIItems.nightVisionLens)) {
+        if (ps != null && ps.active && ps.hasAttachment(SIItems.nightVisionLens)) {
             if (ps.getAttachment(SIItems.nightVisionLens).getData().getBoolean("active") && !nightVisionShader && ps.getEnergy() > 1) {
                 toggleNightVision(true, ps);
-            } else if((!ps.getAttachment(SIItems.nightVisionLens).getData().getBoolean("active") || ps.getEnergy() < 1) && nightVisionShader) {
+            } else if ((!ps.getAttachment(SIItems.nightVisionLens).getData().getBoolean("active") || ps.getEnergy() < 1) && nightVisionShader) {
                 toggleNightVision(false, ps);
             }
         }
@@ -109,7 +107,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
 
     @Unique
     private void toggleNightVision(boolean nightVision, SignalumPowerSuit ps) {
-        if(nightVision && !nightVisionShader) {
+        if (nightVision && !nightVisionShader) {
             nightVisionShader = true;
             if (Shaders.enableShaders) {
                 mc.setRenderer(new ShadersRendererSI(mc, "nightvision/", ps));
@@ -117,7 +115,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
                 mc.fullbright = true;
                 mc.renderGlobal.loadRenderers();
             }
-        } else if(!nightVision && nightVisionShader) {
+        } else if (!nightVision && nightVisionShader) {
             nightVisionShader = false;
 
             if (Shaders.enableShaders) {
@@ -130,8 +128,7 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-    public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci)
-    {
+    public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
         if (tag.containsKey("PowerSuit")) {
             powerSuitData = tag.getCompound("PowerSuit");
         }
@@ -142,23 +139,23 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
     protected void damageEntity(int damage, DamageType damageType) {
         float protection = 1.0f - this.inventory.getTotalProtectionAmount(damageType);
         protection = Math.max(protection, 0.01f);
-        double d = (float)damage * protection;
-        int newDamage = (int)((double)this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
+        double d = (float) damage * protection;
+        int newDamage = (int) ((double) this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
         int preventedDamage = damage - newDamage;
-        if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT ) {
-            if(powerSuit.getEnergy() >= newDamage){
+        if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT) {
+            if (powerSuit.getEnergy() >= newDamage) {
                 if (damageType != null && damageType.shouldDamageArmor()) {
-                    int armorDamage = (int)Math.ceil((double)preventedDamage / 4.0);
+                    int armorDamage = (int) Math.ceil((double) preventedDamage / 4.0);
                     this.inventory.damageArmor(armorDamage);
                 }
                 powerSuit.decrementEnergy(newDamage);
                 return;
             }
-            if(damageType == DamageType.FIRE){
+            if (damageType == DamageType.FIRE) {
                 powerSuit.temperature += 0.5f;
             }
         }
-        if(inventory.armorItemInSlot(2) != null && inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT){
+        if (inventory.armorItemInSlot(2) != null && inventory.armorItemInSlot(2).getData().getBoolean("active_shield") && damageType == DamageType.COMBAT) {
             return;
         }
 
@@ -170,9 +167,9 @@ public abstract class PlayerLocalMixin extends Player implements IWarpPlayer, IP
             at = @At("TAIL")
     )
     public void updateSpeed(CallbackInfo ci) {
-        if(powerSuit != null && powerSuit.active){
-            if(powerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L))){
-                if(powerSuit.getAttachment(SIItems.movementBoosters) != null && powerSuit.getAttachment(SIItems.movementBoosters).getData().getBoolean("active")){
+        if (powerSuit != null && powerSuit.active) {
+            if (powerSuit.hasAttachment(SIItems.movementBoosters, Catalyst.listOf(SignalumPowerSuit.AttachmentLocation.BOOT_BACK_R, SignalumPowerSuit.AttachmentLocation.BOOT_BACK_L))) {
+                if (powerSuit.getAttachment(SIItems.movementBoosters) != null && powerSuit.getAttachment(SIItems.movementBoosters).getData().getBoolean("active")) {
                     speed += (float) (baseSpeed * 1.5);
                 }
             }

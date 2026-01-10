@@ -9,7 +9,6 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicConduitBase;
 import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeMode;

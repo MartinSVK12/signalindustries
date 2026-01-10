@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.mixin;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.monster.MobSkeleton;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumSleepStatus;
 import net.minecraft.core.world.World;
@@ -23,7 +22,8 @@ import static net.minecraft.core.entity.player.Player.deathMsgColor;
 @Mixin(value = Player.class, remap = false)
 public abstract class PlayerMixin extends Mob implements IWarpPlayer, IPlayerPowerSuit<SignalumPowerSuit> {
 
-    @Shadow public abstract void sendTranslatedChatMessage(String message);
+    @Shadow
+    public abstract void sendTranslatedChatMessage(String message);
 
     private PlayerMixin(World world) {
         super(world);
@@ -35,9 +35,8 @@ public abstract class PlayerMixin extends Mob implements IWarpPlayer, IPlayerPow
     }
 
     @Inject(method = "getDeathMessage", at = @At("TAIL"), cancellable = true)
-    public void getDeathMessage(Entity entityKilledBy, CallbackInfoReturnable<String> cir){
-        if (entityKilledBy instanceof MobInfernal)
-        {
+    public void getDeathMessage(Entity entityKilledBy, CallbackInfoReturnable<String> cir) {
+        if (entityKilledBy instanceof MobInfernal) {
             cir.setReturnValue(getDisplayName() + deathMsgColor + " found out that the sun is a deadly laser.");
         }
     }

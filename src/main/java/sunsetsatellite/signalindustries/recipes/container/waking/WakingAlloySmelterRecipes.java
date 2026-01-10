@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.recipes.container.waking;
 
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;

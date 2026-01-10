@@ -8,10 +8,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
-import sunsetsatellite.signalindustries.items.tools.ItemPulsar;
-import sunsetsatellite.signalindustries.menus.MenuPulsar;
 import sunsetsatellite.signalindustries.menus.MenuPulsarAttachment;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -30,7 +27,7 @@ public class ScreenPulsarAttachment extends ScreenFluid {
         this.pulsarSlotIndex = pulsarSlotIndex;
         this.isArmor = isArmor;
         this.player = inventoryPlayer.player;
-        if(isArmor){
+        if (isArmor) {
             this.pulsar = ((IPlayerPowerSuit<?>) inventoryPlayer.player).getPowerSuit().getAttachmentClass(ItemPulsarAttachment.class);
         } else {
             this.pulsar = inventoryPlayer.getItem(pulsarSlotIndex);
@@ -48,12 +45,11 @@ public class ScreenPulsarAttachment extends ScreenFluid {
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
     }
 
-    protected void drawGuiContainerForegroundLayer()
-    {
+    protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
         String name = "";
-        if(pulsar.getItem() instanceof ItemPulsarAttachment){
+        if (pulsar.getItem() instanceof ItemPulsarAttachment) {
             name = I18n.getInstance().translateNameKey(fluidSlots.itemInventory.getNameTranslationKey());
             if (Objects.requireNonNull(((ItemPulsarAttachment) pulsar.getItem()).tier) == Tier.REINFORCED) {
                 color = 0xFFFF0000;
@@ -65,11 +61,11 @@ public class ScreenPulsarAttachment extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        if(isArmor){
+        if (isArmor) {
             this.pulsar = ((IPlayerPowerSuit<?>) player).getPowerSuit().getAttachmentClass(ItemPulsarAttachment.class);
         } else {
             this.pulsar = player.inventory.getItem(pulsarSlotIndex);
         }
-        InventorySerializer.saveInvToNBT(pulsar,fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(pulsar, fluidSlots.itemInventory);
     }
 }

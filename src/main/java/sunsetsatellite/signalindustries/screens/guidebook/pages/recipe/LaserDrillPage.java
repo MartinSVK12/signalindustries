@@ -5,21 +5,12 @@
 
 package sunsetsatellite.signalindustries.screens.guidebook.pages.recipe;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ItemElement;
 import net.minecraft.client.gui.TooltipElement;
-import net.minecraft.client.gui.guidebook.GuidebookPageManager;
-import net.minecraft.client.gui.guidebook.GuidebookSection;
-import net.minecraft.client.gui.guidebook.GuidebookSections;
-import net.minecraft.client.gui.guidebook.RecipePage;
-import net.minecraft.client.gui.guidebook.ScreenGuidebook;
-import net.minecraft.client.gui.guidebook.SlotGuidebook;
+import net.minecraft.client.gui.guidebook.*;
 import net.minecraft.client.gui.guidebook.search.GuidebookPageSearch;
 import net.minecraft.client.option.enums.DescriptionPromptEnum;
 import net.minecraft.client.render.Font;
@@ -34,6 +25,11 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.slot.Slot;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
@@ -56,13 +52,13 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         int recipeAmount = 0;
         int yOffset = 20;
 
-        for(RecipeEntryMachineRandomOutput recipe : recipes) {
+        for (RecipeEntryMachineRandomOutput recipe : recipes) {
             List<SlotGuidebook> recipeSlots = new ArrayList();
             int slotsAmount = 10;
 
-            for(int i = 0; i < slotsAmount - 1; ++i) {
-                if (((WeightedRandomBag)recipe.getOutput()).getEntries().size() > i) {
-                    ItemStack stack = ((WeightedRandomLootObject)((WeightedRandomBag)recipe.getOutput()).getEntries().get(i)).getItemStack();
+            for (int i = 0; i < slotsAmount - 1; ++i) {
+                if (((WeightedRandomBag) recipe.getOutput()).getEntries().size() > i) {
+                    ItemStack stack = ((WeightedRandomLootObject) ((WeightedRandomBag) recipe.getOutput()).getEntries().get(i)).getItemStack();
                     recipeSlots.add((new SlotGuidebook(i, 81 + 20 * (i % 3), 1 + 20 * (i / 3 + recipeAmount * 3) + yOffset, new RecipeSymbol(stack), false, recipe)).setAsOutput());
                 } else {
                     recipeSlots.add((new SlotGuidebook(i, 81 + 20 * (i % 3), 1 + 20 * (i / 3 + recipeAmount * 3) + yOffset, null, false, recipe)).setAsOutput());
@@ -82,7 +78,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
     public void onTick() {
         ++ticks;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             if (ticks > 20L) {
                 slot.showRandomItem();
                 if (this.slots.get(this.slots.size() - 1) == slot) {
@@ -95,18 +91,18 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         if (ticks2 > 25L) {
             ticks2 = 0L;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (slot.recipe instanceof RecipeEntryTrommel) {
-                    RecipeSymbol input = (RecipeSymbol)slot.recipe.getInput();
+                    RecipeSymbol input = (RecipeSymbol) slot.recipe.getInput();
                     if (!input.matches(slot.getItemStack()) && slot.recipeAmount > 8) {
-                        int recipeIndexMax = Math.round((float)slot.recipeAmount / 9.0F);
+                        int recipeIndexMax = Math.round((float) slot.recipeAmount / 9.0F);
                         if (slot.recipeIndex >= recipeIndexMax) {
                             slot.recipeIndex = 0;
                         } else {
                             ++slot.recipeIndex;
                         }
 
-                        WeightedRandomBag<WeightedRandomLootObject> loot = (WeightedRandomBag)slot.recipe.getOutput();
+                        WeightedRandomBag<WeightedRandomLootObject> loot = (WeightedRandomBag) slot.recipe.getOutput();
                         int index = slot.index + 9 * slot.recipeIndex;
                         if (index > slot.recipeAmount) {
                             slot.item = null;
@@ -121,7 +117,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
     }
 
     protected void renderForeground(TextureManager re, Font fr, int x, int y, int mouseX, int mouseY, float partialTicks) {
-        drawStringCenteredNoShadow(fr, "Laser Drill", x+width - 158 / 2, y+5, 0xFF808080);
+        drawStringCenteredNoShadow(fr, "Laser Drill", x + width - 158 / 2, y + 5, 0xFF808080);
 
         if (this.recipes.isEmpty()) {
             this.drawStringCenteredNoShadow(fr, I18n.getInstance().translateKey("guidebook.section.search.error.no_recipes"), x + 79, y + 110, -8355712);
@@ -129,7 +125,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
 
         SlotGuidebook mouseOverSlot = null;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             this.drawSlot(x + slot.x - 1, y + slot.y - 1, -1);
             if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                 mouseOverSlot = slot;
@@ -149,7 +145,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         if (mc.gameSettings.keyShowRecipe.isKeyboardKey(key)) {
             SlotGuidebook hoveringSlot = null;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                     hoveringSlot = slot;
                 }
@@ -166,7 +162,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         } else if (mc.gameSettings.keyShowUsage.isKeyboardKey(key)) {
             SlotGuidebook hoveringSlot = null;
 
-            for(SlotGuidebook slot : this.slots) {
+            for (SlotGuidebook slot : this.slots) {
                 if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                     hoveringSlot = slot;
                 }
@@ -193,7 +189,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         super.renderBackground(re, x, y);
         re.bindTexture(re.loadTexture("/assets/minecraft/textures/gui/container/guidebook/guidebook.png"));
 
-        for(int i = 1; i <= this.recipes.size(); ++i) {
+        for (int i = 1; i <= this.recipes.size(); ++i) {
             RecipeEntryMachineRandomOutput recipe = this.recipes.get(i - 1);
             List<SlotGuidebook> list = this.map.get(recipe);
             this.drawTexturedModalRect(x + list.get(list.size() - 1).x + 25, y + list.get(list.size() - 1).y, 234, 0, 22, 15);
@@ -205,7 +201,7 @@ public class LaserDrillPage extends RecipePage<RecipeEntryMachineRandomOutput> {
         super.renderOverlay(re, fr, x, y, mouseX, mouseY, partialTicks);
         SlotGuidebook mouseOverSlot = null;
 
-        for(SlotGuidebook slot : this.slots) {
+        for (SlotGuidebook slot : this.slots) {
             if (this.getIsMouseOverSlot(slot, x, y, mouseX, mouseY)) {
                 mouseOverSlot = slot;
             }

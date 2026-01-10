@@ -31,7 +31,7 @@ public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescripti
         super.onBlockRightClicked(world, x, y, z, player, side, xHit, yHit);
 
         if (!world.isClientSide) {
-            if(EnvironmentHelper.isServerEnvironment() && SIConfig.config.getBoolean("Other.totemsRequireOP")){
+            if (EnvironmentHelper.isServerEnvironment() && SIConfig.config.getBoolean("Other.totemsRequireOP")) {
                 if (!((PlayerServer) player).mcServer.playerList.isOp(player.uuid)) {
                     player.sendTranslatedChatMessage("event.signalindustries.totemNoPermission");
                     return true;
@@ -43,7 +43,7 @@ public class BlockLogicSolarTotem extends BlockLogic implements ICustomDescripti
                 if (stack.itemID == SIItems.infernalFragment.id && time >= 13000) {
                     player.getCurrentEquippedItem().consumeItem(player);
                     world.setWorldTime(world.getWorldTime() - world.getWorldTime() % 24000L + 1000L);
-                    if(world.getCurrentWeather() == SIWeather.weatherBloodMoon){
+                    if (world.getCurrentWeather() == SIWeather.weatherBloodMoon) {
                         player.sendTranslatedChatMessage("event.signalindustries.solarTotemOvertake");
                         world.weatherManager.overrideWeather(Weathers.OVERWORLD_CLEAR);
                         return true;

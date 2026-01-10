@@ -1,11 +1,9 @@
 package sunsetsatellite.signalindustries.mp.message;
 
 import com.mojang.nbt.tags.CompoundTag;
-import net.minecraft.client.option.KeyBinding;
 import net.minecraft.core.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.SignalIndustriesClient;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import turniplabs.halplibe.helper.network.NetworkMessage;
@@ -59,7 +57,7 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
         return this;
     }
 
-    public NetworkMessagePowerSuitAction(){
+    public NetworkMessagePowerSuitAction() {
 
     }
 
@@ -70,7 +68,7 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
         packet.writeBoolean(ctrl);
         packet.writeInt(this.action);
         packet.writeBoolean(pos != null);
-        if(pos != null){
+        if (pos != null) {
             CompoundTag nbt = new CompoundTag();
             pos.writeToNBT(nbt);
             packet.writeCompoundTag(nbt);
@@ -86,7 +84,7 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
         this.ctrl = packet.readBoolean();
         action = packet.readInt();
         boolean posExists = packet.readBoolean();
-        if(posExists) pos = new Vec3i(packet.readCompoundTag());
+        if (posExists) pos = new Vec3i(packet.readCompoundTag());
         String entityClass = packet.readString();
         if (!"null".equals(entityClass)) {
             try {
@@ -101,8 +99,8 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
     @Override
     public void handle(NetworkContext context) {
         SignalumPowerSuit suit = ((IPlayerPowerSuit<SignalumPowerSuit>) context.player).getPowerSuit();
-        if(suit != null && context.player.world != null){
-            if(action >= 0 && action < 10){
+        if (suit != null && context.player.world != null) {
+            if (action >= 0 && action < 10) {
                 suit.selectedApplicationSlot = action;
                 return;
             }
@@ -112,7 +110,7 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
                     break;
                 }
                 case ACTIVATE_APP: {
-                    if(pos != null && entityClass == null){
+                    if (pos != null && entityClass == null) {
                         suit.activateApplication(pos.x, pos.y, pos.z);
                     } else if (pos != null) {
                         suit.activateApplication(context.player.world.getClosestPlayer(pos.x, pos.y, pos.z, 1));
@@ -124,7 +122,7 @@ public class NetworkMessagePowerSuitAction implements NetworkMessage {
                 case ACTIVATE_ATTACHMENT: {
                     //KeyBinding keyBinding = SignalIndustriesClient.attachmentKeybinds.get(attachmentKeybind);
                     //if(keyBinding != null){
-                        suit.activateAttachment(attachmentKeybind, shift, alt, ctrl);
+                    suit.activateAttachment(attachmentKeybind, shift, alt, ctrl);
                     //}
                     break;
                 }

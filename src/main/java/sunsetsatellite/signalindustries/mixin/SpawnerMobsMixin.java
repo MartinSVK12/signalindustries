@@ -20,13 +20,13 @@ import java.util.List;
 public class SpawnerMobsMixin {
 
     @Unique
-    private static final List<SpawnListEntry> infernals = Collections.singletonList(new SpawnListEntry(MobInfernal.class,50));
+    private static final List<SpawnListEntry> infernals = Collections.singletonList(new SpawnListEntry(MobInfernal.class, 50));
 
     @WrapOperation(method = "performSpawning", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/biome/Biome;getSpawnableList(Lnet/minecraft/core/enums/MobCategory;)Ljava/util/List;"))
-    private static List<SpawnListEntry> eclipseSpawning(Biome instance, MobCategory creatureType, Operation<List<SpawnListEntry>> original, World world){
-        if(creatureType == MobCategory.monster && world.getCurrentWeather() == SIWeather.weatherEclipse){
+    private static List<SpawnListEntry> eclipseSpawning(Biome instance, MobCategory creatureType, Operation<List<SpawnListEntry>> original, World world) {
+        if (creatureType == MobCategory.monster && world.getCurrentWeather() == SIWeather.weatherEclipse) {
             return infernals;
         }
-        return original.call(instance,creatureType);
+        return original.call(instance, creatureType);
     }
 }

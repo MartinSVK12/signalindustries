@@ -16,13 +16,13 @@ import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.items.attachments.ItemSuitColorizer;
 
-@Mixin(value = MobRenderer.class,remap = false)
+@Mixin(value = MobRenderer.class, remap = false)
 public abstract class MobRendererMixin<T extends Mob> extends EntityRenderer<T> {
 
     @Inject(method = "render(Lnet/minecraft/client/render/tessellator/Tessellator;Lnet/minecraft/core/entity/Mob;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelBase;setLivingAnimations(Lnet/minecraft/core/entity/Mob;FFF)V", ordinal = 3, shift = At.Shift.AFTER))
-    public void enableAlphaForArmor(Tessellator tessellator, T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci){
-        if(entity instanceof Player){
-            Player player = (Player)entity;
+    public void enableAlphaForArmor(Tessellator tessellator, T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci) {
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
             if (player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness) {
                 if (player.inventory.armorItemInSlot(2).getData().getBoolean("active_shield")) {
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -31,8 +31,8 @@ public abstract class MobRendererMixin<T extends Mob> extends EntityRenderer<T> 
                     return;
                 }
             }
-            IPowerSuit powerSuit = ((IPlayerPowerSuit<?>)player).getPowerSuit();
-            if(powerSuit != null && powerSuit.hasAttachmentClass(ItemSuitColorizer.class)) {
+            IPowerSuit powerSuit = ((IPlayerPowerSuit<?>) player).getPowerSuit();
+            if (powerSuit != null && powerSuit.hasAttachmentClass(ItemSuitColorizer.class)) {
                 ItemStack stack = powerSuit.getAttachmentClass(ItemSuitColorizer.class);
                 if (stack != null) {
                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

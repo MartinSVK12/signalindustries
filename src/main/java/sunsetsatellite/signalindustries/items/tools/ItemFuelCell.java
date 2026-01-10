@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.items.tools;
 
 
-
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -31,7 +30,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public int getRemainingCapacity(ItemStack stack) {
-        return 4000-(stack.getData().getInteger("fuel")+stack.getData().getInteger("depleted"));
+        return 4000 - (stack.getData().getInteger("fuel") + stack.getData().getInteger("depleted"));
     }
 
     @Override
@@ -51,7 +50,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
-        return new FluidStack(SIFluids.ENERGY,getCapacity(stack));
+        return new FluidStack(SIFluids.ENERGY, getCapacity(stack));
     }
 
     @Override
@@ -61,26 +60,26 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
             int amount = fluidStack.amount;
-            ItemStack cell = new ItemStack(SIItems.fuelCell,1);
-            if(remaining == 0){
+            ItemStack cell = new ItemStack(SIItems.fuelCell, 1);
+            if (remaining == 0) {
                 return null;
             }
-            if(amount > remaining){
+            if (amount > remaining) {
                 fluidStack.amount -= remaining;
                 CompoundTag data = new CompoundTag();
-                data.putInt("fuel",getCapacity(stack));
+                data.putInt("fuel", getCapacity(stack));
                 cell.setData(data);
                 return cell;
             } else {
                 CompoundTag data = new CompoundTag();
-                data.putInt("fuel",saturation + amount);
+                data.putInt("fuel", saturation + amount);
                 cell.setData(data);
                 return cell;
             }
@@ -96,20 +95,20 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public ItemStack fill(FluidStack fluidStack, ItemStack stack, IFluidInventory tile, int maxAmount) {
-        if(fluidStack == null){
+        if (fluidStack == null) {
             return null;
         }
-        if(fluidStack.fluid == SIFluids.ENERGY){
+        if (fluidStack.fluid == SIFluids.ENERGY) {
             int remaining = getRemainingCapacity(stack);
             int saturation = stack.getData().getInteger("fuel");
-            int amount = Math.min(fluidStack.amount,maxAmount);
-            ItemStack cell = new ItemStack(SIItems.fuelCell,1);
-            if(remaining == 0) return null;
-            int result = Math.min(amount,remaining);
-            if(result == 0) return null;
+            int amount = Math.min(fluidStack.amount, maxAmount);
+            ItemStack cell = new ItemStack(SIItems.fuelCell, 1);
+            if (remaining == 0) return null;
+            int result = Math.min(amount, remaining);
+            if (result == 0) return null;
             fluidStack.amount -= result;
             CompoundTag data = new CompoundTag();
-            data.putInt("fuel", saturation+result);
+            data.putInt("fuel", saturation + result);
             cell.setData(data);
             return cell;
         }
@@ -125,30 +124,30 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     public void drain(ItemStack stack, int slot, IFluidInventory tile) {
         int saturation = stack.getData().getInteger("depleted");
         int capacity = tile.getFluidCapacityForSlot(slot);
-        if(saturation == 0){
+        if (saturation == 0) {
             return;
         }
         FluidStack fluidStack = tile.getFluidInSlot(slot);
-        if(fluidStack != null){
+        if (fluidStack != null) {
             int amount = fluidStack.amount;
-            if(amount + saturation > capacity){
-                int remainder = (amount+saturation)-capacity;
+            if (amount + saturation > capacity) {
+                int remainder = (amount + saturation) - capacity;
                 fluidStack.amount = capacity;
-                stack.getData().putInt("depleted",remainder);
+                stack.getData().putInt("depleted", remainder);
             } else {
                 fluidStack.amount += saturation;
-                stack.getData().putInt("depleted",0);
+                stack.getData().putInt("depleted", 0);
             }
         } else {
-            if(saturation > capacity){
-                int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY,capacity);
-                tile.setFluidInSlot(slot,fluid);
-                stack.getData().putInt("depleted",remainder);
+            if (saturation > capacity) {
+                int remainder = saturation - capacity;
+                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY, capacity);
+                tile.setFluidInSlot(slot, fluid);
+                stack.getData().putInt("depleted", remainder);
             } else {
-                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY,saturation);
-                tile.setFluidInSlot(slot,fluid);
-                stack.getData().putInt("depleted",0);
+                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY, saturation);
+                tile.setFluidInSlot(slot, fluid);
+                stack.getData().putInt("depleted", 0);
             }
         }
     }
@@ -157,30 +156,30 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
     public void drain(ItemStack stack, ItemStack other, int slot, IItemFluidContainer inv) {
         int saturation = stack.getData().getInteger("depleted");
         int capacity = inv.getCapacity(other);
-        if(saturation == 0){
+        if (saturation == 0) {
             return;
         }
         FluidStack fluidStack = inv.getCurrentFluid(other);
-        if(fluidStack != null){
+        if (fluidStack != null) {
             int amount = fluidStack.amount;
-            if(amount + saturation > capacity){
-                int remainder = (amount+saturation)-capacity;
+            if (amount + saturation > capacity) {
+                int remainder = (amount + saturation) - capacity;
                 fluidStack.amount = capacity;
-                stack.getData().putInt("depleted",remainder);
+                stack.getData().putInt("depleted", remainder);
             } else {
                 fluidStack.amount += saturation;
-                stack.getData().putInt("depleted",0);
+                stack.getData().putInt("depleted", 0);
             }
         } else {
-            if(saturation > capacity){
-                int remainder = saturation-capacity;
-                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY,capacity);
+            if (saturation > capacity) {
+                int remainder = saturation - capacity;
+                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY, capacity);
                 inv.setCurrentFluid(fluid, other);
-                stack.getData().putInt("depleted",remainder);
+                stack.getData().putInt("depleted", remainder);
             } else {
-                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY,saturation);
+                FluidStack fluid = new FluidStack(SIFluids.BURNT_ENERGY, saturation);
                 inv.setCurrentFluid(fluid, other);
-                stack.getData().putInt("depleted",0);
+                stack.getData().putInt("depleted", 0);
             }
         }
     }

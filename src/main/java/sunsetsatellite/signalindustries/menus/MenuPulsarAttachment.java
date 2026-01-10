@@ -8,12 +8,9 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
-import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryPulsar;
-import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemPulsarAttachment;
-import sunsetsatellite.signalindustries.items.tools.ItemPulsar;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 
 import java.util.List;
@@ -31,26 +28,23 @@ public class MenuPulsarAttachment extends MenuFluid {
 
         ItemStack pulsar;
 
-        if(isArmor){
+        if (isArmor) {
             pulsar = ((IPlayerPowerSuit<?>) playerInv.player).getPowerSuit().getAttachmentClass(ItemPulsarAttachment.class);
         } else {
             pulsar = playerInv.getItem(pulsarSlotIndex);
         }
 
         if (pulsar != null && pulsar.getItem() instanceof ItemPulsarAttachment) {
-            addSlot(new Slot(itemInventory,0,80,33));
+            addSlot(new Slot(itemInventory, 0, 80, 33));
 
-            for(int j = 0; j < 3; j++)
-            {
-                for(int i1 = 0; i1 < 9; i1++)
-                {
+            for (int j = 0; j < 3; j++) {
+                for (int i1 = 0; i1 < 9; i1++) {
                     addSlot(new Slot(playerInv, i1 + j * 9 + 9, 8 + i1 * 18, 84 + j * 18));
                 }
 
             }
 
-            for(int k = 0; k < 9; k++)
-            {
+            for (int k = 0; k < 9; k++) {
                 addSlot(new Slot(playerInv, k, 8 + k * 18, 142));
             }
         }
@@ -67,9 +61,9 @@ public class MenuPulsarAttachment extends MenuFluid {
     public List<Integer> getTargetSlots(InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
         int lastDeviceSlot = (slots.size() - 36) - 1;
         if (slot.index <= lastDeviceSlot) {
-            return getSlots(lastDeviceSlot+1, 36, true);
+            return getSlots(lastDeviceSlot + 1, 36, true);
         }
-        return getSlots(0, Math.max(lastDeviceSlot+1,1), false);
+        return getSlots(0, Math.max(lastDeviceSlot + 1, 1), false);
     }
 
     @Override
@@ -78,15 +72,14 @@ public class MenuPulsarAttachment extends MenuFluid {
 
         ItemStack pulsar;
 
-        if(isArmor){
+        if (isArmor) {
             pulsar = ((IPlayerPowerSuit<?>) player).getPowerSuit().getAttachmentClass(ItemPulsarAttachment.class);
         } else {
             pulsar = player.inventory.getItem(pulsarSlotIndex);
         }
 
-        InventorySerializer.saveInvToNBT(pulsar,itemInventory);
-        for(int i = 0; i < slots.size(); i++)
-        {
+        InventorySerializer.saveInvToNBT(pulsar, itemInventory);
+        for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();
                 stack = stack != null ? stack.copy() : null;

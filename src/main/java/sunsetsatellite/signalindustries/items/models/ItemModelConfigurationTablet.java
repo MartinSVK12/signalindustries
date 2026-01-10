@@ -19,7 +19,6 @@ public class ItemModelConfigurationTablet extends ItemModelStandard {
     public IconCoordinate config = TextureRegistry.getTexture("signalindustries:item/configuration_tablet_configurator");
 
 
-
     public ItemModelConfigurationTablet(Item item, String namespace) {
         super(item, namespace);
     }
@@ -27,7 +26,7 @@ public class ItemModelConfigurationTablet extends ItemModelStandard {
     @Override
     public @NotNull IconCoordinate getIcon(@Nullable Entity entity, ItemStack itemStack) {
         ConfigurationTabletMode mode = ConfigurationTabletMode.values()[itemStack.getData().getInteger("mode")];
-        switch (mode){
+        switch (mode) {
             case ROTATION:
                 return rotation;
             case ITEM:

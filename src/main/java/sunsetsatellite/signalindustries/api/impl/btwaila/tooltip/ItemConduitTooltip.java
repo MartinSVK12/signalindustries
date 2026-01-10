@@ -14,6 +14,6 @@ public class ItemConduitTooltip extends TileTooltip<TileEntityItemConduit> {
     @Override
     public void drawAdvancedTooltip(TileEntityItemConduit conduit, AdvancedInfoComponent c) {
         ItemStack[] stacks = conduit.getContents().stream().map(TileEntityItemConduit.PipeItem::getStack).toArray(ItemStack[]::new);
-        c.drawItemList(stacks,0);
+        c.drawItemList(stacks, 0);
     }
 }

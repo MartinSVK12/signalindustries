@@ -29,7 +29,7 @@ public class Wave {
         this.isBoss = boss;
     }
 
-    public Class<? extends Mob> chooseRandomMob(){
+    public Class<? extends Mob> chooseRandomMob() {
         return mobList.get(random.nextInt(mobList.size()));
     }
 

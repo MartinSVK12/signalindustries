@@ -9,6 +9,7 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.lang.reflect.Type;
+
 public class RecipeMachineJsonAdapter implements RecipeJsonAdapter<RecipeEntryMachine> {
     @Override
     public RecipeEntryMachine deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -16,7 +17,7 @@ public class RecipeMachineJsonAdapter implements RecipeJsonAdapter<RecipeEntryMa
         ItemStack result = context.deserialize(obj.get("result").getAsJsonObject(), ItemStack.class);
         RecipeProperties properties = context.deserialize(obj.get("properties").getAsJsonObject(), RecipeProperties.class);
         RecipeExtendedSymbol[] symbols = obj.get("symbols").getAsJsonArray().asList().stream().map((E) -> (RecipeExtendedSymbol) context.deserialize(E, RecipeExtendedSymbol.class)).toArray(RecipeExtendedSymbol[]::new);
-        return new RecipeEntryMachine(symbols,result,properties);
+        return new RecipeEntryMachine(symbols, result, properties);
     }
 
     @Override

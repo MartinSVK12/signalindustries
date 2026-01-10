@@ -15,7 +15,8 @@ public class NetworkMessageMeteorLocationSync implements NetworkMessage {
         this.location = location;
     }
 
-    public NetworkMessageMeteorLocationSync() {}
+    public NetworkMessageMeteorLocationSync() {
+    }
 
     @Override
     public void encodeToUniversalPacket(@NotNull UniversalPacket packet) {

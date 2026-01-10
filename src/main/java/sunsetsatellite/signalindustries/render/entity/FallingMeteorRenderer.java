@@ -20,7 +20,7 @@ public class FallingMeteorRenderer extends EntityRenderer<ProjectileFallingMeteo
 
     public void renderMeteor(Tessellator tessellator, ProjectileFallingMeteor entity, double x, double y, double z, float f, float f1) {
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)x+0.5f, (float)y-0.5f, (float)z+0.5f);
+        GL11.glTranslatef((float) x + 0.5f, (float) y - 0.5f, (float) z + 0.5f);
         TextureRegistry.blockAtlas.bind();
         Block<?> block = Blocks.getBlock(entity.blockID);
         World world = entity.world;
@@ -32,7 +32,7 @@ public class FallingMeteorRenderer extends EntityRenderer<ProjectileFallingMeteo
 
     @Override
     public void render(Tessellator tessellator, ProjectileFallingMeteor entity, double x, double y, double z, float yaw, float partialTick) {
-        this.renderMeteor(tessellator,entity, x, y, z, yaw, partialTick);
+        this.renderMeteor(tessellator, entity, x, y, z, yaw, partialTick);
     }
 
     private final RenderBlocks blockRenderer;

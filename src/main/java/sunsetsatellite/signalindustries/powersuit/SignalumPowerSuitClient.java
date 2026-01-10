@@ -44,67 +44,67 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
             return;
         }
         DrawUtil drawUtil = new DrawUtil();
-        if(!active){
+        if (!active) {
             KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyOpenSuit();
-            fontRenderer.drawCenteredString(String.format("%s | Press [Shift+%s]", TextFormatting.GRAY+"OFFLINE"+TextFormatting.WHITE, openSuitKey.getKeyName()),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | Press [Shift+%s]", TextFormatting.GRAY + "OFFLINE" + TextFormatting.WHITE, openSuitKey.getKeyName()), width / 2, height - 64, 0xFFFFFFFF);
             return;
         }
-        if(status == Status.NO_ENERGY){
+        if (status == Status.NO_ENERGY) {
             KeyBinding openSuitKey = ((IKeybinds) Minecraft.getMinecraft().gameSettings).signalIndustries$getKeyOpenSuit();
-            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | Press [%s] | %s C", status,TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,openSuitKey.getKeyName(),String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
+            fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | Press [%s] | %s C", status, TextFormatting.RED + String.format("%.2f", getEnergyPercent()) + "%", "(" + getEnergy(), getMaxEnergy() + ")" + TextFormatting.WHITE, openSuitKey.getKeyName(), String.format("%.2f", temperature)), width / 2, height - 64, 0xFFFFFFFF);
             return;
         }
 
-        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C",status.toString(),TextFormatting.RED+String.format("%.2f",getEnergyPercent())+"%","("+getEnergy(), getMaxEnergy() +")"+TextFormatting.WHITE,String.format("%.2f",temperature)),width/2,height-64,0xFFFFFFFF);
+        fontRenderer.drawCenteredString(String.format("%s | %s %s/%s | %s C", status.toString(), TextFormatting.RED + String.format("%.2f", getEnergyPercent()) + "%", "(" + getEnergy(), getMaxEnergy() + ")" + TextFormatting.WHITE, String.format("%.2f", temperature)), width / 2, height - 64, 0xFFFFFFFF);
 
         int color = mode.getColor(0x40);//0x40808080;
         int color2 = mode.getColor();//0xFF808080;
 
-        if(isBackgroundShown) {
+        if (isBackgroundShown) {
             //top
-            drawUtil.drawGradientRect(0,0,width,16,color,color);
-            drawUtil.drawGradientRect(0,16,width/2-100,20,color,color2);
-            drawUtil.drawGradientRect(width/2+100,16,width,20,color,color2);
-            drawUtil.drawGradientRect(width/2-100,36,width/2+100,40,color,color2);
-            drawUtil.drawGradientRect(width/2-102,20,width/2-100,40,color2,color2);
-            drawUtil.drawGradientRect(width/2+100,20,width/2+102,40,color2,color2);
+            drawUtil.drawGradientRect(0, 0, width, 16, color, color);
+            drawUtil.drawGradientRect(0, 16, width / 2 - 100, 20, color, color2);
+            drawUtil.drawGradientRect(width / 2 + 100, 16, width, 20, color, color2);
+            drawUtil.drawGradientRect(width / 2 - 100, 36, width / 2 + 100, 40, color, color2);
+            drawUtil.drawGradientRect(width / 2 - 102, 20, width / 2 - 100, 40, color2, color2);
+            drawUtil.drawGradientRect(width / 2 + 100, 20, width / 2 + 102, 40, color2, color2);
 
-            drawUtil.drawGradientRect(width/2-100,16,width/2+100,36,color,color);
+            drawUtil.drawGradientRect(width / 2 - 100, 16, width / 2 + 100, 36, color, color);
         }
 
-        if(module == null){
-            fontRenderer.drawCenteredString(String.format("%s","No module."),width/2,25,color2);
+        if (module == null) {
+            fontRenderer.drawCenteredString(String.format("%s", "No module."), width / 2, 25, color2);
         } else {
-            if(module.contents[selectedApplicationSlot] != null){
+            if (module.contents[selectedApplicationSlot] != null) {
                 IApplicationItem<?> app = (IApplicationItem<?>) module.contents[selectedApplicationSlot].getItem();
-                if(app.getType() == ApplicationType.ABILITY){
-                    SuitBaseAbility selectedAbility = ((ItemWithAbility)module.contents[selectedApplicationSlot].getItem()).getApplication();
+                if (app.getType() == ApplicationType.ABILITY) {
+                    SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
                     I18n t = I18n.getInstance();
-                    if(selectedAbility instanceof SuitBaseEffectAbility){
-                        if(effectTimes.containsKey(selectedAbility)){
-                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+String.valueOf(effectTimes.get(selectedAbility)/20)+"s"),width/2,25,color2);
-                        } else if(cooldowns.containsKey(selectedAbility)){
-                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                    if (selectedAbility instanceof SuitBaseEffectAbility) {
+                        if (effectTimes.containsKey(selectedAbility)) {
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + String.valueOf(effectTimes.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
+                        } else if (cooldowns.containsKey(selectedAbility)) {
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(cooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
                         } else {
-                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + "READY"), width / 2, 25, color2);
                         }
                     } else {
-                        if(cooldowns.containsKey(selectedAbility)){
-                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.RED+String.valueOf(cooldowns.get(selectedAbility)/20)+"s"),width/2,25,color2);
+                        if (cooldowns.containsKey(selectedAbility)) {
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(cooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
                         } else {
-                            fontRenderer.drawCenteredString(String.format("%s | %s | %s",selectedAbility.tier.getTextColor()+t.translateKey(selectedAbility.name)+TextFormatting.WHITE,TextFormatting.RED+"-"+selectedAbility.cost+TextFormatting.WHITE, TextFormatting.LIME+"READY"),width/2,25,color2);
+                            fontRenderer.drawCenteredString(String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + "READY"), width / 2, 25, color2);
                         }
                     }
                 } else if (app.getType() == ApplicationType.UTILITY) {
                     ItemWithUtility item = (ItemWithUtility) module.contents[selectedApplicationSlot].getItem();
-                    fontRenderer.drawCenteredString(String.format("%s%s%s",item.getTier().getTextColor(),item.getTranslatedName(module.contents[selectedApplicationSlot]),TextFormatting.WHITE),width/2,25,color2);
+                    fontRenderer.drawCenteredString(String.format("%s%s%s", item.getTier().getTextColor(), item.getTranslatedName(module.contents[selectedApplicationSlot]), TextFormatting.WHITE), width / 2, 25, color2);
                 }
             } else {
-                fontRenderer.drawCenteredString(String.format("%s","No application selected."),width/2,25,color2);
+                fontRenderer.drawCenteredString(String.format("%s", "No application selected."), width / 2, 25, color2);
             }
         }
 
-        if(isBackgroundShown) {
+        if (isBackgroundShown) {
             //bottom
             drawUtil.drawGradientRect(0, height - 20, width, height, color, color);
             drawUtil.drawGradientRect(width / 2 - 170, height - 24, width / 2 - 100, height - 20, color2, color);
@@ -122,7 +122,7 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
         }
 
         //ability hotbar
-        if(module == null){
+        if (module == null) {
             GL11.glColor4f(0.5F, 0.5F, 0.5F, 1.0F);
             mc.textureManager.loadTexture("/gui/gui.png").bind();
             int x = width / 2 - 91;
@@ -135,7 +135,7 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
         } else {
             //Tier mode = getModuleMode();
             Color c = new Color().setARGB(mode.getColor());
-            GL11.glColor4f((float) c.getRed() /255, (float) c.getGreen() /255, (float) c.getBlue() /255, (float) c.getAlpha() /255);
+            GL11.glColor4f((float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255, (float) c.getAlpha() / 255);
             //GL11.glColor4b((byte) c.getRed(), (byte) c.getGreen(), (byte) c.getBlue(), (byte) c.getAlpha());
             mc.textureManager.loadTexture("/gui/gui.png").bind();
             int x = width / 2 - 91;
@@ -145,10 +145,10 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
             int j = y;
             for (int i1 = 0; i1 < module.contents.length; i1++) {
                 ItemModel model = ItemModelDispatcher.getInstance().getDispatch(module.contents[i1]);
-                model.renderItemIntoGui(Tessellator.instance, fontRenderer, mc.textureManager, module.contents[i1], i+3, j+3, 1.0F);
+                model.renderItemIntoGui(Tessellator.instance, fontRenderer, mc.textureManager, module.contents[i1], i + 3, j + 3, 1.0F);
                 GL11.glDisable(3042);
                 GL11.glDisable(2896);
-                i+=20;
+                i += 20;
             }
             //selected ability
             mc.textureManager.loadTexture("/gui/gui.png").bind();
@@ -162,20 +162,20 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
         for (int i = 3; i >= 0; i--) {
             ItemStack stack = this.player.inventory.armorInventory[i];
             if (stack != null) {
-                int x = 2 ;
-                int y = height - 64 + ((3-i) * 16);
+                int x = 2;
+                int y = height - 64 + ((3 - i) * 16);
                 ItemModel model = ItemModelDispatcher.getInstance().getDispatch(stack);
-                model.renderItemIntoGui(Tessellator.instance,fontRenderer, mc.textureManager, stack, x, y, 1.0F);
+                model.renderItemIntoGui(Tessellator.instance, fontRenderer, mc.textureManager, stack, x, y, 1.0F);
                 GL11.glDisable(3042);
                 GL11.glDisable(2896);
                 InventoryPowerSuit pieceInv = getArmorPiece(i);
                 if (!pieceInv.isEmpty()) {
                     int k = 16;
                     for (ItemStack content : pieceInv.contents) {
-                        if(content != null){
+                        if (content != null) {
                             model = ItemModelDispatcher.getInstance().getDispatch(content);
-                            model.renderItemIntoGui(Tessellator.instance,fontRenderer, mc.textureManager, content, x+k, y, 1.0F);
-                            k+=16;
+                            model.renderItemIntoGui(Tessellator.instance, fontRenderer, mc.textureManager, content, x + k, y, 1.0F);
+                            k += 16;
                         }
                     }
                 }
@@ -186,12 +186,12 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
 
 
         //render attachment info
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(content.getItem() instanceof IHasOverlay){
-                        ((IHasOverlay) content.getItem()).renderOverlay(content, this, guiIngame,player,height,width,mouseX,mouseY,fontRenderer,itemRenderer);
+                if (content != null) {
+                    if (content.getItem() instanceof IHasOverlay) {
+                        ((IHasOverlay) content.getItem()).renderOverlay(content, this, guiIngame, player, height, width, mouseX, mouseY, fontRenderer, itemRenderer);
                     }
                 }
             }

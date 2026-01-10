@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.api.impl.tmb.category;
 
-import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.net.command.TextFormatting;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.ExtendedIngredientList;
@@ -8,11 +7,11 @@ import sunsetsatellite.catalyst.fluids.api.impl.tmb.ExtendedTypedIngredient;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.TMBFluidPlugin;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
-import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
 import turing.tmb.api.ItemStackIngredientRenderer;
@@ -20,17 +19,17 @@ import turing.tmb.api.VanillaTypes;
 import turing.tmb.api.drawable.IDrawable;
 import turing.tmb.api.drawable.IDrawableAnimated;
 import turing.tmb.api.drawable.IIngredientList;
-import turing.tmb.api.ingredient.IIngredientType;
-import turing.tmb.api.recipe.*;
+import turing.tmb.api.recipe.ILookupContext;
+import turing.tmb.api.recipe.IRecipeCategory;
+import turing.tmb.api.recipe.IRecipeLayout;
+import turing.tmb.api.recipe.RecipeIngredientRole;
 import turing.tmb.api.runtime.ITMBRuntime;
 import turing.tmb.client.DrawableAnimated;
 import turing.tmb.client.DrawableBlank;
 import turing.tmb.client.DrawableIngredient;
 import turing.tmb.client.DrawableTexture;
 import turing.tmb.util.IngredientList;
-import turing.tmb.vanilla.TrommelRecipeTranslator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineRecipeTranslator> {
@@ -77,15 +76,15 @@ public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineReci
         getIngredients(recipe, layout, context, ingredients);
 
         if (data.thisTierOnly) {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: "+data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight()), 0xFFF0F0F0);
         } else {
-            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: "+data.tier.getTextColor()+data.tier.getRank() + TextFormatting.WHITE,24,(background.getHeight()),0xFFF0F0F0);
+            runtime.getGuiHelper().getMinecraft().font.drawStringWithShadow("Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight()), 0xFFF0F0F0);
         }
 
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -94,7 +93,7 @@ public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineReci
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
         RecipeOutputStack[] output = recipe.getOriginal().getOutput();
         for (int i = 0; i < 2; i++) {
-            if(i >= input.length){
+            if (i >= input.length) {
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
@@ -102,14 +101,14 @@ public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineReci
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
         for (int i = 0; i < 4; i++) {
-            if(i >= output.length){
-                ingredients.add(i+2, ExtendedIngredientList.fromRecipeSymbol(null));
+            if (i >= output.length) {
+                ingredients.add(i + 2, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
             RecipeOutputStack symbol = output[i];
-            ingredients.add(i+2, ExtendedIngredientList.fromRecipeOutput(symbol));
+            ingredients.add(i + 2, ExtendedIngredientList.fromRecipeOutput(symbol));
         }
-        ingredients.add(6, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(6, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override
@@ -121,7 +120,7 @@ public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineReci
                 .addOutputSlot(3, VanillaTypes.ITEM_STACK).setPosition(x + 76, (background.getHeight() / 2) - 6).build()
                 .addOutputSlot(4, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 28).build()
                 .addOutputSlot(5, TMBFluidPlugin.FLUID_STACK).setPosition(x + 76, (background.getHeight() / 2) - 28).build()
-                .addSlot(6,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addSlot(6, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

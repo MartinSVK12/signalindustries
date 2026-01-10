@@ -20,9 +20,9 @@ public class BlockModelEternalLog extends BlockModelStandard {
 
     @Override
     public IconCoordinate getBlockTexture(WorldSource blockAccess, int x, int y, int z, Side side) {
-        if(side.getAxis() == Axis.Y && blockAccess.getBlockMetadata(x, y, z) == 1){
+        if (side.getAxis() == Axis.Y && blockAccess.getBlockMetadata(x, y, z) == 1) {
             return topNormal;
-        } else if(side.getAxis() == Axis.Y && blockAccess.getBlockMetadata(x, y, z) != 1){
+        } else if (side.getAxis() == Axis.Y && blockAccess.getBlockMetadata(x, y, z) != 1) {
             return topEmpty;
         }
         return sideNormal;
@@ -30,9 +30,9 @@ public class BlockModelEternalLog extends BlockModelStandard {
 
     @Override
     public IconCoordinate getBlockTextureFromSideAndMetadata(Side side, int data) {
-        if(side.getAxis() == Axis.Y && data == 1){
+        if (side.getAxis() == Axis.Y && data == 1) {
             return topNormal;
-        } else if(side.getAxis() == Axis.Y){
+        } else if (side.getAxis() == Axis.Y) {
             return topEmpty;
         }
         return sideNormal;

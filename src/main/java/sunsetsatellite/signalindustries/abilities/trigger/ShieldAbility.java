@@ -3,9 +3,8 @@ package sunsetsatellite.signalindustries.abilities.trigger;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SignalIndustries;
 
-public class ShieldAbility extends TriggerBaseEffectAbility{
+public class ShieldAbility extends TriggerBaseEffectAbility {
 
     public ShieldAbility(String name, int cost, int cooldown, int effectTime, int costPerTick) {
         super(name, cost, cooldown, effectTime, costPerTick);

@@ -9,7 +9,6 @@ import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
-
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 import turing.tmb.RecipeLayoutBuilder;
@@ -84,7 +83,7 @@ public class WakingInfuserRecipeCategory implements IRecipeCategory<MachineRecip
         arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks+"t",x + 39, (background.getHeight() / 2) - 14,0xFFFFFFFF);
+        runtime.getGuiHelper().getMinecraft().font.drawCenteredString(data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class WakingInfuserRecipeCategory implements IRecipeCategory<MachineRecip
         RecipeProperties data = recipe.getOriginal().getData();
         RecipeExtendedSymbol[] input = recipe.getOriginal().getInput();
         for (int i = 0; i < 3; i++) {
-            if(i >= input.length){
+            if (i >= input.length) {
                 ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(null));
                 continue;
             }
@@ -100,7 +99,7 @@ public class WakingInfuserRecipeCategory implements IRecipeCategory<MachineRecip
             ingredients.add(i, ExtendedIngredientList.fromRecipeSymbol(symbol));
         }
         ingredients.add(3, new IngredientList(TypedIngredient.itemStackIngredient(recipe.getOriginal().getOutput())));
-        ingredients.add(4, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks/200.0f))))));
+        ingredients.add(4, new IngredientList(ExtendedTypedIngredient.fluidStackIngredient(new FluidStack(SIFluids.ENERGY, (int) (data.cost * (data.ticks / 200.0f))))));
     }
 
     @Override
@@ -110,7 +109,7 @@ public class WakingInfuserRecipeCategory implements IRecipeCategory<MachineRecip
                 .addInputSlot(1, VanillaTypes.ITEM_STACK).setPosition(x, (background.getHeight() / 2) + 16).build()
                 .addInputSlot(2, VanillaTypes.ITEM_STACK).setPosition(x, (background.getHeight() / 2) - 26).build()
                 .addOutputSlot(3, VanillaTypes.ITEM_STACK).setPosition(x + 56, (background.getHeight() / 2) - 6).build()
-                .addSlot(4,TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
+                .addSlot(4, TMBFluidPlugin.FLUID_STACK, RecipeIngredientRole.RENDER_ONLY).setPosition(10, (background.getHeight() / 2) - 6).build()
                 .build();
     }
 }

@@ -3,10 +3,8 @@ package sunsetsatellite.signalindustries.recipes.adapter;
 import com.google.gson.*;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.adapter.RecipeJsonAdapter;
-import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
-import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
@@ -19,7 +17,7 @@ public class RecipeMachineMultiOutputJsonAdapter implements RecipeJsonAdapter<Re
         RecipeOutputStack[] outputs = obj.get("outputs").getAsJsonArray().asList().stream().map((E) -> (RecipeOutputStack) context.deserialize(E, RecipeOutputStack.class)).toArray(RecipeOutputStack[]::new);
         RecipeProperties properties = context.deserialize(obj.get("properties").getAsJsonObject(), RecipeProperties.class);
         RecipeExtendedSymbol[] symbols = obj.get("symbols").getAsJsonArray().asList().stream().map((E) -> (RecipeExtendedSymbol) context.deserialize(E, RecipeExtendedSymbol.class)).toArray(RecipeExtendedSymbol[]::new);
-        return new RecipeEntryMachineMultiOutput(symbols,outputs,properties);
+        return new RecipeEntryMachineMultiOutput(symbols, outputs, properties);
     }
 
     @Override

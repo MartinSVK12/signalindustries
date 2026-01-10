@@ -7,7 +7,7 @@ import net.minecraft.core.world.generate.chunk.ChunkDecorator;
 public class ChunkDecoratorCustom implements ChunkDecorator {
 
     public World world;
-    private CustomDimensionData data;
+    private final CustomDimensionData data;
 
     public ChunkDecoratorCustom(World world, CustomDimensionData data) {
         this.world = world;

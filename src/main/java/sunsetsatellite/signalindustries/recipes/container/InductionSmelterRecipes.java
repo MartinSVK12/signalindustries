@@ -10,7 +10,7 @@ import sunsetsatellite.signalindustries.util.RecipeProperties;
 import sunsetsatellite.signalindustries.util.Tier;
 
 // I really did not want to remake how multiblocks work just for this
-public class InductionSmelterRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMachine>>{
+public class InductionSmelterRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntryMachine>> {
 
     @Override
     public void addRecipes(RecipeGroup<RecipeEntryMachine> group) {
@@ -21,10 +21,10 @@ public class InductionSmelterRecipes implements MachineRecipesBase<RecipeGroup<R
                     recipeKey,
                     new RecipeEntryMachine(
                             new RecipeExtendedSymbol[]{
-                                   new RecipeExtendedSymbol(input)
+                                    new RecipeExtendedSymbol(input)
                             },
                             furnaceRecipe.getOutput(),
-                            new RecipeProperties(100,40, Tier.BASIC,false)
+                            new RecipeProperties(100, 40, Tier.BASIC, false)
                     )
             );
         }

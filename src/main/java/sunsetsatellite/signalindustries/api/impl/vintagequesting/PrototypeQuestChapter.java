@@ -13,7 +13,6 @@ import sunsetsatellite.vintagequesting.gui.ScreenQuestbook;
 import sunsetsatellite.vintagequesting.quest.Quest;
 import sunsetsatellite.vintagequesting.quest.template.QuestTemplate;
 
-import java.util.List;
 import java.util.Random;
 
 public class PrototypeQuestChapter extends QuestChapterPage {

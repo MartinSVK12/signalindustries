@@ -4,7 +4,6 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
-import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
@@ -20,8 +19,8 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new FluidStack(SIFluids.ENERGY,160),
-                        new RecipeProperties(200, Tier.PROTOTYPE,true))
+                        new FluidStack(SIFluids.ENERGY, 160),
+                        new RecipeProperties(200, Tier.PROTOTYPE, true))
         );
         group.register(
                 "basic",
@@ -29,17 +28,17 @@ public class ExtractorRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeExtendedSymbol[]{
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal))
                         },
-                        new FluidStack(SIFluids.ENERGY,320),
-                        new RecipeProperties(100, Tier.BASIC,true))
+                        new FluidStack(SIFluids.ENERGY, 320),
+                        new RecipeProperties(100, Tier.BASIC, true))
         );
         group.register(
                 "reinforced",
                 new RecipeEntryMachineFluid(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal,4))
+                                new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal, 4))
                         },
-                        new FluidStack(SIFluids.ENERGY,640*4),
-                        new RecipeProperties(200, Tier.REINFORCED,true))
+                        new FluidStack(SIFluids.ENERGY, 640 * 4),
+                        new RecipeProperties(200, Tier.REINFORCED, true))
         );
     }
 }

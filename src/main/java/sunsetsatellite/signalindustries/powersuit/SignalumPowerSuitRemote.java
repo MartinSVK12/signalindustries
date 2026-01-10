@@ -7,6 +7,7 @@ import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 
 import java.util.List;
+
 import static sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit.*;
 
 public class SignalumPowerSuitRemote implements IPowerSuit {
@@ -48,8 +49,8 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
 
     }
 
-    public InventoryPowerSuit getArmorPiece(int i){
-        switch (i){
+    public InventoryPowerSuit getArmorPiece(int i) {
+        switch (i) {
             case 3:
                 return helmet;
             case 2:
@@ -64,12 +65,12 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public boolean hasAttachment(ItemAttachment attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public boolean hasAttachment(ItemAttachment attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(content.getItem().equals(attachment)){
+                if (content != null) {
+                    if (content.getItem().equals(attachment)) {
                         return true;
                     }
                 }
@@ -79,12 +80,12 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(attachment.isInstance(content.getItem())){
+                if (content != null) {
+                    if (attachment.isInstance(content.getItem())) {
                         return true;
                     }
                 }
@@ -94,11 +95,11 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public boolean hasAttachment(ItemAttachment attachment, List<SignalumPowerSuit.AttachmentLocation> locations){
+    public boolean hasAttachment(ItemAttachment attachment, List<SignalumPowerSuit.AttachmentLocation> locations) {
         for (SignalumPowerSuit.AttachmentLocation location : locations) {
             InventoryPowerSuit armorPieceInv = getArmorPiece(location.armorPiece);
             ItemStack armorPieceAttachment = armorPieceInv.getItem(location.slot);
-            if(armorPieceAttachment != null && armorPieceAttachment.getItem().equals(attachment)){
+            if (armorPieceAttachment != null && armorPieceAttachment.getItem().equals(attachment)) {
                 return true;
             }
         }
@@ -106,12 +107,12 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public ItemStack getAttachment(ItemAttachment attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public ItemStack getAttachment(ItemAttachment attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(content.getItem().equals(attachment)){
+                if (content != null) {
+                    if (content.getItem().equals(attachment)) {
                         return content;
                     }
                 }
@@ -121,12 +122,12 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public ItemStack getAttachmentClass(Class<? extends ItemAttachment> attachment){
-        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet,chestplate,leggings,boots};
+    public ItemStack getAttachmentClass(Class<? extends ItemAttachment> attachment) {
+        InventoryPowerSuit[] pieces = new InventoryPowerSuit[]{helmet, chestplate, leggings, boots};
         for (InventoryPowerSuit piece : pieces) {
             for (ItemStack content : piece.contents) {
-                if(content != null){
-                    if(attachment.isInstance(content.getItem())){
+                if (content != null) {
+                    if (attachment.isInstance(content.getItem())) {
                         return content;
                     }
                 }
@@ -140,7 +141,7 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
         return false;
     }
 
-    public void reload(){
+    public void reload() {
         helmet = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_HEAD));
         chestplate = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_CHEST));
         leggings = new InventoryPowerSuit(player.inventory.armorItemInSlot(PIECE_LEGS));
@@ -149,7 +150,7 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
 
     @Override
     public void loadData(CompoundTag suitTag) {
-        if(suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")){
+        if (suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")) {
             CompoundTag helmetTag = suitTag.getCompound("Helmet");
             CompoundTag chestplateTag = suitTag.getCompound("Chestplate");
             CompoundTag leggingsTag = suitTag.getCompound("Leggings");

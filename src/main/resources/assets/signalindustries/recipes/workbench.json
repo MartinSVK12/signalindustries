@@ -278,14 +278,14 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "item.ammo.charge.explosive",
+          "key": "item.ammo.charge.explosive",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "item.signalindustries.evilEye",
+      "key": "item.signalindustries.evilEye",
       "amount": 1,
       "meta": 0
     },
@@ -311,14 +311,14 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "item.signalindustries.evilEye",
+          "key": "item.signalindustries.evilEye",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "item.signalindustries.infernalEye",
+      "key": "item.signalindustries.infernalEye",
       "amount": 1,
       "meta": 0
     },
@@ -344,7 +344,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "item.signalindustries.dilithiumChip",
+          "key": "item.signalindustries.dilithiumChip",
           "amount": 1,
           "meta": 0
         }
@@ -367,7 +367,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.dilithiumControlCore",
+      "key": "item.signalindustries.dilithiumControlCore",
       "amount": 1,
       "meta": 0
     },
@@ -393,7 +393,7 @@
       {
         "symbol": "C",
         "stack": {
-          "key":  "item.signalindustries.dimensionalChip",
+          "key": "item.signalindustries.dimensionalChip",
           "amount": 1,
           "meta": 0
         }
@@ -408,7 +408,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.warpManipulatorCircuit",
+      "key": "item.signalindustries.warpManipulatorCircuit",
       "amount": 1,
       "meta": 0
     },
@@ -434,14 +434,14 @@
       {
         "symbol": "B",
         "stack": {
-          "key":  "tile.signalindustries.emptyCrystalBlock",
+          "key": "tile.signalindustries.emptyCrystalBlock",
           "amount": 1,
           "meta": 0
         }
       }
     ],
     "result": {
-      "key":  "item.signalindustries.warpOrb",
+      "key": "item.signalindustries.warpOrb",
       "amount": 1,
       "meta": 0
     },
@@ -475,7 +475,7 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.stonePlate",
+          "key": "item.signalindustries.stonePlate",
           "amount": 1,
           "meta": 0
         }
@@ -490,7 +490,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.itemManipulationCircuit",
+      "key": "item.signalindustries.itemManipulationCircuit",
       "amount": 1,
       "meta": 0
     },
@@ -524,7 +524,7 @@
       {
         "symbol": "S",
         "stack": {
-          "key":  "item.signalindustries.stonePlate",
+          "key": "item.signalindustries.stonePlate",
           "amount": 1,
           "meta": 0
         }
@@ -539,7 +539,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.fluidManipulationCircuit",
+      "key": "item.signalindustries.fluidManipulationCircuit",
       "amount": 1,
       "meta": 0
     },
@@ -588,7 +588,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.trigger.null",
+      "key": "item.signalindustries.trigger.null",
       "amount": 1,
       "meta": 0
     },
@@ -629,7 +629,7 @@
       }
     ],
     "result": {
-      "key":  "item.signalindustries.reinforced.signalumSaber",
+      "key": "item.signalindustries.reinforced.signalumSaber",
       "amount": 1,
       "meta": 0
     },

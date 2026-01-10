@@ -10,9 +10,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.menus.MenuCollector;
-import sunsetsatellite.signalindustries.menus.MenuCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityCollector;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityCrusher;
 
 public class ScreenCollector extends ScreenFluid {
 
@@ -30,7 +28,7 @@ public class ScreenCollector extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_energy_collector.png");
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
                 bg = this.mc.textureManager.loadTexture("/assets/signalindustries/gui/basic_energy_collector.png");
@@ -47,7 +45,7 @@ public class ScreenCollector extends ScreenFluid {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
         int counter;
-        if(tile.isBurning()){
+        if (tile.isBurning()) {
             counter = tile.getProgressScaled(12);
             this.drawTexturedModalRect(x + 80, y + 17 + 12 - counter, 176, 12 - counter, 14, counter + 2);
         }
@@ -57,7 +55,7 @@ public class ScreenCollector extends ScreenFluid {
     protected void drawGuiContainerForegroundLayer() {
         super.drawGuiContainerForegroundLayer();
         int color = 0xFFFFFFFF;
-        switch (tile.tier){
+        switch (tile.tier) {
             case PROTOTYPE:
                 break;
             case BASIC:
@@ -89,11 +87,11 @@ public class ScreenCollector extends ScreenFluid {
 
     @Override
     protected void buttonClicked(ButtonElement button) {
-        if(!button.enabled) return;
+        if (!button.enabled) return;
 
-        if(button == itemIoButton){
+        if (button == itemIoButton) {
             mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
-        } else if(button == fluidIoButton){
+        } else if (button == fluidIoButton) {
             mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         super.buttonClicked(button);

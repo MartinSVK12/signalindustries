@@ -12,6 +12,6 @@ public class WeatherBloodMoon extends Weather {
 
     @Override
     public float[] modifyFogColor(float r, float g, float b, float intensity) {
-        return super.modifyFogColor(r,g,b,intensity);
+        return super.modifyFogColor(r, g, b, intensity);
     }
 }
