@@ -18,8 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
+
     public void drawFluids(IFluidInventory inv, AdvancedInfoComponent c, boolean collapse) {
-        if (inv.getFluidInventorySize() <= 2) {
+        drawFluids(inv, c, collapse, 2);
+    }
+
+    public void drawFluids(IFluidInventory inv, AdvancedInfoComponent c, boolean collapse, int maxFluidBars) {
+        if (inv.getFluidInventorySize() <= maxFluidBars) {
             for (int id = 0; id < inv.getFluidInventorySize(); id++) {
                 if (inv.getFluidCapacityForSlot(id) <= 0) continue;
                 FluidStack stack = inv.getFluidInSlot(id);
