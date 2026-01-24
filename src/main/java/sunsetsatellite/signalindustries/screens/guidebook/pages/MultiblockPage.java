@@ -51,8 +51,8 @@ public class MultiblockPage
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        GL11.glScissor(x * mc.resolution.getScale(), y * mc.resolution.getScale(), 158 * mc.resolution.getScale(), 220 * mc.resolution.getScale()); //158, 220
+        //GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        //GL11.glScissor(x * mc.resolution.getScale(), y * mc.resolution.getScale(), 158 * mc.resolution.getScale(), 220 * mc.resolution.getScale()); //158, 220
 
         GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
         GL11.glEnable(2903 /*GL_COLOR_MATERIAL*/);
@@ -76,6 +76,6 @@ public class MultiblockPage
         Lighting.disable();
         GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+        //GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 }
