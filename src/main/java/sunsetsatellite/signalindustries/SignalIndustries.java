@@ -60,6 +60,7 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
     public static Set<BlockInstance> uvLamps = new HashSet<>();
     public static HashMap<String, CustomStructure> customStructures = new HashMap<>();
     public static boolean bloodMoonsDisabled = false;
+    public static boolean worlsSavedIDs = false;
 
     public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "harness", 1200, 10, 10, 10, 10);
     public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "power_suit", 9999, 50, 50, 50, 50);

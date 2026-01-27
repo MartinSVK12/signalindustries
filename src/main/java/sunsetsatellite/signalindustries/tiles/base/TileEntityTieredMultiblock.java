@@ -259,8 +259,8 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public boolean fuel() {
         if (allPartsPresent() && energy.getFluidInSlot(0) != null) {
             int burn = SignalIndustries.getEnergyBurnTime(energy.getFluidInSlot(0));
-            if (burn > 0 && canProcess() && currentRecipe != null) {
-                if (energy.getFluidInSlot(0).amount >= currentRecipe.getData().cost) {
+            if (burn > 0 && canProcess() && energy.getFluidInSlot(0) != null && currentRecipe != null) {
+                if (energy.getFluidInSlot(0) != null && energy.getFluidInSlot(0).amount >= currentRecipe.getData().cost) {
                     progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
                     fuelMaxBurnTicks = fuelBurnTicks = burn;
                     energy.getFluidInSlot(0).amount -= currentRecipe.getData().cost;

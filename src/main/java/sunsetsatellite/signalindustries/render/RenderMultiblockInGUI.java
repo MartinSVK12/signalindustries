@@ -20,8 +20,7 @@ import java.util.ArrayList;
 public class RenderMultiblockInGUI {
     private RenderBlocks blockRenderer;
 
-    public void doRender(Multiblock multiblock, TextureManager re, Font fe, double d, double e, double f, float g) {
-
+    public void doRender(Multiblock multiblock, TextureManager re, Font fe, double d, double e, double f, float alpha) {
         int i = 0;
         int j = 0;
         int k = 0;
@@ -45,7 +44,7 @@ public class RenderMultiblockInGUI {
         }
     }
 
-    public void doRender(ArrayList<BlockInstance> blocks, TextureManager re, Font fe, double d, double e, double f, float g) {
+    public void doRender(ArrayList<BlockInstance> blocks, TextureManager re, Font fe, double d, double e, double f, float alpha) {
 
         int i = 0;
         int j = 0;
@@ -61,7 +60,7 @@ public class RenderMultiblockInGUI {
             GL11.glPushMatrix();
             //GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glTranslatef((float) d + (pos.x - i), (float) e + (pos.y - j), (float) f + (pos.z - k));
-            drawBlock(Tessellator.instance, model, meta, g);
+            drawBlock(Tessellator.instance, model, meta, alpha);
             // ((IFullbright)model).disableFullbright();
             //GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();

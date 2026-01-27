@@ -134,6 +134,8 @@ item.signalindustries.reinforced.signalumDrill.desc=Capable of breaking through 
 
 item.signalindustries.dimensionalShard.name=Dimensional Shard
 item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
+item.signalindustries.dimensionalFragment.name=Dimensional Fragment
+item.signalindustries.dimensionalFragment.desc=Can be attuned to a specific dimensional property.
 item.signalindustries.dilithiumShard.name=Dilithium Shard
 item.signalindustries.dilithiumShard.desc=An extraterrestrial mineral used in machines to locally manipulate time.
 item.signalindustries.realityString.name=String of Reality
@@ -510,6 +512,8 @@ tile.signalindustries.reinforced.encapsulator.desc=Creates a blueprint of an alr
 tile.signalindustries.awakened.encapsulator.name=Awakened Spatial Encapsulator
 tile.signalindustries.awakened.encapsulator.desc=Creates a blueprint of an already built custom structure, can also cut out parts of the world and store them in <Goldprints>.
 
+tile.signalindustries.awakened.inscriber.name=Awakened Property Inscriber
+tile.signalindustries.awakened.inscriber.desc=Studies the environment around itself and attunes <Dimensional Fragments> with the learned information.
 tile.signalindustries.awakened.creationAltar.name=Awakened Altar of Creation
 tile.signalindustries.awakened.creationAltar.desc=Now I have become Life, the creator of worlds.
 
@@ -548,22 +552,28 @@ tile.signalindustries.basic.itemOutputBus.desc=A dedicated item output for Basic
 
 tile.signalindustries.basic.energyInjector.name=Basic Energy Injector
 tile.signalindustries.basic.energyInjector.desc=Provides an automatic way of filling appropriate items with <Signaling Energy>.
+tile.signalindustries.reinforced.energyInjector.name=Reinforced Energy Injector
+tile.signalindustries.reinforced.energyInjector.desc=Can charge items inside your inventory when standing on it.
 
 tile.signalindustries.reinforced.centrifuge.name=Separation Centrifuge
 tile.signalindustries.reinforced.centrifuge.desc=Separates a liquid substance into its components.
 tile.signalindustries.awakened.centrifuge.name=Awakened Ultracentrifuge Controller
 tile.signalindustries.awakened.centrifuge.desc=Spins stuff REALLY FAST, beware of catastrophic failure. On the flip side, spins stuff REALLY WELL leading to increased efficiency.
 
-tile.signalindustries.reinforced.dilithiumStabilizer.name=Dilithium Stabilizer
-tile.signalindustries.reinforced.dilithiumStabilizer.desc=Instead of making things go super fast, this machine uses <Dilithium> to make things super still. Required to stabilize some machines.
+tile.signalindustries.reinforced.stabilizer.name=Dilithium Stabilizer
+tile.signalindustries.reinforced.stabilizer.desc=Instead of making things go super fast, this machine uses <Dilithium> to make things super still. Required to stabilize some machines.
+tile.signalindustries.awakened.stabilizer.name=Awakened Dilithium Normalizer
+tile.signalindustries.awakened.stabilizer.desc=Suppresses anomalies caused by high energy requirements of some machine.
 tile.signalindustries.basic.booster.name=Redstone Booster
 tile.signalindustries.basic.booster.desc=Crude device that tries to speed up other machines using <Redstone>. But maybe there's a material better suited for it?
 tile.signalindustries.reinforced.booster.name=Dilithium Booster
 tile.signalindustries.reinforced.booster.desc=Speeds up an adjacent machine that it points to using <Dilithium>.
 tile.signalindustries.awakened.booster.name=Awakened Dilithium Overbooster
 tile.signalindustries.awakened.booster.desc=Speeds up an adjacent machine that it points to significantly.
+tile.signalindustries.awakened.accelerator.name=Awakened Tachyon Accelerator Controller
+tile.signalindustries.awakened.accelerator.desc=Creates a field of accelerated time around itself, massively boosting every machine in it.
 tile.signalindustries.dilithiumRail.name=Dilithium Rail
-tile.signalindustries.dilithiumRail.desc=Hyperspeed!
+tile.signalindustries.dilithiumRail.desc=A faster rail, Hyperspeed!
 
 tile.signalindustries.prototype.alloySmelter.name=Prototype Alloy Smelter
 tile.signalindustries.prototype.alloySmelter.desc=Combines metals into alloys with heat.
@@ -643,7 +653,6 @@ tile.signalindustries.basic.stoneworks.name=Basic Stoneworks
 tile.signalindustries.basic.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
 tile.signalindustries.reinforced.stoneworks.name=Reinforced Stoneworks
 tile.signalindustries.reinforced.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
-
 
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.

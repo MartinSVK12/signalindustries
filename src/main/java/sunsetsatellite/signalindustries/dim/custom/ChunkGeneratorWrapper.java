@@ -5,13 +5,18 @@ import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
 import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
 
-public class ChunkGeneratorCustom extends ChunkGenerator {
-    public ChunkGeneratorCustom(World world, CustomDimensionData data) {
+public class ChunkGeneratorWrapper extends ChunkGenerator {
+
+    public CustomDimensionData data;
+
+    public ChunkGeneratorWrapper(World world, CustomDimensionData data) {
         super(world, data.getChunkDecorator(world));
+        this.data = data;
+        data.properties.chunkGenerator.init(world);
     }
 
     @Override
     protected ChunkGeneratorResult doBlockGeneration(Chunk chunk) {
-        return new ChunkGeneratorResult();
+        return data.properties.chunkGenerator.doBlockGeneration(chunk);
     }
 }

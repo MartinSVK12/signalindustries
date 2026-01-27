@@ -48,7 +48,7 @@ public class ItemModelBlockSIFluidTank extends ItemModelBlock {
 
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(fluid);
             if (model != null) {
-                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(fluid, new Vec3i(), 0, null))));
+                RenderBlocks blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(fluid, new Vec3i(), 0, null))));
                 GL11.glBlendFunc(770, 771);
                 TextureRegistry.blockAtlas.bind();
                 GL11.glPushMatrix();

@@ -905,7 +905,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
         );
 
         dilithiumStabilizer = customBlock(defaultBuilder(Tier.REINFORCED),
-                "reinforced.dilithiumStabilizer",
+                "reinforced.stabilizer",
                 "reinforced_stabilizer",
                 "dilithiumStabilizer",
                 3,

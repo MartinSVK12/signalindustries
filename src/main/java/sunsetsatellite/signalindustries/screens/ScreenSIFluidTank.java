@@ -48,7 +48,7 @@ public class ScreenSIFluidTank extends ScreenFluid {
             return;
         }
         if (guibutton == fluidIoButton) {
-            mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
+            mc.displayScreen(new ScreenVisualFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
         if (tile.getTier() == Tier.INFINITE && guibutton.id == 1) {
             tile.isInfiniteSource = !tile.isInfiniteSource;

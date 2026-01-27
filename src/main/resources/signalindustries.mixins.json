@@ -49,6 +49,7 @@
     "defaultRequire": 1
   },
   "server": [
+    "MinecraftServerMixin",
     "PacketHandlerLoginMixin",
     "PlayerServerMixin"
   ]

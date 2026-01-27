@@ -44,7 +44,7 @@ public class RenderFluidInBlock extends TileEntityRenderer<TileEntity> {
 
         if (fluidId != -1) {
             Block<?> block = Blocks.blocksList[fluidId];
-            blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(block, new Vec3i(), 0, null))));
+            blockRenderer = new RenderBlocks(new HologramWorld((java.util.ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(block, new Vec3i(), 0, null))));
             BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(block);
             GL11.glPushMatrix();
             GL11.glTranslatef((float) d2, (float) d4, (float) d6);

@@ -368,12 +368,14 @@ public class SIModels implements ModelEntrypoint {
         LOGGER.info("Initializing item models...");
         itemTextures.forEach((item, texture) -> {
             //LOGGER.info("Loading item model for '{}'", item.namespaceID.toString());
+
             ModelHelper.setItemModel(item, () -> {
                 ItemModelStandard model = new ItemModelStandard(item, MOD_ID);
-                model.icon = TextureRegistry.getTexture(NamespaceID.getTemp(MOD_ID, "item/" + texture));
                 if (item == basicSignalumDrill || item == reinforcedSignalumDrill) {
+                    model = new ItemModelTool(item, MOD_ID);
                     model.setFull3D();
                 }
+                model.icon = TextureRegistry.getTexture(NamespaceID.getTemp(MOD_ID, "item/" + texture));
                 return model;
             });
         });

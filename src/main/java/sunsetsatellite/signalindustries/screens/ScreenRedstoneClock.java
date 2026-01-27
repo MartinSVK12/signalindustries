@@ -4,6 +4,7 @@ import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.texture.Texture;
+import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.sound.SoundCategory;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -19,7 +20,7 @@ public class ScreenRedstoneClock extends Screen {
     public int xSize = 176;
     public int ySize = 166;
 
-    public ScreenRedstoneClock(TileEntityRedstoneClock tile) {
+    public ScreenRedstoneClock(ContainerInventory playerInv, TileEntityRedstoneClock tile) {
         super();
         this.tile = tile;
     }

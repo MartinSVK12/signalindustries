@@ -6,13 +6,14 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.covers.CoverBase;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 
 public class BlockModelCoverable extends BlockModelIOPreview {
-
     public BlockModelCoverable(Block<? extends BlockLogic> block) {
         super(block);
     }

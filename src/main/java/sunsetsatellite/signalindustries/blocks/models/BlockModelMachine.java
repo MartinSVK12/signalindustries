@@ -62,7 +62,7 @@ public class BlockModelMachine extends BlockModelCoverable {
 
         Side id = Side.getSideById(index);*/
 
-        return null; //overbrightTextures.get(id);
+        return super.getBlockOverbrightTextureFromSideAndMeta(side,data); //overbrightTextures.get(id);
     }
 
     @Override

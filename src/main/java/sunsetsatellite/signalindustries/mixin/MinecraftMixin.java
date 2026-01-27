@@ -7,6 +7,7 @@ import com.mojang.nbt.tags.Tag;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.PlayerLocal;
 import net.minecraft.client.render.terrain.TerrainRenderer;
+import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.chunk.provider.ChunkProviderDynamic;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.util.phys.HitResult;
@@ -31,7 +32,7 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
 import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
-import sunsetsatellite.signalindustries.dim.custom.WorldTypeCustom;
+import sunsetsatellite.signalindustries.dim.custom.WorldTypeWrapper;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
@@ -123,7 +124,7 @@ public abstract class MinecraftMixin {
             Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
             while (iter.hasNext()) {
                 WorldType worldType = iter.next();
-                if (worldType instanceof WorldTypeCustom) {
+                if (worldType instanceof WorldTypeWrapper) {
                     iter.remove();
                 }
             }
@@ -132,11 +133,18 @@ public abstract class MinecraftMixin {
             if (worldLevelDat.exists()) {
                 CompoundTag nbt = NbtIo.readCompressed(Files.newInputStream(worldLevelDat.toPath())).getCompound("Data");
                 CompoundTag dimensionsTag = nbt.getCompound("CustomDimensions");
+                if(nbt.containsKey("SISavedIDs")){
+                    SignalIndustries.worlsSavedIDs = true;
+                } else {
+                    SignalIndustries.worlsSavedIDs = false;
+                }
                 for (Tag<?> tag : dimensionsTag.getValues()) {
                     if (tag instanceof CompoundTag) {
                         CompoundTag dimTag = (CompoundTag) tag;
                         CustomDimensionData data = new CustomDimensionData(dimTag);
+                        data.properties.test();
                         WorldTypes.register(SignalIndustries.key("custom/" + data.name), data.getWorldType());
+                        WorldTypeFXDispatcher.getInstance().addDispatch(data.getWorldType(), data.properties.worldTypeFX);
                         DimensionCustom dim = new DimensionCustom(data);
                         Dimension.registerDimension(data.id, dim);
                     }

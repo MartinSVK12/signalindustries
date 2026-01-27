@@ -5,11 +5,11 @@ import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.generate.chunk.ChunkGenerator;
 import net.minecraft.core.world.type.WorldType;
 
-public class WorldTypeCustom extends WorldType {
+public class WorldTypeWrapper extends WorldType {
 
     public CustomDimensionData data;
 
-    public WorldTypeCustom(CustomDimensionData data) {
+    public WorldTypeWrapper(CustomDimensionData data) {
         super(data.getWorldTypeProperties());
         this.data = data;
     }

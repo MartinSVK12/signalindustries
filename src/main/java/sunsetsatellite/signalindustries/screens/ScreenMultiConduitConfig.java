@@ -153,7 +153,7 @@ public class ScreenMultiConduitConfig extends Screen {
     }
 
     protected void drawGuiContainerForegroundLayer() {
-        font.drawString("Configure: Multi Conduit", 45, 6, 0xFF404040);
+        font.drawString("Configure: Multi Conduit", 30, 6, 0xFF404040);
         font.drawString("I/O", 78, 70, 0xFF404040);
         font.drawString("Conduit", 128, 70, 0xFF404040);
         font.drawString("Y+", 26, 22, 0xFFFFFFFF);

@@ -89,9 +89,9 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
         if (!button.enabled) return;
 
         if (button == itemIoButton) {
-            mc.displayScreen(new ScreenItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
+            mc.displayScreen(new ScreenVisualItemIOConfig(mc.thePlayer, fluidSlots, this, tile));
         } else if (button == fluidIoButton) {
-            mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
+            mc.displayScreen(new ScreenVisualFluidIOConfig(mc.thePlayer, fluidSlots, this, tile));
         }
 
         if (button.id == 2) {

@@ -31,7 +31,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 //TODO: reimplement catalyst energy support
-public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, IScreenActionListener, /*IEnergy, IEnergySource, IEnergySink,*/ ISupportsMultiparts {
+public class TileEntityMultiConduit extends TileEntityFluidContainer implements INamedTileEntity, IMultiConduit, /*IConduitTile,*/ IScreenActionListener, /*IEnergy, IEnergySource, IEnergySink,*/ ISupportsMultiparts {
     public IConduitBlock[] conduits = new IConduitBlock[4];
     public HashMap<Direction, Integer> conduitConnections = (HashMap<Direction, Integer>) Catalyst.mapOf(Direction.values(), Catalyst.arrayFill(new Integer[Direction.values().length], -1));
 
@@ -501,4 +501,32 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
     public HashMap<Direction, Multipart> getParts() {
         return parts;
     }
+/*
+    @Override
+    public ConduitCapability getConduitCapability() {
+        if(supports(ConduitCapability.RES_NETWORK)) return ConduitCapability.RES_NETWORK;
+        return null;
+    }
+
+    @Override
+    public boolean isConnected(Direction direction) {
+        if(worldObj == null) return false;
+        return direction.getTileEntity(worldObj,this) instanceof TileEntityMultiConduit;
+    }
+
+    @Override
+    public void networkChanged(Network network) {
+
+    }
+
+    @Override
+    public void removedFromNetwork(Network network) {
+
+    }
+
+    @Override
+    public NetworkType getType() {
+        if(supports(ConduitCapability.RES_NETWORK)) return NetworkType.RES_NETWORK;
+        return null;
+    }*/
 }

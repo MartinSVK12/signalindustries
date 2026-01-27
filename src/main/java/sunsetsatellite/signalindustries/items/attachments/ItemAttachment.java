@@ -16,7 +16,7 @@ import java.util.List;
 
 public abstract class ItemAttachment extends Item implements IAttachment, ICustomDescription {
 
-    List<AttachmentPoint> attachmentPoints;
+    public final List<AttachmentPoint> attachmentPoints;
 
     public ItemAttachment(String translationKey, String namespaceId, int id, List<AttachmentPoint> attachmentPoints) {
         super(translationKey, namespaceId, id);

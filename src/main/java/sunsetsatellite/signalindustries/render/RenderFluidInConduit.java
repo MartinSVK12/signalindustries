@@ -56,7 +56,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
         BlockModel<?> model = null;
         if (fluidId != -1) {
             Block<?> fluidBlock = Blocks.getBlock(fluidId);
-            blockRenderer = new RenderBlocks(new HologramWorld(Catalyst.listOf(new BlockInstance(fluidBlock, new Vec3i(), 0, null))));
+            blockRenderer = new RenderBlocks(new HologramWorld((ArrayList<BlockInstance>) Catalyst.listOf(new BlockInstance(fluidBlock, new Vec3i(), 0, null))));
             model = BlockModelDispatcher.getInstance().getDispatch(fluidBlock);
         }
 
