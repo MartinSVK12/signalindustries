@@ -1166,7 +1166,7 @@
       }
     ],
     "result": {
-      "key": "tile.signalindustries.reinforced.dilithiumStabilizer",
+      "key": "tile.signalindustries.reinforced.stabilizer",
       "amount": 1,
       "meta": 0
     },
