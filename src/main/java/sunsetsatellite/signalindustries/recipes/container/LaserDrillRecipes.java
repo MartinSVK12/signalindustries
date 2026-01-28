@@ -23,12 +23,12 @@ public class LaserDrillRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
     public void addRecipes(RecipeGroup<RecipeEntryMachineRandomOutput> group) {
         WeightedRandomBag<WeightedRandomLootObject> bag = new WeightedRandomBag<>();
         bag.addEntry(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 3), 29);
-        bag.addEntry(new WeightedRandomLootObject(Items.ORE_RAW_GOLD.getDefaultStack(), 3), 8);
-        bag.addEntry(new WeightedRandomLootObject(Items.COAL.getDefaultStack(), 3), 32);
+        bag.addEntry(new WeightedRandomLootObject(Items.ORE_RAW_GOLD.getDefaultStack(), 3), 11);
+        bag.addEntry(new WeightedRandomLootObject(Items.COAL.getDefaultStack(), 3), 30);
         bag.addEntry(new WeightedRandomLootObject(Items.DUST_REDSTONE.getDefaultStack(), 3 * 4, 3 * 6), 12);
         bag.addEntry(new WeightedRandomLootObject(new ItemStack(Items.DYE, 1, DyeColor.BLUE.itemMeta), 3 * 4, 3 * 9), 3);
-        bag.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 3), 1);
-        bag.addEntry(new WeightedRandomLootObject(SIItems.rawSignalumCrystal.getDefaultStack(), 3 * 2, 3 * 4), 15);
+        bag.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 3), 3);
+        bag.addEntry(new WeightedRandomLootObject(SIItems.rawSignalumCrystal.getDefaultStack(), 3 * 2, 3 * 4), 12);
         WeightedRandomBag<WeightedRandomLootObject> bagNether = new WeightedRandomBag<>();
         bagNether.addEntry(new WeightedRandomLootObject(Items.NETHERCOAL.getDefaultStack(), 3), 3);
         bagNether.addEntry(new WeightedRandomLootObject(Items.DUST_GLOWSTONE.getDefaultStack(), 3 * 4), 1);

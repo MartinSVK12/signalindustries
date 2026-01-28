@@ -1,11 +1,15 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
 import com.mojang.nbt.tags.CompoundTag;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
+import net.minecraft.core.util.helper.DyeColor;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachine;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
@@ -150,5 +154,61 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                         new RecipeProperties(50, 20, 9, Tier.PROTOTYPE, false)
                 )
         );
+        group.register(
+                "redstone_to_item",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 500)),
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.BLOCK_REDSTONE, 1))
+                        },
+                        new ItemStack(Items.DUST_REDSTONE, 9),
+                        new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
+                )
+        );
+        group.register(
+                "signalite_to_item",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 500)),
+                                new RecipeExtendedSymbol(new ItemStack(SIBlocks.rawCrystalBlock, 1))
+                        },
+                        new ItemStack(SIItems.rawSignalumCrystal, 9),
+                        new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
+                )
+        );
+        group.register(
+                "lapis_to_item",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 500)),
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.BLOCK_LAPIS, 1))
+                        },
+                        new ItemStack(Items.DYE, 9, DyeColor.BLUE.itemMeta),
+                        new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
+                )
+        );
+        group.register(
+                "nether_coal_to_item",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 500)),
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.BLOCK_NETHER_COAL, 1))
+                        },
+                        new ItemStack(Items.NETHERCOAL,8),
+                        new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
+                )
+        );
+        group.register(
+                "coal_to_item",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 500)),
+                                new RecipeExtendedSymbol(new ItemStack(Blocks.BLOCK_COAL, 1))
+                        },
+                        new ItemStack(Items.COAL, 8),
+                        new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
+                )
+        );
+
     }
 }

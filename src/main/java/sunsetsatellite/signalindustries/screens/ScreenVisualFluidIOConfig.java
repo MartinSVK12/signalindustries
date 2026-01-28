@@ -34,6 +34,7 @@ import turniplabs.halplibe.helper.network.NetworkHandler;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ScreenVisualFluidIOConfig extends Screen {
 
@@ -257,23 +258,25 @@ public class ScreenVisualFluidIOConfig extends Screen {
                 mc.displayScreen(new ScreenFluidIOConfig(mc.thePlayer, inventorySlots, this, tile));
             }
 
+            HashMap<Direction, Connection> fluidConnections = new HashMap<>(tile.fluidConnections);
+
             if (button.id == 1) {
                 for (Direction direction : Direction.values()) {
-                    tile.fluidConnections.replace(direction, Connection.INPUT);
+                    fluidConnections.replace(direction, Connection.INPUT);
                 }
                 currentButtonId = button.id;
             }
 
             if (button.id == 2) {
                 for (Direction direction : Direction.values()) {
-                    tile.fluidConnections.replace(direction, Connection.OUTPUT);
+                    fluidConnections.replace(direction, Connection.OUTPUT);
                 }
                 currentButtonId = button.id;
             }
 
             if (button.id == 3) {
                 for (Direction direction : Direction.values()) {
-                    tile.fluidConnections.replace(direction, Connection.NONE);
+                    fluidConnections.replace(direction, Connection.NONE);
                 }
                 currentButtonId = button.id;
             }
@@ -281,7 +284,7 @@ public class ScreenVisualFluidIOConfig extends Screen {
             if (EnvironmentHelper.isClientWorld() && currentButtonId != -1) {
                 for (Direction dir : Direction.values()) {
                     Vec3i position = tile.getPosition();
-                    Connection connection = tile.fluidConnections.get(dir);
+                    Connection connection = fluidConnections.get(dir);
                     int slot = tile.activeFluidSlots.get(dir);
                     NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.ITEM, slot, tile.getClass()));
                 }
