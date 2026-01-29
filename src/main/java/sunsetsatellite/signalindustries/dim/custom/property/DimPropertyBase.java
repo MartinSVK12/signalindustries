@@ -2,11 +2,11 @@ package sunsetsatellite.signalindustries.dim.custom.property;
 
 import com.mojang.nbt.tags.CompoundTag;
 
-public abstract class DimensionPropertyBase {
+public abstract class DimPropertyBase {
 
-    public DimensionPropertyBase(){}
+    public DimPropertyBase(){}
 
-    public DimensionPropertyBase(CompoundTag nbt) {
+    public DimPropertyBase(CompoundTag nbt) {
         readFromNbt(nbt);
     }
 

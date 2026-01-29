@@ -2,25 +2,30 @@ package sunsetsatellite.signalindustries.dim.custom.property;
 
 import com.mojang.nbt.tags.CompoundTag;
 
-public class DimensionPropertyString extends DimensionPropertyBase {
-    public String value;
+public class DimPropertyInt extends DimPropertyBase {
 
-    public DimensionPropertyString(CompoundTag nbt) {
+    public int value;
+
+    public DimPropertyInt(int value) {
+        this.value = value;
+    }
+
+    public DimPropertyInt(CompoundTag nbt) {
         super(nbt);
     }
 
     @Override
     public void readFromNbt(CompoundTag nbt) {
-        value = nbt.getString("Value");
+        value = nbt.getInteger("Value");
     }
 
     @Override
     public void writeToNbt(CompoundTag nbt) {
-        nbt.putString("Value", value);
+        nbt.putInt("Value", value);
     }
 
     @Override
-    public String get() {
+    public Integer get() {
         return value;
     }
 }

@@ -9,6 +9,7 @@ import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +28,25 @@ public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsM
         }
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
         if (tiered != null) {
-            fluidCapacity[0] = (int) Math.pow(2, tiered.getTier().ordinal()) * 1000;
-            transferSpeed = 20 * (tiered.getTier().ordinal() + 1);
+            Tier tier = tiered.getTier();
+            fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 1000;
+            switch (tier){
+                case PROTOTYPE:
+                    transferSpeed = 20;
+                    break;
+                case BASIC:
+                    transferSpeed = 100;
+                    break;
+                case REINFORCED:
+                    transferSpeed = 500;
+                    break;
+                case AWAKENED:
+                    transferSpeed = 1000;
+                    break;
+                case INFINITE:
+                    transferSpeed = Integer.MAX_VALUE;
+                    break;
+            }
         }
         super.tick();
     }

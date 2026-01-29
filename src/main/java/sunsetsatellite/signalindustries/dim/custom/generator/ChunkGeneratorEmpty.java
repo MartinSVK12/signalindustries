@@ -7,8 +7,8 @@ import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
 import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
 
 public class ChunkGeneratorEmpty extends ChunkGeneratorBase{
-    public ChunkGeneratorEmpty(CustomDimensionData data) {
-        super(data);
+    public ChunkGeneratorEmpty(CustomDimensionData data, CompoundTag tag) {
+        super(data, tag);
     }
 
     @Override

@@ -4,10 +4,14 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.world.weather.Weather;
 import net.minecraft.core.world.weather.Weathers;
 
-public class DimensionPropertyWeather extends DimensionPropertyBase {
+public class DimPropertyWeather extends DimPropertyBase {
     public Weather weather;
 
-    public DimensionPropertyWeather(CompoundTag nbt) {
+    public DimPropertyWeather(Weather weather){
+        this.weather = weather;
+    }
+
+    public DimPropertyWeather(CompoundTag nbt) {
         super(nbt);
     }
 

@@ -5,12 +5,17 @@ import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.world.season.Season;
 import net.minecraft.core.world.season.Seasons;
 
-public class DimensionPropertySeason extends DimensionPropertyBase {
+public class DimPropertySeason extends DimPropertyBase {
 
     public Season season;
     public int length;
 
-    public DimensionPropertySeason(CompoundTag nbt) {
+    public DimPropertySeason(Season season, int length) {
+        this.season = season;
+        this.length = length;
+    }
+
+    public DimPropertySeason(CompoundTag nbt) {
         super(nbt);
     }
 

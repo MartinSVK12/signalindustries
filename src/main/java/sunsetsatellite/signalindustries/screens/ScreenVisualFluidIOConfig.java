@@ -281,6 +281,10 @@ public class ScreenVisualFluidIOConfig extends Screen {
                 currentButtonId = button.id;
             }
 
+            if(EnvironmentHelper.isSinglePlayer()){
+                tile.fluidConnections = fluidConnections;
+            }
+
             if (EnvironmentHelper.isClientWorld() && currentButtonId != -1) {
                 for (Direction dir : Direction.values()) {
                     Vec3i position = tile.getPosition();

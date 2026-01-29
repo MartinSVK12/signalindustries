@@ -10,6 +10,7 @@ import net.minecraft.client.render.terrain.TerrainRenderer;
 import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.chunk.provider.ChunkProviderDynamic;
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.Registry;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
@@ -30,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.dim.custom.BiomeCustom;
 import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
 import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
 import sunsetsatellite.signalindustries.dim.custom.WorldTypeWrapper;
@@ -120,7 +122,15 @@ public abstract class MinecraftMixin {
         try {
             Map<Integer, Dimension> dimensionMap = ((IMutableDimensionListAccess) Dimension.OVERWORLD).getMutableDimensionList();
             //todo: might not be the best idea, probably remove them when player exists the level (with the save & quit button)
+            dimensionMap.forEach((id, dim) -> {
+                if (dim instanceof DimensionCustom) {
+                    for (BiomeCustom biome : ((DimensionCustom) dim).data.biomes) {
+                        Registries.BIOMES.unregister(SignalIndustries.key(biome.translationKey.replace("biome.","")));
+                    }
+                }
+            });
             dimensionMap.entrySet().removeIf(entry -> entry.getValue() instanceof DimensionCustom);
+
             Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
             while (iter.hasNext()) {
                 WorldType worldType = iter.next();
@@ -142,7 +152,6 @@ public abstract class MinecraftMixin {
                     if (tag instanceof CompoundTag) {
                         CompoundTag dimTag = (CompoundTag) tag;
                         CustomDimensionData data = new CustomDimensionData(dimTag);
-                        data.properties.test();
                         WorldTypes.register(SignalIndustries.key("custom/" + data.name), data.getWorldType());
                         WorldTypeFXDispatcher.getInstance().addDispatch(data.getWorldType(), data.properties.worldTypeFX);
                         DimensionCustom dim = new DimensionCustom(data);

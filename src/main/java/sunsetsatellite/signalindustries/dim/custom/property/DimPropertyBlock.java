@@ -6,17 +6,21 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.util.HardIllegalArgumentException;
 import net.minecraft.core.util.collection.NamespaceID;
 
-public class DimensionPropertyBlock extends DimensionPropertyBase {
+public class DimPropertyBlock extends DimPropertyBase {
     public Block<?> block;
 
-    public DimensionPropertyBlock(CompoundTag nbt) {
+    public DimPropertyBlock(Block<?> block) {
+        this.block = block;
+    }
+
+    public DimPropertyBlock(CompoundTag nbt) {
         super(nbt);
     }
 
     @Override
     public void readFromNbt(CompoundTag nbt) {
         try {
-            Blocks.blockMap.get(NamespaceID.getPermanent(nbt.getString("Block")));
+            block = Blocks.blockMap.get(NamespaceID.getPermanent(nbt.getString("Block")));
         } catch (HardIllegalArgumentException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +28,7 @@ public class DimensionPropertyBlock extends DimensionPropertyBase {
 
     @Override
     public void writeToNbt(CompoundTag nbt) {
-        nbt.putString("block", block.namespaceId().toString());
+        nbt.putString("Block", block.namespaceId().toString());
     }
 
     @Override

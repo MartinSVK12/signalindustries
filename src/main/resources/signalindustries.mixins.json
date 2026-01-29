@@ -22,6 +22,7 @@
     "PacketRespawnMixin",
     "PlayerMixin",
     "ProjectileArrowMixin",
+    "RegistriesMixin",
     "SaveHandlerBaseMixin",
     "SlotResultMixin",
     "SpawnerMobsMixin",

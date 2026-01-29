@@ -1,14 +1,17 @@
 package sunsetsatellite.signalindustries.dim.custom.property;
 
 import com.mojang.nbt.tags.CompoundTag;
-import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec4f;
 
-public class DimensionPropertyColor extends DimensionPropertyBase {
+public class DimPropertyColor extends DimPropertyBase {
 
     public Vec4f color;
 
-    public DimensionPropertyColor(CompoundTag nbt) {
+    public DimPropertyColor(Vec4f color) {
+        this.color = color;
+    }
+
+    public DimPropertyColor(CompoundTag nbt) {
         super(nbt);
     }
 

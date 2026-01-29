@@ -281,6 +281,10 @@ public class ScreenVisualItemIOConfig extends Screen {
                 currentButtonId = button.id;
             }
 
+            if(EnvironmentHelper.isSinglePlayer()){
+                tile.itemConnections = itemConnections;
+            }
+
             if (EnvironmentHelper.isClientWorld() && currentButtonId != -1) {
                 for (Direction dir : Direction.values()) {
                     Vec3i position = tile.getPosition();

@@ -2,10 +2,14 @@ package sunsetsatellite.signalindustries.dim.custom.property;
 
 import com.mojang.nbt.tags.CompoundTag;
 
-public class DimensionPropertyBoolean extends DimensionPropertyBase {
+public class DimPropertyBoolean extends DimPropertyBase {
     public boolean value;
 
-    public DimensionPropertyBoolean(CompoundTag nbt) {
+    public DimPropertyBoolean(boolean value) {
+        this.value = value;
+    }
+
+    public DimPropertyBoolean(CompoundTag nbt) {
         super(nbt);
     }
 

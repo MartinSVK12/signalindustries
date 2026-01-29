@@ -13,8 +13,8 @@ public class ChunkGeneratorFlat extends ChunkGeneratorBase {
 
     public List<Layers> layers = new ArrayList<>();
 
-    public ChunkGeneratorFlat(CustomDimensionData data) {
-        super(data);
+    public ChunkGeneratorFlat(CustomDimensionData data, CompoundTag tag) {
+        super(data, tag);
     }
 
     @Override

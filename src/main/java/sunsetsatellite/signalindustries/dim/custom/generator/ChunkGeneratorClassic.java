@@ -1,25 +1,37 @@
 package sunsetsatellite.signalindustries.dim.custom.generator;
 
 import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.ListTag;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
+import net.minecraft.core.world.generate.LargeFeature;
 import net.minecraft.core.world.generate.chunk.ChunkGeneratorResult;
 import net.minecraft.core.world.noise.CombinedPerlinNoise;
 import net.minecraft.core.world.noise.PerlinNoise;
 import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
+import sunsetsatellite.signalindustries.dim.custom.DimensionRegistries;
+import sunsetsatellite.signalindustries.dim.custom.surface.SurfaceGeneratorBase;
+import sunsetsatellite.signalindustries.dim.custom.surface.SurfaceGeneratorEmpty;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChunkGeneratorClassic extends ChunkGeneratorBase {
 
-    private CombinedPerlinNoise combinedA;
-    private CombinedPerlinNoise combinedB;
-    private CombinedPerlinNoise combinedC;
-    private CombinedPerlinNoise combinedD;
-    private PerlinNoise octavesA;
-    private PerlinNoise octavesB;
+    public CombinedPerlinNoise combinedA;
+    public CombinedPerlinNoise combinedB;
+    public CombinedPerlinNoise combinedC;
+    public CombinedPerlinNoise combinedD;
+    public PerlinNoise octavesA;
+    public PerlinNoise octavesB;
 
-    public ChunkGeneratorClassic(CustomDimensionData data) {
-        super(data);
+    public SurfaceGeneratorBase sg;
+    public final List<LargeFeature> largeFeatures = new ArrayList<>();
+
+    public ChunkGeneratorClassic(CustomDimensionData data, CompoundTag tag) {
+        super(data, tag);
     }
 
     @Override
@@ -31,6 +43,8 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
         this.combinedD = new CombinedPerlinNoise(new PerlinNoise(seed, 8, 48), new PerlinNoise(seed, 8, 56));
         this.octavesA = new PerlinNoise(seed, 6, 64);
         this.octavesB = new PerlinNoise(seed, 8, 70);
+
+        sg.init(world);
     }
 
     @Override
@@ -103,16 +117,34 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
             }
         }
 
+        if(sg != null){
+            sg.generateSurface(chunk, result);
+        }
+
         return result;
     }
 
     @Override
     public void readFromNbt(CompoundTag tag) {
-
+        sg = this.data.getProperty("SurfaceGenerator", tag, DimensionRegistries.SURFACE_GENERATORS);
+        if(sg == null){
+            sg = new SurfaceGeneratorEmpty(this.data, new CompoundTag());
+        }
+        if(tag.containsKey("LargeFeatures")){
+            ListTag features = tag.getList("LargeFeatures");
+            //TODO:
+        }
     }
 
     @Override
     public void writeToNbt(CompoundTag tag) {
+        CompoundTag sgTag = new CompoundTag();
 
+        sgTag.putString("Type", DimensionRegistries.SURFACE_GENERATORS.getKey(sg.getClass()));
+        CompoundTag data = new CompoundTag();
+        sg.writeToNbt(data);
+        sgTag.put("Data", data);
+
+        tag.putCompound("SurfaceGenerator", sgTag);
     }
 }

@@ -8,16 +8,16 @@ import net.minecraft.core.world.biome.provider.BiomeProvider;
 import net.minecraft.core.world.biome.provider.BiomeProviderOverworld;
 import net.minecraft.core.world.biome.provider.BiomeProviderSingleBiome;
 
-public class DimensionPropertyBiome extends DimensionPropertyBase {
+public class DimPropertyBiome extends DimPropertyBase {
 
     public boolean single = false;
     public Biome singleBiome;
 
-    public DimensionPropertyBiome(CompoundTag nbt) {
+    public DimPropertyBiome(CompoundTag nbt) {
         super(nbt);
     }
 
-    public DimensionPropertyBiome(Biome biome) {
+    public DimPropertyBiome(Biome biome) {
         single = true;
         singleBiome = biome;
     }
@@ -35,10 +35,10 @@ public class DimensionPropertyBiome extends DimensionPropertyBase {
     @Override
     public void writeToNbt(CompoundTag nbt) {
         if(single){
-            nbt.putBoolean("single", true);
-            nbt.putString("biome", Registries.BIOMES.getKey(singleBiome));
+            nbt.putBoolean("Single", true);
+            nbt.putString("Biome", Registries.BIOMES.getKey(singleBiome));
         } else {
-            nbt.putBoolean("single", false);
+            nbt.putBoolean("Single", false);
         }
     }
 
