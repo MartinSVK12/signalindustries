@@ -288,6 +288,10 @@ public class CustomDimensionData {
     }
 
     public <T> T getProperty(String key, CompoundTag tag, Class<?> clazz){
+        return getProperty(key, tag, clazz, null);
+    }
+
+    public <T> T getProperty(String key, CompoundTag tag, Class<?> clazz, T defaultValue){
         if(tag.containsKey(key)){
             try {
                 DimPropertyBase o = (DimPropertyBase) clazz.getDeclaredConstructor(CompoundTag.class).newInstance(tag.getCompound(key));
@@ -297,7 +301,7 @@ public class CustomDimensionData {
                 throw new RuntimeException(e);
             }
         }
-        return null;
+        return defaultValue;
     }
 
     public <T> T getProperty(String key, CompoundTag tag, Registry<Class<? extends T>> registry){

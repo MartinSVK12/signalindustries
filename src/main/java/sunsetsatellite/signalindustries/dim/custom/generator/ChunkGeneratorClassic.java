@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.dim.custom.generator;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
+import com.mojang.nbt.tags.Tag;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.Chunk;
@@ -28,10 +29,13 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
     public PerlinNoise octavesB;
 
     public SurfaceGeneratorBase sg;
-    public final List<LargeFeature> largeFeatures = new ArrayList<>();
+    public List<LargeFeature> largeFeatures;
 
     public ChunkGeneratorClassic(CustomDimensionData data, CompoundTag tag) {
         super(data, tag);
+        if(largeFeatures == null){
+            largeFeatures = new ArrayList<>();
+        }
     }
 
     @Override
@@ -121,6 +125,10 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
             sg.generateSurface(chunk, result);
         }
 
+        for (LargeFeature largeFeature : largeFeatures) {
+            largeFeature.generate(world, chunkX, chunkZ, result);
+        }
+
         return result;
     }
 
@@ -132,7 +140,22 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
         }
         if(tag.containsKey("LargeFeatures")){
             ListTag features = tag.getList("LargeFeatures");
-            //TODO:
+            for (Tag<?> feature : features) {
+                CompoundTag featureTag = ((CompoundTag) feature);
+                String id = featureTag.getString("Type");
+                Class<? extends LargeFeature> largefeatureClass = DimensionRegistries.LARGE_FEATURES.getItem(id);
+                try {
+                    if(largeFeatures == null){
+                        largeFeatures = new ArrayList<>();
+                    }
+                    LargeFeature largeFeature = largefeatureClass.getDeclaredConstructor().newInstance();
+                    largeFeatures.add(largeFeature);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
         }
     }
 
@@ -145,6 +168,14 @@ public class ChunkGeneratorClassic extends ChunkGeneratorBase {
         sg.writeToNbt(data);
         sgTag.put("Data", data);
 
+        ListTag lfTag = new ListTag();
+        for(LargeFeature lf : largeFeatures){
+            CompoundTag inner = new CompoundTag();
+            inner.putString("Type", DimensionRegistries.LARGE_FEATURES.getKey(lf.getClass()));
+            lfTag.addTag(inner);
+        }
+
+        tag.putList("LargeFeatures", lfTag);
         tag.putCompound("SurfaceGenerator", sgTag);
     }
 }

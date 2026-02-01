@@ -2,8 +2,14 @@ package sunsetsatellite.signalindustries.dim.custom;
 
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.Registry;
+import net.minecraft.core.world.generate.CavesLargeFeature;
+import net.minecraft.core.world.generate.LargeFeature;
 import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorBase;
+import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorCustom;
 import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorEmpty;
+import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorWorld;
+import sunsetsatellite.signalindustries.dim.custom.feature.WorldFeatureBase;
+import sunsetsatellite.signalindustries.dim.custom.feature.WorldFeatureOre;
 import sunsetsatellite.signalindustries.dim.custom.generator.ChunkGeneratorBase;
 import sunsetsatellite.signalindustries.dim.custom.generator.ChunkGeneratorClassic;
 import sunsetsatellite.signalindustries.dim.custom.generator.ChunkGeneratorEmpty;
@@ -18,6 +24,8 @@ public class DimensionRegistries {
     public static final Registry<Class<? extends ChunkGeneratorBase>> CHUNK_GENERATORS = new Registry<>();
     public static final Registry<Class<? extends ChunkDecoratorBase>> CHUNK_DECORATORS = new Registry<>();
     public static final Registry<Class<? extends SurfaceGeneratorBase>> SURFACE_GENERATORS = new Registry<>();
+    public static final Registry<Class<? extends LargeFeature>> LARGE_FEATURES = new Registry<>();
+    public static final Registry<Class<? extends WorldFeatureBase>> FEATURES = new Registry<>();
 
     public static boolean init = false;
 
@@ -27,6 +35,8 @@ public class DimensionRegistries {
             initChunkGenerators();
             initChunkDecorators();
             initSurfaceGenerators();
+            initLargeFeatures();
+            initFeatures();
             Registries.getInstance().register("signalindustries:dim_properties", DIM_PROPERTIES);
             Registries.getInstance().register("signalindustries:chunk_generators", CHUNK_GENERATORS);
             Registries.getInstance().register("signalindustries:chunk_decorators", CHUNK_DECORATORS);
@@ -59,6 +69,8 @@ public class DimensionRegistries {
     private static void initChunkDecorators() {
         if(!init){
             CHUNK_DECORATORS.register("signalindustries:empty", ChunkDecoratorEmpty.class);
+            CHUNK_DECORATORS.register("signalindustries:custom", ChunkDecoratorCustom.class);
+            CHUNK_DECORATORS.register("minecraft:overworld", ChunkDecoratorWorld.class);
         }
     }
 
@@ -67,6 +79,18 @@ public class DimensionRegistries {
             SURFACE_GENERATORS.register("signalindustries:empty", SurfaceGeneratorEmpty.class);
             SURFACE_GENERATORS.register("signalindustries:overworld", SurfaceGeneratorOverworld.class);
             SURFACE_GENERATORS.register("signalindustries:retro", SurfaceGeneratorRetro.class);
+        }
+    }
+
+    private static void initLargeFeatures() {
+        if(!init){
+            LARGE_FEATURES.register("minecraft:caves", CavesLargeFeature.class);
+        }
+    }
+
+    private static void initFeatures() {
+        if(!init){
+            FEATURES.register("signalindustries:ore", WorldFeatureOre.class);
         }
     }
 }
