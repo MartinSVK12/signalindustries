@@ -18,7 +18,7 @@ import java.util.Random;
 public class BasicQuestChapter extends QuestChapterPage {
 
     public BasicQuestChapter() {
-        super("signalindustries:basic");
+        super("signalindustries:basic", 1);
     }
 
     @Override

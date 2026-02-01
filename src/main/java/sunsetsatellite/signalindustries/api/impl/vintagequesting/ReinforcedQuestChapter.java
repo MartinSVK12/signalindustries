@@ -18,7 +18,7 @@ import java.util.Random;
 public class ReinforcedQuestChapter extends QuestChapterPage {
 
     public ReinforcedQuestChapter() {
-        super("signalindustries:reinforced");
+        super("signalindustries:reinforced", 2);
     }
 
     @Override

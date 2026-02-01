@@ -30,9 +30,9 @@ import static sunsetsatellite.signalindustries.SIItems.*;
 
 public class VintageQuestingSIPlugin {
 
-    public static final QuestChapterPage PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
-    public static final QuestChapterPage BASIC_CHAPTER = new BasicQuestChapter();
-    public static final QuestChapterPage REINFORCED_CHAPTER = new ReinforcedQuestChapter();
+    public static QuestChapterPage PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
+    public static QuestChapterPage BASIC_CHAPTER = new BasicQuestChapter();
+    public static QuestChapterPage REINFORCED_CHAPTER = new ReinforcedQuestChapter();
 
     public void initializePlugin() {
 
@@ -64,6 +64,18 @@ public class VintageQuestingSIPlugin {
 
         VintageQuesting.LOGGER.info("Loaded quests from: signalindustries!");
 
+    }
+
+    public void reload(){
+        VintageQuesting.CHAPTERS.unregister(PROTOTYPE_CHAPTER.getId());
+        VintageQuesting.CHAPTERS.unregister(BASIC_CHAPTER.getId());
+        VintageQuesting.CHAPTERS.unregister(REINFORCED_CHAPTER.getId());
+
+        PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
+        BASIC_CHAPTER = new BasicQuestChapter();
+        REINFORCED_CHAPTER = new ReinforcedQuestChapter();
+
+        initializePlugin();
     }
 
     public static List<QuestTemplate> addPrototypeQuests() {
@@ -459,6 +471,14 @@ public class VintageQuestingSIPlugin {
                 listOf(basicCore), basicSmelter,
                 -1,
                 0);
+        QuestTemplate bonsaiPot = simpleQuest("basicBonsaiPot", basicBonsai,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(basicBonsai, 1)
+                        )),
+                listOf(basicCore, crystalAlloyPlates), basicChamber,
+                -1,
+                0);
         QuestTemplate basicChip = simpleQuest("basicChip", crystalChip,
                 zip(listOf("retrieval"),
                         listOf(
@@ -661,6 +681,42 @@ public class VintageQuestingSIPlugin {
                 listOf(steelPlates, crystalAlloyPlates, saturatedAlloyPlate), saturatedAlloyPlate,
                 1,
                 0);
+        QuestTemplate romChips = simpleQuest("romChips", romChipScan,
+                zip(listOf("retrieval", "retrieval2", "retrieval3", "retrieval4"),
+                        listOf(
+                                new ItemStack(romChipBoost, 1),
+                                new ItemStack(romChipScan, 1),
+                                new ItemStack(romChipProjectile, 1),
+                                new ItemStack(romChipShield, 1)
+                        )),
+                listOf(), basicDrill,
+                5,
+                0).setTaskLogic(Logic.OR);
+        QuestTemplate triggers = simpleQuest("triggers", nullTrigger,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(nullTrigger, 1)
+                        )),
+                listOf(crystalAlloyPlates, saturatedAlloy, basicEnergyCore, romChips), romChips,
+                0,
+                1);
+        QuestTemplate programmer = simpleQuest("programmer", basicProgrammer,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(basicProgrammer, 1)
+                        )),
+                listOf(basicCore, steelPlates, saturatedAlloyPlate, basicEnergyCore, romChips, triggers), triggers,
+                0,
+                1);
+        QuestTemplate harness = simpleQuest("powerHarness", signalumPrototypeHarness,
+                zip(listOf("retrieval", "retrieval2"),
+                        listOf(
+                                new ItemStack(signalumPrototypeHarness, 1),
+                                new ItemStack(signalumPrototypeHarnessGoggles, 1)
+                        )),
+                listOf(basicEnergyCore, crystalAlloyPlates, romChips, triggers, programmer), programmer,
+                2,
+                -1);
         QuestTemplate signaliteAlloyCoil = simpleQuest("signaliteAlloyCoil", signalumAlloyCoil,
                 zip(listOf("retrieval"),
                         listOf(
@@ -714,6 +770,14 @@ public class VintageQuestingSIPlugin {
                 listOf(crystalAlloyPlates), basicEnergyConnector,
                 1,
                 0);
+        QuestTemplate greenhouse = simpleQuest("greenhouse", basicGreenhouse,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(basicGreenhouse, 1)
+                        )),
+                listOf(basicCasing, basicEnergyConnector, basicItemInput, basicItemOutput), basicEnergyConnector,
+                0,
+                2);
         QuestTemplate redstoneBooster = simpleQuest("redstoneBooster", SIBlocks.redstoneBooster,
                 zip(listOf("retrieval"),
                         listOf(
@@ -721,7 +785,7 @@ public class VintageQuestingSIPlugin {
                         )),
                 listOf(basicCore, basicEnergyCore), basicEnergyCore,
                 -1 - 1,
-                1);
+                0);
         return listOf(
                 emptyCrystal, steel, crystalDust, crystalAlloy, crystalAlloyPlates, meteorCompass,
                 steelPlates, basicCore, basicExtractor, basicCollector, basicCrusher, netherCoalDust,
@@ -730,9 +794,10 @@ public class VintageQuestingSIPlugin {
                 basicChip, basicEnergyCore, basicEnergyCell, basicFluidTank, basicInserter,
                 basicItemConduit, basicRestrictItemConduit, basicSensorItemConduit, basicContainer,
                 basicEnergyConduit, basicFluidConduit, basicAssembler, basicDynamo, basicCatalystConduit,
-                basicInjector, covers, conveyorCover, pumpCover, redstoneCover, switchCover, voidCover,
+                basicInjector, bonsaiPot, covers, conveyorCover, pumpCover, redstoneCover, switchCover, voidCover,
                 glowingObsidian, basicDrill, signaliteAlloyCoil, basicInductionSmelter, basicEnergyConnector,
-                basicItemInput, basicItemOutput, basicCasing, redstoneBooster
+                basicItemInput, basicItemOutput, basicCasing, redstoneBooster, romChips, programmer,
+                triggers, harness, greenhouse
         );
     }
 
@@ -992,6 +1057,10 @@ public class VintageQuestingSIPlugin {
                 listOf(pulsar), pulsar,
                 1,
                 0);
+        QuestTemplate eternity = new QuestTemplate("signalindustries:eternity", "quest.signalindustries.eternity", realityFabric, Logic.AND, Logic.AND)
+                .setTasks(listOf(new VisitDimensionTaskTemplate("signalindustries:eternity/visit", SIDimensions.ETERNITY)))
+                .setPreRequisites(listOf(pulsar, warpOrb))
+                .setY(pulsar, -1).setX(pulsar, -1);
         QuestTemplate reactor = simpleQuest("reactor", signalumReactorCore,
                 zip(listOf("retrieval"),
                         listOf(
@@ -999,11 +1068,15 @@ public class VintageQuestingSIPlugin {
                         )),
                 listOf(reinforcedEnergyCore, saturatedKey, reinforcedItemInput, reinforcedItemOutput, reinforcedEnergyConnector, reinforcedCasing), saturatedKey,
                 -1,
-                1);//.setWidth(1).setHeight(1).setIconSize(2);
-        QuestTemplate eternity = new QuestTemplate("signalindustries:eternity", "quest.signalindustries.eternity", realityFabric, Logic.AND, Logic.AND)
-                .setTasks(listOf(new VisitDimensionTaskTemplate("signalindustries:eternity/visit", SIDimensions.ETERNITY)))
-                .setPreRequisites(listOf(pulsar, warpOrb))
-                .setY(pulsar, -1).setX(pulsar, -1);//.setWidth(1).setHeight(1).setIconSize(2)
+                1);
+        QuestTemplate centrifuge = simpleQuest("centrifuge", reinforcedCentrifuge,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(reinforcedCentrifuge, 1)
+                        )),
+                listOf(reinforcedCore), reactor,
+                0,
+                1);
 
         return listOf(
                 reinforcedAlloy, reinforcedAlloyPlates, reinforcedCore, signaliteGear, reinforcedCutter,
@@ -1011,7 +1084,7 @@ public class VintageQuestingSIPlugin {
                 builder, blueprint, dimensionalOre, warpOrb, reinforcedEnergyConnector, reinforcedCasing,
                 reinforcedFluidOutput, reinforcedFluidInput, reinforcedItemOutput, reinforcedItemInput,
                 reinforcedGrating, reinforcedCasing2, booster, stabilizer, reinforcedWrathBeacon, eclipse,
-                dilithiumChip, dimensionalChip, anchor, pulsar, pulsarAttachment, eternity, saturatedKey, reactor
+                dilithiumChip, dimensionalChip, anchor, pulsar, pulsarAttachment, eternity, saturatedKey, reactor, centrifuge
         );
     }
 

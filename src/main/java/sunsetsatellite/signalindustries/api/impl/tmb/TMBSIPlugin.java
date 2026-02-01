@@ -1,9 +1,7 @@
 package sunsetsatellite.signalindustries.api.impl.tmb;
 
-import sunsetsatellite.signalindustries.SIBlocks;
-import sunsetsatellite.signalindustries.SIItems;
-import sunsetsatellite.signalindustries.SIRecipes;
-import sunsetsatellite.signalindustries.SignalIndustries;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
+import sunsetsatellite.signalindustries.*;
 import sunsetsatellite.signalindustries.api.impl.tmb.category.*;
 import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingAlloySmelterRecipeCategory;
 import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingCrusherRecipeCategory;
@@ -12,6 +10,7 @@ import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingPlate
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import turing.tmb.TMB;
 import turing.tmb.TypedIngredient;
 import turing.tmb.api.ITMBPlugin;
@@ -144,5 +143,13 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
     public void onGatherPlugins(boolean isReload) {
         TMB.LOGGER.info("Loading plugin: " + this.getClass().getSimpleName() + " from " + SignalIndustries.MOD_ID);
         TMB.registerPlugin(this);
+        if(isReload){
+            if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+                if(SIConfig.config.getBoolean("Other.enableQuests")){
+                    new VintageQuestingSIPlugin().reload();
+                    SignalIndustries.LOGGER.info("Quests reloaded!");
+                }
+            }
+        }
     }
 }
