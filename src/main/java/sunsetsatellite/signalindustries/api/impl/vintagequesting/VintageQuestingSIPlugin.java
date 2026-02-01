@@ -33,6 +33,7 @@ public class VintageQuestingSIPlugin {
     public static QuestChapterPage PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
     public static QuestChapterPage BASIC_CHAPTER = new BasicQuestChapter();
     public static QuestChapterPage REINFORCED_CHAPTER = new ReinforcedQuestChapter();
+    public static QuestChapterPage AWAKENED_CHAPTER = new AwakenedQuestChapter();
 
     public void initializePlugin() {
 
@@ -59,6 +60,13 @@ public class VintageQuestingSIPlugin {
             REINFORCED_CHAPTER.addQuest(quest);
         }
         for (Quest quest : REINFORCED_CHAPTER.getQuests()) {
+            quest.setupPrerequisites();
+        }
+
+        for (QuestTemplate quest : awakenedQuests) {
+            AWAKENED_CHAPTER.addQuest(quest);
+        }
+        for (Quest quest : AWAKENED_CHAPTER.getQuests()) {
             quest.setupPrerequisites();
         }
 
@@ -1041,6 +1049,14 @@ public class VintageQuestingSIPlugin {
                 listOf(warpOrb, stabilizer), warpOrb,
                 1,
                 -1);//.setWidth(1).setHeight(1).setIconSize(2);
+        QuestTemplate pulsarBlock = simpleQuest("pulsarBlock", SIBlocks.pulsarBlock,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(SIBlocks.pulsarBlock, 1)
+                        )),
+                listOf(reinforcedEnergyCore), reinforcedDrill,
+                -1,
+                -2 - 1);
         QuestTemplate pulsar = simpleQuest("pulsar", SIItems.pulsar,
                 zip(listOf("retrieval"),
                         listOf(
@@ -1061,12 +1077,20 @@ public class VintageQuestingSIPlugin {
                 .setTasks(listOf(new VisitDimensionTaskTemplate("signalindustries:eternity/visit", SIDimensions.ETERNITY)))
                 .setPreRequisites(listOf(pulsar, warpOrb))
                 .setY(pulsar, -1).setX(pulsar, -1);
+        QuestTemplate fuelCells = simpleQuest("fuelCells", fuelCell,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(fuelCell, 1)
+                        )),
+                listOf(reinforcedAlloyPlates), saturatedKey,
+                0,
+                1);
         QuestTemplate reactor = simpleQuest("reactor", signalumReactorCore,
                 zip(listOf("retrieval"),
                         listOf(
                                 new ItemStack(signalumReactorCore, 1)
                         )),
-                listOf(reinforcedEnergyCore, saturatedKey, reinforcedItemInput, reinforcedItemOutput, reinforcedEnergyConnector, reinforcedCasing), saturatedKey,
+                listOf(reinforcedEnergyCore, saturatedKey, reinforcedItemInput, reinforcedItemOutput, reinforcedEnergyConnector, reinforcedCasing, fuelCells), saturatedKey,
                 -1,
                 1);
         QuestTemplate centrifuge = simpleQuest("centrifuge", reinforcedCentrifuge,
@@ -1077,6 +1101,14 @@ public class VintageQuestingSIPlugin {
                 listOf(reinforcedCore), reactor,
                 0,
                 1);
+        QuestTemplate fragments = simpleQuest("awakenedFragments", awakenedSignalumFragment,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(awakenedSignalumFragment, 1)
+                        )),
+                listOf(centrifuge), centrifuge,
+                0,
+                1);
 
         return listOf(
                 reinforcedAlloy, reinforcedAlloyPlates, reinforcedCore, signaliteGear, reinforcedCutter,
@@ -1084,12 +1116,18 @@ public class VintageQuestingSIPlugin {
                 builder, blueprint, dimensionalOre, warpOrb, reinforcedEnergyConnector, reinforcedCasing,
                 reinforcedFluidOutput, reinforcedFluidInput, reinforcedItemOutput, reinforcedItemInput,
                 reinforcedGrating, reinforcedCasing2, booster, stabilizer, reinforcedWrathBeacon, eclipse,
-                dilithiumChip, dimensionalChip, anchor, pulsar, pulsarAttachment, eternity, saturatedKey, reactor, centrifuge
+                dilithiumChip, dimensionalChip, anchor, pulsarBlock, pulsar, pulsarAttachment, eternity, saturatedKey, fuelCells, reactor,
+                centrifuge, fragments
         );
     }
 
     public static List<QuestTemplate> addAwakenedQuests() {
-        return listOf();
+        QuestTemplate awakenedCrystal = new QuestTemplate("signalindustries:awakenedCrystal", "quest.signalindustries.awakenedCrystal", awakenedSignalumCrystal, Logic.AND, Logic.AND)
+                .setTasks(listOf(new RetrievalTaskTemplate("signalindustries:awakenedCrystal/retrieval", awakenedSignalumCrystal.getDefaultStack())))
+                .setPreRequisites(listOf(getQuest("awakenedFragments")));
+        return listOf(
+                awakenedCrystal
+        );
     }
 
     public static QuestTemplate simpleQuest(
