@@ -981,6 +981,14 @@ public class VintageQuestingSIPlugin {
                 listOf(reinforcedAlloyPlates, getQuest("signalumAlloyMesh")), reinforcedCasing,
                 -1,
                 0);
+        QuestTemplate glass = simpleQuest("reinforcedGlass", reinforcedGlass,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(reinforcedGlass, 1)
+                        )),
+                listOf(reinforcedAlloyPlates), reinforcedCasing,
+                -1,
+                -1);
         QuestTemplate booster = simpleQuest("booster", dilithiumBooster,
                 zip(listOf("retrieval"),
                         listOf(
@@ -1065,14 +1073,65 @@ public class VintageQuestingSIPlugin {
                 listOf(reinforcedEnergyCore), reinforcedDrill,
                 0,
                 -2 - 1);
+        QuestTemplate powerSuit = simpleQuest("powerSuit", signalumPowerSuitChestplate,
+                zip(listOf("retrieval", "retrieval2", "retrieval3", "retrieval4"),
+                        listOf(
+                                new ItemStack(signalumPowerSuitHelmet, 1),
+                                new ItemStack(signalumPowerSuitChestplate, 1),
+                                new ItemStack(signalumPowerSuitLeggings, 1),
+                                new ItemStack(signalumPowerSuitBoots, 1)
+                        )),
+                listOf(reinforcedEnergyCore, reinforcedAlloyPlates), builder,
+                5,
+                0);
+        QuestTemplate attachments = simpleQuest("attachments", attachmentPoint,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(attachmentPoint, 1)
+                        )),
+                listOf(powerSuit), powerSuit,
+                1,
+                0);
         QuestTemplate pulsarAttachment = simpleQuest("pulsarAttachment", SIItems.pulsarAttachment,
                 zip(listOf("retrieval"),
                         listOf(
                                 new ItemStack(SIItems.pulsarAttachment, 1)
                         )),
-                listOf(pulsar), pulsar,
+                listOf(pulsar, powerSuit), attachments,
                 1,
                 0);
+        QuestTemplate backpack = simpleQuest("backpack", reinforcedBackpack,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(reinforcedBackpack, 1)
+                        )),
+                listOf(attachments), attachments,
+                1,
+                1);
+        QuestTemplate nightVision = simpleQuest("nightVision", nightVisionLens,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(nightVisionLens, 1)
+                        )),
+                listOf(attachments), attachments,
+                1,
+                -1);
+        QuestTemplate wings = simpleQuest("wings", crystalWings,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(crystalWings, 1)
+                        )),
+                listOf(attachments), attachments,
+                1,
+                2);
+        QuestTemplate energyPack = simpleQuest("energyPack", extendedEnergyPack,
+                zip(listOf("retrieval"),
+                        listOf(
+                                new ItemStack(extendedEnergyPack, 1)
+                        )),
+                listOf(attachments), attachments,
+                1,
+                -2);
         QuestTemplate eternity = new QuestTemplate("signalindustries:eternity", "quest.signalindustries.eternity", realityFabric, Logic.AND, Logic.AND)
                 .setTasks(listOf(new VisitDimensionTaskTemplate("signalindustries:eternity/visit", SIDimensions.ETERNITY)))
                 .setPreRequisites(listOf(pulsar, warpOrb))
@@ -1085,12 +1144,31 @@ public class VintageQuestingSIPlugin {
                 listOf(reinforcedAlloyPlates), saturatedKey,
                 0,
                 1);
-        QuestTemplate reactor = simpleQuest("reactor", signalumReactorCore,
+        QuestTemplate ignitor = simpleQuest("ignitor", reinforcedIgnitor,
                 zip(listOf("retrieval"),
                         listOf(
-                                new ItemStack(signalumReactorCore, 1)
+                                new ItemStack(reinforcedIgnitor, 1)
                         )),
-                listOf(reinforcedEnergyCore, saturatedKey, reinforcedItemInput, reinforcedItemOutput, reinforcedEnergyConnector, reinforcedCasing, fuelCells), saturatedKey,
+                listOf(reinforcedCore), fuelCells,
+                -2,
+                0);
+        QuestTemplate reactor = simpleQuest("reactor", signalumReactorCore,
+                zip(listOf("retrieval", "retrieval2", "retrieval3", "retrieval4", "retrieval5",
+                                "retrieval6", "retrieval7", "retrieval8", "retrieval9", "retrieval10"),
+                        listOf(
+                                new ItemStack(signalumReactorCore, 1),
+                                new ItemStack(signalumAlloyCoil, 6),
+                                new ItemStack(SIBlocks.reinforcedCasing, 63),
+                                new ItemStack(reinforcedGlass, 73),
+                                new ItemStack(dilithiumStabilizer, 4),
+                                new ItemStack(reinforcedIgnitor, 5),
+                                new ItemStack(reinforcedConduit, 2),
+                                new ItemStack(SIBlocks.reinforcedEnergyConnector, 1),
+                                new ItemStack(reinforcedItemInputBus, 1),
+                                new ItemStack(reinforcedItemOutputBus, 1)
+                        )),
+                listOf(reinforcedEnergyCore, saturatedKey, reinforcedItemInput, reinforcedItemOutput,
+                        reinforcedEnergyConnector, reinforcedCasing, fuelCells, stabilizer, ignitor), saturatedKey,
                 -1,
                 1);
         QuestTemplate centrifuge = simpleQuest("centrifuge", reinforcedCentrifuge,
@@ -1113,11 +1191,13 @@ public class VintageQuestingSIPlugin {
         return listOf(
                 reinforcedAlloy, reinforcedAlloyPlates, reinforcedCore, signaliteGear, reinforcedCutter,
                 pureChip, reinforcedEnergyCore, reinforcedDrill, dilithiumOre, reinforcedTracker, dilithiumPlate,
-                builder, blueprint, dimensionalOre, warpOrb, reinforcedEnergyConnector, reinforcedCasing,
+                builder, blueprint, dimensionalOre, warpOrb, reinforcedEnergyConnector, reinforcedCasing, glass,
                 reinforcedFluidOutput, reinforcedFluidInput, reinforcedItemOutput, reinforcedItemInput,
                 reinforcedGrating, reinforcedCasing2, booster, stabilizer, reinforcedWrathBeacon, eclipse,
-                dilithiumChip, dimensionalChip, anchor, pulsarBlock, pulsar, pulsarAttachment, eternity, saturatedKey, fuelCells, reactor,
-                centrifuge, fragments
+                dilithiumChip, dimensionalChip, anchor, pulsarBlock, pulsar, powerSuit, attachments,
+                backpack, nightVision, wings, energyPack,
+                pulsarAttachment, eternity, saturatedKey,
+                fuelCells, ignitor, reactor, centrifuge, fragments
         );
     }
 
