@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
@@ -73,9 +74,14 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     public void processItem() {
         if (canProcess()) {
             ItemStack chip = itemContents[0];
-            ItemStack trigger = itemContents[1];
-            String[] key = chip.getItemKey().split("\\.");
-            trigger.getData().putString("ability", key[key.length - 1]);
+            if(itemContents[1].getItem() instanceof ItemTrigger){
+                ItemStack trigger = itemContents[1];
+                String[] key = chip.getItemKey().split("\\.");
+                trigger.getData().putString("ability", key[key.length - 1]);
+            } else if (SIItems.blankChip.equals(itemContents[1].getItem())) {
+                itemContents[1] = chip.copy();
+            }
+
             //Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
         }
     }
@@ -85,7 +91,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
             return false;
         } else {
             if (itemContents[0].getItem() instanceof ItemRomChip) {
-                if (itemContents[1].getItem() instanceof ItemTrigger) {
+                if (itemContents[1].getItem() instanceof ItemTrigger || SIItems.blankChip.equals(itemContents[1].getItem())) {
                     return !itemContents[1].getData().containsKey("ability");
                 }
             }
