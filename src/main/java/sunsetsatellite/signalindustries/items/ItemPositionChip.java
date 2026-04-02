@@ -10,6 +10,7 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.interfaces.IAcceptsPosition;
 
 public class ItemPositionChip extends Item implements ICustomDescription {
@@ -51,6 +52,13 @@ public class ItemPositionChip extends Item implements ICustomDescription {
         return true;
     }
 
+    public Vec3i getPosition(ItemStack stack){
+        if (stack.getData().containsKey("position")) {
+            CompoundTag position = stack.getData().getCompound("position");
+            return new Vec3i(position.getInteger("x"), position.getInteger("y"), position.getInteger("z"));
+        }
+        return null;
+    }
 
     @Override
     public String getDescription(ItemStack stack) {

@@ -27,6 +27,7 @@ public class SIMultiblocks extends DataInitializer {
     public static SIMultiblock wakingInfuser;
     public static SIMultiblock laserDrill;
     public static SIMultiblock greenhouse;
+    //public static SIMultiblock altarOfCreation;
 
     @Override
     public void init() {
@@ -60,6 +61,7 @@ public class SIMultiblocks extends DataInitializer {
         signalumReactor = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
         extractionManifold = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
         warpGate = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "warpGate", "warpGate", false, Tier.AWAKENED);
+        //altarOfCreation = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "altarOfCreation", "altarOfCreation", false, Tier.AWAKENED);
 
         CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
                 .loadJson("/assets/signalindustries/structures/greenhouse.json")
@@ -101,6 +103,7 @@ public class SIMultiblocks extends DataInitializer {
         Multiblock.multiblocks.put("warpGate", warpGate);
         Multiblock.multiblocks.put("laserDrill", laserDrill);
         Multiblock.multiblocks.put("greenhouse", greenhouse);
+        //Multiblock.multiblocks.put("altarOfCreation", altarOfCreation);
 
         LOGGER.info("Loaded {} multiblocks..", Multiblock.multiblocks.size());
         LOGGER.info("Loaded {} internal structures.", Structure.internalStructures.size());

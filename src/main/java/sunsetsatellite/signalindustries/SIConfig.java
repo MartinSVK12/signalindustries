@@ -110,6 +110,7 @@ public class SIConfig {
                 changed = true;
             }
 
+            //fixme: on some systems, the raw config cannot be read apparently so it is constantly overriding the config with the defaults?
             if (!rawConfig.contains("WorldGen.signaliteMeteorChance")) {
                 rawConfig.addEntry("WorldGen.signaliteMeteorChance", "Default is 512", 512);
                 changed = true;

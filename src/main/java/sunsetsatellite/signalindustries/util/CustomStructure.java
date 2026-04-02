@@ -16,6 +16,7 @@ import java.nio.file.Files;
 public class CustomStructure extends Structure {
 
     public World world;
+    public boolean hasOrigin = false;
 
     public CustomStructure(String id, World world, boolean placeAir, boolean replaceBlocks) {
         super(SignalIndustries.MOD_ID, new Class[]{}, id, new CompoundTag(), placeAir, replaceBlocks);
@@ -40,29 +41,34 @@ public class CustomStructure extends Structure {
             File file = world.getSaveHandler().getDataFile("struct_" + id);
             if (file == null) return;
             data = NbtIo.readCompressed(Files.newInputStream(file.toPath()));
+            hasOrigin = data.containsKey("Origin");
         } catch (IOException e) {
-            SignalIndustries.LOGGER.error("Failed to load structure: " + id);
+            SignalIndustries.LOGGER.error("Failed to load structure: {}", id);
             e.printStackTrace();
         }
     }
 
     @Override
     public BlockInstance getOrigin() {
+        if(hasOrigin) super.getOrigin();
         return null;
     }
 
     @Override
     public BlockInstance getOrigin(Vec3i origin) {
+        if(hasOrigin) super.getOrigin(origin);
         return null;
     }
 
     @Override
     public BlockInstance getOrigin(World world, Vec3i origin) {
+        if(hasOrigin) super.getOrigin(world, origin);
         return null;
     }
 
     @Override
     public BlockInstance getOrigin(Vec3i origin, Direction dir) {
+        if(hasOrigin) super.getOrigin(origin, dir);
         return null;
     }
 }

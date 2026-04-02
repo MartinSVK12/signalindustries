@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -12,7 +13,9 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.blocks.logic.BlockLogicCasing;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
+import sunsetsatellite.signalindustries.items.ItemPositionChip;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
@@ -45,7 +48,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
     }
 
     public TileEntityEncapsulator() {
-        itemContents = new ItemStack[2];
+        itemContents = new ItemStack[3];
         fluidContents = new FluidStack[1];
         fluidCapacity = new int[1];
         fluidCapacity[0] = (Short.MAX_VALUE * 2) + 1;
@@ -94,8 +97,23 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         if (item != null && (item.getItem().equals(SIItems.blueprint) || item.getItem().equals(SIItems.goldprint)) && worldObj != null) {
             itemContents[0] = null;
             itemContents[1] = item;
+            BlockInstance origin = null;
+            if(itemContents[2] != null && itemContents[2].getItem() instanceof ItemPositionChip){
+                ItemPositionChip chip = (ItemPositionChip) itemContents[2].getItem();
+                Vec3i position = chip.getPosition(itemContents[2]);
+                if(position != null && worldObj.getBlock(position.x, position.y, position.z) != null) {
+                    origin = new BlockInstance(position, worldObj);
+                }
+            }
             if (!structure.isEmpty()) {
-                CompoundTag data = StructureSaver.serialize("structure", structure, state == State.CUTTING);
+                if(origin != null) {
+                    structure.forEach((B)->{
+                        if(B.block.getLogic() instanceof BlockLogicCasing){
+                            B.meta = -1;
+                        }
+                    });
+                }
+                CompoundTag data = StructureSaver.serialize("structure", structure, state == State.CUTTING, origin);
                 UUID id = StructureSaver.save(data, worldObj);
                 if (id == null) return;
                 item.getData().putString("structure", id.toString());
@@ -238,6 +256,16 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
                 int centerY = startY + centerOffsetY;
                 int centerZ = startZ + centerOffsetZ;
 
+                if(itemContents[2] != null && itemContents[2].getItem() instanceof ItemPositionChip){
+                    ItemPositionChip chip = (ItemPositionChip) itemContents[2].getItem();
+                    Vec3i position = chip.getPosition(itemContents[2]);
+                    if(position != null && worldObj.getBlock(position.x, position.y, position.z) != null) {
+                        centerX = position.x;
+                        centerY = position.y;
+                        centerZ = position.z;
+                    }
+                }
+
                 size = new Vec3i(Math.abs(offsetX), Math.abs(offsetY), Math.abs(offsetZ));
 
                 for (int i = startX; i < endX; i++) {
@@ -262,7 +290,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         return heightMarker.exists(worldObj) && widthMarker.exists(worldObj) && depthMarker.exists(worldObj) && originMarker.exists(worldObj);
     }
 
-    private void reset() {
+    public void reset() {
         heightMarker = null;
         widthMarker = null;
         depthMarker = null;
@@ -274,6 +302,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
     @Override
     public void buttonClicked(int id, int button, int channel) {
         super.buttonClicked(id, button, channel);
+        reset();
 
         if (id == 2) {
             state = State.CUTTING;

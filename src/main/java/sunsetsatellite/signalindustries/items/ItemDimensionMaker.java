@@ -4,8 +4,6 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
-import sunsetsatellite.signalindustries.SignalIndustriesClient;
-import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class ItemDimensionMaker extends Item {
     public ItemDimensionMaker(String translationKey, String namespaceId, int id) {
@@ -14,9 +12,9 @@ public class ItemDimensionMaker extends Item {
 
     @Override
     public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
-        if(EnvironmentHelper.isSinglePlayer()){
+        /*if(EnvironmentHelper.isSinglePlayer()){
             return SignalIndustriesClient.createTestDimension();
-        }
+        }*/
 
         return itemstack; //warpOrb;
     }

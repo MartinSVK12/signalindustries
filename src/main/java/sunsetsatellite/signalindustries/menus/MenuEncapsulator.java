@@ -15,6 +15,7 @@ public class MenuEncapsulator extends MenuFluid {
 
         addSlot(new Slot(tile, 0, 148, 10));
         addSlot(new Slot(tile, 1, 148, 60));
+        addSlot(new Slot(tile, 2, 125, 60));
 
         for (int j = 0; j < 3; j++) {
             for (int i1 = 0; i1 < 9; i1++) {

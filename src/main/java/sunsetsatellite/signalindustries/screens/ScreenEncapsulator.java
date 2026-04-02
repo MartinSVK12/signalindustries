@@ -99,6 +99,7 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
         } else if (button.id == 3) {
             tile.state = TileEntityEncapsulator.State.CUTTING;
         }
+        tile.reset();
 
         if (EnvironmentHelper.isClientWorld()) {
             NetworkHandler.sendToServer(new PacketScreenAction(button.id, 0, 0, tile.getPosition(), tile.getClass()));

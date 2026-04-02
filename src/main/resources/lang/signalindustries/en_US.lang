@@ -1004,6 +1004,7 @@ multiblock.signalindustries.wakingPlateFormer.name=Waking Plate Former
 multiblock.signalindustries.wakingInfuser.name=Waking Infuser
 multiblock.signalindustries.laserDrill.name=Laser Drill
 multiblock.signalindustries.greenhouse.name=Greenhouse
+multiblock.signalindustries.altarOfCreation.name=Altar of Creation
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 gui.options.page.signalindustries=Signal Industries
