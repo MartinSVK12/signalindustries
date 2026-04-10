@@ -155,10 +155,13 @@ public class TileEntityHeatPump extends TileEntityTieredMachineBase implements I
                 if(block != null && Catalyst.listContains(Registries.ITEM_GROUPS.getItem("minecraft:stones"), new ItemStack(block, 1, currentBlock.meta), ItemStack::isItemEqual)){
                     worldObj.setBlockWithNotify(currentBlock.pos.x, currentBlock.pos.y, currentBlock.pos.z, Blocks.FLUID_LAVA_STILL.id());
                 }
+                if(block != null && Catalyst.listContains(Registries.ITEM_GROUPS.getItem("minecraft:cobblestones"), new ItemStack(block, 1, currentBlock.meta), ItemStack::isItemEqual)){
+                    worldObj.setBlockWithNotify(currentBlock.pos.x, currentBlock.pos.y, currentBlock.pos.z, Blocks.FLUID_LAVA_STILL.id());
+                }
             }
             if(currentRecipe == SIRecipes.HEAT_PUMP.getItem("freezing")){
                 Block<?> block = worldObj.getBlock(currentBlock.pos.x, currentBlock.pos.y, currentBlock.pos.z);
-                if(block != null && Catalyst.listContains(Registries.ITEM_GROUPS.getItem("minecraft:cobblestones"), new ItemStack(block, 1, currentBlock.meta), ItemStack::isItemEqual)) {
+                if(block != null && block == Blocks.FLUID_WATER_STILL) {
                     worldObj.setBlockWithNotify(currentBlock.pos.x, currentBlock.pos.y, currentBlock.pos.z, Blocks.ICE.id());
                 }
             }
