@@ -148,6 +148,10 @@ item.signalindustries.infernalEye.name=Infernal Eye
 item.signalindustries.infernalEye.desc=But they were, all of them, deceived for an even greater evil was made.
 item.signalindustries.infernalFragment.name=Infernal Fragment
 item.signalindustries.infernalFragment.desc=When the eclipse reaches totality, the monsters come out of hiding.
+item.signalindustries.heatingCoil.name=Heating Coil
+item.signalindustries.heatingCoil.desc=A coil of wire used for heating.
+item.signalindustries.coolingCoil.name=Cooling Coil
+item.signalindustries.coolingCoil.desc=A coil of wire used for cooling.
 
 item.signalindustries.clearKey.name=Clear Key
 item.signalindustries.clearKey.desc=Both a physical and metaphorical key to more power.
@@ -653,6 +657,16 @@ tile.signalindustries.basic.stoneworks.name=Basic Stoneworks
 tile.signalindustries.basic.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
 tile.signalindustries.reinforced.stoneworks.name=Reinforced Stoneworks
 tile.signalindustries.reinforced.stoneworks.desc=Mixes water and lava in various quantities creating various types of rocks.
+
+tile.signalindustries.basic.thermalChamber.name=Basic Thermal Chamber
+tile.signalindustries.basic.thermalChamber.desc=Melts or freezes materials put inside.
+tile.signalindustries.reinforced.thermalChamber.name=Reinforced Thermal Chamber
+tile.signalindustries.reinforced.thermalChamber.desc=Melts or freezes more materials put inside.
+
+tile.signalindustries.basic.heatPump.name=Basic Heat Pump
+tile.signalindustries.basic.heatPump.desc=Melts or freezes surrounding blocks.
+tile.signalindustries.reinforced.heatPump.name=Reinforced Heat Pump
+tile.signalindustries.reinforced.heatPump.desc=Melts or freezes surrounding blocks.
 
 tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
@@ -1311,6 +1325,8 @@ container.signalindustries.pump.name=Pump
 container.signalindustries.dynamo.name=Signalite Dynamo
 container.signalindustries.stabilizer.name=Stabilizer
 container.signalindustries.stoneworks.name=Stoneworks
+container.signalindustries.thermalChamber.name=Thermal Chamber
+container.signalindustries.heatPump.name=Heat Pump
 container.signalindustries.externalIo.name=External I/O
 container.signalindustries.assembler.name=Assembler
 container.signalindustries.inserter.name=Inserter

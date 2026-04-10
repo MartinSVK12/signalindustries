@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Signal;
+import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
@@ -145,6 +146,9 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityPedestal.class, id("pedestal"));
         EntityHelper.createTileEntity(TileEntitySITrommel.class, id("trommel"));
         EntityHelper.createTileEntity(TileEntityRedstoneClock.class, id("redstone_clock"));
+        EntityHelper.createTileEntity(TileEntityThermalChamber.class, id("thermal_chamber"));
+        EntityHelper.createTileEntity(TileEntityHeatPump.class, id("heat_pump"));
+
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");

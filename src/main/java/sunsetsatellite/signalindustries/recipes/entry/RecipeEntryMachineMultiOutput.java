@@ -309,6 +309,7 @@ public class RecipeEntryMachineMultiOutput extends RecipeEntrySI<RecipeExtendedS
                         .filter(Objects::nonNull)
                         .map(ItemStack::copy).collect(Collectors.toList())
         );
+        //fixme: doesn't work with item groups
         for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
             ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
             if (stack.isStackEqual(remainingRecipeStack)) {

@@ -2096,5 +2096,87 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_marker",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "PGP",
+      "GLG",
+      "PGP"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "key": "tile.glass",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "L",
+        "stack": {
+          "key": "tile.block.lapis",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.marker",
+      "amount": 2,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/basic_heat_pump",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "P",
+      "M",
+      "C"
+    ],
+    "symbols": [
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.basic.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.signalumAlloyCoil",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.basic.heatPump",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

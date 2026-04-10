@@ -70,6 +70,16 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(reinforcedIgnitor, () -> new BlockModelIgnitor(reinforcedIgnitor));
         ModelHelper.setBlockModel(basicEnergyInjector, () -> new BlockModelDFJava<>(basicEnergyInjector, DragonFly.loadBlockModel("signalindustries:basic_energy_injector")));
         ModelHelper.setBlockModel(ashenTreeSapling, () -> new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(0, "signalindustries:block/ashen_tree_sapling"));
+        ModelHelper.setBlockModel(basicHeatPump, () -> new BlockModelHeatPump(basicHeatPump, blockTextures.get(basicHeatPump),
+                blockTextures.get(basicHeatPump).copy()
+                        .withActiveTopTexture("basic_heat_pump_top_freezing_active")
+        ));
+        /*ModelHelper.setBlockModel(reinforcedThermalChamber, () -> new BlockModelThermalChamber(reinforcedThermalChamber, blockTextures.get(reinforcedThermalChamber),
+                blockTextures.get(reinforcedThermalChamber).copy()
+                        .withActiveNorthTexture("reinforced_thermal_chamber_freezing_active_side")
+                        .withActiveTopTexture("reinforced_thermal_chamber_top_freezing_active")
+        ));*/
+
         ModelHelper.setBlockModel(pedestal, () ->
                 new BlockModelDFJava<>(pedestal, DragonFly.loadBlockModel("signalindustries:pedestal"))
                         .setStateInterpreter(new RotatableStateInterpreter())

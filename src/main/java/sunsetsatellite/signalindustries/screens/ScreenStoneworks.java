@@ -59,7 +59,7 @@ public class ScreenStoneworks extends ScreenMachineSimple {
         counter = this.tile.getProgressScaled(24);
         this.drawTexturedModalRect(x + 79, y + 34, 176, 14, counter + 1, 16);
         if (this.tile.speedMultiplier > 1) {
-            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 16, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
+            this.drawStringCentered(font, this.tile.speedMultiplier + "x", x + xSize - 50, y + ySize / 2 - 16, tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080));
         }
     }
 

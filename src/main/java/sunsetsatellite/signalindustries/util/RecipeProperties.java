@@ -2,7 +2,9 @@ package sunsetsatellite.signalindustries.util;
 
 import net.minecraft.core.world.Dimension;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecipeProperties {
     public Tier tier;
@@ -15,6 +17,8 @@ public class RecipeProperties {
     public boolean consumeContainers = false;
 
     public List<Dimension> allowedDimensions;
+
+    public Map<String, Object> auxData = new HashMap<>();
 
     public RecipeProperties() {
     }
@@ -56,6 +60,11 @@ public class RecipeProperties {
 
     public RecipeProperties setAllowedDimensions(List<Dimension> allowedDimensions) {
         this.allowedDimensions = allowedDimensions;
+        return this;
+    }
+
+    public RecipeProperties addAuxData(String key, Object value) {
+        auxData.put(key, value);
         return this;
     }
 

@@ -156,6 +156,11 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> reinforcedPump;
 
     public static Block<? extends BlockLogic> basicStoneworks;
+    //public static Block<? extends BlockLogic> reinforcedStoneworks;
+
+    /*public static Block<? extends BlockLogic> basicThermalChamber;
+    public static Block<? extends BlockLogic> reinforcedThermalChamber;*/
+    public static Block<? extends BlockLogic> basicHeatPump;
 
     public static Block<? extends BlockLogic> prototypeInserter;
     public static Block<? extends BlockLogic> basicInserter;
@@ -206,6 +211,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> basicMarker;
     public static Block<? extends BlockLogic> reinforcedBuilder;
     public static Block<? extends BlockLogic> spatialEncapsulator;
+
     public static Block<? extends BlockLogic> creationAltar;
 
     public static Block<? extends BlockLogic> warpGate;
@@ -937,6 +943,46 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withActiveSideTextures("basic_stoneworks_active_side")
         );
 
+        /*basicThermalChamber = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.thermalChamber",
+                "basic_thermal_chamber",
+                "basicThermalChamber",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityThermalChamber::new, "thermal_chamber"),
+                new MachineTextures(Tier.BASIC)
+                        .withDefaultNorthTexture("basic_thermal_chamber_inactive_side")
+                        .withDefaultTopTexture("basic_thermal_chamber_top_inactive")
+                        .withActiveNorthTexture("basic_thermal_chamber_melting_active_side")
+                        .withActiveTopTexture("basic_thermal_chamber_top_melting_active")
+        );*/
+
+        basicHeatPump = customBlock(defaultBuilder(Tier.BASIC),
+                "basic.heatPump",
+                "basic_heat_pump",
+                "basicHeatPump",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityHeatPump::new, "heat_pump"),
+                new MachineTextures(Tier.BASIC)
+                        .withDefaultSideTextures("basic_heat_pump")
+                        .withDefaultTopTexture("basic_heat_pump_top_inactive")
+                        .withActiveSideTextures("basic_heat_pump")
+                        .withActiveTopTexture("basic_heat_pump_top_melting_active")
+                        .withDefaultBottomTexture("signalum_alloy_coil_top")
+        );
+
+        /*reinforcedThermalChamber = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.thermalChamber",
+                "reinforced_thermal_chamber",
+                "reinforcedThermalChamber",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityThermalChamber::new, "thermal_chamber"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultNorthTexture("reinforced_thermal_chamber_inactive_side")
+                        .withDefaultTopTexture("reinforced_thermal_chamber_top_inactive")
+                        .withActiveNorthTexture("reinforced_thermal_chamber_melting_active_side")
+                        .withActiveTopTexture("reinforced_thermal_chamber_top_melting_active")
+        );*/
+
         prototypePump = customBlock(defaultBuilder(Tier.PROTOTYPE),
                 "prototype.pump",
                 "prototype_pump",
@@ -959,6 +1005,8 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures(Tier.BASIC)
                         .withDefaultSideTextures("basic_pump_side_empty")
                         .withDefaultTopTexture("basic_pump_top_empty")
+                        .withActiveSideTextures("basic_pump_side_empty")
+                        .withActiveTopTexture("basic_pump_top_empty")
         );
 
         reinforcedPump = customBlock(defaultBuilder(Tier.REINFORCED),
@@ -1974,7 +2022,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures()
                         .withDefaultTexture("eternal_tree_log")
                         .withDefaultTopBottomTextures("eternal_tree_log_top")
-        );
+        ).withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
 
         etherealLeaves = customBlock(new BlockBuilder(MOD_ID),
                 "leaves.ethereal",

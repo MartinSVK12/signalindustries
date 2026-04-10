@@ -216,19 +216,19 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     public void activate(Player activator) {
         if (!active && worldObj != null) {
             if (worldObj.getDifficulty() == Difficulty.PEACEFUL) {
-                player.sendMessage("This world is far too peaceful..");
+                activator.sendMessage("This world is far too peaceful..");
                 return;
             }
             if (worldObj.isDaytime()) {
-                player.sendMessage("Now is not the time..");
+                activator.sendMessage("Now is not the time..");
                 return;
             }
             if (!multiblock.isValid()) {
-                player.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
+                activator.sendTranslatedChatMessage("event.signalindustries.invalidMultiblock");
                 return;
             }
-            if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem().id == SIItems.infernalEye.id) {
-                player.inventory.getCurrentItem().consumeItem(player);
+            if (activator.inventory.getCurrentItem() != null && activator.inventory.getCurrentItem().getItem().id == SIItems.infernalEye.id) {
+                activator.inventory.getCurrentItem().consumeItem(activator);
                 for (Player player : worldObj.players) {
                     if (player.distanceToSqr(x, y, z) > 64) continue;
                     player.sendTranslatedChatMessage("event.signalindustries.reinforcedWrathBeaconActivated");
@@ -238,7 +238,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
                 checkTimer.unpause();
                 startWave();
             } else {
-                player.sendMessage("The wrath beacon needs a catalyst..");
+                activator.sendMessage("The wrath beacon needs a catalyst..");
             }
         }
     }

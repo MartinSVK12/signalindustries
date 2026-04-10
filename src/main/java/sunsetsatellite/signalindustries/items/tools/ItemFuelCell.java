@@ -5,6 +5,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
@@ -50,6 +51,8 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public FluidStack getCurrentFluid(ItemStack stack) {
+        int depletion = stack.getData().getInteger("depleted");
+        if(getFluidAmount(stack) <= 0 && depletion > 0) return new FluidStack(SIFluids.BURNT_ENERGY, depletion);
         return new FluidStack(SIFluids.ENERGY, getCapacity(stack));
     }
 
@@ -191,7 +194,7 @@ public class ItemFuelCell extends Item implements IItemFluidContainer, ICustomDe
 
     @Override
     public List<Fluid> getAllowedFluids(ItemStack stack) {
-        return Collections.singletonList(SIFluids.ENERGY);
+        return Catalyst.listOf(SIFluids.ENERGY, SIFluids.BURNT_ENERGY);
     }
 
     @Override

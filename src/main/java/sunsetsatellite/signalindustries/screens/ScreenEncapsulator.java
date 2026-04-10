@@ -62,6 +62,8 @@ public class ScreenEncapsulator extends ScreenFluid implements IExtendedScreenDr
 
         storeButton.enabled = tile.state == TileEntityEncapsulator.State.NONE;
         cutButton.enabled = tile.state == TileEntityEncapsulator.State.NONE;
+
+        cutButton.enabled = false; //todo: unfinished, so it is disabled
     }
 
     public ButtonElement itemIoButton;

@@ -126,6 +126,8 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
         Catalyst.GUIS.register(key("gui/blueprint"), new MpGuiEntryClient(InventoryBlueprint.class, ScreenBlueprint.class, MenuBlueprint.class));
         Catalyst.GUIS.register(key("gui/trommel"), new MpGuiEntryClient(TileEntitySITrommel.class, ScreenSITrommel.class, MenuSITrommel.class));
         Catalyst.GUIS.register(key("gui/redstone_clock"), new MpGuiEntryClient(TileEntityRedstoneClock.class, ScreenRedstoneClock.class, null));
+        Catalyst.GUIS.register(key("gui/thermal_chamber"), new MpGuiEntryClient(TileEntityThermalChamber.class, ScreenThermalChamber.class, MenuThermalChamber.class));
+        Catalyst.GUIS.register(key("gui/heat_pump"), new MpGuiEntryClient(TileEntityHeatPump.class, ScreenHeatPump.class, MenuHeatPump.class));
 
         Catalyst.GUIS.register(key("gui/switch_cover"), new MpGuiEntryClient(TileEntityCoverable.class, ScreenSwitchCoverConfig.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"), new MpGuiEntryClient(TileEntityCoverable.class, ScreenVoidCoverConfig.class, MenuCover.class));

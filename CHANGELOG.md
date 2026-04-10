@@ -1,20 +1,16 @@
-- Fixed wrong machines showing up in TMB recipes.
-- Hopefully fixed storage containers dropping a single stack of 1000+ items.
-- Fixed a crash involving backpacks.
-- Added the Reinforced Pump.
-- Added a new fluid.
-- Renamed Crystal Chambers to Crystallizers.
-- Slightly improved the GUI of the EEPROM Programmer.
-- Remade the texture for Triggers.
-- Implemented the Redstone Cover.
-- Added interaction between Switch and Redstone covers.
-- Added the Laser Drill, for later game resource collection.
-- Added an option to hide the suits HUD background.
-- Made world gen features configurable.
-- Fixed fluid tank tooltip.
-- Fixed bug with fluid tanks.
-- Buffed prototype fluid tanks capacity (8000 -> 16000).
-- Fixed a bug where the GUI of the reinforced extractor couldn't be opened.
-- Fixed bug where you couldn't shift click into item inventories (like the backpack).
-- Fixed a couple crashes.
-- Added new greenhouse multiblock.
+- SI worldgen is now available in retro and hell worlds.
+- Fixed several issues with the block version of the Pulsar.
+- Added btwaila info to machines that were missing them.
+- Revamped the machine core textures.
+- Added SI tiered versions of the trommel.
+- Added a configurable redstone clock.
+- It is now possible to grow flowers inside the bonsai pot machine.
+- Added a visual I/O configuration screen. (The manual, older one can still be accessed also)
+- Added charge bars to SI tools.
+- Added a mechanism to hopefully restore correct IDs of a world even if the config is deleted.
+- Adjusted laser drill chances.
+- Added "to block" and "to item" recipes for common materials.
+- Buffed conduit transfer speed for higher tiers.
+- Added the ability to duplicate ROM chips with a blank chip and an EEPROM programmer.
+- A few more quests.
+- Added heat pump machine, melts or frozen blocks in the world.

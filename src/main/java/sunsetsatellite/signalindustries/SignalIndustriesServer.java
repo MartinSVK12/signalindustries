@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.MpGuiEntry;
+import sunsetsatellite.catalyst.core.util.mp.MpGuiEntryClient;
 import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.menus.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
@@ -80,6 +81,8 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
         Catalyst.GUIS.register(key("gui/blueprint"), new MpGuiEntry(InventoryBlueprint.class, MenuBlueprint.class));
         Catalyst.GUIS.register(key("gui/trommel"), new MpGuiEntry(TileEntitySITrommel.class, MenuSITrommel.class));
         Catalyst.GUIS.register(key("gui/redstone_clock"), new MpGuiEntry(TileEntityRedstoneClock.class, null));
+        Catalyst.GUIS.register(key("gui/thermal_chamber"), new MpGuiEntry(TileEntityThermalChamber.class, MenuThermalChamber.class));
+        Catalyst.GUIS.register(key("gui/heat_pump"), new MpGuiEntry(TileEntityHeatPump.class, MenuHeatPump.class));
 
         Catalyst.GUIS.register(key("gui/switch_cover"), new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));
         Catalyst.GUIS.register(key("gui/void_cover"), new MpGuiEntry(TileEntityCoverable.class, MenuCover.class));

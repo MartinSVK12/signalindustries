@@ -65,7 +65,13 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         if (areAllInputsNull()) {
             state = State.NONE;
             progressTicks = 0;
+            duration = 200;
+            cost = 0;
         } else if (canProcess()) {
+            if(state == State.STORING && !structure.isEmpty()){
+                duration = Math.min(300, 5 * (size.x * size.y * size.z));
+                cost = Math.max(4096, Math.min(65535,16 * (size.x * size.y * size.z)));
+            }
             progressMaxTicks = getProgressDuration(duration);
         }
         if (!worldObj.isClientSide) {
@@ -297,6 +303,8 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         originMarker = null;
         structure.clear();
         size = new Vec3i();
+        cost = 0;
+        duration = 200;
     }
 
     @Override

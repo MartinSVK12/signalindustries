@@ -209,6 +209,17 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                         new RecipeProperties(20, 20, 0, Tier.PROTOTYPE, false)
                 )
         );
+        group.register(
+                "coil",
+                new RecipeEntryMachine(
+                        new RecipeExtendedSymbol[]{
+                                new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 1000)),
+                                new RecipeExtendedSymbol(new ItemStack(SIBlocks.signalumAlloyCoil, 1))
+                        },
+                        new ItemStack(SIItems.heatingCoil, 8),
+                        new RecipeProperties(200, 80, 0, Tier.BASIC, false)
+                )
+        );
 
     }
 }

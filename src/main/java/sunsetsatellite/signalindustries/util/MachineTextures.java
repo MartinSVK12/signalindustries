@@ -206,4 +206,12 @@ public class MachineTextures {
         overbrightTextures.replace(Side.EAST, "signalindustries:block/" + texture);
         return this;
     }
+
+    public MachineTextures copy(){
+        MachineTextures textures = new MachineTextures();
+        textures.defaultTextures = (HashMap<Side, String>) defaultTextures.clone();
+        textures.activeTextures = (HashMap<Side, String>) activeTextures.clone();
+        textures.overbrightTextures = (HashMap<Side, String>) overbrightTextures.clone();
+        return textures;
+    }
 }

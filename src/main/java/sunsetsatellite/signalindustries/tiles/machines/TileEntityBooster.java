@@ -4,8 +4,10 @@ package sunsetsatellite.signalindustries.tiles.machines;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
+import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
@@ -248,5 +250,10 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     @Override
     public String getNameTranslationKey() {
         return "container.signalindustries.booster";
+    }
+
+    @Override
+    public boolean canBeCarried(World world, Entity potentialHolder) {
+        return true;
     }
 }
