@@ -20,6 +20,7 @@ public class SIMultiblocks extends DataInitializer {
     public static SIMultiblock signalumReactor;
     public static SIMultiblock extractionManifold;
     public static SIMultiblock inductionSmelterBasic;
+    public static SIMultiblock inductionSmelterReinforced;
     public static SIMultiblock warpGate;
     public static SIMultiblock wakingCrusher;
     public static SIMultiblock wakingAlloySmelter;
@@ -53,6 +54,7 @@ public class SIMultiblocks extends DataInitializer {
                 .mapSymbol('E',new ItemStack(SIBlocks.basicEnergyConnector,1,-1))
                 .build();*/
         inductionSmelterBasic = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "basicInductionSmelter", "basicInductionSmelter", false, Tier.BASIC);
+        inductionSmelterReinforced = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "reinforcedInductionSmelter", "reinforcedInductionSmelter", false, Tier.REINFORCED);
         wakingPlateFormer = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "wakingPlateFormer", "wakingPlateFormer", false, Tier.REINFORCED);
         wakingAlloySmelter = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "wakingAlloySmelter", "wakingAlloySmelter", false, Tier.REINFORCED);
         wakingCrusher = new SIMultiblock(MOD_ID, new Class[]{SIBlocks.class}, "wakingCrusher", "wakingCrusher", false, Tier.REINFORCED);
@@ -96,6 +98,7 @@ public class SIMultiblocks extends DataInitializer {
         Multiblock.multiblocks.put("signalumReactor", signalumReactor);
         Multiblock.multiblocks.put("extractionManifold", extractionManifold);
         Multiblock.multiblocks.put("basicInductionSmelter", inductionSmelterBasic);
+        Multiblock.multiblocks.put("reinforcedInductionSmelter", inductionSmelterReinforced);
         Multiblock.multiblocks.put("wakingPlateFormer", wakingPlateFormer);
         Multiblock.multiblocks.put("wakingAlloySmelter", wakingAlloySmelter);
         Multiblock.multiblocks.put("wakingCrusher", wakingCrusher);

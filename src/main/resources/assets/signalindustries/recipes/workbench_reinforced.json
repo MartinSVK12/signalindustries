@@ -2058,5 +2058,127 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/2x_parallel_processor",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "DRW",
+      "CAC",
+      "MSM"
+    ],
+    "symbols": [
+      {
+        "symbol": "W",
+        "stack": {
+          "key": "item.signalindustries.warpManipulatorCircuit",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "D",
+        "stack": {
+          "key": "item.signalindustries.dilithiumControlCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.dilithiumCoil",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.reinforcedEnergyCore",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "A",
+        "stack": {
+          "key": "item.signalindustries.awakenedSignalumCrystal",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "R",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.casing2",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.parallelProcessor",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_induction_smelter",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      " C ",
+      "PFP",
+      " M "
+    ],
+    "symbols": [
+      {
+        "symbol": "M",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.machine",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "P",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "F",
+        "stack": {
+          "key": "tile.signalindustries.basic.inductionSmelter",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "tile.signalindustries.signalumAlloyCoil",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.inductionSmelter",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

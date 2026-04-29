@@ -93,8 +93,10 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
     public static ItemSignalumPowerSuit signalumPowerSuitBoots;
     public static Item crystalChip;
     public static Item pureCrystalChip;
+    public static Item awakenedCrystalChip;
     public static Item basicEnergyCore;
     public static Item reinforcedEnergyCore;
+    public static Item awakenedEnergyCore;
     public static Item basicDrillBit;
     public static Item reinforcedDrillBit;
     public static Item basicDrillCasing;
@@ -210,8 +212,10 @@ public class SIItems extends DataInitializer implements ItemInitEntrypoint {
         dimensionalShard = simpleItem("dimensionalShard", "dimensional_shard", "dimensionalShard", "dimensionalshard");
         crystalChip = simpleItem("crystalChip", "crystal_chip", "crystalChip", "crystal_chip");
         pureCrystalChip = simpleItem("pureCrystalChip", "pure_crystal_chip", "pureCrystalChip", "pure_crystal_chip");
+        awakenedCrystalChip = simpleItem("awakenedCrystalChip", "awakened_crystal_chip", "awakenedCrystalChip", "awakened_crystal_chip");
         basicEnergyCore = simpleItem("basicEnergyCore", "basic_energy_core", "basicEnergyCore", "basic_energy_core");
         reinforcedEnergyCore = simpleItem("reinforcedEnergyCore", "reinforced_energy_core", "reinforcedEnergyCore", "reinforced_energy_core");
+        awakenedEnergyCore = simpleItem("awakenedEnergyCore", "awakened_energy_core", "awakenedEnergyCore", "awakened_energy_core");
         basicDrillBit = simpleItem("basicDrillBit", "basic_drill_bit", "basicDrillBit", "basic_drill_bit");
         reinforcedDrillBit = simpleItem("reinforcedDrillBit", "reinforced_drill_bit", "reinforcedDrillBit", "reinforced_drill_bit");
         basicDrillCasing = simpleItem("basicDrillCasing", "basic_drill_casing", "basicDrillCasing", "basic_drill_casing");

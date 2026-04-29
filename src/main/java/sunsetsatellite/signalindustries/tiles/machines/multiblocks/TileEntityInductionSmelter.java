@@ -4,6 +4,7 @@ import net.minecraft.core.block.Block;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
 import sunsetsatellite.signalindustries.SIRecipes;
+import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -15,15 +16,34 @@ public class TileEntityInductionSmelter extends TileEntityTieredMultiblock {
         usesEnergy = true;
         usesItemInput = true;
         usesItemOutput = true;
-        minimumEnergyTier = Tier.BASIC;
-        minimumItemInputTier = Tier.BASIC;
-        minimumItemOutputTier = Tier.BASIC;
+        if(block.getLogic() instanceof ITiered){
+            Tier tier = ((ITiered) block.getLogic()).getTier();
+            switch (tier) {
+                case BASIC:
+                    minimumEnergyTier = Tier.BASIC;
+                    minimumItemInputTier = Tier.BASIC;
+                    minimumItemOutputTier = Tier.BASIC;
 
-        recipeGroup = SIRecipes.INDUCTION_SMELTER;
+                    recipeGroup = SIRecipes.INDUCTION_SMELTER;
 
-        multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("basicInductionSmelter"));
+                    multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("basicInductionSmelter"));
 
-        baseParallel = 16;
+                    baseParallel = 16;
+                    break;
+                case REINFORCED:
+                    minimumEnergyTier = Tier.REINFORCED;
+                    minimumItemInputTier = Tier.REINFORCED;
+                    minimumItemOutputTier = Tier.REINFORCED;
+
+                    recipeGroup = SIRecipes.INDUCTION_SMELTER;
+
+                    multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("reinforcedInductionSmelter"));
+
+                    baseParallel = 32;
+                    break;
+            }
+        }
+
     }
 
     @Override

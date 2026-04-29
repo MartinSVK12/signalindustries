@@ -110,6 +110,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> wakingAlloySmelter;
 
     public static Block<? extends BlockLogic> basicInductionSmelter;
+    public static Block<? extends BlockLogic> reinforcedInductionSmelter;
 
     public static Block<? extends BlockLogic> prototypePlateFormer;
     public static Block<? extends BlockLogic> basicPlateFormer;
@@ -1583,6 +1584,21 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                         .withDefaultNorthTexture("basic_induction_smelter_front_inactive")
                         .withActiveTopTexture("basic_induction_smelter_top_active")
                         .withActiveNorthTexture("basic_induction_smelter_front_active")
+                        .withOverbrightTopTexture("induction_smelter_top_overlay")
+                        .withOverbrightNorthTexture("induction_smelter_front_overlay")
+        );
+
+        reinforcedInductionSmelter = customBlock(defaultBuilder(Tier.REINFORCED),
+                "reinforced.inductionSmelter",
+                "reinforced_induction_smelter",
+                "reinforcedInductionSmelter",
+                3,
+                (block) -> new BlockLogicMachine(block, Material.metal, Tier.REINFORCED, TileEntityInductionSmelter::new, "induction_smelter"),
+                new MachineTextures(Tier.REINFORCED)
+                        .withDefaultTopTexture("reinforced_induction_smelter_top_inactive")
+                        .withDefaultNorthTexture("reinforced_induction_smelter_front_inactive")
+                        .withActiveTopTexture("reinforced_induction_smelter_top_active")
+                        .withActiveNorthTexture("reinforced_induction_smelter_front_active")
                         .withOverbrightTopTexture("induction_smelter_top_overlay")
                         .withOverbrightNorthTexture("induction_smelter_front_overlay")
         );
