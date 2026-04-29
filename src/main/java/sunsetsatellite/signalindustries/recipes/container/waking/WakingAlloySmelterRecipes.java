@@ -21,7 +21,7 @@ public class WakingAlloySmelterRecipes implements MachineRecipesBase<RecipeGroup
                                 new RecipeExtendedSymbol(new ItemStack(Items.INGOT_IRON)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.tinyNetherCoalDust))
                         },
-                        new ItemStack(Items.INGOT_STEEL, 2),
+                        new ItemStack(Items.INGOT_STEEL, 8),
                         new RecipeProperties(100, 40, Tier.REINFORCED, false)
                 )
         );

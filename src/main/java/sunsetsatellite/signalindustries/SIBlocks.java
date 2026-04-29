@@ -963,11 +963,10 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 3,
                 (block) -> new BlockLogicMachine(block, Material.metal, Tier.BASIC, TileEntityHeatPump::new, "heat_pump"),
                 new MachineTextures(Tier.BASIC)
-                        .withDefaultSideTextures("basic_heat_pump")
+                        .withDefaultNorthTexture("basic_heat_pump_inactive_side")
                         .withDefaultTopTexture("basic_heat_pump_top_inactive")
-                        .withActiveSideTextures("basic_heat_pump")
+                        .withActiveNorthTexture("basic_heat_pump_melting_active_side")
                         .withActiveTopTexture("basic_heat_pump_top_melting_active")
-                        .withDefaultBottomTexture("signalum_alloy_coil_top")
         );
 
         /*reinforcedThermalChamber = customBlock(defaultBuilder(Tier.REINFORCED),

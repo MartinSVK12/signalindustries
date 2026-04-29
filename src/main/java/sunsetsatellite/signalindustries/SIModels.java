@@ -73,6 +73,7 @@ public class SIModels implements ModelEntrypoint {
         ModelHelper.setBlockModel(basicHeatPump, () -> new BlockModelHeatPump(basicHeatPump, blockTextures.get(basicHeatPump),
                 blockTextures.get(basicHeatPump).copy()
                         .withActiveTopTexture("basic_heat_pump_top_freezing_active")
+                        .withActiveNorthTexture("basic_heat_pump_freezing_active_side")
         ));
         /*ModelHelper.setBlockModel(reinforcedThermalChamber, () -> new BlockModelThermalChamber(reinforcedThermalChamber, blockTextures.get(reinforcedThermalChamber),
                 blockTextures.get(reinforcedThermalChamber).copy()

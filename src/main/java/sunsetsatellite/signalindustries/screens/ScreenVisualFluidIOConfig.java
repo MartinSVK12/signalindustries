@@ -233,7 +233,7 @@ public class ScreenVisualFluidIOConfig extends Screen {
                         Vec3i position = tile.getPosition();
                         Connection connection = tile.fluidConnections.get(dir);
                         int slot = tile.activeFluidSlots.get(dir);
-                        NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.ITEM, slot, tile.getClass()));
+                        NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.FLUID, slot, tile.getClass()));
                     }
                     break;
                 }
@@ -290,7 +290,7 @@ public class ScreenVisualFluidIOConfig extends Screen {
                     Vec3i position = tile.getPosition();
                     Connection connection = fluidConnections.get(dir);
                     int slot = tile.activeFluidSlots.get(dir);
-                    NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.ITEM, slot, tile.getClass()));
+                    NetworkHandler.sendToServer(new NetworkMessageIOChange(position, connection, dir, IOPreview.FLUID, slot, tile.getClass()));
                 }
             }
         }

@@ -63,7 +63,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal, 4))
                         },
-                        new ItemStack(SIItems.signalumCrystal, 1, 0, nbt),
+                        new ItemStack(SIItems.signalumCrystal, 1, 0),
                         new RecipeProperties(200, 80, 0, Tier.BASIC, false)
                 )
         );
@@ -74,7 +74,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.rawSignalumCrystal, 4))
                         },
-                        new ItemStack(SIItems.signalumCrystalEmpty, 1, 0, nbt2),
+                        new ItemStack(SIItems.signalumCrystalEmpty, 1, 0),
                         new RecipeProperties(200, 80, 2, Tier.BASIC, false)
                 )
         );
