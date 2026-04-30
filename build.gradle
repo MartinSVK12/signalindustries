@@ -241,6 +241,8 @@ modrinth {
         required.project "halplibe"
         required.project "catalyst"
         required.project "dragonfly-model-library"
+        optional.project "btwaila"
+        optional.project "tmb"
     }
 }
 
