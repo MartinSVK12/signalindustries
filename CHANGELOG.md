@@ -13,4 +13,12 @@
 - Buffed conduit transfer speed for higher tiers.
 - Added the ability to duplicate ROM chips with a blank chip and an EEPROM programmer.
 - A few more quests.
-- Added heat pump machine, melts or frozen blocks in the world.
+- Added heat pump machine, melts or freezes blocks in the world.
+- Fixed issue where crystals were made with additional unnecessary NBT data.
+- Buffed steel yield in the waking alloy smelter.
+- Show slot id in tooltip when extra item info is enabled.
+- Added reinforced induction smelter.
+- Added recipe for 2x parallel processor.
+- Added more building blocks.
+- Added an option to hide fluid conduit rendering.
+- Added an incomplete custom structure system.
