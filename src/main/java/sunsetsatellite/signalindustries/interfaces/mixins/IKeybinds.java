@@ -3,7 +3,6 @@ package sunsetsatellite.signalindustries.interfaces.mixins;
 
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.OptionBoolean;
-import org.spongepowered.asm.mixin.Unique;
 
 public interface IKeybinds {
     KeyBinding signalIndustries$getKeyOpenSuit();
@@ -16,8 +15,9 @@ public interface IKeybinds {
 
     KeyBinding signalIndustries$getKeyActivateHeadLensAttachment();
 
-    @Unique
     OptionBoolean signalindustries$isSuitBackgroundShown();
+
+    OptionBoolean signalindustries$getRenderFluidInsideConduits();
 
     KeyBinding signalIndustries$getKeyActivateHeadTopAttachment();
 

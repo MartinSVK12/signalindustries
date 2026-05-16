@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.render;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.RenderBlocks;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
@@ -23,6 +24,7 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicFluidConduit;
+import sunsetsatellite.signalindustries.interfaces.mixins.IKeybinds;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,11 @@ import java.util.HashMap;
 public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
     @Override
     public void doRender(Tessellator tessellator, TileEntity tileEntity1, double d2, double d4, double d6, float f8) {
+
+        if (!((IKeybinds) Minecraft.getMinecraft().gameSettings).signalindustries$getRenderFluidInsideConduits().value) {
+            return;
+        }
+
         blockRenderer = new RenderBlocks(tileEntity1.worldObj);
         int i = tileEntity1.x;
         int j = tileEntity1.y;

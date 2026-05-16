@@ -58,6 +58,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> awakenedCasing;
     public static Block<? extends BlockLogic> awakenedSocketCasing;
     public static Block<? extends BlockLogic> awakenedCasing2;
+    public static Block<? extends BlockLogic> awakenedGrate;
     public static Block<? extends BlockLogic> basicCasing2;
     //public static Block<? extends BlockLogic> connectedTexture;
 
@@ -224,6 +225,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
     public static Block<? extends BlockLogic> cobblestoneBricks;
     public static Block<? extends BlockLogic> crystalAlloyBricks;
     public static Block<? extends BlockLogic> reinforcedCrystalAlloyBricks;
+    public static Block<? extends BlockLogic> awakenedAlloyBricks;
     public static Block<? extends BlockLogic> signalumAlloyCoil;
     public static Block<? extends BlockLogic> dilithiumCoil;
     public static Block<? extends BlockLogic> awakenedAlloyCoil;
@@ -1211,6 +1213,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 new MachineTextures().withDefaultTexture("reinforced_alloy_bricks")
         );
 
+        awakenedAlloyBricks = simpleBlock(
+                defaultBuilder(Tier.AWAKENED),
+                "awakened.bricks",
+                "awakened_alloy_bricks",
+                "awakenedAlloyBricks",
+                3,
+                Material.metal,
+                new MachineTextures().withDefaultTexture("awakened_alloy_bricks")
+        );
+
         dilithiumBlock = simpleBlock(
                 new BlockBuilder(MOD_ID)
                         .setLuminance(1)
@@ -1363,6 +1375,16 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
                 3,
                 (block) -> new BlockLogicNonSolid(block, Material.metal),
                 new MachineTextures().withDefaultTexture("reinforced_grate")
+        ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+        awakenedGrate = customBlock(
+                defaultBuilder(Tier.AWAKENED),
+                "awakened.grate",
+                "awakened_grate",
+                "awakenedGrate",
+                3,
+                (block) -> new BlockLogicNonSolid(block, Material.metal),
+                new MachineTextures().withDefaultTexture("awakened_grate")
         ).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
         reinforcedFrame = customBlock(
@@ -2101,6 +2123,7 @@ public class SIBlocks extends DataInitializer implements BlockInitEntrypoint {
         cobblestoneBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         crystalAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         reinforcedCrystalAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
+        awakenedAlloyBricks.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         glowingObsidian.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         voidContainer.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());
         uvLamp.withTags(CatalystMultipart.CAN_BE_MULTIPART).withTags(CatalystMultipart.getAllMultipartTags());

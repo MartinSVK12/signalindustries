@@ -187,6 +187,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
 
         OptionsPage optionsPage = new OptionsPage("gui.options.page.signalindustries", SIItems.signalumCrystal.getDefaultStack());
         optionsPage.withComponent(new BooleanOptionComponent(gameSettings.signalindustries$isSuitBackgroundShown()));
+        optionsPage.withComponent(new BooleanOptionComponent(gameSettings.signalindustries$getRenderFluidInsideConduits()));
         OptionsPages.register(optionsPage);
 
         OptionsCategory category = new OptionsCategory("gui.options.page.controls.category.signalindustries");

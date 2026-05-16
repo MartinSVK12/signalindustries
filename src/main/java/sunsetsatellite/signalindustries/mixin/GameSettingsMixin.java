@@ -23,9 +23,18 @@ public class GameSettingsMixin
     public OptionBoolean showSuitBackground = new OptionBoolean(thisAs, "signalindustries.showSuitBackground", true);
 
     @Unique
+    public OptionBoolean renderFluidInsideConduits = new OptionBoolean(thisAs, "signalindustries.renderFluidInsideConduits", true);
+
+    @Unique
     @Override
     public OptionBoolean signalindustries$isSuitBackgroundShown() {
         return showSuitBackground;
+    }
+
+    @Unique
+    @Override
+    public OptionBoolean signalindustries$getRenderFluidInsideConduits() {
+        return renderFluidInsideConduits;
     }
 
     @Unique

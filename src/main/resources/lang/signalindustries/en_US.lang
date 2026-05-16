@@ -199,6 +199,8 @@ tile.signalindustries.awakened.casing.socket.name=Awakened Socket Casing
 tile.signalindustries.awakened.casing.socket.desc=Used for Awakened-tier multiblock machines. Additionally a dimensional shard can be slotted in.
 tile.signalindustries.awakened.casing2.name=Awakened Casing (Type 2)
 tile.signalindustries.awakened.casing2.desc=Alternative casing used for Awakened-tier multiblock machines.
+tile.signalindustries.awakened.grate.name=Awakened Grate
+tile.signalindustries.awakened.grate.desc=Alternative casing used for Awakened-tier multiblock machines.
 tile.signalindustries.reinforced.glass.name=Reinforced Crystal Glass
 tile.signalindustries.reinforced.glass.desc=Scratches at level 9, with deeper grooves at level 10.
 
@@ -765,7 +767,7 @@ tile.signalindustries.basic.bricks.desc=Stacked bricks of Crystal Alloy ingots.
 tile.signalindustries.reinforced.bricks.name=Reinforced Crystal Alloy Bricks
 tile.signalindustries.reinforced.bricks.desc=Stacked bricks of Reinforced Crystal Alloy ingots.
 tile.signalindustries.awakened.bricks.name=Awakened Alloy Bricks
-tile.signalindustries.awakened.bricks.desc=Stacked bricks of Awakened Alloy ingots.
+tile.signalindustries.awakened.bricks.desc=Stacked bricks of Void Alloy and Awakened Alloy ingots.
 
 tile.signalindustries.signalumAlloyCoil.name=Saturated Signalite Alloy Coil
 tile.signalindustries.signalumAlloyCoil.desc=A coil of Saturated Signalite Alloy.
@@ -1028,6 +1030,7 @@ multiblock.signalindustries.altarOfCreation.name=Altar of Creation
 gui.options.page.controls.category.signalindustries=Signal Industries
 gui.options.page.signalindustries=Signal Industries
 options.signalindustries.showSuitBackground=Show Suit Background
+options.signalindustries.renderFluidInsideConduits=Render Fluid Inside Conduits
 
 chapter.signalindustries.prototype.name=Prototype-tier
 chapter.signalindustries.prototype.desc=The beginning of the mod, contains quests for the Prototype tier.
