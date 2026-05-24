@@ -1,9 +1,8 @@
 .gradle/
 .idea/
 .vscode/
+bin/
 build/
 out/
 run/
-run-2/
-/run-server/
-/bin/
+run-server/

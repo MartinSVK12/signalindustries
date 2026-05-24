@@ -1,10 +1,10 @@
 {
   "model_paths": [
-    "/assets/signalindustries/models/wings.json",
-    "/assets/signalindustries/models/pulsar/item.geo.json",
-    "/assets/signalindustries/models/pulsar/inner_core.geo.json",
-    "/assets/signalindustries/models/pulsar/outer_core.geo.json",
-    "/assets/signalindustries/models/reality_tear.geo.json",
-    "/assets/signalindustries/models/shockwave.geo.json"
+    "/assets/signalindustries/models/entity/wings.json",
+    "/assets/signalindustries/models/entity/pulsar/item.geo.json",
+    "/assets/signalindustries/models/entity/pulsar/inner_core.geo.json",
+    "/assets/signalindustries/models/entity/pulsar/outer_core.geo.json",
+    "/assets/signalindustries/models/entity/reality_tear.geo.json",
+    "/assets/signalindustries/models/entity/shockwave.geo.json"
   ]
 }

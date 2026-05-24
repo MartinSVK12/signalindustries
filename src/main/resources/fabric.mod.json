@@ -32,56 +32,26 @@
     "main": [
       "sunsetsatellite.signalindustries.SignalIndustries"
     ],
-    "afterBlockInit": [
-      "sunsetsatellite.signalindustries.SIBlocks"
-    ],
-    "afterItemInit": [
-      "sunsetsatellite.signalindustries.SIItems"
-    ],
-    "recipesReady": [
-      "sunsetsatellite.signalindustries.SIRecipes"
-    ],
-    "client": [
-      "sunsetsatellite.signalindustries.SignalIndustriesClient"
-    ],
-    "beforeClientStart": [
-      "sunsetsatellite.signalindustries.SignalIndustriesClient"
-    ],
-    "afterClientStart": [
-      "sunsetsatellite.signalindustries.SignalIndustriesClient"
-    ],
-    "beforeGameStart": [
-      "sunsetsatellite.signalindustries.SignalIndustries"
-    ],
-    "afterGameStart": [
-      "sunsetsatellite.signalindustries.SignalIndustries"
-    ],
-    "server": [
-      "sunsetsatellite.signalindustries.SignalIndustriesServer"
-    ],
-    "initModels": [
-      "sunsetsatellite.signalindustries.SIModels"
-    ],
-    "gatherTMBPlugins": [
-      "sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
-    ],
-    "btwaila": [
-      "sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
-    ]
-  },
+		"client": [
+			"sunsetsatellite.signalindustries.SignalIndustriesClient"
+		],
+		"server": [
+			"sunsetsatellite.signalindustries.SignalIndustriesServer"
+		]
+	},
   "mixins": [
     "signalindustries.mixins.json"
   ],
   "depends": {
-    "minecraft": "~7.3",
-    "fabricloader": ">=0.15.5",
-    "catalyst-core": ">=2.3.1",
-    "catalyst-fluids": ">=2.3.3",
-    "catalyst-multiblocks": ">=2.4.0",
-    "catalyst-energy": ">=2.0.6",
-    "catalyst-multipart": ">=2.0.4",
-    "halplibe": ">=5.3.0",
-    "dragonfly": ">=1.7.0-alpha.5"
+    "minecraft": "~8.0-beta.2",
+    "fabricloader": ">=${loader}",
+    "catalyst-core": ">=${core}",
+    "catalyst-fluids": ">=${fluids}",
+    "catalyst-multiblocks": ">=${multiblocks}",
+    "catalyst-energy": ">=${energy}",
+    "catalyst-multipart": ">=${multipart}",
+		"catalyst-screens": ">=${screens}",
+    "halplibe": ">=${halplibe}"
   },
   "suggests": {
     "vintage-questing": "*",

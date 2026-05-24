@@ -2,56 +2,17 @@
   "required": true,
   "minVersion": "0.8",
   "package": "sunsetsatellite.signalindustries.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockLogicFarmlandMixin",
-    "BlockLogicRailMixin",
-    "ChunkDecoratorOverworldHellMixin",
-    "ChunkDecoratorOverworldMixin",
-    "ChunkDecoratorOverworldRetroMixin",
-    "ContainerInventoryMixin",
-    "DataLoaderMixin",
-    "DimensionMixin",
-    "EntityMinecartMixin",
-    "ItemSeedsMixin",
-    "ItemStackMixin",
-    "MenuCraftingMixin",
-    "MinecraftMixin",
-    "MobMixin",
-    "MobMonsterMixin",
-    "PacketRespawnMixin",
-    "PlayerMixin",
-    "ProjectileArrowMixin",
-    "RegistriesMixin",
-    "SaveHandlerBaseMixin",
-    "SlotResultMixin",
-    "SpawnerMobsMixin",
-    "WorldFeatureOreMixin",
-    "WorldGenDungeonMixin",
-    "WorldGenLabyrinthMixin",
-    "WorldMixin"
+
   ],
   "client": [
-    "GameSettingsMixin",
-    "GuidebookSectionsMixin",
-    "HudIngameMixin",
-    "MobRendererMixin",
-    "MobRendererPlayerMixin",
-    "PacketHandlerClientMixin",
-    "PlayerLocalMixin",
-    "PlayerRemoteMixin",
-    "RenderGlobalMixin",
-    "ScreenInventoryMixin",
-    "TextureManagerMixin",
-    "TooltipElementMixin",
-    "WorldClientMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "server": [
-    "MinecraftServerMixin",
-    "PacketHandlerLoginMixin",
-    "PlayerServerMixin"
+
   ]
 }
