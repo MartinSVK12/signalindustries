@@ -422,5 +422,9 @@ public class SIBlocks extends DataInitializer {
 	public void afterBlockInit() {
 		init();
 		new SIFluids().init();
+		new SIWeather().init();
+		new SIBiomes().init();
+		new SIWorldTypes().init();
+		new SIDimensions().init();
 	}
 }
