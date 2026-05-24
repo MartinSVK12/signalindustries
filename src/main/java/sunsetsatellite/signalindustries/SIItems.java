@@ -1,7 +1,14 @@
 package sunsetsatellite.signalindustries;
 
 import net.minecraft.core.item.Item;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemExtendedEnergyPackAttachment;
+import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
+import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.util.AttachmentPoint;
+import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryCategory;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
@@ -118,8 +125,8 @@ public class SIItems extends DataInitializer {
 	public static Item coolingCoil;
 
 	public static /*ItemAttachment*/ Item pulsarAttachment;
-	public static /*ItemAttachment*/ Item extendedEnergyPack;
-	public static /*ItemWingsAttachment*/ Item crystalWings;
+	public static ItemAttachment extendedEnergyPack;
+	public static ItemWingsAttachment crystalWings;
 	public static /*ItemAttachment*/ Item annihilationCrown;
 	public static /*ItemAttachment*/ Item basicBackpack;
 	public static /*ItemAttachment*/ Item reinforcedBackpack;
@@ -137,13 +144,13 @@ public class SIItems extends DataInitializer {
 
 	public static Item scanAbilityContainer;
 
-	public static /*ItemCover*/ Item blankCover;
-	public static /*ItemCover*/ Item redstoneCover;
-	public static /*ItemCover*/ Item voidCover;
-	public static /*ItemCover*/ Item conveyorCover;
-	public static /*ItemCover*/ Item pumpCover;
-	public static /*ItemCover*/ Item switchCover;
-	public static /*ItemCover*/ Item dilithiumLensCover;
+	public static ItemCover blankCover;
+	public static ItemCover redstoneCover;
+	public static ItemCover voidCover;
+	public static ItemCover conveyorCover;
+	public static ItemCover pumpCover;
+	public static ItemCover switchCover;
+	public static ItemCover dilithiumLensCover;
 
 	public static Item raziel;
 
@@ -159,6 +166,9 @@ public class SIItems extends DataInitializer {
 	public void init() {
 		if (initialized) return;
 		LOGGER.info("Initializing items...");
+
+		crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
+		extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);
 
 		List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).toList();
 

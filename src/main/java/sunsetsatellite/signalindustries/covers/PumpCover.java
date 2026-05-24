@@ -1,0 +1,84 @@
+package sunsetsatellite.signalindustries.covers;
+
+import com.mojang.nbt.tags.CompoundTag;
+import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.Player;
+import sunsetsatellite.catalyst.core.util.Connection;
+import sunsetsatellite.catalyst.core.util.Direction;
+import sunsetsatellite.catalyst.core.util.io.IFluidIO;
+import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.api.IFluidTransfer;
+import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.interfaces.IAcceptsCovers;
+import sunsetsatellite.signalindustries.items.covers.ItemCover;
+
+public class PumpCover extends CoverBase {
+
+    protected final String texture = "signalindustries:block/pump_cover";
+
+    @Override
+    public void openConfiguration(Player player, Direction dir) {
+
+    }
+
+    @Override
+    public void writeToNbt(CompoundTag tag) {
+        super.writeToNbt(tag);
+    }
+
+    @Override
+    public void readFromNbt(CompoundTag tag) {
+        super.readFromNbt(tag);
+    }
+
+    @Override
+    public void tick() {
+        if (machine instanceof IFluidIO fluidIO && machine instanceof IFluidTransfer fluidTransfer && machine instanceof IFluidInventory fluidInv && machine instanceof TileEntity machineTile) {
+			Connection con = fluidIO.getFluidIOForSide(dir);
+            int activeSlot = fluidIO.getActiveFluidSlotForSide(dir);
+            if (activeSlot == -1 || con == Connection.NONE) return;
+            TileEntity tile = dir.getTileEntity(machineTile.worldObj, machineTile);
+            if (tile instanceof IFluidIO otherIO && tile instanceof IFluidTransfer && tile instanceof IFluidInventory otherFluidInv) {
+				Connection otherCon = otherIO.getFluidIOForSide(dir.getOpposite());
+                int otherActiveSlot = otherIO.getActiveFluidSlotForSide(dir.getOpposite());
+                if (otherCon == Connection.NONE || otherActiveSlot == -1) return;
+                if (con == Connection.INPUT && otherCon == Connection.OUTPUT) {
+                    if (otherFluidInv.getFluidInSlot(otherActiveSlot) != null) {
+                        fluidTransfer.take(otherFluidInv.getFluidInSlot(otherActiveSlot), dir);
+                    }
+                } else if (con == Connection.OUTPUT && otherCon == Connection.INPUT) {
+                    if (fluidInv.getFluidInSlot(activeSlot) != null) {
+                        fluidTransfer.give(dir);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public String getTexture() {
+        return texture;
+    }
+
+    @Override
+    public ItemCover getItem() {
+        return SIItems.pumpCover;
+    }
+
+    @Override
+    public void onInstalled(Direction dir, IAcceptsCovers machine, Player player) {
+        player.sendMessage("Cover installed!");
+        super.onInstalled(dir, machine, player);
+    }
+
+    @Override
+    public void onRemoved(Player player) {
+        player.sendMessage("Cover removed!");
+        super.onRemoved(player);
+    }
+
+    @Override
+    public void buttonClicked(int id, int button, int channel) {
+
+    }
+}
