@@ -52,6 +52,7 @@ val prismAccountsFile = providers.provider {
 
 loom {
     customMinecraftMetadata.set("https://downloads.betterthanadventure.net/bta-client/${libs.versions.btaChannel.get()}/${libs.versions.bta.get()}/manifest.json")
+	accessWidenerPath.set(file("src/main/resources/signalindustries.classtweaker"))
 	runs {
 		prismAccountsFile.orNull?.let { file ->
 			val account: Provider<Account> = providers.fileContents(layout.file(providers.provider { file }))

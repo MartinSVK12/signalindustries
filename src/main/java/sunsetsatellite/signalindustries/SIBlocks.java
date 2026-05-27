@@ -7,6 +7,14 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.blocks.logic.*;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicUndroppable;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
+import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityCrusher;
+import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityPlateFormer;
 import sunsetsatellite.signalindustries.util.MachineTextures;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.VerticalMachineTextures;
@@ -21,8 +29,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static sunsetsatellite.signalindustries.SIConfig.block;
-import static sunsetsatellite.signalindustries.SignalIndustries.LOGGER;
-import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
+import static sunsetsatellite.signalindustries.SIConfig.config;
+import static sunsetsatellite.signalindustries.SignalIndustries.*;
+import static sunsetsatellite.signalindustries.SignalIndustries.ORE_BLOCK;
 
 public class SIBlocks extends DataInitializer {
 
@@ -308,6 +317,239 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures().withDefaultTexture("world_resin_transparent"))
 			.withTags(BlockTags.NOT_IN_CREATIVE_MENU);
 
+		signalumOre = customBlock(new BlockBuilder(MOD_ID)
+				.setLuminance(3)
+				.setBlockSound(BlockSounds.STONE)
+				.setHardness(3)
+				.setResistance(25).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"signalumOre",
+			"signalite_ore",
+			"signalumOre",
+			3,
+			BlockLogicOreSignalite::new,
+			new MachineTextures().withDefaultTexture("signalum_ore").withOverbrightTextures("signalum_ore_overlay")
+		);
+
+		dilithiumOre = customBlock(new BlockBuilder(MOD_ID)
+				.setLuminance(3)
+				.setBlockSound(BlockSounds.STONE)
+				.setHardness(75)
+				.setResistance(100).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"dilithiumOre",
+			"dilithium_ore",
+			"dilithiumOre",
+			config.getInt("Other.dilithiumMiningLevel"),
+			BlockLogicOreDilithium::new,
+			new MachineTextures().withDefaultTexture("dilithium_ore")
+		);
+
+		dilithiumCrystalBlock = customBlock(new BlockBuilder(MOD_ID)
+				.setLuminance(1)
+				.setHardness(20)
+				.setResistance(1000).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"dilithiumCrystalBlock",
+			"dilithium_crystal_block",
+			"dilithiumCrystalBlock",
+			config.getInt("Other.dilithiumMiningLevel"),
+			BlockLogicDilithiumCrystal::new,
+			new MachineTextures().withDefaultTexture("dilithium_crystal_block")
+		);
+
+		dimensionalCrystalBlock = customBlock(new BlockBuilder(MOD_ID)
+				.setLuminance(1)
+				.setHardness(20)
+				.setResistance(1000).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"dimensionalCrystalBlock",
+			"dimensional_crystal_block",
+			"dimensionalCrystalBlock",
+			config.getInt("Other.dilithiumMiningLevel"),
+			(block) -> new BlockLogicTransparent(block, Materials.GLASS),
+			new MachineTextures().withDefaultTexture("dimensional_crystal_block")
+		);
+
+		dimensionalShardOre = customBlock(new BlockBuilder(MOD_ID)
+				.setLuminance(3)
+				.setBlockSound(BlockSounds.STONE)
+				.setHardness(200)
+				.setResistance(50000).addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"dimensionalShardOre",
+			"dimensional_shard_ore",
+			"dimensionalShardOre",
+			config.getInt("Other.dilithiumMiningLevel"),
+			BlockLogicOreDimensionalShard::new,
+			new MachineTextures().withDefaultTexture("dimensional_shard_ore")
+		);
+
+		prototypeMachineCore = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.machine",
+			"prototype_machine_block",
+			"prototypeMachineCore",
+			2,
+			(block) -> new BlockLogicTiered(block, Materials.STONE, Tier.PROTOTYPE),
+			new MachineTextures().withDefaultTexture("machine_prototype"));
+
+		basicMachineCore = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.machine",
+			"basic_machine_block",
+			"basicMachineCore",
+			3,
+			(block) -> new BlockLogicTiered(block, Materials.METAL, Tier.BASIC),
+			new MachineTextures().withDefaultTexture("machine_basic"));
+
+		reinforcedMachineCore = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.machine",
+			"reinforced_machine_block",
+			"reinforcedMachineCore",
+			3,
+			(block) -> new BlockLogicTiered(block, Materials.METAL, Tier.REINFORCED),
+			new MachineTextures().withDefaultTexture("machine_reinforced"));
+
+		awakenedMachineCore = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.machine",
+			"awakened_machine_block",
+			"awakenedMachineCore",
+			3,
+			(block) -> new BlockLogicTiered(block, Materials.METAL, Tier.AWAKENED),
+			new MachineTextures().withDefaultTexture("machine_awakened"));
+
+		prototypeExtractor = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.extractor",
+			"prototype_extractor",
+			"prototypeExtractor",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityExtractor::new, "extractor"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultSideTextures("extractor_prototype_side_empty")
+				.withActiveSideTextures("extractor_prototype_side_active")
+				.withOverbrightSideTextures("extractor_overlay")
+		);
+
+		basicExtractor = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.extractor",
+			"basic_extractor",
+			"basicExtractor",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityExtractor::new, "extractor"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("extractor_basic_side_empty")
+				.withActiveSideTextures("extractor_basic_side_active")
+				.withOverbrightSideTextures("extractor_overlay")
+		);
+
+		prototypeCrusher = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.crusher",
+			"prototype_crusher",
+			"prototypeCrusher",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityCrusher::new, "crusher"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTopTexture("crusher_prototype_top_inactive")
+				.withDefaultNorthTexture("crusher_prototype_side")
+				.withActiveTopTexture("crusher_prototype_top_active")
+				.withActiveNorthTexture("crusher_prototype_side")
+				.withOverbrightTopTexture("crusher_overlay")
+		);
+
+		basicCrusher = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.crusher",
+			"basic_crusher",
+			"basicCrusher",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityCrusher::new, "crusher"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTopTexture("crusher_basic_top_inactive")
+				.withDefaultNorthTexture("crusher_basic_side")
+				.withActiveTopTexture("crusher_basic_top_active")
+				.withActiveNorthTexture("crusher_basic_side")
+				.withOverbrightTopTexture("crusher_overlay")
+		);
+
+		reinforcedCrusher = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.crusher",
+			"reinforced_crusher",
+			"reinforcedCrusher",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityCrusher::new, "crusher"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTopTexture("crusher_reinforced_top_inactive")
+				.withDefaultNorthTexture("crusher_reinforced_side")
+				.withActiveTopTexture("crusher_reinforced_top_active")
+				.withActiveNorthTexture("crusher_reinforced_side")
+				.withOverbrightTopTexture("crusher_overlay")
+		);
+
+		prototypeAlloySmelter = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.alloySmelter",
+			"prototype_alloy_smelter",
+			"prototypeAlloySmelter",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityAlloySmelter::new, "alloy_smelter"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("alloy_smelter_prototype_inactive")
+				.withActiveNorthTexture("alloy_smelter_prototype_active")
+				.withOverbrightNorthTexture("alloy_smelter_overlay")
+		);
+
+		basicAlloySmelter = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.alloySmelter",
+			"basic_alloy_smelter",
+			"basicAlloySmelter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityAlloySmelter::new, "alloy_smelter"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("alloy_smelter_basic_inactive")
+				.withActiveNorthTexture("alloy_smelter_basic_active")
+				.withOverbrightNorthTexture("alloy_smelter_overlay")
+		);
+
+		reinforcedAlloySmelter = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.alloySmelter",
+			"reinforced_alloy_smelter",
+			"reinforcedAlloySmelter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityAlloySmelter::new, "alloy_smelter"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("alloy_smelter_reinforced_inactive")
+				.withActiveNorthTexture("alloy_smelter_reinforced_active")
+				.withOverbrightNorthTexture("alloy_smelter_reinforced_overlay")
+		);
+
+		prototypePlateFormer = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.plateFormer",
+			"prototype_plate_former",
+			"prototypePlateFormer",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityPlateFormer::new, "plate_former"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("plate_former_prototype_inactive")
+				.withActiveNorthTexture("plate_former_prototype_active")
+				.withOverbrightNorthTexture("plate_former_overlay")
+		);
+
+		basicPlateFormer = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.plateFormer",
+			"basic_plate_former",
+			"basicPlateFormer",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityPlateFormer::new, "plate_former"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("plate_former_basic_inactive")
+				.withActiveNorthTexture("plate_former_basic_active")
+				.withOverbrightNorthTexture("plate_former_overlay")
+		);
+
+		reinforcedPlateFormer = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.plateFormer",
+			"reinforced_plate_former",
+			"reinforcedPlateFormer",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityPlateFormer::new, "plate_former"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("plate_former_reinforced_inactive")
+				.withActiveNorthTexture("plate_former_reinforced_active")
+				.withOverbrightNorthTexture("plate_former_overlay")
+		);
+
 		cobblestoneBricks = simpleBlock(
 			defaultBuilder(Tier.PROTOTYPE),
 			"prototype.bricks",
@@ -347,6 +589,73 @@ public class SIBlocks extends DataInitializer {
 			Materials.METAL,
 			new MachineTextures().withDefaultTexture("awakened_alloy_bricks")
 		);
+
+		rootedFabric = simpleBlock(defaultBuilder(Tier.PROTOTYPE).setHardness(50).setResistance(50000),
+			"rootedFabric",
+			"rooted_fabric",
+			"rootedFabric",
+			config.getInt("Other.dilithiumMiningLevel"),
+			Materials.STONE,
+			new MachineTextures()
+				.withDefaultTexture("rooted_fabric")
+		);
+
+		realityFabric = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.STONE).setHardness(150).setResistance(50000),
+			"realityFabric",
+			"reality_fabric",
+			"realityFabric",
+			config.getInt("Other.awakenedMiningLevel"),
+			(block) -> new BlockLogicUndroppable(block, Materials.STONE),
+			new MachineTextures()
+				.withDefaultTexture("reality_fabric")
+		);
+
+		eternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setHardness(75).setResistance(50000).setLuminance(12),
+			"eternalTreeLog",
+			"ashen_tree_log",
+			"eternalTreeLog",
+			3,
+			(block) -> new BlockLogicEternalTreeLog(block, Materials.WOOD),
+			new MachineTextures()
+				.withDefaultTexture("eternal_tree_log")
+				.withDefaultTopBottomTextures("eternal_tree_log_top")
+		).withTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_PICKAXE);
+
+		etherealLeaves = customBlock(new BlockBuilder(MOD_ID),
+			"leaves.ethereal",
+			"ethereal_leaves",
+			"etherealLeaves",
+			0,
+			(block) -> new BlockLogicLeavesEthereal(block, Materials.GRASS),
+			new MachineTextures()
+				.withDefaultTexture("ethereal_leaves")
+				.withOverbrightTextures("ethereal_leaves")
+		).withSound(BlockSounds.GRASS).withHardness(0.2F).withLightBlock(1).withTags(BlockTags.SHEARS_DO_SILK_TOUCH, BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS);
+
+		ashenTreeSapling = customBlock(new BlockBuilder(MOD_ID),
+			"sapling.ashen",
+			"ashen_tree_sapling",
+			"ashenTreeSapling",
+			0,
+			(block) -> new BlockLogicTransparent(block, Materials.PLANT),
+			new MachineTextures()
+				.withDefaultTexture("ashen_tree_sapling")
+		).withSound(BlockSounds.GRASS).withHardness(0.0F).withTags(BlockTags.PLANTABLE_IN_JAR);
+
+		fueledEternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setUnbreakable().setResistance(18000000).setLuminance(15),
+			"fueledEternalTreeLog",
+			"charged_ashen_tree_log",
+			"fueledEternalTreeLog",
+			3,
+			(block) -> new BlockLogicEternalTreeLog(block, Materials.WOOD),
+			new MachineTextures()
+				.withDefaultTexture("fueled_eternal_tree_log")
+				.withDefaultTopBottomTextures("fueled_eternal_tree_log_top")
+		);
+
+		dilithiumOre.withTags(ORE_BLOCK);
+		signalumOre.withTags(ORE_BLOCK);
+		dimensionalShardOre.withTags(ORE_BLOCK);
 
 		List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).toList();
 
@@ -422,6 +731,7 @@ public class SIBlocks extends DataInitializer {
 	public void afterBlockInit() {
 		init();
 		new SIFluids().init();
+		//new SIMultiblocks().init();
 		new SIWeather().init();
 		new SIBiomes().init();
 		new SIWorldTypes().init();

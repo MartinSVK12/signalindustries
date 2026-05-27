@@ -90,7 +90,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
 
     public boolean matchesRecipe(SearchQuery query) {
         if (query.query.getLeft() == SearchQuery.QueryType.NAME) {
-            String stackName = SignalIndustries.translateNameKey(getOutput().fluid.getName());
+            String stackName = Catalyst.translateNameKey(getOutput().fluid.getName());
             if (query.strict && stackName.equalsIgnoreCase(query.query.getRight())) {
                 return true;
             } else return !query.strict && stackName.toLowerCase().contains(query.query.getRight().toLowerCase());
@@ -154,7 +154,7 @@ public class RecipeEntryMachineFluid extends RecipeEntrySI<RecipeExtendedSymbol[
                         .flatMap(symbol -> symbol.resolveFluids().stream())
                         .filter(Objects::nonNull)
                         .map(FluidStack::copy)
-                        .collect(Collectors.toList());
+                        .toList();
                 List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).collect(Collectors.toList());
                 if (inputStack != null) {
                     Optional<FluidStack> recipeStack = recipeStacks.stream().filter(stack -> stack.isFluidEqual(inputStack)).findFirst();

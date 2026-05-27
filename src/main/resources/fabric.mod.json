@@ -27,6 +27,7 @@
     "sillydot",
     "bigjango13"
   ],
+	"accessWidener": "signalindustries.classtweaker",
   "environment": "*",
   "entrypoints": {
     "main": [

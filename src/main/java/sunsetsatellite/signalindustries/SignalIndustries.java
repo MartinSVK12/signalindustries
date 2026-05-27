@@ -213,14 +213,6 @@ public class SignalIndustries implements ModInitializer {
 		}
 	}
 
-	public static String translateNameKey(String s){
-		return I18n.getInstance().translateKey(s+".name");
-	}
-
-	public static String translateDescKey(String s){
-		return I18n.getInstance().translateKey(s+".name");
-	}
-
 	public static int getEnergyBurnTime(FluidStack stack) {
 		if (stack == null) {
 			return 0;

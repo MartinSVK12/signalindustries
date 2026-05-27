@@ -382,7 +382,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
 
     @Override
     public void writeAdditionalData(@NonNull CompoundTag tag) {
-        super.writeToNBT(tag);
+        super.writeAdditionalData(tag);
         tag.putInt("RecipeId", recipeId);
         /*if(currentRecipe != null) {
             tag.putString("CurrentRecipe",currentRecipe.toString());
@@ -391,7 +391,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
 
     @Override
     public void readAdditionalData(@NonNull CompoundTag tag) {
-        super.readFromNBT(tag);
+        super.readAdditionalData(tag);
         recipeId = tag.getInteger("RecipeId");
         /*if(currentRecipe == null && tag.containsKey("CurrentRecipe")) {
             //todo: why does this not work

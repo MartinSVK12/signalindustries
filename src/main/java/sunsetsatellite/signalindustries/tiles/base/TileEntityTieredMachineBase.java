@@ -112,7 +112,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
 
     @Override
     public void readAdditionalData(@NonNull CompoundTag tag) {
-        super.readFromNBT(tag);
+        super.readAdditionalData(tag);
         fuelBurnTicks = tag.getShort("BurnTime");
         progressTicks = tag.getShort("ProcessTime");
         progressMaxTicks = tag.getInteger("MaxProcessTime");

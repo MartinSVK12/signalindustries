@@ -7,6 +7,7 @@ import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemExtendedEnergyPackAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.items.tools.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -166,6 +167,16 @@ public class SIItems extends DataInitializer {
 	public void init() {
 		if (initialized) return;
 		LOGGER.info("Initializing items...");
+
+		infiniteSignalumCrystal = customItem(() ->
+				new ItemSignalumCrystal(
+					"infiniteSignalumCrystal",
+					key("item/infinite_signalite_crystal"),
+					item("infiniteSignalumCrystal"),
+					true
+				),
+			"infinite_signalum_crystal")
+			.setMaxStackSize(1);
 
 		crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
 		extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);
