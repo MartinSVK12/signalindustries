@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
@@ -14,6 +15,7 @@ import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.CustomStructure;
@@ -204,6 +206,10 @@ public class SignalIndustries implements ModInitializer {
 
 	public static String langKey(String key) {
 		return MOD_ID + "." + key;
+	}
+
+	public static CompoundTag scene(String scene){
+		return Catalyst.compoundOf(new String[]{"scene"},"signalindustries:"+scene);
 	}
 
 	public static void addMeteorLocation(MeteorLocation location) {

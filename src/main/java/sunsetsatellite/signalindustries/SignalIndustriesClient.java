@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.MpGuiEntryClient;
+import sunsetsatellite.catalyst.screens.util.GuiComponents;
+import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.ScreenDoubleMachine;
 import sunsetsatellite.signalindustries.gui.screens.ScreenFuelMachine;
@@ -29,6 +31,8 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		ClientEvents.AFTER_CLIENT_START.listen(this::afterClientStart);
 		ClientEvents.BLOCK_MODEL_RELOAD.listen((t)->new SIModels().initBlockModels(t));
 		ClientEvents.ITEM_MODEL_RELOAD.listen((t)->new SIModels().initItemModels(t));
+
+		//GuiComponents.register("blockRender", BlockRenderComponent.class);
 
 		Catalyst.GUIS.register(key("gui/crusher"), new MpGuiEntryClient(TileEntityCrusher.class, ScreenMachine.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/extractor"), new MpGuiEntryClient(TileEntityExtractor.class, ScreenFuelMachine.class, MenuMachine.class));

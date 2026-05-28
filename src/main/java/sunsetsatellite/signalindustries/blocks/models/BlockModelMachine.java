@@ -5,7 +5,6 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.entity.TileEntity;
-import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
@@ -13,10 +12,9 @@ import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
-import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.MachineTextures;
 
 import java.util.HashMap;
@@ -42,7 +40,7 @@ public class BlockModelMachine extends BlockModelCoverable {
 	public IconCoordinate getFullbrightLayerTexture(@NonNull WorldSource world, @NonNull TilePosc tilePos, @NonNull Side side) {
 		TileEntity tileEntity = world.getTileEntity(tilePos);
 		if(tileEntity instanceof IHasIOPreview ioPreview){
-			if(ioPreview.getPreview() != IOPreview.NONE){
+			if(ioPreview.getPreview() != IO.NONE){
 				return super.getFullbrightLayerTexture(world, tilePos, side);
 			}
 		}

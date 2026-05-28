@@ -12,7 +12,7 @@ import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IBooster;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public abstract class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IHasIOPreview, IActiveForm {
@@ -22,18 +22,18 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     public int progressMaxTicks = 200;
     public float speedMultiplier = 1;
     public float yield = 1;
-    public IOPreview preview = IOPreview.NONE;
+    public IO preview = IO.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
     public boolean disabled = false;
 
 
     @Override
     public void disableIOPreview() {
-        preview = IOPreview.NONE;
+        preview = IO.NONE;
     }
 
     @Override
-    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+    public void setTemporaryIOPreview(IO preview, int ticks) {
         IOPreviewTimer.value = ticks;
         IOPreviewTimer.max = ticks;
         IOPreviewTimer.unpause();
@@ -140,12 +140,12 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     }
 
     @Override
-    public IOPreview getPreview() {
+    public IO getPreview() {
         return preview;
     }
 
     @Override
-    public void setPreview(IOPreview preview) {
+    public void setPreview(IO preview) {
         this.preview = preview;
     }
 

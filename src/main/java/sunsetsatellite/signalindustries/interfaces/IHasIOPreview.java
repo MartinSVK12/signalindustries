@@ -1,13 +1,13 @@
 package sunsetsatellite.signalindustries.interfaces;
 
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 
 public interface IHasIOPreview {
-    IOPreview getPreview();
+    IO getPreview();
 
-    void setPreview(IOPreview preview);
+    void setPreview(IO preview);
 
-    void setTemporaryIOPreview(IOPreview preview, int ticks);
+    void setTemporaryIOPreview(IO preview, int ticks);
 
     void disableIOPreview();
 }

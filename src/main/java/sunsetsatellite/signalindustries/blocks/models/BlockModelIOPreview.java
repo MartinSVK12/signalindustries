@@ -19,7 +19,7 @@ import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 
 public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
 
@@ -30,7 +30,7 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
     public static boolean ioConfig = false;
     public static WorldSource ioConfigWorld = null;
     public static Vec3i ioConfigPos = null;
-    public static IOPreview ioType = IOPreview.NONE;
+    public static IO ioType = IO.NONE;
 
 	protected final TextureLayer fullbrightLayer = new TextureLayer().setAll(BLOCK_TEXTURE_UNASSIGNED);
 
@@ -76,7 +76,7 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
     public IconCoordinate getFullbrightLayerTexture(@NotNull WorldSource world, @NotNull TilePosc tilePos, @NotNull Side side) {
         TileEntity tileEntity = world.getTileEntity(tilePos);
         if (tileEntity instanceof IHasIOPreview) {
-            if (((IHasIOPreview) tileEntity).getPreview() != IOPreview.NONE) {
+            if (((IHasIOPreview) tileEntity).getPreview() != IO.NONE) {
                 switch (((IHasIOPreview) tileEntity).getPreview()) {
                     case ITEM:
                         if (tileEntity instanceof IItemIO itemIO) {

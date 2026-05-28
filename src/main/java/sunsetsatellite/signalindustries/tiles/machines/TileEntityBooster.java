@@ -19,7 +19,7 @@ import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IBooster;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.ArrayList;
@@ -35,16 +35,16 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     public int speedMultiplier = 1;
     public int cost = 40;
     public Random random = new Random();
-    public IOPreview preview = IOPreview.NONE;
+    public IO preview = IO.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
 
     @Override
     public void disableIOPreview() {
-        preview = IOPreview.NONE;
+        preview = IO.NONE;
     }
 
     @Override
-    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+    public void setTemporaryIOPreview(IO preview, int ticks) {
         IOPreviewTimer.value = ticks;
         IOPreviewTimer.max = ticks;
         IOPreviewTimer.unpause();
@@ -236,12 +236,12 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
 
 
     @Override
-    public IOPreview getPreview() {
+    public IO getPreview() {
         return preview;
     }
 
     @Override
-    public void setPreview(IOPreview preview) {
+    public void setPreview(IO preview) {
         this.preview = preview;
     }
 

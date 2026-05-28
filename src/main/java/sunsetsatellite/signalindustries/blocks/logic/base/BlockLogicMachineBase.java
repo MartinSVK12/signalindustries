@@ -25,7 +25,7 @@ import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
@@ -170,7 +170,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
             //TODO: some blocks have some io blocked and this ignores it
             ((IFluidIO) tile).setFluidIOForSide(dir, Connection.values()[(((IFluidIO) tile).getFluidIOForSide(dir).ordinal() + 1) % Connection.values().length]);
             if (tile instanceof IHasIOPreview) {
-                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.FLUID, 100);
+                ((IHasIOPreview) tile).setTemporaryIOPreview(IO.FLUID, 100);
             }
             player.sendMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
         }
@@ -184,7 +184,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
 
             ((IItemIO) tile).setItemIOForSide(dir, Connection.values()[(((IItemIO) tile).getItemIOForSide(dir).ordinal() + 1) % Connection.values().length]);
             if (tile instanceof IHasIOPreview) {
-                ((IHasIOPreview) tile).setTemporaryIOPreview(IOPreview.ITEM, 100);
+                ((IHasIOPreview) tile).setTemporaryIOPreview(IO.ITEM, 100);
             }
             player.sendMessage("Side " + dir.getSide() + " set to " + ((IItemIO) tile).getItemIOForSide(dir) + "!");
         }

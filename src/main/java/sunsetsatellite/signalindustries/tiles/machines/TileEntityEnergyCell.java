@@ -1,9 +1,7 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 
-import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.world.World;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -12,7 +10,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Map;
@@ -23,16 +21,16 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
     //does not do anything for any other tier
     public boolean isInfiniteSource = true;
 
-    public IOPreview preview = IOPreview.NONE;
+    public IO preview = IO.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
 
     @Override
     public void disableIOPreview() {
-        preview = IOPreview.NONE;
+        preview = IO.NONE;
     }
 
     @Override
-    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+    public void setTemporaryIOPreview(IO preview, int ticks) {
         IOPreviewTimer.value = ticks;
         IOPreviewTimer.max = ticks;
         IOPreviewTimer.unpause();
@@ -85,12 +83,12 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
     }
 
     @Override
-    public IOPreview getPreview() {
+    public IO getPreview() {
         return preview;
     }
 
     @Override
-    public void setPreview(IOPreview preview) {
+    public void setPreview(IO preview) {
         this.preview = preview;
     }
 

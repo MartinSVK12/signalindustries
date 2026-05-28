@@ -1,6 +1,6 @@
 package sunsetsatellite.signalindustries.util;
 
-public enum IOPreview {
+public enum IO {
     NONE,
     ITEM,
     FLUID

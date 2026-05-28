@@ -18,7 +18,7 @@ import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,16 +35,16 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
     //public MachineRecipesBase<ArrayList<Object>, ItemStack> recipes = InfuserRecipes.instance;
     public Random random = new Random();
     public TileEntity connectedTo;
-    public IOPreview preview = IOPreview.NONE;
+    public IO preview = IO.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
 
     @Override
     public void disableIOPreview() {
-        preview = IOPreview.NONE;
+        preview = IO.NONE;
     }
 
     @Override
-    public void setTemporaryIOPreview(IOPreview preview, int ticks) {
+    public void setTemporaryIOPreview(IO preview, int ticks) {
         IOPreviewTimer.value = ticks;
         IOPreviewTimer.max = ticks;
         IOPreviewTimer.unpause();
@@ -229,12 +229,12 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
     }
 
     @Override
-    public IOPreview getPreview() {
+    public IO getPreview() {
         return preview;
     }
 
     @Override
-    public void setPreview(IOPreview preview) {
+    public void setPreview(IO preview) {
         this.preview = preview;
     }
 

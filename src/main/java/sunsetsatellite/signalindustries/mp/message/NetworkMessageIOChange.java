@@ -9,7 +9,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.util.IOPreview;
+import sunsetsatellite.signalindustries.util.IO;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
 import turniplabs.halplibe.helper.network.UniversalPacket;
@@ -19,11 +19,11 @@ public class NetworkMessageIOChange implements NetworkMessage {
     public Vec3i pos;
     public Connection connection;
     public Direction dir;
-    public IOPreview io;
+    public IO io;
     public int slot;
     public Class<? extends TileEntity> tileClass;
 
-    public NetworkMessageIOChange(Vec3i pos, Connection connection, Direction dir, IOPreview io, int slot, Class<? extends TileEntity> tileClass) {
+    public NetworkMessageIOChange(Vec3i pos, Connection connection, Direction dir, IO io, int slot, Class<? extends TileEntity> tileClass) {
         this.pos = pos;
         this.connection = connection;
         this.dir = dir;
@@ -51,7 +51,7 @@ public class NetworkMessageIOChange implements NetworkMessage {
     public void decodeFromUniversalPacket(@NotNull UniversalPacket packet) {
         connection = Connection.values()[packet.readInt()];
         dir = Direction.values()[packet.readInt()];
-        io = IOPreview.values()[packet.readInt()];
+        io = IO.values()[packet.readInt()];
         slot = packet.readInt();
         pos = new Vec3i(packet.readCompoundTag());
         tileClass = TileEntityDispatcher.getClassFromID(packet.readString());

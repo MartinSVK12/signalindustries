@@ -174,7 +174,7 @@ public class SIItems extends DataInitializer {
 		signalumCrystalEmpty = simpleItem("signalumCrystalEmpty", "signalite_crystal_empty", "signalumCrystalEmpty", "signalum_crystal_empty");
 		awakenedSignalumCrystal = simpleItem("awakenedSignalumCrystal", "awakened_signalite_crystal", "awakenedSignalumCrystal", "awakened_signalum_crystal").setMaxStackSize(1);
 		awakenedSignalumFragment = simpleItem("awakenedSignalumFragment", "awakened_signalite_fragment", "awakenedSignalumFragment", "awakened_signalum_fragment");
-		coalDust = simpleItem("coalDust", "coal_dust", "coalDust", "coaldust");
+		coalDust = simpleItem("coalDust", "coal_dust", "coalDust", "coal_dust");
 		ironDust = simpleItem("ironDust", "iron_dust", "ironDust", "iron_dust");
 		goldDust = simpleItem("goldDust", "gold_dust", "goldDust", "gold_dust");
 		netherCoalDust = simpleItem("netherCoalDust", "nether_coal_dust", "netherCoalDust", "nethercoaldust");
