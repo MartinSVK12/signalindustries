@@ -32,7 +32,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		ClientEvents.BLOCK_MODEL_RELOAD.listen((t)->new SIModels().initBlockModels(t));
 		ClientEvents.ITEM_MODEL_RELOAD.listen((t)->new SIModels().initItemModels(t));
 
-		//GuiComponents.register("blockRender", BlockRenderComponent.class);
+		GuiComponents.register("blockRender", BlockRenderComponent.class);
 
 		Catalyst.GUIS.register(key("gui/crusher"), new MpGuiEntryClient(TileEntityCrusher.class, ScreenMachine.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/extractor"), new MpGuiEntryClient(TileEntityExtractor.class, ScreenFuelMachine.class, MenuMachine.class));
