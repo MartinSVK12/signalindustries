@@ -4,7 +4,7 @@ import net.fabricmc.api.DedicatedServerModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
-import sunsetsatellite.catalyst.core.util.mp.MpGuiEntry;
+import sunsetsatellite.catalyst.core.util.mp.GuiEntry;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityAlloySmelter;
@@ -20,9 +20,9 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 	@Override
 	public void onInitializeServer() {
 		LOGGER.info("SI Server is being initialized...");
-		Catalyst.GUIS.register(key("gui/crusher"), new MpGuiEntry(TileEntityCrusher.class, MenuMachine.class));
-		Catalyst.GUIS.register(key("gui/extractor"), new MpGuiEntry(TileEntityExtractor.class, MenuMachine.class));
-		Catalyst.GUIS.register(key("gui/alloy_smelter"), new MpGuiEntry(TileEntityAlloySmelter.class, MenuMachine.class));
-		Catalyst.GUIS.register(key("gui/plate_former"), new MpGuiEntry(TileEntityPlateFormer.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/crusher"), new GuiEntry(TileEntityCrusher.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/extractor"), new GuiEntry(TileEntityExtractor.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/alloy_smelter"), new GuiEntry(TileEntityAlloySmelter.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/plate_former"), new GuiEntry(TileEntityPlateFormer.class, MenuMachine.class));
 	}
 }

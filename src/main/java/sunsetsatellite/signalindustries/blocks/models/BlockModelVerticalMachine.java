@@ -40,7 +40,7 @@ public class BlockModelVerticalMachine extends BlockModelMachine{
 	}
 
 	@Override
-	public IconCoordinate getFullbrightLayerTexture(@NonNull WorldSource world, @NonNull TilePosc tilePos, @NonNull Side side) {
+	public IconCoordinate getFullbrightTexture(@NonNull WorldSource world, @NonNull TilePosc tilePos, @NonNull Side side) {
 		TileEntity tileEntity = world.getTileEntity(tilePos);
 		if(tileEntity instanceof IActiveForm machine){
 			if(machine.isBurning() && !machine.isDisabled()){

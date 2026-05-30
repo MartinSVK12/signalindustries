@@ -37,11 +37,11 @@ public class BlockModelMachine extends BlockModelCoverable {
 	}
 
 	@Override
-	public IconCoordinate getFullbrightLayerTexture(@NonNull WorldSource world, @NonNull TilePosc tilePos, @NonNull Side side) {
+	public IconCoordinate getFullbrightTexture(@NonNull WorldSource world, @NonNull TilePosc tilePos, @NonNull Side side) {
 		TileEntity tileEntity = world.getTileEntity(tilePos);
 		if(tileEntity instanceof IHasIOPreview ioPreview){
-			if(ioPreview.getPreview() != IO.NONE){
-				return super.getFullbrightLayerTexture(world, tilePos, side);
+			if(ioPreview.getPreview() != IO.NONE || ioConfig){
+				return super.getFullbrightTexture(world, tilePos, side);
 			}
 		}
 		if(tileEntity instanceof IActiveForm machine){

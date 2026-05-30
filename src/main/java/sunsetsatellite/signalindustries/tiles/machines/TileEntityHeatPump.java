@@ -153,7 +153,7 @@ public class TileEntityHeatPump extends TileEntityTieredMachineBase implements I
 
     public void processItem() {
         if (canProcess() && worldObj != null) {
-			TilePos pos = currentBlock.pos.pos;
+			TilePos pos = currentBlock.pos.tilePos();
             if(currentRecipe == SIRecipes.HEAT_PUMP.getItem("melting")){
 				Block<?> block = worldObj.getBlockType(pos);
                 if(block != null && Catalyst.listContains(Registries.ITEM_GROUPS.getItem("minecraft:stones"), new ItemStack(block, 1, currentBlock.meta), ItemStack::isItemEqual)){

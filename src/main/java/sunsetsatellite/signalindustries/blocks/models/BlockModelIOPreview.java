@@ -29,7 +29,7 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
 
     public static boolean ioConfig = false;
     public static WorldSource ioConfigWorld = null;
-    public static Vec3i ioConfigPos = null;
+    public static TilePosc ioConfigPos = null;
     public static IO ioType = IO.NONE;
 
 	protected final TextureLayer fullbrightLayer = new TextureLayer().setAll(BLOCK_TEXTURE_UNASSIGNED);
@@ -45,7 +45,7 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
 
 		Lighting.disable();
 		for (Side side : Side.sides) {
-			IconCoordinate tex = getFullbrightLayerTexture(worldSource, tilePos, side);
+			IconCoordinate tex = getFullbrightTexture(worldSource, tilePos, side);
 			if(tex == null) continue;
 			switch (side) {
 				case BOTTOM:
@@ -73,33 +73,100 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
 
 	}
 
-    public IconCoordinate getFullbrightLayerTexture(@NotNull WorldSource world, @NotNull TilePosc tilePos, @NotNull Side side) {
+	@Override
+	public void renderStandalone(@NotNull TessellatorGeneral tessellator, int metadata, byte lightIndex) {
+		super.renderStandalone(tessellator, metadata, lightIndex);
+
+		if(!ioConfig || ioConfigPos == null || ioConfigWorld == null) return;
+
+		AABBdc bounds = getBlockBoundsForItemRender();
+		tessellator.offsetTranslation(-0.5, -0.5, -0.5);
+
+		tessellator.startDrawingQuads();
+		tessellator.setLightmapCoord1i(lightIndex);
+
+		tessellator.setNormal(0.0f, -1.0f, 0.0f);
+		IconCoordinate bottom = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.BOTTOM);
+		renderBlocks.renderBottomFace(tessellator, bounds, 0.0, 0.0, 0.0, bottom);
+
+		tessellator.setNormal(0.0f, 1.0f, 0.0f);
+		IconCoordinate top = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.TOP);
+		renderBlocks.renderTopFace(tessellator, bounds, 0.0, 0.0, 0.0, top);
+
+		tessellator.setNormal(0.0f, 0.0f, -1.0f);
+		IconCoordinate north = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.NORTH);
+		renderBlocks.renderNorthFace(tessellator, bounds, 0.0, 0.0, 0.0, north);
+
+		tessellator.setNormal(0.0f, 0.0f, 1.0f);
+		IconCoordinate south = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.SOUTH);
+		renderBlocks.renderSouthFace(tessellator, bounds, 0.0, 0.0, 0.0, south);
+
+		tessellator.setNormal(-1.0f, 0.0f, 0.0f);
+		IconCoordinate west = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.WEST);
+		renderBlocks.renderWestFace(tessellator, bounds, 0.0, 0.0, 0.0, west);
+
+		tessellator.setNormal(1.0f, 0.0f, 0.0f);
+		IconCoordinate east = getFullbrightTexture(ioConfigWorld, ioConfigPos, Side.EAST);
+		renderBlocks.renderEastFace(tessellator, bounds, 0.0, 0.0, 0.0, east);
+
+		tessellator.draw();
+
+		tessellator.offsetTranslation(0.5F, 0.5, 0.5F);
+	}
+
+	public IconCoordinate getFullbrightTexture(@NotNull WorldSource world, @NotNull TilePosc tilePos, @NotNull Side side) {
         TileEntity tileEntity = world.getTileEntity(tilePos);
         if (tileEntity instanceof IHasIOPreview) {
+			if(ioConfig){
+				switch (ioType) {
+					case ITEM -> {
+						if (tileEntity instanceof IItemIO itemIO) {
+							Connection io = itemIO.getItemIOForSide(Direction.getDirectionFromSide(side.id));
+							return switch (io) {
+								case INPUT -> input;
+								case OUTPUT -> output;
+								case BOTH -> both;
+								case NONE -> null;
+							};
+						}
+					}
+					case FLUID -> {
+						if (tileEntity instanceof IFluidIO fluidIO) {
+							Connection io = fluidIO.getFluidIOForSide(Direction.getDirectionFromSide(side.id));
+							return switch (io) {
+								case INPUT -> input;
+								case OUTPUT -> output;
+								case BOTH -> both;
+								case NONE -> null;
+							};
+						}
+					}
+				}
+			}
             if (((IHasIOPreview) tileEntity).getPreview() != IO.NONE) {
                 switch (((IHasIOPreview) tileEntity).getPreview()) {
-                    case ITEM:
-                        if (tileEntity instanceof IItemIO itemIO) {
-                            Connection io = itemIO.getItemIOForSide(Direction.getDirectionFromSide(side.id));
+					case ITEM -> {
+						if (tileEntity instanceof IItemIO itemIO) {
+							Connection io = itemIO.getItemIOForSide(Direction.getDirectionFromSide(side.id));
 							return switch (io) {
-		                        case INPUT -> input;
-		                        case OUTPUT -> output;
-		                        case BOTH -> both;
-		                        case NONE -> null;
-	                        };
-                        }
-                        break;
-                    case FLUID:
-                        if (tileEntity instanceof IFluidIO fluidIO) {
-                            Connection io = fluidIO.getFluidIOForSide(Direction.getDirectionFromSide(side.id));
+								case INPUT -> input;
+								case OUTPUT -> output;
+								case BOTH -> both;
+								case NONE -> null;
+							};
+						}
+					}
+					case FLUID -> {
+						if (tileEntity instanceof IFluidIO fluidIO) {
+							Connection io = fluidIO.getFluidIOForSide(Direction.getDirectionFromSide(side.id));
 							return switch (io) {
-		                        case INPUT -> input;
-		                        case OUTPUT -> output;
-		                        case BOTH -> both;
-		                        case NONE -> null;
-	                        };
-                        }
-                        break;
+								case INPUT -> input;
+								case OUTPUT -> output;
+								case BOTH -> both;
+								case NONE -> null;
+							};
+						}
+					}
                 }
             }
         }

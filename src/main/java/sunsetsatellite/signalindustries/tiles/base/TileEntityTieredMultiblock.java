@@ -149,7 +149,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 for (BlockInstance structBlock : blocks) {
                     if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) != 1) {
-                            worldObj.setBlockData(structBlock.pos.pos, 1);
+                            worldObj.setBlockData(structBlock.pos.tilePos(), 1);
                         }
                     }
                 }
@@ -158,7 +158,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 for (BlockInstance structBlock : blocks) {
                     if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) == 1) {
-                            worldObj.setBlockData(structBlock.pos.pos, 0);
+                            worldObj.setBlockData(structBlock.pos.tilePos(), 0);
                         }
                     }
                 }

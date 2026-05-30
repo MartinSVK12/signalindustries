@@ -349,7 +349,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
                         Vec3i pos = new Vec3i(eX, eY, eZ);
                         Vec3f selfPos = new Vec3f(tilePos);
                         if (pos.distanceTo(selfPos) < range && dim == worldObj.dimension.id) {
-                            TileEntity tile = worldObj.getTileEntity(pos.pos);
+                            TileEntity tile = worldObj.getTileEntity(pos.tilePos());
                             if (tile instanceof Container || tile instanceof IFluidInventory) {
                                 if (!(tile instanceof TileEntityExternalIO)) {
                                     externalTile = tile;
@@ -394,7 +394,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
             tag.putInt("side", side.id);
             tag.putInt("dim", dim);
             externalTilePos = tag;
-            TileEntity tile = worldObj.getTileEntity(pos.pos);
+            TileEntity tile = worldObj.getTileEntity(pos.tilePos());
             if (pos.distanceTo(selfPos) < range) {
                 if (dim == worldObj.dimension.id) {
                     if (tile instanceof Container || tile instanceof IFluidInventory) {
