@@ -12,9 +12,7 @@ import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicUndroppable;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityCrusher;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.util.MachineTextures;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.VerticalMachineTextures;
@@ -548,6 +546,66 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultNorthTexture("plate_former_reinforced_inactive")
 				.withActiveNorthTexture("plate_former_reinforced_active")
 				.withOverbrightNorthTexture("plate_former_overlay")
+		);
+
+		basicCrystalChamber = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.crystalChamber",
+			"basic_crystal_chamber",
+			"basicCrystalChamber",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityCrystalChamber::new, "crystal_chamber"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("basic_crystal_chamber_side_inactive")
+				.withActiveNorthTexture("basic_crystal_chamber_side_active")
+				.withOverbrightNorthTexture("chamber_overlay")
+		);
+
+		reinforcedCrystalChamber = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.crystalChamber",
+			"reinforced_crystal_chamber",
+			"reinforcedCrystalChamber",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityCrystalChamber::new, "crystal_chamber"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("reinforced_crystal_chamber_side_inactive")
+				.withActiveNorthTexture("reinforced_crystal_chamber_side_active")
+				.withOverbrightNorthTexture("reinforced_chamber_overlay")
+		);
+
+		prototypeCrystalCutter = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.crystalCutter",
+			"prototype_crystal_cutter",
+			"prototypeCrystalCutter",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityCrystalCutter::new, "crystal_cutter"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("crystal_cutter_prototype_inactive")
+				.withActiveNorthTexture("crystal_cutter_prototype_active")
+				.withOverbrightNorthTexture("cutter_overlay")
+		);
+
+		basicCrystalCutter = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.crystalCutter",
+			"basic_crystal_cutter",
+			"basicCrystalCutter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityCrystalCutter::new, "crystal_cutter"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("crystal_cutter_basic_inactive")
+				.withActiveNorthTexture("crystal_cutter_basic_active")
+				.withOverbrightNorthTexture("cutter_overlay")
+		);
+
+		reinforcedCrystalCutter = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.crystalCutter",
+			"reinforced_crystal_cutter",
+			"reinforcedCrystalCutter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.REINFORCED, TileEntityCrystalCutter::new, "crystal_cutter"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("crystal_cutter_reinforced_inactive")
+				.withActiveNorthTexture("crystal_cutter_reinforced_active")
+				.withOverbrightNorthTexture("reinforced_cutter_overlay")
 		);
 
 		cobblestoneBricks = simpleBlock(

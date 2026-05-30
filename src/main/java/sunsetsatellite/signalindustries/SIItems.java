@@ -188,7 +188,7 @@ public class SIItems extends DataInitializer {
 		stonePlate = simpleItem("stonePlate", "stone_plate", "stonePlate", "stone_plate");
 		crystalAlloyPlate = simpleItem("crystalAlloyPlate", "crystal_alloy_plate", "crystalAlloyPlate", "crystal_alloy_plate");
 		steelPlate = simpleItem("steelPlate", "steel_plate", "steelPlate", "steel_plate");
-		reinforcedCrystalAlloyPlate = simpleItem("reinforcedCrystalAlloyPlate", "reinforced_crystal_alloy_plate", "reinforcedCrystalAlloyPlate", "reinforcedcrystalalloyplate");
+		reinforcedCrystalAlloyPlate = simpleItem("reinforcedCrystalAlloyPlate", "reinforced_crystal_alloy_plate", "reinforcedCrystalAlloyPlate", "reinforced_crystal_alloy_plate");
 		saturatedSignalumAlloyPlate = simpleItem("saturatedSignalumAlloyPlate", "saturated_signalite_alloy_plate", "saturatedSignalumAlloyPlate", "saturated_signalum_alloy_plate");
 		dilithiumPlate = simpleItem("dilithiumPlate", "dilithium_plate", "dilithiumPlate", "dilithium_plate");
 		voidAlloyPlate = simpleItem("voidAlloyPlate", "void_alloy_plate", "voidAlloyPlate", "void_alloy_plate");

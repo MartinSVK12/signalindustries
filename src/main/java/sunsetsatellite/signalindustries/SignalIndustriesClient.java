@@ -8,12 +8,9 @@ import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.catalyst.screens.util.GuiComponents;
 import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
-import sunsetsatellite.signalindustries.gui.screens.ScreenFuelMachine;
-import sunsetsatellite.signalindustries.gui.screens.ScreenMachine;
+import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityAlloySmelter;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityCrusher;
-import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityPlateFormer;
+import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import turniplabs.halplibe.event.defs.ClientEvents;
 
 import java.awt.*;
@@ -35,8 +32,10 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		//GuiComponents.register("blockRender", BlockRenderComponent.class);
 		Catalyst.GUIS.register(key("gui/crusher"), new TileGuiEntry<>(TileEntityCrusher.class, MenuMachine.class, ScreenMachine::new));
 		Catalyst.GUIS.register(key("gui/extractor"), new TileGuiEntry<>(TileEntityExtractor.class, MenuMachine.class, ScreenFuelMachine::new));
-		Catalyst.GUIS.register(key("gui/alloy_smelter"), new TileGuiEntry<>(TileEntityAlloySmelter.class, MenuMachine.class, ScreenMachine::new));
+		Catalyst.GUIS.register(key("gui/alloy_smelter"), new TileGuiEntry<>(TileEntityAlloySmelter.class, MenuMachine.class, ScreenDoubleMachine::new));
 		Catalyst.GUIS.register(key("gui/plate_former"), new TileGuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class, ScreenMachine::new));
+		Catalyst.GUIS.register(key("gui/crystal_cutter"), new TileGuiEntry<>(TileEntityCrystalCutter.class, MenuMachine.class, ScreenCrystalCutter::new));
+		Catalyst.GUIS.register(key("gui/crystal_chamber"), new TileGuiEntry<>(TileEntityCrystalChamber.class, MenuMachine.class, ScreenCrystalChamber::new));
 	}
 
 	public void beforeClientStart() {
