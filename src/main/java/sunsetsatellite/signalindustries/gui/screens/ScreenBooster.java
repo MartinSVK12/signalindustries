@@ -6,26 +6,21 @@ import sunsetsatellite.catalyst.screens.component.ButtonComponent;
 import sunsetsatellite.catalyst.screens.component.ImageComponent;
 import sunsetsatellite.catalyst.screens.component.ProgressBarComponent;
 import sunsetsatellite.catalyst.screens.component.TextComponent;
-import sunsetsatellite.catalyst.screens.component.base.GuiComponent;
 import sunsetsatellite.catalyst.screens.menu.MenuComposed;
 import sunsetsatellite.catalyst.screens.screen.ScreenComposedContainer;
-import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
-import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.IO;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.scene;
 
-public class ScreenMachine extends ScreenComposedContainer {
+public class ScreenBooster extends ScreenComposedContainer {
 
-	public TileEntityTieredMachineBase tile;
+	public TileEntityBooster tile;
 
-	public ScreenMachine(ContainerInventory playerInv, TileEntityTieredMachineBase inv) {
-		this(playerInv, inv, "simple_machine");
-	}
-
-	public ScreenMachine(ContainerInventory playerInv, TileEntityTieredMachineBase inv, String scene) {
-		super(new MenuMachine(playerInv, inv), scene(scene));
+	public ScreenBooster(ContainerInventory playerInv, TileEntityBooster inv) {
+		super(new MenuMachine(playerInv, inv), scene(inv.tier == Tier.BASIC ? "redstone_booster" : "booster"));
 		this.tile = inv;
 		TextComponent name = get("machineName");
 		ImageComponent background = get("background");
@@ -62,19 +57,11 @@ public class ScreenMachine extends ScreenComposedContainer {
 	@Override
 	public void tick() {
 		super.tick();
-		ProgressBarComponent energy = get("energyBar");
-		ProgressBarComponent progress = get("progressBar");
+		ProgressBarComponent energy = (ProgressBarComponent) components.get("energyBar");
+		ProgressBarComponent progress = (ProgressBarComponent) components.get("progressBar");
 		energy.max = tile.fuelMaxBurnTicks;
 		energy.setProgress(tile.fuelBurnTicks);
 		progress.max = tile.progressMaxTicks;
 		progress.setProgress(tile.progressTicks);
-		TextComponent speed = get("speedModifier");
-		if(tile.speedMultiplier > 1) {
-			speed.visible = true;
-			speed.text = tile.speedMultiplier + "x";
-			speed.color = tile.speedMultiplier >= 3 ? 0xFFFFA500 : (tile.speedMultiplier >= 2 ? 0xFFFF00FF : 0xFFFF8080);
-		} else {
-			speed.visible = false;
-		}
 	}
 }

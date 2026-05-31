@@ -4,11 +4,16 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
+import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
+import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemExtendedEnergyPackAttachment;
 import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.items.tools.ItemSignalumCrystal;
+import sunsetsatellite.signalindustries.items.tools.ItemSignalumDrill;
+import sunsetsatellite.signalindustries.items.tools.ItemSignalumSaber;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -126,18 +131,18 @@ public class SIItems extends DataInitializer {
 	public static Item heatingCoil;
 	public static Item coolingCoil;
 
-	public static /*ItemAttachment*/ Item pulsarAttachment;
+	public static ItemAttachment pulsarAttachment;
 	public static ItemAttachment extendedEnergyPack;
 	public static ItemWingsAttachment crystalWings;
-	public static /*ItemAttachment*/ Item annihilationCrown;
-	public static /*ItemAttachment*/ Item basicBackpack;
-	public static /*ItemAttachment*/ Item reinforcedBackpack;
-	public static /*ItemAttachment*/ Item nightVisionLens;
-	public static /*ItemAttachment*/ Item movementBoosters;
-	public static /*ItemPortableWorkbench*/ Item portableWorkbench;
-	public static /*ItemSmartWatch*/ Item smartWatch;
-	public static /*ItemAttachment*/ Item abilityModule;
-	public static /*ItemAttachment*/ Item awakenedAbilityModule;
+	public static ItemAttachment annihilationCrown;
+	public static ItemAttachment basicBackpack;
+	public static ItemAttachment reinforcedBackpack;
+	public static ItemAttachment nightVisionLens;
+	public static ItemAttachment movementBoosters;
+	public static ItemPortableWorkbench portableWorkbench;
+	public static ItemSmartWatch smartWatch;
+	public static ItemAttachment abilityModule;
+	public static ItemAttachment awakenedAbilityModule;
 
 	public static Item romChipProjectile;
 	public static Item romChipBoost;
@@ -245,6 +250,16 @@ public class SIItems extends DataInitializer {
 
 		raziel = simpleItem("raziel", "raziel", "raziel", "raziel");
 
+		signalumCrystalBattery = customItem(() ->
+				new ItemSignalumCrystal(
+					"signalumCrystal.battery",
+					key("item/signalite_crystal_battery"),
+					item("signalumCrystalBattery"),
+					false
+				),
+			"signalum_crystal_battery")
+			.setMaxStackSize(1);
+
 		infiniteSignalumCrystal = customItem(() ->
 				new ItemSignalumCrystal(
 					"infiniteSignalumCrystal",
@@ -254,6 +269,50 @@ public class SIItems extends DataInitializer {
 				),
 			"infinite_signalum_crystal")
 			.setMaxStackSize(1);
+
+		portableWorkbench = (ItemPortableWorkbench) customItem(() -> new ItemPortableWorkbench(
+				"basic.portableWorkbench",
+				key("item/portable_workbench"),
+				item("portableWorkbench"),
+				Tier.BASIC),
+			"portable_workbench")
+			.setMaxStackSize(1);
+
+		smartWatch = (ItemSmartWatch) customItem(() -> new ItemSmartWatch(
+				"basic.smartWatch",
+				key("item/smart_watch"),
+				item("smartWatch"),
+				Tier.BASIC),
+			"smartwatch")
+			.setMaxStackSize(1);
+
+		basicSignalumDrill = customItem(() -> new ItemSignalumDrill(
+				"basic.signalumDrill",
+				key("item/basic_signalite_drill"),
+				item("basicSignalumDrill"), toolMaterialBasic, Tier.BASIC),
+			"signalum_drill"
+		).setMaxStackSize(1);
+
+		reinforcedSignalumDrill = customItem(() -> new ItemSignalumDrill(
+				"reinforced.signalumDrill",
+				key("item/reinforced_signalite_drill"),
+				item("reinforcedSignalumDrill"), toolMaterialReinforced, Tier.REINFORCED),
+			"signalum_drill_reinforced"
+		).setMaxStackSize(1);
+
+		signalumSaber = customItem(() -> new ItemSignalumSaber(
+				"reinforced.signalumSaber",
+				key("item/reinforced_signalite_saber"),
+				item("signalumSaber"), toolMaterialReinforced, Tier.REINFORCED),
+			"signalum_saber_unpowered"
+		).setMaxStackSize(1);
+
+		configurationTablet = customItem(() -> new ItemConfigurationTablet(
+				"configurationTablet.rotation",
+				key("item/configuration_tablet"),
+				item("configurationTablet")),
+			"configuration_tablet_rotation"
+		).setMaxStackSize(1);
 
 		crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
 		extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);

@@ -9,6 +9,7 @@ import sunsetsatellite.catalyst.screens.util.GuiComponents;
 import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.*;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import turniplabs.halplibe.event.defs.ClientEvents;
@@ -36,6 +37,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/plate_former"), new TileGuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class, ScreenMachine::new));
 		Catalyst.GUIS.register(key("gui/crystal_cutter"), new TileGuiEntry<>(TileEntityCrystalCutter.class, MenuMachine.class, ScreenCrystalCutter::new));
 		Catalyst.GUIS.register(key("gui/crystal_chamber"), new TileGuiEntry<>(TileEntityCrystalChamber.class, MenuMachine.class, ScreenCrystalChamber::new));
+		Catalyst.GUIS.register(key("gui/booster"), new TileGuiEntry<>(TileEntityBooster.class, MenuMachine.class, ScreenBooster::new));
 	}
 
 	public void beforeClientStart() {

@@ -49,8 +49,8 @@ public class ScreenIO extends ScreenComposedContainer {
 		super(new MenuComposed(menuComposed.playerInventory, (FluidItemContainer) menuComposed.inventory), tag);
 		tile = (TileEntityFluidItemContainer) menuComposed.itemInventory;
 		this.io = io;
-		((TextComponent) components.get("title")).text = "Configure: "+io.name();
-		((ButtonComponent) components.get("allI")).buttonClicked.connect((s, t)->{
+		this.<TextComponent>get("title").text = "Configure: "+io.name();
+		this.<ButtonComponent>get("allI").buttonClicked.connect((s, t)->{
 			for (Direction dir : Direction.values()) {
 				if(EnvironmentHelper.isSinglePlayer()){
 					tile.itemConnections.replaceAll((D,C)->Connection.INPUT);
@@ -61,7 +61,7 @@ public class ScreenIO extends ScreenComposedContainer {
 				}
 			}
 		});
-		((ButtonComponent) components.get("allO")).buttonClicked.connect((s, t)->{
+		this.<ButtonComponent>get("allO").buttonClicked.connect((s, t)->{
 			for (Direction dir : Direction.values()) {
 				if(EnvironmentHelper.isSinglePlayer()){
 					tile.itemConnections.replaceAll((D,C)->Connection.OUTPUT);
@@ -72,7 +72,7 @@ public class ScreenIO extends ScreenComposedContainer {
 				}
 			}
 		});
-		((ButtonComponent) components.get("clear")).buttonClicked.connect((s, t)->{
+		this.<ButtonComponent>get("clear").buttonClicked.connect((s, t)->{
 			for (Direction dir : Direction.values()) {
 				if(EnvironmentHelper.isSinglePlayer()){
 					tile.itemConnections.replaceAll((D,C)->Connection.NONE);

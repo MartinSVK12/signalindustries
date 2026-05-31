@@ -11,6 +11,7 @@ import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicUndroppable;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.util.MachineTextures;
@@ -606,6 +607,51 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultNorthTexture("crystal_cutter_reinforced_inactive")
 				.withActiveNorthTexture("crystal_cutter_reinforced_active")
 				.withOverbrightNorthTexture("reinforced_cutter_overlay")
+		);
+
+		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.booster",
+			"basic_booster",
+			"redstoneBooster",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityBooster::new, "booster"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("basic_booster_side_inactive")
+				.withDefaultNorthTexture("basic_booster_top_inactive")
+				.withActiveSideTextures("basic_booster_side_active")
+				.withActiveNorthTexture("basic_booster_top_active")
+				.withOverbrightSideTextures("basic_booster_overlay")
+				.withOverbrightNorthTexture("basic_booster_overlay_top")
+		);
+
+		dilithiumBooster = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.booster",
+			"reinforced_booster",
+			"dilithiumBooster",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityBooster::new, "booster"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("dilithium_booster_side_inactive")
+				.withDefaultNorthTexture("dilithium_top_inactive")
+				.withActiveSideTextures("dilithium_booster_side_active")
+				.withActiveNorthTexture("dilithium_top_active")
+				.withOverbrightSideTextures("booster_overlay")
+				.withOverbrightNorthTexture("dilithium_machine_overlay")
+		);
+
+		awakenedBooster = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.booster",
+			"awakened_booster",
+			"awakenedBooster",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityBooster::new, "booster"),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultSideTextures("awakened_booster_side_inactive")
+				.withDefaultNorthTexture("awakened_booster_top_inactive")
+				.withActiveSideTextures("awakened_booster_side_active")
+				.withActiveNorthTexture("awakened_booster_top_active")
+				.withOverbrightSideTextures("awakened_booster_overlay")
+				.withOverbrightNorthTexture("dilithium_machine_overlay")
 		);
 
 		cobblestoneBricks = simpleBlock(
