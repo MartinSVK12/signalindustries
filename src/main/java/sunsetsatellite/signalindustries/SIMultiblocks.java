@@ -35,7 +35,7 @@ public class SIMultiblocks extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing multiblocks...");
 
-        wrathTree = new SIMultiblock(MOD_ID, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
+        //wrathTree = new SIMultiblock(MOD_ID, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
         // Example:
         /*CompoundTag multiblockData = new StructureBuilder('M', SIBlocks.basicInductionSmelter, 5)
                 .addLayer("BBO",
@@ -55,17 +55,17 @@ public class SIMultiblocks extends DataInitializer {
                 .build();*/
         inductionSmelterBasic = new SIMultiblock(MOD_ID,  "basicInductionSmelter", "basicInductionSmelter", false, Tier.BASIC);
         inductionSmelterReinforced = new SIMultiblock(MOD_ID,  "reinforcedInductionSmelter", "reinforcedInductionSmelter", false, Tier.REINFORCED);
-        wakingPlateFormer = new SIMultiblock(MOD_ID,  "wakingPlateFormer", "wakingPlateFormer", false, Tier.REINFORCED);
-        wakingAlloySmelter = new SIMultiblock(MOD_ID,  "wakingAlloySmelter", "wakingAlloySmelter", false, Tier.REINFORCED);
-        wakingCrusher = new SIMultiblock(MOD_ID,  "wakingCrusher", "wakingCrusher", false, Tier.REINFORCED);
-        wakingInfuser = new SIMultiblock(MOD_ID,  "wakingInfuser", "wakingInfuser", false, Tier.REINFORCED);
+        //wakingPlateFormer = new SIMultiblock(MOD_ID,  "wakingPlateFormer", "wakingPlateFormer", false, Tier.REINFORCED);
+        //wakingAlloySmelter = new SIMultiblock(MOD_ID,  "wakingAlloySmelter", "wakingAlloySmelter", false, Tier.REINFORCED);
+        //wakingCrusher = new SIMultiblock(MOD_ID,  "wakingCrusher", "wakingCrusher", false, Tier.REINFORCED);
+        //wakingInfuser = new SIMultiblock(MOD_ID,  "wakingInfuser", "wakingInfuser", false, Tier.REINFORCED);
         dimAnchorMultiblock = new SIMultiblock(MOD_ID,  "dimensionalAnchor", "dimensionalAnchor", false, Tier.REINFORCED);
-        signalumReactor = new SIMultiblock(MOD_ID,  "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
-        extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
-        warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
+        //signalumReactor = new SIMultiblock(MOD_ID,  "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
+        //extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
+        //warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
         //altarOfCreation = new SIMultiblock(MOD_ID,  "altarOfCreation", "altarOfCreation", false, Tier.AWAKENED);
 
-        CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
+        /*CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
                 .loadJson("/assets/signalindustries/structures/greenhouse.json")
                 .mapSymbol('C', new ItemStack(SIBlocks.basicCasing, 1, -1))
                 .mapSymbol('G', new ItemStack(Blocks.GLASS, 1, -1))
@@ -77,9 +77,9 @@ public class SIMultiblocks extends DataInitializer {
                 .mapSymbol('L', new ItemStack(Blocks.LAMP_INVERTED_ACTIVE, 1, -1))
                 .build();
 
-        greenhouse = new SIMultiblock(MOD_ID, "greenhouse", greenhouseData, false, Tier.BASIC);
+        greenhouse = new SIMultiblock(MOD_ID, "greenhouse", greenhouseData, false, Tier.BASIC);*/
 
-        CompoundTag laserDrillData = new StructureBuilder('M', SIBlocks.reinforcedLaserDrill, 2)
+        /*CompoundTag laserDrillData = new StructureBuilder('M', SIBlocks.reinforcedLaserDrill, 2)
                 .loadJson("/assets/signalindustries/structures/laserDrill.json")
                 .mapSymbol('1', new ItemStack(SIBlocks.reinforcedCasing, 1, -1))
                 .mapSymbol('2', new ItemStack(SIBlocks.reinforcedCasing2, 1, -1))
@@ -91,21 +91,21 @@ public class SIMultiblocks extends DataInitializer {
                 .mapSymbol('E', new ItemStack(SIBlocks.reinforcedEnergyConnector, 1, -1))
                 .build();
 
-        laserDrill = new SIMultiblock(MOD_ID, "laserDrill", laserDrillData, false, Tier.REINFORCED);
+        laserDrill = new SIMultiblock(MOD_ID, "laserDrill", laserDrillData, false, Tier.REINFORCED);*/
 
         Multiblock.multiblocks.put("dimensionalAnchor", dimAnchorMultiblock);
-        Multiblock.multiblocks.put("wrathTree", wrathTree);
-        Multiblock.multiblocks.put("signalumReactor", signalumReactor);
-        Multiblock.multiblocks.put("extractionManifold", extractionManifold);
+        //Multiblock.multiblocks.put("wrathTree", wrathTree);
+        //Multiblock.multiblocks.put("signalumReactor", signalumReactor);
+        //Multiblock.multiblocks.put("extractionManifold", extractionManifold);
         Multiblock.multiblocks.put("basicInductionSmelter", inductionSmelterBasic);
         Multiblock.multiblocks.put("reinforcedInductionSmelter", inductionSmelterReinforced);
-        Multiblock.multiblocks.put("wakingPlateFormer", wakingPlateFormer);
-        Multiblock.multiblocks.put("wakingAlloySmelter", wakingAlloySmelter);
-        Multiblock.multiblocks.put("wakingCrusher", wakingCrusher);
-        Multiblock.multiblocks.put("wakingInfuser", wakingInfuser);
-        Multiblock.multiblocks.put("warpGate", warpGate);
-        Multiblock.multiblocks.put("laserDrill", laserDrill);
-        Multiblock.multiblocks.put("greenhouse", greenhouse);
+        //Multiblock.multiblocks.put("wakingPlateFormer", wakingPlateFormer);
+        //Multiblock.multiblocks.put("wakingAlloySmelter", wakingAlloySmelter);
+        //Multiblock.multiblocks.put("wakingCrusher", wakingCrusher);
+        //Multiblock.multiblocks.put("wakingInfuser", wakingInfuser);
+        //Multiblock.multiblocks.put("warpGate", warpGate);
+        //Multiblock.multiblocks.put("laserDrill", laserDrill);
+        //Multiblock.multiblocks.put("greenhouse", greenhouse);
         //Multiblock.multiblocks.put("altarOfCreation", altarOfCreation);
 
         LOGGER.info("Loaded {} multiblocks..", Multiblock.multiblocks.size());

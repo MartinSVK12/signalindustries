@@ -11,7 +11,12 @@ import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.event.defs.ClientEvents;
 
 import java.awt.*;
@@ -29,6 +34,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		ClientEvents.AFTER_CLIENT_START.listen(this::afterClientStart);
 		ClientEvents.BLOCK_MODEL_RELOAD.listen((t)->new SIModels().initBlockModels(t));
 		ClientEvents.ITEM_MODEL_RELOAD.listen((t)->new SIModels().initItemModels(t));
+		ClientEvents.TILE_ENTITY_RENDERER_RELOAD.listen((t)->new SIModels().initTileEntityModels(t));
 
 		//GuiComponents.register("blockRender", BlockRenderComponent.class);
 		Catalyst.GUIS.register(key("gui/crusher"), new TileGuiEntry<>(TileEntityCrusher.class, MenuMachine.class, ScreenMachine::new));
@@ -38,6 +44,12 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/crystal_cutter"), new TileGuiEntry<>(TileEntityCrystalCutter.class, MenuMachine.class, ScreenCrystalCutter::new));
 		Catalyst.GUIS.register(key("gui/crystal_chamber"), new TileGuiEntry<>(TileEntityCrystalChamber.class, MenuMachine.class, ScreenCrystalChamber::new));
 		Catalyst.GUIS.register(key("gui/booster"), new TileGuiEntry<>(TileEntityBooster.class, MenuMachine.class, ScreenBooster::new));
+		Catalyst.GUIS.register(key("gui/infuser"), new TileGuiEntry<>(TileEntityInfuser.class, MenuMachine.class, ScreenInfuser::new));
+		Catalyst.GUIS.register(key("gui/anchor"), new TileGuiEntry<>(TileEntityDimensionalAnchor.class, MenuMachine.class, ScreenAnchor::new));
+		Catalyst.GUIS.register(key("gui/stabilizer"), new TileGuiEntry<>(TileEntityStabilizer.class, MenuMachine.class, ScreenStabilizer::new));
+		Catalyst.GUIS.register(key("gui/item_bus"), new TileGuiEntry<>(TileEntityItemBus.class, MenuMachine.class, ScreenItemBus::new));
+		Catalyst.GUIS.register(key("gui/fluid_hatch"), new TileGuiEntry<>(TileEntityFluidHatch.class, MenuMachine.class, ScreenFluidHatch::new));
+		Catalyst.GUIS.register(key("gui/energy_connector"), new TileGuiEntry<>(TileEntityEnergyConnector.class, MenuMachine.class, ScreenEnergyConnector::new));
 	}
 
 	public void beforeClientStart() {

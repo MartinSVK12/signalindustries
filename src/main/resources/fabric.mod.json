@@ -38,6 +38,9 @@
 		],
 		"server": [
 			"sunsetsatellite.signalindustries.SignalIndustriesServer"
+		],
+		"btwaila": [
+			"sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
 		]
 	},
   "mixins": [

@@ -8,13 +8,17 @@ import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
-import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachine;
-import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
-import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicUndroppable;
+import sunsetsatellite.signalindustries.blocks.logic.base.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.util.MachineTextures;
+import sunsetsatellite.signalindustries.util.MultiblockPart;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.VerticalMachineTextures;
 import turniplabs.halplibe.helper.BlockBuilder;
@@ -609,6 +613,30 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightNorthTexture("reinforced_cutter_overlay")
 		);
 
+		basicInfuser = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.infuser",
+			"basic_infuser",
+			"basicInfuser",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityInfuser::new, "infuser"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("infuser_basic_side_inactive")
+				.withActiveSideTextures("infuser_basic_side_active")
+				.withOverbrightSideTextures("infuser_overlay")
+		);
+
+		reinforcedInfuser = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.infuser",
+			"reinforced_infuser",
+			"reinforcedInfuser",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityInfuser::new, "infuser"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("infuser_reinforced_side_inactive")
+				.withActiveSideTextures("infuser_reinforced_side_active")
+				.withOverbrightSideTextures("reinforced_infuser_overlay")
+		);
+
 		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.booster",
 			"basic_booster",
@@ -654,6 +682,265 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightNorthTexture("dilithium_machine_overlay")
 		);
 
+		dilithiumStabilizer = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.stabilizer",
+			"reinforced_stabilizer",
+			"dilithiumStabilizer",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityStabilizer::new, "stabilizer").setVertical(),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("dilithium_stabilizer_side_inactive")
+				.withDefaultNorthTexture("dilithium_top_inactive")
+				.withActiveSideTextures("dilithium_stabilizer_side_active")
+				.withActiveNorthTexture("dilithium_top_active")
+				.withOverbrightSideTextures("stabilizer_overlay")
+				.withOverbrightNorthTexture("dilithium_machine_overlay"),
+			new VerticalMachineTextures(Tier.REINFORCED)
+				.withVerticalDefaultSideTextures("dilithium_stabilizer_side_inactive")
+				.withVerticalDefaultTopTexture("dilithium_top_inactive")
+				.withVerticalActiveSideTextures("dilithium_stabilizer_side_active")
+				.withVerticalActiveTopTexture("dilithium_top_active")
+				.withVerticalOverbrightSideTextures("stabilizer_overlay")
+				.withVerticalOverbrightTopTexture("dilithium_machine_overlay")
+		);
+
+		basicFluidInputHatch = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.fluidInputHatch",
+			"basic_fluid_input_hatch",
+			"basicFluidInputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.BASIC, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_fluid_input_hatch")
+		);
+
+		basicFluidOutputHatch = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.fluidOutputHatch",
+			"basic_fluid_output_hatch",
+			"basicFluidOutputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.BASIC, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_fluid_output_hatch")
+		);
+
+		basicItemInputBus = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.itemInputBus",
+			"basic_item_input_bus",
+			"basicItemInputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.BASIC, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_input_bus")
+		);
+
+		basicItemOutputBus = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.itemOutputBus",
+			"basic_item_output_bus",
+			"basicItemOutputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.BASIC, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_output_bus")
+		);
+
+		reinforcedFluidInputHatch = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.fluidInputHatch",
+			"reinforced_fluid_input_hatch",
+			"reinforcedFluidInputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("reinforced_fluid_input_hatch")
+		);
+
+		reinforcedFluidOutputHatch = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.fluidOutputHatch",
+			"reinforced_fluid_output_hatch",
+			"reinforcedFluidOutputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("reinforced_fluid_output_hatch")
+		);
+
+		reinforcedItemInputBus = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.itemInputBus",
+			"reinforced_item_input_bus",
+			"reinforcedItemInputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("reinforced_input_bus")
+		);
+
+		reinforcedItemOutputBus = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.itemOutputBus",
+			"reinforced_item_output_bus",
+			"reinforcedItemOutputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("reinforced_output_bus")
+		);
+
+		basicEnergyConnector = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.energyConnector",
+			"basic_energy_connector",
+			"basicEnergyConnector",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.BASIC, TileEntityEnergyConnector::new, "energy_connector", MultiblockPart.Type.ENERGY, MultiblockPart.IO.N_A),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_energy_connector")
+		);
+
+		reinforcedEnergyConnector = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.energyConnector",
+			"reinforced_energy_connector",
+			"reinforcedEnergyConnector",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityEnergyConnector::new, "energy_connector", MultiblockPart.Type.ENERGY, MultiblockPart.IO.N_A),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("reinforced_energy_connector")
+		);
+
+		awakenedEnergyConnector = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.energyConnector",
+			"awakened_energy_connector",
+			"awakenedEnergyConnector",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityEnergyConnector::new, "energy_connector", MultiblockPart.Type.ENERGY, MultiblockPart.IO.N_A),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultTexture("awakened_energy_connector")
+		);
+
+		dimensionalAnchor = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.dimensionalAnchor",
+			"dimensional_anchor",
+			"dimensionalAnchor",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityDimensionalAnchor::new, "anchor"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("dimensional_anchor_inactive")
+				.withDefaultTopTexture("dimensional_anchor_top_inactive")
+				.withActiveSideTextures("dimensional_anchor")
+				.withActiveTopTexture("dimensional_anchor_top")
+				.withActiveBottomTexture("dimensional_anchor_bottom")
+				.withOverbrightTextures("anchor_blank_overlay")
+				.withOverbrightSideTextures("anchor_overlay")
+				.withOverbrightTopTexture("anchor_top_overlay")
+		);
+
+		basicCasing = customBlock(
+			defaultBuilder(Tier.BASIC),
+			"basic.casing",
+			"basic_casing",
+			"basicCasing",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("basic_casing")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, BASIC_CASING, REPLACEABLE_CASING);
+
+		reinforcedCasing = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.casing",
+			"reinforced_casing",
+			"reinforcedCasing",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("reinforced_casing")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, REPLACEABLE_CASING, REINFORCED_CASING);
+
+		awakenedCasing = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.casing",
+			"awakened_casing",
+			"awakenedCasing",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("awakened_casing_0")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, AWAKENED_CASING, REPLACEABLE_CASING);
+
+		awakenedSocketCasing = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.casing.socket",
+			"awakened_socket_casing",
+			"awakenedSocketCasing",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("awakened_socket_casing_0")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, AWAKENED_CASING);
+
+		awakenedCasing2 = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.casing2",
+			"awakened_casing_2",
+			"awakenedCasing2",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("awakened_casing_2")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, AWAKENED_CASING, REPLACEABLE_CASING);
+
+		basicCasing2 = customBlock(
+			defaultBuilder(Tier.BASIC),
+			"basic.casing2",
+			"basic_casing_2",
+			"basicCasing2",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("basic_casing_2")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, BASIC_CASING, REPLACEABLE_CASING);
+
+		reinforcedCasing2 = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.casing2",
+			"reinforced_casing_2",
+			"reinforcedCasing2",
+			3,
+			(block) -> new BlockLogicCasing(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("reinforced_casing_2")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE, CASING, REPLACEABLE_CASING);
+
+		reinforcedGrate = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.grate",
+			"reinforced_grate",
+			"reinforcedGrate",
+			3,
+			(block) -> new BlockLogicNonSolid(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("reinforced_grate")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		awakenedGrate = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.grate",
+			"awakened_grate",
+			"awakenedGrate",
+			3,
+			(block) -> new BlockLogicNonSolid(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("awakened_grate")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		reinforcedFrame = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.frame",
+			"reinforced_frame",
+			"reinforcedFrame",
+			3,
+			(block) -> new BlockLogicNonSolid(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("reinforced_frame")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		reinforcedGlass = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.glass",
+			"reinforced_glass",
+			"reinforcedGlass",
+			3,
+			(block) -> new BlockLogicNonSolid(block, Materials.METAL),
+			new MachineTextures().withDefaultTexture("reinforced_glass_0")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
 		cobblestoneBricks = simpleBlock(
 			defaultBuilder(Tier.PROTOTYPE),
 			"prototype.bricks",
@@ -692,6 +979,62 @@ public class SIBlocks extends DataInitializer {
 			3,
 			Materials.METAL,
 			new MachineTextures().withDefaultTexture("awakened_alloy_bricks")
+		);
+
+		signalumAlloyCoil = customBlock(
+			defaultBuilder(Tier.BASIC),
+			"signalumAlloyCoil",
+			"signalite_alloy_coil",
+			"signalumAlloyCoil",
+			3,
+			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
+			new MachineTextures()
+				.withDefaultSouthTexture("signalum_alloy_coil")
+				.withDefaultNorthTexture("signalum_alloy_coil")
+				.withDefaultEastTexture("signalum_alloy_coil_2")
+				.withDefaultWestTexture("signalum_alloy_coil_2")
+				.withDefaultTopBottomTextures("signalum_alloy_coil_top")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		dilithiumCoil = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"dilithiumCoil",
+			"dilithium_coil",
+			"dilithiumCoil",
+			3,
+			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
+			new MachineTextures()
+				.withDefaultSideTextures("dilithium_coil")
+				.withDefaultTopBottomTextures("dilithium_coil_top")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		awakenedAlloyCoil = customBlock(
+			defaultBuilder(Tier.REINFORCED).setLuminance(15),
+			"awakenedAlloyCoil",
+			"awakened_alloy_coil",
+			"awakenedAlloyCoil",
+			3,
+			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
+			new MachineTextures()
+				.withDefaultSouthTexture("awakened_alloy_coil")
+				.withDefaultNorthTexture("awakened_alloy_coil")
+				.withDefaultEastTexture("awakened_alloy_coil_2")
+				.withDefaultWestTexture("awakened_alloy_coil_2")
+				.withDefaultTopBottomTextures("awakened_alloy_coil_top")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		glowingObsidian = simpleBlock(
+			new BlockBuilder(MOD_ID)
+				.setLuminance(10)
+				.setBlockSound(BlockSounds.STONE)
+				.setHardness(2)
+				.setResistance(1200),
+			"glowingObsidian",
+			"glowing_obsidian",
+			"glowingObsidian",
+			3,
+			Materials.STONE,
+			new MachineTextures().withDefaultTexture("glowing_obsidian").withOverbrightTextures("glowing_obsidian_overlay")
 		);
 
 		rootedFabric = simpleBlock(defaultBuilder(Tier.PROTOTYPE).setHardness(50).setResistance(50000),
@@ -835,7 +1178,7 @@ public class SIBlocks extends DataInitializer {
 	public void afterBlockInit() {
 		init();
 		new SIFluids().init();
-		//new SIMultiblocks().init();
+		new SIMultiblocks().init();
 		new SIWeather().init();
 		new SIBiomes().init();
 		new SIWorldTypes().init();

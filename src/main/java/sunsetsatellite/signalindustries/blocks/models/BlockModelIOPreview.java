@@ -21,7 +21,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.util.IO;
 
-public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
+public class BlockModelIOPreview extends BlockModelFullbright {
 
     public IconCoordinate input = TextureRegistry.getTexture("signalindustries:block/input_overlay");
     public IconCoordinate output = TextureRegistry.getTexture("signalindustries:block/output_overlay");
@@ -32,46 +32,9 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
     public static TilePosc ioConfigPos = null;
     public static IO ioType = IO.NONE;
 
-	protected final TextureLayer fullbrightLayer = new TextureLayer().setAll(BLOCK_TEXTURE_UNASSIGNED);
-
     public BlockModelIOPreview(Block<? extends BlockLogic> block) {
-        super((Block<BlockLogic>) block);
+        super(block);
     }
-
-	@Override
-	public boolean render(@NotNull TessellatorGeneral tessellator, @NotNull WorldSource worldSource, @NotNull TilePosc tilePos) {
-		boolean b = super.render(tessellator, worldSource, tilePos);
-		AABBdc bounds = this.block.getBoundsFromState(worldSource, tilePos);
-
-		Lighting.disable();
-		for (Side side : Side.sides) {
-			IconCoordinate tex = getFullbrightTexture(worldSource, tilePos, side);
-			if(tex == null) continue;
-			switch (side) {
-				case BOTTOM:
-					renderBlocks.renderBottomFace(tessellator, bounds, tilePos, tex);
-					break;
-				case TOP:
-					renderBlocks.renderTopFace(tessellator, bounds, tilePos, tex);
-					break;
-				case NORTH:
-					renderBlocks.renderNorthFace(tessellator, bounds, tilePos, tex);
-					break;
-				case SOUTH:
-					renderBlocks.renderSouthFace(tessellator, bounds, tilePos, tex);
-					break;
-				case WEST:
-					renderBlocks.renderWestFace(tessellator, bounds, tilePos, tex);
-					break;
-				case EAST:
-					renderBlocks.renderEastFace(tessellator, bounds, tilePos, tex);
-					break;
-			}
-		}
-		Lighting.enableLight();
-		return b;
-
-	}
 
 	@Override
 	public void renderStandalone(@NotNull TessellatorGeneral tessellator, int metadata, byte lightIndex) {
@@ -114,6 +77,7 @@ public class BlockModelIOPreview extends BlockModelStandard<BlockLogic> {
 		tessellator.offsetTranslation(0.5F, 0.5, 0.5F);
 	}
 
+	@Override
 	public IconCoordinate getFullbrightTexture(@NotNull WorldSource world, @NotNull TilePosc tilePos, @NotNull Side side) {
         TileEntity tileEntity = world.getTileEntity(tilePos);
         if (tileEntity instanceof IHasIOPreview) {
