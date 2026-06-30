@@ -1,18 +1,25 @@
 package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.catalyst.screens.util.GuiComponents;
+import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
 import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
@@ -50,6 +57,11 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/item_bus"), new TileGuiEntry<>(TileEntityItemBus.class, MenuMachine.class, ScreenItemBus::new));
 		Catalyst.GUIS.register(key("gui/fluid_hatch"), new TileGuiEntry<>(TileEntityFluidHatch.class, MenuMachine.class, ScreenFluidHatch::new));
 		Catalyst.GUIS.register(key("gui/energy_connector"), new TileGuiEntry<>(TileEntityEnergyConnector.class, MenuMachine.class, ScreenEnergyConnector::new));
+		Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new TileGuiEntry<>(TileEntityWakingAlloySmelter.class, MenuMachine.class, ScreenMultiblock::new));
+		Catalyst.GUIS.register(key("gui/waking_crusher"), new TileGuiEntry<>(TileEntityWakingCrusher.class, MenuMachine.class, ScreenMultiblock::new));
+		Catalyst.GUIS.register(key("gui/waking_plate_former"), new TileGuiEntry<>(TileEntityWakingPlateFormer.class, MenuMachine.class, ScreenMultiblock::new));
+		Catalyst.GUIS.register(key("gui/waking_infuser"), new TileGuiEntry<>(TileEntityWakingInfuser.class, MenuMachine.class, ScreenMultiblock::new));
+		Catalyst.GUIS.register(key("gui/energy_injector"), new TileGuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class, ScreenEnergyInjector::new));
 	}
 
 	public void beforeClientStart() {

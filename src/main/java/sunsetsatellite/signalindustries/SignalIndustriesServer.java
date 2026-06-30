@@ -9,9 +9,13 @@ import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
@@ -39,5 +43,10 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/item_bus"), new GuiEntry<>(TileEntityItemBus.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/fluid_hatch"), new GuiEntry<>(TileEntityFluidHatch.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/energy_connector"), new GuiEntry<>(TileEntityEnergyConnector.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new GuiEntry<>(TileEntityWakingAlloySmelter.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/waking_crusher"), new GuiEntry<>(TileEntityWakingCrusher.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/waking_plate_former"), new GuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/waking_infuser"), new GuiEntry<>(TileEntityWakingInfuser.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/energy_injector"), new GuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class));
 	}
 }

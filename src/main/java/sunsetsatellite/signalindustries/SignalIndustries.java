@@ -53,6 +53,7 @@ import static sunsetsatellite.signalindustries.SIConfig.config;
 public class SignalIndustries implements ModInitializer {
 	public static final String MOD_ID = HalpLibe.registerMod("signalindustries", true);
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static boolean DEBUG = false;
 
 	public static List<MeteorLocation> meteorLocations = new ArrayList<>();
 	public static Set<BlockInstance> uvLamps = new HashSet<>();

@@ -4,6 +4,7 @@ import net.minecraft.client.render.EntityRendererDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
+import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.block.Block;
@@ -15,7 +16,14 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
+import sunsetsatellite.signalindustries.render.RenderGreenhouse;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
 import turniplabs.halplibe.helper.ModelHelper;
 
 import static sunsetsatellite.signalindustries.SIBlocks.*;
@@ -37,6 +45,8 @@ public class SIModels {
 		dispatcher.addDispatch(reinforcedGlass, new BlockModelConnectedTexture(reinforcedGlass, "signalindustries:block/reinforced_glass", Catalyst.listOf(awakenedEnergyConnector)));
 
 		dispatcher.addDispatch(ashenTreeSapling, new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(blockTextures.get(ashenTreeSapling).defaultTextures.get(Side.BOTTOM)));
+
+		dispatcher.addDispatch(basicEnergyInjector, new BlockModelGeneric<>(basicEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_energy_injector")));
 
 		blockTextures.forEach((block, tex) -> {
 			if (dispatcher.hasDispatch(block)) return;
@@ -76,6 +86,12 @@ public class SIModels {
 
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
 		dispatcher.assignRenderer(TileEntityDimensionalAnchor.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWakingAlloySmelter.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWakingPlateFormer.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWakingCrusher.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWakingInfuser.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityLaserDrill.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityGreenhouse.class, new RenderGreenhouse());
 	}
 
 	public void initBlockColors(BlockColorDispatcher dispatcher) {

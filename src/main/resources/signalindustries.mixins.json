@@ -4,15 +4,15 @@
   "package": "sunsetsatellite.signalindustries.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-
+    "ChunkLoaderRegionAsyncMixin",
+    "WorldMixin"
   ],
   "client": [
-
+    "RenderGlobalMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "server": [
-
   ]
 }

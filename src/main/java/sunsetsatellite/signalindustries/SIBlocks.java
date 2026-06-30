@@ -10,9 +10,16 @@ import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyInjector;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
 import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
@@ -383,6 +390,51 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures().withDefaultTexture("dimensional_shard_ore")
 		);
 
+		emptyCrystalBlock = simpleBlock(
+			new BlockBuilder(MOD_ID)
+				.setLuminance(1)
+				.setBlockSound(BlockSounds.GLASS)
+				.setHardness(12)
+				.setResistance(1000)
+				.addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"emptyCrystalBlock",
+			"empty_crystal_block",
+			"emptyCrystalBlock",
+			3,
+			Materials.METAL,
+			new MachineTextures().withDefaultTexture("empty_crystal_block")
+		);
+
+		rawCrystalBlock = simpleBlock(
+			new BlockBuilder(MOD_ID)
+				.setLuminance(15)
+				.setBlockSound(BlockSounds.GLASS)
+				.setHardness(24)
+				.setResistance(50000)
+				.addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"rawCrystalBlock",
+			"saturated_crystal_block",
+			"rawCrystalBlock",
+			3,
+			Materials.METAL,
+			new MachineTextures().withDefaultTexture("saturated_crystal_block")
+		);
+
+		awakenedSignalumCrystalBlock = simpleBlock(
+			new BlockBuilder(MOD_ID)
+				.setLuminance(15)
+				.setBlockSound(BlockSounds.GLASS)
+				.setHardness(50)
+				.setResistance(1000000)
+				.addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"awakenedSignalumCrystalBlock",
+			"awakened_crystal_block",
+			"awakenedSignalumCrystalBlock",
+			3,
+			Materials.METAL,
+			new MachineTextures().withDefaultTexture("awakened_crystal_block")
+		);
+
 		prototypeMachineCore = customBlock(defaultBuilder(Tier.PROTOTYPE),
 			"prototype.machine",
 			"prototype_machine_block",
@@ -637,6 +689,16 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightSideTextures("reinforced_infuser_overlay")
 		);
 
+		basicEnergyInjector = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.energyInjector",
+			"basic_energy_injector",
+			"basicEnergyInjector",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityEnergyInjector::new, "energy_injector").setNonSolid(),
+			new MachineTextures()
+				.withDefaultTexture("basic_energy_injector_bottom")
+		);
+
 		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.booster",
 			"basic_booster",
@@ -829,6 +891,79 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightTextures("anchor_blank_overlay")
 				.withOverbrightSideTextures("anchor_overlay")
 				.withOverbrightTopTexture("anchor_top_overlay")
+		);
+
+		reinforcedLaserDrill = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.laserDrill",
+			"reinforced_laser_drill",
+			"reinforcedLaserDrill",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityLaserDrill::new, "laser_drill"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("reinforced_laser_drill")
+				.withActiveNorthTexture("reinforced_laser_drill_active")
+				.withOverbrightNorthTexture("laser_drill_overlay")
+		);
+
+		basicGreenhouse = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.greenhouse",
+			"basic_greenhouse",
+			"basicGreenhouse",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityGreenhouse::new, "greenhouse"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("basic_greenhouse_front_inactive")
+				.withActiveNorthTexture("basic_greenhouse_front_active")
+		);
+
+		wakingAlloySmelter = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.wakingAlloySmelter",
+			"waking_alloy_smelter",
+			"wakingAlloySmelter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingAlloySmelter::new, "waking_alloy_smelter"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("alloy_smelter_reinforced_inactive")
+				.withActiveNorthTexture("waking_alloy_smelter_reinforced_active")
+				.withOverbrightNorthTexture("waking_alloy_smelter_overlay")
+		);
+
+		wakingCrusher = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.wakingCrusher",
+			"waking_crusher",
+			"wakingCrusher",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingCrusher::new, "waking_crusher"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTopTexture("crusher_reinforced_top_inactive")
+				.withDefaultNorthTexture("waking_crusher_reinforced_side")
+				.withActiveTopTexture("crusher_reinforced_top_active")
+				.withActiveNorthTexture("waking_crusher_reinforced_side")
+				.withOverbrightTopTexture("crusher_overlay")
+		);
+
+		wakingPlateFormer = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.wakingPlateFormer",
+			"waking_plate_former",
+			"wakingPlateFormer",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingPlateFormer::new, "waking_plate_former"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("plate_former_reinforced_inactive")
+				.withActiveNorthTexture("waking_plate_former_reinforced_active")
+				.withOverbrightNorthTexture("waking_plate_former_overlay")
+		);
+
+		wakingInfuser = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.wakingInfuser",
+			"waking_infuser",
+			"wakingInfuser",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingInfuser::new, "waking_infuser"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("infuser_reinforced_side_inactive")
+				.withActiveSideTextures("waking_infuser_side_active")
+				.withOverbrightSideTextures("waking_infuser_overlay")
 		);
 
 		basicCasing = customBlock(
@@ -1178,7 +1313,6 @@ public class SIBlocks extends DataInitializer {
 	public void afterBlockInit() {
 		init();
 		new SIFluids().init();
-		new SIMultiblocks().init();
 		new SIWeather().init();
 		new SIBiomes().init();
 		new SIWorldTypes().init();

@@ -356,5 +356,6 @@ public class SIItems extends DataInitializer {
 
 	public void afterItemInit() {
 		init();
+		new SIMultiblocks().init();
 	}
 }
