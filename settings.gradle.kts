@@ -78,8 +78,8 @@ project(":catalyst-multipart").projectDir = file("../catalyst/modules/multipart"
 project(":catalyst-screens").projectDir = file("../catalyst/modules/screens")
 
 include(":tmb")
-include(":halplibe")
+//include(":halplibe")
 include(":btwaila")
 project(":tmb").projectDir = file("../tmb")
 project(":btwaila").projectDir = file("../btwaila")
-project(":halplibe").projectDir = file("../bta-halplibe")
+//project(":halplibe").projectDir = file("../bta-halplibe")

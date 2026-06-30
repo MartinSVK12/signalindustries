@@ -5,6 +5,7 @@ import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
+import net.minecraft.client.render.entity.EntityRendererSprite;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.block.Block;
@@ -16,6 +17,8 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
+import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
+import sunsetsatellite.signalindustries.items.models.ItemModelMeteorTracker;
 import sunsetsatellite.signalindustries.render.RenderGreenhouse;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
@@ -24,13 +27,17 @@ import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEn
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
-import turniplabs.halplibe.helper.ModelHelper;
+import sunsetsatellite.signalindustries.util.Tier;
 
 import static sunsetsatellite.signalindustries.SIBlocks.*;
-import static sunsetsatellite.signalindustries.SIItems.itemTextures;
+import static sunsetsatellite.signalindustries.SIItems.*;
+import static sunsetsatellite.signalindustries.SIItems.fuelCell;
+import static sunsetsatellite.signalindustries.SIItems.reinforcedMeteorTracker;
+import static sunsetsatellite.signalindustries.SignalIndustriesClient.LOGGER;
 
 public class SIModels {
 	public void initBlockModels(BlockModelDispatcher dispatcher) {
+		LOGGER.info("Initializing block models...");
 		dispatcher.addDispatch(dilithiumCrystalBlock,
 			new BlockModelTransparent<>(dilithiumCrystalBlock, false)
 				.setAllTextures(blockTextures.get(dilithiumCrystalBlock).defaultTextures.get(Side.TOP))
@@ -72,19 +79,25 @@ public class SIModels {
 	}
 
 	public void initItemModels(ItemModelDispatcher dispatcher) {
+		LOGGER.info("Initializing item models...");
 		itemTextures.forEach((item, texture) -> {
 			ItemModelStandard model = new ItemModelStandard(item, false);
 			model.setIcon(SignalIndustries.id("item/"+texture));
 			dispatcher.addDispatch(item, model);
 		});
+
+		dispatcher.addDispatch(meteorTracker, new ItemModelMeteorTracker(fuelCell, Tier.BASIC));
+		dispatcher.addDispatch(reinforcedMeteorTracker, new ItemModelMeteorTracker(fuelCell, Tier.REINFORCED));
 	}
 
 
 	public void initEntityModels(EntityRendererDispatcher dispatcher) {
-
+		LOGGER.info("Initializing entity models...");
+		dispatcher.assignRenderer(ProjectileCrystal.class, new EntityRendererSprite<>(volatileSignalumCrystal));
 	}
 
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
+		LOGGER.info("Initializing tile entity renderers...");
 		dispatcher.assignRenderer(TileEntityDimensionalAnchor.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWakingAlloySmelter.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWakingPlateFormer.class, new RenderMultiblock());

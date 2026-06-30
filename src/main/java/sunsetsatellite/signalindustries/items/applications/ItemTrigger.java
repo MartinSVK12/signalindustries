@@ -4,7 +4,6 @@ package sunsetsatellite.signalindustries.items.applications;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
@@ -56,7 +55,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
 
 
     @Override
-    public String getLanguageKey(ItemStack stack) {
+    public @NonNull String getLanguageKey(@NonNull ItemStack stack) {
         if (getAbility(stack) != null) {
             return "item.signalindustries.trigger." + stack.getData().getString("ability");
         } else {

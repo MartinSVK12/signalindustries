@@ -8,7 +8,9 @@
     "WorldMixin"
   ],
   "client": [
-    "RenderGlobalMixin"
+    "HudIngameMixin",
+    "RenderGlobalMixin",
+    "TextureManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

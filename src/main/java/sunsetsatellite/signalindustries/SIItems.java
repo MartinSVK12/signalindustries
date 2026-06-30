@@ -1,16 +1,19 @@
 package sunsetsatellite.signalindustries;
 
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
-import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
+import sunsetsatellite.signalindustries.abilities.powersuit.ScanSuitAbility;
+import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
-import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
-import sunsetsatellite.signalindustries.items.attachments.ItemExtendedEnergyPackAttachment;
-import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
+import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
+import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
+import sunsetsatellite.signalindustries.items.tools.ItemFuelCell;
 import sunsetsatellite.signalindustries.items.tools.ItemSignalumCrystal;
 import sunsetsatellite.signalindustries.items.tools.ItemSignalumDrill;
 import sunsetsatellite.signalindustries.items.tools.ItemSignalumSaber;
@@ -19,15 +22,14 @@ import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryCategory;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
-import turniplabs.halplibe.util.ItemInitEntrypoint;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
+import static sunsetsatellite.catalyst.Catalyst.listOf;
 import static sunsetsatellite.signalindustries.SIConfig.item;
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
 import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
@@ -161,11 +163,11 @@ public class SIItems extends DataInitializer {
 
 	public static Item raziel;
 
-	public static /*ItemSuitColorizer*/ Item suitColorizerWhite;
-	public static /*ItemSuitColorizer*/ Item suitColorizerBlue;
-	public static /*ItemSuitColorizer*/ Item suitColorizerPurple;
-	public static /*ItemSuitColorizer*/ Item suitColorizerTransparent;
-	public static /*ItemSuitColorizer*/ Item suitColorizerInverted;
+	public static ItemSuitColorizer suitColorizerWhite;
+	public static ItemSuitColorizer suitColorizerBlue;
+	public static ItemSuitColorizer suitColorizerPurple;
+	public static ItemSuitColorizer suitColorizerTransparent;
+	public static ItemSuitColorizer suitColorizerInverted;
 
 	public static Item dimensionMaker;
 
@@ -314,8 +316,80 @@ public class SIItems extends DataInitializer {
 			"configuration_tablet_rotation"
 		).setMaxStackSize(1);
 
+		volatileSignalumCrystal = customItem(
+			() -> new ItemVolatileSignalumCrystal("volatileSignalumCrystal", key("volatile_signalite_crystal"), item("volatileSignalumCrystal")),
+			"volatile_signalum_crystal"
+		).setMaxStackSize(4);
+
+		meteorTracker = customItem(() -> new ItemMeteorTracker("meteorTracker", key("item/meteor_tracker"), item("meteorTracker")), "meteor_tracker_uncalibrated").setMaxStackSize(1);
+		reinforcedMeteorTracker = customItem(() -> new ItemReinforcedMeteorTracker("reinforced.meteorTracker", key("item/reinforced_meteor_tracker"), item("reinforcedMeteorTracker")), "reinforced_meteor_tracker_uncalibrated").setMaxStackSize(1);
+
+		warpOrb = customItem(() -> new ItemWarpOrb("warpOrb", key("item/warp_orb"), item("warpOrb")), "warp_orb").setMaxStackSize(1);
+
+		fuelCell = customItem(() -> new ItemFuelCell("fuelCell", key("item/fuel_cell"), item("fuelCell")), "fuelcellempty").setMaxStackSize(1);
+
+		romChipProjectile = customItem(() -> new ItemRomChip("romChip.projectile", key("item/rom_chip_projectile"), item("romChipProjectile")), "chip1").setMaxStackSize(1);
+		romChipBoost = customItem(() -> new ItemRomChip("romChip.boost", key("item/rom_chip_boost"), item("romChipBoost")), "chip2").setMaxStackSize(1);
+		romChipShield = customItem(() -> new ItemRomChip("romChip.shield", key("item/rom_chip_shield"), item("romChipShield")), "chip3").setMaxStackSize(1);
+		romChipScan = customItem(() -> new ItemRomChip("romChip.scan", key("item/rom_chip_scab"), item("romChipScan")), "chip4").setMaxStackSize(1);
+
+		positionMemoryChip = customItem(() -> new ItemPositionChip("romChip.position", key("item/position_chip"), item("positionMemoryChip")), "position_chip").setMaxStackSize(1);
+
+		nullTrigger = customItem(() -> new ItemTrigger("trigger.null", key("item/trigger"), item("nullTrigger")), "trigger").setMaxStackSize(1);
+
+		scanAbilityContainer = customItem(() -> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()), "ability4").setMaxStackSize(1);
+
 		crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
 		extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);
+		movementBoosters = (ItemAttachment) customItem(() -> new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters", key("item/movement_boosters"), item("movementBoosters"), Catalyst.listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED), "movement_boosters").setMaxStackSize(2);
+
+		suitColorizerWhite = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.white",
+			key("item/suit_colorizer_white"),
+			item("suitColorizerWhite"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_white"), "colorizer_white").setMaxStackSize(1);
+
+		suitColorizerBlue = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.blue",
+			key("item/suit_colorizer_blue"),
+			item("suitColorizerBlue"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_blue"), "colorizer_blue").setMaxStackSize(1);
+
+		suitColorizerPurple = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.purple",
+			key("item/suit_colorizer_purple"),
+			item("suitColorizerPurple"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_purple"), "colorizer_purple").setMaxStackSize(1);
+
+		suitColorizerTransparent = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.transparent",
+			key("item/suit_colorizer_transparent"),
+			item("suitColorizerTransparent"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_transparent"), "colorizer_transparent").setMaxStackSize(1);
+
+		suitColorizerInverted = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.inverted",
+			key("item/suit_colorizer_inverted"),
+			item("suitColorizerInverted"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_inverted"), "colorizer_inverted").setMaxStackSize(1);
+
+		blueprint = customItem(() -> new ItemBlueprint("blueprint", key("item/blueprint"), item("blueprint")), "blueprint").setMaxStackSize(1);
+		goldprint = customItem(() -> new ItemGoldprint("goldprint", key("item/goldprint"), item("goldprint")), "goldprint").setMaxStackSize(1);
+
+		krowka = customItem(() -> new ItemFood(
+				"krowka",
+				key("item/krowka"),
+				item("krowka"),
+				1,
+				1,
+				false, 8),
+			"krowka"
+		);
 
 		List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).toList();
 

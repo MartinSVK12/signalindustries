@@ -22,9 +22,11 @@ import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnect
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.event.defs.ClientEvents;
+import turniplabs.halplibe.util.dependency.Key;
 
 import java.awt.*;
 
+import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
 
 public class SignalIndustriesClient implements ClientModInitializer {
@@ -34,11 +36,12 @@ public class SignalIndustriesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("SI Client is being initialized...");
-		ClientEvents.BEFORE_CLIENT_START.listen(this::beforeClientStart);
-		ClientEvents.AFTER_CLIENT_START.listen(this::afterClientStart);
-		ClientEvents.BLOCK_MODEL_RELOAD.listen((t)->new SIModels().initBlockModels(t));
-		ClientEvents.ITEM_MODEL_RELOAD.listen((t)->new SIModels().initItemModels(t));
-		ClientEvents.TILE_ENTITY_RENDERER_RELOAD.listen((t)->new SIModels().initTileEntityModels(t));
+		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID),this::beforeClientStart);
+		ClientEvents.AFTER_CLIENT_START.listen(Key.of(MOD_ID),this::afterClientStart);
+		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initBlockModels(t));
+		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initItemModels(t));
+		ClientEvents.TILE_ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initTileEntityModels(t));
+		ClientEvents.ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initEntityModels(t));
 
 		//GuiComponents.register("blockRender", BlockRenderComponent.class);
 		Catalyst.GUIS.register(key("gui/crusher"), new TileGuiEntry<>(TileEntityCrusher.class, MenuMachine.class, ScreenMachine::new));

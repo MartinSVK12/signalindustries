@@ -40,11 +40,9 @@ import sunsetsatellite.signalindustries.util.MeteorLocation;
 import turniplabs.halplibe.HalpLibe;
 import turniplabs.halplibe.event.defs.CommonEvents;
 import turniplabs.halplibe.helper.ArmorHelper;
-import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
-import turniplabs.halplibe.util.GameStartEntrypoint;
-import turniplabs.halplibe.util.RecipeEntrypoint;
+import turniplabs.halplibe.util.dependency.Key;
 
 import java.util.*;
 
@@ -181,12 +179,12 @@ public class SignalIndustries implements ModInitializer {
 		BlockTags.TAG_LIST.add(AWAKENED_CASING);
 		BlockTags.TAG_LIST.add(ORE_BLOCK);
 
-		CommonEvents.BEFORE_GAME_START.listen(this::beforeGameStart);
-		CommonEvents.AFTER_GAME_START.listen(this::afterGameStart);
-		CommonEvents.AFTER_BLOCK_INIT.listen(()->new SIBlocks().afterBlockInit());
-		CommonEvents.AFTER_ITEM_INIT.listen(()->new SIItems().afterItemInit());
-		CommonEvents.RECIPES_NAMESPACE_INIT.listen(()->new SIRecipes().initNamespaces());
-		CommonEvents.RECIPES_READY.listen(()->new SIRecipes().onRecipesReady());
+		CommonEvents.BEFORE_GAME_START.listen(Key.of(MOD_ID), this::beforeGameStart);
+		CommonEvents.AFTER_GAME_START.listen(Key.of(MOD_ID),this::afterGameStart);
+		CommonEvents.AFTER_BLOCK_INIT.listen(Key.of(MOD_ID),()->new SIBlocks().afterBlockInit());
+		CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID),()->new SIItems().afterItemInit());
+		CommonEvents.RECIPES_NAMESPACE_INIT.listen(Key.of(MOD_ID),()->new SIRecipes().initNamespaces());
+		CommonEvents.RECIPES_READY.listen(Key.of(MOD_ID),()->new SIRecipes().onRecipesReady());
 	}
 
 	public void beforeGameStart() {
