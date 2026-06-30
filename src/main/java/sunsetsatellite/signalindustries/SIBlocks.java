@@ -9,10 +9,7 @@ import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyInjector;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityExtractor;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
+import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
@@ -489,6 +486,36 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultSideTextures("extractor_basic_side_empty")
 				.withActiveSideTextures("extractor_basic_side_active")
 				.withOverbrightSideTextures("extractor_overlay")
+		);
+
+		basicCollector = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.collector",
+			"basic_collector",
+			"basicCollector",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityCollector::new, "collector"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTopTexture("basic_collector_top_inactive")
+				.withActiveTopTexture("basic_collector_top")
+				.withOverbrightTopTexture("collector_overlay")
+				.withDefaultSideTextures("basic_collector_side_inactive")
+				.withActiveSideTextures("basic_collector_side")
+				.withOverbrightSideTextures("crystal_overlay")
+		);
+
+		reinforcedCollector = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.collector",
+			"reinforced_collector",
+			"reinforcedCollector",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityCollector::new, "collector"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTopTexture("reinforced_collector_top_inactive")
+				.withActiveTopTexture("reinforced_collector_top")
+				.withOverbrightTopTexture("collector_overlay")
+				.withDefaultSideTextures("reinforced_collector_side_inactive")
+				.withActiveSideTextures("reinforced_collector_side")
+				.withOverbrightSideTextures("crystal_overlay")
 		);
 
 		prototypeCrusher = customBlock(defaultBuilder(Tier.PROTOTYPE),
