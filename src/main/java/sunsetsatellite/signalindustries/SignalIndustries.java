@@ -2,6 +2,9 @@ package sunsetsatellite.signalindustries;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.option.GameSettings;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.Option;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.block.tag.BlockTags;
@@ -10,7 +13,6 @@ import net.minecraft.core.entity.EntityDispatcher;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.World;
 import org.slf4j.Logger;
@@ -44,6 +46,7 @@ import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 import turniplabs.halplibe.util.dependency.Key;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 import static sunsetsatellite.signalindustries.SIConfig.config;
@@ -86,6 +89,15 @@ public class SignalIndustries implements ModInitializer {
 		new SIConfig();
 		new SIArt().init();
 
+		LOGGER.info("Binding to events...");
+		CommonEvents.BEFORE_GAME_START.listen(Key.of(MOD_ID), this::beforeGameStart);
+		CommonEvents.AFTER_GAME_START.listen(Key.of(MOD_ID),this::afterGameStart);
+		CommonEvents.AFTER_BLOCK_INIT.listen(Key.of(MOD_ID),()->new SIBlocks().afterBlockInit());
+		CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID),()->new SIItems().afterItemInit());
+		CommonEvents.RECIPES_NAMESPACE_INIT.listen(Key.of(MOD_ID),()->new SIRecipes().initNamespaces());
+		CommonEvents.RECIPES_READY.listen(Key.of(MOD_ID),()->new SIRecipes().onRecipesReady());
+
+		LOGGER.info("Registering tile entities...");
 		TileEntityDispatcher.addMapping(TileEntityExtractor.class, id("extractor"));
 		TileEntityDispatcher.addMapping(TileEntityCollector.class, id("collector"));
 		TileEntityDispatcher.addMapping(TileEntitySIFluidTank.class, id("fluid_tank"));
@@ -144,6 +156,7 @@ public class SignalIndustries implements ModInitializer {
 		TileEntityDispatcher.addMapping(TileEntityRedstoneClock.class, id("redstone_clock"));
 		TileEntityDispatcher.addMapping(TileEntityHeatPump.class, id("heat_pump"));
 
+		LOGGER.info("Registering entities...");
 		EntityDispatcher.getInstance().addMapping(ProjectileCrystal.class, id("volatile_crystal"), ProjectileCrystal::new, "entity.signalindustries.volatileCrystal");
 		EntityDispatcher.getInstance().addMapping(ProjectileFallingMeteor.class, id("falling_meteor"), ProjectileFallingMeteor::new,"entity.signalindustries.fallingMeteor");
 		EntityDispatcher.getInstance().addMapping(ProjectileEnergyOrb.class, id("energy_orb"), ProjectileEnergyOrb::new,"entity.signalindustries.energyOrb");
@@ -152,6 +165,7 @@ public class SignalIndustries implements ModInitializer {
 		EntityDispatcher.getInstance().addMapping(EntityRealityTear.class, id("reality_tear"), EntityRealityTear::new, "entity.signalindustries.realityTear");
 		EntityDispatcher.getInstance().addMapping(EntityShockwave.class, id("shockwave"), EntityShockwave::new, "entity.signalindustries.shockwave");
 
+		LOGGER.info("Registering packets...");
 		NetworkHandler.registerNetworkMessage(NetworkMessageRecipeIdChange::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageIOChange::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageBuilderConfig::new);
@@ -168,6 +182,7 @@ public class SignalIndustries implements ModInitializer {
 		NetworkHandler.registerNetworkMessage(NetworkMessagePowerSuitRemoteSync::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageRedstoneCoverSetFilter::new);
 
+		LOGGER.info("Registering tags...");
 		BlockTags.TAG_LIST.add(SIGNALUM_CONDUITS_CONNECT);
 		BlockTags.TAG_LIST.add(FLUID_CONDUITS_CONNECT);
 		BlockTags.TAG_LIST.add(ITEM_CONDUITS_CONNECT);
@@ -179,12 +194,21 @@ public class SignalIndustries implements ModInitializer {
 		BlockTags.TAG_LIST.add(AWAKENED_CASING);
 		BlockTags.TAG_LIST.add(ORE_BLOCK);
 
-		CommonEvents.BEFORE_GAME_START.listen(Key.of(MOD_ID), this::beforeGameStart);
-		CommonEvents.AFTER_GAME_START.listen(Key.of(MOD_ID),this::afterGameStart);
-		CommonEvents.AFTER_BLOCK_INIT.listen(Key.of(MOD_ID),()->new SIBlocks().afterBlockInit());
-		CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID),()->new SIItems().afterItemInit());
-		CommonEvents.RECIPES_NAMESPACE_INIT.listen(Key.of(MOD_ID),()->new SIRecipes().initNamespaces());
-		CommonEvents.RECIPES_READY.listen(Key.of(MOD_ID),()->new SIRecipes().onRecipesReady());
+		LOGGER.info("Registering options...");
+		for (Field field : SIKeybinds.class.getDeclaredFields()) {
+			try {
+				Object o = field.get(null);
+				if(o instanceof KeyBinding key){
+					GameSettings.register(key);
+				} else {
+					GameSettings.register((Option<?>) o);
+				}
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		//GameSettings.register(SIKeybinds.renderFluidInsideConduits);
+		//GameSettings.register(SIKeybinds.showSuitBackground);
 	}
 
 	public void beforeGameStart() {

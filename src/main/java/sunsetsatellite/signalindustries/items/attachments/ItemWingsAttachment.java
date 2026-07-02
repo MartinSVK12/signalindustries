@@ -1,8 +1,14 @@
 package sunsetsatellite.signalindustries.items.attachments;
 
+import net.minecraft.client.render.EntityRendererDispatcher;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.renderer.GLRenderer;
+import net.minecraft.client.render.tessellator.Tessellator;
+import net.minecraft.core.entity.EntityDispatcher;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import org.useless.dragonfly.data.entity.mojang.EntityGeometryMojangData;
 import org.useless.dragonfly.models.entity.StaticEntityModel;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -42,15 +48,19 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
     @Override
     public void renderWhenAttached(Player player, IPowerSuit signalumPowerSuit, StaticEntityModel modelBipedMain, ItemStack stack) {
         if (stack.getData().getBoolean("active")) {
-            loadTexture("/assets/signalindustries/attachments/wings_texture.png");
+            loadTexture("/assets/signalindustries/textures/attachments/wings_texture.png");
         } else {
-            loadTexture("/assets/signalindustries/attachments/wings_texture_inactive.png");
+            loadTexture("/assets/signalindustries/textures/attachments/wings_texture_inactive.png");
         }
+		StaticEntityModel model = EntityGeometryMojangData.Cache.getModel("geometry.signalindustries.wings", 0);
+		//GLRenderer.modelM4f().rotate(180,0,0,1);
+		//GLRenderer.modelM4f().scale(0.0625f, 0.0625f, 0.0625f);
+		//GLRenderer.modelM4f().translate(0f, 1f, 0.1f);
         /*StaticEntityModel model = DragonFly.loadEntityModel("geometry.signalindustries.wings", 0);
         GL11.glRotatef(180, 0.0F, 0.0F, 1.0F);
         GL11.glScalef(0.0625f, 0.0625f, 0.0625f);
-        GL11.glTranslatef(0f, 0, 0.1f);
-        model.render(Tessellator.instance);*/
+        GL11.glTranslatef(0f, 0, 0.1f);*/
+        model.render();
     }
 
     /*@Override

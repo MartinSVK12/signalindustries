@@ -20,6 +20,7 @@ import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
+import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitClient;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -41,34 +42,22 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
 
     @Override
     public boolean canFill(ItemStack stack) {
-        if (stack.getItem().equals(SIItems.signalumPowerSuitChestplate)) {
-            InventoryPowerSuit inv = new InventoryPowerSuit(stack);
-            InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
-            FluidStack fluidStack = inv.getFluidInSlot(0);
-            if (fluidStack == null) return true;
-            return fluidStack.amount < inv.getFluidCapacityForSlot(0);
-        }
-        return false;
-    }
-
-	//FIXME:
-    /*@Override
-    public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, EntityRendererItem itemRenderer) {
-        IPowerSuit ps = ((IPlayerPowerSuit<?>) player).getPowerSuit();
-
-        if (ps instanceof SignalumPowerSuitClient && getArmorShape().getSlotIndex() == 3) {
-            ((SignalumPowerSuitClient) ps).renderOverlay(guiIngame, player, height, width, mouseX, mouseY, fontRenderer, itemRenderer);
-        }
-    }
-
-    @Override
-    public void renderOverlay(ItemStack stack, IPowerSuit signalumPowerSuit, HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, FontRenderer fontRenderer, EntityRendererItem itemRenderer) {
-
-    }*/
+		if (stack.getItem().equals(SIItems.signalumPowerSuitChestplate)) {
+			InventoryPowerSuit inv = new InventoryPowerSuit(stack);
+			InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
+			FluidStack fluidStack = inv.getFluidInSlot(0);
+			if (fluidStack == null) return true;
+			return fluidStack.amount < inv.getFluidCapacityForSlot(0);
+		}
+		return false;
+	}
 
 	@Override
 	public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Gui gui, FontRenderer fontRenderer, EntityRendererItem itemRenderer) {
-
+		IPowerSuit ps = ((IPlayerPowerSuit<?>) player).getPowerSuit();
+		if(ps instanceof SignalumPowerSuitClient && getArmorShape() == HumanArmorShape.HEAD){
+			((SignalumPowerSuitClient) ps).renderOverlay(guiIngame, player, height, width, mouseX, mouseY, gui, fontRenderer, itemRenderer);
+		}
 	}
 
 	@Override

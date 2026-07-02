@@ -6,8 +6,12 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.GuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
+import sunsetsatellite.signalindustries.gui.menus.MenuBackpack;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
 import sunsetsatellite.signalindustries.gui.screens.*;
+import sunsetsatellite.signalindustries.invs.InventoryBackpack;
+import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
+import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -27,6 +31,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 	@Override
 	public void onInitializeServer() {
 		LOGGER.info("SI Server is being initialized...");
+		LOGGER.info("Registering serverside GUI menus...");
 		Catalyst.GUIS.register(key("gui/crusher"), new GuiEntry<>(TileEntityCrusher.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/extractor"), new GuiEntry<>(TileEntityExtractor.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/collector"), new GuiEntry<>(TileEntityCollector.class, MenuMachine.class));
@@ -46,5 +51,8 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/waking_plate_former"), new GuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/waking_infuser"), new GuiEntry<>(TileEntityWakingInfuser.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/energy_injector"), new GuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class));
+
+		Catalyst.GUIS.register(key("gui/power_suit"), new GuiEntry<>(InventoryPowerSuit.class, MenuPowerSuit.class));
+		Catalyst.GUIS.register(key("gui/power_suit"), new GuiEntry<>(InventoryBackpack.class, MenuBackpack.class));
 	}
 }

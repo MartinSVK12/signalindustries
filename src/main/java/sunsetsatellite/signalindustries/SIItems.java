@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries;
 
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.item.Items;
@@ -90,10 +91,10 @@ public class SIItems extends DataInitializer {
 	public static Item saturatedKey;
 	public static Item signalumSaber;
 	public static Item pulsar;
-	public static /*ItemSignalumPowerSuit*/ Item signalumPowerSuitHelmet;
-	public static /*ItemSignalumPowerSuit*/ Item signalumPowerSuitChestplate;
-	public static /*ItemSignalumPowerSuit*/ Item signalumPowerSuitLeggings;
-	public static /*ItemSignalumPowerSuit*/ Item signalumPowerSuitBoots;
+	public static ItemSignalumPowerSuit signalumPowerSuitHelmet;
+	public static ItemSignalumPowerSuit signalumPowerSuitChestplate;
+	public static ItemSignalumPowerSuit signalumPowerSuitLeggings;
+	public static ItemSignalumPowerSuit signalumPowerSuitBoots;
 	public static Item crystalChip;
 	public static Item pureCrystalChip;
 	public static Item awakenedCrystalChip;
@@ -337,11 +338,18 @@ public class SIItems extends DataInitializer {
 
 		nullTrigger = customItem(() -> new ItemTrigger("trigger.null", key("item/trigger"), item("nullTrigger")), "trigger").setMaxStackSize(1);
 
+		signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, HumanArmorShape.HEAD, Tier.REINFORCED), "signalumpowersuit_helmet").setMaxStackSize(1);
+		signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, HumanArmorShape.CHEST, Tier.REINFORCED), "signalumpowersuit_chestplate").setMaxStackSize(1);
+		signalumPowerSuitLeggings = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.leggings", key("item/power_suit_leggings"), item("signalumPowerSuitLeggings"), armorSignalumPowerSuit, HumanArmorShape.LEGS, Tier.REINFORCED), "signalumpowersuit_leggings").setMaxStackSize(1);
+		signalumPowerSuitBoots = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.boots", key("item/power_suit_boots"), item("signalumPowerSuitBoots"), armorSignalumPowerSuit, HumanArmorShape.BOOTS, Tier.REINFORCED), "signalumpowersuit_boots").setMaxStackSize(1);
+
 		scanAbilityContainer = customItem(() -> new ItemWithAbility("ability.scan", key("item/scan_ability_container"), item("scanAbilityContainer"), new ScanSuitAbility()), "ability4").setMaxStackSize(1);
 
 		crystalWings = (ItemWingsAttachment) customItem(() -> new ItemWingsAttachment("reinforced.attachment.wings", key("item/crystal_wings"), item("crystalWings"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "wings").setMaxStackSize(1);
 		extendedEnergyPack = (ItemAttachment) customItem(() -> new ItemExtendedEnergyPackAttachment("reinforced.attachment.extendedEnergyPack", key("item/extended_energy_pack"), item("extendedEnergyPack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "extended_energy_pack").setMaxStackSize(1);
 		movementBoosters = (ItemAttachment) customItem(() -> new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters", key("item/movement_boosters"), item("movementBoosters"), Catalyst.listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED), "movement_boosters").setMaxStackSize(2);
+		basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"), item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack").setMaxStackSize(1);
+		reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"), item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack").setMaxStackSize(1);
 
 		suitColorizerWhite = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.white",

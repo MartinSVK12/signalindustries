@@ -5,10 +5,16 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ChunkLoaderRegionAsyncMixin",
+    "MobMixin",
+    "PlayerMixin",
+    "PlayerRemoteMixin",
     "WorldMixin"
   ],
   "client": [
     "HudIngameMixin",
+    "MinecraftMixin",
+    "MobRendererPlayerMixin",
+    "PlayerLocalMixin",
     "RenderGlobalMixin",
     "TextureManagerMixin"
   ],
