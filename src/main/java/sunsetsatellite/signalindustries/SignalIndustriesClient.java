@@ -16,10 +16,14 @@ import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.catalyst.screens.util.GuiComponents;
 import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
 import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
+import sunsetsatellite.signalindustries.gui.menus.MenuAbilityModule;
 import sunsetsatellite.signalindustries.gui.menus.MenuBackpack;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
+import sunsetsatellite.signalindustries.gui.menus.MenuPulsar;
 import sunsetsatellite.signalindustries.gui.screens.*;
+import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.invs.InventoryBackpack;
+import sunsetsatellite.signalindustries.invs.InventoryPulsar;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.ScreenPowerSuit;
@@ -84,6 +88,8 @@ public class SignalIndustriesClient implements ClientModInitializer {
 
 		Catalyst.GUIS.register(key("gui/power_suit"), new ItemGuiEntry<>(InventoryPowerSuit.class, MenuPowerSuit.class, ScreenPowerSuit::new));
 		Catalyst.GUIS.register(key("gui/backpack"), new ItemGuiEntry<>(InventoryBackpack.class, MenuBackpack.class, ScreenBackpack::new));
+		Catalyst.GUIS.register(key("gui/ability_module"), new ItemGuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class, ScreenAbilityModule::new));
+		Catalyst.GUIS.register(key("gui/pulsar"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsar.class, ScreenPulsar::new));
 	}
 
 	public void beforeClientStart() {

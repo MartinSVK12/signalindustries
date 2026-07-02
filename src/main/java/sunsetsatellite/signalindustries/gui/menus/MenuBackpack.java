@@ -15,7 +15,7 @@ import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryBackpack;
 import sunsetsatellite.signalindustries.items.attachments.ItemBackpackAttachment;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
-import sunsetsatellite.signalindustries.util.SlotBackpack;
+import sunsetsatellite.signalindustries.util.slot.SlotBackpack;
 
 public class MenuBackpack extends MenuFluid {
 

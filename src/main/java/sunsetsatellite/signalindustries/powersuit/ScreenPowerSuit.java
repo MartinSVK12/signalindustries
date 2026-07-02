@@ -22,7 +22,7 @@ import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageOpenSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
-import sunsetsatellite.signalindustries.util.SlotAttachment;
+import sunsetsatellite.signalindustries.util.slot.SlotAttachment;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;

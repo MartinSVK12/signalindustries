@@ -19,6 +19,8 @@ import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
 import sunsetsatellite.signalindustries.items.models.ItemModelMeteorTracker;
+import sunsetsatellite.signalindustries.items.models.ItemModelPulsar;
+import sunsetsatellite.signalindustries.items.models.ItemModelTrigger;
 import sunsetsatellite.signalindustries.render.RenderGreenhouse;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
@@ -86,6 +88,8 @@ public class SIModels {
 			dispatcher.addDispatch(item, model);
 		});
 
+		dispatcher.addDispatch(nullTrigger, new ItemModelTrigger(nullTrigger));
+		dispatcher.addDispatch(pulsar, new ItemModelPulsar(pulsar));
 		dispatcher.addDispatch(meteorTracker, new ItemModelMeteorTracker(fuelCell, Tier.BASIC));
 		dispatcher.addDispatch(reinforcedMeteorTracker, new ItemModelMeteorTracker(fuelCell, Tier.REINFORCED));
 	}

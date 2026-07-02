@@ -14,10 +14,7 @@ import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
-import sunsetsatellite.signalindustries.items.tools.ItemFuelCell;
-import sunsetsatellite.signalindustries.items.tools.ItemSignalumCrystal;
-import sunsetsatellite.signalindustries.items.tools.ItemSignalumDrill;
-import sunsetsatellite.signalindustries.items.tools.ItemSignalumSaber;
+import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -322,6 +319,8 @@ public class SIItems extends DataInitializer {
 			"volatile_signalum_crystal"
 		).setMaxStackSize(4);
 
+		pulsar = customItem(() -> new ItemPulsar("reinforced.pulsar", key("item/pulsar"), item("pulsar"), Tier.REINFORCED), "pulsar_inactive").setMaxStackSize(1);
+
 		meteorTracker = customItem(() -> new ItemMeteorTracker("meteorTracker", key("item/meteor_tracker"), item("meteorTracker")), "meteor_tracker_uncalibrated").setMaxStackSize(1);
 		reinforcedMeteorTracker = customItem(() -> new ItemReinforcedMeteorTracker("reinforced.meteorTracker", key("item/reinforced_meteor_tracker"), item("reinforcedMeteorTracker")), "reinforced_meteor_tracker_uncalibrated").setMaxStackSize(1);
 
@@ -350,6 +349,9 @@ public class SIItems extends DataInitializer {
 		movementBoosters = (ItemAttachment) customItem(() -> new ItemMovementBoostersAttachment("reinforced.attachment.movementBoosters", key("item/movement_boosters"), item("movementBoosters"), Catalyst.listOf(AttachmentPoint.BOOT_BACK), Tier.REINFORCED), "movement_boosters").setMaxStackSize(2);
 		basicBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("basic.attachment.backpack", key("item/basic_backpack"), item("basicBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.BASIC), "basic_backpack").setMaxStackSize(1);
 		reinforcedBackpack = (ItemAttachment) customItem(() -> new ItemBackpackAttachment("reinforced.attachment.backpack", key("item/reinforced_backpack"), item("reinforcedBackpack"), Catalyst.listOf(AttachmentPoint.CORE_BACK), Tier.REINFORCED), "reinforced_backpack").setMaxStackSize(1);
+
+		abilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("abilityModule", key("item/ability_module"), item("abilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.REINFORCED), "ability_module").setMaxStackSize(1);
+		awakenedAbilityModule = (ItemAttachment) customItem(() -> new ItemAbilityModule("awakenedAbilityModule", key("item/awakened_ability_module"), item("awakenedAbilityModule"), Catalyst.listOf(AttachmentPoint.CORE_MODULE), Tier.AWAKENED), "awakened_ability_module").setMaxStackSize(1);
 
 		suitColorizerWhite = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.white",

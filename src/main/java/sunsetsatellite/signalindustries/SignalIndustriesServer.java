@@ -6,10 +6,14 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.GuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
+import sunsetsatellite.signalindustries.gui.menus.MenuAbilityModule;
 import sunsetsatellite.signalindustries.gui.menus.MenuBackpack;
 import sunsetsatellite.signalindustries.gui.menus.MenuMachine;
+import sunsetsatellite.signalindustries.gui.menus.MenuPulsar;
 import sunsetsatellite.signalindustries.gui.screens.*;
+import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.invs.InventoryBackpack;
+import sunsetsatellite.signalindustries.invs.InventoryPulsar;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
@@ -53,6 +57,8 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/energy_injector"), new GuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class));
 
 		Catalyst.GUIS.register(key("gui/power_suit"), new GuiEntry<>(InventoryPowerSuit.class, MenuPowerSuit.class));
-		Catalyst.GUIS.register(key("gui/power_suit"), new GuiEntry<>(InventoryBackpack.class, MenuBackpack.class));
+		Catalyst.GUIS.register(key("gui/backpack"), new GuiEntry<>(InventoryBackpack.class, MenuBackpack.class));
+		Catalyst.GUIS.register(key("gui/ability_module"), new GuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class));
+		Catalyst.GUIS.register(key("gui/pulsar"), new GuiEntry<>(InventoryPulsar.class, MenuPulsar.class));
 	}
 }

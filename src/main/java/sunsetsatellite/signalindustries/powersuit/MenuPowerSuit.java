@@ -13,7 +13,7 @@ import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
-import sunsetsatellite.signalindustries.util.SlotAttachment;
+import sunsetsatellite.signalindustries.util.slot.SlotAttachment;
 import sunsetsatellite.signalindustries.util.Tier;
 
 public class MenuPowerSuit extends MenuFluid {
