@@ -8,7 +8,7 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemArmorTiered;
+import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.SlotAttachment;

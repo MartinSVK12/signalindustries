@@ -11,7 +11,7 @@ import sunsetsatellite.catalyst.core.util.conduit.IConduitBlock;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicMultiConduit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 
 import java.util.HashMap;
 

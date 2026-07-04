@@ -154,6 +154,13 @@ public class ScreenVisualItemIOConfig extends Screen {
         GL11.glGetFloatv(GL11.GL_PROJECTION_MATRIX, projMatrix);
         GL11.glGetIntegerv(GL11.GL_VIEWPORT, viewport);
 
+        int[] v = new int[16];
+        float[] m = new float[16];
+        float[] p = new float[16];
+        GL11.glGetIntegerv(GL11.GL_VIEWPORT, v);
+        GL11.glGetFloatv(GL11.GL_MODELVIEW_MATRIX, m);
+        GL11.glGetFloatv(GL11.GL_PROJECTION_MATRIX, p);
+
         Direction hovered = null;
         double minDepth = Double.MAX_VALUE;
 

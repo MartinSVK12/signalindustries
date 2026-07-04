@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemArmorTiered;
+import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;

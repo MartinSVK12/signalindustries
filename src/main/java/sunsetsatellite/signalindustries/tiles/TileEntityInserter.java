@@ -13,6 +13,7 @@ import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityBooster;
 import sunsetsatellite.signalindustries.util.Tier;
 

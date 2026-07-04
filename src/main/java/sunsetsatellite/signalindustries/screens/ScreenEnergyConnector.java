@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.signalindustries.menus.MenuEnergyConnector;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 
 public class ScreenEnergyConnector extends ScreenFluid {

@@ -25,7 +25,7 @@ import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.invs.InventoryPulsar;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
-import sunsetsatellite.signalindustries.items.ItemTiered;
+import sunsetsatellite.signalindustries.items.base.ItemTiered;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;

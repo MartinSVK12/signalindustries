@@ -24,6 +24,7 @@ import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryHarness;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
 

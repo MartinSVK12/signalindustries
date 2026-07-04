@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.tiles;
+package sunsetsatellite.signalindustries.tiles.multiblock;
 
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.item.ItemStack;

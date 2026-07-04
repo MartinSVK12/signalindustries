@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.tiles;
+package sunsetsatellite.signalindustries.tiles.conduit;
 
 
 import com.mojang.nbt.tags.ByteTag;
@@ -22,6 +22,8 @@ import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicItemConduit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
+import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWithName;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import sunsetsatellite.signalindustries.util.PipeType;

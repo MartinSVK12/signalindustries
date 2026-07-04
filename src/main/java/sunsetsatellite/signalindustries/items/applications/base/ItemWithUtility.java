@@ -6,7 +6,7 @@ import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.interfaces.IApplicationItem;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
-import sunsetsatellite.signalindustries.items.ItemTiered;
+import sunsetsatellite.signalindustries.items.base.ItemTiered;
 import sunsetsatellite.signalindustries.util.ApplicationType;
 import sunsetsatellite.signalindustries.util.Tier;
 

@@ -9,7 +9,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.menus.MenuItemBus;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
 
 public class ScreenItemBus extends ScreenFluid {

@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.tiles;
+package sunsetsatellite.signalindustries.tiles.conduit;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;

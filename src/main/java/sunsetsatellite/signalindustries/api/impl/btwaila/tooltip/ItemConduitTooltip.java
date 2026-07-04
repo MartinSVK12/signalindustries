@@ -1,7 +1,7 @@
 package sunsetsatellite.signalindustries.api.impl.btwaila.tooltip;
 
 import net.minecraft.core.item.ItemStack;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 import toufoumaster.btwaila.tooltips.TileTooltip;
 

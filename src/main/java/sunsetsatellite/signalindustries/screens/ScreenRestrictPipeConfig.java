@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;

@@ -14,9 +14,9 @@ import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.items.tools.ItemFuelCell;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.TileEntityIgnitor;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 

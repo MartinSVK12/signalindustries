@@ -2,7 +2,7 @@ package sunsetsatellite.signalindustries.api.impl.btwaila.tooltip;
 
 
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
-import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import toufoumaster.btwaila.gui.components.AdvancedInfoComponent;
 
 public class MultiConduitTooltip extends SIBaseTooltip<TileEntityMultiConduit> {

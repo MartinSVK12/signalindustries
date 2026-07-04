@@ -9,7 +9,7 @@ import org.useless.dragonfly.data.block.mojang.state.MetaStateInterpreter;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeType;
 
 import java.util.HashMap;

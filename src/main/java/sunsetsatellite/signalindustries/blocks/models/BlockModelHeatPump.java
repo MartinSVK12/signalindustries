@@ -10,7 +10,6 @@ import net.minecraft.core.util.helper.Sides;
 import net.minecraft.core.world.WorldSource;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityHeatPump;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityThermalChamber;
 import sunsetsatellite.signalindustries.util.MachineTextures;
 
 import java.util.HashMap;

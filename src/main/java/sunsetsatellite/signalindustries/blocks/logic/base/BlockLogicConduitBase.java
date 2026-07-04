@@ -26,7 +26,7 @@ import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.Tier;
 

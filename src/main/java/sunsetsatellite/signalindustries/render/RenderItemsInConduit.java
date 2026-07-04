@@ -16,7 +16,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.model.IFullbright;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.render.entity.EntityRendererFakeItem;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 
 import java.util.Random;
 

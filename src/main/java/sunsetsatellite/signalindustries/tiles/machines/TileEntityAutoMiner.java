@@ -20,7 +20,7 @@ import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 

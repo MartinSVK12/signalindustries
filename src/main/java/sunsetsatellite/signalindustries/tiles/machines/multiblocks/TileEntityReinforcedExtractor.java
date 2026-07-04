@@ -20,8 +20,8 @@ import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntrySI;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 

@@ -13,6 +13,7 @@ import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
+import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;

@@ -6,7 +6,7 @@ import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeType;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;

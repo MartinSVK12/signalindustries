@@ -15,7 +15,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.conduit.IConduitBlock;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
-import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 

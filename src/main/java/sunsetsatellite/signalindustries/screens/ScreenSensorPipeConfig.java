@@ -16,7 +16,7 @@ import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.menus.MenuSensorPipe;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageSensorPipeSetFilter;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.PipeMode;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;

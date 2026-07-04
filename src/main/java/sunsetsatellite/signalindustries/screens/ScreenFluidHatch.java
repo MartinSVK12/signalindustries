@@ -9,7 +9,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.menus.MenuFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredContainer;
 
 public class ScreenFluidHatch extends ScreenFluid {

@@ -7,18 +7,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.MpGuiEntry;
-import sunsetsatellite.catalyst.core.util.mp.MpGuiEntryClient;
 import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.menus.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
 
@@ -64,7 +68,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
         Catalyst.GUIS.register(key("gui/induction_smelter"), new MpGuiEntry(TileEntityInductionSmelter.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new MpGuiEntry(TileEntityWakingAlloySmelter.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_crusher"), new MpGuiEntry(TileEntityWakingCrusher.class, MenuMultiblock.class));
-        Catalyst.GUIS.register(key("gui/waking_plate_former"), new MpGuiEntry(TileEntityPlateFormer.class, MenuMultiblock.class));
+        Catalyst.GUIS.register(key("gui/waking_plate_former"), new MpGuiEntry(TileEntityWakingPlateFormer.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_infuser"), new MpGuiEntry(TileEntityWakingInfuser.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/centrifuge"), new MpGuiEntry(TileEntityCentrifuge.class, MenuCentrifuge.class));
         Catalyst.GUIS.register(key("gui/reactor"), new MpGuiEntry(TileEntitySignalumReactor.class, MenuSignalumReactor.class));

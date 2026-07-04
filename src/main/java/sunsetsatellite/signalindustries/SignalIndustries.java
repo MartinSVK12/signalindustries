@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Signal;
-import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
@@ -30,12 +29,16 @@ import sunsetsatellite.signalindustries.mp.entity.entry.NetEntrySunbeam;
 import sunsetsatellite.signalindustries.mp.entity.entry.NetEntryVolatileCrystal;
 import sunsetsatellite.signalindustries.mp.message.*;
 import sunsetsatellite.signalindustries.tiles.*;
+import sunsetsatellite.signalindustries.tiles.conduit.*;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.util.CustomStructure;
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 import turniplabs.halplibe.helper.ArmorHelper;
@@ -148,7 +151,6 @@ public class SignalIndustries implements ModInitializer, GameStartEntrypoint {
         EntityHelper.createTileEntity(TileEntityRedstoneClock.class, id("redstone_clock"));
         EntityHelper.createTileEntity(TileEntityThermalChamber.class, id("thermal_chamber"));
         EntityHelper.createTileEntity(TileEntityHeatPump.class, id("heat_pump"));
-
 
         EntityHelper.createEntity(ProjectileCrystal.class, id("volatile_crystal"), "entity.signalindustries.volatileCrystal");
         EntityHelper.createEntity(ProjectileFallingMeteor.class, id("falling_meteor"), "entity.signalindustries.fallingMeteor");

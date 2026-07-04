@@ -1,17 +1,16 @@
-package sunsetsatellite.signalindustries.items;
+package sunsetsatellite.signalindustries.items.base;
 
 
-import net.minecraft.core.item.ItemArmor;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ArmorMaterial;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class ItemArmorTiered extends ItemArmor implements ITiered {
+public class ItemTiered extends Item implements ITiered {
     public Tier tier;
 
-    public ItemArmorTiered(String translationKey, String namespaceId, int id, ArmorMaterial material, int armorPiece, Tier tier) {
-        super(translationKey, namespaceId, id, material, armorPiece);
+    public ItemTiered(String translationKey, String namespaceId, int id, Tier tier) {
+        super(translationKey, namespaceId, id);
         this.tier = tier;
     }
 

@@ -1,33 +1,40 @@
-package sunsetsatellite.signalindustries.tiles;
+package sunsetsatellite.signalindustries.tiles.conduit;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
-import sunsetsatellite.catalyst.energy.simple.impl.TileEntityEnergyConductor;
+import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
+import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
+import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.HashMap;
 import java.util.Map;
 
+public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupportsMultiparts {
 
-public class TileEntityCatalystConduit extends TileEntityEnergyConductor implements ISupportsMultiparts {
-
-    public Tier tier = Tier.PROTOTYPE;
-
-    public TileEntityCatalystConduit() {
+    public TileEntityFluidConduit() {
+        acceptedFluids.get(0).clear();
+        for (Fluid fluid : Fluid.fluidMap.values()) {
+            if (fluid != SIFluids.ENERGY) {
+                acceptedFluids.get(0).add(fluid);
+            }
+        }
     }
 
     @Override
     public void tick() {
-        if (worldObj != null && getBlock() != null) {
-            tier = Catalyst.blockLogic(getBlock(), ITiered.class).getTier();
+        if (fluidContents[0] != null && fluidContents[0].amount < 0) {
+            fluidContents[0] = null;
         }
-
-        throughput = 128 * (tier.ordinal() + 1);
+        ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
+        if (tiered != null) {
+            fluidCapacity[0] = (int) Math.pow(2, tiered.getTier().ordinal()) * 1000;
+            transferSpeed = 20 * (tiered.getTier().ordinal() + 1);
+        }
         super.tick();
     }
 

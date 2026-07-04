@@ -6,6 +6,7 @@ import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -23,7 +23,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicMultiConduit;
-import sunsetsatellite.signalindustries.tiles.TileEntityMultiConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 
 import java.util.ArrayList;
 

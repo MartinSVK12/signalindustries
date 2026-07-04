@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.items;
+package sunsetsatellite.signalindustries.items.base;
 
 
 import net.minecraft.core.block.Block;

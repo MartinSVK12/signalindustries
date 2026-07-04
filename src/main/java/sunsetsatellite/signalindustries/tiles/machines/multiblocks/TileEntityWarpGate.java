@@ -23,9 +23,9 @@ import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
 import sunsetsatellite.signalindustries.interfaces.IStabilizable;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemWarpOrb;
-import sunsetsatellite.signalindustries.tiles.TileEntityEnergyConnector;
-import sunsetsatellite.signalindustries.tiles.TileEntityFluidHatch;
-import sunsetsatellite.signalindustries.tiles.TileEntityItemBus;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 

@@ -46,11 +46,17 @@ import sunsetsatellite.signalindustries.powersuit.ScreenPowerSuit;
 import sunsetsatellite.signalindustries.screens.*;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
+import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 
@@ -109,7 +115,7 @@ public class SignalIndustriesClient implements ClientModInitializer, ClientStart
         Catalyst.GUIS.register(key("gui/induction_smelter"), new MpGuiEntryClient(TileEntityInductionSmelter.class, ScreenMultiblock.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new MpGuiEntryClient(TileEntityWakingAlloySmelter.class, ScreenMultiblock.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_crusher"), new MpGuiEntryClient(TileEntityWakingCrusher.class, ScreenMultiblock.class, MenuMultiblock.class));
-        Catalyst.GUIS.register(key("gui/waking_plate_former"), new MpGuiEntryClient(TileEntityPlateFormer.class, ScreenMultiblock.class, MenuMultiblock.class));
+        Catalyst.GUIS.register(key("gui/waking_plate_former"), new MpGuiEntryClient(TileEntityWakingPlateFormer.class, ScreenMultiblock.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/waking_infuser"), new MpGuiEntryClient(TileEntityWakingInfuser.class, ScreenMultiblock.class, MenuMultiblock.class));
         Catalyst.GUIS.register(key("gui/centrifuge"), new MpGuiEntryClient(TileEntityCentrifuge.class, ScreenCentrifuge.class, MenuCentrifuge.class));
         Catalyst.GUIS.register(key("gui/reactor"), new MpGuiEntryClient(TileEntitySignalumReactor.class, ScreenSignalumReactor.class, MenuSignalumReactor.class));
