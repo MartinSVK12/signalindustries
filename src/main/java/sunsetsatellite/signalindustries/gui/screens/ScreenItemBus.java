@@ -12,44 +12,26 @@ import sunsetsatellite.signalindustries.util.IO;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.scene;
 
-public class ScreenItemBus extends ScreenComposedContainer {
+public class ScreenItemBus extends ScreenTiered<TileEntityItemBus> {
 
-	public TileEntityItemBus tile;
 
 	public ScreenItemBus(ContainerInventory playerInv, TileEntityItemBus inv) {
-		super(new MenuMachine(playerInv, inv), scene("item_bus"));
-		this.tile = inv;
-		TextComponent name = get("machineName");
-		ImageComponent background = get("background");
-		ButtonComponent fluidIo = get("fluidIo");
-		ButtonComponent itemIo = get("itemIo");
+		super(playerInv, inv,"item_bus");
 		SlotGridComponent slots = get("slotGrid");
-		name.text = Catalyst.translateNameKey((inv.getNameTranslationKey()));
-		name.color = inv.getTier().getAltColor();
 		switch (inv.getTier()) {
 			case PROTOTYPE, INFINITE -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/prototype_gui.png");
 				slots.resize(1,1);
 			}
 			case BASIC -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/basic_gui.png");
 				slots.resize(2,2);
 			}
 			case REINFORCED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/reinforced_gui.png");
 				slots.resize(3,3);
 			}
 			case AWAKENED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/awakened_gui.png");
 				slots.resize(3,6);
 			}
 		}
-		fluidIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.FLUID));
-		});
-		itemIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.ITEM));
-		});
 	}
 
 	@Override

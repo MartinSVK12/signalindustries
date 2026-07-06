@@ -18,45 +18,19 @@ import static sunsetsatellite.signalindustries.SignalIndustries.scene;
 
 //todo: split progress and energy bar from the rest
 //todo: add generic type parameter for the tile entity type
-public class ScreenMachine extends ScreenComposedContainer {
+public class ScreenMachine<T extends TileEntityTieredMachineBase> extends ScreenTiered<T> {
 
-	public TileEntityTieredMachineBase tile;
+	public T tile;
 
-	public ScreenMachine(ContainerInventory playerInv, TileEntityTieredMachineBase inv) {
+	public ScreenMachine(ContainerInventory playerInv, T inv) {
 		this(playerInv, inv, "simple_machine");
 	}
 
-	public ScreenMachine(ContainerInventory playerInv, TileEntityTieredMachineBase inv, String scene) {
-		super(new MenuMachine(playerInv, inv), scene(scene));
+	public ScreenMachine(ContainerInventory playerInv, T inv, String scene) {
+		super(playerInv, inv, scene);
 		this.tile = inv;
-		TextComponent name = get("machineName");
-		ImageComponent background = get("background");
-		ButtonComponent fluidIo = get("fluidIo");
-		ButtonComponent itemIo = get("itemIo");
 		ProgressBarComponent progress = get("progressBar");
 		ProgressBarComponent energy = get("energyBar");
-		name.text = Catalyst.translateNameKey((inv.getNameTranslationKey()));
-		name.color = inv.getTier().getAltColor();
-		switch (inv.getTier()) {
-			case PROTOTYPE, INFINITE -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/prototype_gui.png");
-			}
-			case BASIC -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/basic_gui.png");
-			}
-			case REINFORCED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/reinforced_gui.png");
-			}
-			case AWAKENED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/awakened_gui.png");
-			}
-		}
-		fluidIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.FLUID));
-		});
-		itemIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.ITEM));
-		});
 		progress.progress = 0;
 		energy.progress = 0;
 	}

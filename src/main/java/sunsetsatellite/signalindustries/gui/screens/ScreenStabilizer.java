@@ -16,41 +16,14 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.scene;
 
-public class ScreenStabilizer extends ScreenComposedContainer {
+public class ScreenStabilizer extends ScreenTiered<TileEntityStabilizer> {
 
 	public TileEntityStabilizer tile;
 
 	public ScreenStabilizer(ContainerInventory playerInv, TileEntityStabilizer inv) {
-		super(new MenuMachine(playerInv, inv), scene("stabilizer"));
-		this.tile = inv;
-		TextComponent name = get("machineName");
-		ImageComponent background = get("background");
-		ButtonComponent fluidIo = get("fluidIo");
-		ButtonComponent itemIo = get("itemIo");
+		super(playerInv, inv, "stabilizer");
 		ProgressBarComponent progress = get("progressBar");
 		ProgressBarComponent energy = get("energyBar");
-		name.text = Catalyst.translateNameKey((inv.getNameTranslationKey()));
-		name.color = inv.getTier().getAltColor();
-		switch (inv.getTier()) {
-			case PROTOTYPE, INFINITE -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/prototype_gui.png");
-			}
-			case BASIC -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/basic_gui.png");
-			}
-			case REINFORCED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/reinforced_gui.png");
-			}
-			case AWAKENED -> {
-				background.changeImage("/assets/signalindustries/textures/gui/container/awakened_gui.png");
-			}
-		}
-		fluidIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.FLUID));
-		});
-		itemIo.buttonClicked.connect((s, t)->{
-			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.ITEM));
-		});
 		progress.progress = 0;
 		energy.progress = 0;
 	}
