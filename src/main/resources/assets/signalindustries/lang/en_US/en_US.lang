@@ -323,8 +323,8 @@ item.signalindustries.basic.portableWorkbench.name=Portable Workbench
 item.signalindustries.basic.portableWorkbench.desc=Crafting on the go!
 item.signalindustries.basic.smartWatch.name=Smartwatch
 item.signalindustries.basic.smartWatch.desc=Combines the utility of the Compass, Clock and Rotary Calendar.
-item.signalindustries.raziel.name=Tome of Raziel
-item.signalindustries.raziel.desc=Stores blueprints and reveals the secrets of dimensional creation.
+item.signalindustries.raziel.name=Raziel's Tome
+item.signalindustries.raziel.desc=Stores blueprints of structures and dimensions.
 
 item.signalindustries.blankAbilityModule.name=Blank Application Module
 item.signalindustries.blankAbilityModule.desc=Base component of an <Application Module>.

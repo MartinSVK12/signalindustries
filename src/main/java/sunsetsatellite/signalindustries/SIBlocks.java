@@ -9,9 +9,11 @@ import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
+import sunsetsatellite.signalindustries.items.blocks.ItemBlockSIFluidTank;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
@@ -432,6 +434,21 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures().withDefaultTexture("awakened_crystal_block")
 		);
 
+		dilithiumBlock = simpleBlock(
+			new BlockBuilder(MOD_ID)
+				.setLuminance(1)
+				.setBlockSound(BlockSounds.GLASS)
+				.setHardness(20)
+				.setResistance(1000)
+				.addTags(BlockTags.MINEABLE_BY_PICKAXE),
+			"dilithiumBlock",
+			"dilithium_block",
+			"dilithiumBlock",
+			3,
+			Materials.METAL,
+			new MachineTextures().withDefaultTexture("dilithium_block")
+		);
+
 		prototypeMachineCore = customBlock(defaultBuilder(Tier.PROTOTYPE),
 			"prototype.machine",
 			"prototype_machine_block",
@@ -516,6 +533,81 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultSideTextures("reinforced_collector_side_inactive")
 				.withActiveSideTextures("reinforced_collector_side")
 				.withOverbrightSideTextures("crystal_overlay")
+		);
+
+		//uncheck deez nuts intellij
+		//noinspection unchecked
+		prototypeFluidTank = customBlock(defaultBuilder(Tier.PROTOTYPE).setBlockItem((block) -> new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
+			"prototype.fluidTank",
+			"prototype_fluid_tank",
+			"prototypeFluidTank",
+			2,
+			(block) -> new BlockLogicSIFluidTank(block, Materials.GLASS, Tier.PROTOTYPE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTexture("fluid_tank_prototype")
+		);
+
+
+		//noinspection unchecked
+		basicFluidTank = customBlock(defaultBuilder(Tier.BASIC).setBlockItem((block) -> new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
+			"basic.fluidTank",
+			"basic_fluid_tank",
+			"basicFluidTank",
+			3,
+			(block) -> new BlockLogicSIFluidTank(block, Materials.GLASS, Tier.BASIC, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("fluid_tank_basic")
+		);
+
+		//noinspection unchecked
+		infiniteFluidTank = customBlock(defaultBuilder(Tier.INFINITE).setBlockItem((block) -> new ItemBlockSIFluidTank((Block<BlockLogicSIFluidTank>) block)),
+			"infinite.fluidTank",
+			"infinite_fluid_tank",
+			"infiniteFluidTank",
+			3,
+			(block) -> new BlockLogicSIFluidTank(block, Materials.GLASS, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTexture("fluid_tank_prototype")
+		);
+
+		prototypeEnergyCell = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.energyCell",
+			"prototype_energy_cell",
+			"prototypeEnergyCell",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.GLASS, Tier.PROTOTYPE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTexture("cell_prototype")
+		);
+
+		basicEnergyCell = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.energyCell",
+			"basic_energy_cell",
+			"basicEnergyCell",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.GLASS, Tier.BASIC, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("cell_basic")
+		);
+
+		reinforcedEnergyCell = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.energyCell",
+			"reinforced_energy_cell",
+			"reinforcedEnergyCell",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.GLASS, Tier.REINFORCED, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("cell_reinforced")
+		);
+
+		infiniteEnergyCell = customBlock(defaultBuilder(Tier.INFINITE),
+			"infinite.energyCell",
+			"infinite_energy_cell",
+			"infiniteEnergyCell",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.GLASS, Tier.INFINITE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTexture("cell_prototype")
 		);
 
 		prototypeCrusher = customBlock(defaultBuilder(Tier.PROTOTYPE),
@@ -726,6 +818,21 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultTexture("basic_energy_injector_bottom")
 		);
 
+		basicAssembler = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.assembler",
+			"basic_assembler",
+			"basicAssembler",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityAssembler::new, "assembler"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_assembler_side")
+				.withDefaultNorthTexture("basic_assembler_front")
+				.withActiveTexture("basic_assembler_side_active")
+				.withActiveNorthTexture("basic_assembler_front_active")
+				.withOverbrightTextures("assembler_overlay_side")
+				.withOverbrightNorthTexture("assembler_overlay_front")
+		);
+
 		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.booster",
 			"basic_booster",
@@ -901,6 +1008,72 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityEnergyConnector::new, "energy_connector", MultiblockPart.Type.ENERGY, MultiblockPart.IO.N_A),
 			new MachineTextures(Tier.AWAKENED)
 				.withDefaultTexture("awakened_energy_connector")
+		);
+
+		reinforcedParallelProcessor = customBlock(
+			defaultBuilder(Tier.REINFORCED),
+			"reinforced.parallelProcessor",
+			"reinforced_parallel_processor",
+			"reinforcedParallelProcessor",
+			3,
+			(block) -> new BlockLogicParallelProcessor(block, Materials.METAL, Tier.REINFORCED, 2, MultiblockPart.Type.PARALLEL, MultiblockPart.IO.N_A),
+			new MachineTextures()
+				.withDefaultTexture("parallel_processor_inactive")
+				.withActiveTexture("parallel_processor_active")
+		);
+
+		awakenedParallelProcessor = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.parallelProcessor",
+			"awakened_parallel_processor",
+			"awakenedParallelProcessor",
+			3,
+			(block) -> new BlockLogicParallelProcessor(block, Materials.METAL, Tier.AWAKENED, 4, MultiblockPart.Type.PARALLEL, MultiblockPart.IO.N_A),
+			new MachineTextures()
+				.withDefaultTexture("awakened_parallel_processor_inactive")
+				.withActiveTexture("awakened_parallel_processor_active")
+		);
+
+		awakenedParallelProcessor8x = customBlock(
+			defaultBuilder(Tier.AWAKENED),
+			"awakened.parallelProcessor.8x",
+			"awakened_parallel_processor_8x",
+			"awakenedParallelProcessor8x",
+			3,
+			(block) -> new BlockLogicParallelProcessor(block, Materials.METAL, Tier.AWAKENED, 8, MultiblockPart.Type.PARALLEL, MultiblockPart.IO.N_A),
+			new MachineTextures()
+				.withDefaultTexture("awakened_8x_parallel_processor_inactive")
+				.withActiveTexture("awakened_8x_parallel_processor_active")
+		);
+
+		basicInductionSmelter = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.inductionSmelter",
+			"basic_induction_smelter",
+			"basicInductionSmelter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityInductionSmelter::new, "induction_smelter"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTopTexture("basic_induction_smelter_top_inactive")
+				.withDefaultNorthTexture("basic_induction_smelter_front_inactive")
+				.withActiveTopTexture("basic_induction_smelter_top_active")
+				.withActiveNorthTexture("basic_induction_smelter_front_active")
+				.withOverbrightTopTexture("induction_smelter_top_overlay")
+				.withOverbrightNorthTexture("induction_smelter_front_overlay")
+		);
+
+		reinforcedInductionSmelter = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.inductionSmelter",
+			"reinforced_induction_smelter",
+			"reinforcedInductionSmelter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityInductionSmelter::new, "induction_smelter"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTopTexture("reinforced_induction_smelter_top_inactive")
+				.withDefaultNorthTexture("reinforced_induction_smelter_front_inactive")
+				.withActiveTopTexture("reinforced_induction_smelter_top_active")
+				.withActiveNorthTexture("reinforced_induction_smelter_front_active")
+				.withOverbrightTopTexture("induction_smelter_top_overlay")
+				.withOverbrightNorthTexture("induction_smelter_front_overlay")
 		);
 
 		dimensionalAnchor = customBlock(defaultBuilder(Tier.REINFORCED),
@@ -1103,6 +1276,57 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures().withDefaultTexture("reinforced_glass_0")
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
+		prototypeStorageContainer = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.storageContainer",
+			"prototype_storage_container",
+			"prototypeStorageContainer",
+			2,
+			(block) -> new BlockLogicStorageContainer(block, Materials.STONE, Tier.PROTOTYPE),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("container_prototype_front")
+		);
+
+		basicStorageContainer = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.storageContainer",
+			"basic_storage_container",
+			"basicStorageContainer",
+			3,
+			(block) -> new BlockLogicStorageContainer(block, Materials.METAL, Tier.BASIC),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("container_basic_front")
+		);
+
+		reinforcedStorageContainer = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.storageContainer",
+			"reinforced_storage_container",
+			"reinforcedStorageContainer",
+			3,
+			(block) -> new BlockLogicStorageContainer(block, Materials.METAL, Tier.REINFORCED),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("container_reinforced_front")
+		);
+
+		infiniteStorageContainer = customBlock(defaultBuilder(Tier.INFINITE),
+			"infinite.storageContainer",
+			"infinite_storage_container",
+			"infiniteStorageContainer",
+			3,
+			(block) -> new BlockLogicStorageContainer(block, Materials.STONE, Tier.INFINITE),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("container_prototype_front")
+		);
+
+		redstoneClock = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"redstoneClock",
+			"redstone_clock",
+			"redstoneClock",
+			1,
+			(block) -> new BlockLogicRedstoneClock(block, Materials.STONE),
+			new MachineTextures()
+				.withDefaultTexture("redstone_clock")
+				.withActiveTexture("redstone_clock_active")
+		);
+
 		cobblestoneBricks = simpleBlock(
 			defaultBuilder(Tier.PROTOTYPE),
 			"prototype.bricks",
@@ -1260,6 +1484,24 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures()
 				.withDefaultTexture("fueled_eternal_tree_log")
 				.withDefaultTopBottomTextures("fueled_eternal_tree_log_top")
+		);
+
+		lunarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"ancient.lunarTotem",
+			"lunar_totem",
+			"lunarTotem",
+			1,
+			(block) -> new BlockLogicLunarTotem(block, Materials.STONE),
+			new MachineTextures()
+		);
+
+		solarTotem = customBlock(defaultBuilder(Tier.PROTOTYPE).setLuminance(15),
+			"ancient.solarTotem",
+			"solar_totem",
+			"solarTotem",
+			1,
+			(block) -> new BlockLogicSolarTotem(block, Materials.STONE),
+			new MachineTextures()
 		);
 
 		dilithiumOre.withTags(ORE_BLOCK);

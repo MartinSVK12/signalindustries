@@ -29,8 +29,8 @@ public class BoostAbility extends SuitBaseAbility {
     }
 
     private void boost(Player player) {
-        double x = 5 * Math.cos(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
-        double z = 5 * Math.sin(DynamicTexture.pmod(Math.round(player.yRot), 360) * Math.PI / 180);
+        double x = 5 * Math.cos(Math.floorMod(Math.round(player.yRot), 360) * Math.PI / 180);
+        double z = 5 * Math.sin(Math.floorMod(Math.round(player.yRot), 360) * Math.PI / 180);
         player.zd += x;
         player.xd -= z;
     }

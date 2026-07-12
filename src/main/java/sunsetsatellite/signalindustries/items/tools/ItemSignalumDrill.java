@@ -294,7 +294,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + "Mode: " + getModeString(stack) + "\n" + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + "/" + getCapacity(stack) + TextFormatting.WHITE;
+        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + TextFormatting.WHITE + "Mode: " + getModeString(stack) + "\n" + TextFormatting.WHITE + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + "/" + getCapacity(stack) + TextFormatting.WHITE;
     }
 
     @Override

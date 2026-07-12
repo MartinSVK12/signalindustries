@@ -13,9 +13,11 @@
   "client": [
     "HudIngameMixin",
     "MinecraftMixin",
+    "MobRendererBipedArmoredMixin",
     "MobRendererPlayerMixin",
     "PlayerLocalMixin",
     "RenderGlobalMixin",
+    "ScreenInventoryMixin",
     "TextureManagerMixin"
   ],
   "injectors": {

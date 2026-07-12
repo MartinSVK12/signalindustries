@@ -29,7 +29,7 @@ public class MinecraftMixin {
 		KeyboardHandler.handleKeyboard((Minecraft) (Object) this, ci);
 	}
 
-	@ModifyExpressionValue(method = "runTick", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/entity/player/PlayerLocal;noPhysics:Z"))
+	@ModifyExpressionValue(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/player/PlayerLocal;hasNoPhysics()Z"))
 	public boolean modifyWingsFlightSpeed(boolean original) {
 		SignalumPowerSuit ps = ((IPlayerPowerSuit<SignalumPowerSuit>) thePlayer).getPowerSuit();
 		if (ps != null && ps.active && ps.hasAttachment(SIItems.crystalWings)) {

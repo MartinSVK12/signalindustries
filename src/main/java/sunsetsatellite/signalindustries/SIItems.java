@@ -13,6 +13,7 @@ import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.attachments.*;
+import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.items.covers.ItemCover;
 import sunsetsatellite.signalindustries.items.tools.*;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
@@ -78,8 +79,8 @@ public class SIItems extends DataInitializer {
 	public static Item infernalEye;
 	public static Item dimensionalShard;
 	public static Item warpOrb;
-	public static /*ItemArmorTiered*/ Item signalumPrototypeHarness;
-	public static /*ItemArmorTiered*/ Item signalumPrototypeHarnessGoggles;
+	public static ItemArmorTiered signalumPrototypeHarness;
+	public static ItemArmorTiered signalumPrototypeHarnessGoggles;
 	public static Item basicSignalumDrill;
 	public static Item reinforcedSignalumDrill;
 	public static Item fuelCell;
@@ -336,6 +337,9 @@ public class SIItems extends DataInitializer {
 		positionMemoryChip = customItem(() -> new ItemPositionChip("romChip.position", key("item/position_chip"), item("positionMemoryChip")), "position_chip").setMaxStackSize(1);
 
 		nullTrigger = customItem(() -> new ItemTrigger("trigger.null", key("item/trigger"), item("nullTrigger")), "trigger").setMaxStackSize(1);
+
+		signalumPrototypeHarness = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarness", key("item/harness"), item("signalumPrototypeHarness"), armorPrototypeHarness, HumanArmorShape.CHEST, Tier.BASIC), "harness").setMaxStackSize(1);
+		signalumPrototypeHarnessGoggles = (ItemArmorTiered) customItem(() -> new ItemSignalumPowerHarness("basic.prototypeHarnessGoggles", key("item/harness_goggles"), item("signalumPrototypeHarnessGoggles"), armorPrototypeHarness, HumanArmorShape.HEAD, Tier.BASIC), "goggles").setMaxStackSize(1);
 
 		signalumPowerSuitHelmet = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.helmet", key("item/power_suit_helmet"), item("signalumPowerSuitHelmet"), armorSignalumPowerSuit, HumanArmorShape.HEAD, Tier.REINFORCED), "signalumpowersuit_helmet").setMaxStackSize(1);
 		signalumPowerSuitChestplate = (ItemSignalumPowerSuit) customItem(() -> new ItemSignalumPowerSuit("reinforced.powerSuit.chestplate", key("item/power_suit_chestplate"), item("signalumPowerSuitChestplate"), armorSignalumPowerSuit, HumanArmorShape.CHEST, Tier.REINFORCED), "signalumpowersuit_chestplate").setMaxStackSize(1);

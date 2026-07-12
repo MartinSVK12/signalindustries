@@ -1,7 +1,15 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.motion.CarriedBlock;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.world.ICarriable;
+import net.minecraft.core.world.ICarrySource;
+import net.minecraft.core.world.World;
+import net.minecraft.core.world.pos.TilePosc;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -16,7 +24,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Map;
 
-public class TileEntitySIFluidTank extends TileEntityTieredContainer implements IHasIOPreview {
+public class TileEntitySIFluidTank extends TileEntityTieredContainer implements IHasIOPreview, ICarrySource {
 
     //only for infinite tier energy cell, if true, the energy cell will act as an infinite source of energy, if false, it will act as a sink destroying any energy it gets.
     //does not do anything for any other tier
@@ -109,4 +117,8 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
 
 	}
 
+	@Override
+	public @NotNull ICarriable pickup(@NotNull World world, @NotNull Entity holder, @NotNull TilePosc tilePos) {
+		return super.pickup(world, holder, tilePos);
+	}
 }

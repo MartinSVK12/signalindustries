@@ -257,10 +257,10 @@ public class SignalumPowerSuit implements IPowerSuit {
             if (i > 3) continue;
             ItemStack itemStack = armorInventory[i];
             if (itemStack.isItemDamaged() && getEnergy() > 0 && status != Status.OVERHEAT) {
-                decrementEnergy(1);
 				if (itemStack.isItemStackDamageable()) {
 					if (itemStack.getMetadata() <= itemStack.getMaxDamage() && itemStack.getMetadata() >= 0) {
-						itemStack.setMetadata(itemStack.getMetadata()-i);
+						itemStack.setMetadata(itemStack.getMetadata()-1);
+						decrementEnergy(1);
 					}
 				}
                 //itemStack.repairItem(1);

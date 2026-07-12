@@ -45,7 +45,7 @@ public class ExplosionNoDrops {
         this.explosionY = y;
         this.explosionZ = z;
         this.destroyBlocks = true;
-        if (!world.getGameRuleValue(GameRules.MOB_GRIEFING)) {
+        if (!world.getGameRuleValue(GameRules.DO_MOB_GRIEFING)) {
             this.destroyBlocks = exploder == null || exploder instanceof Player;
         }
     }
@@ -176,7 +176,7 @@ public class ExplosionNoDrops {
                     float proc = 1 - (((IArmorWearing<?>) entity).getTotalProtectionAmount(DamageType.BLAST) / 2f);
                     flingForce *= proc;
                 }
-                if (!entity.noPhysics) {
+                if (!entity.hasNoPhysics()) {
                     entity.fling(xComp * flingForce, yComp * flingForce, zComp * flingForce, 1);
                 }
             }

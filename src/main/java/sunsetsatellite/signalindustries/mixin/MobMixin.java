@@ -21,7 +21,7 @@ public class MobMixin {
 
 	@ModifyExpressionValue(
 		method = "moveEntityWithHeading",
-		at = @At(value = "FIELD", target = "Lnet/minecraft/core/entity/Mob;noPhysics:Z", opcode = Opcodes.GETFIELD)
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/Mob;hasNoPhysics()Z")
 	)
 	private boolean flyWithWings(boolean original) {
 		if (thisAs instanceof Player player) {

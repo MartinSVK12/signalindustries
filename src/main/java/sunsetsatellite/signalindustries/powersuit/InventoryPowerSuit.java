@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.powersuit;
 
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -18,13 +19,13 @@ import java.util.Objects;
 public class InventoryPowerSuit extends InventoryItemFluid {
 
     private ItemStack armorStack;
-    private int armorPiece;
+    private HumanArmorShape armorPiece;
 
     public InventoryPowerSuit(ItemStack item) {
         super(item);
         if (item.getItem() instanceof ItemSignalumPowerSuit armor) {
             this.armorStack = item;
-			this.armorPiece = armor.getArmorShape().getSlotIndex();
+			this.armorPiece = armor.getArmorShape();
             switch (armor.getArmorShape()) {
 				case CHEST:
                     fluidContents = new FluidStack[1];
@@ -53,7 +54,7 @@ public class InventoryPowerSuit extends InventoryItemFluid {
 
     @Override
     public @Nullable ItemStack removeItem(int index, int takeAmount) {
-        if (armorPiece == 2 && index == 1) {
+        if (armorPiece == HumanArmorShape.CHEST && index == 1) {
             fluidCapacity[0] = 32000;
         }
         if (locked(index)) return null;
@@ -64,9 +65,9 @@ public class InventoryPowerSuit extends InventoryItemFluid {
     public void setItem(int index, @Nullable ItemStack itemstack) {
         super.setItem(index, itemstack);
         if (locked(index)) return;
-        if (armorPiece == 2 && index == 1 && itemstack == null) {
+        if (armorPiece == HumanArmorShape.CHEST && index == 1 && itemstack == null) {
             fluidCapacity[0] = 32000;
-        } else if (armorPiece == 2 && index == 1 && itemstack.getItem() instanceof ItemExtendedEnergyPackAttachment) {
+        } else if (armorPiece == HumanArmorShape.CHEST && index == 1 && itemstack.getItem() instanceof ItemExtendedEnergyPackAttachment) {
             fluidCapacity[0] = 64000;
         }
     }

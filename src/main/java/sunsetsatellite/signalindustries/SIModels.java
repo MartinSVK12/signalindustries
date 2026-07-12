@@ -15,15 +15,22 @@ import net.minecraft.core.block.BlockLogicFullyRotatable;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
+import sunsetsatellite.signalindustries.blocks.logic.BlockLogicStorageContainer;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
-import sunsetsatellite.signalindustries.items.models.ItemModelMeteorTracker;
-import sunsetsatellite.signalindustries.items.models.ItemModelPulsar;
-import sunsetsatellite.signalindustries.items.models.ItemModelTrigger;
+import sunsetsatellite.signalindustries.items.models.*;
+import sunsetsatellite.signalindustries.render.RenderAssembler;
+import sunsetsatellite.signalindustries.render.RenderFluidInBlock;
 import sunsetsatellite.signalindustries.render.RenderGreenhouse;
+import sunsetsatellite.signalindustries.render.RenderStorageContainer;
+import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityAssembler;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntitySIFluidTank;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
@@ -57,6 +64,9 @@ public class SIModels {
 
 		dispatcher.addDispatch(basicEnergyInjector, new BlockModelGeneric<>(basicEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_energy_injector")));
 
+		dispatcher.addDispatch(lunarTotem, new BlockModelGeneric<>(lunarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/lunar_totem")));
+		dispatcher.addDispatch(solarTotem, new BlockModelGeneric<>(solarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/solar_totem")));
+
 		blockTextures.forEach((block, tex) -> {
 			if (dispatcher.hasDispatch(block)) return;
 			if (Block.hasLogicClass(block, BlockLogicMachineBase.class)) {
@@ -67,6 +77,8 @@ public class SIModels {
 				}
 			} else if (Block.hasLogicClass(block, BlockLogicFluid.class)) {
 				dispatcher.addDispatch(block, new BlockModelFluid<>(((Block<BlockLogicFluid>) block), tex.defaultTextures.get(Side.TOP), tex.defaultTextures.get(Side.BOTTOM)));
+			} else if(Block.hasLogicClass(block, BlockLogicStorageContainer.class)) {
+				 dispatcher.addDispatch(block, new BlockModelMachine(block, tex));
 			} else if(Block.hasLogicClass(block, BlockLogicFullyRotatable.class)) {
 				BlockModelFullyRotatable<? extends BlockLogic> model = new BlockModelFullyRotatable<>(block);
 				tex.defaultTextures.forEach((side, text) -> model.setTex(text, side));
@@ -88,6 +100,8 @@ public class SIModels {
 			dispatcher.addDispatch(item, model);
 		});
 
+		dispatcher.addDispatch(signalumSaber, new ItemModelSaber(signalumSaber));
+		dispatcher.addDispatch(fuelCell, new ItemModelFuelCell(fuelCell));
 		dispatcher.addDispatch(nullTrigger, new ItemModelTrigger(nullTrigger));
 		dispatcher.addDispatch(pulsar, new ItemModelPulsar(pulsar));
 		dispatcher.addDispatch(meteorTracker, new ItemModelMeteorTracker(fuelCell, Tier.BASIC));
@@ -108,7 +122,12 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityWakingCrusher.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWakingInfuser.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityLaserDrill.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityInductionSmelter.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityGreenhouse.class, new RenderGreenhouse());
+		dispatcher.assignRenderer(TileEntityAssembler.class, new RenderAssembler());
+		dispatcher.assignRenderer(TileEntitySIFluidTank.class, new RenderFluidInBlock());
+		dispatcher.assignRenderer(TileEntityEnergyCell.class, new RenderFluidInBlock());
+		dispatcher.assignRenderer(TileEntityStorageContainer.class, new RenderStorageContainer());
 	}
 
 	public void initBlockColors(BlockColorDispatcher dispatcher) {

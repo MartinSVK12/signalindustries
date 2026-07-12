@@ -210,7 +210,7 @@ public class ItemSignalumSaber extends ItemToolSword implements ITiered, IItemFl
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + TextFormatting.WHITE;
+        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + TextFormatting.WHITE + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + TextFormatting.WHITE;
     }
 
 	@Override
