@@ -106,23 +106,23 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
         return conduitCapability;
     }
 
-    @Override
-    public boolean onBlockRightClicked(@NonNull World world, int x, int y, int z, Player player, Side side, double xHit, double yHit) {
-        if (!isPlayerHoldingWrench(player)) {
-            return false;
-        }
+	@Override
+	public boolean onInteracted(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Player player, @Nullable Side side, double xHit, double yHit) {
+		if (!isPlayerHoldingWrench(player)) {
+			return false;
+		}
 
-        Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player, side, new Vec2f(xHit, yHit));
-        Side playerFacing = Catalyst.calculatePlayerFacing(player.yRot);
-        if (pairIsInvalid(pair)) {
-            return false;
-        }
+		Pair<Direction, BlockSection> pair = Catalyst.getBlockSurfaceClickPosition(world, player, side, new Vec2f(xHit, yHit));
+		Side playerFacing = Catalyst.calculatePlayerFacing(player.yRot);
+		if (pairIsInvalid(pair)) {
+			return false;
+		}
 
-        if (isPlayerHoldingConfigTablet(player)) {
-            handleConfigTabletAction(player, pair, world, x, y, z, playerFacing);
-        }
-        return true;
-    }
+		if (isPlayerHoldingConfigTablet(player)) {
+			handleConfigTabletAction(player, pair, world, tilePos.x(), tilePos.y(), tilePos.z(), playerFacing);
+		}
+		return true;
+	}
 
     private boolean isPlayerHoldingWrench(Player player) {
         return player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IWrench;

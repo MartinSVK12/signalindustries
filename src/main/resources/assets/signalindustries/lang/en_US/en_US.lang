@@ -835,7 +835,7 @@ ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.
 
 achievement.signalindustries.init=First Light
-achievement.signalindustries.init.desc=Achievements have some issues and are unfinished currently, and as such you will not be able to actually complete any of them. Sorry for that.
+achievement.signalindustries.init.desc=Welcome to Signal Industries! Obtain some Raw Signalite Crystals from a fallen meteorite to get started.
 achievement.signalindustries.thePrototype=The Prototype
 achievement.signalindustries.thePrototype.desc=Create your first Prototype Machine Core.
 achievement.signalindustries.fromWithin=From Within

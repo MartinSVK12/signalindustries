@@ -16,8 +16,6 @@ import sunsetsatellite.signalindustries.util.IO;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.scene;
 
-//todo: split progress and energy bar from the rest
-//todo: add generic type parameter for the tile entity type
 public class ScreenMachine<T extends TileEntityTieredMachineBase> extends ScreenTiered<T> {
 
 	public T tile;

@@ -14,6 +14,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Random;
@@ -28,4 +29,10 @@ public class BlockLogicOreSignalite extends BlockLogic {
         Random random = new Random();
         return dropCause != EnumDropCause.IMPROPER_TOOL ? new ItemStack[]{new ItemStack(SIItems.rawSignalumCrystal, random.nextInt(2) + 2)} : null;
     }
+
+	@Override
+	public void onDestroyedByPlayer(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side, int data, @NotNull Player player, @Nullable Item item) {
+		super.onDestroyedByPlayer(world, tilePos, side, data, player, item);
+		player.triggerAchievement(SIAchievements.INIT);
+	}
 }

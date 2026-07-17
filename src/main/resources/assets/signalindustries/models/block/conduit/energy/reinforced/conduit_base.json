@@ -1,6 +1,0 @@
-{
-  "parent": "signalindustries:conduit/template_conduit_base",
-  "textures": {
-    "conduit": "signalindustries:block/conduit_reinforced"
-  }
-}

@@ -50,6 +50,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/energy_connector"), new GuiEntry<>(TileEntityEnergyConnector.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/energy_cell"), new GuiEntry<>(TileEntityEnergyCell.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/fluid_tank"), new GuiEntry<>(TileEntitySIFluidTank.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/pump"), new GuiEntry<>(TileEntityPump.class, MenuMachine.class));
 
 		Catalyst.GUIS.register(key("gui/anchor"), new GuiEntry<>(TileEntityDimensionalAnchor.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new GuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class));

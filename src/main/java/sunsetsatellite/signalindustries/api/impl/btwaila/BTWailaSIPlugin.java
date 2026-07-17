@@ -17,5 +17,7 @@ public class BTWailaSIPlugin implements BTWailaCustomTooltipPlugin {
         tooltipRegistry.register(new ItemConduitTooltip());
         tooltipRegistry.register(new StorageContainerTooltip());
         tooltipRegistry.register(new MultiConduitTooltip());
-    }
+		tooltipRegistry.register(new ConduitTooltip());
+		tooltipRegistry.register(new FluidConduitTooltip());
+	}
 }

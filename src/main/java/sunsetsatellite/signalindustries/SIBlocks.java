@@ -8,8 +8,14 @@ import net.minecraft.core.item.tool.ItemToolPickaxe;
 import net.minecraft.core.sound.BlockSounds;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.blocks.logic.*;
+import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
 import sunsetsatellite.signalindustries.items.blocks.ItemBlockSIFluidTank;
+import sunsetsatellite.signalindustries.tiles.TileEntityIgnitor;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityCatalystConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityFluidConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
@@ -23,10 +29,7 @@ import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
-import sunsetsatellite.signalindustries.util.MachineTextures;
-import sunsetsatellite.signalindustries.util.MultiblockPart;
-import sunsetsatellite.signalindustries.util.Tier;
-import sunsetsatellite.signalindustries.util.VerticalMachineTextures;
+import sunsetsatellite.signalindustries.util.*;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryCategory;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
@@ -481,6 +484,132 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicTiered(block, Materials.METAL, Tier.AWAKENED),
 			new MachineTextures().withDefaultTexture("machine_awakened"));
 
+		prototypeFluidConduit = customBlock(defaultBuilder(Tier.PROTOTYPE).setBlockSound(BlockSounds.GLASS),
+			"prototype.conduit.fluid",
+			"prototype_fluid_conduit",
+			"prototypeFluidConduit",
+			2,
+			(block) -> new BlockLogicFluidConduit(block, Materials.GLASS, Tier.PROTOTYPE, TileEntityFluidConduit::new),
+			new MachineTextures().withDefaultTexture("fluid_conduit_prototype")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicFluidConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit.fluid",
+			"basic_fluid_conduit",
+			"basicFluidConduit",
+			3,
+			(block) -> new BlockLogicFluidConduit(block, Materials.GLASS, Tier.BASIC, TileEntityFluidConduit::new),
+			new MachineTextures().withDefaultTexture("fluid_conduit_basic")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		reinforcedFluidConduit = customBlock(defaultBuilder(Tier.REINFORCED).setBlockSound(BlockSounds.GLASS),
+			"reinforced.conduit.fluid",
+			"reinforced_fluid_conduit",
+			"reinforcedFluidConduit",
+			3,
+			(block) -> new BlockLogicFluidConduit(block, Materials.GLASS, Tier.REINFORCED, TileEntityFluidConduit::new),
+			new MachineTextures().withDefaultTexture("fluid_conduit_reinforced")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		prototypeConduit = customBlock(defaultBuilder(Tier.PROTOTYPE).setBlockSound(BlockSounds.GLASS),
+			"prototype.conduit",
+			"prototype_conduit",
+			"prototypeConduit",
+			2,
+			(block) -> new BlockLogicConduit(block, Materials.GLASS, Tier.PROTOTYPE, TileEntityConduit::new),
+			new MachineTextures().withDefaultTexture("conduit_prototype")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit",
+			"basic_conduit",
+			"basicConduit",
+			3,
+			(block) -> new BlockLogicConduit(block, Materials.GLASS, Tier.BASIC, TileEntityConduit::new),
+			new MachineTextures().withDefaultTexture("conduit_basic")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		reinforcedConduit = customBlock(defaultBuilder(Tier.REINFORCED).setBlockSound(BlockSounds.GLASS),
+			"reinforced.conduit",
+			"reinforced_conduit",
+			"reinforcedConduit",
+			3,
+			(block) -> new BlockLogicConduit(block, Materials.GLASS, Tier.REINFORCED, TileEntityConduit::new),
+			new MachineTextures().withDefaultTexture("conduit_reinforced")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		awakenedConduit = customBlock(defaultBuilder(Tier.AWAKENED).setBlockSound(BlockSounds.GLASS),
+			"awakened.conduit",
+			"awakened_conduit",
+			"awakenedConduit",
+			3,
+			(block) -> new BlockLogicConduit(block, Materials.GLASS, Tier.AWAKENED, TileEntityConduit::new),
+			new MachineTextures().withDefaultTexture("conduit_awakened")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicCatalystConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit.catalyst",
+			"basic_catalyst_conduit",
+			"basicCatalystConduit",
+			3,
+			(block) -> new BlockLogicCatalystConduit(block, Materials.GLASS, Tier.BASIC, TileEntityCatalystConduit::new),
+			new MachineTextures().withDefaultTexture("catalyst_energy_conduit_basic")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		reinforcedCatalystConduit = customBlock(defaultBuilder(Tier.REINFORCED).setBlockSound(BlockSounds.GLASS),
+			"reinforced.conduit.catalyst",
+			"reinforced_catalyst_conduit",
+			"reinforcedCatalystConduit",
+			3,
+			(block) -> new BlockLogicCatalystConduit(block, Materials.GLASS, Tier.REINFORCED, TileEntityCatalystConduit::new),
+			new MachineTextures().withDefaultTexture("catalyst_energy_conduit_reinforced")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		prototypeItemConduit = customBlock(defaultBuilder(Tier.PROTOTYPE).setBlockSound(BlockSounds.GLASS),
+			"prototype.conduit.item",
+			"prototype_item_conduit",
+			"prototypeItemConduit",
+			2,
+			(block) -> new BlockLogicItemConduit(block, Materials.GLASS, Tier.PROTOTYPE, PipeType.NORMAL, TileEntityItemConduit::new),
+			new MachineTextures().withDefaultTexture("item_conduit_prototype")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicItemConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit.item",
+			"basic_item_conduit",
+			"basicItemConduit",
+			3,
+			(block) -> new BlockLogicItemConduit(block, Materials.GLASS, Tier.BASIC, PipeType.NORMAL, TileEntityItemConduit::new),
+			new MachineTextures().withDefaultTexture("item_conduit_basic")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicRestrictItemConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit.item.restrict",
+			"basic_restrict_item_conduit",
+			"basicRestrictItemConduit",
+			3,
+			(block) -> new BlockLogicItemConduit(block, Materials.GLASS, Tier.BASIC, PipeType.RESTRICT, TileEntityItemConduit::new),
+			new MachineTextures().withDefaultTexture("item_conduit_basic")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		basicSensorItemConduit = customBlock(defaultBuilder(Tier.BASIC).setBlockSound(BlockSounds.GLASS),
+			"basic.conduit.item.sensor",
+			"basic_sensor_item_conduit",
+			"basicSensorItemConduit",
+			3,
+			(block) -> new BlockLogicItemConduit(block, Materials.GLASS, Tier.BASIC, PipeType.SENSOR, TileEntityItemConduit::new),
+			new MachineTextures().withDefaultTexture("item_conduit_basic_sensor_off")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		awakenedCatalystConduit = customBlock(defaultBuilder(Tier.AWAKENED).setBlockSound(BlockSounds.GLASS),
+			"awakened.conduit.catalyst",
+			"awakened_catalyst_conduit",
+			"awakenedCatalystConduit",
+			3,
+			(block) -> new BlockLogicCatalystConduit(block, Materials.GLASS, Tier.AWAKENED, TileEntityCatalystConduit::new),
+			new MachineTextures().withDefaultTexture("catalyst_energy_conduit_awakened")
+		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
 		prototypeExtractor = customBlock(defaultBuilder(Tier.PROTOTYPE),
 			"prototype.extractor",
 			"prototype_extractor",
@@ -818,6 +947,45 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultTexture("basic_energy_injector_bottom")
 		);
 
+		prototypePump = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.pump",
+			"prototype_pump",
+			"prototypePump",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityPump::new, "pump"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultSideTextures("prototype_pump_side_empty")
+				.withDefaultTopTexture("prototype_pump_top_empty")
+				.withActiveSideTextures("prototype_pump_side")
+				.withActiveTopTexture("prototype_pump_top")
+		);
+
+		basicPump = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.pump",
+			"basic_pump",
+			"basicPump",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityPump::new, "pump"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("basic_pump_side_empty")
+				.withDefaultTopTexture("basic_pump_top_empty")
+				.withActiveSideTextures("basic_pump_side_active")
+				.withActiveTopTexture("basic_pump_top_active")
+		);
+
+		reinforcedPump = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.pump",
+			"reinforced_pump",
+			"reinforcedPump",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityPump::new, "pump"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("reinforced_pump_side_empty")
+				.withDefaultTopTexture("reinforced_pump_top_empty")
+				.withActiveSideTextures("reinforced_pump_side_active")
+				.withActiveTopTexture("reinforced_pump_top_active")
+		);
+
 		basicAssembler = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.assembler",
 			"basic_assembler",
@@ -1076,6 +1244,18 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightNorthTexture("induction_smelter_front_overlay")
 		);
 
+		reinforcedIgnitor = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.ignitor",
+			"reinforced_ignitor",
+			"reinforcedIgnitor",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityIgnitor::new, null),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("reinforced_ignitor_inactive")
+				.withDefaultTopTexture("reinforced_ignitor_top_inactive")
+				.withDefaultBottomTexture("reinforced_ignitor_bottom_inactive")
+		);
+
 		dimensionalAnchor = customBlock(defaultBuilder(Tier.REINFORCED),
 			"reinforced.dimensionalAnchor",
 			"dimensional_anchor",
@@ -1325,6 +1505,16 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures()
 				.withDefaultTexture("redstone_clock")
 				.withActiveTexture("redstone_clock_active")
+		);
+
+		basicMarker = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.marker",
+			"basic_marker",
+			"basicMarker",
+			1,
+			(block) -> new BlockLogicTiered(block, Materials.METAL, Tier.BASIC),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("basic_marker")
 		);
 
 		cobblestoneBricks = simpleBlock(

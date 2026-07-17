@@ -1,5 +1,5 @@
 {
-  "parent": "signalindustries:conduit/template_item_conduit_down",
+  "parent": "signalindustries:block/conduit/template_item_conduit_down",
   "textures": {
     "conduit": "signalindustries:block/item_conduit_prototype_split"
   }

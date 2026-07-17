@@ -81,6 +81,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/energy_connector"), new TileGuiEntry<>(TileEntityEnergyConnector.class, MenuMachine.class, ScreenEnergyConnector::new));
 		Catalyst.GUIS.register(key("gui/energy_cell"), new TileGuiEntry<>(TileEntityEnergyCell.class, MenuMachine.class, ScreenEnergyCell::new));
 		Catalyst.GUIS.register(key("gui/fluid_tank"), new TileGuiEntry<>(TileEntitySIFluidTank.class, MenuMachine.class, ScreenSIFluidTank::new));
+		Catalyst.GUIS.register(key("gui/pump"), new TileGuiEntry<>(TileEntityPump.class, MenuMachine.class, ScreenPump::new));
 
 		Catalyst.GUIS.register(key("gui/anchor"), new TileGuiEntry<>(TileEntityDimensionalAnchor.class, MenuMachine.class, ScreenAnchor::new));
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new TileGuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class, ScreenMultiblock::new));
@@ -103,6 +104,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 
 	public void afterClientStart() {
 		LOGGER.info("Beginning client post-init.");
+		new SIAchievements().initClient();
 
 		LOGGER.info("Registering attachment keybinds...");
 		Arrays.stream(SIKeybinds.class.getDeclaredFields()).filter((F) -> F.getName().contains("Attachment")).forEach((F) -> {

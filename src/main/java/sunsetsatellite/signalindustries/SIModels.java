@@ -15,18 +15,19 @@ import net.minecraft.core.block.BlockLogicFullyRotatable;
 import net.minecraft.core.util.helper.Side;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.RenderMultiblock;
+import sunsetsatellite.signalindustries.blocks.logic.BlockLogicItemConduit;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicStorageContainer;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicConduitBase;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
+import sunsetsatellite.signalindustries.blocks.models.BlockModelConduit;
 import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
 import sunsetsatellite.signalindustries.items.models.*;
-import sunsetsatellite.signalindustries.render.RenderAssembler;
-import sunsetsatellite.signalindustries.render.RenderFluidInBlock;
-import sunsetsatellite.signalindustries.render.RenderGreenhouse;
-import sunsetsatellite.signalindustries.render.RenderStorageContainer;
+import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAssembler;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyCell;
+import sunsetsatellite.signalindustries.tiles.machines.TileEntityPump;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntitySIFluidTank;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
@@ -36,6 +37,7 @@ import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEn
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import static sunsetsatellite.signalindustries.SIBlocks.*;
@@ -67,6 +69,8 @@ public class SIModels {
 		dispatcher.addDispatch(lunarTotem, new BlockModelGeneric<>(lunarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/lunar_totem")));
 		dispatcher.addDispatch(solarTotem, new BlockModelGeneric<>(solarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/solar_totem")));
 
+		dispatcher.addDispatch(reinforcedIgnitor, new BlockModelIgnitor(reinforcedIgnitor));
+
 		blockTextures.forEach((block, tex) -> {
 			if (dispatcher.hasDispatch(block)) return;
 			if (Block.hasLogicClass(block, BlockLogicMachineBase.class)) {
@@ -78,11 +82,18 @@ public class SIModels {
 			} else if (Block.hasLogicClass(block, BlockLogicFluid.class)) {
 				dispatcher.addDispatch(block, new BlockModelFluid<>(((Block<BlockLogicFluid>) block), tex.defaultTextures.get(Side.TOP), tex.defaultTextures.get(Side.BOTTOM)));
 			} else if(Block.hasLogicClass(block, BlockLogicStorageContainer.class)) {
-				 dispatcher.addDispatch(block, new BlockModelMachine(block, tex));
+				dispatcher.addDispatch(block, new BlockModelMachine(block, tex));
 			} else if(Block.hasLogicClass(block, BlockLogicFullyRotatable.class)) {
 				BlockModelFullyRotatable<? extends BlockLogic> model = new BlockModelFullyRotatable<>(block);
 				tex.defaultTextures.forEach((side, text) -> model.setTex(text, side));
 				dispatcher.addDispatch(block,model);
+			} else if(Block.hasLogicClass(block, BlockLogicConduitBase.class)) {
+				BlockLogicConduitBase conduit = (BlockLogicConduitBase) block.getLogic();
+				PipeType pipeType = null;
+				if(conduit instanceof BlockLogicItemConduit itemConduit){
+					pipeType = itemConduit.type;
+				}
+				dispatcher.addDispatch(block, new BlockModelConduit<>(block, conduit.conduitCapability, conduit.tier, pipeType));
 			} else {
 				BlockModelFullbright model = new BlockModelFullbright(block);
 				tex.defaultTextures.forEach((side, text) -> model.setTex(text, side));
@@ -128,6 +139,7 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntitySIFluidTank.class, new RenderFluidInBlock());
 		dispatcher.assignRenderer(TileEntityEnergyCell.class, new RenderFluidInBlock());
 		dispatcher.assignRenderer(TileEntityStorageContainer.class, new RenderStorageContainer());
+		dispatcher.assignRenderer(TileEntityPump.class, new RenderPump());
 	}
 
 	public void initBlockColors(BlockColorDispatcher dispatcher) {

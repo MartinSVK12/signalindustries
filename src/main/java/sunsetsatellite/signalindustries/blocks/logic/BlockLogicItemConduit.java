@@ -7,6 +7,9 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.WorldSource;
+import net.minecraft.core.world.pos.TilePosc;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
@@ -30,44 +33,44 @@ public class BlockLogicItemConduit extends BlockLogicConduitBase {
         this.type = type;
     }
 
-    @Override
-    public boolean onBlockRightClicked(World world, int i, int j, int k, Player entityplayer, Side side, double xHit, double yHit) {
-        if (super.onBlockRightClicked(world, i, j, k, entityplayer, side, xHit, yHit)) {
-            return true;
-        }
-        if (entityplayer.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(i, j, k);
-            tile.mode = PipeMode.values()[tile.mode.ordinal() + 1 <= PipeMode.values().length - 1 ? tile.mode.ordinal() + 1 : 0];
-            entityplayer.sendMessage("Pipe mode changed to: " + tile.mode);
-            return true;
-        }
-        if (!EnvironmentHelper.isServerEnvironment() && type == PipeType.RESTRICT) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(i, j, k);
-            Catalyst.displayGui(entityplayer, tile, key("gui/restrict_item_conduit"));
-            return true;
-        }
-        if (!world.isClientSide && type == PipeType.SENSOR) {
-            TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(i, j, k);
-            Catalyst.displayGui(entityplayer, tile, key("gui/sensor_item_conduit"));
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public boolean onInteracted(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Player player, @Nullable Side side, double xHit, double yHit) {
+		if (super.onInteracted(world, tilePos, player, side, xHit, yHit)) {
+			return true;
+		}
+		if (player.isSneaking() && type == PipeType.NORMAL && !world.isClientSide) {
+			TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(tilePos);
+			tile.mode = PipeMode.values()[tile.mode.ordinal() + 1 <= PipeMode.values().length - 1 ? tile.mode.ordinal() + 1 : 0];
+			player.sendMessage("Pipe mode changed to: " + tile.mode);
+			return true;
+		}
+		if (!EnvironmentHelper.isMultiplayerServer() && type == PipeType.RESTRICT) {
+			TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(tilePos);
+			Catalyst.displayGui(player, tile, key("gui/restrict_item_conduit"));
+			return true;
+		}
+		if (!world.isClientSide && type == PipeType.SENSOR) {
+			TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(tilePos);
+			Catalyst.displayGui(player, tile, key("gui/sensor_item_conduit"));
+			return true;
+		}
+		return false;
+	}
 
     @Override
     public boolean isSignalSource() {
         return true;
     }
 
-    @Override
-    public boolean getSignal(WorldSource worldSource, int x, int y, int z, @NonNull Side side) {
-        TileEntityItemConduit tile = (TileEntityItemConduit) worldSource.getTileEntity(x, y, z);
-        return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
-    }
+	@Override
+	public boolean isEmittingDirectSignal(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Side side) {
+		TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(tilePos);
+		return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
+	}
 
-    @Override
-    public boolean getDirectSignal(World world, int x, int y, int z, @NonNull Side side) {
-        TileEntityItemConduit tile = (TileEntityItemConduit) world.getTileEntity(x, y, z);
-        return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
-    }
+	@Override
+	public boolean isEmittingSignal(@NotNull WorldSource source, @NotNull TilePosc tilePos, @NotNull Side side) {
+		TileEntityItemConduit tile = (TileEntityItemConduit) source.getTileEntity(tilePos);
+		return tile != null && tile.type == PipeType.SENSOR && tile.sensorActive;
+	}
 }
