@@ -60,9 +60,9 @@ public class SIMultiblocks extends DataInitializer {
         wakingCrusher = new SIMultiblock(MOD_ID,  "wakingCrusher", "wakingCrusher", false, Tier.REINFORCED);
         wakingInfuser = new SIMultiblock(MOD_ID,  "wakingInfuser", "wakingInfuser", false, Tier.REINFORCED);
         dimAnchorMultiblock = new SIMultiblock(MOD_ID,  "dimensionalAnchor", "dimensionalAnchor", false, Tier.REINFORCED);
-        //signalumReactor = new SIMultiblock(MOD_ID,  "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
-        //extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
-        //warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
+        signalumReactor = new SIMultiblock(MOD_ID,  "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
+        extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
+        warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
         //altarOfCreation = new SIMultiblock(MOD_ID,  "altarOfCreation", "altarOfCreation", false, Tier.AWAKENED);
 
         CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
@@ -95,15 +95,15 @@ public class SIMultiblocks extends DataInitializer {
 
         Multiblock.multiblocks.put("dimensionalAnchor", dimAnchorMultiblock);
         //Multiblock.multiblocks.put("wrathTree", wrathTree);
-        //Multiblock.multiblocks.put("signalumReactor", signalumReactor);
-        //Multiblock.multiblocks.put("extractionManifold", extractionManifold);
+        Multiblock.multiblocks.put("signalumReactor", signalumReactor);
+        Multiblock.multiblocks.put("extractionManifold", extractionManifold);
         Multiblock.multiblocks.put("basicInductionSmelter", inductionSmelterBasic);
         Multiblock.multiblocks.put("reinforcedInductionSmelter", inductionSmelterReinforced);
         Multiblock.multiblocks.put("wakingPlateFormer", wakingPlateFormer);
         Multiblock.multiblocks.put("wakingAlloySmelter", wakingAlloySmelter);
         Multiblock.multiblocks.put("wakingCrusher", wakingCrusher);
         Multiblock.multiblocks.put("wakingInfuser", wakingInfuser);
-        //Multiblock.multiblocks.put("warpGate", warpGate);
+        Multiblock.multiblocks.put("warpGate", warpGate);
         Multiblock.multiblocks.put("laserDrill", laserDrill);
         Multiblock.multiblocks.put("greenhouse", greenhouse);
         //Multiblock.multiblocks.put("altarOfCreation", altarOfCreation);

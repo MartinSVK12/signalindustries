@@ -7,15 +7,16 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.screens.component.ButtonComponent;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageRecipeIdChange;
 import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityCrystalCutter;
+import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityStoneworks;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
-public class ScreenCrystalCutter extends ScreenMachine<TileEntityCrystalCutter> {
+public class ScreenStoneworks extends ScreenMachine<TileEntityStoneworks> {
 
 	public TooltipElement tooltip = new TooltipElement(mc);
 
-	public ScreenCrystalCutter(ContainerInventory playerInv, TileEntityCrystalCutter inv) {
-		super(playerInv, inv, "crystal_cutter");
+	public ScreenStoneworks(ContainerInventory playerInv, TileEntityStoneworks inv) {
+		super(playerInv, inv, "stoneworks");
 		ButtonComponent button = get("recipeId");
 		button.buttonClicked.connect((signal, clicked) -> {
 			if(tile.recipeId > 0 && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))){

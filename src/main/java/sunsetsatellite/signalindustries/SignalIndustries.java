@@ -217,6 +217,7 @@ public class SignalIndustries implements ModInitializer {
 
 	public void afterGameStart() {
 		LOGGER.info("Beginning core post-init.");
+		SIRecipes.loadSpecial();
 	}
 
 	public static NamespaceID id(String id) {

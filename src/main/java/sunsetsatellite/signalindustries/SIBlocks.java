@@ -11,16 +11,13 @@ import sunsetsatellite.signalindustries.blocks.logic.*;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
 import sunsetsatellite.signalindustries.blocks.logic.base.*;
 import sunsetsatellite.signalindustries.items.blocks.ItemBlockSIFluidTank;
-import sunsetsatellite.signalindustries.tiles.TileEntityIgnitor;
+import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityCatalystConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityFluidConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
@@ -634,6 +631,18 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightSideTextures("extractor_overlay")
 		);
 
+		reinforcedExtractor = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.extractor",
+			"reinforced_extractor",
+			"reinforcedExtractor",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityReinforcedExtractor::new, "r_extractor"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("extractor_reinforced_side_empty")
+				.withActiveSideTextures("extractor_reinforced_side_active")
+				.withOverbrightSideTextures("extractor_overlay")
+		);
+
 		basicCollector = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.collector",
 			"basic_collector",
@@ -1000,6 +1009,158 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightTextures("assembler_overlay_side")
 				.withOverbrightNorthTexture("assembler_overlay_front")
 		);
+		basicTrommel = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.trommel",
+			"basic_trommel",
+			"basicTrommel",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntitySITrommel::new, "trommel"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("basic_trommel_side")
+				.withDefaultTopTexture("basic_trommel_top")
+				.withDefaultBottomTexture("basic_trommel_bottom")
+				.withDefaultNorthTexture("basic_trommel_front_inactive")
+				.withDefaultSouthTexture("basic_trommel_front_inactive")
+				.withActiveNorthTexture("basic_trommel_front_active")
+				.withActiveSouthTexture("basic_trommel_front_active")
+		);
+
+		reinforcedTrommel = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.trommel",
+			"reinforced_trommel",
+			"reinforcedTrommel",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntitySITrommel::new, "trommel"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("reinforced_trommel_side_inactive")
+				.withDefaultTopTexture("reinforced_trommel_top_inactive")
+				.withDefaultBottomTexture("reinforced_trommel_bottom")
+				.withDefaultNorthTexture("reinforced_trommel_front_inactive")
+				.withDefaultSouthTexture("reinforced_trommel_front_inactive")
+				.withActiveTexture("reinforced_blank_active")
+				.withActiveTopTexture("reinforced_trommel_top_active")
+				.withActiveSideTextures("reinforced_trommel_side_active")
+				.withActiveNorthTexture("reinforced_trommel_front_active")
+				.withActiveSouthTexture("reinforced_trommel_front_active")
+		);
+
+		basicBonsai = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.bonsai",
+			"basic_bonsai",
+			"basicBonsai",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityBonsaiPot::new, "bonsai_pot").setNonSolid(),
+			new MachineTextures()
+		);
+
+		reinforcedBonsai = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.bonsai",
+			"reinforced_bonsai",
+			"reinforcedBonsai",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityBonsaiPot::new, "bonsai_pot").setNonSolid(),
+			new MachineTextures()
+		);
+
+		basicStoneworks = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.stoneworks",
+			"basic_stoneworks",
+			"basicStoneworks",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityStoneworks::new, "stoneworks").setNonSolid(),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("basic_stoneworks_inactive_side")
+				.withActiveSideTextures("basic_stoneworks_active_side")
+		);
+
+		basicHeatPump = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.heatPump",
+			"basic_heat_pump",
+			"basicHeatPump",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityHeatPump::new, "heat_pump"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("basic_heat_pump_inactive_side")
+				.withDefaultTopTexture("basic_heat_pump_top_inactive")
+				.withActiveNorthTexture("basic_heat_pump_melting_active_side")
+				.withActiveTopTexture("basic_heat_pump_top_melting_active")
+		);
+
+		prototypeInserter = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.inserter",
+			"prototype_inserter",
+			"prototypeInserter",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityInserter::new, null).setVertical(),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultNorthTexture("inserter_input")
+				.withDefaultSouthTexture("inserter_output"),
+			new VerticalMachineTextures(Tier.PROTOTYPE)
+				.withVerticalDefaultTopTexture("inserter_input")
+				.withVerticalDefaultBottomTexture("inserter_output")
+		).withTags(ITEM_CONDUITS_CONNECT);
+
+		basicInserter = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.inserter",
+			"basic_inserter",
+			"basicInserter",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityInserter::new, null).setVertical(),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("basic_inserter_input")
+				.withDefaultSouthTexture("basic_inserter_output"),
+			new VerticalMachineTextures(Tier.BASIC)
+				.withVerticalDefaultTopTexture("basic_inserter_input")
+				.withVerticalDefaultBottomTexture("basic_inserter_output")
+		).withTags(ITEM_CONDUITS_CONNECT);
+
+		prototypeFilter = customBlock(defaultBuilder(Tier.PROTOTYPE),
+			"prototype.filter",
+			"prototype_filter",
+			"prototypeFilter",
+			2,
+			(block) -> new BlockLogicMachine(block, Materials.STONE, Tier.PROTOTYPE, TileEntityFilter::new, "filter"),
+			new MachineTextures(Tier.PROTOTYPE)
+				.withDefaultTopTexture("filter_red")
+				.withDefaultSouthTexture("filter_green")
+				.withDefaultEastTexture("filter_blue")
+				.withDefaultWestTexture("filter_yellow")
+				.withDefaultNorthTexture("filter_magenta")
+				.withDefaultBottomTexture("filter_cyan")
+		).withTags(ITEM_CONDUITS_CONNECT);
+
+		externalIo = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.externalIO",
+			"basic_external_io",
+			"externalIo",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityExternalIO::new, "external_io"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("external_io_blank")
+		);
+		reinforcedExternalIo = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.externalIO",
+			"reinforced_external_io",
+			"reinforcedExternalIo",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityExternalIO::new, "external_io"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultTexture("reinforced_external_io_blank")
+		);
+
+		reinforcedCentrifuge = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.centrifuge",
+			"reinforced_centrifuge",
+			"reinforcedCentrifuge",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityCentrifuge::new, "centrifuge"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("reinforced_centrifuge_front_inactive")
+				.withDefaultTopTexture("reinforced_centrifuge_empty")
+				.withActiveNorthTexture("reinforced_centrifuge_front_active")
+				.withActiveTopTexture("reinforced_centrifuge_closed")
+				.withOverbrightNorthTexture("centrifuge_overlay")
+		);
 
 		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.booster",
@@ -1296,6 +1457,21 @@ public class SIBlocks extends DataInitializer {
 				.withActiveNorthTexture("basic_greenhouse_front_active")
 		);
 
+		signalumReactorCore = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.signalumReactorCore",
+			"signalite_reactor_core",
+			"signalumReactorCore",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntitySignalumReactor::new, "reactor"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("signalum_reactor_side_inactive")
+				.withDefaultNorthTexture("signalum_reactor_front_inactive")
+				.withActiveSideTextures("signalum_reactor_side_active")
+				.withActiveNorthTexture("signalum_reactor_front_inactive")
+				.withOverbrightSideTextures("reactor_side_overlay")
+				.withOverbrightNorthTexture("reactor_overlay")
+		);
+
 		wakingAlloySmelter = customBlock(defaultBuilder(Tier.REINFORCED),
 			"reinforced.wakingAlloySmelter",
 			"waking_alloy_smelter",
@@ -1344,6 +1520,26 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultSideTextures("infuser_reinforced_side_inactive")
 				.withActiveSideTextures("waking_infuser_side_active")
 				.withOverbrightSideTextures("waking_infuser_overlay")
+		);
+
+		warpGate = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.warpGate",
+			"warp_gate",
+			"warpGate",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityWarpGate::new, "warp_gate"),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultSideTextures("warp_gate_side_inactive")
+				.withDefaultNorthTexture("warp_gate_front_inactive")
+				.withDefaultTopTexture("warp_gate_top")
+				.withDefaultSouthTexture("warp_gate_back")
+				.withActiveSideTextures("warp_gate_side_active")
+				.withActiveNorthTexture("warp_gate_front_active")
+				.withActiveSouthTexture("warp_gate_back_filled")
+				.withActiveTopTexture("warp_gate_top")
+				.withOverbrightSouthTexture("warp_gate_back_overlay")
+				.withOverbrightEastTexture("warp_gate_side_overlay")
+				.withOverbrightWestTexture("warp_gate_side_overlay")
 		);
 
 		basicCasing = customBlock(
@@ -1507,6 +1703,28 @@ public class SIBlocks extends DataInitializer {
 				.withActiveTexture("redstone_clock_active")
 		);
 
+		basicWrathBeacon = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.wrathBeacon",
+			"basic_wrath_beacon",
+			"basicWrathBeacon",
+			3,
+			(block) -> new BlockLogicWrathBeacon(block, Materials.METAL, Tier.BASIC),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultSideTextures("wrath_beacon")
+				.withActiveSideTextures("wrath_beacon_active")
+		);
+
+		reinforcedWrathBeacon = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.wrathBeacon",
+			"reinforced_wrath_beacon",
+			"reinforcedWrathBeacon",
+			3,
+			(block) -> new BlockLogicWrathBeacon(block, Materials.METAL, Tier.REINFORCED),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultSideTextures("reinforced_wrath_beacon")
+				.withActiveSideTextures("reinforced_wrath_beacon_active")
+		);
+
 		basicMarker = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.marker",
 			"basic_marker",
@@ -1516,6 +1734,29 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures(Tier.BASIC)
 				.withDefaultTexture("basic_marker")
 		);
+
+		voidContainer = simpleBlock(defaultBuilder(Tier.BASIC),
+			"voidContainer",
+			"void_container",
+			"voidContainer",
+			3,
+			Materials.METAL,
+			new MachineTextures()
+				.withDefaultTexture("container_void")
+		).withEntity(TileEntityVoidContainer::new);
+
+		uvLamp = customBlock(defaultBuilder(Tier.BASIC),
+			"uvLamp",
+			"uv_lamp",
+			"uvLamp",
+			3,
+			(block) -> new BlockLogicUVLamp(block, Materials.METAL),
+			new MachineTextures()
+				.withDefaultTexture("uv_lamp_inactive")
+				.withActiveTexture("uv_lamp")
+				.withOverbrightTextures("uv_lamp_overlay")
+		);
+
 
 		cobblestoneBricks = simpleBlock(
 			defaultBuilder(Tier.PROTOTYPE),

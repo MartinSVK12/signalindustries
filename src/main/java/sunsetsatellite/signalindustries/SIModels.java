@@ -6,6 +6,8 @@ import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
 import net.minecraft.client.render.entity.EntityRendererSprite;
+import net.minecraft.client.render.entity.MobRenderer;
+import net.minecraft.client.render.entity.MobRendererZombie;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.block.Block;
@@ -21,7 +23,9 @@ import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicConduitBase;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.models.BlockModelConduit;
+import sunsetsatellite.signalindustries.entities.MobInfernal;
 import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
+import sunsetsatellite.signalindustries.entities.render.MobRendererInfernal;
 import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
@@ -29,14 +33,12 @@ import sunsetsatellite.signalindustries.tiles.machines.TileEntityAssembler;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyCell;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityPump;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntitySIFluidTank;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityDimensionalAnchor;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityGreenhouse;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityInductionSmelter;
-import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntityLaserDrill;
+import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingInfuser;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingPlateFormer;
+import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityStoneworks;
 import sunsetsatellite.signalindustries.util.PipeType;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -65,6 +67,14 @@ public class SIModels {
 		dispatcher.addDispatch(ashenTreeSapling, new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(blockTextures.get(ashenTreeSapling).defaultTextures.get(Side.BOTTOM)));
 
 		dispatcher.addDispatch(basicEnergyInjector, new BlockModelGeneric<>(basicEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_energy_injector")));
+		dispatcher.addDispatch(basicHeatPump, new BlockModelHeatPump(basicHeatPump, blockTextures.get(basicHeatPump),
+			blockTextures.get(basicHeatPump).copy()
+				.withActiveTopTexture("basic_heat_pump_top_freezing_active")
+				.withActiveNorthTexture("basic_heat_pump_freezing_active_side")
+		));
+
+		dispatcher.addDispatch(basicBonsai,new BlockModelBonsaiPot<>(basicBonsai));
+		dispatcher.addDispatch(reinforcedBonsai,new BlockModelBonsaiPot<>(reinforcedBonsai));
 
 		dispatcher.addDispatch(lunarTotem, new BlockModelGeneric<>(lunarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/lunar_totem")));
 		dispatcher.addDispatch(solarTotem, new BlockModelGeneric<>(solarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/solar_totem")));
@@ -123,10 +133,12 @@ public class SIModels {
 	public void initEntityModels(EntityRendererDispatcher dispatcher) {
 		LOGGER.info("Initializing entity models...");
 		dispatcher.assignRenderer(ProjectileCrystal.class, new EntityRendererSprite<>(volatileSignalumCrystal));
+		dispatcher.assignRenderer(MobInfernal.class, new MobRendererInfernal(0.5f));
 	}
 
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
 		LOGGER.info("Initializing tile entity renderers...");
+		dispatcher.assignRenderer(TileEntityReinforcedExtractor.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityDimensionalAnchor.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWakingAlloySmelter.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWakingPlateFormer.class, new RenderMultiblock());
@@ -140,6 +152,10 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityEnergyCell.class, new RenderFluidInBlock());
 		dispatcher.assignRenderer(TileEntityStorageContainer.class, new RenderStorageContainer());
 		dispatcher.assignRenderer(TileEntityPump.class, new RenderPump());
+		dispatcher.assignRenderer(TileEntityStoneworks.class, new RenderStoneworks());
+		dispatcher.assignRenderer(TileEntitySignalumReactor.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWarpGate.class, new RenderMultiblock());
+
 	}
 
 	public void initBlockColors(BlockColorDispatcher dispatcher) {

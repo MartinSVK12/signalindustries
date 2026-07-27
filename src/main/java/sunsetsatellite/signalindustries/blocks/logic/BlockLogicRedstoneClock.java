@@ -62,8 +62,7 @@ public class BlockLogicRedstoneClock extends BlockLogic {
 		} else {
 			TileEntityRedstoneClock tile = (TileEntityRedstoneClock) world.getTileEntity(tilePos);
 			if (tile != null) {
-				//TODO:
-				//Catalyst.displayGui(player, tile, key("gui/redstone_clock"));
+				Catalyst.displayGui(player, tile, key("gui/redstone_clock"));
 			}
 		}
 		return true;

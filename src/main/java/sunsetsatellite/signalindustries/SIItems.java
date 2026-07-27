@@ -7,6 +7,7 @@ import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
 import sunsetsatellite.signalindustries.abilities.powersuit.ScanSuitAbility;
+import sunsetsatellite.signalindustries.covers.*;
 import sunsetsatellite.signalindustries.items.*;
 import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 import sunsetsatellite.signalindustries.items.applications.ItemSmartWatch;
@@ -319,6 +320,14 @@ public class SIItems extends DataInitializer {
 			() -> new ItemVolatileSignalumCrystal("volatileSignalumCrystal", key("volatile_signalite_crystal"), item("volatileSignalumCrystal")),
 			"volatile_signalum_crystal"
 		).setMaxStackSize(4);
+
+		blankCover = (ItemCover) customItem(() -> new ItemCover("cover.blank", key("item/blank_cover"), item("blankCover"), BlankCover::new), "blank_cover");
+		dilithiumLensCover = (ItemCover) customItem(() -> new ItemCover("cover.dilithiumLens", key("item/dilithium_lens_cover"), item("dilithiumLensCover"), DilithiumLensCover::new), "dilithium_lens");
+		conveyorCover = (ItemCover) customItem(() -> new ItemCover("cover.item", key("item/conveyor_cover"), item("conveyorCover"), ConveyorCover::new), "conveyor_cover");
+		pumpCover = (ItemCover) customItem(() -> new ItemCover("cover.fluid", key("item/pump_cover"), item("pumpCover"), PumpCover::new), "pump_cover");
+		switchCover = (ItemCover) customItem(() -> new ItemCover("cover.switch", key("item/switch_cover"), item("switchCover"), SwitchCover::new), "switch_cover");
+		redstoneCover = (ItemCover) customItem(() -> new ItemCover("cover.redstone", key("item/redstone_cover"), item("redstoneCover"), RedstoneCover::new), "redstone_cover");
+		voidCover = (ItemCover) customItem(() -> new ItemCover("cover.void", key("item/void_cover"), item("voidCover"), VoidCover::new), "void_cover");
 
 		pulsar = customItem(() -> new ItemPulsar("reinforced.pulsar", key("item/pulsar"), item("pulsar"), Tier.REINFORCED), "pulsar_inactive").setMaxStackSize(1);
 
