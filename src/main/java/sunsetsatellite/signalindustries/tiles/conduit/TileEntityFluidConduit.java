@@ -8,15 +8,15 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
-import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
-import sunsetsatellite.catalyst.multipart.api.Multipart;
+//import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+//import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupportsMultiparts {
+public class TileEntityFluidConduit extends TileEntityFluidPipe /*implements ISupportsMultiparts*/ {
 
     public TileEntityFluidConduit() {
         acceptedFluids.get(0).clear();
@@ -40,7 +40,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
         super.tick();
     }
 
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+    /*public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
 
 	@Override
@@ -73,5 +73,5 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
     @Override
     public HashMap<Direction, Multipart> getParts() {
         return parts;
-    }
+    }*/
 }

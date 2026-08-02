@@ -9,6 +9,7 @@
     "PlayerMixin",
     "PlayerRemoteMixin",
     "SlotResultMixin",
+    "SpawnerMobsMixin",
     "WorldMixin"
   ],
   "client": [
@@ -19,11 +20,13 @@
     "PlayerLocalMixin",
     "RenderGlobalMixin",
     "ScreenInventoryMixin",
-    "TextureManagerMixin"
+    "TextureManagerMixin",
+    "WorldClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "server": [
+    "PlayerServerMixin"
   ]
 }

@@ -24,7 +24,7 @@ import sunsetsatellite.catalyst.core.util.section.BlockSection;
 import sunsetsatellite.catalyst.core.util.vector.Vec2f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
-import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+//import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
@@ -69,12 +69,12 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 
     public void setBlockBoundsFromState(WorldSource world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (tile instanceof ISupportsMultiparts) {
+        /*if (tile instanceof ISupportsMultiparts) {
             if (((ISupportsMultiparts) tile).getParts().values().stream().anyMatch(Objects::nonNull)) {
                 setBlockBounds(0, 0, 0, 1, 1, 1);
                 return;
             }
-        }
+        }*/
         float bx = 0.3f, by = 0.3f, bz = 0.3f;
         float tx = 0.7f, ty = 0.7f, tz = 0.7f;
         // Loop de-loop

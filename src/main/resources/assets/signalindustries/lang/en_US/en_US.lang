@@ -1366,8 +1366,8 @@ container.signalindustries.encapsulator.name=Spatial Encapsulator
 container.signalindustries.blueprint.name=Blueprint
 container.signalindustries.trommel.name=Trommel
 
-entity.signalindustries.volatileCrystal.name=Volatile Crystal
-entity.signalindustries.fallingMeteor.name=Falling Meteor
-entity.signalindustries.energyOrb.name=Energy Orb
-entity.signalindustries.sunbeam.name=Sunbeam
-entity.signalindustries.infernal.name=Infernal
+entity.signalindustries.volatileCrystal=Volatile Crystal
+entity.signalindustries.fallingMeteor=Falling Meteor
+entity.signalindustries.energyOrb=Energy Orb
+entity.signalindustries.sunbeam=Sunbeam
+entity.signalindustries.infernal=Infernal

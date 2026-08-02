@@ -35,7 +35,7 @@ public class SIMultiblocks extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing multiblocks...");
 
-        //wrathTree = new SIMultiblock(MOD_ID, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
+        wrathTree = new SIMultiblock(MOD_ID, "wrathTree", "reinforcedWrathBeacon", false, Tier.REINFORCED);
         // Example:
         /*CompoundTag multiblockData = new StructureBuilder('M', SIBlocks.basicInductionSmelter, 5)
                 .addLayer("BBO",
@@ -94,7 +94,7 @@ public class SIMultiblocks extends DataInitializer {
         laserDrill = new SIMultiblock(MOD_ID, "laserDrill", laserDrillData, false, Tier.REINFORCED);
 
         Multiblock.multiblocks.put("dimensionalAnchor", dimAnchorMultiblock);
-        //Multiblock.multiblocks.put("wrathTree", wrathTree);
+        Multiblock.multiblocks.put("wrathTree", wrathTree);
         Multiblock.multiblocks.put("signalumReactor", signalumReactor);
         Multiblock.multiblocks.put("extractionManifold", extractionManifold);
         Multiblock.multiblocks.put("basicInductionSmelter", inductionSmelterBasic);

@@ -40,6 +40,7 @@ public class ProjectileFallingMeteor extends Projectile {
 
     @Override
     public void tick() {
+		defaultProjectileSpeed = 1f;
         super.tick();
         if (this.world != null) {
             if (blockID == SIBlocks.signalumOre.id()) {

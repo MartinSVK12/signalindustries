@@ -17,6 +17,7 @@ import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.tiles.TileEntityRedstoneClock;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -62,6 +63,15 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/energy_injector"), new GuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/redstone_clock"), new GuiEntry<>(TileEntityRedstoneClock.class,null));
 		Catalyst.GUIS.register(key("gui/filter"), new GuiEntry<>(TileEntityFilter.class,MenuFilter.class));
+		Catalyst.GUIS.register(key("gui/dynamo"), new GuiEntry<>(TileEntitySignalumDynamo.class,MenuSignalumDynamo.class));
+		Catalyst.GUIS.register(key("gui/builder"), new GuiEntry<>(TileEntityBuilder.class,MenuBuilder.class));
+		Catalyst.GUIS.register(key("gui/auto_miner"), new GuiEntry<>(TileEntityAutoMiner.class,MenuAutoMiner.class));
+		Catalyst.GUIS.register(key("gui/programmer"), new GuiEntry<>(TileEntityProgrammer.class,MenuProgrammer.class));
+		Catalyst.GUIS.register(key("gui/pulsar_block"), new GuiEntry<>(TileEntityPulsar.class,MenuPulsarBlock.class));
+
+		Catalyst.GUIS.register(key("gui/switch_cover"), new GuiEntry<>(TileEntityCoverable.class, MenuCover.class));
+		Catalyst.GUIS.register(key("gui/void_cover"), new GuiEntry<>(TileEntityCoverable.class, MenuCover.class));
+		Catalyst.GUIS.register(key("gui/redstone_cover"), new GuiEntry<>(TileEntityCoverable.class, MenuCover.class));
 
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new GuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/r_extractor"), new GuiEntry<>(TileEntityReinforcedExtractor.class, MenuReinforcedExtractor.class));

@@ -17,13 +17,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SignalIndustriesClient;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitClient;
 
 @Mixin(value = PlayerLocal.class, remap = false)
-public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSuit<SignalumPowerSuitClient> {
+public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSuit<SignalumPowerSuitClient>, IWarpPlayer {
 
 	@Shadow
 	protected Minecraft mc;
@@ -162,5 +164,10 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 	@Override
 	public CompoundTag getPowerSuitData() {
 		return powerSuitData;
+	}
+
+	@Override
+	public void warp(int dim) {
+		SignalIndustriesClient.movePlayerToDimension(this, dim);
 	}
 }

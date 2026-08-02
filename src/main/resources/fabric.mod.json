@@ -53,7 +53,6 @@
     "catalyst-fluids": ">=${fluids}",
     "catalyst-multiblocks": ">=${multiblocks}",
     "catalyst-energy": ">=${energy}",
-    "catalyst-multipart": ">=${multipart}",
 		"catalyst-screens": ">=${screens}",
     "halplibe": ">=${halplibe}"
   },

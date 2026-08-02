@@ -833,55 +833,6 @@
     "consumeContainers": false
   },
   {
-    "name": "signalindustries:workbench/dilithium_rail",
-    "type": "minecraft:crafting/shaped",
-    "pattern": [
-      "PTP",
-      "DTD",
-      "PTP"
-    ],
-    "symbols": [
-      {
-        "symbol": "P",
-        "stack": {
-          "key": "item.signalindustries.crystalAlloyPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "T",
-        "stack": {
-          "key": "item.stick",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "S",
-        "stack": {
-          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "D",
-        "stack": {
-          "key": "item.signalindustries.dilithiumShard",
-          "amount": 1,
-          "meta": 0
-        }
-      }
-    ],
-    "result": {
-      "key": "tile.signalindustries.dilithiumRail",
-      "amount": 8,
-      "meta": 0
-    },
-    "consumeContainers": false
-  },
-  {
     "name": "signalindustries:workbench/item_input_bus",
     "type": "minecraft:crafting/shaped",
     "pattern": [

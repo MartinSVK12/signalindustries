@@ -20,8 +20,8 @@ public class ProjectileSunbeam extends Projectile {
     @Override
     protected void initProjectile() {
         super.initProjectile();
-        this.gravity = 0.00F;
-        this.speed = 1.5F;
+        this.defaultGravity = 0.00F;
+        this.defaultProjectileSpeed = 1.5F;
         this.damage = 5;
     }
 }

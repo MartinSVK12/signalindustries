@@ -11,15 +11,16 @@ import net.minecraft.core.world.chunk.Chunk;
 import net.minecraft.core.world.chunk.provider.ChunkProvider;
 import net.minecraft.core.world.save.*;
 import net.minecraft.core.world.settings.WorldConfiguration;
+import net.minecraft.core.world.weather.Weather;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIDimensions;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.SignalIndustries;
 
 @Mixin(value = World.class,remap = false)
@@ -29,6 +30,13 @@ public abstract class WorldMixin {
 	@Final
 	@NotNull
 	public Dimension dimension;
+
+	@Shadow
+	@Nullable
+	public abstract Weather getCurrentWeather();
+
+	@Unique
+	private final World thisAs = (World) ((Object) this);
 
 
 	@Inject(method = "spawnPlayerWithLoadedChunks", at = @At("HEAD"))
@@ -44,6 +52,17 @@ public abstract class WorldMixin {
 	public void saveWorld(boolean saveImmediately, ProgressListener progressUpdate, boolean saveLevelData, CallbackInfo ci) {
 		if(dimension.id == SIDimensions.ETERNITY.id && SignalIndustries.DEBUG) {
 			ci.cancel();
+		}
+	}
+
+	@Inject(
+		method = "getCelestialAngle",
+		at = @At("HEAD"),
+		cancellable = true
+	)
+	public void solarEclipseCelestialAngle(float f, CallbackInfoReturnable<Float> cir) {
+		if (getCurrentWeather() == SIWeather.weatherEclipse) {
+			cir.setReturnValue(1f);
 		}
 	}
 

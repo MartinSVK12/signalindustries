@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.energy.simple.impl.TileEntityEnergyConductor;
-import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
-import sunsetsatellite.catalyst.multipart.api.Multipart;
+//import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+//import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class TileEntityCatalystConduit extends TileEntityEnergyConductor implements ISupportsMultiparts {
+public class TileEntityCatalystConduit extends TileEntityEnergyConductor /*implements ISupportsMultiparts*/ {
 
     public Tier tier = Tier.PROTOTYPE;
 
@@ -32,9 +32,19 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor impleme
         super.tick();
     }
 
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+	@Override
+	public void readAdditionalData(@NotNull CompoundTag compoundTag) {
+
+	}
 
 	@Override
+	public void writeAdditionalData(@NotNull CompoundTag compoundTag) {
+
+	}
+
+	//public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+
+	/*@Override
 	public void writeAdditionalData(@NotNull CompoundTag tag) {
 		CompoundTag coversNbt = new CompoundTag();
 
@@ -62,5 +72,5 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor impleme
     @Override
     public HashMap<Direction, Multipart> getParts() {
         return parts;
-    }
+    }*/
 }

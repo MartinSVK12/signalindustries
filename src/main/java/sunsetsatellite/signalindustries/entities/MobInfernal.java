@@ -124,12 +124,12 @@ public class MobInfernal extends MobMonster {
 
     @Override
     public @NotNull String getDefaultEntityTexture() {
-        return "/assets/signalindustries/entity/infernal.png";
+        return "/assets/signalindustries/textures/entity/infernal/0.png";
     }
 
     @Override
     public @NonNull String getEntityTexture() {
-        return "/assets/signalindustries/entity/infernal.png";
+        return "/assets/signalindustries/textures/entity/infernal/0.png";
     }
 
     public String getLivingSound() {

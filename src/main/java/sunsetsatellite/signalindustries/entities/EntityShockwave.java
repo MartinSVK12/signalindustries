@@ -7,6 +7,7 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class EntityShockwave extends Entity {
 		super(world);
 	}
 
-    public EntityShockwave(@Nullable World world, Vec3i start) {
+    public EntityShockwave(@Nullable World world, Vec3f start) {
         super(world);
         setSize(10, 10);
         setPos(start.x, start.y, start.z);

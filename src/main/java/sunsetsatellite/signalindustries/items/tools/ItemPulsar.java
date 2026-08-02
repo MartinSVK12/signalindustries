@@ -19,10 +19,13 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.primitives.AABBd;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.core.util.vector.Vec3f;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.entities.EntityShockwave;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
@@ -77,8 +80,8 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 itemstack.getData().getCompound("inventory").getValue().remove(String.valueOf(0));
             } else {
                 world.spawnParticle("signalindustries.shockwave", player.x, player.y - 1, player.z, 0.0, 0.0, 0.0, 0,32,true);
-                if (EnvironmentHelper.isServerEnvironment() || EnvironmentHelper.isSinglePlayer()) {
-                    AABBd bb = new AABBd(player.x - 5, player.y - 1, player.z - 5, player.x + 5, player.y + 1, player.z + 5);
+                if (EnvironmentHelper.isMultiplayerServer() || EnvironmentHelper.isSingleplayerClient()) {
+                    /*AABBd bb = new AABBd(player.x - 5, player.y - 1, player.z - 5, player.x + 5, player.y + 1, player.z + 5);
                     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, bb);
                     for (Entity entity : list) {
                         if (entity instanceof Mob) {
@@ -93,7 +96,9 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                             ((Mob) entity).attackedAtYaw = (float) (Math.atan2(d1, d) * 180.0 / 3.1415927410125732) - entity.yRot;
                             ((Mob) entity).knockBack(entity, 15, d, d1);
                         }
-                    }
+                    }*/
+					EntityShockwave s = new EntityShockwave(world, new Vec3f(player.x, player.y-1, player.z));
+					world.entityJoinedWorld(s);
                 }
             }
         }

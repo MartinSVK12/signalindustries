@@ -1,23 +1,28 @@
 package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.options.components.BooleanOptionComponent;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPage;
 import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
+import net.minecraft.client.world.WorldClient;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.world.Dimension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.entry.ItemGuiEntry;
+import sunsetsatellite.catalyst.core.util.mp.entry.TileDataGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
-import sunsetsatellite.catalyst.screens.util.GuiComponents;
-import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
-import sunsetsatellite.signalindustries.gui.component.BlockRenderComponent;
 import sunsetsatellite.signalindustries.gui.menus.*;
 import sunsetsatellite.signalindustries.gui.screens.*;
+import sunsetsatellite.signalindustries.gui.screens.composed.*;
+import sunsetsatellite.signalindustries.gui.screens.cover.ScreenRedstoneCoverConfig;
+import sunsetsatellite.signalindustries.gui.screens.cover.ScreenSwitchCoverConfig;
+import sunsetsatellite.signalindustries.gui.screens.cover.ScreenVoidCoverConfig;
 import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
 import sunsetsatellite.signalindustries.invs.InventoryBackpack;
 import sunsetsatellite.signalindustries.invs.InventoryHarness;
@@ -28,6 +33,8 @@ import sunsetsatellite.signalindustries.powersuit.ScreenPowerSuit;
 import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.tiles.TileEntityRedstoneClock;
+import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -41,7 +48,6 @@ import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.event.defs.ClientEvents;
 import turniplabs.halplibe.util.dependency.Key;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -93,6 +99,16 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/bonsai_pot"), new TileGuiEntry<>(TileEntityBonsaiPot.class, MenuBonsaiPot.class, ScreenBonsaiPot::new));
 		Catalyst.GUIS.register(key("gui/redstone_clock"), new TileGuiEntry<>(TileEntityRedstoneClock.class, null, ScreenRedstoneClock::new));
 		Catalyst.GUIS.register(key("gui/filter"), new TileGuiEntry<>(TileEntityFilter.class, MenuFilter.class, ScreenFilter::new));
+		Catalyst.GUIS.register(key("gui/dynamo"), new TileGuiEntry<>(TileEntitySignalumDynamo.class, MenuSignalumDynamo.class, ScreenSignalumDynamo::new));
+		Catalyst.GUIS.register(key("gui/builder"), new TileGuiEntry<>(TileEntityBuilder.class, MenuBuilder.class, ScreenBuilder::new));
+		Catalyst.GUIS.register(key("gui/auto_miner"), new TileGuiEntry<>(TileEntityAutoMiner.class, MenuAutoMiner.class, ScreenAutoMiner::new));
+		Catalyst.GUIS.register(key("gui/programmer"), new TileGuiEntry<>(TileEntityProgrammer.class, MenuProgrammer.class, ScreenProgrammer::new));
+		Catalyst.GUIS.register(key("gui/pulsar_block"), new TileGuiEntry<>(TileEntityPulsar.class, MenuPulsarBlock.class, ScreenPulsarBlock::new));
+		Catalyst.GUIS.register(key("gui/multi_conduit"), new TileGuiEntry<>(TileEntityMultiConduit.class, null, ScreenMultiConduitConfig::new));
+
+		Catalyst.GUIS.register(key("gui/switch_cover"), new TileDataGuiEntry<>(TileEntityCoverable.class, MenuCover.class, ScreenSwitchCoverConfig::new));
+		Catalyst.GUIS.register(key("gui/void_cover"), new TileDataGuiEntry<>(TileEntityCoverable.class, MenuCover.class, ScreenVoidCoverConfig::new));
+		Catalyst.GUIS.register(key("gui/redstone_cover"), new TileDataGuiEntry<>(TileEntityCoverable.class, MenuCover.class, ScreenRedstoneCoverConfig::new));
 
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new TileGuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class, ScreenMultiblock::new));
 		Catalyst.GUIS.register(key("gui/r_extractor"), new TileGuiEntry<>(TileEntityReinforcedExtractor.class, MenuReinforcedExtractor.class, ScreenReinforcedExtractor::new));
@@ -109,6 +125,35 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/backpack"), new ItemGuiEntry<>(InventoryBackpack.class, MenuBackpack.class, ScreenBackpack::new));
 		Catalyst.GUIS.register(key("gui/ability_module"), new ItemGuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class, ScreenAbilityModule::new));
 		Catalyst.GUIS.register(key("gui/pulsar"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsar.class, ScreenPulsar::new));
+		Catalyst.GUIS.register(key("gui/pulsar_attch"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsarAttachment.class, ScreenPulsarAttachment::new));
+	}
+
+	public static void movePlayerToDimension(Player player, int dimension) {
+		Minecraft mc = Minecraft.getMinecraft();
+		Dimension lastDim = Dimension.getDimensionList().get(player.dimension);
+		Dimension newDim = Dimension.getDimensionList().get(dimension);
+		System.out.println("Switching to dimension \"" + newDim.getTranslatedName() + "\"!!");
+		player.dimension = dimension;
+		mc.currentWorld.setEntityDead(player);
+		mc.thePlayer.removed = false;
+		double x = player.x;
+		double y = player.y + 64;
+		double z = player.z;
+		player.moveTo(x *= Dimension.getCoordScale(lastDim, newDim), y, z *= Dimension.getCoordScale(lastDim, newDim), player.yRot, player.xRot);
+		if (player.isAlive()) {
+			mc.currentWorld.updateEntityWithOptionalForce(player, false);
+		}
+		WorldClient world = new WorldClient(mc.currentWorld, newDim);
+		if (newDim == lastDim.homeDim) {
+			mc.changeWorld(world, "Leaving " + lastDim.getTranslatedName(), player);
+		} else {
+			mc.changeWorld(world, "Entering " + newDim.getTranslatedName(), player);
+		}
+		player.world = mc.currentWorld;
+		if (player.isAlive()) {
+			player.moveTo(x, y, z, player.yRot, player.xRot);
+			mc.currentWorld.updateEntityWithOptionalForce(player, false);
+		}
 	}
 
 	public void beforeClientStart() {

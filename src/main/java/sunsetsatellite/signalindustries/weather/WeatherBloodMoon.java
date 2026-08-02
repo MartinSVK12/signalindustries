@@ -13,6 +13,6 @@ public class WeatherBloodMoon extends Weather {
 
     @Override
     public float @NonNull [] modifyFogColor(float r, float g, float b, float intensity) {
-        return new float[]{r,g,b};
+        return new float[]{0,0,0};
     }
 }

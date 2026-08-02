@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
+import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.entities.EntityRealityTear;
 import sunsetsatellite.signalindustries.entities.EntityShockwave;
@@ -59,7 +60,7 @@ public class TileEntityPulsar extends TileEntityTieredMachineBase {
                 worldObj.entityJoinedWorld(tear);
                 setItem(0, null);
             } else if (worldObj != null) {
-                EntityShockwave s = new EntityShockwave(worldObj, getPosition());
+                EntityShockwave s = new EntityShockwave(worldObj, new Vec3f(getPosition()));
                 worldObj.entityJoinedWorld(s);
             }
         } else if (fuelBurnTicks <= 0 && fluidContents[0] != null && (getItem(0) == null && fluidContents[0] != null && fluidContents[0].amount >= 4000) || (getItem(0) != null && getItem(0).getItem() instanceof ItemWarpOrb && fluidContents[0] != null && fluidContents[0].amount >= 8000)) {

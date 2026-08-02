@@ -5,6 +5,12 @@
     "/assets/signalindustries/models/entity/pulsar/inner_core.geo.json",
     "/assets/signalindustries/models/entity/pulsar/outer_core.geo.json",
     "/assets/signalindustries/models/entity/reality_tear.geo.json",
-    "/assets/signalindustries/models/entity/shockwave.geo.json"
-  ]
+    "/assets/signalindustries/models/entity/shockwave.geo.json",
+    "/assets/signalindustries/models/entity/infernal/infernal.geo.json"
+  ],
+  "renderers": {
+    "signalindustries:infernal": {
+      "main": "geometry.signalindustries.infernal"
+    }
+  }
 }

@@ -5,6 +5,8 @@ import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
+import net.minecraft.client.render.block.model.generic.BlockModelGenericFullyRotatable;
+import net.minecraft.client.render.block.model.generic.BlockModelGenericRotatable;
 import net.minecraft.client.render.entity.EntityRendererSprite;
 import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.MobRendererZombie;
@@ -23,16 +25,13 @@ import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicConduitBase;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicMachineBase;
 import sunsetsatellite.signalindustries.blocks.models.*;
 import sunsetsatellite.signalindustries.blocks.models.BlockModelConduit;
-import sunsetsatellite.signalindustries.entities.MobInfernal;
-import sunsetsatellite.signalindustries.entities.ProjectileCrystal;
-import sunsetsatellite.signalindustries.entities.render.MobRendererInfernal;
+import sunsetsatellite.signalindustries.entities.*;
+import sunsetsatellite.signalindustries.entities.render.*;
 import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityAssembler;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityEnergyCell;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntityPump;
-import sunsetsatellite.signalindustries.tiles.machines.TileEntitySIFluidTank;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
+import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingCrusher;
@@ -64,6 +63,8 @@ public class SIModels {
 		dispatcher.addDispatch(reinforcedCasing2, new BlockModelConnectedTextureExtra(reinforcedCasing2, "signalindustries:block/reinforced_casing_2", "signalindustries:block/reinforced_casing_2_active"));
 		dispatcher.addDispatch(reinforcedGlass, new BlockModelConnectedTexture(reinforcedGlass, "signalindustries:block/reinforced_glass", Catalyst.listOf(awakenedEnergyConnector)));
 
+		dispatcher.addDispatch(multiConduit, new BlockModelMultiConduit<>(multiConduit));
+
 		dispatcher.addDispatch(ashenTreeSapling, new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(blockTextures.get(ashenTreeSapling).defaultTextures.get(Side.BOTTOM)));
 
 		dispatcher.addDispatch(basicEnergyInjector, new BlockModelGeneric<>(basicEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_energy_injector")));
@@ -72,6 +73,8 @@ public class SIModels {
 				.withActiveTopTexture("basic_heat_pump_top_freezing_active")
 				.withActiveNorthTexture("basic_heat_pump_freezing_active_side")
 		));
+		dispatcher.addDispatch(basicSignalumDynamo, new BlockModelGenericRotatable<>(basicSignalumDynamo, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_signalum_dynamo")));
+		dispatcher.addDispatch(basicProgrammer, new BlockModelProgrammer<>(basicProgrammer));
 
 		dispatcher.addDispatch(basicBonsai,new BlockModelBonsaiPot<>(basicBonsai));
 		dispatcher.addDispatch(reinforcedBonsai,new BlockModelBonsaiPot<>(reinforcedBonsai));
@@ -80,6 +83,11 @@ public class SIModels {
 		dispatcher.addDispatch(solarTotem, new BlockModelGeneric<>(solarTotem, BlockModelDispatcher.loadDataModel("signalindustries:block/solar_totem")));
 
 		dispatcher.addDispatch(reinforcedIgnitor, new BlockModelIgnitor(reinforcedIgnitor));
+
+		dispatcher.addDispatch(pulsarBlock, new BlockModelPulsar<>(pulsarBlock));
+
+		dispatcher.addDispatch(basicWrathBeacon, new BlockModelMachine(basicWrathBeacon, blockTextures.get(basicWrathBeacon)));
+		dispatcher.addDispatch(reinforcedWrathBeacon, new BlockModelMachine(reinforcedWrathBeacon, blockTextures.get(reinforcedWrathBeacon)));
 
 		blockTextures.forEach((block, tex) -> {
 			if (dispatcher.hasDispatch(block)) return;
@@ -121,6 +129,7 @@ public class SIModels {
 			dispatcher.addDispatch(item, model);
 		});
 
+		dispatcher.addDispatch(configurationTablet, new ItemModelConfigurationTablet(configurationTablet));
 		dispatcher.addDispatch(signalumSaber, new ItemModelSaber(signalumSaber));
 		dispatcher.addDispatch(fuelCell, new ItemModelFuelCell(fuelCell));
 		dispatcher.addDispatch(nullTrigger, new ItemModelTrigger(nullTrigger));
@@ -134,6 +143,10 @@ public class SIModels {
 		LOGGER.info("Initializing entity models...");
 		dispatcher.assignRenderer(ProjectileCrystal.class, new EntityRendererSprite<>(volatileSignalumCrystal));
 		dispatcher.assignRenderer(MobInfernal.class, new MobRendererInfernal(0.5f));
+		dispatcher.assignRenderer(EntityRealityTear.class, new RealityTearRenderer());
+		dispatcher.assignRenderer(EntityShockwave.class, new ShockwaveRenderer());
+		dispatcher.assignRenderer(ProjectileSunbeam.class, new SunbeamRenderer());
+		dispatcher.assignRenderer(ProjectileFallingMeteor.class, new FallingMeteorRenderer());
 	}
 
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
@@ -155,6 +168,11 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityStoneworks.class, new RenderStoneworks());
 		dispatcher.assignRenderer(TileEntitySignalumReactor.class, new RenderMultiblock());
 		dispatcher.assignRenderer(TileEntityWarpGate.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityBuilder.class, new RenderBuilder());
+		dispatcher.assignRenderer(TileEntityPulsar.class, new RenderPulsar());
+		dispatcher.assignRenderer(TileEntityAutoMiner.class, new RenderAutoMiner());
+		dispatcher.assignRenderer(TileEntityMultiConduit.class, new RenderFluidInMultiConduit());
+		dispatcher.assignRenderer(TileEntityReinforcedWrathBeacon.class, new RenderMultiblock());
 
 	}
 

@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitRemote;
 

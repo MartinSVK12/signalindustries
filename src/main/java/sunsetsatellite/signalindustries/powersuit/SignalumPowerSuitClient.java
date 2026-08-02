@@ -181,8 +181,8 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
 		for (InventoryPowerSuit piece : pieces) {
 			for (ItemStack content : piece.contents) {
 				if (content != null) {
-					if (content.getItem() instanceof IHasOverlay) {
-						((IHasOverlay) content.getItem()).renderOverlay(guiIngame, player, height, width, mouseX, mouseY, gui, fontRenderer, itemRenderer);
+					if (content.getItem() instanceof IHasOverlay overlayItem) {
+						overlayItem.renderOverlay(content, this, guiIngame, player, height, width, mouseX, mouseY, gui, fontRenderer, itemRenderer);
 					}
 				}
 			}

@@ -1,6 +1,0 @@
-{
-  "parent": "signalindustries:multi_conduit/conduits_3",
-  "textures": {
-    "c3": "signalindustries:block/conduit_awakened"
-  }
-}

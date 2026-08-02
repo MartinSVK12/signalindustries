@@ -13,9 +13,7 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.util.helper.LightIndexHelper;
-import net.minecraft.core.util.helper.MathHelper;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
-import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.signalindustries.tiles.machines.simple.TileEntityStoneworks;
 
 public class RenderStoneworks extends TileEntityRenderer<TileEntityStoneworks> {

@@ -16,7 +16,7 @@ public class SIDimensions extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing dimensions...");
 
-        ETERNITY = new Dimension(langKey("eternity"), Dimension.OVERWORLD, 1, SIBlocks.portalEternity, SIWorldTypes.ETERNITY_WORLD);
+        ETERNITY = new Dimension(langKey("eternity"), Dimension.OVERWORLD, 1, null, SIWorldTypes.ETERNITY_WORLD);
         Dimension.registerDimension(config.getInt("Other.eternityDimId"), ETERNITY);
 
         setInitialized(true);

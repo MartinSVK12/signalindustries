@@ -222,13 +222,11 @@ public class SIBlocks extends DataInitializer {
 
 	public static Block<? extends BlockLogic> basicGreenhouse;
 
-	public static Block<? extends BlockLogic> reinforcedChunkloader;
-
 	public static Block<? extends BlockLogic> basicMarker;
 	public static Block<? extends BlockLogic> reinforcedBuilder;
-	public static Block<? extends BlockLogic> spatialEncapsulator;
+	//public static Block<? extends BlockLogic> spatialEncapsulator;
 
-	public static Block<? extends BlockLogic> creationAltar;
+	//public static Block<? extends BlockLogic> creationAltar;
 
 	public static Block<? extends BlockLogic> warpGate;
 
@@ -244,11 +242,10 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> dilithiumCoil;
 	public static Block<? extends BlockLogic> awakenedAlloyCoil;
 
-	public static Block<? extends BlockLogicPortal> portalEternity;
+	//public static Block<? extends BlockLogicPortal> portalEternity;
 	public static Block<? extends BlockLogic> realityFabric;
 	public static Block<? extends BlockLogic> rootedFabric;
 	//public static Block<? extends BlockLogic> unraveledFabric;
-	public static Block<? extends BlockLogic> dilithiumRail;
 	public static Block<? extends BlockLogic> eternalTreeLog;
 	public static Block<? extends BlockLogic> etherealLeaves;
 	public static Block<? extends BlockLogic> ashenTreeSapling;
@@ -260,7 +257,7 @@ public class SIBlocks extends DataInitializer {
 
 	public static Block<? extends BlockLogic> lunarTotem;
 	public static Block<? extends BlockLogic> solarTotem;
-	public static Block<? extends BlockLogic> pedestal;
+	//public static Block<? extends BlockLogic> pedestal;
 
 	public static Block<? extends BlockLogic> energyStill;
 	public static Block<? extends BlockLogic> energyFlowing;
@@ -606,6 +603,16 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicCatalystConduit(block, Materials.GLASS, Tier.AWAKENED, TileEntityCatalystConduit::new),
 			new MachineTextures().withDefaultTexture("catalyst_energy_conduit_awakened")
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
+
+		multiConduit = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.conduit.multi",
+			"multi_conduit",
+			"multiConduit",
+			3,
+			(block) -> new BlockLogicMultiConduit(block, Materials.METAL, Tier.REINFORCED),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("multi_conduit_frame")
+		);
 
 		prototypeExtractor = customBlock(defaultBuilder(Tier.PROTOTYPE),
 			"prototype.extractor",
@@ -956,6 +963,25 @@ public class SIBlocks extends DataInitializer {
 				.withDefaultTexture("basic_energy_injector_bottom")
 		);
 
+		basicSignalumDynamo = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.dynamo",
+			"basic_signalum_dynamo",
+			"basicSignalumDynamo",
+			3,
+			(block) -> new BlockLogicEnergyMachine(block, Materials.METAL, Tier.BASIC, TileEntitySignalumDynamo::new, "dynamo"),
+			new MachineTextures()
+		);
+
+		basicProgrammer = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.programmer",
+			"basic_programmer",
+			"basicProgrammer",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityProgrammer::new, "programmer"),
+			new MachineTextures()
+				.withDefaultTexture("programmer_top")
+		);
+
 		prototypePump = customBlock(defaultBuilder(Tier.PROTOTYPE),
 			"prototype.pump",
 			"prototype_pump",
@@ -1160,6 +1186,53 @@ public class SIBlocks extends DataInitializer {
 				.withActiveNorthTexture("reinforced_centrifuge_front_active")
 				.withActiveTopTexture("reinforced_centrifuge_closed")
 				.withOverbrightNorthTexture("centrifuge_overlay")
+		);
+
+		basicAutomaticMiner = customBlock(defaultBuilder(Tier.BASIC),
+			"basic.automaticMiner",
+			"basic_automatic_miner",
+			"basicAutomaticMiner",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityAutoMiner::new, "auto_miner"),
+			new MachineTextures(Tier.BASIC)
+				.withDefaultNorthTexture("basic_automatic_miner")
+				.withActiveNorthTexture("basic_automatic_miner")
+				.withOverbrightNorthTexture("auto_miner_overlay")
+		);
+
+		reinforcedAutomaticMiner = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.automaticMiner",
+			"reinforced_automatic_miner",
+			"reinforcedAutomaticMiner",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityAutoMiner::new, "auto_miner"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultNorthTexture("reinforced_automatic_miner")
+				.withActiveNorthTexture("reinforced_automatic_miner")
+				.withOverbrightNorthTexture("auto_miner_overlay")
+		);
+
+		reinforcedBuilder = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.builder",
+			"reinforced_builder",
+			"reinforcedBuilder",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityBuilder::new, "builder"),
+			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTopTexture("reinforced_blank")
+				.withDefaultNorthTexture("reinforced_builder_front_inactive")
+				.withActiveTopTexture("reinforced_builder_top_active")
+				.withActiveNorthTexture("reinforced_builder_front_active")
+				.withOverbrightNorthTexture("builder_overlay")
+		);
+
+		pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.pulsar",
+			"pulsar",
+			"pulsarBlock",
+			3,
+			(block) -> new BlockLogicPulsar(block, Materials.METAL, Tier.REINFORCED).setNonSolid(),
+			new MachineTextures(Tier.REINFORCED)
 		);
 
 		redstoneBooster = customBlock(defaultBuilder(Tier.BASIC),

@@ -7,8 +7,8 @@ import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
-import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
-import sunsetsatellite.catalyst.multipart.api.Multipart;
+//import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+//import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -16,7 +16,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsMultiparts {
+public class TileEntityConduit extends TileEntityFluidPipe /*implements ISupportsMultiparts*/ {
 
     public TileEntityConduit() {
         acceptedFluids.get(0).clear();
@@ -53,7 +53,7 @@ public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsM
         super.tick();
     }
 
-    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+    /*public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
 	@Override
 	public void writeAdditionalData(@NonNull CompoundTag tag) {
@@ -85,5 +85,5 @@ public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsM
     @Override
     public HashMap<Direction, Multipart> getParts() {
         return parts;
-    }
+    }*/
 }

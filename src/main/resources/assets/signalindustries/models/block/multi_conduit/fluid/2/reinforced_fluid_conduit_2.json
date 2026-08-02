@@ -1,6 +1,0 @@
-{
-  "parent": "signalindustries:multi_conduit/conduits_2",
-  "textures": {
-    "c2": "signalindustries:block/fluid_conduit_reinforced"
-  }
-}
