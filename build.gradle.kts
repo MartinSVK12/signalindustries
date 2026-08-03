@@ -130,6 +130,7 @@ dependencies {
 	implementation(project(":catalyst-screens"))
 	implementation(project(":tmb"))
 	implementation(project(":btwaila"))
+	implementation(project(":retrostorage"))
 }
 
 subprojects {

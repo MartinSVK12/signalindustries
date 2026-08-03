@@ -78,8 +78,10 @@ project(":catalyst-multiblocks").projectDir = file("../catalyst/modules/multiblo
 project(":catalyst-screens").projectDir = file("../catalyst/modules/screens")
 
 include(":tmb")
+include(":retrostorage")
 //include(":halplibe")
 include(":btwaila")
 project(":tmb").projectDir = file("../tmb")
 project(":btwaila").projectDir = file("../btwaila")
+project(":retrostorage").projectDir = file("../retrostorage")
 //project(":halplibe").projectDir = file("../bta-halplibe")

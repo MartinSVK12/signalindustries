@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.world.Dimension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,11 +14,11 @@ public class DimensionMixin implements IMutableDimensionListAccess {
 
     @Shadow
     @Final
-    private static Map<Integer, Dimension> dimensionList;
+    private static Int2ObjectMap<Dimension> dimensionList;
 
 
     @Override
-    public Map<Integer, Dimension> getMutableDimensionList() {
+    public Int2ObjectMap<Dimension> getMutableDimensionList() {
         return dimensionList;
     }
 }

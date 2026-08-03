@@ -47,7 +47,7 @@
     "signalindustries.mixins.json"
   ],
   "depends": {
-    "minecraft": "~8.0-beta.2",
+    "minecraft": "~8.0",
     "fabricloader": ">=${loader}",
     "catalyst-core": ">=${core}",
     "catalyst-fluids": ">=${fluids}",
