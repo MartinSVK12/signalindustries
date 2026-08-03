@@ -60,6 +60,7 @@ public class SignalIndustries implements ModInitializer {
 	public static Set<BlockInstance> uvLamps = new HashSet<>();
 	public static HashMap<String, CustomStructure> customStructures = new HashMap<>();
 	public static final Map<Block<?>, Integer> ORE_BLOCK_COUNT = new HashMap<>();
+	public static boolean worldSavedIDs = false;
 
 	public static final ArmorMaterial armorPrototypeHarness = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "harness", 1200, 10, 10, 10, 10);
 	public static final ArmorMaterial armorSignalumPowerSuit = ArmorHelper.createArmorMaterial(SignalIndustries.MOD_ID, "power_suit", 9999, 50, 50, 50, 50);

@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.gui.achievements.data.AchievementPage;
 import net.minecraft.client.gui.achievements.data.AchievementPages;
 import net.minecraft.core.achievement.Achievement;
