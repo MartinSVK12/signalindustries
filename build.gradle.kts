@@ -82,6 +82,10 @@ repositories {
         patternLayout { artifact("[organisation]/releases/download/[revision]/[module]-bta-[revision].jar") }
         metadataSources { artifact() }
     }
+	ivy("https://github.com/Testure") {
+		patternLayout { artifact("[organisation]/releases/download/v[revision]/[module]-[revision].jar") }
+		metadataSources { artifact() }
+	}
     ivy("https://downloads.betterthanadventure.net/bta-client/${libs.versions.btaChannel.get()}/") {
         patternLayout { artifact("/v[revision]/client.jar") }
         metadataSources { artifact() }
@@ -131,6 +135,8 @@ dependencies {
 	implementation(project(":tmb"))
 	implementation(project(":btwaila"))
 	implementation(project(":retrostorage"))
+	implementation("BTATweaker:btatweaker:1.1.1")
+	compileOnly("org.luaj:luaj-jse:3.0.1")
 }
 
 subprojects {
