@@ -5,6 +5,10 @@ import net.minecraft.core.world.Dimension;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 
 import java.util.Map;
@@ -21,4 +25,9 @@ public class DimensionMixin implements IMutableDimensionListAccess {
     public Int2ObjectMap<Dimension> getMutableDimensionList() {
         return dimensionList;
     }
+
+	@Inject(method = "init", at = @At("TAIL"))
+	private static void init(CallbackInfo ci){
+		new SIDimensions().init();
+	}
 }

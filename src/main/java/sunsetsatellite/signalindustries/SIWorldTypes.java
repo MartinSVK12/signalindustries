@@ -18,7 +18,6 @@ public class SIWorldTypes extends DataInitializer {
         if (initialized) return;
         LOGGER.info("Initializing world types...");
         ETERNITY_WORLD = WorldTypes.register("signalindustries:eternity", new WorldTypeEternity("signalindustries.eternity"));
-		WorldTypeFXDispatcher.getInstance().addDispatch(SIWorldTypes.ETERNITY_WORLD, new WorldTypeFXEternity(SIWorldTypes.ETERNITY_WORLD));
         setInitialized(true);
     }
 }

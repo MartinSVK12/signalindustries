@@ -13,7 +13,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.sound.SoundCategory;
 import org.jspecify.annotations.NonNull;
-import org.lwjgl.opengl.GL11;
+
 import org.lwjgl.opengl.GL12;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;

@@ -1,11 +1,10 @@
 package sunsetsatellite.signalindustries.gui.screens;
 
+import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
@@ -29,7 +28,7 @@ public class ScreenWarpGate extends ScreenFluid {
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
         Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/warp_gate.png");
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;

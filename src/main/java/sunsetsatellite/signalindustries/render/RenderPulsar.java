@@ -6,7 +6,7 @@ import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.renderer.State;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
 import net.minecraft.client.render.tileentity.TileEntityRenderer;
-import org.lwjgl.opengl.GL11;
+
 import org.useless.dragonfly.data.entity.mojang.EntityGeometryMojangData;
 import org.useless.dragonfly.models.entity.StaticEntityModel;
 import sunsetsatellite.signalindustries.items.ItemWarpOrb;

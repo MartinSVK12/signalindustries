@@ -17,7 +17,14 @@ import java.util.Objects;
 import java.util.Random;
 
 public class AchievementPageSI extends AchievementPage {
-    @Override
+
+	@Override
+	public void addAchievement(@NotNull Achievement achievement, int x, int y) {
+		super.addAchievement(achievement, x, y);
+		achievement.registerAchievement();
+	}
+
+	@Override
     public @NotNull String getName() {
         return Catalyst.translateNameKey("gui.achievements.page.signalindustries");
     }

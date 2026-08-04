@@ -4,12 +4,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.gui.TooltipElement;
+import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.opengl.GL11;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageReactorStart;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.TileEntitySignalumReactor;
@@ -39,10 +39,10 @@ public class ScreenSignalumReactor extends Screen {
         int centerX = (this.width - this.xSize) / 2;
         int centerY = (this.height - this.ySize) / 2;
         this.drawGuiContainerBackgroundLayer(partialTick);
-        GL11.glPushMatrix();
-        GL11.glTranslatef(centerX, centerY, 0.0f);
+        GLRenderer.pushFrame();
+        GLRenderer.modelM4f().translate(centerX, centerY, 0.0f);
         this.drawGuiContainerForegroundLayer();
-        GL11.glPopMatrix();
+		GLRenderer.popFrame();
         super.render(mx, my, partialTick);
     }
 
@@ -67,7 +67,7 @@ public class ScreenSignalumReactor extends Screen {
 
     private void drawGuiContainerBackgroundLayer(float partialTick) {
         @NotNull Texture tex = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/signalum_reactor_ui.png");
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(tex);
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;

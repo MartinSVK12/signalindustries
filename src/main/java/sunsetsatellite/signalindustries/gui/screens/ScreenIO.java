@@ -11,7 +11,9 @@ import net.minecraft.core.block.entity.TileEntity;
 import org.joml.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
+
+
+import org.lwjgl.opengl.GL41;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -202,7 +204,7 @@ public class ScreenIO extends ScreenComposedContainer {
 		Direction hovered = null;
 		double minDepth = Double.MAX_VALUE;
 		int[] viewport = new int[16];
-		GL11.glGetIntegerv(GL11.GL_VIEWPORT, viewport);
+		GL41.glGetIntegerv(GL41.GL_VIEWPORT, viewport);
 
 		for (Direction dir : Direction.values()) {
 			//create face vertices of side

@@ -135,6 +135,7 @@ dependencies {
 	implementation(project(":tmb"))
 	implementation(project(":btwaila"))
 	implementation(project(":retrostorage"))
+	implementation(project(":vintagequesting"))
 	implementation("BTATweaker:btatweaker:1.1.1")
 	compileOnly("org.luaj:luaj-jse:3.0.1")
 }

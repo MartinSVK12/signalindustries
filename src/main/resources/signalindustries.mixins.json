@@ -16,7 +16,6 @@
     "MobMixin",
     "MobMonsterMixin",
     "PlayerMixin",
-    "PlayerRemoteMixin",
     "ProjectileArrowMixin",
     "SlotResultMixin",
     "SpawnerMobsMixin",
@@ -25,6 +24,7 @@
     "WorldMixin"
   ],
   "client": [
+    "PlayerRemoteMixin",
     "HudIngameMixin",
     "MinecraftMixin",
     "MobRendererBipedArmoredMixin",

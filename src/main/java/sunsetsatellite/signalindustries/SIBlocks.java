@@ -2089,6 +2089,5 @@ public class SIBlocks extends DataInitializer {
 		new SIWeather().init();
 		new SIBiomes().init();
 		new SIWorldTypes().init();
-		new SIDimensions().init();
 	}
 }

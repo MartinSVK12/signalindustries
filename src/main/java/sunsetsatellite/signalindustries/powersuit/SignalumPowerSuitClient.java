@@ -22,7 +22,7 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.util.helper.Color;
 import net.minecraft.core.util.helper.LightIndexHelper;
-import org.lwjgl.opengl.GL11;
+
 import sunsetsatellite.signalindustries.SIKeybinds;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseAbility;
 import sunsetsatellite.signalindustries.abilities.powersuit.SuitBaseEffectAbility;
@@ -129,7 +129,7 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
 			int y = 0;
 			gui.drawTexturedModalRect(x, y, 0, 0, 182, 22);
 			//selected ability
-			//GL11.glColor4f(1F, 0F, 0F, 1.0F);
+			//GLRenderer.setColor4f(1F, 0F, 0F, 1.0F);
 			//drawUtil.drawTexturedModalRect(x - 1 + selectedAbilitySlot % 9 * 20, y - 1, 0, 22, 24, 22 + 2);
 			//GL11.glBindTexture(3553, mc.renderEngine.getTexture("/gui/icons.png"));
 		} else {

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.powersuit;
 
 import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.gui.TooltipElement;
+import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.renderer.BlendFactor;
 import net.minecraft.client.render.renderer.GLRenderer;
@@ -13,7 +14,8 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.util.helper.LightIndexHelper;
-import org.lwjgl.opengl.GL11;
+
+
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
@@ -74,8 +76,8 @@ public class ScreenPowerSuit extends ScreenFluid {
         super.drawGuiContainerForegroundLayer();
         String name = Catalyst.translateNameKey(fluidSlots.itemInventory.getNameTranslationKey());
         drawStringCenteredShadow(fontRenderer, name, xSize / 2, -16, 0xFFFFFFFF);
-        GL11.glDisable(3042);
-        GL11.glDisable(2896);
+		GLRenderer.disableState(State.BLEND);
+		Lighting.disable();
     }
 
     @Override
@@ -96,8 +98,8 @@ public class ScreenPowerSuit extends ScreenFluid {
             Slot slot = inventorySlots.slots.get(k);
             if (getIsMouseOverSlot(slot, x, y) && slot instanceof SlotAttachment) {
                 if (slot.getItemStack() == null) {
-                    GL11.glDisable(GL11.GL_LIGHTING);
-                    GL11.glDisable(GL11.GL_CULL_FACE);
+					Lighting.disable();
+                    GLRenderer.disableState(State.CULL_FACE);
                     TooltipElement tooltip = new TooltipElement(mc);
                     tooltip.render("Slot accepts attachments of type:\n- " + ((SlotAttachment) slot).getAttachmentPoint(), x, y, 8, -8);
                 }

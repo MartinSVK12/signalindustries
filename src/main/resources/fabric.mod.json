@@ -44,6 +44,9 @@
 		],
 		"btatweakerPlugin": [
 			"sunsetsatellite.signalindustries.api.impl.btatweaker.BTATweakerSIPlugin"
+		],
+		"gatherTMBPlugins": [
+			"sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
 		]
 	},
   "mixins": [

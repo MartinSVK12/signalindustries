@@ -2,11 +2,13 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.gui.achievements.data.AchievementPage;
 import net.minecraft.client.gui.achievements.data.AchievementPages;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.block.Blocks;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.util.AchievementPageSI;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
@@ -121,11 +123,11 @@ public class SIAchievements extends DataInitializer {
         ENDGAME = new Achievement(id("endgame"), langKey("endgame"), SIBlocks.awakenedMachineCore, AWAKENED).setType(Achievement.TYPE_SPECIAL);
         GATE = new Achievement(id("gate"), langKey("gate"), SIBlocks.warpGate, ENDGAME);
 
-        /*if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+        if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
             if (SIConfig.config.getBoolean("Other.enableQuests")) {
                 new VintageQuestingSIPlugin().initializePlugin();
             }
-        }*/
+        }
 		setInitialized(true);
     }
 

@@ -7,7 +7,10 @@ import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
 import net.minecraft.client.gui.options.data.OptionsPage;
 import net.minecraft.client.gui.options.data.OptionsPages;
+import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.Option;
+import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.Dimension;
@@ -17,6 +20,7 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.entry.ItemGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileDataGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
+import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
 import sunsetsatellite.signalindustries.gui.menus.*;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.gui.screens.composed.*;
@@ -48,6 +52,7 @@ import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.event.defs.ClientEvents;
 import turniplabs.halplibe.util.dependency.Key;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -63,6 +68,8 @@ public class SignalIndustriesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("SI Client is being initialized...");
+		WorldTypeFXDispatcher.getInstance().addDispatch(SIWorldTypes.ETERNITY_WORLD, new WorldTypeFXEternity(SIWorldTypes.ETERNITY_WORLD));
+
 		LOGGER.info("Binding to client events...");
 		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID),this::beforeClientStart);
 		ClientEvents.AFTER_CLIENT_START.listen(Key.of(MOD_ID),this::afterClientStart);
@@ -126,6 +133,20 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/ability_module"), new ItemGuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class, ScreenAbilityModule::new));
 		Catalyst.GUIS.register(key("gui/pulsar"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsar.class, ScreenPulsar::new));
 		Catalyst.GUIS.register(key("gui/pulsar_attch"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsarAttachment.class, ScreenPulsarAttachment::new));
+
+		LOGGER.info("Registering options...");
+		for (Field field : SIKeybinds.class.getDeclaredFields()) {
+			try {
+				Object o = field.get(null);
+				if(o instanceof KeyBinding key){
+					GameSettings.register(key);
+				} else {
+					GameSettings.register((Option<?>) o);
+				}
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 
 	public static void movePlayerToDimension(Player player, int dimension) {

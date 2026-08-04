@@ -10,7 +10,7 @@ import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import org.lwjgl.opengl.GL11;
+
 import org.useless.dragonfly.data.entity.mojang.EntityGeometryMojangData;
 import org.useless.dragonfly.models.entity.StaticEntityModel;
 import sunsetsatellite.catalyst.Catalyst;
@@ -110,36 +110,6 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
 		}
 		super.buttonClicked(button);
 	}
-
-    /*@Override
-    public void drawAfterSlotAndButtonRendering(int mouseX, int mouseY, float partialTick) {
-        GL11.glPushMatrix();
-        GL11.glScalef(2, 2, 2);
-        Minecraft.getMinecraft().textureManager.loadTexture("/assets/signalindustries/textures/block/pulsar.png").bind();
-        if (tile.getItem(0) != null && tile.getItem(0).getItem() instanceof ItemWarpOrb) {
-            Minecraft.getMinecraft().textureManager.loadTexture("/assets/signalindustries/textures/block/pulsar_warp.png").bind();
-        }
-		StaticEntityModel item = EntityGeometryMojangData.Cache.getModel("geometry.signalindustries.pulsar_item", 0);
-		StaticEntityModel innerCore = EntityGeometryMojangData.Cache.getModel("geometry.signalindustries.pulsar_inner_core", 0);
-		StaticEntityModel outerCore = EntityGeometryMojangData.Cache.getModel("geometry.signalindustries.pulsar_outer_core", 0);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glTranslatef(44, -10, 0);
-        GL11.glRotatef(tile.orbRotation * 20 + partialTick, 0, 1, 0);
-        GL11.glScalef(1.3f, 1.3f, 1.3f);
-        if (tile.fuelBurnTicks <= 0) {
-            item.render();
-        }
-        if (tile.progressTicks > tile.progressMaxTicks / 2) {
-            innerCore.render();
-        }
-        if (tile.progressTicks >= tile.progressMaxTicks) {
-            outerCore.render();
-        }
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glPopMatrix();
-
-    }*/
 
 	@Override
 	public void drawAfterSlotAndButtonRendering(int mouseX, int mouseY, float partialTick) {

@@ -6,7 +6,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import org.lwjgl.opengl.GL11;
+
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.gui.menus.MenuPulsar;

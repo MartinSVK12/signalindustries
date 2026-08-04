@@ -10,6 +10,7 @@ import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingPlate
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import turing.tmb.TMB;
 import turing.tmb.TypedIngredient;
 import turing.tmb.api.ITMBPlugin;
@@ -145,8 +146,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         if(isReload){
             if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
                 if(SIConfig.config.getBoolean("Other.enableQuests")){
-					//TODO:
-                    //new VintageQuestingSIPlugin().reload();
+                    new VintageQuestingSIPlugin().reload();
                     SignalIndustries.LOGGER.info("Quests reloaded!");
                 }
             }

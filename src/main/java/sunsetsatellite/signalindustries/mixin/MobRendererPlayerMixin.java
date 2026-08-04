@@ -7,7 +7,7 @@ import net.minecraft.client.render.tessellator.TessellatorGeneral;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.ItemStack;
-import org.lwjgl.opengl.GL11;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

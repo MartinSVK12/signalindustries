@@ -2,9 +2,6 @@ package sunsetsatellite.signalindustries;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.option.GameSettings;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.option.Option;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.block.tag.BlockTags;
@@ -194,20 +191,6 @@ public class SignalIndustries implements ModInitializer {
 		BlockTags.TAG_LIST.add(REINFORCED_CASING);
 		BlockTags.TAG_LIST.add(AWAKENED_CASING);
 		BlockTags.TAG_LIST.add(ORE_BLOCK);
-
-		LOGGER.info("Registering options...");
-		for (Field field : SIKeybinds.class.getDeclaredFields()) {
-			try {
-				Object o = field.get(null);
-				if(o instanceof KeyBinding key){
-					GameSettings.register(key);
-				} else {
-					GameSettings.register((Option<?>) o);
-				}
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-		}
 		//GameSettings.register(SIKeybinds.renderFluidInsideConduits);
 		//GameSettings.register(SIKeybinds.showSuitBackground);
 	}
@@ -239,7 +222,7 @@ public class SignalIndustries implements ModInitializer {
 
 	public static void addMeteorLocation(MeteorLocation location) {
 		meteorLocations.add(location);
-		if (EnvironmentHelper.isServerEnvironment()) {
+		if (EnvironmentHelper.isMultiplayerServer()) {
 			NetworkHandler.sendToAllPlayers(new NetworkMessageMeteorLocationSync(location));
 		}
 	}

@@ -9,7 +9,7 @@ import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.Side;
-import org.lwjgl.opengl.GL11;
+
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
