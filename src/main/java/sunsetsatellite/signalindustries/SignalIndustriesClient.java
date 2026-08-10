@@ -38,6 +38,7 @@ import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.tiles.TileEntityRedstoneClock;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
@@ -112,6 +113,9 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/programmer"), new TileGuiEntry<>(TileEntityProgrammer.class, MenuProgrammer.class, ScreenProgrammer::new));
 		Catalyst.GUIS.register(key("gui/pulsar_block"), new TileGuiEntry<>(TileEntityPulsar.class, MenuPulsarBlock.class, ScreenPulsarBlock::new));
 		Catalyst.GUIS.register(key("gui/multi_conduit"), new TileGuiEntry<>(TileEntityMultiConduit.class, null, ScreenMultiConduitConfig::new));
+
+		Catalyst.GUIS.register(key("gui/restrict_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, null, ScreenRestrictPipeConfig::new));
+		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class, ScreenSensorPipeConfig::new));
 
 		Catalyst.GUIS.register(key("gui/switch_cover"), new TileDataGuiEntry<>(TileEntityCoverable.class, MenuCover.class, ScreenSwitchCoverConfig::new));
 		Catalyst.GUIS.register(key("gui/void_cover"), new TileDataGuiEntry<>(TileEntityCoverable.class, MenuCover.class, ScreenVoidCoverConfig::new));

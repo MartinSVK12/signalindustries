@@ -5,7 +5,6 @@ import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.render.renderer.BlendFactor;
 import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.renderer.State;
-import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;

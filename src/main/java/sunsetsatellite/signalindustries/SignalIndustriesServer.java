@@ -18,6 +18,7 @@ import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.tiles.TileEntityRedstoneClock;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -68,6 +69,8 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/auto_miner"), new GuiEntry<>(TileEntityAutoMiner.class,MenuAutoMiner.class));
 		Catalyst.GUIS.register(key("gui/programmer"), new GuiEntry<>(TileEntityProgrammer.class,MenuProgrammer.class));
 		Catalyst.GUIS.register(key("gui/pulsar_block"), new GuiEntry<>(TileEntityPulsar.class,MenuPulsarBlock.class));
+
+		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new GuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class));
 
 		Catalyst.GUIS.register(key("gui/switch_cover"), new GuiEntry<>(TileEntityCoverable.class, MenuCover.class));
 		Catalyst.GUIS.register(key("gui/void_cover"), new GuiEntry<>(TileEntityCoverable.class, MenuCover.class));

@@ -30,6 +30,9 @@ import sunsetsatellite.signalindustries.entities.render.*;
 import sunsetsatellite.signalindustries.items.models.*;
 import sunsetsatellite.signalindustries.render.*;
 import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityFluidConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
@@ -173,6 +176,9 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityAutoMiner.class, new RenderAutoMiner());
 		dispatcher.assignRenderer(TileEntityMultiConduit.class, new RenderFluidInMultiConduit());
 		dispatcher.assignRenderer(TileEntityReinforcedWrathBeacon.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityItemConduit.class, new RenderItemsInConduit());
+		dispatcher.assignRenderer(TileEntityConduit.class, new RenderFluidInConduit());
+		dispatcher.assignRenderer(TileEntityFluidConduit.class, new RenderFluidInConduit());
 
 	}
 
