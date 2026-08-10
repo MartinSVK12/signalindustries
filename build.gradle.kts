@@ -1,5 +1,6 @@
 import com.google.gson.Gson
 import com.smushytaco.lwjgl_gradle.Preset
+
 plugins {
 	alias(libs.plugins.loom)
 	alias(libs.plugins.lwjgl)
@@ -78,6 +79,14 @@ repositories {
     maven("https://maven.thesignalumproject.net/infrastructure") { name = "SignalumMavenInfrastructure" }
     maven("https://maven.thesignalumproject.net/releases") { name = "SignalumMavenReleases" }
 	maven("https://maven.thesignalumproject.net/nightly") { name = "SignalumMavenNightly" }
+	maven("https://maven.danygames2014.net/signalum") { name = "SignalumMavenMirror1" }
+	ivy("https://github.com/Turnip-Labs") {
+		patternLayout {
+			artifact("/fabric-loader/releases/download/[revision]/fabric-loader-[revision].jar")
+		}
+		metadataSources { artifact() }
+		content { includeGroup("bta.loader") }
+	}
     ivy("https://github.com/Better-than-Adventure") {
         patternLayout { artifact("[organisation]/releases/download/[revision]/[module]-bta-[revision].jar") }
         metadataSources { artifact() }
