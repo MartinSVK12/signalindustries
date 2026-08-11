@@ -123,11 +123,6 @@ public class SIAchievements extends DataInitializer {
         ENDGAME = new Achievement(id("endgame"), langKey("endgame"), SIBlocks.awakenedMachineCore, AWAKENED).setType(Achievement.TYPE_SPECIAL);
         GATE = new Achievement(id("gate"), langKey("gate"), SIBlocks.warpGate, ENDGAME);
 
-        if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
-            if (SIConfig.config.getBoolean("Other.enableQuests")) {
-                new VintageQuestingSIPlugin().initializePlugin();
-            }
-        }
 		setInitialized(true);
     }
 

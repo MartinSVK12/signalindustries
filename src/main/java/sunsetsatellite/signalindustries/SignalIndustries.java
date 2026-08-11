@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.block.tag.BlockTags;
@@ -20,6 +21,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.CustomStructure;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.mp.message.*;
@@ -196,12 +198,18 @@ public class SignalIndustries implements ModInitializer {
 	}
 
 	public void beforeGameStart() {
-		LOGGER.info("Beginning core pre-init.");
+
 	}
 
 	public void afterGameStart() {
 		LOGGER.info("Beginning core post-init.");
 		SIRecipes.loadSpecial();
+		LOGGER.info("Beginning core pre-init.");
+		if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+			if (SIConfig.config.getBoolean("Other.enableQuests")) {
+				new VintageQuestingSIPlugin().initializePlugin();
+			}
+		}
 	}
 
 	public static NamespaceID id(String id) {

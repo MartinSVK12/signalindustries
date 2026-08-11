@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.options.components.BooleanOptionComponent;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
@@ -20,6 +21,7 @@ import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.entry.ItemGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileDataGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
+import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
 import sunsetsatellite.signalindustries.gui.menus.*;
 import sunsetsatellite.signalindustries.gui.screens.*;
@@ -188,6 +190,11 @@ public class SignalIndustriesClient implements ClientModInitializer {
 	public void afterClientStart() {
 		LOGGER.info("Beginning client post-init.");
 		new SIAchievements().initClient();
+		if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
+			if (SIConfig.config.getBoolean("Other.enableQuests")) {
+				new VintageQuestingSIPlugin().reloadClient();
+			}
+		}
 
 		LOGGER.info("Registering attachment keybinds...");
 		Arrays.stream(SIKeybinds.class.getDeclaredFields()).filter((F) -> F.getName().contains("Attachment")).forEach((F) -> {

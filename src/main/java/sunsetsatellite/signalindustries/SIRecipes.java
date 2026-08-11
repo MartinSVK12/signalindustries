@@ -21,7 +21,6 @@ import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineFluid;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineMultiOutput;
 import sunsetsatellite.signalindustries.recipes.entry.RecipeEntryMachineRandomOutput;
 import turniplabs.halplibe.helper.RecipeBuilder;
-import turniplabs.halplibe.util.RecipeEntrypoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
