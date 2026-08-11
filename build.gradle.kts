@@ -7,16 +7,16 @@ plugins {
 	alias(libs.plugins.minotaur)
     java
 }
-val modVersion: Provider<String> = providers.gradleProperty("mod_version")
-val modGroup: Provider<String> = providers.gradleProperty("mod_group")
-val modName: Provider<String> = providers.gradleProperty("mod_name")
+val modVersion: String = project.properties["mod_version"].toString()
+val modGroup: String = project.properties["mod_group"].toString()
+val modName: String = project.properties["mod_name"].toString()
 
 val lib = extensions.getByType<VersionCatalogsExtension>().named("libs")
 val javaVersion: Provider<Int> = libs.versions.java.map { it.toInt() }
 
 base.archivesName = modName
-group = modGroup.get()
-version = modVersion.get()
+group = modGroup
+version = modVersion
 
 class AccountsJson(val accounts: List<Account>)
 class Account(val profile: Profile, val ygg: YGG)
@@ -245,7 +245,7 @@ tasks {
 	}
 	processResources {
 		val resourceMap = mapOf(
-			"version" to modVersion.get(),
+			"version" to modVersion,
 			"loader" to libs.versions.loader.get(),
 			"halplibe" to libs.versions.halplibe.get(),
 			"java" to libs.versions.java.get(),
