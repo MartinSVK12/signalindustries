@@ -17,7 +17,7 @@ import sunsetsatellite.signalindustries.api.impl.vintagequesting.page.PrototypeC
 import sunsetsatellite.vintagequesting.VintageQuesting;
 import sunsetsatellite.vintagequesting.VintageQuestingClient;
 import sunsetsatellite.vintagequesting.core.Chapter;
-import sunsetsatellite.vintagequesting.core.Quest;
+import sunsetsatellite.vintagequesting.core.data.ChapterData;
 import sunsetsatellite.vintagequesting.core.data.QuestData;
 import sunsetsatellite.vintagequesting.core.data.RewardData;
 import sunsetsatellite.vintagequesting.core.data.TaskData;
@@ -26,9 +26,11 @@ import sunsetsatellite.vintagequesting.core.data.task.ClickTaskData;
 import sunsetsatellite.vintagequesting.core.data.task.RetrievalTaskData;
 import sunsetsatellite.vintagequesting.core.data.task.VisitDimensionTaskData;
 import sunsetsatellite.vintagequesting.util.Logic;
+import sunsetsatellite.vintagequesting.util.QuestTeam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
 import static sunsetsatellite.catalyst.Catalyst.zip;
@@ -38,10 +40,10 @@ import static sunsetsatellite.signalindustries.SIItems.*;
 
 public class VintageQuestingSIPlugin {
 
-    public static Chapter PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
-    public static Chapter BASIC_CHAPTER = new BasicQuestChapter();
-    public static Chapter REINFORCED_CHAPTER = new ReinforcedQuestChapter();
-    public static Chapter AWAKENED_CHAPTER = new AwakenedQuestChapter();
+    public static ChapterData PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
+    public static ChapterData BASIC_CHAPTER = new BasicQuestChapter();
+    public static ChapterData REINFORCED_CHAPTER = new ReinforcedQuestChapter();
+    public static ChapterData AWAKENED_CHAPTER = new AwakenedQuestChapter();
 
     public void initializePlugin() {
 
@@ -53,30 +55,30 @@ public class VintageQuestingSIPlugin {
         for (QuestData quest : prototypeQuests) {
             PROTOTYPE_CHAPTER.addQuest(quest);
         }
-        for (Quest quest : PROTOTYPE_CHAPTER.getQuests()) {
+        /*for (Quest quest : PROTOTYPE_CHAPTER.getQuests()) {
             quest.setupPrerequisites();
-        }
+        }*/
 
         for (QuestData quest : basicQuests) {
             BASIC_CHAPTER.addQuest(quest);
         }
-        for (Quest quest : BASIC_CHAPTER.getQuests()) {
+        /*for (Quest quest : BASIC_CHAPTER.getQuests()) {
             quest.setupPrerequisites();
-        }
+        }*/
 
         for (QuestData quest : reinforcedQuests) {
             REINFORCED_CHAPTER.addQuest(quest);
         }
-        for (Quest quest : REINFORCED_CHAPTER.getQuests()) {
+        /*for (Quest quest : REINFORCED_CHAPTER.getQuests()) {
             quest.setupPrerequisites();
-        }
+        }*/
 
         for (QuestData quest : awakenedQuests) {
             AWAKENED_CHAPTER.addQuest(quest);
         }
-        for (Quest quest : AWAKENED_CHAPTER.getQuests()) {
+        /*for (Quest quest : AWAKENED_CHAPTER.getQuests()) {
             quest.setupPrerequisites();
-        }
+        }*/
 
         VintageQuesting.LOGGER.info("Loaded quests from: signalindustries!");
 
@@ -103,10 +105,10 @@ public class VintageQuestingSIPlugin {
 		VintageQuestingClient.CHAPTER_PAGES.unregister(REINFORCED_CHAPTER.getId());
 		VintageQuestingClient.CHAPTER_PAGES.unregister(AWAKENED_CHAPTER.getId());
 
-		VintageQuestingClient.CHAPTER_PAGES.register(PROTOTYPE_CHAPTER.id, new PrototypeChapterPage(PROTOTYPE_CHAPTER));
-		VintageQuestingClient.CHAPTER_PAGES.register(BASIC_CHAPTER.id, new PrototypeChapterPage(BASIC_CHAPTER));
-		VintageQuestingClient.CHAPTER_PAGES.register(REINFORCED_CHAPTER.id, new PrototypeChapterPage(REINFORCED_CHAPTER));
-		VintageQuestingClient.CHAPTER_PAGES.register(AWAKENED_CHAPTER.id, new PrototypeChapterPage(AWAKENED_CHAPTER));
+		VintageQuestingClient.CHAPTER_PAGES.register(PROTOTYPE_CHAPTER.getId(), new PrototypeChapterPage(new Chapter(PROTOTYPE_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
+		VintageQuestingClient.CHAPTER_PAGES.register(BASIC_CHAPTER.getId(), new PrototypeChapterPage(new Chapter(BASIC_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
+		VintageQuestingClient.CHAPTER_PAGES.register(REINFORCED_CHAPTER.getId(), new PrototypeChapterPage(new Chapter(REINFORCED_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
+		VintageQuestingClient.CHAPTER_PAGES.register(AWAKENED_CHAPTER.getId(), new PrototypeChapterPage(new Chapter(AWAKENED_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
 	}
 
     public static List<QuestData> addPrototypeQuests() {

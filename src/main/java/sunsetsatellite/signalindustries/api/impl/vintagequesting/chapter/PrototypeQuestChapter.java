@@ -5,11 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
-import sunsetsatellite.vintagequesting.core.Chapter;
-import sunsetsatellite.vintagequesting.core.Quest;
+import sunsetsatellite.vintagequesting.core.data.ChapterData;
+import sunsetsatellite.vintagequesting.core.data.QuestData;
 
 
-public class PrototypeQuestChapter extends Chapter {
+public class PrototypeQuestChapter extends ChapterData {
 
     public PrototypeQuestChapter() {
         super("signalindustries:prototype", 0);
@@ -31,7 +31,7 @@ public class PrototypeQuestChapter extends Chapter {
     }
 
 	@Override
-	public Quest getStartingQuest() {
-		return getQuest(VintageQuestingSIPlugin.getQuest("welcome"));
+	public QuestData getStartingQuest() {
+		return VintageQuestingSIPlugin.getQuest("welcome");
 	}
 }

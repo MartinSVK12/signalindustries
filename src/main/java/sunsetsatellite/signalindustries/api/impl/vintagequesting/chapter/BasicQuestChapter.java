@@ -7,8 +7,10 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.vintagequesting.core.Chapter;
 import sunsetsatellite.vintagequesting.core.Quest;
+import sunsetsatellite.vintagequesting.core.data.ChapterData;
+import sunsetsatellite.vintagequesting.core.data.QuestData;
 
-public class BasicQuestChapter extends Chapter {
+public class BasicQuestChapter extends ChapterData {
 
     public BasicQuestChapter() {
         super("signalindustries:basic", 1);
@@ -30,8 +32,8 @@ public class BasicQuestChapter extends Chapter {
     }
 
     @Override
-    public Quest getStartingQuest() {
-        return getQuest(VintageQuestingSIPlugin.getQuest("emptyCrystal"));
+    public QuestData getStartingQuest() {
+        return VintageQuestingSIPlugin.getQuest("emptyCrystal");
     }
 
 }

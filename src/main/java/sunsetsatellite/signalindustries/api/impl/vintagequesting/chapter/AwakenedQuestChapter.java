@@ -5,11 +5,10 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
-import sunsetsatellite.vintagequesting.core.Chapter;
-import sunsetsatellite.vintagequesting.core.Quest;
+import sunsetsatellite.vintagequesting.core.data.ChapterData;
+import sunsetsatellite.vintagequesting.core.data.QuestData;
 
-
-public class AwakenedQuestChapter extends Chapter {
+public class AwakenedQuestChapter extends ChapterData {
 
     public AwakenedQuestChapter() {
         super("signalindustries:awakened", 3);
@@ -31,7 +30,7 @@ public class AwakenedQuestChapter extends Chapter {
     }
 
     @Override
-    public Quest getStartingQuest() {
-        return getQuest(VintageQuestingSIPlugin.getQuest("awakenedCrystal"));
+    public QuestData getStartingQuest() {
+        return VintageQuestingSIPlugin.getQuest("awakenedCrystal");
     }
 }

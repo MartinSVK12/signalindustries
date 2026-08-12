@@ -7,8 +7,10 @@ import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.vintagequesting.core.Chapter;
 import sunsetsatellite.vintagequesting.core.Quest;
+import sunsetsatellite.vintagequesting.core.data.ChapterData;
+import sunsetsatellite.vintagequesting.core.data.QuestData;
 
-public class ReinforcedQuestChapter extends Chapter {
+public class ReinforcedQuestChapter extends ChapterData {
 
     public ReinforcedQuestChapter() {
         super("signalindustries:reinforced", 2);
@@ -31,8 +33,8 @@ public class ReinforcedQuestChapter extends Chapter {
 
 
     @Override
-    public Quest getStartingQuest() {
-        return getQuest(VintageQuestingSIPlugin.getQuest("reinforcedAlloy"));
+    public QuestData getStartingQuest() {
+        return VintageQuestingSIPlugin.getQuest("reinforcedAlloy");
     }
 
 }
