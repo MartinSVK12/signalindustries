@@ -80,6 +80,9 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void tick() {
+		if(worldObj == null || worldObj.isClientSide){
+			return;
+		}
         if (multiblock == null) {
             return;
         }
@@ -152,12 +155,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
 	@Override
 	public void readAdditionalData(@NotNull CompoundTag compoundTag) {
-
+		state = State.values()[compoundTag.getInteger("State")];
 	}
 
 	@Override
 	public void writeAdditionalData(@NotNull CompoundTag compoundTag) {
-
+		compoundTag.putInt("State", state.ordinal());
 	}
 
 	public void depleteRandomFuelCell() {

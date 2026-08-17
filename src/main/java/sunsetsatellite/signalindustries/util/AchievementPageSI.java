@@ -5,12 +5,13 @@ import net.minecraft.client.gui.achievements.data.AchievementPage;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.achievement.Achievement;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 
 import java.util.Objects;
@@ -40,12 +41,37 @@ public class AchievementPageSI extends AchievementPage {
     }
 
     @Override
-    public @Nullable IconCoordinate getBackgroundTile(ScreenAchievements screenAchievements, int i, Random random, int j, int k) {
-        return TextureRegistry.getTexture("signalindustries:block/reality_fabric");
+    public @Nullable IconCoordinate getBackgroundTile(ScreenAchievements screenAchievements, int i, Random random, int tileX, int tileY) {
+		int offsetX = tileX + random.nextInt(6) - random.nextInt(6);
+		int offsetY = tileY + random.nextInt(6) - random.nextInt(6);
+
+		if(offsetY >= 50){
+			if(random.nextInt(100) == 0){
+				return TextureRegistry.getTexture("signalindustries:block/white");
+			}
+			return TextureRegistry.getTexture("signalindustries:block/gray");
+		}
+		if (offsetY >= 25) {
+			if(random.nextInt(25) == 0){
+				return getTextureFromBlock(SIBlocks.rootedFabric);
+			}
+			if(random.nextInt(100) == 0){
+				return getTextureFromBlock(SIBlocks.dimensionalShardOre);
+			}
+			return getTextureFromBlock(SIBlocks.realityFabric);
+		}
+
+		if(random.nextInt(100) == 0){
+			return getTextureFromBlock(SIBlocks.signalumOre);
+		}
+		if(random.nextInt(150) == 0){
+			return getTextureFromBlock(SIBlocks.dilithiumOre);
+		}
+        return getTextureFromBlock(Blocks.BASALT);
     }
 
     @Override
-    public void postProcessBackground(ScreenAchievements screenAchievements, Random random, ScreenAchievements.BGLayer bGLayer, int i, int j) {
+    public void postProcessBackground(ScreenAchievements screenAchievements, Random random, ScreenAchievements.BGLayer bgLayer, int tileX, int tileY) {
 
     }
 
@@ -56,7 +82,7 @@ public class AchievementPageSI extends AchievementPage {
 
     @Override
     public int backgroundLayers() {
-        return 0;
+        return 1;
     }
 
     @Override

@@ -45,45 +45,57 @@ public class ChunkDecoratorOverworldMixin {
         long l2 = (rand.nextLong() / 2L) * 2L + 1L;
         rand.setSeed((long) chunkX * l1 + (long) chunkZ * l2 ^ world.getRandomSeed());
 
-        if (rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteGeodeChance")) == 0) {
-            int i = x + rand.nextInt(16);
-            int j = (minY + 12) + rand.nextInt(rangeY / 8);
-            int k = z + rand.nextInt(16);
-			TilePos pos = new TilePos(i, j, k);
-            new WorldFeatureGeode(SIBlocks.signalumOre.id(), 0, 20, 4).place(world, rand, pos);
-        }
+		if(SIConfig.config.getInt("WorldGen.signaliteGeodeChance") != 0) {
+			if (rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteGeodeChance")) == 0) {
+				int i = x + rand.nextInt(16);
+				int j = (minY + 12) + rand.nextInt(rangeY / 8);
+				int k = z + rand.nextInt(16);
+				TilePos pos = new TilePos(i, j, k);
+				new WorldFeatureGeode(SIBlocks.signalumOre.id(), 0, 20, 4).place(world, rand, pos);
+			}
+		}
 
-        if (rand.nextInt(SIConfig.config.getInt("WorldGen.ironMeteorChance")) == 0) {
-            int i = x + rand.nextInt(16);
-            int k = z + rand.nextInt(16);
-            int j = world.getHeightValue(i, k);
-			TilePos pos = new TilePos(i, j, k);
-            new WorldFeatureMeteor(Blocks.ORE_IRON_BASALT.id(), 0, 25).place(world, rand, pos);
-        }
+		if(SIConfig.config.getInt("WorldGen.ironMeteorChance") != 0) {
+			if (rand.nextInt(SIConfig.config.getInt("WorldGen.ironMeteorChance")) == 0) {
+				int i = x + rand.nextInt(16);
+				int k = z + rand.nextInt(16);
+				int j = world.getHeightValue(i, k);
+				TilePos pos = new TilePos(i, j, k);
+				new WorldFeatureMeteor(Blocks.ORE_IRON_BASALT.id(), 0, 25).place(world, rand, pos);
+			}
+		}
 
-        if (rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteMeteorChance")) == 0) {
-            int i = x + rand.nextInt(16);
-            int k = z + rand.nextInt(16);
-            int j = world.getHeightValue(i, k);
-			TilePos pos = new TilePos(i, j, k);
-            new WorldFeatureMeteor(SIBlocks.signalumOre.id(), 0, 15).place(world, rand, pos);
-        }
 
-        if (rand.nextInt(SIConfig.config.getInt("WorldGen.dilithiumMeteorChance")) == 0) {
-            int i = x + rand.nextInt(16);
-            int k = z + rand.nextInt(16);
-            int j = world.getHeightValue(i, k);
-			TilePos pos = new TilePos(i, j, k);
-            new WorldFeatureMeteor(SIBlocks.dilithiumOre.id(), 0, 5).place(world, rand, pos);
-        }
+		if(SIConfig.config.getInt("WorldGen.signaliteMeteorChance") != 0) {
+			if (rand.nextInt(SIConfig.config.getInt("WorldGen.signaliteMeteorChance")) == 0) {
+				int i = x + rand.nextInt(16);
+				int k = z + rand.nextInt(16);
+				int j = world.getHeightValue(i, k);
+				TilePos pos = new TilePos(i, j, k);
+				new WorldFeatureMeteor(SIBlocks.signalumOre.id(), 0, 15).place(world, rand, pos);
+			}
+		}
 
-        if (rand.nextInt(SIConfig.config.getInt("WorldGen.obeliskChance")) == 0) {
-            int i = x + rand.nextInt(16);
-            int k = z + rand.nextInt(16);
-            int j = world.getHeightValue(i, k);
-			TilePos pos = new TilePos(i, j, k);
-            new WorldFeatureObelisk().place(world, rand, pos);
-        }
 
+		if(SIConfig.config.getInt("WorldGen.dilithiumMeteorChance") != 0) {
+			if (rand.nextInt(SIConfig.config.getInt("WorldGen.dilithiumMeteorChance")) == 0) {
+				int i = x + rand.nextInt(16);
+				int k = z + rand.nextInt(16);
+				int j = world.getHeightValue(i, k);
+				TilePos pos = new TilePos(i, j, k);
+				new WorldFeatureMeteor(SIBlocks.dilithiumOre.id(), 0, 5).place(world, rand, pos);
+			}
+		}
+
+
+		if(SIConfig.config.getInt("WorldGen.obeliskChance") != 0) {
+			if (rand.nextInt(SIConfig.config.getInt("WorldGen.obeliskChance")) == 0) {
+				int i = x + rand.nextInt(16);
+				int k = z + rand.nextInt(16);
+				int j = world.getHeightValue(i, k);
+				TilePos pos = new TilePos(i, j, k);
+				new WorldFeatureObelisk().place(world, rand, pos);
+			}
+		}
     }
 }

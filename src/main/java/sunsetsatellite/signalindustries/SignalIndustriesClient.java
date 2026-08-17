@@ -126,7 +126,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new TileGuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class, ScreenMultiblock::new));
 		Catalyst.GUIS.register(key("gui/r_extractor"), new TileGuiEntry<>(TileEntityReinforcedExtractor.class, MenuReinforcedExtractor.class, ScreenReinforcedExtractor::new));
 		Catalyst.GUIS.register(key("gui/anchor"), new TileGuiEntry<>(TileEntityDimensionalAnchor.class, MenuMachine.class, ScreenAnchor::new));
-		Catalyst.GUIS.register(key("gui/reactor"), new TileGuiEntry<>(TileEntitySignalumReactor.class, MenuSignalumReactor.class, ScreenSignalumReactor::new));
+		Catalyst.GUIS.register(key("gui/reactor"), new TileGuiEntry<>(TileEntitySignalumReactor.class, null, ScreenSignalumReactor::new));
 		Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new TileGuiEntry<>(TileEntityWakingAlloySmelter.class, MenuMachine.class, ScreenMultiblock::new));
 		Catalyst.GUIS.register(key("gui/waking_crusher"), new TileGuiEntry<>(TileEntityWakingCrusher.class, MenuMachine.class, ScreenMultiblock::new));
 		Catalyst.GUIS.register(key("gui/waking_plate_former"), new TileGuiEntry<>(TileEntityWakingPlateFormer.class, MenuMachine.class, ScreenMultiblock::new));

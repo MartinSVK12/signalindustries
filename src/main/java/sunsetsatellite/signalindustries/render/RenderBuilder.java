@@ -31,7 +31,7 @@ public class RenderBuilder extends TileEntityRenderer<TileEntityBuilder> {
 		int i = builder.tilePos.x;
 		int j = builder.tilePos.y;
 		int k = builder.tilePos.z;
-		Direction dir = Direction.getDirectionFromSide(builder.getBlockMeta());
+		Direction dir = builder.rotation;
 		World world = this.renderDispatcher.textureManager.mc.currentWorld;
 		if (builder.itemContents[0] != null && builder.itemContents[0].getItem() instanceof ItemBlueprint) {
 			Structure multiblock = SignalIndustries.getStructureFromBlueprint(builder.itemContents[0], world);

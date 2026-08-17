@@ -79,7 +79,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/induction_smelter"), new GuiEntry<>(TileEntityInductionSmelter.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/r_extractor"), new GuiEntry<>(TileEntityReinforcedExtractor.class, MenuReinforcedExtractor.class));
 		Catalyst.GUIS.register(key("gui/anchor"), new GuiEntry<>(TileEntityDimensionalAnchor.class, MenuMachine.class));
-		Catalyst.GUIS.register(key("gui/reactor"), new GuiEntry<>(TileEntitySignalumReactor.class, MenuSignalumReactor.class));
+		Catalyst.GUIS.register(key("gui/reactor"), new GuiEntry<>(TileEntitySignalumReactor.class, null));
 		Catalyst.GUIS.register(key("gui/waking_alloy_smelter"), new GuiEntry<>(TileEntityWakingAlloySmelter.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/waking_crusher"), new GuiEntry<>(TileEntityWakingCrusher.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/waking_plate_former"), new GuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class));

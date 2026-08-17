@@ -45,6 +45,7 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     }
 
     public void work() {
+		if (worldObj != null && worldObj.isClientSide) return;
         Structure multiblock = SignalIndustries.getStructureFromBlueprint(itemContents[0], worldObj);
         if (multiblock != null) {
             setStructureToBuild();

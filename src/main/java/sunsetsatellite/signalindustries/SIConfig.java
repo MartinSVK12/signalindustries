@@ -29,8 +29,8 @@ public class SIConfig {
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
         defaultConfig.addCategory("Experimental");
-        defaultConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10.", "WorldGen");
-        defaultConfig.addEntry("Experimental.enableDynamicChunkProvider", "Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.", false);
+        defaultConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10. Set any of these options to 0 to disable them, be careful though as completely disabling any of these might prevent you from progressing through the mod properly.", "WorldGen");
+        //defaultConfig.addEntry("Experimental.enableDynamicChunkProvider", "Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.", false);
         defaultConfig.addEntry("Other.enableQuests", true);
         defaultConfig.addEntry("Other.totemsRequireOP", false);
         defaultConfig.addEntry("Other.eternityDimId", 3);
@@ -43,7 +43,9 @@ public class SIConfig {
         defaultConfig.addEntry("EntityIDs.energyOrbId", 51);
         defaultConfig.addEntry("EntityIDs.fallingMeteorId", 52);
         defaultConfig.addEntry("EntityIDs.sunbeamId", 53);
-        defaultConfig.addEntry("WorldGen.signaliteGeodeChance", "Default is 10", 10);
+		defaultConfig.addEntry("EntityIDs.shockwaveId", 54);
+		defaultConfig.addEntry("EntityIDs.realityTearId", 55);
+        defaultConfig.addEntry("WorldGen.signaliteGeodeChance", "Default is 10.", 10);
         defaultConfig.addEntry("WorldGen.ironMeteorChance", "Default is 256", 256);
         defaultConfig.addEntry("WorldGen.signaliteMeteorChance", "Default is 512", 512);
         defaultConfig.addEntry("WorldGen.dilithiumMeteorChance", "Default is 1024", 1024);
@@ -152,7 +154,17 @@ public class SIConfig {
                 changed = true;
             }
 
-            try {
+			if(!rawConfig.contains("EntityIDs.shockwaveId")){
+				defaultConfig.addEntry("EntityIDs.shockwaveId", 54);
+				changed = true;
+			}
+
+			if(!rawConfig.contains("EntityIDs.realityTearId")){
+				defaultConfig.addEntry("EntityIDs.realityTearId", 55);
+				changed = true;
+			}
+
+            /*try {
                 if (!rawConfig.contains("Experimental.enableDynamicChunkProvider")) {
                     rawConfig.addEntry("Experimental.enableDynamicChunkProvider", false);
                     changed = true;
@@ -160,7 +172,7 @@ public class SIConfig {
             } catch (NullPointerException e) {
                 rawConfig.addEntry("Experimental.enableDynamicChunkProvider", false);
                 changed = true;
-            }
+            }*/
 
             try {
                 if (!rawConfig.contains("Other.enableQuests")) {

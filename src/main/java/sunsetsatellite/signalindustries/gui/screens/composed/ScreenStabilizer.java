@@ -7,8 +7,6 @@ import sunsetsatellite.signalindustries.tiles.machines.TileEntityStabilizer;
 
 public class ScreenStabilizer extends ScreenTiered<TileEntityStabilizer> {
 
-	public TileEntityStabilizer tile;
-
 	public ScreenStabilizer(ContainerInventory playerInv, TileEntityStabilizer inv) {
 		super(playerInv, inv, "stabilizer");
 		ProgressBarComponent progress = get("progressBar");

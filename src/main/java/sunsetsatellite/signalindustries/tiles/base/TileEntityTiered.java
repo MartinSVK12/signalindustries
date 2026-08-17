@@ -11,7 +11,10 @@ public abstract class TileEntityTiered extends TileEntityWithName {
     public void tick() {
         super.tick();
         if (worldObj != null && getBlock() != null) {
-            tier = Catalyst.blockLogic(getBlock(), BlockLogicTiered.class).tier;
+			BlockLogicTiered tiered = Catalyst.blockLogic(getBlock(), BlockLogicTiered.class);
+			if(tiered != null){
+				tier = tiered.getTier();
+			}
         }
     }
 }

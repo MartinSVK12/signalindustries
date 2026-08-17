@@ -11,6 +11,7 @@ import net.minecraft.core.entity.EntityDispatcher;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
+import net.minecraft.core.net.entity.NetEntityHandler;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.World;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import sunsetsatellite.catalyst.multiblocks.Structure;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
+import sunsetsatellite.signalindustries.mp.entity.*;
 import sunsetsatellite.signalindustries.mp.message.*;
 import sunsetsatellite.signalindustries.tiles.*;
 import sunsetsatellite.signalindustries.tiles.conduit.*;
@@ -164,6 +166,12 @@ public class SignalIndustries implements ModInitializer {
 		EntityDispatcher.getInstance().addMapping(MobInfernal.class, id("infernal"), MobInfernal::new, "entity.signalindustries.infernal");
 		EntityDispatcher.getInstance().addMapping(EntityRealityTear.class, id("reality_tear"), EntityRealityTear::new, "entity.signalindustries.realityTear");
 		EntityDispatcher.getInstance().addMapping(EntityShockwave.class, id("shockwave"), EntityShockwave::new, "entity.signalindustries.shockwave");
+
+		NetEntityHandler.registerNetworkEntry(new NetEntryVolatileCrystal(), config.getInt("EntityIDs.volatileCrystalId"));
+		NetEntityHandler.registerNetworkEntry(new NetEntryFallingMeteor(), config.getInt("EntityIDs.fallingMeteorId"));
+		NetEntityHandler.registerNetworkEntry(new NetEntryEnergyOrb(), config.getInt("EntityIDs.energyOrbId"));
+		NetEntityHandler.registerNetworkEntry(new NetEntrySunbeam(), config.getInt("EntityIDs.sunbeamId"));
+		NetEntityHandler.registerNetworkEntry(new NetEntryShockwave(), config.getInt("EntityIDs.shockwaveId"));
 
 		LOGGER.info("Registering packets...");
 		NetworkHandler.registerNetworkMessage(NetworkMessageRecipeIdChange::new);

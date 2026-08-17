@@ -156,135 +156,135 @@ public class ScreenBuilder extends ScreenFluid {
 			mc.displayScreen(new ScreenIO((MenuComposed) inventorySlots, scene("configure"), IO.FLUID));
 		}
 
-        if (EnvironmentHelper.isClientWorld()) {
-            switch (button.id) {
-                case 2:
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, !tile.workTimer.isPaused(), tile.getClass()));
-                    button.displayString = tile.workTimer.isPaused() ? "OFF" : "ON";
-                    break;
-                case 3:
-                    tile.offset.x += 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 5:
-                    tile.offset.y += 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 7:
-                    tile.offset.z += 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 4:
-                    tile.offset.x -= 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 6:
-                    tile.offset.y -= 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 8:
-                    tile.offset.z -= 1;
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                case 9: {
-                    int i = tile.rotation.getSideNumber();
-                    i += 1;
-                    if (i > 5) {
-                        i = 2;
-                    }
-                    tile.rotation = Direction.getDirectionFromSide(i);
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                }
-                case 10: {
-                    int i = tile.rotation.getSideNumber();
-                    i -= 1;
-                    if (i < 2) {
-                        i = 5;
-                    }
-                    tile.rotation = Direction.getDirectionFromSide(i);
-                    tile.reset();
-                    NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getClass()));
-                    break;
-                }
-                default:
-                    break;
-            }
+        if (EnvironmentHelper.isMultiplayerClient()) {
+			switch (button.id) {
+		        case 2 -> {
+					if(tile.workTimer.isPaused()){
+						tile.workTimer.unpause();
+					} else {
+						tile.workTimer.pause();
+					}
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, !tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+					button.displayString = tile.workTimer.isPaused() ? "OFF" : "ON";
+				}
+		        case 3 -> {
+					tile.offset.x += 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 5 -> {
+					tile.offset.y += 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 7 -> {
+					tile.offset.z += 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 4 -> {
+					tile.offset.x -= 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 6 -> {
+					tile.offset.y -= 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 8 -> {
+					tile.offset.z -= 1;
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+		        case 9 -> {
+					int i = tile.rotation.getSideNumber();
+					i += 1;
+					if (i > 5) {
+						i = 2;
+					}
+					tile.rotation = Direction.getDirectionFromSide(i);
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+				case 10 -> {
+					int i = tile.rotation.getSideNumber();
+					i -= 1;
+					if (i < 2) {
+						i = 5;
+					}
+					tile.rotation = Direction.getDirectionFromSide(i);
+					tile.reset();
+					NetworkHandler.sendToServer(new NetworkMessageBuilderConfig(tile.offset, tile.rotation, tile.workTimer.isPaused(), tile.getPosition(), tile.getClass()));
+				}
+				default -> {
+				}
+	        }
         } else {
-            switch (button.id) {
-                case 2:
-                    if (tile.workTimer.isPaused() && (tile.fluidContents[0] != null && tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint)) {
-                        tile.workTimer.unpause();
-                        tile.setStructureToBuild();
-                        for (BlockInstance block : new ArrayList<>(tile.buildingBlocks)) {
-                            if (tile.worldObj != null && block.exists(tile.worldObj)) {
-                                tile.buildingBlocks.remove(block);
-                                tile.builtBlocks++;
-                            }
-                        }
-                        if (tile.buildingBlockIndex >= tile.buildingBlocks.size()) {
-                            tile.buildingBlockIndex = 0;
-                        }
-                    } else {
-                        tile.workTimer.pause();
-                    }
-                    button.displayString = tile.workTimer.isPaused() ? "OFF" : "ON";
-
-                    break;
-                case 3:
-                    tile.offset.x += 1;
-                    tile.reset();
-                    break;
-                case 5:
-                    tile.offset.y += 1;
-                    tile.reset();
-                    break;
-                case 7:
-                    tile.offset.z += 1;
-                    tile.reset();
-                    break;
-                case 4:
-                    tile.offset.x -= 1;
-                    tile.reset();
-                    break;
-                case 6:
-                    tile.offset.y -= 1;
-                    tile.reset();
-                    break;
-                case 8:
-                    tile.offset.z -= 1;
-                    tile.reset();
-                    break;
-                case 9: {
-                    int i = tile.rotation.getSideNumber();
-                    i += 1;
-                    if (i > 5) {
-                        i = 2;
-                    }
-                    tile.rotation = Direction.getDirectionFromSide(i);
-                    tile.reset();
-                    break;
-                }
-                case 10: {
-                    int i = tile.rotation.getSideNumber();
-                    i -= 1;
-                    if (i < 2) {
-                        i = 5;
-                    }
-                    tile.rotation = Direction.getDirectionFromSide(i);
-                    tile.reset();
-                    break;
-                }
-                default:
-                    break;
-            }
+			switch (button.id) {
+		        case 2 -> {
+					if (tile.workTimer.isPaused() && (tile.fluidContents[0] != null && tile.itemContents[0] != null && tile.itemContents[0].getItem() instanceof ItemBlueprint)) {
+						tile.workTimer.unpause();
+						tile.setStructureToBuild();
+						for (BlockInstance block : new ArrayList<>(tile.buildingBlocks)) {
+							if (tile.worldObj != null && block.exists(tile.worldObj)) {
+								tile.buildingBlocks.remove(block);
+								tile.builtBlocks++;
+							}
+						}
+						if (tile.buildingBlockIndex >= tile.buildingBlocks.size()) {
+							tile.buildingBlockIndex = 0;
+						}
+					} else {
+						tile.workTimer.pause();
+					}
+					button.displayString = tile.workTimer.isPaused() ? "OFF" : "ON";
+				}
+		        case 3 -> {
+					tile.offset.x += 1;
+					tile.reset();
+				}
+		        case 5 -> {
+					tile.offset.y += 1;
+					tile.reset();
+				}
+		        case 7 -> {
+					tile.offset.z += 1;
+					tile.reset();
+				}
+		        case 4 -> {
+					tile.offset.x -= 1;
+					tile.reset();
+				}
+		        case 6 -> {
+					tile.offset.y -= 1;
+					tile.reset();
+				}
+		        case 8 -> {
+					tile.offset.z -= 1;
+					tile.reset();
+				}
+		        case 9 -> {
+					int i = tile.rotation.getSideNumber();
+					i += 1;
+					if (i > 5) {
+						i = 2;
+					}
+					tile.rotation = Direction.getDirectionFromSide(i);
+					tile.reset();
+				}
+				case 10 -> {
+					int i = tile.rotation.getSideNumber();
+					i -= 1;
+					if (i < 2) {
+						i = 5;
+					}
+					tile.rotation = Direction.getDirectionFromSide(i);
+					tile.reset();
+				}
+				default -> {
+				}
+	        }
         }
 
 
