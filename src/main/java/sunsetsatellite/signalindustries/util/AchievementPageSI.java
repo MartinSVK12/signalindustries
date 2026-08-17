@@ -22,7 +22,6 @@ public class AchievementPageSI extends AchievementPage {
 	@Override
 	public void addAchievement(@NotNull Achievement achievement, int x, int y) {
 		super.addAchievement(achievement, x, y);
-		achievement.registerAchievement();
 	}
 
 	@Override
