@@ -83,12 +83,14 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 	private void toggleNightVision(boolean nightVision, SignalumPowerSuit ps) {
 		if (nightVision && !nightVisionShader) {
 			nightVisionShader = true;
+			mc.fullbright = true;
 			/*mc.setRenderer(new ShadersRendererSI(mc, "nightvision/", ps));
 			mc.renderer.reload();
 			mc.fullbright = true;
 			mc.renderGlobal.loadRenderers();*/
 		} else if (!nightVision && nightVisionShader) {
 			nightVisionShader = false;
+			mc.fullbright = false;
 			/*mc.setRenderer(new ShadersRenderer(mc));
 			mc.renderer.reload();
 			mc.fullbright = false;

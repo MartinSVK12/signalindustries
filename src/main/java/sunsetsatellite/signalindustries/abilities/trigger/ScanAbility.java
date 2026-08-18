@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class ScanAbility extends TriggerBaseEffectAbility {
 
-    public static HashMap<Block, OreInfo> oreMap = new HashMap<>();
+    public static HashMap<Block<?>, OreInfo> oreMap = new HashMap<>();
 
     public ScanAbility(String name, int cost, int cooldown, int effectTime, int costPerTick) {
         super(name, cost, cooldown, effectTime, costPerTick);

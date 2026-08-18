@@ -54,5 +54,6 @@ public abstract class WorldClientMixin extends World {
 				mc.thePlayer.triggerAchievement(SIAchievements.HELP);
 			}
 		}
+		super.tick();
 	}
 }
