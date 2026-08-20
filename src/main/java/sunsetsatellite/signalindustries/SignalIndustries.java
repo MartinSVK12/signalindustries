@@ -176,6 +176,7 @@ public class SignalIndustries implements ModInitializer {
 		LOGGER.info("Registering packets...");
 		NetworkHandler.registerNetworkMessage(NetworkMessageRecipeIdChange::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageIOChange::new);
+		NetworkHandler.registerNetworkMessage(NetworkMessageIOPreview::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageBuilderConfig::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageReactorStart::new);
 		NetworkHandler.registerNetworkMessage(NetworkMessageDrillModeChange::new);

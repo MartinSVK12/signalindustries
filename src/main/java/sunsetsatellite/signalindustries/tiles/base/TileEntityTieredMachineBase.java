@@ -3,17 +3,24 @@ package sunsetsatellite.signalindustries.tiles.base;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.player.Player;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.covers.DilithiumLensCover;
 import sunsetsatellite.signalindustries.covers.SwitchCover;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.interfaces.IBooster;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
+import sunsetsatellite.signalindustries.mp.message.NetworkMessageIOPreview;
 import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
+import turniplabs.halplibe.helper.network.NetworkHandler;
+
+import java.util.List;
 
 public abstract class TileEntityTieredMachineBase extends TileEntityTieredContainer implements IHasIOPreview, IActiveForm {
     public int fuelBurnTicks = 0;
@@ -38,6 +45,9 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         IOPreviewTimer.max = ticks;
         IOPreviewTimer.unpause();
         this.preview = preview;
+		if(EnvironmentHelper.isMultiplayerServer() && worldObj != null){
+			NetworkHandler.sendToAllAround(tilePos.x, tilePos.y, tilePos.z, 8, worldObj.dimension.id, new NetworkMessageIOPreview(new Vec3i(tilePos), this.getClass(), preview, ticks));
+		}
     }
 
     @Override
@@ -54,8 +64,8 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     public void tick() {
         super.tick();
 		if(worldObj == null) return;
+		IOPreviewTimer.tick();
         if (worldObj.isClientSide) return;
-        IOPreviewTimer.tick();
         Block<?> block = getBlock();
         if (block != null) {
             applyModifiers();
