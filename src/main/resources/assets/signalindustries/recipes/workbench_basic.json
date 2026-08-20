@@ -655,7 +655,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": "item.bucket",
+          "key": "item.bucket.iron",
           "amount": 1,
           "meta": 0
         }
@@ -1307,7 +1307,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": "item.bucket",
+          "key": "item.bucket.iron",
           "amount": 1,
           "meta": 0
         }
@@ -1408,19 +1408,11 @@
       },
       {
         "symbol": "W",
-        "stack": {
-          "key": "item.bucket.water",
-          "amount": 1,
-          "meta": 0
-        }
+        "group": "minecraft:water_buckets"
       },
       {
         "symbol": "L",
-        "stack": {
-          "key": "item.bucket.lava",
-          "amount": 1,
-          "meta": 0
-        }
+        "group": "minecraft:lava_buckets"
       }
     ],
     "result": {
@@ -1916,11 +1908,7 @@
       },
       {
         "symbol": "W",
-        "stack": {
-          "key": "item.bucket.water",
-          "amount": 1,
-          "meta": 0
-        }
+        "group": "minecraft:water_buckets"
       },
       {
         "symbol": "X",
@@ -1932,11 +1920,7 @@
       },
       {
         "symbol": "L",
-        "stack": {
-          "key": "item.bucket.lava",
-          "amount": 1,
-          "meta": 0
-        }
+        "group": "minecraft:lava_buckets"
       }
     ],
     "result": {

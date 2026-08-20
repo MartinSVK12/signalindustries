@@ -532,7 +532,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": "item.bucket",
+          "key": "item.bucket.iron",
           "amount": 1,
           "meta": 0
         }
@@ -2462,7 +2462,7 @@
       {
         "symbol": "B",
         "stack": {
-          "key": "item.bucket",
+          "key": "item.bucket.iron",
           "amount": 1,
           "meta": 0
         }
