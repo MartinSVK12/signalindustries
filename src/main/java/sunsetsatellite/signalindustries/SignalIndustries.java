@@ -214,11 +214,6 @@ public class SignalIndustries implements ModInitializer {
 		LOGGER.info("Beginning core post-init.");
 		SIRecipes.loadSpecial();
 		LOGGER.info("Beginning core pre-init.");
-		if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
-			if (SIConfig.config.getBoolean("Other.enableQuests")) {
-				new VintageQuestingSIPlugin().initializePlugin();
-			}
-		}
 	}
 
 	public static NamespaceID id(String id) {

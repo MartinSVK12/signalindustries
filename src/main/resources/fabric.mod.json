@@ -47,6 +47,9 @@
 		],
 		"gatherTMBPlugins": [
 			"sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
+		],
+		"vintagequesting": [
+			"sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin"
 		]
 	},
   "mixins": [

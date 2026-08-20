@@ -6,7 +6,9 @@ import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.collection.Pair;
+import org.slf4j.Logger;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.chapter.AwakenedQuestChapter;
@@ -30,6 +32,7 @@ import sunsetsatellite.vintagequesting.core.data.task.RetrievalTaskData;
 import sunsetsatellite.vintagequesting.core.data.task.VisitDimensionTaskData;
 import sunsetsatellite.vintagequesting.util.Logic;
 import sunsetsatellite.vintagequesting.util.QuestTeam;
+import sunsetsatellite.vintagequesting.util.VQPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +44,7 @@ import static sunsetsatellite.signalindustries.SIBlocks.*;
 import static sunsetsatellite.signalindustries.SIItems.*;
 
 
-public class VintageQuestingSIPlugin {
+public class VintageQuestingSIPlugin implements VQPlugin {
 
     public static ChapterData PROTOTYPE_CHAPTER = new PrototypeQuestChapter();
     public static ChapterData BASIC_CHAPTER = new BasicQuestChapter();
@@ -87,7 +90,12 @@ public class VintageQuestingSIPlugin {
 
     }
 
-    public void reload(){
+	@Override
+	public boolean shouldLoad() {
+		return SIConfig.config.getBoolean("Other.enableQuests");
+	}
+
+	public void reload(){
         VintageQuesting.CHAPTERS.unregister(PROTOTYPE_CHAPTER.getId());
         VintageQuesting.CHAPTERS.unregister(BASIC_CHAPTER.getId());
         VintageQuesting.CHAPTERS.unregister(REINFORCED_CHAPTER.getId());
