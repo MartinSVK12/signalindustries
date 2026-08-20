@@ -170,7 +170,7 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityPump.class, new RenderPump());
 		dispatcher.assignRenderer(TileEntityStoneworks.class, new RenderStoneworks());
 		dispatcher.assignRenderer(TileEntitySignalumReactor.class, new RenderMultiblock());
-		dispatcher.assignRenderer(TileEntityWarpGate.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntityWarpGate.class, new RenderWarpGate());
 		dispatcher.assignRenderer(TileEntityBuilder.class, new RenderBuilder());
 		dispatcher.assignRenderer(TileEntityPulsar.class, new RenderPulsar());
 		dispatcher.assignRenderer(TileEntityAutoMiner.class, new RenderAutoMiner());
