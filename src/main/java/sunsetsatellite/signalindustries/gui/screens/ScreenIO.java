@@ -53,37 +53,84 @@ public class ScreenIO extends ScreenComposedContainer {
 		this.io = io;
 		this.<TextComponent>get("title").text = "Configure: "+io.name();
 		this.<ButtonComponent>get("allI").buttonClicked.connect((s, t)->{
-			for (Direction dir : Direction.values()) {
-				if(EnvironmentHelper.isSinglePlayer()){
-					tile.itemConnections.replaceAll((D,C)->Connection.INPUT);
-				} else if(EnvironmentHelper.isClientWorld()){
-					Vec3i position = tile.getPosition();
-					int slot = tile.activeItemSlots.get(dir);
-					NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.INPUT, dir, io, slot, tile.getClass()));
+			switch (io) {
+				case FLUID -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.fluidConnections.replaceAll((D,C)->Connection.INPUT);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeFluidSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.INPUT, dir, io, slot, tile.getClass()));
+						}
+					}
+				}
+				case ITEM -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.itemConnections.replaceAll((D,C)->Connection.INPUT);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeItemSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.INPUT, dir, io, slot, tile.getClass()));
+						}
+					}
 				}
 			}
 		});
 		this.<ButtonComponent>get("allO").buttonClicked.connect((s, t)->{
-			for (Direction dir : Direction.values()) {
-				if(EnvironmentHelper.isSinglePlayer()){
-					tile.itemConnections.replaceAll((D,C)->Connection.OUTPUT);
-				} else if(EnvironmentHelper.isClientWorld()){
-					Vec3i position = tile.getPosition();
-					int slot = tile.activeItemSlots.get(dir);
-					NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.OUTPUT, dir, io, slot, tile.getClass()));
+			switch (io) {
+				case ITEM -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.itemConnections.replaceAll((D,C)->Connection.OUTPUT);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeItemSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.OUTPUT, dir, io, slot, tile.getClass()));
+						}
+					}
+				}
+				case FLUID -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.fluidConnections.replaceAll((D,C)->Connection.OUTPUT);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeFluidSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.OUTPUT, dir, io, slot, tile.getClass()));
+						}
+					}
 				}
 			}
+
 		});
 		this.<ButtonComponent>get("clear").buttonClicked.connect((s, t)->{
-			for (Direction dir : Direction.values()) {
-				if(EnvironmentHelper.isSinglePlayer()){
-					tile.itemConnections.replaceAll((D,C)->Connection.NONE);
-				} else if(EnvironmentHelper.isClientWorld()){
-					Vec3i position = tile.getPosition();
-					int slot = tile.activeItemSlots.get(dir);
-					NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.NONE, dir, io, slot, tile.getClass()));
+			switch (io){
+				case ITEM -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.itemConnections.replaceAll((D,C)->Connection.NONE);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeItemSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.NONE, dir, io, slot, tile.getClass()));
+						}
+					}
+				}
+				case FLUID -> {
+					for (Direction dir : Direction.values()) {
+						if(EnvironmentHelper.isSingleplayerClient()){
+							tile.fluidConnections.replaceAll((D,C)->Connection.NONE);
+						} else if(EnvironmentHelper.isMultiplayerClient()){
+							Vec3i position = tile.getPosition();
+							int slot = tile.activeFluidSlots.get(dir);
+							NetworkHandler.sendToServer(new NetworkMessageIOChange(position, Connection.NONE, dir, io, slot, tile.getClass()));
+						}
+					}
 				}
 			}
+
 		});
 	}
 
@@ -103,7 +150,7 @@ public class ScreenIO extends ScreenComposedContainer {
 					case ITEM -> tile.cycleItemIOForSide(dir);
 				}
 			}
-			if(EnvironmentHelper.isClientWorld()){
+			if(EnvironmentHelper.isMultiplayerClient()){
 				Vec3i position = tile.getPosition();
 				Connection connection = Connection.NONE;// = tile.itemConnections.get(dir);
 				int slot = 0;// = tile.activeItemSlots.get(dir);
