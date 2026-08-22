@@ -25,7 +25,7 @@ import sunsetsatellite.signalindustries.util.SIMultiblock;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RenderBuilder extends TileEntityRenderer<TileEntityBuilder> {
+public class RenderBuilder extends RenderSI<TileEntityBuilder> {
 	@Override
 	public void doRender(TessellatorGeneral tessellatorGeneral, TileEntityBuilder builder, double d, double e, double f, float g) {
 		int i = builder.tilePos.x;
@@ -73,21 +73,13 @@ public class RenderBuilder extends TileEntityRenderer<TileEntityBuilder> {
 					}
 				}
 			}
-		}
-	}
 
-	public void drawBlock(TessellatorGeneral t, BlockModel<?> model, int meta, float alpha) {
-		TextureRegistry.worldAtlas.bind();
-		GLRenderer.pushFrame();
-		GLRenderer.setShader(Shaders.WORLD);
-		GLRenderer.enableState(State.BLEND);
-		GLRenderer.setBlendFunc(BlendFactor.SRC_ALPHA, BlendFactor.ONE_MINUS_SRC_ALPHA);
-		GLRenderer.setColor4f(1,1,1,alpha);
-		model.renderStandalone(t, meta, LightIndexHelper.lightIndex2i(15,15));
-		GLRenderer.setColor4f(1,1,1,1);
-		GLRenderer.disableState(State.BLEND);
-		GLRenderer.popFrame();
-		GLRenderer.enableState(State.CULL_FACE);
+			if (!Objects.equals(builder.currentlyBuilding, new Vec3i())) {
+				if (builder.buildingMultiblock != null && !builder.buildingBlocks.isEmpty()) {
+					renderLineBetweenTwoPoints(i, j, k, builder.currentlyBuilding.x, builder.currentlyBuilding.y, builder.currentlyBuilding.z, 1f, 0f, 0f, 1f, 8f, d, e, f);
+				}
+			}
+		}
 	}
 
 	protected HologramWorld hologram;

@@ -179,6 +179,7 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityItemConduit.class, new RenderItemsInConduit());
 		dispatcher.assignRenderer(TileEntityConduit.class, new RenderFluidInConduit());
 		dispatcher.assignRenderer(TileEntityFluidConduit.class, new RenderFluidInConduit());
+		dispatcher.assignRenderer(TileEntityEncapsulator.class, new RenderEncapsulator());
 
 	}
 

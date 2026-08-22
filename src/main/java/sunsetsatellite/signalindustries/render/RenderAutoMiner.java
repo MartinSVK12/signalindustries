@@ -1,36 +1,15 @@
 package sunsetsatellite.signalindustries.render;
 
-import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
-import net.minecraft.client.render.renderer.BlendFactor;
-import net.minecraft.client.render.renderer.GLRenderer;
-import net.minecraft.client.render.renderer.Shaders;
-import net.minecraft.client.render.renderer.State;
+import net.minecraft.client.render.renderer.*;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
-import net.minecraft.client.render.tileentity.TileEntityRenderer;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.util.helper.LightIndexHelper;
 import net.minecraft.core.world.World;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAutoMiner;
 
 import java.util.Objects;
 
-public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
-
-	public void drawBlock(TessellatorGeneral t, BlockModel<?> model, int meta, float alpha) {
-		TextureRegistry.worldAtlas.bind();
-		GLRenderer.pushFrame();
-		GLRenderer.setShader(Shaders.WORLD);
-		GLRenderer.enableState(State.BLEND);
-		GLRenderer.setBlendFunc(BlendFactor.SRC_ALPHA, BlendFactor.ONE_MINUS_SRC_ALPHA);
-		GLRenderer.setColor4f(1,1,1,alpha);
-		model.renderStandalone(t, meta, LightIndexHelper.lightIndex2i(15,15));
-		GLRenderer.setColor4f(1,1,1,1);
-		GLRenderer.disableState(State.BLEND);
-		GLRenderer.popFrame();
-		GLRenderer.enableState(State.CULL_FACE);
-	}
+public class RenderAutoMiner extends RenderSI<TileEntityAutoMiner> {
 
 	@Override
 	public void doRender(TessellatorGeneral tessellator, TileEntityAutoMiner tile, double x, double y, double z, float partialTick) {
@@ -67,6 +46,39 @@ public class RenderAutoMiner extends TileEntityRenderer<TileEntityAutoMiner> {
 				}
 				GLRenderer.popFrame();
 			}
+
+			//square above
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x, y + 4, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y - 1));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z);
+			//square
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x, y, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 0.5f, 0, 1, 8, x, y, z + (tile.size.y - 1));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y, z);
+			//down
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x, y + 4, z + (tile.size.y - 1));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty - 4, tz, 1, 0.5f, 0, 1, 8, x - (tile.size.x - 1), y + 4, z + (tile.size.y - 1));
+			//down 2
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x - 1), y, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x, y, z + (tile.size.y - 1));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, 0, tz, 1, 1, 1, 1, 2, x - (tile.size.x - 1), y, z + (tile.size.y - 1));
+			//square down
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 1, 1, 1, 2, x, y - ty, z);
+			renderLineBetweenTwoPoints(tx, ty, tz, tx - (tile.size.x - 1), ty, tz, 1, 1, 1, 1, 2, x, y - ty, z + (tile.size.y - 1));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, ty, tz + (tile.size.y - 1), 1, 1, 1, 1, 2, x - (tile.size.x - 1), y - ty, z);
+
+			//current lines
+			renderLineBetweenTwoPoints(tx, ty, tz, cx, ty, tz, 1, 0, 0, 1, 8, x, y + 4, z + (cz - tz));
+			renderLineBetweenTwoPoints(tx, ty, cz, tx, ty, tz, 0, 0, 1, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
+			renderLineBetweenTwoPoints(tx, ty, tz, tx, cy - 5, tz, 0, 1, 0, 1, 8, x - (tx - cx), y + 4, z + (cz - tz));
 		}
 	}
+
+
 }

@@ -115,6 +115,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/programmer"), new TileGuiEntry<>(TileEntityProgrammer.class, MenuProgrammer.class, ScreenProgrammer::new));
 		Catalyst.GUIS.register(key("gui/pulsar_block"), new TileGuiEntry<>(TileEntityPulsar.class, MenuPulsarBlock.class, ScreenPulsarBlock::new));
 		Catalyst.GUIS.register(key("gui/multi_conduit"), new TileGuiEntry<>(TileEntityMultiConduit.class, null, ScreenMultiConduitConfig::new));
+		Catalyst.GUIS.register(key("gui/encapsulator"), new TileGuiEntry<>(TileEntityEncapsulator.class, MenuEncapsulator.class, ScreenEncapsulator::new));
 
 		Catalyst.GUIS.register(key("gui/restrict_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, null, ScreenRestrictPipeConfig::new));
 		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class, ScreenSensorPipeConfig::new));

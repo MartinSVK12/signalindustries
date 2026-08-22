@@ -432,7 +432,7 @@ public class SIItems extends DataInitializer {
 			}
 		}
 
-		LOGGER.info("Item progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
+		//LOGGER.info("Item progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
 
 		setInitialized(true);
 	}

@@ -224,7 +224,7 @@ public class SIBlocks extends DataInitializer {
 
 	public static Block<? extends BlockLogic> basicMarker;
 	public static Block<? extends BlockLogic> reinforcedBuilder;
-	//public static Block<? extends BlockLogic> spatialEncapsulator;
+	public static Block<? extends BlockLogic> spatialEncapsulator;
 
 	//public static Block<? extends BlockLogic> creationAltar;
 
@@ -1226,6 +1226,17 @@ public class SIBlocks extends DataInitializer {
 				.withOverbrightNorthTexture("builder_overlay")
 		);
 
+		spatialEncapsulator = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.encapsulator",
+			"awakened_encapsulator",
+			"spatialEncapsulator",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityEncapsulator::new, "encapsulator"),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultNorthTexture("awakened_encapsulator_front_inactive")
+				.withActiveNorthTexture("awakened_encapsulator_front_active")
+		);
+
 		pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),
 			"reinforced.pulsar",
 			"pulsar",
@@ -2036,7 +2047,7 @@ public class SIBlocks extends DataInitializer {
 			}
 		}
 
-		LOGGER.info("Block progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
+		//LOGGER.info("Block progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
 
 		setInitialized(true);
 	}
