@@ -141,7 +141,6 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
 
     @Override
     public void onGatherPlugins(boolean isReload) {
-        TMB.LOGGER.info("Loading plugin: " + this.getClass().getSimpleName() + " from " + SignalIndustries.MOD_ID);
         TMB.registerPlugin(this);
         if(isReload){
             if (FabricLoaderImpl.INSTANCE.isModLoaded("vintagequesting")) {
