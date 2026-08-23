@@ -1,11 +1,30 @@
 import com.google.gson.Gson
 import com.smushytaco.lwjgl_gradle.Preset
+import groovy.namespace.QName
+import groovy.util.Node
+import groovy.xml.XmlParser
+import org.kohsuke.github.GHReleaseBuilder
+import org.kohsuke.github.GitHub
+import java.io.IOException
+import java.net.URL
+import java.nio.file.Files
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath("org.kohsuke:github-api:1.135")
+	}
+}
 
 plugins {
 	alias(libs.plugins.loom)
 	alias(libs.plugins.lwjgl)
 	alias(libs.plugins.minotaur)
     java
+	`maven-publish`
 }
 val modVersion: String = project.properties["mod_version"].toString()
 val modGroup: String = project.properties["mod_group"].toString()
@@ -265,3 +284,99 @@ tasks {
 }
 // Removes LWJGL2 dependencies
 configurations.configureEach { exclude(group = "org.lwjgl.lwjgl") }
+
+val modrinthToken: Provider<String> = providers.gradleProperty("modrinthToken")
+val githubToken: Provider<String> = providers.gradleProperty("githubToken")
+val catalystVersion = project(":catalyst-all").properties["mod_version"] as String
+
+if (modrinthToken.isPresent) {
+	modrinth {
+		token = modrinthToken
+		projectId = "signal-industries"
+		versionName = "Signal Industries ${modVersion}"
+		versionNumber = modVersion
+		versionType = "alpha"
+		uploadFile.set(tasks.jar)
+		additionalFiles = listOf(tasks.named("sourcesJar"))
+		gameVersions.add("b1.7.3")
+		loaders.add("bta-babric")
+		changelog = Files.readString(project.projectDir.toPath().resolve("CHANGELOG.md"))
+		dependencies { // A special DSL for creating dependencies
+			required.version("halplibe", libs.versions.halplibe.get())
+			required.version("catalyst", catalystVersion)
+			optional.project("tmb")
+			optional.project("btwaila")
+		}
+	}
+}
+
+publishing {
+	if(checkVersion(modGroup, modName, modVersion)){
+		repositories {
+			maven {
+				name = "signalumMaven"
+				url = uri("https://maven.thesignalumproject.net/releases")
+				credentials(PasswordCredentials::class)
+				authentication {
+					create<BasicAuthentication>("basic")
+				}
+			}
+
+			publications {
+				create<MavenPublication>("maven") {
+					groupId = modGroup
+					artifactId = modName
+					version = modVersion
+					from(components["java"])
+				}
+			}
+		}
+	}
+}
+
+fun checkVersion(group: String, name: String, version: String): Boolean {
+	return !(rootProject.property("check_versions") as String).toBoolean() || try {
+		val xml = URL("https://maven.thesignalumproject.net/releases/$group/$name/maven-metadata.xml").readText()
+		val metadata = XmlParser().parseText(xml)
+
+		val versions = metadata.getAt(QName("versioning")).getAt("versions").getAt("version").map { (it as Node).text() }
+
+		if (version in versions) {
+			System.err.println("Version $version of $group.$name already exists!")
+			false
+		} else {
+			System.out.println("Version $version of $group.$name ready to release!")
+			true
+		}
+	} catch (e: IOException) {
+		System.err.println("Failed to check version for $group.$name!")
+		e.printStackTrace()
+		true
+	}
+}
+
+if(githubToken.isPresent){
+	tasks.register("github") {
+		description = "Publishes mod to GitHub"
+		doLast {
+			val github = GitHub.connectUsingOAuth(githubToken.get())
+			val repository = github.getRepository("MartinSVK12/signalindustries")
+
+			val releaseBuilder = GHReleaseBuilder(repository, modVersion)
+			releaseBuilder.name(modVersion)
+			releaseBuilder.body(Files.readString(project.projectDir.toPath().resolve("CHANGELOG.md")))
+			releaseBuilder.commitish("8.0")
+			releaseBuilder.prerelease(true)
+
+			val release = releaseBuilder.create()
+			release.uploadAsset(
+				project.file(tasks.named("jar").get().outputs.files.singleFile),
+				"application/java-archive"
+			)
+			release.uploadAsset(
+				project.file(tasks.named("sourcesJar").get().outputs.files.singleFile),
+				"application/java-archive"
+			)
+		}
+	}
+}
