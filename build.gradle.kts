@@ -106,10 +106,7 @@ repositories {
 		metadataSources { artifact() }
 		content { includeGroup("bta.loader") }
 	}
-    ivy("https://github.com/Better-than-Adventure") {
-        patternLayout { artifact("[organisation]/releases/download/[revision]/[module]-bta-[revision].jar") }
-        metadataSources { artifact() }
-    }
+
 	ivy("https://github.com/Testure") {
 		patternLayout { artifact("[organisation]/releases/download/v[revision]/[module]-[revision].jar") }
 		metadataSources { artifact() }
