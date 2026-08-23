@@ -36,7 +36,8 @@
     "ScreenInventoryMixin",
     "TextureManagerMixin",
     "TooltipElementMixin",
-    "WorldClientMixin"
+    "WorldClientMixin",
+    "WorldClientMPMixin"
   ],
   "injectors": {
     "defaultRequire": 1

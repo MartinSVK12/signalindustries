@@ -3,7 +3,9 @@ package sunsetsatellite.signalindustries.tiles.machines.simple;
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.items.tools.ItemSignalumCrystal;
@@ -61,6 +63,9 @@ public class TileEntityCrystalChamber extends TileEntityTieredMachineSimple impl
                 super.processItem();
             }
         }
+		if(hasOutput(0, SIItems.awakenedSignalumCrystal)){
+			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.AWAKENED));
+		}
     }
 
     @Override

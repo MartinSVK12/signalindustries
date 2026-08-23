@@ -2,7 +2,9 @@ package sunsetsatellite.signalindustries.tiles.machines.simple;
 
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineSimple;
@@ -29,4 +31,12 @@ public class TileEntityAlloySmelter extends TileEntityTieredMachineSimple implem
     public @NonNull String getNameTranslationKey() {
         return "container.signalindustries.alloySmelter";
     }
+
+	@Override
+	public void processItem() {
+		super.processItem();
+		if(hasOutput(0, SIItems.reinforcedCrystalAlloyIngot)){
+			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.KNIGHTS_ALLOY));
+		}
+	}
 }

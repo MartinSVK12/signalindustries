@@ -6,6 +6,8 @@ import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.IBoostable;
@@ -48,4 +50,12 @@ public class TileEntityInfuser extends TileEntityTieredMachineSimple implements 
     public @NonNull String getNameTranslationKey() {
         return "container.signalindustries.infuser";
     }
+
+	@Override
+	public void processItem() {
+		super.processItem();
+		if(hasOutput(0, SIBlocks.glowingObsidian)){
+			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.RELIC));
+		}
+	}
 }

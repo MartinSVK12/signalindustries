@@ -1,13 +1,18 @@
 package sunsetsatellite.signalindustries.util.slot;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.slot.Slot;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.interfaces.IAttachable;
 import sunsetsatellite.signalindustries.interfaces.IAttachment;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.items.attachments.ItemWingsAttachment;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class SlotAttachment extends Slot implements IAttachable {
 
@@ -42,9 +47,9 @@ public class SlotAttachment extends Slot implements IAttachable {
     @Override
     public void set(ItemStack itemstack) {
         super.set(itemstack);
-        /*if(itemstack.getItem() instanceof ItemWingsAttachment && !Global.isServer){
-            Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.WINGS);
-        }*/
+        if(itemstack != null && itemstack.getItem() instanceof ItemWingsAttachment && !EnvironmentHelper.isMultiplayerServer()){
+            Minecraft.getMinecraft().thePlayer.triggerAchievement(SIAchievements.WINGS);
+        }
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.Fluids;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIRecipes;
@@ -42,13 +43,16 @@ public class TileEntityCrystalCutter extends TileEntityTieredMachineSimple imple
     @Override
     public void processItem() {
         super.processItem();
-        if (itemContents[itemOutputs[0]].getItem().equals(SIItems.signalumCrystalEmpty)) {
+        if (hasOutput(0, SIItems.signalumCrystalEmpty)) {
             if (fluidContents[energySlot] != null && fluidContents[energySlot].amount + 1000 <= fluidCapacity[energySlot]) {
                 fluidContents[energySlot].amount += 1000;
             } else if (fluidContents[energySlot] == null) {
                 fluidContents[energySlot] = new FluidStack(SIFluids.ENERGY, 1000);
             }
         }
+		if(hasOutput(0, SIItems.signalumCrystal)){
+			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.SHINING));
+		}
     }
 
     @Override

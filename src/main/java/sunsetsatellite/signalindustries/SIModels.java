@@ -5,11 +5,8 @@ import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.*;
 import net.minecraft.client.render.block.model.generic.BlockModelGeneric;
-import net.minecraft.client.render.block.model.generic.BlockModelGenericFullyRotatable;
 import net.minecraft.client.render.block.model.generic.BlockModelGenericRotatable;
 import net.minecraft.client.render.entity.EntityRendererSprite;
-import net.minecraft.client.render.entity.MobRenderer;
-import net.minecraft.client.render.entity.MobRendererZombie;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.core.block.Block;
@@ -92,6 +89,8 @@ public class SIModels {
 		dispatcher.addDispatch(basicWrathBeacon, new BlockModelMachine(basicWrathBeacon, blockTextures.get(basicWrathBeacon)));
 		dispatcher.addDispatch(reinforcedWrathBeacon, new BlockModelMachine(reinforcedWrathBeacon, blockTextures.get(reinforcedWrathBeacon)));
 
+		dispatcher.addDispatch(SIBlocks.fuelCellBlock, new BlockModelFuelCell(SIBlocks.fuelCellBlock, blockTextures.get(fuelCellBlock)));
+
 		blockTextures.forEach((block, tex) -> {
 			if (dispatcher.hasDispatch(block)) return;
 			if (Block.hasLogicClass(block, BlockLogicMachineBase.class)) {
@@ -169,7 +168,7 @@ public class SIModels {
 		dispatcher.assignRenderer(TileEntityStorageContainer.class, new RenderStorageContainer());
 		dispatcher.assignRenderer(TileEntityPump.class, new RenderPump());
 		dispatcher.assignRenderer(TileEntityStoneworks.class, new RenderStoneworks());
-		dispatcher.assignRenderer(TileEntitySignalumReactor.class, new RenderMultiblock());
+		dispatcher.assignRenderer(TileEntitySignalumReactor.class, new RenderReactor());
 		dispatcher.assignRenderer(TileEntityWarpGate.class, new RenderWarpGate());
 		dispatcher.assignRenderer(TileEntityBuilder.class, new RenderBuilder());
 		dispatcher.assignRenderer(TileEntityPulsar.class, new RenderPulsar());

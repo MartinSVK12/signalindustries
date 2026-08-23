@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustriesClient;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
@@ -63,7 +64,7 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 		}
 		if (powerSuit == null) {
 			powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object) this);
-			//triggerAchievement(SIAchievements.POWER_SUIT);
+			triggerAchievement(SIAchievements.POWER_SUIT);
 		} else {
 			powerSuit.tick();
 		}

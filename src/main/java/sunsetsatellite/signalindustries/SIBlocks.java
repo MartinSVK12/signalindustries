@@ -35,7 +35,6 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static sunsetsatellite.signalindustries.SIConfig.block;
 import static sunsetsatellite.signalindustries.SIConfig.config;
@@ -254,6 +253,7 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> uvLamp;
 	public static Block<? extends BlockLogic> voidContainer;
 	public static Block<? extends BlockLogic> redstoneClock;
+	public static Block<? extends BlockLogic> fuelCellBlock;
 
 	public static Block<? extends BlockLogic> lunarTotem;
 	public static Block<? extends BlockLogic> solarTotem;
@@ -1956,6 +1956,17 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicUndroppable(block, Materials.STONE),
 			new MachineTextures()
 				.withDefaultTexture("reality_fabric")
+		);
+
+		fuelCellBlock = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.STONE).setHardness(150).setResistance(50000).addTags(BlockTags.NOT_IN_CREATIVE_MENU),
+			"fuelCell",
+			"fuel_cell",
+			"fuelCellBlock",
+			0,
+			(block) -> new BlockLogicTransparent(block, Materials.METAL),
+			new MachineTextures()
+				.withDefaultTopBottomTextures("fuel_cell_empty")
+				.withDefaultSideTextures("fuel_cell_side")
 		);
 
 		eternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setHardness(75).setResistance(50000).setLuminance(12),

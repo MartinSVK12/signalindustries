@@ -51,10 +51,13 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
                 float xd = random.nextFloat() / 10 - 0.05f;
                 float yd = random.nextFloat() / 10 - 0.05f;
                 float zd = random.nextFloat() / 10 - 0.05f;
-                /*SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+0.5,y+0.5,z,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+0.5,y+0.5,z+1,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x,y+0.5,z+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));
-                SignalIndustries.spawnParticle(new EntityFlameFX(worldObj,x+1,y+0.5,z+0.5,xd,yd,zd, EntityFlameFX.Type.ORANGE));*/
+				double x = tilePos.x;
+				double y = tilePos.y;
+				double z = tilePos.z;
+				worldObj.spawnParticle("flame",x+0.5,y+0.5,z,xd,yd,zd,0,8,true);
+				worldObj.spawnParticle("flame",x,y+0.5,z+0.5,xd,yd,zd,0,8,true);
+				worldObj.spawnParticle("flame",x,y+0.5,z+0.5,xd,yd,zd,0,8,true);
+				worldObj.spawnParticle("flame",x+1,y+0.5,z+0.5,xd,yd,zd,0,8,true);
             }
         }
     }

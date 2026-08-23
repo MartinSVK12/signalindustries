@@ -11,6 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
+import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIModels;
+import sunsetsatellite.signalindustries.SIMultiblocks;
+import sunsetsatellite.signalindustries.util.SIMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.function.Supplier;
@@ -33,6 +37,29 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
 		if(tile != null && guiId != null) {
 			if(tile instanceof IMultiblock multiblock){
 				if(multiblock.getMultiblock() != null && multiblock.getMultiblock().isValid()){
+					if(multiblock.getMultiblock().data == SIMultiblocks.dimAnchorMultiblock) {
+						player.triggerAchievement(SIAchievements.ANCHOR);
+					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.wakingCrusher) {
+						player.triggerAchievement(SIAchievements.WAKING1);
+					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.wakingPlateFormer) {
+						player.triggerAchievement(SIAchievements.WAKING2);
+					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.wakingInfuser) {
+						player.triggerAchievement(SIAchievements.WAKING3);
+					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.wakingAlloySmelter) {
+						player.triggerAchievement(SIAchievements.WAKING4);
+					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.warpGate) {
+						player.triggerAchievement(SIAchievements.GATE);
+					}
+					if(multiblock.getMultiblock().data instanceof SIMultiblock siMultiblock){
+						if(siMultiblock.tier.ordinal() >= Tier.REINFORCED.ordinal()){
+							player.triggerAchievement(SIAchievements.HORIZONS);
+						}
+					}
 					Catalyst.displayGui(player, tile, key("gui/" + guiId));
 					return true;
 				} else {

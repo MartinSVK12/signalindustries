@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
@@ -83,7 +84,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
                 itemContents[1] = chip.copy();
             }
 
-            //Minecraft.getMinecraft().//thePlayer.triggerAchievement(SIAchievements.PROGRAMMER);
+            doWithNearPlayers(8,(P)->P.triggerAchievement(SIAchievements.PROGRAMMER));
         }
     }
 

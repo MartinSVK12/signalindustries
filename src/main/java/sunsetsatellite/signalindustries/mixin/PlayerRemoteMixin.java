@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
@@ -44,7 +45,7 @@ public abstract class PlayerRemoteMixin extends Player implements IPlayerPowerSu
 		}
 		if (powerSuit == null) {
 			powerSuit = new SignalumPowerSuitRemote((PlayerRemote) (Object) this);
-			//triggerAchievement(SIAchievements.POWER_SUIT);
+			triggerAchievement(SIAchievements.POWER_SUIT);
 		} else {
 			powerSuit.tick();
 		}

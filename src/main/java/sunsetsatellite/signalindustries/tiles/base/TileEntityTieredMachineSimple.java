@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.tiles.base;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.io.IFluidIO;
@@ -9,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.*;
@@ -379,6 +382,15 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         });
         currentRecipe = recipeGroup.findRecipe(symbols.toArray(new RecipeExtendedSymbol[0]), tier, recipeId);
     }
+
+	public boolean hasOutput(int index, Item item){
+		if(itemContents[itemOutputs[index]] == null) return false;
+		return itemContents[itemOutputs[index]].getItem().equals(item);
+	}
+
+	public boolean hasOutput(int index, Block<?> block){
+		return Blocks.getBlock(itemContents[itemOutputs[index]].itemID).equals(block);
+	}
 
     @Override
     public void writeAdditionalData(@NonNull CompoundTag tag) {

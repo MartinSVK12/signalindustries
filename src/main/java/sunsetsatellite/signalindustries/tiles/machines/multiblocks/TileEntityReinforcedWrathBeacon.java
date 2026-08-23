@@ -24,6 +24,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIWeather;
@@ -146,7 +147,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             for (Player player : worldObj.players) {
 				if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
                 player.sendMessage("Challenge complete!!");
-                //player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
+                player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
             }
             for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(tilePos), Direction.Z_POS)) {
                 if (worldObj.getBlockId(bi.pos.x, bi.pos.y, bi.pos.z) == SIBlocks.fueledEternalTreeLog.id()) {

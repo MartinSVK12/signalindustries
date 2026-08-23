@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.abilities.trigger.*;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 
@@ -27,11 +28,10 @@ public class ItemTrigger extends Item implements ICustomDescription {
 
     public ItemTrigger(String translationKey, String namespaceId, int id) {
         super(translationKey, namespaceId, id);
-		//TODO:
-        //abilities.put("projectile", new ProjectileAbility("Projectlie", 50, 1));
-        //abilities.put("boost", new BoostAbility("Boost", 150, 5));
-        //abilities.put("shield", new ShieldAbility("Shield", 300, 15, 10, 5));
-        //abilities.put("scan", new ScanAbility("Scan", 150, 3, 15, 1));
+        abilities.put("projectile", new ProjectileAbility("Projectlie", 50, 1));
+        abilities.put("boost", new BoostAbility("Boost", 150, 5));
+        abilities.put("shield", new ShieldAbility("Shield", 300, 15, 10, 5));
+        abilities.put("scan", new ScanAbility("Scan", 150, 3, 15, 1));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
 					CompoundTag energy = ((ItemSignalumPowerHarness) harness.getItem()).getFluidStack(0, harness);
 					int amount = energy.getInteger("amount");
 					if (amount >= ability.cost) {
-						//entityplayer.triggerAchievement(SIAchievements.TRIGGER);
+						player.triggerAchievement(SIAchievements.TRIGGER);
 						if (ability instanceof TriggerBaseEffectAbility) {
 							boolean active = harness.getData().getBoolean("active_" + getAbilityName(stack));
 							if (active) {
@@ -141,7 +141,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
 					CompoundTag energy = ((ItemSignalumPowerHarness) harness.getItem()).getFluidStack(0, harness);
 					int amount = energy.getInteger("amount");
 					if (amount >= ability.cost) {
-						//entityplayer.triggerAchievement(SIAchievements.TRIGGER);
+						player.triggerAchievement(SIAchievements.TRIGGER);
 						if (ability instanceof TriggerBaseEffectAbility) {
 							boolean active = harness.getData().getBoolean("active_" + getAbilityName(stack));
 							if (active) {

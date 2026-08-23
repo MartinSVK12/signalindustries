@@ -14,6 +14,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.TickTimer;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWrathBeaconBase;
@@ -95,7 +96,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
             for (Player player : worldObj.players) {
                 if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
                 player.sendMessage("Challenge complete!!");
-                //player.triggerAchievement(SIAchievements.VICTORY);
+                player.triggerAchievement(SIAchievements.VICTORY);
             }
             active = false;
             started = false;
@@ -135,11 +136,11 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
 	public void activate(Player activator) {
         if (!active && worldObj != null) {
             if (worldObj.getDifficulty() == Difficulty.PEACEFUL) {
-                activator.sendMessage("This world is far too peaceful..");
+                activator.sendMessage("This world is far too peaceful...");
                 return;
             }
             if (worldObj.isDaytime()) {
-                activator.sendMessage("Now is not the time..");
+                activator.sendMessage("Now is not the time...");
                 return;
             }
             /*for (int x1 = x-7; x < x+7; x++) {
@@ -159,7 +160,7 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                 for (Player player : worldObj.players) {
                     if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
                     player.sendTranslatedChatMessage("event.signalindustries.wrathBeaconActivated");
-                    //player.triggerAchievement(SIAchievements.CHALLENGE);
+                    player.triggerAchievement(SIAchievements.CHALLENGE);
                 }
                 active = true;
                 startWave();

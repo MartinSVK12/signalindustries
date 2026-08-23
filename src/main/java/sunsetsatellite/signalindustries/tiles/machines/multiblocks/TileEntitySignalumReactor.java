@@ -11,6 +11,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.interfaces.IActiveForm;
 import sunsetsatellite.signalindustries.interfaces.IMultiblockPart;
@@ -225,6 +226,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
     public void start() {
         if (getFuel() > 0 && state == State.INACTIVE) {
             state = State.IGNITING;
+			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.REACTOR));
         } else if (state == State.IGNITING || state == State.RUNNING) {
             state = State.INACTIVE;
         }

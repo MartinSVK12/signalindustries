@@ -8,8 +8,10 @@ import net.minecraft.client.render.font.FontRenderer;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
@@ -23,6 +25,7 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.entities.EntityShockwave;
@@ -31,6 +34,7 @@ import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.invs.InventoryPulsar;
+import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.items.base.ItemTiered;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -70,17 +74,23 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
                 CompoundTag data = getItemFromSlot(0, itemstack).getCompound("Data");
                 CompoundTag warpPosition = data.getCompound("position");
                 if (warpPosition.containsKey("x") && warpPosition.containsKey("y") && warpPosition.containsKey("z")) {
+					player.triggerAchievement(SIAchievements.TELEPORT_SUCCESS);
                     if (data.getInteger("dim") != player.dimension) {
+						if(world.dimension.id == SIDimensions.ETERNITY.id){
+							player.triggerAchievement(SIAchievements.FALSE_ETERNITY);
+						}
                         ((IWarpPlayer) player).warp(data.getInteger("dim"));
                     }
                     player.setPos(warpPosition.getInteger("x"), warpPosition.getInteger("y"), warpPosition.getInteger("z"));
                 } else {
+					player.triggerAchievement(SIAchievements.TELEPORT_FAIL);
                     ((IWarpPlayer) player).warp(SIDimensions.ETERNITY.id);
                 }
                 itemstack.getData().getCompound("inventory").getValue().remove(String.valueOf(0));
             } else {
                 world.spawnParticle("signalindustries.shockwave", player.x, player.y - 1, player.z, 0.0, 0.0, 0.0, 0,32,true);
-                if (EnvironmentHelper.isMultiplayerServer() || EnvironmentHelper.isSingleplayerClient()) {
+                player.triggerAchievement(SIAchievements.PULSE);
+				if (EnvironmentHelper.isMultiplayerServer() || EnvironmentHelper.isSingleplayerClient()) {
                     /*AABBd bb = new AABBd(player.x - 5, player.y - 1, player.z - 5, player.x + 5, player.y + 1, player.z + 5);
                     List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, bb);
                     for (Entity entity : list) {
@@ -134,16 +144,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
 
     /*@Override
     public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Font fontRenderer, EntityRendererItem itemRenderer) {
-        ContainerInventory inv = player.inventory;
-        ItemStack pulsar = inv.getCurrentItem();
-        int i = (inv.armorItemInSlot(2) != null && inv.armorItemInSlot(2).getItem() instanceof ItemSignalumPowerHarness) ? height - 128 : height - 64;
-        fontRenderer.drawStringWithShadow("The Pulsar", 4, i += 16, 0xFFFF0000);
-        fontRenderer.drawStringWithShadow("Ability: ", 4, i += 16, 0xFFFFFFFF);
-        fontRenderer.drawStringWithShadow(((ItemPulsar) pulsar.getItem()).getAbility(pulsar), 4 + fontRenderer.getStringWidth("Ability: "), i, 0xFFFF0000);
-        fontRenderer.drawStringWithShadow("Charge: ", 4, i += 10, 0xFFFFFFFF);
-        fontRenderer.drawStringWithShadow(String.valueOf(pulsar.getData().getByte("charge")) + "%", 4 + fontRenderer.getStringWidth("Charge: "), i, pulsar.getData().getByte("charge") >= 100 ? 0xFFFF0000 : 0xFFFFFFFF);
-        fontRenderer.drawStringWithShadow("Energy: ", 4, i += 10, 0xFFFFFFFF);
-        fontRenderer.drawStringWithShadow(String.valueOf(((ItemPulsar) pulsar.getItem()).getFluidStack(0, pulsar).getInteger("amount")), 4 + fontRenderer.getStringWidth("Energy: "), i, 0xFFFF8080);
+
     }
 
     @Override
@@ -192,7 +193,16 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
 
 	@Override
 	public void renderOverlay(HudIngame guiIngame, Player player, int height, int width, int mouseX, int mouseY, Gui gui, FontRenderer fontRenderer, EntityRendererItem itemRenderer) {
-
+		ContainerInventory inv = player.inventory;
+		ItemStack pulsar = inv.getCurrentItem();
+		int i = (inv.armorItemInSlot(HumanArmorShape.CHEST) != null && inv.armorItemInSlot(HumanArmorShape.CHEST).getItem() instanceof ItemSignalumPowerHarness) ? height - 128 : height - 64;
+		gui.drawStringShadow(fontRenderer, "The Pulsar", 4, i += 16, 0xFFFF0000);
+		gui.drawStringShadow(fontRenderer, "Ability: ", 4, i += 16, 0xFFFFFFFF);
+		gui.drawStringShadow(fontRenderer, ((ItemPulsar) pulsar.getItem()).getAbility(pulsar), 4 + fontRenderer.stringWidth("Ability: "), i, 0xFFFF0000);
+		gui.drawStringShadow(fontRenderer, "Charge: ", 4, i += 10, 0xFFFFFFFF);
+		gui.drawStringShadow(fontRenderer, String.valueOf(pulsar.getData().getByte("charge")) + "%", 4 + fontRenderer.stringWidth("Charge: "), i, pulsar.getData().getByte("charge") >= 100 ? 0xFFFF0000 : 0xFFFFFFFF);
+		gui.drawStringShadow(fontRenderer, "Energy: ", 4, i += 10, 0xFFFFFFFF);
+		gui.drawStringShadow(fontRenderer, String.valueOf(((ItemPulsar) pulsar.getItem()).getFluidStack(0, pulsar).getInteger("amount")), 4 + fontRenderer.stringWidth("Energy: "), i, 0xFFFF8080);
 	}
 
 	@Override

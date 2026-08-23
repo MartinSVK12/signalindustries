@@ -1,8 +1,11 @@
 package sunsetsatellite.signalindustries.tiles.base;
 
+import net.minecraft.core.entity.player.Player;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.util.Tier;
+
+import java.util.function.Consumer;
 
 public abstract class TileEntityTiered extends TileEntityWithName {
     public Tier tier = Tier.PROTOTYPE;
@@ -17,4 +20,9 @@ public abstract class TileEntityTiered extends TileEntityWithName {
 			}
         }
     }
+
+	public void doWithNearPlayers(int range, Consumer<Player> action){
+		if(worldObj == null) return;
+		worldObj.getPlayersWithinRange(tilePos.x, tilePos.y, tilePos.z, range).forEach(action);
+	}
 }

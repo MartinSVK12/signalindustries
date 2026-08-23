@@ -106,7 +106,7 @@ public class SIAchievements extends DataInitializer {
 		WARP_ORB = new Achievement(id("warp_orb"), langKey("warpOrb"), SIItems.warpOrb, DIMENSIONAL).registerAchievement();
 		ANCHOR = new Achievement(id("anchor"), langKey("anchor"), SIBlocks.dimensionalAnchor, WARP_ORB).registerAchievement();
 		TELEPORT_SUCCESS = new Achievement(id("teleport_success"), langKey("teleport.success"), Blocks.GRASS_RETRO, ANCHOR).registerAchievement();
-		TELEPORT_FAIL = new Achievement(id("teleport_fail"), langKey("teleport.fail"), SIBlocks.realityFabric, ANCHOR).registerAchievement();
+		TELEPORT_FAIL = new Achievement(id("teleport_fail"), langKey("teleport.fail"), SIBlocks.realityFabric, WARP_ORB).registerAchievement();
 		ETERNITY = new Achievement(id("eternity"), langKey("eternity"), SIBlocks.rootedFabric, TELEPORT_FAIL).registerAchievement();
 		FALSE_ETERNITY = new Achievement(id("false_eternity"), langKey("falseEternity"), SIBlocks.dimensionalShardOre, TELEPORT_FAIL).registerAchievement();
 		BOOST = new Achievement(id("boost"), langKey("boost"), SIBlocks.dilithiumBooster, DILITHIUM).registerAchievement();
