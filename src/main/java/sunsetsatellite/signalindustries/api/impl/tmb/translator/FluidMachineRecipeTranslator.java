@@ -14,7 +14,7 @@ public class FluidMachineRecipeTranslator extends RecipeTranslator<RecipeEntryMa
     }
 
     @Override
-    public boolean isValidInput(ITypedIngredient<?> ingredient) {
+    public <I> boolean isValidInput(ITypedIngredient<I> ingredient) {
         if (ingredient.getType() == VanillaTypes.ITEM_STACK) {
             return Arrays.stream(recipe.getInput()).anyMatch(symbol -> symbol.matches(ingredient.getCastIngredient(VanillaTypes.ITEM_STACK)));
         } else if (ingredient.getType() == TMBFluidPlugin.FLUID_STACK) {
@@ -24,7 +24,7 @@ public class FluidMachineRecipeTranslator extends RecipeTranslator<RecipeEntryMa
     }
 
     @Override
-    public boolean isOutput(ITypedIngredient<?> ingredient) {
+    public <I> boolean isOutput(ITypedIngredient<I> ingredient) {
         if (ingredient.getType() == TMBFluidPlugin.FLUID_STACK) {
             return recipe.getOutput().isFluidEqual(ingredient.getCastIngredient(TMBFluidPlugin.FLUID_STACK));
         }

@@ -29,10 +29,7 @@ import sunsetsatellite.signalindustries.gui.screens.composed.*;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenRedstoneCoverConfig;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenSwitchCoverConfig;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenVoidCoverConfig;
-import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
-import sunsetsatellite.signalindustries.invs.InventoryBackpack;
-import sunsetsatellite.signalindustries.invs.InventoryHarness;
-import sunsetsatellite.signalindustries.invs.InventoryPulsar;
+import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.ScreenPowerSuit;
@@ -140,6 +137,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/ability_module"), new ItemGuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class, ScreenAbilityModule::new));
 		Catalyst.GUIS.register(key("gui/pulsar"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsar.class, ScreenPulsar::new));
 		Catalyst.GUIS.register(key("gui/pulsar_attch"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsarAttachment.class, ScreenPulsarAttachment::new));
+		Catalyst.GUIS.register(key("gui/blueprint"), new ItemGuiEntry<>(InventoryBlueprint.class, MenuBlueprint.class, ScreenBlueprint::new));
 
 		LOGGER.info("Registering options...");
 		for (Field field : SIKeybinds.class.getDeclaredFields()) {

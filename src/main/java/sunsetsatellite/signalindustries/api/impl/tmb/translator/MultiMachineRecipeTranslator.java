@@ -16,7 +16,7 @@ public class MultiMachineRecipeTranslator extends RecipeTranslator<RecipeEntryMa
     }
 
     @Override
-    public boolean isValidInput(ITypedIngredient<?> ingredient) {
+    public <I> boolean isValidInput(ITypedIngredient<I> ingredient) {
         if (ingredient.getType() == VanillaTypes.ITEM_STACK) {
             return Arrays.stream(recipe.getInput()).anyMatch(symbol -> symbol.matches(ingredient.getCastIngredient(VanillaTypes.ITEM_STACK)));
         } else if (ingredient.getType() == TMBFluidPlugin.FLUID_STACK) {
@@ -26,7 +26,7 @@ public class MultiMachineRecipeTranslator extends RecipeTranslator<RecipeEntryMa
     }
 
     @Override
-    public boolean isOutput(ITypedIngredient<?> ingredient) {
+    public <I> boolean isOutput(ITypedIngredient<I> ingredient) {
         if (ingredient.getType() == VanillaTypes.ITEM_STACK) {
             return Arrays.stream(recipe.getOutput())
                     .filter(RecipeOutputStack::isItem)
