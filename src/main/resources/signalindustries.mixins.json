@@ -17,6 +17,7 @@
     "MobMonsterMixin",
     "PlayerMixin",
     "ProjectileArrowMixin",
+    "RegistriesMixin",
     "SlotResultMixin",
     "SpawnerMobsMixin",
     "StatListMixin",

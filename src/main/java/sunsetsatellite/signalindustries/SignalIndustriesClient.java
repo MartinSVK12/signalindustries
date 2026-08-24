@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
@@ -13,8 +14,15 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.Option;
 import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.Dimension;
+import net.minecraft.core.world.generate.CavesLargeFeature;
+import net.minecraft.core.world.type.WorldTypeGroups;
+import net.minecraft.core.world.type.WorldTypes;
+import org.joml.Vector3f;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
@@ -23,12 +31,19 @@ import sunsetsatellite.catalyst.core.util.mp.entry.TileDataGuiEntry;
 import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.dim.WorldTypeFXEternity;
+import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
+import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
+import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorCustom;
+import sunsetsatellite.signalindustries.dim.custom.feature.WorldFeatureOre;
+import sunsetsatellite.signalindustries.dim.custom.generator.ChunkGeneratorClassic;
+import sunsetsatellite.signalindustries.dim.custom.surface.SurfaceGeneratorOverworld;
 import sunsetsatellite.signalindustries.gui.menus.*;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.gui.screens.composed.*;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenRedstoneCoverConfig;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenSwitchCoverConfig;
 import sunsetsatellite.signalindustries.gui.screens.cover.ScreenVoidCoverConfig;
+import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
@@ -50,11 +65,13 @@ import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnect
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
 import turniplabs.halplibe.event.defs.ClientEvents;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.util.dependency.Key;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
@@ -220,5 +237,51 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		});
 		OptionsPages.CONTROLS
 			.withComponent(category);
+	}
+
+	public static ItemStack createTestDimension(){
+		if(EnvironmentHelper.isSingleplayerClient()){
+			int customDimId = 100;
+			ItemStack warpOrb = new ItemStack(SIItems.warpOrb);
+			CompoundTag pos = new CompoundTag();
+			pos.putInt("x", 0);
+			pos.putInt("y", 100);
+			pos.putInt("z", 0);
+			warpOrb.getData().put("position", pos);
+			warpOrb.getData().putInt("dim", customDimId);
+            if (Dimension.getDimensionList().containsKey(customDimId)) {
+                return warpOrb;
+            }
+			CustomDimensionData data = new CustomDimensionData("custom", customDimId);
+			CustomDimensionData.Properties properties = data.properties;
+			properties.empty();
+			properties.worldTypeProperties.fillerBlock(Blocks.STONE);
+			properties.worldTypeProperties.oceanBlocks(Blocks.FLUID_LAVA_FLOWING);
+			properties.worldTypeFX.fogColor = new Vector3f(1,0,1);
+			ChunkGeneratorClassic generator = new ChunkGeneratorClassic(data, new CompoundTag());
+			generator.sg = new SurfaceGeneratorOverworld(data, new CompoundTag());
+			generator.largeFeatures.add(new CavesLargeFeature());
+			properties.chunkGenerator = generator;
+			properties.chunkDecorator = new ChunkDecoratorCustom(data, new CompoundTag());
+			WorldFeatureOre oreFeature = new WorldFeatureOre(data, new CompoundTag());
+			oreFeature.oreBlock = Blocks.ORE_DIAMOND_STONE;
+			oreFeature.oreAmount = 32;
+			oreFeature.heightModifier = 1;
+			oreFeature.baseRepeatAmount = 4;
+			((ChunkDecoratorCustom) properties.chunkDecorator).features.add(oreFeature);
+			data.reset();
+			DimensionCustom dim = new DimensionCustom(data);
+			dim.id = customDimId;
+			Map<Integer, Dimension> list = ((IMutableDimensionListAccess) Dimension.OVERWORLD).getMutableDimensionList();
+			list.put(customDimId, dim);
+			WorldTypes.register(key("custom/custom"), data.getWorldType());
+			WorldTypeFXDispatcher.getInstance().addDispatch(data.getWorldType(), properties.worldTypeFX);
+			for (WorldTypeGroups.Group group : WorldTypeGroups.GROUPS) {
+				group.with(dim, data.getWorldType());
+			}
+			//Dimension.registerDimension(customDimId, dim);
+			return warpOrb;
+		}
+		return null;
 	}
 }

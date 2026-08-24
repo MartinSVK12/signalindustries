@@ -79,6 +79,7 @@ public class SIItems extends DataInitializer {
 	public static Item evilEye;
 	public static Item infernalEye;
 	public static Item dimensionalShard;
+	public static Item dimensionalFragment;
 	public static Item warpOrb;
 	public static ItemArmorTiered signalumPrototypeHarness;
 	public static ItemArmorTiered signalumPrototypeHarnessGoggles;
@@ -272,6 +273,14 @@ public class SIItems extends DataInitializer {
 			"infinite_signalum_crystal")
 			.setMaxStackSize(1);
 
+		dimensionalFragment = customItem(() ->
+				new ItemDimFragment(
+					"dimensionalFragment",
+					key("item/dimensional_fragment"),
+					item("dimensionalFragment")
+				),
+			"dimensional_fragment");
+
 		portableWorkbench = (ItemPortableWorkbench) customItem(() -> new ItemPortableWorkbench(
 				"basic.portableWorkbench",
 				key("item/portable_workbench"),
@@ -415,6 +424,8 @@ public class SIItems extends DataInitializer {
 				false, 8),
 			"krowka"
 		);
+
+		dimensionMaker = customItem(() -> new ItemDimensionMaker("dimensionMaker", key("item/dimension_maker"), item("dimensionMaker")), "dimension_maker").setMaxStackSize(1);
 
 		List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).toList();
 

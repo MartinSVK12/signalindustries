@@ -23,6 +23,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.dim.custom.BiomeCustom;
+import sunsetsatellite.signalindustries.dim.custom.CustomDimensionData;
+import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
+import sunsetsatellite.signalindustries.dim.custom.WorldTypeWrapper;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IMutableDimensionListAccess;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
@@ -76,38 +80,40 @@ public class MinecraftMixin {
 		try {
 			Map<Integer, Dimension> dimensionMap = ((IMutableDimensionListAccess) Dimension.OVERWORLD).getMutableDimensionList();
 			//todo: might not be the best idea, probably remove them when player exists the level (with the save & quit button)
-			/*dimensionMap.forEach((id, dim) -> {
+			dimensionMap.forEach((id, dim) -> {
 				if (dim instanceof DimensionCustom) {
 					for (BiomeCustom biome : ((DimensionCustom) dim).data.biomes) {
 						Registries.BIOMES.unregister(SignalIndustries.key(biome.translationKey.replace("biome.","")));
 					}
 				}
 			});
-			dimensionMap.entrySet().removeIf(entry -> entry.getValue() instanceof DimensionCustom);*/
+			dimensionMap.entrySet().removeIf(entry -> entry.getValue() instanceof DimensionCustom);
 
-			/*Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
+			Iterator<WorldType> iter = Registries.WORLD_TYPES.iterator();
 			while (iter.hasNext()) {
 				WorldType worldType = iter.next();
 				if (worldType instanceof WorldTypeWrapper) {
 					iter.remove();
 				}
-			}*/
+			}
 			File saveFile = new File(this.mcDataDir, "saves/" + worldDirName);
 			File worldLevelDat = new File(saveFile, "level.dat");
 			if (worldLevelDat.exists()) {
 				CompoundTag nbt = NbtIo.readCompressed(Files.newInputStream(worldLevelDat.toPath())).getCompound("Data");
 				CompoundTag dimensionsTag = nbt.getCompound("CustomDimensions");
 				SignalIndustries.worldSavedIDs = nbt.containsKey("SISavedIDs");
-				/*for (Tag<?> tag : dimensionsTag.getValues()) {
-					if (tag instanceof CompoundTag) {
-						CompoundTag dimTag = (CompoundTag) tag;
+				for (Tag<?> tag : dimensionsTag.getValues()) {
+					if (tag instanceof CompoundTag dimTag) {
 						CustomDimensionData data = new CustomDimensionData(dimTag);
 						WorldTypes.register(SignalIndustries.key("custom/" + data.name), data.getWorldType());
 						WorldTypeFXDispatcher.getInstance().addDispatch(data.getWorldType(), data.properties.worldTypeFX);
 						DimensionCustom dim = new DimensionCustom(data);
+						for (WorldTypeGroups.Group group : WorldTypeGroups.GROUPS) {
+							group.with(dim, data.getWorldType());
+						}
 						Dimension.registerDimension(data.id, dim);
 					}
-				}*/
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

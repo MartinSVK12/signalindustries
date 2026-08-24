@@ -1,7 +1,11 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
+import net.minecraft.core.block.Block;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.save.*;
 import org.spongepowered.asm.mixin.Final;
@@ -12,11 +16,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
+import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.dim.custom.DimensionCustom;
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Mixin(value = LevelStorageBase.class, remap = false)
@@ -81,28 +92,29 @@ public abstract class LevelStorageBaseMixin implements LevelStorage {
         //dimensionDataTag.putCompound("ChunkLoaders", chunkloaderNbt);
     }
 
-    /*@Inject(method = "saveLevelDataAndPlayerData", at = @At(value = "NEW", target = "()Lcom/mojang/nbt/tags/CompoundTag;"))
-    public void saveLevelDataAndPlayerData(LevelData levelData, List<Player> playerList, CallbackInfo ci, @Local CompoundTag dataTag) {
+	@Inject(method = "saveLevelDataAndPlayerData", at = @At(value = "NEW", target = "()Lcom/mojang/nbt/tags/CompoundTag;", ordinal = 1))
+    public void saveLevelDataAndPlayerData(LevelData levelData, List<Player> playerList, CallbackInfo ci, @Local(name = "dataTag") CompoundTag dataTag) {
         CompoundTag dimensionsTag = new CompoundTag();
-        for (Map.Entry<Integer, Dimension> dimensionEntry : Dimension.getDimensionList().entrySet()) {
+        for (Map.Entry<Integer, Dimension> dimensionEntry : Dimension.getDimensionList().int2ObjectEntrySet()) {
             Dimension d = dimensionEntry.getValue();
             CompoundTag dimensionTag = new CompoundTag();
-            if (d instanceof DimensionCustom) {
-                DimensionCustom dim = (DimensionCustom) d;
-                dim.data.writeToNbt(dimensionTag);
+            if (d instanceof DimensionCustom dim) {
+				dim.data.writeToNbt(dimensionTag);
                 dimensionsTag.putCompound(String.valueOf(dimensionEntry.getKey()), dimensionTag);
             }
         }
-        if(!SignalIndustries.worlsSavedIDs){
-            SignalIndustries.worlsSavedIDs = true;
+        if(!SignalIndustries.worldSavedIDs){
+            SignalIndustries.worldSavedIDs = true;
             CompoundTag nbt = new CompoundTag();
             try {
-                List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
-                List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
+                List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).toList();
+                List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> Item.class.isAssignableFrom(F.getType())).toList();
                 for (Field field : itemFields) {
+					if(field.get(null) == null) continue;
                     nbt.putInt(field.getName(),((Item) field.get(null)).id);
                 }
                 for (Field field : blockFields) {
+					if(field.get(null) == null) continue;
                     nbt.putInt(field.getName(),((Block<?>) field.get(null)).id());
                 }
             } catch (Exception e){
@@ -112,5 +124,5 @@ public abstract class LevelStorageBaseMixin implements LevelStorage {
             dataTag.putCompound("SISavedIDs", nbt);
         }
         dataTag.putCompound("CustomDimensions", dimensionsTag);
-    }*/
+    }
 }
