@@ -28,6 +28,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     public int progressTicks = 0;
     public int progressMaxTicks = 200;
     public float speedMultiplier = 1;
+	public float baseSpeedMultiplier = 1;
     public float yield = 1;
     public IO preview = IO.NONE;
     public TickTimer IOPreviewTimer = new TickTimer(this, this::disableIOPreview, 20, false);
@@ -73,7 +74,7 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
     }
 
     public void applyModifiers() {
-        speedMultiplier = 1;
+        speedMultiplier = baseSpeedMultiplier;
         yield = 1;
         for (Direction dir : Direction.values()) {
             TileEntity tile = dir.getTileEntity(worldObj, this);
@@ -83,24 +84,24 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
                     Direction side = Direction.getDirectionFromSide(meta);
                     if (side.getOpposite() == dir) {
                         if (((IBooster) tile).getTier() == Tier.BASIC) {
-                            speedMultiplier = 1.5f;
+                            speedMultiplier = baseSpeedMultiplier * 1.5f;
                             //yield = 1.05f;
                             if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
-                                speedMultiplier = 1.75f;
+                                speedMultiplier = baseSpeedMultiplier * 1.75f;
                                 //yield = 1.15f;
                             }
                         } else if (((IBooster) tile).getTier() == Tier.REINFORCED) {
-                            speedMultiplier = 2;
+                            speedMultiplier = baseSpeedMultiplier * 2;
                             //yield = 1.25f;
                             if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
-                                speedMultiplier = 2.5f;
+                                speedMultiplier = baseSpeedMultiplier * 2.5f;
                                 //yield = 1.35f;
                             }
                         } else if (((IBooster) tile).getTier() == Tier.AWAKENED) {
-                            speedMultiplier = 3;
+                            speedMultiplier = baseSpeedMultiplier * 3;
                             //yield = 2f;
                             if (((IBooster) tile).hasCover(side, DilithiumLensCover.class)) {
-                                speedMultiplier = 4f;
+                                speedMultiplier = baseSpeedMultiplier * 4f;
                                 //yield = 2.1f;
                             }
                         }

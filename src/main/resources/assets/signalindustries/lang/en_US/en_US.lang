@@ -475,6 +475,8 @@ tile.signalindustries.basic.trommel.name=Basic Trommel
 tile.signalindustries.basic.trommel.desc=Like the regular trommel but powered with <Signaling Energy> and faster.
 tile.signalindustries.reinforced.trommel.name=Reinforced Trommel
 tile.signalindustries.reinforced.trommel.desc=Like the regular trommel but powered with <Signaling Energy> and a lot faster.
+tile.signalindustries.awakened.trommel.name=Awakened Mega Trommel
+tile.signalindustries.awakened.trommel.desc=Comically large trommel, processes many items at absurd speeds.
 
 tile.signalindustries.basic.assembler.name=Basic Assembler
 tile.signalindustries.basic.assembler.desc=Crafts items, automatically!
@@ -945,6 +947,8 @@ achievement.signalindustries.gate=Thinking with Portals
 achievement.signalindustries.gate.desc=Construct a Warp Gate to link any two points in space permanently.
 achievement.signalindustries.encapsulator=WorldEdit
 achievement.signalindustries.encapsulator.desc=Cut out a piece of space with a Spatial Encapsulator.
+achievement.signalindustries.megaTrommel=Only A Spoonful
+achievement.signalindustries.megaTrommel.desc=Build the Mega Trommel and bask in its glory.
 achievement.signalindustries.recreator=Domain Expansion
 achievement.signalindustries.recreator.desc=Recreate space encapsulated in a Goldprint.
 achievement.signalindustries.altar=Deus Ex Machina
@@ -1028,6 +1032,7 @@ multiblock.signalindustries.wakingInfuser.name=Waking Infuser
 multiblock.signalindustries.laserDrill.name=Laser Drill
 multiblock.signalindustries.greenhouse.name=Greenhouse
 multiblock.signalindustries.altarOfCreation.name=Altar of Creation
+multiblock.signalindustries.megaTrommel.name=Mega Trommel
 
 gui.options.page.controls.category.signalindustries=Signal Industries
 gui.options.page.signalindustries=Signal Industries
@@ -1367,6 +1372,7 @@ container.signalindustries.bonsai.name=Bonsai Pot
 container.signalindustries.encapsulator.name=Spatial Encapsulator
 container.signalindustries.blueprint.name=Blueprint
 container.signalindustries.trommel.name=Trommel
+container.signalindustries.megaTrommel.name=Mega Trommel
 
 entity.signalindustries.volatileCrystal=Volatile Crystal
 entity.signalindustries.fallingMeteor=Falling Meteor

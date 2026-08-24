@@ -146,6 +146,7 @@ public class SIBlocks extends DataInitializer {
 
 	public static Block<? extends BlockLogic> basicTrommel;
 	public static Block<? extends BlockLogic> reinforcedTrommel;
+	public static Block<? extends BlockLogic> awakenedTrommel;
 
 	public static Block<? extends BlockLogic> prototypeStorageContainer;
 	public static Block<? extends BlockLogic> infiniteStorageContainer;
@@ -208,6 +209,11 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> reinforcedFluidOutputHatch;
 	public static Block<? extends BlockLogic> reinforcedItemInputBus;
 	public static Block<? extends BlockLogic> reinforcedItemOutputBus;
+
+	public static Block<? extends BlockLogic> awakenedFluidInputHatch;
+	public static Block<? extends BlockLogic> awakenedFluidOutputHatch;
+	public static Block<? extends BlockLogic> awakenedItemInputBus;
+	public static Block<? extends BlockLogic> awakenedItemOutputBus;
 
 	public static Block<? extends BlockLogic> basicEnergyInjector;
 	public static Block<? extends BlockLogic> reinforcedEnergyInjector;
@@ -1090,6 +1096,19 @@ public class SIBlocks extends DataInitializer {
 				.withActiveSouthTexture("reinforced_trommel_front_active")
 		);
 
+		awakenedTrommel = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.trommel",
+			"awakened_trommel",
+			"awakenedTrommel",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityMegaTrommel::new, "mega_trommel"),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultNorthTexture("awakened_trommel")
+				.withDefaultSouthTexture("awakened_trommel")
+				.withActiveNorthTexture("awakened_trommel_active")
+				.withActiveSouthTexture("awakened_trommel_active")
+		);
+
 		basicBonsai = customBlock(defaultBuilder(Tier.BASIC),
 			"basic.bonsai",
 			"basic_bonsai",
@@ -1411,6 +1430,46 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.REINFORCED, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.OUTPUT),
 			new MachineTextures(Tier.REINFORCED)
 				.withDefaultTexture("reinforced_output_bus")
+		);
+
+		awakenedFluidInputHatch = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.fluidInputHatch",
+			"awakened_fluid_input_hatch",
+			"awakenedFluidInputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultTexture("awakened_fluid_input_hatch")
+		);
+
+		awakenedFluidOutputHatch = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.fluidOutputHatch",
+			"awakened_fluid_output_hatch",
+			"awakenedFluidOutputHatch",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityFluidHatch::new, "fluid_hatch", MultiblockPart.Type.FLUID, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultTexture("awakened_fluid_output_hatch")
+		);
+
+		awakenedItemInputBus = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.itemInputBus",
+			"awakened_item_input_bus",
+			"awakenedItemInputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.INPUT),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultTexture("awakened_input_bus")
+		);
+
+		awakenedItemOutputBus = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.itemOutputBus",
+			"awakened_item_output_bus",
+			"awakenedItemOutputBus",
+			3,
+			(block) -> new BlockLogicMultiblockPart(block, Materials.METAL, Tier.AWAKENED, TileEntityItemBus::new, "item_bus", MultiblockPart.Type.ITEM, MultiblockPart.IO.OUTPUT),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultTexture("awakened_output_bus")
 		);
 
 		basicEnergyConnector = customBlock(defaultBuilder(Tier.BASIC),

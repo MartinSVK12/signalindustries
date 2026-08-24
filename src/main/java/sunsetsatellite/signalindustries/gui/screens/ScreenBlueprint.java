@@ -70,7 +70,7 @@ public class ScreenBlueprint extends ScreenFluid implements IExtendedScreenDraw 
 		GLRenderer.modelM4f().translate(80,80,900f);
         //.glEnable(.GL_DEPTH_TEST);
 
-        float size = 7;
+        float size = 5;
 
         rotation += 0.1f;
         if (rotation > 360) {
@@ -87,12 +87,13 @@ public class ScreenBlueprint extends ScreenFluid implements IExtendedScreenDraw 
         if (structure.getOrigin() != null) {
             blocks.add(structure.getOrigin());
         }
+
         r.render(blocks, 1);
 		GLRenderer.popFrame();
 		Lighting.disable();
 
-        int color = 0xFFFFFFFF;
-        drawStringCenteredShadow(fontRenderer, Catalyst.translateNameKey("container.signalindustries.blueprint"), 128, 6, color);
+		int color = 0xFFFFFFFF;
+		drawStringCenteredShadow(fontRenderer, Catalyst.translateNameKey("container.signalindustries.blueprint"), 128, 6, color);
 		drawStringCenteredShadow(fontRenderer, blocks.size() + " blocks.", 128, 150, color);
 
         FakeItemElement guiRenderFakeItem = new FakeItemElement(mc);

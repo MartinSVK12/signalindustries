@@ -55,6 +55,12 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
     public RecipeEntrySI<?, ?, RecipeProperties> currentRecipe;
     public Random random = new Random();
 
+	public List<BlockInstance> cachedSubstitutions = new ArrayList<>();
+	public List<BlockInstance> cachedBlocks = new ArrayList<>();
+	public List<BlockInstance> cachedTEs = new ArrayList<>();
+	public Direction cachedDirection;
+	public Vec3i cachedPosition;
+
     public int parallel = 1;
     public int baseParallel = 1;
 
@@ -81,8 +87,17 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         fluidOutput = null;
         energy = null;
         if (multiblock.isValid()) {
-            Direction dir = Direction.getDirectionFromSide(getBlockMeta());
-            ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj, new Vec3i(tilePos), dir);
+			Direction dir = Direction.getDirectionFromSide(getBlockMeta());
+			if (multiblock.data != null) {
+				if(dir != cachedDirection || !getPosition().equals(cachedPosition)){
+					cachedSubstitutions = multiblock.data.getSubstitutions(new Vec3i(tilePos), dir);
+					cachedBlocks = multiblock.data.getBlocks(new Vec3i(tilePos), dir);
+					cachedTEs = multiblock.data.getTileEntities(worldObj, new Vec3i(tilePos), dir);
+					cachedDirection = dir;
+					cachedPosition = new Vec3i(tilePos);
+				}
+	        }
+            List<BlockInstance> tileEntities = cachedTEs;
             for (BlockInstance tileEntity : tileEntities) {
                 IMultiblockPartBlock multiblockPart = Catalyst.blockLogic(tileEntity.block, IMultiblockPartBlock.class);
                 if (tileEntity.tile instanceof IMultiblockPart && multiblockPart instanceof ITiered) {
@@ -111,7 +126,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 }
             }
             parallel = baseParallel;
-            ArrayList<BlockInstance> extraBlocks = multiblock.data.getSubstitutions(new Vec3i(tilePos), dir);
+            List<BlockInstance> extraBlocks = cachedSubstitutions;
             for (BlockInstance extraBlock : extraBlocks) {
                 if (worldObj != null && extraBlock.exists(worldObj)) {
                     BlockLogicParallelProcessor multiblockPart = Catalyst.blockLogic(extraBlock.block, BlockLogicParallelProcessor.class);
@@ -144,21 +159,28 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 work();
             }
 
+			int maxChange = Integer.MAX_VALUE;
             if (isBurning()) {
-                ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(tilePos), dir);
+                List<BlockInstance> blocks = cachedBlocks;
+				int i = 0;
                 for (BlockInstance structBlock : blocks) {
+					if(i >= maxChange) break;
                     if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) != 1) {
-                            worldObj.setBlockData(structBlock.pos.tilePos(), 1);
+                            worldObj.setBlockDataNotify(structBlock.pos.tilePos(), 1);
+							i++;
                         }
                     }
                 }
             } else {
-                ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(tilePos), dir);
+				int i = 0;
+                List<BlockInstance> blocks = cachedBlocks;
                 for (BlockInstance structBlock : blocks) {
+					if(i >= maxChange) break;
                     if (structBlock.block == SIBlocks.reinforcedCasing2 || structBlock.block == SIBlocks.awakenedSocketCasing || structBlock.block == SIBlocks.awakenedCasing2) {
                         if (worldObj != null && structBlock.pos.getBlockMetadata(worldObj) == 1) {
-                            worldObj.setBlockData(structBlock.pos.tilePos(), 0);
+                            worldObj.setBlockDataNotify(structBlock.pos.tilePos(), 0);
+							i++;
                         }
                     }
                 }

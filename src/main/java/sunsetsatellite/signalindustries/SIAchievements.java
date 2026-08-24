@@ -65,6 +65,7 @@ public class SIAchievements extends DataInitializer {
     public static Achievement WAKING3;
     public static Achievement WAKING4;
     public static Achievement GATE;
+	public static Achievement MEGA_TROMMEL;
 
     public static Achievement AWAKENED;
     public static Achievement ENDGAME;
@@ -125,6 +126,7 @@ public class SIAchievements extends DataInitializer {
 		AWAKENED = new Achievement(id("awakened"), langKey("awakened"), SIItems.awakenedSignalumCrystal, RISING_ABOVE).setType(Achievement.TYPE_SPECIAL).registerAchievement();
 		ENDGAME = new Achievement(id("endgame"), langKey("endgame"), SIBlocks.awakenedMachineCore, AWAKENED).setType(Achievement.TYPE_SPECIAL).registerAchievement();
 		GATE = new Achievement(id("gate"), langKey("gate"), SIBlocks.warpGate, ENDGAME).registerAchievement();
+		MEGA_TROMMEL = new Achievement(id("mega_trommel"), langKey("megaTrommel"), SIBlocks.awakenedTrommel, ENDGAME).registerAchievement();
 
 		setInitialized(true);
     }
@@ -184,6 +186,7 @@ public class SIAchievements extends DataInitializer {
 		SIGNAL_INDUSTRIES.addAchievement(AWAKENED, 9, 8);
 		SIGNAL_INDUSTRIES.addAchievement(ENDGAME, 9, 10);
 		SIGNAL_INDUSTRIES.addAchievement(GATE, 10, 12);
+		SIGNAL_INDUSTRIES.addAchievement(MEGA_TROMMEL, 8, 12);
 
 		AchievementPages.register(SIGNAL_INDUSTRIES);
 	}

@@ -157,6 +157,7 @@ public class SignalIndustries implements ModInitializer {
 		TileEntityDispatcher.addMapping(TileEntitySITrommel.class, id("trommel"));
 		TileEntityDispatcher.addMapping(TileEntityRedstoneClock.class, id("redstone_clock"));
 		TileEntityDispatcher.addMapping(TileEntityHeatPump.class, id("heat_pump"));
+		TileEntityDispatcher.addMapping(TileEntityMegaTrommel.class, id("mega_trommel"));
 
 		LOGGER.info("Registering entities...");
 		EntityDispatcher.getInstance().addMapping(ProjectileCrystal.class, id("volatile_crystal"), ProjectileCrystal::new, "entity.signalindustries.volatileCrystal");

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
@@ -112,7 +113,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
             if(itemContents[2] != null && itemContents[2].getItem() instanceof ItemPositionChip){
                 ItemPositionChip chip = (ItemPositionChip) itemContents[2].getItem();
                 Vec3i position = chip.getPosition(itemContents[2]);
-                if(position != null && worldObj.getBlock(position.x, position.y, position.z) != null) {
+                if(position != null && worldObj.getBlock(position.x, position.y, position.z) != Blocks.AIR) {
                     origin = new BlockInstance(position, worldObj);
                 }
             }
@@ -180,11 +181,8 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         worldObj.markBlockDirty(tilePos);
         extractFluids();
         if (!canProcess() && state != State.NONE) state = State.NONE;
-        Block<?> block = getBlock();
-        if (block != null) {
-            if (!disabled) work();
-        }
-        Direction side = Direction.getDirectionFromSide(getBlockMeta()).getOpposite();
+		if (!disabled) work();
+		Direction side = Direction.getDirectionFromSide(getBlockMeta()).getOpposite();
         if (heightMarker == null || widthMarker == null || depthMarker == null || originMarker == null) {
             Block<?> originMarker = side.getBlock(worldObj, this);
             if (originMarker == SIBlocks.basicMarker) {
@@ -267,10 +265,9 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
                 int centerY = startY + centerOffsetY;
                 int centerZ = startZ + centerOffsetZ;
 
-                if(itemContents[2] != null && itemContents[2].getItem() instanceof ItemPositionChip){
-                    ItemPositionChip chip = (ItemPositionChip) itemContents[2].getItem();
-                    Vec3i position = chip.getPosition(itemContents[2]);
-                    if(position != null && worldObj.getBlock(position.x, position.y, position.z) != null) {
+                if(itemContents[2] != null && itemContents[2].getItem() instanceof ItemPositionChip chip){
+					Vec3i position = chip.getPosition(itemContents[2]);
+                    if(position != null && worldObj.getBlock(position.x, position.y, position.z) != Blocks.AIR) {
                         centerX = position.x;
                         centerY = position.y;
                         centerZ = position.z;
@@ -282,7 +279,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
                 for (int i = startX; i < endX; i++) {
                     for (int j = startY; j < endY; j++) {
                         for (int k = startZ; k < endZ; k++) {
-                            if (worldObj.getBlock(i, j, k) == null) continue;
+                            if (worldObj.getBlock(i, j, k) == Blocks.AIR) continue;
                             if (worldObj.getBlock(i, j, k).getHardness() == -1) continue;
 
                             structure.add(new BlockInstance(worldObj.getBlock(i, j, k), new Vec3i(i - centerX, j - centerY, k - centerZ), worldObj.getBlockMetadata(i, j, k), worldObj.getTileEntity(i, j, k)));

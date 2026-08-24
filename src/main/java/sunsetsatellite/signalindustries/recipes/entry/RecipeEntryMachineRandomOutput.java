@@ -145,7 +145,7 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
             InventoryWrapper wrapper = new InventoryWrapper(multiblock.itemInput);
             for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
                 ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
-                if (stack.isStackEqual(remainingRecipeStack)) {
+                if (stack != null && stack.isStackEqual(remainingRecipeStack)) {
                     if (stack.getItem().hasContainerItem() && !getData().consumeContainers) {
                         wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
                     }

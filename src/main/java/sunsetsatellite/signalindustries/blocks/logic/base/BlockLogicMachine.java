@@ -55,6 +55,9 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
 					if(multiblock.getMultiblock().data == SIMultiblocks.warpGate) {
 						player.triggerAchievement(SIAchievements.GATE);
 					}
+					if(multiblock.getMultiblock().data == SIMultiblocks.megaTrommel) {
+						player.triggerAchievement(SIAchievements.MEGA_TROMMEL);
+					}
 					if(multiblock.getMultiblock().data instanceof SIMultiblock siMultiblock){
 						if(siMultiblock.tier.ordinal() >= Tier.REINFORCED.ordinal()){
 							player.triggerAchievement(SIAchievements.HORIZONS);

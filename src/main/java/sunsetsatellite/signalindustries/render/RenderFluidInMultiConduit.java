@@ -25,6 +25,7 @@ import sunsetsatellite.catalyst.core.util.conduit.IConduitBlock;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SIKeybinds;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicMultiConduit;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 
@@ -48,6 +49,9 @@ public class RenderFluidInMultiConduit extends TileEntityRenderer<TileEntityMult
 
 	@Override
 	public void doRender(TessellatorGeneral tessellator, TileEntityMultiConduit tile, double x, double y, double z, float partialTick) {
+		if (!SIKeybinds.renderFluidInsideConduits.value) {
+			return;
+		}
 		Vec3i pos = new Vec3i(tile.tilePos);
 		boolean split = false;
 		for (Direction dir : Direction.values()) {

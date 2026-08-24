@@ -93,6 +93,7 @@ public class RenderReactor extends RenderMultiblock {
 					}
 				}
 				if (!(stack.getItem() instanceof ItemFuelCell)) continue;
+				if(cellPositions.get(dir) == null) continue;
 				drawFuelCell(cellPositions.get(dir)[i], stack, tessellator);
 			}
 		}
