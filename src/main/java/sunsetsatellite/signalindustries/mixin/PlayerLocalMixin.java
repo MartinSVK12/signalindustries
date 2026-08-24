@@ -65,6 +65,7 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 		if (powerSuit == null) {
 			powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object) this);
 			triggerAchievement(SIAchievements.POWER_SUIT);
+			powerSuitData = null;
 		} else {
 			powerSuit.tick();
 		}

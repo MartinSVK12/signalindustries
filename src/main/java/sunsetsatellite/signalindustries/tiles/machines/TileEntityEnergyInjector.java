@@ -1,15 +1,21 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
+import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
+import sunsetsatellite.signalindustries.util.Tier;
 
 public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
 
     public int injectSpeed = 5;
+	public boolean isInjecting = false;
 
     public TileEntityEnergyInjector() {
         itemContents = new ItemStack[1];
@@ -55,12 +61,14 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
         if (getFluidInSlot(0) != null
                 && getFluidInSlot(0).amount >= transferSpeed
                 && stack != null
-                && (stack.getItem() instanceof IItemFluidContainer || stack.getItem() instanceof IInjectable)) {
+                && (stack.getItem() instanceof IItemFluidContainer || stack.getItem() instanceof IInjectable || isInjecting)) {
             if (stack.getItem() instanceof IItemFluidContainer) {
                 return ((IItemFluidContainer) stack.getItem()).canFill(stack);
-            } else {
+            } else if(stack.getItem() instanceof IInjectable) {
                 return ((IInjectable) stack.getItem()).canFill(stack);
-            }
+            } else {
+				return true;
+			}
         } else return false;
     }
 
@@ -68,4 +76,41 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
     public String getNameTranslationKey() {
         return "container.signalindustries.energyInjector";
     }
+
+	public void onEntityCollision(@NotNull Entity entity) {
+		if (tier != Tier.REINFORCED) {
+			return;
+		}
+		if(entity instanceof Player player){
+			for (ItemStack stack : player.inventory.armorInventory) {
+				if(getFluidInSlot(0) != null && getFluidInSlot(0).amount >= transferSpeed){
+					if(stack != null && stack.getItem() instanceof IInjectable injectable){
+						if(injectable.canFill(stack)){
+							((IInjectable) stack.getItem()).fill(getFluidInSlot(0), stack, this, transferSpeed);
+							isInjecting = true;
+						}
+					}
+				}
+			}
+			for (ItemStack stack : player.inventory.mainInventory) {
+				if(getFluidInSlot(0) != null && getFluidInSlot(0).amount >= transferSpeed){
+					if(stack != null && stack.getItem() instanceof IInjectable injectable){
+						if(injectable.canFill(stack)){
+							((IInjectable) stack.getItem()).fill(getFluidInSlot(0), stack, this, transferSpeed);
+							isInjecting = true;
+						}
+					} else if (stack != null && stack.getItem() instanceof IItemFluidContainer fluidContainer) {
+						if(fluidContainer.canFill(stack)){
+							((IItemFluidContainer) stack.getItem()).fill(getFluidInSlot(0), stack, this, transferSpeed);
+							isInjecting = true;
+						}
+					}
+				}
+			}
+			if(((IPlayerPowerSuit<?>) player).getPowerSuit() != null){
+				((IPlayerPowerSuit<?>) player).getPowerSuit().reload();
+			}
+		}
+		isInjecting = false;
+	}
 }

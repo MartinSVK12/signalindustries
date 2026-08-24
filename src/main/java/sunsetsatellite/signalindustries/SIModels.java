@@ -68,6 +68,8 @@ public class SIModels {
 		dispatcher.addDispatch(ashenTreeSapling, new BlockModelCrossedSquares<>(ashenTreeSapling).setAllTextures(blockTextures.get(ashenTreeSapling).defaultTextures.get(Side.BOTTOM)));
 
 		dispatcher.addDispatch(basicEnergyInjector, new BlockModelGeneric<>(basicEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_energy_injector")));
+		dispatcher.addDispatch(reinforcedEnergyInjector, new BlockModelGeneric<>(reinforcedEnergyInjector, BlockModelDispatcher.loadDataModel("signalindustries:block/reinforced_energy_injector")));
+
 		dispatcher.addDispatch(basicHeatPump, new BlockModelHeatPump(basicHeatPump, blockTextures.get(basicHeatPump),
 			blockTextures.get(basicHeatPump).copy()
 				.withActiveTopTexture("basic_heat_pump_top_freezing_active")

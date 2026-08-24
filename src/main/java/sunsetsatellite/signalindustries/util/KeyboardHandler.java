@@ -65,15 +65,42 @@ public class KeyboardHandler {
                                 ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.X3_UNSAFE);
                                 break;
                             case X3_UNSAFE:
-                                ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
+                                ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.DISASSEMBLE);
                                 break;
+							case DISASSEMBLE:
+								((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
+								break;
                         }
                         mode = ((ItemSignalumDrill) SIItems.reinforcedSignalumDrill).getMode(mc.thePlayer.getCurrentEquippedItem());
                         mc.hudIngame.addChatMessage("Mode switched to: " + mode);
-                        if (EnvironmentHelper.isClientWorld()) {
+						if(mode == ItemSignalumDrill.DrillMode.DISASSEMBLE){
+							mc.hudIngame.addChatMessage("Disassembling mode activated! Press Shift+Right Click to disassemble this drill.");
+							mc.hudIngame.addChatMessage("Any remaining energy will be lost!");
+						}
+                        if (EnvironmentHelper.isMultiplayerClient()) {
                             NetworkHandler.sendToServer(new NetworkMessageDrillModeChange(mode));
                         }
                     }
+					if (mc.thePlayer.getCurrentEquippedItem().getItem().equals(SIItems.basicSignalumDrill)) {
+						ItemSignalumDrill.DrillMode mode = ((ItemSignalumDrill) SIItems.basicSignalumDrill).getMode(mc.thePlayer.getCurrentEquippedItem());
+						switch (mode) {
+							case NORMAL:
+								((ItemSignalumDrill) SIItems.basicSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.DISASSEMBLE);
+								break;
+							case DISASSEMBLE:
+								((ItemSignalumDrill) SIItems.basicSignalumDrill).setMode(mc.thePlayer.getCurrentEquippedItem(), ItemSignalumDrill.DrillMode.NORMAL);
+								break;
+						}
+						mode = ((ItemSignalumDrill) SIItems.basicSignalumDrill).getMode(mc.thePlayer.getCurrentEquippedItem());
+						mc.hudIngame.addChatMessage("Mode switched to: " + mode);
+						if(mode == ItemSignalumDrill.DrillMode.DISASSEMBLE){
+							mc.hudIngame.addChatMessage("Disassembling mode activated! Press Shift+Right Click to disassemble this drill.");
+							mc.hudIngame.addChatMessage("Any remaining energy will be lost!");
+						}
+						if (EnvironmentHelper.isMultiplayerClient()) {
+							NetworkHandler.sendToServer(new NetworkMessageDrillModeChange(mode));
+						}
+					}
                 }
             }
             if (openSuitKey.isPressed()) {

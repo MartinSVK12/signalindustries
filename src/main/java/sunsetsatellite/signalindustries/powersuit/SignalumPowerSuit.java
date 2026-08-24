@@ -290,6 +290,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
     }
 
+	@Override
     public void reload() {
         if (player.inventory.armorItemInSlot(HEAD) != null
                 && player.inventory.armorItemInSlot(CHEST) != null

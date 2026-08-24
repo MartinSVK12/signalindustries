@@ -137,6 +137,7 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
         return false;
     }
 
+	@Override
     public void reload() {
         helmet = new InventoryPowerSuit(player.inventory.armorItemInSlot(HumanArmorShape.HEAD));
         chestplate = new InventoryPowerSuit(player.inventory.armorItemInSlot(HumanArmorShape.CHEST));

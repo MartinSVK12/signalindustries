@@ -210,6 +210,7 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> reinforcedItemOutputBus;
 
 	public static Block<? extends BlockLogic> basicEnergyInjector;
+	public static Block<? extends BlockLogic> reinforcedEnergyInjector;
 
 	public static Block<? extends BlockLogic> basicSignalumDynamo;
 
@@ -958,9 +959,19 @@ public class SIBlocks extends DataInitializer {
 			"basic_energy_injector",
 			"basicEnergyInjector",
 			3,
-			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityEnergyInjector::new, "energy_injector").setNonSolid(),
+			(block) -> new BlockLogicInjector(block, Materials.METAL, Tier.BASIC, TileEntityEnergyInjector::new, "energy_injector").setNonSolid(),
 			new MachineTextures()
 				.withDefaultTexture("basic_energy_injector_bottom")
+		);
+
+		reinforcedEnergyInjector = customBlock(defaultBuilder(Tier.REINFORCED),
+			"reinforced.energyInjector",
+			"reinforced_energy_injector",
+			"reinforcedEnergyInjector",
+			3,
+			(block) -> new BlockLogicInjector(block, Materials.METAL, Tier.REINFORCED, TileEntityEnergyInjector::new, "energy_injector").setNonSolid(),
+			new MachineTextures()
+				.withDefaultTexture("reinforced_energy_injector_bottom")
 		);
 
 		basicSignalumDynamo = customBlock(defaultBuilder(Tier.BASIC),

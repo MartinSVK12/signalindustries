@@ -95,7 +95,6 @@ public class MenuPowerSuit extends MenuFluid {
         if (suit != null) {
             InventorySerializer.saveInvToNBT(player.inventory.armorItemInSlot(HumanArmorShape.values()[slotIndex]), itemInventory);
             suit.reload();
-
         }
     }
 }

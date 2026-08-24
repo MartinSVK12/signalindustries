@@ -21,12 +21,14 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -64,7 +66,8 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 	public enum DrillMode {
         NORMAL,
         X3,
-        X3_UNSAFE
+        X3_UNSAFE,
+		DISASSEMBLE
     }
 
     public String getModeString(ItemStack stack) {
@@ -73,6 +76,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 		    case NORMAL -> TextFormatting.GRAY + "Normal";
 		    case X3 -> TextFormatting.YELLOW + "3x3";
 		    case X3_UNSAFE -> TextFormatting.RED + "3x3 (Unsafe)";
+			case DISASSEMBLE -> TextFormatting.ORANGE + "/!\\ Disassemble /!\\";
 	    };
 	}
 
@@ -165,8 +169,29 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 		return true;
 	}
 
+	@Override
+	public @Nullable ItemStack onUse(@NotNull ItemStack selfStack, @NotNull World world, @NotNull Player player) {
+		if(getMode(selfStack) == DrillMode.DISASSEMBLE) {
+			if(player.isSneaking()) {
+				switch (tier){
+					case BASIC -> {
+						player.inventory.setItem(player.inventory.getCurrentSlot(),SIItems.basicDrillBit.getDefaultStack());
+						player.inventory.insertItem(SIItems.basicDrillCasing.getDefaultStack(), false);
+						player.sendMessage("Drill disassembled!");
+					}
+					case REINFORCED -> {
+						player.inventory.setItem(player.inventory.getCurrentSlot(),SIItems.reinforcedDrillBit.getDefaultStack());
+						player.inventory.insertItem(SIItems.reinforcedDrillCasing.getDefaultStack(), false);
+						player.sendMessage("Drill disassembled!");
+					}
+				}
 
-    @Override
+			}
+		}
+		return super.onUse(selfStack, world, player);
+	}
+
+	@Override
     public Tier getTier() {
         return tier;
     }

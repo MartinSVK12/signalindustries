@@ -20,6 +20,8 @@ public interface IPowerSuit {
 
     void tick();
 
+	void reload();
+
     boolean hasAttachment(ItemAttachment attachment);
 
     boolean hasAttachmentClass(Class<? extends ItemAttachment> attachment);
