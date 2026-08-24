@@ -215,7 +215,7 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> basicSignalumDynamo;
 
 	public static Block<? extends BlockLogic> basicProgrammer;
-	//public static Block<? extends BlockLogic> reinforcedProgrammer;
+	public static Block<? extends BlockLogic> reinforcedProgrammer;
 
 	public static Block<? extends BlockLogic> basicBonsai;
 	public static Block<? extends BlockLogic> reinforcedBonsai;
@@ -991,6 +991,15 @@ public class SIBlocks extends DataInitializer {
 			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.BASIC, TileEntityProgrammer::new, "programmer"),
 			new MachineTextures()
 				.withDefaultTexture("programmer_top")
+		);
+
+		reinforcedProgrammer = customBlock(defaultBuilder(Tier.BASIC),
+			"reinforced.programmer",
+			"reinforced_programmer",
+			"reinforcedProgrammer",
+			3,
+			(block)->new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityProgrammer::new, "programmer"),
+			new MachineTextures(Tier.REINFORCED)
 		);
 
 		prototypePump = customBlock(defaultBuilder(Tier.PROTOTYPE),

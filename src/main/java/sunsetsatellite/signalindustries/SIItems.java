@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
@@ -171,6 +172,8 @@ public class SIItems extends DataInitializer {
 	public static ItemSuitColorizer suitColorizerInverted;
 
 	public static Item dimensionMaker;
+
+	public static Map<ItemRomChip, ItemWithAbility> chipsToAbilityMap = new HashMap<>();
 
 	@Override
 	public void init() {
@@ -426,6 +429,8 @@ public class SIItems extends DataInitializer {
 		);
 
 		dimensionMaker = customItem(() -> new ItemDimensionMaker("dimensionMaker", key("item/dimension_maker"), item("dimensionMaker")), "dimension_maker").setMaxStackSize(1);
+
+		chipsToAbilityMap.put((ItemRomChip) romChipScan, (ItemWithAbility) scanAbilityContainer);
 
 		List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> F.getType() == Item.class).toList();
 

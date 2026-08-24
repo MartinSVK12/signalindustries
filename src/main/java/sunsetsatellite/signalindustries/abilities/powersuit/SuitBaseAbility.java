@@ -18,7 +18,6 @@ public abstract class SuitBaseAbility {
     public static ArrayList<SuitBaseAbility> abilities = new ArrayList<>();
     public ActivationType activationType = null;
 
-
     public SuitBaseAbility(Tier tier, String modId, String translateKey, int cost, int cooldown) {
         this.tier = tier;
         this.name = "ability." + modId + "." + tier.name().toLowerCase() + "." + translateKey + ".name";

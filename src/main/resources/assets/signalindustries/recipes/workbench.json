@@ -1814,67 +1814,6 @@
     "consumeContainers": false
   },
   {
-    "name": "signalindustries:workbench/eeprom_programmer",
-    "type": "minecraft:crafting/shaped",
-    "pattern": [
-      " C ",
-      "EML",
-      "PSP"
-    ],
-    "symbols": [
-      {
-        "symbol": "P",
-        "stack": {
-          "key": "item.signalindustries.steelPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "L",
-        "stack": {
-          "key": "tile.lever.cobble.stone",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "E",
-        "stack": {
-          "key": "item.signalindustries.basicEnergyCore",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "S",
-        "stack": {
-          "key": "item.signalindustries.saturatedSignalumAlloyPlate",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "M",
-        "stack": {
-          "key": "tile.signalindustries.basic.machine",
-          "amount": 1,
-          "meta": 0
-        }
-      },
-      {
-        "symbol": "C",
-        "group": "signalindustries:rom_chips"
-      }
-    ],
-    "result": {
-      "key": "tile.signalindustries.basic.programmer",
-      "amount": 1,
-      "meta": 0
-    },
-    "consumeContainers": false
-  },
-  {
     "name": "signalindustries:workbench/blank_rom_chip",
     "type": "minecraft:crafting/shaped",
     "pattern": [

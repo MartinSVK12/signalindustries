@@ -76,7 +76,9 @@ public class SIModels {
 				.withActiveNorthTexture("basic_heat_pump_freezing_active_side")
 		));
 		dispatcher.addDispatch(basicSignalumDynamo, new BlockModelGenericRotatable<>(basicSignalumDynamo, BlockModelDispatcher.loadDataModel("signalindustries:block/basic_signalum_dynamo")));
+
 		dispatcher.addDispatch(basicProgrammer, new BlockModelProgrammer<>(basicProgrammer));
+		dispatcher.addDispatch(reinforcedProgrammer, new BlockModelReinforcedProgrammer<>(reinforcedProgrammer));
 
 		dispatcher.addDispatch(basicBonsai,new BlockModelBonsaiPot<>(basicBonsai));
 		dispatcher.addDispatch(reinforcedBonsai,new BlockModelBonsaiPot<>(reinforcedBonsai));

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.signalindustries.SIFluids;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IInjectable;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
@@ -100,6 +101,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
 							isInjecting = true;
 						}
 					} else if (stack != null && stack.getItem() instanceof IItemFluidContainer fluidContainer) {
+						if(stack.getItem().equals(SIItems.infiniteSignalumCrystal)) continue;
 						if(fluidContainer.canFill(stack)){
 							((IItemFluidContainer) stack.getItem()).fill(getFluidInSlot(0), stack, this, transferSpeed);
 							isInjecting = true;

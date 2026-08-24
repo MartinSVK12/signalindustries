@@ -8,6 +8,7 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
+import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -76,13 +77,22 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     public void processItem() {
         if (canProcess()) {
             ItemStack chip = itemContents[0];
-            if(itemContents[1].getItem() instanceof ItemTrigger){
-                ItemStack trigger = itemContents[1];
-                String[] key = chip.getItemKey().split("\\.");
-                trigger.getData().putString("ability", key[key.length - 1]);
-            } else if (SIItems.blankChip.equals(itemContents[1].getItem())) {
-                itemContents[1] = chip.copy();
-            }
+			if(tier == Tier.REINFORCED){
+				if(itemContents[1] != null && itemContents[1].getItem().equals(SIItems.abilityContainerCasing)){
+					setItem(1, SIItems.chipsToAbilityMap.get(((ItemRomChip) chip.getItem())).getDefaultStack());
+				} else if (SIItems.blankChip.equals(itemContents[1].getItem())) {
+					itemContents[1] = chip.copy();
+				}
+			} else {
+				if(itemContents[1].getItem() instanceof ItemTrigger){
+					ItemStack trigger = itemContents[1];
+					String[] key = chip.getItemKey().split("\\.");
+					trigger.getData().putString("ability", key[key.length - 1]);
+				} else if (SIItems.blankChip.equals(itemContents[1].getItem())) {
+					itemContents[1] = chip.copy();
+				}
+			}
+
 
             doWithNearPlayers(8,(P)->P.triggerAchievement(SIAchievements.PROGRAMMER));
         }
@@ -93,9 +103,15 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
             return false;
         } else {
             if (itemContents[0].getItem() instanceof ItemRomChip) {
-                if (itemContents[1].getItem() instanceof ItemTrigger || SIItems.blankChip.equals(itemContents[1].getItem())) {
-                    return !itemContents[1].getData().containsKey("ability");
-                }
+				if(tier == Tier.REINFORCED){
+					if (itemContents[1].getItem().equals(SIItems.abilityContainerCasing) || SIItems.blankChip.equals(itemContents[1].getItem())) {
+						return itemContents[1].getItem().equals(SIItems.abilityContainerCasing) || !itemContents[1].getData().containsKey("ability");
+					}
+				} else {
+					if (itemContents[1].getItem() instanceof ItemTrigger || SIItems.blankChip.equals(itemContents[1].getItem())) {
+						return !itemContents[1].getData().containsKey("ability");
+					}
+				}
             }
         }
         return false;
