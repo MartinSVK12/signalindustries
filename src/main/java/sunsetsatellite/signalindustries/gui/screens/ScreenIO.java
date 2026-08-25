@@ -219,8 +219,8 @@ public class ScreenIO extends ScreenComposedContainer {
 			yRot = my - centerY;
 		}
 		GLRenderer.modelM4f().scale(size, -size, size);
-		GLRenderer.modelM4f().rotateX(-(float) Math.atan(yRot / 40F) * 20F);
-		GLRenderer.modelM4f().rotate((float) Math.atan(xRot / 40F) * 20F, 0, 1F, 0);
+		GLRenderer.modelM4f().rotateX((float) Math.toRadians(-(float) Math.atan(yRot / 40F) * 60));
+		GLRenderer.modelM4f().rotate((float) Math.toRadians(Math.atan(xRot / 40F) * 80), 0, 1F, 0);
 		lastHoveredSide = getHoveredSide();
 		Lighting.enableLight();
 		RenderMultiblockInGUI r = new RenderMultiblockInGUI();
