@@ -5,9 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.GuiEntry;
-import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.signalindustries.gui.menus.*;
-import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
@@ -25,8 +23,6 @@ import sunsetsatellite.signalindustries.tiles.machines.simple.*;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityEnergyConnector;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityFluidHatch;
 import sunsetsatellite.signalindustries.tiles.multiblock.TileEntityItemBus;
-
-import java.awt.*;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
 
@@ -85,7 +81,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/waking_plate_former"), new GuiEntry<>(TileEntityPlateFormer.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/waking_infuser"), new GuiEntry<>(TileEntityWakingInfuser.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/warp_gate"), new GuiEntry<>(TileEntityWarpGate.class, MenuWarpGate.class));
-		Catalyst.GUIS.register(key("gui/mega_trommel"), new GuiEntry<>(TileEntityMegaTrommel.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/giga_trommel"), new GuiEntry<>(TileEntityGigaTrommel.class, MenuMachine.class));
 
 		Catalyst.GUIS.register(key("gui/harness"), new GuiEntry<>(InventoryHarness.class, MenuHarness.class));
 		Catalyst.GUIS.register(key("gui/power_suit"), new GuiEntry<>(InventoryPowerSuit.class, MenuPowerSuit.class));

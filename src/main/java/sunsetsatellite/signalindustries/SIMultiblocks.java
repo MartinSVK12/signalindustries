@@ -28,7 +28,7 @@ public class SIMultiblocks extends DataInitializer {
     public static SIMultiblock wakingInfuser;
     public static SIMultiblock laserDrill;
     public static SIMultiblock greenhouse;
-	public static SIMultiblock megaTrommel;
+	public static SIMultiblock gigaTrommel;
     //public static SIMultiblock altarOfCreation;
 
     @Override
@@ -64,7 +64,7 @@ public class SIMultiblocks extends DataInitializer {
         signalumReactor = new SIMultiblock(MOD_ID,  "signalumReactor", "signalumReactor", false, Tier.REINFORCED);
         extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
         warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
-		megaTrommel = new SIMultiblock(MOD_ID,  "megaTrommel", "megaTrommel", false, Tier.AWAKENED);
+		gigaTrommel = new SIMultiblock(MOD_ID,  "gigaTrommel", "gigaTrommel", false, Tier.AWAKENED);
         //altarOfCreation = new SIMultiblock(MOD_ID,  "altarOfCreation", "altarOfCreation", false, Tier.AWAKENED);
 
         CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
@@ -108,7 +108,7 @@ public class SIMultiblocks extends DataInitializer {
         Multiblock.multiblocks.put("warpGate", warpGate);
         Multiblock.multiblocks.put("laserDrill", laserDrill);
         Multiblock.multiblocks.put("greenhouse", greenhouse);
-		Multiblock.multiblocks.put("megaTrommel", megaTrommel);
+		Multiblock.multiblocks.put("gigaTrommel", gigaTrommel);
         //Multiblock.multiblocks.put("altarOfCreation", altarOfCreation);
 
         LOGGER.info("Loaded {} multiblocks..", Multiblock.multiblocks.size());

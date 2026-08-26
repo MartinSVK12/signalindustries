@@ -45,7 +45,7 @@ public class MachineTooltip extends SIBaseTooltip<TileEntityTieredMachineBase> {
         addClass(TileEntityBonsaiPot.class);
         addClass(TileEntitySITrommel.class);
         addClass(TileEntityHeatPump.class);
-		addClass(TileEntityMegaTrommel.class);
+		addClass(TileEntityGigaTrommel.class);
     }
 
     @Override

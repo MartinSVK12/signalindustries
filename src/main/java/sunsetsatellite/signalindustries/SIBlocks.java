@@ -1101,7 +1101,7 @@ public class SIBlocks extends DataInitializer {
 			"awakened_trommel",
 			"awakenedTrommel",
 			3,
-			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityMegaTrommel::new, "mega_trommel"),
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityGigaTrommel::new, "giga_trommel"),
 			new MachineTextures(Tier.AWAKENED)
 				.withDefaultNorthTexture("awakened_trommel")
 				.withDefaultSouthTexture("awakened_trommel")

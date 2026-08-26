@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.multiblocks.IMultiblock;
 import sunsetsatellite.signalindustries.SIAchievements;
-import sunsetsatellite.signalindustries.SIModels;
 import sunsetsatellite.signalindustries.SIMultiblocks;
 import sunsetsatellite.signalindustries.util.SIMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
@@ -55,8 +54,8 @@ public class BlockLogicMachine extends BlockLogicMachineBase {
 					if(multiblock.getMultiblock().data == SIMultiblocks.warpGate) {
 						player.triggerAchievement(SIAchievements.GATE);
 					}
-					if(multiblock.getMultiblock().data == SIMultiblocks.megaTrommel) {
-						player.triggerAchievement(SIAchievements.MEGA_TROMMEL);
+					if(multiblock.getMultiblock().data == SIMultiblocks.gigaTrommel) {
+						player.triggerAchievement(SIAchievements.GIGA_TROMMEL);
 					}
 					if(multiblock.getMultiblock().data instanceof SIMultiblock siMultiblock){
 						if(siMultiblock.tier.ordinal() >= Tier.REINFORCED.ordinal()){

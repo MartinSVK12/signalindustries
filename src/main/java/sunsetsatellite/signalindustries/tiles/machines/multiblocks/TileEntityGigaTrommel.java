@@ -8,7 +8,7 @@ import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class TileEntityMegaTrommel extends TileEntityTieredMultiblock {
+public class TileEntityGigaTrommel extends TileEntityTieredMultiblock {
     @Override
     public void init(Block<?> block) {
         super.init(block);
@@ -21,7 +21,7 @@ public class TileEntityMegaTrommel extends TileEntityTieredMultiblock {
 
         recipeGroup = SIRecipes.TROMMEL;
 
-        multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("megaTrommel"));
+        multiblock = new MultiblockInstance(this, Multiblock.multiblocks.get("gigaTrommel"));
 
 		baseParallel = 256;
 		baseSpeedMultiplier = 5;
@@ -29,6 +29,6 @@ public class TileEntityMegaTrommel extends TileEntityTieredMultiblock {
 
     @Override
     public @NonNull String getNameTranslationKey() {
-        return "container.signalindustries.megaTrommel";
+        return "container.signalindustries.gigaTrommel";
     }
 }

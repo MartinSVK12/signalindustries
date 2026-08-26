@@ -2,7 +2,6 @@ package sunsetsatellite.signalindustries;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntityDispatcher;
 import net.minecraft.core.block.tag.BlockTags;
@@ -22,7 +21,6 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.CustomStructure;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
-import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.mp.entity.*;
@@ -47,7 +45,6 @@ import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 import turniplabs.halplibe.util.dependency.Key;
 
-import java.lang.reflect.Field;
 import java.util.*;
 
 import static sunsetsatellite.signalindustries.SIConfig.config;
@@ -157,7 +154,7 @@ public class SignalIndustries implements ModInitializer {
 		TileEntityDispatcher.addMapping(TileEntitySITrommel.class, id("trommel"));
 		TileEntityDispatcher.addMapping(TileEntityRedstoneClock.class, id("redstone_clock"));
 		TileEntityDispatcher.addMapping(TileEntityHeatPump.class, id("heat_pump"));
-		TileEntityDispatcher.addMapping(TileEntityMegaTrommel.class, id("mega_trommel"));
+		TileEntityDispatcher.addMapping(TileEntityGigaTrommel.class, id("giga_trommel"));
 
 		LOGGER.info("Registering entities...");
 		EntityDispatcher.getInstance().addMapping(ProjectileCrystal.class, id("volatile_crystal"), ProjectileCrystal::new, "entity.signalindustries.volatileCrystal");
