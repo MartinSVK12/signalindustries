@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 import com.mojang.nbt.tags.CompoundTag;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.monster.MobCreeper;
@@ -13,11 +14,13 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import org.jetbrains.annotations.NotNull;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWrathBeaconBase;
+import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
 
 import java.lang.reflect.InvocationTargetException;
@@ -115,9 +118,12 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
                 worldObj.spawnParticle("reddust", tilePos.x + 0.5, y1, tilePos.z + 0.5, 0, 0, 0, 0, true);
             }
         }
-        if (worldObj != null && getBlock() != null) {
-            tier = ((ITiered) getBlock().getLogic()).getTier();
-        }
+        if (worldObj != null && getBlock() != Blocks.AIR) {
+			ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
+			if(tiered != null){
+				tier = tiered.getTier();
+			}
+		}
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
         //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));
 

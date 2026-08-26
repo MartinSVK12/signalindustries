@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
@@ -147,7 +148,7 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         super.tick();
         extractFluids();
         worldObj.markBlockDirty(tilePos);
-        if (getBlock() != null) {
+        if (getBlock() != Blocks.AIR) {
             setCurrentRecipe();
             if (!disabled) work();
             if (!enhanced) {

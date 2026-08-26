@@ -334,9 +334,12 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         super.tick();
         worldObj.markBlockDirty(tilePos);
         worldObj.notifyBlocksOfNeighborChange(tilePos, getBlock());
-        if (worldObj != null && getBlock() != null) {
-            tier = ((ITiered) getBlock().getLogic()).getTier();
-            type = ((BlockLogicItemConduit) getBlock().getLogic()).type;
+        if (worldObj != null && getBlock() != Blocks.AIR) {
+			BlockLogicItemConduit logic = Catalyst.blockLogic(getBlock(), BlockLogicItemConduit.class);
+			if(logic != null){
+				tier = logic.tier;
+				type = logic.type;
+			}
         }
         switch (tier) {
             case BASIC:

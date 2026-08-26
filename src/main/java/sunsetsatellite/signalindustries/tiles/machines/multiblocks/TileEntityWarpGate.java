@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.tiles.machines.multiblocks;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.Axis;
@@ -111,7 +112,7 @@ public class TileEntityWarpGate extends TileEntityTieredMachineBase implements I
                 }
             }
             stabilityVerifyTimer.tick();
-            if (getBlock() != null && itemInput != null && itemOutput != null && fluidInput != null && fluidOutput != null && energy != null) {
+            if (getBlock() != Blocks.AIR && itemInput != null && itemOutput != null && fluidInput != null && fluidOutput != null && energy != null) {
                 if (state == State.IDLE && (worldObj.hasNeighborSignal(tilePos) || worldObj.hasDirectSignal(tilePos)) && warpOrbInserted()) {
                     state = State.CHARGING;
                 } else if (state != State.IDLE && (!worldObj.hasNeighborSignal(tilePos) && !worldObj.hasDirectSignal(tilePos))) {

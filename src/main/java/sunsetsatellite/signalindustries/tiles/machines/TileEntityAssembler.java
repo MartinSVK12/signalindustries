@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.ListTag;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
@@ -44,7 +45,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         super.tick();
         extractFluids();
         worldObj.markBlockDirty(tilePos);
-        if (getBlock() != null && worldObj != null) {
+        if (getBlock() != Blocks.AIR && worldObj != null) {
             work();
         }
     }

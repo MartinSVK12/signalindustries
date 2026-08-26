@@ -16,6 +16,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkPosition;
 import org.jetbrains.annotations.NotNull;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
@@ -184,9 +185,12 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 //                worldObj.spawnParticle("reddust",x+0.5,y1,z+0.5,0,0,0);
 //            }
 //        }
-        if (worldObj != null && getBlock() != null) {
-            tier = ((ITiered) getBlock().getLogic()).getTier();
-        }
+		if (worldObj != null && getBlock() != Blocks.AIR) {
+			ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
+			if(tiered != null){
+				tier = tiered.getTier();
+			}
+		}
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
         //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));
 
@@ -203,7 +207,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 	}
 
 	public void check() {
-        if (getBlock() != null && active) {
+        if (getBlock() != Blocks.AIR && active) {
             if (worldObj != null && worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon && !suddenDeath) {
                 for (BlockInstance bi : multiblock.data.getSubstitutions(new Vec3i(tilePos), Direction.Z_POS)) {
                     if (worldObj.getBlockId(bi.pos.x, bi.pos.y, bi.pos.z) == SIBlocks.eternalTreeLog.id()) {
@@ -259,7 +263,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public void suddenDeathSpawn() {
         if (suddenDeath) {
-            if (getBlock() != null) {
+            if (getBlock() != Blocks.AIR) {
                 started = true;
                 ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, tilePos.x, tilePos.z);
                 Mob mob;
@@ -307,7 +311,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     public void spawn() {
-        if (getBlock() != null) {
+        if (getBlock() != Blocks.AIR) {
             if (enemiesSpawned < currentMaxAmount) {
                 started = true;
                 ChunkPosition randomPos = getRandomSpawningPointInChunk(worldObj, tilePos.x, tilePos.z);
