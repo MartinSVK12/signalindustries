@@ -18,7 +18,7 @@ public class MenuAbstractMixin {
 
 	@Inject(method = "setItem", at = @At("HEAD"))
 	public void setItem(int i, ItemStack itemstack, CallbackInfo ci){
-		if(!EnvironmentHelper.isMultiplayerServer()){
+		if(!EnvironmentHelper.isMultiplayerServer() && itemstack != null){
 			if(Catalyst.listContains(RecipeBuilder.getItemGroup(SignalIndustries.MOD_ID, "rom_chips"),itemstack, ItemStack::isItemEqual)){
 				Minecraft.getMinecraft().thePlayer.triggerAchievement(SIAchievements.ROM_CHIP);
 			}

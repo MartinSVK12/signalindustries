@@ -1,10 +1,12 @@
 package sunsetsatellite.signalindustries.tiles.base;
 
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.ITileEntityInit;
+import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -16,7 +18,10 @@ public abstract class TileEntityTieredContainer extends TileEntityCoverable impl
 
     @Override
     public void init(Block<?> block) {
-        tier = Objects.requireNonNull(Catalyst.blockLogic(getBlock(), ITiered.class)).getTier();
+		if (getBlock() != Blocks.AIR) {
+			ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
+			if(tiered != null) tier = tiered.getTier();
+		}
     }
 
     @Override

@@ -2,6 +2,7 @@ package sunsetsatellite.signalindustries.tiles.conduit;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
+import net.minecraft.core.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -24,8 +25,9 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor /*imple
 
     @Override
     public void tick() {
-        if (worldObj != null && getBlock() != null) {
-            tier = Catalyst.blockLogic(getBlock(), ITiered.class).getTier();
+        if (worldObj != null && getBlock() != Blocks.AIR) {
+			ITiered logic = Catalyst.blockLogic(getBlock(), ITiered.class);
+			if(logic != null) tier = logic.getTier();
         }
 
         throughput = 128 * (tier.ordinal() + 1);

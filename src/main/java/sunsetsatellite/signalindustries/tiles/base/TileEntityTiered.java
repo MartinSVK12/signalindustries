@@ -1,5 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.base;
 
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.player.Player;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
@@ -13,7 +14,7 @@ public abstract class TileEntityTiered extends TileEntityWithName {
     @Override
     public void tick() {
         super.tick();
-        if (worldObj != null && getBlock() != null) {
+        if (worldObj != null && getBlock() != Blocks.AIR) {
 			BlockLogicTiered tiered = Catalyst.blockLogic(getBlock(), BlockLogicTiered.class);
 			if(tiered != null){
 				tier = tiered.getTier();
