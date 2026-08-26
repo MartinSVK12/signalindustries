@@ -69,6 +69,7 @@ public class RenderItemsInConduit extends TileEntityRenderer<TileEntityItemCondu
 			}
 			Vec3f p = pos.copy().add(offset);
 			ItemStack stack = content.getStack();
+			if(stack == null) return;
 			ItemModel model = ItemModelDispatcher.getInstance().getDispatch(stack);
 			GLRenderer.pushFrame();
 			p.y -= 0.25f;

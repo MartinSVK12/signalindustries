@@ -4,6 +4,7 @@ package sunsetsatellite.signalindustries.tiles.conduit;
 import com.mojang.nbt.tags.ByteTag;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
@@ -351,7 +352,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         }
         if (EnvironmentHelper.isClientWorld()) return;
         extractTimer.tick();
-        contents.removeIf((P) -> P.stack == null);
+        contents.removeIf((P) -> P.stack == null || P.stack.stackSize <= 0 || P.stack.itemID == 0);
         final Iterator<PipeItem> iter = contents.iterator();
         while (iter.hasNext()) {
             PipeItem next = iter.next();
@@ -642,8 +643,13 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
         }
 
         public PipeItem(CompoundTag tag) {
-            this.stack = ItemStack.readItemStackFromNbt(tag.getCompound("stack"));
-            this.entry = Direction.getDirectionFromSide(tag.getInteger("entry"));
+	        ItemStack preStack;
+			preStack = ItemStack.readItemStackFromNbt(tag.getCompound("stack"));
+			if(preStack == null){
+				preStack = new ItemStack(Blocks.AIR,0,0);
+			}
+			this.stack = preStack;
+	        this.entry = Direction.getDirectionFromSide(tag.getInteger("entry"));
             this.exit = Direction.getDirectionFromSide(tag.getInteger("exit"));
             insertTimer.value = tag.getInteger("ticks");
         }
