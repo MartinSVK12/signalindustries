@@ -5,6 +5,8 @@ A technomagical mod for Better Than Adventure! 8.0.
 
 ***Now with multiplayer!***
 
+*See the [modrinth page](https://modrinth.com/mod/signal-industries) for more information!*
+
 Requires:
 
 - HalpLibe (https://github.com/Turnip-Labs/bta-halplibe)
