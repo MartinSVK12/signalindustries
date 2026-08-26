@@ -1,1 +1,12 @@
-### Updated to BTA! 8.0.1!
+- Added the Reinforced Energy Injector.
+- Added drill disassembling.
+- Added the Flash Reprogrammer.
+- Added awakened-tier I/O blocks.
+- Added recipes to some awakened-tier blocks.
+- Added the Giga Trommel.
+- Increased amount of ore in iron meteors (25% -> 35%)
+- Meteor crater changed from explosion to sphere.
+- Iron meteors will now not spawn within 64 blocks of any other meteor.
+- Changed "Boost" ability name to "Jump".
+- Made the rom chip achievement actually obtainable.
+- Fixed power suits voiding energy when being charged in an Injector.
