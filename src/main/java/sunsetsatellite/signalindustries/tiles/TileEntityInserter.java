@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.tiles;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
@@ -11,6 +12,7 @@ import net.minecraft.core.util.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.joml.primitives.AABBd;
 import org.joml.primitives.AABBdc;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.TickTimer;
 import sunsetsatellite.catalyst.core.util.io.InventoryWrapper;
@@ -36,13 +38,17 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
     @Override
     public void tick() {
         super.tick();
+		if(worldObj == null) return;
         workTimer.tick();
         workTimer.max = (int) (MAX_WORK_TICKS / speedMultiplier + (tier.ordinal() + 1));
         input = Direction.getDirectionFromSide(worldObj.getBlockData(tilePos));
         output = input.getOpposite();
         Block<?> block = getBlock();
-        if (block != null) {
-            tier = ((ITiered) block.getLogic()).getTier();
+        if (block != Blocks.AIR) {
+			ITiered tiered = Catalyst.blockLogic(block, ITiered.class);
+			if(tiered != null){
+				tier = tiered.getTier();
+			}
             applyModifiers();
         }
     }

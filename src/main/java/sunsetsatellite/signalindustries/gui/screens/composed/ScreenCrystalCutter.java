@@ -17,6 +17,7 @@ public class ScreenCrystalCutter extends ScreenMachine<TileEntityCrystalCutter> 
 	public ScreenCrystalCutter(ContainerInventory playerInv, TileEntityCrystalCutter inv) {
 		super(playerInv, inv, "crystal_cutter");
 		ButtonComponent button = get("recipeId");
+		button.text.text = String.valueOf(tile.recipeId);
 		button.buttonClicked.connect((signal, clicked) -> {
 			if(tile.recipeId > 0 && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))){
 				if(EnvironmentHelper.isMultiplayerClient()){
