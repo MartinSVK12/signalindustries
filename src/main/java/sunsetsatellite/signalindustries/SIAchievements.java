@@ -2,14 +2,11 @@ package sunsetsatellite.signalindustries;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.impl.FabricLoaderImpl;
-import net.minecraft.client.gui.achievements.data.AchievementPage;
 import net.minecraft.client.gui.achievements.data.AchievementPages;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.core.util.DataInitializer;
-import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import sunsetsatellite.signalindustries.util.AchievementPageSI;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.*;
@@ -86,7 +83,7 @@ public class SIAchievements extends DataInitializer {
 		PLATE_FORMER = new Achievement(id("plate_former"), langKey("plateFormer"), SIBlocks.prototypePlateFormer, THE_PROTOTYPE).registerAchievement();
 		SHINING = new Achievement(id("shining"), langKey("shining"), SIItems.signalumCrystal, THE_PROTOTYPE).setType(Achievement.TYPE_SPECIAL).registerAchievement();
 		BASIC = new Achievement(id("basic"), langKey("basic"), SIBlocks.basicMachineCore, SHINING).setType(Achievement.TYPE_SPECIAL).registerAchievement();
-		ROM_CHIP = new Achievement(id("rom_chip"), langKey("romChip"), SIItems.romChipBoost, null).registerAchievement();
+		ROM_CHIP = new Achievement(id("rom_chip"), langKey("romChip"), SIItems.romChipJump, null).registerAchievement();
 		COMBINED = new Achievement(id("combined"), langKey("combined"), SIBlocks.basicCrystalChamber, BASIC).registerAchievement();
 		MINER = new Achievement(id("miner"), langKey("miner"), SIBlocks.basicAutomaticMiner, BASIC).registerAchievement();
 		PUMP = new Achievement(id("pump"), langKey("pump"), SIBlocks.basicPump, BASIC).registerAchievement();

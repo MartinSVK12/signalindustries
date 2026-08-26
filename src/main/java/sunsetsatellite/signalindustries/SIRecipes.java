@@ -140,7 +140,7 @@ public class SIRecipes {
         Registries.RECIPE_TYPES.register("signalindustries:machine/random", RecipeEntryMachineRandomOutput.class);
         Registries.RECIPE_TYPES.register("signalindustries:machine/multi", RecipeEntryMachineMultiOutput.class);
         List<ItemStack> romChipGroup = new ArrayList<>();
-        romChipGroup.add(SIItems.romChipBoost.getDefaultStack());
+        romChipGroup.add(SIItems.romChipJump.getDefaultStack());
         romChipGroup.add(SIItems.romChipProjectile.getDefaultStack());
         romChipGroup.add(SIItems.romChipShield.getDefaultStack());
         romChipGroup.add(SIItems.romChipScan.getDefaultStack());

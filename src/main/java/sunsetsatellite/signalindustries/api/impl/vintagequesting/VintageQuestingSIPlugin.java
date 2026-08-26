@@ -6,7 +6,6 @@ import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.collection.Pair;
-import org.slf4j.Logger;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIDimensions;
@@ -728,7 +727,7 @@ public class VintageQuestingSIPlugin implements VQPlugin {
         QuestData romChips = simpleQuest("romChips", romChipScan,
                 zip(listOf("retrieval", "retrieval2", "retrieval3", "retrieval4"),
                         listOf(
-                                new ItemStack(romChipBoost, 1),
+                                new ItemStack(romChipJump, 1),
                                 new ItemStack(romChipScan, 1),
                                 new ItemStack(romChipProjectile, 1),
                                 new ItemStack(romChipShield, 1)

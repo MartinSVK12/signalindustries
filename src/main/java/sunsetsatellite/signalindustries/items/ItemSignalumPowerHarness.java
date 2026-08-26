@@ -76,7 +76,7 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
             if (inv.getCurrentItem() != null && inv.getCurrentItem().getItem() instanceof ItemTrigger) {
                 ItemStack trigger = inv.getCurrentItem();
                 ItemTrigger itemTrigger = (ItemTrigger) trigger.getItem();
-                if (!Objects.equals(trigger.getData().getString("ability"), "")) {
+                if (!Objects.equals(trigger.getData().getString("ability"), "") && itemTrigger.getAbility(trigger) != null) {
                     if (armor.getData().getInteger("cooldown_" + trigger.getData().getString("ability")) <= 0 && armor.getData().getInteger("effectTime_" + trigger.getData().getString("ability")) <= 0) {
                         gui.drawStringShadow(fontRenderer,"Ability: ", 4, i += 16, 0xFFFFFFFF);
                         gui.drawStringShadow(fontRenderer,itemTrigger.getAbility(trigger).name + TextFormatting.LIME + " READY", 4 + fontRenderer.stringWidth("Ability: "), i, 0xFFFF0000);

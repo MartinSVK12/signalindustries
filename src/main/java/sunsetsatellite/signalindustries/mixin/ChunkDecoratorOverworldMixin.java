@@ -61,7 +61,7 @@ public class ChunkDecoratorOverworldMixin {
 				int k = z + rand.nextInt(16);
 				int j = world.getHeightValue(i, k);
 				TilePos pos = new TilePos(i, j, k);
-				new WorldFeatureMeteor(Blocks.ORE_IRON_BASALT.id(), 0, 25).place(world, rand, pos);
+				new WorldFeatureMeteor(Blocks.ORE_IRON_BASALT.id(), 0, 35).place(world, rand, pos);
 			}
 		}
 

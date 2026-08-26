@@ -28,7 +28,7 @@ public class WorldGenLabyrinthMixin {
 
     @Inject(method = "place", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/WeightedRandomBag;addEntry(Ljava/lang/Object;D)V", ordinal = 0, shift = At.Shift.AFTER))
     private void init(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipBoost.getDefaultStack()), 30);
+        this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipJump.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipProjectile.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipShield.getDefaultStack()), 30);
         this.chestLoot.addEntry(new WeightedRandomLootObject(SIItems.romChipScan.getDefaultStack()), 30);

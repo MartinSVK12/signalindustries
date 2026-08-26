@@ -21,6 +21,7 @@ public class WorldFeatureMeteor implements WorldFeatureInterface {
     public int oreMeta;
     public int oreChance;
     public int radius = 4;
+	public int holeRadius = 8;
 
     public WorldFeatureMeteor(int oreId, int oreMeta, int oreChance) {
         this.oreId = oreId;
@@ -44,12 +45,29 @@ public class WorldFeatureMeteor implements WorldFeatureInterface {
 		int i = tilePos.x();
 		int j = tilePos.y();
 		int k = tilePos.z();
+
+		for (MeteorLocation m : SignalIndustries.meteorLocations) {
+			if (m.type == MeteorLocation.Type.IRON && m.location.distanceTo(new Vec3i(i, j, k)) < 64) {
+				return false;
+			}
+		}
+
 		SignalIndustries.LOGGER.info("{} Meteor fell at X:{} Y:{} Z:{}", I18n.getInstance().translateKey(Blocks.blocksList[oreId].getLanguageKey(oreMeta)+".name"), i, j, k);
-		ExplosionNoDrops ex = new ExplosionNoDrops(world, null, i, j, k, 50f);
-		ex.explode();
-		ex.addEffects(false);
+		//ExplosionNoDrops ex = new ExplosionNoDrops(world, null, i, j, k, 50f);
+		//ex.explode();
+		//ex.addEffects(false);
 
 		int oreBlocks = 0;
+
+		for (int x = -holeRadius; x <= holeRadius; ++x) {
+			for (int y = -holeRadius; y <= holeRadius; ++y) {
+				for (int z = -holeRadius; z <= holeRadius; ++z) {
+					if (isPointInsideSphere(x, y, z, holeRadius)) {
+						world.setBlockAndMetadataWithNotify(x + i, y + j, z + k, Blocks.AIR.id(), 0);
+					}
+				}
+			}
+		}
 
 		for (int x = -radius; x <= radius; ++x) {
 			for (int y = -radius; y <= radius; ++y) {

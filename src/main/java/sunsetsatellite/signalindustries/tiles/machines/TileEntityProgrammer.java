@@ -108,9 +108,10 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 						return itemContents[1].getItem().equals(SIItems.abilityContainerCasing) || !itemContents[1].getData().containsKey("ability");
 					}
 				} else {
-					if (itemContents[1].getItem() instanceof ItemTrigger || SIItems.blankChip.equals(itemContents[1].getItem())) {
-						return !itemContents[1].getData().containsKey("ability");
+					if (itemContents[1].getItem() instanceof ItemTrigger trigger) {
+						return trigger.getAbility(itemContents[1]) == null;
 					}
+					return SIItems.blankChip.equals(itemContents[1].getItem());
 				}
             }
         }

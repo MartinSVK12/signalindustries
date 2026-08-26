@@ -96,15 +96,15 @@ item.signalindustries.trigger.projectile.name=Trigger: Projectile
 item.signalindustries.trigger.projectile.desc=Shoots an orb of <Signaling Energy> from the core of the <S. P. Harness> you're wearing.
 item.signalindustries.trigger.shield.name=Trigger: Shield
 item.signalindustries.trigger.shield.desc=Generates a shield of energy protecting you from combat damage for a short period of time.
-item.signalindustries.trigger.boost.name=Trigger: Boost
-item.signalindustries.trigger.boost.desc=Launches you in the direction you're looking at.
+item.signalindustries.trigger.jump.name=Trigger: Jump
+item.signalindustries.trigger.jump.desc=Launches you in the direction you're looking at.
 item.signalindustries.trigger.scan.name=Trigger: Scan
 item.signalindustries.trigger.scan.desc=Tries to find and highlight ores in the world.
 
 item.signalindustries.romChip.projectile.name=ROM Chip: Projectile
 item.signalindustries.romChip.projectile.desc=Contains code for a <Trigger> ability.
-item.signalindustries.romChip.boost.name=ROM Chip: Boost
-item.signalindustries.romChip.boost.desc=Contains code for a <Trigger> ability.
+item.signalindustries.romChip.jump.name=ROM Chip: Jump
+item.signalindustries.romChip.jump.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.shield.name=ROM Chip: Shield
 item.signalindustries.romChip.shield.desc=Contains code for a <Trigger> ability.
 item.signalindustries.romChip.scan.name=ROM Chip: Scan
@@ -270,8 +270,8 @@ item.signalindustries.abilityContainerCasing.desc=A part of the base for an <App
 item.signalindustries.ability.clockwork.name=Ability: Clockwork
 item.signalindustries.ability.clockwork.desc=Container for a <Signalum Power Suit> ability application.
 
-item.signalindustries.ability.boost.name=Ability: Boost
-item.signalindustries.ability.boost.desc=Container for a <Signalum Power Suit> ability application.
+item.signalindustries.ability.jump.name=Ability: Jump
+item.signalindustries.ability.jump.desc=Container for a <Signalum Power Suit> ability application.
 
 item.signalindustries.ability.projectile.name=Ability: Projectile
 item.signalindustries.ability.projectile.desc=Container for a <Signalum Power Suit> ability application.

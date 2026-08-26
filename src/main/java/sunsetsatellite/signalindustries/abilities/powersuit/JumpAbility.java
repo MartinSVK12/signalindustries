@@ -1,6 +1,5 @@
 package sunsetsatellite.signalindustries.abilities.powersuit;
 
-import net.minecraft.client.render.dynamictexture.DynamicTexture;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.world.World;
@@ -8,9 +7,9 @@ import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
 
-public class BoostAbility extends SuitBaseAbility {
-    public BoostAbility() {
-        super(Tier.BASIC, SignalIndustries.MOD_ID, "boost", 150, 40);
+public class JumpAbility extends SuitBaseAbility {
+    public JumpAbility() {
+        super(Tier.BASIC, SignalIndustries.MOD_ID, "jump", 150, 40);
     }
 
     @Override

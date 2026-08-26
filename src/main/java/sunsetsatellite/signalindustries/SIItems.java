@@ -149,7 +149,7 @@ public class SIItems extends DataInitializer {
 	public static ItemAttachment awakenedAbilityModule;
 
 	public static Item romChipProjectile;
-	public static Item romChipBoost;
+	public static Item romChipJump;
 	public static Item romChipShield;
 	public static Item romChipScan;
 
@@ -351,7 +351,7 @@ public class SIItems extends DataInitializer {
 		fuelCell = customItem(() -> new ItemFuelCell("fuelCell", key("item/fuel_cell"), item("fuelCell")), "fuelcellempty").setMaxStackSize(1);
 
 		romChipProjectile = customItem(() -> new ItemRomChip("romChip.projectile", key("item/rom_chip_projectile"), item("romChipProjectile")), "chip1").setMaxStackSize(1);
-		romChipBoost = customItem(() -> new ItemRomChip("romChip.boost", key("item/rom_chip_boost"), item("romChipBoost")), "chip2").setMaxStackSize(1);
+		romChipJump = customItem(() -> new ItemRomChip("romChip.jump", key("item/rom_chip_jump"), item("romChipJump")), "chip2").setMaxStackSize(1);
 		romChipShield = customItem(() -> new ItemRomChip("romChip.shield", key("item/rom_chip_shield"), item("romChipShield")), "chip3").setMaxStackSize(1);
 		romChipScan = customItem(() -> new ItemRomChip("romChip.scan", key("item/rom_chip_scab"), item("romChipScan")), "chip4").setMaxStackSize(1);
 
