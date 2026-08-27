@@ -4,6 +4,7 @@ package sunsetsatellite.signalindustries.tiles.machines;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.ICarriable;
+import net.minecraft.core.world.ICarrySource;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +21,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Map;
 
-public class TileEntityEnergyCell extends TileEntityTieredContainer implements IHasIOPreview, ICarriable {
+public class TileEntityEnergyCell extends TileEntityTieredContainer implements IHasIOPreview, ICarrySource {
 
     //only for infinite tier energy cell, if true, the energy cell will act as an infinite source of energy, if false, it will act as a sink destroying any energy it gets.
     //does not do anything for any other tier
