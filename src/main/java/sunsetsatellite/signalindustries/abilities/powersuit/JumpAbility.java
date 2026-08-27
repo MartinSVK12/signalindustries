@@ -9,7 +9,7 @@ import sunsetsatellite.signalindustries.util.Tier;
 
 public class JumpAbility extends SuitBaseAbility {
     public JumpAbility() {
-        super(Tier.BASIC, SignalIndustries.MOD_ID, "jump", 150, 40);
+        super(Tier.BASIC, SignalIndustries.MOD_ID, "jump", 50, 40);
     }
 
     @Override

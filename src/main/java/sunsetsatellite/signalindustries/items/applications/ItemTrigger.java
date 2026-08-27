@@ -29,7 +29,7 @@ public class ItemTrigger extends Item implements ICustomDescription {
     public ItemTrigger(String translationKey, String namespaceId, int id) {
         super(translationKey, namespaceId, id);
         abilities.put("projectile", new ProjectileAbility("Projectile", 50, 1));
-        abilities.put("jump", new JumpAbility("Jump", 150, 5));
+        abilities.put("jump", new JumpAbility("Jump", 50, 5));
         abilities.put("shield", new ShieldAbility("Shield", 300, 15, 10, 5));
         abilities.put("scan", new ScanAbility("Scan", 150, 3, 15, 1));
     }
