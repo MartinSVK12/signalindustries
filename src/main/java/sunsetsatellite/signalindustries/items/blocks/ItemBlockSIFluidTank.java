@@ -6,6 +6,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.block.ItemBlock;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.pos.TilePos;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,8 +20,9 @@ public class ItemBlockSIFluidTank extends ItemBlock<BlockLogicSIFluidTank> {
 	}
 
 	@Override
-	public boolean onUseOnBlock(@NotNull ItemStack stack, @NotNull World world, @Nullable Player player, @NotNull TilePosc blockPos, @NotNull Side side, double xHit, double yHit) {
-		boolean b = super.onUseOnBlock(stack, world, player, blockPos, side, xHit, yHit);
+	public boolean placeOnBlock(@NotNull ItemStack stack, @NotNull World world, @Nullable Player player, @NotNull TilePosc blockPos, @NotNull Side side, double xHit, double yHit) {
+		boolean b = super.placeOnBlock(stack, world, player, blockPos, side, xHit, yHit);
+		blockPos = blockPos.add(side.direction(), new TilePos());
 		if(!b) return b;
 		TileEntitySIFluidTank tile = (TileEntitySIFluidTank) world.getTileEntity(blockPos);
 		if(tile != null){
