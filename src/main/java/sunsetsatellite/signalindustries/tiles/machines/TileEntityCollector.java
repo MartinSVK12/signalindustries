@@ -71,7 +71,12 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         }
     }
 
-    public void processItem() {
+	@Override
+	public boolean isBurning() {
+		return currentRecipe != null;
+	}
+
+	public void processItem() {
         if (canProcess()) {
             if (currentRecipe instanceof RecipeEntryMachineFluid recipe) {
 				FluidStack fluidStack = recipe.getOutput() == null ? null : recipe.getOutput().copy();
@@ -95,7 +100,7 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
         }
     }
 
-    public boolean canProcess() {
+	public boolean canProcess() {
         if (currentRecipe instanceof RecipeEntryMachineFluid recipe) {
             if (!worldObj.canLoadedBlockSeeSky(tilePos)) return false;
 			FluidStack fluidStack = recipe.getOutput();
