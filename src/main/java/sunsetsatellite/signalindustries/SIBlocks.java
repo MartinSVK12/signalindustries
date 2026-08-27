@@ -2137,7 +2137,7 @@ public class SIBlocks extends DataInitializer {
 			}
 		}
 
-		LOGGER.info("Block progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
+		//LOGGER.info("Block progress: {}/{} ({}% complete)",itemAmount-unknownAmount,itemAmount,((float)(itemAmount-unknownAmount)/itemAmount)*100);
 
 		setInitialized(true);
 	}

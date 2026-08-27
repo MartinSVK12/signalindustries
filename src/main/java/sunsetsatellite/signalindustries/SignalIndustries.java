@@ -205,13 +205,12 @@ public class SignalIndustries implements ModInitializer {
 	}
 
 	public void beforeGameStart() {
-
+		LOGGER.info("Beginning core pre-init.");
 	}
 
 	public void afterGameStart() {
 		LOGGER.info("Beginning core post-init.");
 		SIRecipes.loadSpecial();
-		LOGGER.info("Beginning core pre-init.");
 	}
 
 	public static NamespaceID id(String id) {
