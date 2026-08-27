@@ -17,15 +17,35 @@ public class SITrommelRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
             String recipeKey = Registries.RECIPES.deconstructKey(trommelRecipe.toString())[2];
             RecipeSymbol input = trommelRecipe.getInput();
             group.register(
-                    recipeKey,
+                    recipeKey+"_basic",
                     new RecipeEntryMachineRandomOutput(
                             new RecipeExtendedSymbol[]{
                                     new RecipeExtendedSymbol(input)
                             },
                             trommelRecipe.getOutput(),
-                            new RecipeProperties(50, 40, Tier.BASIC, false).setChance(0.5f)
+                            new RecipeProperties(50, 40, Tier.BASIC, true).setChance(0.5f)
                     )
             );
+			group.register(
+				recipeKey+"_reinforced",
+				new RecipeEntryMachineRandomOutput(
+					new RecipeExtendedSymbol[]{
+						new RecipeExtendedSymbol(input)
+					},
+					trommelRecipe.getOutput(),
+					new RecipeProperties(50, 40, Tier.REINFORCED, true).setChance(0.75f)
+				)
+			);
+			group.register(
+				recipeKey+"_awakened",
+				new RecipeEntryMachineRandomOutput(
+					new RecipeExtendedSymbol[]{
+						new RecipeExtendedSymbol(input)
+					},
+					trommelRecipe.getOutput(),
+					new RecipeProperties(50, 40, Tier.AWAKENED, false).setChance(1f)
+				)
+			);
         }
     }
 }

@@ -53,26 +53,41 @@ public class ScanAbility extends TriggerBaseEffectAbility {
         oreMap.put(Blocks.ORE_GOLD_STONE, new OreInfo());
         oreMap.put(Blocks.ORE_LAPIS_STONE, new OreInfo());
         oreMap.put(Blocks.ORE_REDSTONE_STONE, new OreInfo());
+		oreMap.put(Blocks.ORE_DIAMOND_STONE, new OreInfo());
 
         oreMap.put(Blocks.ORE_COAL_BASALT, new OreInfo());
         oreMap.put(Blocks.ORE_IRON_BASALT, new OreInfo());
         oreMap.put(Blocks.ORE_GOLD_BASALT, new OreInfo());
         oreMap.put(Blocks.ORE_LAPIS_BASALT, new OreInfo());
         oreMap.put(Blocks.ORE_REDSTONE_BASALT, new OreInfo());
+		oreMap.put(Blocks.ORE_DIAMOND_BASALT, new OreInfo());
 
         oreMap.put(Blocks.ORE_COAL_LIMESTONE, new OreInfo());
         oreMap.put(Blocks.ORE_IRON_LIMESTONE, new OreInfo());
         oreMap.put(Blocks.ORE_GOLD_LIMESTONE, new OreInfo());
         oreMap.put(Blocks.ORE_LAPIS_LIMESTONE, new OreInfo());
         oreMap.put(Blocks.ORE_REDSTONE_LIMESTONE, new OreInfo());
+		oreMap.put(Blocks.ORE_DIAMOND_LIMESTONE, new OreInfo());
 
         oreMap.put(Blocks.ORE_COAL_GRANITE, new OreInfo());
         oreMap.put(Blocks.ORE_IRON_GRANITE, new OreInfo());
         oreMap.put(Blocks.ORE_GOLD_GRANITE, new OreInfo());
         oreMap.put(Blocks.ORE_LAPIS_GRANITE, new OreInfo());
         oreMap.put(Blocks.ORE_REDSTONE_GRANITE, new OreInfo());
+		oreMap.put(Blocks.ORE_DIAMOND_GRANITE, new OreInfo());
 
-        oreMap.put(SIBlocks.signalumOre, new OreInfo());
+		oreMap.put(Blocks.ORE_COAL_PERMAFROST, new OreInfo());
+		oreMap.put(Blocks.ORE_IRON_PERMAFROST, new OreInfo());
+		oreMap.put(Blocks.ORE_GOLD_PERMAFROST, new OreInfo());
+		oreMap.put(Blocks.ORE_LAPIS_PERMAFROST, new OreInfo());
+		oreMap.put(Blocks.ORE_REDSTONE_PERMAFROST, new OreInfo());
+		oreMap.put(Blocks.ORE_DIAMOND_PERMAFROST, new OreInfo());
+
+		oreMap.put(Blocks.ORE_NETHERCOAL_BASALT, new OreInfo());
+		oreMap.put(Blocks.ORE_NETHERCOAL_GLOOMSTONE, new OreInfo());
+		oreMap.put(Blocks.ORE_NETHERCOAL_NETHERRACK, new OreInfo());
+
+		oreMap.put(SIBlocks.signalumOre, new OreInfo());
         oreMap.put(SIBlocks.dilithiumOre, new OreInfo());
 
         for (int i = -range; i < range; i++) {
