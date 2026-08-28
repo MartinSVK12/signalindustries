@@ -82,16 +82,16 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
 					SuitBaseAbility selectedAbility = ((ItemWithAbility) module.contents[selectedApplicationSlot].getItem()).getApplication();
 					I18n t = I18n.getInstance();
 					if (selectedAbility instanceof SuitBaseEffectAbility) {
-						if (effectTimes.containsKey(selectedAbility)) {
-							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + String.valueOf(effectTimes.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
-						} else if (cooldowns.containsKey(selectedAbility)) {
-							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(cooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
+						if (localEffectTimes.containsKey(selectedAbility)) {
+							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + String.valueOf(localEffectTimes.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
+						} else if (localCooldowns.containsKey(selectedAbility)) {
+							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(localCooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
 						} else {
 							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + "READY"), width / 2, 25, color2);
 						}
 					} else {
-						if (cooldowns.containsKey(selectedAbility)) {
-							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(cooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
+						if (localCooldowns.containsKey(selectedAbility)) {
+							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.RED + String.valueOf(localCooldowns.get(selectedAbility) / 20) + "s"), width / 2, 25, color2);
 						} else {
 							gui.drawStringCenteredShadow(fontRenderer,String.format("%s | %s | %s", selectedAbility.tier.getTextColor() + t.translateKey(selectedAbility.name) + TextFormatting.WHITE, TextFormatting.RED + "-" + selectedAbility.cost + TextFormatting.WHITE, TextFormatting.LIME + "READY"), width / 2, 25, color2);
 						}
@@ -131,7 +131,7 @@ public class SignalumPowerSuitClient extends SignalumPowerSuit implements IHasOv
 			//selected ability
 			//GLRenderer.setColor4f(1F, 0F, 0F, 1.0F);
 			//drawUtil.drawTexturedModalRect(x - 1 + selectedAbilitySlot % 9 * 20, y - 1, 0, 22, 24, 22 + 2);
-			//GL11.glBindTexture(3553, mc.renderEngine.getTexture("/gui/icons.png"));
+			//GL12.glBindTexture(3553, mc.renderEngine.getTexture("/gui/icons.png"));
 		} else {
 			Color c = new Color().setARGB(mode.getColor());
 			GLRenderer.setColor4f((float) c.getRed() / 255, (float) c.getGreen() / 255, (float) c.getBlue() / 255, (float) c.getAlpha() / 255);

@@ -30,6 +30,7 @@ public class ScanSuitAbility extends SuitBaseEffectAbility {
 
     @Override
     public void deactivate(Player player, World world, IPowerSuit powerSuit) {
+		//todo: mp sync
         oreMap.clear();
     }
 
@@ -60,6 +61,7 @@ public class ScanSuitAbility extends SuitBaseEffectAbility {
 
     @Override
     public void activate(Player player, World world, IPowerSuit powerSuit) {
+		//todo: mp sync
         int range = 16;
 
         oreMap.clear();

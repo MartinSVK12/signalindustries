@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.powersuit;
 
 import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.IntTag;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.HumanArmorShape;
@@ -50,6 +51,9 @@ public class SignalumPowerSuit implements IPowerSuit {
     public HashMap<SuitBaseAbility, Integer> cooldowns = new HashMap<>();
     public HashMap<SuitBaseEffectAbility, Integer> effectTimes = new HashMap<>();
 
+	public HashMap<SuitBaseAbility, Integer> localCooldowns = new HashMap<>();
+	public HashMap<SuitBaseEffectAbility, Integer> localEffectTimes = new HashMap<>();
+
     public SignalumPowerSuit(Player player) {
         this.player = player;
 
@@ -61,7 +65,6 @@ public class SignalumPowerSuit implements IPowerSuit {
         if (((IPlayerPowerSuit<?>) player).getPowerSuitData() != null) {
             loadData(((IPlayerPowerSuit<?>) player).getPowerSuitData());
         }
-
 
     }
 
@@ -98,14 +101,19 @@ public class SignalumPowerSuit implements IPowerSuit {
     public void tick() {
         verify();
 
-        if (player.world != null && player.world.isClientSide) return;
+        if (player.world.isClientSide) return;
 
-        if (EnvironmentHelper.isServerEnvironment()) {
+        if (EnvironmentHelper.isMultiplayerServer()) {
             CompoundTag data = new CompoundTag();
             saveData(data);
             NetworkHandler.sendToPlayer(player, new NetworkMessagePowerSuitSync(data));
             NetworkHandler.sendToAllPlayers(new NetworkMessagePowerSuitRemoteSync(player.username, player.uuid, data));
         }
+
+		if(!EnvironmentHelper.isMultiplayerClient()){
+			localCooldowns = cooldowns;
+			localEffectTimes = effectTimes;
+		}
 
         // set status based on energy levels
         if (getEnergyPercent() == 0) {
@@ -526,6 +534,18 @@ public class SignalumPowerSuit implements IPowerSuit {
         suitTag.putBoolean("Active", active);
         suitTag.putInt("Status", status.ordinal());
         suitTag.putInt("SelectedApplicationSlot", selectedApplicationSlot);
+		if(!EnvironmentHelper.isMultiplayerClient()){
+			CompoundTag cooldownsTag = new CompoundTag();
+			cooldowns.forEach((K,V)->{
+				cooldownsTag.putInt(K.abilityId, V);
+			});
+			suitTag.put("Cooldowns", cooldownsTag);
+			CompoundTag effectTimesTag = new CompoundTag();
+			effectTimes.forEach((K,V)->{
+				effectTimesTag.putInt(K.abilityId, V);
+			});
+			suitTag.put("EffectTimes", effectTimesTag);
+		}
         InventorySerializer.saveInvToNBT(helmet.container, helmet);
         InventorySerializer.saveInvToNBT(chestplate.container, chestplate);
         InventorySerializer.saveInvToNBT(leggings.container, leggings);
@@ -550,6 +570,26 @@ public class SignalumPowerSuit implements IPowerSuit {
         temperature = suitTag.getFloat("Temperature");
         status = Status.values()[suitTag.getInteger("Status")];
         selectedApplicationSlot = suitTag.getInteger("SelectedApplicationSlot");
+
+		if(EnvironmentHelper.isMultiplayerClient()){
+			localCooldowns.clear();
+			CompoundTag cooldownsTag = suitTag.getCompound("Cooldowns");
+			cooldownsTag.getValue().forEach((K,V)->{
+				SuitBaseAbility ability = SuitBaseAbility.abilities.get(K);
+				if(ability != null && V instanceof IntTag intTag){
+					localCooldowns.put(ability, intTag.getValue());
+				}
+			});
+
+			localEffectTimes.clear();
+			CompoundTag effectTimesTag = suitTag.getCompound("EffectTimes");
+			effectTimesTag.getValue().forEach((K,V)->{
+				SuitBaseAbility ability = SuitBaseAbility.abilities.get(K);
+				if(ability instanceof SuitBaseEffectAbility effectAbility && V instanceof IntTag intTag) {
+					localEffectTimes.put(effectAbility, intTag.getValue());
+				}
+			});
+		}
 
         if (suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")) {
             CompoundTag helmetTag = suitTag.getCompound("Helmet");

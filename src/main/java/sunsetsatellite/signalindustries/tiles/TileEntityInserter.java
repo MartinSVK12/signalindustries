@@ -87,7 +87,7 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
     public void work() {
         TileEntity inv = input.getTileEntity(worldObj, this);
         TileEntity pipe = output.getTileEntity(worldObj, this);
-        if (getBlock() == null) return;
+        if (getBlock() == Blocks.AIR) return;
         AABBdc aabb = getBlock().getSelectionAABB(worldObj, tilePos).translate(input.getVecF().x, input.getVecF().y, input.getVecF().z, new AABBd());
         List<EntityItem> items = new ArrayList<>(worldObj.getEntitiesWithinAABB(EntityItem.class, aabb));
         if (pipe instanceof TileEntityItemConduit && (inv instanceof Container || inv instanceof TileEntityStorageContainer)) {
@@ -134,6 +134,7 @@ public class TileEntityInserter extends TileEntity implements IBoostable {
             }
         } else if (pipe instanceof TileEntityItemConduit && !items.isEmpty()) {
             EntityItem item = items.get(0);
+			if(item == null || item.item == null) return;
             ItemStack split;
             int maxSplit = (int) Math.min(64, (4 * speedMultiplier) * (tier.ordinal() + 1));
             if (item.item.stackSize >= maxSplit) {
