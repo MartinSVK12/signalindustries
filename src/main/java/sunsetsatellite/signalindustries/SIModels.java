@@ -9,6 +9,7 @@ import net.minecraft.client.render.block.model.generic.BlockModelGenericRotatabl
 import net.minecraft.client.render.entity.EntityRendererSprite;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicFluid;
@@ -153,6 +154,7 @@ public class SIModels {
 		dispatcher.assignRenderer(EntityShockwave.class, new ShockwaveRenderer());
 		dispatcher.assignRenderer(ProjectileSunbeam.class, new SunbeamRenderer());
 		dispatcher.assignRenderer(ProjectileFallingMeteor.class, new FallingMeteorRenderer());
+		dispatcher.assignRenderer(ProjectileEnergyOrb.class, new EntityRendererSprite<>(TextureRegistry.getTexture("signalindustries:item/energyorb")));
 	}
 
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {

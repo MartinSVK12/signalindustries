@@ -7,6 +7,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.signalindustries.entities.ProjectileEnergyOrb;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 public class ProjectileAbility extends TriggerBaseAbility {
 
@@ -16,12 +17,12 @@ public class ProjectileAbility extends TriggerBaseAbility {
 
     @Override
     public void activate(@NotNull TilePosc blockPos, Player player, World world, ItemStack trigger, ItemStack harness) {
-        world.entityJoinedWorld(new ProjectileEnergyOrb(world, player));
+        if(!EnvironmentHelper.isMultiplayerClient()) world.entityJoinedWorld(new ProjectileEnergyOrb(world, player));
     }
 
     @Override
     public void activate(Player player, World world, ItemStack trigger, ItemStack harness) {
-        world.entityJoinedWorld(new ProjectileEnergyOrb(world, player));
+		if(!EnvironmentHelper.isMultiplayerClient()) world.entityJoinedWorld(new ProjectileEnergyOrb(world, player));
     }
 
 }

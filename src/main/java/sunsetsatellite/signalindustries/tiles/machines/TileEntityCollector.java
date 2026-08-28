@@ -73,7 +73,7 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
 
 	@Override
 	public boolean isBurning() {
-		return currentRecipe != null;
+		return itemContents[0] != null;
 	}
 
 	public void processItem() {
