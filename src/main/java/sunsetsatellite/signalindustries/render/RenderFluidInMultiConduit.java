@@ -122,7 +122,7 @@ public class RenderFluidInMultiConduit extends TileEntityRenderer<TileEntityMult
 				}
 				int amount = tile.fluidContents[i].amount;
 				int maxAmount = tile.fluidCapacity[i];
-				float ratio = ((float) amount / maxAmount);
+				float ratio = ((float) Math.min(amount, maxAmount) / maxAmount);
 				float mappedRatio = (float) Catalyst.map(ratio, 0.0d, 1.0d, 0.0d, 0.3d);
 				Axis axis = Side.fromId(tile.worldObj.getBlockData(tile.tilePos)).axis();
 				int axisOrd = axis.ordinal();
