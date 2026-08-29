@@ -12,12 +12,12 @@ import java.util.Map;
 public record MeteorLocation(Type type, Vec3i location) {
 
 	public record Type(String name) {
+		public static final Map<String, Type> TYPES = new HashMap<>();
+
 		public static final Type IRON = new Type("IRON");
 		public static final Type SIGNALUM = new Type("SIGNALUM");
 		public static final Type DILITHIUM = new Type("DILITHIUM");
 		public static final Type UNKNOWN = new Type("UNKNOWN");
-
-		public static final Map<String, Type> TYPES = new HashMap<>();
 
 		public Type(String name) {
 			this.name = name;
