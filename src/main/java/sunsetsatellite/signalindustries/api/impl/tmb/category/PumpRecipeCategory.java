@@ -47,7 +47,7 @@ public class PumpRecipeCategory implements IRecipeCategory<FluidMachineRecipeTra
 
     @Override
     public String getName() {
-        return "Pump";
+        return "container.signalindustries.pump.name";
     }
 
     @Override

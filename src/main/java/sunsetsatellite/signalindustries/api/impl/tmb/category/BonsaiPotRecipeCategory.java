@@ -53,7 +53,7 @@ public class BonsaiPotRecipeCategory implements IRecipeCategory<MultiMachineReci
 
     @Override
     public String getName() {
-        return "Bonsai Pot";
+        return "container.signalindustries.bonsai.name";
     }
 
     @Override

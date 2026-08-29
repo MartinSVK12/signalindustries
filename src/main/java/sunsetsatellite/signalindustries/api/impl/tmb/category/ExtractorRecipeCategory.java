@@ -49,7 +49,7 @@ public class ExtractorRecipeCategory implements IRecipeCategory<FluidMachineReci
 
     @Override
     public String getName() {
-        return "Extractor";
+        return "container.signalindustries.extractor.name";
     }
 
     @Override

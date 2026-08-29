@@ -53,7 +53,7 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
 
     @Override
     public String getName() {
-        return "Stoneworks";
+        return "container.signalindustries.stoneworks.name";
     }
 
     @Override

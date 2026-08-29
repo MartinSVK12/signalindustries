@@ -53,7 +53,7 @@ public class CentrifugeRecipeCategory implements IRecipeCategory<MachineRecipeTr
 
     @Override
     public String getName() {
-        return "Centrifuge";
+        return "container.signalindustries.centrifuge.name";
     }
 
     @Override

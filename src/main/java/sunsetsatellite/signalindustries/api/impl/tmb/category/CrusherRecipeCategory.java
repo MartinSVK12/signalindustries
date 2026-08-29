@@ -49,7 +49,7 @@ public class CrusherRecipeCategory implements IRecipeCategory<MachineRecipeTrans
 
     @Override
     public String getName() {
-        return "Crusher";
+        return "container.signalindustries.crusher.name";
     }
 
     @Override

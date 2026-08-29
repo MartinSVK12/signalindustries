@@ -49,7 +49,7 @@ public class PlateFormerRecipeCategory implements IRecipeCategory<MachineRecipeT
 
     @Override
     public String getName() {
-        return "Plate Former";
+        return "container.signalindustries.plateFormer.name";
     }
 
     @Override

@@ -10,6 +10,7 @@ import sunsetsatellite.signalindustries.api.impl.tmb.category.waking.WakingPlate
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.FluidMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MultiMachineRecipeTranslator;
+import sunsetsatellite.signalindustries.api.impl.tmb.translator.RandomMachineRecipeTranslator;
 import sunsetsatellite.signalindustries.api.impl.vintagequesting.VintageQuestingSIPlugin;
 import turing.tmb.TMB;
 import turing.tmb.TypedIngredient;
@@ -33,6 +34,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
     public static PumpRecipeCategory pumpCategory;
     public static BonsaiPotRecipeCategory bonsaiCategory;
     public static GreenhouseRecipeCategory greenhouseCategory;
+	public static LaserDrillRecipeCategory laserDrillCategory;
 
     public static WakingAlloySmelterRecipeCategory wAlloySmelterCategory;
     public static WakingCrusherRecipeCategory wCrusherCategory;
@@ -89,6 +91,8 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
 
         runtime.getRecipeIndex().registerCatalyst(greenhouseCategory, TypedIngredient.itemStackIngredient(SIBlocks.basicGreenhouse.getDefaultStack()));
 
+		runtime.getRecipeIndex().registerCatalyst(laserDrillCategory, TypedIngredient.itemStackIngredient(SIBlocks.reinforcedLaserDrill.getDefaultStack()));
+
         runtime.getRecipeIndex().registerCatalyst(wAlloySmelterCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingAlloySmelter.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(wCrusherCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingCrusher.getDefaultStack()));
         runtime.getRecipeIndex().registerCatalyst(wInfuserRecipeCategory, TypedIngredient.itemStackIngredient(SIBlocks.wakingInfuser.getDefaultStack()));
@@ -110,6 +114,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         pumpCategory = runtime.getRecipeIndex().registerCategory(new PumpRecipeCategory());
         bonsaiCategory = runtime.getRecipeIndex().registerCategory(new BonsaiPotRecipeCategory());
         greenhouseCategory = runtime.getRecipeIndex().registerCategory(new GreenhouseRecipeCategory());
+		laserDrillCategory = runtime.getRecipeIndex().registerCategory(new LaserDrillRecipeCategory());
 
         wAlloySmelterCategory = runtime.getRecipeIndex().registerCategory(new WakingAlloySmelterRecipeCategory());
         wCrusherCategory = runtime.getRecipeIndex().registerCategory(new WakingCrusherRecipeCategory());
@@ -132,6 +137,7 @@ public class TMBSIPlugin implements ITMBPlugin, TMBEntrypoint {
         runtime.getRecipeIndex().registerRecipes(pumpCategory, SIRecipes.PUMP.getAllRecipes(), FluidMachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(bonsaiCategory, SIRecipes.BONSAI_POT.getAllRecipes(), MultiMachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(greenhouseCategory, SIRecipes.GREENHOUSE.getAllRecipes(), MultiMachineRecipeTranslator::new);
+		runtime.getRecipeIndex().registerRecipes(laserDrillCategory, SIRecipes.LASER_DRILL.getAllRecipes(), RandomMachineRecipeTranslator::new);
 
         runtime.getRecipeIndex().registerRecipes(wAlloySmelterCategory, SIRecipes.WAKING_ALLOY_SMELTER.getAllRecipes(), MachineRecipeTranslator::new);
         runtime.getRecipeIndex().registerRecipes(wCrusherCategory, SIRecipes.WAKING_CRUSHER.getAllRecipes(), MachineRecipeTranslator::new);

@@ -53,7 +53,7 @@ public class GreenhouseRecipeCategory implements IRecipeCategory<MultiMachineRec
 
     @Override
     public String getName() {
-        return "Greenhouse";
+        return "container.signalindustries.greenhouse.name";
     }
 
     @Override

@@ -53,7 +53,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<MachineRecipeTrans
 
     @Override
     public String getName() {
-        return "Infuser";
+        return "container.signalindustries.infuser.name";
     }
 
     @Override

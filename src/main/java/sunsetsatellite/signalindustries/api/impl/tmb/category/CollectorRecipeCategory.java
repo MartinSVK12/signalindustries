@@ -45,7 +45,7 @@ public class CollectorRecipeCategory implements IRecipeCategory<FluidMachineReci
 
     @Override
     public String getName() {
-        return "Collector";
+        return "container.signalindustries.collector.name";
     }
 
     @Override

@@ -49,7 +49,7 @@ public class AlloySmelterRecipeCategory implements IRecipeCategory<MachineRecipe
 
     @Override
     public String getName() {
-        return "Alloy Smelter";
+        return "container.signalindustries.alloySmelter.name";
     }
 
     @Override

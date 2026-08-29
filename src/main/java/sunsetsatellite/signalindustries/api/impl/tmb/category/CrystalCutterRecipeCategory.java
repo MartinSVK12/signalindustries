@@ -53,7 +53,7 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
 
     @Override
     public String getName() {
-        return "Crystal Cutter";
+        return "container.signalindustries.crystalCutter.name";
     }
 
     @Override
