@@ -41,7 +41,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 					final Vec3i finalChunk = chunk;
 					SignalIndustries.meteorLocations.removeIf((L) -> L.location() == finalChunk);
 				} else {
-					player.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance, type));
+					player.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance, type.name()));
 				}
 			} else {
 				player.sendStatusMessage("No meteors detected nearby.");
