@@ -17,5 +17,9 @@ public class ScreenEnergyCell extends ScreenTiered<TileEntityEnergyCell> {
 			button.visible = false;
 		}
 		button.text.text = inv.isInfiniteSource ? "INF" : "VOID";
+		button.buttonClicked.connect( (signal, clicked) -> {
+			inv.isInfiniteSource = !inv.isInfiniteSource;
+			button.text.text = inv.isInfiniteSource ? "INF" : "VOID";
+		});
 	}
 }

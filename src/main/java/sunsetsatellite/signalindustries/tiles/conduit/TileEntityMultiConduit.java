@@ -84,47 +84,45 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                 }
                 int finalI = i;
                 neighbors.forEach((side, tile) -> {
-                    if (tile instanceof TileEntityMultiConduit && !tile.equals(lastPipes[finalI])) {
-                        TileEntityMultiConduit multiConduit = (TileEntityMultiConduit) tile;
-                        if (multiConduit.fluidContents.length <= finalI || fluidContents.length <= finalI) {
+                    if (tile instanceof TileEntityMultiConduit multiConduit && !tile.equals(lastPipes[finalI])) {
+						if (multiConduit.fluidContents.length <= finalI || fluidContents.length <= finalI) {
                             return;
                         }
                         FluidStack intFluid = getFluidInSlot(finalI);
                         FluidStack extFluid = multiConduit.getFluidInSlot(finalI);
                         if (intFluid != null && extFluid == null) {
-                            lastPipes[finalI] = (TileEntityMultiConduit) tile;
-                            ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
+                            lastPipes[finalI] = multiConduit;
+                            multiConduit.lastPipes[finalI] = this;
                             give(side, finalI, finalI);
                         } else if (intFluid == null && extFluid != null) {
-                            lastPipes[finalI] = (TileEntityMultiConduit) tile;
-                            ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
+                            lastPipes[finalI] = multiConduit;
+                            multiConduit.lastPipes[finalI] = this;
                             take(extFluid, side, finalI);
                         } else if (intFluid != null) { //if both internal and external aren't null
-                            lastPipes[finalI] = (TileEntityMultiConduit) tile;
-                            ((TileEntityMultiConduit) tile).lastPipes[finalI] = this;
+                            lastPipes[finalI] = multiConduit;
+                            multiConduit.lastPipes[finalI] = this;
                             if (intFluid.amount < extFluid.amount) {
                                 take(extFluid, side, finalI);
                             } else {
                                 give(side, finalI, finalI);
                             }
                         }
-                    } else if (tile instanceof TileEntityFluidPipe && !tile.equals(lastPipes[finalI])) {
-                        TileEntityFluidPipe inv = (TileEntityFluidPipe) tile;
-                        int activeSlot = conduitConnections.get(side);
+                    } else if (tile instanceof TileEntityFluidPipe inv && !tile.equals(lastPipes[finalI])) {
+						int activeSlot = conduitConnections.get(side);
                         if (activeSlot == -1) return;
                         FluidStack intFluid = getFluidInSlot(activeSlot);
                         FluidStack extFluid = inv.getFluidInSlot(0);
                         if (intFluid != null && extFluid == null) {
-                            lastPipes[finalI] = (TileEntityFluidPipe) tile;
-                            ((TileEntityFluidPipe) tile).last = this;
+                            lastPipes[finalI] = inv;
+                            inv.last = this;
                             give(side, activeSlot, 0);
                         } else if (intFluid == null && extFluid != null) {
-                            lastPipes[finalI] = (TileEntityFluidPipe) tile;
-                            ((TileEntityFluidPipe) tile).last = this;
+                            lastPipes[finalI] = inv;
+                            inv.last = this;
                             take(extFluid, side, activeSlot);
                         } else if (intFluid != null) { //if both internal and external aren't null
-                            lastPipes[finalI] = (TileEntityFluidPipe) tile;
-                            ((TileEntityFluidPipe) tile).last = this;
+                            lastPipes[finalI] = inv;
+                            inv.last = this;
                             if (intFluid.amount < extFluid.amount) {
                                 take(extFluid, side, activeSlot);
                             } else {
@@ -166,12 +164,25 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
                     fluidContents = Arrays.copyOf(fluidContents, fluidContents.length + 1);
                     fluidCapacity = Arrays.copyOf(fluidCapacity, fluidCapacity.length + 1);
                     acceptedFluids.add(new ArrayList<>());
-                    if (newConduit instanceof ITiered) {
-                        fluidCapacity[fluidCapacity.length - 1] = (int) Math.pow(2, ((ITiered) newConduit).getTier().ordinal()) * 1000;
-                        int value = (int) Math.pow(2, ((ITiered) newConduit).getTier().ordinal()) * 20;
-                        if (transferSpeed < value) {
-                            transferSpeed = value;
-                        }
+                    if (newConduit instanceof ITiered tiered) {
+						switch (tiered.getTier()){
+							case PROTOTYPE:
+								transferSpeed = 20;
+								break;
+							case BASIC:
+								transferSpeed = 100;
+								break;
+							case REINFORCED:
+								transferSpeed = 500;
+								break;
+							case AWAKENED:
+								transferSpeed = 1000;
+								break;
+							case INFINITE:
+								transferSpeed = Integer.MAX_VALUE;
+								break;
+						}
+						fluidCapacity[fluidCapacity.length - 1] = transferSpeed;
                     }
                     if (newConduit.getConduitCapability() == ConduitCapability.FLUID) {
                         acceptedFluids.get(acceptedFluids.size() - 1).addAll(Fluid.fluidMap.values());

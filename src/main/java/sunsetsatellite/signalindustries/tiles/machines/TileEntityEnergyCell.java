@@ -82,7 +82,20 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
             }
         } else {
             fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 8000;
-            transferSpeed = 50 * (tier.ordinal() + 1);
+			switch (tier){
+				case PROTOTYPE:
+					transferSpeed = 20;
+					break;
+				case BASIC:
+					transferSpeed = 100;
+					break;
+				case REINFORCED:
+					transferSpeed = 500;
+					break;
+				case AWAKENED:
+					transferSpeed = 1000;
+					break;
+			}
         }
         extractFluids();
         super.tick();
