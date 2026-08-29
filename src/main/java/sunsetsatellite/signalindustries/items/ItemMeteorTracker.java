@@ -28,18 +28,18 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 			double distance = Double.MAX_VALUE;
 			MeteorLocation.Type type = null;
 			for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
-				Vec3i location = meteorLocation.location;
+				Vec3i location = meteorLocation.location();
 				if (location.getSqDistanceTo((int) player.x, (int) player.y, (int) player.z) < distance) {
 					distance = location.getSqDistanceTo((int) player.x, (int) player.y, (int) player.z);
 					chunk = location;
-					type = meteorLocation.type;
+					type = meteorLocation.type();
 				}
 			}
 			if (chunk != null) {
 				if (player.isSneaking() && distance < 5) {
 					player.sendStatusMessage("This meteor will no longer be tracked.");
 					final Vec3i finalChunk = chunk;
-					SignalIndustries.meteorLocations.removeIf((L) -> L.location == finalChunk);
+					SignalIndustries.meteorLocations.removeIf((L) -> L.location() == finalChunk);
 				} else {
 					player.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance, type));
 				}

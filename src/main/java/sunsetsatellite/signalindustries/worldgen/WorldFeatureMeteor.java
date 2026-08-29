@@ -4,13 +4,11 @@ package sunsetsatellite.signalindustries.worldgen;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.lang.I18n;
 import net.minecraft.core.world.World;
-import net.minecraft.core.world.generate.feature.WorldFeature;
 import net.minecraft.core.world.generate.feature.WorldFeatureInterface;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SignalIndustries;
-import sunsetsatellite.signalindustries.util.ExplosionNoDrops;
 import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 import java.util.Random;
@@ -47,7 +45,7 @@ public class WorldFeatureMeteor implements WorldFeatureInterface {
 		int k = tilePos.z();
 
 		for (MeteorLocation m : SignalIndustries.meteorLocations) {
-			if (m.type == MeteorLocation.Type.IRON && m.location.distanceTo(new Vec3i(i, j, k)) < 64) {
+			if (m.type() == MeteorLocation.Type.IRON && m.location().distanceTo(new Vec3i(i, j, k)) < 64) {
 				return false;
 			}
 		}

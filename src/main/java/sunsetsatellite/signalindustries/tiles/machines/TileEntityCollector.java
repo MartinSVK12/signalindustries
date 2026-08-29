@@ -159,8 +159,8 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
             if (!enhanced) {
                 double distance = 24;
                 for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
-                    Vec3i location = meteorLocation.location;
-                    if (location.getSqDistanceTo(tilePos.x, tilePos.y, tilePos.z) < distance && meteorLocation.type == MeteorLocation.Type.SIGNALUM) {
+                    Vec3i location = meteorLocation.location();
+                    if (location.getSqDistanceTo(tilePos.x, tilePos.y, tilePos.z) < distance && meteorLocation.type() == MeteorLocation.Type.SIGNALUM) {
                         enhanced = true;
                     }
                 }

@@ -72,7 +72,7 @@ public class DynamicTextureMeteorTracker extends DynamicTexture {
             Vec3i chunk = null;
             double distance = Double.MAX_VALUE;
             for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
-                Vec3i location = meteorLocation.location;
+                Vec3i location = meteorLocation.location();
                 if (location.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z) < distance) {
                     distance = location.getSqDistanceTo((int) this.mc.thePlayer.x, (int) this.mc.thePlayer.y, (int) this.mc.thePlayer.z);
                     chunk = location;

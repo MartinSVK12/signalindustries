@@ -27,7 +27,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Mixin(value = LevelStorageBase.class, remap = false)
@@ -52,7 +51,7 @@ public abstract class LevelStorageBaseMixin implements LevelStorage {
             for (Tag<?> value : meteorLocations.getValues()) {
                 if (value instanceof CompoundTag compoundTag) {
 					Vec3i coordinates = new Vec3i(compoundTag.getInteger("x"), compoundTag.getInteger("y"), compoundTag.getInteger("z"));
-                    SignalIndustries.meteorLocations.add(new MeteorLocation(MeteorLocation.Type.valueOf(Objects.equals(compoundTag.getString("type"), "") ? "UNKNOWN" : compoundTag.getString("type")), coordinates));
+                    SignalIndustries.meteorLocations.add(new MeteorLocation(MeteorLocation.Type.fromName(Objects.equals(compoundTag.getString("type"), "") ? "UNKNOWN" : compoundTag.getString("type")), coordinates));
                 }
             }
             /*for (Tag<?> value : chunkloaders.getValues()) {
@@ -71,12 +70,12 @@ public abstract class LevelStorageBaseMixin implements LevelStorage {
         //CompoundTag chunkloaderNbt = new CompoundTag();
         List<MeteorLocation> meteorLocations = SignalIndustries.meteorLocations;
         for (int i = 0; i < meteorLocations.size(); i++) {
-            Vec3i meteorLocation = meteorLocations.get(i).location;
+            Vec3i meteorLocation = meteorLocations.get(i).location();
             CompoundTag locationNbt = new CompoundTag();
             locationNbt.putInt("x", meteorLocation.x);
             locationNbt.putInt("y", meteorLocation.y);
             locationNbt.putInt("z", meteorLocation.z);
-            locationNbt.putString("type", meteorLocations.get(i).type.name());
+            locationNbt.putString("type", meteorLocations.get(i).type().name());
             meteorNbt.putCompound(String.valueOf(i), locationNbt);
         }
        /* List<ChunkCoordinates> chunkLoaders = SignalIndustries.chunkLoaders;
