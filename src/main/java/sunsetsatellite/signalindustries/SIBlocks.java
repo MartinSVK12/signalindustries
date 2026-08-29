@@ -232,7 +232,8 @@ public class SIBlocks extends DataInitializer {
 	public static Block<? extends BlockLogic> reinforcedBuilder;
 	public static Block<? extends BlockLogic> spatialEncapsulator;
 
-	//public static Block<? extends BlockLogic> creationAltar;
+	public static Block<? extends BlockLogic> propertyInscriber;
+	public static Block<? extends BlockLogic> creationAltar;
 
 	public static Block<? extends BlockLogic> warpGate;
 
@@ -1274,6 +1275,30 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures(Tier.AWAKENED)
 				.withDefaultNorthTexture("awakened_encapsulator_front_inactive")
 				.withActiveNorthTexture("awakened_encapsulator_front_active")
+		);
+
+		propertyInscriber = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.inscriber",
+			"awakened_property_inscriber",
+			"propertyInscriber",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityPropertyInscriber::new, null),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultSideTextures("property_inscriber_side")
+				.withActiveSideTextures("property_inscriber_side_active")
+				.withActiveTopTexture("property_inscriber_top_active")
+		);
+
+		creationAltar = customBlock(defaultBuilder(Tier.AWAKENED),
+			"awakened.creationAltar",
+			"awakened_creation_altar",
+			"creationAltar",
+			3,
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityCreationAltar::new, null),
+			new MachineTextures(Tier.AWAKENED)
+				.withDefaultSideTextures("awakened_creation_altar_side")
+				.withDefaultNorthTexture("awakened_creation_altar_front_inactive")
+				.withDefaultTopTexture("awakened_creation_altar_top_inactive")
 		);
 
 		pulsarBlock = customBlock(defaultBuilder(Tier.REINFORCED),

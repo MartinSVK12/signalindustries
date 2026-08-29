@@ -57,6 +57,7 @@ public class SIRecipes {
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> GREENHOUSE;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> BONSAI_POT;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> HEAT_PUMP;
+	public static RecipeGroupSI<RecipeEntryMachine> PROPERTY_INSCRIBER;
     //public static RecipeGroupSI<RecipeEntryMachineMultiOutput> THERMAL_CHAMBER;
 
     public void onRecipesReady() {
@@ -97,6 +98,7 @@ public class SIRecipes {
         SIGNAL_INDUSTRIES.register("bonsai_pot", BONSAI_POT);
         //SIGNAL_INDUSTRIES.register("thermal_chamber", THERMAL_CHAMBER);
         SIGNAL_INDUSTRIES.register("heat_pump", HEAT_PUMP);
+		SIGNAL_INDUSTRIES.register("property_inscriber", PROPERTY_INSCRIBER);
         Registries.RECIPES.register("signalindustries", SIGNAL_INDUSTRIES);
     }
 
@@ -126,6 +128,7 @@ public class SIRecipes {
         GREENHOUSE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicGreenhouse))));
         BONSAI_POT = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicBonsai), new ItemStack(SIBlocks.reinforcedBonsai))));
         HEAT_PUMP = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicHeatPump))));
+		PROPERTY_INSCRIBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.propertyInscriber))));
         //THERMAL_CHAMBER = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicThermalChamber))));
     }
 
@@ -178,6 +181,7 @@ public class SIRecipes {
         new GreenhouseRecipes().addRecipes(GREENHOUSE);
         new BonsaiPotRecipes().addRecipes(BONSAI_POT);
         new HeatPumpRecipes().addRecipes(HEAT_PUMP);
+		new PropertyInscriberRecipes().addRecipes(PROPERTY_INSCRIBER);
         //new ThermalChamberRecipes().addRecipes(THERMAL_CHAMBER);
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench.json");
         DataLoader.loadRecipesFromFile("/assets/signalindustries/recipes/workbench_prototype.json");

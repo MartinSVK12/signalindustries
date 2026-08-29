@@ -495,7 +495,7 @@ tile.signalindustries.infinite.storageContainer.desc=An infinite and unlimited s
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
 tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Eye>.
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
-tile.signalindustries.reinforced.wrathBeacon.desc=<todo>
+tile.signalindustries.reinforced.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Infernal Eye>.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
@@ -1373,6 +1373,8 @@ container.signalindustries.encapsulator.name=Spatial Encapsulator
 container.signalindustries.blueprint.name=Blueprint
 container.signalindustries.trommel.name=Trommel
 container.signalindustries.gigaTrommel.name=Giga Trommel
+container.signalindustries.creationAltar.name=Altar of Creation
+container.signalindustries.propertyInscriber.name=Property Inscriber
 
 entity.signalindustries.volatileCrystal=Volatile Crystal
 entity.signalindustries.fallingMeteor=Falling Meteor
