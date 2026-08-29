@@ -5,6 +5,7 @@ import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.network.Network;
 import sunsetsatellite.catalyst.core.util.network.NetworkComponentTile;
+import sunsetsatellite.catalyst.core.util.network.NetworkManager;
 import sunsetsatellite.catalyst.core.util.network.NetworkType;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.energy.simple.api.IEnergyContainer;
@@ -90,4 +91,10 @@ public abstract class TileEntityTieredEnergyMachine extends TileEntityTieredMach
     public void removedFromNetwork(Network network) {
         this.energyNet = null;
     }
+
+	@Override
+	public void tick() {
+		super.tick();
+		energyNet = NetworkManager.getNet(worldObj, new Vec3i(tilePos));
+	}
 }

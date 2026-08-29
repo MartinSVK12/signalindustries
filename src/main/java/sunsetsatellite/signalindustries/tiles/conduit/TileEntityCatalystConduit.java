@@ -25,13 +25,13 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor /*imple
 
     @Override
     public void tick() {
+		super.tick();
         if (worldObj != null && getBlock() != Blocks.AIR) {
 			ITiered logic = Catalyst.blockLogic(getBlock(), ITiered.class);
 			if(logic != null) tier = logic.getTier();
         }
 
         throughput = 128 * (tier.ordinal() + 1);
-        super.tick();
     }
 
 	@Override
