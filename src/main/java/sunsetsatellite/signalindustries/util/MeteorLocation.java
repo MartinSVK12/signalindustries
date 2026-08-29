@@ -11,16 +11,17 @@ import java.util.Map;
 
 public record MeteorLocation(Type type, Vec3i location) {
 
-	public record Type(String name) {
+	public record Type(String name, Block<?> block) {
 		public static final Map<String, Type> TYPES = new HashMap<>();
 
-		public static final Type IRON = new Type("IRON");
-		public static final Type SIGNALUM = new Type("SIGNALUM");
-		public static final Type DILITHIUM = new Type("DILITHIUM");
-		public static final Type UNKNOWN = new Type("UNKNOWN");
+		public static final Type IRON = new Type("IRON", Blocks.ORE_IRON_BASALT);
+		public static final Type SIGNALUM = new Type("SIGNALUM", SIBlocks.signalumOre);
+		public static final Type DILITHIUM = new Type("DILITHIUM", SIBlocks.dilithiumOre);
+		public static final Type UNKNOWN = new Type("UNKNOWN", null);
 
-		public Type(String name) {
+		public Type(String name, Block<?> block) {
 			this.name = name;
+			this.block = block;
 			TYPES.put(name, this);
 		}
 
@@ -29,15 +30,14 @@ public record MeteorLocation(Type type, Vec3i location) {
 		}
 
 		public static Type getFromBlock(Block<?> block) {
-			if (block == SIBlocks.signalumOre) {
-				return SIGNALUM;
-			} else if (block == SIBlocks.dilithiumOre) {
-				return DILITHIUM;
-			} else if (block == Blocks.ORE_IRON_BASALT) {
-				return IRON;
-			} else {
-				return UNKNOWN;
+			for (Map.Entry<String, Type> entry : TYPES.entrySet()) {
+				String K = entry.getKey();
+				Type V = entry.getValue();
+				if (V.block == block) {
+					return V;
+				}
 			}
+			return UNKNOWN;
 		}
 
 	}
