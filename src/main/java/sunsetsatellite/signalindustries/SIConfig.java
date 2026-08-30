@@ -2,8 +2,8 @@ package sunsetsatellite.signalindustries;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.Item;
-import turniplabs.halplibe.util.TomlConfigHandler;
-import turniplabs.halplibe.util.toml.Toml;
+import sunsetsatellite.signalindustries.util.config.TomlConfigHandler;
+import sunsetsatellite.signalindustries.util.config.Toml;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +20,8 @@ public class SIConfig {
     public static final TomlConfigHandler config;
 
     static {
+		SignalIndustries.LOGGER.info("Loading SI config...");
+
         List<Field> blockFields = Arrays.stream(SIBlocks.class.getDeclaredFields()).filter((F) -> Block.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
         List<Field> itemFields = Arrays.stream(SIItems.class.getDeclaredFields()).filter((F) -> Item.class.isAssignableFrom(F.getType())).collect(Collectors.toList());
 
@@ -28,7 +30,7 @@ public class SIConfig {
         defaultConfig.addCategory("ItemIDs");
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
-        defaultConfig.addCategory("Experimental");
+        //defaultConfig.addCategory("Experimental");
         defaultConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10. Set any of these options to 0 to disable them, be careful though as completely disabling any of these might prevent you from progressing through the mod properly.", "WorldGen");
         //defaultConfig.addEntry("Experimental.enableDynamicChunkProvider", "Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.", false);
         defaultConfig.addEntry("Other.enableQuests", true);
@@ -66,7 +68,6 @@ public class SIConfig {
 
         if (config.getConfigFile().exists()) {
             config.loadConfig();
-            config.setDefaults(config.getRawParsed());
             Toml rawConfig = config.getRawParsed();
             Toml blockToml = (Toml) rawConfig.get(".BlockIDs");
             Toml itemToml = (Toml) rawConfig.get(".ItemIDs");
@@ -97,7 +98,7 @@ public class SIConfig {
                 }
             }
 
-            if (!rawConfig.contains("WorldGen")) {
+            if (!rawConfig.contains(".WorldGen")) {
                 rawConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10.", "WorldGen");
                 changed = true;
             }
@@ -219,20 +220,22 @@ public class SIConfig {
                 changed = true;
             }
 
+			config.setDefaults(rawConfig);
             if (changed) {
-                config.setDefaults(rawConfig);
                 config.writeConfig();
-                config.loadConfig();
+				SignalIndustries.LOGGER.info("Config updated.");
             }
+			SignalIndustries.LOGGER.info("Config loaded successfully.");
         } else {
             config.setDefaults(defaultConfig);
             try {
+				SignalIndustries.LOGGER.info("No config file found! Generating default config...");
                 //noinspection ResultOfMethodCallIgnored
                 configFile.getParentFile().mkdirs();
                 //noinspection ResultOfMethodCallIgnored
                 configFile.createNewFile();
                 config.writeConfig();
-                config.loadConfig();
+				SignalIndustries.LOGGER.info("Default config loaded successfully.");
             } catch (IOException e) {
                 throw new RuntimeException("Failed to generate config!", e);
             }

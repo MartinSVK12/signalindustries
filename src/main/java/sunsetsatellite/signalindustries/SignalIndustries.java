@@ -84,7 +84,6 @@ public class SignalIndustries implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Signal Industries is loading... Shine!");
-		LOGGER.info("Loading SI config...");
 		new SIConfig();
 		new SIArt().init();
 
