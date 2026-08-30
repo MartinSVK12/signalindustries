@@ -2,10 +2,12 @@ package sunsetsatellite.signalindustries.tiles;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.util.helper.Side;
+import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -36,36 +38,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     }
 
     @Override
-    public int getActiveFluidSlotForSide(Direction dir) {
-        if (externalTile instanceof IFluidIO) {
-            return ((IFluidIO) externalTile).getActiveFluidSlotForSide(dir);
-        }
-        return 0;
-    }
-
-    @Override
-    public Connection getFluidIOForSide(Direction dir) {
-        if (externalTile instanceof IFluidIO) {
-            return ((IFluidIO) externalTile).getFluidIOForSide(dir);
-        }
-        return Connection.NONE;
-    }
-
-    @Override
-    public void take(@NotNull FluidStack fluidStack, Direction dir, int slot) {
-        if (externalTile instanceof IFluidTransfer) {
-            ((IFluidTransfer) externalTile).take(fluidStack, dir, slot);
-        }
-    }
-
-    @Override
-    public void give(Direction dir, int slot, int otherSlot) {
-        if (externalTile instanceof IFluidTransfer) {
-            ((IFluidTransfer) externalTile).give(dir, slot, otherSlot);
-        }
-    }
-
-    @Override
     public void readAdditionalData(@NonNull CompoundTag tag) {
         super.readAdditionalData(tag);
         if (tag.containsKey("externalPosition")) {
@@ -79,20 +51,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
             tag.put("externalPosition", externalTilePos);
         }
         super.writeAdditionalData(tag);
-    }
-
-    @Override
-    public void take(@NotNull FluidStack fluidStack, Direction dir) {
-        if (externalTile instanceof IFluidTransfer) {
-            ((IFluidTransfer) externalTile).take(fluidStack, dir);
-        }
-    }
-
-    @Override
-    public void give(Direction dir) {
-        if (externalTile instanceof IFluidTransfer) {
-            ((IFluidTransfer) externalTile).give(dir);
-        }
     }
 
     @Override
@@ -200,34 +158,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         return 0;
     }
 
-    /*@Override
-    public void setFluidIOForSide(Direction dir, Connection con) {
-        if(externalTile instanceof IFluidIO){
-            ((IFluidIO) externalTile).setFluidIOForSide(dir, con);
-        }
-    }
-
-    @Override
-    public void cycleFluidIOForSide(Direction dir) {
-        if(externalTile instanceof IFluidIO){
-            ((IFluidIO) externalTile).cycleFluidIOForSide(dir);
-        }
-    }
-
-    @Override
-    public void cycleActiveFluidSlotForSide(Direction dir, boolean backwards) {
-        if(externalTile instanceof IFluidIO){
-            ((IFluidIO) externalTile).cycleActiveFluidSlotForSide(dir, backwards);
-        }
-    }
-
-    @Override
-    public void setActiveFluidSlotForSide(Direction dir, int slot) {
-        if(externalTile instanceof IFluidIO){
-            ((IFluidIO) externalTile).setActiveFluidSlotForSide(dir, slot);
-        }
-    }*/
-
     @Override
     public int getContainerSize() {
         if (externalTile instanceof Container) {
@@ -271,50 +201,6 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
 	public void sort() {
 
 	}
-
-	@Override
-    public int getActiveItemSlotForSide(Direction dir) {
-        if (externalTile instanceof IItemIO) {
-            return ((IItemIO) externalTile).getActiveItemSlotForSide(dir);
-        }
-        return 0;
-    }
-
-    /*@Override
-    public void setActiveItemSlotForSide(Direction dir, int slot) {
-        if(externalTile instanceof IItemIO) {
-            ((IItemIO) externalTile).setActiveItemSlotForSide(dir, slot);
-        }
-    }*/
-
-    @Override
-    public Connection getItemIOForSide(Direction dir) {
-        if (externalTile instanceof IItemIO) {
-            return ((IItemIO) externalTile).getItemIOForSide(dir);
-        }
-        return Connection.NONE;
-    }
-
-    /*@Override
-    public void setItemIOForSide(Direction dir, Connection con) {
-        if(externalTile instanceof IItemIO) {
-            ((IItemIO) externalTile).setItemIOForSide(dir, con);
-        }
-    }
-
-    @Override
-    public void cycleItemIOForSide(Direction dir) {
-        if(externalTile instanceof IItemIO) {
-            ((IItemIO) externalTile).cycleItemIOForSide(dir);
-        }
-    }
-
-    @Override
-    public void cycleActiveItemSlotForSide(Direction dir, boolean backwards) {
-        if(externalTile instanceof IItemIO) {
-            ((IItemIO) externalTile).cycleActiveItemSlotForSide(dir, backwards);
-        }
-    }*/
 
     @Override
     public void tick() {
@@ -415,7 +301,17 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         }
     }
 
-    @Override
+	@Override
+	public void drop(World world, Entity holder) {
+
+	}
+
+	@Override
+	public void dropContents(World world, int x, int y, int z) {
+
+	}
+
+	@Override
     public @NonNull String getNameTranslationKey() {
         return "container.signalindustries.externalIo";
     }
