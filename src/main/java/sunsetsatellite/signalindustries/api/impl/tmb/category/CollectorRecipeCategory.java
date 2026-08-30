@@ -50,7 +50,7 @@ public class CollectorRecipeCategory implements IRecipeCategory<FluidMachineReci
 
     @Override
     public String getNamespace() {
-        return SignalIndustries.MOD_ID;
+        return "Signal Industries";
     }
 
     @Override

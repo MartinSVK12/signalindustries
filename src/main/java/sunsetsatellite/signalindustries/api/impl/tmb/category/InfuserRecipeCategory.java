@@ -58,7 +58,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<MachineRecipeTrans
 
     @Override
     public String getNamespace() {
-        return SignalIndustries.MOD_ID;
+        return "Signal Industries";
     }
 
     @Override

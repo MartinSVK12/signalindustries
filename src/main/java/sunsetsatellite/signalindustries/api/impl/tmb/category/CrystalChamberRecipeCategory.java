@@ -58,7 +58,7 @@ public class CrystalChamberRecipeCategory implements IRecipeCategory<MachineReci
 
     @Override
     public String getNamespace() {
-        return SignalIndustries.MOD_ID;
+        return "Signal Industries";
     }
 
     @Override

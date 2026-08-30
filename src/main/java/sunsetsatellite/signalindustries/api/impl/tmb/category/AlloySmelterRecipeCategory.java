@@ -54,7 +54,7 @@ public class AlloySmelterRecipeCategory implements IRecipeCategory<MachineRecipe
 
     @Override
     public String getNamespace() {
-        return SignalIndustries.MOD_ID;
+        return "Signal Industries";
     }
 
     @Override

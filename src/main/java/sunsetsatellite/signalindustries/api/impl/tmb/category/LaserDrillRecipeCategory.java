@@ -6,6 +6,7 @@ import net.minecraft.core.net.command.TextFormatting;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.ExtendedTypedIngredient;
 import sunsetsatellite.catalyst.fluids.api.impl.tmb.TMBFluidPlugin;
+import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.RandomMachineRecipeTranslator;
 import turing.tmb.RecipeLayoutBuilder;
@@ -40,7 +41,7 @@ public class LaserDrillRecipeCategory implements IRecipeCategory<RandomMachineRe
 
 	public LaserDrillRecipeCategory() {
 		this.background = new DrawableBlank(120, 60);
-		this.icon = new DrawableIngredient<>(Blocks.TROMMEL_ACTIVE.getDefaultStack(), ItemStackIngredientRenderer.INSTANCE);
+		this.icon = new DrawableIngredient<>(SIBlocks.reinforcedLaserDrill.getDefaultStack(), ItemStackIngredientRenderer.INSTANCE);
 		this.arrow = new DrawableAnimated(new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 82, 128, 24, 16, 0, 0, 0, 0, 24, 16), 12, IDrawableAnimated.StartDirection.LEFT, false);
 		this.arrowBack = new DrawableTexture("/assets/tmb/textures/gui/gui_vanilla.png", 24, 133, 24, 16, 0, 0, 0, 0, 24, 16);
 	}
@@ -52,7 +53,7 @@ public class LaserDrillRecipeCategory implements IRecipeCategory<RandomMachineRe
 
 	@Override
 	public String getNamespace() {
-		return SignalIndustries.MOD_ID;
+		return "Signal Industries";
 	}
 
 	@Override

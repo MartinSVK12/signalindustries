@@ -58,7 +58,7 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
 
     @Override
     public String getNamespace() {
-        return SignalIndustries.MOD_ID;
+        return "Signal Industries";
     }
 
     @Override

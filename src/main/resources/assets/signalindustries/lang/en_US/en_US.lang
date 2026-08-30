@@ -687,7 +687,7 @@ tile.signalindustries.reinforced.programmer.name=NAND Flash Reprogrammer
 tile.signalindustries.reinforced.programmer.desc=Device for programming and configuring <Ability Containers>.
 
 tile.signalindustries.basic.dynamo.name=Basic Signalite Dynamo
-tile.signalindustries.basic.dynamo.desc=Generates universal energy units using <S. Energy>. Only available if Catalyst: Energy is installed.
+tile.signalindustries.basic.dynamo.desc=Generates universal energy units using <S. Energy>.
 tile.signalindustries.reinforced.dynamo.name=Reinforced Signalite Dynamo
 tile.signalindustries.reinforced.dyname.desc=Generates more energy that it's basic counterpart.
 
