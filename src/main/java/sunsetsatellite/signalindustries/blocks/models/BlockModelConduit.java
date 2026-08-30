@@ -92,17 +92,21 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 						case SPLIT -> splitModels.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 					}
 				}
-				models.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 				if(type == ConduitCapability.FLUID || type == ConduitCapability.SIGNALUM){
 					TileEntityFluidPipe tile = (TileEntityFluidPipe) worldSource.getTileEntity(tilePos);
 					if(tile == null) continue;
+					if(tile.getFluidIOForSide(dir) != Connection.NONE) {
+						models.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
+					}
 					if(tile.getFluidIOForSide(dir) == Connection.INPUT){
 						inputModels.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 					}
 					if(tile.getFluidIOForSide(dir) == Connection.OUTPUT){
 						outputModels.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 					}
+					continue;
 				}
+				models.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 			}
 		}
 
@@ -179,7 +183,10 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 					switch (type){
 						case SIGNALUM, FLUID -> {
 							TileEntity tile = worldSource.getTileEntity(tilePos);
-							if(tile == null) continue;
+							if(tile == null) {
+								states.put(direction, show);
+								continue;
+							};
 							if(tile instanceof IFluidIO fluidIO && fluidIO.getFluidIOForSide(direction) != Connection.NONE){
 								if (!(neighbouringBlock.getLogic() instanceof BlockLogicFluidConduit || neighbouringBlock.getLogic() instanceof BlockLogicConduit)) {
 									if (neighbouringBlock.isEntityTile) {
