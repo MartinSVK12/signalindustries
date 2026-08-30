@@ -1,9 +1,13 @@
 package sunsetsatellite.signalindustries.blocks.logic.base;
 
+import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.IntTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
@@ -29,6 +33,7 @@ import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -132,26 +137,46 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
                                           World world, TilePosc tilePos, Side playerFacing) {
 
         ConfigurationTabletMode mode = ConfigurationTabletMode.values()[player.getCurrentEquippedItem().getData().getInteger("mode")];
-        switch (mode) {
-            case ROTATION:
-                handleRotationAction(pair, world, tilePos, playerFacing, player);
-                break;
-            case ITEM:
-                handleItemIoChange(pair, world, tilePos, playerFacing, player);
-                break;
-            case FLUID:
-                handleFluidIoChange(pair, world, tilePos, playerFacing, player);
-                break;
-            case DISCONNECTOR:
-                handleCoverRemoval(pair, world, tilePos, playerFacing, player);
-                break;
-            case CONFIGURATOR:
-                handleCoverConfig(pair, world, tilePos, playerFacing, player);
-                break;
-        }
+		switch (mode) {
+		    case ROTATION -> handleRotationAction(pair, world, tilePos, playerFacing, player);
+			case ITEM -> handleItemIoChange(pair, world, tilePos, playerFacing, player);
+			case FLUID -> handleFluidIoChange(pair, world, tilePos, playerFacing, player);
+			case DISCONNECTOR -> handleCoverRemoval(pair, world, tilePos, playerFacing, player);
+			case CONFIGURATOR -> handleCoverConfig(pair, world, tilePos, playerFacing, player);
+			case COPY_PASTE -> handleCopyPaste(pair, world, tilePos, playerFacing, player);
+		}
     }
 
-    private void handleCoverConfig(Pair<Direction, BlockSection> pair, World world, @NotNull TilePosc tilePos, Side playerFacing, Player player) {
+	private void handleCopyPaste(Pair<Direction, BlockSection> pair, World world, TilePosc tilePos, Side playerFacing, Player player) {
+		ItemStack tablet = player.getCurrentEquippedItem();
+		TileEntity tile = world.getTileEntity(tilePos);
+		if(tablet.getData().containsKey("CopyPaste")){
+			CompoundTag copyPaste = tablet.getData().getCompound("CopyPaste");
+			if(tile instanceof IFluidIO fluidIO){
+				CompoundTag fluidIoTag = copyPaste.getCompound("Fluid");
+				CompoundTag connectionsTag = fluidIoTag.getCompound("fluidConnections");
+				for (Object con : connectionsTag.getValues()) {
+					fluidIO.setFluidIOForSide(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], Connection.values()[((IntTag) con).getValue()]);
+				}
+			}
+			player.sendStatusMessage(I18n.getInstance().translateKey("event.signalindustries.pasted"));
+		} else {
+			CompoundTag copyPaste = new CompoundTag();
+			if(tile instanceof IFluidIO fluidIO){
+				CompoundTag fluidIoTag = new CompoundTag();
+				CompoundTag connectionsTag = new CompoundTag();
+				for (Direction dir : Direction.values()) {
+					connectionsTag.putInt(String.valueOf(dir.ordinal()), fluidIO.getFluidIOForSide(dir).ordinal());
+				}
+				fluidIoTag.putCompound("fluidConnections", connectionsTag);
+				copyPaste.put("Fluid", fluidIoTag);
+			}
+			tablet.getData().put("CopyPaste", copyPaste);
+			player.sendStatusMessage(I18n.getInstance().translateKey("event.signalindustries.copied"));
+		}
+	}
+
+	private void handleCoverConfig(Pair<Direction, BlockSection> pair, World world, @NotNull TilePosc tilePos, Side playerFacing, Player player) {
         TileEntity tile = world.getTileEntity(tilePos);
         if (tile instanceof TileEntityCoverable) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);

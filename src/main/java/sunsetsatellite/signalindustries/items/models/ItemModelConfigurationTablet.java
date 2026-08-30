@@ -17,6 +17,7 @@ public class ItemModelConfigurationTablet extends ItemModelStandard {
     public IconCoordinate fluid = TextureRegistry.getTexture("signalindustries:item/configuration_tablet_fluid");
     public IconCoordinate pipeDisconnect = TextureRegistry.getTexture("signalindustries:item/configuration_tablet_pipe_disconnect");
     public IconCoordinate config = TextureRegistry.getTexture("signalindustries:item/configuration_tablet_configurator");
+	public IconCoordinate copyPaste = TextureRegistry.getTexture("signalindustries:item/configuration_tablet_copy_paste");
 
 	public ItemModelConfigurationTablet(@NotNull Item item) {
 		super(item);
@@ -31,6 +32,7 @@ public class ItemModelConfigurationTablet extends ItemModelStandard {
 		    case FLUID -> fluid;
 		    case DISCONNECTOR -> pipeDisconnect;
 		    case CONFIGURATOR -> config;
-	    };
+			case COPY_PASTE -> copyPaste;
+		};
 	}
 }

@@ -347,8 +347,8 @@ item.signalindustries.configurationTablet.disconnect.name=Configuration Tablet (
 item.signalindustries.configurationTablet.disconnect.desc=Used to disconnect conduits and remove covers. Shift+RMB to change mode.
 item.signalindustries.configurationTablet.config.name=Configuration Tablet (Configurator)
 item.signalindustries.configurationTablet.config.desc=Used to configure covers. Shift+RMB to change mode.
-item.signalindustries.configurationTablet.copy.name=Configuration Tablet (Copy & Paste)
-item.signalindustries.configurationTablet.copy.desc=Work in progress, doesn't work currently. Copies configurations from machine to another. Shift+RMB to change mode.
+item.signalindustries.configurationTablet.copyPaste.name=Configuration Tablet (Copy & Paste)
+item.signalindustries.configurationTablet.copyPaste.desc=Copies I/O configurations from one machine to another. Shift+RMB to change mode.
 
 item.signalindustries.cover.blank.name=Blank Cover
 item.signalindustries.cover.blank.desc=Covers can be attached to any side of a machine for extended functionality, although this cover doesn't have any.
@@ -817,6 +817,9 @@ event.signalindustries.bloodMoonBlock=Blood moons will no longer appear.
 event.signalindustries.bloodMoonUnblock=Blood moons will appear again.
 event.signalindustries.solarTotemOvertake=The power of the Solar Totem overrides the cursed night!
 event.signalindustries.totemNoPermission=You're not worthy of controlling the skies.
+event.signalindustries.clearedCopyPaste=Copied data cleared!
+event.signalindustries.copied=Data copied!
+event.signalindustries.pasted=Data pasted!
 
 signalindustries.warning=Warning!
 

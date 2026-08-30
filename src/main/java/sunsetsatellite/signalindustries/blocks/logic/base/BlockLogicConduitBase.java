@@ -1,11 +1,14 @@
 package sunsetsatellite.signalindustries.blocks.logic.base;
 
+import com.mojang.nbt.tags.CompoundTag;
+import com.mojang.nbt.tags.IntTag;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.util.collection.Pair;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
@@ -168,8 +171,72 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
             handlePipeDisconnect(pair, world, tilePos, playerFacing, player);
         } else if(mode == ConfigurationTabletMode.FLUID && (getConduitCapability() == ConduitCapability.FLUID || getConduitCapability() == ConduitCapability.SIGNALUM)) {
 			handleFluidPipeIO(pair, world, tilePos, playerFacing, player);
+		} else if(mode == ConfigurationTabletMode.COPY_PASTE){
+			handleCopyPaste(pair, world, tilePos, playerFacing, player);
 		}
     }
+
+	private void handleCopyPaste(Pair<Direction, BlockSection> pair, World world, TilePosc tilePos, Side playerFacing, Player player) {
+		ItemStack tablet = player.getCurrentEquippedItem();
+		TileEntity tile = world.getTileEntity(tilePos);
+		if(tablet.getData().containsKey("CopyPaste")){
+			CompoundTag copyPaste = tablet.getData().getCompound("CopyPaste");
+			if(tile instanceof IFluidIO fluidIO){
+				CompoundTag fluidIoTag = copyPaste.getCompound("Fluid");
+				CompoundTag connectionsTag = fluidIoTag.getCompound("fluidConnections");
+				for (Object con : connectionsTag.getValues()) {
+					fluidIO.setFluidIOForSide(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], Connection.values()[((IntTag) con).getValue()]);
+				}
+
+				CompoundTag activeFluidSlotsTag = fluidIoTag.getCompound("fluidActiveSlots");
+				for (Object con : activeFluidSlotsTag.getValues()) {
+					fluidIO.setActiveFluidSlotForSide(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], ((IntTag) con).getValue());
+				}
+			}
+			if (tile instanceof IItemIO itemIO) {
+				CompoundTag itemIoTag = copyPaste.getCompound("Item");
+				CompoundTag connectionsTag = itemIoTag.getCompound("itemConnections");
+				for (Object con : connectionsTag.getValues()) {
+					itemIO.setItemIOForSide(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], Connection.values()[((IntTag) con).getValue()]);
+				}
+
+				CompoundTag activeItemSlotsTag = itemIoTag.getCompound("itemActiveSlots");
+				for (Object con : activeItemSlotsTag.getValues()) {
+					itemIO.setActiveItemSlotForSide(Direction.values()[Integer.parseInt(((IntTag) con).getTagName())], ((IntTag) con).getValue());
+				}
+			}
+			player.sendStatusMessage(I18n.getInstance().translateKey("event.signalindustries.pasted"));
+		} else {
+			CompoundTag copyPaste = new CompoundTag();
+			if(tile instanceof IFluidIO fluidIO){
+				CompoundTag fluidIoTag = new CompoundTag();
+				CompoundTag connectionsTag = new CompoundTag();
+				CompoundTag activeFluidSlotsTag = new CompoundTag();
+				for (Direction dir : Direction.values()) {
+					connectionsTag.putInt(String.valueOf(dir.ordinal()), fluidIO.getFluidIOForSide(dir).ordinal());
+					activeFluidSlotsTag.putInt(String.valueOf(dir.ordinal()), fluidIO.getActiveFluidSlotForSide(dir));
+				}
+				fluidIoTag.putCompound("fluidConnections", connectionsTag);
+				fluidIoTag.putCompound("fluidActiveSlots", activeFluidSlotsTag);
+				copyPaste.put("Fluid", fluidIoTag);
+			}
+			if (tile instanceof IItemIO itemIO) {
+				CompoundTag itemIoTag = new CompoundTag();
+				CompoundTag itemConnectionsTag = new CompoundTag();
+				CompoundTag activeItemSlotsTag = new CompoundTag();
+				for (Direction dir : Direction.values()) {
+					itemConnectionsTag.putInt(String.valueOf(dir.ordinal()), itemIO.getItemIOForSide(dir).ordinal());
+					activeItemSlotsTag.putInt(String.valueOf(dir.ordinal()), itemIO.getActiveItemSlotForSide(dir));
+				}
+				itemIoTag.putCompound("itemConnections", itemConnectionsTag);
+				itemIoTag.putCompound("itemActiveSlots", activeItemSlotsTag);
+
+				copyPaste.put("Item", itemIoTag);
+			}
+			tablet.getData().put("CopyPaste", copyPaste);
+			player.sendStatusMessage(I18n.getInstance().translateKey("event.signalindustries.copied"));
+		}
+	}
 
 	private void handleFluidPipeIO(Pair<Direction, BlockSection> pair, World world, TilePosc tilePos, Side playerFacing, Player player) {
 		TileEntity tile = world.getTileEntity(tilePos);

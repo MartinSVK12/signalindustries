@@ -5,5 +5,6 @@ public enum ConfigurationTabletMode {
     ITEM,
     FLUID,
     DISCONNECTOR,
-    CONFIGURATOR
+    CONFIGURATOR,
+	COPY_PASTE
 }

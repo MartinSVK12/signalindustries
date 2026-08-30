@@ -5,6 +5,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.lang.I18n;
 import net.minecraft.core.world.World;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.IWrench;
@@ -33,7 +34,8 @@ public class ItemConfigurationTablet extends Item implements IWrench, ISideInter
 		    case FLUID -> "item.signalindustries.configurationTablet.fluid";
 		    case DISCONNECTOR -> "item.signalindustries.configurationTablet.disconnect";
 		    case CONFIGURATOR -> "item.signalindustries.configurationTablet.config";
-	    };
+			case COPY_PASTE -> "item.signalindustries.configurationTablet.copyPaste";
+		};
 	}
 
     @Override
@@ -43,7 +45,14 @@ public class ItemConfigurationTablet extends Item implements IWrench, ISideInter
             mode = (mode + 1) % ConfigurationTabletMode.values().length;
             itemstack.getData().putInt("mode", mode);
             entityplayer.sendStatusMessage(itemstack.getDisplayName());
-        }
+        } else {
+			ConfigurationTabletMode mode = ConfigurationTabletMode.values()[itemstack.getData().getInteger("mode")];
+			if(mode == ConfigurationTabletMode.COPY_PASTE){
+				itemstack.getData().getValue().remove("CopyPaste");
+				entityplayer.sendStatusMessage(I18n.getInstance().translateKey("event.signalindustries.clearedCopyPaste"));
+			}
+		}
+
         return super.onUse(itemstack, world, entityplayer);
     }
 }
