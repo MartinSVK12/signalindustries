@@ -23,7 +23,7 @@ public class SITrommelRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                                     new RecipeExtendedSymbol(input)
                             },
                             trommelRecipe.getOutput(),
-                            new RecipeProperties(50, 40, Tier.BASIC, true).setChance(0.5f)
+                            new RecipeProperties(50, 40, Tier.BASIC, true)
                     )
             );
 			group.register(
@@ -33,7 +33,7 @@ public class SITrommelRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
 						new RecipeExtendedSymbol(input)
 					},
 					trommelRecipe.getOutput(),
-					new RecipeProperties(50, 40, Tier.REINFORCED, true).setChance(0.75f)
+					new RecipeProperties(50, 40, Tier.REINFORCED, true)
 				)
 			);
 			group.register(
@@ -43,7 +43,7 @@ public class SITrommelRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
 						new RecipeExtendedSymbol(input)
 					},
 					trommelRecipe.getOutput(),
-					new RecipeProperties(50, 40, Tier.AWAKENED, false).setChance(1f)
+					new RecipeProperties(50, 40, Tier.AWAKENED, false)
 				)
 			);
         }
