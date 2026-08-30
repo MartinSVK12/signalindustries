@@ -5,7 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.GuiEntry;
+import sunsetsatellite.catalyst.core.util.mp.entry.TileGuiEntry;
 import sunsetsatellite.signalindustries.gui.menus.*;
+import sunsetsatellite.signalindustries.gui.screens.ScreenAssembler;
+import sunsetsatellite.signalindustries.gui.screens.ScreenMultiConduitConfig;
 import sunsetsatellite.signalindustries.invs.*;
 import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.MenuPowerSuit;
@@ -14,6 +17,7 @@ import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
 import sunsetsatellite.signalindustries.tiles.TileEntityRedstoneClock;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityCoverable;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
+import sunsetsatellite.signalindustries.tiles.conduit.TileEntityMultiConduit;
 import sunsetsatellite.signalindustries.tiles.machines.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.*;
 import sunsetsatellite.signalindustries.tiles.machines.multiblocks.waking.TileEntityWakingAlloySmelter;
@@ -42,6 +46,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/crystal_cutter"), new GuiEntry<>(TileEntityCrystalCutter.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/crystal_chamber"), new GuiEntry<>(TileEntityCrystalChamber.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/booster"), new GuiEntry<>(TileEntityBooster.class, MenuMachine.class));
+		Catalyst.GUIS.register(key("gui/assembler"), new GuiEntry<>(TileEntityAssembler.class, MenuAssembler.class));
 		Catalyst.GUIS.register(key("gui/infuser"), new GuiEntry<>(TileEntityInfuser.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/stabilizer"), new GuiEntry<>(TileEntityStabilizer.class, MenuMachine.class));
 		Catalyst.GUIS.register(key("gui/item_bus"), new GuiEntry<>(TileEntityItemBus.class, MenuMachine.class));
@@ -64,6 +69,7 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/auto_miner"), new GuiEntry<>(TileEntityAutoMiner.class,MenuAutoMiner.class));
 		Catalyst.GUIS.register(key("gui/programmer"), new GuiEntry<>(TileEntityProgrammer.class,MenuProgrammer.class));
 		Catalyst.GUIS.register(key("gui/pulsar_block"), new GuiEntry<>(TileEntityPulsar.class,MenuPulsarBlock.class));
+		Catalyst.GUIS.register(key("gui/multi_conduit"), new GuiEntry<>(TileEntityMultiConduit.class, null));
 		Catalyst.GUIS.register(key("gui/encapsulator"), new GuiEntry<>(TileEntityEncapsulator.class,MenuEncapsulator.class));
 
 		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new GuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class));
