@@ -14,11 +14,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.useless.dragonfly.data.block.BlockModelData;
 import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
+import sunsetsatellite.catalyst.core.util.io.IFluidIO;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.energy.simple.api.IEnergyContainer;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
+import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicCatalystConduit;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
@@ -39,6 +42,8 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 	public HashMap<Direction, BlockModelData> sensorOffModels = new HashMap<>();
 	public HashMap<Direction, BlockModelData> sensorOnModels = new HashMap<>();
 	public HashMap<Direction, BlockModelData> restrictModels = new HashMap<>();
+	public HashMap<Direction, BlockModelData> inputModels = new HashMap<>();
+	public HashMap<Direction, BlockModelData> outputModels = new HashMap<>();
 
 	public ConduitCapability type;
 	public Tier tier;
@@ -88,6 +93,16 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 					}
 				}
 				models.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
+				if(type == ConduitCapability.FLUID || type == ConduitCapability.SIGNALUM){
+					TileEntityFluidPipe tile = (TileEntityFluidPipe) worldSource.getTileEntity(tilePos);
+					if(tile == null) continue;
+					if(tile.getFluidIOForSide(dir) == Connection.INPUT){
+						inputModels.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
+					}
+					if(tile.getFluidIOForSide(dir) == Connection.OUTPUT){
+						outputModels.get(dir).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
+					}
+				}
 			}
 		}
 
@@ -163,16 +178,20 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 				} else {
 					switch (type){
 						case SIGNALUM, FLUID -> {
-							if (!(neighbouringBlock.getLogic() instanceof BlockLogicFluidConduit || neighbouringBlock.getLogic() instanceof BlockLogicConduit)) {
-								if (neighbouringBlock.isEntityTile) {
-									TileEntity neighbouringTile = offset.getTileEntity(worldSource);
-									if (neighbouringTile instanceof IFluidInventory) {
-										show = true;
+							TileEntity tile = worldSource.getTileEntity(tilePos);
+							if(tile == null) continue;
+							if(tile instanceof IFluidIO fluidIO && fluidIO.getFluidIOForSide(direction) != Connection.NONE){
+								if (!(neighbouringBlock.getLogic() instanceof BlockLogicFluidConduit || neighbouringBlock.getLogic() instanceof BlockLogicConduit)) {
+									if (neighbouringBlock.isEntityTile) {
+										TileEntity neighbouringTile = offset.getTileEntity(worldSource);
+										if (neighbouringTile instanceof IFluidInventory) {
+											show = true;
+										} else if (neighbouringBlock.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
+											show = true;
+										}
 									} else if (neighbouringBlock.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
 										show = true;
 									}
-								} else if (neighbouringBlock.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) || neighbouringBlock.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT)) {
-									show = true;
 								}
 							}
 						}
@@ -225,6 +244,8 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 		if(models.isEmpty()){
 			for (Direction dir : Direction.values()) {
 				models.put(dir, loadConduitModel(type, tier, null, String.format("conduit_%s",dir.getName().toLowerCase())));
+				inputModels.put(dir, loadConduitModel(null, null, "input", String.format("conduit_%s",dir.getName().toLowerCase())));
+				outputModels.put(dir, loadConduitModel(null, null, "output", String.format("conduit_%s",dir.getName().toLowerCase())));
 				if(type == ConduitCapability.ITEM){
 					splitModels.put(dir, loadConduitModel(type, tier, "split", String.format("conduit_%s",dir.getName().toLowerCase())));
 					if(tier.ordinal() > 0){
@@ -238,6 +259,9 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 	}
 
 	public static BlockModelData loadConduitModel(ConduitCapability type, Tier tier, String additional, String base) {
+		if(tier == null){
+			return BlockModelDispatcher.loadDataModel(String.format("signalindustries:block/conduit/%s/%s",additional,base));
+		}
 		if(additional == null){
 			return BlockModelDispatcher.loadDataModel(String.format("signalindustries:block/conduit/%s/%s/%s",type.name().toLowerCase(),tier.name().toLowerCase(),base));
 		}

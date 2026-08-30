@@ -16,19 +16,26 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.primitives.AABBdc;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IWrench;
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
 import sunsetsatellite.catalyst.core.util.conduit.IConduitBlock;
+import sunsetsatellite.catalyst.core.util.io.IFluidIO;
+import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.section.BlockSection;
 import sunsetsatellite.catalyst.core.util.vector.Vec2f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 //import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.tiles.conduit.TileEntityItemConduit;
 import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
+import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 
 import java.util.Objects;
@@ -88,7 +95,23 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
                         continue;
                     }
                 } else {
-                    continue;
+					switch (conduitCapability) {
+						case FLUID -> {
+							if(!b.hasTag(SignalIndustries.FLUID_CONDUITS_CONNECT) && !(te instanceof IFluidIO)) continue;
+						}
+						case SIGNALUM -> {
+							if(!b.hasTag(SignalIndustries.SIGNALUM_CONDUITS_CONNECT) && !(te instanceof IFluidIO)) continue;
+						}
+						case ITEM -> {
+							if(!b.hasTag(SignalIndustries.ITEM_CONDUITS_CONNECT) && !(te instanceof IItemIO)) continue;
+						}
+						case CATALYST_ENERGY -> {
+							if(!b.hasTag(CatalystEnergy.ENERGY_CONDUITS_CONNECT)) continue;
+						}
+						default -> {
+							continue;
+						}
+					}
                 }
             }
             if (v.x > 0) tx = 1.0f;
@@ -119,7 +142,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 		}
 
 		if (isPlayerHoldingConfigTablet(player)) {
-			handleConfigTabletAction(player, pair, world, tilePos.x(), tilePos.y(), tilePos.z(), playerFacing);
+			handleConfigTabletAction(player, pair, world, tilePos, playerFacing);
 		}
 		return true;
 	}
@@ -137,16 +160,33 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
     }
 
     private void handleConfigTabletAction(Player player, Pair<Direction, BlockSection> pair,
-                                          World world, int x, int y, int z, Side playerFacing) {
+                                          World world, TilePosc tilePos, Side playerFacing) {
 
         ConfigurationTabletMode mode = ConfigurationTabletMode.values()[player.getCurrentEquippedItem().getData().getInteger("mode")];
-        if (Objects.requireNonNull(mode) == ConfigurationTabletMode.DISCONNECTOR) {
-            handlePipeDisconnect(pair, world, x, y, z, playerFacing, player);
-        }
+		if(mode == null) return;
+        if (mode == ConfigurationTabletMode.DISCONNECTOR) {
+            handlePipeDisconnect(pair, world, tilePos, playerFacing, player);
+        } else if(mode == ConfigurationTabletMode.FLUID && (getConduitCapability() == ConduitCapability.FLUID || getConduitCapability() == ConduitCapability.SIGNALUM)) {
+			handleFluidPipeIO(pair, world, tilePos, playerFacing, player);
+		}
     }
 
-    private void handlePipeDisconnect(Pair<Direction, BlockSection> pair, World world, int x, int y, int z, Side playerFacing, Player player) {
-        TileEntity tile = world.getTileEntity(x, y, z);
+	private void handleFluidPipeIO(Pair<Direction, BlockSection> pair, World world, TilePosc tilePos, Side playerFacing, Player player) {
+		TileEntity tile = world.getTileEntity(tilePos);
+		if (tile instanceof IFluidIO) {
+			Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
+			if (dir == null) return;
+			//TODO: some blocks have some io blocked and this ignores it
+			((IFluidIO) tile).setFluidIOForSide(dir, Connection.values()[(((IFluidIO) tile).getFluidIOForSide(dir).ordinal() + 1) % Connection.values().length]);
+			if (tile instanceof IHasIOPreview) {
+				((IHasIOPreview) tile).setTemporaryIOPreview(IO.FLUID, 100);
+			}
+			player.sendMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
+		}
+	}
+
+    private void handlePipeDisconnect(Pair<Direction, BlockSection> pair, World world, TilePosc tilePos, Side playerFacing, Player player) {
+        TileEntity tile = world.getTileEntity(tilePos);
         if (tile instanceof TileEntityItemConduit) {
             Direction dir = pair.getRight().toDirection(pair.getLeft(), playerFacing);
             ((TileEntityItemConduit) tile).noConnectDirections.put(dir, !((TileEntityItemConduit) tile).noConnectDirections.get(dir));

@@ -70,7 +70,7 @@ public class RedstoneCover extends CoverBase {
         ItemStack stack;
         boolean previousState = sensorActive;
         sensorActive = false;
-        if (sensorSlot >= 0 && machine instanceof Container && machine instanceof TileEntity tile) {
+        if (sensorSlot >= 0 && machine instanceof Container container && machine instanceof TileEntity tile && container.getContainerSize() > sensorSlot) {
 			stack = ((Container) machine).getItem(sensorSlot);
             if (stack != null && sensorStack != null) {
                 if (stack.itemID == sensorStack.itemID) {

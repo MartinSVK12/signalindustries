@@ -16,6 +16,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.util.helper.LightIndexHelper;
 import net.minecraft.core.world.World;
 import sunsetsatellite.catalyst.Catalyst;
+import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
@@ -60,11 +61,12 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 		float fluidMaxAmount = 1;
 		int fluidId = -1;
 
-		if (((TileEntityFluidContainer) tileEntity).fluidContents[0] != null) {
-			if (((TileEntityFluidContainer) tileEntity).fluidContents[0].fluid != null) {
-				fluidMaxAmount = ((TileEntityFluidContainer) tileEntity).getFluidCapacityForSlot(0);
-				fluidAmount = ((TileEntityFluidContainer) tileEntity).fluidContents[0].amount;
-				fluidId = ((TileEntityFluidContainer) tileEntity).fluidContents[0].fluid.getFirstId();
+		TileEntityFluidContainer fluidContainer = (TileEntityFluidContainer) tileEntity;
+		if (fluidContainer.fluidContents[0] != null) {
+			if (fluidContainer.fluidContents[0].fluid != null) {
+				fluidMaxAmount = fluidContainer.getFluidCapacityForSlot(0);
+				fluidAmount = fluidContainer.fluidContents[0].amount;
+				fluidId = fluidContainer.fluidContents[0].fluid.getFirstId();
 			}
 		}
 
@@ -83,6 +85,10 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 			boolean show = false;
 			Vec3i offset = new Vec3i(i, j, k).add(direction.getVec());
 			Block<?> neighbouringBlock = world.getBlockType(offset.tilePos());
+			if(fluidContainer.getFluidIOForSide(direction) == Connection.NONE){
+				states.put(direction, show);
+				continue;
+			}
 			if (block.getLogic().getClass().isAssignableFrom(neighbouringBlock.getLogic().getClass())) {
 				show = true;
 			} else if (!(neighbouringBlock.getLogic() instanceof BlockLogicConduit || neighbouringBlock.getLogic() instanceof BlockLogicFluidConduit)) {
