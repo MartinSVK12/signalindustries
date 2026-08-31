@@ -1,23 +1,15 @@
-- Added the Reinforced Energy Injector.
-- Added drill disassembling.
-- Added the Flash Reprogrammer.
-- Added awakened-tier I/O blocks.
-- Added recipes to some awakened-tier blocks.
-- Added the Giga Trommel.
-- SI Trommel failure chance now decreases by tier.
-- Increased amount of ore in iron meteors (25% -> 35%)
-- Meteor crater changed from explosion to sphere.
-- Iron meteors will now not spawn within 64 blocks of any other meteor.
-- Changed "Boost" ability name to "Jump".
-- Lowered cost of the "Jump" ability (150 -> 50)
-- Made the rom chip achievement actually obtainable.
-- Made energy cells carriable again.
-- Fixed a visual bug with crystal cutter gui.
-- Fixed fluid tanks losing their contents when placed.
-- Fixed power suits voiding energy when being charged in an Injector.
-- Fixed scan ability.
-- Fixed projectile ability orb not having a texture.
-- Fixed collector flickering.
-- Fixed many crash bugs.
-
-Thanks to lokachop for finding many bugs that were fixed for this release!
+- Added input <-> output bus/hatch recipes.
+- Added copy paste mode to the configuration tablet.
+- Added missing gui entries on servers.
+- Added I/O configuration to fluid/energy conduits.
+- Fix energy nets breaking when world is reloaded.
+- Reworked fluid/energy conduits.
+- Fixed not being able to set infinite fluid storages to void mode.
+- Made meteor types into a record instead of enum for extensibility.
+- Added TMB integration for the laser drill.
+- Gave the laser drill its UI back.
+- Hopefully fixed config issues.
+- Fixed crash with redstone covers.
+- Removed chance from trommel recipes.
+- Fixed external I/O.
+- Buffed volatile crystal recipe. (4 -> 8)
