@@ -6,6 +6,7 @@ import net.minecraft.core.block.entity.TileEntityDispatcher;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.tiles.TileEntityExternalIO;
+import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkMessage;
 import turniplabs.halplibe.helper.network.UniversalPacket;
@@ -39,16 +40,22 @@ public class NetworkMessageExternalIOLinkBreak implements NetworkMessage {
 
     @Override
     public void handle(NetworkContext context) {
-        if (EnvironmentHelper.isServerEnvironment()) {
-            if (context.player.world != null) {
-                TileEntity tileEntity = context.player.world.getTileEntity(pos.x, pos.y, pos.z);
-                if (tileEntity instanceof TileEntityExternalIO && tileEntity.worldObj != null) {
-                    ((TileEntityExternalIO) tileEntity).externalTile = null;
-                    ((TileEntityExternalIO) tileEntity).externalTileSide = null;
-                    ((TileEntityExternalIO) tileEntity).externalTilePos = null;
-                }
-            }
-        }
+        if (EnvironmentHelper.isMultiplayerServer()) {
+			TileEntity tileEntity = context.player.world.getTileEntity(pos.tilePos());
+			if (tileEntity instanceof TileEntityExternalIO externalIO && tileEntity.worldObj != null) {
+				if(externalIO.tier == Tier.BASIC) {
+					if(externalIO.lockedDirection == null && externalIO.externalTileSide != null){
+						externalIO.lockedDirection = externalIO.externalTileSide;
+					} else if(externalIO.lockedDirection != null) {
+						externalIO.lockedDirection = null;
+					}
+					return;
+				}
+				externalIO.externalTile = null;
+				externalIO.externalTileSide = null;
+				externalIO.externalTilePos = null;
+			}
+		}
     }
 }
 

@@ -478,5 +478,97 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/awakened_item_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "tile.signalindustries.awakened.itemInputBus",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakened.itemOutputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/awakened_item_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "O"
+    ],
+    "symbols": [
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "tile.signalindustries.awakened.itemOutputBus",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakened.itemInputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/awakened_fluid_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "tile.signalindustries.awakened.fluidInputHatch",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakened.fluidOutputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/awakened_fluid_output_to_input",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "O"
+    ],
+    "symbols": [
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "tile.signalindustries.awakened.fluidOutputHatch",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.awakened.fluidInputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

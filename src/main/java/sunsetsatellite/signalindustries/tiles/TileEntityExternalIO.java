@@ -34,6 +34,8 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     public CompoundTag externalTilePos;
     public static int range = 5;
 
+	public Direction lockedDirection;
+
     public TileEntityExternalIO() {
     }
 
@@ -43,6 +45,9 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         if (tag.containsKey("externalPosition")) {
             externalTilePos = tag.getCompound("externalPosition");
         }
+		if(tag.containsKey("lockedDirection")){
+			lockedDirection = Direction.values()[tag.getInteger("lockedDirection")];
+		}
     }
 
     @Override
@@ -50,6 +55,9 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         if (externalTilePos != null) {
             tag.put("externalPosition", externalTilePos);
         }
+		if(lockedDirection != null) {
+			tag.putInt("lockedDirection", lockedDirection.ordinal());
+		}
         super.writeAdditionalData(tag);
     }
 
@@ -209,22 +217,39 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
         worldObj.markBlockDirty(tilePos);
         if (externalTile == null) {
             if (tier == Tier.BASIC) {
-                for (Direction dir : Direction.values()) {
-                    TileEntity tile = dir.getTileEntity(worldObj, this);
-                    if (tile instanceof Container || tile instanceof IFluidInventory) {
-                        if (!(tile instanceof TileEntityExternalIO)) {
-                            externalTile = tile;
-                            externalTileSide = dir;
-                            CompoundTag pos = new CompoundTag();
-                            pos.putInt("x", externalTile.tilePos.x);
-                            pos.putInt("y", externalTile.tilePos.y);
-                            pos.putInt("z", externalTile.tilePos.z);
-                            pos.putInt("side", dir.getSideNumber());
-                            pos.putInt("dim", externalTile.worldObj.dimension.id);
-                            externalTilePos = pos;
-                        }
-                    }
-                }
+				if(lockedDirection != null){
+					TileEntity tile = lockedDirection.getTileEntity(worldObj, this);
+					if (tile instanceof Container || tile instanceof IFluidInventory) {
+						if (!(tile instanceof TileEntityExternalIO)) {
+							externalTile = tile;
+							externalTileSide = lockedDirection;
+							CompoundTag pos = new CompoundTag();
+							pos.putInt("x", externalTile.tilePos.x);
+							pos.putInt("y", externalTile.tilePos.y);
+							pos.putInt("z", externalTile.tilePos.z);
+							pos.putInt("side", lockedDirection.getSideNumber());
+							pos.putInt("dim", externalTile.worldObj.dimension.id);
+							externalTilePos = pos;
+						}
+					}
+				} else {
+					for (Direction dir : Direction.values()) {
+						TileEntity tile = dir.getTileEntity(worldObj, this);
+						if (tile instanceof Container || tile instanceof IFluidInventory) {
+							if (!(tile instanceof TileEntityExternalIO)) {
+								externalTile = tile;
+								externalTileSide = dir;
+								CompoundTag pos = new CompoundTag();
+								pos.putInt("x", externalTile.tilePos.x);
+								pos.putInt("y", externalTile.tilePos.y);
+								pos.putInt("z", externalTile.tilePos.z);
+								pos.putInt("side", dir.getSideNumber());
+								pos.putInt("dim", externalTile.worldObj.dimension.id);
+								externalTilePos = pos;
+							}
+						}
+					}
+				}
             } else if (tier == Tier.REINFORCED) {
                 if (externalTilePos != null) {
                     if (externalTilePos.containsKey("x") && externalTilePos.containsKey("y") && externalTilePos.containsKey("z") && externalTilePos.containsKey("dim") && externalTilePos.containsKey("side")) {

@@ -2455,5 +2455,97 @@
       "meta": 0
     },
     "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_item_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.itemInputBus",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.itemOutputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_item_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "O"
+    ],
+    "symbols": [
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.itemOutputBus",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.itemInputBus",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_fluid_input_to_output",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "I"
+    ],
+    "symbols": [
+      {
+        "symbol": "I",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.fluidInputHatch",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.fluidOutputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
+    "name": "signalindustries:workbench/reinforced_fluid_output_to_input",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "O"
+    ],
+    "symbols": [
+      {
+        "symbol": "O",
+        "stack": {
+          "key": "tile.signalindustries.reinforced.fluidOutputHatch",
+          "amount": 1,
+          "meta": 0
+        }
+      }
+    ],
+    "result": {
+      "key": "tile.signalindustries.reinforced.fluidInputHatch",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
   }
 ]

@@ -85,7 +85,7 @@ public class CrystalCutterRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 1000)),
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal, 1))
                         },
-                        new ItemStack(SIItems.volatileSignalumCrystal, 4, 0),
+                        new ItemStack(SIItems.volatileSignalumCrystal, 8, 0),
                         new RecipeProperties(200, 80, 3, Tier.BASIC, false)
                 )
         );

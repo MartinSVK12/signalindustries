@@ -131,6 +131,9 @@ public class ScreenExternalIO extends ScreenFluid {
         fluidIoButton = fluidIo;
         itemIoButton = itemIo;
         removeLinkButton = removeLink;
+		if(tile.tier == Tier.BASIC) {
+			removeLinkButton.displayString = tile.lockedDirection == null ? "L" : "UL";
+		}
         if (!(tile.externalTile instanceof Container)) {
             itemIo.enabled = false;
         }
@@ -151,6 +154,16 @@ public class ScreenExternalIO extends ScreenFluid {
 		} else if (button == removeLinkButton) {
 			if (EnvironmentHelper.isMultiplayerClient()) {
 				NetworkHandler.sendToServer(new NetworkMessageExternalIOLinkBreak(tile.getPosition(), tile.getClass()));
+			}
+			if(tile.tier == Tier.BASIC) {
+				if(tile.lockedDirection == null && tile.externalTileSide != null){
+					tile.lockedDirection = tile.externalTileSide;
+					removeLinkButton.displayString = "UL";
+				} else if(tile.lockedDirection != null) {
+					tile.lockedDirection = null;
+					removeLinkButton.displayString = "L";
+				}
+				return;
 			}
 			player.sendMessage("Link removed!");
 			tile.externalTile = null;
