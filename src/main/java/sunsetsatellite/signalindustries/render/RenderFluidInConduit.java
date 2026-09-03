@@ -21,6 +21,7 @@ import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidContainer;
+import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 import sunsetsatellite.signalindustries.SIKeybinds;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicConduit;
@@ -57,16 +58,16 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 
 		if(world == null) return;
 
-		float fluidAmount = 0;
-		float fluidMaxAmount = 1;
+		double fluidAmount = 0;
+		double fluidMaxAmount = 1;
 		int fluidId = -1;
 
-		TileEntityFluidContainer fluidContainer = (TileEntityFluidContainer) tileEntity;
-		if (fluidContainer.fluidContents[0] != null) {
-			if (fluidContainer.fluidContents[0].fluid != null) {
+		TileEntityFluidPipe fluidContainer = (TileEntityFluidPipe) tileEntity;
+		if (fluidContainer.getFluidInSlot(0) != null) {
+			if (fluidContainer.getFluidInSlot(0).fluid != null) {
 				fluidMaxAmount = fluidContainer.getFluidCapacityForSlot(0);
-				fluidAmount = fluidContainer.fluidContents[0].amount;
-				fluidId = fluidContainer.fluidContents[0].fluid.getFirstId();
+				fluidAmount = fluidContainer.averageFlow.getAverage(world);
+				fluidId = fluidContainer.getFluidInSlot(0).fluid.getFirstId();
 			}
 		}
 
@@ -104,7 +105,7 @@ public class RenderFluidInConduit extends TileEntityRenderer<TileEntity> {
 			states.put(direction, show);
 		}
 
-		float amount = (fluidAmount / fluidMaxAmount);
+		double amount = (fluidAmount / fluidMaxAmount);
 		float mapped = (float) Catalyst.map(amount, 0.0d, 1.0d, 0.0d, 0.3d);
 
 		GLRenderer.pushFrame();
