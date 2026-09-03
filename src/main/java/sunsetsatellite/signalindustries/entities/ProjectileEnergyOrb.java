@@ -26,8 +26,8 @@ public class ProjectileEnergyOrb extends Projectile {
     @Override
     protected void initProjectile() {
         super.initProjectile();
-        this.gravity = 0.0F;
-        this.speed = 1.0F;
+        this.defaultGravity = 0.0F;
+        this.defaultProjectileSpeed = 1.0F;
         this.damage = 4;
     }
 
