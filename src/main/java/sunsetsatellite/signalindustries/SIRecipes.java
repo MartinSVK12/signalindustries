@@ -33,6 +33,8 @@ import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 
 public class SIRecipes {
 
+	public static boolean loaded = false;
+
     public static RecipeNamespaceSI SIGNAL_INDUSTRIES = new RecipeNamespaceSI();
     public static RecipeGroup<RecipeEntryCrafting<?, ?>> WORKBENCH;
     public static RecipeGroup<RecipeEntryFurnace> FURNACE;
@@ -71,6 +73,14 @@ public class SIRecipes {
         LOGGER.info("Loading SI recipe namespaces...");
         resetGroups();
         registerNamespaces();
+		if(loaded){
+			LOGGER.warn("Arbitrary reinitialization of SI recipe namespaces!");
+			new Exception("stack trace").printStackTrace();
+			load();
+			loadSpecial();
+			return;
+		}
+		loaded = true;
     }
 
     public void registerNamespaces() {
