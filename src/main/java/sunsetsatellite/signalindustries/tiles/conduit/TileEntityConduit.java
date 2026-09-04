@@ -48,7 +48,7 @@ public class TileEntityConduit extends TileEntityFluidPipe /*implements ISupport
                     transferSpeed = Integer.MAX_VALUE;
                     break;
             }
-			fluidCapacity[0] = transferSpeed;
+			fluidCapacity[0] = transferSpeed * 6;
         }
         super.tick();
     }

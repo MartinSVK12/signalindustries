@@ -182,7 +182,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 								transferSpeed = Integer.MAX_VALUE;
 								break;
 						}
-						fluidCapacity[fluidCapacity.length - 1] = transferSpeed;
+						fluidCapacity[fluidCapacity.length - 1] = transferSpeed * 6;
                     }
                     if (newConduit.getConduitCapability() == ConduitCapability.FLUID) {
                         acceptedFluids.get(acceptedFluids.size() - 1).addAll(Fluid.fluidMap.values());

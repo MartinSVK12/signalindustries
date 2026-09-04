@@ -35,7 +35,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe /*implements ISu
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
         if (tiered != null) {
             transferSpeed = 20 * (tiered.getTier().ordinal() + 1);
-			fluidCapacity[0] = transferSpeed;
+			fluidCapacity[0] = transferSpeed * 6;
         }
         super.tick();
     }
