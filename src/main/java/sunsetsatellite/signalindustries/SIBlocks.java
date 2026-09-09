@@ -1282,7 +1282,7 @@ public class SIBlocks extends DataInitializer {
 			"awakened_property_inscriber",
 			"propertyInscriber",
 			3,
-			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityPropertyInscriber::new, null),
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityPropertyInscriber::new, "inscriber"),
 			new MachineTextures(Tier.AWAKENED)
 				.withDefaultSideTextures("property_inscriber_side")
 				.withActiveSideTextures("property_inscriber_side_active")

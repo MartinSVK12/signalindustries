@@ -12,6 +12,7 @@ import net.minecraft.client.gui.options.data.OptionsPages;
 import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.Option;
+import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.worldtype.WorldTypeFXDispatcher;
 import net.minecraft.client.world.WorldClient;
 import net.minecraft.core.block.Blocks;
@@ -71,6 +72,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
 import static sunsetsatellite.signalindustries.SignalIndustries.key;
@@ -89,7 +91,12 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		LOGGER.info("Binding to client events...");
 		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID),this::beforeClientStart);
 		ClientEvents.AFTER_CLIENT_START.listen(Key.of(MOD_ID),this::afterClientStart);
-		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initBlockModels(t));
+		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(MOD_ID), new Consumer<BlockModelDispatcher>() {
+			@Override
+			public void accept(BlockModelDispatcher t) {
+				new SIModels().initBlockModels(t);
+			}
+		});
 		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initItemModels(t));
 		ClientEvents.TILE_ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initTileEntityModels(t));
 		ClientEvents.ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initEntityModels(t));
@@ -129,6 +136,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/pulsar_block"), new TileGuiEntry<>(TileEntityPulsar.class, MenuPulsarBlock.class, ScreenPulsarBlock::new));
 		Catalyst.GUIS.register(key("gui/multi_conduit"), new TileGuiEntry<>(TileEntityMultiConduit.class, null, ScreenMultiConduitConfig::new));
 		Catalyst.GUIS.register(key("gui/encapsulator"), new TileGuiEntry<>(TileEntityEncapsulator.class, MenuEncapsulator.class, ScreenEncapsulator::new));
+		Catalyst.GUIS.register(key("gui/inscriber"), new TileGuiEntry<>(TileEntityPropertyInscriber.class, MenuMachine.class, ScreenInscriber::new));
 
 		Catalyst.GUIS.register(key("gui/restrict_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, null, ScreenRestrictPipeConfig::new));
 		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new TileGuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class, ScreenSensorPipeConfig::new));

@@ -132,6 +132,9 @@ item.signalindustries.basic.signalumDrill.desc=A heavy-duty drill powered by <Si
 item.signalindustries.reinforced.signalumDrill.name=Reinforced Signalite Drill
 item.signalindustries.reinforced.signalumDrill.desc=Capable of breaking through tough extraterrestrial materials. Can also break a 3x3 area at once.
 
+item.signalindustries.basic.chainsaw.name=Basic Chainsaw
+item.signalindustries.basic.chainsaw.desc=A chainsaw powered by <Signaling Energy>. Will not break when it runs out of energy.
+
 item.signalindustries.dimensionalShard.name=Dimensional Shard
 item.signalindustries.dimensionalShard.desc=You can see a reflection of a different world on each side.
 item.signalindustries.dimensionalFragment.name=Dimensional Fragment
@@ -307,6 +310,8 @@ item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.name=Auxiliary
 item.signalindustries.awakened.attachment.auxiliaryEnergyInjector.desc=Reduces cooldown of power suit <Abilities>.
 item.signalindustries.reinforced.attachment.nightVisionLens.name=Night Vision Lens
 item.signalindustries.reinforced.attachment.nightVisionLens.desc=Allows you to see in the dark.
+item.signalindustries.prototype.magnet.name=Magnet
+item.signalindustries.prototype.magnet.desc=Pulls items closer to you.
 
 item.signalindustries.reinforced.attachment.colorizer.white.name=Power Suit Colorizer (White)
 item.signalindustries.reinforced.attachment.colorizer.white.desc=Colorizers change the appearance of your <Signalum Power Suit>!
@@ -337,6 +342,7 @@ item.signalindustries.meteorTracker.name=Meteor Tracker
 item.signalindustries.meteorTracker.desc=Points to the closest meteor to you.
 item.signalindustries.reinforced.meteorTracker.name=Reinforced Meteor Tracker
 item.signalindustries.reinforced.meteorTracker.desc=Powerful enough to detect the presence of <Signalite Crystal Ore> even through many layers of rock.
+
 item.signalindustries.configurationTablet.rotation.name=Configuration Tablet (Rotation)
 item.signalindustries.configurationTablet.rotation.desc=Used to change an already placed blocks rotation. Shift+RMB to change mode.
 item.signalindustries.configurationTablet.item.name=Configuration Tablet (Item I/O)
@@ -385,6 +391,10 @@ item.signalindustries.basicDrillCasing.name=Basic Drill Casing
 item.signalindustries.basicDrillCasing.desc=Casing needed to make a <Basic S. Drill>.
 item.signalindustries.reinforcedDrillCasing.name=Reinforced Drill Casing
 item.signalindustries.reinforcedDrillCasing.desc=Casing needed to make a <Reinforced S. Drill>.
+item.signalindustries.basicChainsawCasing.name=Basic Chainsaw Casing
+item.signalindustries.basicChainsawCasing.desc=Casing needed to make a <Basic Chainsaw>.
+item.signalindustries.basicChainsawBlade.name=Basic Chainsaw Blade
+item.signalindustries.basicChainsawBlade.desc=The actual chain saw part of a <Basic Chainsaw>.
 item.signalindustries.pulsarShell.name=Pulsar Shell
 item.signalindustries.pulsarShell.desc=Shell of the <Pulsar>.
 item.signalindustries.pulsarInnerCore.name=Pulsar Inner Core

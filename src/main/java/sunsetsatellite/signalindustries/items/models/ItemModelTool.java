@@ -11,6 +11,7 @@ import net.minecraft.client.render.renderer.State;
 import net.minecraft.client.render.tessellator.TessellatorGeneral;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.collection.NamespaceID;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.useless.dragonfly.DisplayPos;
@@ -21,8 +22,9 @@ import java.awt.*;
 import static net.minecraft.client.render.item.model.ItemModelDispatcher.*;
 
 public class ItemModelTool extends ItemModelStandard {
-	public ItemModelTool(@NotNull Item item) {
+	public ItemModelTool(@NotNull Item item, NamespaceID texture) {
 		super(item);
+		setIcon(texture);
 		setDisplayPos(DisplayPos.FIRST_PERSON_RIGHT_HAND, HANDHELD_FIRST_PERSON_RIGHT_HAND)
 			.setDisplayPos(DisplayPos.FIRST_PERSON_LEFT_HAND, HANDHELD_FIRST_PERSON_LEFT_HAND)
 			.setDisplayPos(DisplayPos.THIRD_PERSON_RIGHT_HAND, HANDHELD_THIRD_PERSON_RIGHT_HAND)

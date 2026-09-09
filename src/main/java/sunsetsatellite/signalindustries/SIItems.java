@@ -24,10 +24,7 @@ import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryCategory;
 import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
@@ -86,6 +83,7 @@ public class SIItems extends DataInitializer {
 	public static ItemArmorTiered signalumPrototypeHarnessGoggles;
 	public static Item basicSignalumDrill;
 	public static Item reinforcedSignalumDrill;
+	public static Item basicChainsaw;
 	public static Item fuelCell;
 	public static Item nullTrigger;
 	public static Item clearKey;
@@ -106,6 +104,8 @@ public class SIItems extends DataInitializer {
 	public static Item reinforcedDrillBit;
 	public static Item basicDrillCasing;
 	public static Item reinforcedDrillCasing;
+	public static Item basicChainsawCasing;
+	public static Item basicChainsawBlade;
 	public static Item pulsarShell;
 	public static Item pulsarInnerCore;
 	public static Item pulsarOuterCore;
@@ -228,6 +228,8 @@ public class SIItems extends DataInitializer {
 		reinforcedDrillBit = simpleItem("reinforcedDrillBit", "reinforced_drill_bit", "reinforcedDrillBit", "reinforced_drill_bit");
 		basicDrillCasing = simpleItem("basicDrillCasing", "basic_drill_casing", "basicDrillCasing", "basic_drill_casing");
 		reinforcedDrillCasing = simpleItem("reinforcedDrillCasing", "reinforced_drill_casing", "reinforcedDrillCasing", "reinforced_drill_casing");
+		basicChainsawCasing = simpleItem("basicChainsawCasing", "basic_chainsaw_casing", "basicChainsawCasing", "basic_chainsaw_casing");
+		basicChainsawBlade = simpleItem("basicChainsawBlade", "basic_chainsaw_blade", "basicChainsawBlade", "basic_chainsaw_blade");
 		pulsarShell = simpleItem("pulsarShell", "pulsar_shell", "pulsarShell", "pulsar_shell");
 		pulsarInnerCore = simpleItem("pulsarInnerCore", "pulsar_inner_core", "pulsarInnerCore", "pulsar_inner_core");
 		pulsarOuterCore = simpleItem("pulsarOuterCore", "pulsar_outer_core", "pulsarOuterCore", "pulsar_outer_core");
@@ -312,6 +314,13 @@ public class SIItems extends DataInitializer {
 				key("item/reinforced_signalite_drill"),
 				item("reinforcedSignalumDrill"), toolMaterialReinforced, Tier.REINFORCED),
 			"signalum_drill_reinforced"
+		).setMaxStackSize(1);
+
+		basicChainsaw = customItem(()-> new ItemChainsaw(
+				"basic.chainsaw",
+				key("item/basic_chainsaw"),
+				item("basicChainsaw"), toolMaterialBasic, Tier.BASIC),
+			"basic_chainsaw"
 		).setMaxStackSize(1);
 
 		signalumSaber = customItem(() -> new ItemSignalumSaber(

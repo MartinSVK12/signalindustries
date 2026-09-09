@@ -62,15 +62,16 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/external_io"), new GuiEntry<>(TileEntityExternalIO.class, MenuExternalIO.class));
 		Catalyst.GUIS.register(key("gui/bonsai_pot"), new GuiEntry<>(TileEntityBonsaiPot.class, MenuBonsaiPot.class));
 		Catalyst.GUIS.register(key("gui/energy_injector"), new GuiEntry<>(TileEntityEnergyInjector.class, MenuMachine.class));
-		Catalyst.GUIS.register(key("gui/redstone_clock"), new GuiEntry<>(TileEntityRedstoneClock.class,null));
-		Catalyst.GUIS.register(key("gui/filter"), new GuiEntry<>(TileEntityFilter.class,MenuFilter.class));
-		Catalyst.GUIS.register(key("gui/dynamo"), new GuiEntry<>(TileEntitySignalumDynamo.class,MenuSignalumDynamo.class));
-		Catalyst.GUIS.register(key("gui/builder"), new GuiEntry<>(TileEntityBuilder.class,MenuBuilder.class));
-		Catalyst.GUIS.register(key("gui/auto_miner"), new GuiEntry<>(TileEntityAutoMiner.class,MenuAutoMiner.class));
-		Catalyst.GUIS.register(key("gui/programmer"), new GuiEntry<>(TileEntityProgrammer.class,MenuProgrammer.class));
-		Catalyst.GUIS.register(key("gui/pulsar_block"), new GuiEntry<>(TileEntityPulsar.class,MenuPulsarBlock.class));
+		Catalyst.GUIS.register(key("gui/redstone_clock"), new GuiEntry<>(TileEntityRedstoneClock.class, null));
+		Catalyst.GUIS.register(key("gui/filter"), new GuiEntry<>(TileEntityFilter.class, MenuFilter.class));
+		Catalyst.GUIS.register(key("gui/dynamo"), new GuiEntry<>(TileEntitySignalumDynamo.class, MenuSignalumDynamo.class));
+		Catalyst.GUIS.register(key("gui/builder"), new GuiEntry<>(TileEntityBuilder.class, MenuBuilder.class));
+		Catalyst.GUIS.register(key("gui/auto_miner"), new GuiEntry<>(TileEntityAutoMiner.class, MenuAutoMiner.class));
+		Catalyst.GUIS.register(key("gui/programmer"), new GuiEntry<>(TileEntityProgrammer.class, MenuProgrammer.class));
+		Catalyst.GUIS.register(key("gui/pulsar_block"), new GuiEntry<>(TileEntityPulsar.class, MenuPulsarBlock.class));
 		Catalyst.GUIS.register(key("gui/multi_conduit"), new GuiEntry<>(TileEntityMultiConduit.class, null));
-		Catalyst.GUIS.register(key("gui/encapsulator"), new GuiEntry<>(TileEntityEncapsulator.class,MenuEncapsulator.class));
+		Catalyst.GUIS.register(key("gui/encapsulator"), new GuiEntry<>(TileEntityEncapsulator.class, MenuEncapsulator.class));
+		Catalyst.GUIS.register(key("gui/inscriber"), new GuiEntry<>(TileEntityPropertyInscriber.class, MenuMachine.class));
 
 		Catalyst.GUIS.register(key("gui/sensor_item_conduit"), new GuiEntry<>(TileEntityItemConduit.class, MenuSensorPipe.class));
 

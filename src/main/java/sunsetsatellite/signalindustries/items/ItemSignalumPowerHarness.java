@@ -52,7 +52,6 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
 		if (!stack.getItem().equals(SIItems.signalumPrototypeHarness)) return false;
 		if (player.isSneaking()) {
 			Catalyst.displayGui(player, new InventoryHarness(stack), player.inventory.getCurrentSlot(), false, key("gui/harness"));
-			//SignalIndustries.displayGui(player,() -> new GuiHarness(player.inventory,player.inventory.getCurrentItem()),new ContainerHarness(player.inventory,player.inventory.getCurrentItem()),new InventoryHarness(player.inventory.getCurrentItem()),itemstack);
 			return true;
 		}
 		return false;
@@ -115,6 +114,7 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
     @Override
     public void inventoryTick(@NonNull ItemStack itemstack, @NonNull World world, @NonNull Entity entity, int i, boolean flag) {
         super.inventoryTick(itemstack, world, entity, i, flag);
+		if(itemstack.getItem().equals(SIItems.signalumPrototypeHarnessGoggles)) itemstack.setMetadata(0);
         if (!itemstack.getItem().equals(SIItems.signalumPrototypeHarness)) return;
         cooldownTicks++;
         if (cooldownTicks >= 20) {

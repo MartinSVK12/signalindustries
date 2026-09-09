@@ -16,57 +16,28 @@ import java.util.ArrayList;
 public class TileEntityPropertyInscriber extends TileEntityTieredMachineSimple implements IBoostable {
 
     public TileEntityPropertyInscriber() {
-        fluidContents = new FluidStack[2];
-        fluidCapacity = new int[2];
+        fluidContents = new FluidStack[1];
+        fluidCapacity = new int[1];
         fluidCapacity[0] = 4000;
-        fluidCapacity[1] = 4000;
-        itemContents = new ItemStack[3];
+        itemContents = new ItemStack[4];
         for (FluidStack ignored : fluidContents) {
             acceptedFluids.add(new ArrayList<>());
         }
         acceptedFluids.get(0).add(SIFluids.ENERGY);
-        acceptedFluids.get(1).add(SIFluids.WORLD_RESIN);
         energySlot = 0;
-        recipeGroup = SIRecipes.CRYSTAL_CHAMBER;
-        itemInputs = new int[]{0, 2};
-        itemOutputs = new int[]{1};
-        fluidInputs = new int[]{1};
+        recipeGroup = SIRecipes.PROPERTY_INSCRIBER;
+        itemInputs = new int[]{0, 1, 2};
+        itemOutputs = new int[]{3};
     }
 
     @Override
     public boolean canProcess() {
-        /*ItemStack c1 = this.itemContents[itemInputs[0]];
-        ItemStack c2 = this.itemContents[itemInputs[1]];
-        if (c1 != null && c2 != null) {
-            if ((c1.getData().getInteger("size") + c2.getData().getInteger("size")) > (8 * tier.ordinal())) {
-                return false;
-            }
-        }*/
         return super.canProcess();
     }
 
     @Override
     public void processItem() {
 		super.processItem();
-        /*if (canProcess()) {
-            if (this.itemContents[itemInputs[0]] != null && this.itemContents[itemInputs[0]].getItem() instanceof ItemSignalumCrystal &&
-                    this.itemContents[itemInputs[1]] != null && this.itemContents[itemInputs[1]].getItem() instanceof ItemSignalumCrystal) {
-                int size1 = this.itemContents[itemInputs[0]].getData().getInteger("size");
-                int sat1 = this.itemContents[itemInputs[0]].getData().getInteger("saturation");
-                int size2 = this.itemContents[itemInputs[1]].getData().getInteger("size");
-                int sat2 = this.itemContents[itemInputs[1]].getData().getInteger("saturation");
-                super.processItem();
-                if (this.itemContents[itemOutputs[0]] != null) {
-                    this.itemContents[itemOutputs[0]].getData().putInt("size", size1 + size2);
-                    this.itemContents[itemOutputs[0]].getData().putInt("saturation", sat1 + sat2);
-                }
-            } else {
-                super.processItem();
-            }
-        }
-		if(hasOutput(0, SIItems.awakenedSignalumCrystal)){
-			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.AWAKENED));
-		}*/
     }
 
     @Override

@@ -136,6 +136,9 @@ public class SIModels {
 			dispatcher.addDispatch(item, model);
 		});
 
+		dispatcher.addDispatch(basicSignalumDrill, new ItemModelTool(basicSignalumDrill, SignalIndustries.id("item/"+itemTextures.get(basicSignalumDrill))));
+		dispatcher.addDispatch(reinforcedSignalumDrill, new ItemModelTool(reinforcedSignalumDrill,  SignalIndustries.id("item/"+itemTextures.get(reinforcedSignalumDrill))));
+		dispatcher.addDispatch(basicChainsaw, new ItemModelTool(basicChainsaw,  SignalIndustries.id("item/"+itemTextures.get(basicChainsaw))));
 		dispatcher.addDispatch(configurationTablet, new ItemModelConfigurationTablet(configurationTablet));
 		dispatcher.addDispatch(signalumSaber, new ItemModelSaber(signalumSaber));
 		dispatcher.addDispatch(fuelCell, new ItemModelFuelCell(fuelCell));
