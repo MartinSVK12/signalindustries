@@ -79,6 +79,7 @@ public class SIItems extends DataInitializer {
 	public static Item dimensionalShard;
 	public static Item dimensionalFragment;
 	public static Item warpOrb;
+	public static Item magnet;
 	public static ItemArmorTiered signalumPrototypeHarness;
 	public static ItemArmorTiered signalumPrototypeHarnessGoggles;
 	public static Item basicSignalumDrill;
@@ -301,6 +302,14 @@ public class SIItems extends DataInitializer {
 				Tier.BASIC),
 			"smartwatch")
 			.setMaxStackSize(1);
+
+		magnet = customItem(() -> new ItemMagnet(
+				"prototype.magnet",
+				key("item/magnet"),
+				item("magnet"),
+				Tier.PROTOTYPE),
+			"magnet_inactive"
+		).setMaxStackSize(1);
 
 		basicSignalumDrill = customItem(() -> new ItemSignalumDrill(
 				"basic.signalumDrill",

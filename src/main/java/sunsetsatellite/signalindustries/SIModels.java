@@ -141,6 +141,7 @@ public class SIModels {
 		dispatcher.addDispatch(basicChainsaw, new ItemModelTool(basicChainsaw,  SignalIndustries.id("item/"+itemTextures.get(basicChainsaw))));
 		dispatcher.addDispatch(configurationTablet, new ItemModelConfigurationTablet(configurationTablet));
 		dispatcher.addDispatch(signalumSaber, new ItemModelSaber(signalumSaber));
+		dispatcher.addDispatch(magnet, new ItemModelMagnet(magnet));
 		dispatcher.addDispatch(fuelCell, new ItemModelFuelCell(fuelCell));
 		dispatcher.addDispatch(nullTrigger, new ItemModelTrigger(nullTrigger));
 		dispatcher.addDispatch(pulsar, new ItemModelPulsar(pulsar));

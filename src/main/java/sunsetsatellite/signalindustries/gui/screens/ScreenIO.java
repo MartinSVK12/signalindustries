@@ -205,6 +205,8 @@ public class ScreenIO extends ScreenComposedContainer {
 			tooltip.render(lastHoveredSide.getName()+"\n"+io+"\n"+slot,mx,my,8,8);
 		}
 		GLRenderer.enableState(State.DEPTH_TEST);
+		drawStringShadow(fontRenderer, "LMB on a side to switch I/O.", centerX, centerY-30, 0xFFFFFF);
+		drawStringShadow(fontRenderer, "Shift+LMB on a side to change the active slot.", centerX, centerY-15, 0xFFFFFF);
 	}
 
 	public void renderBlock(){
