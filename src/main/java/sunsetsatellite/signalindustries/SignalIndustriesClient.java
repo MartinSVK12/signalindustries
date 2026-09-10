@@ -4,6 +4,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
 import net.minecraft.client.gui.options.components.BooleanOptionComponent;
 import net.minecraft.client.gui.options.components.KeyBindingComponent;
 import net.minecraft.client.gui.options.components.OptionsCategory;
@@ -37,6 +38,7 @@ import sunsetsatellite.signalindustries.dim.custom.decorator.ChunkDecoratorCusto
 import sunsetsatellite.signalindustries.dim.custom.feature.WorldFeatureOre;
 import sunsetsatellite.signalindustries.dim.custom.generator.ChunkGeneratorClassic;
 import sunsetsatellite.signalindustries.dim.custom.surface.SurfaceGeneratorOverworld;
+import sunsetsatellite.signalindustries.entities.MobInfernal;
 import sunsetsatellite.signalindustries.gui.menus.*;
 import sunsetsatellite.signalindustries.gui.screens.*;
 import sunsetsatellite.signalindustries.gui.screens.composed.*;
@@ -220,6 +222,17 @@ public class SignalIndustriesClient implements ClientModInitializer {
 				new VintageQuestingSIPlugin().reloadClient();
 			}
 		}
+
+		MobInfoRegistry.register(
+			MobInfernal.class,
+			"guidebook.section.mob.infernal.name",
+			"guidebook.section.mob.infernal.desc",
+			40,
+			1000,
+			new MobInfoRegistry.MobDrop[]{
+				new MobInfoRegistry.MobDrop(new ItemStack(SIItems.infernalFragment), 1, 0, 2)
+			}
+		);
 
 		LOGGER.info("Registering attachment keybinds...");
 		Arrays.stream(SIKeybinds.class.getDeclaredFields()).filter((F) -> F.getName().contains("Attachment")).forEach((F) -> {

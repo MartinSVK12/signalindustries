@@ -2106,7 +2106,7 @@ public class SIBlocks extends DataInitializer {
 		).withSound(BlockSounds.GRASS).withHardness(0.0F).withTags(BlockTags.PLANTABLE_IN_JAR);
 
 		fueledEternalTreeLog = customBlock(new BlockBuilder(MOD_ID).setBlockSound(BlockSounds.WOOD).setUnbreakable().setResistance(18000000).setLuminance(15),
-			"fueledEternalTreeLog",
+			"chargedEternalTreeLog",
 			"charged_ashen_tree_log",
 			"fueledEternalTreeLog",
 			3,

@@ -26,8 +26,9 @@
     "WorldMixin"
   ],
   "client": [
-    "MenuAbstractMixin",
+    "GuidebookSectionsMixin",
     "HudIngameMixin",
+    "MenuAbstractMixin",
     "MinecraftMixin",
     "MobRendererBipedArmoredMixin",
     "MobRendererPlayerMixin",
