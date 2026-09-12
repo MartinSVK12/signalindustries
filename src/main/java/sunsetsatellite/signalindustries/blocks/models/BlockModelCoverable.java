@@ -6,6 +6,7 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.entity.TileEntity;
+import net.minecraft.core.world.BlocksContainer;
 import net.minecraft.core.world.WorldSource;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,7 @@ public class BlockModelCoverable extends BlockModelIOPreview {
 	@Override
 	public boolean render(@NotNull TessellatorGeneral tessellator, @NotNull WorldSource world, @NotNull TilePosc tilePos) {
 		TileEntity tile = world.getTileEntity(tilePos);
-		if (tile == null) {
+		if (tile == null || world instanceof BlocksContainer) {
 			return super.render(tessellator, world, tilePos);
 		}
 		AABBdc bounds = this.block.getBoundsFromState(world, tilePos);
