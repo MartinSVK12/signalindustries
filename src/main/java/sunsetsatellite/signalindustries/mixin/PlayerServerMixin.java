@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.signalindustries.SIAchievements;
+import sunsetsatellite.signalindustries.SIConfig;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
@@ -89,12 +90,13 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
 		int newDamage = (int) ((double) this.random.nextFloat() > 0.5 ? Math.floor(d) : Math.ceil(d));
 		int preventedDamage = damage - newDamage;
 		if (powerSuit != null && powerSuit.active && powerSuit.status != SignalumPowerSuit.Status.OVERHEAT) {
-			if (powerSuit.getEnergy() >= newDamage) {
+			int damageCost = (int) (newDamage * SIConfig.config.getDouble("Balance.suitDamageCostMultiplier"));
+			if (powerSuit.getEnergy() >= damageCost) {
 				if (damageType != null && damageType.shouldDamageArmor()) {
 					int armorDamage = (int) Math.ceil((double) preventedDamage / 4.0);
 					this.damageArmor(armorDamage);
 				}
-				powerSuit.decrementEnergy(newDamage);
+				powerSuit.decrementEnergy(damageCost);
 				return;
 			}
 			if (damageType == DamageType.FIRE) {

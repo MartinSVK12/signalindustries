@@ -19,6 +19,14 @@ public class SIConfig {
     private static final int itemIdStart = 17100;
     public static final TomlConfigHandler config;
 
+	public static final int signaliteGeodeChance;
+	public static final int ironMeteorChance;
+	public static final int signaliteMeteorChance;
+	public static final int dilithiumMeteorChance;
+	public static final int obeliskChance;
+	public static final double suitDamageCostMultiplier;
+	public static final int wingsFlightCost;
+
     static {
 		SignalIndustries.LOGGER.info("Loading SI config...");
 
@@ -31,6 +39,7 @@ public class SIConfig {
         defaultConfig.addCategory("EntityIDs");
         defaultConfig.addCategory("Other");
         //defaultConfig.addCategory("Experimental");
+		defaultConfig.addCategory("These options can make the mod harder or easier to match your liking, or to adjust balance on public servers.","Balance");
         defaultConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10. Set any of these options to 0 to disable them, be careful though as completely disabling any of these might prevent you from progressing through the mod properly.", "WorldGen");
         //defaultConfig.addEntry("Experimental.enableDynamicChunkProvider", "Switches the vanilla BTA static provider with a new dynamic one, required for chunkloading to work.", false);
         defaultConfig.addEntry("Other.enableQuests", true);
@@ -52,6 +61,8 @@ public class SIConfig {
         defaultConfig.addEntry("WorldGen.signaliteMeteorChance", "Default is 512", 512);
         defaultConfig.addEntry("WorldGen.dilithiumMeteorChance", "Default is 1024", 1024);
         defaultConfig.addEntry("WorldGen.obeliskChance", "Default is 2048", 2048);
+		defaultConfig.addEntry("Balance.suitDamageCostMultiplier", "Default is 1.0", 1.0);
+		defaultConfig.addEntry("Balance.wingsFlightCost", "Default is 1", 1);
 
         int blockId = blockIdStart;
         int itemId = itemIdStart;
@@ -102,6 +113,11 @@ public class SIConfig {
                 rawConfig.addCategory("These options modify the world generation, the values for chances here are interpreted by the game as 1 in x. A config having the value of 10 would mean 1 in 10.", "WorldGen");
                 changed = true;
             }
+
+			if (!rawConfig.contains(".Balance")) {
+				rawConfig.addCategory("These options can make the mod harder or easier to match your liking, or to adjust balance on public servers.","Balance");
+				changed = true;
+			}
 
             if (!rawConfig.contains("WorldGen.signaliteGeodeChance")) {
                 rawConfig.addEntry("WorldGen.signaliteGeodeChance", "Default is 10", 10);
@@ -220,12 +236,29 @@ public class SIConfig {
                 changed = true;
             }
 
+			if(!rawConfig.contains("Balance.suitDamageCostMultiplier")) {
+				rawConfig.addEntry("Balance.suitDamageCostMultiplier", "Default is 1.0", 1.0);
+				changed = true;
+			}
+
+			if(!rawConfig.contains("Balance.wingsFlightCost")) {
+				rawConfig.addEntry("Balance.wingsFlightCost", "Default is 1", 1);
+				changed = true;
+			}
+
 			config.setDefaults(rawConfig);
             if (changed) {
                 config.writeConfig();
 				SignalIndustries.LOGGER.info("Config updated.");
             }
 			SignalIndustries.LOGGER.info("Config loaded successfully.");
+			signaliteGeodeChance = config.getInt("WorldGen.signaliteGeodeChance");
+			ironMeteorChance = config.getInt("WorldGen.ironMeteorChance");
+			signaliteMeteorChance = config.getInt("WorldGen.signaliteMeteorChance");
+			dilithiumMeteorChance = config.getInt("WorldGen.dilithiumMeteorChance");
+			obeliskChance = config.getInt("WorldGen.obeliskChance");
+			suitDamageCostMultiplier = config.getDouble("Balance.suitDamageCostMultiplier");
+			wingsFlightCost = config.getInt("Balance.wingsFlightCost");
         } else {
             config.setDefaults(defaultConfig);
             try {
@@ -236,6 +269,13 @@ public class SIConfig {
                 configFile.createNewFile();
                 config.writeConfig();
 				SignalIndustries.LOGGER.info("Default config loaded successfully.");
+				signaliteGeodeChance = config.getInt("WorldGen.signaliteGeodeChance");
+				ironMeteorChance = config.getInt("WorldGen.ironMeteorChance");
+				signaliteMeteorChance = config.getInt("WorldGen.signaliteMeteorChance");
+				dilithiumMeteorChance = config.getInt("WorldGen.dilithiumMeteorChance");
+				obeliskChance = config.getInt("WorldGen.obeliskChance");
+				suitDamageCostMultiplier = config.getDouble("Balance.suitDamageCostMultiplier");
+				wingsFlightCost = config.getInt("Balance.wingsFlightCost");
             } catch (IOException e) {
                 throw new RuntimeException("Failed to generate config!", e);
             }

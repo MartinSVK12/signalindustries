@@ -10,6 +10,7 @@ import net.minecraft.core.entity.EntityDispatcher;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.material.ToolMaterial;
+import net.minecraft.core.net.command.CommandManager;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.world.World;
@@ -21,6 +22,7 @@ import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.multiblocks.CustomStructure;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.Structure;
+import sunsetsatellite.signalindustries.commands.CommandSI;
 import sunsetsatellite.signalindustries.entities.*;
 import sunsetsatellite.signalindustries.items.ItemBlueprint;
 import sunsetsatellite.signalindustries.mp.entity.*;
@@ -86,6 +88,7 @@ public class SignalIndustries implements ModInitializer {
 		LOGGER.info("Signal Industries is loading... Shine!");
 		new SIConfig();
 		new SIArt().init();
+		CommandManager.registerCommand(new CommandSI());
 
 		LOGGER.info("Binding to events...");
 		CommonEvents.BEFORE_GAME_START.listen(Key.of(MOD_ID), this::beforeGameStart);
