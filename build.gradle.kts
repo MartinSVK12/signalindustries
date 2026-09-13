@@ -154,7 +154,7 @@ dependencies {
 	implementation(project(":catalyst-fluids"))
 	implementation(project(":catalyst-energy"))
 	implementation(project(":catalyst-multiblocks"))
-	//implementation(project(":catalyst-multipart"))
+	implementation(project(":catalyst-multipart"))
 	implementation(project(":catalyst-effects"))
 	implementation(project(":catalyst-screens"))
 	implementation(project(":tmb"))
@@ -212,7 +212,7 @@ subprojects {
 	}
 }
 
-println("@Mod Updates **Signal Industries updated to ${version}!**\n\n${Files.readString(project.projectDir.toPath().resolve("CHANGELOG.md"))}\n\n:modrinth:https://modrinth.com/mod/signal-industries/version/${version}\n:github:<https://github.com/MartinSVK12/signalindustries/releases/tag/${version}>")
+println("@Mod Updates **Signal Industries updated to ${version}!**\n\n${Files.readString(project.projectDir.toPath().resolve("CHANGELOG.md"))}\n:modrinth:https://modrinth.com/mod/signal-industries/version/${version}\n:github:<https://github.com/MartinSVK12/signalindustries/releases/tag/${version}>")
 
 java {
 	toolchain {
