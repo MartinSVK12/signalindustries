@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.useless.dragonfly.data.block.BlockModelData;
 import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.conduit.ConduitCapability;
@@ -141,6 +142,8 @@ public class BlockModelConduit<T extends BlockLogic> extends BlockModelGeneric<T
 				}
 			}
 		}
+
+		BlockModelDispatcher.getInstance().getDispatch(CatalystMultipart.multipartBlock).render(tessellator, worldSource, tilePos);
 
 		return loadBaseConduitModel(worldSource, tilePos).asModel().renderAttached(this, tessellator, worldSource, tilePos, 0, 0, 0, 0.0F, 0.0F, 0.0F, false, cullFaces, overrideTexture);
 	}

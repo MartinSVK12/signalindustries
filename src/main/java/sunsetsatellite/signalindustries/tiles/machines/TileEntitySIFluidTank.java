@@ -1,8 +1,6 @@
 package sunsetsatellite.signalindustries.tiles.machines;
 
 
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.motion.CarriedBlock;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.ICarriable;
@@ -93,7 +91,7 @@ public class TileEntitySIFluidTank extends TileEntityTieredContainer implements 
             fluidCapacity[0] = (int) Math.pow(2, tier.ordinal()) * 16000;
             transferSpeed = 50 * (tier.ordinal() + 1);
         }
-        extractFluids();
+        moveFluids();
         super.tick();
     }
 

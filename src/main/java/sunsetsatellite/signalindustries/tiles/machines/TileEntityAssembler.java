@@ -43,7 +43,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     @Override
     public void tick() {
         super.tick();
-        extractFluids();
+        moveFluids();
         worldObj.markBlockDirty(tilePos);
         if (getBlock() != Blocks.AIR && worldObj != null) {
             work();

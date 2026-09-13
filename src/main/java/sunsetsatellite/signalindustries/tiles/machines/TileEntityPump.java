@@ -98,7 +98,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         if (worldObj != null && worldObj.isClientSide) return;
         worldObj.markBlockDirty(tilePos);
         pumpTimer.tick();
-        extractFluids();
+        moveFluids();
 
         boolean update = false;
         if (fuelBurnTicks > 0) {

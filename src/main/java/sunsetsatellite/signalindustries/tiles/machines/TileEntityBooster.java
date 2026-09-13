@@ -67,7 +67,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
     public void tick() {
         worldObj.markBlockDirty(tilePos);
         IOPreviewTimer.tick();
-        extractFluids();
+        moveFluids();
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;

@@ -97,7 +97,7 @@ public class TileEntityEnergyCell extends TileEntityTieredContainer implements I
 					break;
 			}
         }
-        extractFluids();
+        moveFluids();
         super.tick();
     }
 

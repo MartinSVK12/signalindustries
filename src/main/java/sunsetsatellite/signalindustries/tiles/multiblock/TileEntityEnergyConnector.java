@@ -32,7 +32,7 @@ public class TileEntityEnergyConnector extends TileEntityTieredContainer impleme
                     extractFluids();
                 }
             } else {*/
-            extractFluids();
+            moveFluids();
             //}
         }
     }

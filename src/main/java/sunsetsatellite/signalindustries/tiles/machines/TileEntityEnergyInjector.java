@@ -30,7 +30,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
         if (worldObj != null) {
             worldObj.markBlockDirty(tilePos);
         }
-        extractFluids();
+        moveFluids();
         if (isBurning()) {
             ItemStack stack = getItem(0);
             if (stack != null) {

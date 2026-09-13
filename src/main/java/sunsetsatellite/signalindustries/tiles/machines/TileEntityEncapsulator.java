@@ -179,7 +179,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
         super.tick();
         if (worldObj == null) return;
         worldObj.markBlockDirty(tilePos);
-        extractFluids();
+        moveFluids();
         if (!canProcess() && state != State.NONE) state = State.NONE;
 		if (!disabled) work();
 		Direction side = Direction.getDirectionFromSide(getBlockMeta()).getOpposite();

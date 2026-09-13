@@ -86,7 +86,7 @@ public class TileEntityBuilder extends TileEntityTieredMachineBase implements IB
     public void tick() {
         super.tick();
         if (worldObj != null && worldObj.isClientSide) return;
-        extractFluids();
+        moveFluids();
         workTimer.max = (int) (10 / speedMultiplier);
         workTimer.tick();
         if (fluidContents[0] == null || itemContents[0] == null || !(itemContents[0].getItem() instanceof ItemBlueprint)) {

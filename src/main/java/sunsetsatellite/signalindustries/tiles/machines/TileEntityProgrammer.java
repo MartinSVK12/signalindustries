@@ -8,7 +8,6 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.items.ItemRomChip;
 import sunsetsatellite.signalindustries.items.applications.ItemTrigger;
-import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.Tier;
 
@@ -25,7 +24,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
 
     public void tick() {
         worldObj.markBlockDirty(tilePos);
-        extractFluids();
+        moveFluids();
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;

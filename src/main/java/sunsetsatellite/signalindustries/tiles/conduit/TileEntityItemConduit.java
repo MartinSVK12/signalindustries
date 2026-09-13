@@ -22,6 +22,8 @@ import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 //import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 //import sunsetsatellite.catalyst.multipart.api.Multipart;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.blocks.logic.BlockLogicItemConduit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.TileEntityFilter;
@@ -39,7 +41,7 @@ import java.util.stream.Collectors;
 //TODO: double chests don't work
 //TODO: do a second try for items that failed to insert
 
-public class TileEntityItemConduit extends TileEntityWithName implements IScreenActionListener/*, ISupportsMultiparts*/ {
+public class TileEntityItemConduit extends TileEntityWithName implements IScreenActionListener, ISupportsMultiparts {
 
     public static int TRANSFER_TICKS = 20 * 3;
     public static int EXTRACT_TICKS = 20 * 2;
@@ -59,7 +61,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     public boolean sensorUseData = false;
     public ItemStack sensorStack = null;
 
-    //public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
     public TileEntityItemConduit() {
         for (Direction dir : Direction.values()) {
@@ -454,13 +456,13 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
 			}
 		}
 
-		/*CompoundTag coversNbt = tag.getCompound("Parts");
+		CompoundTag coversNbt = tag.getCompound("Parts");
 
 		for (Map.Entry<String, Tag<?>> entry : coversNbt.getValue().entrySet()) {
 			Direction dir = Direction.values()[Integer.parseInt(entry.getKey())];
 			CompoundTag partTag = (CompoundTag) entry.getValue();
 			parts.put(dir, new Multipart(partTag));
-		}*/
+		}
 
 	}
 
@@ -505,7 +507,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
 			tag.putCompound("SensorStack", itemNbt);
 		}
 
-		/*CompoundTag coversNbt = new CompoundTag();
+		CompoundTag coversNbt = new CompoundTag();
 
 		for (Map.Entry<Direction, Multipart> entry : parts.entrySet()) {
 			if (entry.getValue() == null) continue;
@@ -514,13 +516,13 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
 			coversNbt.putCompound(String.valueOf(entry.getKey().ordinal()), partNbt);
 		}
 
-		tag.putCompound("Parts", coversNbt);*/
+		tag.putCompound("Parts", coversNbt);
 	}
 
-	/*@Override
+	@Override
     public HashMap<Direction, Multipart> getParts() {
         return parts;
-    }*/
+    }
 
     @Override
     public void dropContents(World world, int x, int y, int z) {

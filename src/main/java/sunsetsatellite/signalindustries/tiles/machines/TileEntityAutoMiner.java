@@ -170,7 +170,7 @@ public class TileEntityAutoMiner extends TileEntityTieredMachineBase implements 
     public void tick() {
         if (worldObj != null) {
             applyModifiers();
-            extractFluids();
+            moveFluids();
             if (!workTimer.isPaused()) {
                 workTimer.tick();
             }

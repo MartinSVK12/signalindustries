@@ -44,7 +44,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
         Random random = new Random();
         spreadFluids(Direction.Y_POS);
         worldObj.markBlockDirty(tilePos);
-        extractFluids();
+        moveFluids();
         if (getFluidInSlot(0) != null && getFluidInSlot(0).amount <= 0) fluidContents[0] = null;
         if (isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5) {
             if (random.nextFloat() < 0.25) {

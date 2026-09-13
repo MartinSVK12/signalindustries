@@ -34,7 +34,7 @@ public class TileEntityFluidHatch extends TileEntityTieredContainer implements I
     @Override
     public void tick() {
         super.tick();
-        extractFluids();
+        moveFluids();
     }
 
     @Override

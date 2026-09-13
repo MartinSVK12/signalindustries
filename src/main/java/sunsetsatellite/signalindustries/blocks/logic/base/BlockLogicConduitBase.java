@@ -20,6 +20,7 @@ import org.joml.primitives.AABBdc;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.CatalystEnergy;
+import sunsetsatellite.catalyst.CatalystMultipart;
 import sunsetsatellite.catalyst.core.util.Connection;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.IWrench;
@@ -32,6 +33,8 @@ import sunsetsatellite.catalyst.core.util.vector.Vec2f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 //import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.interfaces.IHasIOPreview;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
@@ -41,6 +44,8 @@ import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -79,12 +84,12 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 
     public void setBlockBoundsFromState(WorldSource world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        /*if (tile instanceof ISupportsMultiparts) {
+        if (tile instanceof ISupportsMultiparts) {
             if (((ISupportsMultiparts) tile).getParts().values().stream().anyMatch(Objects::nonNull)) {
                 setBlockBounds(0, 0, 0, 1, 1, 1);
                 return;
             }
-        }*/
+        }
         float bx = 0.3f, by = 0.3f, bz = 0.3f;
         float tx = 0.7f, ty = 0.7f, tz = 0.7f;
         // Loop de-loop
@@ -263,7 +268,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 	@Override
 	public @NotNull ItemStack @Nullable [] getBreakResult(@NotNull World world, @NotNull EnumDropCause dropCause, @NotNull TilePosc tilePos, int data, @Nullable TileEntity tileEntity) {
 		ItemStack[] breakResult = super.getBreakResult(world, dropCause, tilePos, data, tileEntity);
-		/*if (tileEntity instanceof ISupportsMultiparts) {
+		if (tileEntity instanceof ISupportsMultiparts) {
 			List<ItemStack> list = new ArrayList<>();
 			for (Multipart multipart : ((ISupportsMultiparts) tileEntity).getParts().values()) {
 				if (multipart == null) continue;
@@ -274,7 +279,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 				multipartTag.putInt("Block", multipart.block.id());
 				multipartTag.putInt("Meta", multipart.meta);
 				if (multipart.side != null) {
-					multipartTag.putInt("Side", multipart.side.getId());
+					multipartTag.putInt("Side", multipart.side.id);
 				}
 				tag.putCompound("Multipart", multipartTag);
 				stack.setData(tag);
@@ -282,7 +287,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 			}
 			if (breakResult != null) list.add(breakResult[0]);
 			return list.toArray(new ItemStack[0]);
-		}*/
+		}
 		return breakResult;
 	}
 }

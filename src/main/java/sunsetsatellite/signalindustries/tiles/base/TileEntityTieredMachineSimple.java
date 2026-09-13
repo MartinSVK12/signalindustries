@@ -11,7 +11,6 @@ import sunsetsatellite.catalyst.core.util.io.IItemIO;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
 import sunsetsatellite.catalyst.fluids.util.RecipeOutputStack;
-import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.recipes.RecipeGroupSI;
 import sunsetsatellite.signalindustries.recipes.entry.*;
@@ -37,7 +36,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         super.tick();
 		if(worldObj == null) return;
         worldObj.markBlockDirty(tilePos);
-        extractFluids();
+        moveFluids();
         Block<?> block = getBlock();
         if (block != null) {
             setCurrentRecipe();

@@ -21,7 +21,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
     public void tick() {
         super.tick();
         worldObj.markBlockDirty(tilePos);
-        extractFluids();
+        moveFluids();
         for (int i = 0; i < itemContents.length; i++) {
             if (itemContents[i] != null && itemContents[i].stackSize <= 0) {
                 itemContents[i] = null;

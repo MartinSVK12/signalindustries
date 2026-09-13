@@ -10,13 +10,15 @@ import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
 //import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 //import sunsetsatellite.catalyst.multipart.api.Multipart;
+import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
+import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityFluidConduit extends TileEntityFluidPipe /*implements ISupportsMultiparts*/ {
+public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupportsMultiparts {
 
     public TileEntityFluidConduit() {
         acceptedFluids.get(0).clear();
@@ -29,18 +31,15 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe /*implements ISu
 
     @Override
     public void tick() {
-        if (fluidContents[0] != null && fluidContents[0].amount < 0) {
-            fluidContents[0] = null;
-        }
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
         if (tiered != null) {
-            transferSpeed = 20 * (tiered.getTier().ordinal() + 1);
-			fluidCapacity[0] = transferSpeed * 6;
+            flowRate = 20 * (tiered.getTier().ordinal() + 1);
+			fluidCapacity = flowRate;
         }
         super.tick();
     }
 
-    /*public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
+    public final HashMap<Direction, Multipart> parts = (HashMap<Direction, Multipart>) Catalyst.mapOf(Direction.values(), new Multipart[Direction.values().length]);
 
 
 	@Override
@@ -73,5 +72,5 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe /*implements ISu
     @Override
     public HashMap<Direction, Multipart> getParts() {
         return parts;
-    }*/
+    }
 }

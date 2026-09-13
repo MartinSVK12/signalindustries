@@ -55,7 +55,7 @@ public class TileEntityDimensionalAnchor extends TileEntityTieredMachineBase imp
             return;
         }
         speedMultiplier = 1;
-        extractFluids();
+        moveFluids();
         stabilizers.clear();
         if (!multiblock.isValid()) {
             return;

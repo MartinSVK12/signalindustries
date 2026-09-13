@@ -41,7 +41,7 @@ public class TileEntityVoidContainer extends TileEntityFluidItemContainer {
 	@Override
     public void tick() {
         super.tick();
-        extractFluids();
+        moveFluids();
         if (worldObj != null) {
             worldObj.markBlockDirty(tilePos);
         }

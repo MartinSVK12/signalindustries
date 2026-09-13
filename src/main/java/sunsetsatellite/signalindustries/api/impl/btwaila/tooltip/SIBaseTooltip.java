@@ -23,6 +23,37 @@ public abstract class SIBaseTooltip<T> extends TileTooltip<T> {
         drawFluids(inv, c, collapse, 2);
     }
 
+	public void drawFluid(FluidStack stack, int capacity, AdvancedInfoComponent c, boolean collapse){
+		if(collapse){
+			c.drawItemList(new ItemStack[]{stack.toItemStack()}, 0);
+		} else {
+			if(stack == null){
+				ProgressBarOptions options = new ProgressBarOptions(
+					152,
+					"Empty: 0/" + NumberUtil.format(capacity) + " ",
+					false,
+					true,
+					new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
+					new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")));
+				c.drawProgressBarTextureWithText(0, capacity, options, 0);
+			} else {
+				BlockModel<?> model = BlockModelDispatcher.getInstance().getDispatch(stack.fluid.blocks.get(0));
+				ProgressBarOptions options = new ProgressBarOptions(
+					152,
+					stack.fluid.getName()
+						.replace("Flowing ", "")
+						.replace("Still ", "")
+						.replace("Signaling Energy", "sE")
+						+ ": " + NumberUtil.format(stack.amount) + "/" + NumberUtil.format(capacity) + " ",
+					false,
+					true,
+					new TextureOptions(0, TextureRegistry.getTexture("signalindustries:block/reality_fabric")),
+					new TextureOptions(0xFFFFFF, model.getOverlayTexture(0)));
+				c.drawProgressBarTextureWithText(stack.amount, capacity, options, 0);
+			}
+		}
+	}
+
     public void drawFluids(IFluidInventory inv, AdvancedInfoComponent c, boolean collapse, int maxFluidBars) {
         if (inv.getFluidInventorySize() <= maxFluidBars) {
             for (int id = 0; id < inv.getFluidInventorySize(); id++) {

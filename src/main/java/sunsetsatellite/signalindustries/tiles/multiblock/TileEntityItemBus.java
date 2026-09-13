@@ -24,7 +24,7 @@ public class TileEntityItemBus extends TileEntityTieredContainer implements IMul
     @Override
     public void tick() {
         super.tick();
-        extractFluids();
+        moveFluids();
         if (!init) {
             if (tier == Tier.BASIC) {
                 itemContents = Arrays.copyOf(itemContents, 4);

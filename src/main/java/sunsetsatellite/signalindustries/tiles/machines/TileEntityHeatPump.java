@@ -24,7 +24,6 @@ import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMachineBase;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TileEntityHeatPump extends TileEntityTieredMachineBase implements IBoostable {
 
@@ -98,7 +97,7 @@ public class TileEntityHeatPump extends TileEntityTieredMachineBase implements I
         if (worldObj != null && worldObj.isClientSide) return;
         worldObj.markBlockDirty(tilePos);
         pumpTimer.tick();
-        extractFluids();
+        moveFluids();
 
         boolean update = false;
         if (fuelBurnTicks > 0) {
