@@ -1371,7 +1371,7 @@
     "pattern": [
       "CFC",
       "CPC",
-      "LMW"
+      "BMB"
     ],
     "symbols": [
       {
@@ -1407,12 +1407,12 @@
         }
       },
       {
-        "symbol": "W",
-        "group": "minecraft:water_buckets"
-      },
-      {
-        "symbol": "L",
-        "group": "minecraft:lava_buckets"
+        "symbol": "B",
+        "stack": {
+          "key": "item.bucket.iron",
+          "amount": 1,
+          "meta": 0
+        }
       }
     ],
     "result": {
