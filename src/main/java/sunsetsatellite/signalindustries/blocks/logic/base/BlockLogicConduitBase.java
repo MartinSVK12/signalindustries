@@ -253,7 +253,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 			if (tile instanceof IHasIOPreview) {
 				((IHasIOPreview) tile).setTemporaryIOPreview(IO.FLUID, 100);
 			}
-			player.sendMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
+			player.sendStatusMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
 		}
 	}
 

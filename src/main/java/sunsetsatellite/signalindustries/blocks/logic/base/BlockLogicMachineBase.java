@@ -197,7 +197,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
             if (tile instanceof IHasIOPreview) {
                 ((IHasIOPreview) tile).setTemporaryIOPreview(IO.FLUID, 100);
             }
-            player.sendMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
+            player.sendStatusMessage("Side " + dir.getSide() + " set to " + ((IFluidIO) tile).getFluidIOForSide(dir) + "!");
         }
     }
 
@@ -211,7 +211,7 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
             if (tile instanceof IHasIOPreview) {
                 ((IHasIOPreview) tile).setTemporaryIOPreview(IO.ITEM, 100);
             }
-            player.sendMessage("Side " + dir.getSide() + " set to " + ((IItemIO) tile).getItemIOForSide(dir) + "!");
+            player.sendStatusMessage("Side " + dir.getSide() + " set to " + ((IItemIO) tile).getItemIOForSide(dir) + "!");
         }
     }
 

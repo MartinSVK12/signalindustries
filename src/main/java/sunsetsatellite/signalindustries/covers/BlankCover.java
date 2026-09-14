@@ -44,13 +44,13 @@ public class BlankCover extends CoverBase {
 
     @Override
     public void onInstalled(Direction dir, IAcceptsCovers machine, Player player) {
-        player.sendMessage("Cover installed!");
+        player.sendStatusMessage("Cover installed!");
         super.onInstalled(dir, machine, player);
     }
 
     @Override
     public void onRemoved(Player player) {
-        player.sendMessage("Cover removed!");
+        player.sendStatusMessage("Cover removed!");
         super.onRemoved(player);
     }
 
