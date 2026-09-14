@@ -64,6 +64,7 @@
     "catalyst-multiblocks": ">=${multiblocks}",
     "catalyst-energy": ">=${energy}",
 		"catalyst-screens": ">=${screens}",
+		"catalyst-multipart": ">=${multipart}",
     "halplibe": ">=${halplibe}"
   },
   "suggests": {

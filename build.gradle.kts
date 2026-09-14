@@ -273,7 +273,7 @@ tasks {
 			"fluids" to project(":catalyst-fluids").properties["mod_version"] as String,
 			"energy" to project(":catalyst-energy").properties["mod_version"] as String,
 			"multiblocks" to project(":catalyst-multiblocks").properties["mod_version"] as String,
-			//"multipart" to project(":catalyst-multipart").properties["mod_version"] as String,
+			"multipart" to project(":catalyst-multipart").properties["mod_version"] as String,
 			"effects" to project(":catalyst-effects").properties["mod_version"] as String,
 			"screens" to project(":catalyst-screens").properties["mod_version"] as String
 		)
