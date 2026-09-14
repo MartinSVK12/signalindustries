@@ -123,6 +123,9 @@ public class TileEntityWrathBeacon extends TileEntityWrathBeaconBase {
 			if(tiered != null){
 				tier = tiered.getTier();
 			}
+			for (Mob mob : enemiesLeft) {
+				worldObj.spawnParticle("reddust", mob.x, mob.y + 1f, mob.z, 0, 0, 0, 0, true);
+			}
 		}
         //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
         //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));

@@ -35,12 +35,12 @@ public class ItemBlueprint extends Item implements ICustomDescription {
 				return super.onUseOnBlock(stack, world, player, blockPos, side, xHit, yHit);
 			}
 			stack.getData().putString("multiblock", multiblock.getMultiblock().data.translateKey);
-			player.sendMessage("Blueprint written down!");
+			player.sendStatusMessage("Blueprint written down!");
 		} else {
 			if (player.isSneaking()) {
 				stack.getData().getValue().remove("multiblock");
 				stack.getData().getValue().remove("structure");
-				player.sendMessage("Blueprint cleared!");
+				player.sendStatusMessage("Blueprint cleared!");
 			}
 		}
 		return super.onUseOnBlock(stack, world, player, blockPos, side, xHit, yHit);

@@ -34,6 +34,7 @@ import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityWrathBeaconBase;
 import sunsetsatellite.signalindustries.util.Tier;
 import sunsetsatellite.signalindustries.util.Wave;
+import turniplabs.halplibe.helper.EnvironmentHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -109,10 +110,11 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     @Override
     public void tick() {
-        if (multiblock == null) {
+		if(EnvironmentHelper.isMultiplayerClient()) return;
+        if (multiblock == null || worldObj == null) {
             return;
         }
-        worldObj.markBlockDirty(tilePos);
+		worldObj.markBlockDirty(tilePos);
         if (active) {
             spawnTimer.tick();
             intermissionTimer.tick();
@@ -135,24 +137,23 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             worldObj.entityJoinedWorld(entityitem2);
         }
         if (active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave < waves.size() - 1) {
-            for (Player player : worldObj.players) {
-                if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
-                player.sendMessage("Wave " + wave + " complete! Next wave in: " + (intermissionTimer.max / 20) + "s.");
-            }
+			doWithNearPlayers(32, player ->{
+				player.sendMessage("Wave " + wave + " complete! Next wave in: " + (intermissionTimer.max / 20) + "s.");
+            });
             started = false;
             intermissionTimer.unpause();
             intermission = true;
             enemiesSpawned = 0;
             wave++;
         } else if (active && started && enemiesLeft.isEmpty() && enemiesSpawned == currentMaxAmount && wave == waves.size() - 1) {
-            for (Player player : worldObj.players) {
-				if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
-                player.sendMessage("Challenge complete!!");
-                player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
-            }
-            for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(tilePos), Direction.Z_POS)) {
-                if (worldObj.getBlockId(bi.pos.x, bi.pos.y, bi.pos.z) == SIBlocks.fueledEternalTreeLog.id()) {
-                    worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id());
+			doWithNearPlayers(32, player ->{
+				player.sendMessage("Challenge complete!!!");
+				player.triggerAchievement(SIAchievements.VICTORY_REINFORCED);
+			});
+			Direction dir = Direction.getDirectionFromSide(getBlockMeta());
+            for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(tilePos), dir)) {
+                if (worldObj.getBlockType(bi.pos.tilePos()) == SIBlocks.fueledEternalTreeLog) {
+                    worldObj.setBlockTypeNotify(bi.pos.tilePos(), bi.block);
                 }
             }
             active = false;
@@ -165,20 +166,21 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             enemiesSpawned = 0;
             worldObj.setBlockTypeNotify(tilePos, Blocks.AIR);
             worldObj.spawnParticle("signalindustries.shockwave", tilePos.x, tilePos.y, tilePos.z, 0.0, 0.0, 0.0, 0, true);
-            EntityItem entityitem = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIItems.saturatedKey, 1));
-            EntityItem entityitem2 = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
-            worldObj.entityJoinedWorld(entityitem);
-            worldObj.entityJoinedWorld(entityitem2);
+            EntityItem key = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIItems.saturatedKey, 1));
+            EntityItem machine = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
+            worldObj.entityJoinedWorld(key);
+            worldObj.entityJoinedWorld(machine);
         }
-        if (!suddenDeath && active && ticksSinceStart % 30 == 0) {
-            ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(tilePos), Direction.Z_POS);
+        if (!suddenDeath && active && ticksSinceStart % 40 == 0) {
+			Direction dir = Direction.getDirectionFromSide(getBlockMeta());
+            ArrayList<BlockInstance> blocks = multiblock.data.getBlocks(new Vec3i(tilePos), dir);
             int i = random.nextInt(blocks.size());
             BlockInstance block = blocks.get(i);
-            while (worldObj.getBlockId(block.pos.x, block.pos.y, block.pos.z) == SIBlocks.fueledEternalTreeLog.id() && !readyForSuddenDeath()) {
+            while (worldObj.getBlockType(block.pos.tilePos()) == SIBlocks.fueledEternalTreeLog && !readyForSuddenDeath()) {
                 i = random.nextInt(blocks.size());
                 block = blocks.get(i);
             }
-            worldObj.setBlockWithNotify(block.pos.x, block.pos.y, block.pos.z, SIBlocks.fueledEternalTreeLog.id());
+            worldObj.setBlockTypeNotify(block.pos.tilePos(), SIBlocks.fueledEternalTreeLog);
         }
 //        if(active){
 //            for (float y1 = y; y < 256; y+=0.1f) {
@@ -190,10 +192,13 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 			if(tiered != null){
 				tier = tiered.getTier();
 			}
+			for (Mob mob : enemiesLeft) {
+				worldObj.spawnParticle("reddust", mob.x, mob.y + 1f, mob.z, 0, 0, 0, 0, true);
+			}
 		}
-        //SignalIndustries.LOGGER.info(String.valueOf(enemiesLeft.size()));
-        //SignalIndustries.LOGGER.info(String.valueOf(intermissionTimer.value));
-
+		doWithNearPlayers(32, player ->{
+			player.sendStatusMessage("Wave: "+wave+" | "+enemiesLeft.size() +"/"+ enemiesSpawned);
+		});
     }
 
 	@Override
@@ -208,10 +213,11 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
 	public void check() {
         if (getBlock() != Blocks.AIR && active) {
+			Direction dir = Direction.getDirectionFromSide(getBlockMeta());
             if (worldObj != null && worldObj.getCurrentWeather() == SIWeather.weatherBloodMoon && !suddenDeath) {
-                for (BlockInstance bi : multiblock.data.getSubstitutions(new Vec3i(tilePos), Direction.Z_POS)) {
-                    if (worldObj.getBlockId(bi.pos.x, bi.pos.y, bi.pos.z) == SIBlocks.eternalTreeLog.id()) {
-                        worldObj.setBlockWithNotify(bi.pos.x, bi.pos.y, bi.pos.z, bi.block.id());
+                for (BlockInstance bi : multiblock.data.getSubstitutions(new Vec3i(tilePos), dir)) {
+                    if (worldObj.getBlockType(bi.pos.tilePos()) == SIBlocks.eternalTreeLog) {
+                        worldObj.setBlockTypeNotify(bi.pos.tilePos(), bi.block);
                     }
                 }
             }
@@ -225,8 +231,8 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             if (!multiblock.isValid() && worldObj != null) {
                 player.sendMessage("The wrath beacon loses all its strength suddenly..");
                 worldObj.setBlockTypeNotify(tilePos, Blocks.AIR);
-                EntityItem entityitem2 = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
-                worldObj.entityJoinedWorld(entityitem2);
+                EntityItem item = new EntityItem(worldObj, (float) tilePos.x, (float) tilePos.y, (float) tilePos.z, new ItemStack(SIBlocks.reinforcedWrathBeacon, 1));
+                worldObj.entityJoinedWorld(item);
             }
         }
     }
@@ -247,11 +253,14 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
             }
             if (activator.inventory.getCurrentItem() != null && activator.inventory.getCurrentItem().getItem().id == SIItems.infernalEye.id) {
                 activator.inventory.getCurrentItem().consumeItem(activator);
-                for (Player player : worldObj.players) {
-                    if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
-                    player.sendTranslatedChatMessage("event.signalindustries.reinforcedWrathBeaconActivated");
-                }
+				doWithNearPlayers(64, p -> p.sendTranslatedChatMessage("event.signalindustries.reinforcedWrathBeaconActivated"));
                 active = true;
+				Direction dir = Direction.getDirectionFromSide(getBlockMeta());
+				for (BlockInstance bi : multiblock.data.getBlocks(new Vec3i(tilePos), dir)) {
+					if (worldObj.getBlockType(bi.pos.tilePos()) == SIBlocks.fueledEternalTreeLog) {
+						worldObj.setBlockTypeNotify(bi.pos.tilePos(), bi.block);
+					}
+				}
                 player = activator;
                 checkTimer.unpause();
                 startWave();
@@ -290,13 +299,12 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
 
     public void startWave() {
         if (active && worldObj != null) {
-            for (Player player : worldObj.players) {
-                if (player.distanceToSqr(tilePos.x, tilePos.y, tilePos.z) > 64) continue;
-                player.sendMessage("Wave " + wave);
-                if (wave == waves.size() - 1) {
-                    player.sendMessage("FINAL WAVE!");
-                }
-            }
+			doWithNearPlayers(64, p -> {
+				p.sendMessage("Wave " + wave);
+				if (wave == waves.size() - 1) {
+					p.sendMessage("FINAL WAVE!");
+				}
+			});
             intermission = false;
             intermissionTimer.pause();
             spawnTimer.unpause();
@@ -345,12 +353,16 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
     }
 
     public boolean readyForSuddenDeath() {
-        for (BlockInstance substitution : multiblock.data.getSubstitutions(new Vec3i(tilePos), Direction.Z_POS)) {
-            if (worldObj.getBlockId(substitution.pos.x, substitution.pos.y, substitution.pos.z) != SIBlocks.fueledEternalTreeLog.id()) {
-                return false;
-            }
-        }
-        return true;
+	    if(worldObj != null){
+			Direction dir = Direction.getDirectionFromSide(getBlockMeta());
+			for (BlockInstance substitution : multiblock.data.getSubstitutions(new Vec3i(tilePos), dir)) {
+				if (worldObj.getBlockType(substitution.pos.tilePos()) != SIBlocks.fueledEternalTreeLog) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
     }
 
     @Override

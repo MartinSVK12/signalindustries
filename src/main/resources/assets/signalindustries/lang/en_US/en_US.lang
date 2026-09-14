@@ -157,11 +157,11 @@ item.signalindustries.coolingCoil.name=Cooling Coil
 item.signalindustries.coolingCoil.desc=A coil of wire used for cooling.
 
 item.signalindustries.clearKey.name=Clear Key
-item.signalindustries.clearKey.desc=Both a physical and metaphorical key to more power.
+item.signalindustries.clearKey.desc=Reward from the Basic-tier Wrath Beacon challenge.
 item.signalindustries.saturatedKey.name=Saturated Key
-item.signalindustries.saturatedKey.desc=Can open many "doors", but only you can choose which will be actually opened.
-item.signalindustries.awakenedCatalyst.name=Awakened Key
-item.signalindustries.awakenedCatalyst.desc=When the stars align and the sunsets glow, you'll find me there after all.
+item.signalindustries.saturatedKey.desc=Reward from the Reinforced-tier Wrath Beacon challenge.
+item.signalindustries.awakenedKey.name=Awakened Key
+item.signalindustries.awakenedKey.desc=When the stars align and the sunsets glow, you'll find me there after all.
 
 item.signalindustries.fuelCell.name=Fuel Cell
 item.signalindustries.fuelCell.desc=A special container containing <Signaling Energy> for use in the <Signalite Reactor>.
@@ -503,9 +503,9 @@ tile.signalindustries.infinite.storageContainer.name=Infinite Storage Container
 tile.signalindustries.infinite.storageContainer.desc=An infinite and unlimited supply of any item! Creative mode only.
 
 tile.signalindustries.basic.wrathBeacon.name=Basic Wrath Beacon
-tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Eye>.
+tile.signalindustries.basic.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Evil Eye>. Activates the Basic-tier Wrath Beacon challenge.
 tile.signalindustries.reinforced.wrathBeacon.name=Reinforced Wrath Beacon
-tile.signalindustries.reinforced.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Infernal Eye>.
+tile.signalindustries.reinforced.wrathBeacon.desc=A terrible machine capable of unleashing the evil from an <Infernal Eye>. Activates the Reinforced-tier Wrath Beacon challenge.
 tile.signalindustries.awakened.wrathBeacon.name=Awakened Wrath Beacon
 tile.signalindustries.awakened.wrathBeacon.desc=Don't stare at the abyss or it will stare back at you.
 
