@@ -17,4 +17,10 @@ public class PacketHandlerClientMixin {
 		SIRecipes.loaded = false;
         SignalIndustries.meteorLocations.clear();
     }
+
+	@Inject(method = "handleLogin", at = @At("TAIL"), order = 1100)
+	public void handleLogin2(PacketLogin packetLogin, CallbackInfo ci) {
+		new SIRecipes().load();
+		SIRecipes.loadSpecial();
+	}
 }
