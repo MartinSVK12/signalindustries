@@ -612,7 +612,7 @@ public class SIBlocks extends DataInitializer {
 			new MachineTextures().withDefaultTexture("catalyst_energy_conduit_awakened")
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
-		multiConduit = customBlock(defaultBuilder(Tier.REINFORCED),
+		multiConduit = customBlock(defaultBuilder(Tier.REINFORCED).setTags(BlockTags.NOT_IN_CREATIVE_MENU),
 			"reinforced.conduit.multi",
 			"multi_conduit",
 			"multiConduit",
