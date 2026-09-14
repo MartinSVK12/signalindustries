@@ -1098,7 +1098,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.conduit.item",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
@@ -1135,7 +1135,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.conduit.item.restrict",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
@@ -1176,7 +1176,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.basic.conduit.item.sensor",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false

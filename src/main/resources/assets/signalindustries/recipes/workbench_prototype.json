@@ -522,7 +522,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.prototype.conduit.item",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false

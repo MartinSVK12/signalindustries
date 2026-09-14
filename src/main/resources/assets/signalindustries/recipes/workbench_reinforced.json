@@ -600,7 +600,7 @@
     ],
     "result": {
       "key": "tile.signalindustries.reinforced.conduit.fluid",
-      "amount": 4,
+      "amount": 8,
       "meta": 0
     },
     "consumeContainers": false
