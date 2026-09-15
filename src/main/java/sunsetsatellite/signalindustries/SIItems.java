@@ -169,6 +169,7 @@ public class SIItems extends DataInitializer {
 	public static ItemSuitColorizer suitColorizerWhite;
 	public static ItemSuitColorizer suitColorizerBlue;
 	public static ItemSuitColorizer suitColorizerPurple;
+	public static ItemSuitColorizer suitColorizerGreen;
 	public static ItemSuitColorizer suitColorizerTransparent;
 	public static ItemSuitColorizer suitColorizerInverted;
 
@@ -418,6 +419,13 @@ public class SIItems extends DataInitializer {
 			item("suitColorizerPurple"),
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
 			"/assets/signalindustries/textures/armor/power_suit_purple"), "colorizer_purple").setMaxStackSize(1);
+
+		suitColorizerGreen = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
+			"reinforced.attachment.colorizer.green",
+			key("item/suit_colorizer_green"),
+			item("suitColorizerGreen"),
+			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
+			"/assets/signalindustries/textures/armor/power_suit_green"), "colorizer_green").setMaxStackSize(1);
 
 		suitColorizerTransparent = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.transparent",

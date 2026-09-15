@@ -1766,6 +1766,47 @@
     "consumeContainers": false
   },
   {
+    "name": "signalindustries:workbench/colorizer_green",
+    "type": "minecraft:crafting/shaped",
+    "pattern": [
+      "G",
+      "C",
+      "S"
+    ],
+    "symbols": [
+      {
+        "symbol": "C",
+        "stack": {
+          "key": "item.signalindustries.crystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "S",
+        "stack": {
+          "key": "item.signalindustries.reinforcedCrystalAlloyPlate",
+          "amount": 1,
+          "meta": 0
+        }
+      },
+      {
+        "symbol": "G",
+        "stack": {
+          "id": 16479,
+          "amount": 1,
+          "meta": 10
+        }
+      }
+    ],
+    "result": {
+      "key": "item.signalindustries.reinforced.attachment.colorizer.green",
+      "amount": 1,
+      "meta": 0
+    },
+    "consumeContainers": false
+  },
+  {
     "name": "signalindustries:workbench/pulsar_block",
     "type": "minecraft:crafting/shaped",
     "pattern": [
