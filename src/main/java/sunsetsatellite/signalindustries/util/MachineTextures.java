@@ -22,24 +22,28 @@ public class MachineTextures {
         this.activeTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], "minecraft:block/texture_unassigned"));
         this.overbrightTextures = (HashMap<Side, String>) Catalyst.mapOf(Arrays.stream(Side.values()).filter((s) -> s != Side.NONE).toArray(Side[]::new), Catalyst.arrayFill(new String[Side.values().length - 1], null));
 
-        switch (tier) {
-            case PROTOTYPE:
-                withDefaultTexture("prototype_blank");
-                withActiveTexture("prototype_blank");
-                break;
-            case BASIC:
-                withDefaultTexture("basic_blank");
-                withActiveTexture("basic_blank");
-                break;
-            case REINFORCED:
-                withDefaultTexture("reinforced_blank");
-                withActiveTexture("reinforced_blank");
-                break;
-            case AWAKENED:
-                withDefaultTexture("awakened_blank");
-                withActiveTexture("awakened_blank");
-                break;
-        }
+		switch (tier) {
+		    case PROTOTYPE -> {
+				withDefaultTexture("prototype_blank");
+				withActiveTexture("prototype_blank");
+			}
+		    case BASIC -> {
+				withDefaultTexture("basic_blank");
+				withActiveTexture("basic_blank");
+			}
+		    case REINFORCED -> {
+				withDefaultTexture("reinforced_blank");
+				withActiveTexture("reinforced_blank");
+			}
+		    case AWAKENED -> {
+				withDefaultTexture("awakened_blank");
+				withActiveTexture("awakened_blank");
+			}
+		    case INFINITE -> {
+				withDefaultTexture("infinite_blank");
+				withActiveTexture("infinite_blank");
+			}
+	    }
     }
 
     public MachineTextures withDefaultTexture(String texture) {

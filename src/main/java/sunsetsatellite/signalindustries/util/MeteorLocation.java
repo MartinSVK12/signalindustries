@@ -17,6 +17,7 @@ public record MeteorLocation(Type type, Vec3i location) {
 		public static final Type IRON = new Type("IRON", Blocks.ORE_IRON_BASALT);
 		public static final Type SIGNALUM = new Type("SIGNALUM", SIBlocks.signalumOre);
 		public static final Type DILITHIUM = new Type("DILITHIUM", SIBlocks.dilithiumOre);
+		public static final Type DIMENSIONAL = new Type("DIMENSIONAL", SIBlocks.dimensionalShardOre);
 		public static final Type UNKNOWN = new Type("UNKNOWN", null);
 
 		public Type(String name, Block<?> block) {

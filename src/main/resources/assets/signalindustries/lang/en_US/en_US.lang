@@ -848,6 +848,9 @@ ability.signalindustries.basic.scan.desc=Tries to find and highlight ores in the
 ability.signalindustries.reinforced.devouringField.name=Devouring Field
 ability.signalindustries.reinforced.devouringField.desc=Drains health from nearby enemies and also sets them on fire.
 
+ability.signalindustries.reinforced.sharingField.name=Sharing Field
+ability.signalindustries.reinforced.sharingField.desc=Heals players and animals around you!
+
 ability.signalindustries.awakened.clockwork.name=Clockwork
 ability.signalindustries.awakened.clockwork.desc=The sands of time freeze on your command.
 

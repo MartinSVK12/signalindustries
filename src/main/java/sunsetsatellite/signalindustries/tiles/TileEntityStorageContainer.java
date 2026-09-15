@@ -6,6 +6,8 @@ import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.PacketTileEntityData;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -252,5 +254,10 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 	@Override
 	public String getName() {
 		return getNameTranslationKey();
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return new PacketTileEntityData(this);
 	}
 }

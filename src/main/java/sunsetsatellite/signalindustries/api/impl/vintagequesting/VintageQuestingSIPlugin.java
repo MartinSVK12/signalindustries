@@ -717,8 +717,6 @@ public class VintageQuestingSIPlugin implements VQPlugin {
         QuestData basicDrill = simpleQuest("basicDrill", basicSignalumDrill,
                 zip(listOf("retrieval", "retrieval2", "retrieval3"),
                         listOf(
-                                new ItemStack(basicDrillCasing, 1),
-                                new ItemStack(basicDrillBit, 1),
                                 new ItemStack(basicSignalumDrill, 1)
                         )),
                 listOf(steelPlates, crystalAlloyPlates, saturatedAlloyPlate), saturatedAlloyPlate,
@@ -889,9 +887,7 @@ public class VintageQuestingSIPlugin implements VQPlugin {
         QuestData reinforcedDrill = simpleQuest("reinforcedDrill", reinforcedSignalumDrill,
                 zip(listOf("retrieval", "retrieval2", "retrieval3"),
                         listOf(
-                                new ItemStack(reinforcedSignalumDrill, 1),
-                                new ItemStack(reinforcedDrillBit, 1),
-                                new ItemStack(reinforcedDrillCasing, 1)
+                                new ItemStack(reinforcedSignalumDrill, 1)
                         )),
                 listOf(reinforcedEnergyCore), reinforcedEnergyCore,
                 1,

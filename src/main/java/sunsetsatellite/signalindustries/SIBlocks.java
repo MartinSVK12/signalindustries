@@ -719,8 +719,8 @@ public class SIBlocks extends DataInitializer {
 			"infiniteFluidTank",
 			3,
 			(block) -> new BlockLogicSIFluidTank(block, Materials.GLASS, Tier.INFINITE, TileEntitySIFluidTank::new, "fluid_tank").setNonSolid(),
-			new MachineTextures(Tier.PROTOTYPE)
-				.withDefaultTexture("fluid_tank_prototype")
+			new MachineTextures(Tier.INFINITE)
+				.withDefaultTexture("fluid_tank_infinite")
 		);
 
 		prototypeEnergyCell = customBlock(defaultBuilder(Tier.PROTOTYPE),
@@ -759,8 +759,8 @@ public class SIBlocks extends DataInitializer {
 			"infiniteEnergyCell",
 			3,
 			(block) -> new BlockLogicMachine(block, Materials.GLASS, Tier.INFINITE, TileEntityEnergyCell::new, "energy_cell").setNonSolid(),
-			new MachineTextures(Tier.PROTOTYPE)
-				.withDefaultTexture("cell_prototype")
+			new MachineTextures(Tier.INFINITE)
+				.withDefaultTexture("cell_infinite")
 		);
 
 		prototypeCrusher = customBlock(defaultBuilder(Tier.PROTOTYPE),
@@ -1667,8 +1667,9 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingAlloySmelter::new, "waking_alloy_smelter"),
 			new MachineTextures(Tier.REINFORCED)
-				.withDefaultNorthTexture("alloy_smelter_reinforced_inactive")
-				.withActiveNorthTexture("waking_alloy_smelter_reinforced_active")
+				.withDefaultTexture("waking_blank")
+				.withDefaultNorthTexture("waking_alloy_smelter_inactive")
+				.withActiveNorthTexture("waking_alloy_smelter_active")
 				.withOverbrightNorthTexture("waking_alloy_smelter_overlay")
 		);
 
@@ -1679,10 +1680,11 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingCrusher::new, "waking_crusher"),
 			new MachineTextures(Tier.REINFORCED)
+				.withDefaultTexture("waking_blank")
 				.withDefaultTopTexture("crusher_reinforced_top_inactive")
-				.withDefaultNorthTexture("waking_crusher_reinforced_side")
+				.withDefaultNorthTexture("waking_crusher_side")
 				.withActiveTopTexture("crusher_reinforced_top_active")
-				.withActiveNorthTexture("waking_crusher_reinforced_side")
+				.withActiveNorthTexture("waking_crusher_side")
 				.withOverbrightTopTexture("crusher_overlay")
 		);
 
@@ -1693,8 +1695,9 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingPlateFormer::new, "waking_plate_former"),
 			new MachineTextures(Tier.REINFORCED)
-				.withDefaultNorthTexture("plate_former_reinforced_inactive")
-				.withActiveNorthTexture("waking_plate_former_reinforced_active")
+				.withDefaultTexture("waking_blank")
+				.withDefaultNorthTexture("waking_plate_former_inactive")
+				.withActiveNorthTexture("waking_plate_former_active")
 				.withOverbrightNorthTexture("waking_plate_former_overlay")
 		);
 
@@ -1705,7 +1708,8 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.REINFORCED, TileEntityWakingInfuser::new, "waking_infuser"),
 			new MachineTextures(Tier.REINFORCED)
-				.withDefaultSideTextures("infuser_reinforced_side_inactive")
+				.withDefaultTexture("waking_blank")
+				.withDefaultSideTextures("waking_infuser_side_inactive")
 				.withActiveSideTextures("waking_infuser_side_active")
 				.withOverbrightSideTextures("waking_infuser_overlay")
 		);
@@ -1876,8 +1880,8 @@ public class SIBlocks extends DataInitializer {
 			"infiniteStorageContainer",
 			3,
 			(block) -> new BlockLogicStorageContainer(block, Materials.STONE, Tier.INFINITE),
-			new MachineTextures(Tier.PROTOTYPE)
-				.withDefaultNorthTexture("container_prototype_front")
+			new MachineTextures(Tier.INFINITE)
+				.withDefaultNorthTexture("container_infinite_front")
 		);
 
 		redstoneClock = customBlock(defaultBuilder(Tier.PROTOTYPE),

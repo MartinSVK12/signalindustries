@@ -2,6 +2,8 @@ package sunsetsatellite.signalindustries.tiles.conduit;
 
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.PacketTileEntityData;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
@@ -85,4 +87,9 @@ public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsM
     public HashMap<Direction, Multipart> getParts() {
         return parts;
     }
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return new PacketTileEntityData(this);
+	}
 }

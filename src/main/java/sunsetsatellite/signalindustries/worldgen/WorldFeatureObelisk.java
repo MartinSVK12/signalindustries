@@ -1,13 +1,16 @@
 package sunsetsatellite.signalindustries.worldgen;
 
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.Dimension;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 import net.minecraft.core.world.generate.feature.WorldFeatureInterface;
 import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
 import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 import java.util.Random;
 
@@ -68,6 +71,7 @@ public class WorldFeatureObelisk implements WorldFeatureInterface {
 					world.setBlockWithNotify(i, j + l - 1, k, SIBlocks.rootedFabric.id());
 					world.setBlockWithNotify(i, j + l - 2, k, SIBlocks.realityFabric.id());
 					world.setBlockWithNotify(i, j + l - 3, k, SIBlocks.realityFabric.id());
+					SignalIndustries.addMeteorLocation(new MeteorLocation(MeteorLocation.Type.DIMENSIONAL, new Vec3i(i, j + l, k)));
 					SignalIndustries.LOGGER.info("Obelisk generated.");
 					return true;
 				} else {

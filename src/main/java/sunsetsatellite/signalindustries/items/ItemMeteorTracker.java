@@ -23,11 +23,11 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 		if (stack.getMetadata() == 0) {
 			stack.setMetadata(1);
 		} else {
-
 			Vec3i chunk = null;
 			double distance = Double.MAX_VALUE;
 			MeteorLocation.Type type = null;
 			for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
+				if(meteorLocation.type() == MeteorLocation.Type.DIMENSIONAL) continue;
 				Vec3i location = meteorLocation.location();
 				if (location.getSqDistanceTo((int) player.x, (int) player.y, (int) player.z) < distance) {
 					distance = location.getSqDistanceTo((int) player.x, (int) player.y, (int) player.z);
@@ -39,7 +39,7 @@ public class ItemMeteorTracker extends Item implements ICustomDescription {
 				if (player.isSneaking() && distance < 5) {
 					player.sendStatusMessage("This meteor will no longer be tracked.");
 					final Vec3i finalChunk = chunk;
-					SignalIndustries.meteorLocations.removeIf((L) -> L.location() == finalChunk);
+					SignalIndustries.meteorLocations.removeIf((L) -> L.location() == finalChunk && L.type() != MeteorLocation.Type.DIMENSIONAL);
 				} else {
 					player.sendStatusMessage(String.format("Distance: %.0f blocks | Type: %s", distance, type.name()));
 				}

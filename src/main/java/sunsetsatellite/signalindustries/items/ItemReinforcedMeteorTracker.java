@@ -8,7 +8,10 @@ import net.minecraft.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.core.util.ICustomDescription;
+import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.signalindustries.SIBlocks;
+import sunsetsatellite.signalindustries.SignalIndustries;
+import sunsetsatellite.signalindustries.util.MeteorLocation;
 
 public class ItemReinforcedMeteorTracker extends Item implements ICustomDescription {
 
@@ -22,6 +25,18 @@ public class ItemReinforcedMeteorTracker extends Item implements ICustomDescript
 		if (stack.getMetadata() == 0) {
 			stack.setMetadata(1);
 		} else {
+			for (MeteorLocation meteorLocation : SignalIndustries.meteorLocations) {
+				if(meteorLocation.type() == MeteorLocation.Type.DIMENSIONAL){
+					Vec3i location = meteorLocation.location();
+					int distance = (int) location.getSqDistanceTo((int) player.x, (int) player.y, (int) player.z);
+					if (location.getBlock(world) == SIBlocks.dimensionalShardOre) {
+						if (distance < 256) {
+							player.sendStatusMessage(String.format("Interference detected %s blocks away.",distance));
+							return super.onUse(stack, world, player);
+						}
+					}
+				}
+			}
 			int oreFound = 0;
 			int oreYLevel = -1;
 			for (int i = -range; i < range; i++) {

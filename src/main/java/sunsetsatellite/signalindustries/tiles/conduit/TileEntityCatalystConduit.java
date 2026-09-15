@@ -3,6 +3,8 @@ package sunsetsatellite.signalindustries.tiles.conduit;
 import com.mojang.nbt.tags.CompoundTag;
 import com.mojang.nbt.tags.Tag;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.PacketTileEntityData;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
@@ -67,4 +69,9 @@ public class TileEntityCatalystConduit extends TileEntityEnergyConductor impleme
     public HashMap<Direction, Multipart> getParts() {
         return parts;
     }
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return new PacketTileEntityData(this);
+	}
 }
