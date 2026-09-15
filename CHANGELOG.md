@@ -2,3 +2,4 @@
 - Added unique textures for creative utilities.
 - Added recipe for basic chainsaw casing.
 - Fixed rendering of storage containers and multiparts on conduits on servers.
+- Added the green suit colorizer.
