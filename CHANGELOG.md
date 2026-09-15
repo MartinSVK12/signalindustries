@@ -1,13 +1,4 @@
-- Fix projectile ability being affected by gravity.
-- Added a warning about deleting meteor sites to the meteor tracker quest.
-- Added chainsaw.
-- Added magnet.
-- Added ability to swap conduits in-place by clicking them with another conduit in hand.
-- Readded SI multiblocks and mobs to the BTA guidebook.
-- Fluid tanks can now be interacted with by clicking on them with a bucket or any other fluid containing item.
-- Tools now properly display their charge in the "durability" bar.
-- Add some balance configurations to config and a command to see it.
-- Made status messages actually show up as status messages and not spam the chat.
-- No longer need filled buckets for basic pump recipe.
-- Buffed some conduit recipes.
-- Improved wrath beacon challenge.
+- Added interference mechanic to reinforced meteor tracker.
+- Added unique textures for creative utilities.
+- Added recipe for basic chainsaw casing.
+- Fixed rendering of storage containers and multiparts on conduits on servers.
