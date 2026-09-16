@@ -37,6 +37,28 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
         if (tiered != null) {
             flowRate = 20 * (tiered.getTier().ordinal() + 1);
 			fluidCapacity = flowRate;
+			switch (tiered.getTier()) {
+				case PROTOTYPE -> {
+					travelDelay = 10;
+					outputCooldown = 20;
+				}
+				case BASIC -> {
+					travelDelay = 8;
+					outputCooldown = 15;
+				}
+				case REINFORCED -> {
+					travelDelay = 6;
+					outputCooldown = 10;
+				}
+				case AWAKENED -> {
+					travelDelay = 4;
+					outputCooldown = 5;
+				}
+				case INFINITE -> {
+					travelDelay = 1;
+					outputCooldown = 1;
+				}
+			}
         }
         super.tick();
     }

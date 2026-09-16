@@ -9,8 +9,6 @@ import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidPipe;
-//import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
-//import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.catalyst.multipart.api.ISupportsMultiparts;
 import sunsetsatellite.catalyst.multipart.api.Multipart;
 import sunsetsatellite.signalindustries.SIFluids;
@@ -32,23 +30,33 @@ public class TileEntityConduit extends TileEntityFluidPipe implements ISupportsM
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
         if (tiered != null) {
             Tier tier = tiered.getTier();
-            switch (tier){
-                case PROTOTYPE:
-                    flowRate = 20;
-                    break;
-                case BASIC:
-                    flowRate = 100;
-                    break;
-                case REINFORCED:
-                    flowRate = 500;
-                    break;
-                case AWAKENED:
-                    flowRate = 1000;
-                    break;
-                case INFINITE:
-                    flowRate = Integer.MAX_VALUE;
-                    break;
-            }
+			switch (tier) {
+		        case PROTOTYPE -> {
+					travelDelay = 10;
+					outputCooldown = 20;
+					flowRate = 20;
+				}
+		        case BASIC -> {
+					travelDelay = 8;
+					outputCooldown = 15;
+					flowRate = 100;
+				}
+		        case REINFORCED -> {
+					travelDelay = 6;
+					outputCooldown = 10;
+					flowRate = 500;
+				}
+		        case AWAKENED -> {
+					travelDelay = 4;
+					outputCooldown = 5;
+					flowRate = 1000;
+				}
+		        case INFINITE -> {
+					travelDelay = 1;
+					outputCooldown = 1;
+					flowRate = Integer.MAX_VALUE;
+				}
+	        }
 			fluidCapacity = flowRate;
         }
         super.tick();
