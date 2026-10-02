@@ -3,6 +3,7 @@ package sunsetsatellite.signalindustries.mixin;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
+import net.minecraft.core.player.inventory.menu.MenuCrafting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.gui.menus.MenuBackpack;
+import sunsetsatellite.signalindustries.items.applications.ItemPortableWorkbench;
 
 @Mixin(
         value = ContainerInventory.class,
@@ -45,5 +47,8 @@ public class ContainerInventoryMixin {
         if (this.player.containerMenu instanceof MenuBackpack) {
             cir.setReturnValue(true);
         }
+		if(this.player.containerMenu instanceof MenuCrafting && this.player.getCurrentEquippedItem() != null && this.player.getCurrentEquippedItem().getItem() instanceof ItemPortableWorkbench){
+			cir.setReturnValue(true);
+		}
     }
 }

@@ -12,6 +12,7 @@
     "DataLoaderMixin",
     "DimensionMixin",
     "LevelStorageBaseMixin",
+    "MenuAbstractMixinCommon",
     "MenuCraftingMixin",
     "MobMixin",
     "MobMonsterMixin",
