@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.client.entity.player.PlayerRemote;
@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sunsetsatellite.signalindustries.SIAchievements;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
-import sunsetsatellite.signalindustries.interfaces.mixins.IWarpPlayer;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuitRemote;
 

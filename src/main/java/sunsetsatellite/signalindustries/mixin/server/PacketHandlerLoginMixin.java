@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.server;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.net.packet.PacketLogin;

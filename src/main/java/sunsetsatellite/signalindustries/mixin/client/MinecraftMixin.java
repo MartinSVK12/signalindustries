@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.mojang.nbt.NbtIo;

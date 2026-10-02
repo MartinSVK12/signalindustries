@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import net.minecraft.client.gui.guidebook.GuidebookSections;
 import org.spongepowered.asm.mixin.Mixin;

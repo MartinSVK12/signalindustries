@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import net.minecraft.client.net.handler.PacketHandlerClient;
 import net.minecraft.core.net.packet.PacketLogin;

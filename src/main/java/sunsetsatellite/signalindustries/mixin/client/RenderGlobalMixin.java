@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -29,15 +29,12 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.catalyst.core.util.BlockInstance;
-import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.SIDimensions;
 import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.abilities.powersuit.ScanSuitAbility;
 import sunsetsatellite.signalindustries.abilities.trigger.ScanAbility;
 import sunsetsatellite.signalindustries.util.OreInfo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @Debug(export = true)

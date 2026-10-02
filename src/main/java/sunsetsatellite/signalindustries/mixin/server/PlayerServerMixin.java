@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.server;
 
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.player.Player;

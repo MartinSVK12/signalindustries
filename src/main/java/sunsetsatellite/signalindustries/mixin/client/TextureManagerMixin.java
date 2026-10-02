@@ -1,4 +1,4 @@
-package sunsetsatellite.signalindustries.mixin;
+package sunsetsatellite.signalindustries.mixin.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.TextureManager;

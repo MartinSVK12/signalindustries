@@ -12,7 +12,7 @@
     "DataLoaderMixin",
     "DimensionMixin",
     "LevelStorageBaseMixin",
-    "MenuAbstractMixinCommon",
+    "MenuAbstractMixin",
     "MenuCraftingMixin",
     "MobMixin",
     "MobMonsterMixin",
@@ -27,28 +27,28 @@
     "WorldMixin"
   ],
   "client": [
-    "GuidebookSectionsMixin",
-    "HudIngameMixin",
-    "MenuAbstractMixin",
-    "MinecraftMixin",
-    "MobRendererBipedArmoredMixin",
-    "MobRendererPlayerMixin",
-    "PacketHandlerClientMixin",
-    "PlayerLocalMixin",
-    "PlayerRemoteMixin",
-    "RenderGlobalMixin",
-    "ScreenInventoryMixin",
-    "TextureManagerMixin",
-    "TooltipElementMixin",
-    "WorldClientMixin",
-    "WorldClientMPMixin"
+    "client.GuidebookSectionsMixin",
+    "client.HudIngameMixin",
+    "client.MenuAbstractMixin",
+    "client.MinecraftMixin",
+    "client.MobRendererBipedArmoredMixin",
+    "client.MobRendererPlayerMixin",
+    "client.PacketHandlerClientMixin",
+    "client.PlayerLocalMixin",
+    "client.PlayerRemoteMixin",
+    "client.RenderGlobalMixin",
+    "client.ScreenInventoryMixin",
+    "client.TextureManagerMixin",
+    "client.TooltipElementMixin",
+    "client.WorldClientMixin",
+    "client.WorldClientMPMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "server": [
-    "MinecraftServerMixin",
-    "PacketHandlerLoginMixin",
-    "PlayerServerMixin"
+    "server.MinecraftServerMixin",
+    "server.PacketHandlerLoginMixin",
+    "server.PlayerServerMixin"
   ]
 }
