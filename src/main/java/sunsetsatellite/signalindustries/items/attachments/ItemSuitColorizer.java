@@ -13,10 +13,18 @@ import java.util.List;
 public class ItemSuitColorizer extends ItemTieredAttachment {
 
 	public final String path;
+	public final String wingsPath;
 
 	public ItemSuitColorizer(String translationKey, String namespaceId, int id, List<AttachmentPoint> attachmentPoints, Tier tier, String path) {
 		super(translationKey, namespaceId, id, attachmentPoints, tier);
 		this.path = path;
+		this.wingsPath = "/assets/signalindustries/textures/attachments/wings";
+	}
+
+	public ItemSuitColorizer(String translationKey, String namespaceId, int id, List<AttachmentPoint> attachmentPoints, Tier tier, String path, String wingsPath) {
+		super(translationKey, namespaceId, id, attachmentPoints, tier);
+		this.path = path;
+		this.wingsPath = wingsPath;
 	}
 
 	@Override

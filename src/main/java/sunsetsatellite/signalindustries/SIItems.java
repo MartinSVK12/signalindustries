@@ -411,21 +411,24 @@ public class SIItems extends DataInitializer {
 			key("item/suit_colorizer_blue"),
 			item("suitColorizerBlue"),
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-			"/assets/signalindustries/textures/armor/power_suit_blue"), "colorizer_blue").setMaxStackSize(1);
+			"/assets/signalindustries/textures/armor/power_suit_blue",
+			"/assets/signalindustries/textures/attachments/wings_blue"), "colorizer_blue").setMaxStackSize(1);
 
 		suitColorizerPurple = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.purple",
 			key("item/suit_colorizer_purple"),
 			item("suitColorizerPurple"),
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-			"/assets/signalindustries/textures/armor/power_suit_purple"), "colorizer_purple").setMaxStackSize(1);
+			"/assets/signalindustries/textures/armor/power_suit_purple",
+			"/assets/signalindustries/textures/attachments/wings_purple"), "colorizer_purple").setMaxStackSize(1);
 
 		suitColorizerGreen = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.green",
 			key("item/suit_colorizer_green"),
 			item("suitColorizerGreen"),
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-			"/assets/signalindustries/textures/armor/power_suit_green"), "colorizer_green").setMaxStackSize(1);
+			"/assets/signalindustries/textures/armor/power_suit_green",
+			"/assets/signalindustries/textures/attachments/wings_green"), "colorizer_green").setMaxStackSize(1);
 
 		suitColorizerTransparent = (ItemSuitColorizer) customItem(() -> new ItemSuitColorizer(
 			"reinforced.attachment.colorizer.transparent",
@@ -439,7 +442,8 @@ public class SIItems extends DataInitializer {
 			key("item/suit_colorizer_inverted"),
 			item("suitColorizerInverted"),
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
-			"/assets/signalindustries/textures/armor/power_suit_inverted"), "colorizer_inverted").setMaxStackSize(1);
+			"/assets/signalindustries/textures/armor/power_suit_inverted",
+			"/assets/signalindustries/textures/attachments/wings_inverted"), "colorizer_inverted").setMaxStackSize(1);
 
 		blueprint = customItem(() -> new ItemBlueprint("blueprint", key("item/blueprint"), item("blueprint")), "blueprint").setMaxStackSize(1);
 		goldprint = customItem(() -> new ItemGoldprint("goldprint", key("item/goldprint"), item("goldprint")), "goldprint").setMaxStackSize(1);

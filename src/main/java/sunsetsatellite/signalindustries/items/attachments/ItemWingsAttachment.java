@@ -51,9 +51,13 @@ public class ItemWingsAttachment extends ItemTieredAttachment {
     @Override
     public void renderWhenAttached(Player player, IPowerSuit signalumPowerSuit, StaticEntityModel modelBipedMain, ItemStack stack) {
         if (stack.getData().getBoolean("active")) {
-            loadTexture("/assets/signalindustries/textures/attachments/wings_texture.png");
+            loadTexture("/assets/signalindustries/textures/attachments/wings.png");
+			ItemStack colorizer = signalumPowerSuit.getAttachmentClass(ItemSuitColorizer.class);
+			if(colorizer != null){
+				loadTexture(((ItemSuitColorizer) colorizer.getItem()).wingsPath+".png");
+			}
         } else {
-            loadTexture("/assets/signalindustries/textures/attachments/wings_texture_inactive.png");
+            loadTexture("/assets/signalindustries/textures/attachments/wings_inactive.png");
         }
 		StaticEntityModel model = EntityGeometryMojangData.Cache.getModel("geometry.signalindustries.wings", 0);
         model.render();
