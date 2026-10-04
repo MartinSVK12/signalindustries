@@ -29,15 +29,15 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 	@Override
 	public void onAttacked(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Player player, @NotNull Side side, double xHit, double yHit) {
 		super.onAttacked(world, tilePos, player, side, xHit, yHit);
-		if (!EnvironmentHelper.isClientWorld()) {
+		if (!EnvironmentHelper.isMultiplayerClient()) {
 			TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(tilePos);
 			if (tile != null) {
 				if (player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof ItemTool)) {
 					ItemStack stack;
-					if (!player.isSneaking()) {
-						stack = tile.extractStack(1);
+					if (player.isSneaking()) {
+						stack = tile.extractStack(64);
 					} else {
-						stack = tile.extractStack();
+						stack = tile.extractStack(1);
 					}
 					if (stack != null) {
 						Vec3f vec = new Vec3f(tilePos).add(Direction.getDirectionFromSide(world.getBlockData(tilePos)).getVecF()).add(0.5f);
@@ -52,11 +52,18 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 	@Override
 	public boolean onInteracted(@NotNull World world, @NotNull TilePosc tilePos, @NotNull Player player, @Nullable Side side, double xHit, double yHit) {
 		super.onInteracted(world, tilePos, player, side, xHit, yHit);
-		if (!EnvironmentHelper.isClientWorld()) {
+		if (!EnvironmentHelper.isMultiplayerClient()) {
 			TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(tilePos);
 			if (tile != null) {
 				if (player.getCurrentEquippedItem() != null) {
 					if (player.isSwinging) {
+						tile.insertStack(player.getCurrentEquippedItem());
+						if (player.getCurrentEquippedItem().stackSize <= 0) {
+							player.destroyCurrentEquippedItem();
+						} else {
+							player.getCurrentEquippedItem().animationsToGo = 5;
+						}
+					} else {
 						ItemStack stack = player.getCurrentEquippedItem().copy();
 						stack.stackSize = 1;
 						if (tile.insertStack(stack)) {
@@ -67,24 +74,30 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 								player.getCurrentEquippedItem().animationsToGo = 5;
 							}
 						}
-					} else {
-						tile.insertStack(player.getCurrentEquippedItem());
-						if (player.getCurrentEquippedItem().stackSize <= 0) {
-							player.destroyCurrentEquippedItem();
-						} else {
-							player.getCurrentEquippedItem().animationsToGo = 5;
-						}
 					}
 					return true;
 				} else {
 					if (tile.infinite && player.gamemode == Gamemodes.CREATIVE) {
 						tile.contents = null;
 					} else {
-						tile.locked = !tile.locked;
-						if (tile.locked) {
-							player.sendTranslatedChatMessage("event.signalindustries.containerLocked");
+						if(player.isSneaking()){
+							@Nullable ItemStack @NotNull [] mainInventory = player.inventory.mainInventory;
+							for (int i = 0; i < mainInventory.length; i++) {
+								ItemStack stack = mainInventory[i];
+								if (stack != null && stack.stackSize > 0 && stack.canStackWith(tile.contents)) {
+									tile.insertStack(stack);
+									if (stack.stackSize <= 0) {
+										player.inventory.setItem(i, null);
+									}
+								}
+							}
 						} else {
-							player.sendTranslatedChatMessage("event.signalindustries.containerUnlocked");
+							tile.locked = !tile.locked;
+							if (tile.locked) {
+								player.sendTranslatedChatMessage("event.signalindustries.containerLocked");
+							} else {
+								player.sendTranslatedChatMessage("event.signalindustries.containerUnlocked");
+							}
 						}
 					}
 				}
