@@ -78,7 +78,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
         }
         super.tick();
         if (worldObj != null) {
-            worldObj.markBlockDirty(tilePos);
+            //worldObj.markBlockDirty(tilePos);
         }
         Block<?> block = getBlock();
         itemInput = null;

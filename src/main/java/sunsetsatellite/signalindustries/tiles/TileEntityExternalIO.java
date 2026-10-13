@@ -214,7 +214,7 @@ public class TileEntityExternalIO extends TileEntityTieredMachineBase implements
     public void tick() {
         super.tick();
 		if(worldObj == null) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         if (externalTile == null) {
             if (tier == Tier.BASIC) {
 				if(lockedDirection != null){

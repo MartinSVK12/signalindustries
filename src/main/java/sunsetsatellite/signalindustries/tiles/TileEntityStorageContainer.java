@@ -123,7 +123,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
         }
     }
 
-    //extracts specific amount capped bu the items max stack size
+    //extracts specific amount capped to the items max stack size
     public ItemStack extractStack(int amount) {
         if (contents == null) return null;
         if (contents.stackSize <= 0) return null;
@@ -147,7 +147,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         if (tier == Tier.INFINITE) {
             infinite = true;
             unlimited = true;

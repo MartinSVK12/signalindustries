@@ -20,7 +20,7 @@ public class TileEntityRedstoneClock extends TileEntity implements IActiveForm, 
     public void tick() {
         super.tick();
         if (worldObj == null) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
 		worldObj.notifyBlockChange(tilePos, getBlock());
         //worldObj.notifyBlocksOfNeighborChange(tilePos, active ? 15 : 0);
         if (disabled) {

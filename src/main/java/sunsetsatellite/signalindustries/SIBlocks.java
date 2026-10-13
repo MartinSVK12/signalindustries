@@ -1294,7 +1294,7 @@ public class SIBlocks extends DataInitializer {
 			"awakened_creation_altar",
 			"creationAltar",
 			3,
-			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityCreationAltar::new, null),
+			(block) -> new BlockLogicMachine(block, Materials.METAL, Tier.AWAKENED, TileEntityCreationAltar::new, "creation_altar"),
 			new MachineTextures(Tier.AWAKENED)
 				.withDefaultSideTextures("awakened_creation_altar_side")
 				.withDefaultNorthTexture("awakened_creation_altar_front_inactive")

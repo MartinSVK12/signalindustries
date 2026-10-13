@@ -20,7 +20,7 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         moveFluids();
         for (int i = 0; i < itemContents.length; i++) {
             if (itemContents[i] != null && itemContents[i].stackSize <= 0) {

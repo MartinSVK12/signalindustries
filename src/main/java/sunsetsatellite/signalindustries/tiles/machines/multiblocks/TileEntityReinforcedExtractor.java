@@ -62,7 +62,7 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             return;
         }
         super.tick();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         input = null;
         output = null;
         if (multiblock.isValid()) {

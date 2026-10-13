@@ -24,7 +24,7 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         moveFluids();
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;

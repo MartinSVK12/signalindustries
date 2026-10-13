@@ -114,7 +114,7 @@ public class TileEntityReinforcedWrathBeacon extends TileEntityWrathBeaconBase i
         if (multiblock == null || worldObj == null) {
             return;
         }
-		worldObj.markBlockDirty(tilePos);
+		//worldObj.markBlockDirty(tilePos);
         if (active) {
             spawnTimer.tick();
             intermissionTimer.tick();

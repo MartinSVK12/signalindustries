@@ -1,12 +1,13 @@
 package sunsetsatellite.signalindustries.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.Items;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
@@ -20,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import sunsetsatellite.signalindustries.SIItems;
+import sunsetsatellite.signalindustries.SIWeather;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
-import sunsetsatellite.signalindustries.items.base.ItemToolTiered;
 import sunsetsatellite.signalindustries.powersuit.SignalumPowerSuit;
 
 import java.util.List;
@@ -75,5 +76,10 @@ public abstract class PlayerMixin extends Mob implements IPlayerPowerSuit<Signal
 				}
 			}
 		}
+	}
+
+	@WrapOperation(method = "sleepInBedAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;isDaytime()Z"))
+	public boolean sleepInBedAt(World instance, Operation<Boolean> original) {
+		return original.call(instance) && instance.getCurrentWeather() != SIWeather.weatherEclipse;
 	}
 }

@@ -96,7 +96,7 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
     public void tick() {
         super.tick();
         if (worldObj != null && worldObj.isClientSide) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         pumpTimer.tick();
         moveFluids();
 

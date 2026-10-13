@@ -43,7 +43,7 @@ public class TileEntityVoidContainer extends TileEntityFluidItemContainer {
         super.tick();
         moveFluids();
         if (worldObj != null) {
-            worldObj.markBlockDirty(tilePos);
+            //worldObj.markBlockDirty(tilePos);
         }
         fluidContents[0] = null;
         itemContents[0] = null;

@@ -23,7 +23,7 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
     }
 
     public void tick() {
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         moveFluids();
         boolean update = false;
         if (fuelBurnTicks > 0) {

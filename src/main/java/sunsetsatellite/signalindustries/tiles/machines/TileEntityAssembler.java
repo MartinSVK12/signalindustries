@@ -44,7 +44,7 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
     public void tick() {
         super.tick();
         moveFluids();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         if (getBlock() != Blocks.AIR && worldObj != null) {
             work();
         }

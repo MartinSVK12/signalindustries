@@ -152,7 +152,7 @@ public class TileEntityCollector extends TileEntityTieredMachineBase implements 
     public void tick() {
         super.tick();
         moveFluids();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         if (getBlock() != Blocks.AIR) {
             setCurrentRecipe();
             if (!disabled) work();

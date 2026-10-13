@@ -65,7 +65,7 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         IOPreviewTimer.tick();
         moveFluids();
         boolean update = false;

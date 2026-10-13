@@ -28,7 +28,7 @@ public class TileEntityEnergyInjector extends TileEntityTieredMachineBase {
     @Override
     public void tick() {
         if (worldObj != null) {
-            worldObj.markBlockDirty(tilePos);
+            //worldObj.markBlockDirty(tilePos);
         }
         moveFluids();
         if (isBurning()) {

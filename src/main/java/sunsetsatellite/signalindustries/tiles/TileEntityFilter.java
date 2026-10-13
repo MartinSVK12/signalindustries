@@ -27,7 +27,7 @@ public class TileEntityFilter extends TileEntityFluidItemContainer {
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         super.tick();
     }
 

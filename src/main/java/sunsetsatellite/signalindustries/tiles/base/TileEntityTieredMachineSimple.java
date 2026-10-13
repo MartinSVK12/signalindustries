@@ -35,7 +35,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
     public void tick() {
         super.tick();
 		if(worldObj == null) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         moveFluids();
         Block<?> block = getBlock();
         if (block != null) {

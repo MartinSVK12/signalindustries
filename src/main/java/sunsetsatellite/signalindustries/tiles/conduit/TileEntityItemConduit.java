@@ -334,7 +334,7 @@ public class TileEntityItemConduit extends TileEntityWithName implements IScreen
     @Override
     public void tick() {
         super.tick();
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         worldObj.notifyBlocksOfNeighborChange(tilePos, getBlock());
         if (worldObj != null && getBlock() != Blocks.AIR) {
 			BlockLogicItemConduit logic = Catalyst.blockLogic(getBlock(), BlockLogicItemConduit.class);

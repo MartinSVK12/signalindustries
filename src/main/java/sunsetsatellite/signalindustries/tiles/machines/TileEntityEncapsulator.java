@@ -178,7 +178,7 @@ public class TileEntityEncapsulator extends TileEntityTieredMachineBase implemen
     public void tick() {
         super.tick();
         if (worldObj == null) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         moveFluids();
         if (!canProcess() && state != State.NONE) state = State.NONE;
 		if (!disabled) work();

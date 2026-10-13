@@ -158,6 +158,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/warp_gate"), new TileGuiEntry<>(TileEntityWarpGate.class, MenuWarpGate.class, ScreenWarpGate::new));
 		Catalyst.GUIS.register(key("gui/giga_trommel"), new TileGuiEntry<>(TileEntityGigaTrommel.class, MenuMachine.class, ScreenMultiblock::new));
 		Catalyst.GUIS.register(key("gui/laser_drill"), new TileGuiEntry<>(TileEntityLaserDrill.class, MenuMachine.class, ScreenMultiblock::new));
+		Catalyst.GUIS.register(key("gui/creation_altar"), new TileGuiEntry<>(TileEntityCreationAltar.class, MenuCreationAltar.class, ScreenCreationAltar::new));
 
 		Catalyst.GUIS.register(key("gui/harness"), new ItemGuiEntry<>(InventoryHarness.class, MenuHarness.class, ScreenHarness::new));
 		Catalyst.GUIS.register(key("gui/power_suit"), new ItemGuiEntry<>(InventoryPowerSuit.class, MenuPowerSuit.class, ScreenPowerSuit::new));

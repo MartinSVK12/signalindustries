@@ -65,7 +65,7 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
 
     @Override
     public void tick() {
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         IOPreviewTimer.tick();
         moveFluids();
         boolean update = false;

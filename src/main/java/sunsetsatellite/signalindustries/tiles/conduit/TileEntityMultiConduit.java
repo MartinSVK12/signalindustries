@@ -65,7 +65,7 @@ public class TileEntityMultiConduit extends TileEntityFluidContainer implements 
 
     @Override
     public void tick() {
-        /*worldObj.markBlockDirty(tilePos);
+        /*//worldObj.markBlockDirty(tilePos);
         //lastTransferMemory.tick();
         if (Arrays.stream(conduits).allMatch(Objects::isNull) && !acceptedFluids.isEmpty()) {
             acceptedFluids.clear();

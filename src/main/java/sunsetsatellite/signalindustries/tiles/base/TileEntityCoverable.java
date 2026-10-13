@@ -35,7 +35,7 @@ public abstract class TileEntityCoverable extends TileEntityFluidItemContainer i
     @Override
     public void tick() {
 		if(worldObj == null) return;
-        worldObj.markBlockDirty(tilePos);
+        //worldObj.markBlockDirty(tilePos);
         covers.values().stream().filter(Objects::nonNull).forEach(CoverBase::tick);
         super.tick();
     }

@@ -65,7 +65,7 @@ public class SIMultiblocks extends DataInitializer {
         extractionManifold = new SIMultiblock(MOD_ID,  "extractionManifold", "reinforcedExtractor", false, Tier.REINFORCED);
         warpGate = new SIMultiblock(MOD_ID,  "warpGate", "warpGate", false, Tier.AWAKENED);
 		gigaTrommel = new SIMultiblock(MOD_ID,  "gigaTrommel", "gigaTrommel", false, Tier.AWAKENED);
-        creationAltar = new SIMultiblock(MOD_ID,  "altarOfCreation", "altarOfCreation", false, Tier.AWAKENED);
+        creationAltar = new SIMultiblock(MOD_ID,  "creationAltar", "creationAltar", false, Tier.AWAKENED);
 
         CompoundTag greenhouseData = new StructureBuilder('M', SIBlocks.basicGreenhouse, 2)
                 .loadJson("/assets/signalindustries/structures/greenhouse.json")
