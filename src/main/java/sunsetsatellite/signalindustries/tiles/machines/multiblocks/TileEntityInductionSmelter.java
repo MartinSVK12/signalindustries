@@ -4,10 +4,13 @@ import net.minecraft.core.block.Block;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.multiblocks.Multiblock;
 import sunsetsatellite.catalyst.multiblocks.MultiblockInstance;
+import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.SIRecipes;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTieredMultiblock;
 import sunsetsatellite.signalindustries.util.Tier;
+
+import java.util.Arrays;
 
 public class TileEntityInductionSmelter extends TileEntityTieredMultiblock {
 
@@ -49,6 +52,13 @@ public class TileEntityInductionSmelter extends TileEntityTieredMultiblock {
 
     @Override
     public void tick() {
+		if(itemInput != null){
+			if (Arrays.stream(itemInput.itemContents).anyMatch(item -> item != null && item.getItem().equals(SIItems.heatingCoil))) {
+				recipeGroup = SIRecipes.INDUCTION_SMELTER_BLAST;
+			} else {
+				recipeGroup = SIRecipes.INDUCTION_SMELTER;
+			}
+		}
         super.tick();
     }
 

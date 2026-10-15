@@ -55,6 +55,7 @@ public class SIRecipes {
     public static RecipeGroupSI<RecipeEntryMachineFluid> COLLECTOR;
     public static RecipeGroupSI<RecipeEntryMachineRandomOutput> TROMMEL;
     public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER;
+	public static RecipeGroupSI<RecipeEntryMachine> INDUCTION_SMELTER_BLAST;
     public static RecipeGroupSI<RecipeEntryMachineRandomOutput> LASER_DRILL;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> GREENHOUSE;
     public static RecipeGroupSI<RecipeEntryMachineMultiOutput> BONSAI_POT;
@@ -103,6 +104,7 @@ public class SIRecipes {
         SIGNAL_INDUSTRIES.register("waking_alloy_smelter", WAKING_ALLOY_SMELTER);
         SIGNAL_INDUSTRIES.register("waking_infuser", WAKING_INFUSER);
         SIGNAL_INDUSTRIES.register("induction_smelter", INDUCTION_SMELTER);
+		SIGNAL_INDUSTRIES.register("induction_smelter_blast", INDUCTION_SMELTER_BLAST);
         SIGNAL_INDUSTRIES.register("laser_drill", LASER_DRILL);
         SIGNAL_INDUSTRIES.register("greenhouse", GREENHOUSE);
         SIGNAL_INDUSTRIES.register("bonsai_pot", BONSAI_POT);
@@ -134,6 +136,7 @@ public class SIRecipes {
         WAKING_ALLOY_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingAlloySmelter))));
         WAKING_INFUSER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.wakingInfuser))));
         INDUCTION_SMELTER = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
+		INDUCTION_SMELTER_BLAST = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicInductionSmelter))));
         LASER_DRILL = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.reinforcedLaserDrill))));
         GREENHOUSE = new RecipeGroupSI<>(new RecipeSymbol(Collections.singletonList(new ItemStack(SIBlocks.basicGreenhouse))));
         BONSAI_POT = new RecipeGroupSI<>(new RecipeSymbol(Arrays.asList(new ItemStack(SIBlocks.basicBonsai), new ItemStack(SIBlocks.reinforcedBonsai))));
@@ -144,6 +147,7 @@ public class SIRecipes {
 
     public static void loadSpecial() {
         new InductionSmelterRecipes().addRecipes(SIRecipes.INDUCTION_SMELTER);
+		new InductionSmelterRecipes().addRecipesBlast(SIRecipes.INDUCTION_SMELTER_BLAST);
         new SITrommelRecipes().addRecipes(SIRecipes.TROMMEL);
     }
 
