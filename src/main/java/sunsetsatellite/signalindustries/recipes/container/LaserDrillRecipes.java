@@ -32,6 +32,8 @@ public class LaserDrillRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
         WeightedRandomBag<WeightedRandomLootObject> bagNether = new WeightedRandomBag<>();
         bagNether.addEntry(new WeightedRandomLootObject(Items.NETHERCOAL.getDefaultStack(), 3), 3);
         bagNether.addEntry(new WeightedRandomLootObject(Items.DUST_GLOWSTONE.getDefaultStack(), 3 * 4), 1);
+		bagNether.addEntry(new WeightedRandomLootObject(Items.RUBYGLASS.getDefaultStack(), 1), 1);
+		bagNether.addEntry(new WeightedRandomLootObject(Items.SULFUR.getDefaultStack(), 3), 1);
         WeightedRandomBag<WeightedRandomLootObject> bagEternity = new WeightedRandomBag<>();
         bagEternity.addEntry(new WeightedRandomLootObject(SIItems.dilithiumShard.getDefaultStack(), 3), 1);
         group.register(
