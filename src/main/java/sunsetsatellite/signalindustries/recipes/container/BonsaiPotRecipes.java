@@ -194,5 +194,109 @@ public class BonsaiPotRecipes implements MachineRecipesBase<RecipeGroup<RecipeEn
                         new RecipeProperties(400, 60, Tier.BASIC, false)
                 )
         );
+		group.register(
+			"grow_flower_light_blue",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_LIGHT_BLUE, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.FLOWER_LIGHT_BLUE, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_flower_orange",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_ORANGE, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.FLOWER_ORANGE, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_flower_pink",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_PINK, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.FLOWER_PINK, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_flower_purple",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.FLOWER_PURPLE, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.FLOWER_PURPLE, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_mushroom_brown",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.MUSHROOM_BROWN, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.MUSHROOM_BROWN, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_mushroom_red",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.MUSHROOM_RED, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.MUSHROOM_RED, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_tall_grass",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.TALLGRASS, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.TALLGRASS, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
+		group.register(
+			"grow_fern",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Blocks.TALLGRASS_FERN, 1)),
+					new RecipeExtendedSymbol(new FluidStack(Fluids.WATER, 100))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.TALLGRASS_FERN, 8)),
+				},
+				new RecipeProperties(400, 60, Tier.BASIC, false)
+			)
+		);
     }
 }

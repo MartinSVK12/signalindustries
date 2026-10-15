@@ -1,5 +1,7 @@
 package sunsetsatellite.signalindustries.recipes.container;
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
@@ -13,17 +15,30 @@ public class GreenhouseRecipes implements MachineRecipesBase<RecipeGroup<RecipeE
     @Override
     public void addRecipes(RecipeGroup<RecipeEntryMachineMultiOutput> group) {
         group.register(
-                "wheat",
-                new RecipeEntryMachineMultiOutput(
-                        new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol(new ItemStack(Items.SEEDS_WHEAT, 1))
-                        },
-                        new RecipeOutputStack[]{
-                                new RecipeOutputStack(new ItemStack(Items.WHEAT, 1)),
-                                new RecipeOutputStack(new ItemStack(Items.SEEDS_WHEAT, 1)).randomYield(1, 4)
-                        },
-                        new RecipeProperties(600, 100, Tier.BASIC, false)
-                )
+			"wheat",
+			new RecipeEntryMachineMultiOutput(
+					new RecipeExtendedSymbol[]{
+							new RecipeExtendedSymbol(new ItemStack(Items.SEEDS_WHEAT, 1))
+					},
+					new RecipeOutputStack[]{
+							new RecipeOutputStack(new ItemStack(Items.WHEAT, 1)),
+							new RecipeOutputStack(new ItemStack(Items.SEEDS_WHEAT, 1)).randomYield(1, 4)
+					},
+					new RecipeProperties(600, 100, Tier.BASIC, false)
+			)
         );
+		group.register(
+			"pumpkin",
+			new RecipeEntryMachineMultiOutput(
+				new RecipeExtendedSymbol[]{
+					new RecipeExtendedSymbol(new ItemStack(Items.SEEDS_PUMPKIN, 1))
+				},
+				new RecipeOutputStack[]{
+					new RecipeOutputStack(new ItemStack(Blocks.PUMPKIN, 1)),
+					new RecipeOutputStack(new ItemStack(Items.SEEDS_PUMPKIN, 1)).randomYield(1, 4)
+				},
+				new RecipeProperties(600, 100, Tier.BASIC, false)
+			)
+		);
     }
 }
