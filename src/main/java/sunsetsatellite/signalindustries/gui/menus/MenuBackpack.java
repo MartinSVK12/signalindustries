@@ -56,13 +56,13 @@ public class MenuBackpack extends MenuFluid {
 
                     for (int k = 0; k < 3; k++) {
                         for (int j1 = 0; j1 < 9; j1++) {
-                            addSlot(new Slot(playerInv, j1 + k * 9 + 9, 8 + j1 * 18, 103 + k * 18 + i));
+                            addSlot(new Slot(playerInv, j1 + k * 9 + 9, 8 + j1 * 18, 104 + k * 18 + i));
                         }
 
                     }
 
                     for (int l = 0; l < 9; l++) {
-                        addSlot(new Slot(playerInv, l, 8 + l * 18, 161 + i));
+                        addSlot(new Slot(playerInv, l, 8 + l * 18, 162 + i));
                     }
                     break;
                 }
@@ -84,13 +84,13 @@ public class MenuBackpack extends MenuFluid {
 
                     for (int k = 0; k < 3; k++) {
                         for (int j1 = 0; j1 < 9; j1++) {
-                            addSlot(new Slot(playerInv, j1 + k * 9 + 9, 8 + j1 * 18, 103 + k * 18 + i));
+                            addSlot(new Slot(playerInv, j1 + k * 9 + 9, 8 + j1 * 18, 104 + k * 18 + i));
                         }
 
                     }
 
                     for (int l = 0; l < 9; l++) {
-                        addSlot(new Slot(playerInv, l, 8 + l * 18, 161 + i));
+                        addSlot(new Slot(playerInv, l, 8 + l * 18, 162 + i));
                     }
                     break;
                 }
