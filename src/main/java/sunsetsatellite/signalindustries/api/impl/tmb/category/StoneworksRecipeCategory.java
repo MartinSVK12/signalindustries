@@ -90,6 +90,9 @@ public class StoneworksRecipeCategory implements IRecipeCategory<MachineRecipeTr
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
         gui.drawStringCenteredShadow(font,data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
+		if(data.chance != 1){
+			gui.drawStringCenteredShadow(font,(data.chance * 100) + "%", x + 39, (background.getHeight() / 2) + 14, 0xFFFFFFFF);
+		}
        	gui.drawStringShadow(font,"ID: " + data.id, x + 80, (background.getHeight() / 2), 0xFFFFFFFF);
     }
 

@@ -84,6 +84,9 @@ public class PumpRecipeCategory implements IRecipeCategory<FluidMachineRecipeTra
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
         gui.drawStringCenteredShadow(font,data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
+		if(data.chance != 1){
+			gui.drawStringCenteredShadow(font,(data.chance * 100) + "%", x + 39, (background.getHeight() / 2) + 14, 0xFFFFFFFF);
+		}
     }
 
     @Override

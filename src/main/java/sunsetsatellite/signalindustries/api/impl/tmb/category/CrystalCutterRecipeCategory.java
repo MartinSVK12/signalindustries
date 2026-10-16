@@ -74,23 +74,26 @@ public class CrystalCutterRecipeCategory implements IRecipeCategory<MachineRecip
     @Override
     public void drawRecipe(ITMBRuntime runtime, MachineRecipeTranslator recipe, IRecipeLayout layout, List<IIngredientList> ingredients, ILookupContext context) {
 
-        RecipeProperties data = recipe.getOriginal().getData();
-        getIngredients(recipe, layout, context, ingredients);
+		RecipeProperties data = recipe.getOriginal().getData();
+		getIngredients(recipe, layout, context, ingredients);
 
 		Gui gui = new Gui();
 		FontRenderer font = runtime.getGuiHelper().getMinecraft().font;
 
-        if (data.thisTierOnly) {
-           gui.drawStringShadow(font,"Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
-        } else {
-           gui.drawStringShadow(font,"Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
-        }
+		if (data.thisTierOnly) {
+		   gui.drawStringShadow(font,"Only at: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
+		} else {
+		   gui.drawStringShadow(font,"Minimum tier: " + data.tier.getTextColor() + data.tier.getRank() + TextFormatting.WHITE, 24, (background.getHeight() - 10), 0xFFF0F0F0);
+		}
 
-        arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
-        arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
+		arrowBack.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
+		arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
-        gui.drawStringCenteredShadow(font,data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
-       gui.drawStringShadow(font,"ID: " + data.id, x + 80, (background.getHeight() / 2), 0xFFFFFFFF);
+		gui.drawStringCenteredShadow(font,data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
+		if(data.chance != 1){
+			gui.drawStringCenteredShadow(font,(data.chance * 100) + "%", x + 39, (background.getHeight() / 2) + 14, 0xFFFFFFFF);
+		}
+		gui.drawStringShadow(font,"ID: " + data.id, x + 80, (background.getHeight() / 2), 0xFFFFFFFF);
     }
 
     @Override
