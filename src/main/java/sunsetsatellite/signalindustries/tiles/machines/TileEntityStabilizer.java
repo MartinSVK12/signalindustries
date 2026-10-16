@@ -74,6 +74,9 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
 
             if (fuelBurnTicks > 0) {
                 fuelBurnTicks--;
+				if(fuelBurnTicks == 0){
+					update = true;
+				}
             }
             /*if (progressTicks >= 0 && canProcess()){
                 update = fuel();
@@ -127,6 +130,12 @@ public class TileEntityStabilizer extends TileEntityTieredContainer implements I
         }
 
     }
+
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		if(worldObj != null) worldObj.markBlockDirty(tilePos);
+	}
 
     public int getProgressScaled(int paramInt) {
         return this.progressTicks * paramInt / progressMaxTicks;

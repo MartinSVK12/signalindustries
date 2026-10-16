@@ -28,6 +28,9 @@ public class TileEntityProgrammer extends TileEntityTieredMachineBase {
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				update = true;
+			}
         }
         if (itemContents[0] == null || itemContents[1] == null) {
             progressTicks = 0;

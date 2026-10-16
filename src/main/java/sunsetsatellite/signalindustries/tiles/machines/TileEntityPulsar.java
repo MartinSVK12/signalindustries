@@ -52,6 +52,7 @@ public class TileEntityPulsar extends TileEntityTieredMachineBase {
 
     public void activate() {
         if (charging && progressTicks >= progressMaxTicks) {
+			setChanged();
             charging = false;
             progressTicks = 0;
             fuelBurnTicks = fuelMaxBurnTicks;
@@ -65,6 +66,7 @@ public class TileEntityPulsar extends TileEntityTieredMachineBase {
             }
         } else if (fuelBurnTicks <= 0 && fluidContents[0] != null && (getItem(0) == null && fluidContents[0] != null && fluidContents[0].amount >= 4000) || (getItem(0) != null && getItem(0).getItem() instanceof ItemWarpOrb && fluidContents[0] != null && fluidContents[0].amount >= 8000)) {
             charging = true;
+			setChanged();
         }
     }
 

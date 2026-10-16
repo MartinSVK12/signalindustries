@@ -91,8 +91,8 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
         stabilizers.clear();
         ignitors.clear();
         if (!multiblock.isValid()) {
-            state = State.INACTIVE;
-            return;
+			changeState(State.INACTIVE);
+			return;
         }
         Direction dir = Direction.getDirectionFromSide(getBlockMeta());
         ArrayList<BlockInstance> tileEntities = multiblock.data.getTileEntities(worldObj, new Vec3i(tilePos), dir);
@@ -115,14 +115,14 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
             }
         }
         if (state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()) {
-            state = State.RUNNING;
+            changeState(State.RUNNING);
         }
         //TODO: state machine maybe?
         if (state == State.RUNNING && checkIfStabilizersReady() && getFuel() > 0) {
             depleteRandomFuelCell();
         } else if (state == State.RUNNING) {
-            state = State.INACTIVE;
-        }
+			changeState(State.INACTIVE);
+		}
         if (state == State.RUNNING) {
             ItemStack[] itemContents = input.itemContents;
             for (int i = 0; i < itemContents.length; i++) {
@@ -138,12 +138,12 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
             }
 
             if (getFuel() <= 0) {
-                state = State.INACTIVE;
-            }
+				changeState(State.INACTIVE);
+			}
             for (TileEntityIgnitor ignitor : ignitors) {
                 if (ignitor.isEmpty()) {
-                    state = State.INACTIVE;
-                    break;
+					changeState(State.INACTIVE);
+					break;
                 }
                 ignitor.isActivated = true;
             }
@@ -153,6 +153,17 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
             }
         }
     }
+
+	private void changeState(State state) {
+		this.state = state;
+		setChanged();
+	}
+
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		if(worldObj != null) worldObj.markBlockDirty(tilePos);
+	}
 
 	@Override
 	public void readAdditionalData(@NotNull CompoundTag compoundTag) {
@@ -225,11 +236,11 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     public void start() {
         if (getFuel() > 0 && state == State.INACTIVE) {
-            state = State.IGNITING;
+            changeState(State.IGNITING);
 			doWithNearPlayers(8, (P)->P.triggerAchievement(SIAchievements.REACTOR));
         } else if (state == State.IGNITING || state == State.RUNNING) {
-            state = State.INACTIVE;
-        }
+			changeState(State.INACTIVE);
+		}
     }
 
     @Override

@@ -201,6 +201,9 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
             boolean update = false;
             if (fuelBurnTicks > 0) {
                 fuelBurnTicks--;
+				if(fuelBurnTicks == 0){
+					update = true;
+				}
             }
             ArrayList<ItemStack> inputContents = getItemInputContents();
             ArrayList<FluidStack> fluidInputContents = getFluidInputContents();

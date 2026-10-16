@@ -28,6 +28,9 @@ public class TileEntitySignalumDynamo extends TileEntityTieredEnergyGenerator {
         moveFluids();
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				setChanged();
+			}
         }
 
         if (!worldObj.isClientSide) {

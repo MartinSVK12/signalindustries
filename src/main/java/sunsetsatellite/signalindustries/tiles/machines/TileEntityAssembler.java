@@ -63,6 +63,9 @@ public class TileEntityAssembler extends TileEntityTieredMachineBase implements 
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				update = true;
+			}
         }
         if (!canProcess()) {
             progressTicks = 0;

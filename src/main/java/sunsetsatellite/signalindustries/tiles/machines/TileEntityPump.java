@@ -103,6 +103,9 @@ public class TileEntityPump extends TileEntityTieredMachineBase implements IBoos
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				update = true;
+			}
         }
         if (fluidContents[0] == null) {
             progressTicks = 0;

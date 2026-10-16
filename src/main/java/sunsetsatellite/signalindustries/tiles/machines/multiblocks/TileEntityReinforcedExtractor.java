@@ -110,6 +110,9 @@ public class TileEntityReinforcedExtractor extends TileEntityTieredMachineBase i
             boolean update = false;
             if (fuelBurnTicks > 0) {
                 fuelBurnTicks--;
+				if(fuelBurnTicks == 0){
+					update = true;
+				}
             }
             ArrayList<ItemStack> inputContents = getInputContents();
             if (inputContents.isEmpty()) {

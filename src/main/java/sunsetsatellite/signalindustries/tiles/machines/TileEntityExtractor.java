@@ -30,6 +30,9 @@ public class TileEntityExtractor extends TileEntityTieredMachineBase implements 
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				update = true;
+			}
         }
         if (itemContents[0] == null) {
             progressTicks = 0;

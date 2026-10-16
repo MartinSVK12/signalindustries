@@ -71,6 +71,9 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
         boolean update = false;
         if (fuelBurnTicks > 0) {
             fuelBurnTicks--;
+			if(fuelBurnTicks == 0){
+				update = true;
+			}
         }
         if (!worldObj.isClientSide) {
             /*if (progressTicks >= 0 && canProcess()){
@@ -128,7 +131,13 @@ public class TileEntityBooster extends TileEntityTieredContainer implements IHas
 
     }
 
-    public int getProgressScaled(int paramInt) {
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		if(worldObj != null) worldObj.markBlockDirty(tilePos);
+	}
+
+	public int getProgressScaled(int paramInt) {
         return this.progressTicks * paramInt / progressMaxTicks;
     }
 

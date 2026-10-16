@@ -65,6 +65,7 @@ public class TileEntityIgnitor extends TileEntityFluidItemContainer implements I
     public void work() {
         if (isActivated && getFluidInSlot(0) != null && getFluidInSlot(0).amount >= 5) {
             getFluidInSlot(0).amount -= 5;
+			setChanged();
         }
     }
 

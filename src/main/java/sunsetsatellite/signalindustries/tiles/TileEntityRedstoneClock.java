@@ -31,16 +31,24 @@ public class TileEntityRedstoneClock extends TileEntity implements IActiveForm, 
             timer++;
             if (timer >= ticksOff) {
                 active = true;
+				setChanged();
                 timer = 0;
             }
         } else {
             timer++;
             if (timer >= ticksOn) {
                 active = false;
+				setChanged();
                 timer = 0;
             }
         }
     }
+
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		if(worldObj != null) worldObj.markBlockDirty(tilePos);
+	}
 
 	@Override
 	public void writeAdditionalData(@NotNull CompoundTag tag) {
