@@ -1,5 +1,12 @@
-- Added interference mechanic to reinforced meteor tracker.
-- Added unique textures for creative utilities.
-- Added recipe for basic chainsaw casing.
-- Fixed rendering of storage containers and multiparts on conduits on servers.
-- Added the green suit colorizer.
+- Fix issues with portable workbench.
+- Added icons for SI armor to the hud armor bar.
+- Power suit redesign.
+- Wings now match the color of the suit. (except transparent, white)
+- Storage containers now less awful.
+- Performance improvements.
+- Fixed slots being one pixel off in backpack GUI.
+- Added the BTA! flowers, mushrooms, tall grass and ferns to the bonsai, and pumpkins to the greenhouse.
+- Added rubyglass and sulfur to laser drills nether lootpool.
+- Induction smelter can now process blast furnace recipes if it has an additional heating coil in its input bus.
+- Buffed fluid conduit max transfer amount.
+- Added the ability to pickup storage containers.
