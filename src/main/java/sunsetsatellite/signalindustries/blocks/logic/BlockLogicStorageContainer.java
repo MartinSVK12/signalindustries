@@ -16,7 +16,9 @@ import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.catalyst.core.util.Direction;
 import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.signalindustries.blocks.logic.base.BlockLogicTiered;
+import sunsetsatellite.signalindustries.items.ItemConfigurationTablet;
 import sunsetsatellite.signalindustries.tiles.TileEntityStorageContainer;
+import sunsetsatellite.signalindustries.util.ConfigurationTabletMode;
 import sunsetsatellite.signalindustries.util.Tier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
@@ -32,6 +34,7 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 		if (!EnvironmentHelper.isMultiplayerClient()) {
 			TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(tilePos);
 			if (tile != null) {
+				if(tile.packed) return;
 				if (player.getCurrentEquippedItem() == null || !(player.getCurrentEquippedItem().getItem() instanceof ItemTool)) {
 					ItemStack stack;
 					if (player.isSneaking()) {
@@ -56,6 +59,14 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 			TileEntityStorageContainer tile = (TileEntityStorageContainer) world.getTileEntity(tilePos);
 			if (tile != null) {
 				if (player.getCurrentEquippedItem() != null) {
+					if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemConfigurationTablet tablet){
+						ConfigurationTabletMode mode = ConfigurationTabletMode.values()[player.getCurrentEquippedItem().getData().getInteger("mode")];
+						if(mode == ConfigurationTabletMode.CONFIGURATOR){
+							tile.packed = !tile.packed;
+							return true;
+						}
+					}
+					if(tile.packed) return true;
 					if (player.isSwinging) {
 						tile.insertStack(player.getCurrentEquippedItem());
 						if (player.getCurrentEquippedItem().stackSize <= 0) {
@@ -77,6 +88,7 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 					}
 					return true;
 				} else {
+					if(tile.packed) return true;
 					if (tile.infinite && player.gamemode == Gamemodes.CREATIVE) {
 						tile.contents = null;
 					} else {
@@ -93,11 +105,6 @@ public class BlockLogicStorageContainer extends BlockLogicTiered {
 							}
 						} else {
 							tile.locked = !tile.locked;
-							if (tile.locked) {
-								player.sendTranslatedChatMessage("event.signalindustries.containerLocked");
-							} else {
-								player.sendTranslatedChatMessage("event.signalindustries.containerUnlocked");
-							}
 						}
 					}
 				}

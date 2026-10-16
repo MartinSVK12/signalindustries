@@ -3,26 +3,32 @@ package sunsetsatellite.signalindustries.tiles;
 
 import com.mojang.nbt.tags.ByteTag;
 import com.mojang.nbt.tags.CompoundTag;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.PacketTileEntityData;
 import net.minecraft.core.player.inventory.container.Container;
+import net.minecraft.core.world.ICarriable;
+import net.minecraft.core.world.ICarrySource;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.UnlimitedItemStack;
 import sunsetsatellite.signalindustries.tiles.base.TileEntityTiered;
 import sunsetsatellite.signalindustries.util.Tier;
 
 //TODO: make better with item conduits
-public class TileEntityStorageContainer extends TileEntityTiered implements Container {
+public class TileEntityStorageContainer extends TileEntityTiered implements Container, ICarrySource {
     public ItemStack contents = null;
     public int capacity = 4096;
     public boolean infinite = false;
     public boolean unlimited = false;
     public boolean locked = false;
+	public boolean packed = false;
 
     public TileEntityStorageContainer() {
 
@@ -33,6 +39,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 		tag.putBoolean("Infinite", infinite);
 		tag.putBoolean("Unlimited", unlimited);
 		tag.putBoolean("Locked", locked);
+		tag.putBoolean("Packed", packed);
 		if (contents != null) {
 			CompoundTag contentsTag = new CompoundTag();
 			contentsTag.putShort("id", (short) contents.itemID);
@@ -54,6 +61,7 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 		infinite = tag.getBoolean("Infinite");
 		unlimited = tag.getBoolean("Unlimited");
 		locked = tag.getBoolean("Locked");
+		packed = tag.getBoolean("Packed");
 		if (tag.containsKey("Contents")) {
 			contents = new ItemStack(1, 1, 0);
 			((UnlimitedItemStack) (Object) contents).enableCustomMaxSize(getTieredCapacity());
@@ -259,5 +267,10 @@ public class TileEntityStorageContainer extends TileEntityTiered implements Cont
 	@Override
 	public Packet getDescriptionPacket() {
 		return new PacketTileEntityData(this);
+	}
+
+	@Override
+	public @Nullable ICarriable pickup(@NotNull World world, @NotNull Entity holder, @NotNull TilePosc tilePos) {
+		return packed ? super.pickup(world, holder, tilePos) : null;
 	}
 }

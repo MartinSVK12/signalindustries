@@ -71,10 +71,12 @@ public class BlockLogicMachineBase extends BlockLogicTiered implements ISideInte
 
 		if (isPlayerHoldingConfigTablet(player)) {
 			handleConfigTabletAction(player, pair, world, tilePos, playerFacing);
+			world.markBlockDirty(tilePos);
 		}
 
 		if (isPlayerHoldingCover(player)) {
 			handleCoverInstallation(player, pair, world, tilePos, playerFacing);
+			world.markBlockDirty(tilePos);
 		}
 		return true;
 	}

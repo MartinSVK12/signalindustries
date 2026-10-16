@@ -151,6 +151,7 @@ public class BlockLogicConduitBase extends BlockLogicNonSolid implements ITiered
 
 		if (isPlayerHoldingConfigTablet(player)) {
 			handleConfigTabletAction(player, pair, world, tilePos, playerFacing);
+			world.markBlockDirty(tilePos);
 		}
 		return true;
 	}

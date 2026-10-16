@@ -51,20 +51,24 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
 		GLRenderer.setDepthMask(false);
 		Lighting.disable();
 
-		int color = 0xFFFFFFFF;
 		ItemStack stack = null;
 
 		if(tileEntity.contents != null){
 			stack = tileEntity.contents;
 		}
 		String s = "";
+		int color = 0xFFFFFF00;
 		if(tileEntity.locked){
 			s = "Locked";
+		}
+		if(tileEntity.packed){
+			s = "Packed";
+			color = 0xFFFF0000;
 		}
 
 		int offset = -6;
 		GLRenderer.modelM4f().translate(0, 28, 82);
-		gui.drawStringShadow(getFont(), s, -getFont().stringWidth(s) / 2, (offset * 10 - 5), 0xFFFFFF00);
+		gui.drawStringShadow(getFont(), s, -getFont().stringWidth(s) / 2, (offset * 10 - 5), color);
 		GLRenderer.modelM4f().translate(0, -28, -82);
 		GLRenderer.modelM4f().scale(2.5f, 2.5f, 0.3f);
 		GLRenderer.modelM4f().translate(0, 0, 240);

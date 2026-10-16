@@ -25,6 +25,9 @@ public class StorageContainerTooltip extends SIBaseTooltip<TileEntityStorageCont
             if (tile.locked) {
                 c.drawStringWithShadow("Locked", 0, 0xFFFF00);
             }
+			if (tile.packed) {
+				c.drawStringWithShadow("Packed", 0, 0xFF0000);
+			}
             c.drawStringWithShadow("Holding: " + tile.contents.stackSize + "x " + tile.contents.getDisplayName(), 0);
             ProgressBarOptions options = new ProgressBarOptions()
                     .setForegroundOptions(new TextureOptions(color, TextureRegistry.getTexture("minecraft:block/sand")))

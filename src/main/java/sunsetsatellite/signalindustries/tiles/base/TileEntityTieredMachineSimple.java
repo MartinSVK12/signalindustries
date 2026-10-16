@@ -79,7 +79,7 @@ public abstract class TileEntityTieredMachineSimple extends TileEntityTieredMach
         }
     }
 
-    public boolean areAllInputsNull() {
+	public boolean areAllInputsNull() {
         boolean itemsNull = Arrays.stream(itemInputs).allMatch(slot -> itemContents[slot] == null);
         boolean fluidsNull = Arrays.stream(fluidInputs).allMatch(slot -> fluidContents[slot] == null);
         return itemsNull && fluidsNull;

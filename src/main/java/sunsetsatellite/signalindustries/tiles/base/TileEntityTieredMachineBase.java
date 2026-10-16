@@ -111,6 +111,12 @@ public abstract class TileEntityTieredMachineBase extends TileEntityTieredContai
         }
     }
 
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		if(worldObj != null) worldObj.markBlockDirty(tilePos);
+	}
+
     @Override
     public void writeAdditionalData(@NonNull CompoundTag tag) {
         super.writeAdditionalData(tag);
