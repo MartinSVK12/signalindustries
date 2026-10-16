@@ -35,7 +35,7 @@ public class TileEntityFluidConduit extends TileEntityFluidPipe implements ISupp
     public void tick() {
         ITiered tiered = Catalyst.blockLogic(getBlock(), ITiered.class);
         if (tiered != null) {
-            flowRate = 20 * (tiered.getTier().ordinal() + 1);
+            flowRate = 50 * (tiered.getTier().ordinal() + 1);
 			fluidCapacity = flowRate;
 			switch (tiered.getTier()) {
 				case PROTOTYPE -> {
