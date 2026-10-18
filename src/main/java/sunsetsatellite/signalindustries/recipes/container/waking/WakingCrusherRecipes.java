@@ -122,7 +122,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIBlocks.rootedFabric))
                         },
                         new ItemStack(SIItems.realityString, 2),
-                        new RecipeProperties(200, 80, Tier.REINFORCED, false).setChance(0.75f)
+                        new RecipeProperties(200, 80, Tier.REINFORCED, false).setChance(1f)
                 )
         );
         group.register(

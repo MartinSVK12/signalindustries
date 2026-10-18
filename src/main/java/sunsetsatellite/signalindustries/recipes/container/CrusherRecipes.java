@@ -161,7 +161,7 @@ public class CrusherRecipes implements MachineRecipesBase<RecipeGroup<RecipeEntr
                                 new RecipeExtendedSymbol(new ItemStack(SIBlocks.rootedFabric))
                         },
                         new ItemStack(SIItems.realityString, 2),
-                        new RecipeProperties(300, 160, Tier.REINFORCED, false).setChance(0.25f)
+                        new RecipeProperties(300, 160, Tier.REINFORCED, false).setChance(0.5f)
                 )
         );
     }

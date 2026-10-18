@@ -10,3 +10,6 @@
 - Induction smelter can now process blast furnace recipes if it has an additional heating coil in its input bus.
 - Buffed fluid conduit max transfer amount.
 - Added the ability to pickup storage containers.
+- Recipes now show chance.
+- Updated the UI for the Signalite Reactor.
+- Buffed chance of getting reality string from crushing rooted fabric.
