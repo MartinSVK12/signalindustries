@@ -70,7 +70,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
 	@Override
 	public String getName() {
-		return "SignalumReactor";
+		return "container.signalindustries.reactor";
 	}
 
 	public enum State {
@@ -81,7 +81,7 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
 
     @Override
     public void tick() {
-		if(worldObj == null || worldObj.isClientSide){
+		if(worldObj == null){
 			return;
 		}
         if (multiblock == null) {
@@ -114,6 +114,28 @@ public class TileEntitySignalumReactor extends TileEntityTiered implements IMult
                 ((IMultiblockPart) tileEntity.tile).connect(this);
             }
         }
+		if(worldObj.isClientSide){
+			if (state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()) {
+				changeState(State.RUNNING);
+			}
+			if (state == State.RUNNING) {
+				if (getFuel() <= 0) {
+					changeState(State.INACTIVE);
+				}
+				for (TileEntityIgnitor ignitor : ignitors) {
+					if (ignitor.isEmpty()) {
+						changeState(State.INACTIVE);
+						break;
+					}
+					ignitor.isActivated = true;
+				}
+			} else {
+				for (TileEntityIgnitor ignitor : ignitors) {
+					ignitor.isActivated = false;
+				}
+			}
+			return;
+		}
         if (state == State.IGNITING && checkIfIgnitorsReady() && checkIfStabilizersReady()) {
             changeState(State.RUNNING);
         }
