@@ -35,16 +35,16 @@ public class ItemSignalumPowerSuit extends ItemArmorTiered implements IHasOverla
     @Override
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         InventoryPowerSuit inv = new InventoryPowerSuit(stack);
-        InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
+        InventorySerializer.loadInvFromNBT(stack, inv, 8, 1, ItemSignalumPowerSuit.class);
         inv.insertFluid(0, fluidStack.splitStack(Math.min(maxAmount, fluidStack.amount)));
-        InventorySerializer.saveInvToNBT(stack, inv);
+        InventorySerializer.saveInvToNBT(stack, inv, ItemSignalumPowerSuit.class);
     }
 
     @Override
     public boolean canFill(ItemStack stack) {
 		if (stack.getItem().equals(SIItems.signalumPowerSuitChestplate)) {
 			InventoryPowerSuit inv = new InventoryPowerSuit(stack);
-			InventorySerializer.loadInvFromNBT(stack, inv, 8, 1);
+			InventorySerializer.loadInvFromNBT(stack, inv, 8, 1, ItemSignalumPowerSuit.class);
 			FluidStack fluidStack = inv.getFluidInSlot(0);
 			if (fluidStack == null) return true;
 			return fluidStack.amount < inv.getFluidCapacityForSlot(0);

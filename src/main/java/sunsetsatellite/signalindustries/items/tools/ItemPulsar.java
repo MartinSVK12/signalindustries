@@ -155,9 +155,9 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     @Override
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         InventoryPulsar inv = new InventoryPulsar(stack);
-        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1);
+        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1, ItemPulsar.class);
         inv.insertFluid(0, fluidStack.splitStack(Math.min(maxAmount, fluidStack.amount)));
-        InventorySerializer.saveInvToNBT(stack, inv);
+        InventorySerializer.saveInvToNBT(stack, inv, ItemPulsar.class);
     }
 
     @Override
@@ -171,7 +171,7 @@ public class ItemPulsar extends ItemTiered implements IHasOverlay, IInjectable {
     @Override
     public boolean canFill(ItemStack stack) {
         InventoryPulsar inv = new InventoryPulsar(stack);
-        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1);
+        InventorySerializer.loadInvFromNBT(stack, inv, 1, 1, ItemPulsar.class);
         return inv.fluidContents[0] == null || inv.fluidContents[0].amount < inv.getFluidCapacityForSlot(0);
     }
 

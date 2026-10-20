@@ -21,6 +21,7 @@ import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageOpenSuit;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
@@ -185,7 +186,7 @@ public class ScreenPowerSuit extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        InventorySerializer.saveInvToNBT(armorPiece, fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(armorPiece, fluidSlots.itemInventory, ItemSignalumPowerSuit.class);
     }
 
 	public void drawGradientRect(final int minX, final int minY, final int maxX, final int maxY, final int argb1, final int argb2, final int argb3, final int argb4 ) {

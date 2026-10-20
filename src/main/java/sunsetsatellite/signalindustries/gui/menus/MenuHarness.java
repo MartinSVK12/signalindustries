@@ -23,7 +23,7 @@ public class MenuHarness extends MenuFluid {
         ItemStack armor = playerInv.getItem(slotIndex);
 
         if (armor != null && armor.getItem() instanceof ItemSignalumPowerHarness) {
-            InventorySerializer.loadInvFromNBT(armor, itemInventory, 0, 1);
+            InventorySerializer.loadInvFromNBT(armor, itemInventory, 0, 1, ItemSignalumPowerHarness.class);
 
             addFluidSlot(new SlotFluid(fluidInventory, 0, 80, 33));
 
@@ -44,7 +44,7 @@ public class MenuHarness extends MenuFluid {
     @Override
     public void onCraftGuiClosed(Player player) {
         super.onCraftGuiClosed(player);
-        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), itemInventory);
+        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), itemInventory, ItemSignalumPowerHarness.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();

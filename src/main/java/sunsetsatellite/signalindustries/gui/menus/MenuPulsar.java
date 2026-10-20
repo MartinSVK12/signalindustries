@@ -37,7 +37,7 @@ public class MenuPulsar extends MenuFluid {
 
         if (pulsar != null && pulsar.getItem() instanceof ItemPulsar) {
 
-            InventorySerializer.loadInvFromNBT(pulsar, itemInventory, 1, 1);
+            InventorySerializer.loadInvFromNBT(pulsar, itemInventory, 1, 1, ItemPulsar.class);
 
             addSlot(new Slot(itemInventory, 0, 80, 33));
 
@@ -84,7 +84,7 @@ public class MenuPulsar extends MenuFluid {
         pulsar = player.inventory.getItem(pulsarSlotIndex);
         //}
 
-        InventorySerializer.saveInvToNBT(pulsar, itemInventory);
+        InventorySerializer.saveInvToNBT(pulsar, itemInventory, ItemPulsar.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();

@@ -39,7 +39,7 @@ public class MenuBackpack extends MenuFluid {
         if (backpack != null && backpack.getItem() instanceof ItemBackpackAttachment) {
             switch (((ItemBackpackAttachment) backpack.getItem()).getTier()) {
                 case BASIC: {
-                    InventorySerializer.loadInvFromNBT(backpack, itemInventory, 27, 2);
+                    InventorySerializer.loadInvFromNBT(backpack, itemInventory, 27, 2, ItemBackpackAttachment.class);
 
                     for (int y = 0; y < 2; y++) {
                         addFluidSlot(new SlotFluid(fluidInventory, y, 174, 36 + 18 * y));
@@ -67,7 +67,7 @@ public class MenuBackpack extends MenuFluid {
                     break;
                 }
                 case REINFORCED: {
-                    InventorySerializer.loadInvFromNBT(backpack, itemInventory, 27 * 2, 4);
+                    InventorySerializer.loadInvFromNBT(backpack, itemInventory, 27 * 2, 4, ItemBackpackAttachment.class);
 
                     for (int y = 0; y < 4; y++) {
                         addFluidSlot(new SlotFluid(fluidInventory, y, 174, 36 + 18 * y));
@@ -126,7 +126,7 @@ public class MenuBackpack extends MenuFluid {
             backpack = player.inventory.getItem(backpackSlotIndex);
         }
 
-        InventorySerializer.saveInvToNBT(backpack, itemInventory);
+        InventorySerializer.saveInvToNBT(backpack, itemInventory, ItemBackpackAttachment.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();

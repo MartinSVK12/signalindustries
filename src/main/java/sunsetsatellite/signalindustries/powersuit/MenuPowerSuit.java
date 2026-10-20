@@ -10,6 +10,7 @@ import org.jspecify.annotations.NonNull;
 import sunsetsatellite.catalyst.fluids.impl.MenuFluid;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
+import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.base.ItemArmorTiered;
 import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
@@ -78,7 +79,7 @@ public class MenuPowerSuit extends MenuFluid {
     @Override
     public void onCraftGuiClosed(@NonNull Player player) {
         super.onCraftGuiClosed(player);
-        InventorySerializer.saveInvToNBT(player.inventory.armorItemInSlot(HumanArmorShape.values()[slotIndex]), itemInventory);
+        InventorySerializer.saveInvToNBT(player.inventory.armorItemInSlot(HumanArmorShape.values()[slotIndex]), itemInventory, ItemSignalumPowerSuit.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();
@@ -93,7 +94,7 @@ public class MenuPowerSuit extends MenuFluid {
         super.broadcastChanges();
         SignalumPowerSuit suit = ((IPlayerPowerSuit<SignalumPowerSuit>) player).getPowerSuit();
         if (suit != null) {
-            InventorySerializer.saveInvToNBT(player.inventory.armorItemInSlot(HumanArmorShape.values()[slotIndex]), itemInventory);
+            InventorySerializer.saveInvToNBT(player.inventory.armorItemInSlot(HumanArmorShape.values()[slotIndex]), itemInventory, ItemSignalumPowerSuit.class);
             suit.reload();
         }
     }

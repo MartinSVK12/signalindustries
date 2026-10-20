@@ -5,12 +5,21 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.util.FluidStack;
+import sunsetsatellite.signalindustries.SignalIndustries;
 
 public class InventorySerializer {
 
     private static boolean preventSaving = false;
 
-    public static void saveInvToNBT(ItemStack container, Container inv) {
+    public static void saveInvToNBT(ItemStack container, Container inv, Class<?> itemClass) {
+		if(container == null){
+			SignalIndustries.LOGGER.error("Tried to save inventory to a null item stack!");
+			return;
+		}
+		if(itemClass != null && !itemClass.isInstance(container.getItem())) {
+			SignalIndustries.LOGGER.error("Tried to save inventory to an invalid item stack! {} expected, got {}", itemClass.getSimpleName(), container.getItem().getClass().getSimpleName());
+			return;
+		}
         if (preventSaving) return;
         CompoundTag itemData = container.getData().getCompound("inventory");
         for (int i = 0; i < inv.getContainerSize(); i++) {
@@ -24,9 +33,8 @@ public class InventorySerializer {
             }
         }
         container.getData().putCompound("inventory", itemData);
-        if (inv instanceof IFluidInventory) {
-            IFluidInventory fluidInv = (IFluidInventory) inv;
-            CompoundTag fluidData = container.getData().getCompound("fluidInventory");
+        if (inv instanceof IFluidInventory fluidInv) {
+			CompoundTag fluidData = container.getData().getCompound("fluidInventory");
             for (int i = 0; i < fluidInv.getFluidInventorySize(); i++) {
                 FluidStack fluid = ((IFluidInventory) inv).getFluidInSlot(i);
                 CompoundTag fluidNBT = new CompoundTag();
@@ -41,7 +49,15 @@ public class InventorySerializer {
         }
     }
 
-    public static void loadInvFromNBT(ItemStack container, Container inv, int amount, int fluidAmount) {
+    public static void loadInvFromNBT(ItemStack container, Container inv, int amount, int fluidAmount, Class<?> itemClass) {
+		if(container == null){
+			SignalIndustries.LOGGER.error("Tried to load inventory from a null item stack!");
+			return;
+		}
+		if(itemClass != null && !itemClass.isInstance(container.getItem())) {
+			SignalIndustries.LOGGER.error("Tried to load inventory from an invalid item stack! {} expected, got {}", itemClass.getSimpleName(), container.getItem().getClass().getSimpleName());
+			return;
+		}
         preventSaving = true;
         CompoundTag itemNBT = container.getData().getCompound("inventory");
         CompoundTag fluidNBT = container.getData().getCompound("fluidInventory");
@@ -52,9 +68,8 @@ public class InventorySerializer {
             }
         }
         for (int i = 0; i < fluidAmount; i++) {
-            if (inv instanceof IFluidInventory) {
-                IFluidInventory fluidInv = (IFluidInventory) inv;
-                CompoundTag tag = fluidNBT.getCompound(String.valueOf(i));
+            if (inv instanceof IFluidInventory fluidInv) {
+				CompoundTag tag = fluidNBT.getCompound(String.valueOf(i));
                 if (tag != null && tag.containsKey("fluid")) {
                     FluidStack fluid = new FluidStack(tag);
                     fluidInv.setFluidInSlot(i, fluid);

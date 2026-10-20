@@ -28,11 +28,11 @@ public abstract class InventoryItemFluid implements Container, IFluidInventory {
     }
 
     public void save() {
-        InventorySerializer.saveInvToNBT(container, this);
+        InventorySerializer.saveInvToNBT(container, this, null);
     }
 
     public void load() {
-        InventorySerializer.loadInvFromNBT(container, this, getContainerSize(), getFluidInventorySize());
+        InventorySerializer.loadInvFromNBT(container, this, getContainerSize(), getFluidInventorySize(), null);
     }
 
     public @Nullable ItemStack getItem(int index) {

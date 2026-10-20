@@ -14,6 +14,7 @@ import sunsetsatellite.signalindustries.interfaces.IApplicationItem;
 import sunsetsatellite.signalindustries.interfaces.IPlayerPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.invs.InventoryAbilityModule;
+import sunsetsatellite.signalindustries.items.ItemSignalumPowerSuit;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithAbility;
 import sunsetsatellite.signalindustries.items.applications.base.ItemWithUtility;
 import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
@@ -94,7 +95,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
         chestplate.fluidContents[0].amount -= amount;
         chestplate.onFluidInventoryChanged();
-        InventorySerializer.saveInvToNBT(chestplate.container, chestplate);
+        InventorySerializer.saveInvToNBT(chestplate.container, chestplate, ItemSignalumPowerSuit.class);
     }
 
     @Override
@@ -546,10 +547,10 @@ public class SignalumPowerSuit implements IPowerSuit {
 			});
 			suitTag.put("EffectTimes", effectTimesTag);
 		}
-        InventorySerializer.saveInvToNBT(helmet.container, helmet);
-        InventorySerializer.saveInvToNBT(chestplate.container, chestplate);
-        InventorySerializer.saveInvToNBT(leggings.container, leggings);
-        InventorySerializer.saveInvToNBT(boots.container, boots);
+        InventorySerializer.saveInvToNBT(helmet.container, helmet, ItemSignalumPowerSuit.class);
+        InventorySerializer.saveInvToNBT(chestplate.container, chestplate, ItemSignalumPowerSuit.class);
+        InventorySerializer.saveInvToNBT(leggings.container, leggings, ItemSignalumPowerSuit.class);
+        InventorySerializer.saveInvToNBT(boots.container, boots, ItemSignalumPowerSuit.class);
         CompoundTag helmetTag = new CompoundTag();
         CompoundTag chestplateTag = new CompoundTag();
         CompoundTag leggingsTag = new CompoundTag();

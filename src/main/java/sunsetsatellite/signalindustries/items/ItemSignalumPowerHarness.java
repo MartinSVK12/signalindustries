@@ -162,16 +162,16 @@ public class ItemSignalumPowerHarness extends ItemArmorTiered implements IHasOve
     public void fill(FluidStack fluidStack, ItemStack stack, TileEntityFluidContainer tile, int maxAmount) {
         if (!stack.getItem().equals(SIItems.signalumPrototypeHarness)) return;
         InventoryHarness inv = new InventoryHarness(stack);
-        InventorySerializer.loadInvFromNBT(stack, inv, 0, 1);
+        InventorySerializer.loadInvFromNBT(stack, inv, 0, 1, ItemSignalumPowerHarness.class);
         inv.insertFluid(0, fluidStack.splitStack(Math.min(maxAmount, fluidStack.amount)));
-        InventorySerializer.saveInvToNBT(stack, inv);
+        InventorySerializer.saveInvToNBT(stack, inv, ItemSignalumPowerHarness.class);
     }
 
     @Override
     public boolean canFill(ItemStack stack) {
         if (stack.getItem().equals(SIItems.signalumPrototypeHarness)) {
             InventoryHarness inv = new InventoryHarness(stack);
-            InventorySerializer.loadInvFromNBT(stack, inv, 0, 1);
+            InventorySerializer.loadInvFromNBT(stack, inv, 0, 1, ItemSignalumPowerHarness.class);
             return (inv.getFluidInSlot(0) == null ? 0 : inv.getFluidInSlot(0).amount) < inv.getFluidCapacityForSlot(0);
         }
         return false;

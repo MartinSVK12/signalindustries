@@ -82,6 +82,6 @@ public class ScreenBackpack extends ScreenFluid {
         } else {
             this.backpack = player.inventory.getItem(backpackSlotIndex);
         }
-        InventorySerializer.saveInvToNBT(backpack, fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(backpack, fluidSlots.itemInventory, ItemBackpackAttachment.class);
     }
 }

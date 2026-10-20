@@ -81,7 +81,7 @@ public class MenuAbilityModule extends MenuFluid {
             module = player.inventory.getItem(slotIndex);
         }
 
-        InventorySerializer.saveInvToNBT(module, itemInventory);
+        InventorySerializer.saveInvToNBT(module, itemInventory, ItemAbilityModule.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();

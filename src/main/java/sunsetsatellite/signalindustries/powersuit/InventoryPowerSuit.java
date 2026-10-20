@@ -85,11 +85,11 @@ public class InventoryPowerSuit extends InventoryItemFluid {
     }
 
     public void readFromNBT() {
-        InventorySerializer.loadInvFromNBT(armorStack, this, contents.length, fluidContents.length);
+        InventorySerializer.loadInvFromNBT(armorStack, this, contents.length, fluidContents.length, ItemSignalumPowerSuit.class);
     }
 
     public void saveToNBT() {
-        InventorySerializer.saveInvToNBT(armorStack, this);
+        InventorySerializer.saveInvToNBT(armorStack, this, ItemSignalumPowerSuit.class);
     }
 
     @Override

@@ -78,7 +78,7 @@ public class MenuPulsarAttachment extends MenuFluid {
             pulsar = player.inventory.getItem(pulsarSlotIndex);
         }
 
-        InventorySerializer.saveInvToNBT(pulsar, itemInventory);
+        InventorySerializer.saveInvToNBT(pulsar, itemInventory, ItemPulsarAttachment.class);
         for (int i = 0; i < slots.size(); i++) {
             for (ContainerListener crafter : containerListeners) {
                 ItemStack stack = slots.get(i).getItemStack();
