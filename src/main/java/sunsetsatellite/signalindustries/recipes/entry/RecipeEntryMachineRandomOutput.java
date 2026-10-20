@@ -157,7 +157,7 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
                     .flatMap(symbol -> symbol.resolveFluids().stream())
                     .filter(Objects::nonNull)
                     .map(FluidStack::copy)
-                    .collect(Collectors.toList());
+                    .toList();
             List<FluidStack> remainingRecipeStacks = recipeStacks.stream().map(FluidStack::copy).peek(F -> F.amount *= multiblock.parallel).collect(Collectors.toList());
             FluidInventoryWrapper wrapper = new FluidInventoryWrapper(multiblock.fluidInput);
             for (FluidStack remainingRecipeStack : remainingRecipeStacks) {
@@ -232,7 +232,7 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
         );
         for (ItemStack remainingRecipeStack : remainingRecipeStacks) {
             ItemStack stack = wrapper.removeUntil(remainingRecipeStack.itemID, remainingRecipeStack.getMetadata(), remainingRecipeStack.stackSize, remainingRecipeStack.getData(), false, false);
-            if (stack.isStackEqual(remainingRecipeStack)) {
+            if (stack != null && stack.isStackEqual(remainingRecipeStack)) {
                 if (stack.getItem().hasContainerItem() && !getData().consumeContainers) {
                     wrapper.add(new ItemStack(stack.getItem().getContainerItem()));
                 }
@@ -242,7 +242,7 @@ public class RecipeEntryMachineRandomOutput extends RecipeEntrySI<RecipeExtended
                 .flatMap(symbol -> symbol.resolveFluids().stream())
                 .filter(Objects::nonNull)
                 .map(FluidStack::copy)
-                .collect(Collectors.toList());
+                .toList();
         for (FluidStack fluidStack : fluidRecipeStacks) {
             fluidWrapper.removeUntil(fluidStack.fluid.getFirstId(), fluidStack.amount, false);
         }
