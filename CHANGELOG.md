@@ -1,15 +1,3 @@
-- Fix issues with portable workbench.
-- Added icons for SI armor to the hud armor bar.
-- Power suit redesign.
-- Wings now match the color of the suit. (except transparent, white)
-- Storage containers now less awful.
-- Performance improvements.
-- Fixed slots being one pixel off in backpack GUI.
-- Added the BTA! flowers, mushrooms, tall grass and ferns to the bonsai, and pumpkins to the greenhouse.
-- Added rubyglass and sulfur to laser drills nether lootpool.
-- Induction smelter can now process blast furnace recipes if it has an additional heating coil in its input bus.
-- Buffed fluid conduit max transfer amount.
-- Added the ability to pickup storage containers.
-- Recipes now show chance.
-- Updated the UI for the Signalite Reactor.
-- Buffed chance of getting reality string from crushing rooted fabric.
+- Fixed crash that could happen when some machines consume their inputs.
+- Log illegal attempts at inventory serialization.
+- Prevent locked slots from being interacted with even more.
