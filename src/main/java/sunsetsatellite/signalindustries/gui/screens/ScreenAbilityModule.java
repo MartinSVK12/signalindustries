@@ -83,7 +83,7 @@ public class ScreenAbilityModule extends ScreenFluid {
         } else {
             this.module = player.inventory.getItem(slotIndex);
         }
-        InventorySerializer.saveInvToNBT(module, fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(module, fluidSlots.itemInventory, ItemAbilityModule.class);
     }
 
 	public void drawGradientRect(final int minX, final int minY, final int maxX, final int maxY, final int argb1, final int argb2, final int argb3, final int argb4 ) {

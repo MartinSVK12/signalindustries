@@ -67,6 +67,6 @@ public class ScreenPulsar extends ScreenFluid {
         } else {*/
         this.pulsar = player.inventory.getItem(pulsarSlotIndex);
         //}
-        InventorySerializer.saveInvToNBT(pulsar, fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(pulsar, fluidSlots.itemInventory, ItemPulsar.class);
     }
 }

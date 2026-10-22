@@ -8,6 +8,7 @@ import net.minecraft.core.player.inventory.container.ContainerInventory;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
 import sunsetsatellite.signalindustries.gui.menus.MenuHarness;
+import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
 import sunsetsatellite.signalindustries.util.InventorySerializer;
 
 public class ScreenHarness extends ScreenFluid {
@@ -44,6 +45,6 @@ public class ScreenHarness extends ScreenFluid {
     @Override
     public void removed() {
         super.removed();
-        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), fluidSlots.itemInventory);
+        InventorySerializer.saveInvToNBT(player.inventory.getItem(slotIndex), fluidSlots.itemInventory, ItemSignalumPowerHarness.class);
     }
 }
