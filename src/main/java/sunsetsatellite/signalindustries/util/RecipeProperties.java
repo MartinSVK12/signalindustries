@@ -12,6 +12,7 @@ public class RecipeProperties {
     public int ticks;
     public int id = 0;
     public float chance = 1;
+	public int maxParallels = 1;
 
     public boolean thisTierOnly;
     public boolean consumeContainers = false;
@@ -52,6 +53,11 @@ public class RecipeProperties {
         this.chance = chance;
         return this;
     }
+
+	public RecipeProperties setMaxParallels(int maxParallels) {
+		this.maxParallels = maxParallels;
+		return this;
+	}
 
     public RecipeProperties setConsumeContainers() {
         this.consumeContainers = true;

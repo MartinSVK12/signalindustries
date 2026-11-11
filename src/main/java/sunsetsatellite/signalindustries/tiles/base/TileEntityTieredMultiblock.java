@@ -139,8 +139,9 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                 int oldParallel = parallel;
                 parallel = 1;
                 setCurrentRecipe();
-                parallel = oldParallel;
+				parallel = oldParallel;
                 if (currentRecipe != null) {
+					parallel = oldParallel * currentRecipe.getData().maxParallels;
                     int recipeInputSum = Arrays.stream(((RecipeExtendedSymbol[]) currentRecipe.getInput())).map(RecipeExtendedSymbol::asNormalSymbol).map(RecipeSymbol::resolve).map(L -> L.get(0)).mapToInt(S -> S.stackSize).sum();
                     int inputSum = 0;
                     if (itemInput != null) {
@@ -155,7 +156,6 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
                         parallel = effectiveParallel;
                     }
                 }
-                setCurrentRecipe();
                 work();
             }
 
@@ -210,7 +210,7 @@ public abstract class TileEntityTieredMultiblock extends TileEntityTieredMachine
             if (inputContents.isEmpty() && fluidInputContents.isEmpty()) {
                 progressTicks = 0;
             } else if (canProcess()) {
-                progressMaxTicks = (int) (currentRecipe.getData().ticks / speedMultiplier);
+                progressMaxTicks = getTieredProgressDuration(currentRecipe.getData().ticks);
             }
             if (worldObj != null && !worldObj.isClientSide) {
                 if (progressTicks == 0 && canProcess() && fuelBurnTicks < 2) {

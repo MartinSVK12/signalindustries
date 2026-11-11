@@ -22,7 +22,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
                         new ItemStack(Blocks.GRAVEL, 1),
-                        new RecipeProperties(100, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 40, Tier.PROTOTYPE, false).setMaxParallels(16)
                 )
         );
         group.register(
@@ -32,7 +32,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Blocks.GRAVEL, 1))
                         },
                         new ItemStack(Blocks.SAND, 1),
-                        new RecipeProperties(100, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 40, Tier.PROTOTYPE, false).setMaxParallels(16)
                 )
         );
         group.register(
@@ -52,7 +52,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Items.COAL))
                         },
                         new ItemStack(SIItems.coalDust, 1),
-                        new RecipeProperties(100, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 40, Tier.PROTOTYPE, false).setMaxParallels(8)
                 )
         );
         group.register(
@@ -62,7 +62,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Items.ORE_RAW_IRON))
                         },
                         new ItemStack(SIItems.ironDust, 4),
-                        new RecipeProperties(50, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 40, Tier.PROTOTYPE, false).setMaxParallels(8)
                 )
         );
         group.register(
@@ -72,7 +72,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Items.ORE_RAW_GOLD))
                         },
                         new ItemStack(SIItems.goldDust, 4),
-                        new RecipeProperties(50, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 40, Tier.PROTOTYPE, false).setMaxParallels(8)
                 )
         );
         group.register(
@@ -82,7 +82,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystalEmpty))
                         },
                         new ItemStack(SIItems.emptySignalumCrystalDust, 8),
-                        new RecipeProperties(100, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 40, Tier.BASIC, false)
                 )
         );
         group.register(
@@ -92,7 +92,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.signalumCrystal))
                         },
                         new ItemStack(SIItems.saturatedSignalumCrystalDust, 8),
-                        new RecipeProperties(100, 40, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 40, Tier.BASIC, false)
                 )
         );
         group.register(
@@ -102,7 +102,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(Items.NETHERCOAL))
                         },
                         new ItemStack(SIItems.netherCoalDust, 2),
-                        new RecipeProperties(50, 80, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 80, Tier.BASIC, false)
                 )
         );
         group.register(
@@ -112,7 +112,7 @@ public class WakingCrusherRecipes implements MachineRecipesBase<RecipeGroup<Reci
                                 new RecipeExtendedSymbol(new ItemStack(SIItems.netherCoalDust))
                         },
                         new ItemStack(SIItems.tinyNetherCoalDust, 9),
-                        new RecipeProperties(50, 80, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 80, Tier.BASIC, false)
                 )
         );
         group.register(

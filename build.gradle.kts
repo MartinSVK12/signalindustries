@@ -158,12 +158,12 @@ dependencies {
 	implementation(project(":catalyst-effects"))
 	implementation(project(":catalyst-screens"))
 	implementation(project(":tmb"))
-	implementation(project(":bemi"))
+	//implementation(project(":bemi"))
 	implementation(project(":btwaila"))
 	implementation(project(":retrostorage"))
 	implementation(project(":vintagequesting"))
-	implementation("BTATweaker:btatweaker:1.1.1")
-	compileOnly("org.luaj:luaj-jse:3.0.1")
+	//implementation("BTATweaker:btatweaker:1.1.1")
+	//compileOnly("org.luaj:luaj-jse:3.0.1")
 }
 
 subprojects {

@@ -11,6 +11,7 @@ import sunsetsatellite.signalindustries.SIFluids;
 import sunsetsatellite.signalindustries.SignalIndustries;
 import sunsetsatellite.signalindustries.api.impl.tmb.translator.MachineRecipeTranslator;
 import sunsetsatellite.signalindustries.util.RecipeProperties;
+import sunsetsatellite.signalindustries.util.Tier;
 import turing.tmb.RecipeLayoutBuilder;
 import turing.tmb.TypedIngredient;
 import turing.tmb.api.ItemStackIngredientRenderer;
@@ -84,6 +85,9 @@ public class WakingPlateFormerRecipeCategory implements IRecipeCategory<MachineR
         arrow.draw(runtime.getGuiHelper(), x + 26, (background.getHeight() / 2) - 5);
 
         gui.drawStringCenteredShadow(font,data.ticks + "t", x + 39, (background.getHeight() / 2) - 14, 0xFFFFFFFF);
+		if(data.maxParallels != 1){
+			gui.drawStringCenteredShadow(font,"Up to "+data.maxParallels+"x", x + 39, (background.getHeight() / 2) + 14, 0xFFFFFFFF);
+		}
     }
 
     @Override

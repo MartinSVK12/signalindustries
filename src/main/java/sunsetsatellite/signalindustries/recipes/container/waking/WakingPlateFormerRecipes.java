@@ -20,7 +20,7 @@ public class WakingPlateFormerRecipes implements MachineRecipesBase<RecipeGroup<
                                 new RecipeExtendedSymbol("minecraft:stones")
                         },
                         new ItemStack(SIItems.stonePlate, 2),
-                        new RecipeProperties(50, 20, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 20, Tier.PROTOTYPE, false).setMaxParallels(16)
                 )
         );
         group.register(
@@ -30,7 +30,7 @@ public class WakingPlateFormerRecipes implements MachineRecipesBase<RecipeGroup<
                                 new RecipeExtendedSymbol("minecraft:cobblestones")
                         },
                         new ItemStack(SIItems.cobblestonePlate, 2),
-                        new RecipeProperties(50, 20, Tier.REINFORCED, false)
+                        new RecipeProperties(50, 20, Tier.PROTOTYPE, false).setMaxParallels(16)
                 )
         );
         group.register(
@@ -40,7 +40,7 @@ public class WakingPlateFormerRecipes implements MachineRecipesBase<RecipeGroup<
                                 new RecipeExtendedSymbol(new ItemStack(Items.INGOT_STEEL))
                         },
                         new ItemStack(SIItems.steelPlate, 1),
-                        new RecipeProperties(100, 20, Tier.REINFORCED, false)
+                        new RecipeProperties(100, 20, Tier.BASIC, false).setMaxParallels(8)
                 )
         );
         group.register(

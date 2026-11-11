@@ -43,9 +43,6 @@
 		"btwaila": [
 			"sunsetsatellite.signalindustries.api.impl.btwaila.BTWailaSIPlugin"
 		],
-		"btatweakerPlugin": [
-			"sunsetsatellite.signalindustries.api.impl.btatweaker.BTATweakerSIPlugin"
-		],
 		"gatherTMBPlugins": [
 			"sunsetsatellite.signalindustries.api.impl.tmb.TMBSIPlugin"
 		],
