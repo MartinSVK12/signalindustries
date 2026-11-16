@@ -9,6 +9,7 @@ felix170905 - connected textures code
 mzov - basic tier texture remakes
 sillydot - brick textures, reinforced infuser texture
 lokachop - bug hunter
+ArgentVASIMR - new coil texture
 
 --Libraries/Mods integrated--
 azurelmao - halplibe

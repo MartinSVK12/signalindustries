@@ -1998,11 +1998,12 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
 			new MachineTextures()
-				.withDefaultSouthTexture("signalum_alloy_coil")
+				.withDefaultTexture("signalum_alloy_coil_new")
+				/*.withDefaultSouthTexture("signalum_alloy_coil")
 				.withDefaultNorthTexture("signalum_alloy_coil")
 				.withDefaultEastTexture("signalum_alloy_coil_2")
 				.withDefaultWestTexture("signalum_alloy_coil_2")
-				.withDefaultTopBottomTextures("signalum_alloy_coil_top")
+				.withDefaultTopBottomTextures("signalum_alloy_coil_top")*/
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
 		dilithiumCoil = customBlock(
@@ -2013,8 +2014,9 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
 			new MachineTextures()
-				.withDefaultSideTextures("dilithium_coil")
-				.withDefaultTopBottomTextures("dilithium_coil_top")
+				.withDefaultTexture("dilithium_coil_new")
+				/*.withDefaultSideTextures("dilithium_coil")
+				.withDefaultTopBottomTextures("dilithium_coil_top")*/
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
 		awakenedAlloyCoil = customBlock(
@@ -2025,11 +2027,12 @@ public class SIBlocks extends DataInitializer {
 			3,
 			(block) -> new BlockLogicFullyRotatable(block, Materials.METAL),
 			new MachineTextures()
-				.withDefaultSouthTexture("awakened_alloy_coil")
+				.withDefaultTexture("awakened_alloy_coil_new")
+				/*.withDefaultSouthTexture("awakened_alloy_coil")
 				.withDefaultNorthTexture("awakened_alloy_coil")
 				.withDefaultEastTexture("awakened_alloy_coil_2")
 				.withDefaultWestTexture("awakened_alloy_coil_2")
-				.withDefaultTopBottomTextures("awakened_alloy_coil_top")
+				.withDefaultTopBottomTextures("awakened_alloy_coil_top")*/
 		).withTags(BlockTags.MINEABLE_BY_PICKAXE);
 
 		glowingObsidian = simpleBlock(

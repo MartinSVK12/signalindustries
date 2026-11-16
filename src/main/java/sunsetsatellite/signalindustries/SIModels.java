@@ -63,6 +63,7 @@ public class SIModels {
 		dispatcher.addDispatch(basicCasing2, new BlockModelConnectedTexture(basicCasing2, "signalindustries:block/basic_casing_2"));
 		dispatcher.addDispatch(reinforcedCasing2, new BlockModelConnectedTextureExtra(reinforcedCasing2, "signalindustries:block/reinforced_casing_2", "signalindustries:block/reinforced_casing_2_active"));
 		dispatcher.addDispatch(reinforcedGlass, new BlockModelConnectedTexture(reinforcedGlass, "signalindustries:block/reinforced_glass", Catalyst.listOf(awakenedEnergyConnector)));
+		dispatcher.addDispatch(reinforcedCasing, new BlockModelConnectedTexture(reinforcedCasing, "signalindustries:block/reinforced_casing"));
 
 		dispatcher.addDispatch(multiConduit, new BlockModelMultiConduit<>(multiConduit));
 

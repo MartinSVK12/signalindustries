@@ -93,12 +93,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		LOGGER.info("Binding to client events...");
 		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID),this::beforeClientStart);
 		ClientEvents.AFTER_CLIENT_START.listen(Key.of(MOD_ID),this::afterClientStart);
-		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(MOD_ID), new Consumer<BlockModelDispatcher>() {
-			@Override
-			public void accept(BlockModelDispatcher t) {
-				new SIModels().initBlockModels(t);
-			}
-		});
+		ClientEvents.BLOCK_MODEL_RELOAD.listen(Key.of(MOD_ID), t -> new SIModels().initBlockModels(t));
 		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initItemModels(t));
 		ClientEvents.TILE_ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initTileEntityModels(t));
 		ClientEvents.ENTITY_RENDERER_RELOAD.listen(Key.of(MOD_ID),(t)->new SIModels().initEntityModels(t));
