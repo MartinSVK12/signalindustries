@@ -18,6 +18,7 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
 
 	private final FakeItemElement itemRenderer = new FakeItemElement(Minecraft.getMinecraft());
 	private final Gui gui = new Gui();
+	public static boolean rendering = false;
 
 	@Override
 	public void doRender(TessellatorGeneral tessellator, TileEntityStorageContainer tileEntity, double x, double y, double z, float partialTick) {
@@ -90,7 +91,9 @@ public class RenderStorageContainer extends TileEntityRenderer<TileEntityStorage
 			GLRenderer.pushFrame();
 			GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GLRenderer.modelM4f().translate(0.0F, 0.0F, 32.0F);
+			rendering = true;
 			itemRenderer.render(stack, x, y, NumberUtil.format(stack.stackSize));
+			rendering = false;
 			GLRenderer.disableState(State.DEPTH_TEST);
 			GLRenderer.popFrame();
 		}

@@ -29,6 +29,7 @@
   "client": [
     "client.GuidebookSectionsMixin",
     "client.HudIngameMixin",
+    "client.ItemModelStandardMixin",
     "client.MenuAbstractMixin",
     "client.MinecraftMixin",
     "client.MobRendererBipedArmoredMixin",

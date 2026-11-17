@@ -83,7 +83,9 @@ public class RenderAssembler extends TileEntityRenderer<TileEntityAssembler> {
 			GLRenderer.pushFrame();
 			GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GLRenderer.modelM4f().translate(0.0F, 0.0F, 32.0F);
+			RenderStorageContainer.rendering = true;
 			itemRenderer.render(stack, x, y);
+			RenderStorageContainer.rendering = false;
 			GLRenderer.disableState(State.DEPTH_TEST);
 			GLRenderer.popFrame();
 		}
