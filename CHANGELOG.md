@@ -1,3 +1,5 @@
-- Fixed crash that could happen when some machines consume their inputs.
-- Log illegal attempts at inventory serialization.
-- Prevent locked slots from being interacted with even more.
+- Add support for per-recipe parallels.
+  - Right now some of the waking-tier multiblocks make use of it. 
+- New coil textures (by ArgentVASIMR)
+- Reinforced casing now uses connected textures.
+- Fixed item stack numbers on assemblers and storage containers rendering through blocks.
