@@ -1,7 +1,6 @@
 package sunsetsatellite.signalindustries.gui.screens;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.option.enums.DescriptionPromptEnum;
 import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.renderer.GLRenderer;
@@ -9,7 +8,6 @@ import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
-import org.lwjgl.opengl.GL;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.BlockInstance;
 import sunsetsatellite.catalyst.core.util.mixin.interfaces.IExtendedScreenDraw;
@@ -49,7 +47,7 @@ public class ScreenBlueprint extends ScreenFluid implements IExtendedScreenDraw 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/blueprint.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/blueprint.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
         int x = (this.width - this.xSize) / 2;

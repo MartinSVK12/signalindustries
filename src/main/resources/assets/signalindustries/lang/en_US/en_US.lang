@@ -5,7 +5,7 @@ fluid.signalindustries.worldResin.name=World Resin
 tile.signalindustries.signalumEnergy.still.name=Signaling Energy
 tile.signalindustries.signalumEnergy.still.desc=Mysterious substance with magically energetic properties. Used to power a new kind of technology.
 tile.signalindustries.burntSignalum.still.name=Burnt Signaling Energy
-tile.signalindustries.burntSignalum.still.desc=<Signaling Energy> burnt out in an unstable reaction. But there's still beauty in the ashes, can you find it?
+tile.signalindustries.burntSignalum.still.desc=Energy that has failed to overcome its limits. But there's still beauty in the ashes, can you find it?
 tile.signalindustries.worldResin.still.name=World Resin
 tile.signalindustries.worldResin.still.desc=The primordial nectar of existence shaping the worlds you know, crystallizes into <Dimensional Shards> under the right circumstances.
 tile.signalindustries.signalumEnergy.flowing.name=Signaling Energy
@@ -13,7 +13,7 @@ tile.signalindustries.signalumEnergy.flowing.desc=Mysterious substance with magi
 tile.signalindustries.burntSignalum.flowing.name=Burnt Signaling Energy
 tile.signalindustries.burntSignalum.flowing.desc=Energy that has failed to overcome its limits. But there's still beauty in the ashes, can you find it?
 tile.signalindustries.worldResin.flowing.name=World Resin
-tile.signalindustries.worldResin.flowing.desc=The primordial nectar of existence, crystallizes into <Dimensional Shards> under the right circumstances.
+tile.signalindustries.worldResin.flowing.desc=The primordial nectar of existence shaping the worlds you know, crystallizes into <Dimensional Shards> under the right circumstances.
 item.signalindustries.signalumCrystal.name=Signalite Crystal
 item.signalindustries.signalumCrystal.desc=A pure crystal with <Signaling Energy> infused in it. Shines with a bright red glow.
 item.signalindustries.signalumCrystal.battery.name=Signalite Crystal (Battery)
@@ -115,7 +115,7 @@ item.signalindustries.romChip.blank.desc=Unprogrammed ROM chip.
 item.signalindustries.romChip.position.name=Position Memory Chip
 item.signalindustries.romChip.position.desc=Stores an XYZ location in the current world, unlike the <Warp Orb> it can only be used to logically link 2 points together.
 item.signalindustries.romChip.precision.name=Precision Control Chip
-item.signalindustries.romChip.precision.desc=Allows <Automatic Miners> to execute finer control over their drills, collecting materials with silk touch.
+item.signalindustries.romChip.precision.desc=Allows other tools or machines to collect materials with silk touch. Try it with an <Automatic Miner> or <Signalite Drill>.
 item.signalindustries.romChip.unlimited.name=Unlimited Power Chip
 item.signalindustries.romChip.unlimited.desc=Allows some machines to ignore their requirements. Creative mode only.
 
@@ -168,6 +168,9 @@ item.signalindustries.fuelCell.desc=A special container containing <Signaling En
 
 item.signalindustries.warpOrb.name=Warp Orb
 item.signalindustries.warpOrb.desc=Can be encoded with a location in space. Wonder what would happen if you broke it?
+
+item.signalindustries.realityMarble.name=Reality Marble
+item.signalindustries.realityMarble.desc=A whole new world awaits inside.
 
 tile.signalindustries.signalumOre.name=Signalite Crystal Ore
 tile.signalindustries.signalumOre.desc=<Raw Signalite Crystals> encased in rock.
@@ -692,6 +695,9 @@ tile.signalindustries.basic.externalIO.name=External I/O
 tile.signalindustries.basic.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively.
 tile.signalindustries.reinforced.externalIO.name=Reinforced External I/O
 tile.signalindustries.reinforced.externalIO.desc=Allows item/fluid I/O configuration even for blocks that don't support it natively, remotely!
+
+tile.signalindustries.basic.dock.name=Dock
+tile.signalindustries.basic.dock.desc=Opens up the inventory of the item inside to surrounding blocks.
 
 tile.signalindustries.basic.programmer.name=EEPROM Programmer
 tile.signalindustries.basic.programmer.desc=Device for programming and configuring <Triggers>.
@@ -1395,6 +1401,7 @@ container.signalindustries.trommel.name=Trommel
 container.signalindustries.gigaTrommel.name=Giga Trommel
 container.signalindustries.creationAltar.name=Altar of Creation
 container.signalindustries.propertyInscriber.name=Property Inscriber
+container.signalindustries.drill.name=Signalite Drill
 
 entity.signalindustries.volatileCrystal=Volatile Crystal
 entity.signalindustries.fallingMeteor=Falling Meteor

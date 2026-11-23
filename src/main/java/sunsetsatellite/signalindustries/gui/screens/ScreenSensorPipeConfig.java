@@ -40,7 +40,7 @@ public class ScreenSensorPipeConfig extends ScreenContainerAbstract {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
-        @NotNull Texture l = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/sensor_pipe_gui.png");
+        @NotNull Texture l = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/sensor_pipe_gui.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(l);
         int j = (width - xSize) / 2;

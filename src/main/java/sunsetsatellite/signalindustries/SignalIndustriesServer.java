@@ -98,5 +98,6 @@ public class SignalIndustriesServer implements DedicatedServerModInitializer {
 		Catalyst.GUIS.register(key("gui/ability_module"), new GuiEntry<>(InventoryAbilityModule.class, MenuAbilityModule.class));
 		Catalyst.GUIS.register(key("gui/pulsar"), new GuiEntry<>(InventoryPulsar.class, MenuPulsar.class));
 		Catalyst.GUIS.register(key("gui/blueprint"), new GuiEntry<>(InventoryBlueprint.class, MenuBlueprint.class));
+		Catalyst.GUIS.register(key("gui/drill"), new GuiEntry<>(InventoryDrill.class, MenuDrill.class));
 	}
 }

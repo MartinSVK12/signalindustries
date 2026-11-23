@@ -6,8 +6,13 @@ import net.minecraft.client.gui.hud.HudIngame;
 import net.minecraft.client.render.entity.EntityRendererItem;
 import net.minecraft.client.render.font.FontRenderer;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.data.registry.recipe.RecipeSymbol;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingWithTool;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.HumanArmorShape;
@@ -23,6 +28,7 @@ import net.minecraft.core.world.pos.TilePosc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.api.IItemFluidContainer;
 import sunsetsatellite.catalyst.fluids.util.Fluid;
@@ -32,15 +38,25 @@ import sunsetsatellite.signalindustries.SIItems;
 import sunsetsatellite.signalindustries.interfaces.IHasOverlay;
 import sunsetsatellite.signalindustries.interfaces.IPowerSuit;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.invs.InventoryDrill;
+import sunsetsatellite.signalindustries.invs.InventoryPulsar;
 import sunsetsatellite.signalindustries.items.ItemSignalumPowerHarness;
+import sunsetsatellite.signalindustries.items.attachments.ItemAttachment;
+import sunsetsatellite.signalindustries.powersuit.InventoryPowerSuit;
 import sunsetsatellite.signalindustries.util.Tier;
+import turniplabs.halplibe.helper.RecipeBuilder;
 
 import java.util.Collections;
 import java.util.List;
 
+import static sunsetsatellite.signalindustries.SignalIndustries.MOD_ID;
+import static sunsetsatellite.signalindustries.SignalIndustries.key;
+
 public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItemFluidContainer, IHasOverlay {
     public Tier tier;
     public int blockDestroyCost = 1;
+
+	public static ItemStack currentStack = null;
 
     public ItemSignalumDrill(String lang, String namespaceId, int id, ToolMaterial enumtoolmaterial, Tier tier) {
         super(lang, namespaceId, id, enumtoolmaterial);
@@ -98,6 +114,9 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 		int energy = stack.getData().getInteger("energy");
 		DrillMode mode = getMode(stack);
 
+		boolean silk = getAttachment(stack, SIItems.precisionControlChip) != null;
+		if(silk) blockDestroyCost = 5; else blockDestroyCost = 1;
+
 		int ox = blockPos.x();
 		int oy = blockPos.y();
 		int oz = blockPos.z();
@@ -110,9 +129,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 			}
 			case X3_UNSAFE:
 			case X3: {
-				//todo: change to normal (1)
 				int size = 1;
-				blockDestroyCost = 0;
 				if (side.axis() == Axis.Y) {
 					for (int x = -size; x <= size; x++) {
 						for (int z = -size; z <= size; z++) {
@@ -165,7 +182,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 				break;
 			}
 		}
-
+		currentStack = null;
 		return true;
 	}
 
@@ -185,8 +202,9 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 						player.sendMessage("Drill disassembled!");
 					}
 				}
-
 			}
+		} else if(player.isSneaking()){
+			Catalyst.displayGui(player, new InventoryDrill(selfStack), player.inventory.getCurrentSlot(), false, key("gui/drill"));
 		}
 		return super.onUse(selfStack, world, player);
 	}
@@ -246,12 +264,12 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
             }
             if (amount > remaining) {
                 fluidStack.amount -= remaining;
-                CompoundTag data = new CompoundTag();
+                CompoundTag data = stack.getData();
                 data.putInt("energy", getCapacity(stack));
                 stack.setData(data);
                 return stack;
             } else {
-                CompoundTag data = new CompoundTag();
+                CompoundTag data = stack.getData();
                 data.putInt("energy", saturation + amount);
                 fluidStack.amount -= amount;
                 stack.setData(data);
@@ -279,7 +297,7 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
             int result = Math.min(amount, remaining);
             if (result == 0) return null;
             fluidStack.amount -= result;
-            CompoundTag data = new CompoundTag();
+            CompoundTag data = stack.getData();
             data.putInt("energy", saturation + result);
             stack.setData(data);
             return stack;
@@ -319,7 +337,10 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
 
     @Override
     public String getDescription(ItemStack stack) {
-        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n" + TextFormatting.WHITE + "Mode: " + getModeString(stack) + "\n" + TextFormatting.WHITE + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + "/" + getCapacity(stack) + TextFormatting.WHITE;
+        return "Tier: " + tier.getTextColor() + tier.getRank() + "\n"
+			+ TextFormatting.WHITE + "Mode: " + getModeString(stack) + "\n"
+			+ TextFormatting.WHITE + "Energy: " + TextFormatting.RED + stack.getData().getInteger("energy") + "/" + getCapacity(stack)
+			+ TextFormatting.WHITE + (getAttachment(stack, SIItems.precisionControlChip) != null ? "\n" + TextFormatting.YELLOW + "Silk Touch" + TextFormatting.WHITE : "");
     }
 
     @Override
@@ -348,4 +369,22 @@ public class ItemSignalumDrill extends ItemToolPickaxe implements ITiered, IItem
     public boolean hitEntity(@NonNull ItemStack itemstack, @NonNull Mob target, @NonNull Mob attacker) {
         return true;
     }
+
+	public ItemStack getAttachment(ItemStack stack, ItemAttachment attachment) {
+		InventoryDrill inv = new InventoryDrill(stack);
+		inv.load();
+		for (ItemStack content : inv.contents) {
+			if (content != null) {
+				if (content.getItem().equals(attachment)) {
+					return content;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isSilkTouch() {
+		return currentStack != null && getAttachment(currentStack, SIItems.precisionControlChip) != null;
+	}
 }

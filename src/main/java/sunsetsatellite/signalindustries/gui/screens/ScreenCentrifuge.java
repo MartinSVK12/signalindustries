@@ -30,7 +30,7 @@ public class ScreenCentrifuge extends ScreenFluid {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
 		super.drawGuiContainerBackgroundLayer(f);
-		Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/centrifuge_reinforced.png");
+		Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/centrifuge_reinforced.png");
 		GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.textureManager.bindTexture(bg);
 		int x = (this.width - this.xSize) / 2;

@@ -3,9 +3,7 @@ package sunsetsatellite.signalindustries.gui.screens;
 import net.minecraft.client.gui.ButtonElement;
 import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.texture.Texture;
-import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.Side;
@@ -15,7 +13,6 @@ import sunsetsatellite.catalyst.core.util.vector.Vec3f;
 import sunsetsatellite.catalyst.core.util.vector.Vec3i;
 import sunsetsatellite.catalyst.fluids.api.IFluidInventory;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
-import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.screens.menu.MenuComposed;
 import sunsetsatellite.signalindustries.gui.menus.MenuExternalIO;
 import sunsetsatellite.signalindustries.mp.message.NetworkMessageExternalIOLinkBreak;
@@ -41,14 +38,14 @@ public class ScreenExternalIO extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_gui_blank.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_gui_blank.png");
         switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_gui_blank.png");
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_gui_blank.png");
                 break;
             case REINFORCED:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/reinforced_gui_base.png");
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/reinforced_gui_base.png");
                 break;
             case AWAKENED:
                 break;

@@ -125,7 +125,7 @@ public class SIItems extends DataInitializer {
 	public static Item abilityContainerCasing;
 	public static Item blankChip;
 	public static Item positionMemoryChip;
-	public static Item precisionControlChip;
+	public static ItemAttachment precisionControlChip;
 	public static Item unlimitedChip;
 	public static Item condensedMilkCan;
 	public static Item bucketCaramel;
@@ -250,7 +250,6 @@ public class SIItems extends DataInitializer {
 		caramelPlate = simpleItem("caramelPlate", "caramel_plate", "caramelPlate", "caramel_plate");
 		signalumAlloyMesh = simpleItem("signalumAlloyMesh", "signalum_alloy_mesh", "signalumAlloyMesh", "signalum_alloy_mesh");
 		crystalWingPart = simpleItem("crystalWingPart", "crystal_wing_part", "crystalWingPart", "crystal_wing_part").setMaxStackSize(6);
-		precisionControlChip = simpleItem("precisionControlChip", "precision_control_chip", "romChip.precision", "precision_control_chip");
 		clearKey = simpleItem("clearKey", "clear_key", "clearKey", "clear_key");
 		saturatedKey = simpleItem("saturatedKey", "saturated_key", "saturatedKey", "saturated_key");
 		unlimitedChip = simpleItem("unlimitedChip", "unlimited_chip", "romChip.unlimited", "unlimited_chip");
@@ -444,6 +443,8 @@ public class SIItems extends DataInitializer {
 			listOf(AttachmentPoint.COLORIZER), Tier.REINFORCED,
 			"/assets/signalindustries/textures/armor/power_suit_inverted",
 			"/assets/signalindustries/textures/attachments/wings_inverted"), "colorizer_inverted").setMaxStackSize(1);
+
+		precisionControlChip = (ItemAttachment) customItem(() -> new ItemSimpleAttachment("romChip.precision", key("precision_control_chip"), item("precisionControlChip"), listOf(AttachmentPoint.DRILL), Tier.BASIC), "precision_control_chip");
 
 		blueprint = customItem(() -> new ItemBlueprint("blueprint", key("item/blueprint"), item("blueprint")), "blueprint").setMaxStackSize(1);
 		goldprint = customItem(() -> new ItemGoldprint("goldprint", key("item/goldprint"), item("goldprint")), "goldprint").setMaxStackSize(1);

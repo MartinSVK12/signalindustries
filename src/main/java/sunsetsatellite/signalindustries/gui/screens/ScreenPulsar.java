@@ -4,7 +4,6 @@ import net.minecraft.client.render.renderer.GLRenderer;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.lang.I18n;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 
 import sunsetsatellite.catalyst.Catalyst;
@@ -38,7 +37,7 @@ public class ScreenPulsar extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/pulsar_ui.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/pulsar_ui.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
         int x = (this.width - this.xSize) / 2;

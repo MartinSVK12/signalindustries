@@ -44,12 +44,12 @@ public class ScreenBackpack extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_backpack.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_backpack.png");
 		bg = switch (((ItemBackpackAttachment) backpack.getItem()).getTier()) {
 		    case BASIC ->
-				this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_backpack.png");
+				this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_backpack.png");
 		    case REINFORCED ->
-			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/reinforced_backpack.png");
+			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/reinforced_backpack.png");
 		    default -> bg;
 	    };
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);

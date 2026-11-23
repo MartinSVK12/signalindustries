@@ -33,11 +33,11 @@ public class ScreenAssembler extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_assembler_gui.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_assembler_gui.png");
         switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
-				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_assembler_gui.png");
+				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_assembler_gui.png");
                 break;
             case REINFORCED:
             case AWAKENED:

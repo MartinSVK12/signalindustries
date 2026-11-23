@@ -38,7 +38,7 @@ public class ScreenPulsarBlock extends ScreenFluid implements IExtendedScreenDra
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/pulsar_block_ui.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/pulsar_block_ui.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.textureManager.bindTexture(bg);
         int x = (this.width - this.xSize) / 2;

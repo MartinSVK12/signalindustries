@@ -51,11 +51,11 @@ public class ScreenSignalumDynamo extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/dynamo_basic.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/dynamo_basic.png");
         switch (tile.tier) {
             case PROTOTYPE:
             case BASIC:
-                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/dynamo_basic.png");
+                bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/dynamo_basic.png");
                 break;
             case REINFORCED:
             case AWAKENED:

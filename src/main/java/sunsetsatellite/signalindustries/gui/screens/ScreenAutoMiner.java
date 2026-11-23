@@ -1,11 +1,15 @@
 package sunsetsatellite.signalindustries.gui.screens;
 
 import net.minecraft.client.gui.ButtonElement;
+import net.minecraft.client.gui.TooltipElement;
+import net.minecraft.client.render.Lighting;
 import net.minecraft.client.render.renderer.GLRenderer;
+import net.minecraft.client.render.renderer.State;
 import net.minecraft.client.render.texture.Texture;
 import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
+import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.Catalyst;
 import sunsetsatellite.catalyst.core.util.mp.PacketScreenAction;
 import sunsetsatellite.catalyst.fluids.impl.ScreenFluid;
@@ -16,6 +20,7 @@ import sunsetsatellite.signalindustries.mp.message.NetworkMessageAutoMinerStart;
 import sunsetsatellite.signalindustries.tiles.machines.TileEntityAutoMiner;
 import sunsetsatellite.signalindustries.util.IO;
 import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.signalindustries.util.slot.SlotAttachment;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 import turniplabs.halplibe.helper.network.NetworkHandler;
 
@@ -38,12 +43,12 @@ public class ScreenAutoMiner extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/autominer.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/autominer.png");
 		switch (tile.tier) {
 		    case PROTOTYPE, BASIC ->
-			    bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/autominer.png");
+			    bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/autominer.png");
 			case REINFORCED ->
-			    bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/reinforced_autominer.png");
+			    bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/reinforced_autominer.png");
 			case AWAKENED -> {
 			}
 	    }
@@ -159,4 +164,20 @@ public class ScreenAutoMiner extends ScreenFluid {
 
         super.buttonClicked(button);
     }
+
+	@Override
+	public void render(int mx, int my, float partialTick) {
+		super.render(mx, my, partialTick);
+		for (int k = 0; k < inventorySlots.slots.size(); k++) {
+			Slot slot = inventorySlots.slots.get(k);
+			if (getIsMouseOverSlot(slot, mx, my) && slot instanceof SlotAttachment) {
+				if (slot.getItemStack() == null) {
+					Lighting.disable();
+					GLRenderer.disableState(State.CULL_FACE);
+					TooltipElement tooltip = new TooltipElement(mc);
+					tooltip.render("Slot accepts attachments of type:\n- " + ((SlotAttachment) slot).getAttachmentPoint(), mx, my, 8, -8);
+				}
+			}
+		}
+	}
 }

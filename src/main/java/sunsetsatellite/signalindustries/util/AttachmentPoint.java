@@ -11,5 +11,6 @@ public enum AttachmentPoint {
     LEG_SIDE,
     BOOT_BACK,
     COLORIZER,
+	DRILL,
     ANY
 }

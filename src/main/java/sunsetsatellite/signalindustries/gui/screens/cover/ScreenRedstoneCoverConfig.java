@@ -80,7 +80,7 @@ public class ScreenRedstoneCoverConfig extends ScreenContainerAbstract {
     }
 
     protected void drawGuiContainerBackgroundLayer(float f) {
-        @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/sensor_pipe_gui.png");
+        @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/sensor_pipe_gui.png");
 		GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);
         int j = (width - xSize) / 2;

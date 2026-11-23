@@ -162,6 +162,7 @@ public class SignalIndustriesClient implements ClientModInitializer {
 		Catalyst.GUIS.register(key("gui/pulsar"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsar.class, ScreenPulsar::new));
 		Catalyst.GUIS.register(key("gui/pulsar_attch"), new ItemGuiEntry<>(InventoryPulsar.class, MenuPulsarAttachment.class, ScreenPulsarAttachment::new));
 		Catalyst.GUIS.register(key("gui/blueprint"), new ItemGuiEntry<>(InventoryBlueprint.class, MenuBlueprint.class, ScreenBlueprint::new));
+		Catalyst.GUIS.register(key("gui/drill"), new ItemGuiEntry<>(InventoryDrill.class, MenuDrill.class, ScreenDrill::new));
 
 		LOGGER.info("Registering options...");
 		for (Field field : SIKeybinds.class.getDeclaredFields()) {

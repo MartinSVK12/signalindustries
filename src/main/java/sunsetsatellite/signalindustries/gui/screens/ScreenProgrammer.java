@@ -30,12 +30,12 @@ public class ScreenProgrammer extends ScreenFluid {
     @Override
     protected void drawGuiContainerBackgroundLayer(float f) {
         super.drawGuiContainerBackgroundLayer(f);
-        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/programmer_basic_new.png");
+        Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/programmer_basic_new.png");
 		bg = switch (tile.tier) {
 		    case BASIC ->
-			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/programmer_basic_new.png");
+			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/programmer_basic_new.png");
 		    case REINFORCED ->
-			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/programmer_reinforced_new.png");
+			    this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/programmer_reinforced_new.png");
 		    default -> bg;
 	    };
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);

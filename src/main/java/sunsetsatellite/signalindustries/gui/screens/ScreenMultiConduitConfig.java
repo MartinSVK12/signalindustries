@@ -157,7 +157,7 @@ public class ScreenMultiConduitConfig extends Screen {
     }
 
     protected void drawGuiContainerBackgroundLayer(float f) {
-        Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/ioconfig.png");
+        Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/ioconfig.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);
         int j = (width - xSize) / 2;

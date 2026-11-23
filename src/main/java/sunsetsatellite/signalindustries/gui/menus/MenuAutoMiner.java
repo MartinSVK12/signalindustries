@@ -5,7 +5,9 @@ import net.minecraft.core.player.inventory.slot.Slot;
 import sunsetsatellite.catalyst.fluids.impl.tile.TileEntityFluidItemContainer;
 import sunsetsatellite.catalyst.fluids.util.SlotFluid;
 import sunsetsatellite.signalindustries.interfaces.ITiered;
+import sunsetsatellite.signalindustries.util.AttachmentPoint;
 import sunsetsatellite.signalindustries.util.Tier;
+import sunsetsatellite.signalindustries.util.slot.SlotAttachment;
 
 public class MenuAutoMiner extends MenuMachine {
     public MenuAutoMiner(ContainerInventory inv, TileEntityFluidItemContainer tile) {
@@ -19,7 +21,7 @@ public class MenuAutoMiner extends MenuMachine {
 
             SlotFluid slot = new SlotFluid(tile, 0, 9, 53); //116 35
             addFluidSlot(slot);
-            this.addSlot(new Slot(tile, 0, 127, 31 + 4));
+            this.addSlot(new SlotAttachment(tile, 0, 127, 31 + 4, AttachmentPoint.DRILL, Tier.BASIC));
 
             for (int j = 0; j < 3; j++) {
                 for (int i1 = 0; i1 < 9; i1++) {

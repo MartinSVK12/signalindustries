@@ -56,7 +56,7 @@ public class ScreenVoidCoverConfig extends Screen {
     }
 
     protected void drawGuiContainerBackgroundLayer(float f) {
-        @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/config.png");
+        @NotNull Texture i = mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/config.png");
         GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.textureManager.bindTexture(i);
         int j = (width - xSize) / 2;

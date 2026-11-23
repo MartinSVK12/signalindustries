@@ -31,13 +31,13 @@ public class ScreenSITrommel extends ScreenFluid {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f) {
 		super.drawGuiContainerBackgroundLayer(f);
-		Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_trommel_gui.png");
+		Texture bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_trommel_gui.png");
 		switch (tile.tier) {
 			case BASIC:
-				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/basic_trommel_gui.png");
+				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/basic_trommel_gui.png");
 				break;
 			case REINFORCED:
-				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/old/centrifuge_reinforced.png");
+				bg = this.mc.textureManager.loadTexture("/assets/signalindustries/textures/gui/container/static/centrifuge_reinforced.png");
 				break;
 		}
 		GLRenderer.setColor4f(1.0F, 1.0F, 1.0F, 1.0F);
