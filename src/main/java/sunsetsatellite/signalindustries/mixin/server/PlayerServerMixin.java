@@ -31,22 +31,8 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
 	@Unique
 	public SignalumPowerSuit powerSuit = null;
 
-	@Unique
-	public CompoundTag powerSuitData = null;
-
 	private PlayerServerMixin(World world) {
 		super(world);
-	}
-
-	@Inject(
-		method = "addAdditionalSaveData",
-		at = @At("HEAD")
-	)
-	public void saveSuitData(CompoundTag tag, CallbackInfo ci) {
-		if (powerSuit != null) {
-			//powerSuit.saveToStacks();
-			powerSuit.saveData(tag);
-		}
 	}
 
 	@Inject(
@@ -71,13 +57,6 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
 			triggerAchievement(SIAchievements.POWER_SUIT);
 		} else {
 			powerSuit.tick();
-		}
-	}
-
-	@Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-	public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
-		if (tag.containsKey("PowerSuit")) {
-			powerSuitData = tag.getCompound("PowerSuit");
 		}
 	}
 
@@ -127,11 +106,6 @@ public abstract class PlayerServerMixin extends Player implements IWarpPlayer, I
 	@Override
 	public SignalumPowerSuit getPowerSuit() {
 		return powerSuit;
-	}
-
-	@Override
-	public CompoundTag getPowerSuitData() {
-		return powerSuitData;
 	}
 
 	@Override

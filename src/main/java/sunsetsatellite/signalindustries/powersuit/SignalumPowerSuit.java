@@ -63,10 +63,7 @@ public class SignalumPowerSuit implements IPowerSuit {
         leggings = new InventoryPowerSuit(player.inventory.armorItemInSlot(LEGS));
         boots = new InventoryPowerSuit(player.inventory.armorItemInSlot(BOOTS));
 
-        if (((IPlayerPowerSuit<?>) player).getPowerSuitData() != null) {
-            loadData(((IPlayerPowerSuit<?>) player).getPowerSuitData());
-        }
-
+		loadData(chestplate.container.getData().getCompound("PowerSuit"));
     }
 
     @Override
@@ -551,19 +548,8 @@ public class SignalumPowerSuit implements IPowerSuit {
         InventorySerializer.saveInvToNBT(chestplate.container, chestplate, ItemSignalumPowerSuit.class);
         InventorySerializer.saveInvToNBT(leggings.container, leggings, ItemSignalumPowerSuit.class);
         InventorySerializer.saveInvToNBT(boots.container, boots, ItemSignalumPowerSuit.class);
-        CompoundTag helmetTag = new CompoundTag();
-        CompoundTag chestplateTag = new CompoundTag();
-        CompoundTag leggingsTag = new CompoundTag();
-        CompoundTag bootsTag = new CompoundTag();
-        helmet.container.writeToNBT(helmetTag);
-        chestplate.container.writeToNBT(chestplateTag);
-        leggings.container.writeToNBT(leggingsTag);
-        boots.container.writeToNBT(bootsTag);
-        suitTag.put("Helmet", helmetTag);
-        suitTag.put("Chestplate", chestplateTag);
-        suitTag.put("Leggings", leggingsTag);
-        suitTag.put("Boots", bootsTag);
-        tag.putCompound("PowerSuit", suitTag);
+		chestplate.container.getData().putCompound("PowerSuit", suitTag);
+		tag.putCompound("PowerSuit", suitTag);
     }
 
     public void loadData(CompoundTag suitTag) {
@@ -591,18 +577,6 @@ public class SignalumPowerSuit implements IPowerSuit {
 				}
 			});
 		}
-
-        if (suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")) {
-            CompoundTag helmetTag = suitTag.getCompound("Helmet");
-            CompoundTag chestplateTag = suitTag.getCompound("Chestplate");
-            CompoundTag leggingsTag = suitTag.getCompound("Leggings");
-            CompoundTag bootsTag = suitTag.getCompound("Boots");
-            helmet.container.readFromNBT(helmetTag);
-            chestplate.container.readFromNBT(chestplateTag);
-            leggings.container.readFromNBT(leggingsTag);
-            boots.container.readFromNBT(bootsTag);
-            reload();
-        }
     }
 
     public enum AttachmentLocation {

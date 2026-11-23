@@ -21,15 +21,11 @@ public class MenuMachine extends MenuComposed {
 
 	@Override
 	public IntList getTargetSlots(@NotNull InventoryAction inventoryAction, Slot slot, int i, Player entityPlayer) {
-		int firstDeviceSlot = entityPlayer.inventory.mainInventory.length;
-		if(slot.index < firstDeviceSlot) {
-			return getSlots(firstDeviceSlot, tile.getContainerSize(), false);
-		}
-		return getSlots(0, 36, true);
-		/*if (slot.index <= lastDeviceSlot) {
+		int lastDeviceSlot = tile.getContainerSize() - 1;
+		if (slot.index <= lastDeviceSlot) {
 			return getSlots(lastDeviceSlot + 1, 36, true);
 		}
-		return getSlots(0, Math.max(lastDeviceSlot + 1, 1), false);*/
+		return getSlots(0, Math.max(lastDeviceSlot + 1, 1), false);
 	}
 
 	@Override

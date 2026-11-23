@@ -47,11 +47,6 @@ public abstract class PlayerMixin extends Mob implements IPlayerPowerSuit<Signal
 		return null;
 	}
 
-	@Override
-	public CompoundTag getPowerSuitData() {
-		return null;
-	}
-
 	@Inject(method = "getAcidMeltDamage", at = @At("HEAD"), cancellable = true)
 	private void getAcidMeltDamage(ItemStack stack, int acidIntensity, CallbackInfoReturnable<Integer> cir) {
 		if(stack != null && stack.getItem() instanceof ITiered){

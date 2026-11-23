@@ -54,9 +54,4 @@ public abstract class PlayerRemoteMixin extends Player implements IPlayerPowerSu
 	public SignalumPowerSuitRemote getPowerSuit() {
 		return powerSuit;
 	}
-
-	@Override
-	public CompoundTag getPowerSuitData() {
-		return null;
-	}
 }

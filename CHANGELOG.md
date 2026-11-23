@@ -1,5 +1,3 @@
-- Add support for per-recipe parallels.
-  - Right now some of the waking-tier multiblocks make use of it. 
-- New coil textures (by ArgentVASIMR)
-- Reinforced casing now uses connected textures.
-- Fixed item stack numbers on assemblers and storage containers rendering through blocks.
+- Added silk touch capability to drills.
+- Fixed power suit losing energy after being charged in an injector.
+- Fixed shift-clicking items into machines.

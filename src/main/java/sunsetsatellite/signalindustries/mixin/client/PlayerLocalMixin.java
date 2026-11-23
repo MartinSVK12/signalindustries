@@ -35,9 +35,6 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 	public SignalumPowerSuitClient powerSuit = null;
 
 	@Unique
-	public CompoundTag powerSuitData = null;
-
-	@Unique
 	public boolean nightVisionShader = false;
 
 	private PlayerLocalMixin(@NotNull World world) {
@@ -66,7 +63,6 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 		if (powerSuit == null) {
 			powerSuit = new SignalumPowerSuitClient((PlayerLocal) (Object) this);
 			triggerAchievement(SIAchievements.POWER_SUIT);
-			powerSuitData = null;
 		} else {
 			powerSuit.tick();
 		}
@@ -143,33 +139,9 @@ public abstract class PlayerLocalMixin extends Player implements IPlayerPowerSui
 		}
 	}
 
-
-	@Inject(
-		method = "addAdditionalSaveData",
-		at = @At("HEAD")
-	)
-	public void saveSuitData(CompoundTag tag, CallbackInfo ci) {
-		if (powerSuit != null) {
-			//powerSuit.saveToStacks();
-			powerSuit.saveData(tag);
-		}
-	}
-
-	@Inject(method = "readAdditionalSaveData", at = @At("HEAD"))
-	public void loadSuitData(CompoundTag tag, CallbackInfo ci) {
-		if (tag.containsKey("PowerSuit")) {
-			powerSuitData = tag.getCompound("PowerSuit");
-		}
-	}
-
 	@Override
 	public SignalumPowerSuitClient getPowerSuit() {
 		return powerSuit;
-	}
-
-	@Override
-	public CompoundTag getPowerSuitData() {
-		return powerSuitData;
 	}
 
 	@Override
