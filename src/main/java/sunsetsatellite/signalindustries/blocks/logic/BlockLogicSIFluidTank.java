@@ -6,6 +6,7 @@ import net.minecraft.core.block.entity.TileEntity;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.enums.EnumDropCause;
+import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.HardIllegalArgumentException;
 import net.minecraft.core.util.collection.NamespaceID;
@@ -63,6 +64,9 @@ public class BlockLogicSIFluidTank extends BlockLogicMachine {
 		ItemStack stack = player.getCurrentEquippedItem();
 		TileEntity t = world.getTileEntity(tilePos);
 		if(stack != null && stack.getItem() instanceof IItemFluidContainer item && t instanceof TileEntitySIFluidTank tank){
+			if(item instanceof ItemBucket && (ItemBucket.getState(stack).toString().equals(ItemBucket.STATE_MILK.toString()) || ItemBucket.getState(stack).toString().equals(ItemBucket.STATE_ICECREAM.toString()))) {
+				return true;
+			}
 			FluidStack fluid = item.getCurrentFluid(stack);
 			if(fluid != null){
 				if (tank.getAllowedFluidsForSlot(0).contains(fluid.fluid)) {

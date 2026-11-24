@@ -1,6 +1,7 @@
 package sunsetsatellite.signalindustries.recipes.container.waking;
 
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
+import net.minecraft.core.item.ItemBucket;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.catalyst.fluids.util.RecipeExtendedSymbol;
@@ -51,7 +52,7 @@ public class WakingAlloySmelterRecipes implements MachineRecipesBase<RecipeGroup
                 "condensed_milk_can",
                 new RecipeEntryMachine(
                         new RecipeExtendedSymbol[]{
-                                new RecipeExtendedSymbol("minecraft:milk_buckets"),
+							new RecipeExtendedSymbol(ItemBucket.createRecipeInput(Items.BUCKET_IRON, ItemBucket.STATE_MILK)),
                                 new RecipeExtendedSymbol(new ItemStack(Items.DUST_SUGAR, 8))
                         },
                         new ItemStack(SIItems.condensedMilkCan, 1),
