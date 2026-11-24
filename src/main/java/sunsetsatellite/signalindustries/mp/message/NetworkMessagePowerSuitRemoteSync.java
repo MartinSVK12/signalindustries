@@ -51,6 +51,7 @@ public class NetworkMessagePowerSuitRemoteSync implements NetworkMessage {
                             IPowerSuit suit = ((IPlayerPowerSuit<?>) player).getPowerSuit();
                             if (suit != null) {
                                 suit.loadData(data.getCompound("PowerSuit"));
+								suit.loadArmor(data.getCompound("Armor"));
                             }
                         }
 

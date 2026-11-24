@@ -33,6 +33,7 @@ public class NetworkMessagePowerSuitSync implements NetworkMessage {
         IPowerSuit suit = ((IPlayerPowerSuit<?>) context.player).getPowerSuit();
         if (suit != null) {
             suit.loadData(data.getCompound("PowerSuit"));
+			suit.loadArmor(data.getCompound("Armor"));
         }
     }
 }

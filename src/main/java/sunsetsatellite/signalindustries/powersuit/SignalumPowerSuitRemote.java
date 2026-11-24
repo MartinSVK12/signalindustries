@@ -146,22 +146,32 @@ public class SignalumPowerSuitRemote implements IPowerSuit {
     }
 
     @Override
-    public void loadData(CompoundTag suitTag) {
-        if (suitTag.containsKey("Helmet") && suitTag.containsKey("Chestplate") && suitTag.containsKey("Leggings") && suitTag.containsKey("Boots")) {
-            CompoundTag helmetTag = suitTag.getCompound("Helmet");
-            CompoundTag chestplateTag = suitTag.getCompound("Chestplate");
-            CompoundTag leggingsTag = suitTag.getCompound("Leggings");
-            CompoundTag bootsTag = suitTag.getCompound("Boots");
-            helmet.container.readFromNBT(helmetTag);
-            chestplate.container.readFromNBT(chestplateTag);
-            leggings.container.readFromNBT(leggingsTag);
-            boots.container.readFromNBT(bootsTag);
-            reload();
-        }
+    public void loadData(CompoundTag tag) {
+
     }
 
     @Override
-    public void saveData(CompoundTag powerSuit) {
+    public void saveData(CompoundTag tag) {
 
     }
+
+	@Override
+	public void loadArmor(CompoundTag tag) {
+		if (tag.containsKey("Helmet") && tag.containsKey("Chestplate") && tag.containsKey("Leggings") && tag.containsKey("Boots")) {
+			CompoundTag helmetTag = tag.getCompound("Helmet");
+			CompoundTag chestplateTag = tag.getCompound("Chestplate");
+			CompoundTag leggingsTag = tag.getCompound("Leggings");
+			CompoundTag bootsTag = tag.getCompound("Boots");
+			helmet.container.readFromNBT(helmetTag);
+			chestplate.container.readFromNBT(chestplateTag);
+			leggings.container.readFromNBT(leggingsTag);
+			boots.container.readFromNBT(bootsTag);
+			reload();
+		}
+	}
+
+	@Override
+	public void saveArmor(CompoundTag tag) {
+
+	}
 }

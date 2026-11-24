@@ -104,6 +104,9 @@ public class SignalumPowerSuit implements IPowerSuit {
         if (EnvironmentHelper.isMultiplayerServer()) {
             CompoundTag data = new CompoundTag();
             saveData(data);
+			CompoundTag armorData = new CompoundTag();
+			saveArmor(armorData);
+			data.put("Armor", armorData);
             NetworkHandler.sendToPlayer(player, new NetworkMessagePowerSuitSync(data));
             NetworkHandler.sendToAllPlayers(new NetworkMessagePowerSuitRemoteSync(player.username, player.uuid, data));
         }
@@ -526,6 +529,31 @@ public class SignalumPowerSuit implements IPowerSuit {
         }
     }
 
+	public void saveArmor(CompoundTag tag){
+		CompoundTag helmetTag = new CompoundTag();
+		CompoundTag chestplateTag = new CompoundTag();
+		CompoundTag leggingsTag = new CompoundTag();
+		CompoundTag bootsTag = new CompoundTag();
+		helmet.container.writeToNBT(helmetTag);
+		chestplate.container.writeToNBT(chestplateTag);
+		leggings.container.writeToNBT(leggingsTag);
+		boots.container.writeToNBT(bootsTag);
+		tag.put("Helmet", helmetTag);
+		tag.put("Chestplate", chestplateTag);
+		tag.put("Leggings", leggingsTag);
+		tag.put("Boots", bootsTag);
+	}
+
+	public void loadArmor(CompoundTag tag){
+		if(tag.containsKey("Helmet") && tag.containsKey("Chestplate") && tag.containsKey("Leggings") && tag.containsKey("Boots")){
+			helmet.container.readFromNBT(tag.getCompound("Helmet"));
+			chestplate.container.readFromNBT(tag.getCompound("Chestplate"));
+			leggings.container.readFromNBT(tag.getCompound("Leggings"));
+			boots.container.readFromNBT(tag.getCompound("Boots"));
+			reload();
+		}
+	}
+
     public void saveData(CompoundTag tag) {
         CompoundTag suitTag = new CompoundTag();
         suitTag.putFloat("Temperature", temperature);
@@ -552,15 +580,15 @@ public class SignalumPowerSuit implements IPowerSuit {
 		tag.putCompound("PowerSuit", suitTag);
     }
 
-    public void loadData(CompoundTag suitTag) {
-        active = suitTag.getBoolean("Active");
-        temperature = suitTag.getFloat("Temperature");
-        status = Status.values()[suitTag.getInteger("Status")];
-        selectedApplicationSlot = suitTag.getInteger("SelectedApplicationSlot");
+    public void loadData(CompoundTag tag) {
+        active = tag.getBoolean("Active");
+        temperature = tag.getFloat("Temperature");
+        status = Status.values()[tag.getInteger("Status")];
+        selectedApplicationSlot = tag.getInteger("SelectedApplicationSlot");
 
 		if(EnvironmentHelper.isMultiplayerClient()){
 			localCooldowns.clear();
-			CompoundTag cooldownsTag = suitTag.getCompound("Cooldowns");
+			CompoundTag cooldownsTag = tag.getCompound("Cooldowns");
 			cooldownsTag.getValue().forEach((K,V)->{
 				SuitBaseAbility ability = SuitBaseAbility.abilities.get(K);
 				if(ability != null && V instanceof IntTag intTag){
@@ -569,7 +597,7 @@ public class SignalumPowerSuit implements IPowerSuit {
 			});
 
 			localEffectTimes.clear();
-			CompoundTag effectTimesTag = suitTag.getCompound("EffectTimes");
+			CompoundTag effectTimesTag = tag.getCompound("EffectTimes");
 			effectTimesTag.getValue().forEach((K,V)->{
 				SuitBaseAbility ability = SuitBaseAbility.abilities.get(K);
 				if(ability instanceof SuitBaseEffectAbility effectAbility && V instanceof IntTag intTag) {

@@ -34,9 +34,13 @@ public interface IPowerSuit {
 
     boolean isActive();
 
-    void loadData(CompoundTag suitTag);
+    void loadData(CompoundTag tag);
 
-    void saveData(CompoundTag suitTag);
+    void saveData(CompoundTag tag);
+
+	void loadArmor(CompoundTag tag);
+
+	void saveArmor(CompoundTag tag);
 
     InventoryPowerSuit getArmorPiece(HumanArmorShape shape);
 }
