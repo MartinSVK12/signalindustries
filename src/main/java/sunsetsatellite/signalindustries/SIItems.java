@@ -444,7 +444,7 @@ public class SIItems extends DataInitializer {
 			"/assets/signalindustries/textures/armor/power_suit_inverted",
 			"/assets/signalindustries/textures/attachments/wings_inverted"), "colorizer_inverted").setMaxStackSize(1);
 
-		precisionControlChip = (ItemAttachment) customItem(() -> new ItemSimpleAttachment("romChip.precision", key("precision_control_chip"), item("precisionControlChip"), listOf(AttachmentPoint.DRILL), Tier.BASIC), "precision_control_chip");
+		precisionControlChip = (ItemAttachment) customItem(() -> new ItemSimpleAttachment("romChip.precision", key("item/precision_control_chip"), item("precisionControlChip"), listOf(AttachmentPoint.DRILL), Tier.BASIC), "precision_control_chip");
 
 		blueprint = customItem(() -> new ItemBlueprint("blueprint", key("item/blueprint"), item("blueprint")), "blueprint").setMaxStackSize(1);
 		goldprint = customItem(() -> new ItemGoldprint("goldprint", key("item/goldprint"), item("goldprint")), "goldprint").setMaxStackSize(1);
