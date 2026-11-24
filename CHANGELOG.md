@@ -1,3 +1,3 @@
-- Added silk touch capability to drills.
-- Fixed power suit losing energy after being charged in an injector.
-- Fixed shift-clicking items into machines.
+- Fixed an oversight in a crafting recipe.
+- Fixed crash that would happen if a player clicked on a fluid tank with a milk or ice cream bucket.
+- Fixed power suit state not syncing in multiplayer.
